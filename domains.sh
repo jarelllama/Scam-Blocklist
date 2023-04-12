@@ -9,7 +9,7 @@ num_results=100
 
 search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0"
 
-search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//' | grep -v -i 'scam' | grep -v -i 'google' | grep -v -i 'pinterest' | grep -v -i 'reddit' | grep -v -i 'zoominfo')
+search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//' | grep -v -i 'scam' | grep -v -i 'google' | grep -v -i 'pinterest' | grep -v -i 'reddit' | grep -v -i 'socialgrep' | grep -v -i 'zoominfo')
 
 for domain in $search_results; do
     if dig +short "$domain" | grep -q '^$'; then
