@@ -2,9 +2,9 @@
 
 # Download required files
 
-read -p "Do you want to download the toplist.txt? (y/n)" choice
+read -p "Do you want to download the toplist.txt? (y/N)" choice
 
-if [ $choice == "y" ]; then
+if [ "$check_dead" =~ ^[yY]$ ]; then
 wget -N https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt
 fi
 
