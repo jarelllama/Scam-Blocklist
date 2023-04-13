@@ -36,12 +36,12 @@ cp "$temp_file" "$input_file"
 # Sort the input file and overwrite it
 sort -o "$input_file" "$input_file"
 
+# Print the total number of removed domains
+echo "Total number of removed domains: $removed_domains"
+
 # Compare the input file with the toplist file and output common domains
 echo "Domains in toplist:"
 comm -12 <(sort "$input_file") <(sort "$toplist_file")
-
-# Print the total number of removed domains
-echo "Total number of removed domains: $removed_domains"
 
 # Remove the temporary file
 rm "$temp_file"
