@@ -22,7 +22,7 @@ search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0
 search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
 # Output the list of domains to a file
-echo "$search_results" > new_domains.txt
+echo "$search_results" | grep -v '^$' > new_domains.txt
 
 # Print the list of domains
 cat new_domains.txt
