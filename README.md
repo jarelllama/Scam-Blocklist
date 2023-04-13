@@ -25,3 +25,5 @@ Identity newly created scam sites that use the same template as reported scam si
 >No matter where you are, who you are and what you are passionate about we want to be able to provide you with custom products that help you Express Yourself...to help you express who you really are!
 
 >is your global online store that delivers latest fashion apparel for you! We have handmade toys , dresses, tops, bottoms and jewelry for girls and ladies. Thousands of products in different styles are waiting for you!
+
+>founded in 2020 for one simple reason: We strive to improve the lives of those on-the-go by creating durable, functional and adaptable products at a great value; and we do this by co-creating products with you.
