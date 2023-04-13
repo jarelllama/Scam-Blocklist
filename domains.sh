@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ask the user if they want to manually input a search term
-read -p "Do you want to manually input a search term? (y/n) " choice
+read -p "Do you want to manually input a search term? (y/N) " choice
 
 # If the user chooses to manually input a search term
 if [ "$choice" == "y" ]; then
