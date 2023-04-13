@@ -17,10 +17,11 @@ if [ "$choice" == "y" ]; then
     search_terms=("$input_term")
 else
     # Read the search terms from the search terms file and store them in an array
-    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "search_terms.txt"))'
+    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "$search_terms_file"))'
 fi
 
 # Define the function to process a search term
+# Note variables apparently don't work here
 function process_term() {
     # Get the search term
     og_query=$1
@@ -65,25 +66,22 @@ export -f process_term
 printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}'
 
 # Count number of lines in original file
-original_count=$(wc -l < "new_domains.txt")
+original_count=$(wc -l < "$new_domains_file")
 
 # Remove duplicates and domains matching whitelist
-sort -uf "new_domains.txt" | comm -23 - <(sort -f "whitelist.txt") > "new_domains.txt.tmp"
-mv "new_domains.txt.tmp" "new_domains.txt"
+sort -uf "$new_domains_file" | comm -23 - <(sort -f "$whitelist_file") > "$new_domains_file.tmp"
+mv "$new_domains_file.tmp" "$new_domains_file"
 
 # Sort final list alphabetically
-sort -f "new_domains.txt" -o "new_domains.txt"
-
-# Sort final list alphabetically
-sort -f "new_domains.txt" -o "new_domains.txt"
+sort -f "$new_domains_file" -o "$new_domains_file"
 
 # Print removed domains and reasons
 echo "Removed domains:"
-awk -F. '{print tolower($1)}' "new_domains.txt" | sort | uniq -d | grep -wf - <(sort -f "new_domains.txt" "$whitelist_file" | uniq -d) | sed 's/^\([^[:space:]]*\)/\1 (duplicate)/'
-grep -wif "$whitelist_file" "new_domains.txt" | sed 's/^\([^[:space:]]*\)/\1 (whitelisted)/'
+awk -F. '{print tolower($1)}' "$new_domains_file" | sort | uniq -d | grep -wf - <(sort -f "$new_domains_file" "$whitelist_file" | uniq -d) | sed 's/^\([^[:space:]]*\)/\1 (duplicate)/'
+grep -wif "$whitelist_file" "$new_domains_file" | sed 's/^\([^[:space:]]*\)/\1 (whitelisted)/'
 
 # Count number of lines in final file
-total_count=$(wc -l < "new_domains.txt")
+total_count=$(wc -l < "$new_domains_file")
 
 # Print results
 echo "Original number of domains: $original_count"
