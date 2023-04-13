@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Define inputs and output locations
-input_file="domains.txt"
-whitelist_file="whitelist.txt"
-toplist_file="toplist.txt"
-new_domains_file="new_domains.txt"
+# Define input and output file paths
+input_file="domains.txt"           # The file containing the domains to filter
+whitelist_file="whitelist.txt"     # The file containing whitelisted domains
+toplist_file="toplist.txt"         # The file containing the list of top domains
+new_domains_file="new_domains.txt" # The file containing new domains to be added
 
 # Define a temporary file for storing the live domains
 temp_file=$(mktemp)
 
-# Initialize counters for the number of removed and duplicate domains
+# Initialize counters for the number of removed and added domains
 removed_domains=0
 added_domains=0
 
@@ -34,8 +34,8 @@ while read -r domain; do
     removed_domains=$((removed_domains+1))
   # Check if the domain is already in the temporary file
   elif grep -qFx "$domain" "$temp_file"; then
-    removed_domains=$((duplicate_domains+1))
     echo "Domain removed: $domain (duplicate)"
+    removed_domains=$((removed_domains+1))
   # Check if the domain is dead
   elif dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
     echo "Domain removed: $domain (dead)"
