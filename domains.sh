@@ -18,13 +18,14 @@ search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0
 # Store the resulting list of domains in a variable called 'search_results'
 search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//' | grep -v -i 'scam\|google\|pinterest\|reddit\|socialgrep\|zoominfo')
 
-# Iterate over the list of domains and perform a DNS lookup on each to check if it is live
+# Iterate over the list of domains and check if each domain is live
 # Print the live domains to the console
 for domain in $search_results; do
-    if dig +short "$domain" | grep -q '^$'; then
-        continue
-    fi
-    echo "$domain"
+  if dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
+    # Domain is dead
+    continue
+  fi
+  echo "$domain"
 done
 
 # Print the original search query to the console for reference
