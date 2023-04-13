@@ -11,7 +11,6 @@ temp_file=$(mktemp)
 
 # Initialize counters for the number of removed and duplicate domains
 removed_domains=0
-duplicate_domains=0
 added_domains=0
 
 # Add new domains to the input file if they are not already in the file
@@ -35,7 +34,7 @@ while read -r domain; do
     removed_domains=$((removed_domains+1))
   # Check if the domain is already in the temporary file
   elif grep -qFx "$domain" "$temp_file"; then
-    duplicate_domains=$((duplicate_domains+1))
+    removed_domains=$((duplicate_domains+1))
     echo "Domain removed: $domain (duplicate)"
   # Check if the domain is dead
   elif dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
