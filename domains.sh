@@ -1,7 +1,10 @@
 #!/bin/bash
+#!/bin/bash
 
 # Define input and output file locations
 whitelist_file="whitelist.txt"
+new_domains_file="new_domains.txt"
+search_terms_file="search_terms.txt"
 
 # Ask the user if they want to manually input a search term
 read -p "Do you want to manually input a search term? (y/N) " choice
@@ -15,7 +18,7 @@ if [ "$choice" == "y" ]; then
     search_terms=("$input_term")
 else
     # Read the search terms from the search terms file and store them in an array
-    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "search_terms.txt"))'
+    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "$search_terms_file"))'
 fi
 
 # Define the function to process a search term
@@ -42,7 +45,7 @@ function process_term() {
     search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
     # Append the list of domains to the new domains file
-    echo "$search_results" | grep -v '^$' >> new_domains.txt
+    echo "$search_results" | grep -v '^$' >> "$new_domains_file"
 
     # Count the number of domains found for the search term
     num_domains=$(echo "$search_results" | wc -l)
