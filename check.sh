@@ -17,15 +17,16 @@ while read -r domain; do
   if grep -qFf "$whitelist_file" <(echo "$domain"); then
     echo "Removing whitelisted domain: $domain"
     removed_domains=$((removed_domains+1))
+  # Check if the domain is already in the temporary file
+  elif grep -qFx "$domain" "$temp_file"; then
+    echo "Removing duplicate domain: $domain"
+    removed_domains=$((removed_domains+1))
   # Check if the domain is dead
   elif dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
     echo "Removing dead domain: $domain"
     removed_domains=$((removed_domains+1))
   else
-    # Check if the domain is already in the temporary file
-    if ! grep -qFx "$domain" "$temp_file"; then
-      echo "$domain" >> "$temp_file"
-    fi
+    echo "$domain" >> "$temp_file"
   fi
 done < "$input_file"
 
