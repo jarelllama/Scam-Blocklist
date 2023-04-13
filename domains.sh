@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Define input and output file locations
+whitelist_file="whitelist.txt"
+
 # Ask the user if they want to manually input a search term
 read -p "Do you want to manually input a search term? (y/N) " choice
 
@@ -59,6 +62,25 @@ export -f process_term
 # Process each search term in parallel using xargs
 printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}'
 
-# Count the total number of unique domains in the new domains file
-total_domains=$(sort -u new_domains.txt | wc -l)
-echo "Total number of unique domains found: $total_domains"
+# Count number of lines in original file
+original_count=$(wc -l < "$new_domains_file")
+
+# Remove duplicates and domains matching whitelist
+sort -uf "$new_domains_file" | comm -23 - <(sort -f "$whitelist_file") > "$new_domains_file.tmp"
+mv "$new_domains_file.tmp" "$new_domains_file"
+
+# Sort final list alphabetically
+sort -f "$new_domains_file" -o "$new_domains_file"
+
+# Print removed domains and reasons
+echo "Removed domains:"
+awk -F. '{print tolower($1)}' "$new_domains_file" | sort | uniq -d | grep -wf - <(sort -f "$new_domains_file" "$whitelist_file" | uniq -d) | sed 's/^\([^[:space:]]*\)/\1 (duplicate)/'
+grep -wif "$whitelist_file" "$new_domains_file" | sed 's/^\([^[:space:]]*\)/\1 (whitelisted)/'
+
+# Count number of lines in final file
+total_count=$(wc -l < "$new_domains_file")
+
+# Print results
+echo "Original number of domains: $original_count"
+echo "Total domains removed: $(($original_count - $total_count))"
+echo "Final number of domains: $total_count"
