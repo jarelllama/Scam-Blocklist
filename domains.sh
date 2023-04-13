@@ -4,7 +4,7 @@
 read -p "Do you want to manually input a search term? (y/N) " choice
 
 # If the user chooses to manually input a search term
-if [[ "$choice" =~ ^[Yy]$ ]]; then
+if [ "$choice" == "y" ]; then
     # Ask the user to input the search term
     read -p "Enter the search term: " input_term
 
