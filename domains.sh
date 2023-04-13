@@ -11,7 +11,7 @@ if [ "$choice" == "y" ]; then
     # Add the input search term to the search_terms array
     search_terms=("$input_term")
 else
-    # Read the search terms from the "search_terms.txt" file and store them in an array
+    # Read the search terms from the search terms file and store them in an array
     IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "search_terms.txt"))'
 fi
 
@@ -39,7 +39,7 @@ do
     # Append the list of domains to the new domains file
     echo "$search_results" | grep -v '^$' >> new_domains.txt
 
-    # Count the number of domains found for the search term and print it
+    # Count the number of domains found for the search term
     num_domains=$(echo "$search_results" | wc -l)
     if [ -z "$search_results" ]; then
         echo "\"$og_query\": No domains found"
@@ -50,3 +50,7 @@ do
     # Print a separator between search terms
     echo "--------------------------------------------------"
 done
+
+# Count the total number of unique domains in the new domains file
+total_domains=$(sort -u new_domains.txt | wc -l)
+echo "Total number of unique domains found: $total_domains"
