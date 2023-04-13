@@ -30,6 +30,10 @@ echo "Total number of new domains before filtering: $added_domains"
 # Remove any empty lines from the input file
 sed -i '/^$/d' "$domains_file"
 
+# Ask the user whether to check for dead domains or not
+echo -n "Do you want to check for dead domains? [y/N]: "
+read -r check_dead
+
 # Loop over each line in the input file
 while read -r domain; do
   # Check if the domain or any of its subdomains appear in the whitelist
@@ -40,8 +44,8 @@ while read -r domain; do
   elif grep -qFx "$domain" "$temp_file"; then
     echo "Domain removed: $domain (duplicate)"
     removed_domains=$((removed_domains+1))
-  # Check if the domain is dead
-  elif dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
+  # Check if the user wants to check for dead domains and if the domain is dead
+  elif [[ "$check_dead" =~ ^[yY]$ ]] && dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
     echo "Domain removed: $domain (dead)"
     removed_domains=$((removed_domains+1))
   else
