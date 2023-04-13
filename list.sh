@@ -27,7 +27,7 @@ fi
 # Print the total number of newly added domains before filtering
 echo "Total number of new domains before filtering: $added_domains"
 
-# Remove any empty lines from the input file
+# Remove any empty lines from the domains file
 sed -i '/^$/d' "$domains_file"
 
 # Ask the user whether to check for dead domains or not
@@ -45,7 +45,7 @@ while read -r domain; do
     echo "Domain removed: $domain (duplicate)"
     removed_domains=$((removed_domains+1))
   # Check if the user wants to check for dead domains and if the domain is dead
-  elif [[ "$check_dead" =~ ^[yY]$ ]] && dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
+  elif [ "$check_dead" == "y" ] && dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
     echo "Domain removed: $domain (dead)"
     removed_domains=$((removed_domains+1))
   else
