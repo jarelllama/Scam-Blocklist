@@ -42,9 +42,9 @@ function process_term() {
 
     # Retrieve the search results page from Google, extract the URLs, and filter out irrelevant domains
     # Store the resulting list of domains in a variable called 'search_results'
-    search_results=$(curl -s -A "$user_agent" "$search_url" | awk -F'[/:]' '/^https?:\/\//{print $4} /^href/{print $3}' | sort -u | sed 's/^www\.//')
-
-    # Append the list of domains to the new domains file
+    search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
+    
+# Append the list of domains to the new domains file
     echo "$search_results" | grep -v '^$' >> "new_domains.txt"
 
     # Count the number of domains found for the search term
