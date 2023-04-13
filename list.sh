@@ -9,9 +9,6 @@ new_domains_file="new_domains.txt" # The file containing new domains to be added
 # Define a temporary file for storing the live domains
 temp_file=$(mktemp)
 
-# Remove any empty lines from the input file
-sed -i '/^$/d' "$input_file"
-
 # Initialize counters for the number of removed and added domains
 removed_domains=0
 added_domains=0
@@ -28,6 +25,9 @@ fi
 
 # Print the total number of newly added domains before filtering
 echo "Total number of new domains before filtering: $added_domains"
+
+# Remove any empty lines from the input file
+sed -i '/^$/d' "$input_file"
 
 # Loop over each line in the input file
 while read -r domain; do
