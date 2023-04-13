@@ -1,31 +1,48 @@
 #!/bin/bash
 
-# Prompt the user to input a search query
-read -p "Enter a search query: " og_query
+# Ask the user if they want to manually input a search term
+read -p "Do you want to manually input a search term? (y/n) " choice
 
-# Format the search query for use in a Google search URL
-# Wrap the query in double quotes to search for exact match
-query="\"$og_query\""
+# If the user chooses to manually input a search term
+if [ "$choice" == "y" ]; then
+    # Ask the user to input the search term
+    read -p "Enter the search term: " input_term
 
-# Replace any spaces with '+' for use in the search URL
-query=${query// /+}
+    # Add the input search term to the search_terms array
+    search_terms=("$input_term")
+else
+    # Read the search terms from the "search_terms.txt" file and store them in an array
+    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "search_terms.txt"))'
+fi
 
-# Set the user agent and number of results to retrieve
-user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-num_results=100
+# Loop through the search terms and execute the Google search for each term
+for og_query in "${search_terms[@]}"
+do
+    # Format the search query for use in a Google search URL
+    # Wrap the query in double quotes to search for exact match
+    query="\"$og_query\""
 
-# Construct the Google search URL using the formatted query and number of results
-search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0"
+    # Replace any spaces with '+' for use in the search URL
+    query=${query// /+}
 
-# Retrieve the search results page from Google, extract the URLs, and filter out irrelevant domains
-# Store the resulting list of domains in a variable called 'search_results'
-search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
+    # Set the user agent and number of results to retrieve
+    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+    num_results=100
 
-# Append the list of domains to the new domains file
-echo "$search_results" | grep -v '^$' >> new_domains.txt
+    # Construct the Google search URL using the formatted query and number of results
+    search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0"
 
-# Print the list of domains
-cat new_domains.txt
+    # Retrieve the search results page from Google, extract the URLs, and filter out irrelevant domains
+    # Store the resulting list of domains in a variable called 'search_results'
+    search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
-# Print the original search query for reference
-echo "Search term used: $og_query"
+    # Append the list of domains to the new domains file
+    echo "$search_results" | grep -v '^$' >> new_domains.txt
+
+    # Print the list of domains
+    echo "Domains found for search term \"$og_query\":"
+    cat new_domains.txt
+
+    # Print a separator between search terms
+    echo "--------------------------------------------------"
+done
