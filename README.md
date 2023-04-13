@@ -27,3 +27,5 @@ Identity newly created scam sites that use the same template as reported scam si
 >is your global online store that delivers latest fashion apparel for you! We have handmade toys , dresses, tops, bottoms and jewelry for girls and ladies. Thousands of products in different styles are waiting for you!
 
 >founded in 2020 for one simple reason: We strive to improve the lives of those on-the-go by creating durable, functional and adaptable products at a great value; and we do this by co-creating products with you.
+
+>In recent two years, due to the impact of the epidemic COVID-19, Amazon's inventories have piled up and lots of warehouses have closed down. This is why they sell them to us at a lower price and we can sell them at a big discount.For all of the products we sell, you can find the same original products at a higher price on Amazon.com.
