@@ -12,7 +12,8 @@ removed_domains=0
 while read -r domain; do
   # If the domain returns NXDOMAIN, remove it
   if dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
-    echo "Removing dead domain: $domain"                 removed_domains=$((removed_domains+1))
+    echo "Removing dead domain: $domain"                 
+    removed_domains=$((removed_domains+1))
   else
     # Check if the domain is already in the temporary file
     if ! grep -qFx "$domain" "$temp_file"; then
