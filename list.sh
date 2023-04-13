@@ -18,7 +18,6 @@ while read -r domain; do
     if ! grep -qFx "$domain" "$temp_file"; then
       echo "$domain" >> "$temp_file"
     fi
-    echo "$domain" >> "$temp_file"
   fi
 done < "$input_file"
 
