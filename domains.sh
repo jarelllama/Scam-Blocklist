@@ -19,7 +19,7 @@ search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0
 
 # Retrieve the search results page from Google, extract the URLs, and filter out irrelevant domains
 # Store the resulting list of domains in a variable called 'search_results'
-search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//' | grep -v -i 'scam\|google\|pinterest\|reddit\|socialgrep\|zoominfo')
+search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
 # Iterate over the list of domains
 # Print the live domains to the console
