@@ -35,6 +35,13 @@ cp "$temp_file" "$input_file"
 # Sort the input file and overwrite it
 sort "$input_file" -o "$input_file"
 
+# Download the toplist file
+curl -o "toplist.txt" "https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt"
+
+# Compare the input file with the toplist file and output common domains
+echo "Domains in toplist:"
+comm -12 <(sort "$input_file") <(sort "toplist.txt")
+
 # Print the total number of removed domains
 echo "Total number of removed domains: $removed_domains"
 
