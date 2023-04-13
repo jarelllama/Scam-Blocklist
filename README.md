@@ -1,6 +1,11 @@
 ### How is the list maintained
 
-I run a script to search Google for specific search terms almost exclusively used in scam sites. The script returns a list of domains. The list is then filtered against a whitelist (scam reporting sites, Reddit, genuine stores, etc.). Dead domains and duplicates are also removed. The final list is then compared against the Umbrella Toplist and domains on both lists are pointed out to me for manual validation.
+I run a script to search Google for specific search terms almost exclusively used in scam sites. The script returns a list of domains. The list is filtered in this order:
+- checked against a whitelist (scam reporting sites, Reddit, genuine stores, etc.)
+- duplicates are removed
+- dead domains are removed
+- final list is compared against the Umbrella Toplist and domains on both lists are pointed out to me
+- I manually check the potential false positives
 
 ### Search terms:
 >We have spent our entire lives in the business of clothing, from economy lines to luxury lines,. Thousands of products in different styles are waiting for you! After spending 15 years learning this market and business we decided to put all of our contacts in manufacturing and designing to good use.  Our mission is to bring the newest and best designs in clothing to you.
