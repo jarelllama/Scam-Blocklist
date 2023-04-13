@@ -17,8 +17,7 @@ added_domains=0
 # Add new domains to the input file if they are not already in the file
 if [ -f "$new_domains_file" ]; then
   while read -r new_domain; do
-    if grep -qFx "$new_domain" "$input_file"; then
-    else
+    if ! grep -qFx "$new_domain" "$input_file"; then
       echo "$new_domain" >> "$input_file"
       added_domains=$((added_domains+1))
     fi
@@ -26,8 +25,7 @@ if [ -f "$new_domains_file" ]; then
 fi
 
 # Print the total number of newly added domains before filtering
-echo "Total number of new domains before filtering: "$added_domains"
-
+echo "Total number of new domains before filtering: $added_domains"
 
 # Loop over each line in the input file
 while read -r domain; do
@@ -54,9 +52,8 @@ cp "$temp_file" "$input_file"
 # Sort the input file and overwrite it
 sort -o "$input_file" "$input_file"
 
-# Print the total number of removed and duplicate domains
+# Print the total number of removed domains
 echo "Total number of domains removed: $removed_domains"
-echo "Total number of duplicate domains: $duplicate_domains"
 
 # Compare the input file with the toplist file and output common domains
 echo "Domains in toplist:"
