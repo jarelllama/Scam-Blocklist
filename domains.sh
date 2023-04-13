@@ -21,8 +21,10 @@ search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0
 # Store the resulting list of domains in a variable called 'search_results'
 search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
-# Iterate over the list of domains
-# Print the live domains to the console
+# Output the list of domains to a file called "new_domains.txt" and overwrite it
+echo "$search_results" > new_domains.txt
+
+# Iterate over the list of domains and print them to the console
 for domain in $search_results; do
   echo "$domain"
 done
