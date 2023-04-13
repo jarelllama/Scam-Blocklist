@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 
 # Define input and output file locations
 whitelist_file="whitelist.txt"
