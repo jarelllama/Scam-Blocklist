@@ -23,3 +23,5 @@ Identity newly created scam sites that use the same template as reported scam si
 >We source designer style products. And have been able to do this by building great long term relationships with several manufacturers over the years. This allows us to produce unique pieces at the lowest possible cost and sell directly to you.
 
 >No matter where you are, who you are and what you are passionate about we want to be able to provide you with custom products that help you Express Yourself...to help you express who you really are!
+
+>is your global online store that delivers latest fashion apparel for you! We have handmade toys , dresses, tops, bottoms and jewelry for girls and ladies. Thousands of products in different styles are waiting for you!
