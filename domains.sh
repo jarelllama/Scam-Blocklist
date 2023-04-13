@@ -42,7 +42,7 @@ do
     # Count the number of domains found for the search term and print it
     num_domains=$(echo "$search_results" | wc -l)
     if [ -z "$search_results" ]; then
-        echo "No domains found for search term \"$og_query\""
+        echo "\"$og_query\": No domains found"
     else
         echo "\"$og_query\": $num_domains"
     fi
