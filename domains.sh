@@ -39,9 +39,13 @@ do
     # Append the list of domains to the new domains file
     echo "$search_results" | grep -v '^$' >> new_domains.txt
 
-    # Print the list of domains
-    echo "Domains found for search term \"$og_query\":"
-    cat new_domains.txt
+    # Count the number of domains found for the search term and print it
+    num_domains=$(echo "$search_results" | wc -l)
+    if [ -z "$search_results" ]; then
+        echo "No domains found for search term \"$og_query\""
+    else
+        echo "\"$og_query\": $num_domains"
+    fi
 
     # Print a separator between search terms
     echo "--------------------------------------------------"
