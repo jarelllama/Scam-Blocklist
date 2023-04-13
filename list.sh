@@ -3,6 +3,7 @@
 # Define input and output file paths
 input_file="domains.txt"           # The file containing the domains to filter
 whitelist_file="whitelist.txt"     # The file containing whitelisted domains
+blacklist_file="blacklist.txt"     # The file containing blacklisted domains
 toplist_file="toplist.txt"         # The file containing the list of top domains
 new_domains_file="new_domains.txt" # The file containing new domains to be added
 
