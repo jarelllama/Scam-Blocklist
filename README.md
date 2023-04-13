@@ -21,3 +21,5 @@ Identity newly created scam sites that use the same template as reported scam si
 >We are a company specialised in e-commerce founded in 2018, and since then we have managed countless of online stores. Our mission is supplying you with the
 
 >We source designer style products. And have been able to do this by building great long term relationships with several manufacturers over the years. This allows us to produce unique pieces at the lowest possible cost and sell directly to you.
+
+>No matter where you are, who you are and what you are passionate about we want to be able to provide you with custom products that help you Express Yourself...to help you express who you really are!
