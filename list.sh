@@ -60,7 +60,7 @@ echo "Total number of domains removed: $removed_domains"
 
 # Find the common domains between domains.txt and toplist.txt, excluding domains in blacklist.txt
 echo "Domains in toplist:"
-comm -12 <(sort "$input_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+comm -12 <(sort "$domains_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
 # Remove the temporary file
 rm "$temp_file"
