@@ -17,7 +17,7 @@ if [ "$choice" == "y" ]; then
     search_terms=("$input_term")
 else
     # Read the search terms from the search terms file and store them in an array
-    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "$search_terms_file"))'
+    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "search_terms.txt"))'
 fi
 
 # Define the function to process a search term
@@ -44,7 +44,7 @@ function process_term() {
     search_results=$(curl -s -A "$user_agent" "$search_url" | awk -F'[/:]' '/^https?:\/\//{print $4} /^href/{print $3}' | sort -u | sed 's/^www\.//')
 
     # Append the list of domains to the new domains file
-    echo "$search_results" | grep -v '^$' >> "$new_domains_file"
+    echo "$search_results" | grep -v '^$' >> "new_domains.txt"
 
     # Count the number of domains found for the search term
     num_domains=$(echo "$search_results" | wc -l)
@@ -65,22 +65,25 @@ export -f process_term
 printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}'
 
 # Count number of lines in original file
-original_count=$(wc -l < "$new_domains_file")
+original_count=$(wc -l < "new_domains.txt")
 
 # Remove duplicates and domains matching whitelist
-sort -uf "$new_domains_file" | comm -23 - <(sort -f "$whitelist_file") > "$new_domains_file.tmp"
-mv "$new_domains_file.tmp" "$new_domains_file"
+sort -uf "new_domains.txt" | comm -23 - <(sort -f "whitelist.txt") > "new_domains.txt.tmp"
+mv "new_domains.txt.tmp" "new_domains.txt"
 
 # Sort final list alphabetically
-sort -f "$new_domains_file" -o "$new_domains_file"
+sort -f "new_domains.txt" -o "new_domains.txt"
+
+# Sort final list alphabetically
+sort -f "new_domains.txt" -o "new_domains.txt"
 
 # Print removed domains and reasons
 echo "Removed domains:"
-awk -F. '{print tolower($1)}' "$new_domains_file" | sort | uniq -d | grep -wf - <(sort -f "$new_domains_file" "$whitelist_file" | uniq -d) | sed 's/^\([^[:space:]]*\)/\1 (duplicate)/'
-grep -wif "$whitelist_file" "$new_domains_file" | sed 's/^\([^[:space:]]*\)/\1 (whitelisted)/'
+awk -F. '{print tolower($1)}' "new_domains.txt" | sort | uniq -d | grep -wf - <(sort -f "new_domains.txt" "$whitelist_file" | uniq -d) | sed 's/^\([^[:space:]]*\)/\1 (duplicate)/'
+grep -wif "$whitelist_file" "new_domains.txt" | sed 's/^\([^[:space:]]*\)/\1 (whitelisted)/'
 
 # Count number of lines in final file
-total_count=$(wc -l < "$new_domains_file")
+total_count=$(wc -l < "new_domains.txt")
 
 # Print results
 echo "Original number of domains: $original_count"
