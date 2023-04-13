@@ -3,6 +3,9 @@
 # Define the input file
 input_file="domains.txt"
 
+# Define the whitelist file
+whitelist_file="whitelist.txt"
+
 # Define a temporary file for storing the live domains
 temp_file=$(mktemp)
 
@@ -11,8 +14,11 @@ removed_domains=0
 
 # Loop over each line in the input file
 while read -r domain; do
-  # If the domain returns NXDOMAIN, remove it
-  if dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
+  # Check if the domain or any of its subdomains appear in the whitelist
+  if grep -qFf "$whitelist_file" <(echo "$domain"); then
+    echo "Removing whitelisted domain: $domain"
+    removed_domains=$((removed_domains+1))
+  elif dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
     echo "Removing dead domain: $domain"
     removed_domains=$((removed_domains+1))
   else
