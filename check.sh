@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Define the input file
+# Define inputs and output locations
 input_file="domains.txt"
-
-# Define the whitelist file
 whitelist_file="whitelist.txt"
+toplist_file="toplist.txt"
 
 # Define a temporary file for storing the live domains
 temp_file=$(mktemp)
@@ -18,6 +17,7 @@ while read -r domain; do
   if grep -qFf "$whitelist_file" <(echo "$domain"); then
     echo "Removing whitelisted domain: $domain"
     removed_domains=$((removed_domains+1))
+  # Check if the domain is dead
   elif dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
     echo "Removing dead domain: $domain"
     removed_domains=$((removed_domains+1))
@@ -33,14 +33,11 @@ done < "$input_file"
 cp "$temp_file" "$input_file"
 
 # Sort the input file and overwrite it
-sort "$input_file" -o "$input_file"
-
-# Download the toplist file
-curl -o "toplist.txt" "https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt"
+sort -o "$input_file" "$input_file"
 
 # Compare the input file with the toplist file and output common domains
 echo "Domains in toplist:"
-comm -12 <(sort "$input_file") <(sort "toplist.txt")
+comm -12 <(sort "$input_file") <(sort "$toplist_file")
 
 # Print the total number of removed domains
 echo "Total number of removed domains: $removed_domains"
