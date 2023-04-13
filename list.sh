@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define input and output file paths
-input_file="domains.txt"           # The file containing the domains to filter
+domains_file="domains.txt"           # The file containing the domains to filter
 whitelist_file="whitelist.txt"     # The file containing whitelisted domains
 blacklist_file="blacklist.txt"     # The file containing blacklisted domains
 toplist_file="toplist.txt"         # The file containing the list of top domains
@@ -17,8 +17,8 @@ added_domains=0
 # Add new domains to the input file if they are not already in the file
 if [ -f "$new_domains_file" ]; then
   while read -r new_domain; do
-    if ! grep -qFx "$new_domain" "$input_file"; then
-      echo "$new_domain" >> "$input_file"
+    if ! grep -qFx "$new_domain" "$domains_file"; then
+      echo "$new_domain" >> "$domains_file"
       added_domains=$((added_domains+1))
     fi
   done < "$new_domains_file"
@@ -28,7 +28,7 @@ fi
 echo "Total number of new domains before filtering: $added_domains"
 
 # Remove any empty lines from the input file
-sed -i '/^$/d' "$input_file"
+sed -i '/^$/d' "$domains_file"
 
 # Loop over each line in the input file
 while read -r domain; do
@@ -47,21 +47,20 @@ while read -r domain; do
   else
     echo "$domain" >> "$temp_file"
   fi
-done < "$input_file"
+done < "$domains_file"
 
 # Copy the temporary file to the input file
-cp "$temp_file" "$input_file"
+cp "$temp_file" "$domains_file"
 
 # Sort the input file and overwrite it
-sort -o "$input_file" "$input_file"
+sort -o "$domains_file" "$domains_file"
 
 # Print the total number of removed domains
 echo "Total number of domains removed: $removed_domains"
 
-# Compare the input file (excluding blacklisted domains) with the toplist file and output common domains
-toplist_output=$(comm -23 <(echo "$(comm -12 "$input_file" "$toplist_file")" | sort) <(sort "$blacklist_file"))
+# Find the common domains between domains.txt and toplist.txt, excluding domains in blacklist.txt
 echo "Domains in toplist:"
-echo "$toplist_output"
+comm -12 <(sort "$input_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
 # Remove the temporary file
 rm "$temp_file"
