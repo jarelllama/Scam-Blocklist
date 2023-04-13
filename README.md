@@ -4,7 +4,7 @@ I run a script to search Google for specific search terms almost exclusively use
 - checked against a whitelist (scam reporting sites, Reddit, genuine stores, etc.)
 - duplicates are removed
 - dead domains are removed
-- final list is compared against the Umbrella Toplist and domains on both lists are pointed out to me
+- the final list is compared against the Umbrella Toplist and domains on both lists are pointed out
 - I manually check the potential false positives
 
 ### Search terms
