@@ -15,9 +15,11 @@ else
     IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "search_terms.txt"))'
 fi
 
-# Loop through the search terms and execute the Google search for each term
-for og_query in "${search_terms[@]}"
-do
+# Define the function to process a search term
+function process_term() {
+    # Get the search term
+    og_query=$1
+
     # Format the search query for use in a Google search URL
     # Wrap the query in double quotes to search for exact match
     query="\"$og_query\""
@@ -49,7 +51,13 @@ do
 
     # Print a separator between search terms
     echo "--------------------------------------------------"
-done
+}
+
+# Export the function so that it can be called by xargs
+export -f process_term
+
+# Process each search term in parallel using xargs
+printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}'
 
 # Count the total number of unique domains in the new domains file
 total_domains=$(sort -u new_domains.txt | wc -l)
