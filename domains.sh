@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Prompt the user to input a search query and store it in a variable called 'og_query'
+# Prompt the user to input a search query
 read -p "Enter a search query: " og_query
 
 # Format the search query for use in a Google search URL
@@ -21,14 +21,11 @@ search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0
 # Store the resulting list of domains in a variable called 'search_results'
 search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
-# Output the list of domains to a file called "new_domains.txt" and overwrite it
-# Remove empty lines using 'grep' command
-echo "$search_results" | grep -v '^$' > new_domains.txt
+# Output the list of domains to a file
+echo "$search_results" > new_domains.txt
 
-# Iterate over the list of domains and print them to the console
-for domain in $search_results; do
-  echo "$domain"
-done
+# Print the list of domains
+cat new_domains.txt
 
-# Print the original search query to the console for reference
+# Print the original search query for reference
 echo "Search term used: $og_query"
