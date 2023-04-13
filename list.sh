@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Define the input file                              input_file="domains.txt"
+# Define the input file
+input_file="domains.txt"
 
 # Define a temporary file for storing the live domains
 temp_file=$(mktemp)
@@ -12,7 +13,7 @@ removed_domains=0
 while read -r domain; do
   # If the domain returns NXDOMAIN, remove it
   if dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
-    echo "Removing dead domain: $domain"                 
+    echo "Removing dead domain: $domain"
     removed_domains=$((removed_domains+1))
   else
     # Check if the domain is already in the temporary file
