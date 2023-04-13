@@ -19,3 +19,5 @@ Identity newly created scam sites that use the same template as reported scam si
 >committed to the progress of sustainability within our business practices. With consistent evaluation and attention, we are proud to have brought on changes that have an emphasis on renewable energy, recycling, and beyond.
 
 >We are a company specialised in e-commerce founded in 2018, and since then we have managed countless of online stores. Our mission is supplying you with the
+
+>We source designer style products. And have been able to do this by building great long term relationships with several manufacturers over the years. This allows us to produce unique pieces at the lowest possible cost and sell directly to you.
