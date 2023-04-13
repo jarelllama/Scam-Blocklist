@@ -12,7 +12,7 @@ if [[ "$choice" =~ ^[Yy]$ ]]; then
     search_terms=("$input_term")
 else
     # Read the search terms from the search terms file and store them in an array
-    mapfile -t search_terms < search_terms.txt
+    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "search_terms.txt"))'
 fi
 
 # Loop through the search terms and execute the Google search for each term
