@@ -59,8 +59,9 @@ sort -o "$input_file" "$input_file"
 echo "Total number of domains removed: $removed_domains"
 
 # Compare the input file (excluding blacklisted domains) with the toplist file and output common domains
+toplist_output=$(comm -23 <(echo "$(comm -12 "$input_file" "$toplist_file")" | sort) <(sort "$blacklist_file")
 echo "Domains in toplist:"
-comm -13 <(grep -vFf "$blacklist_file" "$input_file" | sort) <(sort "$toplist_file")
+echo "$toplist_output"
 
 # Remove the temporary file
 rm "$temp_file"
