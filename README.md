@@ -7,6 +7,10 @@ I run a script to search Google for specific search terms almost exclusively use
 - the final list is compared against the Umbrella Toplist and domains on both lists are pointed out
 - I manually check the potential false positives
 
+### Goal
+
+Identity newly created scam sites that use the same template as reported scam sites.
+
 ### Search terms
 >We have spent our entire lives in the business of clothing, from economy lines to luxury lines,. Thousands of products in different styles are waiting for you! After spending 15 years learning this market and business we decided to put all of our contacts in manufacturing and designing to good use.  Our mission is to bring the newest and best designs in clothing to you.
 
