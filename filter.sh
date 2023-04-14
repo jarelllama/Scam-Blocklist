@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: ensure whitelist is read in lowercase
+
 # Define input and output file locations
 input_file="new_domains.txt"
 output_file="new_domains.txt"
@@ -31,7 +33,7 @@ awk '
 ' "$input_file" > "$input_file.tmp"
 
 # Replace the input file with the modified version
-mv "$input_file.tmp" $input_file"
+mv "$input_file.tmp" $output_file"
 
 
 
