@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Define input and output file locations
-new_domains_file="new_domains.txt"
-whitelist_file="whitelist.txt"
+new_domains_file="new_domains.txt""
 
 # Set the user agent and number of results to retrieve
 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -28,7 +27,6 @@ fi
 function process_term() {
     # Get the search term and file paths
     og_query=$1
-    whitelist_file=$2
     new_domains_file=$3
 
     # Format the search query for use in a Google search URL
