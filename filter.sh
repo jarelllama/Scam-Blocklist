@@ -32,7 +32,7 @@ awk '
 ' "$input_file" > "$input_file.tmp"
 
 # Output the modified version
-mv "$input_file.tmp" "$input_file"
+mv "$input_file.tmp" "$output_file"
 
 
 
