@@ -2,7 +2,11 @@
 
 # Define input and output file locations
 input_file="new_domains.txt"
+output_file="new_domains.txt"
 whitelist_file="whitelist.txt"
+
+# Convert all entries to lowercase
+tr '[:upper:]' '[:lower:]' < "$input_file" > "$output_file"
 
 # Use awk to process the input file
 awk '
