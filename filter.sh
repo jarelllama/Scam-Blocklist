@@ -4,12 +4,38 @@
 new_domains_file="new_domains.txt"
 whitelist_file="whitelist.txt"
 
+# Use awk to process the input file
+awk '
+    # Skip empty lines
+    /^[[:space:]]*$/ {next}
+
+    # Remove duplicates
+    !seen[$0]++ {
+
+        # Remove non-domains
+        if ($0 ~ /^[a-zA-Z0-9\.-]+$/) {
+
+            # Split the domain name into its component parts
+            split($0, parts, ".")
+
+            # Remove TLDs and single level domains
+            if (length(parts) > 2 || ($0 ~ /\.[a-zA-Z]{2,}$/ && length(parts) == 2 && parts[1] != "")) {
+                print
+            }
+        }
+    }
+' "$new_domains_file" > "$new_domains_file.tmp"
+
+# Replace the input file with the modified version
+mv "$new_domains_file.tmp" $new_domains_file"
+
+
 # Count number of lines in original file
 original_count=$(wc -l < "$new_domains_file")
 
 # Remove duplicates and domains matching whitelist
-sort -uf "$new_domains_file" | comm -23 - <(sort -f "$whitelist_file") > "$new_domains_file.tmp"
-mv "$new_domains_file.tmp" "$new_domains_file"
+#sort -uf "$new_domains_file" | comm -23 - <(sort -f "$whitelist_file") > "$new_domains_file.tmp"
+#mv "$new_domains_file.tmp" "$new_domains_file"
 
 # Sort final list alphabetically
 sort -f "$new_domains_file" -o "$new_domains_file"
