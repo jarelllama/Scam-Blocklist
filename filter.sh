@@ -6,7 +6,6 @@
 input_file="new_domains.txt"
 output_file="new_domains.txt"
 whitelist_file="whitelist.txt"
-removed_domains_file="removed_domains.txt"
 
 awk '
     # Skip empty lines
@@ -22,9 +21,6 @@ awk '
             $0 = tolower($0)
             print
  
-        } else {
-            # Output removed domains to a separate file
-            print $0 >> "'"$removed_domains_file"'"
         }
     }
 ' "$input_file" > "$input_file.tmp"
