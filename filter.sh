@@ -7,14 +7,13 @@ input_file="new_domains.txt"
 output_file="new_domains.txt"
 whitelist_file="whitelist.txt"
 
+# TODO: remove empty lines
+
 # Convert all entries to lowercase
 tr '[:upper:]' '[:lower:]' < "$input_file" > "$output_file"
 
 # Use awk to process the input file
 awk '
-    # Skip empty lines
-    /^[[:space:]]*$/ {next}
-
     # Remove duplicates
     !seen[$0]++ {
 
