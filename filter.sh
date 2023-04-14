@@ -6,6 +6,7 @@
 input_file="new_domains.txt"
 output_file="new_domains.txt"
 whitelist_file="whitelist.txt"
+removed_domains_file="removed_domains.txt"
 
 awk '
     # Skip empty lines
@@ -14,19 +15,16 @@ awk '
     # Remove duplicates
     !seen[$0]++ {
 
-        # Remove non-domains
-        if ($0 ~ /^[a-zA-Z0-9\.-]+$/) {
+        # Remove non domain entries while keeping all levels of subdomain and remove .TLD
+        if ($1 ~ /^([a-zA-Z0-9]([a-zA-Z0-9\-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/ && $1 !~ /^\.[a-zA-Z]{2,}$/) {
 
-            # Split the domain name into its component parts
-            split($0, parts, ".")
-
-            # Remove TLDs and single level domains
-            if (length(parts) > 2 || ($0 ~ /\.[a-zA-Z]{2,}$/ && length(parts) == 2 && parts[1] != "")) {
-
-                # Convert to lowercase
-                $0 = tolower($0)
-                print
-            }
+            # Convert to lowercase
+            $0 = tolower($0)
+            print
+ 
+        } else {
+            # Output removed domains to a separate file
+            print $0 >> "'"$removed_domains_file"'"
         }
     }
 ' "$input_file" > "$input_file.tmp"
