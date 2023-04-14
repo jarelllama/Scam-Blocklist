@@ -29,18 +29,16 @@ awk '
     }
 ' "$input_file" > "$input_file.tmp"
 
-# Output the modified version
+# Remove domains matching whitelist terms
+comm -23 - <(sort -f "$whitelist_file") > "$input_file.tmp"
+
+# Output the modified file
 mv "$input_file.tmp" "$output_file"
-
-
 
 
 # Count number of lines in original file
 original_count=$(wc -l < "$new_domains_file")
 
-# Remove duplicates and domains matching whitelist
-#sort -uf "$new_domains_file" | comm -23 - <(sort -f "$whitelist_file") > "$new_domains_file.tmp"
-#mv "$new_domains_file.tmp" "$new_domains_file"
 
 # Sort final list alphabetically
 sort -f "$new_domains_file" -o "$new_domains_file"
