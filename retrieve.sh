@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Define input and output file locations
-whitelist_file="whitelist.txt"
-new_domains_file="new_domains.txt"
-search_terms_file="search_terms.txt"
-
 # Ask the user if they want to manually input a search term
 read -p "Do you want to manually input a search term? (y/N) " choice
 
@@ -17,14 +12,16 @@ if [ "$choice" == "y" ]; then
     search_terms=("$input_term")
 else
     # Read the search terms from the search terms file and store them in an array
+    search_terms_file="search_terms.txt"
     IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "$search_terms_file"))'
 fi
 
 # Define the function to process a search term
-# Note variables apparently don't work here
 function process_term() {
-    # Get the search term
+    # Get the search term and file paths
     og_query=$1
+    whitelist_file=$2
+    new_domains_file=$3
 
     # Format the search query for use in a Google search URL
     # Wrap the query in double quotes to search for exact match
@@ -44,8 +41,8 @@ function process_term() {
     # Store the resulting list of domains in a variable called 'search_results'
     search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
     
-# Append the list of domains to the new domains file
-    echo "$search_results" | grep -v '^$' >> "new_domains.txt"
+    # Append the list of domains to the new domains file
+    echo "$search_results" | grep -v '^$' >> "$new_domains_file"
 
     # Count the number of domains found for the search term
     num_domains=$(echo "$search_results" | wc -l)
@@ -63,8 +60,9 @@ function process_term() {
 export -f process_term
 
 # Process each search term in parallel using xargs
-printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}'
+whitelist_file="whitelist.txt"
+new_domains_file="new_domains.txt"
+printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}' "$whitelist_file" "$new_domains_file"
 
 # Count the total number of unique domains in the new domains file
-total_domains=$(sort -u new_domains.txt | wc -l)
-echo "Total number of unique domains found: $total_domains"
+total_domains=$(sort -u "$new_domains_file" |
