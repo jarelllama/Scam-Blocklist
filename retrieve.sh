@@ -15,7 +15,7 @@ IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "$search_terms_file
 function process_term() {
     # Get the search term and file paths
     og_query=$1
-    new_domains_file=$3
+    new_domains_file=$2
 
     # Format the search query for use in a Google search URL
     # Wrap the query in double quotes to search for exact match
@@ -50,4 +50,4 @@ function process_term() {
 export -f process_term
 
 # Process each search term in parallel using xargs
-printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}' "$whitelist_file" "$new_domains_file"
+printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}' "$new_domains_file"
