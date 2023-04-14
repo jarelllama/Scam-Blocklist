@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define input and output file locations
-new_domains_file="new_domains.txt"
+input_file="new_domains.txt"
 whitelist_file="whitelist.txt"
 
 # Use awk to process the input file
@@ -24,10 +24,11 @@ awk '
             }
         }
     }
-' "$new_domains_file" > "$new_domains_file.tmp"
+' "$input_file" > "$input_file.tmp"
 
 # Replace the input file with the modified version
-mv "$new_domains_file.tmp" $new_domains_file"
+mv "$input_file.tmp" $input_file"
+
 
 
 # Count number of lines in original file
