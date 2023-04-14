@@ -65,4 +65,5 @@ new_domains_file="new_domains.txt"
 printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}' "$whitelist_file" "$new_domains_file"
 
 # Count the total number of unique domains in the new domains file
-total_domains=$(sort -u "$new_domains_file" |
+total_domains=$(sort -u new_domains.txt | wc -l)
+echo "Total number of unique domains found: $total_domains"
