@@ -7,23 +7,24 @@ input_file="new_domains.txt"
 output_file="new_domains.txt"
 whitelist_file="whitelist.txt"
 
-# TODO: remove empty lines
-
-# Convert all entries to lowercase
-tr '[:upper:]' '[:lower:]' < "$input_file" > "$output_file"
-
-# Use awk to process the input file
 awk '
+    # Skip empty lines
+    /^[[:space:]]*$/ {next}
+
     # Remove duplicates
     !seen[$0]++ {
 
         # Remove non-domains
         if ($0 ~ /^[a-zA-Z0-9\.-]+$/) {
+
             # Split the domain name into its component parts
             split($0, parts, ".")
 
             # Remove TLDs and single level domains
             if (length(parts) > 2 || ($0 ~ /\.[a-zA-Z]{2,}$/ && length(parts) == 2 && parts[1] != "")) {
+
+                # Convert to lowercase
+                $0 = tolower($0)
                 print
             }
         }
@@ -31,7 +32,8 @@ awk '
 ' "$input_file" > "$input_file.tmp"
 
 # Output the modified version
-mv "$input_file.tmp" $output_file"
+mv "$input_file.tmp" "$input_file"
+
 
 
 
