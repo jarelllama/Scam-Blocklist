@@ -67,5 +67,5 @@ export -f process_term
 printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}' "$whitelist_file" "$new_domains_file"
 
 # Count the total number of unique domains in the new domains file
-total_domains=$(awk -F@ '!a[$2]++ {c++} END {print c}' "$new_domains_file")
+total_domains=$(grep -c '^[^#[:space:]]\+\.[^#[:space:]]\+$' new_domains.txt)
 echo "Total number of unique domains found: $total_domains"
