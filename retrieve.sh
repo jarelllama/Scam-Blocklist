@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Define input and output file locations
+new_domains_file="new_domains.txt"
+whitelist_file="whitelist.txt"
+
 # Ask the user if they want to manually input a search term
 read -p "Do you want to manually input a search term? (y/N) " choice
 
@@ -42,7 +46,7 @@ function process_term() {
     search_results=$(curl -s -A "$user_agent" "$search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
     
     # Append the list of domains to the new domains file
-    echo "$search_results" | grep -v '^$' >> "$new_domains_file"
+    echo "${search_results//$'\n'/}" >> "$new_domains_file"
 
     # Count the number of domains found for the search term
     num_domains=$(echo "$search_results" | wc -l)
@@ -60,10 +64,8 @@ function process_term() {
 export -f process_term
 
 # Process each search term in parallel using xargs
-whitelist_file="whitelist.txt"
-new_domains_file="new_domains.txt"
 printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}' "$whitelist_file" "$new_domains_file"
 
 # Count the total number of unique domains in the new domains file
-total_domains=$(sort -u new_domains.txt | wc -l)
+total_domains=$(awk -F@ '!a[$2]++ {c++} END {print c}' "$new_domains_file")
 echo "Total number of unique domains found: $total_domains"
