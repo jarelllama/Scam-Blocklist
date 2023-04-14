@@ -4,6 +4,10 @@
 new_domains_file="new_domains.txt"
 whitelist_file="whitelist.txt"
 
+# Set the user agent and number of results to retrieve
+user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+num_results=120
+
 # Ask the user if they want to manually input a search term
 read -p "Do you want to manually input a search term? (y/N) " choice
 
@@ -33,10 +37,6 @@ function process_term() {
 
     # Replace any spaces with '+' for use in the search URL
     query=${query// /+}
-
-    # Set the user agent and number of results to retrieve
-    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-    num_results=100
 
     # Construct the Google search URL using the formatted query and number of results
     search_url="https://www.google.com/search?q=${query}&num=${num_results}&filter=0"
