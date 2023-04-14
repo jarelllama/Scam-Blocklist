@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Define input and output file locations
 new_domains_file="new_domains.txt"
 whitelist_file="whitelist.txt"
 
