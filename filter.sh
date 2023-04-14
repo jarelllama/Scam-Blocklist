@@ -21,9 +21,14 @@ awk '
             $0 = tolower($0)
             print
  
+        } else {
+
+            # Print invalid domains
+            print "Invalid domain removed:", $1 > "/dev/stderr"
         }
     }
 ' "$input_file" > "$input_file.tmp"
+
 
 # Remove domains matching whitelist terms
 comm -23 - <(sort -f "$whitelist_file") > "$input_file.tmp"
