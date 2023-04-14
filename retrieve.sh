@@ -1,27 +1,15 @@
 #!/bin/bash
 
 # Define input and output file locations
-new_domains_file="new_domains.txt""
+new_domains_file="new_domains.txt"
+search_terms_file="search_terms.txt"
 
 # Set the user agent and number of results to retrieve
 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 num_results=120
 
-# Ask the user if they want to manually input a search term
-read -p "Do you want to manually input a search term? (y/N) " choice
-
-# If the user chooses to manually input a search term
-if [ "$choice" == "y" ]; then
-    # Ask the user to input the search term
-    read -p "Enter the search term: " input_term
-
-    # Add the input search term to the search_terms array
-    search_terms=("$input_term")
-else
-    # Read the search terms from the search terms file and store them in an array
-    search_terms_file="search_terms.txt"
-    IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "$search_terms_file"))'
-fi
+# Read the search terms from the search terms file and store them in an array
+IFS=$'\r\n' GLOBIGNORE='*' command eval 'search_terms=($(cat "$search_terms_file"))'
 
 # Define the function to process a search term
 function process_term() {
@@ -63,7 +51,3 @@ export -f process_term
 
 # Process each search term in parallel using xargs
 printf '%s\0' "${search_terms[@]}" | xargs -0 -P "$(nproc)" -I '{}' bash -c 'process_term "$@"' _ '{}' "$whitelist_file" "$new_domains_file"
-
-# Count the total number of unique domains in the new domains file
-total_domains=$(grep -c '^[^#[:space:]]\+\.[^#[:space:]]\+$' new_domains.txt)
-echo "Total number of unique domains found: $total_domains"
