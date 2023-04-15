@@ -12,10 +12,10 @@ awk '!a[$0]++ && NF' "$input_file" > "tmp1.txt"
 awk 'seen[$0]++ == 1 { print $0 , "(duplicate)" }' "$input_file"
 
 # Remove whitelisted domains
-awk 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "tmp1.txt" | grep -vf "$whitelist_file" -i | cut -d' ' -f1 > "tmp2.txt"
+awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "tmp1.txt" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > "tmp2.txt"
 
 # Print whitelisted domains
-grep -f "$whitelist_file" -i "tmp1.txt" | cut -d' ' -f1 | while read line; do echo "$line (whitelisted)"; done
+grep -f "$whitelist_file" -i "tmp1.txt" | awk '{print $1" (whitelisted)"}'
 
 # Move the temporary file to the desired output file
 mv "tmp2.txt" "$output_file"
