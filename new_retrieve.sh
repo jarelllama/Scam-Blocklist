@@ -11,6 +11,9 @@ num_results=120
 # Define a user agent to prevent Google from blocking the search request
 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
+# Create an associative array to store unique domains
+declare -A unique_domains
+
 echo "Search terms:"
 
 # Read search terms from file and loop through each term
@@ -35,7 +38,16 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
         # Print the total number of domains for each search term
         echo "$line"
-        echo "Number of domains found: $num_domains"
-        echo "----------------------------------"
+        echo "Number of unique domains found: $num_domains"
+        echo "---------------------------------------"
+
+        # Add each domain to the associative array
+        for domain in $domains; do
+            unique_domains["$domain"]=1
+        done
     fi
 done < "$search_terms_file"
+
+# Get the number of unique domains found and print it
+num_unique_domains=${#unique_domains[@]}
+echo "Total number of unique domains found: $num_unique_domains"
