@@ -10,7 +10,7 @@ num_results=120
 # Define a user agent to prevent Google from blocking the search request
 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-# Create an associative array to store unique domains
+# Create an associative array to store only unique domains
 declare -A unique_domains
 
 # Print out the search terms being used in this run
