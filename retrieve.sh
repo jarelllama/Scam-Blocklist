@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define input and output file locations
-output_file="retrieved_domains.txt"
+output_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 
 # Define the number of search results
