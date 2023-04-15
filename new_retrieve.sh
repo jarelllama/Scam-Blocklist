@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Define input and output file locations
 new_domains_file="new_domains.txt"
+search_terms_file="search_terms.txt"
 
-if [[ -s $new_domains_file ]]; then
-  read -p "The new domains file is not empty. Do you want to empty it? (y/N) " answer
-
-  if [[ "$answer" =~ ^[Yy]$ ]]; then
-    echo "" > "$new_domains_file"
-  fi
+# If new_domains_file is not empty, prompt the user whether to empty it or not.
+if [ -s "$new_domains_file" ]
+then
+    read -p "new_domains_file is not empty. Do you want to empty it? (y/n)" answer
+    if [ "$answer" == "y" ]
+    then
+        > $new_domains_file                              fi
 fi
