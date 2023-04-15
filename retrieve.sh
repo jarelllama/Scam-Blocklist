@@ -47,7 +47,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         # Print the total number of domains for each search term
         echo "$line"
         echo "Number of unique domains found: $num_domains"
-        echo "---------------------------------------"
+        echo "--------------------------------------------"
 
         # loop through each domain and add it to associative array only if it is unique
         for domain in $domains; do
