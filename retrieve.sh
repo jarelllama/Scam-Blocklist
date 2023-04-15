@@ -15,8 +15,8 @@ declare -A unique_domains
 
 # If the output file is not empty, prompt the user whether to empty it or not.
 if [[ -s "$output_file" ]]; then
-    read -p "$output_file is not empty. Do you want to empty it? (y/N)" answer
-    if [[ "$answer" == "y" ]]; then
+    read -p "$output_file is not empty. Do you want to empty it? (Y/n): " answer
+    if [[ ! "$answer" == "n" ]]; then
         > "$output_file"
     fi
 fi
