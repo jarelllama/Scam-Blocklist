@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Define input and output file locations
-whitelist_file="whitelist.txt"
-new_domains_file="new_domains.txt"
+output_file="retrieved_domains.txt"
 search_terms_file="search_terms.txt"
 
 # Define the number of search results
@@ -14,6 +13,7 @@ user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 # Create an associative array to store unique domains
 declare -A unique_domains
 
+# Print out the search terms being used in this run
 echo "Search terms:"
 
 # Read search terms from file and loop through each term
