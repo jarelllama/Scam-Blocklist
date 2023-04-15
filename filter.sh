@@ -5,6 +5,8 @@ input_file="pending_domains.txt"
 output_file="filtered_domains.txt"
 whitelist_file="whitelist.txt"
 
+echo "Domains removed:"
+
 # Remove empty lines and duplicates
 awk '!a[$0]++ && NF' "$input_file" > "tmp1.txt"
 
