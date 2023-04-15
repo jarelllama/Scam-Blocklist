@@ -21,8 +21,11 @@ awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file
 # Print whitelisted domains
 grep -f "$whitelist_file" -i "tmp1.txt" | awk '{print $1" (whitelisted)"}'
 
-# Move the temporary file to the desired output file
-mv "tmp2.txt" "$output_file"
+# Sort the list alphabetically and save to the output_file
+sort -o "$output_file" "tmp2.txt"
+
+# Remove temporary files
+rm "tmp*.txt"
 
 # Compare with toplist domains
 echo "Domains in toplist:"
