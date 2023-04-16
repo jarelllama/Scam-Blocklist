@@ -12,7 +12,7 @@ echo "Domains removed:"
 # Remove empty lines and duplicates
 awk '!a[$0]++ && NF' "$input_file" > "tmp1.txt"
 
-# Find and print out duplicated domains
+# Print out duplicated domains while skipping empty lines
 awk 'NF && seen[$0]++ == 1 { print $0, "(duplicate)" }' "$input_file"
 
 # Remove whitelisted domains
@@ -27,6 +27,6 @@ sort -o "$output_file" "tmp2.txt"
 # Remove temporary files
 rm tmp*.txt
 
-# Compare with toplist domains
+# Compare with toplist
 echo "Domains in toplist:"
 comm -12 <(sort "$output_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
