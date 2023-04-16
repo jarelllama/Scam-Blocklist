@@ -28,9 +28,8 @@ grep -f "$whitelist_file" -i "tmp1.txt" | awk '{print $1" (whitelisted)"}'
 # Remove whitelisted domains
 awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "tmp1.txt" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > "tmp2.txt"
 
-# Save changes to the output file and sort alphabetically
-mv "tmp2.txt" "$output_file"
-sort -o ."$output_file" "$output_file"
+# sort alphabetically and save changes to the output file
+sort -o "$output_file" "tmp2.txt"
 
 # Remove temporary files
 rm tmp*.txt
