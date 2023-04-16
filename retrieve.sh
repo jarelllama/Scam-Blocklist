@@ -13,7 +13,7 @@ user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 # Create an associative array to store only unique domains
 declare -A unique_domains
 
-# If the output file is not empty, prompt the user whether to empty it or not.
+# If the output file is not empty, prompt the user whether to empty it
 if [[ -s "$output_file" ]]; then
     read -p "$output_file is not empty. Do you want to empty it? (Y/n): " answer
     if [[ ! "$answer" == "n" ]]; then
@@ -62,3 +62,9 @@ done < "$search_terms_file"
 # Count unique domains and print the number of domains found
 total_unique_domains=${#unique_domains[@]}
 echo "Total number of unique domains found: $total_unique_domains"
+
+# Prompt the user whether to merge the retrieved domains with the blocklist
+read -p "Merge the retrieved domains with the blocklist? (Y/n): " answer
+if [[ ! "$answer" == "n" ]]; then
+    bash merge.sh
+fi
