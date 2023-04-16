@@ -11,7 +11,7 @@ toplist_file="toplist.txt"
 cp "$output_file" "$output_file.bak"
 
 # Append the input file to the output file
-dd if="$input_file$ of="$output_file" conv=notrunc oflag=append
+cat "$input_file" >> "$output_file"
 
 # Print out the domains removed in this run
 echo "Domains removed:"
@@ -37,6 +37,3 @@ rm tmp*.txt
 # Compare with toplist
 echo "Domains in toplist:"
 comm -12 <(sort "$output_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
-
-# Empty the input file
-> "$input_file"
