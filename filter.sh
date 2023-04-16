@@ -17,10 +17,10 @@ dd if="$input_file$ of="$output_file" conv=notrunc oflag=append
 echo "Domains removed:"
 
 # Print out duplicated domains while skipping empty lines
-awk 'NF && seen[$0]++ == 1 { print $0, "(duplicate)" }' "$input_file"
+awk '$0~/[^[:space:]]/ && seen[$0]++ == 1 { print $0, "(duplicate)" }' "$input_file"
 
 # Remove empty lines and duplicates
-awk '!a[$0]++ && NF' "$input_file" > "tmp1.txt"
+awk '$0~/[^[:space:]]/ && !a[$0]++' "$input_file" > "tmp1.txt"
 
 # Print whitelisted domains
 grep -f "$whitelist_file" -i "tmp1.txt" | awk '{print $1" (whitelisted)"}'
