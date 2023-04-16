@@ -44,11 +44,9 @@ rm tmp*.txt
 echo "Domains in toplist:"
 comm -12 <(sort "$domains_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
+# Calculate change in the updated domain file
+diff=$((num_after - num_before))
+change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
+
 # Print the change in the number of domains
-if [[ "$num_after" > "$num_before" ]]; then
-  echo "Change in total number of unique domains: +$((num_after - num_before))"
-elif [[ "$num_after" < "$num_before" ]]; then
-  echo "Change in total number of unique domains: -$((num_before - num_after))"
-else
-  echo "Change in total number of unique domains: 0"
-fi
+echo "Change in total number of unique domains: ${change}"
