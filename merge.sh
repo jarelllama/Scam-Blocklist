@@ -45,9 +45,9 @@ echo "Domains in toplist:"
 comm -12 <(sort "$domains_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
 # Print the change in the number of domains
-if [[ $num_after > $num_before ]]; then
+if [[ "$num_after" > "$num_before" ]]; then
   echo "Change in total number of unique domains: +$((num_after - num_before))"
-elif [[ $num_after < $num_before ]]; then
+elif [[ "$num_after" < "$num_before" ]]; then
   echo "Change in total number of unique domains: -$((num_before - num_after))"
 else
   echo "Change in total number of unique domains: 0"
