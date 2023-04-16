@@ -10,6 +10,9 @@ toplist_file="toplist.txt"
 # Backup the domains file before making any changes
 cp "$domains_file" "$domains_file.bak"
 
+# Get the number of domains before merging
+num_before=$(wc -l "$domains_file" | awk '{print $1}')
+
 # Append the input file to the domains file
 cat "$input_file" >> "$domains_file"
 
@@ -31,9 +34,21 @@ awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file
 # sort alphabetically and save changes to the domains file
 sort -o "$domains_file" "tmp2.txt"
 
+# Get the number of domains after merging
+num_after=$(wc -l "$domains_file" | awk '{print $1}')
+
 # Remove temporary files
 rm tmp*.txt
 
 # Compare with toplist
 echo "Domains in toplist:"
 comm -12 <(sort "$domains_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+
+# Print the change in the number of domains
+if [[ $num_after > $num_before ]]; then
+  echo "Change in total number of unique domains: +$((num_after - num_before))"
+elif [[ $num_after < $num_before ]]; then
+  echo "Change in total number of unique domains: -$((num_before - num_after))"
+else
+  echo "Change in total number of unique domains: 0"
+fi
