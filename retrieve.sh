@@ -28,8 +28,8 @@ echo "Search terms:"
 while IFS= read -r line || [[ -n "$line" ]]; do
     # Ignore empty lines
     if [[ -n "$line" ]]; then
-        # Encode the search term for use in the Google search URL
-        encoded_search_term=${line// /+}
+        # Replace non-alphanumeric characters with plus signs and group sequential plus signs into a single plus sign
+        encoded_search_term=$(echo "$line" | tr -C '[:alnum:]' '+' | sed 's/+ */+/g')
 
         # Use the search term to search Google with filtering off
         google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=$num_results&filter=0"
