@@ -13,8 +13,9 @@ cp "$domains_file" "$domains_file.bak"
 # Get the number of domains before merging
 num_before=$(wc -l "$domains_file" | awk '{print $1}')
 
-# Append the input file to the domains file
-cat "$input_file" >> "$domains_file"
+# Append unique entries from the input file to the domains file
+# Since most domains retrieved are duplicates, this step improves performance by not including them for the filtering below 
+comm -23 <(sort "$input_file") <(sort "$domains_file") >> "$domains_file"
 
 # Print out the domains removed in this run
 echo "Domains removed:"
