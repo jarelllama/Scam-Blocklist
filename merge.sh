@@ -10,7 +10,7 @@ toplist_file="toplist.txt"
 # Backup the domains file before making any changes
 cp "$domains_file" "$domains_file.bak"
 
-# Get the number of domains before merging
+# Get the number of domains before merging. Does not count empty lines
 num_before=$(wc -l "$domains_file" | awk '{print $1}')
 
 # Append unique entries from the input file to the domains file
