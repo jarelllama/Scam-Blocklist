@@ -40,13 +40,11 @@ num_after=$(wc -l "$domains_file" | awk '{print $1}')
 # Remove temporary files
 rm tmp*.txt
 
-# Compare with toplist
+# Compare domains file with toplist
 echo "Domains in toplist:"
 comm -12 <(sort "$domains_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
-# Calculate change in the updated domain file
+# Calculate and print change in the updated domain file
 diff=$((num_after - num_before))
 change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
-
-# Print the change in the number of domains
 echo "Change in total number of unique domains: ${change}"
