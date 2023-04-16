@@ -7,6 +7,7 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 
+# Print out the domains removed in this run
 echo "Domains removed:"
 
 # Remove empty lines and duplicates
