@@ -7,6 +7,12 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 
+# Backup the output file before making any changes
+rsync -a "$output_file" "$output_file.bak"
+
+# Append the input file to the output file
+dd if="$input_file$ of="$output_file" conv=notrunc oflag=append
+
 # Print out the domains removed in this run
 echo "Domains removed:"
 
@@ -22,8 +28,8 @@ grep -f "$whitelist_file" -i "tmp1.txt" | awk '{print $1" (whitelisted)"}'
 # Remove whitelisted domains
 awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "tmp1.txt" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > "tmp2.txt"
 
-# Append the filtered domains to the output file and sort alphabetically
-sort --parallel=8 -m -u -o "$output_file" "tmp2.txt" "$output_file"
+# Save changes to the output file and sort alphabetically
+#sort --parallel=4 -m -u -o "$output_file" "tmp2.txt" "$output_file"
 
 # Remove temporary files
 rm tmp*.txt
