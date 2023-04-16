@@ -2,7 +2,7 @@
 
 whitelist_file="whitelist.txt"
 
-read -r "Enter the new entry: " new_entry
+read -p "Enter the new entry: " new_entry
 new_entry="${new_entry,,}"
 
 echo "$new_entry" >> "$whitelist_file"
