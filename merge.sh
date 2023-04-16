@@ -20,7 +20,7 @@ cat "$input_file" >> "$domains_file"
 echo "Domains removed:"
 
 # Print out duplicated domains while skipping empty lines
-awk '$0~/[^[:space:]]/ && seen[$0]++ == 1 { print $0, "(duplicate)" }' "$domains_file"
+# awk '$0~/[^[:space:]]/ && seen[$0]++ == 1 { print $0, "(duplicate)" }' "$domains_file"
 
 # Remove empty lines and duplicates
 awk '$0~/[^[:space:]]/ && !a[$0]++' "$domains_file" > "tmp1.txt"
