@@ -50,7 +50,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         echo "--------------------------------------------"
 
         # Loop through each domain and add it to associative array only if it is unique
-        for domain in "$domains"; do
+        for domain in $domains; do
             if [[ ! ${unique_domains["$domain"]+_} ]]; then
                 unique_domains["$domain"]=1
                 echo "$domain" >> "$output_file"
