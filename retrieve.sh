@@ -49,7 +49,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         echo "Number of unique domains found: $num_domains"
         echo "--------------------------------------------"
 
-        # loop through each domain and add it to associative array only if it is unique
+        # Loop through each domain and add it to associative array only if it is unique
         for domain in $domains; do
             if [[ ! ${unique_domains["$domain"]+_} ]]; then
                 unique_domains["$domain"]=1
