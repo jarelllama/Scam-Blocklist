@@ -29,7 +29,8 @@ grep -f "$whitelist_file" -i "tmp1.txt" | awk '{print $1" (whitelisted)"}'
 awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "tmp1.txt" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > "tmp2.txt"
 
 # Save changes to the output file and sort alphabetically
-#sort --parallel=4 -m -u -o "$output_file" "tmp2.txt" "$output_file"
+mv "tmp2.txt" "$output_file"
+sort -o ."$output_file" "$output_file"
 
 # Remove temporary files
 rm tmp*.txt
