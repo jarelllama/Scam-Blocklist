@@ -48,4 +48,5 @@ comm -12 <(sort "$domains_file") <(sort "$toplist_file") | grep -vFxf "$blacklis
 # Calculate and print change in the updated domain file
 diff=$((num_after - num_before))
 change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
+echo "--------------------------------------------"
 echo "Change in total number of unique domains: ${change}"
