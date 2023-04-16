@@ -8,7 +8,7 @@ blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 
 # Backup the output file before making any changes
-rsync -a "$output_file" "$output_file.bak"
+cp "$output_file" "$output_file.bak"
 
 # Append the input file to the output file
 dd if="$input_file$ of="$output_file" conv=notrunc oflag=append
