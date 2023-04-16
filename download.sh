@@ -18,3 +18,4 @@ wget -N https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/whiteli
 
 wget -N https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/search_terms.txt
 
+wget -N https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/add.sh
