@@ -2,7 +2,7 @@
 
 # Download required files
 
-read -p "Do you want to download the toplist.txt? (y/N): " answer
+read -p "Download the toplist.txt? (y/N): " answer
 
 if [[ "$answer" == "y" ]]; then
   wget -N https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt
