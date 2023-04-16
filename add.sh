@@ -5,9 +5,9 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 
 echo "Choose which list to add to:"
-echo "1. Whitelist"
-echo "2. Blacklist"
-echo "3. Blocklist"
+echo "1. Blocklist"
+echo "2. Whitelist"
+echo "3. Blacklist"
 read list_choice
 
 read -p "Enter the new entry: " new_entry
@@ -15,16 +15,16 @@ new_entry="${new_entry,,}"
 
 case "$list_choice" in
   1)
+    echo "$new_entry" >> "$domains_file"
+    sort -o "$domains_file" "$domains_file"
+    ;;
+  2)
     echo "$new_entry" >> "$whitelist_file"
     sort -o "$whitelist_file" "$whitelist_file"
     ;;
-  2)
+  3)
     echo "$new_entry" >> "$blacklist_file"
     sort -o "$blacklist_file" "$blacklist_file"
-    ;;
-  3)
-    echo "$new_entry" >> "$domains_file"
-    sort -o "$domains_file" "$domains_file"
     ;;
   *)
     echo "Invalid choice. Exiting."
