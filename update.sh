@@ -21,10 +21,11 @@ declare -A unique_domains
 # If the pending domains file is not empty, prompt the user whether to empty it
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    [[ $answer == "y" ]] && > "$pending_file"
-fi
+    if [[ ! "$answer" == "n" ]]; then
+        > "$pending_file"
+    fi
 
-echo "Search terms:"
+echo "\nSearch terms:"
 
 # Read search terms from file and loop through each term
 while IFS= read -r line || [[ -n "$line" ]]; do
@@ -104,8 +105,7 @@ function filter_pending {
     rm tmp*.txt
 
     # Print counters
-    echo "--------------------------------------------"
-    echo "Total domains retrieved: $total_unique_domains"
+    echo "\nTotal domains retrieved: $total_unique_domains"
     echo "Total domains pending: $num_before"
     echo "Total domains removed: $((num_before - num_after))"
     echo "Final domains pending: $num_after"
