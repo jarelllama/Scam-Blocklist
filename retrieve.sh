@@ -119,6 +119,8 @@ read choice
 
 case "$choice" in
     1)
+        echo "Merge with blocklist"
+
         # Backup the domains file before making any changes
         cp "$domains_file" "$domains_file.bak"
 
@@ -166,4 +168,5 @@ case "$choice" in
             # Print the options again
             echo "Invalid option selected: $choice"
             echo "Please select a valid option (1-5)"
+        fi
 esac
