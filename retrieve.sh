@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Define input and output file locations
-output_file="pending_domains.txt"
+pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
+blacklist_file="blacklist.txt"
 
 # Define the number of search results
 num_results=120
@@ -15,10 +16,10 @@ user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 declare -A unique_domains
 
 # If the output file is not empty, prompt the user whether to empty it
-if [[ -s "$output_file" ]]; then
-    read -p "$output_file is not empty. Do you want to empty it? (Y/n): " answer
+if [[ -s "$pending_file" ]]; then
+    read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     if [[ ! "$answer" == "n" ]]; then
-        > "$output_file"
+        > "$pending_file"
     fi
 fi
 
@@ -56,7 +57,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
             if [[ ! ${unique_domains["$domain"]+_} ]]; then
                 unique_domains["$domain"]=1
                 # Output unique domains to the output file
-                echo "$domain" >> "$output_file"
+                echo "$domain" >> "$pending_file"
             fi
         done
     fi
@@ -67,30 +68,30 @@ total_unique_domains=${#unique_domains[@]}
 echo "Total number of unique domains retrieved: $total_unique_domains"
 
 # Count and print the number of domains in the output file before filtering
-num_before=$(wc -l < "$output_file")
+num_before=$(wc -l < "$pending_file")
 echo "Number of pending domains before filtering: $num_before"
 
 # Print out the domains removed during filtering
 echo "Domains removed:"
 
 # Print whitelisted domains
-grep -f "$whitelist_file" -i "$output_file" | awk '{print $1" (whitelisted)"}'
+grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
 
 # Remove whitelisted domains
-awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$output_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp1.txt
+awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$pending_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp1.txt
 
 # sort alphabetically and save changes to the output file
-sort -o "$output_file" tmp1.txt
+sort -o "$pending_file" tmp1.txt
 
 # Compare domains file with toplist
 echo "Domains in toplist:"
-comm -12 <(sort "$output_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
 # Remove temporary files
 rm tmp*.txt
 
 # Count and print the number of domains in the output file after filtering
-num_after=$(wc -l < "$output_file")
+num_after=$(wc -l < "$pending_file")
 echo "Number of pending domains after filtering: $num_after"
 
 # Calculate and print change in the updated output file
