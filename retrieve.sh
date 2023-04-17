@@ -24,7 +24,7 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
-echo "Searching and extracting domains..."
+echo "Search terms:"
 
 # Read search terms from file and loop through each term
 while IFS= read -r line || [[ -n "$line" ]]; do
@@ -74,6 +74,9 @@ echo "Domains removed:"
 
 # Remove non domain entries
 awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > tmp1.txt; else print $0" (invalid)" }' "$pending_file"
+
+# Remove domains with whitelisted TLDs
+grep -vf <(awk '{print "."$0"$"}' tlds.txt) test_domains.txt
 
 # Print whitelisted domains
 grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
