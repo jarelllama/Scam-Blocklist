@@ -150,6 +150,9 @@ function merge_pending {
     echo "Final domains after: $num_after"
     echo "--------------------------------------------"
 
+    # Empty pending domains file
+    > "$pending_file"
+
     # Exit script
     exit 0
 }
