@@ -79,16 +79,16 @@ echo "Domains removed:"
 grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" | sed "s/\(.*\)/\1 (TLD)/"
 
 # Remove domains with whitelisted TLDs
-grep -vE "\.($(paste -sd '|' tlds.txt))$" test_domains.txt > tmp1.txt
+grep -vE "\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" > tmp1.txt
 
 # Print whitelisted domains
-grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
+grep -f "$whitelist_file" -i tmp1.txt | awk '{print $1" (whitelisted)"}'
 
 # Remove whitelisted domains
-awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$pending_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp1.txt
+awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp1.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp2.txt
 
 # Sort alphabetically and save changes to the pending domains file
-sort -o "$pending_file" tmp1.txt
+sort -o "$pending_file" tmp2.txt
 
 # Print pending domains found in the toplist
 echo "Domains in toplist:"
