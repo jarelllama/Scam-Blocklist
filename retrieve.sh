@@ -31,7 +31,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     if [[ -n "$line" ]]; then
         # Replace non-alphanumeric characters with plus signs and group sequential plus signs into a single plus sign
         encoded_search_term=$(echo "$line" | sed -E 's/[^[:alnum:]]+/\+/g')
-        
+
         # Use the search term to search Google with filtering off
         google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=$num_results&filter=0"
 
@@ -64,8 +64,11 @@ total_unique_domains=${#unique_domains[@]}
 # Count the number of pending domains before filtering
 num_before=$(wc -l < "$pending_file")
 
-# Sort alphabetically 
+# Sort alphabetically
 sort -o "$pending_file" "$pending_file"
+
+# Create temporary file
+touch tmp1.txt
 
 echo "Domains removed:"
 
@@ -73,19 +76,19 @@ echo "Domains removed:"
 awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp1.txt"; else print $0" (invalid)" }' "$pending_file"
 
 # Print domains with whitelisted TLDs
-grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" "tmp1.txt" | sed "s/\(.*\)/\1 (TLD)/"
+grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp1.txt | sed "s/\(.*\)/\1 (TLD)/"
 
 # Remove domains with whitelisted TLDs
-grep -vE "\.($(paste -sd '|' "$tlds_file"))$" "tmp1.txt" > "tmp2.txt"
+grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp1.txt > tmp2.txt
 
 # Print whitelisted domains
-grep -f "$whitelist_file" -i "tmp2.txt" | awk '{print $1" (whitelisted)"}'
+grep -f "$whitelist_file" -i tmp2.txt | awk '{print $1" (whitelisted)"}'
 
 # Remove whitelisted domains
-awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "tmp2.txt" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > "tmp3.txt"
+awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp2.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp3.txt
 
 # Save changes to the pending domains file
-mv "tmp3.txt" "$pending_file"
+mv tmp3.txt "$pending_file"
 
 # Print domains found in the toplist
 echo "Domains in toplist:"
