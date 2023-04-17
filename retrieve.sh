@@ -64,9 +64,8 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     fi
 done < "$search_terms_file"
 
-# Print number of unique domains retrieved in this run
+# Count the number of unique domains retrieved in this run
 total_unique_domains=${#unique_domains[@]}
-echo "Total domains retrieved: $total_unique_domains"
 
 # Count the number of pending domains before filtering
 num_before=$(wc -l < "$pending_file")
@@ -105,8 +104,10 @@ num_after=$(wc -l < "$pending_file")
 rm tmp*.txt
 
 # Print counters
+echo "--------------------------------------------"
+echo "Total domains retrieved: $total_unique_domains"
 echo "Total domains pending: $num_before"
-echo "Total domains removed: $((num_after - num_before))"
+echo "Total domains removed: $((num_before - num_after))"
 echo "Final domains pending: $num_after"
 echo "--------------------------------------------"
 
