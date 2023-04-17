@@ -20,9 +20,7 @@ declare -A unique_domains
 # If the pending domains file is not empty, prompt the user whether to empty it
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    if [[ ! "$answer" == "n" ]]; then
-        > "$pending_file"
-    fi
+    [[ $answer == "y" ]] && > "$pending_file"
 fi
 
 echo "Search terms:"
