@@ -62,52 +62,58 @@ done < "$search_terms_file"
 # Count the number of unique domains retrieved in this run
 total_unique_domains=${#unique_domains[@]}
 
-# Count the number of pending domains before filtering
-num_before=$(wc -l < "$pending_file")
+# Define function to filter pending domains
+function filter_pending {
+    # Count the number of pending domains before filtering
+    num_before=$(wc -l < "$pending_file")
 
-# Sort pending domains alphabetically
-sort -o "$pending_file" "$pending_file"
+    # Sort pending domains alphabetically
+    sort -o "$pending_file" "$pending_file"
 
-# Create temporary file
-touch tmp1.txt
+    # Create temporary file
+    touch tmp1.txt
 
-echo "Domains removed:"
+    echo "Domains removed:"
 
-# Print and remove non domain entries
-awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp1.txt"; else print $0" (invalid)" }' "$pending_file"
+    # Print and remove non domain entries
+    awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp1.txt"; else print $0" (invalid)" }' "$pending_file"
 
-# Print domains with whitelisted TLDs
-grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp1.txt | sed "s/\(.*\)/\1 (TLD)/"
+    # Print domains with whitelisted TLDs
+    grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp1.txt | sed "s/\(.*\)/\1 (TLD)/"
 
-# Remove domains with whitelisted TLDs
-grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp1.txt > tmp2.txt
+    # Remove domains with whitelisted TLDs
+    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp1.txt > tmp2.txt
 
-# Print whitelisted domains
-grep -f "$whitelist_file" -i tmp2.txt | awk '{print $1" (whitelisted)"}'
+    # Print whitelisted domains
+    grep -f "$whitelist_file" -i tmp2.txt | awk '{print $1" (whitelisted)"}'
 
-# Remove whitelisted domains
-awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp2.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp3.txt
+    # Remove whitelisted domains
+    awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp2.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp3.txt
 
-# Save changes to the pending domains file
-mv tmp3.txt "$pending_file"
+    # Save changes to the pending domains file
+    mv tmp3.txt "$pending_file"
 
-# Print domains found in the toplist
-echo "Domains in toplist:"
-comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+    # Print domains found in the toplist
+    echo "Domains in toplist:"
+    comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
-# Count the number of pending domains after filtering
-num_after=$(wc -l < "$pending_file")
+    # Count the number of pending domains after filtering
+    num_after=$(wc -l < "$pending_file")
 
-# Remove temporary files
-rm tmp*.txt
+    # Remove temporary files
+    rm tmp*.txt
 
-# Print counters
-echo "--------------------------------------------"
-echo "Total domains retrieved: $total_unique_domains"
-echo "Total domains pending: $num_before"
-echo "Total domains removed: $((num_before - num_after))"
-echo "Final domains pending: $num_after"
-echo "--------------------------------------------"
+    # Print counters
+    echo "--------------------------------------------"
+    echo "Total domains retrieved: $total_unique_domains"
+    echo "Total domains pending: $num_before"
+    echo "Total domains removed: $((num_before - num_after))"
+    echo "Final domains pending: $num_after"
+    echo "--------------------------------------------"
+}
+
+# Execute filtering in pending domains
+filter_pending
 
 # Prompt user with options on how to proceed
 echo "Choose how to proceed:"
@@ -164,6 +170,7 @@ while true; do
         ;;
     4)
         echo "Run filter again"
+        filter_pending
         ;;
     5)
         exit 0
