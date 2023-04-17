@@ -144,12 +144,18 @@ case "$choice" in
         echo "--------------------------------------------"
         ;;
     2)
-        # Code for option 2
-        echo "Option 2 selected"
+        echo "Add to whitelist"
+        read -p "Enter the new entry: " new_entry
+        new_entry="${new_entry,,}"
+        echo "$new_entry" >> "$whitelist_file"
+        sort -o "$whitelist_file" "$whitelist_file"
         ;;
     3)
-        # Code for option 3
-        echo "Option 3 selected"
+        echo "Add to blacklist"
+        read -p "Enter the new entry: " new_entry
+        new_entry="${new_entry,,}"
+        echo "$new_entry" >> "$blacklist_file"
+        sort -o "$blacklist_file" "$blacklist_file"
         ;;
     4)
         # Code for option 3
