@@ -72,6 +72,9 @@ num_before=$(wc -l < "$pending_file")
 
 echo "Domains removed:"
 
+# Remove non domain entries
+awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > tmp1.txt; else print $0" (invalid)" }' "$pending_file"
+
 # Print whitelisted domains
 grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
 
