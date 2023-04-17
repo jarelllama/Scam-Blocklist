@@ -24,7 +24,7 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
-echo "Search terms:"
+echo "Searching and extracting domains..."
 
 # Read search terms from file and loop through each term
 while IFS= read -r line || [[ -n "$line" ]]; do
@@ -49,7 +49,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
         # Print the number of domains retrieved by the search term
         echo "$line"
-        echo "Number of unique domains retrieved: $num_domains"
+        echo "Unique domains retrieved: $num_domains"
         echo "--------------------------------------------"
 
         # Loop through each domain and add it to associative array only if it is unique
@@ -65,9 +65,7 @@ done < "$search_terms_file"
 
 # Print number of unique domains retrieved in this run
 total_unique_domains=${#unique_domains[@]}
-echo "Total number of unique domains retrieved: $total_unique_domains"
-
-echo "Filtering domains..."
+echo "Total domains retrieved: $total_unique_domains"
 
 # Count the number of pending domains before filtering
 num_before=$(wc -l < "$pending_file")
@@ -87,21 +85,16 @@ sort -o "$pending_file" tmp1.txt
 echo "Domains in toplist:"
 comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
-# Remove temporary files
-rm tmp*.txt
-
 # Count the number of pending domains after filtering
 num_after=$(wc -l < "$pending_file")
 
-# Print the number of pending domains before and after filtering
-echo "Pending domains after filtering: $num_before"
-echo "Pending domains after filtering: $num_after"
+# Remove temporary files
+rm tmp*.txt
 
-# Calculate and print change in the updated pending domains file
-diff=$((num_after - num_before))
-change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
-echo "Change: ${change} domains"
-
+# Print counters
+echo "Total domains pending: $num_before"
+echo "Total domains removed: $((num_after - num_before))
+echo "Final domains pending: $num_after"
 echo "--------------------------------------------"
 
 echo "Choose how to proceed:"
@@ -109,4 +102,5 @@ echo "1. Merge with blocklist (default)"
 echo "2. Add to whitelist"
 echo "3. Add to blacklist"
 echo "4. Run filter again"
+echo "5. Exit"
 read choice
