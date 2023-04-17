@@ -26,7 +26,11 @@ echo "Domains removed:"
 # Remove empty lines and duplicates
 awk '$0~/[^[:space:]]/ && !a[$0]++' "$domains_file" > tmp1.txt
 
+# Remove non domain entries
+awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > tmp1.txt; else print $0" (invalid)" }' "$pending_file"
+
 # Print whitelisted domains
+# TODO: optimize
 grep -f "$whitelist_file" -i tmp1.txt | awk '{print $1" (whitelisted)"}'
 
 # Remove whitelisted domains
