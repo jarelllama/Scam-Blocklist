@@ -21,7 +21,7 @@ if [[ -s "$output_file" ]]; then
     fi
 fi
 
-# Print out the search terms being used in this run
+# Print the search terms being used in this run
 echo "Search terms:"
 
 # Read search terms from file and loop through each term
@@ -35,16 +35,17 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=$num_results&filter=0"
 
         # Send the request to Google and extract all domains and subdomains from the HTML. Remove www., empty lines and duplicates
+        # Empty lines and duplicates have to be removed here for accurate counting of the retrieved domains by each search term
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//' | sed '/^$/d')
 
-        # Count the number of domains
+        # Count the number of domains retrieved by the specific search term
         if [[ -z "$domains" ]]; then
             num_domains=0
         else
             num_domains=$(echo "$domains" | wc -l)
         fi
 
-        # Print the total number of domains for each search term
+        # Print the number of domains retrieved by the search term
         echo "$line"
         echo "Number of unique domains found: $num_domains"
         echo "--------------------------------------------"
@@ -53,18 +54,54 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         for domain in $domains; do
             if [[ ! ${unique_domains["$domain"]+_} ]]; then
                 unique_domains["$domain"]=1
+                # Output unique domains to the output file
                 echo "$domain" >> "$output_file"
             fi
         done
     fi
 done < "$search_terms_file"
 
-# Count unique domains and print the number of domains found
+# Print number of unique domains retrieved in this run
 total_unique_domains=${#unique_domains[@]}
-echo "Total number of unique domains found: $total_unique_domains"
+echo "Total number of unique domains retrieved: $total_unique_domains"
+
+# Print the number of domains in the output file before filtering
+num_before=$(wc -l < "$output_file")
+echo "Number of pending domains before filtering: $num_before"
+
+# Print out the domains removed during filtering
+echo "Domains removed:"
+
+# Print whitelisted domains
+grep -f "$whitelist_file" -i "$output_file" | awk '{print $1" (whitelisted)"}'
+
+# Remove whitelisted domains
+awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$output_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp1.txt
+
+# sort alphabetically and save changes to the output file
+sort -o "$output_file" tmp1.txt
+
+# Count the number of domains in the output file after filtering
+num_after=$(wc -l < "$output_file")
+
+# Compare domains file with toplist
+echo "Domains in toplist:"
+comm -12 <(sort "$output_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+
+# Remove temporary files
+rm tmp*.txt
+
+# Print the number of domains in the output file after filtering
+num_before=$(wc -l < "$output_file")
+echo "Number of pending domains after filtering: $num_after"
+
+# Calculate and print change in the updated output file
+diff=$((num_after - num_before))
+change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
+echo "Change: ${change}"
 
 # Prompt the user whether to merge the retrieved domains with the blocklist
-read -p "Merge the retrieved domains with the blocklist? (Y/n): " answer
-if [[ ! "$answer" == "n" ]]; then
-    bash merge.sh
-fi
+#read -p "Merge the retrieved domains with the blocklist? (Y/n): " answer
+#if [[ ! "$answer" == "n" ]]; then
+#    bash merge.sh
+#fi
