@@ -176,6 +176,7 @@ while true; do
                 echo "$new_entry" >> "$whitelist_file"
 
                 # Remove empty lines including lines that are whitespaces
+                # After benchmarking it appears outputting to a temporary file is faster than editing inplace
                 awk NF "$whitelist_file" > tmp1.txt
 
                 # Sort alphabetically
