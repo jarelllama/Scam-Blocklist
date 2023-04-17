@@ -3,6 +3,7 @@
 # Define input and output file locations
 output_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
+whitelist_file="whitelist.txt"
 
 # Define the number of search results
 num_results=120
@@ -101,5 +102,5 @@ echo "Choose how to proceed:"
 echo "1. Merge with blocklist (default)"
 echo "2. Add to whitelist"
 echo "3. Add to blacklist"
-echo "4. Run filter again
+echo "4. Run filter again"
 read choice
