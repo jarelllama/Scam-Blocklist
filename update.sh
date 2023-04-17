@@ -24,6 +24,7 @@ if [[ -s "$pending_file" ]]; then
     if [[ ! "$answer" == "n" ]]; then
         > "$pending_file"
     fi
+fi
 
 echo "\nSearch terms:"
 
