@@ -27,7 +27,7 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
-echo -e "\nSearch terms:"
+echo "Search terms:"
 
 # Read search terms from file and loop through each term
 while IFS= read -r line || [[ -n "$line" ]]; do
@@ -111,14 +111,13 @@ function filter_pending {
     echo "Total domains pending: $num_before"
     echo "Total domains removed: $((num_before - num_after))"
     echo "Final domains pending: $num_after"
-    echo "--------------------------------------------"
 }
 
 # Execute filtering for pending domains
 filter_pending
 
 # Prompt user with options on how to proceed
-echo "Choose how to proceed:"
+echo -e "\nChoose how to proceed:"
 echo "1. Merge with blocklist (default)"
 echo "2. Add to whitelist"
 echo "3. Add to blacklist"
