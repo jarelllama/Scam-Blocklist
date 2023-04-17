@@ -62,7 +62,7 @@ done < "$search_terms_file"
 # Count the number of unique domains retrieved in this run
 total_unique_domains=${#unique_domains[@]}
 
-# Define function to filter pending domains
+# Define a function to filter pending domains
 function filter_pending {
     # Count the number of pending domains before filtering
     num_before=$(wc -l < "$pending_file")
@@ -124,8 +124,8 @@ echo "4. Run filter again"
 echo "5. Exit"
 read choice
 
+# Define a function to merge filtered pending domains to the domains file
 function merge_pending {
-
     echo "Merge with blocklist"
 
     # Backup the domains file before making any changes
@@ -156,35 +156,35 @@ function merge_pending {
 
 while true; do
     case "$choice" in
-    1)
-        merge_pending
-        ;;
-    2)
-        echo "Add to whitelist"
-        read -p "Enter the new entry: " new_entry
-        new_entry="${new_entry,,}"
-        echo "$new_entry" >> "$whitelist_file"
-        sort -o "$whitelist_file" "$whitelist_file"
-        ;;
-    3)
-        echo "Add to blacklist"
-        read -p "Enter the new entry: " new_entry
-        new_entry="${new_entry,,}"
-        echo "$new_entry" >> "$blacklist_file"
-        sort -o "$blacklist_file" "$blacklist_file"
-        ;;
-    4)
-        echo "Run filter again"
-        filter_pending
-        ;;
-    5)
-        exit 0
-        ;;
-    *)
-        if [[ -z "$choice" ]]; then
+        1)
             merge_pending
-        else
-            echo "Invalid option selected"
-        fi
-esac
+            ;;
+        2)
+            echo "Add to whitelist"
+            read -p "Enter the new entry: " new_entry
+            new_entry="${new_entry,,}"
+            echo "$new_entry" >> "$whitelist_file"
+            sort -o "$whitelist_file" "$whitelist_file"
+            ;;
+        3)
+            echo "Add to blacklist"
+            read -p "Enter the new entry: " new_entry
+            new_entry="${new_entry,,}"
+            echo "$new_entry" >> "$blacklist_file"
+            sort -o "$blacklist_file" "$blacklist_file"
+            ;;
+        4)
+            echo "Run filter again"
+            filter_pending
+            ;;
+        5)
+            exit 0
+            ;;
+        *)
+            if [[ -z "$choice" ]]; then
+                merge_pending
+            else
+                echo "Invalid option selected"
+            fi
+    esac
 done
