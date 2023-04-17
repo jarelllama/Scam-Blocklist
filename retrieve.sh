@@ -91,7 +91,7 @@ awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file
 # Save changes to the pending domains file
 mv tmp2.txt "$pending_file"
 
-# Print pending domains found in the toplist
+# Print domains found in the toplist
 echo "Domains in toplist:"
 comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
