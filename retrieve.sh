@@ -124,35 +124,40 @@ echo "4. Run filter again"
 echo "5. Exit"
 read choice
 
+function merge_pending {
+
+    echo "Merge with blocklist"
+
+    # Backup the domains file before making any changes
+    cp "$domains_file" "$domains_file.bak"
+
+    # Count the number of domains before merging
+    num_before=$(wc -l < "$domains_file")
+
+    # Append unique pending domains to the domains file
+    comm -23 "$pending_file" "$domains_file" >> "$domains_file"
+
+    # Sort domains file alphabetically
+    sort -o "$domains_file" "$domains_file"
+
+    # Count the number of domains after merging
+    num_after=$(wc -l < "$domains_file")
+
+    # Print counters
+    echo "--------------------------------------------"
+    echo "Total domains before: $num_before"
+    echo "Total domains added: $((num_before - num_after))"
+    echo "Final domains after: $num_after"
+    echo "--------------------------------------------"
+
+    # Exit script
+    exit 0
+}
+
 while true; do
     case "$choice" in
     1)
-        echo "Merge with blocklist"
-
-        # Backup the domains file before making any changes
-        cp "$domains_file" "$domains_file.bak"
-
-        # Count the number of domains before merging
-        num_before=$(wc -l < "$domains_file")
-
-        # Append unique pending domains to the domains file
-        comm -23 "$pending_file" "$domains_file" >> "$domains_file"
-
-        # Sort domains file alphabetically
-        sort -o "$domains_file" "$domains_file"
-
-        # Count the number of domains after merging
-        num_after=$(wc -l < "$domains_file")
-
-        # Print counters
-        echo "--------------------------------------------"
-        echo "Total domains before: $num_before"
-        echo "Total domains added: $((num_before - num_after))"
-        echo "Final domains after: $num_after"
-        echo "--------------------------------------------"
-
-        # Exit script
-        exit 0
+        merge_pending
         ;;
     2)
         echo "Add to whitelist"
@@ -177,7 +182,7 @@ while true; do
         ;;
     *)
         if [[ -z "$choice" ]]; then
-            # default action
+            merge_pending
         else
             echo "Invalid option selected"
         fi
