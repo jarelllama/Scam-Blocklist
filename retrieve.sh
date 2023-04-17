@@ -71,9 +71,10 @@ echo "Total domains retrieved: $total_unique_domains"
 # Count the number of pending domains before filtering
 num_before=$(wc -l < "$pending_file")
 
-echo "Domains removed:"
-
 # Sort alphabetically 
+sort -o "$pending_file" "$pending_file"
+
+echo "Domains removed:"
 
 # Print domains with whitelisted TLDs
 grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" | sed "s/\(.*\)/\1 (TLD)/"
@@ -87,8 +88,8 @@ grep -f "$whitelist_file" -i tmp1.txt | awk '{print $1" (whitelisted)"}'
 # Remove whitelisted domains
 awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp1.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp2.txt
 
-# Sort alphabetically and save changes to the pending domains file
-sort -o "$pending_file" tmp2.txt
+# Save changes to the pending domains file
+mv tmp2.txt "$pending_file"
 
 # Print pending domains found in the toplist
 echo "Domains in toplist:"
