@@ -93,7 +93,7 @@ rm tmp*.txt
 
 # Print counters
 echo "Total domains pending: $num_before"
-echo "Total domains removed: $((num_after - num_before))
+echo "Total domains removed: $((num_after - num_before))"
 echo "Final domains pending: $num_after"
 echo "--------------------------------------------"
 
