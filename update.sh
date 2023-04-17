@@ -97,7 +97,7 @@ function filter_pending {
     mv tmp3.txt "$pending_file"
 
     # Print domains found in the toplist
-    echo "Domains in toplist:"
+    echo -e "\nDomains in toplist:"
     comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
     # Count the number of pending domains after filtering
@@ -138,7 +138,7 @@ function merge_pending {
     # Print counters
     echo "--------------------------------------------"
     echo "Total domains before: $num_before"
-    echo "Total domains added: $((num_before - num_after))"
+    echo "Total domains added: $((num_after - num_before))"
     echo "Final domains after: $num_after"
     echo "--------------------------------------------"
 
