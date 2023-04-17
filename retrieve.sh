@@ -15,7 +15,7 @@ user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 # Create an associative array to store only unique domains
 declare -A unique_domains
 
-# If the output file is not empty, prompt the user whether to empty it
+# If the pending domains file is not empty, prompt the user whether to empty it
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     if [[ ! "$answer" == "n" ]]; then
@@ -56,7 +56,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         for domain in $domains; do
             if [[ ! ${unique_domains["$domain"]+_} ]]; then
                 unique_domains["$domain"]=1
-                # Output unique domains to the output file
+                # Output unique domains to the pending domains
                 echo "$domain" >> "$pending_file"
             fi
         done
@@ -67,7 +67,7 @@ done < "$search_terms_file"
 total_unique_domains=${#unique_domains[@]}
 echo "Total number of unique domains retrieved: $total_unique_domains"
 
-# Count and print the number of domains in the output file before filtering
+# Count and print the number of pending domains before filtering
 num_before=$(wc -l < "$pending_file")
 echo "Number of pending domains before filtering: $num_before"
 
@@ -80,21 +80,21 @@ grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
 # Remove whitelisted domains
 awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$pending_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp1.txt
 
-# sort alphabetically and save changes to the output file
+# Sort alphabetically and save changes to the pending domains file
 sort -o "$pending_file" tmp1.txt
 
-# Compare domains file with toplist
+# Print pending domains found in the toplist
 echo "Domains in toplist:"
 comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
 # Remove temporary files
 rm tmp*.txt
 
-# Count and print the number of domains in the output file after filtering
+# Count and print the number of pending domains after filtering
 num_after=$(wc -l < "$pending_file")
 echo "Number of pending domains after filtering: $num_after"
 
-# Calculate and print change in the updated output file
+# Calculate and print change in the updated pending domains file
 diff=$((num_after - num_before))
 change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
 echo "Change: ${change} domains"
