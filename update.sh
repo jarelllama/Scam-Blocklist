@@ -178,7 +178,7 @@ function proceed_options {
                 sort -o "$whitelist_file" "$whitelist_file"
 
                 # Remove empty lines
-                sed -i '/^$/d' file.txt
+                sed -i '/^$/d' $whitelist_file"
             fi
 
             # Go back to the options prompt
@@ -192,7 +192,7 @@ function proceed_options {
             new_entry="${new_entry,,}"
             
             # Add the new entry if the domain isn't already in the blacklist
-            if grep -q "^$new_entry$" "$whitelist_file"; then
+            if grep -q "^$new_entry$" "$blacklist_file"; then
                 echo "The domain already in the blacklist"
             else
                 echo "$new_entry" >> "$blacklist_file"
@@ -201,7 +201,7 @@ function proceed_options {
                 sort -o "$blacklist_file" "$blacklist_file"
 
                 # Remove empty lines
-                sed -i '/^$/d' file.txt
+                sed -i '/^$/d' $blacklist_file"
             fi
 
             # Go back to the options prompt
