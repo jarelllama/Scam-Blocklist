@@ -109,6 +109,7 @@ echo "Total domains removed: $((num_before - num_after))"
 echo "Final domains pending: $num_after"
 echo "--------------------------------------------"
 
+# Prompt user with options on how to proceed
 echo "Choose how to proceed:"
 echo "1. Merge with blocklist (default)"
 echo "2. Add to whitelist"
@@ -117,7 +118,8 @@ echo "4. Run filter again"
 echo "5. Exit"
 read choice
 
-case "$choice" in
+while true; do
+    case "$choice" in
     1)
         echo "Merge with blocklist"
 
@@ -142,6 +144,9 @@ case "$choice" in
         echo "Total domains added: $((num_before - num_after))"
         echo "Final domains after: $num_after"
         echo "--------------------------------------------"
+
+        # Exit script
+        exit 0
         ;;
     2)
         echo "Add to whitelist"
@@ -158,21 +163,16 @@ case "$choice" in
         sort -o "$blacklist_file" "$blacklist_file"
         ;;
     4)
-        # Code for option 3
-        echo "Option 3 selected"
+        echo "Run filter again"
         ;;
     5)
-        # Code for option 3
-        echo "Option 3 selected"
+        exit 0
         ;;
-        *)
+    *)
         if [[ -z "$choice" ]]; then
             # default action
-            echo "Invalid option selected"
-            echo "Please select a valid option (1-5)"
         else
-            # Print the options again
-            echo "Invalid option selected: $choice"
-            echo "Please select a valid option (1-5)"
+            echo "Invalid option selected"
         fi
 esac
+done
