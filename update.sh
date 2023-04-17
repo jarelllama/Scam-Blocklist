@@ -176,10 +176,10 @@ while true; do
                 echo "$new_entry" >> "$whitelist_file"
 
                 # Remove empty lines including lines that are whitespaces
-                awk NF $whitelist_file" > tmp1.txt
+                awk NF "$whitelist_file" > tmp1.txt
 
                 # Sort alphabetically
-                sort -o $whitelist_file" tmp1.txt
+                sort -o "$whitelist_file" tmp1.txt
 
                 # Remove temporary file
                 rm tmp1.txt
@@ -202,10 +202,10 @@ while true; do
                 echo "$new_entry" >> "$blacklist_file"
 
                 # Remove empty lines
-                awk NF $blacklist_file" > tmp1.txt
+                awk NF "$blacklist_file" > tmp1.txt
 
                 # Sort alphabetically
-                sort -o $blacklist_file" tmp1.txt
+                sort -o "$blacklist_file" tmp1.txt
 
                 # Remove temporary file
                 rm tmp1.txt
