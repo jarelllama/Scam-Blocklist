@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Define input and output file locations
+domains_file="domains.txt"
 pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
@@ -64,7 +65,7 @@ total_unique_domains=${#unique_domains[@]}
 # Count the number of pending domains before filtering
 num_before=$(wc -l < "$pending_file")
 
-# Sort alphabetically
+# Sort pending domains alphabetically
 sort -o "$pending_file" "$pending_file"
 
 # Create temporary file
@@ -115,3 +116,54 @@ echo "3. Add to blacklist"
 echo "4. Run filter again"
 echo "5. Exit"
 read choice
+
+case "$choice" in
+    1)
+        # Backup the domains file before making any changes
+        cp "$domains_file" "$domains_file.bak"
+
+        # Count the number of domains before merging
+        num_before=$(wc -l < "$domains_file")
+
+        # Append unique pending domains to the domains file
+        comm -23 "$pending_file" "$domains_file" >> "$domains_file"
+
+        # Sort domains file alphabetically
+        sort -o "$domains_file" "$domains_file"
+
+        # Count the number of domains after merging
+        num_after=$(wc -l < "$domains_file")
+
+        # Print counters
+        echo "--------------------------------------------"
+        echo "Total domains before: $num_before"
+        echo "Total domains added: $((num_before - num_after))"
+        echo "Final domains after: $num_after"
+        echo "--------------------------------------------"
+        ;;
+    2)
+        # Code for option 2
+        echo "Option 2 selected"
+        ;;
+    3)
+        # Code for option 3
+        echo "Option 3 selected"
+        ;;
+    4)
+        # Code for option 3
+        echo "Option 3 selected"
+        ;;
+    5)
+        # Code for option 3
+        echo "Option 3 selected"
+        ;;
+        *)
+        if [[ -z "$choice" ]]; then
+            # default action
+            echo "Invalid option selected"
+            echo "Please select a valid option (1-5)"
+        else
+            # Print the options again
+            echo "Invalid option selected: $choice"
+            echo "Please select a valid option (1-5)"
+esac
