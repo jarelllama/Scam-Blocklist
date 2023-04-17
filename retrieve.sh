@@ -5,6 +5,7 @@ pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
+toplist_file="toplist.txt"
 
 # Define the number of search results
 num_results=120
@@ -12,7 +13,7 @@ num_results=120
 # Define a user agent to prevent Google from blocking the search request
 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-# Create an associative array to store only unique domains
+# Create an associative array to store unique domains
 declare -A unique_domains
 
 # If the pending domains file is not empty, prompt the user whether to empty it
@@ -23,7 +24,6 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
-# Print the search terms being used in this run
 echo "Search terms:"
 
 # Read search terms from file and loop through each term
@@ -67,11 +67,11 @@ done < "$search_terms_file"
 total_unique_domains=${#unique_domains[@]}
 echo "Total number of unique domains retrieved: $total_unique_domains"
 
-# Count and print the number of pending domains before filtering
-num_before=$(wc -l < "$pending_file")
-echo "Number of pending domains before filtering: $num_before"
+echo "Filtering domains..."
 
-# Print out the domains removed during filtering
+# Count the number of pending domains before filtering
+num_before=$(wc -l < "$pending_file")
+
 echo "Domains removed:"
 
 # Print whitelisted domains
@@ -90,14 +90,19 @@ comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklis
 # Remove temporary files
 rm tmp*.txt
 
-# Count and print the number of pending domains after filtering
+# Count the number of pending domains after filtering
 num_after=$(wc -l < "$pending_file")
-echo "Number of pending domains after filtering: $num_after"
+
+# Print the number of pending domains before and after filtering
+echo "Pending domains after filtering: $num_before"
+echo "Pending domains after filtering: $num_after"
 
 # Calculate and print change in the updated pending domains file
 diff=$((num_after - num_before))
 change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
 echo "Change: ${change} domains"
+
+echo "--------------------------------------------"
 
 echo "Choose how to proceed:"
 echo "1. Merge with blocklist (default)"
