@@ -73,8 +73,10 @@ num_before=$(wc -l < "$pending_file")
 
 echo "Domains removed:"
 
+# Sort alphabetically 
+
 # Remove domains with whitelisted TLDs
-grep -vf <(awk '{print "."$0"$"}' "$tlds_file") "$pending_file"
+grep -vFf <(awk '{print "."$0"$"}' "$tlds_file") "$pending_file" > tmp1.txt
 
 # Print whitelisted domains
 grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
