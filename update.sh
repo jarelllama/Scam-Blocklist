@@ -174,11 +174,14 @@ while true; do
             else
                 echo "$new_entry" >> "$whitelist_file"
 
-                # Sort alphabetically
-                sort -o "$whitelist_file" "$whitelist_file"
+                # Remove empty lines including lines that are whitespaces
+                awk NF $whitelist_file" > tmp1.txt
 
-                # Remove empty lines
-                sed -i '/^$/d' "$whitelist_file"
+                # Sort alphabetically
+                sort -o $whitelist_file" tmp1.txt
+
+                # Remove temporary file
+                rm tmp1.txt
             fi
 
             # Go back to options prompt
@@ -197,11 +200,14 @@ while true; do
             else
                 echo "$new_entry" >> "$blacklist_file"
 
-                # Sort alphabetically
-                sort -o "$blacklist_file" "$blacklist_file"
-
                 # Remove empty lines
-                sed -i '/^$/d' "$blacklist_file"
+                awk NF $blacklist_file" > tmp1.txt
+
+                # Sort alphabetically
+                sort -o $blacklist_file" tmp1.txt
+
+                # Remove temporary file
+                rm tmp1.txt
             fi
 
             # Go back to options prompt
