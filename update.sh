@@ -10,7 +10,7 @@ toplist_file="toplist.txt"
 tlds_file="white_tlds.txt"
 
 # Define the number of search results
-num_results=120
+num_results=110
 
 # Define a user agent to prevent Google from blocking the search request
 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
@@ -23,10 +23,11 @@ if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     if [[ ! "$answer" == "n" ]]; then
         > "$pending_file"
+        echo "Emptied pending domains file"
     fi
 fi
 
-echo "\nSearch terms:"
+echo -e "\nSearch terms:"
 
 # Read search terms from file and loop through each term
 while IFS= read -r line || [[ -n "$line" ]]; do
@@ -106,14 +107,14 @@ function filter_pending {
     rm tmp*.txt
 
     # Print counters
-    echo "\nTotal domains retrieved: $total_unique_domains"
+    echo -e "\nTotal domains retrieved: $total_unique_domains"
     echo "Total domains pending: $num_before"
     echo "Total domains removed: $((num_before - num_after))"
     echo "Final domains pending: $num_after"
     echo "--------------------------------------------"
 }
 
-# Execute filtering in pending domains
+# Execute filtering for pending domains
 filter_pending
 
 # Prompt user with options on how to proceed
