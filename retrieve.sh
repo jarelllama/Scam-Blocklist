@@ -40,11 +40,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//' | sed '/^$/d')
 
         # Count the number of domains retrieved by the specific search term
-        if [[ -z "$domains" ]]; then
-            num_domains=0
-        else
-            num_domains=$(echo "$domains" | wc -l)
-        fi
+        num_domains=$(echo -n "$domains" | grep -oF '.' | wc -l)
 
         # Print the number of domains retrieved by the search term
         echo "$line"
