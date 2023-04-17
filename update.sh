@@ -129,7 +129,7 @@ function merge_pending {
     # Append unique pending domains to the domains file
     comm -23 "$pending_file" "$domains_file" >> "$domains_file"
 
-    # Sort the domains file alphabetically
+    # Sort alphabetically
     sort -o "$domains_file" "$domains_file"
 
     # Count the number of domains after merging
@@ -148,7 +148,6 @@ function merge_pending {
 
 # Define a function to prompt the user with options on how to proceed
 function proceed_options {
-    # Prompt user with options on how to proceed
     echo -e "\nChoose how to proceed:"
     echo "1. Merge with blocklist (default)"
     echo "2. Add to whitelist"
@@ -177,6 +176,7 @@ function proceed_options {
 
                 # Sort alphabetically
                 sort -o "$whitelist_file" "$whitelist_file"
+
                 # Remove empty lines
                 sed -i '/^$/d' file.txt
             fi
@@ -218,10 +218,14 @@ function proceed_options {
             exit 0
             ;;
         *)
+            # Use domain merger as the default option
             if [[ -z "$choice" ]]; then
                 merge_pending
             else
                 echo "Invalid option selected"
+
+                # Go back to the options prompt
+                proceed_options           
             fi
     esac
 }
