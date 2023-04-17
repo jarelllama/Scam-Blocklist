@@ -116,15 +116,6 @@ function filter_pending {
 # Execute filtering for pending domains
 filter_pending
 
-# Prompt user with options on how to proceed
-echo -e "\nChoose how to proceed:"
-echo "1. Merge with blocklist (default)"
-echo "2. Add to whitelist"
-echo "3. Add to blacklist"
-echo "4. Run filter again"
-echo "5. Exit"
-read choice
-
 # Define a function to merge filtered pending domains to the domains file
 function merge_pending {
     echo "Merge with blocklist"
@@ -138,7 +129,7 @@ function merge_pending {
     # Append unique pending domains to the domains file
     comm -23 "$pending_file" "$domains_file" >> "$domains_file"
 
-    # Sort domains file alphabetically
+    # Sort the domains file alphabetically
     sort -o "$domains_file" "$domains_file"
 
     # Count the number of domains after merging
@@ -153,12 +144,19 @@ function merge_pending {
 
     # Empty pending domains file
     > "$pending_file"
-
-    # Exit script
-    exit 0
 }
 
-while true; do
+# Define a function to prompt the user with options on how to proceed
+function proceed_options {
+    # Prompt user with options on how to proceed
+    echo -e "\nChoose how to proceed:"
+    echo "1. Merge with blocklist (default)"
+    echo "2. Add to whitelist"
+    echo "3. Add to blacklist"
+    echo "4. Run filter again"
+    echo "5. Exit"
+    read choice
+
     case "$choice" in
         1)
             merge_pending
@@ -166,20 +164,55 @@ while true; do
         2)
             echo "Add to whitelist"
             read -p "Enter the new entry: " new_entry
+            
+            # Change the new entry to lowecase
             new_entry="${new_entry,,}"
-            echo "$new_entry" >> "$whitelist_file"
-            sort -o "$whitelist_file" "$whitelist_file"
+
+            # Add the new entry if a similar term isn't already in the whitelist
+            if grep -Fiq "$new_entry" "$whitelist_file"; then
+                existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
+                echo "Similar term already in the whitelist: $existing_entry"
+            else
+                echo "$new_entry" >> "$whitelist_file"
+
+                # Sort alphabetically
+                sort -o "$whitelist_file" "$whitelist_file"
+                # Remove empty lines
+                sed -i '/^$/d' file.txt
+            fi
+
+            # Go back to the options prompt
+            proceed_options
             ;;
         3)
             echo "Add to blacklist"
             read -p "Enter the new entry: " new_entry
+            
+            # Change the new entry to lowecase
             new_entry="${new_entry,,}"
-            echo "$new_entry" >> "$blacklist_file"
-            sort -o "$blacklist_file" "$blacklist_file"
+            
+            # Add the new entry if the domain isn't already in the blacklist
+            if grep -q "^$new_entry$" "$whitelist_file"; then
+                echo "The domain already in the blacklist"
+            else
+                echo "$new_entry" >> "$blacklist_file"
+
+                # Sort alphabetically
+                sort -o "$blacklist_file" "$blacklist_file"
+
+                # Remove empty lines
+                sed -i '/^$/d' file.txt
+            fi
+
+            # Go back to the options prompt
+            proceed_options
             ;;
         4)
             echo "Run filter again"
             filter_pending
+
+            # Go back to the options prompt
+            proceed_options
             ;;
         5)
             exit 0
@@ -191,4 +224,7 @@ while true; do
                 echo "Invalid option selected"
             fi
     esac
-done
+}
+
+# Prompt the user with options on how to proceed
+proceed_options
