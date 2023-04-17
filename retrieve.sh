@@ -47,7 +47,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
         # Print the number of domains retrieved by the search term
         echo "$line"
-        echo "Number of unique domains found: $num_domains"
+        echo "Number of unique domains retrieved: $num_domains"
         echo "--------------------------------------------"
 
         # Loop through each domain and add it to associative array only if it is unique
@@ -65,7 +65,7 @@ done < "$search_terms_file"
 total_unique_domains=${#unique_domains[@]}
 echo "Total number of unique domains retrieved: $total_unique_domains"
 
-# Print the number of domains in the output file before filtering
+# Count and print the number of domains in the output file before filtering
 num_before=$(wc -l < "$output_file")
 echo "Number of pending domains before filtering: $num_before"
 
@@ -81,9 +81,6 @@ awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file
 # sort alphabetically and save changes to the output file
 sort -o "$output_file" tmp1.txt
 
-# Count the number of domains in the output file after filtering
-num_after=$(wc -l < "$output_file")
-
 # Compare domains file with toplist
 echo "Domains in toplist:"
 comm -12 <(sort "$output_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
@@ -91,17 +88,18 @@ comm -12 <(sort "$output_file") <(sort "$toplist_file") | grep -vFxf "$blacklist
 # Remove temporary files
 rm tmp*.txt
 
-# Print the number of domains in the output file after filtering
-num_before=$(wc -l < "$output_file")
+# Count and print the number of domains in the output file after filtering
+num_after=$(wc -l < "$output_file")
 echo "Number of pending domains after filtering: $num_after"
 
 # Calculate and print change in the updated output file
 diff=$((num_after - num_before))
 change=$( [[ $diff -lt 0 ]] && echo "${diff}" || ( [[ $diff -gt 0 ]] && echo "+${diff}" || echo "0" ) )
-echo "Change: ${change}"
+echo "Change: ${change} domains"
 
-# Prompt the user whether to merge the retrieved domains with the blocklist
-#read -p "Merge the retrieved domains with the blocklist? (Y/n): " answer
-#if [[ ! "$answer" == "n" ]]; then
-#    bash merge.sh
-#fi
+echo "Choose how to proceed:"
+echo "1. Merge with blocklist (default)"
+echo "2. Add to whitelist"
+echo "3. Add to blacklist"
+echo "4. Run filter again
+read choice
