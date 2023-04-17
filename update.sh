@@ -74,6 +74,7 @@ function filter_pending {
     sort -o "$pending_file" "$pending_file"
 
     # Create temporary file
+    # An error appears when this step isn't done filtering
     touch tmp1.txt
 
     echo "Domains removed:"
