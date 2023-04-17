@@ -146,8 +146,8 @@ function merge_pending {
     > "$pending_file"
 }
 
-# Define a function to prompt the user with options on how to proceed
-function proceed_options {
+# Prompt the user with options on how to proceed
+while true; do
     echo -e "\nChoose how to proceed:"
     echo "1. Merge with blocklist (default)"
     echo "2. Add to whitelist"
@@ -170,7 +170,7 @@ function proceed_options {
             # Add the new entry if a similar term isn't already in the whitelist
             if grep -Fiq "$new_entry" "$whitelist_file"; then
                 existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
-                echo "Similar term already in the whitelist: $existing_entry"
+                echo "A similar term is already in the whitelist: $existing_entry"
             else
                 echo "$new_entry" >> "$whitelist_file"
 
@@ -178,11 +178,11 @@ function proceed_options {
                 sort -o "$whitelist_file" "$whitelist_file"
 
                 # Remove empty lines
-                sed -i '/^$/d' $whitelist_file"
+                sed -i '/^$/d' "$whitelist_file"
             fi
 
-            # Go back to the options prompt
-            proceed_options
+            # Go back to options prompt
+            continue
             ;;
         3)
             echo "Add to blacklist"
@@ -193,7 +193,7 @@ function proceed_options {
             
             # Add the new entry if the domain isn't already in the blacklist
             if grep -q "^$new_entry$" "$blacklist_file"; then
-                echo "The domain already in the blacklist"
+                echo "The domain is already in the blacklist"
             else
                 echo "$new_entry" >> "$blacklist_file"
 
@@ -201,18 +201,18 @@ function proceed_options {
                 sort -o "$blacklist_file" "$blacklist_file"
 
                 # Remove empty lines
-                sed -i '/^$/d' $blacklist_file"
+                sed -i '/^$/d' "$blacklist_file"
             fi
 
-            # Go back to the options prompt
-            proceed_options
+            # Go back to options prompt
+            continue
             ;;
         4)
             echo "Run filter again"
             filter_pending
 
-            # Go back to the options prompt
-            proceed_options
+            # Go back to options prompt
+            continue
             ;;
         5)
             exit 0
@@ -224,11 +224,8 @@ function proceed_options {
             else
                 echo "Invalid option selected"
 
-                # Go back to the options prompt
-                proceed_options           
+                # Go back to options prompt
+                continue           
             fi
     esac
-}
-
-# Prompt the user with options on how to proceed
-proceed_options
+done
