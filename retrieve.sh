@@ -79,10 +79,7 @@ echo "Domains removed:"
 grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" | sed "s/\(.*\)/\1 (TLD)/"
 
 # Remove domains with whitelisted TLDs
-grep -vFf <(awk '{print "."$0"$"}' "$tlds_file") "$pending_file" > tmp1.txt
-
 grep -vE "\.($(paste -sd '|' tlds.txt))$" test_domains.txt > tmp1.txt
-
 
 # Print whitelisted domains
 grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
