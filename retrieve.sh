@@ -6,6 +6,7 @@ search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
+tlds_file="white_tlds.txt"
 
 # Define the number of search results
 num_results=120
@@ -72,11 +73,8 @@ num_before=$(wc -l < "$pending_file")
 
 echo "Domains removed:"
 
-# Remove non domain entries
-awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > tmp1.txt; else print $0" (invalid)" }' "$pending_file"
-
 # Remove domains with whitelisted TLDs
-grep -vf <(awk '{print "."$0"$"}' tlds.txt) test_domains.txt
+grep -vf <(awk '{print "."$0"$"}' "$tlds_file") "$pending_file"
 
 # Print whitelisted domains
 grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
