@@ -104,7 +104,7 @@ function filter_pending {
 
     # Print domains found in the toplist
     echo -e "\nDomains in toplist:"
-    comm -12 "$pending_file" <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+    grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file"
 
     # Count the number of pending domains after filtering
     num_after=$(wc -l < "$pending_file")
