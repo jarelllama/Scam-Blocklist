@@ -150,6 +150,9 @@ function merge_pending {
 
     # Empty pending domains file
     > "$pending_file"
+
+    # Exit script
+    exit 0
 }
 
 # Prompt the user with options on how to proceed
