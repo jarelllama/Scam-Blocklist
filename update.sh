@@ -63,19 +63,19 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 done < "$search_terms_file"
 
 # Count the number of unique domains retrieved in this run
-total_retrieved_domains=${#retrieved_domains[@]}
+num_retrieved=${#retrieved_domains[@]}
 
 # Define a function to filter pending domains
 function filter_pending {
     # Count the number of pending domains before filtering
     num_before=$(wc -l < "$pending_file")
 
-    # Sort pending domains alphabetically
-    sort -o "$pending_file" "$pending_file"
-
     # Create temporary file
     # An error appears when this step isn't done filtering
     touch tmp1.txt
+
+    # Sort pending domains alphabetically
+    sort -o "$pending_file" "$pending_file"
 
     echo "Domains removed:"
 
@@ -99,17 +99,20 @@ function filter_pending {
 
     # Print domains found in the toplist
     echo -e "\nDomains in toplist:"
-    comm -12 <(sort "$pending_file") <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+    comm -12 "$pending_file" <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
 
     # Count the number of pending domains after filtering
     num_after=$(wc -l < "$pending_file")
+
+    # Count pending domains not already in the domains file
+    num_new=$(comm -13 "$pending_file" "$domains_file" | wc -l)
 
     # Remove temporary files
     rm tmp*.txt
 
     # Print counters
-    echo -e "\nTotal domains retrieved: $total_retrieved_domains"
-    echo "Domains not in blocklist: "
+    echo -e "\nTotal domains retrieved: $num_retrieved"
+    echo "Domains not in blocklist: $num_new"
     echo "Total domains pending: $num_before"
     echo "Total domains removed: $((num_before - num_after))"
     echo "Final domains pending: $num_after"
