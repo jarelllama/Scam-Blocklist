@@ -133,10 +133,6 @@ function filter_pending {
     # Sort alphabetically after adding www subdomains
     sort -o "$pending_file" tmp5.txt
     
-    # Print domains found in the toplist
-    echo -e "\nDomains in toplist:"
-    grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
-
     # Count the number of pending domains after filtering
     num_pending=$(wc -l < "$pending_file")
 
@@ -148,6 +144,8 @@ function filter_pending {
     echo "Domains not in blocklist: $num_pending"
     echo "Domains:"
     cat "$pending_file"
+    echo -e "\nDomains in toplist:"
+    grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
 }
 
 # Execute filtering for pending domains
