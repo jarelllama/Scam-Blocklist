@@ -113,10 +113,10 @@ function filter_pending {
 
     # Print counters
     echo -e "\nTotal domains retrieved: $num_retrieved"
-    echo "Domains not in blocklist: $num_new"
     echo "Total domains pending: $num_before"
     echo "Total domains removed: $((num_before - num_after))"
     echo "Final domains pending: $num_after"
+    echo "Domains not in blocklist: $num_new"
 }
 
 # Execute filtering for pending domains
