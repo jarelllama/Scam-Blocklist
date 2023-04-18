@@ -2,10 +2,10 @@
 
 - The script searches Google with a list of search terms almost exclusively used in scam sites
 - The unique domains extracted are added to a pending domain list
-- The pending domains are sorted alphabetically
 - Invalid entries (non domains) are removed
-- Domains with whitelisted TLDs are removed
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.)
+- Domains with whitelisted TLDs are removed
+- 'www' subdomains are removed
 - The filtered pending domains list is compared against the Umbrella Toplist
 - Domains found in the toplist are checked manually
 - The final list of pending domains are merged to the blocklist
