@@ -204,25 +204,25 @@ while true; do
             # Change the new entry to lowecase
             new_entry="${new_entry,,}"
 
-            # Add the new entry if a similar term isn't already in the whitelist
+            # Check if a similar term is already in the whitelist
             if grep -Fiq "$new_entry" "$whitelist_file"; then
                 existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
                 echo "A similar term is already in the whitelist: $existing_entry"
-            else
-                echo "$new_entry" >> "$whitelist_file"
-
-                # Remove empty lines including lines that are whitespaces
-                # After benchmarking it appears outputting to a temporary file is faster than editing in place
-                awk NF "$whitelist_file" > tmp1.txt
-
-                # Sort alphabetically
-                sort -o "$whitelist_file" tmp1.txt
-
-                # Remove temporary file
-                rm tmp1.txt
+                continue
             fi
 
-            # Go back to options prompt
+            # Add the new entry
+            echo -e "\nAdded to whitelist: $new_entry"
+            echo "$new_entry" >> "$whitelist_file"
+
+            # Remove empty lines
+            awk NF "$whitelist_file" > tmp1.txt
+
+            # Save changes and sort alphabetically
+            sort -o "$whitelist_file" tmp1.txt
+
+            # Remove temporary file
+            rm tmp1.txt
             continue
             ;;
         3)
@@ -232,30 +232,35 @@ while true; do
             # Change the new entry to lowecase
             new_entry="${new_entry,,}"
             
-            # Add the new entry if the domain isn't already in the blacklist
-            if grep -xq "$new_entry" "$blacklist_file"; then
-                echo "The domain is already in the blacklist"
-            else
-                echo "$new_entry" >> "$blacklist_file"
-
-                # Remove empty lines
-                awk NF "$blacklist_file" > tmp1.txt
-
-                # Sort alphabetically
-                sort -o "$blacklist_file" tmp1.txt
-
-                # Remove temporary file
-                rm tmp1.txt
+            # Check if the entry is valid
+            if ! [[ $new_entry =~ ^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$ ]]; then
+                echo -e "\nInvalid entry."
+                continue
             fi
 
-            # Go back to options prompt
+            # Check if the new entry is already in the list
+            if grep -xq "$new_entry" "$blacklist_file"; then
+                echo "The domain is already in the blacklist. Not added."
+                continue
+            fi
+
+            # Add the new entry
+            echo -e "\nAdded to blacklist: $new_entry"
+            echo "$new_entry" >> "$blacklist_file"
+
+            # Remove empty lines
+            awk NF "$blacklist_file" > tmp1.txt
+
+            # Save changes and sort alphabetically
+            sort -o "$blacklist_file" tmp1.txt
+
+            # Remove temporary file
+            rm tmp1.txt
             continue
             ;;
         4)
             echo "Run filter again"
             filter_pending
-
-            # Go back to options prompt
             continue
             ;;
         5)
@@ -266,10 +271,10 @@ while true; do
             if [[ -z "$choice" ]]; then
                 merge_pending
             else
-                echo "Invalid option selected"
+                echo "Invalid option."
 
                 # Go back to options prompt
-                continue           
+                continue     
             fi
     esac
 done
