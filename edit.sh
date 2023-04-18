@@ -23,10 +23,20 @@ while true; do
 
             # Remove domain from the blocklist
             if [[ $new_entry == -* ]]; then
-                domain=$(echo "$new_entry" | cut -c 2-)
-                sed -i "/^$domain$/d" "$domains_file"
-                echo -e "\nRemoved from blocklist: $new_entry"
+
+                # Remove the minus sign
+                new_entry=$(echo "$new_entry" | cut -c 2-)
+
+                # Check if the entry is in the list
+                if grep -q "^$new_entry$" "$domains_file"; then
+                    sed -i "/^$new_entry$/d" "$domains_file"
+                    echo -e "\nRemoved from blocklist: $new_entry"
+                else
+                    echo -e "\nEntry not found in blocklist: $new_entry"
+                fi
+
             else
+
                 # Test if the new entry is dead
                 if dig @1.1.1.1 "$new_entry" | grep -q 'NXDOMAIN'; then
                     echo -e "\nThe domain is dead. Not added."
@@ -66,8 +76,8 @@ while true; do
 
             # Remove term from the whitelist
             if [[ $new_entry == -* ]]; then
-                term=$(echo "$new_entry" | cut -c 2-)
-                sed -i "/$term/d" "$whitelist_file"
+                new_entry=$(echo "$new_entry" | cut -c 2-)
+                sed -i "/$new_entry/d" "$whitelist_file"
                 echo -e "\nRemoved from whitelist: $new_entry"
             else
                 # Add the new entry if a similar term isn't already in the whitelist
@@ -102,8 +112,8 @@ while true; do
 
             # Remove domain from the blacklist
             if [[ $new_entry == -* ]]; then
-                domain=$(echo "$new_entry" | cut -c 2-)
-                sed -i "/^$domain$/d" "$blacklist_file"
+                new_entry=$(echo "$new_entry" | cut -c 2-)
+                sed -i "/^$new_entry$/d" "$blacklist_file"
                 echo -e "\nRemoved from blacklist: $new_entry"
             else
                 # Add the new entry if the domain isn't already in the blacklist
