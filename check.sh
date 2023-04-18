@@ -39,15 +39,15 @@ grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 sed -i 's/^www\.//' tmp3.txt
 
 # Print and remove dead domains
-while read -r domain; do
-  if dig @1.1.1.1 "$domain" | grep -q 'NXDOMAIN'; then
-    echo "$domain (dead)"
-    sed -i "/^$domain$/d" tmp3.txt
-  fi
-done < tmp3.txt
-
+cat tmp4.txt | parallel -j 10 '
+    if dig @1.1.1.1 {} | grep -q "NXDOMAIN"; then
+        echo {} "(dead)";
+    else
+        echo {} >> tmp4.txt;
+    fi
+'
 # Save changes to the domains file
-mv tmp3.txt "$domains_file"
+mv tmp4.txt "$domains_file"
 
 # Print domains found in the toplist
 echo -e "\nDomains in toplist:"
