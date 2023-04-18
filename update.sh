@@ -37,7 +37,7 @@ while IFS= read -r term || [[ -n "$term" ]]; do
         # Count the number of domains retrieved by the specific search term
         num_domains=$(echo -n "$domains" | grep -oF '.' | wc -l)
 
-        echo "$line"
+        echo "$term"
         echo "Unique domains retrieved: $num_domains"
         echo "--------------------------------------------"
 
