@@ -76,7 +76,7 @@ function filter_pending {
 
     # Remove www subdomains
     # Has to be before sorting alphabetically
-    sed -i 's/^www\.//' tmp3.txt
+    sed -i 's/^www\.//' "$pending_file"
 
     # Remove duplicates and sort alphabetically
     sort -u -o "$pending_file" "$pending_file"
