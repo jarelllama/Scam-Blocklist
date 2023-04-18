@@ -39,7 +39,7 @@ grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (
 grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 
 # Print and remove dead domains
-cat "$domains_file" | xargs -I{} -P8 bash -c "
+cat "$domains_file" | xargs -I{} -P10 bash -c "
   if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
     echo {} (dead)
   else
@@ -49,6 +49,9 @@ cat "$domains_file" | xargs -I{} -P8 bash -c "
 
 # Save changes to the domains file
 mv tmp4.txt "$domains_file"
+
+# Sort alphabetically again
+sort -o "$domains_file" "$domains_file"
 
 # Print domains found in the toplist
 echo -e "\nDomains in toplist:"
