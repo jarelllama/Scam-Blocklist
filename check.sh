@@ -38,20 +38,27 @@ grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (
 # Remove domains with whitelisted TLDs
 grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 
-# Print and remove dead domains
-cat "$domains_file" | xargs -I{} -P10 bash -c "
+# Create temporary file for dead domains
+touch tmp_dead.txt
+
+# Find and print dead domains
+cat tmp3.txt | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
+    echo {} >> tmp_dead.txt
     echo '{} (dead)'
-  else
-    echo {} >> tmp4.txt
   fi
 "
 
-# Save changes to the domains file
-mv tmp4.txt "$domains_file"
+wait
 
-# Sort alphabetically again
-sort -o "$domains_file" "$domains_file"
+# Remove dead domains
+grep -vFf tmp_dead.txt tmp3.txt > tmp4.txt
+
+# Save changes to the domains file
+#mv tmp4.txt "$domains_file"
+
+# Save changes and sort alphabetically
+#sort -o "$domains_file" tmp4.txt
 
 # Print domains found in the toplist
 echo -e "\nDomains in toplist:"
