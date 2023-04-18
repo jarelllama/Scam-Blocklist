@@ -146,6 +146,8 @@ function filter_pending {
     # Print counters
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Domains not in blocklist: $num_pending"
+    echo "Domains:"
+    cat "$pending_file"
 }
 
 # Execute filtering for pending domains
@@ -175,7 +177,6 @@ function merge_pending {
     echo "Total domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Final domains after: $num_after"
-    echo "--------------------------------------------"
 
     # Empty pending domains file
     > "$pending_file"
