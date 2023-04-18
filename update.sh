@@ -41,7 +41,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
         # Send the request to Google and extract all domains and subdomains from the HTML. Remove www., empty lines and duplicates
         # Empty lines and duplicates have to be removed here for accurate counting of the retrieved domains by each search term
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -o '<a href="[^"]*"' | sed 's/^<a href="//' | sed 's/"$//' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//' | sed '/^$/d')
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
         # Count the number of domains retrieved by the specific search term
         num_domains=$(echo -n "$domains" | grep -oF '.' | wc -l)
