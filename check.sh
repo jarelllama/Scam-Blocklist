@@ -39,13 +39,14 @@ grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (
 grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 
 # Print and remove dead domains
-cat tmp3.txt | parallel -j 20 '
-    if dig @1.1.1.1 {} | grep -q "NXDOMAIN"; then
-        echo {} "(dead)";
-    else
-        echo {} >> tmp4.txt;
-    fi
-'
+cat "$domains_file" | xargs -I{} -P8 bash -c "
+  if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
+    echo {} (dead)
+  else
+    echo {} >> tmp4.txt
+  fi
+"
+
 # Save changes to the domains file
 mv tmp4.txt "$domains_file"
 
