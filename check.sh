@@ -39,12 +39,14 @@ grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 touch tmp_dead.txt
 
 # Find and print dead domains
-cat tmp3.txt | xargs -I{} -P10 bash -c "
+cat tmp3.txt | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
     echo {} >> tmp_dead.txt
     echo '{} (dead)'
   fi
 "
+
+wait
 
 # Remove dead domains by removing common domains in both lists from the blocklist
 comm -23 <(sort tmp_dead.txt) tmp3.txt > tmp4.txt
