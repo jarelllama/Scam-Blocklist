@@ -57,7 +57,7 @@ mv tmp4.txt "$domains_file"
 
 # Print domains found in the toplist
 echo -e "\nDomains in toplist:"
-comm -12 "$domains_file" <(sort "$toplist_file") | grep -vFxf "$blacklist_file"
+grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file"
 
 # Count the number of domains after filtering
 num_after=$(wc -l < "$domains_file")
