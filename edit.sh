@@ -25,16 +25,18 @@ while true; do
             if [[ $new_entry == -* ]]; then
                 domain=$(echo "$new_entry" | cut -c 2-)
                 sed -i "/^$domain$/d" "$domains_file"
+                echo -e "\nRemoved from blocklist: $new_entry
             else
                 # Test if the new entry is dead
                 if dig @1.1.1.1 "$new_entry" | grep -q 'NXDOMAIN'; then
-                    echo "The domain is dead"
+                    echo -e "\nThe domain is dead. Not added."
                 else
                     # Add the new entry if the domain isn't already in the blocklist
                     if grep -q "^$new_entry$" "$domains_file"; then
                         echo "The domain is already in the blocklist"
                     else
                         echo "$new_entry" >> "$domains_file"
+                        echo -e "\nAdded to blocklist: $new_entry"
 
                         # Remove empty lines
                         awk NF "$domains_file" > tmp1.txt
@@ -63,12 +65,14 @@ while true; do
             if [[ $new_entry == -* ]]; then
                 term=$(echo "$new_entry" | cut -c 2-)
                 sed -i "/$term/d" "$whitelist_file"
+                echo -e "\nRemoved from whitelist: $new_entry"
             else
                 # Add the new entry if a similar term isn't already in the whitelist
                 if grep -Fiq "$new_entry" "$whitelist_file"; then
                     existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
                     echo "A similar term is already in the whitelist: $existing_entry"
                 else
+                    echo -e "\nAdded to whitelist: $new_entry"
                     echo "$new_entry" >> "$whitelist_file"
 
                     # Remove empty lines
@@ -97,11 +101,13 @@ while true; do
             if [[ $new_entry == -* ]]; then
                 domain=$(echo "$new_entry" | cut -c 2-)
                 sed -i "/^$domain$/d" "$blacklist_file"
+                echo -e "\nRemoved from blacklist: $new_entry
             else
                 # Add the new entry if the domain isn't already in the blacklist
                 if grep -q "^$new_entry$" "$blacklist_file"; then
                     echo "The domain is already in the blacklist"
                 else
+                    echo -e "\nAdded to blacklist: $new_entry"
                     echo "$new_entry" >> "$blacklist_file"
 
                     # Remove empty lines
