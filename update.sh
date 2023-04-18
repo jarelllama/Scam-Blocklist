@@ -74,8 +74,8 @@ function filter_pending {
     # An error appears when this step isn't done filtering
     touch tmp1.txt
 
-    # Sort pending domains alphabetically
-    sort -o "$pending_file" "$pending_file"
+    # Remove duplicates and sort alphabetically
+    sort -u -o "$pending_file" "$pending_file"
 
     echo "Domains removed:"
 
