@@ -68,7 +68,7 @@ num_retrieved=${#retrieved_domains[@]}
 # Define a function to filter pending domains
 function filter_pending {
 
-    # Make a backup of the pending domains file in case of premature exits
+    # Make a backup of the pending domains file
     cp "$pending_file" "$pending_file.bak"
 
     # Remove www subdomains
@@ -81,32 +81,32 @@ function filter_pending {
 
     # Keep only pending domains not already in the blocklist for filtering
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 "$pending_file" "$domains_file" > "$pending_file"
+    comm -23 "$pending_file" "$domains_file" > tmp1.txt
 
     echo "Domains removed:"
 
     # Print whitelisted domains
-    grep -f "$whitelist_file" -i "$pending_file" | awk '{print $1" (whitelisted)"}'
+    grep -f "$whitelist_file" -i tmp1.txt | awk '{print $1" (whitelisted)"}'
 
     # Remove whitelisted domains
-    awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$pending_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > "$pending_file"
+    awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp1.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp2.txt
 
     # Print and remove non domain entries
     # Non domains are already be filtered when the domains were retrieved. This code is more for debugging
-    awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "$pending_file"; else print $0" (invalid)" }' "$pending_file"
+    awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp3.txt"; else print $0" (invalid)" }' tmp2.txt
 
     # Print domains with whitelisted TLDs
-    grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" | sed "s/\(.*\)/\1 (TLD)/"
+    grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp3.txt | sed "s/\(.*\)/\1 (TLD)/"
 
     # Remove domains with whitelisted TLDs
-    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" > tmp1.txt
+    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp3.txt > tmp4.txt
 
     # Create temporary file for dead domains and www subdomains
     touch tmp_dead.txt
     touch tmp_www.txt
 
     # Find and print dead domains
-    cat tmp1.txt | xargs -I{} -P8 bash -c "
+    cat tmp4.txt | xargs -I{} -P4 bash -c "
         if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
             echo {} >> tmp_dead.txt
             echo '{} (dead)'
@@ -114,7 +114,7 @@ function filter_pending {
     "
 
     # Remove dead domains by removing domains found in both lists
-    comm -23 tmp1.txt <(sort tmp_dead.txt) > tmp1.txt
+    comm -23 tmp4.txt <(sort tmp_dead.txt) > tmp5.txt
 
     # Add the www subdomain to dead domains
     sed 's/^/www./' tmp_dead.txt > tmpA.txt
@@ -128,10 +128,10 @@ function filter_pending {
     "
 
     # Append the resolving www subdomains to the pending domains file if they aren't already inside
-    comm -23 <(sort tmp_www.txt) tmp1.txt >> "$pending_file"
+    comm -23 <(sort tmp_www.txt) tmp5.txt >> tmp5.txt
 
     # Sort alphabetically after adding www subdomains
-    sort -o "$pending_file" "$pending_file"
+    sort -o "$pending_file" tmp5.txt
     
     # Print domains found in the toplist
     echo -e "\nDomains in toplist:"
