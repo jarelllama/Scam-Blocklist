@@ -15,22 +15,19 @@ touch tmp1.txt
 # Count the number of domains before filtering
 num_before=$(wc -l < "$domains_file")
 
-# Remove www subdomains
-sed -i 's/^www\.//' "$domains_file"
-
 # Remove duplicates and sort alphabetically
 sort -u -o "$domains_file" "$domains_file"
 
 echo "Domains removed:"
 
-# Print and remove non domain entries
-awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp1.txt"; else print $0" (invalid)" }' "$domains_file"
-
 # Print whitelisted domains
-grep -f "$whitelist_file" -i tmp1.txt | awk '{print $1" (whitelisted)"}'
+grep -f "$whitelist_file" -i "$domains_file" | awk '{print $1" (whitelisted)"}'
 
 # Remove whitelisted domains
-awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp1.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp2.txt
+awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$domains_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp1.txt
+
+# Print and remove non domain entries
+awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp2.txt"; else print $0" (invalid)" }' tmp1.txt
 
 # Print domains with whitelisted TLDs
 grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (TLD)/"
@@ -52,8 +49,8 @@ cat tmp3.txt | xargs -I{} -P10 bash -c "
 # Remove dead domains by removing common domains in both lists from the blocklist
 comm -23 <(sort tmp_dead.txt) tmp3.txt > tmp4.txt
 
-# Save changes and sort alphabetically after adding www subdomains
-sort -o "$domains_file" tmp4.txt
+# Save changes
+mv tmp4.txt "$domains_file"
 
 # Print domains found in the toplist
 echo -e "\nDomains in toplist:"
