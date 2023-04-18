@@ -8,14 +8,13 @@ function remove_entry {
     # Remove the minus sign
     new_entry=$(echo "$new_entry" | cut -c 2-)
 
-    if ! grep -q "^$new_entry$" "$2"; then
-        echo -e "\nEntry not found in $1: $new_entry"
-        return
-    fi
-
     # Remove the entry if it's in the list
-    sed -i "/^$new_entry$/d" "$2"
-    echo -e "\nRemoved from $1: $new_entry"
+    if grep -q "^$new_entry$" "$2"; then
+        sed -i "/^$new_entry$/d" "$2"
+        echo -e "\nRemoved from $1: $new_entry"
+    else
+        echo -e "\nEntry not found in $1: $new_entry"
+    fi
 }
 
 while true; do
@@ -54,7 +53,7 @@ while true; do
             # Check if the new entry is already in the list
             if grep -q "^$new_entry$" "$domains_file"; then
                 echo "The entry is already in the blocklist"
-                return
+                continue
             fi
 
             # Add the new entry
@@ -62,10 +61,10 @@ while true; do
             echo -e "\nAdded to blocklist: $new_entry"
 
             # Remove empty lines
-            awk NF "$2" > tmp1.txt
+            awk NF "$domains_file" > tmp1.txt
 
             # Save changes and sort alphabetically
-            sort -o "$2" tmp1.txt
+            sort -o "$domains_file" tmp1.txt
 
             # Remove temporary file
             rm tmp1.txt
@@ -80,26 +79,27 @@ while true; do
             # Change the new entry to lowercase
             new_entry="${new_entry,,}"
 
-            # Remove term from the whitelist
+            # Remove a term from the whitelist
             if [[ $new_entry == -* ]]; then
                 remove_entry "$list" "$whitelist_file"
                 continue
             fi
              
-            # Add the new entry if a similar term isn't already in the whitelist
+            # Check if a similar term is already in the whitelist
             if grep -Fiq "$new_entry" "$whitelist_file"; then
                 existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
                 echo "A similar term is already in the whitelist: $existing_entry"
                 continue
             fi
-                
+
+            # Add the new entry
             echo -e "\nAdded to whitelist: $new_entry"
             echo "$new_entry" >> "$whitelist_file"
 
             # Remove empty lines
             awk NF "$whitelist_file" > tmp1.txt
 
-            # Sort alphabetically
+            # Save changes and sort alphabetically
             sort -o "$whitelist_file" tmp1.txt
 
             # Remove temporary file
@@ -108,6 +108,7 @@ while true; do
             ;;
         3)
             echo "Blacklist"
+            list="blacklist"
 
             read -p "Enter the new entry (add '-' to remove entry): " new_entry
 
@@ -116,29 +117,28 @@ while true; do
 
             # Remove domain from the blacklist
             if [[ $new_entry == -* ]]; then
-                new_entry=$(echo "$new_entry" | cut -c 2-)
-                sed -i "/^$new_entry$/d" "$blacklist_file"
-                echo -e "\nRemoved from blacklist: $new_entry"
-            else
-                # Add the new entry if the domain isn't already in the blacklist
-                if grep -xq "$new_entry" "$blacklist_file"; then
-                    echo "The domain is already in the blacklist"
-                else
-                    echo -e "\nAdded to blacklist: $new_entry"
-                    echo "$new_entry" >> "$blacklist_file"
-
-                    # Remove empty lines
-                    awk NF "$blacklist_file" > tmp1.txt
-
-                    # Sort alphabetically
-                    sort -o "$blacklist_file" tmp1.txt
-
-                    # Remove temporary file
-                    rm tmp1.txt
-                fi
+                remove_entry "$list" "$blacklist_file"
+                continue
             fi
 
-            # Go back to options prompt
+            # Check if the new entry is already in the list
+            if grep -xq "$new_entry" "$blacklist_file"; then
+                echo "The domain is already in the blacklist"
+                continue
+            fi
+
+            # Add the new entry
+            echo -e "\nAdded to blacklist: $new_entry"
+            echo "$new_entry" >> "$blacklist_file"
+
+            # Remove empty lines
+            awk NF "$blacklist_file" > tmp1.txt
+
+            # Save changes and sort alphabetically
+            sort -o "$blacklist_file" tmp1.txt
+
+            # Remove temporary file
+            rm tmp1.txt
             continue
             ;;
         4)
