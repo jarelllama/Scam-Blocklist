@@ -27,7 +27,7 @@ while true; do
                 sed -i "/^$domain$/d" "$domains_file"
             else
                 # Test if the new entry is dead
-                if dig +short @"1.1.1.1" "$new_entry" | grep -q 'NXDOMAIN'; then
+                if dig @1.1.1.1 "$new_entry" | grep -q 'NXDOMAIN'; then
                     echo "The domain is dead"
                 else
                     # Add the new entry if the domain isn't already in the blocklist
