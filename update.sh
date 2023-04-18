@@ -99,14 +99,14 @@ function filter_pending {
     grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" | sed "s/\(.*\)/\1 (TLD)/"
 
     # Remove domains with whitelisted TLDs
-    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" > "$pending_file"
+    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" "$pending_file" > tmp1.txt
 
     # Create temporary file for dead domains and www subdomains
     touch tmp_dead.txt
     touch tmp_www.txt
 
     # Find and print dead domains
-    cat "$pending_file" | xargs -I{} -P8 bash -c "
+    cat tmp1.txt | xargs -I{} -P8 bash -c "
         if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
             echo {} >> tmp_dead.txt
             echo '{} (dead)'
@@ -114,13 +114,13 @@ function filter_pending {
     "
 
     # Remove dead domains by removing domains found in both lists
-    comm -23 <(sort tmp_dead.txt) "$pending_file" > "$pending_file"
+    comm -23 <(sort tmp_dead.txt) tmp1.txt > tmp1.txt
 
     # Add the www subdomain to dead domains
-    sed 's/^/www./' tmp_dead.txt > tmp1.txt
+    sed 's/^/www./' tmp_dead.txt > tmpA.txt
 
     # Check if the www subdomains are resolving
-    cat tmp1.txt | xargs -I{} -P4 bash -c "
+    cat tmpA.txt | xargs -I{} -P4 bash -c "
         if ! dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
             echo {} >> tmp_www.txt
             echo '{} is resolving'
@@ -128,9 +128,9 @@ function filter_pending {
     "
 
     # Append the resolving www subdomains to the pending domains file if they aren't already inside
-    comm -23 <(sort tmp_www.txt) "$pending_file" >> "$pending_file"
+    comm -23 <(sort tmp_www.txt) tmp1.txt >> "$pending_file"
 
-    # Save changes and sort alphabetically after adding www subdomains
+    # Sort alphabetically after adding www subdomains
     sort -o "$pending_file" "$pending_file"
     
     # Print domains found in the toplist
@@ -146,7 +146,7 @@ function filter_pending {
 
     # Print counters
     echo -e "\nTotal domains retrieved: $num_retrieved"
-    echo "Pending domains: $num_pending"
+    echo "Unique pending domains: $num_pending"
 }
 
 # Execute filtering for pending domains
