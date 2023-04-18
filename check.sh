@@ -41,7 +41,7 @@ grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 # Print and remove dead domains
 cat "$domains_file" | xargs -I{} -P10 bash -c "
   if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
-    echo {} (dead)
+    echo '{} (dead)'
   else
     echo {} >> tmp4.txt
   fi
