@@ -50,7 +50,7 @@ cat tmp3.txt | xargs -I{} -P10 bash -c "
   fi
 "
 
-# Remove dead domains
+# Remove dead domains by removing common domains in both lists from the blocklist
 grep -vxFf tmp_dead.txt tmp3.txt > tmp4.txt
 
 # Add the www subdomain to dead domains
