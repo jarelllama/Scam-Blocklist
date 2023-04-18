@@ -35,6 +35,9 @@ while true; do
                     if grep -q "^$new_entry$" "$domains_file"; then
                         echo "The domain is already in the blocklist"
                     else
+                        # Backup the domains file before making any changes
+                        cp "$domains_file" "$domains_file.bak"
+
                         echo "$new_entry" >> "$domains_file"
                         echo -e "\nAdded to blocklist: $new_entry"
 
