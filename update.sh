@@ -41,7 +41,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
         # Send the request to Google and extract all domains. Remove www subdomain
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
         # Count the number of domains retrieved by the specific search term
         num_domains=$(echo -n "$domains" | grep -oF '.' | wc -l)
@@ -94,6 +94,9 @@ function filter_pending {
 
     # Remove domains with whitelisted TLDs
     grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
+
+    # Remove www subdomains
+    sed -i 's/^www\.//' tmp3.txt
 
     # Save changes to the pending domains file
     mv tmp3.txt "$pending_file"
