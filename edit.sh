@@ -5,7 +5,7 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 
 while true; do
-    echo "Choose which list to add to:"
+    echo -e "\nChoose which list to add to:"
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
