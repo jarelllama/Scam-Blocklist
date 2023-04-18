@@ -55,7 +55,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         for domain in $domains; do
             if [[ ! ${retrieved_domains["$domain"]+_} ]]; then
                 retrieved_domains["$domain"]=1
-                # Output unique domains to the pending domains
+                # Output unique domains to the pending domains file
                 echo "$domain" >> "$pending_file"
             fi
         done
@@ -67,31 +67,35 @@ num_retrieved=${#retrieved_domains[@]}
 
 # Define a function to filter pending domains
 function filter_pending {
-    # Count the number of pending domains before filtering
-    num_before=$(wc -l < "$pending_file")
-
-    # Create temporary file
-    # An error appears when this step isn't done filtering
-    touch tmp1.txt
 
     # Remove www subdomains
-    # Has to be before sorting alphabetically
+    # Has to be done before sorting alphabetically
     sed -i 's/^www\.//' "$pending_file"
 
     # Remove duplicates and sort alphabetically
+    # Although the retrieved domains are already deduplicated, not emptying the pending domains file may result in duplicates
     sort -u -o "$pending_file" "$pending_file"
 
-    echo "Domains removed:"
+    # Keep only pending domains not already in the blocklist for filtering
+    # This removes the majority of pending domains and makes the further filtering more efficient
+    comm -23 "$pending_file" "$domains_file" > tmp1.txt
 
-    # Print and remove non domain entries
-    # Non domains should already be filtered when the domains were retrieved. This code is more for debugging
-    awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp1.txt"; else print $0" (invalid)" }' "$pending_file"
+    # Count the number of pending domains before filtering
+    num_before=$(wc -l < "$pending_file")
+
+    echo "Domains removed:"
 
     # Print whitelisted domains
     grep -f "$whitelist_file" -i tmp1.txt | awk '{print $1" (whitelisted)"}'
 
     # Remove whitelisted domains
     awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp1.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp2.txt
+
+
+    # Print and remove non domain entries
+    # Non domains are already be filtered when the domains were retrieved. This code is more for debugging
+    awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp1.txt"; else print $0" (invalid)" }' "$pending_file"
+
 
     # Print domains with whitelisted TLDs
     grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (TLD)/"
@@ -102,6 +106,9 @@ function filter_pending {
     # Save changes to the pending domains file
     mv tmp3.txt "$pending_file"
 
+
+
+    
     # Print domains found in the toplist
     echo -e "\nDomains in toplist:"
     grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
