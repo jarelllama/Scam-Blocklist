@@ -40,7 +40,6 @@ grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 
 # Create temporary file for dead domains and www subdomains
 touch tmp_dead.txt
-touch tmp_www.txt
 
 # Find and print dead domains
 cat tmp3.txt | xargs -I{} -P10 bash -c "
@@ -52,20 +51,6 @@ cat tmp3.txt | xargs -I{} -P10 bash -c "
 
 # Remove dead domains by removing common domains in both lists from the blocklist
 comm -23 <(sort tmp_dead.txt) tmp3.txt > tmp4.txt
-
-# Add the www subdomain to dead domains
-sed 's/^/www./' tmp_dead.txt > tmpA.txt
-
-# Check if the www subdomains are resolving
-cat tmpA.txt | xargs -I{} -P4 bash -c "
-  if ! dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
-    echo {} >> tmp_www.txt
-    echo '{} is resolving'
-  fi
-"
-
-# Append the resolving www subdomains to the blocklist if they aren't already inside
-comm -23 <(sort tmp_www.txt) tmp4.txt >> tmp4.txt
 
 # Save changes and sort alphabetically after adding www subdomains
 sort -o "$domains_file" tmp4.txt
