@@ -49,16 +49,11 @@ cat tmp3.txt | xargs -I{} -P8 bash -c "
   fi
 "
 
-wait
-
 # Remove dead domains
 grep -vFf tmp_dead.txt tmp3.txt > tmp4.txt
 
 # Save changes to the domains file
-#mv tmp4.txt "$domains_file"
-
-# Save changes and sort alphabetically
-#sort -o "$domains_file" tmp4.txt
+mv tmp4.txt "$domains_file"
 
 # Print domains found in the toplist
 echo -e "\nDomains in toplist:"
