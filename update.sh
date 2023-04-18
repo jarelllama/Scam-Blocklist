@@ -106,7 +106,7 @@ function filter_pending {
     num_after=$(wc -l < "$pending_file")
 
     # Count pending domains not already in the domains file
-    num_new=$(comm -13 "$pending_file" "$domains_file" | wc -l)
+    num_new=$(comm -13 "$domains_file" "$pending_file" | wc -l)
 
     # Remove temporary files
     rm tmp*.txt
