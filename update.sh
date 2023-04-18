@@ -40,7 +40,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=$num_results&filter=0"
 
         # Send the request to Google and extract all domains and subdomains from the HTML. Remove www., empty lines and duplicates
-        # Empty lines and duplicates have to be removed here for accurate counting of the retrieved domains by each search term
+        # Duplicates are removed here for accurate counting of the retrieved domains by each search term
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u | sed 's/^www\.//')
 
         # Count the number of domains retrieved by the specific search term
@@ -80,6 +80,7 @@ function filter_pending {
     echo "Domains removed:"
 
     # Print and remove non domain entries
+    # Non domains should already be filtered when the domains were retrieved. This code is more for debugging
     awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp1.txt"; else print $0" (invalid)" }' "$pending_file"
 
     # Print domains with whitelisted TLDs
