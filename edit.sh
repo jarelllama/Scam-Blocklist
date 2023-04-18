@@ -43,7 +43,7 @@ while true; do
 
             # Check if the entry is valid
             if ! [[ $new_entry =~ ^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$ ]]; then
-                echo "Invalid entry"
+                echo -e "\nInvalid entry."
                 continue
             fi
 
@@ -58,7 +58,7 @@ while true; do
 
             # Check if the new entry is already in the list
             if grep -q "^$new_entry$" "$domains_file"; then
-                echo "The entry is already in the blocklist"
+                echo -e "\nThe entry is already in the blocklist. Not added."
                 continue
             fi
 
@@ -129,13 +129,13 @@ while true; do
 
             # Check if the entry is valid
             if ! [[ $new_entry =~ ^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$ ]]; then
-                echo "Invalid entry"
+                echo -e "\nInvalid entry."
                 continue
             fi
 
             # Check if the new entry is already in the list
             if grep -xq "$new_entry" "$blacklist_file"; then
-                echo "The domain is already in the blacklist"
+                echo "The domain is already in the blacklist. Not added."
                 continue
             fi
 
