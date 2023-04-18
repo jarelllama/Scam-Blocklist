@@ -25,20 +25,25 @@ while true; do
                 domain=$(echo "$new_entry" | cut -c 2-)
                 sed -i "/^$domain$/d" "$domains_file"
             else
-                # Add the new entry if the domain isn't already in the blocklist
-                if grep -q "^$new_entry$" "$domains_file"; then
-                    echo "The domain is already in the blocklist"
+                # Test if the new entry is dead
+                if dig +short @"1.1.1.1" "$new_entry" | grep -q 'NXDOMAIN'; then
+                    echo "The domain is dead"
                 else
-                    echo "$new_entry" >> "$domains_file"
+                    # Add the new entry if the domain isn't already in the blocklist
+                    if grep -q "^$new_entry$" "$domains_file"; then
+                        echo "The domain is already in the blocklist"
+                    else
+                        echo "$new_entry" >> "$domains_file"
 
-                    # Remove empty lines
-                    awk NF "$domains_file" > tmp1.txt
+                        # Remove empty lines
+                        awk NF "$domains_file" > tmp1.txt
 
-                    # Sort alphabetically
-                    sort -o "$domains_file" tmp1.txt
+                        # Sort alphabetically
+                        sort -o "$domains_file" tmp1.txt
 
-                    # Remove temporary file
-                    rm tmp1.txt
+                        # Remove temporary file
+                        rm tmp1.txt
+                    fi
                 fi
             fi
 
