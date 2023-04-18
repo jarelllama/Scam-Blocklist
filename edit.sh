@@ -41,7 +41,13 @@ while true; do
                 continue
             fi
 
-            # Test if the new entry is dead
+            # Check if the entry is valid
+            if ! [[ $new_entry =~ ^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$ ]]; then
+                echo "Invalid entry"
+                continue
+            fi
+
+            # Test if the entry is dead
             if dig @1.1.1.1 "$new_entry" | grep -q 'NXDOMAIN'; then
                 echo -e "\nThe domain is dead. Not added."
                 continue
@@ -118,6 +124,12 @@ while true; do
             # Remove domain from the blacklist
             if [[ $new_entry == -* ]]; then
                 remove_entry "$list" "$blacklist_file"
+                continue
+            fi
+
+            # Check if the entry is valid
+            if ! [[ $new_entry =~ ^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$ ]]; then
+                echo "Invalid entry"
                 continue
             fi
 
