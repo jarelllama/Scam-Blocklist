@@ -4,6 +4,20 @@ domains_file="domains.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 
+function remove_entry {
+    # Remove the minus sign
+    new_entry=$(echo "$new_entry" | cut -c 2-)
+
+    if ! grep -q "^$new_entry$" "$2"; then
+        echo -e "\nEntry not found in $1: $new_entry"
+        return
+    fi
+
+    # Remove the entry if it's in the list
+    sed -i "/^$new_entry$/d" "$2"
+    echo -e "\nRemoved from $1: $new_entry"
+}
+
 while true; do
     echo -e "\nChoose which list to add to:"
     echo "1. Blocklist"
@@ -15,59 +29,51 @@ while true; do
     case "$choice" in
         1)
             echo "Blocklist"
+            list="blocklist"
 
             read -p "Enter the new entry (add '-' to remove entry): " new_entry
 
             # Change the new entry to lowercase
             new_entry="${new_entry,,}"
 
-            # Remove domain from the blocklist
+            # Remove a domain from the blocklist
             if [[ $new_entry == -* ]]; then
-
-                # Remove the minus sign
-                new_entry=$(echo "$new_entry" | cut -c 2-)
-
-                # Check if the entry is in the list
-                if grep -q "^$new_entry$" "$domains_file"; then
-                    sed -i "/^$new_entry$/d" "$domains_file"
-                    echo -e "\nRemoved from blocklist: $new_entry"
-                else
-                    echo -e "\nEntry not found in blocklist: $new_entry"
-                fi
-
-            else
-
-                # Test if the new entry is dead
-                if dig @1.1.1.1 "$new_entry" | grep -q 'NXDOMAIN'; then
-                    echo -e "\nThe domain is dead. Not added."
-                else
-                    # Add the new entry if the domain isn't already in the blocklist
-                    if grep -q "^$new_entry$" "$domains_file"; then
-                        echo "The domain is already in the blocklist"
-                    else
-                        # Backup the domains file before making any changes
-                        cp "$domains_file" "$domains_file.bak"
-
-                        echo "$new_entry" >> "$domains_file"
-                        echo -e "\nAdded to blocklist: $new_entry"
-
-                        # Remove empty lines
-                        awk NF "$domains_file" > tmp1.txt
-
-                        # Sort alphabetically
-                        sort -o "$domains_file" tmp1.txt
-
-                        # Remove temporary file
-                        rm tmp1.txt
-                    fi
-                fi
+                remove_entry "$list" "$domains_file"
+                continue
             fi
 
-            # Go back to options prompt
+            # Test if the new entry is dead
+            if dig @1.1.1.1 "$new_entry" | grep -q 'NXDOMAIN'; then
+                echo -e "\nThe domain is dead. Not added."
+                continue
+            fi
+
+            # Backup the domains file before making any changes
+            cp "$domains_file" "$domains_file.bak"
+
+            # Check if the new entry is already in the list
+            if grep -q "^$new_entry$" "$domains_file"; then
+                echo "The entry is already in the blocklist"
+                return
+            fi
+
+            # Add the new entry
+            echo "$new_entry" >> "$domains_file"
+            echo -e "\nAdded to blocklist: $new_entry"
+
+            # Remove empty lines
+            awk NF "$2" > tmp1.txt
+
+            # Save changes and sort alphabetically
+            sort -o "$2" tmp1.txt
+
+            # Remove temporary file
+            rm tmp1.txt
             continue
             ;;
         2)
             echo "Whitelist"
+            list="whitelist"
 
             read -p "Enter the new entry (add '-' to remove entry): " new_entry
 
@@ -76,30 +82,28 @@ while true; do
 
             # Remove term from the whitelist
             if [[ $new_entry == -* ]]; then
-                new_entry=$(echo "$new_entry" | cut -c 2-)
-                sed -i "/$new_entry/d" "$whitelist_file"
-                echo -e "\nRemoved from whitelist: $new_entry"
-            else
-                # Add the new entry if a similar term isn't already in the whitelist
-                if grep -Fiq "$new_entry" "$whitelist_file"; then
-                    existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
-                    echo "A similar term is already in the whitelist: $existing_entry"
-                else
-                    echo -e "\nAdded to whitelist: $new_entry"
-                    echo "$new_entry" >> "$whitelist_file"
-
-                    # Remove empty lines
-                    awk NF "$whitelist_file" > tmp1.txt
-
-                    # Sort alphabetically
-                    sort -o "$whitelist_file" tmp1.txt
-
-                    # Remove temporary file
-                    rm tmp1.txt
-                fi
+                remove_entry "$list" "$whitelist_file"
+                continue
             fi
+             
+            # Add the new entry if a similar term isn't already in the whitelist
+            if grep -Fiq "$new_entry" "$whitelist_file"; then
+                existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
+                echo "A similar term is already in the whitelist: $existing_entry"
+                continue
+            fi
+                
+            echo -e "\nAdded to whitelist: $new_entry"
+            echo "$new_entry" >> "$whitelist_file"
 
-            # Go back to options prompt
+            # Remove empty lines
+            awk NF "$whitelist_file" > tmp1.txt
+
+            # Sort alphabetically
+            sort -o "$whitelist_file" tmp1.txt
+
+            # Remove temporary file
+            rm tmp1.txt
             continue
             ;;
         3)
