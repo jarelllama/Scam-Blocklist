@@ -38,8 +38,9 @@ grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (
 # Remove domains with whitelisted TLDs
 grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 
-# Create temporary file for dead domains
+# Create temporary file for dead domains and www subdomains
 touch tmp_dead.txt
+touch tmp_www.txt
 
 # Find and print dead domains
 cat tmp3.txt | xargs -I{} -P10 bash -c "
