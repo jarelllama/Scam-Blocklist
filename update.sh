@@ -146,7 +146,7 @@ function filter_pending {
 
     # Print counters
     echo -e "\nTotal domains retrieved: $num_retrieved"
-    echo "Unique pending domains: $num_pending"
+    echo "Domains not in blocklist: $num_pending"
 }
 
 # Execute filtering for pending domains
