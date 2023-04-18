@@ -74,6 +74,10 @@ function filter_pending {
     # An error appears when this step isn't done filtering
     touch tmp1.txt
 
+    # Remove www subdomains
+    # Has to be before sorting alphabetically
+    sed -i 's/^www\.//' tmp3.txt
+
     # Remove duplicates and sort alphabetically
     sort -u -o "$pending_file" "$pending_file"
 
@@ -94,9 +98,6 @@ function filter_pending {
 
     # Remove domains with whitelisted TLDs
     grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
-
-    # Remove www subdomains
-    sed -i 's/^www\.//' tmp3.txt
 
     # Save changes to the pending domains file
     mv tmp3.txt "$pending_file"
