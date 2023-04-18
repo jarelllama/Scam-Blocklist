@@ -15,6 +15,9 @@ touch tmp1.txt
 # Count the number of domains before filtering
 num_before=$(wc -l < "$domains_file")
 
+# Remove www subdomains
+sed -i 's/^www\.//' tmp3.txt
+
 # Remove duplicates and sort alphabetically
 sort -u -o "$domains_file" "$domains_file"
 
@@ -35,11 +38,8 @@ grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (
 # Remove domains with whitelisted TLDs
 grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
 
-# Remove www subdomains
-sed -i 's/^www\.//' tmp3.txt
-
 # Print and remove dead domains
-cat tmp4.txt | parallel -j 10 '
+cat tmp3.txt | parallel -j 20 '
     if dig @1.1.1.1 {} | grep -q "NXDOMAIN"; then
         echo {} "(dead)";
     else
