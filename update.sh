@@ -114,7 +114,7 @@ function filter_pending {
     "
 
     # Remove dead domains by removing domains found in both lists
-    comm -23 <(sort tmp_dead.txt) tmp1.txt > tmp1.txt
+    comm -23 tmp1.txt <(sort tmp_dead.txt) > tmp1.txt
 
     # Add the www subdomain to dead domains
     sed 's/^/www./' tmp_dead.txt > tmpA.txt
@@ -142,7 +142,6 @@ function filter_pending {
 
     # Remove temporary files
     rm tmp*.txt
-    rm "$pending_file.bak"
 
     # Print counters
     echo -e "\nTotal domains retrieved: $num_retrieved"
