@@ -53,8 +53,8 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
         # Loop through each domain and add it to associative array only if it is unique
         for domain in $domains; do
-            if [[ ! ${pending_domains["$domain"]+_} ]]; then
-                pending_domains["$domain"]=1
+            if [[ ! ${retrieved_domains["$domain"]+_} ]]; then
+                retrieved_domains["$domain"]=1
                 # Output unique domains to the pending domains
                 echo "$domain" >> "$pending_file"
             fi
@@ -63,7 +63,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 done < "$search_terms_file"
 
 # Count the number of unique domains retrieved in this run
-total_pending_domains=${#pending_domains[@]}
+total_retrieved_domains=${#retrieved_domains[@]}
 
 # Define a function to filter pending domains
 function filter_pending {
@@ -108,7 +108,7 @@ function filter_pending {
     rm tmp*.txt
 
     # Print counters
-    echo -e "\nTotal domains retrieved: $total_pending_domains"
+    echo -e "\nTotal domains retrieved: $total_retrieved_domains"
     echo "Domains not in blocklist: "
     echo "Total domains pending: $num_before"
     echo "Total domains removed: $((num_before - num_after))"
