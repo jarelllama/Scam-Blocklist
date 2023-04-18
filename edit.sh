@@ -11,14 +11,14 @@ while true; do
     echo "3. Blacklist"
     read choice
 
-    read -p "Enter the new entry (add '-' to remove entry): " new_entry
-
-    # Change the new entry to lowercase
-    new_entry="${new_entry,,}"
-
     case "$choice" in
         1)
             echo "Blocklist"
+
+            read -p "Enter the new entry (add '-' to remove entry): " new_entry
+
+            # Change the new entry to lowercase
+            new_entry="${new_entry,,}"
 
             # Remove domain from the blocklist
             if [[ $new_entry == -* ]]; then
@@ -53,6 +53,11 @@ while true; do
         2)
             echo "Whitelist"
 
+            read -p "Enter the new entry (add '-' to remove entry): " new_entry
+
+            # Change the new entry to lowercase
+            new_entry="${new_entry,,}"
+
             # Remove term from the whitelist
             if [[ $new_entry == -* ]]; then
                 term=$(echo "$new_entry" | cut -c 2-)
@@ -81,6 +86,11 @@ while true; do
             ;;
         3)
             echo "Blacklist"
+
+            read -p "Enter the new entry (add '-' to remove entry): " new_entry
+
+            # Change the new entry to lowercase
+            new_entry="${new_entry,,}"
 
             # Remove domain from the blacklist
             if [[ $new_entry == -* ]]; then
