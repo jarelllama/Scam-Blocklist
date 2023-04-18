@@ -113,8 +113,6 @@ function filter_pending {
         fi
     "
 
-    wait
-
     # Remove dead domains by removing domains found in both lists
     comm -23 tmp4.txt <(sort tmp_dead.txt) > tmp5.txt
 
@@ -128,8 +126,6 @@ function filter_pending {
             echo '{} is resolving'
         fi
     "
-
-    wait
 
     # Append the resolving www subdomains to the pending domains file if they aren't already inside
     comm -23 <(sort tmp_www.txt) tmp5.txt >> tmp5.txt
