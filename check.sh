@@ -16,7 +16,7 @@ touch tmp1.txt
 num_before=$(wc -l < "$domains_file")
 
 # Remove www subdomains
-sed -i 's/^www\.//' tmp3.txt
+sed -i 's/^www\.//' "$domains_file"
 
 # Remove duplicates and sort alphabetically
 sort -u -o "$domains_file" "$domains_file"
