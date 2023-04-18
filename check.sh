@@ -49,6 +49,9 @@ cat tmp3.txt | xargs -I{} -P10 bash -c "
   fi
 "
 
+# Remove dead domains
+grep -vxFf tmp_dead.txt tmp3.txt > tmp4.txt
+
 # Add the www subdomain to dead domains
 sed 's/^/www./' tmp_dead.txt > tmpA.txt
 
@@ -56,19 +59,15 @@ sed 's/^/www./' tmp_dead.txt > tmpA.txt
 cat tmpA.txt | xargs -I{} -P4 bash -c "
   if ! dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
     echo {} >> tmp_www.txt
-    echo 'www.{} is resolving'
+    echo '{} is resolving'
   fi
 "
 
 # Append the resolving www subdomains to the blocklist if they aren't already inside
-sort -u domains.txt tmp_www2.txt > domains.tmp
-mv -f domains.tmp domains.txt
+comm -23 <(sort tmp_www.txt) tmp4.txt >> tmp4.txt
 
-# Remove dead domains
-grep -vFf tmp_dead.txt tmp3.txt > tmp4.txt
-
-# Save changes to the domains file
-mv tmp4.txt "$domains_file"
+# Save changes and sort alphabetically after adding www subdomains
+sort -o "$domains_file" tmp4.txt
 
 # Print domains found in the toplist
 echo -e "\nDomains in toplist:"
