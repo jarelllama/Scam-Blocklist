@@ -46,8 +46,6 @@ cat tmp3.txt | xargs -I{} -P8 bash -c "
   fi
 "
 
-wait
-
 # Remove dead domains by removing common domains in both lists from the blocklist
 comm -23 <(sort tmp_dead.txt) tmp3.txt > tmp4.txt
 
