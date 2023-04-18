@@ -9,6 +9,7 @@ while true; do
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
+    echo "4. Exit"
     read choice
 
     case "$choice" in
@@ -116,6 +117,9 @@ while true; do
 
             # Go back to options prompt
             continue
+            ;;
+        4)
+            exit 0  
             ;;
         *)
             echo "Invalid option selected"
