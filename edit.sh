@@ -107,7 +107,7 @@ while true; do
                 echo -e "\nRemoved from blacklist: $new_entry"
             else
                 # Add the new entry if the domain isn't already in the blacklist
-                if grep -q "^$new_entry$" "$blacklist_file"; then
+                if grep -xq "$new_entry" "$blacklist_file"; then
                     echo "The domain is already in the blacklist"
                 else
                     echo -e "\nAdded to blacklist: $new_entry"
