@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Define input and output file locations
 domains_file="domains.txt"
 pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
@@ -9,75 +8,65 @@ blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 tlds_file="white_tlds.txt"
 
-# Define the number of search results
-num_results=100
-
 # Define a user agent to prevent Google from blocking the search request
 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-# Create an associative array to store unique domains
-declare -A retrieved_domains
-
-# If the pending domains file is not empty, prompt the user whether to empty it
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     if [[ ! "$answer" == "n" ]]; then
         > "$pending_file"
-        echo "Emptied pending domains file"
     fi
 fi
 
+declare -A retrieved_domains
+
 echo "Search terms:"
 
-# Read search terms from file and loop through each term
-while IFS= read -r line || [[ -n "$line" ]]; do
-    # Ignore empty lines
-    if [[ -n "$line" ]]; then
+# Read search terms from the search terms file and loop through each term
+while IFS= read -r term || [[ -n "$term" ]]; do
+    # Skip empty lines
+    if [[ -n "$term" ]]; then
         # Replace non-alphanumeric characters with plus signs and group sequential plus signs into a single plus sign
-        encoded_search_term=$(echo "$line" | sed -E 's/[^[:alnum:]]+/\+/g')
+        encoded_search_term=$(echo "$term" | sed -E 's/[^[:alnum:]]+/\+/g')
 
-        # Use the search term to search Google with filtering off
-        google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=$num_results&filter=0"
+        google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=100&filter=0"
 
-        # Send the request to Google and extract all domains. Remove www subdomain
+        # Search Google and extract all domains
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
         # Count the number of domains retrieved by the specific search term
         num_domains=$(echo -n "$domains" | grep -oF '.' | wc -l)
 
-        # Print the number of domains retrieved by the search term
         echo "$line"
         echo "Unique domains retrieved: $num_domains"
         echo "--------------------------------------------"
 
-        # Loop through each domain and add it to associative array only if it is unique
+        # Loop through each domain and add it to the associative array only if it is unique
         for domain in $domains; do
             if [[ ! ${retrieved_domains["$domain"]+_} ]]; then
                 retrieved_domains["$domain"]=1
-                # Output unique domains to the pending domains file
+
                 echo "$domain" >> "$pending_file"
             fi
         done
     fi
 done < "$search_terms_file"
 
-# Count the number of unique domains retrieved in this run
 num_retrieved=${#retrieved_domains[@]}
 
-# Define a function to filter pending domains
 function filter_pending {
-
-    # Make a backup of the pending domains file
     cp "$pending_file" "$pending_file.bak"
 
-    # Remove www subdomains
-    # Has to be done before sorting alphabetically
-    sed -i 's/^www\.//' "$pending_file"
+    awk NF "$pending_file" > tmp1.txt
 
-    # Remove duplicates and sort alphabetically
+    tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
+
+    # Removing www subdomains has to be done before sorting alphabetically
+    sed -i 's/^www\.//' tmp2.txt
+
     # Although the retrieved domains are already deduplicated, not emptying the pending domains file may result in duplicates
-    sort -u -o "$pending_file" "$pending_file"
+    sort -uo "pending_file" tmp2.txt
 
     # Keep only pending domains not already in the blocklist for filtering
     # This removes the majority of pending domains and makes the further filtering more efficient
@@ -86,7 +75,7 @@ function filter_pending {
     echo "Domains removed:"
 
     # Print whitelisted domains
-    grep -f "$whitelist_file" -i tmp1.txt | awk '{print $1" (whitelisted)"}'
+    grep -f "$whitelist_file" tmp1.txt | awk '{print $1" (whitelisted)"}'
 
     # Remove whitelisted domains
     awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp1.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp2.txt
