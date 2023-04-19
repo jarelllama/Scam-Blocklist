@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Download required files
-
 read -p "Download the toplist.txt? (y/N): " answer
 
 if [[ "$answer" == "y" ]]; then
