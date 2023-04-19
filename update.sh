@@ -8,8 +8,6 @@ blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 tlds_file="white_tlds.txt"
 
-user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
-
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     if [[ ! "$answer" == "n" ]]; then
@@ -21,33 +19,31 @@ declare -A retrieved_domains
 
 echo "Search terms:"
 
-# Read search terms from the search terms file and loop through each term
+# Read entire search term. Loop through each search term
 while IFS= read -r term || [[ -n "$term" ]]; do
     # Skip empty lines
     if [[ -n "$term" ]]; then
-        # Replace non-alphanumeric characters with plus signs and group sequential plus signs into a single plus sign
+        # Replace non-alphanumeric characters with plus signs and group consecutive plus signs into one
         encoded_search_term=$(echo "$term" | sed -E 's/[^[:alnum:]]+/\+/g')
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=100&filter=0"
+user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+ google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=100&filter=0"
 
         # Search Google and extract all domains
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
-        # Count the number of domains retrieved by the specific search term
-        num_domains=$(echo -n "$domains" | grep -oF '.' | wc -l)
-
         echo "$term"
-        echo "Unique domains retrieved: $num_domains"
+        echo "Unique domains retrieved: $(echo "$domains" | wc -l)"
         echo "--------------------------------------------"
 
-        # Loop through each domain and add it to the associative array only if it is unique
+        # Check if each domain is already in the retrieved domains associative array
         for domain in $domains; do
-            if [[ ! ${retrieved_domains["$domain"]+_} ]]; then
-                retrieved_domains["$domain"]=1
-
-                echo "$domain" >> "$pending_file"
+            if [[ ${retrieved_domains["$domain"]+_} ]]; then
+               continue 
             fi
+             retrieved_domains["$domain"]=1
+             echo "$domain" >> "$pending_file"
         done
     fi
 done < "$search_terms_file"
@@ -65,7 +61,7 @@ function filter_pending {
     sed -i 's/^www\.//' tmp2.txt
 
     # Although the retrieved domains are already deduplicated, not emptying the pending domains file may result in duplicates
-    sort -uo "pending_file" tmp2.txt
+    sort -uo "$pending_file" tmp2.txt
 
     # Keep only pending domains not already in the blocklist for filtering
     # This removes the majority of pending domains and makes the further filtering more efficient
