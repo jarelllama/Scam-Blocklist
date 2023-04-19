@@ -87,7 +87,7 @@ function filter_pending {
 
     # Use parallel processing
     cat tmp8.txt | xargs -I{} -P4 bash -c "
-        if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
+        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> tmp_dead.txt
             echo '{} (dead)'
         fi
