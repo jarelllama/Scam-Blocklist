@@ -34,6 +34,7 @@ while true; do
             new_entry="${new_entry,,}"
 
             if [[ $new_entry == -* ]]; then
+                cp "$domains_file" "$domains_file.bak"
                 remove_entry "$list" "$domains_file"
                 continue
             fi
