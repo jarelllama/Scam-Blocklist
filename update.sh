@@ -36,7 +36,8 @@ while IFS= read -r term; do
 
         echo "$term"
         # The grep command is needed to correctly count zero when no domains are retrieved
-        echo "Unique domains retrieved: $(echo "$domains" | grep -oF '.' | wc -l)"
+        echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
+
         echo "--------------------------------------------"
 
         # Check if each domain is already in the retrieved domains associative array
