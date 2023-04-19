@@ -24,7 +24,7 @@ while IFS= read -r term; do
     # Skip empty lines
     if [[ -n "$term" ]]; then
         # Replace non-alphanumeric characters with plus signs and group consecutive plus signs into one
-        encoded_term=$(echo "$term" | sed -E 's/[^[:alnum:]]+/\+/g')
+        encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
@@ -59,33 +59,31 @@ function filter_pending {
 
     tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
 
-    # Removing www subdomains has to be done before sorting alphabetically
-    sed -i 's/^www\.//' tmp2.txt
+    # Has to be done before sorting alphabetically
+    awk '{sub(/^www\./, ""); print' tmp2.txt > tmp3.txt
 
     # Although the retrieved domains are already deduplicated, not emptying the pending domains file may result in duplicates
-    sort -u tmp2.txt -o tmp3.txt
+    sort -u tmp3.txt -o tmp4.txt
 
     # Keep only pending domains not already in the blocklist for filtering
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 tmp3.txt "$domains_file" > tmp4.txt
+    comm -23 tmp4.txt "$domains_file" > tmp5.txt
 
     echo "Domains removed:"
 
-    # Print whitelisted domains
-    grep -f "$whitelist_file" tmp4.txt | awk '{print $1" (whitelisted)"}'
-    
-    # Remoce whitelisted domains
-    grep -vf "$whitelist_file" tmp4.txt > tmp5.txt
+    grep -f "$whitelist_file" tmp5.txt | awk '{print $1" (whitelisted)"}'
+
+    grep -vf "$whitelist_file" tmp5.txt > tmp6.txt
 
     # Print and remove non domain entries
-    # Non domains are already be filtered when the domains were retrieved. This code is more for debugging
-    awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp3.txt"; else print $0" (invalid)" }' tmp2.txt
+    # The regex checks for one or more alphanumeric characters, periods or dashes infront of a period followed by two or more alphanumeric characters.
+    awk '{ if ($0 ~ /^[[:alnum:].-]+\.[[:alnum:]]{2,}$/) print $0 > "tmp7.txt"; else print $0" (invalid)" }' tmp6.txt
 
     # Print domains with whitelisted TLDs
-    grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp3.txt | sed "s/\(.*\)/\1 (TLD)/"
+    grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp7.txt | awk '{print $1" (TLD)"}'
 
     # Remove domains with whitelisted TLDs
-    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp3.txt > tmp4.txt
+    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp7.txt > tmp8.txt
 
     # Create temporary file for dead domains and www subdomains
     touch tmp_dead.txt
