@@ -60,7 +60,7 @@ function filter_pending {
     tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
 
     # Has to be done before sorting alphabetically
-    awk '{sub(/^www\./, ""); print' tmp2.txt > tmp3.txt
+    awk '{sub(/^www\./, ""); print}' tmp2.txt > tmp3.txt
 
     # Although the retrieved domains are already deduplicated, not emptying the pending domains file may result in duplicates
     sort -u tmp3.txt -o tmp4.txt
