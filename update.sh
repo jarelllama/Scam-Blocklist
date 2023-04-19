@@ -79,7 +79,7 @@ function filter_pending {
     # The regex checks for one or more alphanumeric characters, periods or dashes infront of a period followed by two or more alphanumeric characters
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt | awk '{print $0 " (invalid)"}'
     
-   grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt > tmp7.txt
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt > tmp7.txt
 
     # The regex finds entries with whitelisted TLDs
     grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp7.txt | awk '{print $0 " (TLD)"}'
