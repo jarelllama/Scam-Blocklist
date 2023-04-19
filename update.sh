@@ -35,7 +35,9 @@ while IFS= read -r term; do
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
         echo "$term"
-        echo "Unique domains retrieved: $(echo "$domains" | wc -l)"
+        # The grep command is needed to correctly count zero when no domains are retrieved
+        echo "Unique domains retrieved: $(echo -n "$domains" | grep -oF '.' | wc -l)"
+
         echo "--------------------------------------------"
 
         # Check if each domain is already in the retrieved domains associative array
@@ -74,9 +76,10 @@ function filter_pending {
 
     grep -vFf "$whitelist_file" tmp5.txt > tmp6.txt
 
-    # Print and remove non domain entries
     # The regex checks for one or more alphanumeric characters, periods or dashes infront of a period followed by two or more alphanumeric characters
-    awk '{ if ($0 ~ /^[[:alnum:].-]+\.[[:alnum:]]{2,}$/) print $0 > "tmp7.txt"; else print $0 " (invalid)" }' tmp6.txt
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt | awk '{print $0 " (invalid)"}'
+    
+   grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt > tmp7.txt
 
     # The regex finds entries with whitelisted TLDs
     grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp7.txt | awk '{print $0 " (TLD)"}'
@@ -106,14 +109,15 @@ function filter_pending {
         fi
     "
 
-    comm -23 <(sort tmp_www.txt) tmp9.txt >> tmp10.txt
+    # Appends resolving www subdomains
+    comm -23 <(sort tmp_www.txt) tmp9.txt >> tmp9.txt
 
-    sort tmp10.txt -o "$pending_file"
+    sort tmp9.txt -o "$pending_file"
 
     rm tmp*.txt
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
-    echo "Domains not in blocklist: $(wc -l < "$pending_file")"
+    echo "Pending domains not in blocklist: $(wc -l < "$pending_file")"
     echo "Domains:"
     cat "$pending_file"
     echo -e "\nDomains in toplist:"
