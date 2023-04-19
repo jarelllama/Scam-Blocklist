@@ -24,10 +24,11 @@ while IFS= read -r term || [[ -n "$term" ]]; do
     # Skip empty lines
     if [[ -n "$term" ]]; then
         # Replace non-alphanumeric characters with plus signs and group consecutive plus signs into one
-        encoded_search_term=$(echo "$term" | sed -E 's/[^[:alnum:]]+/\+/g')
+        encoded_term=$(echo "$term" | sed -E 's/[^[:alnum:]]+/\+/g')
 
-user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
- google_search_url="https://www.google.com/search?q=\"${encoded_search_term}\"&num=100&filter=0"
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0"
 
         # Search Google and extract all domains
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
