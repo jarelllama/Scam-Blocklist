@@ -79,7 +79,7 @@ while true; do
             fi
              
             if grep -Fq "$new_entry" "$whitelist_file"; then
-                existing_entry=$(grep -Fi "$new_entry" "$whitelist_file" | head -n 1)
+                existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
                 echo "A similar term is already in the whitelist: $existing_entry"
                 continue
             fi
