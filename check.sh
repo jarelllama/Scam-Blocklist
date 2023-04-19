@@ -8,7 +8,7 @@ tlds_file="white_tlds.txt"
 
 cp "$domains_file" "$domains_file.bak"
 
-awk NF "$pending_file" > tmp1.txt
+awk NF "$domains_file" > tmp1.txt
 
 tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
 
