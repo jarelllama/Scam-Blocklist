@@ -19,8 +19,8 @@ declare -A retrieved_domains
 
 echo "Search terms:"
 
-# Read entire search term. Loop through each search term
-while IFS= read -r term || [[ -n "$term" ]]; do
+# Loop through each search term in its entirety from the search terms file
+while IFS= read -r term; do
     # Skip empty lines
     if [[ -n "$term" ]]; then
         # Replace non-alphanumeric characters with plus signs and group consecutive plus signs into one
@@ -43,8 +43,9 @@ while IFS= read -r term || [[ -n "$term" ]]; do
             if [[ ${retrieved_domains["$domain"]+_} ]]; then
                continue 
             fi
-             retrieved_domains["$domain"]=1
-             echo "$domain" >> "$pending_file"
+            # Add the unique domain to the associative array
+            retrieved_domains["$domain"]=1
+            echo "$domain" >> "$pending_file"
         done
     fi
 done < "$search_terms_file"
@@ -62,19 +63,19 @@ function filter_pending {
     sed -i 's/^www\.//' tmp2.txt
 
     # Although the retrieved domains are already deduplicated, not emptying the pending domains file may result in duplicates
-    sort -uo "$pending_file" tmp2.txt
+    sort -u tmp2.txt -o tmp3.txt
 
     # Keep only pending domains not already in the blocklist for filtering
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 "$pending_file" "$domains_file" > tmp1.txt
+    comm -23 tmp3.txt "$domains_file" > tmp4.txt
 
     echo "Domains removed:"
 
     # Print whitelisted domains
-    grep -f "$whitelist_file" tmp1.txt | awk '{print $1" (whitelisted)"}'
-
-    # Remove whitelisted domains
-    awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" tmp1.txt | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp2.txt
+    grep -f "$whitelist_file" tmp4.txt | awk '{print $1" (whitelisted)"}'
+    
+    # Remoce whitelisted domains
+    grep -vf "$whitelist_file" tmp4.txt > tmp5.txt
 
     # Print and remove non domain entries
     # Non domains are already be filtered when the domains were retrieved. This code is more for debugging
