@@ -6,63 +6,48 @@ blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 tlds_file="white_tlds.txt"
 
-# Backup the domains file before making any changes
 cp "$domains_file" "$domains_file.bak"
 
-# Create temporary file
-touch tmp1.txt
+awk NF "$pending_file" > tmp1.txt
 
-# Count the number of domains before filtering
-num_before=$(wc -l < "$domains_file")
+tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
 
-# Remove duplicates and sort alphabetically
-sort -u -o "$domains_file" "$domains_file"
+num_before=$(wc -l < tmp2.txt)
+
+sort -u tmp2.txt -o tmp3.txt
 
 echo "Domains removed:"
 
-# Print whitelisted domains
-grep -f "$whitelist_file" -i "$domains_file" | awk '{print $1" (whitelisted)"}'
+grep -Ff "$whitelist_file" tmp3.txt | awk '{print $0 " (whitelisted)"}'
 
-# Remove whitelisted domains
-awk -v FS=" " 'FNR==NR{a[tolower($1)]++; next} !a[tolower($1)]' "$whitelist_file" "$domains_file" | grep -vf "$whitelist_file" -i | awk -v FS=" " '{print $1}' > tmp1.txt
+grep -vFf "$whitelist_file" tmp3.txt > tmp4.txt
 
-# Print and remove non domain entries
-awk '{ if ($0 ~ /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/) print $0 > "tmp2.txt"; else print $0" (invalid)" }' tmp1.txt
+awk '{ if ($0 ~ /^[[:alnum:].-]+\.[[:alnum:]]{2,}$/) print $0 > "tmp5.txt"; else print $0 " (invalid)" }' tmp4.txt
 
-# Print domains with whitelisted TLDs
-grep -oE "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt | sed "s/\(.*\)/\1 (TLD)/"
+grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt | awk '{print $0 " (TLD)"}'
 
-# Remove domains with whitelisted TLDs
-grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp2.txt > tmp3.txt
-
-# Create temporary file for dead domains and www subdomains
+grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt > tmp6.txt
+    
 touch tmp_dead.txt
 
-# Find and print dead domains
-cat tmp3.txt | xargs -I{} -P8 bash -c "
-  if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
-    echo {} >> tmp_dead.txt
-    echo '{} (dead)'
+cat tmp6.txt | xargs -I{} -P8 bash -c "
+  if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+      echo {} >> tmp_dead.txt
+      echo '{} (dead)'
   fi
 "
 
-# Remove dead domains by removing common domains in both lists from the blocklist
-comm -23 tmp3.txt <(sort tmp_dead.txt) > tmp4.txt
+comm -23 tmp6.txt <(sort tmp_dead.txt) > tmp7.txt
 
-# Save changes
-mv tmp4.txt "$domains_file"
+mv tmp7.txt "$domains_file"
 
-# Print domains found in the toplist
 echo -e "\nDomains in toplist:"
 grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file"
 
-# Count the number of domains after filtering
 num_after=$(wc -l < "$domains_file")
 
-# Remove temporary files
 rm tmp*.txt
 
-# Print counters
 echo "Total domains before: $num_before"
 echo "Total domains removed: $((num_before - num_after))"
 echo "Final domains after: $num_after"
