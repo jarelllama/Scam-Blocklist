@@ -21,9 +21,8 @@ echo "Search terms:"
 
 # Loop through each search term in its entirety from the search terms file
 while IFS= read -r term; do
-    # Skip empty lines
     if [[ -n "$term" ]]; then
-        # Replace non-alphanumeric characters with plus signs and group consecutive plus signs into one
+        # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
@@ -76,7 +75,7 @@ function filter_pending {
     grep -vf "$whitelist_file" tmp5.txt > tmp6.txt
 
     # Print and remove non domain entries
-    # The regex checks for one or more alphanumeric characters, periods or dashes infront of a period followed by two or more alphanumeric characters.
+    # The regex checks for one or more alphanumeric characters, periods or dashes infront of a period followed by two or more alphanumeric characters
     awk '{ if ($0 ~ /^[[:alnum:].-]+\.[[:alnum:]]{2,}$/) print $0 > "tmp7.txt"; else print $0" (invalid)" }' tmp6.txt
 
     # Print domains with whitelisted TLDs
@@ -85,23 +84,20 @@ function filter_pending {
     # Remove domains with whitelisted TLDs
     grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp7.txt > tmp8.txt
 
-    # Create temporary file for dead domains and www subdomains
     touch tmp_dead.txt
     touch tmp_www.txt
 
-    # Find and print dead domains
-    cat tmp4.txt | xargs -I{} -P4 bash -c "
+    # Use parallel processing
+    cat tmp8.txt | xargs -I{} -P4 bash -c "
         if dig @1.1.1.1 {} | grep -q 'NXDOMAIN'; then
             echo {} >> tmp_dead.txt
             echo '{} (dead)'
         fi
     "
 
-    # Remove dead domains by removing domains found in both lists
-    comm -23 tmp4.txt <(sort tmp_dead.txt) > tmp5.txt
-
-    # Add the www subdomain to dead domains
-    sed 's/^/www./' tmp_dead.txt > tmpA.txt
+    comm -23 tmp8.txt <(sort tmp_dead.txt) > tmp9.txt
+    
+    awk '{print "www." $0}' tmp_dead.txt > tmpA.txt
 
     # Check if the www subdomains are resolving
     cat tmpA.txt | xargs -I{} -P4 bash -c "
@@ -111,13 +107,12 @@ function filter_pending {
         fi
     "
 
-    # Append the resolving www subdomains to the pending domains file if they aren't already inside
-    comm -23 <(sort tmp_www.txt) tmp5.txt >> tmp5.txt
+    comm -23 <(sort tmp_www.txt) tmp9.txt >> tmp10.txt
 
-    # Sort alphabetically after adding www subdomains
-    sort -o "$pending_file" tmp5.txt
+    sort tmp10.txt -o "$pending_file"
     
-    # Count the number of pending domains after filtering
+    # TODO...
+    
     num_pending=$(wc -l < "$pending_file")
 
     # Remove temporary files
