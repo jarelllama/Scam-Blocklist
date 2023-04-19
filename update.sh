@@ -167,7 +167,7 @@ while true; do
             # Change the new entry to lowecase
             new_entry="${new_entry,,}"
 
-            if grep -qF "$new_entry" "$whitelist_file"; then
+            if grep -Fq "$new_entry" "$whitelist_file"; then
                 # head -n is used here for when multiple whitelisted terms match the new entry
                 existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
                 echo "A similar term is already in the whitelist: $existing_entry"
