@@ -21,6 +21,7 @@ echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
 while IFS= read -r term; do
+    # Checks if string is non empty
     if [[ -n "$term" ]]; then
         # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
