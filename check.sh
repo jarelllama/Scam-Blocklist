@@ -22,9 +22,9 @@ grep -Ff "$whitelist_file" tmp3.txt | awk '{print $0 " (whitelisted)"}'
 
 grep -vFf "$whitelist_file" tmp3.txt > tmp4.txt
 
-grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp4.txt | awk '{print $0 " (invalid)"}'
+grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp4.txt | awk '{print $0 " (invalid)"}'
     
-grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp4.txt > tmp5.txt
+grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp4.txt > tmp5.txt
    
 grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt | awk '{print $0 " (TLD)"}'
 
