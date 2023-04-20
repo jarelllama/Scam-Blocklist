@@ -18,9 +18,11 @@ sort -u tmp2.txt -o tmp3.txt
 
 echo "Domains removed:"
 
-grep -Ff "$whitelist_file" tmp3.txt | awk '{print $0 " (whitelisted)"}'
+grep -Ff "$whitelist_file" tmp3.txt | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-grep -vFf "$whitelist_file" tmp3.txt > tmp4.txt
+grep -Ff "$whitelist_file" tmp3.txt | grep -vxFf "$blacklist_file" > tmp_white.txt
+
+comm -23 tmp3.txt <(sort tmp_white.txt) > tmp4.txt
 
 grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp4.txt | awk '{print $0 " (invalid)"}'
     
