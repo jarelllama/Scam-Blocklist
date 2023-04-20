@@ -92,6 +92,9 @@ function filter_pending {
         fi
     "
 
+    # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
+    # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
+
     comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
 
     grep '^www\.' tmp8.txt > tmp_with_www.txt
