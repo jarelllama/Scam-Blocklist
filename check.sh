@@ -24,14 +24,14 @@ grep -Ff "$whitelist_file" tmp3.txt | grep -vxFf "$blacklist_file" > tmp_white.t
 
 comm -23 tmp3.txt <(sort tmp_white.txt) > tmp4.txt
 
-grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp4.txt | awk '{print $0 " (invalid)"}'
-    
-grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp4.txt > tmp5.txt
-   
-grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt | awk '{print $0 " (TLD)"}'
+grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp4.txt | awk '{print $0 " (TLD)"}'
 
-grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt > tmp6.txt
+grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp4.txt > tmp5.txt
+
+grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt | awk '{print $0 " (invalid)"}'
     
+grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt > tmp6.txt
+
 touch tmp_dead.txt
 
 cat tmp6.txt | xargs -I{} -P8 bash -c "
