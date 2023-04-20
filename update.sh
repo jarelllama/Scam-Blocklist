@@ -95,22 +95,7 @@ function filter_pending {
         fi
     "
 
-    comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
-    
-    awk '{print "www." $0}' tmp_dead.txt > tmp_dead_www.txt
-
-    # Check if the www subdomains are resolving
-    cat tmp_dead_www.txt | xargs -I{} -P4 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> tmp_alive_www.txt
-            echo '{} is resolving'
-        fi
-    "
-
-    # Appends resolving www subdomains
-    comm -23 <(sort tmp_alive_www.txt) tmp8.txt >> tmp8.txt
-
-    sort tmp8.txt -o "$pending_file"
+    comm -23 tmp7.txt <(sort tmp_dead.txt) > "$pending_file"
 
     rm tmp*.txt
 
