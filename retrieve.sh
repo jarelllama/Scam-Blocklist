@@ -155,7 +155,7 @@ while true; do
             # Change the new entry to lowecase
             new_entry="${new_entry,,}"
 
-            if ! [[ $new_entry =~ ^[^\s\n]+$ ]]; then
+            if [[ $new_entry =~ [[:space:]] ]]; then
                 echo -e "\nInvalid entry."
                 continue
             fi
