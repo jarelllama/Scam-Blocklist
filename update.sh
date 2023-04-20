@@ -165,10 +165,15 @@ while true; do
             ;;
         2)
             echo "Add to whitelist"
-            read -p "Enter the new entry: " new_entry
-            
+            read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+
             # Change the new entry to lowecase
             new_entry="${new_entry,,}"
+
+            if ! [[ $new_entry =~ ^.+$ ]]; then
+                echo -e "\nInvalid entry."
+                continue
+            fi
 
             if grep -Fq "$new_entry" "$whitelist_file"; then
                 # head -n is used here for when multiple whitelisted terms match the new entry
@@ -189,7 +194,7 @@ while true; do
             ;;
         3)
             echo "Add to blacklist"
-            read -p "Enter the new entry: " new_entry
+            read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
             new_entry="${new_entry,,}"
             
