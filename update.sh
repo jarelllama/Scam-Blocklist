@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains_file="domains.txt"
+domains_file="domains"
 pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
