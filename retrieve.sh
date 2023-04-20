@@ -59,11 +59,6 @@ function filter_pending {
 
     tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
 
-    awk '{sub(/^www\./, ""); print}' tmp2.txt > tmp_no_www.txt
-
-    # Merges www subdomains with www-stripped domains
-    grep -vxFf tmp2.txt tmp_no_www.txt >> tmp2.txt
-
     sort -u tmp2.txt -o tmp3.txt
 
     # This removes the majority of pending domains and makes the further filtering more efficient
@@ -97,8 +92,32 @@ function filter_pending {
         fi
     "
 
-    comm -23 tmp7.txt <(sort tmp_dead.txt) > "$pending_file"
+    comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
 
+    grep '^www\.' tmp8.txt > tmp_with_www.txt
+
+    comm -23 tmp8.txt <(sort tmp_with_www.txt) > tmp_no_www.txt
+
+    awk '{sub(/^www\./, ""); print}' tmp_with_www.txt > tmp_no_www_new.txt
+
+    awk '{print "www."$0}' tmp_no_www.txt > tmp_with_www_new.txt
+
+    cat tmp_no_www_new.txt tmp_with_www_new.txt > tmp_flipped.txt
+
+    touch tmp_flipped_dead.txt
+
+    cat tmp_flipped.txt | xargs -I{} -P4 bash -c "
+        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> tmp_flipped_dead.txt
+        fi
+    "
+    
+    comm -23 <(sort tmp_flipped.txt) <(sort tmp_flipped_dead.txt) > tmp_flipped_alive.txt
+
+    cat tmp8.txt tmp_flipped_alive.txt > tmp9.txt
+
+    sort tmp9.txt -o "$pending_file"
+    
     rm tmp*.txt
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
