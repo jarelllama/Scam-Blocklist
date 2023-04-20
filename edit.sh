@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains_file="domains.txt"
+domains_file="domains"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 
