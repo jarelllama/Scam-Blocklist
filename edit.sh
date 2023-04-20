@@ -92,7 +92,6 @@ while true; do
                 echo -e "\nThe domain is found in the toplist. Not added."
                 echo "Matches in toplist:"
                 grep -xFf tmp_entries.txt  "$toplist_file" | grep -vxFf "$blacklist_file"
-
                 continue
             fi
 
