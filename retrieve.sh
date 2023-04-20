@@ -72,15 +72,15 @@ function filter_pending {
 
     comm -23 tmp4.txt <(sort tmp_white.txt) > tmp5.txt
 
-    # This regex checks for valid domains
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt | awk '{print $0 " (invalid)"}'
-    
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt > tmp6.txt
-
     # This regex finds entries with whitelisted TLDs
-    grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp6.txt | awk '{print $0 " (TLD)"}'
+    grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt | awk '{print $0 " (TLD)"}'
 
-    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp6.txt > tmp7.txt
+    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt > tmp6.txt
+
+    # This regex checks for valid domains
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt | awk '{print $0 " (invalid)"}'
+    
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt > tmp7.txt
 
     touch tmp_dead.txt
 
@@ -92,10 +92,10 @@ function filter_pending {
         fi
     "
 
+    comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
+
     # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
     # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
-
-    comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
 
     grep '^www\.' tmp8.txt > tmp_with_www.txt
 
