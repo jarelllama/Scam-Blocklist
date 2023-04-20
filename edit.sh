@@ -56,6 +56,7 @@ while true; do
             www_subdomain="www.${new_entry}"
 
             echo "$www_subdomain" >> tmp_entries.txt
+            
             sort tmp_entries.txt -o tmp_entries.txt
             
             if [[ "$remove_entry" -eq 1 ]]; then
