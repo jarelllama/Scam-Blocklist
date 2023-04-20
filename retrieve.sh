@@ -86,7 +86,6 @@ function filter_pending {
     grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp6.txt > tmp7.txt
 
     touch tmp_dead.txt
-    touch tmp_www.txt
 
     # Use parallel processing
     cat tmp7.txt | xargs -I{} -P4 bash -c "
