@@ -102,10 +102,10 @@ while true; do
                 
                 cp "$domains_file" "$domains_file.bak"
 
-                echo "$new_entry" >> "$domains_file"
-                
                 echo -e "\nAdded to blocklist: $new_entry"
 
+                echo "$new_entry" >> "$domains_file"
+                
                 awk NF "$domains_file" > tmp1.txt
 
                 sort tmp1.txt -o "$domains_file" 
