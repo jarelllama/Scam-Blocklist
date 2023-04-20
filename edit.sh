@@ -29,7 +29,7 @@ while true; do
             echo "Blocklist"
             list="blocklist"
 
-            read -p "Enter the new entry (add '-' to remove entry): " new_entry
+            read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
             new_entry="${new_entry,,}"
 
@@ -70,7 +70,7 @@ while true; do
             echo "Whitelist"
             list="whitelist"
 
-            read -p "Enter the new entry (add '-' to remove entry): " new_entry
+            read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
             new_entry="${new_entry,,}"
 
@@ -78,7 +78,12 @@ while true; do
                 remove_entry "$list" "$whitelist_file"
                 continue
             fi
-             
+
+            if ! [[ $new_entry =~ ^.+$ ]]; then
+                echo -e "\nInvalid entry."
+                continue
+            fi
+
             if grep -Fq "$new_entry" "$whitelist_file"; then
                 existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
                 echo "A similar term is already in the whitelist: $existing_entry"
@@ -99,7 +104,7 @@ while true; do
             echo "Blacklist"
             list="blacklist"
 
-            read -p "Enter the new entry (add '-' to remove entry): " new_entry
+            read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
             new_entry="${new_entry,,}"
 
