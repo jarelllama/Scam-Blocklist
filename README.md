@@ -9,7 +9,7 @@
 - Dead domains are removed
 - Domains that are found in toplist updates are checked
 
-Note that when `www` subdomains are retrieved the script adds the www-stripped domain alongside the `www` subdomain. This is so wildcard supporting formats can block all subdomains while lists that don't support wildcards (Pihole) can block both `example.com` and `www.example.com`.
+Resolving `www` subdomains are included. This is so lists that don't support wildcards (Pihole) can block both `example.com` and `www.example.com`.
 
 ### Goal
 
