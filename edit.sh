@@ -33,6 +33,8 @@ while true; do
 
             new_entry="${new_entry,,}"
 
+            new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
+
             if [[ $new_entry == -* ]]; then
                 cp "$domains_file" "$domains_file.bak"
                 remove_entry "$list" "$domains_file"
@@ -57,7 +59,15 @@ while true; do
             cp "$domains_file" "$domains_file.bak"
 
             echo "$new_entry" >> "$domains_file"
-            echo -e "\nAdded to blocklist: $new_entry"
+            
+            www_subdomain="www.${new_entry}"
+            
+            if ! dig @1.1.1.1 "$www_subdomain" | grep -Fq 'NXDOMAIN'; then
+                echo "$www_subdomain" >> "$domains_file"
+                echo -e "\nAdded to blocklist:\n$new_entry\n$www_subdomain"  
+            else
+                echo -e "\nAdded to blocklist: $new_entry"
+            fi
 
             awk NF "$domains_file" > tmp1.txt
 
