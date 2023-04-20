@@ -9,11 +9,20 @@ function remove_entry {
     new_entry=$(echo "$new_entry" | cut -c 2-)
 
     if grep -xFq "$new_entry" "$2"; then
-        sed -i "/^$new_entry$/d" "$2"
         echo -e "\nRemoved from $1: $new_entry"
+        sed -i "/^$new_entry$/d" "$2"
     else
         echo -e "\nEntry not found in $1: $new_entry"
     fi
+}
+
+function add_entry {
+    echo -e "\nAdded to $1: $new_entry"
+    echo "$new_entry" >> "$2"
+
+    awk NF "$2" > tmp1.txt
+    sort tmp1.txt -o "$2" 
+    rm tmp*.txt
 }
 
 while true; do
@@ -27,18 +36,43 @@ while true; do
     case "$choice" in
         1)
             echo "Blocklist"
-            list="blocklist"
 
             read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
             new_entry="${new_entry,,}"
 
             new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
-
+                
             if [[ $new_entry == -* ]]; then
+                new_entry=$(echo "$new_entry" | cut -c 2-)
+                www_subdomain="www.${new_entry}"
+                if ! grep -xFq "$new_entry" "$domains_file"; then
+                    if ! grep -xFq "$www_subdomain" "$domains_file"; then
+                        echo -e "\nEntry not found in blocklist: $new_entry"
+                        continue 
+                    fi
+
+                    cp "$domains_file" "$domains_file.bak"
+
+                    echo -e "\nRemoved from blocklist: $www_subdomain"
+
+                    sed -i "/^$www_subdomain$/d" "$domains_file"
+
+                    continue
+                fi
+                
                 cp "$domains_file" "$domains_file.bak"
-                remove_entry "$list" "$domains_file"
-                continue
+                
+                sed -i "/^$new_entry$/d" "$domains_file"
+                                    
+                if grep -xFq "$www_subdomain" "$domains_file"; then
+                    echo -e "\nRemoved from blocklist:\n$new_entry\n$www_subdomain"
+                    sed -i "/^$www_subdomain$/d" "$domains_file"
+                else
+                    echo -e "\nRemoved from blocklist: $new_entry"
+                fi
+                
+                continue 
             fi
 
             if ! [[ $new_entry =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
@@ -51,8 +85,33 @@ while true; do
                 continue
             fi
 
+            www_subdomain="www.${new_entry}"
+            www_alive=0
+
+            if ! dig @1.1.1.1 "$www_subdomain" | grep -Fq 'NXDOMAIN'; then
+                www_alive=1
+            fi
+
             if dig @1.1.1.1 "$new_entry" | grep -Fq 'NXDOMAIN'; then
-                echo -e "\nThe domain is dead. Not added."
+                if [[ "$www_alive" -eq 0 ]]; then
+                    echo -e "\nThe domain is dead. Not added."
+                    continue
+                fi
+                
+                new_entry="$www_subdomain"
+                
+                cp "$domains_file" "$domains_file.bak"
+
+                echo "$new_entry" >> "$domains_file"
+                
+                echo -e "\nAdded to blocklist: $new_entry"
+
+                awk NF "$domains_file" > tmp1.txt
+
+                sort tmp1.txt -o "$domains_file" 
+
+                rm tmp*.txt
+                
                 continue
             fi
 
@@ -60,20 +119,19 @@ while true; do
 
             echo "$new_entry" >> "$domains_file"
             
-            www_subdomain="www.${new_entry}"
-            
-            if ! dig @1.1.1.1 "$www_subdomain" | grep -Fq 'NXDOMAIN'; then
+            if [[ "$www_alive" -eq 1 ]]; then
+                echo -e "\nAdded to blocklist:\n$new_entry\n$www_subdomain" 
                 echo "$www_subdomain" >> "$domains_file"
-                echo -e "\nAdded to blocklist:\n$new_entry\n$www_subdomain"  
             else
                 echo -e "\nAdded to blocklist: $new_entry"
-            fi
+            fi 
 
             awk NF "$domains_file" > tmp1.txt
 
             sort tmp1.txt -o "$domains_file" 
 
             rm tmp*.txt
+            
             continue
             ;;
         2)
@@ -100,14 +158,8 @@ while true; do
                 continue
             fi
 
-            echo -e "\nAdded to whitelist: $new_entry"
-            echo "$new_entry" >> "$whitelist_file"
-
-            awk NF "$whitelist_file" > tmp1.txt
-
-            sort tmp1.txt -o "$whitelist_file" 
-
-            rm tmp*.txt
+            add_entry "$list" "$whitelist_file"
+            
             continue
             ;;
         3)
@@ -133,14 +185,8 @@ while true; do
                 continue
             fi
 
-            echo -e "\nAdded to blacklist: $new_entry"
-            echo "$new_entry" >> "$blacklist_file"
-
-            awk NF "$blacklist_file" > tmp1.txt
-
-            sort tmp1.txt -o "$blacklist_file" 
-
-            rm tmp*.txt
+            add_entry "$list" "$blacklist_file"
+            
             continue
             ;;
         4)
