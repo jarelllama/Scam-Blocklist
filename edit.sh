@@ -79,7 +79,7 @@ while true; do
                 continue
             fi
 
-            if ! [[ $new_entry =~ ^.+$ ]]; then
+            if ! [[ $new_entry =~ ^[^\s\n]+$ ]]; then
                 echo -e "\nInvalid entry."
                 continue
             fi
