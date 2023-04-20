@@ -61,7 +61,7 @@ function filter_pending {
 
     awk '{sub(/^www\./, ""); print}' tmp2.txt > tmp_no_www.txt
 
-    comm -23 <(sort tmp_no_www.txt) tmp2.txt >> tmp2.txt
+    grep -vxFf tmp2.txt tmp_no_www.txt >> tmp2.txt
 
     sort -u tmp2.txt -o tmp3.txt
 
