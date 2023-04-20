@@ -39,7 +39,6 @@ while true; do
             echo "Blocklist"
 
             read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
-
             remove_entry=0
 
             if [[ $new_entry == -* ]]; then
