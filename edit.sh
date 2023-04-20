@@ -71,7 +71,7 @@ while true; do
                 else
                     echo -e "\nRemoved from blocklist: $new_entry"
                 fi
-                
+
                 continue 
             fi
 
