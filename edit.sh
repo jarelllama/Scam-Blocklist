@@ -82,12 +82,6 @@ while true; do
                 continue
             fi
 
-            # This checks if there are no unique entries in the new entries file
-            if [[ $(comm -23 tmp_entries.txt "$domains_file" | wc -l) -eq 0 ]]; then
-                echo -e "\nThe domain is already in the blocklist. Not added."
-                continue
-            fi
-
             if grep -xFf tmp_entries.txt "$toplist_file" | grep -vxFqf "$blacklist_file"; then
                 echo -e "\nThe domain is found in the toplist. Not added."
                 echo "Matches in toplist:"
@@ -110,6 +104,12 @@ while true; do
 
             mv tmp_alive_entries.txt tmp_entries.txt
   
+            # This checks if there are no unique entries in the new entries file
+            if [[ $(comm -23 tmp_entries.txt "$domains_file" | wc -l) -eq 0 ]]; then
+                echo -e "\nThe domain is already in the blocklist. Not added."
+                continue
+            fi
+
             cp "$domains_file" "$domains_file.bak"
 
             echo -e "\nDomains added:"
