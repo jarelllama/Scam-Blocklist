@@ -103,13 +103,13 @@ while true; do
                 fi
             done < tmp_entries.txt
 
-            mv tmp_alive_entries.txt tmp_entries.txt
-
-            if ! [[ -s tmp_entries.txt ]]; then
+            if ! [[ -s tmp_alive_entries.txt ]]; then
                 echo -e "\nThe domain is dead. Not added."
                 continue
-            fi  
-                
+            fi
+
+            mv tmp_alive_entries.txt tmp_entries.txt
+  
             cp "$domains_file" "$domains_file.bak"
 
             echo -e "\nDomains added:"
