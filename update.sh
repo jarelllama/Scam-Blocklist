@@ -35,7 +35,6 @@ while IFS= read -r term; do
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
         echo "$term"
-        # The grep command is needed to correctly count zero when no domains are retrieved
         echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------------"
 
@@ -60,58 +59,58 @@ function filter_pending {
 
     tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
 
-    # Has to be done before sorting alphabetically
-    awk '{sub(/^www\./, ""); print}' tmp2.txt > tmp3.txt
+    awk '{sub(/^www\./, ""); print}' tmp2.txt > tmp_no_www.txt
 
-    # Although the retrieved domains are already deduplicated, not emptying the pending domains file may result in duplicates
-    sort -u tmp3.txt -o tmp4.txt
+    comm -23 <(sort tmp_no_www.txt) tmp2.txt >> tmp2.txt
+
+    sort -u tmp2.txt -o tmp3.txt
 
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 tmp4.txt "$domains_file" > tmp5.txt
+    comm -23 tmp3.txt "$domains_file" > tmp4.txt
 
     echo "Domains removed:"
 
-    grep -Ff "$whitelist_file" tmp5.txt | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" tmp4.txt | awk '{print $0 " (whitelisted)"}'
 
-    grep -vFf "$whitelist_file" tmp5.txt > tmp6.txt
+    grep -vFf "$whitelist_file" tmp4.txt > tmp5.txt
 
     # The regex checks for one or more alphanumeric characters, periods or dashes infront of a period followed by two or more alphanumeric characters
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt | awk '{print $0 " (invalid)"}'
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt | awk '{print $0 " (invalid)"}'
     
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt > tmp7.txt
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt > tmp6.txt
 
     # The regex finds entries with whitelisted TLDs
-    grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp7.txt | awk '{print $0 " (TLD)"}'
+    grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp6.txt | awk '{print $0 " (TLD)"}'
 
-    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp7.txt > tmp8.txt
+    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp6.txt > tmp7.txt
 
     touch tmp_dead.txt
     touch tmp_www.txt
 
     # Use parallel processing
-    cat tmp8.txt | xargs -I{} -P4 bash -c "
+    cat tmp7.txt | xargs -I{} -P4 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> tmp_dead.txt
             echo '{} (dead)'
         fi
     "
 
-    comm -23 tmp8.txt <(sort tmp_dead.txt) > tmp9.txt
+    comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
     
-    awk '{print "www." $0}' tmp_dead.txt > tmpA.txt
+    awk '{print "www." $0}' tmp_dead.txt > tmp_dead_www.txt
 
     # Check if the www subdomains are resolving
-    cat tmpA.txt | xargs -I{} -P4 bash -c "
+    cat tmp_dead_www.txt | xargs -I{} -P4 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> tmp_www.txt
+            echo {} >> tmp_alive_www.txt
             echo '{} is resolving'
         fi
     "
 
     # Appends resolving www subdomains
-    comm -23 <(sort tmp_www.txt) tmp9.txt >> tmp9.txt
+    comm -23 <(sort tmp_alive_www.txt) tmp8.txt >> tmp8.txt
 
-    sort tmp9.txt -o "$pending_file"
+    sort tmp8.txt -o "$pending_file"
 
     rm tmp*.txt
 
