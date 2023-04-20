@@ -40,105 +40,90 @@ while true; do
 
             read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
+            remove_entry=0
+
+            if [[ $new_entry == -* ]]; then
+                new_entry=$(echo "$new_entry" | cut -c 2-)
+
+                remove_entry=1
+            fi
+
             new_entry="${new_entry,,}"
 
             new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
 
-            www_subdomain="www.${new_entry}"    
+            echo "$new_entry" > tmp_entries.txt
 
-            if [[ $new_entry == -* ]]; then
-                new_entry=$(echo "$new_entry" | cut -c 2-)
-                www_subdomain="www.${new_entry}"
-                if ! grep -xFq "$new_entry" "$domains_file"; then
-                    if ! grep -xFq "$www_subdomain" "$domains_file"; then
-                        echo -e "\nEntry not found in blocklist: $new_entry"
-                        continue 
-                    fi
+            www_subdomain="www.${new_entry}"
 
-                    cp "$domains_file" "$domains_file.bak"
-
-                    echo -e "\nRemoved from blocklist: $www_subdomain"
-
-                    sed -i "/^$www_subdomain$/d" "$domains_file"
-
+            echo "$www_subdomain" >> tmp_entries.txt
+            sort tmp_entries.txt -o tmp_entries.txt
+            
+            if [[ "$remove_entry" -eq 1 ]]; then
+                if ! grep -xFqf tmp_entries.txt "$domains_file"; then
+                    echo -e "\nDomain not found in blocklist: $new_entry"
                     continue
                 fi
-                
-                cp "$domains_file" "$domains_file.bak"
-                
-                sed -i "/^$new_entry$/d" "$domains_file"
-                                    
-                if grep -xFq "$www_subdomain" "$domains_file"; then
-                    echo -e "\nRemoved from blocklist:\n$new_entry\n$www_subdomain"
-                    sed -i "/^$www_subdomain$/d" "$domains_file"
-                else
-                    echo -e "\nRemoved from blocklist: $new_entry"
-                fi
 
-                continue 
+                echo -e "\nDomains removed:"
+                comm -12 "$domains_file" tmp_entries.txt
+
+                comm -23 "$domains_file" tmp_entries.txt > tmp1.txt
+
+                mv tmp1.txt "$domains_file"
+
+                rm tmp*.txt
+
+                continue
             fi
 
             if ! [[ $new_entry =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
-                echo -e "\nInvalid entry."
+                echo -e "\nInvalid domain. Not added."
                 continue
             fi
 
-            if grep -xFq "$new_entry" "$domains_file"; then
-                echo -e "\nThe entry is already in the blocklist. Not added."
+            # This checks if there are no unique entries in the new entries file
+            if [[ $(comm -23 tmp_entries.txt "$domains_file" | wc -l) -eq 0 ]]; then
+                echo -e "\nThe domain is already in the blocklist. Not added."
                 continue
             fi
 
-            if grep -xFq "$new_entry" "$toplist_file" || grep -xFq "$www_subdomain" "$toplist_file"; then
-                echo -e "\nThe entry is found in the toplist. Not added."
+            if grep -xFf tmp_entries.txt "$toplist_file" | grep -vxFqf "$blacklist_file"; then
+                echo -e "\nThe domain is found in the toplist. Not added."
+                echo "Matches in toplist:"
+                grep -xFf tmp_entries.txt  "$toplist_file" | grep -vxFf "$blacklist_file"
+
                 continue
             fi
 
-            www_alive=0
+            touch tmp_alive_entries.txt
 
-            if ! dig @1.1.1.1 "$www_subdomain" | grep -Fq 'NXDOMAIN'; then
-                www_alive=1
-            fi
-
-            if dig @1.1.1.1 "$new_entry" | grep -Fq 'NXDOMAIN'; then
-                if [[ "$www_alive" -eq 0 ]]; then
-                    echo -e "\nThe domain is dead. Not added."
-                    continue
+            while read -r entry; do
+                if ! dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
+                    echo "$entry" >> tmp_alive_entries.txt
                 fi
-                
-                new_entry="$www_subdomain"
-                
-                cp "$domains_file" "$domains_file.bak"
+            done < tmp_entries.txt
 
-                echo -e "\nAdded to blocklist: $new_entry"
+            mv tmp_alive_entries.txt tmp_entries.txt
 
-                echo "$new_entry" >> "$domains_file"
-                
-                awk NF "$domains_file" > tmp1.txt
-
-                sort tmp1.txt -o "$domains_file" 
-
-                rm tmp*.txt
-                
+            if ! [[ -s tmp_entries.txt ]]; then
+                echo -e "\nThe domain is dead. Not added."
                 continue
-            fi
-
+            fi  
+                
             cp "$domains_file" "$domains_file.bak"
 
-            echo "$new_entry" >> "$domains_file"
-            
-            if [[ "$www_alive" -eq 1 ]]; then
-                echo -e "\nAdded to blocklist:\n$new_entry\n$www_subdomain" 
-                echo "$www_subdomain" >> "$domains_file"
-            else
-                echo -e "\nAdded to blocklist: $new_entry"
-            fi 
+            echo -e "\nDomains added:"
+            comm -23 tmp_entries.txt "$domains_file"
+
+            comm -23 tmp_entries.txt "$domains_file" >> "$domains_file"
 
             awk NF "$domains_file" > tmp1.txt
 
-            sort tmp1.txt -o "$domains_file" 
+            sort tmp1.txt -o "$domains_file"
 
             rm tmp*.txt
-            
+                
             continue
             ;;
         2)
@@ -155,13 +140,13 @@ while true; do
             fi
 
             if [[ $new_entry =~ [[:space:]] ]]; then
-                echo -e "\nInvalid entry."
+                echo -e "\nInvalid entry. Not added."
                 continue
             fi
 
             if grep -Fq "$new_entry" "$whitelist_file"; then
                 existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
-                echo "A similar term is already in the whitelist: $existing_entry"
+                echo -e "\nA similar term is already in the whitelist: $existing_entry"
                 continue
             fi
 
@@ -183,12 +168,12 @@ while true; do
             fi
 
             if ! [[ $new_entry =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
-                echo -e "\nInvalid entry."
+                echo -e "\nInvalid entry. Not added."
                 continue
             fi
 
             if grep -xFq "$new_entry" "$blacklist_file"; then
-                echo "The domain is already in the blacklist. Not added."
+                echo -e "\nThe domain is already in the blacklist. Not added."
                 continue
             fi
 
@@ -200,7 +185,7 @@ while true; do
             exit 0  
             ;;
         *)
-            echo "Invalid option."
+            echo -e "\nInvalid option."
             continue  
             ;;
     esac
