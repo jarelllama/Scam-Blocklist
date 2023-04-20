@@ -149,12 +149,12 @@ while true; do
             ;;
         2)
             echo "Add to whitelist"
-            read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+            read -p $'Enter the new entry:\n' new_entry
 
             # Change the new entry to lowecase
             new_entry="${new_entry,,}"
 
-            if ! [[ $new_entry =~ ^.+$ ]]; then
+            if ! [[ $new_entry =~ ^[^\s\n]+$ ]]; then
                 echo -e "\nInvalid entry."
                 continue
             fi
@@ -178,7 +178,7 @@ while true; do
             ;;
         3)
             echo "Add to blacklist"
-            read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+            read -p $'Enter the new entry:\n' new_entry
 
             new_entry="${new_entry,,}"
             
