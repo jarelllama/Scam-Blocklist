@@ -21,7 +21,7 @@ echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
 while IFS= read -r term; do
-    # Checks if string is non empty
+    # Checks if string is non empty and not a comment
     if [[ -n "$term" ]] && [[ ! "$term" =~ ^\# ]]; then
         # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
@@ -61,6 +61,7 @@ function filter_pending {
 
     awk '{sub(/^www\./, ""); print}' tmp2.txt > tmp_no_www.txt
 
+    # Merges www subdomains with www-stripped domains
     grep -vxFf tmp2.txt tmp_no_www.txt >> tmp2.txt
 
     sort -u tmp2.txt -o tmp3.txt
@@ -74,12 +75,12 @@ function filter_pending {
 
     grep -vFf "$whitelist_file" tmp4.txt > tmp5.txt
 
-    # The regex checks for one or more alphanumeric characters, periods or dashes infront of a period followed by two or more alphanumeric characters
+    # This regex checks for valid domains
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt | awk '{print $0 " (invalid)"}'
     
     grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt > tmp6.txt
 
-    # The regex finds entries with whitelisted TLDs
+    # This regex finds entries with whitelisted TLDs
     grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp6.txt | awk '{print $0 " (TLD)"}'
 
     grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp6.txt > tmp7.txt
