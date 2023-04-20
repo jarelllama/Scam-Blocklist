@@ -3,6 +3,7 @@
 domains_file="domains"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
+toplist_file="toplist.txt"
 
 function remove_entry {
     # Remove the minus sign
@@ -42,7 +43,9 @@ while true; do
             new_entry="${new_entry,,}"
 
             new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
-                
+
+            www_subdomain="www.${new_entry}"    
+
             if [[ $new_entry == -* ]]; then
                 new_entry=$(echo "$new_entry" | cut -c 2-)
                 www_subdomain="www.${new_entry}"
@@ -85,7 +88,11 @@ while true; do
                 continue
             fi
 
-            www_subdomain="www.${new_entry}"
+            if grep -xFq "$new_entry" "$toplist_file" || grep -xFq "$www_subdomain" "$toplist_file"; then
+                echo -e "\nThe entry is found in the toplist. Not added."
+                continue
+            fi
+
             www_alive=0
 
             if ! dig @1.1.1.1 "$www_subdomain" | grep -Fq 'NXDOMAIN'; then
