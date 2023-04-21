@@ -201,6 +201,7 @@ while true; do
             sort tmp1.txt -o "$whitelist_file"
 
             rm tmp*.txt
+
             continue
             ;;
         3)
@@ -227,6 +228,7 @@ while true; do
             sort tmp1.txt -o "$blacklist_file" 
 
             rm tmp*.txt
+
             continue
             ;;
         4)
