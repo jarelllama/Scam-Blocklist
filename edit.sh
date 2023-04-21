@@ -42,7 +42,7 @@ while true; do
             
             remove_entry=0
 
-            if [[ "$new_entry* == -* ]]; then
+            if [[ "$new_entry" == -* ]]; then
                 new_entry=$(echo "$new_entry" | cut -c 2-)
                 remove_entry=1
             fi
