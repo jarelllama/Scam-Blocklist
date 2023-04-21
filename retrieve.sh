@@ -121,8 +121,7 @@ function filter_pending {
 
     cat tmp8.txt tmp_flipped_alive.txt > tmp9.txt
 
-    # Duplicates are removed here for very niche situations
-    sort -u tmp9.txt -o "$pending_file"
+    sort tmp9.txt -o "$pending_file"
     
     rm tmp*.txt
 
@@ -144,9 +143,9 @@ function merge_pending {
 
     num_before=$(wc -l < "$domains_file")
 
-    comm -23 "$pending_file" "$domains_file" >> "$domains_file"
+    cat "$pending_file" >> "$domains_file" 
 
-    sort "$domains_file" -o "$domains_file" 
+    sort -u "$domains_file" -o "$domains_file"
 
     num_after=$(wc -l < "$domains_file")
 
