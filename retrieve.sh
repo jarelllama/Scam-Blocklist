@@ -121,7 +121,8 @@ function filter_pending {
 
     cat tmp8.txt tmp_flipped_alive.txt > tmp9.txt
 
-    sort tmp9.txt -o "$pending_file"
+    # Duplicates are removed here for very niche situations
+    sort -u tmp9.txt -o "$pending_file"
     
     rm tmp*.txt
 
