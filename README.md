@@ -11,7 +11,7 @@
 
 Resolving `www` subdomains are included. This is so lists that don't support wildcards (Pihole) can block both `example.com` and `www.example.com`.
 
-Some malicious domains found in r/Scams are also added after veung manually vetted.
+Some malicious domains found in r/Scams are also added after being manually vetted.
 
 ### Goal
 
