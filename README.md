@@ -7,9 +7,11 @@
 - Domains are compared against the Umbrella Toplist
 - Domains found in the toplist are checked manually
 - Dead domains are removed
-- Domains that are found in toplist updates are checked
+- Domains that are found in toplist updates are vetted
 
 Resolving `www` subdomains are included. This is so lists that don't support wildcards (Pihole) can block both `example.com` and `www.example.com`.
+
+Some malicious domains found in r/Scams are also added after veung manually vetted.
 
 ### Goal
 
