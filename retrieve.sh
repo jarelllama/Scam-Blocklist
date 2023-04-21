@@ -51,7 +51,7 @@ while IFS= read -r term; do
         echo "$term"
 
         if [[ "$debug" -eq 1 ]]; then
-            	echo "$domains"
+            echo "$domains"
         fi
 
         echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
