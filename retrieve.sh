@@ -76,10 +76,9 @@ function filter_pending {
 
     comm -23 tmp4.txt <(sort tmp_white.txt) > tmp5.txt
 
-    # This regex finds entries with whitelisted TLDs
-    grep -E "(\S+)\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt | awk '{print $0 " (TLD)"}'
+    grep -E '\.(edu|gov)$' tmp5.txt | awk '{print $0 " (TLD)"}'
 
-    grep -vE "\.($(paste -sd '|' "$tlds_file"))$" tmp5.txt > tmp6.txt
+    grep -vE '\.(edu|gov)$' tmp5.txt > tmp6.txt
 
     # This regex checks for valid domains
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt | awk '{print $0 " (invalid)"}'
