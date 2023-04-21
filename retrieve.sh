@@ -133,7 +133,6 @@ function filter_pending {
     cat "$pending_file"
     echo -e "\nDomains in toplist:"
     # About 8x faster than comm due to not needing to sort the toplist
-    # Note that www subdomains arent matched
     grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
 }
 
