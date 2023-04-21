@@ -14,6 +14,21 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
+debug=0
+
+time="y"
+
+for arg in "$@"; do
+    if [[ "$arg" == "d" ]]; then
+        debug=1
+    fi
+    if [[ "$arg" == "w" ]]; then
+        time="w"
+    elif [[ "$arg" == "m" ]]; then
+        time="m"
+    fi
+done
+
 declare -A retrieved_domains
 
 echo "Search terms:"
@@ -27,7 +42,7 @@ while IFS= read -r term; do
 
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:m"
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time}"
 
         # Search Google and extract all domains
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
@@ -35,8 +50,9 @@ while IFS= read -r term; do
 
         echo "$term"
 
-        # Uncomment for debugging
-	# echo "$domains"
+        if [[ "$debug" -eq 1 ]]; then
+            	echo "$domains"
+        fi
 
         echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------------"
