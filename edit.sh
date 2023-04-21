@@ -118,7 +118,9 @@ while true; do
             echo -e "\nDomains added:"
             comm -23 tmp_entries.txt "$domains_file"
 
-            comm -23 tmp_entries.txt "$domains_file" >> "$domains_file"
+            cat tmp_entries.txt >> "$domains_file" 
+
+            sort -u "$domains_file" -o "$domains_file"
 
             awk NF "$domains_file" > tmp1.txt
 
