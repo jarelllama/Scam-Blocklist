@@ -49,11 +49,14 @@ while true; do
 
             new_entry="${new_entry,,}"
 
-            new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
+            if [[ "$new_entry" == www.* ]]; then
+                www_subdomain="${new_entry}"
+                new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
+            else
+                www_subdomain="www.${new_entry}"
+            fi
 
             echo "$new_entry" > tmp_entries.txt
-
-            www_subdomain="www.${new_entry}"
 
             echo "$www_subdomain" >> tmp_entries.txt
             
