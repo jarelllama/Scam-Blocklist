@@ -4,7 +4,6 @@ domains_file="domains"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
-tlds_file="white_tlds.txt"
 
 cp "$domains_file" "$domains_file.bak"
 
@@ -24,9 +23,9 @@ grep -Ff "$whitelist_file" tmp3.txt | grep -vxFf "$blacklist_file" > tmp_white.t
 
 comm -23 tmp3.txt <(sort tmp_white.txt) > tmp4.txt
 
-grep -E '\.(edu|gov)$' tmp5.txt | awk '{print $0 " (TLD)"}'
+grep -E '\.(edu|gov)$' tmp4.txt | awk '{print $0 " (TLD)"}'
 
-grep -vE '\.(edu|gov)$' tmp5.txt > tmp6.txt
+grep -vE '\.(edu|gov)$' tmp4.txt > tmp5.txt
 
 grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt | awk '{print $0 " (invalid)"}'
     
