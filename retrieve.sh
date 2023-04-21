@@ -195,7 +195,7 @@ while true; do
             # Change the new entry to lowecase
             new_entry="${new_entry,,}"
 
-            if [[ $new_entry =~ [[:space:]] ]]; then
+            if [[ "$new_entry" =~ [[:space:]] ]]; then
                 echo -e "\nInvalid entry."
                 continue
             fi
@@ -224,7 +224,7 @@ while true; do
 
             new_entry="${new_entry,,}"
             
-            if ! [[ $new_entry =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+            if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
                 echo -e "\nInvalid entry."
                 continue
             fi
