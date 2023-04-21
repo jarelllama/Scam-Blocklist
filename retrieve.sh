@@ -6,7 +6,6 @@ search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
-tlds_file="white_tlds.txt"
 
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
