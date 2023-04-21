@@ -36,7 +36,7 @@ while IFS= read -r term; do
         echo "$term"
 
         # Uncomment for debugging
-	 echo "$domains"
+	# echo "$domains"
 
         echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------------"
