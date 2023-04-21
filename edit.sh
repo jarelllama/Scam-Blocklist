@@ -42,7 +42,7 @@ while true; do
             
             remove_entry=0
 
-            if [[ $new_entry == -* ]]; then
+            if [[ "$new_entry* == -* ]]; then
                 new_entry=$(echo "$new_entry" | cut -c 2-)
                 remove_entry=1
             fi
@@ -80,7 +80,7 @@ while true; do
                 continue
             fi
 
-            if ! [[ $new_entry =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+            if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
                 echo -e "\nInvalid domain. Not added."
                 continue
             fi
@@ -138,12 +138,12 @@ while true; do
 
             new_entry="${new_entry,,}"
 
-            if [[ $new_entry == -* ]]; then
+            if [[ "$new_entry" == -* ]]; then
                 remove_entry "$list" "$whitelist_file"
                 continue
             fi
 
-            if [[ $new_entry =~ [[:space:]] ]]; then
+            if [[ "$new_entry" =~ [[:space:]] ]]; then
                 echo -e "\nInvalid entry. Not added."
                 continue
             fi
@@ -166,12 +166,12 @@ while true; do
 
             new_entry="${new_entry,,}"
 
-            if [[ $new_entry == -* ]]; then
+            if [[ "$new_entry" == -* ]]; then
                 remove_entry "$list" "$blacklist_file"
                 continue
             fi
 
-            if ! [[ $new_entry =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+            if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
                 echo -e "\nInvalid entry. Not added."
                 continue
             fi
