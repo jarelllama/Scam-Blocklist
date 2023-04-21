@@ -231,6 +231,7 @@ while true; do
             ;;
         4)
             echo "Run filter again"
+            cp "$pending_file.bak" "$pending_file"
             filter_pending
             continue
             ;;
