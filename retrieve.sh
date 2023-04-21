@@ -35,6 +35,9 @@ while IFS= read -r term; do
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
         echo "$term"
+
+echo "$domains"
+
         echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------------"
 
@@ -124,7 +127,7 @@ function filter_pending {
     rm tmp*.txt
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
-    echo "Pending domains not in blocklist: $(wc -l < "$pending_file")"
+    echo "Pending domains not in blocklist: $(comm -23 "$pending_file" "$domains_file" | wc -l)"
     echo "Domains:"
     cat "$pending_file"
     echo -e "\nDomains in toplist:"
