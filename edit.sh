@@ -12,7 +12,6 @@ function edit_blocklist {
 
     # Strip and output the blocklist header (title, description, homepage, etc.)
     head -n 8 "$domains_file" > tmp_header.txt
-    
     tail -n +9 "$domains_file" > tmp1.txt
 
     mv tmp1.txt "$domains_file"
