@@ -13,7 +13,7 @@ function edit_blocklist {
     remove_entry=0
 
     if [[ "$new_entry" == -* ]]; then
-        new_entry=$(echo "$new_entry" | cut -c 2-)
+        new_entry="${new_entry#-}"
         remove_entry=1
     fi
 
@@ -25,7 +25,7 @@ function edit_blocklist {
 
     if [[ "$new_entry" == www.* ]]; then
         www_subdomain="${new_entry}"
-        new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
+        new_entry="${new_entry#www.}"
     else
         www_subdomain="www.${new_entry}"
     fi
@@ -111,7 +111,7 @@ function edit_whitelist {
     new_entry="${new_entry,,}"
 
     if [[ "$new_entry" == -* ]]; then
-        new_entry=$(echo "$new_entry" | cut -c 2-)
+        new_entry="${new_entry#-}"
         if ! grep -xFq "$new_entry" "$2"; then
             echo -e "\nEntry not found in $1: $new_entry"
             continue
@@ -150,7 +150,7 @@ function edit_blacklist {
     remove_entry=0
 
     if [[ "$new_entry" == -* ]]; then
-        new_entry=$(echo "$new_entry" | cut -c 2-)
+        new_entry="${new_entry#-}"
         remove_entry=1
     fi
 
@@ -158,7 +158,7 @@ function edit_blacklist {
 
     if [[ "$new_entry" == www.* ]]; then
         www_subdomain="${new_entry}"
-        new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
+        new_entry="${new_entry#www.}"
     else
         www_subdomain="www.${new_entry}"
     fi
