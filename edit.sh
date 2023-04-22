@@ -18,8 +18,6 @@ function update_header {
 " | cat - "$domains_file" > tmp1.txt
 
     mv tmp1.txt "$domains_file"
-
-    rm tmp*.txt
 }
 
 function edit_blocklist {
@@ -157,8 +155,6 @@ function edit_whitelist {
     echo "$new_entry" >> "$whitelist_file"
 
     sort "$whitelist_file" -o "$whitelist_file"
-
-    rm tmp*.txt
 }
 
 function edit_blacklist {
