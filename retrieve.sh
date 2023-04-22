@@ -58,7 +58,8 @@ while IFS= read -r term; do
         echo "--------------------------------------------"
 
         # Check if each domain is already in the retrieved domains associative array
-        for domain in "$domains"; do
+        # Note that quoting $domains causes errors
+	for domain in $domains; do
             if [[ ${retrieved_domains["$domain"]+_} ]]; then
                continue 
             fi
@@ -207,11 +208,11 @@ function edit_whitelist {
     fi
 
     echo -e "\nAdded to $1: $new_entry"
-    echo "$new_entry" >> "$2"
+    echo "$new_entry" >> "$whitelist_file"
 
-    awk NF "$2" > tmp1.txt
+    awk NF "$whitelist_file" > tmp1.txt
 
-    sort tmp1.txt -o "$2"
+    sort tmp1.txt -o "$whitelist_file"
 
     rm tmp*.txt
 }
