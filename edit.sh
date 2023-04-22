@@ -10,14 +10,13 @@ function edit_blocklist {
     
     cp "$domains_file" "$domains_file.bak"
 
-    # Strip and output the blocklist header (title, description, homepage, etc.)
-    head -n 8 "$domains_file" > tmp_header.txt
+    # Strip the blocklist header (title, description, homepage, etc.)
     tail -n +9 "$domains_file" > tmp1.txt
 
     mv tmp1.txt "$domains_file"
 
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
-            
+
     remove_entry=0
 
     if [[ "$new_entry" == -* ]]; then
@@ -103,7 +102,16 @@ function edit_blocklist {
 
     sort -u "$domains_file" -o "$domains_file"
 
-    cat tmp_header.txt "$domains_file > tmp1.txt
+    num_domains=$(wc -l < "$domains_file")
+
+    echo "# Title: Jarelllama's Scam Blocklist
+    # Description: Blocklist for scam sites extracted from Google
+    # Homepage: https://github.com/jarelllama/Scam-Blocklist
+    # Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
+    # License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+    # Last modified: $(date -u)
+    # Total number of domains: $(num_domains)
+    " | cat - "$domains_file" > tmp1.txt
 
     mv tmp1.txt "$domains_file"
 
