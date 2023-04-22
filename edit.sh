@@ -25,7 +25,7 @@ function edit_blocklist {
     
     cp "$domains_file" "$domains_file.bak"
 
-    # Create a temporary copy of domains file without the header
+    # Create a temporary copy of the domains file without the header
     grep -vE '^(#|$)' "$domains_file" > tmp1.txt
 
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
