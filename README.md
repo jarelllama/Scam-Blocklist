@@ -1,3 +1,5 @@
+Test: 0
+
 ### How domains are added to the blocklist
 
 - The script searches Google with a list of search terms almost exclusively used in scam sites
