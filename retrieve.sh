@@ -14,18 +14,30 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
-debug=0
+touch last_run.txt
 
-time="y"
+# Google search dates: y=year m=month w=week
+
+if [[ $(cat last_run.txt) == "y" ]]; then
+    time="m"
+    echo "m" > last_run.txt
+else
+    time="y"
+    echo "y" > last_run.txt
+fi
+
+debug=0
 
 for arg in "$@"; do
     if [[ "$arg" == "d" ]]; then
         debug=1
     fi
-    if [[ "$arg" == "w" ]]; then
-        time="w"
+    if [[ "$arg" == "y" ]]; then
+        time="y"
     elif [[ "$arg" == "m" ]]; then
         time="m"
+    elif [[ "$arg" == "w" ]]; then
+        time="w"
     fi
 done
 
