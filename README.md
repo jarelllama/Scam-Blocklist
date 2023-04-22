@@ -1,4 +1,4 @@
-Test: 0
+Current number of domains: 3303
 
 ### How domains are added to the blocklist
 
