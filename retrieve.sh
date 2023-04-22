@@ -49,7 +49,7 @@ for arg in "$@"; do
         debug=1
     fi
     if [[ "$arg" == "y" ]]; then
-        time="year""
+        time="year"
     elif [[ "$arg" == "m" ]]; then
         time="month"
     elif [[ "$arg" == "w" ]]; then
