@@ -25,11 +25,6 @@ function edit_blocklist {
     
     cp "$domains_file" "$domains_file.bak"
 
-    # Strip the blocklist header (title, description, homepage, etc.)
-    tail -n +9 "$domains_file" > tmp1.txt
-
-    mv tmp1.txt "$domains_file"
-
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
     remove_entry=0
@@ -73,6 +68,8 @@ function edit_blocklist {
 
         rm tmp*.txt
 
+        update_header
+
         return
     fi
 
@@ -109,6 +106,11 @@ function edit_blocklist {
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
     fi
+
+    # Strip the blocklist header (title, description, homepage, etc.)
+    tail -n +9 "$domains_file" > tmp1.txt
+
+    mv tmp1.txt "$domains_file"
 
     echo -e "\nDomains added:"
     comm -23 tmp_entries.txt "$domains_file"
