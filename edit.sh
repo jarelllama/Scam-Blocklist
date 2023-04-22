@@ -27,7 +27,6 @@ function add_entry {
 }
 
 function edit_blocklist {
-    
     echo "Blocklist"
 
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
@@ -122,7 +121,6 @@ function edit_blocklist {
 }
 
 function edit_whitelist {
-    
     echo "Whitelist"
     list="whitelist"
 
@@ -150,7 +148,6 @@ function edit_whitelist {
 }
 
 function edit_blacklist {
-    
     echo "Blacklist"
     list="blacklist"
 
