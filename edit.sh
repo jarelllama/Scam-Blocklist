@@ -7,6 +7,13 @@ toplist_file="toplist.txt"
 
 function edit_blocklist {
     echo "Blocklist"
+    
+    # Strip and output the blocklist header (title, description, homepage, etc.)
+    head -n 8 "$domains_file" > tmp_header.txt
+    
+    tail -n +9 "$domains_file" > tmp1.txt
+
+    mv tmp1.txt "$domains_file"
 
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
             
@@ -97,9 +104,9 @@ function edit_blocklist {
 
     sort -u "$domains_file" -o "$domains_file"
 
-    awk NF "$domains_file" > tmp1.txt
+    cat tmp_header.txt "$domains_file > tmp1.txt
 
-    sort tmp1.txt -o "$domains_file"
+    mv tmp1.txt "$domains_file"
 
     rm tmp*.txt
 }
