@@ -32,10 +32,9 @@ fi
 # Create a temporary copy of the domains file without the header
 grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
-# This section of code alternates between the year and month filter for Google Search
-
 touch last_run.txt
 
+# This section of code alternates between the year and month filter for Google Search
 if [[ $(cat last_run.txt) == "year" ]]; then
     time="month"
     echo "month" > last_run.txt
