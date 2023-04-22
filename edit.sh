@@ -25,6 +25,9 @@ function edit_blocklist {
     
     cp "$domains_file" "$domains_file.bak"
 
+    # Create a temporary copy of domains file without the header
+    grep -vE '^(#|$)' "$domains_file" > tmp1.txt
+
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
     remove_entry=0
@@ -54,17 +57,15 @@ function edit_blocklist {
     sort tmp_entries.txt -o tmp_entries.txt
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFqf tmp_entries.txt "$domains_file"; then
+        if ! grep -xFqf tmp_entries.txt tmp1.txt; then
             echo -e "\nDomain not found in blocklist: $new_entry"
             return
         fi
 
         echo -e "\nDomains removed:"
-        comm -12 "$domains_file" tmp_entries.txt
+        comm -12 tmp1.txt tmp_entries.txt
 
-        comm -23 "$domains_file" tmp_entries.txt > tmp1.txt
-
-        mv tmp1.txt "$domains_file"
+        comm -23 tmp1.txt tmp_entries.txt > "$domains_file"
 
         rm tmp*.txt
 
@@ -102,22 +103,17 @@ function edit_blocklist {
     mv tmp_alive_entries.txt tmp_entries.txt
   
     # This checks if there are no unique entries in the new entries file
-    if [[ $(comm -23 tmp_entries.txt "$domains_file" | wc -l) -eq 0 ]]; then
+    if [[ $(comm -23 tmp_entries.txt tmp1.txt | wc -l) -eq 0 ]]; then
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
     fi
 
-    # Strip the blocklist header (title, description, homepage, etc.)
-    tail -n +9 "$domains_file" > tmp1.txt
-
-    mv tmp1.txt "$domains_file"
-
     echo -e "\nDomains added:"
-    comm -23 tmp_entries.txt "$domains_file"
+    comm -23 tmp_entries.txt tmp1.txt
 
-    cat tmp_entries.txt >> "$domains_file" 
+    cat tmp_entries.txt >> tmp1.txt 
 
-    sort -u "$domains_file" -o "$domains_file"
+    sort -u tmp1.txt -o "$domains_file"
 
     rm tmp*.txt
 
