@@ -271,34 +271,34 @@ function edit_blacklist {
     while read -r entry; do
         if ! dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
             echo "$entry" >> tmp_alive_entries.txt
-            fi
-        done < tmp_entries.txt
-
-        if ! [[ -s tmp_alive_entries.txt ]]; then
-            echo -e "\nThe domain is dead. Not added."
-            continue
         fi
+    done < tmp_entries.txt
 
-        mv tmp_alive_entries.txt tmp_entries.txt
+    if ! [[ -s tmp_alive_entries.txt ]]; then
+        echo -e "\nThe domain is dead. Not added."
+        continue
+    fi
+
+    mv tmp_alive_entries.txt tmp_entries.txt
   
-        # This checks if there are no unique entries in the new entries file
-        if [[ $(comm -23 tmp_entries.txt "$blacklist_file" | wc -l) -eq 0 ]]; then
-            echo -e "\nThe domain is already in the blacklist. Not added."
-            continue
-        fi
+    # This checks if there are no unique entries in the new entries file
+    if [[ $(comm -23 tmp_entries.txt "$blacklist_file" | wc -l) -eq 0 ]]; then
+        echo -e "\nThe domain is already in the blacklist. Not added."
+        continue
+    fi
 
-        echo -e "\nDomains added:"
-        comm -23 tmp_entries.txt "$blacklist_file"
+    echo -e "\nDomains added:"
+    comm -23 tmp_entries.txt "$blacklist_file"
 
-        cat tmp_entries.txt >> "$blacklist_file" 
+    cat tmp_entries.txt >> "$blacklist_file" 
 
-        sort -u "$blacklist_file" -o "$blacklist_file"
+    sort -u "$blacklist_file" -o "$blacklist_file"
 
-        awk NF "$blacklist_file" > tmp1.txt
+    awk NF "$blacklist_file" > tmp1.txt
 
-        sort tmp1.txt -o "$blacklist_file"
+    sort tmp1.txt -o "$blacklist_file"
 
-        rm tmp*.txt
+    rm tmp*.txt
 }
 
 while true; do
