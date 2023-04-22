@@ -19,6 +19,9 @@ function edit_blocklist {
 
     new_entry="${new_entry,,}"
 
+    # Removes https:// or http://
+    new_entry="${new_entry#*://}"
+
     if [[ "$new_entry" == www.* ]]; then
         www_subdomain="${new_entry}"
         new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
@@ -129,11 +132,11 @@ function edit_whitelist {
     fi
 
     echo -e "\nAdded to $1: $new_entry"
-    echo "$new_entry" >> "$2"
+    echo "$new_entry" >> "$whitelist_file"
 
-    awk NF "$2" > tmp1.txt
+    awk NF "$whitelist_file" > tmp1.txt
 
-    sort tmp1.txt -o "$2"
+    sort tmp1.txt -o "$whitelist_file"
 
     rm tmp*.txt
 }
