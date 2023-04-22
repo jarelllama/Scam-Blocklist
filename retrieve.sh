@@ -268,9 +268,10 @@ function edit_blacklist {
     touch tmp_alive_entries.txt
 
     while read -r entry; do
-        if ! dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            echo "$entry" >> tmp_alive_entries.txt
+        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
+            continue
         fi
+        echo "$entry" >> tmp_alive_entries.txt
     done < tmp_entries.txt
 
     if ! [[ -s tmp_alive_entries.txt ]]; then
