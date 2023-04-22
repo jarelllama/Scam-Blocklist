@@ -9,7 +9,7 @@ toplist_file="toplist.txt"
 
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    if [[ "$answer" != "n" ]]; then
+    if [[ ! "$answer" == "n" ]]; then
         > "$pending_file"
     fi
 fi
@@ -53,7 +53,7 @@ echo "Search terms:"
 # A blank IFS ensures the entire search term is read
 while IFS= read -r term; do
     # Checks if the line is non empty and not a comment
-    if [[ -n "$term" ]] && [[ "$term" !~ ^\# ]]; then
+    if [[ -n "$term" ]] && [[ ! "$term" =~ ^\# ]]; then
         # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
@@ -159,7 +159,7 @@ function filter_pending {
     
     rm tmp*.txt
 
-    echo -e "\n Search time filter: $time_full"
+    echo -e "\nSearch filter used: $time_full"
     echo "Total domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(comm -23 "$pending_file" "$domains_file" | wc -l)"
     echo "Domains:"
@@ -278,7 +278,7 @@ function edit_blacklist {
         continue
     fi
 
-    if [[ "$new_entry" !~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
         continue
     fi
