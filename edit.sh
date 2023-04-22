@@ -143,9 +143,7 @@ function edit_whitelist {
     echo -e "\nAdded to $1: $new_entry"
     echo "$new_entry" >> "$whitelist_file"
 
-    awk NF "$whitelist_file" > tmp1.txt
-
-    sort tmp1.txt -o "$whitelist_file"
+    sort "$whitelist_file" -o "$whitelist_file"
 
     rm tmp*.txt
 }
@@ -228,10 +226,6 @@ function edit_blacklist {
     cat tmp_entries.txt >> "$blacklist_file" 
 
     sort -u "$blacklist_file" -o "$blacklist_file"
-
-    awk NF "$blacklist_file" > tmp1.txt
-
-    sort tmp1.txt -o "$blacklist_file"
 
     rm tmp*.txt
 }
