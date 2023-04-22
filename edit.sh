@@ -8,6 +8,8 @@ toplist_file="toplist.txt"
 function edit_blocklist {
     echo "Blocklist"
     
+    cp "$domains_file" "$domains_file.bak"
+
     # Strip and output the blocklist header (title, description, homepage, etc.)
     head -n 8 "$domains_file" > tmp_header.txt
     
@@ -94,8 +96,6 @@ function edit_blocklist {
         echo -e "\nThe domain is already in the blocklist. Not added."
         continue
     fi
-
-    cp "$domains_file" "$domains_file.bak"
 
     echo -e "\nDomains added:"
     comm -23 tmp_entries.txt "$domains_file"
