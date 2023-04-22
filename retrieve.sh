@@ -208,6 +208,7 @@ function merge_pending {
 function edit_whitelist {
     echo "Whitelist"
 
+    # The $ and single quotes allow for the escape sequence
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
     new_entry="${new_entry,,}"
@@ -234,7 +235,7 @@ function edit_whitelist {
         continue
     fi
 
-    echo -e "\nAdded to $1: $new_entry"
+    echo -e "\nAdded to $whitelist_file: $new_entry"
     echo "$new_entry" >> "$whitelist_file"
 
     sort "$whitelist_file" -o "$whitelist_file"
