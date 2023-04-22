@@ -16,3 +16,9 @@ Some malicious domains found in r/Scams are also added after being manually vett
 ### Goal
 
 Identify newly created scam sites that use the same template as reported scam sites.
+
+### See also
+
+[Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
+
+[Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Contains both my list and Durablenapkin's list)
