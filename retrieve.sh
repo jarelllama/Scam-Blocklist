@@ -189,6 +189,17 @@ function merge_pending {
     echo "Total domains added: $((num_after - num_before))"
     echo "Final domains after: $num_after"
 
+    echo "# Title: Jarelllama's Scam Blocklist
+    # Description: Blocklist for scam sites extracted from Google
+    # Homepage: https://github.com/jarelllama/Scam-Blocklist
+    # Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
+    # License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+    # Last updated: $(date -u)
+    # Total number of domains:
+    " | cat - "$domains_file" > tmp1.txt
+
+    mv tmp1.txt "$domains_file"
+
     > "$pending_file"
 
     exit 0
