@@ -175,27 +175,6 @@ function merge_pending {
     exit 0
 }
 
-function remove_entry {
-    # Remove the minus sign
-    new_entry=$(echo "$new_entry" | cut -c 2-)
-
-    if grep -xFq "$new_entry" "$2"; then
-        echo -e "\nRemoved from $1: $new_entry"
-        sed -i "/^$new_entry$/d" "$2"
-    else
-        echo -e "\nEntry not found in $1: $new_entry"
-    fi
-}
-
-function add_entry {
-    echo -e "\nAdded to $1: $new_entry"
-    echo "$new_entry" >> "$2"
-
-    awk NF "$2" > tmp1.txt
-    sort tmp1.txt -o "$2" 
-    rm tmp*.txt
-}
-
 function edit_whitelist {
     echo "Whitelist"
 
