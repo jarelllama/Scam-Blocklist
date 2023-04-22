@@ -175,6 +175,82 @@ function merge_pending {
     exit 0
 }
 
+function remove_entry {
+    # Remove the minus sign
+    new_entry=$(echo "$new_entry" | cut -c 2-)
+
+    if grep -xFq "$new_entry" "$2"; then
+        echo -e "\nRemoved from $1: $new_entry"
+        sed -i "/^$new_entry$/d" "$2"
+    else
+        echo -e "\nEntry not found in $1: $new_entry"
+    fi
+}
+
+function add_entry {
+    echo -e "\nAdded to $1: $new_entry"
+    echo "$new_entry" >> "$2"
+
+    awk NF "$2" > tmp1.txt
+    sort tmp1.txt -o "$2" 
+    rm tmp*.txt
+}
+
+function edit_whitelist {
+    echo "Whitelist"
+    list="whitelist"
+
+    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+
+    # Change the new entry to lowecase
+    new_entry="${new_entry,,}"
+
+    if [[ "$new_entry" == -* ]]; then
+        remove_entry "$list" "$whitelist_file"
+        continue
+    fi
+
+    if [[ "$new_entry" =~ [[:space:]] ]]; then
+        echo -e "\nInvalid entry. Not added."
+        continue
+    fi
+    
+    if grep -Fq "$new_entry" "$whitelist_file"; then
+        # head -n is used here for when multiple whitelisted terms match the new entry
+        existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
+        echo -e "\nA similar term is already in the whitelist: $existing_entry"
+        continue
+    fi
+
+    add_entry "$list" "$whitelist_file"
+}
+
+function edit_blacklist {
+    echo "Blacklist"
+    list="blacklist"
+
+    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+
+    new_entry="${new_entry,,}"
+
+    if [[ "$new_entry" == -* ]]; then
+        remove_entry "$list" "$blacklist_file"
+        continue
+    fi
+
+    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+        echo -e "\nInvalid entry. Not added."
+        continue
+    fi
+
+    if grep -xFq "$new_entry" "$blacklist_file"; then
+        echo -e "\nThe domain is already in the blacklist. Not added."
+        continue
+    fi
+
+    add_entry "$list" "$blacklist_file"
+}
+
 while true; do
     echo -e "\nChoose how to proceed:"
     echo "1. Merge with blocklist (default)"
@@ -189,60 +265,11 @@ while true; do
             merge_pending
             ;;
         2)
-            echo "Add to whitelist"
-            read -p $'Enter the new entry:\n' new_entry
-
-            # Change the new entry to lowecase
-            new_entry="${new_entry,,}"
-
-            if [[ "$new_entry" =~ [[:space:]] ]]; then
-                echo -e "\nInvalid entry."
-                continue
-            fi
-
-            if grep -Fq "$new_entry" "$whitelist_file"; then
-                # head -n is used here for when multiple whitelisted terms match the new entry
-                existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
-                echo "A similar term is already in the whitelist: $existing_entry"
-                continue
-            fi
-
-            echo -e "\nAdded to whitelist: $new_entry"
-            echo "$new_entry" >> "$whitelist_file"
-
-            awk NF "$whitelist_file" > tmp1.txt
-
-            sort tmp1.txt -o "$whitelist_file"
-
-            rm tmp*.txt
-
+            edit_whitelist
             continue
             ;;
         3)
-            echo "Add to blacklist"
-            read -p $'Enter the new entry:\n' new_entry
-
-            new_entry="${new_entry,,}"
-            
-            if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
-                echo -e "\nInvalid entry."
-                continue
-            fi
-
-            if grep -xFq "$new_entry" "$blacklist_file"; then
-                echo "The domain is already in the blacklist. Not added."
-                continue
-            fi
-
-            echo -e "\nAdded to blacklist: $new_entry"
-            echo "$new_entry" >> "$blacklist_file"
-
-            awk NF "$blacklist_file" > tmp1.txt
-
-            sort tmp1.txt -o "$blacklist_file" 
-
-            rm tmp*.txt
-
+            edit_blacklist
             continue
             ;;
         4)
