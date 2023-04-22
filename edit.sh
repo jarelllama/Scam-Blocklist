@@ -54,7 +54,7 @@ function edit_blocklist {
         continue
     fi
 
-    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+    if [[ "$new_entry" !~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
         continue
     fi
@@ -188,7 +188,7 @@ function edit_blacklist {
         continue
     fi
 
-    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+    if [[ "$new_entry" !~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
         continue
     fi
