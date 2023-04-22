@@ -101,7 +101,6 @@ function edit_blocklist {
 
 function edit_whitelist {
     echo "Whitelist"
-    list="whitelist"
 
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
