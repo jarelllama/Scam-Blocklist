@@ -20,9 +20,11 @@ touch last_run.txt
 
 if [[ $(cat last_run.txt) == "y" ]]; then
     time="m"
+    time_full="month"
     echo "m" > last_run.txt
 else
     time="y"
+    time_full="year"
     echo "y" > last_run.txt
 fi
 
@@ -34,10 +36,13 @@ for arg in "$@"; do
     fi
     if [[ "$arg" == "y" ]]; then
         time="y"
+        time_full="year"
     elif [[ "$arg" == "m" ]]; then
         time="m"
+        time_full="month"
     elif [[ "$arg" == "w" ]]; then
         time="w"
+        time_full="week"
     fi
 done
 
@@ -154,7 +159,8 @@ function filter_pending {
     
     rm tmp*.txt
 
-    echo -e "\nTotal domains retrieved: $num_retrieved"
+    echo -e "\n Search time filter: $time_full"
+    echo "Total domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(comm -23 "$pending_file" "$domains_file" | wc -l)"
     echo "Domains:"
     cat "$pending_file"
