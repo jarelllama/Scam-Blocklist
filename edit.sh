@@ -133,12 +133,12 @@ function edit_whitelist {
 
     if [[ "$new_entry" == -* ]]; then
         new_entry="${new_entry#-}"
-        if ! grep -xFq "$new_entry" "$2"; then
-            echo -e "\nEntry not found in $1: $new_entry"
+        if ! grep -xFq "$new_entry" "$whitelist_file"; then
+            echo -e "\nEntry not found in whitelist: $new_entry"
             return
         fi
-        echo -e "\nRemoved from $1: $new_entry"
-        sed -i "/^$new_entry$/d" "$2"
+        echo -e "\nRemoved from whitelist: $new_entry"
+        sed -i "/^$new_entry$/d" "$whitelist_file"
         return
     fi
 
@@ -153,7 +153,7 @@ function edit_whitelist {
         return
     fi
 
-    echo -e "\nAdded to $1: $new_entry"
+    echo -e "\nAdded to whitelist: $new_entry"
     echo "$new_entry" >> "$whitelist_file"
 
     sort "$whitelist_file" -o "$whitelist_file"
