@@ -194,7 +194,7 @@ function merge_pending {
     # Homepage: https://github.com/jarelllama/Scam-Blocklist
     # Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
     # License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
-    # Last updated: $(date -u)
+    # Last modified: $(date -u)
     # Total number of domains: $(num_after)
     " | cat - "$domains_file" > tmp1.txt
 
