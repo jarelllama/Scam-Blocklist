@@ -7,6 +7,21 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 
+function update_header {
+    num_domains=$(wc -l < "$domains_file")
+
+    echo "# Title: Jarelllama's Scam Blocklist
+# Description: Blocklist for scam sites extracted from Google
+# Homepage: https://github.com/jarelllama/Scam-Blocklist
+# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
+# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+# Last modified: $(date -u)
+# Total number of domains: $num_domains
+" | cat - "$domains_file" > tmp1.txt
+
+    mv tmp1.txt "$domains_file"
+}
+
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     if [[ ! "$answer" == "n" ]]; then
@@ -14,18 +29,17 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
+# Create a temporary copy of the domains file without the header
+grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
+
 touch last_run.txt
 
-# Google search dates: y=year m=month w=week
-
-if [[ $(cat last_run.txt) == "y" ]]; then
-    time="m"
-    time_full="month"
-    echo "m" > last_run.txt
+if [[ $(cat last_run.txt) == "year" ]]; then
+    time="month"
+    echo "month" > last_run.txt
 else
-    time="y"
-    time_full="year"
-    echo "y" > last_run.txt
+    time="year"
+    echo "year" > last_run.txt
 fi
 
 debug=0
@@ -35,14 +49,11 @@ for arg in "$@"; do
         debug=1
     fi
     if [[ "$arg" == "y" ]]; then
-        time="y"
-        time_full="year"
+        time="year""
     elif [[ "$arg" == "m" ]]; then
-        time="m"
-        time_full="month"
+        time="month"
     elif [[ "$arg" == "w" ]]; then
-        time="w"
-        time_full="week"
+        time="week"
     fi
 done
 
@@ -59,7 +70,7 @@ while IFS= read -r term; do
 
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time}"
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time:0:1}"
 
         # Search Google and extract all domains
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
@@ -99,7 +110,7 @@ function filter_pending {
     sort -u tmp2.txt -o tmp3.txt
 
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 tmp3.txt "$domains_file" > tmp4.txt
+    comm -23 tmp3.txt tmp_domains_file.txt > tmp4.txt
 
     echo "Domains removed:"
 
@@ -156,17 +167,17 @@ function filter_pending {
     cat tmp8.txt tmp_flipped_alive.txt > tmp9.txt
 
     sort tmp9.txt -o "$pending_file"
-    
-    rm tmp*.txt
 
-    echo -e "\nSearch filter used: $time_full"
+    echo -e "\nSearch filter used: $time"
     echo "Total domains retrieved: $num_retrieved"
-    echo "Pending domains not in blocklist: $(comm -23 "$pending_file" "$domains_file" | wc -l)"
+    echo "Pending domains not in blocklist: $(comm -23 "$pending_file" tmp_domains_file.txt | wc -l)"
     echo "Domains:"
     cat "$pending_file"
     echo -e "\nDomains in toplist:"
     # About 8x faster than comm due to not needing to sort the toplist
     grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
+    
+    rm tmp*.txt
 }
 
 filter_pending
@@ -176,11 +187,13 @@ function merge_pending {
 
     cp "$domains_file" "$domains_file.bak"
 
-    num_before=$(wc -l < "$domains_file")
+    grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
-    cat "$pending_file" >> "$domains_file" 
+    num_before=$(wc -l < tmp_domains_file.txt)
 
-    sort -u "$domains_file" -o "$domains_file"
+    cat "$pending_file" >> tmp_domains_file.txt 
+
+    sort -u tmp_domains_file.txt -o "$domains_file"
 
     num_after=$(wc -l < "$domains_file")
 
@@ -188,19 +201,12 @@ function merge_pending {
     echo "Total domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Final domains after: $num_after"
-
-    echo "# Title: Jarelllama's Scam Blocklist
-    # Description: Blocklist for scam sites extracted from Google
-    # Homepage: https://github.com/jarelllama/Scam-Blocklist
-    # Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
-    # License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
-    # Last modified: $(date -u)
-    # Total number of domains: $num_after
-    " | cat - "$domains_file" > tmp1.txt
-
-    mv tmp1.txt "$domains_file"
-
+    
+    rm tmp*.txt
+    
     > "$pending_file"
+    
+    update_header
 
     exit 0
 }
