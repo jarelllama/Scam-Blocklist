@@ -181,11 +181,10 @@ function edit_whitelist {
 
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
-    # Change the new entry to lowecase
     new_entry="${new_entry,,}"
 
     if [[ "$new_entry" == -* ]]; then
-        new_entry=$(echo "$new_entry" | cut -c 2-)
+        new_entry="${new_entry#-}"
         if ! grep -xFq "$new_entry" "$2"; then
             echo -e "\nEntry not found in $1: $new_entry"
             continue
@@ -201,7 +200,6 @@ function edit_whitelist {
     fi
     
     if grep -Fq "$new_entry" "$whitelist_file"; then
-        # head -n is used here for when multiple whitelisted terms match the new entry
         existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
         echo -e "\nA similar term is already in the whitelist: $existing_entry"
         continue
@@ -225,7 +223,7 @@ function edit_blacklist {
     remove_entry=0
 
     if [[ "$new_entry" == -* ]]; then
-        new_entry=$(echo "$new_entry" | cut -c 2-)
+        new_entry="${new_entry#-}"
         remove_entry=1
     fi
 
@@ -233,7 +231,7 @@ function edit_blacklist {
 
     if [[ "$new_entry" == www.* ]]; then
         www_subdomain="${new_entry}"
-        new_entry=$(echo "$new_entry" | awk '{sub(/^www\./, "")}1')
+        new_entry="${new_entry#www.}"
     else
         www_subdomain="www.${new_entry}"
     fi
