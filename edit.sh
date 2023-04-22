@@ -71,36 +71,36 @@ function edit_blocklist {
     while read -r entry; do
         if ! dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
             echo "$entry" >> tmp_alive_entries.txt
-            fi
-        done < tmp_entries.txt
-
-        if ! [[ -s tmp_alive_entries.txt ]]; then
-            echo -e "\nThe domain is dead. Not added."
-            continue
         fi
+    done < tmp_entries.txt
 
-        mv tmp_alive_entries.txt tmp_entries.txt
+    if ! [[ -s tmp_alive_entries.txt ]]; then
+        echo -e "\nThe domain is dead. Not added."
+        continue
+    fi
+
+    mv tmp_alive_entries.txt tmp_entries.txt
   
-        # This checks if there are no unique entries in the new entries file
-        if [[ $(comm -23 tmp_entries.txt "$domains_file" | wc -l) -eq 0 ]]; then
-            echo -e "\nThe domain is already in the blocklist. Not added."
-            continue
-        fi
+    # This checks if there are no unique entries in the new entries file
+    if [[ $(comm -23 tmp_entries.txt "$domains_file" | wc -l) -eq 0 ]]; then
+        echo -e "\nThe domain is already in the blocklist. Not added."
+        continue
+    fi
 
-        cp "$domains_file" "$domains_file.bak"
+    cp "$domains_file" "$domains_file.bak"
 
-        echo -e "\nDomains added:"
-        comm -23 tmp_entries.txt "$domains_file"
+    echo -e "\nDomains added:"
+    comm -23 tmp_entries.txt "$domains_file"
 
-        cat tmp_entries.txt >> "$domains_file" 
+    cat tmp_entries.txt >> "$domains_file" 
 
-        sort -u "$domains_file" -o "$domains_file"
+    sort -u "$domains_file" -o "$domains_file"
 
-        awk NF "$domains_file" > tmp1.txt
+    awk NF "$domains_file" > tmp1.txt
 
-        sort tmp1.txt -o "$domains_file"
+    sort tmp1.txt -o "$domains_file"
 
-        rm tmp*.txt
+    rm tmp*.txt
 }
 
 function edit_whitelist {
