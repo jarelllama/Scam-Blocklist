@@ -321,7 +321,7 @@ function edit_blacklist {
 
 while true; do
     echo -e "\nChoose how to proceed:"
-    echo "1. Merge with blocklist (default)"
+    echo "1. Merge with blocklist"
     echo "2. Add to whitelist"
     echo "3. Add to blacklist"
     echo "4. Run filter again"
@@ -350,12 +350,7 @@ while true; do
             exit 0
             ;;
         *)
-            # The z flag checks if the variable is empty
-            if [[ -z "$choice" ]]; then
-                merge_pending
-            else
-                echo "Invalid option."
-                continue     
-            fi
+            echo -e "\nInvalid option."
+            continue
     esac
 done
