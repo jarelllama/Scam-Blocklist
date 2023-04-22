@@ -202,11 +202,11 @@ function merge_pending {
     echo "Total domains added: $((num_after - num_before))"
     echo "Final domains after: $num_after"
     
-    rm tmp*.txt
-    
-    > "$pending_file"
-    
     update_header
+
+    > "$pending_file"
+
+    rm tmp*.txt
 
     exit 0
 }
@@ -287,8 +287,6 @@ function edit_blacklist {
 
         mv tmp1.txt "$blacklist_file"
 
-        rm tmp*.txt
-
         return
     fi
 
@@ -325,8 +323,6 @@ function edit_blacklist {
     cat tmp_entries.txt >> "$blacklist_file" 
 
     sort -u "$blacklist_file" -o "$blacklist_file"
-
-    rm tmp*.txt
 }
 
 while true; do
@@ -348,6 +344,7 @@ while true; do
             ;;
         3)
             edit_blacklist
+            rm tmp*.txt
             continue
             ;;
         4)
@@ -357,6 +354,7 @@ while true; do
             continue
             ;;
         5)
+            rm tmp*.txt
             exit 0
             ;;
         *)
