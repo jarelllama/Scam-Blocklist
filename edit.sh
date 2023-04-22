@@ -46,7 +46,7 @@ function edit_blocklist {
     if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFqf tmp_entries.txt "$domains_file"; then
             echo -e "\nDomain not found in blocklist: $new_entry"
-            continue
+            return
         fi
 
         echo -e "\nDomains removed:"
@@ -58,33 +58,33 @@ function edit_blocklist {
 
         rm tmp*.txt
 
-        continue
+        return
     fi
 
     if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
-        continue
+        return
     fi
 
     if grep -xFf tmp_entries.txt "$toplist_file" | grep -vxFqf "$blacklist_file"; then
         echo -e "\nThe domain is found in the toplist. Not added."
         echo "Matches in toplist:"
         grep -xFf tmp_entries.txt  "$toplist_file" | grep -vxFf "$blacklist_file"
-        continue
+        return
     fi
 
     touch tmp_alive_entries.txt
 
     while read -r entry; do
         if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            continue
+            return
         fi
         echo "$entry" >> tmp_alive_entries.txt
     done < tmp_entries.txt
 
     if ! [[ -s tmp_alive_entries.txt ]]; then
         echo -e "\nThe domain is dead. Not added."
-        continue
+        return
     fi
 
     mv tmp_alive_entries.txt tmp_entries.txt
@@ -92,7 +92,7 @@ function edit_blocklist {
     # This checks if there are no unique entries in the new entries file
     if [[ $(comm -23 tmp_entries.txt "$domains_file" | wc -l) -eq 0 ]]; then
         echo -e "\nThe domain is already in the blocklist. Not added."
-        continue
+        return
     fi
 
     echo -e "\nDomains added:"
@@ -110,7 +110,7 @@ function edit_blocklist {
     # Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
     # License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
     # Last modified: $(date -u)
-    # Total number of domains: $(num_domains)
+    # Total number of domains: $num_domains
     " | cat - "$domains_file" > tmp1.txt
 
     mv tmp1.txt "$domains_file"
@@ -129,22 +129,22 @@ function edit_whitelist {
         new_entry="${new_entry#-}"
         if ! grep -xFq "$new_entry" "$2"; then
             echo -e "\nEntry not found in $1: $new_entry"
-            continue
+            return
         fi
         echo -e "\nRemoved from $1: $new_entry"
         sed -i "/^$new_entry$/d" "$2"
-        continue
+        return
     fi
 
     if [[ "$new_entry" =~ [[:space:]] ]]; then
         echo -e "\nInvalid entry. Not added."
-        continue
+        return
     fi
     
     if grep -Fq "$new_entry" "$whitelist_file"; then
         existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
         echo -e "\nA similar term is already in the whitelist: $existing_entry"
-        continue
+        return
     fi
 
     echo -e "\nAdded to $1: $new_entry"
@@ -185,7 +185,7 @@ function edit_blacklist {
     if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFqf tmp_entries.txt "$blacklist_file"; then
             echo -e "\nDomain not found in blacklist: $new_entry"
-            continue
+            return
         fi
 
         echo -e "\nDomains removed:"
@@ -197,26 +197,26 @@ function edit_blacklist {
 
         rm tmp*.txt
 
-        continue
+        return
     fi
 
     if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
-        continue
+        return
     fi
 
     touch tmp_alive_entries.txt
 
     while read -r entry; do
         if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            continue
+            return
         fi
         echo "$entry" >> tmp_alive_entries.txt
     done < tmp_entries.txt
 
     if ! [[ -s tmp_alive_entries.txt ]]; then
         echo -e "\nThe domain is dead. Not added."
-        continue
+        return
     fi
 
     mv tmp_alive_entries.txt tmp_entries.txt
@@ -224,7 +224,7 @@ function edit_blacklist {
     # This checks if there are no unique entries in the new entries file
     if [[ $(comm -23 tmp_entries.txt "$blacklist_file" | wc -l) -eq 0 ]]; then
         echo -e "\nThe domain is already in the blacklist. Not added."
-        continue
+        return
     fi
 
     echo -e "\nDomains added:"
