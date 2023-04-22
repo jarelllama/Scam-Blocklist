@@ -19,8 +19,9 @@ function edit_blocklist {
 
     new_entry="${new_entry,,}"
 
-    # Removes https:// or http://
     new_entry="${new_entry#*://}"
+
+    new_entry="${new_entry%%/*}"
 
     if [[ "$new_entry" == www.* ]]; then
         www_subdomain="${new_entry}"
