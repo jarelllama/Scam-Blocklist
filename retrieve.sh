@@ -58,7 +58,7 @@ while IFS= read -r term; do
         echo "--------------------------------------------"
 
         # Check if each domain is already in the retrieved domains associative array
-        for domain in $domains; do
+        for domain in "$domains"; do
             if [[ ${retrieved_domains["$domain"]+_} ]]; then
                continue 
             fi
