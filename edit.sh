@@ -253,9 +253,7 @@ while true; do
             continue
             ;;
         p)
-            echo "Push lists changes"
-
-            echo ""
+            echo -e "Push lists changes\n"
 
             git config user.email "$github_email"
             git config user.name "$github_name"
