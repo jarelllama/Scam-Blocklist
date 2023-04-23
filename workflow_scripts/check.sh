@@ -16,7 +16,8 @@ fi
 awk NF tmp1.txt > tmp2.txt
 
 if grep -q '[A-Z]' tmp2.txt; then
-    echo -e "\nThe blocklist contains capitalized letters."
+    echo -e "\nThe blocklist contains capitalized letters:"
+    grep '[A-Z]' tmp2.txt | awk '{print $0 " (case)"}'
     error=1
 fi
 
@@ -24,7 +25,7 @@ tr '[:upper:]' '[:lower:]' < tmp2.txt > tmp3.txt
 
 num_before=$(wc -l < tmp3.txt)
 
-echo -e "\nDomains removed:"
+echo -e "\nEntries removed (if any):"
 
 awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' tmp3.txt
 
@@ -42,23 +43,23 @@ mv tmp6.txt "$domains_file"
 
 num_after=$(wc -l < "$domains_file")
 
-if [[ "$num_before" != "$num_after" ]]; then
+if [[ "$num_before" -eq "$num_after" ]]; then
+    echo -e "\nNo entries removed."
+else
     error=1
 fi
 
 rm tmp*.txt
 
-if [[ error == 0 ]]; then
+if [[ "$error" == 0 ]]; then
     exit 0
 fi
-
-#echo -e "\nTotal domains removed: $((num_before - num_after))"
 
 git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$domains_file"
-git commit -mq "Update domains"
+git commit -qm "Update domains"
 git push -q
 
 exit 1
