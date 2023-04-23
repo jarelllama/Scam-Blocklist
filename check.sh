@@ -57,9 +57,7 @@ cat tmp7.txt | xargs -I{} -P8 bash -c "
   fi
 "
 
-comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
-
-mv tmp8.txt "$domains_file"
+comm -23 tmp7.txt <(sort tmp_dead.txt) > "$domains_file"
 
 echo -e "\nDomains in toplist:"
 grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file"
