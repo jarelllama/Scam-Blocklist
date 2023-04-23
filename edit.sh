@@ -7,14 +7,7 @@ toplist_file="toplist.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-function edit_blocklist {
-    echo "Blocklist"
-    
-    cp "$domains_file" "$domains_file.bak"
-
-    # Create a temporary copy of the domains file without the header
-    grep -vE '^(#|$)' "$domains_file" > tmp1.txt
-
+function prep_entry {
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
     remove_entry=0
@@ -42,6 +35,17 @@ function edit_blocklist {
     echo "$www_subdomain" >> tmp_entries.txt
             
     sort tmp_entries.txt -o tmp_entries.txt
+}
+
+function edit_blocklist {
+    echo "Blocklist"
+    
+    cp "$domains_file" "$domains_file.bak"
+
+    # Create a temporary copy of the domains file without the header
+    grep -vE '^(#|$)' "$domains_file" > tmp1.txt
+
+    prep_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFqf tmp_entries.txt tmp1.txt; then
@@ -141,29 +145,7 @@ function edit_whitelist {
 function edit_blacklist {
     echo "Blacklist"
 
-    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
-            
-    remove_entry=0
-
-    if [[ "$new_entry" == -* ]]; then
-        new_entry="${new_entry#-}"
-        remove_entry=1
-    fi
-
-    new_entry="${new_entry,,}"
-
-    if [[ "$new_entry" == www.* ]]; then
-        www_subdomain="${new_entry}"
-        new_entry="${new_entry#www.}"
-    else
-        www_subdomain="www.${new_entry}"
-    fi
-
-    echo "$new_entry" > tmp_entries.txt
-
-    echo "$www_subdomain" >> tmp_entries.txt
-            
-    sort tmp_entries.txt -o tmp_entries.txt
+    prep_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFqf tmp_entries.txt "$blacklist_file"; then
