@@ -32,6 +32,8 @@ fi
 echo -e "\nDomains added:"
 comm -23 <(sort tmp_flipped_alive.txt) tmp1.txt
 
+echo -e "\nTotal domains added: $(comm -23 <(sort tmp_flipped_alive.txt) tmp1.txt | wc -l)"
+
 cat tmp_flipped_alive.txt >> tmp1.txt
 
 sort -u tmp1.txt -o "$domains_file"
