@@ -233,7 +233,7 @@ while true; do
         2)
             # Call editing script
             echo "Edit lists"
-            echo -e "\nExit the script to run the filtering again with the updated white/black lists.
+            echo -e "\nExit the script to run the filtering again with the updated white/black lists."
             source "$edit_script"
             continue
             ;;
