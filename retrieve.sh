@@ -16,9 +16,6 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
-# Create a temporary copy of the domains file without the header
-grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
-
 touch last_run.txt
 
 # This section of code alternates between the year and month filter for Google Search
@@ -44,6 +41,9 @@ for arg in "$@"; do
         time="week"
     fi
 done
+
+# Create a temporary copy of the domains file without the header
+grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
 declare -A retrieved_domains
 
@@ -92,6 +92,8 @@ num_retrieved=${#retrieved_domains[@]}
 
 function filter_pending {
     cp "$pending_file" "$pending_file.bak"
+
+    grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
     awk NF "$pending_file" > tmp1.txt
 
@@ -180,6 +182,8 @@ function merge_pending {
     echo "Merge with blocklist"
 
     cp "$domains_file" "$domains_file.bak"
+
+    grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
     num_before=$(wc -l < tmp_domains_file.txt)
 
