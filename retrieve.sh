@@ -24,7 +24,7 @@ function update_header {
 
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    if [[ ! "$answer" == "n" ]]; then
+    if ! [[ "$answer" == "n" ]]; then
         > "$pending_file"
     fi
 fi
@@ -83,6 +83,7 @@ while IFS= read -r term; do
             echo "$domains"
         fi
 
+        # wc -w does a better job than wc -l for counting domains in this case
         echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------------"
 
@@ -117,9 +118,9 @@ function filter_pending {
 
     grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-    grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" > tmp_white.txt
+    grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" > tmp_whitelisted.txt
 
-    comm -23 tmp4.txt <(sort tmp_white.txt) > tmp5.txt
+    comm -23 tmp4.txt <(sort tmp_whitelisted.txt) > tmp5.txt
 
     grep -E '\.(edu|gov)$' tmp5.txt | awk '{print $0 " (TLD)"}'
 
@@ -288,6 +289,8 @@ function edit_blacklist {
 
         mv tmp1.txt "$blacklist_file"
 
+        rm tmp*.txt
+
         return
     fi
 
@@ -324,6 +327,8 @@ function edit_blacklist {
     cat tmp_entries.txt >> "$blacklist_file" 
 
     sort -u "$blacklist_file" -o "$blacklist_file"
+    
+    rm tmp*.txt
 }
 
 while true; do
@@ -332,7 +337,7 @@ while true; do
     echo "2. Add to whitelist"
     echo "3. Add to blacklist"
     echo "4. Run filter again"
-    echo "5. Exit"
+    echo "x. Exit"
     read choice
 
     case "$choice" in
@@ -345,7 +350,6 @@ while true; do
             ;;
         3)
             edit_blacklist
-            rm tmp*.txt
             continue
             ;;
         4)
@@ -354,7 +358,7 @@ while true; do
             filter_pending
             continue
             ;;
-        5)
+        x)
             rm tmp*.txt
             exit 0
             ;;
