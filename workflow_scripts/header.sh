@@ -1,8 +1,8 @@
 #!/bin/bash
 
 domains_file="domains"
-email="91372088+jarelllama@users.noreply.github.com"
-name="jarelllama"
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
 
 grep -vE '^(#|$)' "$domains_file" > tmp1.txt
 
@@ -19,8 +19,8 @@ echo "# Title: Jarelllama's Scam Blocklist
 
 sed -i "s/Current number of domains: .*/Current number of domains: \`$num_domains\`/" README.md
 
-git config user.email "$email"
-git config user.name "$name"
+git config user.email "$github_email"
+git config user.name "$github_name"
 
 git add "$domains_file" README.md
 git commit -m "Update domains count"
