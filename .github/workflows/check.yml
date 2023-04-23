@@ -1,4 +1,4 @@
-name: Check for invalid entries
+name: Valid entries check
 run-name: Valid entries check
 on:
   schedule:
