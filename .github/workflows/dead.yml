@@ -1,4 +1,4 @@
-#name: Remove dead domains
+name: Remove dead domains
 run-name: Remove dead domains
 on:
   schedule:
