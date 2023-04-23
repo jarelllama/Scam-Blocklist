@@ -67,9 +67,9 @@ function edit_blocklist {
 
         comm -23 tmp1.txt tmp_entries.txt > "$domains_file"
 
-        rm tmp*.txt
-
         update_header
+
+        rm tmp*.txt
 
         return
     fi
@@ -242,7 +242,7 @@ while true; do
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
-    echo "4. Exit"
+    echo "x. Exit"
     read choice
 
     case "$choice" in
@@ -258,7 +258,8 @@ while true; do
             edit_blacklist
             continue
             ;;
-        4)
+        x)
+            rm tmp*.txt
             exit 0  
             ;;
         *)
