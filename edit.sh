@@ -254,6 +254,7 @@ while true; do
             if [[ -f tmp*.txt ]]; then
                 rm tmp*.txt
             fi
+
             exit 0  
             ;;
         *)
