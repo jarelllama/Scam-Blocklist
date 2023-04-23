@@ -13,7 +13,7 @@ github_name="jarelllama"
 echo -e "\nRemember to pull the latest changes!\n"
 
 if [[ -s "$pending_file" ]]; then
-    read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
+    read -p $'\n$pending_file is not empty. Do you want to empty it? (Y/n): ' answer
     if ! [[ "$answer" == "n" ]]; then
         > "$pending_file"
     fi
