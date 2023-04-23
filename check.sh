@@ -48,16 +48,7 @@ grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt | awk '{print $0 " (invali
     
 grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt > tmp7.txt
 
-touch tmp_dead.txt
-
-cat tmp7.txt | xargs -I{} -P8 bash -c "
-  if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-      echo {} >> tmp_dead.txt
-      echo '{} (dead)'
-  fi
-"
-
-comm -23 tmp7.txt <(sort tmp_dead.txt) > "$domains_file"
+mv tmp7.txt "$domains_file"
 
 echo -e "\nDomains in toplist:"
 grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file"
