@@ -1,0 +1,13 @@
+name: Check for whitelisted domains
+run-name: Whitelisted domains check
+on:
+  push:
+    paths:
+      - "whitelist.txt"
+jobs:
+  Whitelisted_domains_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run whitelist.sh
+        run: bash "workflow_scripts/whitelist.sh"
