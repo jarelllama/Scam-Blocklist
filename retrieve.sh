@@ -10,10 +10,7 @@ edit_script="edit.sh"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-read -p "Do you want to pull the repo? (Y/n): " answer
-if ! [[ "$answer" == "n" ]]; then
-    git pull -q
-fi
+echo -e "\nRemember to pull the latest changes!\n"
 
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
