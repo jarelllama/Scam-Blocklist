@@ -4,6 +4,8 @@ domains_file="domains"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
 
 function edit_blocklist {
     echo "Blocklist"
@@ -223,6 +225,7 @@ while true; do
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
+    echo "p. Push lists changes"
     echo "x. Exit"
     read choice
 
@@ -238,6 +241,18 @@ while true; do
         3)
             edit_blacklist
             continue
+            ;;
+        p)
+            echo "Push lists changes"
+
+            git config user.email "$github_email"
+            git config user.name "$github_name"
+
+            git add "$domains_file" "$whitelist_file" "$blacklist_file"
+            git commit -m "Update domains"
+            git push
+
+            exit 0
             ;;
         x)
             if [[ -f tmp*.txt ]]; then
