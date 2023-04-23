@@ -5,10 +5,24 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 
+function update_header {
+    num_domains=$(wc -l < "$domains_file")
+
+    echo "# Title: Jarelllama's Scam Blocklist
+# Description: Blocklist for scam sites extracted from Google
+# Homepage: https://github.com/jarelllama/Scam-Blocklist
+# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
+# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+# Last modified: $(date -u)
+# Total number of domains: $num_domains
+" | cat - "$domains_file" > tmp1.txt
+
+    mv tmp1.txt "$domains_file"
+}
+
 cp "$domains_file" "$domains_file.bak"
 
-# Strip the blocklist header (title, description, homepage, etc.)
-tail -n +9 "$domains_file" > tmp1.txt
+grep -vE '^(#|$)' "$domains_file" > tmp1.txt
 
 awk NF tmp1.txt > tmp2.txt
 
@@ -22,9 +36,9 @@ echo "Domains removed:"
 
 grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" > tmp_white.txt
+grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" > tmp_whitelisted.txt
 
-comm -23 tmp4.txt <(sort tmp_white.txt) > tmp5.txt
+comm -23 tmp4.txt <(sort tmp_whitelisted.txt) > tmp5.txt
 
 grep -E '\.(edu|gov)$' tmp5.txt | awk '{print $0 " (TLD)"}'
 
@@ -56,15 +70,6 @@ echo "Total domains before: $num_before"
 echo "Total domains removed: $((num_before - num_after))"
 echo "Final domains after: $num_after"
 
-echo "# Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam sites extracted from Google
-# Homepage: https://github.com/jarelllama/Scam-Blocklist
-# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
-# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
-# Last modified: $(date -u)
-# Total number of domains: $(num_after)
-" | cat - "$domains_file" > tmp1.txt
-
-mv tmp1.txt "$domains_file"
+update_header
 
 rm tmp*.txt
