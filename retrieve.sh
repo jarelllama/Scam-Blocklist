@@ -342,7 +342,7 @@ while true; do
     echo "3. Add to blacklist"
     echo "4. Run filter again"
     echo "p. Push lists changes"
-    echo "x. Exit"
+    echo "x. Save pending and exit"
     read choice
 
     case "$choice" in
