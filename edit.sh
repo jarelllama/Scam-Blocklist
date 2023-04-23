@@ -203,7 +203,6 @@ function edit_blacklist {
 }
 
 function check_entry {
-    
     read -p $'\nEnter the entry to check:\n' check_entry
     if ! grep -xFq "$check_entry" "$domains_file"; then
         echo -e "\nThe entry is not present."
@@ -213,7 +212,6 @@ function check_entry {
 }
 
 function push_changes {
-    
     echo -e "Push lists changes\n"
 
     git config user.email "$github_email"
