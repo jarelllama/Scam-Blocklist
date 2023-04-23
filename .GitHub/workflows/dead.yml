@@ -1,0 +1,10 @@
+name: Remove dead domains
+run-name: Scheduled dead domains removal
+on: [push]
+jobs:
+  Remove-dead-domains:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run dead.sh
+        run: bash dead.sh
