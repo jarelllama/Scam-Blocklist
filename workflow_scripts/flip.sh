@@ -25,6 +25,7 @@ cat tmp_flipped.txt | xargs -I{} -P4 bash -c "
 grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
 
 if ! [[ -s tmp_flipped_alive.txt ]]; then
+    rm tmp*.txt
     exit 0
 fi
 
