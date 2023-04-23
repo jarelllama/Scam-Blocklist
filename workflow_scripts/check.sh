@@ -52,7 +52,7 @@ if [[ error == 0 ]]; then
     exit 0
 fi
 
-echo -e "\nTotal domains removed: $((num_before - num_after))"
+#echo -e "\nTotal domains removed: $((num_before - num_after))"
 
 git config user.email "$github_email"
 git config user.name "$github_name"
