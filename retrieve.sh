@@ -169,9 +169,13 @@ function filter_pending {
 
     cat tmp8.txt tmp_flipped_alive.txt > tmp9.txt
 
-    sort tmp9.txt -o "$pending_file"
+    sort tmp9.txt -o tmp10.txt
 
-    echo "Total domains retrieved: $num_retrieved"
+    # Remove any new flipped domains that might already be in the blocklist
+    # This is done for accurate counting
+    comm -23 tmp10.txt "$domains_file" > "$pending_domains"
+
+    echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(comm -23 "$pending_file" tmp_domains_file.txt | wc -l)"
     echo "Domains:"
     cat "$pending_file"
