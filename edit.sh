@@ -125,7 +125,7 @@ function edit_whitelist {
         return
     fi
 
-    if [[ "$new_entry" =~ [[:space:]] ]]; then
+    if [[ "$new_entry" =~ [[:space:]] || -z "$new_entry" ]]; then
         echo -e "\nInvalid entry. Not added."
         return
     fi
@@ -203,7 +203,7 @@ function edit_blacklist {
 }
 
 while true; do
-    echo -e "\nEdit Menu:"
+    echo -e "\nEdit Lists Menu:"
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
