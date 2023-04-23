@@ -42,9 +42,6 @@ for arg in "$@"; do
     fi
 done
 
-# Create a temporary copy of the domains file without the header
-grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
-
 declare -A retrieved_domains
 
 echo "Search filter used: $time"
@@ -93,6 +90,7 @@ num_retrieved=${#retrieved_domains[@]}
 function filter_pending {
     cp "$pending_file" "$pending_file.bak"
 
+    # Create a temporary copy of the domains file without the header
     grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
     awk NF "$pending_file" > tmp1.txt
