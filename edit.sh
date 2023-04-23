@@ -255,7 +255,11 @@ while true; do
                 rm tmp*.txt
             fi
 
-            return
+            # Check if the script was sourced by another script
+            if [[ "${#BASH_SOURCE[@]}" -gt 1 && "${BASH_SOURCE[0]}" != "${0}" ]]; then
+                return
+            fi
+
             exit 0  
             ;;
         *)
