@@ -1,0 +1,13 @@
+name: Check for invalid entries
+run-name: Valid entries check
+on:
+  schedule:
+    # Daily at 2am
+    - cron: "0 2 * * *"
+jobs:
+  Valid-entries-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run check.sh
+        run: bash "workflow_scripts/check.sh"
