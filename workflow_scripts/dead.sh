@@ -39,11 +39,8 @@ update_header
 rm tmp*.txt
 
 git config user.email "$email"
-
 git config user.name "$name"
 
 git add "$domains_file"
-
 git commit -m "Remove dead domains"
-
 git push
