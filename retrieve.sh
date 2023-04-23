@@ -364,12 +364,12 @@ while true; do
             continue
             ;;
         p)
-            echo "Push lists changes"
+            echo -e "Push lists changes\n"
 
             git config user.email "$github_email"
             git config user.name "$github_name"
 
-            git add "$whitelist_file" "$blacklist_file"
+            git add "$domains_file" "$whitelist_file" "$blacklist_file"
             git commit -m "Update domains"
             git push
 
