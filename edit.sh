@@ -245,7 +245,7 @@ while true; do
             ;;
         4)
             read -p $'Enter the entry to check:\n' check_entry
-            if ! grep -xF "$check_entry" "$domains_file"; then
+            if ! grep -xFq "$check_entry" "$domains_file"; then
                 echo -e "\nThe entry is not present."
                 continue
             fi
