@@ -24,7 +24,7 @@ tr '[:upper:]' '[:lower:]' < tmp2.txt > tmp3.txt
 
 num_before=$(wc -l < tmp3.txt)
 
-echo "Domains removed:"
+echo -e "\nDomains removed:"
 
 awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' tmp3.txt
 
