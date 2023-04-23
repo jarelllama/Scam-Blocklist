@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run dead.sh
-        run: bash dead.sh
+        run: bash "workflow_scripts/dead.sh"
