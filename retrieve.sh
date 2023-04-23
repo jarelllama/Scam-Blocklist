@@ -72,7 +72,7 @@ while IFS= read -r term; do
         fi
 
         # wc -w does a better job than wc -l for counting domains in this case
-        echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
+        echo "Domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------------"
 
         # Check if each domain is already in the retrieved domains associative array
@@ -168,7 +168,7 @@ function filter_pending {
     comm -23 tmp9.txt tmp_domains_file.txt > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
-    echo "Pending domains not in blocklist: $(comm -23 "$pending_file" tmp_domains_file.txt | wc -l)"
+    echo "Pending domains not in blocklist: $(wc -l < "$pending_file")"
     echo "Domains:"
     cat "$pending_file"
     echo -e "\nDomains in toplist:"
@@ -204,7 +204,7 @@ function merge_pending {
 
     rm tmp*.txt
 
-    read -p "Do you want to push the updated blocklist? (y/N): " answer
+    read -p $'\nDo you want to push the updated blocklist? (y/N): ' answer
     if [[ "$answer" != "y" ]]; then
         exit 0
     fi
