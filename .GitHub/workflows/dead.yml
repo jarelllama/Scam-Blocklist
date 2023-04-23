@@ -2,7 +2,7 @@ name: Remove dead domains
 run-name: Scheduled dead domains removal
 on:
   schedule:
-    # Run daily
+    # Daily
     - cron: "0 0 * * *"
 jobs:
   Remove-dead-domains:
