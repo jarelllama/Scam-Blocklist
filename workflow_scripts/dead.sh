@@ -8,8 +8,6 @@ grep -vE '^(#|$)' "$domains_file" > tmp1.txt
 
 touch tmp_dead.txt
 
-echo -e "\nDead domains:"
-
 cat tmp1.txt | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
       echo {} >> tmp_dead.txt
@@ -23,11 +21,7 @@ if ! [[ -s tmp_dead.txt ]]; then
     exit 0
 fi
 
-echo -e "\nTotal domains removed: $(wc -l < tmp_dead.txt)\n"
-
 comm -23 tmp1.txt <(sort tmp_dead.txt) > "$domains_file"
-
-rm tmp*.txt
 
 git config user.email "$github_email"
 git config user.name "$github_name"
@@ -35,3 +29,10 @@ git config user.name "$github_name"
 git add "$domains_file"
 git commit -m "Remove dead domains"
 git push
+
+echo -e "\nDead domains:"
+cat tmp_dead.txt
+
+echo -e "\nTotal domains removed: $(wc -l < tmp_dead.txt)"
+
+rm tmp*.txt
