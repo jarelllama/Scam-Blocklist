@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Update toplist
+      - name: Run toplist.sh
         run: bash "workflow_scripts/toplist.sh"
