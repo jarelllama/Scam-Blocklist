@@ -12,7 +12,7 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$toplist_file"
-git commit -mq "Update $toplist_file"
+git commit -qm "Update $toplist_file"
 git push -q
 
 grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp1.txt
