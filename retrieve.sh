@@ -359,7 +359,9 @@ while true; do
             continue
             ;;
         x)
-            rm tmp*.txt
+            if [[ -f tmp*.txt ]]; then
+                rm tmp*.txt
+            fi
             exit 0
             ;;
         *)
