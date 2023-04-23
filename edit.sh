@@ -5,21 +5,6 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 
-function update_header {
-    num_domains=$(wc -l < "$domains_file")
-
-    echo "# Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam sites extracted from Google
-# Homepage: https://github.com/jarelllama/Scam-Blocklist
-# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
-# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
-# Last modified: $(date -u)
-# Total number of domains: $num_domains
-" | cat - "$domains_file" > tmp1.txt
-
-    mv tmp1.txt "$domains_file"
-}
-
 function edit_blocklist {
     echo "Blocklist"
     
@@ -66,8 +51,6 @@ function edit_blocklist {
         comm -12 tmp1.txt tmp_entries.txt
 
         comm -23 tmp1.txt tmp_entries.txt > "$domains_file"
-
-        update_header
 
         rm tmp*.txt
 
@@ -116,8 +99,6 @@ function edit_blocklist {
     sort -u tmp1.txt -o "$domains_file"
 
     rm tmp*.txt
-
-    update_header
 }
 
 function edit_whitelist {
