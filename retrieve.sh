@@ -6,6 +6,8 @@ search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
 
 if [[ -s "$pending_file" ]]; then
     read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
@@ -198,6 +200,18 @@ function merge_pending {
 
     rm tmp*.txt
 
+    read -p "Do you want to push the updated blocklist? (y/N): " answer
+    if [[ "$answer" != "y" ]]; then
+        exit 0
+    fi
+
+    git config user.email "$github_email"
+    git config user.name "$github_name"
+
+    git add "$domains_file" "$whitelist_file" "$blacklist_file"
+    git commit -m "Update domains"
+    git push
+
     exit 0
 }
 
@@ -325,6 +339,7 @@ while true; do
     echo "2. Add to whitelist"
     echo "3. Add to blacklist"
     echo "4. Run filter again"
+    echo "p. Push lists changes"
     echo "x. Exit"
     read choice
 
@@ -345,6 +360,18 @@ while true; do
             cp "$pending_file.bak" "$pending_file"
             filter_pending
             continue
+            ;;
+        p)
+            echo "Push lists changes"
+
+            git config user.email "$github_email"
+            git config user.name "$github_name"
+
+            git add "$whitelist_file" "$blacklist_file"
+            git commit -m "Update domains"
+            git push
+
+            exit 0
             ;;
         x)
             if [[ -f tmp*.txt ]]; then
