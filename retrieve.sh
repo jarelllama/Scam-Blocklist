@@ -305,7 +305,7 @@ function edit_blacklist {
 
     while read -r entry; do
         if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            return
+            continue
         fi
         echo "$entry" >> tmp_alive_entries.txt
     done < tmp_entries.txt
