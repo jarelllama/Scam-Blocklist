@@ -1,0 +1,18 @@
+name: Update toplist
+run-name: Scheduled toplist update
+on:
+  schedule:
+    # Every 12 hours
+    - cron: "0 */12 * * *"
+jobs:
+  Remove-dead-domains:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update toplist
+        run: |
+          toplist_file="toplist.txt"
+          wget https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
+          git add "$toplist_file"
+          git commit -m "Update $toplist_file"
+          git push
