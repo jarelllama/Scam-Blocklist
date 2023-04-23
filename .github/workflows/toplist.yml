@@ -1,5 +1,5 @@
 name: Update toplist
-run-name: Scheduled toplist update
+run-name: Update toplist
 on:
   schedule:
     # Every 12 hours
