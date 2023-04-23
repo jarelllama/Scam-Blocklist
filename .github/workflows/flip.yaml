@@ -2,8 +2,8 @@ name: Check for resolving www subdomains
 run-name: www subdomains check
 on:
   schedule:
-    # Daily at 5am (GMT+8)
-    - cron: "0 21 * * *"
+    # Daily at 4am (GMT+8)
+    - cron: "0 20 * * *"
 jobs:
   www-subdomains-check:
     runs-on: ubuntu-latest
