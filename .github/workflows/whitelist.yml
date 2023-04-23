@@ -1,4 +1,4 @@
-name: Check for whitelisted domains
+name: Whitelisted domains check
 run-name: Whitelisted domains check
 on:
   push:
