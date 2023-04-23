@@ -373,6 +373,10 @@ while true; do
             git commit -m "Update domains"
             git push
 
+            if [[ -f tmp*.txt ]]; then
+                rm tmp*.txt
+            fi
+
             exit 0
             ;;
         x)
