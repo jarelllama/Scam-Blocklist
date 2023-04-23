@@ -9,27 +9,6 @@ toplist_file="toplist.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-echo -e "\nOptions:"
-echo "1. Retrieve domains (default)"
-echo "2. Edit lists"
-echo "x. Exit"
-read choice
-
-case "$choice" in
-    1)
-        retrieve_domains
-        ;;
-    2)
-        edit_lists
-        ;;
-    x)
-        exit 0
-        ;;
-    *)
-        retrieve_domains
-        ;;
-esac
-
 function prep_new_entry {
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
             
@@ -60,6 +39,29 @@ function prep_new_entry {
     sort tmp_entries.txt -o tmp_entries.txt
 }
 
+function filter_entry {
+    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+        echo -e "\nInvalid domain. Not added."
+        return
+    fi
+
+    touch tmp_alive_entries.txt
+
+    while read -r entry; do
+        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
+            continue
+        fi
+        echo "$entry" >> tmp_alive_entries.txt
+    done < tmp_entries.txt
+
+    if ! [[ -s tmp_alive_entries.txt ]]; then
+        echo -e "\nThe domain is dead. Not added."
+        return
+    fi
+
+    mv tmp_alive_entries.txt tmp_entries.txt
+}
+
 function edit_blocklist {
     echo "Blocklist"
     
@@ -86,33 +88,14 @@ function edit_blocklist {
         return
     fi
 
-    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
-        echo -e "\nInvalid domain. Not added."
-        return
-    fi
-
+    filter_entry
+    
     if grep -xFf tmp_entries.txt "$toplist_file" | grep -vxFqf "$blacklist_file"; then
         echo -e "\nThe domain is found in the toplist. Not added."
         echo "Matches in toplist:"
         grep -xFf tmp_entries.txt  "$toplist_file" | grep -vxFf "$blacklist_file"
         return
     fi
-
-    touch tmp_alive_entries.txt
-
-    while read -r entry; do
-        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            continue
-        fi
-        echo "$entry" >> tmp_alive_entries.txt
-    done < tmp_entries.txt
-
-    if ! [[ -s tmp_alive_entries.txt ]]; then
-        echo -e "\nThe domain is dead. Not added."
-        return
-    fi
-
-    mv tmp_alive_entries.txt tmp_entries.txt
   
     # This checks if there are no unique entries in the new entries file
     if [[ $(comm -23 tmp_entries.txt tmp1.txt | wc -l) -eq 0 ]]; then
@@ -486,6 +469,31 @@ function merge_pending {
 
     exit 0
 }
+
+echo -e "\nOptions:"
+echo "1. Retrieve domains (default)"
+echo "2. Edit lists"
+echo "x. Exit"
+read choice
+
+case "$choice" in
+    1)
+        retrieve_domains
+        ;;
+    2)
+        edit_lists
+        ;;
+    x)
+        exit 0
+        ;;
+    *)
+        retrieve_domains
+        ;;
+esac
+
+
+
+
 
 while true; do
     echo -e "\nChoose how to proceed:"
