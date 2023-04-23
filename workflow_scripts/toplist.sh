@@ -17,7 +17,7 @@ git push
 
 # The following code produces an error when a domain is found in the updated toplist. This allows the user to be informed via email
 
-grep -xFf "$domains" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp1.txt
+grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp1.txt
 
 if ! [[ -s tmp1.txt ]]; then
     rm tmp*.txt
