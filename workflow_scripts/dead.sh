@@ -19,6 +19,7 @@ cat tmp1.txt | xargs -I{} -P8 bash -c "
 
 if ! [[ -s tmp_dead.txt ]]; then
     echo -e "\nNo dead domains found.\n"
+    rm tmp*.txt
     exit 0
 fi
 
