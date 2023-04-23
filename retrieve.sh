@@ -60,6 +60,7 @@ done
 
 declare -A retrieved_domains
 
+echo "Search filter used: $time"
 echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
@@ -170,7 +171,6 @@ function filter_pending {
 
     sort tmp9.txt -o "$pending_file"
 
-    echo -e "\nSearch filter used: $time"
     echo "Total domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(comm -23 "$pending_file" tmp_domains_file.txt | wc -l)"
     echo "Domains:"
