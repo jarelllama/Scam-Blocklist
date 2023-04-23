@@ -234,7 +234,7 @@ while true; do
         2)
             # Call editing script
             echo "Edit lists"
-            echo -e "\nExit the edit menu to go back to the previous menu."
+            echo -e "\nEnter /'x/' to go back to the previous menu."
             source "$edit_script"
             continue
             ;;
