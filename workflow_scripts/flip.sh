@@ -46,5 +46,5 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$domains_file"
-git commit -qm "Update domains"
+git commit -qm "Add subdomains"
 git push -q
