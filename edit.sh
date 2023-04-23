@@ -225,7 +225,7 @@ while true; do
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
-    echo "4. Check blocklist entry
+    echo "4. Check blocklist entry"
     echo "p. Push lists changes"
     echo "x. Exit"
     read choice
