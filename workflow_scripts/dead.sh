@@ -4,21 +4,6 @@ domains_file="domains"
 email="91372088+jarelllama@users.noreply.github.com"
 name="jarelllama"
 
-function update_header {
-    num_domains=$(wc -l < "$domains_file")
-
-    echo "# Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam sites extracted from Google
-# Homepage: https://github.com/jarelllama/Scam-Blocklist
-# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
-# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
-# Last modified: $(date -u)
-# Total number of domains: $num_domains
-" | cat - "$domains_file" > tmp1.txt
-
-    mv tmp1.txt "$domains_file"
-}
-
 grep -vE '^(#|$)' "$domains_file" > tmp1.txt
 
 touch tmp_dead.txt
