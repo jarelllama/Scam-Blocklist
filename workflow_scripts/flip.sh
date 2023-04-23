@@ -36,7 +36,7 @@ cat tmp_flipped_unique.txt
 
 echo -e "\nTotal domains added: $(wc -l < tmp_flipped_unique.txt)"
 
-cat tmp_flipped_alive.txt >> tmp1.txt
+cat tmp_flipped_unique.txt >> tmp1.txt
 
 sort -u tmp1.txt -o "$domains_file"
 
