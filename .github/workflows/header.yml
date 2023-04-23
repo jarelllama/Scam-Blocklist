@@ -12,7 +12,6 @@ jobs:
       - name: Update count
         run: |
           domains_file="domains"
-          
           echo "# Title: Jarelllama's Scam Blocklist
 # Description: Blocklist for scam sites extracted from Google
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
@@ -21,5 +20,4 @@ jobs:
 # Last modified: $(date -u)
 # Total number of domains: $(wc -l < "$domains_file")
 " | cat - "$domains_file" > tmp1.txt
-
           mv tmp1.txt "$domains_file"
