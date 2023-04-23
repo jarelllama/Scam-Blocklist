@@ -1,0 +1,25 @@
+name: Update blocklist header and README.md count
+run-name: Update domains count
+on:
+  push:
+    paths:
+      - "domains"
+jobs:
+  Update-count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update count
+        run: |
+          domains_file="domains"
+          
+          echo "# Title: Jarelllama's Scam Blocklist
+# Description: Blocklist for scam sites extracted from Google
+# Homepage: https://github.com/jarelllama/Scam-Blocklist
+# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
+# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+# Last modified: $(date -u)
+# Total number of domains: $(wc -l < "$domains_file")
+" | cat - "$domains_file" > tmp1.txt
+
+          mv tmp1.txt "$domains_file"
