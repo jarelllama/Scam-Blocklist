@@ -9,83 +9,273 @@ toplist_file="toplist.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-if [[ -s "$pending_file" ]]; then
-    read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    if ! [[ "$answer" == "n" ]]; then
-        > "$pending_file"
+echo -e "\nOptions:"
+echo "1. Retrieve domains (default)"
+echo "2. Edit lists"
+echo "x. Exit"
+read choice
+
+case "$choice" in
+    1)
+        retrieve_domains
+        ;;
+    2)
+        edit_lists
+        ;;
+    x)
+        exit 0
+        ;;
+    *)
+        retrieve_domains
+        ;;
+esac
+
+function prep_new_entry {
+    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+            
+    remove_entry=0
+
+    if [[ "$new_entry" == -* ]]; then
+        new_entry="${new_entry#-}"
+        remove_entry=1
     fi
-fi
 
-touch last_run.txt
+    new_entry="${new_entry,,}"
 
-# This section of code alternates between the year and month filter for Google Search
-if [[ $(cat last_run.txt) == "year" ]]; then
-    time="month"
-    echo "month" > last_run.txt
-else
-    time="year"
-    echo "year" > last_run.txt
-fi
+    new_entry="${new_entry#*://}"
 
-debug=0
+    new_entry="${new_entry%%/*}"
 
-for arg in "$@"; do
-    if [[ "$arg" == "d" ]]; then
-        debug=1
+    if [[ "$new_entry" == www.* ]]; then
+        www_subdomain="${new_entry}"
+        new_entry="${new_entry#www.}"
+    else
+        www_subdomain="www.${new_entry}"
     fi
-    if [[ "$arg" == "y" ]]; then
-        time="year"
-    elif [[ "$arg" == "m" ]]; then
-        time="month"
-    elif [[ "$arg" == "w" ]]; then
-        time="week"
-    fi
-done
 
-declare -A retrieved_domains
+    echo "$new_entry" > tmp_entries.txt
 
-echo "Search filter used: $time"
-echo "Search terms:"
+    echo "$www_subdomain" >> tmp_entries.txt
+            
+    sort tmp_entries.txt -o tmp_entries.txt
+}
 
-# A blank IFS ensures the entire search term is read
-while IFS= read -r term; do
-    # Checks if the line is non empty and not a comment
-    if ! [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
-        # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
-        encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
+function edit_blocklist {
+    echo "Blocklist"
+    
+    cp "$domains_file" "$domains_file.bak"
 
-        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+    # Create a temporary copy of the domains file without the header
+    grep -vE '^(#|$)' "$domains_file" > tmp1.txt
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time:0:1}"
-
-        # Search Google and extract all domains
-        # Duplicates are removed here for accurate counting of the retrieved domains by each search term
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
-
-        echo "$term"
-
-        if [[ "$debug" -eq 1 ]]; then
-            echo "$domains"
+    prep_new_entry
+            
+    if [[ "$remove_entry" -eq 1 ]]; then
+        if ! grep -xFqf tmp_entries.txt tmp1.txt; then
+            echo -e "\nDomain not found in blocklist: $new_entry"
+            return
         fi
 
-        # wc -w does a better job than wc -l for counting domains in this case
-        echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
-        echo "--------------------------------------------"
+        echo -e "\nDomains removed:"
+        comm -12 tmp1.txt tmp_entries.txt
 
-        # Check if each domain is already in the retrieved domains associative array
-        # Note that quoting $domains causes errors
-	for domain in $domains; do
-            if [[ ${retrieved_domains["$domain"]+_} ]]; then
-               continue 
-            fi
-            # Add the unique domain to the associative array
-            retrieved_domains["$domain"]=1
-            echo "$domain" >> "$pending_file"
-        done
+        comm -23 tmp1.txt tmp_entries.txt > "$domains_file"
+
+        rm tmp*.txt
+
+        return
     fi
-done < "$search_terms_file"
 
-num_retrieved=${#retrieved_domains[@]}
+    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+        echo -e "\nInvalid domain. Not added."
+        return
+    fi
+
+    if grep -xFf tmp_entries.txt "$toplist_file" | grep -vxFqf "$blacklist_file"; then
+        echo -e "\nThe domain is found in the toplist. Not added."
+        echo "Matches in toplist:"
+        grep -xFf tmp_entries.txt  "$toplist_file" | grep -vxFf "$blacklist_file"
+        return
+    fi
+
+    touch tmp_alive_entries.txt
+
+    while read -r entry; do
+        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
+            continue
+        fi
+        echo "$entry" >> tmp_alive_entries.txt
+    done < tmp_entries.txt
+
+    if ! [[ -s tmp_alive_entries.txt ]]; then
+        echo -e "\nThe domain is dead. Not added."
+        return
+    fi
+
+    mv tmp_alive_entries.txt tmp_entries.txt
+  
+    # This checks if there are no unique entries in the new entries file
+    if [[ $(comm -23 tmp_entries.txt tmp1.txt | wc -l) -eq 0 ]]; then
+        echo -e "\nThe domain is already in the blocklist. Not added."
+        return
+    fi
+
+    echo -e "\nDomains added:"
+    comm -23 tmp_entries.txt tmp1.txt
+
+    cat tmp_entries.txt >> tmp1.txt 
+
+    sort -u tmp1.txt -o "$domains_file"
+
+    rm tmp*.txt
+}
+
+function edit_whitelist {
+    echo "Whitelist"
+
+    # The $ and single quotes allow for the escape sequence
+    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+
+    new_entry="${new_entry,,}"
+
+    if [[ "$new_entry" == -* ]]; then
+        new_entry="${new_entry#-}"
+        if ! grep -xFq "$new_entry" "$whitelist_file"; then
+            echo -e "\nEntry not found in whitelist: $new_entry"
+            return
+        fi
+        echo -e "\nRemoved from whitelist: $new_entry"
+        sed -i "/^$new_entry$/d" "$whitelist_file"
+        return
+    fi
+
+    if [[ "$new_entry" =~ [[:space:]] ]]; then
+        echo -e "\nInvalid entry. Not added."
+        return
+    fi
+    
+    if grep -Fq "$new_entry" "$whitelist_file"; then
+        existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
+        echo -e "\nA similar term is already in the whitelist: $existing_entry"
+        return
+    fi
+
+    echo -e "\nAdded to whitelist: $new_entry"
+    echo "$new_entry" >> "$whitelist_file"
+
+    sort "$whitelist_file" -o "$whitelist_file"
+}
+
+function edit_blacklist {
+    echo "Blacklist"
+
+    prep_new_entry
+
+    if [[ "$remove_entry" -eq 1 ]]; then
+        if ! grep -xFqf tmp_entries.txt "$blacklist_file"; then
+            echo -e "\nDomain not found in blacklist: $new_entry"
+            return
+        fi
+
+        echo -e "\nDomains removed:"
+        comm -12 "$blacklist_file" tmp_entries.txt
+
+        comm -23 "$blacklist_file" tmp_entries.txt > tmp1.txt
+
+        mv tmp1.txt "$blacklist_file"
+
+        rm tmp*.txt
+
+        return
+    fi
+
+    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+        echo -e "\nInvalid domain. Not added."
+        return
+    fi
+
+    touch tmp_alive_entries.txt
+
+    while read -r entry; do
+        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
+            continue
+        fi
+        echo "$entry" >> tmp_alive_entries.txt
+    done < tmp_entries.txt
+
+    if ! [[ -s tmp_alive_entries.txt ]]; then
+        echo -e "\nThe domain is dead. Not added."
+        return
+    fi
+
+    mv tmp_alive_entries.txt tmp_entries.txt
+  
+    # This checks if there are no unique entries in the new entries file
+    if [[ $(comm -23 tmp_entries.txt "$blacklist_file" | wc -l) -eq 0 ]]; then
+        echo -e "\nThe domain is already in the blacklist. Not added."
+        return
+    fi
+
+    echo -e "\nDomains added:"
+    comm -23 tmp_entries.txt "$blacklist_file"
+
+    cat tmp_entries.txt >> "$blacklist_file" 
+
+    sort -u "$blacklist_file" -o "$blacklist_file"
+    
+    rm tmp*.txt
+}
+
+function check_for_entry {
+    read -p $'Enter the entry to check:\n' check_entry
+    if ! grep -xFq "$check_entry" "$domains_file"; then
+        echo -e "\nThe entry is not present."
+        continue
+    fi
+    echo -e "\nThe entry is present."
+}
+
+function edit_lists {
+    while true; do
+        echo -e "\nChoose which list edit:"
+        echo "1. Blocklist"
+        echo "2. Whitelist"
+        echo "3. Blacklist"
+        echo "4. Check blocklist entry"
+        echo "p. Push lists changes"
+        echo "x. Exit"
+        read choice
+
+        case "$choice" in
+            1)
+                edit_blocklist
+                continue
+                ;;
+            2)
+                edit_whitelist
+                continue
+                ;;
+            3)
+                edit_blacklist
+                continue
+                ;;
+            4)
+                check_for_entry
+                continue
+                ;;
+            x)
+                if ! [[ -f tmp*.txt ]]; then
+                    exit 0
+                fi
+                rm tmp*.txt  
+                ;;
+            *)
+                echo -e "\nInvalid option."
+                continue  
+                ;;
+        esac
+    done
+}
 
 function filter_pending {
     cp "$pending_file" "$pending_file.bak"
@@ -174,7 +364,87 @@ function filter_pending {
     rm tmp*.txt
 }
 
-filter_pending
+function retrieve_domains {
+    if [[ -s "$pending_file" ]]; then
+        read -p "$pending_file is not empty. Do you want to empty it? (Y/n): " answer
+        if ! [[ "$answer" == "n" ]]; then
+            > "$pending_file"
+        fi
+    fi
+
+    touch last_run.txt
+
+    # This section of code alternates between the year and month filter for Google Search
+    if [[ $(cat last_run.txt) == "year" ]]; then
+        time="month"
+        echo "month" > last_run.txt
+    else
+        time="year"
+        echo "year" > last_run.txt
+    fi
+
+    debug=0
+
+    for arg in "$@"; do
+        if [[ "$arg" == "d" ]]; then
+            debug=1
+        fi
+        if [[ "$arg" == "y" ]]; then
+            time="year"
+        elif [[ "$arg" == "m" ]]; then
+            time="month"
+        elif [[ "$arg" == "w" ]]; then
+            time="week"
+        fi
+    done
+
+    declare -A retrieved_domains
+
+    echo "Search filter used: $time"
+    echo "Search terms:"
+
+    # A blank IFS ensures the entire search term is read
+    while IFS= read -r term; do
+        # Checks if the line is non empty and not a comment
+        if ! [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
+            # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
+            encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
+
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+
+            google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time:0:1}"
+
+            # Search Google and extract all domains
+            # Duplicates are removed here for accurate counting of the retrieved domains by each search term
+            domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
+
+            echo "$term"
+
+            if [[ "$debug" -eq 1 ]]; then
+                echo "$domains"
+            fi
+
+            # wc -w does a better job than wc -l for counting domains in this case
+            echo "Unique domains retrieved: $(echo "$domains" | wc -w)"
+            echo "--------------------------------------------"
+
+            # Check if each domain is already in the retrieved domains associative array
+            # Note that quoting $domains causes errors
+	    for domain in $domains; do
+                if [[ ${retrieved_domains["$domain"]+_} ]]; then
+                   continue 
+                fi
+                # Add the unique domain to the associative array
+                retrieved_domains["$domain"]=1
+                echo "$domain" >> "$pending_file"
+            done
+        fi
+    done < "$search_terms_file"
+
+   num_retrieved=${#retrieved_domains[@]}
+
+   filter_pending
+}
 
 function merge_pending {
     echo "Merge with blocklist"
@@ -217,131 +487,12 @@ function merge_pending {
     exit 0
 }
 
-function edit_whitelist {
-    echo "Whitelist"
-
-    # The $ and single quotes allow for the escape sequence
-    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
-
-    new_entry="${new_entry,,}"
-
-    if [[ "$new_entry" == -* ]]; then
-        new_entry="${new_entry#-}"
-        if ! grep -xFq "$new_entry" "$whitelist_file"; then
-            echo -e "\nEntry not found in whitelist: $new_entry"
-            return
-        fi
-        echo -e "\nRemoved from whitelist: $new_entry"
-        sed -i "/^$new_entry$/d" "$whitelist_file"
-        return
-    fi
-
-    if [[ "$new_entry" =~ [[:space:]] ]]; then
-        echo -e "\nInvalid entry. Not added."
-        return
-    fi
-    
-    if grep -Fq "$new_entry" "$whitelist_file"; then
-        existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
-        echo -e "\nA similar term is already in the whitelist: $existing_entry"
-        return
-    fi
-
-    echo -e "\nAdded to whitelist: $new_entry"
-    echo "$new_entry" >> "$whitelist_file"
-
-    sort "$whitelist_file" -o "$whitelist_file"
-}
-
-function edit_blacklist {
-    echo "Blacklist"
-
-    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
-            
-    remove_entry=0
-
-    if [[ "$new_entry" == -* ]]; then
-        new_entry="${new_entry#-}"
-        remove_entry=1
-    fi
-
-    new_entry="${new_entry,,}"
-
-    if [[ "$new_entry" == www.* ]]; then
-        www_subdomain="${new_entry}"
-        new_entry="${new_entry#www.}"
-    else
-        www_subdomain="www.${new_entry}"
-    fi
-
-    echo "$new_entry" > tmp_entries.txt
-
-    echo "$www_subdomain" >> tmp_entries.txt
-            
-    sort tmp_entries.txt -o tmp_entries.txt
-            
-    if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFqf tmp_entries.txt "$blacklist_file"; then
-            echo -e "\nDomain not found in blacklist: $new_entry"
-            return
-        fi
-
-        echo -e "\nDomains removed:"
-        comm -12 "$blacklist_file" tmp_entries.txt
-
-        comm -23 "$blacklist_file" tmp_entries.txt > tmp1.txt
-
-        mv tmp1.txt "$blacklist_file"
-
-        rm tmp*.txt
-
-        return
-    fi
-
-    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
-        echo -e "\nInvalid domain. Not added."
-        return
-    fi
-
-    touch tmp_alive_entries.txt
-
-    while read -r entry; do
-        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            continue
-        fi
-        echo "$entry" >> tmp_alive_entries.txt
-    done < tmp_entries.txt
-
-    if ! [[ -s tmp_alive_entries.txt ]]; then
-        echo -e "\nThe domain is dead. Not added."
-        return
-    fi
-
-    mv tmp_alive_entries.txt tmp_entries.txt
-  
-    # This checks if there are no unique entries in the new entries file
-    if [[ $(comm -23 tmp_entries.txt "$blacklist_file" | wc -l) -eq 0 ]]; then
-        echo -e "\nThe domain is already in the blacklist. Not added."
-        return
-    fi
-
-    echo -e "\nDomains added:"
-    comm -23 tmp_entries.txt "$blacklist_file"
-
-    cat tmp_entries.txt >> "$blacklist_file" 
-
-    sort -u "$blacklist_file" -o "$blacklist_file"
-    
-    rm tmp*.txt
-}
-
 while true; do
     echo -e "\nChoose how to proceed:"
     echo "1. Merge with blocklist"
     echo "2. Add to whitelist"
     echo "3. Add to blacklist"
     echo "4. Run filter again"
-    echo "p. Push lists changes"
     echo "x. Save pending and exit"
     read choice
 
@@ -362,22 +513,6 @@ while true; do
             cp "$pending_file.bak" "$pending_file"
             filter_pending
             continue
-            ;;
-        p)
-            echo -e "Push lists changes\n"
-
-            git config user.email "$github_email"
-            git config user.name "$github_name"
-
-            git add "$domains_file" "$whitelist_file" "$blacklist_file"
-            git commit -m "Update domains"
-            git push
-
-            if [[ -f tmp*.txt ]]; then
-                rm tmp*.txt
-            fi
-
-            exit 0
             ;;
         x)
             if [[ -f tmp*.txt ]]; then
