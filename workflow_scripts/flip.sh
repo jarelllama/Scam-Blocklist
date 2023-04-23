@@ -24,15 +24,17 @@ cat tmp_flipped.txt | xargs -I{} -P4 bash -c "
 
 grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
 
-if ! [[ -s tmp_flipped_alive.txt ]]; then
+grep -vxFf tmp1.txt tmp_flipped_alive.txt > tmp_flipped_unique.txt
+
+if ! [[ -s tmp_flipped_unique.txt ]]; then
     rm tmp*.txt
     exit 0
 fi
 
 echo -e "\nDomains added:"
-comm -23 <(sort tmp_flipped_alive.txt) tmp1.txt
+cat tmp_flipped_unique.txt
 
-echo -e "\nTotal domains added: $(comm -23 <(sort tmp_flipped_alive.txt) tmp1.txt | wc -l)"
+echo -e "\nTotal domains added: $(wc -l < tmp_flipped_unique.txt)"
 
 cat tmp_flipped_alive.txt >> tmp1.txt
 
