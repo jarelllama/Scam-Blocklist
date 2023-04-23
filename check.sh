@@ -4,6 +4,8 @@ domains_file="domains"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
 
 cp "$domains_file" "$domains_file.bak"
 
@@ -45,3 +47,15 @@ echo "Total domains removed: $((num_before - num_after))"
 echo "Final domains after: $num_after"
 
 rm tmp*.txt
+
+read -p "Do you want to push any changes? (y/N): " answer
+if [[ "$answer" != "y" ]]; then
+    exit 0
+fi
+
+git config user.email "$github_email"
+git config user.name "$github_name"
+
+git add "$domains_file"
+git commit -m "Update domains"
+git push
