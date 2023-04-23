@@ -246,10 +246,10 @@ while true; do
         4)
             read -p $'Enter the entry to check:\n' check_entry
             if ! grep -xF "$check_entry" "$domains_file"; then
-                echo "The entry is not present."
+                echo -e "\nThe entry is not present."
                 continue
             fi
-            echo "The entry is present."
+            echo -e "\nThe entry is present."
             continue
             ;;
         p)
