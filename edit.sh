@@ -225,6 +225,7 @@ while true; do
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
+    echo "4. Check blocklist entry
     echo "p. Push lists changes"
     echo "x. Exit"
     read choice
@@ -240,6 +241,15 @@ while true; do
             ;;
         3)
             edit_blacklist
+            continue
+            ;;
+        4)
+            read -p $'Enter the entry to check:\n' check_entry
+            if ! grep -xF "$check_entry" "$domains_file"; then
+                echo "The entry is not present."
+                continue
+            fi
+            echo "The entry is present."
             continue
             ;;
         p)
