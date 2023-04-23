@@ -5,7 +5,7 @@ on:
     # Every 12 hours
     - cron: "0 */12 * * *"
 jobs:
-  Remove-dead-domains:
+  Update-toplist:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
