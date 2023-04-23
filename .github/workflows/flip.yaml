@@ -1,11 +1,11 @@
-name: Check for resolving www subdomains
-run-name: www subdomains check
+name: Add www subdomains
+run-name: Add www subdomains
 on:
   schedule:
     # Daily at 4am (GMT+8)
     - cron: "0 20 * * *"
 jobs:
-  www-subdomains-check:
+  add-www-subdomains:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
