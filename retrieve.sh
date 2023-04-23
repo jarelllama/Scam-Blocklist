@@ -121,6 +121,7 @@ function filter_pending {
 
     grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" > tmp_whitelisted.txt
 
+    # Both comm and grep were tested here. It seems when only a small file needs to be sorted, the performance is generally the same
     comm -23 tmp4.txt <(sort tmp_whitelisted.txt) > tmp5.txt
 
     grep -E '\.(edu|gov)$' tmp5.txt | awk '{print $0 " (TLD)"}'
@@ -149,7 +150,7 @@ function filter_pending {
 
     grep '^www\.' tmp8.txt > tmp_with_www.txt
 
-    comm -23 tmp8.txt <(sort tmp_with_www.txt) > tmp_no_www.txt
+    grep -vxFf tmp_with_www.txt tmp8.txt > tmp_no_www.txt
 
     awk '{sub(/^www\./, ""); print}' tmp_with_www.txt > tmp_no_www_new.txt
 
@@ -164,8 +165,8 @@ function filter_pending {
             echo {} >> tmp_flipped_dead.txt
         fi
     "
-    
-    comm -23 <(sort tmp_flipped.txt) <(sort tmp_flipped_dead.txt) > tmp_flipped_alive.txt
+
+    grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
 
     cat tmp8.txt tmp_flipped_alive.txt > tmp9.txt
 
@@ -173,7 +174,7 @@ function filter_pending {
 
     # Remove any new flipped domains that might already be in the blocklist
     # This is done for accurate counting
-    comm -23 tmp10.txt "$domains_file" > "$pending_domains"
+    comm -23 tmp10.txt "$domains_file" > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(comm -23 "$pending_file" tmp_domains_file.txt | wc -l)"
