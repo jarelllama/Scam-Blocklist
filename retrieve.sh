@@ -220,7 +220,7 @@ function merge_pending {
 }
 
 while true; do
-    echo -e "\nChoose how to proceed:"
+    echo -e "\nPending domains menu:"
     echo "1. Merge with blocklist"
     echo "2. Edit lists"
     echo "3. Run filter again"
@@ -234,7 +234,7 @@ while true; do
         2)
             # Call editing script
             echo "Edit lists"
-            echo -e "\nEnter /'x/' to go back to the previous menu."
+            echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
             continue
             ;;
