@@ -53,6 +53,8 @@ if [[ "$answer" != "y" ]]; then
     exit 0
 fi
 
+echo ""
+
 git config user.email "$github_email"
 git config user.name "$github_name"
 
