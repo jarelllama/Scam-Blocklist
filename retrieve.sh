@@ -156,13 +156,14 @@ function filter_pending {
 
     grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
 
-    cat tmp8.txt tmp_flipped_alive.txt > tmp9.txt
+    cat tmp_flipped_alive.txt >> tmp8.txt
 
-    sort tmp9.txt -o tmp10.txt
+    # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
+    sort -u tmp8.txt -o tmp9.txt
 
     # Remove any new flipped domains that might already be in the blocklist
     # This is done for accurate counting
-    comm -23 tmp10.txt tmp_domains_file.txt > "$pending_file"
+    comm -23 tmp9.txt tmp_domains_file.txt > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(comm -23 "$pending_file" tmp_domains_file.txt | wc -l)"
@@ -252,5 +253,6 @@ while true; do
         *)
             echo -e "\nInvalid option."
             continue
+            ;;
     esac
 done
