@@ -202,6 +202,28 @@ function edit_blacklist {
     rm tmp*.txt
 }
 
+function check_entry {
+    
+    read -p $'\nEnter the entry to check:\n' check_entry
+    if ! grep -xFq "$check_entry" "$domains_file"; then
+        echo -e "\nThe entry is not present."
+        continue
+    fi
+    echo -e "\nThe entry is present."
+}
+
+function push_changes {
+    
+    echo -e "Push lists changes\n"
+
+    git config user.email "$github_email"
+    git config user.name "$github_name"
+
+    git add "$domains_file" "$whitelist_file" "$blacklist_file"
+    git commit -m "Update domains"
+    git push
+}
+
 while true; do
     echo -e "\nEdit Lists Menu:"
     echo "1. Blocklist"
@@ -226,23 +248,11 @@ while true; do
             continue
             ;;
         4)
-            read -p $'Enter the entry to check:\n' check_entry
-            if ! grep -xFq "$check_entry" "$domains_file"; then
-                echo -e "\nThe entry is not present."
-                continue
-            fi
-            echo -e "\nThe entry is present."
+            check_entry
             continue
             ;;
         p)
-            echo -e "Push lists changes\n"
-
-            git config user.email "$github_email"
-            git config user.name "$github_name"
-
-            git add "$domains_file" "$whitelist_file" "$blacklist_file"
-            git commit -m "Update domains"
-            git push
+            push_changes
 
             if [[ -f tmp*.txt ]]; then
                 rm tmp*.txt
