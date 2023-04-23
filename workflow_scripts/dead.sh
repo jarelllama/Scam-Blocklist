@@ -15,6 +15,7 @@ cat tmp1.txt | xargs -I{} -P8 bash -c "
   fi
 "
 
+# No need to push if no dead domains found
 if ! [[ -s tmp_dead.txt ]]; then
     echo -e "\nNo dead domains found.\n"
     rm tmp*.txt
@@ -23,16 +24,16 @@ fi
 
 comm -23 tmp1.txt <(sort tmp_dead.txt) > "$domains_file"
 
-git config user.email "$github_email"
-git config user.name "$github_name"
-
-git add "$domains_file"
-git commit -m "Remove dead domains"
-git push
-
 echo -e "\nDead domains:"
 cat tmp_dead.txt
 
 echo -e "\nTotal domains removed: $(wc -l < tmp_dead.txt)"
 
 rm tmp*.txt
+
+git config user.email "$github_email"
+git config user.name "$github_name"
+
+git add "$domains_file"
+git commit -mq "Remove dead domains"
+git push -q
