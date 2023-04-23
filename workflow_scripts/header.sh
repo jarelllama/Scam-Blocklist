@@ -19,6 +19,8 @@ echo "# Title: Jarelllama's Scam Blocklist
 
 sed -i "s/Current number of domains: .*/Current number of domains: \`$num_domains\`/" README.md
 
+rm tmp*.txt
+
 git config user.email "$github_email"
 git config user.name "$github_name"
 
