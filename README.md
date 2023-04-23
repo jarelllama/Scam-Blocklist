@@ -1,4 +1,4 @@
-Current number of domains: `3376`
+Current number of domains: `3378`
 https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
 
 ### How domains are added to the blocklist
