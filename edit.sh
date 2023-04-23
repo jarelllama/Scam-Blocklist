@@ -38,7 +38,7 @@ function prep_entry {
 }
 
 function edit_blocklist {
-    echo "Blocklist"
+    echo "BLOCKLIST"
     
     cp "$domains_file" "$domains_file.bak"
 
@@ -108,7 +108,7 @@ function edit_blocklist {
 }
 
 function edit_whitelist {
-    echo "Whitelist"
+    echo "WHITELIST"
 
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
 
@@ -143,7 +143,7 @@ function edit_whitelist {
 }
 
 function edit_blacklist {
-    echo "Blacklist"
+    echo "BLACKLIST"
 
     prep_entry
             
@@ -203,7 +203,7 @@ function edit_blacklist {
 }
 
 while true; do
-    echo -e "\nChoose which list to add to:"
+    echo -e "\nEdit Menu:"
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
