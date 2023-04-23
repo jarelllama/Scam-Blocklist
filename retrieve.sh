@@ -243,7 +243,7 @@ while true; do
             cp "$pending_file.bak" "$pending_file"
             filter_pending
             continue
-            ;:
+            ;;
         x)
             if [[ -f tmp*.txt ]]; then
                 rm tmp*.txt
