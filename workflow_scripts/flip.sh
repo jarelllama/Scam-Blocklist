@@ -32,9 +32,7 @@ fi
 echo -e "\nDomains added:"
 comm -23 <(sort tmp_flipped_alive.txt) tmp1.txt
 
-cat tmp_flipped_alive.txt >> tmp1.txt
-
-sort -u tmp1.txt -o "$domains_file"
+comm -23 <(sort tmp_flipped_alive.txt) tmp1.txt > "$domains_file"
 
 rm tmp*.txt
 
@@ -42,5 +40,5 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$domains_file"
-git commit -mq "Update domains"
+git commit -qm "Update domains"
 git push -q
