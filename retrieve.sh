@@ -161,7 +161,7 @@ function filter_pending {
 
     # Remove any new flipped domains that might already be in the blocklist
     # This is done for accurate counting
-    comm -23 tmp10.txt "$domains_file" > "$pending_file"
+    comm -23 tmp10.txt tmp_domains_file.txt > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(comm -23 "$pending_file" tmp_domains_file.txt | wc -l)"
@@ -180,8 +180,6 @@ function merge_pending {
     echo "Merge with blocklist"
 
     cp "$domains_file" "$domains_file.bak"
-
-    grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
     num_before=$(wc -l < tmp_domains_file.txt)
 
