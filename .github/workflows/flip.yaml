@@ -1,0 +1,13 @@
+name: Check for resolving www subdomains
+run-name: www subdomains check
+on:
+  schedule:
+    # Daily at 3am
+    - cron: "0 3 * * *"
+jobs:
+  www-subdomains-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run flip.sh
+        run: bash "workflow_scripts/flip.sh"
