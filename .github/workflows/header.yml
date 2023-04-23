@@ -1,13 +1,13 @@
-name: Update blocklist header and README.md count
+name: Update blocklist header and README count
 run-name: Update domains count
 on:
   push:
     paths:
       - "domains"
 jobs:
-  Update-count:
+  Update-domains-count:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Update count
+      - name: Run header.sh
         run: bash "workflow_scripts/header.sh"
