@@ -5,21 +5,6 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
 
-function update_header {
-    num_domains=$(wc -l < "$domains_file")
-
-    echo "# Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam sites extracted from Google
-# Homepage: https://github.com/jarelllama/Scam-Blocklist
-# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
-# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
-# Last modified: $(date -u)
-# Total number of domains: $num_domains
-" | cat - "$domains_file" > tmp1.txt
-
-    mv tmp1.txt "$domains_file"
-}
-
 cp "$domains_file" "$domains_file.bak"
 
 grep -vE '^(#|$)' "$domains_file" > tmp1.txt
@@ -58,7 +43,5 @@ num_after=$(wc -l < "$domains_file")
 echo "Total domains before: $num_before"
 echo "Total domains removed: $((num_before - num_after))"
 echo "Final domains after: $num_after"
-
-update_header
 
 rm tmp*.txt
