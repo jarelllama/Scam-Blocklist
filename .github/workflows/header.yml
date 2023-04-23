@@ -3,7 +3,7 @@ run-name: Update domains count
 on:
   push:
     paths:
-      - "domains"
+      - 'domains'
 jobs:
   Update-count:
     runs-on: ubuntu-latest
