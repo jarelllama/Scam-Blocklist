@@ -14,7 +14,7 @@ echo "# Title: Jarelllama's Scam Blocklist
 # Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
 # License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 # Last modified: $(date -u)
-# Total number of domains: $(num_domains)
+# Total number of domains: $num_domains
 " | cat - tmp1.txt > "$domains_file"
 
 sed -i "s/Current number of domains: .*/Current number of domains: \`$num_domains\`/" README.md
