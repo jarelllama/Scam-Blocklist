@@ -15,15 +15,15 @@ git add "$toplist_file"
 git commit -qm "Update $toplist_file"
 git push -q
 
-grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp1.txt
+grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp_in_toplist.txt
 
-if ! [[ -s tmp1.txt ]]; then
+if ! [[ -s tmp_in_toplist.txt ]]; then
     rm tmp*.txt
     exit 0
 fi
 
 echo -e "\nDomains in toplist:"
-cat tmp1.txt
+cat tmp_in_toplist.txt
 
 rm tmp*.txt
 
