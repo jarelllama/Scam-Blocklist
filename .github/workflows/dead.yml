@@ -1,5 +1,5 @@
-name: Remove dead domains
-run-name: Scheduled dead domains removal
+#name: Remove dead domains
+run-name: Remove dead domains
 on:
   schedule:
     # Daily at 3am (GMT+8)
