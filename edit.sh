@@ -209,7 +209,7 @@ while true; do
     echo "3. Blacklist"
     echo "4. Check blocklist entry"
     echo "p. Push lists changes"
-    echo "x. Exit"
+    echo "x. Exit/return"
     read choice
 
     case "$choice" in
@@ -255,6 +255,7 @@ while true; do
                 rm tmp*.txt
             fi
 
+            return
             exit 0  
             ;;
         *)
