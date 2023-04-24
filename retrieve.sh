@@ -10,7 +10,7 @@ edit_script="edit.sh"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-echo -e "\nRemember to pull the latest changes!"
+echo -e "\nRemember to pull the latest changes first!"
 
 if [[ -s "$pending_file" ]]; then
     read -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
