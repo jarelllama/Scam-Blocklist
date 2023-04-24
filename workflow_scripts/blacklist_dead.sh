@@ -18,7 +18,7 @@ if ! [[ -s tmp_dead.txt ]]; then
     exit 0
 fi
 
-comm -23 "$blacklist_file" tmp_dead.txt > tmp1.txt
+comm -23 "$blacklist_file" <(sort tmp_dead.txt) > tmp1.txt
 
 mv tmp1.txt "$blacklist_file"
 
