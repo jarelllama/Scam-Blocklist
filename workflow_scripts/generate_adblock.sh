@@ -2,8 +2,6 @@
 
 raw_file="raw.txt"
 adblock_file="adblock.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
 
 grep -vE '^(#|$)' "$raw_file" > tmp1.txt
 
@@ -35,10 +33,3 @@ echo "# Title: Jarelllama's Scam Blocklist
 " | cat - tmp_adblock2.txt > "$adblock_file"
 
 rm tmp*.txt
-
-git config user.email "$github_email"
-git config user.name "$github_name"
-
-git add "$adblock_file"
-git commit -qm "Update adblock list"
-git push -q
