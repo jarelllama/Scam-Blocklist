@@ -11,7 +11,6 @@ num_domains=$(wc -l < tmp1.txt)
 echo "# Title: Jarelllama's Scam Blocklist
 # Description: Blocklist for scam sites extracted from Google
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
-# Source: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
 # License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 # Last modified: $(date -u)
 # Total number of domains: $num_domains
