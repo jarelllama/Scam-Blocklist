@@ -1,0 +1,20 @@
+name: Test
+run-name: Test
+on: [push]
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "run1" > test.txt
+      - run: echo "run2" >> test.txt
+      - run: echo "run2" >> test.txt
+      - name: Push changes
+        run: |
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
+git config user.email "$github_email"
+git config user.name "$github_name"
+git add test.txt
+git commit -qm "Test commit"
+git push -q
