@@ -15,6 +15,7 @@ fi
 
 echo -e "\nWhitelisted domains:"
 cat tmp_whitelisted.txt
+echo ""
 
 rm tmp*.txt
 
