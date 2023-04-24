@@ -122,7 +122,7 @@ if [[ -s tmp_in_toplist.txt ]]; then
 fi
 
 echo -e "\nTotal domains retrieved: $num_retrieved"
-echo "Pending domains not in blocklist: $(wc -l < "$pending_file")"
+echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
 echo "Domains:"
 cat "$pending_file"
 
