@@ -170,7 +170,7 @@ function merge_pending {
     git config user.name "$github_name"
 
     git add "$domains_file"
-    git commit -m "Update domains"
+    git commit -m "Automatically update domains"
     git push
 }
 
