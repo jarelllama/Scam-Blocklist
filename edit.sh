@@ -57,8 +57,6 @@ function edit_blocklist {
 
         comm -23 tmp_domains_file.txt tmp_entries.txt > "$domains_file"
 
-        rm tmp*.txt
-
         return
     fi
 
@@ -102,8 +100,6 @@ function edit_blocklist {
     cat tmp_entries.txt >> tmp_domains_file.txt 
 
     sort -u tmp_domains_file.txt -o "$domains_file"
-
-    rm tmp*.txt
 }
 
 function edit_whitelist {
@@ -159,8 +155,6 @@ function edit_blacklist {
 
         mv tmp1.txt "$blacklist_file"
 
-        rm tmp*.txt
-
         return
     fi
 
@@ -197,8 +191,6 @@ function edit_blacklist {
     cat tmp_entries.txt >> "$blacklist_file" 
 
     sort -u "$blacklist_file" -o "$blacklist_file"
-
-    rm tmp*.txt
 }
 
 function check_entry {
@@ -207,7 +199,8 @@ function check_entry {
         echo -e "\nThe entry is not present."
         return
     fi
-    echo -e "\nThe entry is present."
+    echo -e "\nThe entry is present:"
+    grep -xFq "$check_entry" "$domains_file"
 }
 
 function push_changes {
@@ -226,7 +219,7 @@ while true; do
     echo "1. Blocklist"
     echo "2. Whitelist"
     echo "3. Blacklist"
-    echo "4. Check blocklist entry"
+    echo "c. Check blocklist entry"
     echo "p. Push lists changes"
     echo "x. Exit/return"
     read choice
@@ -234,6 +227,7 @@ while true; do
     case "$choice" in
         1)
             edit_blocklist
+            rm tmp*.txt
             continue
             ;;
         2)
@@ -242,9 +236,10 @@ while true; do
             ;;
         3)
             edit_blacklist
+            rm tmp*.txt
             continue
             ;;
-        4)
+        c)
             check_entry
             continue
             ;;
