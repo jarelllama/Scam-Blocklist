@@ -204,7 +204,7 @@ function check_entry {
         grep -F "$check_entry" "$domains_file"
         return
     fi
-    echo -e "\nThe entry is present:"
+    echo -e "\nThe entry is present."
     grep -xFq "$check_entry" "$domains_file"
 }
 
