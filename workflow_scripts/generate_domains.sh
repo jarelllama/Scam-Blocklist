@@ -1,7 +1,7 @@
 #!/bin/bash
 
 raw_file="raw.txt"
-domains_file="domains"
+domains_file="domains.txt"
 
 grep -vE '^(#|$)' "$raw_file" > tmp1.txt
 
