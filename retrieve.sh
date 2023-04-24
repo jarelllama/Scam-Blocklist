@@ -21,16 +21,9 @@ fi
 
 touch last_run.txt
 
-# This section of code alternates between the year and month filter for Google Search
-if [[ $(cat last_run.txt) == "year" ]]; then
-    time="month"
-    echo "month" > last_run.txt
-else
-    time="year"
-    echo "year" > last_run.txt
-fi
-
 debug=0
+
+time="any"
 
 for arg in "$@"; do
     if [[ "$arg" == "d" ]]; then
