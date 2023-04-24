@@ -23,8 +23,8 @@ touch last_run.txt
 
 debug=0
 
-# Set the default time filter to past 5 years
-time_filter="y5"
+# Set the default time filter to past 3 years
+time_filter="y3"
 
 for arg in "$@"; do
     if [[ "$arg" == "d" ]]; then
