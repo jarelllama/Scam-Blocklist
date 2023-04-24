@@ -50,13 +50,13 @@ else
     error=1
 fi
 
+echo ""
+
 rm tmp*.txt
 
 if [[ "$error" == 0 ]]; then
     exit 0
 fi
-
-echo ""
 
 git config user.email "$github_email"
 git config user.name "$github_name"
