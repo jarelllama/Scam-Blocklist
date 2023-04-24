@@ -3,7 +3,7 @@
 raw_file="raw.txt"
 adblock_file="adblock.txt"
 
-grep -vE '^(#|$)' "$raw_file" > tmp1.txt
+grep -vE '^(!|$)' "$raw_file" > tmp1.txt
 
 awk '{sub(/^www\./, ""); print}' tmp1.txt > tmp2.txt
 
@@ -23,13 +23,13 @@ sort tmp_adblock.txt -o tmp_adblock2.txt
 
 num_entries=$(wc -l < tmp_adblock2.txt)
 
-echo "# Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam sites extracted from Google
-# Homepage: https://github.com/jarelllama/Scam-Blocklist
-# License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
-# Last modified: $(date -u)
-# Syntax: Adblock Plus
-# Total number of entries: $num_entries
+echo "! Title: Jarelllama's Scam Blocklist
+! Description: Blocklist for scam sites extracted from Google
+! Homepage: https://github.com/jarelllama/Scam-Blocklist
+! License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+! Last modified: $(date -u)
+! Syntax: Adblock Plus
+! Total number of entries: $num_entries
 " | cat - tmp_adblock2.txt > "$adblock_file"
 
 rm tmp*.txt
