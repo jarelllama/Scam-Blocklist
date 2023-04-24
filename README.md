@@ -1,4 +1,4 @@
-Current number of domains: `3740`
+Current number of domains: `3770`
 
 https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
 
