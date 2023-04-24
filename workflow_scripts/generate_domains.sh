@@ -3,38 +3,13 @@
 raw_file="raw.txt"
 domains_file="domains.txt"
 
-grep -vE '^(#|$)' "$raw_file" > tmp1.txt
+grep -vE '^(#|$)' "$raw_file" > raw.tmp
 
-grep -vE '^(#|$)' "$domains_file" > tmp_domains.txt
+grep -vE '^(#|$)' "$domains_file" > domains.tmp
 
-comm -23 tmp1.txt tmp_domains.txt > tmp_unique.txt
+diff -u domains.tmp raw.tmp | patch domains.tmp
 
-grep '^www\.' tmp_unique.txt > tmp_with_www.txt
-
-# comm is used here since both files are still in sorted order
-comm -23 tmp_unique.txt tmp_with_www.txt > tmp_no_www.txt
-
-awk '{sub(/^www\./, ""); print}' tmp_with_www.txt > tmp_no_www_new.txt
-
-awk '{print "www."$0}' tmp_no_www.txt > tmp_with_www_new.txt
-
-cat tmp_no_www_new.txt tmp_with_www_new.txt > tmp_flipped.txt
-
-touch tmp_flipped_dead.txt
-
-cat tmp_flipped.txt | xargs -I{} -P8 bash -c "
-    if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-        echo {} >> tmp_flipped_dead.txt
-    fi
-"
-
-grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
-
-cat tmp_flipped_alive.txt >> tmp_domains.txt
-
-sort -u tmp_domains.txt -o tmp_domains2.txt
-
-num_domains=$(wc -l < tmp_domains2.txt)
+num_domains=$(wc -l < domains.tmp)
 
 echo "# Title: Jarelllama's Scam Blocklist
 # Description: Blocklist for scam sites extracted from Google
@@ -43,6 +18,6 @@ echo "# Title: Jarelllama's Scam Blocklist
 # Last modified: $(date -u)
 # Syntax: Domains
 # Total number of domains: $num_domains
-" | cat - tmp_domains2.txt > "$domains_file"
+" | cat - domains.tmp > "$domains_file"
 
-rm tmp*.txt
+rm *.tmp
