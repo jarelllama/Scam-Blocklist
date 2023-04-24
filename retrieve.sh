@@ -178,8 +178,6 @@ function filter_pending {
     rm tmp*.txt
 }
 
-filter_pending
-
 function merge_pending {
     echo "Merge with blocklist"
 
@@ -220,6 +218,8 @@ function merge_pending {
 
     exit 0
 }
+
+filter_pending
 
 while true; do
     echo -e "\nPending Domains Menu:"
