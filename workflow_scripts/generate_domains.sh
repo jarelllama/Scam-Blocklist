@@ -7,14 +7,14 @@ github_name="jarelllama"
 
 grep -vE '^(#|$)' "$raw_file" > tmp1.txt
 
-grep -vE '^(#|$)' "$domains_file" > tmpA.txt
+grep -vE '^(#|$)' "$domains_file" > tmp_domains.txt
 
-comm -23 tmp1.txt tmpA.txt > tmp2.txt
+comm -23 tmp1.txt tmp_domains.txt > tmp_unique.txt
 
-grep '^www\.' tmp2.txt > tmp_with_www.txt
+grep '^www\.' tmp_unique.txt > tmp_with_www.txt
 
 # comm is used here since both files are still in sorted order
-comm -23 tmp2.txt tmp_with_www.txt > tmp_no_www.txt
+comm -23 tmp_unique.txt tmp_with_www.txt > tmp_no_www.txt
 
 awk '{sub(/^www\./, ""); print}' tmp_with_www.txt > tmp_no_www_new.txt
 
@@ -32,11 +32,11 @@ cat tmp_flipped.txt | xargs -I{} -P8 bash -c "
 
 grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
 
-cat tmp_flipped_alive.txt >> tmp2.txt
+cat tmp_flipped_alive.txt >> tmp_domains.txt
 
-sort -u tmp2.txt -o tmp3.txt
+sort -u tmp_domains.txt -o tmp_domains2.txt
 
-num_domains=$(wc -l < tmp3.txt)
+num_domains=$(wc -l < tmp_domains2.txt)
 
 echo "# Title: Jarelllama's Scam Blocklist
 # Description: Blocklist for scam sites extracted from Google
@@ -45,7 +45,7 @@ echo "# Title: Jarelllama's Scam Blocklist
 # Last modified: $(date -u)
 # Syntax: Domains
 # Total number of domains: $num_domains
-" | cat - tmp3.txt > "$domains_file"
+" | cat - tmp_domains2.txt > "$domains_file"
 
 rm tmp*.txt
 
