@@ -39,13 +39,13 @@ echo "# Title: Jarelllama's Scam Blocklist
 # Last modified: $(date -u)
 # Syntax: Domains
 # Total number of domains: $num_domains
-" | cat - tmp2.txt > "$raw_file"
+" | cat - tmp2.txt > "$domains_file"
 
 rm tmp*.txt
 
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-git add "$raw_file"
+git add "$domains_file"
 git commit -qm "Update domains list"
 git push -q
