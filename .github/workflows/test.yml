@@ -1,13 +1,29 @@
-name: Test
-run-name: Test
-on: [push]
+name: Generate lists
+run-name: Generate lists
+on:
+  path:
+    - "raw.txt"
+
 jobs:
-  Test:
+  Generate-domains-list:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: echo "run1" > temp.txt
-      - run: echo "run2" >> temp.txt
-      - run: echo "run2" >> temp.txt
-      - name: Push changes
-        run: bash "workflow_scripts/test.sh"
+      - name: Run generate_domains.sh
+        run: bash "workflow_scripts/generate_domains.sh"
+
+  Generate-adblock-list:
+    needs: Generate-domains-list
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run generate_adblock.sh
+        run: bash "workflow_scripts/generate_adblock.sh"
+
+  Add-header-to-raw:
+    needs: [Generate-domains-list, Generate-adblock-list]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run add_raw_header.sh
+        run: bash "workflow_scripts/add_raw_header.sh"
