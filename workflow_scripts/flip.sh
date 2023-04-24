@@ -34,7 +34,7 @@ fi
 echo -e "\nDomains added:"
 cat tmp_flipped_unique.txt
 
-echo -e "\nTotal domains added: $(wc -l < tmp_flipped_unique.txt)"
+echo -e "\nTotal domains added: $(wc -l < tmp_flipped_unique.txt)\n"
 
 cat tmp_flipped_unique.txt >> tmp1.txt
 
