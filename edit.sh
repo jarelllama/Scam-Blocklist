@@ -186,7 +186,7 @@ function edit_blacklist {
     mv tmp_alive_entries.txt tmp_entries.txt
   
     # This checks if there are no unique entries in the new entries file
-    if [[ $(comm -23 tmp_entries.txt "$blacklist_file" | wc -l) -eq 0 ]]; then
+    if grep -xFqf tmp_entries.txt "$blacklist_file"; then
         echo -e "\nThe domain is already in the blacklist. Not added."
         return
     fi
