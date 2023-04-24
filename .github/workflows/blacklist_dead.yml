@@ -1,0 +1,13 @@
+name: Remove dead domains from blacklist
+run-name: Remove dead domains from blacklist
+on:
+  schedule:
+    # Daily at 3:40am (GMT+8)
+    - cron: "40 19 * * *"
+jobs:
+  Remove-dead-domains:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run blacklist_dead.sh
+        run: bash "workflow_scripts/blacklist_dead.sh"
