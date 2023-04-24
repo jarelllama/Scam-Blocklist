@@ -37,7 +37,7 @@ done
 
 declare -A retrieved_domains
 
-echo -e "\nSearch filter used: $time_filter"
+echo -e "\nSearch filter: $time_filter"
 echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
