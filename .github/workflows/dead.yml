@@ -2,8 +2,8 @@ name: Remove dead domains
 run-name: Remove dead domains
 on:
   schedule:
-    # Daily at 3am (GMT+8)
-    - cron: "0 19 * * *"
+    # Daily at 2am (GMT+8)
+    - cron: "0 18 * * *"
 jobs:
   Remove-dead-domains:
     runs-on: ubuntu-latest
