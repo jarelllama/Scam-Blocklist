@@ -137,6 +137,7 @@ sort -u tmp_domains_file.txt -o "$domains_file"
 num_after=$(wc -l < "$domains_file")
 
 echo -e "\nTotal domains before: $num_before"
+echo "Total domains added: $((num_after - num_before))"
 echo "Final domains after: $num_after"
 
 rm "$pending_file"
