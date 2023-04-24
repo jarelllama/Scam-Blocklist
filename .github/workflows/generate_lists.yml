@@ -4,27 +4,16 @@ on:
   push:
     paths:
       - "raw.txt"
-
 jobs:
-  Generate-domains-list:
+  Generate-lists:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run generate_domains.sh
+      - name: Generate Domains list
         run: bash "workflow_scripts/generate_domains.sh"
-
-  Generate-adblock-list:
-    needs: Generate-domains-list
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run generate_adblock.sh
+      - name: Generate Adblock Plus list
         run: bash "workflow_scripts/generate_adblock.sh"
-
-  Add-header-to-raw:
-    needs: [Generate-domains-list, Generate-adblock-list]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run add_raw_header.sh
+      - name: Add header to raw file
         run: bash "workflow_scripts/add_raw_header.sh"
+      - name: Push lists
+        run: bash "workflow_scripts/push_lists.sh"
