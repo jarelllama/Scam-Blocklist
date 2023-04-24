@@ -150,5 +150,5 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$domains_file"
-git commit -m "Automatically update domains"
+git commit -m "Automatic domains update"
 git push
