@@ -2,8 +2,6 @@
 
 raw_file="raw.txt"
 domains_file="domains.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
 
 grep -vE '^(#|$)' "$raw_file" > tmp1.txt
 
@@ -48,10 +46,3 @@ echo "# Title: Jarelllama's Scam Blocklist
 " | cat - tmp_domains2.txt > "$domains_file"
 
 rm tmp*.txt
-
-git config user.email "$github_email"
-git config user.name "$github_name"
-
-git add "$domains_file"
-git commit -qm "Update domains list"
-git push -q
