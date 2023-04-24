@@ -1,0 +1,13 @@
+name: Retrieve domains
+run-name: Retrieve domains
+on:
+  schedule:
+    # Daily at 2am (GMT+8)
+    - cron: "0 18 * * *"
+jobs:
+  Retrieve-domains:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run retrieve.sh
+        run: bash "workflow_scripts/retrieve.sh"
