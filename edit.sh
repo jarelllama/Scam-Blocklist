@@ -197,6 +197,11 @@ function check_entry {
     read -p $'\nEnter the entry to check:\n' check_entry
     if ! grep -xFq "$check_entry" "$domains_file"; then
         echo -e "\nThe entry is not present."
+        if ! grep -Fq "$check_entry" "$domains_file"; then
+            return
+        fi
+        echo "Similar entries:"
+        grep -F "$check_entry" "$domains_file"
         return
     fi
     echo -e "\nThe entry is present:"
