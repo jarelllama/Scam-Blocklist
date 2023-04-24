@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains_file="domains"
+raw_file="domains"
 pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
@@ -84,7 +84,7 @@ function filter_pending {
     cp "$pending_file" "$pending_file.bak"
 
     # Create a temporary copy of the domains file without the header
-    grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
+    grep -vE '^(#|$)' "$raw_file" > tmp_raw_file.txt
 
     awk NF "$pending_file" > tmp1.txt
 
@@ -93,7 +93,7 @@ function filter_pending {
     sort -u tmp2.txt -o tmp3.txt
 
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 tmp3.txt tmp_domains_file.txt > tmp4.txt
+    comm -23 tmp3.txt tmp_raw_file.txt > tmp4.txt
 
     echo "Domains removed:"
 
@@ -123,39 +123,7 @@ function filter_pending {
         fi
     "
 
-    comm -23 tmp7.txt <(sort tmp_dead.txt) > tmp8.txt
-
-    # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
-    # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
-
-    grep '^www\.' tmp8.txt > tmp_with_www.txt
-
-    grep -vxFf tmp_with_www.txt tmp8.txt > tmp_no_www.txt
-
-    awk '{sub(/^www\./, ""); print}' tmp_with_www.txt > tmp_no_www_new.txt
-
-    awk '{print "www."$0}' tmp_no_www.txt > tmp_with_www_new.txt
-
-    cat tmp_no_www_new.txt tmp_with_www_new.txt > tmp_flipped.txt
-
-    touch tmp_flipped_dead.txt
-
-    cat tmp_flipped.txt | xargs -I{} -P4 bash -c "
-        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> tmp_flipped_dead.txt
-        fi
-    "
-
-    grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
-
-    cat tmp_flipped_alive.txt >> tmp8.txt
-
-    # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
-    sort -u tmp8.txt -o tmp9.txt
-
-    # Remove any new flipped domains that might already be in the blocklist
-    # This is done for accurate counting
-    comm -23 tmp9.txt tmp_domains_file.txt > "$pending_file"
+    comm -23 tmp7.txt <(sort tmp_dead.txt) > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
@@ -171,17 +139,17 @@ function filter_pending {
 function merge_pending {
     echo "Merge with blocklist"
 
-    cp "$domains_file" "$domains_file.bak"
+    cp "$raw_file" "$raw_file.bak"
 
-    grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
+    grep -vE '^(#|$)' "$raw_file" > tmp_raw_file.txt
 
-    num_before=$(wc -l < tmp_domains_file.txt)
+    num_before=$(wc -l < tmp_raw_file.txt)
 
-    cat "$pending_file" >> tmp_domains_file.txt 
+    cat "$pending_file" >> tmp_raw_file.txt 
 
-    sort -u tmp_domains_file.txt -o "$domains_file"
+    sort -u tmp_raw_file.txt -o "$raw_file"
 
-    num_after=$(wc -l < "$domains_file")
+    num_after=$(wc -l < "$raw_file")
 
     echo "--------------------------------------------"
     echo "Total domains before: $num_before"
@@ -202,7 +170,7 @@ function merge_pending {
     git config user.email "$github_email"
     git config user.name "$github_name"
 
-    git add "$domains_file" "$whitelist_file" "$blacklist_file"
+    git add "$raw_file" "$whitelist_file" "$blacklist_file"
     git commit -m "Update domains"
     git push
 
