@@ -26,7 +26,7 @@ comm -23 tmp1.txt <(sort tmp_dead.txt) > "$domains_file"
 echo -e "\nDead domains:"
 cat tmp_dead.txt
 
-echo -e "\nTotal domains removed: $(wc -l < tmp_dead.txt)"
+echo -e "\nTotal domains removed: $(wc -l < tmp_dead.txt)\n"
 
 rm tmp*.txt
 
