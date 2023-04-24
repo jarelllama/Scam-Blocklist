@@ -2,8 +2,8 @@ name: Retrieve domains
 run-name: Retrieve domains
 on:
   schedule:
-    # Daily at 2am (GMT+8)
-    - cron: "0 18 * * *"
+    # Daily at 3am (GMT+8)
+    - cron: "0 19 * * *"
 jobs:
   Retrieve-domains:
     runs-on: ubuntu-latest
