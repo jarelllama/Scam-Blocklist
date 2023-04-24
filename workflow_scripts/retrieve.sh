@@ -116,8 +116,8 @@ grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp_i
 if [[ -s tmp_in_toplist.txt ]]; then
     echo -e "\nDomains found in toplist:"
     grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
-    echo ""
-    echo -e "Exiting...\n"
+    echo -e "\nExiting...\n"
+    rm tmp*.txt
     exit 1
 fi
 
@@ -125,11 +125,8 @@ echo -e "\nTotal domains retrieved: $num_retrieved"
 echo "Pending domains not in blocklist: $(wc -l < "$pending_file")"
 echo "Domains:"
 cat "$pending_file"
-echo ""
 
-rm tmp*.txt
-
-echo -e "Merging with blocklist...\n"
+echo -e "\nMerging with blocklist...\n"
 
 cat "$pending_file" >> tmp_domains_file.txt 
 
