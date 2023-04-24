@@ -18,7 +18,7 @@ git push -q
 grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp_in_toplist.txt
 
 if ! [[ -s tmp_in_toplist.txt ]]; then
-    echo -e "\nNo domains found in updated toplist.\n"
+    echo -e "\nNo domains found in the updated toplist.\n"
     rm tmp*.txt
     exit 0
 fi
