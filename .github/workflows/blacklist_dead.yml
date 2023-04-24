@@ -2,8 +2,8 @@ name: Remove dead domains from blacklist
 run-name: Remove dead domains from blacklist
 on:
   schedule:
-    # Daily at 3:40am (GMT+8)
-    - cron: "40 19 * * *"
+    # Daily at 1am (GMT+8)
+    - cron: "0 17 * * *"
 jobs:
   Remove-dead-domains:
     runs-on: ubuntu-latest
