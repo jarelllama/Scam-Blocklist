@@ -10,10 +10,10 @@ edit_script="edit.sh"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-echo -e "\nRemember to pull the latest changes!\n"
+echo -e "\nRemember to pull the latest changes!"
 
 if [[ -s "$pending_file" ]]; then
-    read -p $'\n$pending_file is not empty. Do you want to empty it? (Y/n): ' answer
+    read -p $'\n\$pending_file is not empty. Do you want to empty it? (Y/n): ' answer
     if ! [[ "$answer" == "n" ]]; then
         > "$pending_file"
     fi
@@ -47,7 +47,7 @@ done
 
 declare -A retrieved_domains
 
-echo "Search filter used: $time"
+echo -e "\nSearch filter used: $time"
 echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
