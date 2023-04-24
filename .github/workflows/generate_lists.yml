@@ -1,8 +1,9 @@
 name: Generate lists
 run-name: Generate lists
 on:
-  path:
-    - "raw.txt"
+  push:
+    path:
+      - "raw.txt"
 
 jobs:
   Generate-domains-list:
