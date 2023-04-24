@@ -1,5 +1,8 @@
 # Google search dates: a=any y=year m=month
 # Low count means less than or equal to 10 domains
+# The month filter produces the most FPs
+# The year filter produces the least FPs
+# The any filter produces the highest count
 
 We have spent our entire lives in the business of clothing, from economy lines to luxury lines,.Thousands of products in different styles are waiting for you!After spending 15 years learning this market and business we decided to put all of our contacts in manufacturing and designing to good use. Our mission is to bring the newest and best designs in clothing to you.
 
@@ -33,8 +36,8 @@ Every day we receive more appreciative emails from satisfied customers all over 
 # Low count (y/m), high FPs (m)
 We now serve customers all over the world ( just offering advice in some cases ), and are thrilled that we’re able to turn our passion into our own business/website, which we are able to provide families with
 
-# Low count (a/y/m) high FPs (a/y?/m)
-# Create millions of smiles, moments of inspiration, happiness, and laughter. Everyday, we strive to deliver high-quality products with the greatest customer experience possible.
+# Low count (a/y/m) high FPs (a/y?/m) Contains lots of linkedin subdomains using 'any' filter
+Create millions of smiles, moments of inspiration, happiness, and laughter. Everyday, we strive to deliver high-quality products with the greatest customer experience possible.
 
 # Low count (a/y/m), high FPs (a?/y?/m)
 we have been playing the role as a manufacturer as well as a supplier ever since. Our factories in Vietnam and Philippines have been making clothes for many famous brands. However, according to the service agreements, we are unable to disclose their names. Our designers and workers have made clothes for millions of women in past ten years.
@@ -42,8 +45,8 @@ we have been playing the role as a manufacturer as well as a supplier ever since
 # Low count (m)
 CLEARANCE WAREHOUSE BRINGS YOU FACTORY DIRECT PRODUCTS AT WHOLESALE PRICE Welcome to a new era of buying online. Clearance Warehouse brings you factory direct products at wholesale price. Guaranteed. We are US premier wholesale clearance centre. Want to experience a whole new way of buying products online for your home or office? How does up to 80% off normal pricing sound?
 
-# Low count (m), high FPs (a?/y?/m)
-thrive on the power and potential of diversity. As a global company, we believe that the most effective way to embrace the diversity of our customers and communities is to mirror it from within. We believe that the fusion of various perspectives results in the best outcomes for our employees, our company, our customers, and the world around us. We are committed to an inclusive environment where every individual can thrive through a sense of belonging, respect and contribution.
+# Low count (m), high FPs (a/m)
+# thrive on the power and potential of diversity. As a global company, we believe that the most effective way to embrace the diversity of our customers and communities is to mirror it from within. We believe that the fusion of various perspectives results in the best outcomes for our employees, our company, our customers, and the world around us. We are committed to an inclusive environment where every individual can thrive through a sense of belonging, respect and contribution.
 
 # Low count, high FPs
 # We are breeders specializing in . TICA registered, USDA and NC State licensed, we breed beautiful  for sale from exquisitely health tested parents and offer a one year health guarantee as well as all registration documents for our  for sale.
