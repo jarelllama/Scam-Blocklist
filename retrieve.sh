@@ -23,24 +23,24 @@ touch last_run.txt
 
 debug=0
 
-time="any"
+time_filter="any"
 
 for arg in "$@"; do
     if [[ "$arg" == "d" ]]; then
         debug=1
     fi
     if [[ "$arg" == "a" ]]; then
-        time="any"
+        time_filter="any"
     elif [[ "$arg" == "y" ]]; then
-        time="year"
+        time_filter="year"
     elif [[ "$arg" == "m" ]]; then
-        time="month"
+        time_filter="month"
     fi
 done
 
 declare -A retrieved_domains
 
-echo -e "\nSearch filter used: $time"
+echo -e "\nSearch filter used: $time_filter"
 echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
@@ -52,7 +52,7 @@ while IFS= read -r term; do
 
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time:0:1}"
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time_filter:0:1}"
 
         # Search Google and extract all domains
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
