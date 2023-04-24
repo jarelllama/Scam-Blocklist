@@ -24,6 +24,7 @@ fi
 
 echo -e "\nDomains in toplist:"
 cat tmp_in_toplist.txt
+echo ""
 
 rm tmp*.txt
 
