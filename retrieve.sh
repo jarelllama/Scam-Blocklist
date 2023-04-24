@@ -23,18 +23,18 @@ touch last_run.txt
 
 debug=0
 
-time_filter="any"
+# Set default time filter to past 5 years
+time_filter="y5"
 
 for arg in "$@"; do
     if [[ "$arg" == "d" ]]; then
         debug=1
-    fi
-    if [[ "$arg" == "a" ]]; then
-        time_filter="any"
+    # Set the time filter to respective argument
+    # y=year m=month
     elif [[ "$arg" == "y" ]]; then
-        time_filter="year"
+        time_filter="$arg"
     elif [[ "$arg" == "m" ]]; then
-        time_filter="month"
+        time_filter="$arg"
     fi
 done
 
@@ -52,7 +52,7 @@ while IFS= read -r term; do
 
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time_filter:0:1}"
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
 
         # Search Google and extract all domains
         # Duplicates are removed here for accurate counting of the retrieved domains by each search term
