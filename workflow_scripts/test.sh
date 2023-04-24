@@ -5,4 +5,4 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 git add test.txt
 git commit -qm "Test commit"
-git push -q
+git push -fq
