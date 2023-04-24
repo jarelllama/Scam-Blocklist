@@ -42,7 +42,6 @@ function edit_blocklist {
     
     cp "$domains_file" "$domains_file.bak"
 
-    # Create a temporary copy of the domains file without the header
     grep -vE '^(#|$)' "$domains_file" > tmp1.txt
 
     prep_entry
