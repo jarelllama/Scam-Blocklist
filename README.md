@@ -1,3 +1,5 @@
+**Note new Domains list and Adblock Plus list are currently in development.**
+
 Current number of domains: `3775`
 
 https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
