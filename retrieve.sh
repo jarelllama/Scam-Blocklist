@@ -1,6 +1,6 @@
 #!/bin/bash
 
-raw_file="domains"
+raw_file="raw.txt"
 pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
@@ -18,8 +18,6 @@ if [[ -s "$pending_file" ]]; then
         > "$pending_file"
     fi
 fi
-
-touch last_run.txt
 
 debug=0
 
@@ -171,7 +169,7 @@ function merge_pending {
     git config user.name "$github_name"
 
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
-    git commit -m "Update domains"
+    git commit -m "Update $raw_file"
     git push
 
     exit 0
