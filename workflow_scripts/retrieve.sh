@@ -128,9 +128,16 @@ cat "$pending_file"
 
 echo -e "\nMerging with blocklist..."
 
+num_before=$(wc -l < tmp_domains_file.txt)
+
 cat "$pending_file" >> tmp_domains_file.txt 
 
 sort -u tmp_domains_file.txt -o "$domains_file"
+
+num_after=$(wc -l < "$domains_file")
+
+echo -e "\nTotal domains before: $num_before"
+echo "Final domains after: $num_after"
 
 rm "$pending_file"
 
