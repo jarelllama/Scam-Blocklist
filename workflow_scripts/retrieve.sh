@@ -126,7 +126,7 @@ echo "Pending domains not in blocklist: $(wc -l < "$pending_file")"
 echo "Domains:"
 cat "$pending_file"
 
-echo -e "\nMerging with blocklist...\n"
+echo -e "\nMerging with blocklist..."
 
 cat "$pending_file" >> tmp_domains_file.txt 
 
@@ -135,6 +135,8 @@ sort -u tmp_domains_file.txt -o "$domains_file"
 rm "$pending_file"
 
 rm tmp*.txt
+
+echo -e "\nPushing changes...\n"
 
 git config user.email "$github_email"
 git config user.name "$github_name"
