@@ -11,20 +11,19 @@ awk '{sub(/^www\./, ""); print}' tmp1.txt > tmp2.txt
 
 sort -u tmp2.txt -o tmp3.txt
 
-grep -vE '^(#|$)' "$adblock_file" > tmpA.txt
+grep -vE '^(#|$)' "$adblock_file" > tmp_adblock.txt
 
-# Convert the adblock list back to domains
-awk '{sub(/^\|\|/, ""); sub(/\^$/, ""); print}' tmpA.txt > tmpB.txt
+awk '{sub(/^\|\|/, ""); sub(/\^$/, ""); print}' tmp_adblock.txt > tmp_domains.txt
 
-comm -23 tmp3.txt tmpB.txt > tmp4.txt
+comm -23 tmp3.txt tmp_domains.txt > tmp_unique.txt
 
-awk '{print "||" $0 "^"}' tmp4.txt > tmp5.txt
+awk '{print "||" $0 "^"}' tmp_unique.txt > tmp_adblock_pending.txt
 
-cat tmp5.txt "$adblock_list" > tmpC.txt
+cat tmp_adblock_pending.txt >> tmp_adblock.txt
 
-sort tmpC.txt -o tmpD.txt
+sort tmp_adblock.txt -o tmp_adblock2.txt
 
-num_entries=$(wc -l < tmpD.txt)
+num_entries=$(wc -l < tmp_adblock2.txt)
 
 echo "# Title: Jarelllama's Scam Blocklist
 # Description: Blocklist for scam sites extracted from Google
@@ -33,7 +32,7 @@ echo "# Title: Jarelllama's Scam Blocklist
 # Last modified: $(date -u)
 # Syntax: Adblock Plus
 # Total number of entries: $num_entries
-" | cat - tmpD.txt > "$adblock_file"
+" | cat - tmp_adblock2.txt > "$adblock_file"
 
 rm tmp*.txt
 
