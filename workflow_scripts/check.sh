@@ -44,9 +44,9 @@ mv tmp6.txt "$domains_file"
 num_after=$(wc -l < "$domains_file")
 
 if [[ "$num_before" -eq "$num_after" ]]; then
-    echo -e "\nNo entries removed.\n"
+    echo -e "\nNo entries removed."
 else
-    echo -e "\nTotal entries removed: $((num_before - num_after))\n"
+    echo -e "\nTotal entries removed: $((num_before - num_after))"
     error=1
 fi
 
@@ -55,6 +55,8 @@ rm tmp*.txt
 if [[ "$error" == 0 ]]; then
     exit 0
 fi
+
+echo ""
 
 git config user.email "$github_email"
 git config user.name "$github_name"
