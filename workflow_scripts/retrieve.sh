@@ -105,12 +105,19 @@ sort -u tmp8.txt -o tmp9.txt
 
 comm -23 tmp9.txt tmp_domains_file.txt > "$pending_file"
 
-grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp_in_toplist.txt
+if ! [[ -s "$pending_file" ]]; then
+    echo -e "\nNo pending domains. Exiting...\n"
+    rm tmp*.txt
+    exit 0
+fi
+
+grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp_in_toplist.txt
 
 if [[ -s tmp_in_toplist.txt ]]; then
-    echo -e "\nDomains in toplist:"
+    echo -e "\nDomains found in toplist:"
     grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
     echo ""
+    echo -e "Exiting...\n"
     exit 1
 fi
 
@@ -123,8 +130,6 @@ echo ""
 rm tmp*.txt
 
 echo -e "Merging with blocklist...\n"
-
-grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
 
 cat "$pending_file" >> tmp_domains_file.txt 
 
