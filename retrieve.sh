@@ -36,12 +36,12 @@ for arg in "$@"; do
     if [[ "$arg" == "d" ]]; then
         debug=1
     fi
-    if [[ "$arg" == "y" ]]; then
+    if [[ "$arg" == "a" ]]; then
+        time="any"
+    elif [[ "$arg" == "y" ]]; then
         time="year"
     elif [[ "$arg" == "m" ]]; then
         time="month"
-    elif [[ "$arg" == "w" ]]; then
-        time="week"
     fi
 done
 
