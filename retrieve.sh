@@ -161,7 +161,7 @@ function filter_pending {
     comm -23 tmp9.txt tmp_domains_file.txt > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
-    echo "Pending domains not in blocklist: $(wc -l < "$pending_file")"
+    echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
     echo "Domains:"
     cat "$pending_file"
     echo -e "\nDomains in toplist:"
