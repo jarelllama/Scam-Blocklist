@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: echo "run1" > test.txt
-      - run: echo "run2" >> test.txt
-      - run: echo "run2" >> test.txt
+      - run: echo "run1" > temp.txt
+      - run: echo "run2" >> temp.txt
+      - run: echo "run2" >> temp.txt
       - name: Push changes
         run: bash "workflow_scripts/test.sh"
