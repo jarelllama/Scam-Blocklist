@@ -27,6 +27,7 @@ grep -vxFf tmp_flipped_dead.txt tmp_flipped.txt > tmp_flipped_alive.txt
 grep -vxFf tmp1.txt tmp_flipped_alive.txt > tmp_flipped_unique.txt
 
 if ! [[ -s tmp_flipped_unique.txt ]]; then
+    echo -e "\nNo domains added.\n"
     rm tmp*.txt
     exit 0
 fi
