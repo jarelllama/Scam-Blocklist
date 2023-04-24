@@ -2,7 +2,7 @@ name: Generate lists
 run-name: Generate lists
 on:
   push:
-    path:
+    paths:
       - "raw.txt"
 
 jobs:
