@@ -1,0 +1,13 @@
+name: Generate adblock list
+run-name: Generate adblock list
+on:
+  push:
+    paths:
+      - "raw.txt"
+jobs:
+  Generate-adblock-list:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run generate_adblock.sh
+        run: bash "workflow_scripts/generate_adblock.sh"
