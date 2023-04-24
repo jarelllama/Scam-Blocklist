@@ -2,6 +2,8 @@
 
 raw_file="raw.txt"
 adblock_file="adblock.txt"
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
 
 grep -vE '^(#|$)' "$raw_file" > tmp1.txt
 
