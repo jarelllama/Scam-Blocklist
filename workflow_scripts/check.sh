@@ -44,13 +44,11 @@ mv tmp6.txt "$domains_file"
 num_after=$(wc -l < "$domains_file")
 
 if [[ "$num_before" -eq "$num_after" ]]; then
-    echo -e "\nNo entries removed."
+    echo -e "\nNo entries removed.\n"
 else
-    echo -e "\nTotal entries removed: $((num_before - num_after))"
+    echo -e "\nTotal entries removed: $((num_before - num_after))\n"
     error=1
 fi
-
-echo ""
 
 rm tmp*.txt
 
