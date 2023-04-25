@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run update_readme.sh
-        run: bash "workflow_scripts/update_readme.sh
+        run: bash "workflow_scripts/update_readme.sh"
