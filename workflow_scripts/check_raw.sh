@@ -6,40 +6,38 @@ github_name="jarelllama"
 
 error=0
 
-grep -vE '^(#|$)' "$raw_file" > 1.tmp
-
-if grep -q '^[[:space:]]*$' 1.tmp; then
+if grep -q '^[[:space:]]*$' "$raw_file"; then
     echo -e "\nThe blocklist contains empty lines."
     error=1
 fi
 
-awk NF 1.tmp > 2.tmp
+awk NF "$raw_file" > 1.tmp
 
-if grep -q '[A-Z]' 2.tmp; then
+if grep -q '[A-Z]' 1.tmp; then
     echo -e "\nThe blocklist contains capitalized letters:"
-    grep '[A-Z]' 2.tmp | awk '{print $0 " (case)"}'
+    grep '[A-Z]' 1.tmp | awk '{print $0 " (case)"}'
     error=1
 fi
 
-tr '[:upper:]' '[:lower:]' < 2.tmp > 3.tmp
+tr '[:upper:]' '[:lower:]' < 1.tmp > 2.tmp
 
-num_before=$(wc -l < 3.tmp)
+num_before=$(wc -l < 2.tmp)
 
 echo -e "\nEntries removed (if any):"
 
-awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' 3.tmp
+awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' 2.tmp
 
-sort -u 3.tmp -o 3.tmp
+sort -u 2.tmp -o 2.tmp
 
-grep -E '\.(edu|gov)$' 3.tmp | awk '{print $0 " (TLD)"}'
+grep -E '\.(edu|gov)$' 2.tmp | awk '{print $0 " (TLD)"}'
 
-grep -vE '\.(edu|gov)$' 3.tmp > 4.tmp
+grep -vE '\.(edu|gov)$' 2.tmp > 3.tmp
 
-grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 4.tmp | awk '{print $0 " (invalid)"}'
+grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 3.tmp | awk '{print $0 " (invalid)"}'
     
-grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 4.tmp > 5.tmp
+grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 3.tmp > 4.tmp
 
-mv 5.tmp "$raw_file"
+mv 4.tmp "$raw_file"
 
 num_after=$(wc -l < "$raw_file")
 
