@@ -1,6 +1,6 @@
 #!/bin/bash
 
-raw_file="raw.txt"
+raw_file="data/raw.txt"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
