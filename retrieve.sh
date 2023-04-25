@@ -35,6 +35,8 @@ done
 
 declare -A retrieved_domains
 
+user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+
 echo -e "\nSearch filter: $time_filter"
 echo "Search terms:"
 
@@ -43,8 +45,6 @@ while IFS= read -r term; do
     if ! [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
         # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
-
-        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
         google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
 
