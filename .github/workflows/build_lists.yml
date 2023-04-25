@@ -14,6 +14,6 @@ jobs:
       - name: Build Adblock Plus list
         run: bash "workflow_scripts/build_adblock.sh"
       - name: Update domains/entries count
-        run: bash "workflow_scripts/update_count.sh"
+        run: bash "workflow_scripts/update_readme.sh"
       - name: Push changes
         run: bash "workflow_scripts/push_changes.sh"
