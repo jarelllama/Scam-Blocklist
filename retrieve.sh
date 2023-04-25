@@ -1,11 +1,11 @@
 #!/bin/bash
 
-raw_file="raw.txt"
+raw_file="data/raw.txt"
 pending_file="pending_domains.txt"
 search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
-toplist_file="toplist.txt"
+toplist_file="data/toplist.txt"
 edit_script="edit.sh"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
