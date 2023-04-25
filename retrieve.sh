@@ -86,7 +86,7 @@ function filter_pending {
 
     tr '[:upper:]' '[:lower:]' < tmp1.tmp > tmp2.tmp
 
-    # Note that sort writes the sorted list to a temporary file before moving it to the output file. Therefore the input and output file can be the same file
+    # Note that sort writes the sorted list to a temporary file before moving it to the output file. Therefore the input and output files can be the same
     sort -u tmp2.tmp -o tmp2.tmp
 
     # This removes the majority of pending domains and makes the further filtering more efficient
