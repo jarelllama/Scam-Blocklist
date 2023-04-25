@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run blacklist_dead.sh
-        run: bash "workflow_scripts/blacklist_dead.sh"
+      - name: Run remove_blacklist_dead.sh
+        run: bash "workflow_scripts/remove_blacklist_dead.sh"
