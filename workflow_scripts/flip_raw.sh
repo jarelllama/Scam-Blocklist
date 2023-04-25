@@ -2,11 +2,9 @@
 
 raw_file="data/raw.txt"
 
-grep -vE '^(#|$)' "$raw_file" > raw.tmp
+grep '^www\.' "$raw_file" > with_www.tmp
 
-grep '^www\.' raw.tmp > with_www.tmp
-
-comm -23 raw.tmp with_www.tmp > no_www.tmp
+comm -23 "$raw_file" with_www.tmp > no_www.tmp
 
 awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
 
@@ -24,7 +22,7 @@ cat flipped.tmp | xargs -I{} -P4 bash -c "
 
 grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
 
-grep -vxFf raw.tmp flipped_alive.tmp > flipped_unique.tmp
+grep -vxFf "$raw_file" flipped_alive.tmp > flipped_unique.tmp
 
 if ! [[ -s flipped_unique.tmp ]]; then
     echo -e "\nNo domains added.\n"
@@ -37,9 +35,9 @@ cat flipped_unique.tmp
 
 echo -e "\nTotal domains added: $(wc -l < flipped_unique.tmp)\n"
 
-cat flipped_unique.tmp >> raw.tmp
+cat flipped_unique.tmp >> "$raw_file"
 
-sort raw.tmp -o "$raw_file"
+sort "$raw_file" -o "$raw_file"
 
 rm *.tmp
 
