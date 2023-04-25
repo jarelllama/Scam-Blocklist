@@ -1,8 +1,8 @@
 #!/bin/bash
 
-domains_file="domains"
+raw_file="data/raw.txt"
 blacklist_file="blacklist.txt"
-toplist_file="toplist.txt"
+toplist_file="data/toplist.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
@@ -12,21 +12,21 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$toplist_file"
-git commit -qm "Update $toplist_file"
+git commit -qm "Update toplist.txt"
 git push -q
 
-grep -xFf "$domains_file" "$toplist_file" | grep -vxFf "$blacklist_file" > tmp_in_toplist.txt
+grep -xFf "$raw_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
-if ! [[ -s tmp_in_toplist.txt ]]; then
+if ! [[ -s in_toplist.tmp ]]; then
     echo -e "\nNo domains found in the updated toplist.\n"
-    rm tmp*.txt
+    rm *.tmp
     exit 0
 fi
 
 echo -e "\nDomains in toplist:"
-cat tmp_in_toplist.txt
+cat in_toplist.tmp
 echo ""
 
-rm tmp*.txt
+rm *.tmp
 
 exit 1
