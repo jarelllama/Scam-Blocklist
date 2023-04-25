@@ -47,5 +47,5 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$raw_file"
-git commit -qm "Add subdomains to raw.txt"
+git commit -qm "Add subdomains"
 git push -q
