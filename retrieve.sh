@@ -199,8 +199,9 @@ function merge_pending {
     git config user.email "$github_email"
     git config user.name "$github_name"
 
+    # Commit white/black lists too for when the user modified them
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
-    git commit -m "Update list(s)"
+    git commit -m "Update raw.txt"
     git push
 
     exit 0
