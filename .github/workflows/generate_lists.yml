@@ -1,19 +1,19 @@
-name: Generate lists
-run-name: Generate lists
+name: Generate blocklists
+run-name: Generate blocklists
 on:
   push:
     paths:
       - "data/raw.txt"
 jobs:
-  Generate-lists:
+  Generate-blocklists:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Generate Domains list
+      - name: Generate Domains blocklist
         run: bash "workflow_scripts/generate_domains.sh"
-      - name: Generate Adblock Plus list
+      - name: Generate Adblock Plus blocklist
         run: bash "workflow_scripts/generate_adblock.sh"
       - name: Add header to raw file
         run: bash "workflow_scripts/add_raw_header.sh"
-      - name: Push lists
+      - name: Push blocklists
         run: bash "workflow_scripts/push_lists.sh"
