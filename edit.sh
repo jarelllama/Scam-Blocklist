@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains_file="domains"
+raw_file="raw.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="toplist.txt"
@@ -30,32 +30,32 @@ function prep_entry {
         www_subdomain="www.${new_entry}"
     fi
 
-    echo "$new_entry" > tmp_entries.txt
+    echo "$new_entry" > entries.tmp
 
-    echo "$www_subdomain" >> tmp_entries.txt
+    echo "$www_subdomain" >> entries.tmp
             
-    sort tmp_entries.txt -o tmp_entries.txt
+    sort entries.tmp -o entries.tmp
 }
 
 function edit_blocklist {
     echo "BLOCKLIST"
     
-    cp "$domains_file" "$domains_file.bak"
+    cp "$raw_file" "$raw_file.bak"
 
-    grep -vE '^(#|$)' "$domains_file" > tmp_domains_file.txt
+    grep -vE '^(#|$)' "$raw_file" > raw.tmp
 
     prep_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFqf tmp_entries.txt tmp_domains_file.txt; then
+        if ! grep -xFqf entries.tmp raw.tmp; then
             echo -e "\nDomain not found in blocklist: $new_entry"
             return
         fi
 
         echo -e "\nDomains removed:"
-        comm -12 tmp_domains_file.txt tmp_entries.txt
+        comm -12 raw.tmp entries.tmp
 
-        comm -23 tmp_domains_file.txt tmp_entries.txt > "$domains_file"
+        comm -23 raw.tmp entries.tmp > "$raw_file"
 
         return
     fi
@@ -65,41 +65,41 @@ function edit_blocklist {
         return
     fi
 
-    if grep -xFf tmp_entries.txt "$toplist_file" | grep -vxFqf "$blacklist_file"; then
+    if grep -xFf entries.tmp "$toplist_file" | grep -vxFqf "$blacklist_file"; then
         echo -e "\nThe domain is found in the toplist. Not added."
         echo "Matches in toplist:"
-        grep -xFf tmp_entries.txt  "$toplist_file" | grep -vxFf "$blacklist_file"
+        grep -xFf entries.tmp  "$toplist_file" | grep -vxFf "$blacklist_file"
         return
     fi
 
-    touch tmp_alive_entries.txt
+    touch alive_entries.tmp
 
     while read -r entry; do
         if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
             continue
         fi
-        echo "$entry" >> tmp_alive_entries.txt
-    done < tmp_entries.txt
+        echo "$entry" >> alive_entries.tmp
+    done < entries.tmp
 
-    if ! [[ -s tmp_alive_entries.txt ]]; then
+    if ! [[ -s alive_entries.tmp ]]; then
         echo -e "\nThe domain is dead. Not added."
         return
     fi
 
-    mv tmp_alive_entries.txt tmp_entries.txt
+    mv alive_entries.tmp entries.tmp
   
     # This checks if there are no unique entries in the new entries file
-    if grep -xFqf tmp_entries.txt tmp_domains_file.txt; then
+    if grep -xFqf entries.tmp raw.tmp; then
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
     fi        
 
     echo -e "\nDomains added:"
-    comm -23 tmp_entries.txt tmp_domains_file.txt
+    comm -23 entries.tmp raw.tmp
 
-    cat tmp_entries.txt >> tmp_domains_file.txt 
+    cat entries.tmp >> raw.tmp 
 
-    sort -u tmp_domains_file.txt -o "$domains_file"
+    sort -u raw.tmp -o "$raw_file"
 }
 
 function edit_whitelist {
@@ -144,17 +144,17 @@ function edit_blacklist {
     prep_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFqf tmp_entries.txt "$blacklist_file"; then
+        if ! grep -xFqf entries.tmp "$blacklist_file"; then
             echo -e "\nDomain not found in blacklist: $new_entry"
             return
         fi
 
         echo -e "\nDomains removed:"
-        comm -12 "$blacklist_file" tmp_entries.txt
+        comm -12 "$blacklist_file" entries.tmp
 
-        comm -23 "$blacklist_file" tmp_entries.txt > tmp1.txt
+        comm -23 "$blacklist_file" entries.tmp > tmp1.tmp
 
-        mv tmp1.txt "$blacklist_file"
+        mv tmp1.tmp "$blacklist_file"
 
         return
     fi
@@ -164,49 +164,49 @@ function edit_blacklist {
         return
     fi
 
-    touch tmp_alive_entries.txt
+    touch alive_entries.tmp
 
     while read -r entry; do
         if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
             continue
         fi
-        echo "$entry" >> tmp_alive_entries.txt
-    done < tmp_entries.txt
+        echo "$entry" >> alive_entries.tmp
+    done < entries.tmp
 
-    if ! [[ -s tmp_alive_entries.txt ]]; then
+    if ! [[ -s alive_entries.tmp ]]; then
         echo -e "\nThe domain is dead. Not added."
         return
     fi
 
-    mv tmp_alive_entries.txt tmp_entries.txt
+    mv alive_entries.tmp entries.tmp
   
     # This checks if there are no unique entries in the new entries file
-    if grep -xFqf tmp_entries.txt "$blacklist_file"; then
+    if grep -xFqf entries.tmp "$blacklist_file"; then
         echo -e "\nThe domain is already in the blacklist. Not added."
         return
     fi
 
     echo -e "\nDomains added:"
-    comm -23 tmp_entries.txt "$blacklist_file"
+    comm -23 entries.tmp "$blacklist_file"
 
-    cat tmp_entries.txt >> "$blacklist_file" 
+    cat entries.tmp >> "$blacklist_file" 
 
     sort -u "$blacklist_file" -o "$blacklist_file"
 }
 
 function check_entry {
     read -p $'\nEnter the entry to check:\n' check_entry
-    if ! grep -xFq "$check_entry" "$domains_file"; then
+    if ! grep -xFq "$check_entry" "$raw_file"; then
         echo -e "\nThe entry is not present."
-        if ! grep -Fq "$check_entry" "$domains_file"; then
+        if ! grep -Fq "$check_entry" "$raw_file"; then
             return
         fi
         echo "Similar entries:"
-        grep -F "$check_entry" "$domains_file"
+        grep -F "$check_entry" "$raw_file"
         return
     fi
     echo -e "\nThe entry is present."
-    grep -xFq "$check_entry" "$domains_file"
+    grep -xFq "$check_entry" "$raw_file"
 }
 
 function push_changes {
@@ -215,7 +215,7 @@ function push_changes {
     git config user.email "$github_email"
     git config user.name "$github_name"
 
-    git add "$domains_file" "$whitelist_file" "$blacklist_file"
+    git add "$raw_file" "$whitelist_file" "$blacklist_file"
     git commit -m "Update domains"
     git push
 }
@@ -233,7 +233,7 @@ while true; do
     case "$choice" in
         1)
             edit_blocklist
-            rm tmp*.txt
+            rm *.tmp
             continue
             ;;
         2)
@@ -242,7 +242,7 @@ while true; do
             ;;
         3)
             edit_blacklist
-            rm tmp*.txt
+            rm *.tmp
             continue
             ;;
         c)
@@ -252,15 +252,15 @@ while true; do
         p)
             push_changes
 
-            if [[ -f tmp*.txt ]]; then
-                rm tmp*.txt
+            if [[ -f *.tmp ]]; then
+                rm *.tmp
             fi
 
             exit 0
             ;;
         x)
-            if [[ -f tmp*.txt ]]; then
-                rm tmp*.txt
+            if [[ -f *.tmp ]]; then
+                rm *.tmp
             fi
 
             # Check if the script was sourced by another script
