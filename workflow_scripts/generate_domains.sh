@@ -1,6 +1,6 @@
 #!/bin/bash
 
-raw_file="raw.txt"
+raw_file="data/raw.txt"
 domains_file="domains.txt"
 
 grep -vE '^(#|$)' "$raw_file" > raw.tmp
