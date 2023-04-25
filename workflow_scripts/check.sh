@@ -1,47 +1,47 @@
 #!/bin/bash
 
-domains_file="domains"
+raw_file="raw.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-grep -vE '^(#|$)' "$domains_file" > tmp1.txt
-
 error=0
 
-if grep -q '^[[:space:]]*$' tmp1.txt; then
+grep -vE '^(#|$)' "$raw_file" > 1.tmp
+
+if grep -q '^[[:space:]]*$' 1.tmp; then
     echo -e "\nThe blocklist contains empty lines."
     error=1
 fi
 
-awk NF tmp1.txt > tmp2.txt
+awk NF 1.tmp > 2.tmp
 
-if grep -q '[A-Z]' tmp2.txt; then
+if grep -q '[A-Z]' 2.tmp; then
     echo -e "\nThe blocklist contains capitalized letters:"
-    grep '[A-Z]' tmp2.txt | awk '{print $0 " (case)"}'
+    grep '[A-Z]' 2.tmp | awk '{print $0 " (case)"}'
     error=1
 fi
 
-tr '[:upper:]' '[:lower:]' < tmp2.txt > tmp3.txt
+tr '[:upper:]' '[:lower:]' < 2.tmp > 3.tmp
 
-num_before=$(wc -l < tmp3.txt)
+num_before=$(wc -l < 3.tmp)
 
 echo -e "\nEntries removed (if any):"
 
-awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' tmp3.txt
+awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' 3.tmp
 
-sort -u tmp3.txt -o tmp4.txt
+sort -u 3.tmp -o 3.tmp
 
-grep -E '\.(edu|gov)$' tmp4.txt | awk '{print $0 " (TLD)"}'
+grep -E '\.(edu|gov)$' 3.tmp | awk '{print $0 " (TLD)"}'
 
-grep -vE '\.(edu|gov)$' tmp4.txt > tmp5.txt
+grep -vE '\.(edu|gov)$' 3.tmp > 4.tmp
 
-grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt | awk '{print $0 " (invalid)"}'
+grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 4.tmp | awk '{print $0 " (invalid)"}'
     
-grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.txt > tmp6.txt
+grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 4.tmp > 5.tmp
 
-mv tmp6.txt "$domains_file"
+mv 5.tmp "$raw_file"
 
-num_after=$(wc -l < "$domains_file")
+num_after=$(wc -l < "$raw_file")
 
 if [[ "$num_before" -eq "$num_after" ]]; then
     echo -e "\nNo entries removed.\n"
@@ -50,17 +50,17 @@ else
     error=1
 fi
 
-rm tmp*.txt
+rm *.tmp
 
-if [[ "$error" == 0 ]]; then
+if [[ "$error" -eq 0 ]]; then
     exit 0
 fi
 
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-git add "$domains_file"
-git commit -qm "Remove invalid entries"
+git add "$raw_file"
+git commit -qm "Remove invalid entries from raw.txt"
 git push -q
 
 exit 1
