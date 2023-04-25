@@ -196,6 +196,13 @@ function edit_blacklist {
 
 function check_entry {
     read -p $'\nEnter the entry to check:\n' check_entry
+    
+    check_entry="${check_entry,,}"
+
+    check_entry="${check_entry#*://}"
+
+    check_entry="${check_entry%%/*}"
+    
     if ! grep -xFq "$check_entry" "$raw_file"; then
         echo -e "\nThe entry is not present."
         if ! grep -Fq "$check_entry" "$raw_file"; then
