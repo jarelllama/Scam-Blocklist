@@ -3,7 +3,7 @@ run-name: Generate lists
 on:
   push:
     paths:
-      - "raw.txt"
+      - "data/raw.txt"
 jobs:
   Generate-lists:
     runs-on: ubuntu-latest
