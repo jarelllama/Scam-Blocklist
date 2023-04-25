@@ -17,5 +17,5 @@ jobs:
         run: bash "workflow_scripts/add_raw_header.sh"
       - name: Update domains/entries count
         run: bash "workflow_scripts/update_count.sh"
-      - name: Push lists
-        run: bash "workflow_scripts/push_lists.sh"
+      - name: Push changes
+        run: bash "workflow_scripts/push_changes.sh"
