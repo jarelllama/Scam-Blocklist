@@ -94,9 +94,9 @@ function filter_pending {
 
     echo "Domains removed:"
 
-    comm -12 tmp3.tmp "$whitelist_file" | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-    comm -12 tmp3.tmp "$whitelist_file" | grep -vxFf "$blacklist_file" > whitelisted.tmp
+    grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
 
     comm -23 tmp3.tmp whitelisted.tmp > tmp4.tmp
 
