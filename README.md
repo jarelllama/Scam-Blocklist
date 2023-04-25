@@ -1,8 +1,9 @@
-**Note new Domains list and Adblock Plus list are currently in development.**
+### Blocklist
 
-Current number of domains: `3775`
-
-https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains
+| Syntax | Domains/Entries |
+| --- |:---:|
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2000 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 4000 |
 
 ### How domains are added to the blocklist
 
