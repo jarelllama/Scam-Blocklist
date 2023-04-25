@@ -40,7 +40,6 @@ echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
 while IFS= read -r term; do
-    # Checks if the line is non empty and not a comment
     if ! [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
         # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
@@ -81,47 +80,78 @@ num_retrieved=${#retrieved_domains[@]}
 function filter_pending {
     cp "$pending_file" "$pending_file.bak"
 
-    # Create a temporary copy of the domains file without the header
-    grep -vE '^(#|$)' "$raw_file" > tmp_raw_file.txt
+    grep -vE '^(#|$)' "$raw_file" > raw.tmp
 
-    awk NF "$pending_file" > tmp1.txt
+    awk NF "$pending_file" > tmp1.tmp
 
-    tr '[:upper:]' '[:lower:]' < tmp1.txt > tmp2.txt
+    tr '[:upper:]' '[:lower:]' < tmp1.tmp > tmp2.tmp
 
-    sort -u tmp2.txt -o tmp3.txt
+    sort -u tmp2.tmp -o tmp3.tmp
 
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 tmp3.txt tmp_raw_file.txt > tmp4.txt
+    comm -23 tmp3.tmp raw.tmp > tmp4.tmp
 
     echo "Domains removed:"
 
-    grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-    grep -Ff "$whitelist_file" tmp4.txt | grep -vxFf "$blacklist_file" > tmp_whitelisted.txt
+    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
 
-    # Both comm and grep were tested here. It seems when only a small file needs to be sorted, the performance is generally the same
-    comm -23 tmp4.txt <(sort tmp_whitelisted.txt) > tmp5.txt
+    comm -23 tmp4.txt whitelisted.tmp > tmp5.txt
 
-    grep -E '\.(edu|gov)$' tmp5.txt | awk '{print $0 " (TLD)"}'
+    grep -E '\.(edu|gov)$' tmp5.tmp | awk '{print $0 " (TLD)"}'
 
-    grep -vE '\.(edu|gov)$' tmp5.txt > tmp6.txt
+    grep -vE '\.(edu|gov)$' tmp5.tmp > tmp6.tmp
 
     # This regex checks for valid domains
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt | awk '{print $0 " (invalid)"}'
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp | awk '{print $0 " (invalid)"}'
     
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.txt > tmp7.txt
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp > tmp7.tmp
 
-    touch tmp_dead.txt
+    touch dead.tmp
 
     # Use parallel processing
-    cat tmp7.txt | xargs -I{} -P4 bash -c "
+    cat tmp7.tmp | xargs -I{} -P4 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> tmp_dead.txt
+            echo {} >> dead.tmp
             echo '{} (dead)'
         fi
     "
 
-    comm -23 tmp7.txt <(sort tmp_dead.txt) > "$pending_file"
+    # Both comm and grep were tested here. It seems when only a small file needs to be sorted, the performance is generally the same
+    grep -vxFf dead.tmp tmp7.tmp > tmp8.tmp
+
+    # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
+    # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
+
+    grep '^www\.' tmp8.tmp > with_www.tmp
+
+    grep -vxFf with_www.tmp tmp8.tmp > no_www.tmp
+
+    awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
+
+    awk '{print "www."$0}' no_www.tmp > with_www_new.tmp
+
+    cat no_www_new.tmp with_www_new.tmp > flipped.tmp
+
+    touch flipped_dead.tmp
+
+    cat flipped.tmp | xargs -I{} -P4 bash -c "
+        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> flipped_dead.tmp
+        fi
+    "
+
+    grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
+
+    cat flipped_alive.tmp >> tmp8.tmp
+
+    # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
+    sort -u tmp8.tmp -o tmp9.tmp
+
+    # Remove any new flipped domains that might already be in the blocklist
+    # This is done for accurate counting
+    comm -23 tmp9.tmp raw.tmp > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
@@ -131,7 +161,7 @@ function filter_pending {
     # About 8x faster than comm due to not needing to sort the toplist
     grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
     
-    rm tmp*.txt
+    rm *.tmp
 }
 
 function merge_pending {
@@ -139,13 +169,13 @@ function merge_pending {
 
     cp "$raw_file" "$raw_file.bak"
 
-    grep -vE '^(#|$)' "$raw_file" > tmp_raw_file.txt
+    grep -vE '^(#|$)' "$raw_file" > raw.tmp
 
-    num_before=$(wc -l < tmp_raw_file.txt)
+    num_before=$(wc -l < raw.tmp)
 
-    cat "$pending_file" >> tmp_raw_file.txt 
+    cat "$pending_file" >> raw.tmp 
 
-    sort -u tmp_raw_file.txt -o "$raw_file"
+    sort -u raw.tmp -o "$raw_file"
 
     num_after=$(wc -l < "$raw_file")
 
@@ -156,7 +186,7 @@ function merge_pending {
 
     > "$pending_file"
 
-    rm tmp*.txt
+    rm *.tmp
 
     read -p $'\nDo you want to push the updated blocklist? (y/N): ' answer
     if [[ "$answer" != "y" ]]; then
@@ -203,8 +233,8 @@ while true; do
             continue
             ;;
         x)
-            if [[ -f tmp*.txt ]]; then
-                rm tmp*.txt
+            if [[ -f *.tmp ]]; then
+                rm *.tmp
             fi
             exit 0
             ;;
