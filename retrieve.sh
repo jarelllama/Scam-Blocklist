@@ -183,8 +183,6 @@ function merge_pending {
 
     > "$pending_file"
 
-    rm *.tmp
-
     read -p $'\nDo you want to push the updated blocklist? (y/N): ' answer
     if [[ "$answer" != "y" ]]; then
         exit 0
