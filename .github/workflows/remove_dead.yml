@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run dead.sh
-        run: bash "workflow_scripts/dead.sh"
+      - name: Run remove_dead.sh
+        run: bash "workflow_scripts/remove_dead.sh"
