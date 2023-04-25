@@ -1,6 +1,7 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
+blacklist_file="blacklist.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
@@ -21,7 +22,9 @@ if ! [[ -s dead.tmp ]]; then
     exit 0
 fi
 
-comm -23 raw.tmp <(sort dead.tmp) > "$raw_file"
+grep -vxFf dead.tmp raw.tmp > "$raw_file"
+
+grep -vxFf dead.tmp "$blacklist_file" > "$blacklist_file"
 
 echo -e "\nDead domains:"
 cat dead.tmp
@@ -33,6 +36,6 @@ rm *.tmp
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-git add "$raw_file"
+git add "$raw_file" "$blacklist_file"
 git commit -qm "Remove dead domains"
 git push -q
