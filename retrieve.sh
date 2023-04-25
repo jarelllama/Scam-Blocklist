@@ -199,12 +199,8 @@ function merge_pending {
     git config user.email "$github_email"
     git config user.name "$github_name"
 
-    git add "$raw_file"
-    git commit -qm "Update $raw_file"
-    git add "$whitelist_file"
-    git commit -qm "Update $whitelist_file"
-    git add "$blacklist_file"
-    git commit -qm "Update $blacklist_file"
+    git add "$raw_file" "$whitelist_file" "$blacklist_file"
+    git commit -m "Update list(s)"
     git push
 
     exit 0
