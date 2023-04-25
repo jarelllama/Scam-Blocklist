@@ -11,7 +11,7 @@ sed -i 's/adblock_count/'"$adblock_count"'/g' "$template"
 
 sed -i 's/domains_count/'"$domains_count"'/g' "$template"
 
-sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%m UTC")"'/g' "$template"
+sed -i 's/update_time/'$(date -u +"%a %b %d %H:%m UTC")'/g' "$template"
 
 cp "$template" "$readme"
 
