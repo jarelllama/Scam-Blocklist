@@ -23,5 +23,5 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$readme"
-git commit -qm "Update README"
-git push -q
+git commit -m "Update README"
+git push
