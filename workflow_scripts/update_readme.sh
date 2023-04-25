@@ -4,6 +4,8 @@ readme="README.md"
 template="data/README.md.template"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
 
 adblock_count=$(grep -vE '^(!|$)' "$adblock_file" | wc -l)
 
