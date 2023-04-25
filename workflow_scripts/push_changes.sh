@@ -1,5 +1,6 @@
 #!/bin/bash
 
+readme="README.md"
 raw_file="data/raw.txt"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
@@ -9,6 +10,6 @@ github_name="jarelllama"
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-git add "$domains_file" "$adblock_file" "$raw_file"
+git add "$domains_file" "$adblock_file" "$raw_file" "$readme"
 git commit -m "Update blocklist"
 git push
