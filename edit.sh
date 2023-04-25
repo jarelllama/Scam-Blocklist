@@ -216,7 +216,7 @@ function push_changes {
     git config user.name "$github_name"
 
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
-    git commit -m "Update domains"
+    git commit -m "Update lists"
     git push
 }
 
