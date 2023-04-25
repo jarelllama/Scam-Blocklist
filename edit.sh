@@ -1,9 +1,9 @@
 #!/bin/bash
 
-raw_file="raw.txt"
+raw_file="data/raw.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
-toplist_file="toplist.txt"
+toplist_file="data/toplist.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
