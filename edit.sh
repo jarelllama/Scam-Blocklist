@@ -42,20 +42,18 @@ function edit_blocklist {
     
     cp "$raw_file" "$raw_file.bak"
 
-    grep -vE '^(#|$)' "$raw_file" > raw.tmp
-
     prep_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFqf entries.tmp raw.tmp; then
+        if ! grep -xFqf entries.tmp "$raw_file"; then
             echo -e "\nDomain not found in blocklist: $new_entry"
             return
         fi
 
         echo -e "\nDomains removed:"
-        comm -12 raw.tmp entries.tmp
+        comm -12 "$raw_file" entries.tmp
 
-        comm -23 raw.tmp entries.tmp > "$raw_file"
+        comm -23 "$raw_file" entries.tmp > "$raw_file"
 
         return
     fi
@@ -89,17 +87,17 @@ function edit_blocklist {
     mv alive_entries.tmp entries.tmp
   
     # This checks if there are no unique entries in the new entries file
-    if grep -xFqf entries.tmp raw.tmp; then
+    if grep -xFqf entries.tmp "$raw_file"; then
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
     fi        
 
     echo -e "\nDomains added:"
-    comm -23 entries.tmp raw.tmp
+    comm -23 entries.tmp "$raw_file"
 
-    cat entries.tmp >> raw.tmp 
+    cat entries.tmp >> "$raw_file" 
 
-    sort -u raw.tmp -o "$raw_file"
+    sort -u "$raw_file" -o "$raw_file"
 }
 
 function edit_whitelist {
