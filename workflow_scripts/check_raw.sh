@@ -60,7 +60,7 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$raw_file"
-git commit -qm "Remove invalid entries from raw.txt"
+git commit -qm "Remove invalid entries"
 git push -q
 
 exit 1
