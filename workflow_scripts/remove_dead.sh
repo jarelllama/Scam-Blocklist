@@ -1,38 +1,38 @@
 #!/bin/bash
 
-domains_file="domains"
+raw_file="data/raw.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-grep -vE '^(#|$)' "$domains_file" > tmp1.txt
+grep -vE '^(#|$)' "$raw_file" > raw.tmp
 
-touch tmp_dead.txt
+touch dead.tmp
 
-cat tmp1.txt | xargs -I{} -P8 bash -c "
+cat raw.tmp | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-      echo {} >> tmp_dead.txt
+      echo {} >> dead.tmp
       echo '{} (dead)'
   fi
 "
 
-if ! [[ -s tmp_dead.txt ]]; then
+if ! [[ -s dead.tmp ]]; then
     echo -e "\nNo dead domains found.\n"
-    rm tmp*.txt
+    rm *.tmp
     exit 0
 fi
 
-comm -23 tmp1.txt <(sort tmp_dead.txt) > "$domains_file"
+comm -23 raw.tmp <(sort dead.tmp) > "$raw_file"
 
 echo -e "\nDead domains:"
-cat tmp_dead.txt
+cat dead.tmp
 
-echo -e "\nTotal domains removed: $(wc -l < tmp_dead.txt)\n"
+echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
 
-rm tmp*.txt
+rm *.tmp
 
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-git add "$domains_file"
+git add "$raw_file"
 git commit -qm "Remove dead domains"
 git push -q
