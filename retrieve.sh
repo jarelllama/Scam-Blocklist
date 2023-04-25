@@ -80,8 +80,6 @@ num_retrieved=${#retrieved_domains[@]}
 function filter_pending {
     cp "$pending_file" "$pending_file.bak"
 
-    grep -vE '^(#|$)' "$raw_file" > raw.tmp
-
     awk NF "$pending_file" > tmp1.tmp
 
     tr '[:upper:]' '[:lower:]' < tmp1.tmp > tmp2.tmp
@@ -90,7 +88,7 @@ function filter_pending {
     sort -u tmp2.tmp -o tmp2.tmp
 
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 tmp2.tmp raw.tmp > tmp3.tmp
+    comm -23 tmp2.tmp "$raw_file" > tmp3.tmp
 
     echo "Domains removed:"
 
@@ -152,7 +150,7 @@ function filter_pending {
 
     # Remove any new flipped domains that might already be in the blocklist
     # This is done for accurate counting
-    comm -23 tmp8.tmp raw.tmp > "$pending_file"
+    comm -23 tmp8.tmp "$raw_file" > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
@@ -170,13 +168,11 @@ function merge_pending {
 
     cp "$raw_file" "$raw_file.bak"
 
-    grep -vE '^(#|$)' "$raw_file" > raw.tmp
+    num_before=$(wc -l < "$raw_file")
 
-    num_before=$(wc -l < raw.tmp)
+    cat "$pending_file" >> "$raw_file" 
 
-    cat "$pending_file" >> raw.tmp 
-
-    sort -u raw.tmp -o "$raw_file"
+    sort -u "$raw_file" -o "$raw_file"
 
     num_after=$(wc -l < "$raw_file")
 
