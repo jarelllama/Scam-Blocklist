@@ -3,17 +3,15 @@
 raw_file="data/raw.txt"
 adblock_file="adblock.txt"
 
-grep -vE '^(#|$)' "$raw_file" > raw.tmp
-
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
-awk '{sub(/^www\./, ""); print}' raw.tmp > raw2.tmp
+awk '{sub(/^www\./, ""); print}' "$raw_file" > raw.tmp
 
-sort -u raw2.tmp -o raw3.tmp
+sort -u raw.tmp -o raw.tmp
 
-awk '{print "||" $0 "^"}' raw3.tmp > raw.tmp
+awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
 
-if diff -q adblock.tmp raw.tmp >/dev/null; then
+if diff -q adblock.tmp raw2.tmp >/dev/null; then
    echo -e "\nNo changes. Exiting...\n"
    rm *.tmp
    exit 0
@@ -21,7 +19,7 @@ fi
 
 num_before=$(wc -l < adblock.tmp)
 
-cp raw.tmp adblock.tmp
+cp raw2.tmp adblock.tmp
 
 num_after=$(wc -l < adblock.tmp)
 
