@@ -3,25 +3,25 @@
 raw_file="raw.txt"
 adblock_file="adblock.txt"
 
-grep -vE '^(!|$)' "$raw_file" > tmp1.txt
+grep -vE '^(#|$)' "$raw_file" > raw.tmp
 
-awk '{sub(/^www\./, ""); print}' tmp1.txt > tmp2.txt
+grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
-sort -u tmp2.txt -o tmp3.txt
+awk '{sub(/^www\./, ""); print}' raw.tmp > raw2.tmp
 
-grep -vE '^(#|$)' "$adblock_file" > tmp_adblock.txt
+sort -u raw2.tmp -o raw3.tmp
 
-awk '{sub(/^\|\|/, ""); sub(/\^$/, ""); print}' tmp_adblock.txt > tmp_domains.txt
+awk '{print "||" $0 "^"}' raw3.tmp > raw.tmp
 
-comm -23 tmp3.txt tmp_domains.txt > tmp_unique.txt
+if diff -q adblock.tmp raw.tmp >/dev/null; then
+   echo -e "\nNo changes. Exiting...\n"
+   rm *.tmp
+   exit 0
+fi
 
-awk '{print "||" $0 "^"}' tmp_unique.txt > tmp_adblock_pending.txt
+cp raw.tmp adblock.tmp
 
-cat tmp_adblock_pending.txt >> tmp_adblock.txt
-
-sort tmp_adblock.txt -o tmp_adblock2.txt
-
-num_entries=$(wc -l < tmp_adblock2.txt)
+num_entries=$(wc -l < adblock.tmp)
 
 echo "! Title: Jarelllama's Scam Blocklist
 ! Description: Blocklist for scam sites extracted from Google
@@ -30,6 +30,6 @@ echo "! Title: Jarelllama's Scam Blocklist
 ! Last modified: $(date -u)
 ! Syntax: Adblock Plus
 ! Total number of entries: $num_entries
-" | cat - tmp_adblock2.txt > "$adblock_file"
+" | cat - adblock.tmp > "$adblock_file"
 
-rm tmp*.txt
+rm *.tmp
