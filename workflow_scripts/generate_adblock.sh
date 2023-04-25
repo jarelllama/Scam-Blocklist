@@ -19,9 +19,15 @@ if diff -q adblock.tmp raw.tmp >/dev/null; then
    exit 0
 fi
 
+num_before=$(wc -l < adblock.tmp)
+
 cp raw.tmp adblock.tmp
 
-num_entries=$(wc -l < adblock.tmp)
+num_after=$(wc -l < adblock.tmp)
+
+echo -e "\nTotal entries before: $num_before"
+echo "Total entries added: $((num_after - num_before))"
+echo -e "Final entries after: $num_after\n"
 
 echo "! Title: Jarelllama's Scam Blocklist
 ! Description: Blocklist for scam sites extracted from Google
@@ -29,7 +35,7 @@ echo "! Title: Jarelllama's Scam Blocklist
 ! License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 ! Last modified: $(date -u)
 ! Syntax: Adblock Plus
-! Total number of entries: $num_entries
+! Total number of entries: $num_after
 " | cat - adblock.tmp > "$adblock_file"
 
 rm *.tmp
