@@ -3,11 +3,9 @@
 raw_file="data/raw.txt"
 domains_file="domains.txt"
 
-grep -vE '^(#|$)' "$raw_file" > raw.tmp
-
 grep -vE '^(#|$)' "$domains_file" > domains.tmp
 
-if diff -q domains.tmp raw.tmp >/dev/null; then
+if diff -q domains.tmp "$raw_file" >/dev/null; then
    echo -e "\nNo changes. Exiting...\n"
    rm *.tmp
    exit 0
@@ -15,7 +13,7 @@ fi
 
 num_before=$(wc -l < domains.tmp)
 
-cp raw.tmp domains.tmp
+cp "$raw_file" domains.tmp
 
 num_after=$(wc -l < domains.tmp)
 
