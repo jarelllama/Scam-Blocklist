@@ -16,6 +16,8 @@ adblock_count=$(wc -l < adblock.tmp)
 
 domains_count=$(wc -l < domains.tmp)
 
-sed -i "${adblock_line_num}s/[1-9]\{3,\}/$adblock_count/" "$readme"
+sed -i "${adblock_line_num}s/[0-9]\{4,\}/$adblock_count/" "$readme"
 
-sed -i "${domains_line_num}s/[1-9]\{3,\}/$domains_count/" "$readme"
+sed -i "${domains_line_num}s/[0-9]\{4,\}/$domains_count/" "$readme"
+
+rm *.tmp
