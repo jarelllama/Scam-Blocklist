@@ -5,7 +5,7 @@
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2283 |
 | [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 3823 |
 
-Updated: Tue Apr 25 18:33 UTC
+Updated: Tue Apr 25 18:45 UTC
 
 ### How domains are added to the blocklist
 
@@ -20,7 +20,7 @@ Updated: Tue Apr 25 18:33 UTC
 
 Resolving `www` subdomains are included in the domains list. This is so lists that don't support wildcards (Pihole) can block both `example.com` and `www.example.com`.
 
-Some malicious domains found in r/Scams are also added after being manually vetted.
+Malicious domains found in r/Scams are also added after being manually vetted.
 
 ### Goal
 
