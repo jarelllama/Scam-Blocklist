@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run whitelist.sh
-        run: bash "workflow_scripts/whitelist.sh"
+        run: bash "workflow_scripts/whitelist_check.sh"
