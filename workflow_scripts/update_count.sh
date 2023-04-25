@@ -8,13 +8,9 @@ adblock_line_num=$(cat README.md | grep -n "| \[Adblock Plus\](https://raw" | cu
 
 domains_line_num=$(cat README.md | grep -n "| \[Domains\](https://raw" | cut -d ":" -f 1)
 
-grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
+adblock_count=$(grep -vE '^(!|$)' "$adblock_file" | wc -l)
 
-grep -vE '^(#|$)' "$domains_file" > domains.tmp
-
-adblock_count=$(wc -l < adblock.tmp)
-
-domains_count=$(wc -l < domains.tmp)
+domains_count=$(grep -vE '^(#|$)' "$domains_file" | wc -l)
 
 sed -i "${adblock_line_num}s/[0-9]\{4,\}/$adblock_count/" "$readme"
 
