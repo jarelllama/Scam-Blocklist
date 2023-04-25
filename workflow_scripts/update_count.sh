@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readme=README.md
+readme="README.md"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
 
