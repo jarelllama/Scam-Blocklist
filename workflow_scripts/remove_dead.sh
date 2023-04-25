@@ -5,11 +5,9 @@ blacklist_file="blacklist.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-grep -vE '^(#|$)' "$raw_file" > raw.tmp
-
 touch dead.tmp
 
-cat raw.tmp | xargs -I{} -P8 bash -c "
+cat "$raw_file" | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
       echo {} >> dead.tmp
       echo '{} (dead)'
@@ -22,9 +20,13 @@ if ! [[ -s dead.tmp ]]; then
     exit 0
 fi
 
-grep -vxFf dead.tmp raw.tmp > "$raw_file"
+grep -vxFf dead.tmp "$raw_file" > raw.tmp
 
-grep -vxFf dead.tmp "$blacklist_file" > "$blacklist_file"
+mv raw.tmp "$raw_file"
+
+grep -vxFf dead.tmp "$blacklist_file" > blacklist.tmp
+
+mv blacklist.tmp "$blacklist_file"
 
 echo -e "\nDead domains:"
 cat dead.tmp
