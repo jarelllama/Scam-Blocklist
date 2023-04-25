@@ -4,9 +4,7 @@ raw_file="data/raw.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 
-grep -vE '^(#|$)' "$raw_file" > raw.tmp
-
-grep -Ff "$whitelist_file" raw.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+grep -Ff "$whitelist_file" "$raw_file" | grep -vxFf "$blacklist_file" > whitelisted.tmp
 
 if ! [[ -s whitelisted.tmp ]]; then
     echo -e "\nNo whitelisted domains found.\n"
