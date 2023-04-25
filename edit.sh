@@ -53,7 +53,9 @@ function edit_blocklist {
         echo -e "\nDomains removed:"
         comm -12 "$raw_file" entries.tmp
 
-        comm -23 "$raw_file" entries.tmp > "$raw_file"
+        comm -23 "$raw_file" entries.tmp > raw.tmp
+        
+        mv raw.tmp "$raw_file"
 
         return
     fi
@@ -150,9 +152,9 @@ function edit_blacklist {
         echo -e "\nDomains removed:"
         comm -12 "$blacklist_file" entries.tmp
 
-        comm -23 "$blacklist_file" entries.tmp > tmp1.tmp
+        comm -23 "$blacklist_file" entries.tmp > blacklist.tmp
 
-        mv tmp1.tmp "$blacklist_file"
+        mv blacklist.tmp "$blacklist_file"
 
         return
     fi
