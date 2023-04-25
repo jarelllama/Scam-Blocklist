@@ -10,5 +10,5 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$domains_file" "$adblock_file" "$raw_file"
-git commit -m "Update lists"
+git commit -m "Update blocklists"
 git push
