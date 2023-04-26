@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run retrieve.sh
-        run: bash "workflow_scripts/retrieve.sh"
+      - name: Run auto_retrieve.sh
+        run: bash "workflow_scripts/auto_retrieve.sh"
