@@ -1,7 +1,7 @@
 #!/bin/bash
 
 readme="README.md"
-template="data/README.md.template"
+template="data/README.md"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
 
