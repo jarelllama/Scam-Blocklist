@@ -70,6 +70,7 @@ while IFS= read -r term; do
             fi
             # Add the unique domain to the associative array
             retrieved_domains["$domain"]=1
+            # Note that echo creates the file when it doesn't already exist
             echo "$domain" >> "$pending_file"
         done
     fi
