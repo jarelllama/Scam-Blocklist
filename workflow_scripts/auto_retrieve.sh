@@ -26,7 +26,6 @@ while IFS= read -r term; do
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
         echo "$term"
-
         echo "Domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------"
 	for domain in $domains; do
