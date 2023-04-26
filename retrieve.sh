@@ -19,15 +19,18 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
+# Default values
 debug=0
-
-# Set the default time filter
+unattended=0
 time_filter="a"
 
 for arg in "$@"; do
     if [[ "$arg" == "d" ]]; then
         debug=1
-    # Set the time filter to argument specified on runtime
+    elif [[ "$arg" == "u" ]]; then
+        unattended=1
+        time_filter="y"
+        echo -e "\nRetrieving domains..."
     else
         time_filter="$arg"
     fi
@@ -60,7 +63,7 @@ while IFS= read -r term; do
 
         # wc -w does a better job than wc -l for counting domains in this case
         echo "Domains retrieved: $(echo "$domains" | wc -w)"
-        echo "--------------------------------------------"
+        echo "--------------------------------------"
 
         # Check if each domain is already in the retrieved domains associative array
         # Note that quoting $domains causes errors
@@ -92,7 +95,7 @@ function filter_pending {
     # This removes the majority of pending domains and makes the further filtering more efficient
     comm -23 tmp2.tmp "$raw_file" > tmp3.tmp
 
-    echo "Domains removed:"
+    echo -e "\nDomains removed:"
 
     grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
@@ -157,20 +160,35 @@ function filter_pending {
     # This is done for accurate counting
     comm -23 tmp7.tmp "$raw_file" > "$pending_file"
 
+    if ! [[ -s "$pending_file" && "$unattended" -eq 1 ]]; then
+        echo -e "\nNo pending domains. Exiting...\n"
+        rm *.tmp
+        exit 0
+    fi
+
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
     echo "Domains:"
     cat "$pending_file"
-    echo -e "\nDomains in toplist:"
+    
     # About 8x faster than comm due to not needing to sort the toplist
-    grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file"
+    grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
+
+    if [[ -s in_toplist.tmp && "$unattended" -eq 1 ]]; then
+        echo -e "\nDomains found in toplist:"
+        cat in_toplist.tmp
+        echo -e "\nExiting...\n"
+        rm *.tmp
+        exit 1
+    fi
+    
+    echo -e "\nDomains in toplist:"
+    cat in_toplist.tmp
     
     rm *.tmp
 }
 
 function merge_pending {
-    echo "Merge with blocklist"
-
     cp "$raw_file" "$raw_file.bak"
 
     num_before=$(wc -l < "$raw_file")
@@ -181,16 +199,21 @@ function merge_pending {
 
     num_after=$(wc -l < "$raw_file")
 
-    echo "--------------------------------------------"
-    echo "Total domains before: $num_before"
+    echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Final domains after: $num_after"
 
     > "$pending_file"
 
-    read -p $'\nDo you want to push the updated blocklist? (y/N): ' answer
-    if [[ "$answer" != "y" ]]; then
-        exit 0
+    if [[ unattended -eq 0 ]]; then
+        read -p $'\nDo you want to push the updated blocklist? (y/N): ' answer
+        if [[ "$answer" != "y" ]]; then
+            exit 0
+        fi
+        commit_msg="Update raw.txt"
+    else
+        echo -e "\nPushing changes..."
+        commit_msg="Automatic domain retrieval"
     fi
 
     echo ""
@@ -200,13 +223,18 @@ function merge_pending {
 
     # Commit white/black lists too for when the user modified them
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
-    git commit -m "Update raw.txt"
+    git commit -m "$commit_msg"
     git push
 
     exit 0
 }
 
 filter_pending
+
+if [[ "$unattended" -eq 1 ]]; then
+    echo -e "\nMerging with blocklist..."
+    merge_pending
+fi
 
 while true; do
     echo -e "\nPending Domains Menu:"
@@ -218,6 +246,7 @@ while true; do
 
     case "$choice" in
         1)
+            echo "Merge with blocklist"
             merge_pending
             ;;
         2)
