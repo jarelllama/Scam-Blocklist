@@ -5,6 +5,8 @@ redundant_entries="data/redundant_entries.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
+touch "$redundant_entries"
+
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
 while read -r entry; do
