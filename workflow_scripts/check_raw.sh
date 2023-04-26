@@ -35,9 +35,7 @@ grep -vE '\.(edu|gov)$' 2.tmp > 3.tmp
 
 grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 3.tmp | awk '{print $0 " (invalid)"}'
     
-grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 3.tmp > 4.tmp
-
-mv 4.tmp "$raw_file"
+grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 3.tmp > "$raw_file"
 
 num_after=$(wc -l < "$raw_file")
 
