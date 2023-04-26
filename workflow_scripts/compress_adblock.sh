@@ -14,12 +14,12 @@ done < adblock.tmp
 # The output has a high chance of having duplicates
 sort -u "$redundant_rules" -o "$redundant_rules"
 
-rm *.tmp
-
 if ! [[ -s "$redundant_rules" ]]; then
     echo -e "\nNo redundant rules found.\n"
     exit 0
 fi
+
+rm *.tmp
 
 git config user.email "$github_email"
 git config user.name "$github_name"
