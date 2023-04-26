@@ -2,10 +2,10 @@ name: Add www subdomains
 run-name: Add www subdomains
 on:
   schedule:
-    # Daily at 4am (GMT+8)
-    - cron: "0 20 * * *"
+    # Daily at 3:30am (GMT+8)
+    - cron: "30 19 * * *"
 jobs:
-  add-www-subdomains:
+  Add-www-subdomains:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
