@@ -13,12 +13,11 @@ Updated: Wed Apr 26 06:08 UTC
 - Invalid entries (non domains) are removed
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.)
 - Domains with whitelisted TLDs (edu, gov) are removed
-- Domains are compared against the Umbrella Toplist
+- Domains are compared against the Cisco Umbrella Toplist
 - Domains found in the toplist are checked manually
 - Dead domains are removed
+- Resolving `www` subdomains are included in the domains list
 - Domains that are found in toplist/whitelist updates are vetted manually
-
-Resolving `www` subdomains are included in the domains list. This is so lists that don't support wildcards (Pihole) can block both `example.com` and `www.example.com`.
 
 Malicious domains found in r/Scams are also added after being manually vetted.
 
