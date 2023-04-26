@@ -2,8 +2,8 @@ name: Valid entries check
 run-name: Valid entries check
 on:
   schedule:
-    # Daily at 5am (GMT+8)
-    - cron: "0 21 * * *"
+    # Daily at 4am (GMT+8)
+    - cron: "0 20 * * *"
 jobs:
   Valid-entries-check:
     runs-on: ubuntu-latest
