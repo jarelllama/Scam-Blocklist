@@ -143,14 +143,14 @@ function filter_pending {
 
     grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
 
-    cat flipped_alive.tmp >> tmp8.tmp
+    cat flipped_alive.tmp >> tmp7.tmp
 
     # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
-    sort -u tmp8.tmp -o tmp8.tmp
+    sort -u tmp7.tmp -o tmp7.tmp
 
     # Remove any new flipped domains that might already be in the blocklist
     # This is done for accurate counting
-    comm -23 tmp8.tmp "$raw_file" > "$pending_file"
+    comm -23 tmp7.tmp "$raw_file" > "$pending_file"
 
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
