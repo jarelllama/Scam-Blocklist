@@ -19,11 +19,11 @@ if ! [[ -s dead.tmp ]]; then
     exit 0
 fi
 
-comm -23 "$raw_file" dead.tmp > raw.tmp
+grep -vxFf dead.tmp "$raw_file" > raw.tmp
 
 mv raw.tmp "$raw_file"
 
-comm -23 "$blacklist_file" dead.tmp > blacklist.tmp
+grep -vxFf dead.tmp "$blacklist_file" > blacklist.tmp
 
 mv blacklist.tmp "$blacklist_file"
 
