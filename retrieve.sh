@@ -117,6 +117,7 @@ function filter_pending {
         fi
     "
 
+    # Seems like the dead.tmp isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
     grep -vxFf dead.tmp tmp6.tmp > tmp7.tmp
 
