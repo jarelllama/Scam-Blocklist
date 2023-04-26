@@ -2,12 +2,12 @@
 
 readme="README.md"
 template="data/README.md"
-raw_file="data/raw.txt"
 adblock_file="adblock.txt"
+domains_file="domains.txt"
 
 adblock_count=$(grep -vE '^(!|$)' "$adblock_file" | wc -l)
 
-domains_count=$(wc -l < "$raw_file")
+domains_count=$(grep -vE '^(#|$)' "$domains_file" | wc -l)
 
 sed -i 's/adblock_count/'"$adblock_count"'/g' "$template"
 
