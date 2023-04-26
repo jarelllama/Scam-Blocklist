@@ -2,8 +2,8 @@ name: Update toplist
 run-name: Update toplist
 on:
   schedule:
-    # Daily at midnight (GMT+8)
-    - cron: "0 16 * * *"
+    # Daily at 4am (GMT+8)
+    - cron: "0 20 * * *"
 jobs:
   Update-toplist:
     runs-on: ubuntu-latest
