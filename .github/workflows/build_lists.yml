@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "data/raw.txt"
+      - "data/redundant_rules.txt"
 jobs:
   Build-blocklist:
     runs-on: ubuntu-latest
