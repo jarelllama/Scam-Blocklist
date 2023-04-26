@@ -10,7 +10,6 @@ touch dead.tmp
 cat "$raw_file" | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
       echo {} >> dead.tmp
-      echo '{} (dead)'
   fi
 "
 
@@ -20,11 +19,11 @@ if ! [[ -s dead.tmp ]]; then
     exit 0
 fi
 
-grep -vxFf dead.tmp "$raw_file" > raw.tmp
+comm -23 "$raw_file" dead.tmp > raw.tmp
 
 mv raw.tmp "$raw_file"
 
-grep -vxFf dead.tmp "$blacklist_file" > blacklist.tmp
+comm -23 "$blacklist_file" dead.tmp > blacklist.tmp
 
 mv blacklist.tmp "$blacklist_file"
 
