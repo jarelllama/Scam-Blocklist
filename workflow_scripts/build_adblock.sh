@@ -8,9 +8,10 @@ grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
 awk '{sub(/^www\./, ""); print}' "$raw_file" > raw.tmp
 
-sort -u raw.tmp -o raw.tmp
-
 awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
+
+# Sorting after converting to ABP format because adding || somehow messes up the order
+sort -u raw2.tmp -o raw2.tmp
 
 comm -23 raw2.tmp "$redundant_rules" > raw.tmp
 
