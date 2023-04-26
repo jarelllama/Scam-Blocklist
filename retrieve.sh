@@ -109,6 +109,8 @@ function filter_pending {
     
     grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.tmp > tmp6.tmp
 
+    # The file is created here for when there are no dead domains so the echo command doesn't create it
+    # When it is missing the grep command shows an error
     touch dead.tmp
 
     # Use parallel processing
