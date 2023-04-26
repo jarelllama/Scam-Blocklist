@@ -1,0 +1,13 @@
+name: Compress Adblock rules
+run-name: Compress Adblock rules
+on:
+  schedule:
+    # Daily at 4:30am (GMT+8)
+    - cron: "30 20 * * *"
+jobs:
+  Compress-Adblock-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run compress_adblock.sh
+        run: bash "workflow_scripts/compress_adblock.sh"
