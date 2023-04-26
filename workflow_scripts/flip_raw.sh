@@ -16,7 +16,7 @@ cat no_www_new.tmp with_www_new.tmp > flipped.tmp
 
 touch flipped_dead.tmp
 
-cat flipped.tmp | xargs -I{} -P4 bash -c "
+cat flipped.tmp | xargs -I{} -P8 bash -c "
     if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
         echo {} >> flipped_dead.tmp
     fi
