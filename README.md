@@ -2,10 +2,10 @@
 
 | Syntax | Domains/Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2305 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 3863 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2324 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 3905 |
 
-Updated: Wed Apr 26 04:18 UTC
+Updated: Wed Apr 26 04:30 UTC
 
 ### How domains are added to the blocklist
 
