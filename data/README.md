@@ -19,7 +19,7 @@ Updated: update_time
 - Resolving `www` subdomains are included in the domains list
 - Domains that are found in toplist/whitelist updates are vetted manually
 
-Malicious domains found in r/Scams are also added after being manually vetted.
+Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are also added after being manually vetted.
 
 ### Goal
 
