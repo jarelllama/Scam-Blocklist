@@ -20,6 +20,8 @@ fi
 
 sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' "$template"
 
-cp "$template" "$readme"
+top_tlds=$(awk -F '.' '{print $NF}' data/raw.txt | sort | uniq -c | sort -nr | head -15 | awk '{print "| " $2, " | "$1 " |"}')
+
+awk -v var="$top_tlds" '{gsub(/top_tlds/,var)}1' "$template" > "readme"
 
 # Note that only the README file should be pushed
