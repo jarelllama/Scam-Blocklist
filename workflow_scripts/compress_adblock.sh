@@ -2,8 +2,6 @@
 
 adblock_file="adblock.txt"
 redundant_rules="data/redundant_rules.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
@@ -20,10 +18,3 @@ if ! [[ -s "$redundant_rules" ]]; then
 fi
 
 rm *.tmp
-
-git config user.email "$github_email"
-git config user.name "$github_name"
-
-git add "$redundant_rules"
-git commit -qm "Compress $adblock_file"
-git push -q
