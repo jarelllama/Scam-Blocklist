@@ -1,6 +1,8 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
+github_email="91372088+jarelllama@users.noreply.github.com"
+github_name="jarelllama"
 
 grep '^www\.' "$raw_file" > with_www.tmp
 
