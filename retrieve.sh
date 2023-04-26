@@ -10,8 +10,6 @@ edit_script="edit.sh"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-echo -e "\nRemember to pull the latest changes first!"
-
 if [[ -s "$pending_file" ]]; then
     read -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     if ! [[ "$answer" == "n" ]]; then
@@ -35,6 +33,10 @@ for arg in "$@"; do
         time_filter="$arg"
     fi
 done
+
+if [[ "$unattended" -eq 0 ]]; then
+    echo -e "\nRemember to pull the latest changes first!"
+fi
 
 declare -A retrieved_domains
 
