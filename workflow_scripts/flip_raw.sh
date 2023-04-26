@@ -24,7 +24,10 @@ cat flipped.tmp | xargs -I{} -P8 bash -c "
 
 grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
 
-grep -vxFf "$raw_file" flipped_alive.tmp > flipped_unique.tmp
+# Sort for alphabetically ordered console print
+sort flipped_alive.tmp -o flipped_alive.tmp
+
+comm -23 flipped_alive.tmp "$raw_file" > flipped_unique.tmp
 
 if ! [[ -s flipped_unique.tmp ]]; then
     echo -e "\nNo domains added.\n"
