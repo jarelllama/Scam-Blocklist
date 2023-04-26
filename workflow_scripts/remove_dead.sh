@@ -2,6 +2,7 @@
 
 raw_file="data/raw.txt"
 blacklist_file="blacklist.txt"
+redundant_rules="data/redundant_rules.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
@@ -19,6 +20,11 @@ if ! [[ -s dead.tmp ]]; then
     exit 0
 fi
 
+echo -e "\nDead domains:"
+cat dead.tmp
+
+echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
+
 grep -vxFf dead.tmp "$raw_file" > raw.tmp
 
 mv raw.tmp "$raw_file"
@@ -27,16 +33,17 @@ grep -vxFf dead.tmp "$blacklist_file" > blacklist.tmp
 
 mv blacklist.tmp "$blacklist_file"
 
-echo -e "\nDead domains:"
-cat dead.tmp
+awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
 
-echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
+grep -vxFf adblock_dead.tmp "$redundant_rules" > redundant_rules.tmp
+
+mv redundant_rules.tmp "$redundant_rules"
 
 rm *.tmp
 
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-git add "$raw_file" "$blacklist_file"
+git add "$raw_file" "$blacklist_file" "$redundant_rules"
 git commit -qm "Remove dead domains"
 git push -q
