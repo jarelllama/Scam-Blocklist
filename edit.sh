@@ -213,7 +213,6 @@ function check_entry {
         return
     fi
     echo -e "\nThe entry is present."
-    grep -xFq "$check_entry" "$raw_file"
 }
 
 function push_changes {
