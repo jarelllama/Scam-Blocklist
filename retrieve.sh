@@ -84,6 +84,7 @@ function filter_pending {
 
     tr '[:upper:]' '[:lower:]' < tmp1.tmp > tmp2.tmp
 
+    # Duplicates removed for when pending file isn't cleared
     # Note that sort writes the sorted list to a temporary file before moving it to the output file. Therefore the input and output files can be the same
     sort -u tmp2.tmp -o tmp2.tmp
 
@@ -173,7 +174,7 @@ function merge_pending {
 
     cat "$pending_file" >> "$raw_file" 
 
-    sort -u "$raw_file" -o "$raw_file"
+    sort "$raw_file" -o "$raw_file"
 
     num_after=$(wc -l < "$raw_file")
 
