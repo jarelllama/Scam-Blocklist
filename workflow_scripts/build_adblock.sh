@@ -30,9 +30,11 @@ echo -e "Final entries after: $num_after\n"
 echo "! Title: Jarelllama's Scam Blocklist
 ! Description: Blocklist for scam sites extracted from Google
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
-! License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
+! Version: $(date -u +"%m%d%H%M%S%Y")
 ! Last modified: $(date -u)
 ! Syntax: Adblock Plus
+! Expires: 6 hours
 ! Total number of entries: $num_after
 " | cat - adblock.tmp > "$adblock_file"
 
