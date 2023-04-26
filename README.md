@@ -2,10 +2,10 @@
 
 | Syntax | Domains/Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2331 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 4640 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2335 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 4648 |
 
-Updated: Wed Apr 26 06:08 UTC
+Updated: Wed Apr 26 07:36 UTC
 
 ### How domains are added to the blocklist
 
@@ -19,7 +19,7 @@ Updated: Wed Apr 26 06:08 UTC
 - Resolving `www` subdomains are included in the domains list
 - Domains that are found in toplist/whitelist updates are vetted manually
 
-Malicious domains found in r/Scams are also added after being manually vetted.
+Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are also added after being manually vetted.
 
 ### Goal
 
@@ -35,7 +35,7 @@ Identify newly created scam sites that use the same template as reported scam si
 
 | TLD | Count |
 | ---:|:--- |
-| com  | 3134 |
+| com  | 3140 |
 | shop  | 552 |
 | store  | 335 |
 | online  | 74 |
