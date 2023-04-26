@@ -160,8 +160,8 @@ function filter_pending {
     # This is done for accurate counting
     comm -23 tmp7.tmp "$raw_file" > "$pending_file"
 
-    if ! [[ -s "$pending_file" && "$unattended" -eq 1 ]]; then
-        echo -e "\nNo pending domains. Exiting...\n"
+    if ! [[ -s "$pending_file" ]]; then
+        echo -e "\nNo pending domains.\n"
         rm *.tmp
         exit 0
     fi
@@ -174,16 +174,17 @@ function filter_pending {
     # About 8x faster than comm due to not needing to sort the toplist
     grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
-    if [[ -s in_toplist.tmp && "$unattended" -eq 1 ]]; then
-        echo -e "\nDomains found in toplist:"
+    if [[ -s in_toplist.tmp ]]; then
+        echo -e "\nDomains in toplist:"
         cat in_toplist.tmp
-        echo -e "\nExiting...\n"
-        rm *.tmp
-        exit 1
+        if [[ "$unattended" -eq 1 ]]; then
+            echo -e "\nExiting...\n"
+            rm *.tmp
+            exit 1
+        fi
+    else
+        echo -e "\nNo domains found in toplist."
     fi
-    
-    echo -e "\nDomains in toplist:"
-    cat in_toplist.tmp
     
     rm *.tmp
 }
