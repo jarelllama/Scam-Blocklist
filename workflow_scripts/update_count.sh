@@ -13,6 +13,11 @@ sed -i 's/adblock_count/'"$adblock_count"'/g' "$template"
 
 sed -i 's/domains_count/'"$domains_count"'/g' "$template"
 
+if diff -q "$readme" "$template" >/dev/null; then
+   echo -e "\nNo changes. Exiting...\n"
+   exit 0
+fi
+
 sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' "$template"
 
 cp "$template" "$readme"
