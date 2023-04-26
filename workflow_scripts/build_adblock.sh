@@ -2,6 +2,7 @@
 
 raw_file="data/raw.txt"
 adblock_file="adblock.txt"
+redundant_rules="data/redundant_rules.txt"
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
@@ -11,7 +12,9 @@ sort -u raw.tmp -o raw.tmp
 
 awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
 
-if diff -q adblock.tmp raw2.tmp >/dev/null; then
+comm -23 raw2.tmp "$redundant_rules" > raw.tmp
+
+if diff -q adblock.tmp raw.tmp >/dev/null; then
    echo -e "\nNo changes. Exiting...\n"
    rm *.tmp
    exit 0
@@ -19,7 +22,7 @@ fi
 
 num_before=$(wc -l < adblock.tmp)
 
-cp raw2.tmp adblock.tmp
+cp raw.tmp adblock.tmp
 
 num_after=$(wc -l < adblock.tmp)
 
