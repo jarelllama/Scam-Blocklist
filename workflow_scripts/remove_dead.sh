@@ -20,11 +20,6 @@ if ! [[ -s dead.tmp ]]; then
     exit 0
 fi
 
-echo -e "\nDead domains:"
-cat dead.tmp
-
-echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
-
 grep -vxFf dead.tmp "$raw_file" > raw.tmp
 
 mv raw.tmp "$raw_file"
@@ -38,6 +33,11 @@ awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
 grep -vxFf adblock_dead.tmp "$redundant_rules" > redundant_rules.tmp
 
 mv redundant_rules.tmp "$redundant_rules"
+
+echo -e "\nDead domains:"
+cat dead.tmp
+
+echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
 
 rm *.tmp
 
