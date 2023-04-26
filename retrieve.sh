@@ -204,7 +204,7 @@ function merge_pending {
 
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
-    echo "Final domains after: $num_after"
+    echo "Total domains after: $num_after"
 
     > "$pending_file"
 
