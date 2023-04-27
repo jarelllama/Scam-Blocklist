@@ -2,13 +2,14 @@
 ! Description: Blocklist for scam sites automatically extracted from Google
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 04.27.073516.2023
-! Last modified: Thu Apr 27 07:35:16 UTC 2023
+! Version: 04.27.074238.2023
+! Last modified: Thu Apr 27 07:42:38 UTC 2023
 ! Expires: 6 hours
 ! Syntax: Adblock Plus
-! Total number of entries: 2360
+! Total number of entries: 2361
 
 ||3dsportstore.com^
+||3dsportstore.comi^
 ||68apparel.store^
 ||a-mazon.shop^
 ||a3review.com^
