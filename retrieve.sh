@@ -12,7 +12,7 @@ github_name="jarelllama"
 
 if [[ -s "$pending_file" ]]; then
     read -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    if ! [[ "$answer" == "n" ]]; then
+    if [[ "$answer" != "n" ]]; then
         > "$pending_file"
     fi
 fi
@@ -209,8 +209,8 @@ function merge_pending {
     > "$pending_file"
 
     if [[ unattended -eq 0 ]]; then
-        read -p $'\nDo you want to push the updated blocklist? (y/N): ' answer
-        if [[ "$answer" != "y" ]]; then
+        read -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
+        if [[ "$answer" == "n" ]]; then
             exit 0
         fi
         commit_msg="Manual domain retrieval"
