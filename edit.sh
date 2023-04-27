@@ -65,6 +65,7 @@ function edit_blocklist {
         return
     fi
 
+    # The toplist is checked before removing dead to find potential www subdomains in the toplist
     if grep -xFf entries.tmp "$toplist_file" | grep -vxFqf "$blacklist_file"; then
         echo -e "\nThe domain is found in the toplist. Not added."
         echo "Matches in toplist:"
@@ -89,7 +90,7 @@ function edit_blocklist {
     mv alive_entries.tmp entries.tmp
   
     # This checks if there are no unique entries in the new entries file
-    if grep -xFqf entries.tmp "$raw_file"; then
+    if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
     fi        
@@ -180,8 +181,7 @@ function edit_blacklist {
 
     mv alive_entries.tmp entries.tmp
   
-    # This checks if there are no unique entries in the new entries file
-    if grep -xFqf entries.tmp "$blacklist_file"; then
+    if ! comm -23 entries.tmp "$blacklist_file" | grep -q . ; then
         echo -e "\nThe domain is already in the blacklist. Not added."
         return
     fi
