@@ -11,7 +11,7 @@ while read -r entry; do
     grep "\.${entry#||}$" adblock.tmp >> redundant_rules.tmp
 done < adblock.tmp
 
-if ! [[ -f redundant_rules.tmp ]]; then
+if ! [[ -s "$redundant_rules" ]]; then
     echo -e "\nNo redundant rules found.\n"
     rm *.tmp
     exit 0
@@ -22,7 +22,7 @@ cat redundant_rules.tmp >> "$redundant_rules"
 # The output has a high chance of having duplicates
 sort -u "$redundant_rules" -o "$redundant_rules"
 
-echo -e "\Redundant rules found:"
+echo -e "\nRedundant rules found:"
 cat redundant_rules.tmp
 echo ""
 
