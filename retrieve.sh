@@ -213,10 +213,10 @@ function merge_pending {
         if [[ "$answer" == "n" ]]; then
             exit 0
         fi
-        commit_msg="Manual domain retrieval"
+        commit_msg="Manual domains retrieval"
     else
         echo -e "\nPushing changes..."
-        commit_msg="Automatic domain retrieval"
+        commit_msg="Automatic domains retrieval"
     fi
 
     echo ""
