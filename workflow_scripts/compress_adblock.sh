@@ -17,8 +17,10 @@ if ! [[ -f redundant_rules.tmp ]]; then
     exit 0
 fi
 
+cat redundant_rules.tmp >> "$redundant_rules"
+
 # The output has a high chance of having duplicates
-sort -u redundant_rules.tmp -o "$redundant_rules"
+sort -u "$redundant_rules" -o "$redundant_rules"
 
 echo -e "\Redundant rules found:"
 cat redundant_rules.tmp
