@@ -65,7 +65,7 @@ git config user.name "$github_name"
 git add "$domains_file" "$adblock_file"
 git commit -m "Build lists"
 
-git add "$readme"
+git add "$readme" "$count_history"
 git commit -m "Update README count"
 
 git push
