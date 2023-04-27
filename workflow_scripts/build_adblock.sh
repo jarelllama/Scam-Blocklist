@@ -28,7 +28,7 @@ cp raw.tmp adblock.tmp
 num_after=$(wc -l < adblock.tmp)
 
 echo -e "\nTotal entries before: $num_before"
-echo "Total entries added: $((num_after - num_before))"
+echo "Difference: $((num_after - num_before))"
 echo -e "Final entries after: $num_after\n"
 
 echo "! Title: Jarelllama's Scam Blocklist
