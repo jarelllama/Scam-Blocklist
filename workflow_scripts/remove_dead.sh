@@ -12,7 +12,7 @@ cat "$raw_file" | xargs -I{} -P8 bash -c "
   fi
 "
 
-if ! [[ -f dead.tmp ]]; then
+if ! [[ -s dead.tmp ]]; then
     echo -e "\nNo dead domains found.\n"
     rm *.tmp
     exit 0
