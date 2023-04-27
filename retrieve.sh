@@ -213,7 +213,7 @@ function merge_pending {
         if [[ "$answer" != "y" ]]; then
             exit 0
         fi
-        commit_msg="Update raw.txt"
+        commit_msg="Manual domain retrieval"
     else
         echo -e "\nPushing changes..."
         commit_msg="Automatic domain retrieval"
