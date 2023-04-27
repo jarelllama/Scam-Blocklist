@@ -32,7 +32,7 @@ echo "Difference: $((num_after - num_before))"
 echo -e "Final entries after: $num_after\n"
 
 echo "! Title: Jarelllama's Scam Blocklist
-! Description: Blocklist for scam sites extracted from Google
+! Description: Blocklist for scam sites automatically extracted from Google
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ! Version: $(date -u +"%m.%d.%H%M%S.%Y")
