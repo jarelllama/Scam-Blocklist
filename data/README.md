@@ -12,9 +12,7 @@ Updated: update_time
 ### How domains are added to the blocklist
 
 - The script searches Google with a list of search terms almost exclusively used in scam sites
-- Invalid entries (non domains) are removed
-- Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.)
-- Domains with whitelisted TLDs (edu, gov) are removed
+- Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
 - Domains are compared against the Cisco Umbrella Toplist
 - Domains found in the toplist are checked manually
 - Dead domains are removed
@@ -23,9 +21,13 @@ Updated: update_time
 
 Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are also added after being manually vetted.
 
-### Goal
+To see the full filtering process check out the code in the repository.
 
-Identify newly created scam sites that use the same template as reported scam sites.
+### Ideology
+
+After browsing r/Scams for weeks and manually reporting scam sites to Hagezi's issue tracker, I realised most scam sites follow a similar template.
+
+There is no way I could not keep up with the amount of scam sites created daily but with this project I aim to retrieve as many newly created scam sites as possible.
 
 ### See also
 
