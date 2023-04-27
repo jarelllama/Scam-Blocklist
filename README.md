@@ -7,7 +7,7 @@
 
 Unique scam sites found yesterday: 52
 
-Updated: Thu Apr 27 19:46 UTC
+Updated: Thu Apr 27 21:17 UTC
 
 ### How domains are added to the blocklist
 
@@ -23,7 +23,7 @@ Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are also ad
 
 To see the full filtering process check out the code in the repository.
 
-### Ideology
+### Inspiration
 
 After browsing r/Scams for weeks and manually reporting scam sites to Hagezi's issue tracker, I realised most scam sites follow a similar template.
 
