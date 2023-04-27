@@ -5,6 +5,8 @@
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | adblock_count |
 | [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | domains_count |
 
+Domains found today: found_today
+
 Updated: update_time
 
 ### How domains are added to the blocklist
@@ -36,3 +38,9 @@ Identify newly created scam sites that use the same template as reported scam si
 | TLD | Count |
 | ---:|:--- |
 top_tlds
+
+### History
+
+| Date | Count | Change |
+| --- | --- | --- |
+count_history
