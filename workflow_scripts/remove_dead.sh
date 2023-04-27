@@ -6,15 +6,13 @@ redundant_rules="data/redundant_rules.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-touch dead.tmp
-
 cat "$raw_file" | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
       echo {} >> dead.tmp
   fi
 "
 
-if ! [[ -s dead.tmp ]]; then
+if ! [[ -f dead.tmp ]]; then
     echo -e "\nNo dead domains found.\n"
     rm *.tmp
     exit 0
