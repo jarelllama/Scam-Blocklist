@@ -9,6 +9,8 @@ adblock_file="adblock.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
+# Code to update the number of entries for each list
+
 adblock_count=$(grep -vE '^(!|$)' "$adblock_file" | wc -l)
 
 domains_count=$(grep -vE '^(#|$)' "$domains_file" | wc -l)
@@ -16,6 +18,8 @@ domains_count=$(grep -vE '^(#|$)' "$domains_file" | wc -l)
 sed -i 's/adblock_count/'"$adblock_count"'/g' "$template"
 
 sed -i 's/domains_count/'"$domains_count"'/g' "$template"
+
+# Code to update the number of domains retrieved in a day (shows the amount from previous day)
 
 todays_date=$(date -u +"%m%d%y")
 
@@ -44,10 +48,13 @@ if [[ "$todays_date" != "$date_in_file" ]]; then
     
     echo "$after_count" >> "$count_history"
 else
+    # Use old values which causes no updates when pushed
     count_diff=$((old_after_count - old_before_count))
 
     sed -i 's/found_yest/'"$count_diff"'/g' "$template"
 fi
+
+# Code to update the top scam TLDs
 
 top_tlds=$(awk -F '.' '{print $NF}' "$raw_file" | sort | uniq -c | sort -nr | head -10 | awk '{print "| " $2, " | "$1 " |"}')
 
