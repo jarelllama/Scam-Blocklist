@@ -18,7 +18,7 @@ cp "$raw_file" domains.tmp
 num_after=$(wc -l < domains.tmp)
 
 echo -e "\nTotal domains before: $num_before"
-echo "Total domains added: $((num_after - num_before))"
+echo "Difference: $((num_after - num_before))"
 echo -e "Final domains after: $num_after\n"
 
 echo "# Title: Jarelllama's Scam Blocklist
