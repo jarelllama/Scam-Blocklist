@@ -5,7 +5,7 @@
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2367 |
 | [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 4713 |
 
-Unique scam sites found yesterday: 4
+Unique scam sites found yesterday: 52
 
 Updated: Thu Apr 27 08:55 UTC
 
