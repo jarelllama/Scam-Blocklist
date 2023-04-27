@@ -32,5 +32,5 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 git add "$redundant_rules"
-git commit -qm "Compress $adblock_file"
+git commit -qm "Compress Adblock rules"
 git push -q
