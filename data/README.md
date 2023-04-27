@@ -23,7 +23,7 @@ Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are also ad
 
 To see the full filtering process check out the code in the repository.
 
-### Ideology
+### Inspiration
 
 After browsing r/Scams for weeks and manually reporting scam sites to Hagezi's issue tracker, I realised most scam sites follow a similar template.
 
