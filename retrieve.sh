@@ -175,8 +175,13 @@ function filter_pending {
         exit 0
     fi
 
+    awk '{sub(/^www\./, ""); print}' "$pending_file" > unique_sites.tmp
+    
+    sort -u unique_sites.tmp -o unique_sites.tmp
+
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
+    echo "Unique sites retrieved: $(wc -l < unique_sites.tmp)"
     echo "Domains:"
     cat "$pending_file"
     
