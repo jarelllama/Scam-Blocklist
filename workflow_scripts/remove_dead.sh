@@ -56,6 +56,10 @@ cat dead_now_alive.tmp
     git commit -qm "Add resurrected dead domains"
 }
 
+# grep will show an error if the file isn't created due to no domains found
+touch dead.tmp
+touch dead_now_alive.tmp
+
 cat "$raw_file" | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
       echo {} >> dead.tmp
