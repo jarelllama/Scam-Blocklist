@@ -5,6 +5,7 @@
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | adblock_count |
 | [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | domains_count |
 
+Unique scam sites found today: found_today
 Unique scam sites found yesterday: found_yest
 
 Updated: update_time
