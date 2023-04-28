@@ -6,6 +6,7 @@ search_terms_file="search_terms.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
+dead_domains_file="data/dead_domains.txt"
 edit_script="edit.sh"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
@@ -130,6 +131,10 @@ function filter_pending {
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
     grep -vxFf dead.tmp tmp6.tmp > tmp7.tmp
 
+    cat dead.tmp >> "$dead_domains_file"
+
+    sort -u "$dead_domains_file" -o "$dead_domains_file"
+
     # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
     # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
 
@@ -154,6 +159,8 @@ function filter_pending {
     grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
 
     cat flipped_alive.tmp >> tmp7.tmp
+
+    # Note that dead flipped domains here aren't added to the dead domaina file since the whole list is checked for flip domains on a schedule. Any new flipped domains then will be added
 
     # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
     sort -u tmp7.tmp -o tmp7.tmp
