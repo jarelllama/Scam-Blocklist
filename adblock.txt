@@ -2,11 +2,11 @@
 ! Description: Blocklist for scam sites automatically extracted from Google
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 04.28.173540.2023
-! Last modified: Fri Apr 28 17:35:40 UTC 2023
+! Version: 04.28.175057.2023
+! Last modified: Fri Apr 28 17:50:57 UTC 2023
 ! Expires: 4 hours
 ! Syntax: Adblock Plus
-! Total number of entries: 2535
+! Total number of entries: 2539
 
 ||3d-printing.store^
 ||3dsportstore.com^
@@ -490,7 +490,9 @@
 ||ctjhy.telemedicine-solutions.com^
 ||customers-insight.com^
 ||customers-surveys.com^
+||customsurveys.guru^
 ||cutpricecamping.com^
+||cuture.us^
 ||cycery.com^
 ||cycle100percent.com^
 ||cycleorigin.com^
@@ -1376,6 +1378,7 @@
 ||memobebe.com^
 ||men-clothing.store^
 ||menaccessoriesoutlet.store^
+||menchoice.us^
 ||menclothingforsale.store^
 ||mendezcufflinks.shop^
 ||meneryo.com^
@@ -1568,6 +1571,7 @@
 ||offusski.com^
 ||ogimedya.com^
 ||ogybi.com^
+||ogyhome.com^
 ||ohitems.com^
 ||oilabortle.com^
 ||olespattes.co^
