@@ -5,11 +5,14 @@
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | adblock_count |
 | [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | domains_count |
 
-Unique scam sites found today: found_today
-
-Unique scam sites found yesterday: found_yest
+```
+Unique scam sites found:
+Today: todays_count
+Yesterday: yest_count
+Total: total_count
 
 Updated: update_time
+```
 
 ### How domains are added to the blocklist
 
