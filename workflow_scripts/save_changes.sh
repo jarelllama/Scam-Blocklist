@@ -25,11 +25,7 @@ todays_date=$(date -u +"%m%d%y")
 
 date_in_file=$(head -n 1 "$count_history")
 
-awk '{sub(/^www\./, ""); print}' "$raw_file" > unique_sites.tmp
-    
-sort -u unique_sites.tmp -o unique_sites.tmp
-
-todays_count=$(wc -l < unique_sites.tmp)
+todays_count="$adblock_count"
 
 yest_count=$(sed -n '3p' "$count_history")
 
