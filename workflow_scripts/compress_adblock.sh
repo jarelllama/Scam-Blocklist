@@ -7,6 +7,7 @@ github_name="jarelllama"
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
+# I've tried using xarg parallelization here to no success
 while read -r entry; do
     grep "\.${entry#||}$" adblock.tmp >> redundant_rules.tmp
 done < adblock.tmp
