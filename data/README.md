@@ -16,17 +16,20 @@ Updated: update_time
 
 ### How domains are added to the blocklist
 
-- The script searches Google with a list of search terms almost exclusively used in scam sites
+- The script searches Google with a list of search terms almost exclusively used in scam sites. See the list of search terms here: [search_terms.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/search_terms.txt)
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
 - Domains are compared against the Cisco Umbrella Toplist
 - Domains found in the toplist are checked manually
-- Dead domains are removed
 - Resolving `www` subdomains are included in the domains list
 - Domains that are found in toplist/whitelist updates are vetted manually
 
 Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are also added after being manually vetted.
 
 To see the full filtering process check out the code in the repository.
+
+### Dead domains
+
+Dead domains are removed during the domain retrieval process and once a day for the full blocklist. Dead domains that resolve again are added back.
 
 ### Inspiration
 
