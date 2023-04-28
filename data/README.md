@@ -27,7 +27,7 @@ To see the full filtering process check out the code in the repository.
 
 After browsing r/Scams for weeks and manually reporting scam sites to Hagezi's issue tracker, I realised most scam sites follow a similar template.
 
-There is no way I could not keep up with the amount of scam sites created daily but with this project I aim to retrieve as many newly created scam sites as possible.
+There is no way I could keep up with the amount of scam sites created daily but with this project I aim to retrieve as many newly created scam sites as possible.
 
 ### See also
 
