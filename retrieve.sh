@@ -216,7 +216,7 @@ function merge_pending {
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Total domains after: $num_after"
-    echo "Unique sites retrieved: $(wc -l < unique_sites.tmp)"
+    echo "Unique sites added: $(wc -l < unique_sites.tmp)"
 
     > "$pending_file"
 
