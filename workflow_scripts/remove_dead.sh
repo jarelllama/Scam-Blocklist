@@ -3,6 +3,7 @@
 raw_file="data/raw.txt"
 blacklist_file="blacklist.txt"
 redundant_rules="data/redundant_rules.txt"
+dead_domains_file="data/dead_domains.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
@@ -31,6 +32,10 @@ awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
 grep -vxFf adblock_dead.tmp "$redundant_rules" > redundant_rules.tmp
 
 mv redundant_rules.tmp "$redundant_rules"
+
+cat dead.tmp >> "$dead_domains_file"
+
+sort -u "$dead_domains_file" -o "$dead_domains_file"
 
 echo -e "\nDead domains:"
 cat dead.tmp
