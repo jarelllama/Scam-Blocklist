@@ -27,7 +27,7 @@ echo "# Title: Jarelllama's Scam Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 # Version: $(date -u +"%m.%d.%H%M%S.%Y")
 # Last modified: $(date -u)
-# Expires: 6 hours
+# Expires: 4 hours
 # Syntax: Domains
 # Total number of domains: $num_after
 " | cat - domains.tmp > "$domains_file"
