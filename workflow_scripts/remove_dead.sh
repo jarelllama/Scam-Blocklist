@@ -30,7 +30,7 @@ function remove_dead {
     sort -u "$dead_domains_file" -o "$dead_domains_file"
 
     echo -e "\nDead domains:"
-cat dead.tmp
+    cat dead.tmp
 
     echo -e "\nTotal domains removed: $(wc -l < dead.tmp)"
     
@@ -48,7 +48,7 @@ function add_resurrected {
     sort "$raw_file" -o "$raw_file"
 
     echo -e "\nPreviously dead domains that are alive again:"
-cat dead_now_alive.tmp
+    cat dead_now_alive.tmp
 
     echo -e "\nTotal domains added: $(wc -l < dead_now_alive.tmp)"
     
