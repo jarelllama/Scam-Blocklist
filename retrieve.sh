@@ -175,13 +175,8 @@ function filter_pending {
         exit 0
     fi
 
-    awk '{sub(/^www\./, ""); print}' "$pending_file" > unique_sites.tmp
-    
-    sort -u unique_sites.tmp -o unique_sites.tmp
-
     echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
-    echo "Unique sites retrieved: $(wc -l < unique_sites.tmp)"
     echo "Domains:"
     cat "$pending_file"
     
@@ -214,11 +209,18 @@ function merge_pending {
 
     num_after=$(wc -l < "$raw_file")
 
+    awk '{sub(/^www\./, ""); print}' "$pending_file" > unique_sites.tmp
+    
+    sort -u unique_sites.tmp -o unique_sites.tmp
+
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Total domains after: $num_after"
+    echo "Unique sites retrieved: $(wc -l < unique_sites.tmp)"
 
     > "$pending_file"
+
+    rm *.tmp
 
     if [[ unattended -eq 0 ]]; then
         read -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
