@@ -11,7 +11,7 @@ while read -r entry; do
     grep "\.${entry#||}$" adblock.tmp >> redundant_rules.tmp
 done < adblock.tmp
 
-if ! [[ -s "$redundant_rules" ]]; then
+if ! [[ -s redundant_rules.tmp ]]; then
     echo -e "\nNo redundant rules found.\n"
     rm *.tmp
     exit 0
