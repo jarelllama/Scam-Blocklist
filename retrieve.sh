@@ -115,12 +115,15 @@ function filter_pending {
     
     grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.tmp > tmp6.tmp
 
+    # Remove known dead domains to make the dead domains check more efficient
+    comm -23 tmp6.tmp "$dead_domains_file" > tmp7.tmp
+
     # The file is created here for when there are no dead domains so the echo command doesn't create it
     # When it is missing the grep command shows an error
     touch dead.tmp
 
     # Use parallel processing
-    cat tmp6.tmp | xargs -I{} -P4 bash -c "
+    cat tmp7.tmp | xargs -I{} -P4 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> dead.tmp
             echo '{} (dead)'
@@ -129,7 +132,7 @@ function filter_pending {
 
     # Seems like the dead.tmp isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
-    grep -vxFf dead.tmp tmp6.tmp > tmp7.tmp
+    grep -vxFf dead.tmp tmp7.tmp > tmp8.tmp
 
     cat dead.tmp >> "$dead_domains_file"
 
@@ -138,9 +141,9 @@ function filter_pending {
     # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
     # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
 
-    grep '^www\.' tmp7.tmp > with_www.tmp
+    grep '^www\.' tmp8.tmp > with_www.tmp
 
-    comm -23 tmp7.tmp with_www.tmp > no_www.tmp
+    comm -23 tmp8.tmp with_www.tmp > no_www.tmp
 
     awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
 
@@ -158,16 +161,16 @@ function filter_pending {
 
     grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
 
-    cat flipped_alive.tmp >> tmp7.tmp
+    cat flipped_alive.tmp >> tmp8.tmp
 
     # Note that dead flipped domains here aren't added to the dead domaina file since the whole list is checked for flip domains on a schedule. Any new flipped domains then will be added
 
     # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
-    sort -u tmp7.tmp -o tmp7.tmp
+    sort -u tmp8.tmp -o tmp8.tmp
 
     # Remove any new flipped domains that might already be in the blocklist
     # This is done for accurate counting
-    comm -23 tmp7.tmp "$raw_file" > "$pending_file"
+    comm -23 tmp8.tmp "$raw_file" > "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
