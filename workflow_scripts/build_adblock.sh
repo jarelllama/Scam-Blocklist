@@ -37,7 +37,7 @@ echo "! Title: Jarelllama's Scam Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ! Version: $(date -u +"%m.%d.%H%M%S.%Y")
 ! Last modified: $(date -u)
-! Expires: 6 hours
+! Expires: 4 hours
 ! Syntax: Adblock Plus
 ! Total number of entries: $num_after
 " | cat - adblock.tmp > "$adblock_file"
