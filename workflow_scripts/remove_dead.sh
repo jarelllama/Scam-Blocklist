@@ -53,10 +53,10 @@ function add_resurrected {
     echo -e "\nTotal domains added: $(wc -l < dead_now_alive.tmp)"
     
     git add "$raw_file" "$dead_domains_file"
-    git commit -qm "Add resurrected dead domains"
+    git commit -qm "Add resurrected domains"
 }
 
-# grep will show an error if the file isn't created due to no domains found
+# grep will show an error if the file isn't created
 touch dead.tmp
 touch dead_now_alive.tmp
 
