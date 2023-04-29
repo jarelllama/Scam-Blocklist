@@ -1,0 +1,13 @@
+name: Add subdomains
+run-name: Add subdomains
+on:
+  schedule:
+    # Daily at 3:30am (GMT+8)
+    - cron: "30 19 * * *"
+jobs:
+  Add-subdomains:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run add_subdomains.sh
+        run: bash "workflow_scripts/add_subdomains.sh"
