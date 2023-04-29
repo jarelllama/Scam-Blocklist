@@ -2,16 +2,16 @@
 
 | Syntax | Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2548 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 5075 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2557 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 5091 |
 
 ```
 Unique scam sites found:
-Today: 0
+Today: 9
 Yesterday: 174
-Total: 2548
+Total: 2557
 
-Updated: Sat Apr 29 02:34 UTC
+Updated: Sat Apr 29 02:52 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -47,13 +47,13 @@ There is no way I can keep up with the number of scam sites created daily but wi
 
 | TLD | Count |
 | ---:|:--- |
-| com  | 3427 |
+| com  | 3437 |
 | shop  | 614 |
 | store  | 353 |
-| online  | 76 |
+| online  | 78 |
 | net  | 66 |
 | xyz  | 63 |
 | space  | 60 |
 | us  | 50 |
 | website  | 38 |
-| co  | 37 |
+| co  | 35 |
