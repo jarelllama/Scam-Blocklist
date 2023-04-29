@@ -7,6 +7,7 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 dead_domains_file="data/dead_domains.txt"
+subdomains_file="data/subdomains.txt"
 edit_script="edit.sh"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
@@ -98,6 +99,12 @@ function filter_pending {
     # This removes the majority of pending domains and makes the further filtering more efficient
     comm -23 tmp2.tmp "$raw_file" > tmp3.tmp
 
+    if ! [[ -s tmp3.tmp ]]; then
+        echo -e "\nNo retrieved domains.\n"
+        rm *.tmp
+        exit 0
+    fi
+
     echo -e "\nDomains removed:"
 
     grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
@@ -151,24 +158,36 @@ function filter_pending {
 
     cat no_www_new.tmp with_www_new.tmp > flipped.tmp
 
-    touch flipped_dead.tmp
+    touch flipped_alive.tmp
 
     cat flipped.tmp | xargs -I{} -P4 bash -c "
-        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> flipped_dead.tmp
+        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> flipped_alive.tmp
         fi
     "
 
-    grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
-
     cat flipped_alive.tmp >> tmp8.tmp
 
-    # Note that dead flipped domains here aren't added to the dead domaina file since the whole list is checked for flip domains on a schedule. Any new flipped domains then will be added
+    grep -v '^www\.' tmp8.tmp > no_www.tmp
+    
+    touch subdomain_alive.tmp
 
-    # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
+    while read -r subdomain; do
+        awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_www.tmp > subdomain.tmp
+
+        cat subdomain.tmp | xargs -I{} -P4 bash -c "
+            if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+                echo {} >> subdomain_alive.tmp
+            fi
+        "
+
+        cat subdomain_alive.tmp >> tmp8.tmp
+done < "$subdomains_file"
+
+    # Removing duplicates here also help with issues arising from not clearing the pending domains file
     sort -u tmp8.tmp -o tmp8.tmp
 
-    # Remove any new flipped domains that might already be in the blocklist
+    # Remove any new domains that might already be in the blocklist
     # This is done for accurate counting
     comm -23 tmp8.tmp "$raw_file" > "$pending_file"
 
