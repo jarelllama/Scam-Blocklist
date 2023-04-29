@@ -2,18 +2,29 @@
 
 raw_file="data/raw.txt"
 adblock_file="adblock.txt"
-redundant_rules="data/redundant_rules.txt"
 
-grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
+echo -e "\nCompressing entries..."
 
-awk '{sub(/^www\./, ""); print}' "$raw_file" > raw.tmp
+# I've tried using xarg parallelization here to no success
+while read -r entry; do
+    grep "\.$entry$" "$raw_file" >> redundant_entries.tmp
+done < "$raw_file"
+
+# The output has a high chance of having duplicates
+sort -u redundant_entries.tmp -o redundant_entries.tmp
+
+echo -e "\nEntries compressed: $(wc -l < redundant_entries.tmp)"
+
+comm -23 "$raw_file" redundant_entries.tmp > raw.tmp
+
+echo -e "\nBuilding ABP list..."
 
 awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
 
 # Sorting after converting to ABP format because adding || somehow messes up the order
-sort -u raw2.tmp -o raw2.tmp
+sort -u raw2.tmp -o raw.tmp
 
-comm -23 raw2.tmp "$redundant_rules" > raw.tmp
+grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
 if diff -q adblock.tmp raw.tmp >/dev/null; then
    echo -e "\nNo changes. Exiting...\n"
