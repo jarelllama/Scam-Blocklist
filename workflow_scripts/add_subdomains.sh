@@ -26,7 +26,7 @@ touch subdomains_alive.tmp
 while read -r subdomain; do
     awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains_only.tmp > with_subdomain.tmp
 
-    cat with_subdomain.tmp | xargs -I{} -P4 bash -c "
+    cat with_subdomain.tmp | xargs -I{} -P8 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> subdomains_alive.tmp
         fi
