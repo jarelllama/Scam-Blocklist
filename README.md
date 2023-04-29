@@ -1,5 +1,7 @@
 # Scam Blocklist
 
+Update (Apr 29th): Currently going through major code changes. Will take the weekend to complete.
+
 | Syntax | Entries |
 | --- |:---:|
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2588 |
