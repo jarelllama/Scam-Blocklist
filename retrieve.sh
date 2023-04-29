@@ -184,7 +184,7 @@ function filter_pending {
         cat subdomain_alive.tmp >> tmp8.tmp
     done < "$subdomains_file"
 
-    # Removing duplicates here also help with issues arising from not clearing the pending domains file
+    # Removing duplicates here also helps with issues arising from not clearing the pending domains file
     sort -u tmp8.tmp -o tmp8.tmp
 
     # Remove any new domains that might already be in the blocklist
