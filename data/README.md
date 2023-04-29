@@ -20,7 +20,7 @@ Updated: update_time
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
 - Domains are compared against the Cisco Umbrella Toplist
 - Domains found in the toplist are checked manually
-- Resolving `www` and `m` subdomains are included in the domains list
+- Resolving subdomains are included in the domains list. See the list of subdomains checked here: [subdomains.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/data/subdomains.txt)
 - Domains found in toplist/whitelist updates are vetted manually
 
 Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasionally added after being manually vetted.
