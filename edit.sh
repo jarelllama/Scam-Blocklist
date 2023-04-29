@@ -4,6 +4,7 @@ raw_file="data/raw.txt"
 whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
+subdomains_file="data/subdomains.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
@@ -33,7 +34,12 @@ function prep_entry {
     echo "$new_entry" > entries.tmp
 
     echo "$www_subdomain" >> entries.tmp
-            
+
+    while read -r subdomain; do
+        subdomain="${subdomain}:${new_entry}"
+        echo "$subdomain" >> entries.tmp
+    done < "$subdomains_file"
+
     sort entries.tmp -o entries.tmp
 }
 
@@ -73,14 +79,14 @@ function edit_blocklist {
         return
     fi
 
+    # mv shows an error when the file doesnt exist
     touch alive_entries.tmp
 
-    while read -r entry; do
-        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            continue
+    cat entries.tmp | xargs -I{} -P4 bash -c "
+        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> alive_entries.tmp
         fi
-        echo "$entry" >> alive_entries.tmp
-    done < entries.tmp
+    "
 
     if ! [[ -s alive_entries.tmp ]]; then
         echo -e "\nThe domain is dead. Not added."
@@ -167,12 +173,11 @@ function edit_blacklist {
 
     touch alive_entries.tmp
 
-    while read -r entry; do
-        if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-            continue
+    cat entries.tmp | xargs -I{} -P4 bash -c "
+        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> alive_entries.tmp
         fi
-        echo "$entry" >> alive_entries.tmp
-    done < entries.tmp
+    "
 
     if ! [[ -s alive_entries.tmp ]]; then
         echo -e "\nThe domain is dead. Not added."
