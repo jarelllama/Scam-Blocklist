@@ -10,24 +10,6 @@ github_name="jarelllama"
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-function add_resurrected {
-    grep -vxFf dead_now_alive.tmp "$dead_domains_file" > "$dead_domains_file.tmp"
-
-    mv "$dead_domains_file.tmp" "$dead_domains_file"
-
-    cat dead_now_alive.tmp >> "$raw_file" 
-    
-    sort "$raw_file" -o "$raw_file"
-
-    echo -e "\nPreviously dead domains that are alive again:"
-    cat dead_now_alive.tmp
-
-    echo -e "\nTotal domains added: $(wc -l < dead_now_alive.tmp)"
-    
-    git add "$raw_file" "$dead_domains_file"
-    git commit -qm "Add resurrected domains"
-}
-
 function remove_dead {
     grep -vxFf dead.tmp "$raw_file" > raw.tmp
 
@@ -56,7 +38,33 @@ function remove_dead {
     git commit -qm "Remove dead domains"
 }
 
+function add_resurrected {
+    grep -vxFf dead_now_alive.tmp "$dead_domains_file" > "$dead_domains_file.tmp"
+
+    mv "$dead_domains_file.tmp" "$dead_domains_file"
+
+    cat dead_now_alive.tmp >> "$raw_file" 
+    
+    sort "$raw_file" -o "$raw_file"
+
+    echo -e "\nPreviously dead domains that are alive again:"
+    cat dead_now_alive.tmp
+
+    echo -e "\nTotal domains added: $(wc -l < dead_now_alive.tmp)"
+    
+    git add "$raw_file" "$dead_domains_file"
+    git commit -qm "Add resurrected dead domains"
+}
+
+# grep will show an error if the file isn't created due to no domains found
+touch dead.tmp
 touch dead_now_alive.tmp
+
+cat "$raw_file" | xargs -I{} -P8 bash -c "
+  if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+      echo {} >> dead.tmp
+  fi
+"
 
 cat "$dead_domains_file" | xargs -I{} -P8 bash -c "
   if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
@@ -64,24 +72,14 @@ cat "$dead_domains_file" | xargs -I{} -P8 bash -c "
   fi
 "
 
-if [[ -s dead_now_alive.tmp ]]; then
-    add_resurrected
-fi
-
-touch dead.tmp
-
-comm -23 "$raw_file" "$dead_domains_file" > raw.tmp
-
-cat raw.tmp | xargs -I{} -P8 bash -c "
-  if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-      echo {} >> dead.tmp
-  fi
-"
-
 if [[ -s dead.tmp ]]; then
     remove_dead
 else
     echo -e "\nNo dead domains found."
+fi
+
+if [[ -s dead_now_alive.tmp ]]; then
+    add_resurrected
 fi
 
 rm *.tmp
