@@ -139,57 +139,11 @@ function filter_pending {
 
     # Seems like the dead.tmp isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
-    grep -vxFf dead.tmp tmp7.tmp > tmp8.tmp
+    grep -vxFf dead.tmp tmp7.tmp > "$pending_file"
 
     cat dead.tmp >> "$dead_domains_file"
 
     sort -u "$dead_domains_file" -o "$dead_domains_file"
-
-    # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
-    # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
-
-    grep '^www\.' tmp8.tmp > with_www.tmp
-
-    comm -23 tmp8.tmp with_www.tmp > no_www.tmp
-
-    awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
-
-    awk '{print "www."$0}' no_www.tmp > with_www_new.tmp
-
-    cat no_www_new.tmp with_www_new.tmp > flipped.tmp
-
-    touch flipped_alive.tmp
-
-    cat flipped.tmp | xargs -I{} -P4 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> flipped_alive.tmp
-        fi
-    "
-
-    cat flipped_alive.tmp >> tmp8.tmp
-
-    grep -v '^www\.' tmp8.tmp > no_www.tmp
-    
-    touch subdomain_alive.tmp
-
-    while read -r subdomain; do
-        awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_www.tmp > subdomain.tmp
-
-        cat subdomain.tmp | xargs -I{} -P4 bash -c "
-            if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-                echo {} >> subdomain_alive.tmp
-            fi
-        "
-
-        cat subdomain_alive.tmp >> tmp8.tmp
-    done < "$subdomains_file"
-
-    # Removing duplicates here also helps with issues arising from not clearing the pending domains file
-    sort -u tmp8.tmp -o tmp8.tmp
-
-    # Remove any new domains that might already be in the blocklist
-    # This is done for accurate counting
-    comm -23 tmp8.tmp "$raw_file" > "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
@@ -231,14 +185,9 @@ function merge_pending {
 
     num_after=$(wc -l < "$raw_file")
 
-    awk '{sub(/^www\./, ""); print}' "$pending_file" > unique_sites.tmp
-    
-    sort -u unique_sites.tmp -o unique_sites.tmp
-
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Total domains after: $num_after"
-    echo "Unique sites added: $(wc -l < unique_sites.tmp)"
 
     > "$pending_file"
 
