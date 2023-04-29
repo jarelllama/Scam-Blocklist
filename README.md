@@ -3,13 +3,13 @@
 | Syntax | Entries |
 | --- |:---:|
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 5792 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 13832 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | todo |
 
 ```
 Unique scam sites found:
-Today: 3244
-Yesterday: 174
-Total: 5792 (since Apr 12 2023)
+Today: todo
+Yesterday: todo
+Total: todo (since Apr 12 2023)
 
 Updated: Sat Apr 29 21:17 UTC
 ```
