@@ -2,22 +2,9 @@
 
 raw_file="data/raw.txt"
 adblock_file="adblock.txt"
+compressed_entries="data/compressed_entries.txt"
 
-echo -e "\nCompressing entries..."
-
-# I've tried using xarg parallelization here to no success
-while read -r entry; do
-    grep "\.$entry$" "$raw_file" >> redundant_entries.tmp
-done < "$raw_file"
-
-# The output has a high chance of having duplicates
-sort -u redundant_entries.tmp -o redundant_entries.tmp
-
-echo -e "\nEntries compressed: $(wc -l < redundant_entries.tmp)"
-
-comm -23 "$raw_file" redundant_entries.tmp > raw.tmp
-
-echo -e "\nBuilding ABP list..."
+comm -23 "$raw_file" "$compressed_entries" > raw.tmp
 
 awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
 
