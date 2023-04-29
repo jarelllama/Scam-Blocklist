@@ -50,10 +50,8 @@ else
     sed -i 's/todays_count/0/g' "$template"
 
     echo "$end_of_day_diff" >> "$count_stats"
-
-    > "$count_history"
     
-    echo "$todays_date" >> "$count_history"
+    echo "$todays_date" > "$count_history"
     
     echo "$yest_count" >> "$count_history"
     
