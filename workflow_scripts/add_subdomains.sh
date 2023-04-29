@@ -5,41 +5,35 @@ subdomains_file="data/subdomains.txt"
 github_email="91372088+jarelllama@users.noreply.github.com"
 github_name="jarelllama"
 
-grep '^www\.' "$raw_file" > with_www.tmp
+grep '^www\.' "$raw_file" > www.tmp
 
-comm -23 "$raw_file" with_www.tmp > no_www.tmp
+awk '{sub(/^www\./, ""); print}' www.tmp > base_domain.tmp
 
-awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
+touch base_domain_alive.tmp
 
-awk '{print "www."$0}' no_www.tmp > with_www_new.tmp
-
-cat no_www_new.tmp with_www_new.tmp > flipped.tmp
-
-touch flipped_alive.tmp
-
-cat flipped.tmp | xargs -I{} -P8 bash -c "
+cat base_domain.tmp | xargs -I{} -P8 bash -c "
     if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-        echo {} >> flipped_alive.tmp
+        echo {} >> base_domain_alive.tmp
     fi
 "
 
-cat flipped_alive.tmp "$raw_file" > raw.tmp
+cat base_domain_alive.tmp "$raw_file" > raw.tmp
 
 grep -v '^www\.' raw.tmp > no_www.tmp
 
-touch subdomain_alive.tmp
+touch subdomains_alive.tmp
 
 while read -r subdomain; do
     awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_www.tmp > subdomain.tmp
 
     cat subdomain.tmp | xargs -I{} -P4 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> subdomain_alive.tmp
+            echo {} >> subdomains_alive.tmp
         fi
     "
-
-    cat subdomain_alive.tmp >> raw.tmp
 done < "$subdomains_file"
+
+cat subdomains_alive.tmp >> raw.tmp
 
 sort raw.tmp -o raw.tmp
 
