@@ -16,7 +16,7 @@ while read -r entry; do
 done < adblock.tmp
 
 if ! [[ -s compressed_entries.tmp ]]; then
-    echo -e "\nNo redundant rules found.\n"
+    echo -e "\nNo redundant entries found.\n"
     rm *.tmp
     exit 0
 fi
