@@ -45,7 +45,7 @@ if ! [[ -s unique.tmp ]]; then
     exit 0
 fi
 
-mv raw.tmp "$raw_file"
+cp raw.tmp "$raw_file"
 
 echo -e "\nDomains added:"
 cat unique.tmp
