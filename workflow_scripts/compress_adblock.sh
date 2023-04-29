@@ -7,8 +7,11 @@ github_name="jarelllama"
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
+echo -e "\nRedundant rules (if any):"
+
 # I've tried using xarg parallelization here to no success
 while read -r entry; do
+    grep "\.${entry#||}$" adblock.tmp | awk -v entry="$entry" '{print $0 " made redundant by " entry}'  
     grep "\.${entry#||}$" adblock.tmp >> redundant_rules.tmp
 done < adblock.tmp
 
@@ -23,11 +26,9 @@ cat redundant_rules.tmp >> "$redundant_rules"
 # The output has a high chance of having duplicates
 sort -u "$redundant_rules" -o "$redundant_rules"
 
-echo -e "\nRedundant rules found:"
-cat redundant_rules.tmp
-echo ""
-
 rm *.tmp
+
+echo ""
 
 git config user.email "$github_email"
 git config user.name "$github_name"
