@@ -24,25 +24,42 @@ cat flipped.tmp | xargs -I{} -P8 bash -c "
 
 grep -vxFf flipped_dead.tmp flipped.tmp > flipped_alive.tmp
 
-# Sort for alphabetically ordered console print
-sort flipped_alive.tmp -o flipped_alive.tmp
+cat flipped_alive.tmp "$raw_file" > raw.tmp
 
-comm -23 flipped_alive.tmp "$raw_file" > flipped_unique.tmp
+grep -v '^www\.' raw.tmp > no_www.tmp
 
-if ! [[ -s flipped_unique.tmp ]]; then
+awk '{print "m."$0}' no_www.tmp > m_subdomain.tmp
+
+touch m_subdomain_dead.tmp
+
+cat m_subdomain.tmp | xargs -I{} -P8 bash -c "
+    if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+        echo {} >> m_subdomain_dead.tmp
+    fi
+"
+
+grep -vxFf m_subdomain_dead.tmp m_subdomain.tmp > m_subdomain_alive.tmp
+
+cat m_subdomain_alive.tmp flipped_alive.tmp > new_entries.tmp
+
+sort new_entries.tmp -o new_entries.tmp
+
+comm -23 new_entries.tmp "$raw_file" > new_entries_unique.tmp
+
+if ! [[ -s new_entries_unique.tmp ]]; then
     echo -e "\nNo domains added.\n"
     rm *.tmp
     exit 0
 fi
 
-echo -e "\nDomains added:"
-cat flipped_unique.tmp
-
-echo -e "\nTotal domains added: $(wc -l < flipped_unique.tmp)\n"
-
-cat flipped_unique.tmp >> "$raw_file"
+cat new_entries_unique.tmp >> "$raw_file"
 
 sort "$raw_file" -o "$raw_file"
+
+echo -e "\nDomains added:"
+cat new_entries_unique.tmp
+
+echo -e "\nTotal domains added: $(wc -l < new_entries_unique.tmp)\n"
 
 rm *.tmp
 
