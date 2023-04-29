@@ -91,17 +91,15 @@ function filter_pending {
 
     tr '[:upper:]' '[:lower:]' < tmp1.tmp > tmp2.tmp
 
-    # Duplicates are removed here for when the pending file isn't cleared
+    # Duplicates removed for when pending file isn't cleared
     # Note that sort writes the sorted list to a temporary file before moving it to the output file. Therefore the input and output files can be the same
     sort -u tmp2.tmp -o tmp2.tmp
 
     # This removes the majority of pending domains and makes the further filtering more efficient
     comm -23 tmp2.tmp "$raw_file" > tmp3.tmp
-
-    # Remove known dead domains
-    comm -23 tmp3.tmp "$dead_domains_file" > tmp4.tmp
-
-    if ! [[ -s tmp4.tmp ]]; then
+    
+    
+    if ! [[ -s tmp3.tmp ]]; then
         echo -e "\nNo retrieved domains.\n"
         rm *.tmp
         exit 0
@@ -109,22 +107,25 @@ function filter_pending {
 
     echo -e "\nDomains removed:"
 
-    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+    grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
 
-    comm -23 tmp4.tmp whitelisted.tmp > tmp5.tmp
+    comm -23 tmp3.tmp whitelisted.tmp > tmp4.tmp
 
-    grep -E '\.(edu|gov)$' tmp5.tmp | awk '{print $0 " (TLD)"}'
+    grep -E '\.(edu|gov)$' tmp4.tmp | awk '{print $0 " (TLD)"}'
 
-    grep -vE '\.(edu|gov)$' tmp5.tmp > tmp6.tmp
+    grep -vE '\.(edu|gov)$' tmp4.tmp > tmp5.tmp
 
     # This regex checks for valid domains
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp | awk '{print $0 " (invalid)"}'
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.tmp | awk '{print $0 " (invalid)"}'
     
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp > tmp7.tmp
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.tmp > tmp6.tmp
 
-    # The dead file is created here for when there are no dead domains
+    # Remove known dead domains to make the dead domains check more efficient
+    comm -23 tmp6.tmp "$dead_domains_file" > tmp7.tmp
+
+    # The file is created here for when there are no dead domains so the echo command doesn't create it
     # When it is missing the grep command shows an error
     touch dead.tmp
 
@@ -138,11 +139,43 @@ function filter_pending {
 
     # Seems like the dead.tmp isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
-    grep -vxFf dead.tmp tmp7.tmp > "$pending_file"
+    grep -vxFf dead.tmp tmp7.tmp > tmp8.tmp
 
-    cat dead.tmp >> "$dead_domains_file"
+    
+    # TODO: dont use the dead domains file since that can lead to false positives in yhe raw file.
+    #cat dead.tmp >> "$dead_domains_file"
 
-    sort -u "$dead_domains_file" -o "$dead_domains_file"
+    #sort -u "$dead_domains_file" -o "$dead_domains_file"
+
+    # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
+    # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
+
+    grep '^www\.' tmp8.tmp > with_www.tmp
+
+    comm -23 tmp8.tmp with_www.tmp > no_www.tmp
+
+    awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
+
+    awk '{print "www."$0}' no_www.tmp > with_www_new.tmp
+
+    cat no_www_new.tmp with_www_new.tmp > flipped.tmp
+
+    touch flipped_alive.tmp
+
+    cat flipped.tmp | xargs -I{} -P4 bash -c "
+        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> flipped_alive.tmp
+        fi
+    "
+
+    cat flipped_alive.tmp >> tmp8.tmp
+
+    # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
+    sort -u tmp8.tmp -o tmp8.tmp
+
+    # Remove any new flipped domains that might already be in the blocklist
+    # This is done for accurate counting
+    comm -23 tmp8.tmp "$raw_file" > "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
@@ -184,9 +217,14 @@ function merge_pending {
 
     num_after=$(wc -l < "$raw_file")
 
+    awk '{sub(/^www\./, ""); print}' "$pending_file" > unique_sites.tmp
+    
+    sort -u unique_sites.tmp -o unique_sites.tmp
+
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Total domains after: $num_after"
+    echo "Unique sites added: $(wc -l < unique_sites.tmp)"
 
     > "$pending_file"
 
