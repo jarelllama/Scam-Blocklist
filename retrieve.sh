@@ -18,7 +18,6 @@ if [[ -s "$pending_file" ]]; then
     fi
 fi
 
-# Default values
 debug=0
 unattended=0
 time_filter="a"
@@ -54,8 +53,7 @@ while IFS= read -r term; do
 
         google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
 
-        # Search Google and extract all domains
-        # Duplicates are removed here for accurate counting of the retrieved domains by each search term
+        # Duplicates are removed here for accurate counting
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
 
         echo "$term"
@@ -91,15 +89,16 @@ function filter_pending {
 
     tr '[:upper:]' '[:lower:]' < tmp1.tmp > tmp2.tmp
 
-    # Duplicates removed for when pending file isn't cleared
-    # Note that sort writes the sorted list to a temporary file before moving it to the output file. Therefore the input and output files can be the same
+    # Remove duplicates here for when the pending file isn't cleared
+    # Note that sort writes to a temporary file here before moving it the output file. That's why the input and output can be the same
     sort -u tmp2.tmp -o tmp2.tmp
 
     # This removes the majority of pending domains and makes the further filtering more efficient
     comm -23 tmp2.tmp "$raw_file" > tmp3.tmp
     
+    comm -23 tmp3.tmp "$dead_domains_file" > tmp4.tmp
     
-    if ! [[ -s tmp3.tmp ]]; then
+    if ! [[ -s tmp4.tmp ]]; then
         echo -e "\nNo retrieved domains.\n"
         rm *.tmp
         exit 0
@@ -107,30 +106,26 @@ function filter_pending {
 
     echo -e "\nDomains removed:"
 
-    grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-    grep -Ff "$whitelist_file" tmp3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
 
-    comm -23 tmp3.tmp whitelisted.tmp > tmp4.tmp
+    comm -23 tmp4.tmp whitelisted.tmp > tmp5.tmp
 
-    grep -E '\.(edu|gov)$' tmp4.tmp | awk '{print $0 " (TLD)"}'
+    grep -E '\.(edu|gov)$' tmp5.tmp | awk '{print $0 " (TLD)"}'
 
-    grep -vE '\.(edu|gov)$' tmp4.tmp > tmp5.tmp
+    grep -vE '\.(edu|gov)$' tmp5.tmp > tmp6.tmp
 
     # This regex checks for valid domains
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.tmp | awk '{print $0 " (invalid)"}'
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp | awk '{print $0 " (invalid)"}'
     
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp5.tmp > tmp6.tmp
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp > tmp7.tmp
 
-    # Remove known dead domains to make the dead domains check more efficient
-    comm -23 tmp6.tmp "$dead_domains_file" > tmp7.tmp
-
-    # The file is created here for when there are no dead domains so the echo command doesn't create it
-    # When it is missing the grep command shows an error
+    # grep outputs an error if this file is missing
     touch dead.tmp
 
     # Use parallel processing
-    cat tmp7.tmp | xargs -I{} -P4 bash -c "
+    cat tmp8.tmp | xargs -I{} -P4 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> dead.tmp
             echo '{} (dead)'
@@ -148,7 +143,6 @@ function filter_pending {
     #sort -u "$dead_domains_file" -o "$dead_domains_file"
 
     # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
-    # This reduces the number of domains checked by the dead domains filter. Thus, improves efficiency
 
     grep '^www\.' tmp8.tmp > with_www.tmp
 
@@ -173,7 +167,7 @@ function filter_pending {
     # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
     sort -u tmp8.tmp -o tmp8.tmp
 
-    # Remove any new flipped domains that might already be in the blocklist
+    # Remove any new flipped domains that are already be in the blocklist
     # This is done for accurate counting
     comm -23 tmp8.tmp "$raw_file" > "$pending_file"
 
@@ -246,7 +240,7 @@ function merge_pending {
     git config user.email "$github_email"
     git config user.name "$github_name"
 
-    # Commit white/black lists too for when the user modified them
+    # Push white/black lists too for when the user modifies them
     git add "$raw_file" "$whitelist_file" "$blacklist_file" "$dead_domains_file"
     git commit -m "$commit_msg"
     git push
