@@ -9,7 +9,7 @@
 Unique scam sites found:
 Today: todays_count
 Yesterday: yest_count
-Total since: total_count (since Apr 12 2023)
+Total: total_count (since Apr 12 2023)
 
 Updated: update_time
 ```
