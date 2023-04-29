@@ -2,16 +2,16 @@
 
 | Syntax | Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2581 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 5139 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2582 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 5141 |
 
 ```
 Unique scam sites found:
-Today: 33
+Today: 34
 Yesterday: 174
-Total: 2581
+Total since: 2582 (since Apr 12 2023)
 
-Updated: Sat Apr 29 03:33 UTC
+Updated: Sat Apr 29 03:47 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -20,10 +20,10 @@ Updated: Sat Apr 29 03:33 UTC
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
 - Domains are compared against the Cisco Umbrella Toplist
 - Domains found in the toplist are checked manually
-- Resolving `www` subdomains are included in the domains list
-- Domains that are found in toplist/whitelist updates are vetted manually
+- Resolving `www` and `m` subdomains are included in the domains list
+- Domains found in toplist/whitelist updates are vetted manually
 
-Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are also added after being manually vetted.
+Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasionally added after being manually vetted.
 
 To see the full filtering process check out the code in the repository.
 
@@ -56,4 +56,4 @@ There is no way I can keep up with the number of scam sites created daily but wi
 | space  | 60 |
 | us  | 50 |
 | website  | 38 |
-| co  | 35 |
+| co  | 37 |
