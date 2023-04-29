@@ -7,26 +7,26 @@ github_name="jarelllama"
 
 grep '^www\.' "$raw_file" > www.tmp
 
-awk '{sub(/^www\./, ""); print}' www.tmp > base_domain.tmp
+awk '{sub(/^www\./, ""); print}' www.tmp > base_domains.tmp
 
-touch base_domain_alive.tmp
+touch base_domains_alive.tmp
 
-cat base_domain.tmp | xargs -I{} -P8 bash -c "
+cat base_domains.tmp | xargs -I{} -P8 bash -c "
     if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-        echo {} >> base_domain_alive.tmp
+        echo {} >> base_domains_alive.tmp
     fi
 "
 
-cat base_domain_alive.tmp "$raw_file" > raw.tmp
+cat base_domains_alive.tmp "$raw_file" > raw.tmp
 
-grep -v '^www\.' raw.tmp > no_www.tmp
+grep -v '^www\.' raw.tmp > base_domains_only.tmp
 
 touch subdomains_alive.tmp
 
 while read -r subdomain; do
-    awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_www.tmp > subdomain.tmp
+    awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains_only.tmp > with_subdomain.tmp
 
-    cat subdomain.tmp | xargs -I{} -P4 bash -c "
+    cat with_subdomain.tmp | xargs -I{} -P4 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> subdomains_alive.tmp
         fi
