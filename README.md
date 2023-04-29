@@ -1,19 +1,17 @@
 # Scam Blocklist
 
-Update (Apr 29th): Currently going through major code changes. Will take the weekend to complete.
-
 | Syntax | Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 2588 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 5153 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 5792 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 13832 |
 
 ```
 Unique scam sites found:
-Today: 40
+Today: 3244
 Yesterday: 174
-Total: 2588 (since Apr 12 2023)
+Total: 5792 (since Apr 12 2023)
 
-Updated: Sat Apr 29 04:53 UTC
+Updated: Sat Apr 29 21:17 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -22,7 +20,7 @@ Updated: Sat Apr 29 04:53 UTC
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
 - Domains are compared against the Cisco Umbrella Toplist
 - Domains found in the toplist are checked manually
-- Resolving `www` and `m` subdomains are included in the domains list
+- Resolving subdomains are included in the domains list. See the list of subdomains checked here: [subdomains.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/data/subdomains.txt)
 - Domains found in toplist/whitelist updates are vetted manually
 
 Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasionally added after being manually vetted.
@@ -49,13 +47,13 @@ There is no way I can keep up with the number of scam sites created daily but wi
 
 | TLD | Count |
 | ---:|:--- |
-| com  | 3485 |
-| shop  | 620 |
-| store  | 355 |
-| online  | 78 |
-| net  | 68 |
-| xyz  | 63 |
-| space  | 60 |
-| us  | 50 |
-| website  | 38 |
-| co  | 37 |
+| com  | 9262 |
+| shop  | 1604 |
+| store  | 932 |
+| online  | 210 |
+| net  | 192 |
+| xyz  | 170 |
+| space  | 153 |
+| de  | 144 |
+| us  | 131 |
+| top  | 105 |
