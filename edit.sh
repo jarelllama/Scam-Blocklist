@@ -36,7 +36,7 @@ function prep_entry {
     echo "$www_subdomain" >> entries.tmp
 
     while read -r subdomain; do
-        subdomain="${subdomain}:${new_entry}"
+        subdomain="${subdomain}.${new_entry}"
         echo "$subdomain" >> entries.tmp
     done < "$subdomains_file"
 
@@ -94,6 +94,9 @@ function edit_blocklist {
     fi
 
     mv alive_entries.tmp entries.tmp
+    
+    # The dead check messes up the order
+    sort entries.tmp -o entries.tmp
   
     # This checks if there are no unique entries in the new entries file
     if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
@@ -185,7 +188,9 @@ function edit_blacklist {
     fi
 
     mv alive_entries.tmp entries.tmp
-  
+
+    sort entries.tmp -o entries.tmp
+
     if ! comm -23 entries.tmp "$blacklist_file" | grep -q . ; then
         echo -e "\nThe domain is already in the blacklist. Not added."
         return
