@@ -12,6 +12,7 @@ while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
 
+# The subdomains file isn't sorted
 grep -vxFf subdomains.tmp "$raw_file" > base_domains.tmp
 
 touch subdomains_alive.tmp
