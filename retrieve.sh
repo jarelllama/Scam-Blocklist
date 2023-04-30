@@ -118,9 +118,9 @@ function filter_pending {
     grep -vE '\.(edu|gov)$' 4.tmp > 5.tmp
 
     # This regex matches valid domains
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
     
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 5.tmp > 6.tmp
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp > 6.tmp
 
     # grep outputs an error if this file is missing
     touch dead.tmp
