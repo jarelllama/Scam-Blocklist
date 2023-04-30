@@ -5,8 +5,8 @@ on:
     paths:
       - "data/raw.txt"
   schedule:
-    # Daily at 5:10am (GMT+8)
-    - cron: "10 21 * * *"
+    # Daily at 5am (GMT+8)
+    - cron: "0 21 * * *"
 jobs:
   Build-blocklist:
     runs-on: ubuntu-latest
