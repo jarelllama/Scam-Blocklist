@@ -2,8 +2,8 @@ name: Compress Adblock rules
 run-name: Compress Adblock rules
 on:
   schedule:
-    # Daily at 4:15am (GMT+8)
-    - cron: "15 20 * * *"
+    # Daily at 4:30am (GMT+8)
+    - cron: "30 20 * * *"
 jobs:
   Compress-Adblock-rules:
     runs-on: ubuntu-latest
