@@ -32,7 +32,6 @@ for arg in "$@"; do
     elif [[ "$arg" == 'u' ]]; then
         unattended=1
         time_filter='y'
-        echo -e "\nRetrieving domains..."
     else
         time_filter="$arg"
     fi
@@ -40,6 +39,8 @@ done
 
 if [[ "$unattended" -eq 0 ]]; then
     echo -e "\nRemember to pull the latest changes first!"
+else
+    echo -e "\nRetrieving domains..."
 fi
 
 declare -A retrieved_domains
