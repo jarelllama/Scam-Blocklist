@@ -94,9 +94,9 @@ function filter_pending {
     # Note that sort writes to a temporary file before moving it to the output file. That's why the input and output can be the same
     sort -u 1.tmp -o 1.tmp
 
-    # This removes the majority of pending domains and makes the further filtering more efficient
+    # This removes the majority of pending domains
     comm -23 1.tmp "$raw_file" > 2.tmp
-    
+
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
     
     if ! [[ -s 3.tmp ]]; then
@@ -117,12 +117,12 @@ function filter_pending {
 
     grep -vE '\.(edu|gov)$' 4.tmp > 5.tmp
 
-    # This regex matches valid domains
+    # This regex matches valid domains. This includes puny code TLDs (.xn--*)
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
     
     grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp > 6.tmp
 
-    # grep outputs an error if this file is missing
+    # grep outputs an error when this file is missing
     touch dead.tmp
 
     # Use parallel processing
@@ -134,7 +134,7 @@ function filter_pending {
     "
 
     # It appears that the dead file isn't always sorted
-    # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
+    # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than using grep
     grep -vxFf dead.tmp 6.tmp > pending.tmp
 
     # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
@@ -162,7 +162,7 @@ function filter_pending {
 
     cat flipped_alive.tmp >> pending.tmp
 
-    # Duplicates are removed again from the pending file for when the file isn't cleared and flipped domains might be duplicated
+    # Duplicates are removed again from the pending file for when the file isn't cleared and there are duplicate flipped domains
     sort -u pending.tmp -o "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
@@ -232,7 +232,7 @@ function merge_pending {
 
     echo
 
-    # Push white/black lists too for when the user modifies them
+    # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
     git commit -m "$commit_msg"
     git push
@@ -261,7 +261,7 @@ while true; do
             merge_pending
             ;;
         2)
-            # Call editing script
+            # Call the editing script
             echo "Edit lists"
             echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
