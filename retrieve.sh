@@ -113,9 +113,9 @@ function filter_pending {
 
     comm -23 3.tmp whitelisted.tmp > 4.tmp
 
-    grep -E '\.(edu|gov)$' 4.tmp | awk '{print $0 " (TLD)"}'
+    grep -E '\.(gov|edu)(\.[a-z]{2})?$' 4.tmp | awk '{print $0 " (TLD)"}'
 
-    grep -vE '\.(edu|gov)$' 4.tmp > 5.tmp
+    grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 4.tmp > 5.tmp
 
     # This regex matches valid domains. This includes puny code TLDs (.xn--*)
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
