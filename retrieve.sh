@@ -249,25 +249,25 @@ fi
 
 while true; do
     echo -e "\nPending Domains Menu:"
-    echo "1. Merge with blocklist"
-    echo "2. Edit lists"
-    echo "3. Run filter again"
+    echo "m. Merge with blocklist"
+    echo "e. Edit lists"
+    echo "r. Run filter again"
     echo "x. Save pending and exit"
     read choice
 
     case "$choice" in
-        1)
+        m)
             echo "Merge with blocklist"
             merge_pending
             ;;
-        2)
+        e)
             # Call the editing script
             echo "Edit lists"
             echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
             continue
             ;;
-        3)
+        r)
             echo "Run filter again"
             cp "$pending_file.bak" "$pending_file"
             filter_pending
