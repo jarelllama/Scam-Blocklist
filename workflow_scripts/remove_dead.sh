@@ -39,9 +39,9 @@ function remove_dead {
 }
 
 function add_resurrected {
-    grep -vxFf dead_now_alive.tmp "$dead_domains_file" > "$dead_domains_file.tmp"
+    grep -vxFf dead_now_alive.tmp "$dead_domains_file" > dead_domains.tmp
 
-    mv "$dead_domains_file.tmp" "$dead_domains_file"
+    mv dead_domains.tmp "$dead_domains_file"
 
     cat dead_now_alive.tmp >> "$raw_file" 
     
