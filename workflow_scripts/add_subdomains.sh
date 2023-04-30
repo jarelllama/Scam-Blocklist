@@ -42,7 +42,7 @@ done < "$subdomains_file"
 
 cat subdomains_dead.tmp >> "$dead_domains_file"
 
-sort -u "$dead_domains_file" -o "$dead_domains_file"
+sort "$dead_domains_file" -o "$dead_domains_file"
 
 if ! [[ -s subdomains_alive.tmp ]]; then
     echo -e "\nNo domains added.\n"
