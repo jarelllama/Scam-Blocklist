@@ -11,6 +11,9 @@ edit_script="edit.sh"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
+git config user.email "$github_email"
+git config user.name "$github_name"
+
 if [[ -s "$pending_file" ]]; then
     read -n 1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
     echo
@@ -229,9 +232,6 @@ function merge_pending {
     fi
 
     echo
-
-    git config user.email "$github_email"
-    git config user.name "$github_name"
 
     # Push white/black lists too for when the user modifies them
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
