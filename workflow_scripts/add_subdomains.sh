@@ -38,6 +38,7 @@ done < "$subdomains_file"
 
 cat subdomains_alive.tmp >> raw.tmp
 
+# Remove duplicates to not add any subdomain already in the list
 sort -u raw.tmp -o raw.tmp
 
 comm -23 raw.tmp "$raw_file" > unique.tmp
