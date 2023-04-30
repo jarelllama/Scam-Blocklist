@@ -15,14 +15,14 @@ sort "$subdomains_file" -o "$subdomains_file"
 comm -23 "$raw_file" "$subdomains_cache" > raw.tmp
 
 while read -r subdomain; do
-    grep "^$subdomain\." "raw.tmp" >> subdomains.tmp
+    grep "^$subdomain\." "raw.tmp" >> "$subdomains_cache"
 done < "$subdomains_file"
 
-comm -23 "$raw_file" subdomains.tmp > base_domains.tmp
+sort -u "$subdomains_cache" -o "$subdomains_cache"
+
+comm -23 raw.tmp subdomains_cache > base_domains.tmp
 
 cp base_domains.tmp "$subdomains_removed_file"
-cat subdomains.tmp >> "$subdomains_cache"
-sort -u "$subdomains_cache" -o "$subdomains_cache"
 
 touch subdomains_alive.tmp
 
