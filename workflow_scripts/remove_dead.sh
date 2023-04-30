@@ -83,6 +83,5 @@ fi
 
 rm *.tmp
 
-echo ""
-
+echo
 git push -q
