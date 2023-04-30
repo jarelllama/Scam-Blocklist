@@ -2,6 +2,7 @@
 
 raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
+dead_domains_file="data/dead_domains.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
@@ -10,25 +11,33 @@ git config user.name "$github_name"
 
 sort "$subdomains_file" -o "$subdomains_file"
 
+# Find subdomains and append them to a file
 while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
 
+# Remove subdomains to get only base domains
 comm -23 "$raw_file" subdomains.tmp > base_domains.tmp
 
-touch subdomains_alive.tmp
+touch subdomains_dead.tmp
 
 while read -r subdomain; do
-    awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains.tmp > subdomains.tmp
+    # Append the current subdomain to the base domain
+    awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains.tmp > 1.tmp
 
-    # Remove subdomains already in the raw file. This reduces the number of domains to dig
-    comm -23 subdomains.tmp "$raw_file" > new_subdomains.tmp
+    # Remove subdomains already in the raw file
+    comm -23 1.tmp "$raw_file" > 2.tmp
 
-    cat new_subdomains.tmp | xargs -I{} -P8 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> subdomains_alive.tmp
+    # Remove known dead subdomains
+    comm -23 2.tmp "$dead_domains_file" > subdomains.tmp
+
+    cat subdomains.tmp | xargs -I{} -P8 bash -c "
+        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> subdomains_dead.tmp
         fi
     "
+    
+    grep -vxFf subdomains_dead.tmp subdomains.tmp >> subdomains_alive.tmp
 done < "$subdomains_file"
 
 if ! [[ -s subdomains_alive.tmp ]]; then
