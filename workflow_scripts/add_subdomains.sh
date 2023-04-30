@@ -2,8 +2,11 @@
 
 raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
+github_email='91372088+jarelllama@users.noreply.github.com'
+github_name='jarelllama'
+
+git config user.email "$github_email"
+git config user.name "$github_name"
 
 grep '^www\.' "$raw_file" > www.tmp
 
@@ -19,12 +22,12 @@ cat base_domains.tmp | xargs -I{} -P8 bash -c "
 
 cat base_domains_alive.tmp "$raw_file" > raw.tmp
 
-grep -v '^www\.' raw.tmp > base_domains_only.tmp
+grep -E '^[^.]*\.[^\.]*$' raw.tmp > base_domains.tmp
 
 touch subdomains_alive.tmp
 
 while read -r subdomain; do
-    awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains_only.tmp > with_subdomain.tmp
+    awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains.tmp > with_subdomain.tmp
 
     cat with_subdomain.tmp | xargs -I{} -P8 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
@@ -35,7 +38,7 @@ done < "$subdomains_file"
 
 cat subdomains_alive.tmp >> raw.tmp
 
-sort raw.tmp -o raw.tmp
+sort -u raw.tmp -o raw.tmp
 
 comm -23 raw.tmp "$raw_file" > unique.tmp
 
@@ -53,9 +56,6 @@ cat unique.tmp
 echo -e "\nTotal domains added: $(wc -l < unique.tmp)\n"
 
 rm *.tmp
-
-git config user.email "$github_email"
-git config user.name "$github_name"
 
 git add "$raw_file"
 git commit -qm "Add subdomains"
