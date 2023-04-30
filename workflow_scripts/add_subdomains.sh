@@ -24,6 +24,7 @@ touch subdomains_alive.tmp
 while read -r subdomain; do
     awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains.tmp > subdomains.tmp
 
+    # Remove subdomains already in the raw file. This reduces the number of domains to dig
     comm -23 subdomains.tmp "$raw_file" > new_subdomains.tmp
 
     cat new_subdomains.tmp | xargs -I{} -P8 bash -c "
