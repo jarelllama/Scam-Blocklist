@@ -246,7 +246,6 @@ filter_pending
 if [[ "$unattended" -eq 1 ]]; then
     echo -e "\nMerging with blocklist..."
     merge_pending
-    rm *.bak
 fi
 
 while true; do
