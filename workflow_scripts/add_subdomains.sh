@@ -44,20 +44,18 @@ cat subdomains_dead.tmp >> "$dead_domains_file"
 
 sort "$dead_domains_file" -o "$dead_domains_file"
 
-if ! [[ -s subdomains_alive.tmp ]]; then
-    echo -e "\nNo domains added.\n"
-    rm *.tmp
-    exit 0
-fi
+if [[ -s subdomains_alive.tmp ]]; then
+    cat subdomains_alive.tmp >> "$raw_file"
 
-cat subdomains_alive.tmp >> "$raw_file"
+    sort "$raw_file" -o "$raw_file"
 
-sort "$raw_file" -o "$raw_file"
-
-echo -e "\nDomains added:"
+    echo -e "\nDomains added:"
 cat subdomains_alive.tmp
 
-echo -e "\nTotal domains added: $(wc -l < subdomains_alive.tmp)\n"
+    echo -e "\nTotal domains added: $(wc -l < subdomains_alive.tmp)\n"
+else
+    echo -e "\nNo domains added.\n"
+fi
 
 rm *.tmp
 
