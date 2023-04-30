@@ -56,7 +56,6 @@ function add_resurrected {
     git commit -qm "Add resurrected domains"
 }
 
-# grep will show an error if the file isn't created
 touch dead.tmp
 touch dead_now_alive.tmp
 
