@@ -150,7 +150,7 @@ function filter_pending {
     cat no_www_new.tmp with_www_new.tmp > flipped.tmp
 
     # Remove flipped domains that are already in the blocklist
-    grep -vxFf "$raw_file" 1.tmp > flipped_unique.tmp
+    grep -vxFf "$raw_file" flipped.tmp > flipped_unique.tmp
 
     touch flipped_alive.tmp
 
