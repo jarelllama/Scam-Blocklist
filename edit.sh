@@ -69,7 +69,7 @@ function edit_blocklist {
         return
     fi
 
-    # The toplist is checked before removing dead to find potential subdomains in the toplist
+    # The toplist is checked before removing dead domains to find potential subdomains in the toplist
     if grep -xFf entries.tmp "$toplist_file" | grep -vxFqf "$blacklist_file"; then
         echo -e "\nThe domain is found in the toplist. Not added."
         echo "Matches in toplist:"
