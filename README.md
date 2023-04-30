@@ -10,9 +10,8 @@
 Unique scam sites found:
 Today: 272
 Yesterday: 40
+Avg/day: 120
 Total: 2860 (since Apr 12 2023)
-
-Search terms: 20
 
 Updated: Sun Apr 30 17:36 UTC
 ```
