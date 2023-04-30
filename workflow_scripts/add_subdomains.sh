@@ -9,8 +9,6 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-sort "$subdomains_file" -o "$subdomains_file"
-
 # Find subdomains and append them to a file
 while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> subdomains.tmp
@@ -59,6 +57,6 @@ fi
 
 rm *.tmp
 
-git add "$raw_file" "$subdomains_file" "$dead_domains_file"
+git add "$raw_file" "$dead_domains_file"
 git commit -qm "Add subdomains"
 git push -q
