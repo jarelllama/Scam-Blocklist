@@ -4,12 +4,19 @@ raw_file="data/raw.txt"
 adblock_file="adblock.txt"
 compressed_entries="data/compressed_entries.txt"
 
-comm -23 "$raw_file" "$compressed_entries" > raw.tmp
+while read -r subdomain; do
+    grep "^$subdomain\." "$raw_file" >> subdomains.tmp
+done < "$subdomains_file"
+
+# Remove subdomains
+comm -23 "$raw_file" subdomains.tmp > raw.tmp
 
 awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
 
-# Sorting after converting to ABP format because adding || somehow messes up the order
-sort -u raw2.tmp -o raw.tmp
+# Adding || somehow messes up the order
+sort -u raw2.tmp -o raw2.tmp
+
+comm -23 raw2.tmp "$compressed_entries" > raw.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
