@@ -40,6 +40,10 @@ while read -r subdomain; do
     grep -vxFf subdomains_dead.tmp subdomains.tmp >> subdomains_alive.tmp
 done < "$subdomains_file"
 
+cat subdomains_dead.tmp >> "$dead_domains_file"
+
+sort -u "$dead_domains_file" -o "$dead_domains_file"
+
 if ! [[ -s subdomains_alive.tmp ]]; then
     echo -e "\nNo domains added.\n"
     rm *.tmp
@@ -57,6 +61,6 @@ echo -e "\nTotal domains added: $(wc -l < subdomains_alive.tmp)\n"
 
 rm *.tmp
 
-git add "$raw_file" "$subdomains_file"
+git add "$raw_file" "$subdomains_file" "$dead_domains_file"
 git commit -qm "Add subdomains"
 git push -q
