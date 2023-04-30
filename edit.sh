@@ -5,38 +5,36 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
+github_email='91372088+jarelllama@users.noreply.github.com'
+github_name='jarelllama'
+
+git config user.email "$github_email"
+git config user.name "$github_name"
 
 function prep_entry {
-    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+    read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
     remove_entry=0
 
-    if [[ "$new_entry" == -* ]]; then
-        new_entry="${new_entry#-}"
+    if [[ "$entry" == -* ]]; then
+        entry="${entry#-}"
         remove_entry=1
     fi
 
-    new_entry="${new_entry,,}"
+    entry="${entry,,}"
 
-    new_entry="${new_entry#*://}"
+    entry="${entry#*://}"
 
-    new_entry="${new_entry%%/*}"
-
-    if [[ "$new_entry" == www.* ]]; then
-        www_subdomain="${new_entry}"
-        new_entry="${new_entry#www.}"
-    else
-        www_subdomain="www.${new_entry}"
-    fi
-
-    echo "$new_entry" > entries.tmp
-
-    echo "$www_subdomain" >> entries.tmp
+    entry="${entry%%/*}"
 
     while read -r subdomain; do
-        subdomain="${subdomain}.${new_entry}"
+        entry="${entry#${subdomain}.}"
+    done < "$subdomains_file"
+
+    echo "$entry" > entries.tmp
+
+    while read -r subdomain; do
+        subdomain="${subdomain}.${entry}"
         echo "$subdomain" >> entries.tmp
     done < "$subdomains_file"
 
@@ -52,7 +50,7 @@ function edit_blocklist {
             
     if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFqf entries.tmp "$raw_file"; then
-            echo -e "\nDomain not found in blocklist: $new_entry"
+            echo -e "\nDomain not found in blocklist: $entry"
             return
         fi
 
@@ -66,7 +64,7 @@ function edit_blocklist {
         return
     fi
 
-    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+    if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
         return
     fi
@@ -82,7 +80,7 @@ function edit_blocklist {
     # mv shows an error when the file doesnt exist
     touch alive_entries.tmp
 
-    cat entries.tmp | xargs -I{} -P4 bash -c "
+    cat entries.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> alive_entries.tmp
         fi
@@ -115,35 +113,35 @@ function edit_blocklist {
 function edit_whitelist {
     echo "WHITELIST"
 
-    read -p $'Enter the new entry (add \'-\' to remove entry):\n' new_entry
+    read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
-    new_entry="${new_entry,,}"
+    entry="${entry,,}"
 
-    if [[ "$new_entry" == -* ]]; then
-        new_entry="${new_entry#-}"
-        if ! grep -xFq "$new_entry" "$whitelist_file"; then
-            echo -e "\nEntry not found in whitelist: $new_entry"
+    if [[ "$entry" == -* ]]; then
+        entry="${entry#-}"
+        if ! grep -xFq "$entry" "$whitelist_file"; then
+            echo -e "\nEntry not found in whitelist: $entry"
             return
         fi
-        echo -e "\nRemoved from whitelist: $new_entry"
-        sed -i "/^$new_entry$/d" "$whitelist_file"
+        echo -e "\nRemoved from whitelist: $entry"
+        sed -i "/^$entry$/d" "$whitelist_file"
         return
     fi
 
     # Check if the entry contains whitespaces or is empty
-    if [[ "$new_entry" =~ [[:space:]] || -z "$new_entry" ]]; then
+    if [[ "$entry" =~ [[:space:]] || -z "$entry" ]]; then
         echo -e "\nInvalid entry. Not added."
         return
     fi
     
-    if grep -Fq "$new_entry" "$whitelist_file"; then
-        existing_entry=$(grep -F "$new_entry" "$whitelist_file" | head -n 1)
+    if grep -Fq "$entry" "$whitelist_file"; then
+        existing_entry=$(grep -F "$entry" "$whitelist_file" | head -n 1)
         echo -e "\nA similar term is already in the whitelist: $existing_entry"
         return
     fi
 
-    echo -e "\nAdded to whitelist: $new_entry"
-    echo "$new_entry" >> "$whitelist_file"
+    echo -e "\nAdded to whitelist: $entry"
+    echo "$entry" >> "$whitelist_file"
 
     sort "$whitelist_file" -o "$whitelist_file"
 }
@@ -155,7 +153,7 @@ function edit_blacklist {
             
     if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFqf entries.tmp "$blacklist_file"; then
-            echo -e "\nDomain not found in blacklist: $new_entry"
+            echo -e "\nDomain not found in blacklist: $entry"
             return
         fi
 
@@ -169,14 +167,14 @@ function edit_blacklist {
         return
     fi
 
-    if ! [[ "$new_entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
+    if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
         return
     fi
 
     touch alive_entries.tmp
 
-    cat entries.tmp | xargs -I{} -P4 bash -c "
+    cat entries.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> alive_entries.tmp
         fi
@@ -227,9 +225,6 @@ function check_entry {
 
 function push_changes {
     echo -e "Push lists changes\n"
-
-    git config user.email "$github_email"
-    git config user.name "$github_name"
 
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
     git commit -m "Update list(s)"
