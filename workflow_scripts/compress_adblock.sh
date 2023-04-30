@@ -2,8 +2,11 @@
 
 adblock_file="adblock.txt"
 compressed_entries="data/compressed_entries.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
+github_email='91372088+jarelllama@users.noreply.github.com'
+github_name='jarelllama'
+
+git config user.email "$github_email"
+git config user.name "$github_name"
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
@@ -28,11 +31,7 @@ sort -u "$compressed_entries" -o "$compressed_entries"
 
 rm *.tmp
 
-echo ""
-
-git config user.email "$github_email"
-git config user.name "$github_name"
-
+echo
 git add "$compressed_entries"
 git commit -qm "Compress Adblock entries"
 git push -q
