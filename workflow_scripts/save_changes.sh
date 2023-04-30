@@ -74,12 +74,6 @@ if ! diff -q "$readme" template.tmp >/dev/null; then
     sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' template.tmp
 fi
 
-# Code to update the number of search terms
-
-search_terms=$(grep -vE '^[[:space:]]*$|^#' "$search_terms_file" | wc -l)
-
-sed -i 's/search_terms_count/'"$search_terms"'/g' "$template"
-
 cp template.tmp "$readme"
 
 git add "$domains_file" "$adblock_file"
