@@ -9,15 +9,15 @@ while read -r subdomain; do
 done < "$subdomains_file"
 
 # Remove subdomains
-comm -23 "$raw_file" subdomains.tmp > raw.tmp
+comm -23 "$raw_file" subdomains.tmp > 1.tmp
 
-awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
+awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
 
 # Appending || somehow messes up the order
-sort -u raw2.tmp -o raw2.tmp
+sort -u 2.tmp -o 2.tmp
 
 # Remove redundant entries
-comm -23 raw2.tmp "$compressed_entries" > raw.tmp
+comm -23 2.tmp "$compressed_entries" > raw.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
