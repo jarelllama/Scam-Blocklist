@@ -11,8 +11,6 @@ Today: 257
 Yesterday: 40
 Total: 2845 (since Apr 12 2023)
 
-Search terms: search_terms_count
-
 Updated: Sun Apr 30 16:48 UTC
 ```
 
