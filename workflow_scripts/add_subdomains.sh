@@ -12,7 +12,7 @@ while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
 
-comm -23 "$raw_file" subdomains.tmp > base_domains.tmp
+grep -vxFf subdomains.tmp "$raw_file" > base_domains.tmp
 
 touch subdomains_alive.tmp
 
