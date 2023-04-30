@@ -55,6 +55,6 @@ echo -e "\nTotal domains added: $(wc -l < subdomains_alive.tmp)\n"
 
 rm *.tmp
 
-git add "$raw_file" "$subdomains_file" "$no_subdomains_file"
+git add "$raw_file" "$subdomains_file" "$subdomains_removed_file" "$subdomains_cache"
 git commit -qm "Add subdomains"
 git push -q
