@@ -12,10 +12,10 @@ git config user.name "$github_name"
 
 sort "$subdomains_file" -o "$subdomains_file"
 
-comm -23 "$raw_file" "$subdomains_cache"
+comm -23 "$raw_file" "$subdomains_cache" > raw.tmp
 
 while read -r subdomain; do
-    grep "^$subdomain\." "$raw_file" >> subdomains.tmp
+    grep "^$subdomain\." "raw.tmp" >> subdomains.tmp
 done < "$subdomains_file"
 
 comm -23 "$raw_file" subdomains.tmp > base_domains.tmp
