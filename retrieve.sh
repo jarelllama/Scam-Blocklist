@@ -58,7 +58,6 @@ while IFS= read -r term; do
 
         google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
 
-        # Duplicates are removed here for accurate counting
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
 
         echo "$term"
