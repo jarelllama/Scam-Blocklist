@@ -2,8 +2,8 @@
 
 readme="README.md"
 template="data/README.md"
-count_history="data/count_history.txt"
 count_stats="data/count_stats.txt"
+count_history="data/count_history.txt"
 raw_file="data/raw.txt"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
@@ -28,13 +28,13 @@ sed -i 's/domains_count/'"$domains_count"'/g' "$template"
 
 todays_date=$(date -u +"%m%d%y")
 
-date_in_file=$(sed -n '1p' "$count_history")
+date_in_file=$(sed -n '1p' "$count_stats")
 
 current_count="$adblock_count"
 
-yest_count=$(sed -n '3p' "$count_history")
+yest_count=$(sed -n '3p' "$count_stats")
 
-yest_yest_count=$(sed -n '2p' "$count_history")
+yest_yest_count=$(sed -n '2p' "$count_stats")
 
 if [[ "$date_in_file" == "$todays_date" ]]; then
     todays_diff=$((current_count - yest_count))
@@ -53,13 +53,13 @@ else
     
     sed -i 's/todays_count/0/g' "$template"
 
-    echo "$end_of_day_diff" >> "$count_stats"
+    echo "$end_of_day_diff" >> "$count_history"
     
-    echo "$todays_date" > "$count_history"
+    echo "$todays_date" > "$count_stats"
     
-    echo "$yest_count" >> "$count_history"
+    echo "$yest_count" >> "$count_stats"
     
-    echo "$current_count" >> "$count_history"
+    echo "$current_count" >> "$count_stats"
 fi
 
 sed -i 's/total_count/'"$current_count"'/g' "$template"
@@ -79,7 +79,7 @@ cp template.tmp "$readme"
 git add "$domains_file" "$adblock_file"
 git commit -m "Build lists"
 
-git add "$readme" "$count_history"
+git add "$readme" "$count_stats" "$count_history"
 git commit -m "Update README count"
 
 git push
