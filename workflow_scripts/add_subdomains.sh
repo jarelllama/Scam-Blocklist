@@ -45,7 +45,7 @@ fi
 cp raw.tmp "$raw_file"
 
 echo -e "\nDomains added:"
-cat unique.tmp
+cat new_entries.tmp
 
 echo -e "\nTotal domains added: $(wc -l < unique.tmp)\n"
 
