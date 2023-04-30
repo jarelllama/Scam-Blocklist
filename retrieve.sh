@@ -135,19 +135,22 @@ function filter_pending {
 
     # It appears that the dead file isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
-    grep -vxFf dead.tmp 6.tmp > 7.tmp
+    grep -vxFf dead.tmp 6.tmp > pending.tmp
 
     # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
 
-    grep '^www\.' 7.tmp > with_www.tmp
+    grep '^www\.' pending.tmp > with_www.tmp
 
-    comm -23 7.tmp with_www.tmp > no_www.tmp
+    comm -23 pending.tmp with_www.tmp > no_www.tmp
 
     awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
 
     awk '{print "www."$0}' no_www.tmp > with_www_new.tmp
 
-    cat no_www_new.tmp with_www_new.tmp > flipped.tmp
+    cat no_www_new.tmp with_www_new.tmp > 1.tmp
+
+    # Remove flipped domains that are already in the blocklist
+    grep -vxFf "$raw_file" 1.tmp > flipped.tmp
 
     touch flipped_alive.tmp
 
@@ -157,13 +160,10 @@ function filter_pending {
         fi
     "
 
-    cat flipped_alive.tmp >> 7.tmp
+    cat flipped_alive.tmp >> pending.tmp
 
-    # Duplicates are removed for when the pending file isn't cleared and flipped domains might be duplicated
-    sort -u 7.tmp -o 7.tmp
-
-    # Add only flipped domains that aren't already in the blocklist
-    comm -23 7.tmp "$raw_file" > "$pending_file"
+    # Duplicates are removed again from the pending file for when the file isn't cleared and flipped domains might be duplicated
+    sort -u pending.tmp -o "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
