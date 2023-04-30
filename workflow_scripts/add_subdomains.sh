@@ -26,9 +26,8 @@ while read -r subdomain; do
     "
 done < "$subdomains_file"
 
-cat subdomains_alive.tmp >> raw.tmp
+cat subdomains_alive.tmp "$raw_file" > raw.tmp
 
-# Remove duplicates to not add any subdomain already in the list
 sort -u raw.tmp -o raw.tmp
 
 comm -23 raw.tmp "$raw_file" > unique.tmp
