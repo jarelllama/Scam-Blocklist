@@ -7,6 +7,7 @@ count_stats="data/count_stats.txt"
 raw_file="data/raw.txt"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
+search_terms_file="search_terms.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
@@ -72,6 +73,12 @@ awk -v var="$top_tlds" '{gsub(/top_tlds/,var)}1' "$template" > template.tmp
 if ! diff -q "$readme" template.tmp >/dev/null; then
     sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' template.tmp
 fi
+
+# Code to update the number of search terms
+
+search_terms=$(grep -vE '^[[:space:]]*$|^#' "$search_terms_file" | wc -l)
+
+sed -i 's/search_terms_count/'"$search_terms"'/g' "$template"
 
 cp template.tmp "$readme"
 
