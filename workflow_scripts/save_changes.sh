@@ -5,6 +5,7 @@ template="data/README.md"
 count_stats="data/count_stats.txt"
 count_history="data/count_history.txt"
 raw_file="data/raw.txt"
+dead_domains_file="data/dead_domains.txt"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
 search_terms_file="search_terms.txt"
@@ -61,6 +62,16 @@ else
     
     echo "$current_count" >> "$count_stats"
 fi
+
+while read -r subdomain; do
+    grep "^$subdomain\." "$dead_domains_file" >> subdomains.tmp
+done < "$subdomains_file"
+
+comm -23 "$dead_domains_file" subdomains.tmp > dead_domains.tmp
+
+dead_count=$(wc -l < dead_domains.tmp)
+
+total_count=$((dead_count + current_count))
 
 sed -i 's/total_count/'"$current_count"'/g' "$template"
 
