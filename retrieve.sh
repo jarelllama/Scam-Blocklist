@@ -8,26 +8,27 @@ blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 dead_domains_file="data/dead_domains.txt"
 edit_script="edit.sh"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
+github_email='91372088+jarelllama@users.noreply.github.com'
+github_name='jarelllama'
 
 if [[ -s "$pending_file" ]]; then
-    read -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    if [[ "$answer" != "n" ]]; then
+    read -n 1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
+    echo
+    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
         > "$pending_file"
     fi
 fi
 
 debug=0
 unattended=0
-time_filter="a"
+time_filter='a'
 
 for arg in "$@"; do
-    if [[ "$arg" == "d" ]]; then
+    if [[ "$arg" == 'd' ]]; then
         debug=1
-    elif [[ "$arg" == "u" ]]; then
+    elif [[ "$arg" == 'u' ]]; then
         unattended=1
-        time_filter="y"
+        time_filter='y'
         echo -e "\nRetrieving domains..."
     else
         time_filter="$arg"
@@ -40,7 +41,7 @@ fi
 
 declare -A retrieved_domains
 
-user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
 echo -e "\nSearch filter: $time_filter"
 echo "Search terms:"
@@ -48,13 +49,13 @@ echo "Search terms:"
 # A blank IFS ensures the entire search term is read
 while IFS= read -r term; do
     if ! [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
-        # gsub is used here to replace consecutive non-alphanumeric characters with a single plus sign
+        # gsub replaces consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
         google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
 
         # Duplicates are removed here for accurate counting
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="https:\S+"' | awk -F/ '{print $3}' | sort -u)
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
 
         echo "$term"
 
@@ -66,7 +67,7 @@ while IFS= read -r term; do
         echo "Domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------"
 
-        # Check if each domain is already in the retrieved domains associative array
+        # Check if each domain is in the retrieved domains associative array
         # Note that quoting $domains causes errors
 	for domain in $domains; do
             if [[ ${retrieved_domains["$domain"]+_} ]]; then
@@ -74,7 +75,6 @@ while IFS= read -r term; do
             fi
             # Add the unique domain to the associative array
             retrieved_domains["$domain"]=1
-            # Note that echo creates the file when it doesn't already exist
             echo "$domain" >> "$pending_file"
         done
     fi
@@ -85,20 +85,18 @@ num_retrieved=${#retrieved_domains[@]}
 function filter_pending {
     cp "$pending_file" "$pending_file.bak"
 
-    awk NF "$pending_file" > tmp1.tmp
+    tr '[:upper:]' '[:lower:]' < "$pending_file" > 1.tmp
 
-    tr '[:upper:]' '[:lower:]' < tmp1.tmp > tmp2.tmp
-
-    # Remove duplicates here for when the pending file isn't cleared
-    # Note that sort writes to a temporary file here before moving it the output file. That's why the input and output can be the same
-    sort -u tmp2.tmp -o tmp2.tmp
+    # Duplicates are removed for when the pending file isn't cleared
+    # Note that sort writes to a temporary file before moving it to the output file. That's why the input and output can be the same
+    sort -u 1.tmp -o 1.tmp
 
     # This removes the majority of pending domains and makes the further filtering more efficient
-    comm -23 tmp2.tmp "$raw_file" > tmp3.tmp
+    comm -23 1.tmp "$raw_file" > 2.tmp
     
-    comm -23 tmp3.tmp "$dead_domains_file" > tmp4.tmp
+    comm -23 2.tmp "$dead_domains_file" > 3.tmp
     
-    if ! [[ -s tmp4.tmp ]]; then
+    if ! [[ -s 3.tmp ]]; then
         echo -e "\nNo retrieved domains.\n"
         rm *.tmp
         exit 0
@@ -106,47 +104,41 @@ function filter_pending {
 
     echo -e "\nDomains removed:"
 
-    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
 
-    grep -Ff "$whitelist_file" tmp4.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+    grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
 
-    comm -23 tmp4.tmp whitelisted.tmp > tmp5.tmp
+    comm -23 3.tmp whitelisted.tmp > 4.tmp
 
-    grep -E '\.(edu|gov)$' tmp5.tmp | awk '{print $0 " (TLD)"}'
+    grep -E '\.(edu|gov)$' 4.tmp | awk '{print $0 " (TLD)"}'
 
-    grep -vE '\.(edu|gov)$' tmp5.tmp > tmp6.tmp
+    grep -vE '\.(edu|gov)$' 4.tmp > 5.tmp
 
-    # This regex checks for valid domains
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp | awk '{print $0 " (invalid)"}'
+# This regex checks for valid domains
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
     
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' tmp6.tmp > tmp7.tmp
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 5.tmp > 6.tmp
 
     # grep outputs an error if this file is missing
     touch dead.tmp
 
     # Use parallel processing
-    cat tmp8.tmp | xargs -I{} -P4 bash -c "
+    cat 6.tmp | xargs -I{} -P6 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> dead.tmp
             echo '{} (dead)'
         fi
     "
 
-    # Seems like the dead.tmp isn't always sorted
+    # It appears that the dead file isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than just using grep
-    grep -vxFf dead.tmp tmp7.tmp > tmp8.tmp
-
-    
-    # TODO: dont use the dead domains file since that can lead to false positives in yhe raw file.
-    #cat dead.tmp >> "$dead_domains_file"
-
-    #sort -u "$dead_domains_file" -o "$dead_domains_file"
+    grep -vxFf dead.tmp 6.tmp > 7.tmp
 
     # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
 
-    grep '^www\.' tmp8.tmp > with_www.tmp
+    grep '^www\.' 7.tmp > with_www.tmp
 
-    comm -23 tmp8.tmp with_www.tmp > no_www.tmp
+    comm -23 7.tmp with_www.tmp > no_www.tmp
 
     awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
 
@@ -156,20 +148,20 @@ function filter_pending {
 
     touch flipped_alive.tmp
 
-    cat flipped.tmp | xargs -I{} -P4 bash -c "
+    cat flipped.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> flipped_alive.tmp
         fi
     "
 
-    cat flipped_alive.tmp >> tmp8.tmp
+    cat flipped_alive.tmp >> 7.tmp
 
-    # Duplicates are removed here for when the pending file isn't cleared and flipped domains are duplicated
-    sort -u tmp8.tmp -o tmp8.tmp
+    # Duplicates are removed for when the pending file isn't cleared and flipped domains might be duplicated
+    sort -u 7.tmp -o 7.tmp
 
-    # Remove any new flipped domains that are already be in the blocklist
+    # Add only flipped domains that aren't already in the blocklist
     # This is done for accurate counting
-    comm -23 tmp8.tmp "$raw_file" > "$pending_file"
+    comm -23 7.tmp "$raw_file" > "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
@@ -225,23 +217,24 @@ function merge_pending {
     rm *.tmp
 
     if [[ unattended -eq 0 ]]; then
-        read -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
-        if [[ "$answer" == "n" ]]; then
+        read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
+        echo
+        if ! [[ "$answer" =~ ^[Yy]$ ]] && ! [[ -z "$answer" ]]; then
             exit 0
         fi
-        commit_msg="Manual domains retrieval"
+        commit_msg='Manual domains retrieval'
     else
         echo -e "\nPushing changes..."
-        commit_msg="Automatic domains retrieval"
+        commit_msg='Automatic domains retrieval'
     fi
 
-    echo ""
+    echo
 
     git config user.email "$github_email"
     git config user.name "$github_name"
 
     # Push white/black lists too for when the user modifies them
-    git add "$raw_file" "$whitelist_file" "$blacklist_file" "$dead_domains_file"
+    git add "$raw_file" "$whitelist_file" "$blacklist_file"
     git commit -m "$commit_msg"
     git push
 
@@ -253,6 +246,7 @@ filter_pending
 if [[ "$unattended" -eq 1 ]]; then
     echo -e "\nMerging with blocklist..."
     merge_pending
+    rm *.bak
 fi
 
 while true; do
