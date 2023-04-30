@@ -2,7 +2,7 @@
 
 raw_file="data/raw.txt"
 adblock_file="adblock.txt"
-subdomain_file="data/subdomains.txt"
+subdomains_file="data/subdomains.txt"
 compressed_entries="data/compressed_entries.txt"
 
 while read -r subdomain; do
