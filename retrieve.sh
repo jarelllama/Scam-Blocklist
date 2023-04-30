@@ -163,7 +163,6 @@ function filter_pending {
     sort -u 7.tmp -o 7.tmp
 
     # Add only flipped domains that aren't already in the blocklist
-    # This is done for accurate counting
     comm -23 7.tmp "$raw_file" > "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
