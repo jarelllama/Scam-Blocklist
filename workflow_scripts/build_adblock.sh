@@ -13,9 +13,10 @@ comm -23 "$raw_file" subdomains.tmp > raw.tmp
 
 awk '{print "||" $0 "^"}' raw.tmp > raw2.tmp
 
-# Adding || somehow messes up the order
+# Appending || somehow messes up the order
 sort -u raw2.tmp -o raw2.tmp
 
+# Remove redundant entries
 comm -23 raw2.tmp "$compressed_entries" > raw.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
