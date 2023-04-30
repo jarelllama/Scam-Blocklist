@@ -2,11 +2,11 @@
 ! Description: Blocklist for scam sites automatically extracted from Google
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 04.30.162405.2023
-! Last modified: Sun Apr 30 16:24:05 UTC 2023
+! Version: 04.30.163448.2023
+! Last modified: Sun Apr 30 16:34:48 UTC 2023
 ! Expires: 4 hours
 ! Syntax: Adblock Plus
-! Total number of entries: 2759
+! Total number of entries: 2784
 
 ||3d-printing.store^
 ||3dsportstore.com^
@@ -385,6 +385,7 @@
 ||cathyhouse.net^
 ||cattoysale.store^
 ||cbnue.shop^
+||ccsssurvivalusa.com^
 ||cdasszsmyxgs.com^
 ||ceauete.com^
 ||cebesale.com^
@@ -474,6 +475,7 @@
 ||cluckergifts.company.site^
 ||cnmetalstore.com^
 ||cobracmcecco.com^
+||cobratigerdc.com^
 ||coffeeteaware.com^
 ||cogool.com^
 ||collaboraten.com^
@@ -612,6 +614,7 @@
 ||dewemalls.com^
 ||dezamall.com^
 ||dezasale.com^
+||df-lb.com^
 ||dianseretail.shop^
 ||diapount.com^
 ||digitalaki.com^
@@ -681,12 +684,15 @@
 ||dtchohw.store^
 ||dtswissbike.com^
 ||duanebattle.myshopify.com^
+||duckyprints.com^
+||duhitu.com^
 ||duluthpacksale.com^
 ||duovana.com^
 ||dustin-sales.shop^
 ||duvipmalls.store^
 ||dynyl.com^
 ||dytreasure.com^
+||dzirenation.com^
 ||dzoumy.co.uk^
 ||e-ridze.store^
 ||eabdti.com^
@@ -951,6 +957,7 @@
 ||gardenequipmenshopmall.store^
 ||gardeningshop.website^
 ||garmentvogue.com^
+||gbp-co.uk^
 ||gbthoodie.store^
 ||gd-workshop.com^
 ||gdallianz.com^
@@ -972,7 +979,9 @@
 ||gibbeverage.shop^
 ||gift4ls.com^
 ||giftflows.com^
+||giftiheaven.com^
 ||gifts4fan.us^
+||giftshoptoday.com^
 ||giftsshop75.com^
 ||giftwrapping.shop^
 ||giftystory.com^
@@ -986,6 +995,8 @@
 ||glamnetis.com^
 ||glitzce.com^
 ||gllomall.com^
+||glo-balexpress.com^
+||global-posts.com^
 ||gloriashoe.shop^
 ||gnomesdogo.com^
 ||goamerip.com^
@@ -1034,6 +1045,7 @@
 ||guersare.online^
 ||guillermocraig.shop^
 ||guitarsale.store^
+||guntiony.com^
 ||guridft.store^
 ||gvs-usa.com^
 ||gyustio.store^
@@ -1057,6 +1069,7 @@
 ||hazelbath.shop^
 ||hazeltoiletries.shop^
 ||hbyrts.com^
+||hcglobalshopping.com^
 ||hdjean.online^
 ||healthfitnessoutlet.com^
 ||healthgroupnews.com^
@@ -1139,6 +1152,7 @@
 ||huntingcameras.shop^
 ||huntingtools.shop^
 ||hyperazt.com^
+||hyperworkstore.com^
 ||iankrogers.com^
 ||ianscrystal.com^
 ||iceao.shop^
@@ -1715,6 +1729,7 @@
 ||olivably.com^
 ||olivebly.com^
 ||olkina.shop^
+||omegafitgear.com^
 ||omitages.com^
 ||on-soprtshoes.com^
 ||oncloudshoes.co^
@@ -1755,6 +1770,7 @@
 ||otxzu.ferreteriayvarios.com^
 ||ouncefax.com^
 ||ouozre.com^
+||oupinke.watch^
 ||outdooramusement.xyz^
 ||outdoorplush.com^
 ||outdoorr.shop^
@@ -1830,6 +1846,7 @@
 ||petsanky.com^
 ||petshopping.shop^
 ||petsuppliesale.store^
+||petyachtclub.com^
 ||petzloutdooor.com^
 ||phgliders.com^
 ||phillipsbook.shop^
@@ -1860,6 +1877,7 @@
 ||plusoneusstore.co^
 ||pocoutdooor.com^
 ||pod-template-sports.onshopbase.com^
+||podgiftshop.com^
 ||pokamicompany.com^
 ||polarityi.com^
 ||polemusi.store^
@@ -2010,6 +2028,7 @@
 ||royalcellz.com^
 ||royaldocksrainbows.com^
 ||royalhedgies.com^
+||royalmail-depot.gbp-co.uk^
 ||rptbaa.shop^
 ||rroenest.com^
 ||rsfancy.com^
@@ -2340,8 +2359,10 @@
 ||techifyze.shop^
 ||technin.shop^
 ||teebi-boutique.com^
+||teecampie.com^
 ||teechipshop.com^
 ||teeguys.com^
+||teemortals.com^
 ||teesworld.online^
 ||tehasid.shop^
 ||temaotrade.com^
@@ -2522,6 +2543,8 @@
 ||unineri.shop^
 ||uniqueabund.com^
 ||uniquehomeshop.com^
+||unitedexpress.org^
+||unitedmailexpress.com^
 ||universal-health88.com^
 ||unkohoble.com^
 ||unusualsurf.com^
@@ -2531,6 +2554,7 @@
 ||uprivia.com^
 ||upropeca.com^
 ||urbanhugo.com^
+||urereno.com^
 ||us-boutiques.com^
 ||us-dtswissbike.com^
 ||usadultproducts.com^
@@ -2648,6 +2672,7 @@
 ||webtule.shop^
 ||wegmansd.com^
 ||welacob.com^
+||wellappliance.com^
 ||wellbinde.com^
 ||welldecloth.life^
 ||wenoreshop.com^
