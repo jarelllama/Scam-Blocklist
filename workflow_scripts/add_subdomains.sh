@@ -8,19 +8,22 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
+sort "$subdomains_file" -o "$subdomains_file"
+
 while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
 
-# The subdomains file isn't sorted
-grep -vxFf subdomains.tmp "$raw_file" > base_domains.tmp
+comm -23 "$raw_file" "$subdomains_file" > base_domains.tmp
 
 touch subdomains_alive.tmp
 
 while read -r subdomain; do
-    awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains.tmp > with_subdomain.tmp
+    awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains.tmp > subdomains.tmp
 
-    cat with_subdomain.tmp | xargs -I{} -P8 bash -c "
+    comm -23 subdomains.tmp "$raw_file" > unique_subdomains.tmp
+
+    cat unique_subdomains.tmp | xargs -I{} -P8 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> subdomains_alive.tmp
         fi
@@ -31,9 +34,9 @@ cat subdomains_alive.tmp "$raw_file" > raw.tmp
 
 sort -u raw.tmp -o raw.tmp
 
-comm -23 raw.tmp "$raw_file" > unique.tmp
+comm -23 raw.tmp "$raw_file" > new_entries.tmp
 
-if ! [[ -s unique.tmp ]]; then
+if ! [[ -s new_entries.tmp ]]; then
     echo -e "\nNo domains added.\n"
     rm *.tmp
     exit 0
@@ -48,6 +51,6 @@ echo -e "\nTotal domains added: $(wc -l < unique.tmp)\n"
 
 rm *.tmp
 
-git add "$raw_file"
+git add "$raw_file" "$subdomains_file"
 git commit -qm "Add subdomains"
 git push -q
