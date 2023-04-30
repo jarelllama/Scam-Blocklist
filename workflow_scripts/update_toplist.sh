@@ -6,10 +6,10 @@ toplist_file="data/toplist.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
-wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
-
 git config user.email "$github_email"
 git config user.name "$github_name"
+
+wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
 
 git add "$toplist_file"
 git commit -qm "Update toplist.txt"
