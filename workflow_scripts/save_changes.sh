@@ -5,9 +5,10 @@ template="data/README.md"
 count_stats="data/count_stats.txt"
 count_history="data/count_history.txt"
 raw_file="data/raw.txt"
-dead_domains_file="data/dead_domains.txt"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
+subdomains_file="data/subdomains.txt"
+dead_domains_file="data/dead_domains.txt"
 search_terms_file="search_terms.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
@@ -15,7 +16,7 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-# Code to update the number of entries for each list
+# Update the number of entries for each list
 
 adblock_count=$(grep -vE '^(!|$)' "$adblock_file" | wc -l)
 
@@ -25,7 +26,7 @@ sed -i 's/adblock_count/'"$adblock_count"'/g' "$template"
 
 sed -i 's/domains_count/'"$domains_count"'/g' "$template"
 
-# Code to update the number of unique sites found
+# Update the number of unique sites found
 
 todays_date=$(date -u +"%m%d%y")
 
@@ -69,13 +70,13 @@ done < "$subdomains_file"
 
 comm -23 "$dead_domains_file" subdomains.tmp > dead_domains.tmp
 
-dead_count=$(wc -l < dead_domains.tmp)
+dead_domains_count=$(wc -l < dead_domains.tmp)
 
-total_count=$((dead_count + current_count))
+total_count=$((dead_domains_count + current_count))
 
-sed -i 's/total_count/'"$current_count"'/g' "$template"
+sed -i 's/total_count/'"$total_count"'/g' "$template"
 
-# Code to update the top scam TLDs
+# Update the top scam TLDs
 
 top_tlds=$(awk -F '.' '{print $NF}' "$raw_file" | sort | uniq -c | sort -nr | head -10 | awk '{print "| " $2, " | "$1 " |"}')
 
