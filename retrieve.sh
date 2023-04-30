@@ -147,14 +147,14 @@ function filter_pending {
 
     awk '{print "www."$0}' no_www.tmp > with_www_new.tmp
 
-    cat no_www_new.tmp with_www_new.tmp > 1.tmp
+    cat no_www_new.tmp with_www_new.tmp > flipped.tmp
 
     # Remove flipped domains that are already in the blocklist
-    grep -vxFf "$raw_file" 1.tmp > flipped.tmp
+    grep -vxFf "$raw_file" 1.tmp > flipped_unique.tmp
 
     touch flipped_alive.tmp
 
-    cat flipped.tmp | xargs -I{} -P6 bash -c "
+    cat flipped_unique.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> flipped_alive.tmp
         fi
