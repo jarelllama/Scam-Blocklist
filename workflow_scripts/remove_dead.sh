@@ -4,8 +4,8 @@ raw_file="data/raw.txt"
 blacklist_file="blacklist.txt"
 compressed_entries="data/compressed_entries.txt"
 dead_domains_file="data/dead_domains.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
+github_email='91372088+jarelllama@users.noreply.github.com'
+github_name='jarelllama'
 
 git config user.email "$github_email"
 git config user.name "$github_name"
