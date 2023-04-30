@@ -11,8 +11,6 @@ Today: todays_count
 Yesterday: yest_count
 Total: total_count (since Apr 12 2023)
 
-Search terms: search_terms_count
-
 Updated: update_time
 ```
 
