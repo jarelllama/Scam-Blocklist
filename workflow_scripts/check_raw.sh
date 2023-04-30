@@ -1,8 +1,11 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
+github_email='91372088+jarelllama@users.noreply.github.com'
+github_name='jarelllama'
+
+git config user.email "$github_email"
+git config user.name "$github_name"
 
 error=0
 
@@ -33,9 +36,9 @@ grep -E '\.(edu|gov)$' 2.tmp | awk '{print $0 " (TLD)"}'
 
 grep -vE '\.(edu|gov)$' 2.tmp > 3.tmp
 
-grep -vE '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 3.tmp | awk '{print $0 " (invalid)"}'
+grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp | awk '{print $0 " (invalid)"}'
     
-grep -E '^[[:alnum:].-]+\.[[:alnum:]]{2,}$' 3.tmp > "$raw_file"
+grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp > "$raw_file"
 
 num_after=$(wc -l < "$raw_file")
 
@@ -51,9 +54,6 @@ rm *.tmp
 if [[ "$error" -eq 0 ]]; then
     exit 0
 fi
-
-git config user.email "$github_email"
-git config user.name "$github_name"
 
 git add "$raw_file"
 git commit -qm "Remove invalid entries"
