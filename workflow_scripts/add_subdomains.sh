@@ -2,7 +2,6 @@
 
 raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
-subdomains_cache="data/subdomains_cache.txt"
 subdomains_removed_file="data/subdomains_removed.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
@@ -12,15 +11,11 @@ git config user.name "$github_name"
 
 sort "$subdomains_file" -o "$subdomains_file"
 
-comm -23 "$raw_file" "$subdomains_cache" > raw.tmp
-
 while read -r subdomain; do
-    grep "^$subdomain\." "raw.tmp" >> "$subdomains_cache"
+    grep "^$subdomain\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
 
-sort -u "$subdomains_cache" -o "$subdomains_cache"
-
-comm -23 raw.tmp subdomains_cache > base_domains.tmp
+comm -23 "$raw_file" subdomains.tmp > base_domains.tmp
 
 cp base_domains.tmp "$subdomains_removed_file"
 
@@ -55,6 +50,6 @@ echo -e "\nTotal domains added: $(wc -l < subdomains_alive.tmp)\n"
 
 rm *.tmp
 
-git add "$raw_file" "$subdomains_file" "$subdomains_removed_file" "$subdomains_cache"
+git add "$raw_file" "$subdomains_file" "$subdomains_removed_file"
 git commit -qm "Add subdomains"
 git push -q
