@@ -2,6 +2,7 @@
 
 raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
+no_subdomains_file="data/no_subdomains.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
@@ -15,6 +16,8 @@ while read -r subdomain; do
 done < "$subdomains_file"
 
 comm -23 "$raw_file" subdomains.tmp > base_domains.tmp
+
+cp base_domains.tmp "$no_subdomains_file"
 
 touch subdomains_alive.tmp
 
@@ -47,6 +50,6 @@ echo -e "\nTotal domains added: $(wc -l < subdomains_alive.tmp)\n"
 
 rm *.tmp
 
-git add "$raw_file" "$subdomains_file"
+git add "$raw_file" "$subdomains_file" "$no_subdomains_file"
 git commit -qm "Add subdomains"
 git push -q
