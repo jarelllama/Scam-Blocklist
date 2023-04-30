@@ -22,7 +22,7 @@ comm -23 "$raw_file" subdomains.tmp > base_domains.tmp
 touch subdomains_dead.tmp
 
 while read -r subdomain; do
-    # Append the current subdomain to the base domain
+    # Append the current subdomain to the base domains
     awk -v subdomain="$subdomain" '{print subdomain"."$0}' base_domains.tmp > 1.tmp
 
     # Remove subdomains already in the raw file
