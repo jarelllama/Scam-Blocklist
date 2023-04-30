@@ -7,8 +7,11 @@ count_stats="data/count_stats.txt"
 raw_file="data/raw.txt"
 domains_file="domains.txt"
 adblock_file="adblock.txt"
-github_email="91372088+jarelllama@users.noreply.github.com"
-github_name="jarelllama"
+github_email='91372088+jarelllama@users.noreply.github.com'
+github_name='jarelllama'
+
+git config user.email "$github_email"
+git config user.name "$github_name"
 
 # Code to update the number of entries for each list
 
@@ -71,9 +74,6 @@ if ! diff -q "$readme" template.tmp >/dev/null; then
 fi
 
 cp template.tmp "$readme"
-
-git config user.email "$github_email"
-git config user.name "$github_name"
 
 git add "$domains_file" "$adblock_file"
 git commit -m "Build lists"
