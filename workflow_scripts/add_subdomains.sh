@@ -8,21 +8,8 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-grep '^www\.' "$raw_file" > www.tmp
-
-awk '{sub(/^www\./, ""); print}' www.tmp > base_domains.tmp
-
-touch base_domains_alive.tmp
-
-cat base_domains.tmp | xargs -I{} -P8 bash -c "
-    if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-        echo {} >> base_domains_alive.tmp
-    fi
-"
-
-cat base_domains_alive.tmp "$raw_file" > raw.tmp
-
-grep -E '^[^.]*\.[^\.]*$' raw.tmp > base_domains.tmp
+# Need to find a better way to find base domains
+grep -E '^[^.]*\.[^\.]*$' "$raw_file" > base_domains.tmp
 
 touch subdomains_alive.tmp
 
