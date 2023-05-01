@@ -233,25 +233,25 @@ function push_changes {
 
 while true; do
     echo -e "\nEdit Lists Menu:"
-    echo "1. Blocklist"
-    echo "2. Whitelist"
-    echo "3. Blacklist"
+    echo "b. Blocklist"
+    echo "w. Whitelist"
+    echo "l. Blacklist"
     echo "c. Check blocklist entry"
     echo "p. Push list(s) changes"
     echo "x. Exit/return"
     read choice
 
     case "$choice" in
-        1)
+        b)
             edit_blocklist
             rm *.tmp
             continue
             ;;
-        2)
+        w)
             edit_whitelist
             continue
             ;;
-        3)
+        l)
             edit_blacklist
             rm *.tmp
             continue
