@@ -78,9 +78,9 @@ sed -i 's/total_count/'"$total_count"'/g' "$template"
 
 # Update the top scam TLDs
 
-top_tlds=$(awk -F '.' '{print $NF}' "$raw_file" | sort | uniq -c | sort -nr | head -10 | awk '{print "| " $2, " | "$1 " |"}')
+#top_tlds=$(awk -F '.' '{print $NF}' "$raw_file" | sort | uniq -c | sort -nr | head -10 | awk '{print "| " $2, " | "$1 " |"}')
 
-awk -v var="$top_tlds" '{gsub(/top_tlds/,var)}1' "$template" > template.tmp
+#awk -v var="$top_tlds" '{gsub(/top_tlds/,var)}1' "$template" > template.tmp
 
 if ! diff -q "$readme" template.tmp >/dev/null; then
     sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' template.tmp
