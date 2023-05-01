@@ -3,11 +3,13 @@ run-name: Remove subdomains from wildcard domains
 on:
   schedule:
     # Daily at 3am (GMT+8)
-    - cron: "30 22 * * *"
+    - cron: "23 22 * * *"
 jobs:
   Remove-subdomains:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run
+      - name: Remove subdomains from wildcards
         run: bash "temp.sh"
+      - name: Add subdomains
+        run: bash "workflow_scripts/add_subdomains.sh"
