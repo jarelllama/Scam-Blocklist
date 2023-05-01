@@ -52,35 +52,36 @@ echo "Search terms:"
 
 # A blank IFS ensures the entire search term is read
 while IFS= read -r term; do
-    if ! [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
-        # gsub replaces consecutive non-alphanumeric characters with a single plus sign
-        encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
-
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
-
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
-
-        echo "$term"
-
-        if [[ "$debug" -eq 1 ]]; then
-            echo "$domains"
-        fi
-
-        # wc -w does a better job than wc -l for counting domains in this case
-        echo "Domains retrieved: $(echo "$domains" | wc -w)"
-        echo "--------------------------------------"
-
-        # Check if each domain is in the retrieved domains associative array
-        # Note that quoting $domains causes errors
-	for domain in $domains; do
-            if [[ ${retrieved_domains["$domain"]+_} ]]; then
-               continue 
-            fi
-            # Add the unique domain to the associative array
-            retrieved_domains["$domain"]=1
-            echo "$domain" >> "$pending_file"
-        done
+    if [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
+        continue
     fi
+    # gsub replaces consecutive non-alphanumeric characters with a single plus sign
+    encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
+
+    google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
+
+    domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
+
+    echo "$term"
+
+    if [[ "$debug" -eq 1 ]]; then
+        echo "$domains"
+    fi
+
+    # wc -w does a better job than wc -l for counting domains in this case
+    echo "Domains retrieved: $(echo "$domains" | wc -w)"
+    echo "--------------------------------------"
+
+    # Check if each domain is in the retrieved domains associative array
+    # Note that quoting $domains causes errors
+    for domain in $domains; do
+        if [[ ${retrieved_domains["$domain"]+_} ]]; then
+           continue 
+        fi
+        # Add the unique domain to the associative array
+        retrieved_domains["$domain"]=1
+        echo "$domain" >> "$pending_file"
+    done
 done < "$search_terms_file"
 
 num_retrieved=${#retrieved_domains[@]}
