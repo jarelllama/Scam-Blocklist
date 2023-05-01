@@ -9,7 +9,6 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-# Output entries with subdomains listed in the subdomains file
 while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
