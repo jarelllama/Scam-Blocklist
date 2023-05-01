@@ -85,13 +85,13 @@ while read -r subdomain; do
     grep -vxFf dead_subdomains.tmp subdomains.tmp >> new_subdomains.tmp
 done < "$subdomains_file"
 
-cat new_subdomains.tmp >> new_domains.tmp
-
-sort new_domains.tmp -o new_domains.tmp
-
 cat dead_subdomains.tmp >> "$dead_domains_file"
 
 sort "$dead_domains_file" -o "$dead_domains_file"
+
+cat new_subdomains.tmp >> new_domains.tmp
+
+sort new_domains.tmp -o new_domains.tmp
 
 # Remove entries already in the raw file (new wildcard domains weren't checked earlier)
 comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
