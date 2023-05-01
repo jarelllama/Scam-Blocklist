@@ -86,7 +86,7 @@ if ! diff -q "$readme" template.tmp >/dev/null; then
     sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' template.tmp
 fi
 
-cp template.tmp "$readme"
+cp "$template" "$readme"
 
 git add "$domains_file" "$adblock_file"
 git commit -m "Build lists"
