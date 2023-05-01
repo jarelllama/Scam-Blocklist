@@ -45,18 +45,3 @@ There is no way I can keep up with the number of scam sites created daily but wi
 [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
 
 [Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Contains both my list and Durablenapkin's list)
-
-### Top scam TLDs
-
-| TLD | Count |
-| ---:|:--- |
-| com  | 4555 |
-| shop  | 708 |
-| store  | 394 |
-| net  | 101 |
-| online  | 90 |
-| de  | 80 |
-| xyz  | 76 |
-| space  | 66 |
-| co  | 61 |
-| us  | 58 |
