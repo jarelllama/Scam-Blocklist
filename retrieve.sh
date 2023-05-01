@@ -101,7 +101,7 @@ function filter_pending {
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
     
     if ! [[ -s 3.tmp ]]; then
-        echo -e "\nNo retrieved domains.\n"
+        echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
         rm *.tmp
         exit 0
     fi
