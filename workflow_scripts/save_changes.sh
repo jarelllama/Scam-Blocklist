@@ -82,8 +82,8 @@ sed -i 's/total_count/'"$total_count"'/g' "$template"
 
 #awk -v var="$top_tlds" '{gsub(/top_tlds/,var)}1' "$template" > template.tmp
 
-if ! diff -q "$readme" template.tmp >/dev/null; then
-    sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' template.tmp
+if ! diff -q "$readme" "$template" >/dev/null; then
+    sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' "$template"
 fi
 
 cp "$template" "$readme"
