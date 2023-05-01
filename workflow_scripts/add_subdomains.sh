@@ -29,9 +29,9 @@ cat random_subdomain.tmp | xargs -I{} -P8 bash -c "
     fi
 "
 
-awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > wildcard_second_level.tmp
+awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > wildcards_second_level.tmp
 
-mv wildcard_second_level.tmp wildcards.tmp
+mv wildcards_second_level.tmp wildcards.tmp
 
 # Don't bother checking domains with wildcard records for resolving subdomains 
 grep -vxFf wildcards.tmp second_level.tmp > domains.tmp
