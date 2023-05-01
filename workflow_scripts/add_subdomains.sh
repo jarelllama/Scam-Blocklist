@@ -3,6 +3,7 @@
 raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
 dead_domains_file="data/dead_domains.txt"
+toplist_file="data/subdomains_toplist.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
@@ -14,11 +15,20 @@ while read -r subdomain; do
 done < "$subdomains_file"
 
 # Process only second-level domains
-comm -23 "$raw_file" subdomains.tmp > second_level.tmp
+comm -23 "$raw_file" subdomains.tmp > domains.tmp
+
+touch toplist_subdomains.tmp
+
+# Find subdomains in the subdomains toplist
+while read -r domain; do
+    grep "\.$domain$" "$toplist_file" > toplist_subdomains.tmp
+done < domains.tmp
+
+cat toplist_subdomains >> new_domains.tmp
 
 random_subdomain='6nd7p7ccay6r5da'
 
-awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level.tmp > random_subdomain.tmp
+awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' domains.tmp > random_subdomain.tmp
 
 touch wildcards.tmp
 
@@ -29,12 +39,16 @@ cat random_subdomain.tmp | xargs -I{} -P8 bash -c "
     fi
 "
 
-awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > wildcards_second_level.tmp
+awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > 1.tmp
 
-mv wildcards_second_level.tmp wildcards.tmp
+mv 1.tmp wildcards.tmp
+
+cat wildcards.tmp >> new_domains.tmp
 
 # Don't bother checking domains with wildcard records for resolving subdomains 
-grep -vxFf wildcards.tmp second_level.tmp > domains.tmp
+grep -vxFf wildcards.tmp domains.tmp > no_wildcards.tmp
+
+mv no_wildcards.tmp domains.tmp
 
 touch dead_subdomains.tmp
 
@@ -46,30 +60,32 @@ while read -r subdomain; do
     comm -23 1.tmp "$raw_file" > 2.tmp
 
     # Remove known dead subdomains
-    comm -23 2.tmp "$dead_domains_file" > 3.tmp
+    comm -23 2.tmp "$dead_domains_file" > subdomains.tmp
 
-    cat 3.tmp | xargs -I{} -P8 bash -c "
+    cat subdomains.tmp | xargs -I{} -P8 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> dead_subdomains.tmp
         fi
     "
     
-    grep -vxFf dead_subdomains.tmp 3.tmp >> new_subdomains.tmp
+    grep -vxFf dead_subdomains.tmp subdomains.tmp >> new_subdomains.tmp
 done < "$subdomains_file"
+
+cat new_subdomains.tmp >> new_domains.tmp
 
 cat dead_subdomains.tmp >> "$dead_domains_file"
 
 sort "$dead_domains_file" -o "$dead_domains_file"
 
-awk '{print "www."$0}' wildcards.tmp > wildcards_with_www.tmp
+awk '{print "www."$0}' wildcards.tmp > new_wildcards.tmp
 
-awk '{print "m."$0}' wildcards.tmp > wildcards_with_m.tmp
+cat new_wildcards.tmp >> new_domains.tmp
 
-cat wildcards_with_www.tmp wildcards_with_m.tmp > wildcards.tmp
+# Remove entries already in the raw file for accurate counting
+grep -vxFf "$raw_file" new_domains.tmp >  1.tmp
 
-grep -vxFf "$raw_file" wildcards.tmp > new_wildcards.tmp
+mv 1.tmp new_domains.tmp
 
-cat new_wildcards.tmp new_subdomains.tmp > new_domains.tmp
 
 if [[ -s new_domains.tmp ]]; then
     cat new_domains.tmp >> "$raw_file"
