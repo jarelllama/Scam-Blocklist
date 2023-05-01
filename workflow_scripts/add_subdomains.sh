@@ -63,7 +63,11 @@ sort "$dead_domains_file" -o "$dead_domains_file"
 
 awk '{print "www."$0}' wildcards.tmp > wildcards_with_www.tmp
 
-grep -vxFf "$raw_file" wildcards_with_www.tmp > new_wildcards.tmp
+awk '{print "m."$0}' wildcards.tmp > wildcards_with_m.tmp
+
+cat wildcards_with_www.tmp wildcards_with_m.tmp > wildcards.tmp
+
+grep -vxFf "$raw_file" wildcards.tmp > new_wildcards.tmp
 
 cat new_wildcards.tmp new_subdomains.tmp > new_domains.tmp
 
