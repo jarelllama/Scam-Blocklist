@@ -63,7 +63,6 @@ sort "$dead_domains_file" -o "$dead_domains_file"
 
 awk '{print "www."$0}' wildcards.tmp > wildcards_with_www.tmp
 
-# Remove entries already in the raw file for accurate counting
 grep -vxFf "$raw_file" wildcards_with_www.tmp > new_wildcards.tmp
 
 cat new_wildcards.tmp new_subdomains.tmp > new_domains.tmp
@@ -74,7 +73,7 @@ if [[ -s new_domains.tmp ]]; then
     sort "$raw_file" -o "$raw_file"
 
     echo -e "\nDomains added:"
-cat new_domains.tmp
+    cat new_domains.tmp
 
     echo -e "\nTotal domains added: $(wc -l < new_domains.tmp)\n"
 else
