@@ -2,11 +2,11 @@
 ! Description: Blocklist for scam sites automatically extracted from Google
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 05.01.052441.2023
-! Last modified: Mon May  1 05:24:41 UTC 2023
+! Version: 05.01.060151.2023
+! Last modified: Mon May  1 06:01:51 UTC 2023
 ! Expires: 4 hours
 ! Syntax: Adblock Plus
-! Total number of entries: 2914
+! Total number of entries: 2915
 
 ||3d-printing.store^
 ||3dsportstore.com^
@@ -557,6 +557,7 @@
 ||csbo.shop^
 ||cshcstore.com^
 ||cshoeshop.com^
+||csknife.net^
 ||cstwire.com^
 ||ctjhy.telemedicine-solutions.com^
 ||customerreviews.guru^
