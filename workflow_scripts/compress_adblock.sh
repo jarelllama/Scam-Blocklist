@@ -29,9 +29,10 @@ cat compressed_entries.tmp >> "$compressed_entries"
 # The output has a high chance of having duplicates
 sort -u "$compressed_entries" -o "$compressed_entries"
 
+echo -e "\nTotal entries removed: $(wc -l < compressed_entries.tmp)\n"
+
 rm *.tmp
 
-echo
 git add "$compressed_entries"
 git commit -qm "Compress Adblock entries"
 git push -q
