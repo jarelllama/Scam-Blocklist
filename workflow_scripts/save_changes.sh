@@ -70,8 +70,6 @@ done < "$subdomains_file"
 
 comm -23 "$dead_domains_file" subdomains.tmp > dead_domains.tmp
 
-sort -u dead_domains.tmp -o dead_domains.tmp
-
 dead_domains_count=$(wc -l < dead_domains.tmp)
 
 total_count=$((dead_domains_count + current_count))
