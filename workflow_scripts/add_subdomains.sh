@@ -21,10 +21,20 @@ touch toplist_subdomains.tmp
 
 # Find subdomains in the subdomains toplist
 while read -r domain; do
-    grep "\.$domain$" "$toplist_file" > toplist_subdomains.tmp
+    grep "\.$domain$" "$toplist_file" >> toplist_subdomains.tmp
 done < domains.tmp
 
-cat toplist_subdomains >> new_domains.tmp
+grep -vxFf "$raw_file" toplist_subdomains.tmp > unique_toplist_subdomains.tmp
+
+touch alive_toplist_subdomains.tmp
+
+cat unique_toplist_subdomains.tmp | xargs -I{} -P8 bash -c "
+    if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+        echo {} >> alive_toplist_subdomains.tmp
+    fi
+"
+
+cat alive_toplist_subdomains.tmp >> new_domains.tmp
 
 random_subdomain='6nd7p7ccay6r5da'
 
@@ -39,14 +49,18 @@ cat random_subdomain.tmp | xargs -I{} -P8 bash -c "
     fi
 "
 
-awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > 1.tmp
+awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > stripped_wildcards.tmp
 
-mv 1.tmp wildcards.tmp
+awk '{print "www."$0}' stripped_wildcards.tmp > wildcards_with_www.tmp
 
-cat wildcards.tmp >> new_domains.tmp
+awk '{print "m."$0}' stripped_wildcards.tmp > wildcards_with_m.tmp
+
+cat wildcards_with_www.tmp >> new_domains.tmp
+
+cat wildcards_with_m.tmp >> new_domains.tmp
 
 # Don't bother checking domains with wildcard records for resolving subdomains 
-grep -vxFf wildcards.tmp domains.tmp > no_wildcards.tmp
+grep -vxFf stripped_wildcards.tmp domains.tmp > no_wildcards.tmp
 
 mv no_wildcards.tmp domains.tmp
 
@@ -77,25 +91,19 @@ cat dead_subdomains.tmp >> "$dead_domains_file"
 
 sort "$dead_domains_file" -o "$dead_domains_file"
 
-awk '{print "www."$0}' wildcards.tmp > new_wildcards.tmp
-
-cat new_wildcards.tmp >> new_domains.tmp
-
-# Remove entries already in the raw file for accurate counting
-grep -vxFf "$raw_file" new_domains.tmp >  1.tmp
-
-mv 1.tmp new_domains.tmp
+# Remove entries already in the raw file (new wildcard domains weren't checked earlier)
+grep -vxFf "$raw_file" new_domains.tmp >  unique_domains.tmp
 
 
-if [[ -s new_domains.tmp ]]; then
-    cat new_domains.tmp >> "$raw_file"
+if [[ -s unique_domains.tmp ]]; then
+    cat unique_domains.tmp >> "$raw_file"
 
     sort "$raw_file" -o "$raw_file"
 
     echo -e "\nDomains added:"
-    cat new_domains.tmp
+    cat unique_domains.tmp
 
-    echo -e "\nTotal domains added: $(wc -l < new_domains.tmp)\n"
+    echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
 else
     echo -e "\nNo domains added.\n"
 fi
