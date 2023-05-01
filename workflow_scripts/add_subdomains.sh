@@ -81,9 +81,9 @@ while read -r subdomain; do
             echo {} >> dead_subdomains.tmp
         fi
     "
-    
-    grep -vxFf dead_subdomains.tmp subdomains.tmp >> new_subdomains.tmp
 done < "$subdomains_file"
+
+grep -vxFf dead_subdomains.tmp subdomains.tmp >> new_subdomains.tmp
 
 cat dead_subdomains.tmp >> "$dead_domains_file"
 
