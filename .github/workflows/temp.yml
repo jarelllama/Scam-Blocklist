@@ -1,9 +1,9 @@
 name: Remove subdomains from wildcard domains
 run-name: Remove subdomains from wildcard domains
 on:
-  schedule:
-    # Daily at 3am (GMT+8)
-    - cron: "23 22 * * *"
+  push:
+    paths:
+      - "push"
 jobs:
   Remove-subdomains:
     runs-on: ubuntu-latest
