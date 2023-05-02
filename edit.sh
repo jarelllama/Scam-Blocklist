@@ -28,7 +28,7 @@ function prep_entry {
     entry="${entry%%/*}"
 
     while read -r subdomain; do
-        entry="${entry#${subdomain}.}"
+        entry="${entry#"${subdomain}".}"
     done < "$subdomains_file"
 
     echo "$entry" > entries.tmp
@@ -263,16 +263,12 @@ while true; do
         p)
             push_changes
 
-            if [[ -f *.tmp ]]; then
-                rm *.tmp
-            fi
+            find . -maxdepth 1 -type f -name "*.tmp" -delete
 
             exit 0
             ;;
         x)
-            if [[ -f *.tmp ]]; then
-                rm *.tmp
-            fi
+            find . -maxdepth 1 -type f -name "*.tmp" -delete
 
             # Check if the script was sourced by another script
             if [[ "${#BASH_SOURCE[@]}" -gt 1 && "${BASH_SOURCE[0]}" != "${0}" ]]; then
