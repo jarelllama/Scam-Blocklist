@@ -35,7 +35,7 @@ function prep_entry {
         if ! [[ "$entry" == "$subdomain".* ]]; then
             continue
         fi
-        # Add the second-level domain
+        # Strip the subdomain to the second-level domain
         sld="${entry#"${subdomain}".}"
     done < "$subdomains_file"
 
