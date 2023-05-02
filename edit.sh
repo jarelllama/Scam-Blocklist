@@ -37,8 +37,9 @@ function prep_entry {
         fi
         # Add the second-level domain
         sld="${entry#"${subdomain}".}"
-        echo "$sld" >> entries.tmp
     done < "$subdomains_file"
+
+    echo "$sld" > entries.tmp
 
     entry="www.${sld}"
 
