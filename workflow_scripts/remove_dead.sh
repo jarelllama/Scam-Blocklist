@@ -12,21 +12,16 @@ git config user.name "$github_name"
 
 function remove_dead {
     grep -vxFf dead.tmp "$raw_file" > raw.tmp
-
     mv raw.tmp "$raw_file"
 
     grep -vxFf dead.tmp "$blacklist_file" > blacklist.tmp
-
     mv blacklist.tmp "$blacklist_file"
 
     awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
-
     grep -vxFf adblock_dead.tmp "$compressed_entries" > compressed_entries.tmp
-
     mv compressed_entries.tmp "$compressed_entries"
 
     cat dead.tmp >> "$dead_domains_file"
-
     sort -u "$dead_domains_file" -o "$dead_domains_file"
 
     echo -e "\nDead domains:"
