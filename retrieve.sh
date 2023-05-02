@@ -62,7 +62,8 @@ while IFS= read -r term; do
 
     domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
 
-    echo "$term"
+    # Show only the first 300 characters
+    echo "$term" | cut -c 1-300
 
     if [[ "$debug" -eq 1 ]]; then
         echo "$domains"
