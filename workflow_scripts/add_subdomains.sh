@@ -14,7 +14,7 @@ while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
 
-# Process only second-level domains
+# Remove known subdomains to keep only second-level domains
 comm -23 "$raw_file" subdomains.tmp > domains.tmp
 
 touch toplist_subdomains.tmp
