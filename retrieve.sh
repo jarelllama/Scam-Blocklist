@@ -238,10 +238,10 @@ function merge_pending {
         if ! [[ "$answer" =~ ^[Yy]$ ]] && [[ -n "$answer" ]]; then
             exit 0
         fi
-        commit_msg='Manual domains retrieval'
+        commit_msg='Manual domain retrieval'
     else
         echo -e "\nPushing changes..."
-        commit_msg='Automatic domains retrieval'
+        commit_msg='Automatic domain retrieval'
     fi
 
     echo
