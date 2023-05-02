@@ -2,18 +2,18 @@
 
 | Syntax | Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3121 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 6575 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3122 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 6577 |
 
 ### Stats
 
 ```
 Unique scam sites found:
-Today: 198
+Today: 199
 Yesterday: 45
-Total: 3129 (since Apr 12 2023)
+Total: 3130 (since Apr 12 2023)
 
-Updated: Tue May 02 14:13 UTC
+Updated: Tue May 02 14:24 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -35,7 +35,7 @@ Common subdomains are added to domains with no [wildcard record](https://develop
 
 Only the `www` and `m` subdomains are added to domains with wildcard records so as to not inflate the blocklist size.
 
-Subdomains found in Hagezi's [merged toplist](https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt) are also added (thank you Hagezi).
+Subdomains found in Hagezi's [merged toplist](https://github.com/hagezi/dns-data-collection/tree/main/top) are also added (thank you Hagezi).
 
 All subdomains are only added if they are resolving (in the case of domains with wildcard records, all subdomains resolve).
 
@@ -54,3 +54,5 @@ There is no way I can keep up with the number of scam sites created daily but wi
 [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
 
 [Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Contains both my list and Durablenapkin's list)
+
+[Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
