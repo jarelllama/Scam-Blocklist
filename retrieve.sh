@@ -150,7 +150,6 @@ function filter_pending {
     grep -vxFf "$raw_file" flipped.tmp > flipped_unique.tmp
 
     touch flipped_alive.tmp
-
     cat flipped_unique.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> flipped_alive.tmp
@@ -167,7 +166,6 @@ function filter_pending {
     grep -vxFf "$raw_file" with_m.tmp > with_m_unique.tmp
 
     touch with_m_alive.tmp
-
     cat with_m_unique.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> with_m_alive.tmp
