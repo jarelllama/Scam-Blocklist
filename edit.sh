@@ -31,9 +31,10 @@ function prep_entry {
 
     echo "$entry" > entries.tmp
 
+    sld="$entry"
+
     while read -r subdomain; do
         if ! [[ "$entry" == "$subdomain".* ]]; then
-            sld="$entry"
             continue
         fi
         # Add the second-level domain
@@ -49,7 +50,7 @@ function prep_entry {
 
     echo "$entry" >> entries.tmp
 
-    sort entries.tmp -o entries.tmp
+    sort -u entries.tmp -o entries.tmp
 }
 
 function edit_blocklist {
