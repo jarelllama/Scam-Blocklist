@@ -241,20 +241,16 @@ while true; do
         b)
             edit_blocklist
             rm *.tmp
-            continue
             ;;
         w)
             edit_whitelist
-            continue
             ;;
         l)
             edit_blacklist
             rm *.tmp
-            continue
             ;;
         c)
             check_entry
-            continue
             ;;
         p)
             push_changes
@@ -274,8 +270,7 @@ while true; do
             exit 0  
             ;;
         *)
-            echo -e "\nInvalid option."
-            continue  
+            echo -e "\nInvalid option."  
             ;;
     esac
 done
