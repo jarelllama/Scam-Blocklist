@@ -46,13 +46,9 @@ function prep_entry {
 
     echo "$sld" > entries.tmp
 
-    entry="www.${sld}"
+    echo "www.${sld}" >> entries.tmp
 
-    echo "$entry" >> entries.tmp
-
-    entry="m.${sld}"
-
-    echo "$entry" >> entries.tmp
+    echo "m.${sld}"" >> entries.tmp
 
     sort entries.tmp -o entries.tmp
 }
@@ -60,13 +56,13 @@ function prep_entry {
 function edit_blocklist {
     echo "BLOCKLIST"
     
-    cp "$raw_file" "$raw_file.bak"
+    cp "$raw_file" "${raw_file}.bak"
 
     prep_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        # This checks if there are no unique entries in the new entries file
-        if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
+        # Check if the new entries are unique (not in the blocklist)
+        if comm -23 entries.tmp "$raw_file" | grep -q . ; then
             echo -e "\nDomain not found in blocklist: $entry"
             return
         fi
@@ -113,6 +109,7 @@ function edit_blocklist {
     # The dead check messes up the order
     sort alive_entries.tmp -o entries.tmp
   
+    # Check if the new entries are not unique (already in the blocklist)
     if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
