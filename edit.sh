@@ -23,20 +23,31 @@ function prep_entry {
 
     entry="${entry,,}"
 
+    # Strip URLs to domains
+
     entry="${entry#*://}"
 
     entry="${entry%%/*}"
 
-    while read -r subdomain; do
-        entry="${entry#"${subdomain}".}"
-    done < "$subdomains_file"
-
     echo "$entry" > entries.tmp
 
     while read -r subdomain; do
-        subdomain="${subdomain}.${entry}"
-        echo "$subdomain" >> entries.tmp
+        if ! [[ "$entry" == "$subdomain".* ]]; then
+            sld="$entry"
+            continue
+        fi
+        # Add the second-level domain
+        sld="${entry#"${subdomain}".}"
+        echo "$sld" >> entries.tmp
     done < "$subdomains_file"
+
+    entry="www.${sld}"
+
+    echo "$entry" >> entries.tmp
+
+    entry="m.${sld}"
+
+    echo "$entry" >> entries.tmp
 
     sort entries.tmp -o entries.tmp
 }
