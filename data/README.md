@@ -41,7 +41,7 @@ All subdomains are only added if they are resolving (in the case of domains with
 
 ### Dead domains
 
-Dead domains are removed during the domain retrieval process and once a day for the full blocklist. Dead domains that resolve again are added back.
+Domains returning `NXDOMAIN` are removed during the domain retrieval process and once a day for the full blocklist. Dead domains that resolve again are added back.
 
 ### Inspiration
 
