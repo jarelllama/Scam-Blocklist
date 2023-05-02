@@ -48,7 +48,7 @@ function prep_entry {
 
     echo "www.${sld}" >> entries.tmp
 
-    echo "m.${sld}"" >> entries.tmp
+    echo "m.${sld}" >> entries.tmp
 
     sort entries.tmp -o entries.tmp
 }
