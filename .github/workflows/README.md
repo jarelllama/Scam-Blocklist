@@ -1,6 +1,6 @@
-Time in GMT+8
-
 ```
+(Time in GMT+8)
+
 Remove dead: 3am
 
 Add subdomains: 3:30am
