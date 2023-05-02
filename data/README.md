@@ -35,7 +35,7 @@ Common subdomains are added to domains with no [wildcard record](https://develop
 
 Only the `www` and `m` subdomains are added to domains with wildcard records so as to not inflate the blocklist size.
 
-Subdomains found in Hagezi's [merged toplist](https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt) are also added (thank you Hagezi).
+Subdomains found in Hagezi's [merged toplist](https://github.com/hagezi/dns-data-collection/tree/main/top) are also added (thank you Hagezi).
 
 All subdomains are only added if they are resolving (in the case of domains with wildcard records, all subdomains resolve).
 
