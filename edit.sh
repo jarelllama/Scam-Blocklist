@@ -94,7 +94,6 @@ function edit_blocklist {
 
     # mv shows an error when the file doesnt exist
     touch alive_entries.tmp
-
     cat entries.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> alive_entries.tmp
@@ -186,7 +185,6 @@ function edit_blacklist {
     fi
 
     touch alive_entries.tmp
-
     cat entries.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> alive_entries.tmp
