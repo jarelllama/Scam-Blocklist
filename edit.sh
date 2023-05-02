@@ -23,8 +23,6 @@ function prep_entry {
 
     entry="${entry,,}"
 
-    # Strip URLs to domains
-
     entry="${entry#*://}"
 
     entry="${entry%%/*}"
