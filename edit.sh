@@ -33,6 +33,7 @@ function prep_entry {
         entry="${entry}.com"
     fi
 
+    # Assume the entry is a second-level domain and has no subdomain
     sld="$entry"
 
     while read -r subdomain; do
