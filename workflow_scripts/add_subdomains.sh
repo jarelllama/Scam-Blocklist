@@ -34,6 +34,7 @@ cat unique_toplist_subdomains.tmp | xargs -I{} -P8 bash -c "
 cat alive_toplist_subdomains.tmp >> new_domains.tmp
 
 random_subdomain='6nd7p7ccay6r5da'
+
 awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' domains.tmp > random_subdomain.tmp
 
 # Find domains with a wildcard record (domains that resolve any subdomain)
