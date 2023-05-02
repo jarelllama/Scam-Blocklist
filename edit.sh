@@ -29,11 +29,11 @@ function prep_entry {
 
     entry="${entry%%/*}"
 
-    sld="$entry"
-
     if ! [[ "$entry" == *.* ]]; then
-        entry="${sld}.com"
+        entry="${entry}.com"
     fi
+
+    sld="$entry"
 
     while read -r subdomain; do
         if ! [[ "$entry" == "$subdomain".* ]]; then
