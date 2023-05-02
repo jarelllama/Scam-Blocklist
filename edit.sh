@@ -222,6 +222,10 @@ function check_entry {
 
     check_entry="${check_entry%%/*}"
     
+    if ! [[ "$check_entry" == *.* ]]; then
+        check_entry="${check_entry}.com"
+    fi
+
     if ! grep -xFq "$check_entry" "$raw_file"; then
         echo -e "\nThe entry is not present."
         if ! grep -Fq "$check_entry" "$raw_file"; then
