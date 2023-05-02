@@ -9,7 +9,6 @@ domains_file="domains.txt"
 adblock_file="adblock.txt"
 subdomains_file="data/subdomains.txt"
 dead_domains_file="data/dead_domains.txt"
-search_terms_file="search_terms.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
