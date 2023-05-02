@@ -93,7 +93,8 @@ cat new_subdomains.tmp >> new_domains.tmp
 
 sort new_domains.tmp -o new_domains.tmp
 
-# Remove entries already in the raw file (new wildcard domains weren't checked earlier)
+# Remove entries already in the raw file
+# This was done already for the toplist subdomains and subdomains in subdomains.txt for efficiency reasons. Otherwise, I would just do it all in this step
 comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
 if [[ -s unique_domains.tmp ]]; then
