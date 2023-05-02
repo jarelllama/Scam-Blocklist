@@ -2,18 +2,18 @@
 
 | Syntax | Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3122 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 6577 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3159 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 6598 |
 
 ### Stats
 
 ```
 Unique scam sites found:
-Today: 199
+Today: 236
 Yesterday: 45
-Total: 3130 (since Apr 12 2023)
+Total: 3167 (since Apr 12 2023)
 
-Updated: Tue May 02 14:24 UTC
+Updated: Tue May 02 15:53 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -41,7 +41,7 @@ All subdomains are only added if they are resolving (in the case of domains with
 
 ### Dead domains
 
-Dead domains are removed during the domain retrieval process and once a day for the full blocklist. Dead domains that resolve again are added back.
+Domains returning `NXDOMAIN` are removed during the domain retrieval process and once a day for the full blocklist. Dead domains that resolve again are added back.
 
 ### Inspiration
 
@@ -56,3 +56,5 @@ There is no way I can keep up with the number of scam sites created daily but wi
 [Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Contains both my list and Durablenapkin's list)
 
 [Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
+
+[Reddit's r/Scams subreddit](https://www.reddit.com/r/Scams)
