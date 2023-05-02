@@ -16,9 +16,8 @@ done < "$subdomains_file"
 # Remove known subdomains to keep only second-level domains
 comm -23 "$raw_file" subdomains.tmp > domains.tmp
 
-touch toplist_subdomains.tmp
-
 # Find subdomains in the subdomains toplist
+touch toplist_subdomains.tmp
 while read -r domain; do
     grep "\.$domain$" "$toplist_file" >> toplist_subdomains.tmp
 done < domains.tmp
@@ -26,7 +25,6 @@ done < domains.tmp
 grep -vxFf "$raw_file" toplist_subdomains.tmp > unique_toplist_subdomains.tmp
 
 touch alive_toplist_subdomains.tmp
-
 cat unique_toplist_subdomains.tmp | xargs -I{} -P8 bash -c "
     if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
         echo {} >> alive_toplist_subdomains.tmp
@@ -36,12 +34,10 @@ cat unique_toplist_subdomains.tmp | xargs -I{} -P8 bash -c "
 cat alive_toplist_subdomains.tmp >> new_domains.tmp
 
 random_subdomain='6nd7p7ccay6r5da'
-
 awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' domains.tmp > random_subdomain.tmp
 
-touch wildcards.tmp
-
 # Find domains with a wildcard record (domains that resolve any subdomain)
+touch wildcards.tmp
 cat random_subdomain.tmp | xargs -I{} -P8 bash -c "
     if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
         echo {} >> wildcards.tmp
@@ -60,7 +56,6 @@ cat wildcards_with_m.tmp >> new_domains.tmp
 
 # Don't bother checking domains with wildcard records for resolving subdomains 
 grep -vxFf stripped_wildcards.tmp domains.tmp > no_wildcards.tmp
-
 mv no_wildcards.tmp domains.tmp
 
 touch dead_subdomains.tmp
@@ -82,7 +77,6 @@ done < "$subdomains_file"
 grep -vxFf dead_subdomains.tmp subdomains.tmp >> new_subdomains.tmp
 
 cat new_subdomains.tmp >> new_domains.tmp
-
 sort new_domains.tmp -o new_domains.tmp
 
 # Remove entries already in the raw file
@@ -91,7 +85,6 @@ comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
 if [[ -s unique_domains.tmp ]]; then
     cat unique_domains.tmp >> "$raw_file"
-
     sort "$raw_file" -o "$raw_file"
 
     echo -e "\nDomains added:"
