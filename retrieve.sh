@@ -222,7 +222,7 @@ function merge_pending {
     if [[ unattended -eq 0 ]]; then
         read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
         echo
-        if ! [[ "$answer" =~ ^[Yy]$ ]] && ! [[ -z "$answer" ]]; then
+        if ! [[ "$answer" =~ ^[Yy]$ ]] && [[ -n "$answer" ]]; then
             exit 0
         fi
         commit_msg='Manual domains retrieval'
@@ -275,9 +275,7 @@ while true; do
             continue
             ;;
         x)
-            if [[ -f *.tmp ]]; then
-                rm *.tmp
-            fi
+            find . -maxdepth 1 -type f -name "*.tmp" -delete
             exit 0
             ;;
         *)
