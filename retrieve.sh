@@ -164,12 +164,12 @@ function filter_pending {
     cat flipped_alive.tmp >> pending.tmp
 
     grep -v '^www\.' flipped_alive.tmp > no_www.tmp
-    
+
     # Append the 'm' subdomain to second-level domains
     awk '{print "m."$0}' no_www.tmp > with_m.tmp
-    
+
     grep -vxFf "$raw_file" with_m.tmp > with_m_unique.tmp
-    
+
     touch with_m_alive.tmp
 
     cat with_m_unique.tmp | xargs -I{} -P6 bash -c "
@@ -180,7 +180,7 @@ function filter_pending {
 
     cat with_m_alive.tmp >> pending.tmp
 
-    # Duplicates are removed again from the pending file for when the file isn't cleared and there are duplicate flipped domains
+    # Duplicates are removed again from the pending file for when the file isn't cleared and there are duplicate domains
     sort -u pending.tmp -o "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
