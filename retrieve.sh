@@ -163,7 +163,7 @@ function filter_pending {
 
     cat flipped_alive.tmp >> pending.tmp
 
-    grep -v '^www\.' flipped_alive.tmp > no_www.tmp
+    grep -v '^www\.' pending.tmp > no_www.tmp
 
     # Append the 'm' subdomain to second-level domains
     awk '{print "m."$0}' no_www.tmp > with_m.tmp
