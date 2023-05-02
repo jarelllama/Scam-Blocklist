@@ -56,3 +56,5 @@ There is no way I can keep up with the number of scam sites created daily but wi
 [Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Contains both my list and Durablenapkin's list)
 
 [Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
+
+[Reddit's r/Scams subreddit](https://www.reddit.com/r/Scams)
