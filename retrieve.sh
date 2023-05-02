@@ -266,13 +266,11 @@ while true; do
             echo "Edit lists"
             echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
-            continue
             ;;
         r)
             echo "Run filter again"
             cp "$pending_file.bak" "$pending_file"
             filter_pending
-            continue
             ;;
         x)
             find . -maxdepth 1 -type f -name "*.tmp" -delete
@@ -280,7 +278,6 @@ while true; do
             ;;
         *)
             echo -e "\nInvalid option."
-            continue
             ;;
     esac
 done
