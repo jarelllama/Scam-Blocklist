@@ -138,7 +138,7 @@ function filter_pending {
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than using grep
     grep -vxFf dead.tmp 6.tmp > pending.tmp
 
-    # This portion of code removes www subdomains for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
+    # This portion of code removes the www subdomain for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
 
     grep '^www\.' pending.tmp > with_www.tmp
 
@@ -162,6 +162,23 @@ function filter_pending {
     "
 
     cat flipped_alive.tmp >> pending.tmp
+
+    grep -v '^www\.' flipped_alive.tmp > no_www.tmp
+    
+    # Append the 'm' subdomain to second-level domains
+    awk '{print "m."$0}' no_www.tmp > with_m.tmp
+    
+    grep -vxFf "$raw_file" with_m.tmp > with_m_unique.tmp
+    
+    touch with_m_alive.tmp
+
+    cat with_m_unique.tmp | xargs -I{} -P6 bash -c "
+        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> with_m_alive.tmp
+        fi
+    "
+
+    cat with_m_alive.tmp >> pending.tmp
 
     # Duplicates are removed again from the pending file for when the file isn't cleared and there are duplicate flipped domains
     sort -u pending.tmp -o "$pending_file"
