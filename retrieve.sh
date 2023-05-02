@@ -87,7 +87,7 @@ done < "$search_terms_file"
 num_retrieved=${#retrieved_domains[@]}
 
 function filter_pending {
-    cp "$pending_file" "$pending_file.bak"
+    cp "$pending_file" "${pending_file}.bak"
 
     tr '[:upper:]' '[:lower:]' < "$pending_file" > 1.tmp
 
@@ -212,7 +212,7 @@ function filter_pending {
 }
 
 function merge_pending {
-    cp "$raw_file" "$raw_file.bak"
+    cp "$raw_file" "${raw_file}.bak"
 
     num_before=$(wc -l < "$raw_file")
 
