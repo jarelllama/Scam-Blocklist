@@ -65,7 +65,8 @@ function edit_blocklist {
     prep_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFqf entries.tmp "$raw_file"; then
+        # This checks if there are no unique entries in the new entries file
+        if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
             echo -e "\nDomain not found in blocklist: $entry"
             return
         fi
@@ -112,7 +113,6 @@ function edit_blocklist {
     # The dead check messes up the order
     sort alive_entries.tmp -o entries.tmp
   
-    # This checks if there are no unique entries in the new entries file
     if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
