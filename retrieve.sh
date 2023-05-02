@@ -110,18 +110,14 @@ function filter_pending {
     echo -e "\nDomains removed:"
 
     grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" | awk '{print $0 " (whitelisted)"}'
-
     grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
-
     comm -23 3.tmp whitelisted.tmp > 4.tmp
 
     grep -E '\.(gov|edu)(\.[a-z]{2})?$' 4.tmp | awk '{print $0 " (TLD)"}'
-
     grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 4.tmp > 5.tmp
 
     # This regex matches valid domains. This includes puny code TLDs (.xn--*)
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
-    
     grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp > 6.tmp
 
     # grep outputs an error when this file is missing
