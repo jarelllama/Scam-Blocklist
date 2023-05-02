@@ -13,7 +13,6 @@ if grep -q '^[[:space:]]*$' "$raw_file"; then
     echo -e "\nThe blocklist contains empty lines."
     error=1
 fi
-
 awk NF "$raw_file" > 1.tmp
 
 if grep -q '[A-Z]' 1.tmp; then
@@ -21,7 +20,6 @@ if grep -q '[A-Z]' 1.tmp; then
     grep '[A-Z]' 1.tmp | awk '{print $0 " (case)"}'
     error=1
 fi
-
 tr '[:upper:]' '[:lower:]' < 1.tmp > 2.tmp
 
 num_before=$(wc -l < 2.tmp)
@@ -29,15 +27,12 @@ num_before=$(wc -l < 2.tmp)
 echo -e "\nEntries removed (if any):"
 
 awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' 2.tmp
-
 sort -u 2.tmp -o 2.tmp
 
 grep -E '\.(edu|gov)$' 2.tmp | awk '{print $0 " (TLD)"}'
-
 grep -vE '\.(edu|gov)$' 2.tmp > 3.tmp
 
 grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp | awk '{print $0 " (invalid)"}'
-    
 grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp > "$raw_file"
 
 num_after=$(wc -l < "$raw_file")
