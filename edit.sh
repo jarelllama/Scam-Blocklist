@@ -29,8 +29,6 @@ function prep_entry {
 
     entry="${entry%%/*}"
 
-    echo "$entry" > entries.tmp
-
     sld="$entry"
 
     while read -r subdomain; do
@@ -50,7 +48,7 @@ function prep_entry {
 
     echo "$entry" >> entries.tmp
 
-    sort -u entries.tmp -o entries.tmp
+    sort entries.tmp -o entries.tmp
 }
 
 function edit_blocklist {
