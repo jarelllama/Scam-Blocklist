@@ -223,7 +223,9 @@ function merge_pending {
 
     num_after=$(wc -l < "$raw_file")
 
-    awk '{sub(/^www\./, ""); print}' "$pending_file" > unique_sites.tmp
+    awk '{sub(/^www\./, ""); print}' "$pending_file" > 1.tmp
+
+    awk '{sub(/^m\./, ""); print}' 1.tmp > unique_sites.tmp
     
     sort -u unique_sites.tmp -o unique_sites.tmp
 
