@@ -6,7 +6,7 @@ on:
     - cron: "0 19 * * *"
   push:
     paths:
-      -"legacy/test"
+      - "legacy/test"
 jobs:
   Remove-dead-domains:
     runs-on: ubuntu-latest
