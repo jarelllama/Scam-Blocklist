@@ -35,11 +35,9 @@ function remove_dead {
 
 function add_resurrected {
     grep -vxFf dead_now_alive.tmp "$dead_domains_file" > dead_domains.tmp
-
     mv dead_domains.tmp "$dead_domains_file"
 
     cat dead_now_alive.tmp >> "$raw_file" 
-    
     sort "$raw_file" -o "$raw_file"
 
     echo -e "\nPreviously dead domains that are alive again:"
@@ -52,14 +50,13 @@ function add_resurrected {
 }
 
 touch dead.tmp
-touch dead_now_alive.tmp
-
 cat "$raw_file" | xargs -I{} -P8 bash -c "
   if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
       echo {} >> dead.tmp
   fi
 "
 
+touch dead_now_alive.tmp
 cat "$dead_domains_file" | xargs -I{} -P8 bash -c "
   if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
       echo {} >> dead_now_alive.tmp
