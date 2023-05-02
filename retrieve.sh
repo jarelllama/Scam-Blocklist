@@ -46,9 +46,9 @@ fi
 echo -e "\nSearch filter: $time_filter"
 echo "Search terms:"
 
-user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-
 declare -A retrieved_domains
+
+user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
 # A blank IFS ensures the entire search term is read
 while IFS= read -r term; do
