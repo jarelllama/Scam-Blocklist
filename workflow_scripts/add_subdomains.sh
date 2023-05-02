@@ -74,8 +74,10 @@ while read -r subdomain; do
     "
 done < "$subdomains_file"
 
-grep -vxFf dead_subdomains.tmp subdomains.tmp >> new_subdomains.tmp
-cat new_subdomains.tmp >> new_domains.tmp
+grep -vxFf dead_subdomains.tmp subdomains.tmp > alive_subdomains.tmp
+
+cat alive_subdomains.tmp >> new_domains.tmp
+
 sort new_domains.tmp -o new_domains.tmp
 
 # Remove entries already in the raw file
