@@ -14,12 +14,12 @@ sort -u "$subdomains_toplist_file" -o "$subdomains_toplist_file"
 comm -12 "$raw_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
 if ! [[ -s in_toplist.tmp ]]; then
-    echo -e "\nNo domains found in toplist.\n"
+    echo -e "\nNo domains found in the toplist. Exiting without error...\n"
     rm *.tmp
     exit 0
 fi
 
-echo -e "\nDomains in toplist:"
+echo -e "\nDomains in the toplist:"
 cat in_toplist.tmp
 echo
 
