@@ -8,4 +8,4 @@ jobs:
       - name: Test
         env:
           GIT_EMAIL: ${{env.GIT_EMAIL}}
-        run: echo "Email is: $GIT_EMAIL"
+        run: echo "Email is $GIT_EMAIL"
