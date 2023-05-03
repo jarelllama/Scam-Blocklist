@@ -8,4 +8,4 @@ jobs:
       - name: Test
         run: |
           echo "${{var.git_username}}"
-          echo "${{secrets.git_email}}"
+          #echo "${{secrets.git_email}}"
