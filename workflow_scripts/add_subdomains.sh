@@ -129,17 +129,19 @@ sort -u new_domains.tmp -o new_domains.tmp
 comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
 if [[ -s unique_domains.tmp ]]; then
-    cat unique_domains.tmp >> "$raw_file"
-
-    sort "$raw_file" -o "$raw_file"
-
-    echo -e "\nAll domains added:"
-    cat unique_domains.tmp
-
-    echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
-else
     echo -e "\nNo domains added.\n"
+    rm *.tmp
+    exit 0
 fi
+
+cat unique_domains.tmp >> "$raw_file"
+
+sort "$raw_file" -o "$raw_file"
+
+echo -e "\nAll domains added:"
+cat unique_domains.tmp
+
+echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
 
 rm *.tmp
 
