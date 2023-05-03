@@ -17,7 +17,7 @@ jobs:
           COMMIT_MESSAGE: 'Update toplist'
         run: |
           git config user.email "${{secrets.GIT_EMAIL}}"
-          git config user.name "${{vars.Git_username}}"
+          git config user.name "${{vars.GIT_USERNAME}}"
           git add "${{vars.TOPLIST_FILE}}" "${{vars.SUBDOMAINS_TOPLIST_FILE}}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
           git push
