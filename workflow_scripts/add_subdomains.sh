@@ -77,11 +77,11 @@ while read -r subdomain; do
             echo {} >> dead_subdomains.tmp
         fi
     "
+
+    grep -vxFf dead_subdomains.tmp subdomains.tmp > alive_subdomains.tmp
+
+    cat alive_subdomains.tmp >> new_domains.tmp
 done < "$subdomains_file"
-
-grep -vxFf dead_subdomains.tmp subdomains.tmp > alive_subdomains.tmp
-
-cat alive_subdomains.tmp >> new_domains.tmp
 
 sort new_domains.tmp -o new_domains.tmp
 
