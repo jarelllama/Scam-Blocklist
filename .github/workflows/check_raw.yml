@@ -19,5 +19,5 @@ jobs:
           git config user.email "${{secrets.git_email}}"
           git config user.name "${{vars.git_username}}"
           git add "${{vars.raw_file}}"
-          git diff-index -q HEAD || git commit -m "$commit_message"
+          git diff-index --quiet HEAD || git commit -m "$commit_message"
           git push
