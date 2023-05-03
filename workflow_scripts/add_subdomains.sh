@@ -4,11 +4,6 @@ raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
 toplist_file="data/subdomains_toplist.txt"
 dead_domains_file="data/dead_domains.txt"
-github_email='91372088+jarelllama@users.noreply.github.com'
-github_name='jarelllama'
-
-git config user.email "$github_email"
-git config user.name "$github_name"
 
 > new_domains.tmp
 
@@ -139,7 +134,3 @@ cat unique_domains.tmp
 echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
 
 rm *.tmp
-
-git add "$raw_file"
-git commit -qm "Add subdomains"
-git push -q
