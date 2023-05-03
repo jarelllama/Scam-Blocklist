@@ -17,8 +17,8 @@ jobs:
           raw_file="data/raw.txt"
           commit_message='Add subdomains'
         run: |
-          git config user.email "${{secrets.git_email}}"
-          git config user.name "${{env.git_username}}"
+          git config user.email ${{secrets.git_email}}
+          git config user.name ${{env.git_username}}
           git add "$raw_file"
           git commit -m "$commit_message"
           git push
