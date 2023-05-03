@@ -33,6 +33,13 @@ function add_toplist_subdomains {
         fi
     "
 
+    if ! [[ -s alive_toplist_subdomains.tmp ]]; then
+        return
+    fi
+    
+    echo -e "\nSubdomains found in the toplist""
+    cat alive_toplist_subdomains.tmp
+
     cat alive_toplist_subdomains.tmp >> new_domains.tmp
 }
 
@@ -52,6 +59,17 @@ function add_subdomains_to_wildcards {
 
     awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > wildcard_second_level_domains.tmp
 
+    # Create a file with no wildcard domains. This file is sorted 
+    grep -vxFf wildcard_second_level_domains.tmp second_level_domains.tmp > no_wildcards.tmp
+
+    if ! [[ -s wildcard_second_level_domains.tmp ]]; then
+        return
+    fi
+
+    echo -e "\nWildcard domains found:"
+    cat wildcard_second_level_domains.tmp
+    echo -e "\n"'The `www` and `m` subdomains will be added to these domains.'
+
     awk '{print "www."$0}' wildcard_second_level_domains.tmp > wildcards_with_www.tmp
 
     awk '{print "m."$0}' wildcard_second_level_domains.tmp > wildcards_with_m.tmp
@@ -59,16 +77,13 @@ function add_subdomains_to_wildcards {
     cat wildcards_with_www.tmp >> new_domains.tmp
 
     cat wildcards_with_m.tmp >> new_domains.tmp
-     
-    # Create a file with no wildcard domains. This file is sorted 
-    grep -vxFf wildcard_second_level_domains.tmp second_level_domains.tmp > no_wildcards.tmp
 }
 
 function add_subdomains {
     touch dead_subdomains.tmp
 
     while read -r subdomain; do
-    # Append the current subdomain in the loop to the domains
+        # Append the current subdomain in the loop to the domains
         awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_wildcards.tmp > 1.tmp
 
         # Remove subdomains already present in the raw file
@@ -87,6 +102,13 @@ function add_subdomains {
         "
 
         grep -vxFf dead_subdomains.tmp subdomains.tmp > alive_subdomains.tmp
+
+        if ! [[ -s alive_subdomains.tmp ]]; then
+            continue
+        fi
+
+        echo -e "\nResolving subdomains found:"
+        cat alive_subdomains.tmp
 
         cat alive_subdomains.tmp >> new_domains.tmp
     done < "$subdomains_file"
@@ -108,7 +130,7 @@ if [[ -s unique_domains.tmp ]]; then
 
     sort "$raw_file" -o "$raw_file"
 
-    echo -e "\nDomains added:"
+    echo -e "\nAll domains added:"
     cat unique_domains.tmp
 
     echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
