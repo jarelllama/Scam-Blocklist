@@ -188,7 +188,7 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
     
-    comm -12 "$raw_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
+    comm -12 "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
     if [[ -s in_toplist.tmp ]]; then
         echo -e "\nDomains in toplist:"
