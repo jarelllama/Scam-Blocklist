@@ -5,9 +5,6 @@ on:
     # Daily at 3:30am (GMT+8)
     - cron: "30 19 * * *"
   workflow_dispatch:
-env:
-  github_email='91372088+jarelllama@users.noreply.github.com'
-  github_name='jarelllama'
 jobs:
   Add-subdomains:
     runs-on: ubuntu-latest
@@ -17,11 +14,10 @@ jobs:
         run: bash "workflow_scripts/add_subdomains.sh"
       - name: Commit and push changes
         env:
-          raw_file="data/raw.txt"
-          commit_message='Add subdomains'
+          COMMIT_MESSAGE: 'Add subdomains'
         run: |
-          git config user.email "$github_email"
-          git config user.name "$github_name"
-          git add "$raw_file"
-          git commit -m "$commit_message"
+          git config user.email "${{secrets.GIT_EMAIL}}"
+          git config user.name "${{vars.GIT_USERNAME}}"
+          git add "${{vars.RAW_FILE}}"
+          git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
           git push
