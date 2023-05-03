@@ -14,10 +14,10 @@ jobs:
         run: bash "workflow_scripts/update_toplists.sh"
       - name: Commit and push changes
         env:
-          commit_message: 'Update toplist'
+          COMMIT_MESSAGE: 'Update toplist'
         run: |
-          git config user.email "${{secrets.git_email}}"
-          git config user.name "${{vars.git_username}}"
-          git add "${{vars.toplist_file}}" "${{vars.subdomains_toplist_file}}"
-          git diff-index --quiet HEAD || git commit -m "$commit_message"
+          git config user.email "${{secrets.GIT_EMAIL}}"
+          git config user.name "${{vars.Git_username}}"
+          git add "${{vars.TOPLIST_FILE}}" "${{vars.SUBDOMAINS_TOPLIST_FILE}}"
+          git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
           git push
