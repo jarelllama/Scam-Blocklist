@@ -47,8 +47,6 @@ function retrieve_domains {
     echo -e "\nSearch filter: $time_filter"
     echo "Search terms:"
 
-    declare -A retrieved_domains
-
     user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
     # A blank IFS ensures the entire search term is read
@@ -74,19 +72,12 @@ function retrieve_domains {
         echo "Domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------"
 
-        # Check if each domain is in the retrieved domains associative array
-        # Note that quoting $domains causes errors
-        for domain in $domains; do
-            if [[ ${retrieved_domains["$domain"]+_} ]]; then
-               continue 
-            fi
-            # Add the unique domain to the associative array
-            retrieved_domains["$domain"]=1
-            echo "$domain" >> "$pending_file"
-        done
+        echo "$domain" >> "$pending_file"
     done < "$search_terms_file"
 
-    num_retrieved=${#retrieved_domains[@]}
+    sort -u "$pending_file" -o "$pending_file"
+
+    total_retrieved=$(wc -l < "$pending_file")
 }
 
 function filter_pending {
@@ -185,7 +176,7 @@ function filter_pending {
         exit 0
     fi
 
-    echo -e "\nTotal domains retrieved: $num_retrieved"
+    echo -e "\nTotal domains retrieved: $total_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
     echo "Domains:"
     cat "$pending_file"
