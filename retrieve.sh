@@ -81,6 +81,8 @@ function retrieve_domains {
     sort -u "$pending_file" -o "$pending_file"
 
     total_retrieved=$(wc -l < "$pending_file")
+
+    echo -e "\nTotal domains retrieved: $total_retrieved"
 }
 
 function filter_pending {
@@ -179,7 +181,6 @@ function filter_pending {
         exit 0
     fi
 
-    echo -e "\nTotal domains retrieved: $total_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
     echo "Domains:"
     cat "$pending_file"
