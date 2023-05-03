@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: echo "${{var.git_username}}"
+        run: echo "${{var.GIT_USERNAME}}"
