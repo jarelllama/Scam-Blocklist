@@ -128,7 +128,7 @@ sort -u new_domains.tmp -o new_domains.tmp
 # Remove entries already in the raw file
 comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
-if [[ -s unique_domains.tmp ]]; then
+if ! [[ -s unique_domains.tmp ]]; then
     echo -e "\nNo domains added.\n"
     rm *.tmp
     exit 0
