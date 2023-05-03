@@ -20,7 +20,7 @@ function add_toplist_subdomains {
     touch toplist_subdomains.tmp
 
     while read -r domain; do
-        grep "\.$domain$" "$toplist_file" >> toplist_subdomains.tmp
+        grep "\.${domain}$" "$toplist_file" >> toplist_subdomains.tmp
     done < second_level_domains.tmp
 
     grep -vxFf "$raw_file" toplist_subdomains.tmp > 1.tmp
