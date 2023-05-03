@@ -68,7 +68,7 @@ function add_subdomains_to_wildcards {
 
     echo -e "\nWildcard domains found:"
     cat wildcard_second_level_domains.tmp
-    echo -e "\n"'The `www` and `m` subdomains will be added to these domains.'
+    echo 'The `www` and `m` subdomains will be added to these domains.'
 
     awk '{print "www."$0}' wildcard_second_level_domains.tmp > wildcards_with_www.tmp
 
