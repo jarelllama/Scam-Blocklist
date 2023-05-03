@@ -24,6 +24,7 @@ fi
 
 debug=0
 unattended=0
+use_pending_only=0
 time_filter='a'
 
 for arg in "$@"; do
@@ -32,6 +33,8 @@ for arg in "$@"; do
     elif [[ "$arg" == 'u' ]]; then
         unattended=1
         time_filter='y'
+    elif [[ "$arg" == 'p' ]]; then
+        use_pending_only=1
     else
         time_filter="$arg"
     fi
@@ -246,7 +249,9 @@ function merge_pending {
     exit 0
 }
 
-retrieve_domains
+if [[ "$use_pending_only" -eq 0 ]]; then
+    retrieve_domains
+fi
 
 filter_pending
 
