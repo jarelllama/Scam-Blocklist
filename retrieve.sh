@@ -181,7 +181,7 @@ function filter_pending {
         exit 0
     fi
 
-    echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
+    echo -e "\nPending domains not in blocklist: $(wc -l < $pending_file)"
     echo "Domains:"
     cat "$pending_file"
     
