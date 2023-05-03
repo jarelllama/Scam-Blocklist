@@ -29,8 +29,8 @@ echo -e "\nEntries removed (if any):"
 awk 'seen[$0]++ == 1 {print $0 " (duplicate)"}' 2.tmp
 sort -u 2.tmp -o 2.tmp
 
-grep -E '\.(edu|gov)$' 2.tmp | awk '{print $0 " (TLD)"}'
-grep -vE '\.(edu|gov)$' 2.tmp > 3.tmp
+grep -E '\.(gov|edu)(\.[a-z]{2})?$' 2.tmp | awk '{print $0 " (TLD)"}'
+grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 2.tmp > 3.tmp
 
 grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp | awk '{print $0 " (invalid)"}'
 grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp > "$raw_file"
