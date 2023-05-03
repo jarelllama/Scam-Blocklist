@@ -16,8 +16,9 @@ jobs:
         env:
           COMMIT_MESSAGE: 'Remove invalid entries'
         run: |
-          git config user.email ${{env.GIT_EMAIL}}
-          git config user.name "${{env.GIT_USERNAME}}"
-          git add "${{env.RAW_FILE}}"
-          git commit -m "$COMMIT_MESSAGE"
-          git push
+          echo ${{env.GIT_EMAIL}}"
+          #git config user.email ${{env.GIT_EMAIL}}
+          #git config user.name "${{env.GIT_USERNAME}}"
+          #git add "${{env.RAW_FILE}}"
+          #git commit -m "$COMMIT_MESSAGE"
+          #git push
