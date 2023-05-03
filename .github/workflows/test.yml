@@ -7,6 +7,6 @@ jobs:
     steps:
       - name: Test
         env:
-          git_email: ${{env.GIT_EMAIL}}
+          GIT_EMAIL: ${{env.GIT_EMAIL}}
         run: |
-          echo $git_email
+          echo $GIT_EMAIL
