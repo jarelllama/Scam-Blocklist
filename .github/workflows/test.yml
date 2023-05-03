@@ -7,6 +7,6 @@ jobs:
     steps:
       - name: Test
         env:
-          COMMIT_MESSAGE: 'Remove invalid entries'
+          git_email: ${{env.GIT_EMAIL}}
         run: |
-          echo ${{env.GIT_EMAIL}}
+          echo $git_email
