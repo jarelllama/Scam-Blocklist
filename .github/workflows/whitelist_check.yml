@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "whitelist.txt"
+  workflow_dispatch:
 jobs:
   Whitelisted_domains_check:
     runs-on: ubuntu-latest
