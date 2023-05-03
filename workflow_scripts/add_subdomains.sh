@@ -11,82 +11,96 @@ git config user.email "$github_email"
 git config user.name "$github_name"
 
 while read -r subdomain; do
-    grep "^$subdomain\." "$raw_file" >> subdomains.tmp
+    grep "^$subdomain\." "$raw_file" >> only_subdomains.tmp
 done < "$subdomains_file"
 
-# Remove known subdomains to keep only second-level domains
-comm -23 "$raw_file" subdomains.tmp > domains.tmp
+comm -23 "$raw_file" only_subdomains.tmp > second_level_domains.tmp
 
-# Find subdomains in the subdomains toplist
-touch toplist_subdomains.tmp
-while read -r domain; do
-    grep "\.$domain$" "$toplist_file" >> toplist_subdomains.tmp
-done < domains.tmp
+function add_toplist_subdomains {
+    touch toplist_subdomains.tmp
 
-grep -vxFf "$raw_file" toplist_subdomains.tmp > unique_toplist_subdomains.tmp
+    while read -r domain; do
+        grep "\.$domain$" "$toplist_file" >> toplist_subdomains.tmp
+    done < second_level_domains.tmp
 
-touch alive_toplist_subdomains.tmp
-cat unique_toplist_subdomains.tmp | xargs -I{} -P8 bash -c "
-    if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-        echo {} >> alive_toplist_subdomains.tmp
-    fi
-"
+    grep -vxFf "$raw_file" toplist_subdomains.tmp > unique_toplist_subdomains.tmp
 
-cat alive_toplist_subdomains.tmp >> new_domains.tmp
-
-random_subdomain='6nd7p7ccay6r5da'
-
-awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' domains.tmp > random_subdomain.tmp
-
-# Find domains with a wildcard record (domains that resolve any subdomain)
-touch wildcards.tmp
-cat random_subdomain.tmp | xargs -I{} -P8 bash -c "
-    if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-        echo {} >> wildcards.tmp
-    fi
-"
-
-awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > stripped_wildcards.tmp
-
-awk '{print "www."$0}' stripped_wildcards.tmp > wildcards_with_www.tmp
-
-awk '{print "m."$0}' stripped_wildcards.tmp > wildcards_with_m.tmp
-
-cat wildcards_with_www.tmp >> new_domains.tmp
-
-cat wildcards_with_m.tmp >> new_domains.tmp
-
-# Don't bother checking domains with wildcard records for resolving subdomains 
-grep -vxFf stripped_wildcards.tmp domains.tmp > no_wildcards.tmp
-
-mv no_wildcards.tmp domains.tmp
-
-touch dead_subdomains.tmp
-while read -r subdomain; do
-    # Append the current subdomain in the loop to the domains
-    awk -v subdomain="$subdomain" '{print subdomain"."$0}' domains.tmp > 1.tmp
-
-    # Remove subdomains already present in the raw file
-    comm -23 1.tmp "$raw_file" > 2.tmp
-
-    # Remove known dead subdomains
-    comm -23 2.tmp "$dead_domains_file" > subdomains.tmp
-
-    cat subdomains.tmp | xargs -I{} -P8 bash -c "
-        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> dead_subdomains.tmp
+    touch alive_toplist_subdomains.tmp
+    
+    cat unique_toplist_subdomains.tmp | xargs -I{} -P8 bash -c "
+        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> alive_toplist_subdomains.tmp
         fi
     "
 
-    grep -vxFf dead_subdomains.tmp subdomains.tmp > alive_subdomains.tmp
+    cat alive_toplist_subdomains.tmp >> new_domains.tmp
+}
 
-    cat alive_subdomains.tmp >> new_domains.tmp
-done < "$subdomains_file"
+function add_subdomains_to_wildcards {
+    random_subdomain='6nd7p7ccay6r5da'
 
-sort new_domains.tmp -o new_domains.tmp
+    awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level_domains.tmp > random_subdomain.tmp
+
+    touch wildcards.tmp
+
+    # Find domains with a wildcard record (domains that resolve any subdomain)
+    cat random_subdomain.tmp | xargs -I{} -P8 bash -c "
+        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+            echo {} >> wildcards.tmp
+        fi
+    "
+
+    awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > wildcard_second_level_domains.tmp
+
+    awk '{print "www."$0}' wildcard_second_level_domains.tmp > wildcards_with_www.tmp
+
+    awk '{print "m."$0}' wildcard_second_level_domains.tmp > wildcards_with_m.tmp
+
+    cat wildcards_with_www.tmp >> new_domains.tmp
+
+    cat wildcards_with_m.tmp >> new_domains.tmp
+     
+    # Create a file with no wildcard domains. This file is sorted 
+    grep -vxFf wildcard_second_level_domains.tmp second_level_domains.tmp > no_wildcards.tmp
+}
+
+function add_subdomains {
+    touch dead_subdomains.tmp
+
+    while read -r subdomain; do
+    # Append the current subdomain in the loop to the domains
+        awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_wildcards.tmp > 1.tmp
+
+        # Remove subdomains already present in the raw file
+        comm -23 1.tmp "$raw_file" > 2.tmp
+
+        # Remove known dead subdomains
+        comm -23 2.tmp "$dead_domains_file" > 3.tmp
+    
+        # Remove subdomains already in the new domains file
+        grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
+
+        cat subdomains.tmp | xargs -I{} -P8 bash -c "
+            if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+                echo {} >> dead_subdomains.tmp
+            fi
+        "
+
+        grep -vxFf dead_subdomains.tmp subdomains.tmp > alive_subdomains.tmp
+
+        cat alive_subdomains.tmp >> new_domains.tmp
+    done < "$subdomains_file"
+}
+
+add_toplist_subdomains
+
+add_subdomains_to_wildcards
+
+add_subdomains
+
+sort -u new_domains.tmp -o new_domains.tmp
 
 # Remove entries already in the raw file
-# This was done already for the toplist subdomains and subdomains in subdomains.txt for efficiency reasons. Otherwise, I would just do it all in this step
 comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
 if [[ -s unique_domains.tmp ]]; then
