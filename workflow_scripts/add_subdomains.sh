@@ -110,7 +110,7 @@ function add_subdomains {
             continue
         fi
 
-        echo -e "\nResolving subdomains found:"
+        echo -e "\nResolving '$subdomain' subdomains found:"
         cat alive_subdomains.tmp
 
         cat alive_subdomains.tmp >> new_domains.tmp
