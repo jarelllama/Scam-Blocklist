@@ -6,6 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: |
-          #echo "${{var.git_username}}"
-          echo "${{secrets.git_email}}"
+        run: echo "${{var.git_username}}"
+          #echo "${{secrets.git_email}}"
