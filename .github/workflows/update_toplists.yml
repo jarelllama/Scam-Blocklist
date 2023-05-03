@@ -15,9 +15,10 @@ jobs:
       - name: Commit and push changes
         env:
           COMMIT_MESSAGE: 'Update toplists'
+          FILE_TO_ADD: "${{vars.TOPLIST_FILE}}" "${{vars.SUBDOMAINS_TOPLIST_FILE}}"
         run: |
           git config user.email "${{secrets.GIT_EMAIL}}"
           git config user.name "${{vars.GIT_USERNAME}}"
-          git add "${{vars.TOPLIST_FILE}}" "${{vars.SUBDOMAINS_TOPLIST_FILE}}"
+          git add "${{FILES_TO_ADS}}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
           git push
