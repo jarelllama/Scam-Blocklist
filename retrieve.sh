@@ -188,8 +188,7 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
     
-    # About 8x faster than comm due to not needing to sort the toplist
-    grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
+    comm -12 "$raw_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
     if [[ -s in_toplist.tmp ]]; then
         echo -e "\nDomains in toplist:"
