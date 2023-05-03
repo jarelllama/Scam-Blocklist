@@ -2,11 +2,10 @@ name: Test workflow
 on:
   workflow_dispatch:
 jobs:
-  Valid-entries-check:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - name: Test
         env:
           GIT_EMAIL: ${{env.GIT_EMAIL}}
-        run: |
-          echo $GIT_EMAIL
+        run: echo $GIT_EMAIL
