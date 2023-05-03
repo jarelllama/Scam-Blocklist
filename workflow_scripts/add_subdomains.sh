@@ -76,8 +76,6 @@ function add_subdomains_to_wildcards {
 }
 
 function add_subdomains {
-    touch dead_subdomains.tmp
-
     while read -r subdomain; do
         # Append the current subdomain in the loop to the domains
         awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_wildcards.tmp > 1.tmp
@@ -91,13 +89,13 @@ function add_subdomains {
         # Remove subdomains already in the new domains file
         grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
 
+        > alive_subdomains.tmp
+
         cat subdomains.tmp | xargs -I{} -P8 bash -c "
-            if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-                echo {} >> dead_subdomains.tmp
+            if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
+                echo {} >> alive_subdomains.tmp
             fi
         "
-
-        grep -vxFf dead_subdomains.tmp subdomains.tmp > alive_subdomains.tmp
 
         if ! [[ -s alive_subdomains.tmp ]]; then
             continue
