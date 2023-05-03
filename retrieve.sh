@@ -14,14 +14,6 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-if [[ -s "$pending_file" ]]; then
-    read -n 1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
-    echo
-    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
-        > "$pending_file"
-    fi
-fi
-
 debug=0
 unattended=0
 use_pending_only=0
@@ -39,6 +31,14 @@ for arg in "$@"; do
         time_filter="$arg"
     fi
 done
+
+if [[ -s "$pending_file" ]] && [[ use_pending_only -eq 0 ]]; then
+    read -n 1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
+    echo
+    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+        > "$pending_file"
+    fi
+fi
 
 if [[ "$unattended" -eq 0 ]]; then
     echo -e "\nRemember to pull the latest changes first!"
