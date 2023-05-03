@@ -269,9 +269,7 @@ while true; do
             ;;
         p)
             push_changes
-
             find . -maxdepth 1 -type f -name "*.tmp" -delete
-
             exit 0
             ;;
         x)
