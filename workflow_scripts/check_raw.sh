@@ -35,9 +35,7 @@ mv 4.tmp "$raw_file"
 
 num_after=$(wc -l < "$raw_file")
 
-if [[ "$num_before" -eq "$num_after" ]]; then
-    echo -e "\nNo entries removed.\n"
-else
+if ! [[ "$num_before" -eq "$num_after" ]]; then
     echo -e "\nTotal entries removed: $((num_before - num_after))\n"
     error=1
 fi
@@ -45,6 +43,7 @@ fi
 rm *.tmp
 
 if [[ "$error" -eq 0 ]]; then
+    echo -e "\nNo invalid entries. Exiting without error..."
     exit 0
 fi
 
