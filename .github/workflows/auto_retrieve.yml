@@ -4,6 +4,7 @@ on:
   schedule:
     # Daily at 4:20am (GMT+8)
     - cron: "20 20 * * *"
+  workflow_dispatch:
 jobs:
   Retrieve-domains:
     runs-on: ubuntu-latest
