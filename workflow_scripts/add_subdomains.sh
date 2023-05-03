@@ -3,6 +3,7 @@
 raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
 toplist_file="data/subdomains_toplist.txt"
+dead_domains_file="data/dead_domains.txt"
 github_email='91372088+jarelllama@users.noreply.github.com'
 github_name='jarelllama'
 
@@ -67,6 +68,9 @@ while read -r subdomain; do
 
     # Remove subdomains already present in the raw file
     comm -23 1.tmp "$raw_file" > 2.tmp
+
+    # Remove known dead subdomains
+    comm -23 2.tmp "$dead_domains_file" > subdomains.tmp
 
     cat subdomains.tmp | xargs -I{} -P8 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
