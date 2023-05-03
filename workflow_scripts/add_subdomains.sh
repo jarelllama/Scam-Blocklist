@@ -23,7 +23,9 @@ function add_toplist_subdomains {
         grep "\.$domain$" "$toplist_file" >> toplist_subdomains.tmp
     done < second_level_domains.tmp
 
-    grep -vxFf "$raw_file" toplist_subdomains.tmp > unique_toplist_subdomains.tmp
+    grep -vxFf "$raw_file" toplist_subdomains.tmp > 1.tmp
+
+    grep -vxFf "$dead_domains_file" 1.tmp > unique_toplist_subdomains.tmp
 
     touch alive_toplist_subdomains.tmp
     
