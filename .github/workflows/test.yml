@@ -7,4 +7,3 @@ jobs:
     steps:
       - name: Test
         run: echo "${{var.git_username}}"
-          #echo "${{secrets.git_email}}"
