@@ -43,49 +43,52 @@ else
     echo -e "\nRetrieving domains..."
 fi
 
-echo -e "\nSearch filter: $time_filter"
-echo "Search terms:"
+function retrieve_domains {
+    
+    echo -e "\nSearch filter: $time_filter"
+    echo "Search terms:"
 
-declare -A retrieved_domains
+    declare -A retrieved_domains
 
-user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+    user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
-# A blank IFS ensures the entire search term is read
-while IFS= read -r term; do
-    if [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
-        continue
-    fi
-    # gsub replaces consecutive non-alphanumeric characters with a single plus sign
-    encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
-
-    google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
-
-    domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
-
-    term=$(echo "$term" | cut -c 1-350)
-    echo "${term}"...
-
-    if [[ "$debug" -eq 1 ]]; then
-        echo "$domains"
-    fi
-
-    # wc -w does a better job than wc -l for counting domains in this case
-    echo "Domains retrieved: $(echo "$domains" | wc -w)"
-    echo "--------------------------------------"
-
-    # Check if each domain is in the retrieved domains associative array
-    # Note that quoting $domains causes errors
-    for domain in $domains; do
-        if [[ ${retrieved_domains["$domain"]+_} ]]; then
-           continue 
+    # A blank IFS ensures the entire search term is read
+    while IFS= read -r term; do
+        if [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
+            continue
         fi
-        # Add the unique domain to the associative array
-        retrieved_domains["$domain"]=1
-        echo "$domain" >> "$pending_file"
-    done
-done < "$search_terms_file"
+        # gsub replaces consecutive non-alphanumeric characters with a single plus sign
+        encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
-num_retrieved=${#retrieved_domains[@]}
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
+
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
+
+        term=$(echo "$term" | cut -c 1-350)
+        echo "${term}"...
+
+        if [[ "$debug" -eq 1 ]]; then
+            echo "$domains"
+        fi
+
+        # wc -w does a better job than wc -l for counting domains in this case
+        echo "Domains retrieved: $(echo "$domains" | wc -w)"
+        echo "--------------------------------------"
+
+        # Check if each domain is in the retrieved domains associative array
+    # Note that quoting $domains causes errors
+        for domain in $domains; do
+            if [[ ${retrieved_domains["$domain"]+_} ]]; then
+               continue 
+            fi
+            # Add the unique domain to the associative array
+            retrieved_domains["$domain"]=1
+            echo "$domain" >> "$pending_file"
+        done
+    done < "$search_terms_file"
+
+    num_retrieved=${#retrieved_domains[@]}
+}
 
 function filter_pending {
     cp "$pending_file" "${pending_file}.bak"
@@ -252,6 +255,8 @@ function merge_pending {
 
     exit 0
 }
+
+retrieve_domains
 
 filter_pending
 
