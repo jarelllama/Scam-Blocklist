@@ -44,7 +44,6 @@ else
 fi
 
 function retrieve_domains {
-    
     echo -e "\nSearch filter: $time_filter"
     echo "Search terms:"
 
