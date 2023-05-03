@@ -4,10 +4,10 @@ on:
   push:
     paths:
       - "data/raw.txt"
-  workflow_dispatch:
   schedule:
     # Daily at 5am (GMT+8)
     - cron: "0 21 * * *"
+  workflow_dispatch:
 jobs:
   Build-blocklist:
     runs-on: ubuntu-latest
