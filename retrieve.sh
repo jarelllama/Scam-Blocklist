@@ -14,16 +14,9 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-if [[ -s "$pending_file" ]]; then
-    read -n 1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
-    echo
-    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
-        > "$pending_file"
-    fi
-fi
-
 debug=0
 unattended=0
+use_pending_only=0
 time_filter='a'
 
 for arg in "$@"; do
@@ -32,10 +25,20 @@ for arg in "$@"; do
     elif [[ "$arg" == 'u' ]]; then
         unattended=1
         time_filter='y'
+    elif [[ "$arg" == 'p' ]]; then
+        use_pending_only=1
     else
         time_filter="$arg"
     fi
 done
+
+if [[ -s "$pending_file" ]] && [[ use_pending_only -eq 0 ]]; then
+    read -n 1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
+    echo
+    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+        > "$pending_file"
+    fi
+fi
 
 if [[ "$unattended" -eq 0 ]]; then
     echo -e "\nRemember to pull the latest changes first!"
@@ -43,49 +46,44 @@ else
     echo -e "\nRetrieving domains..."
 fi
 
-echo -e "\nSearch filter: $time_filter"
-echo "Search terms:"
+function retrieve_domains {
+    echo -e "\nSearch filter: $time_filter"
+    echo "Search terms:"
 
-declare -A retrieved_domains
+    user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
-user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-
-# A blank IFS ensures the entire search term is read
-while IFS= read -r term; do
-    if [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
-        continue
-    fi
-    # gsub replaces consecutive non-alphanumeric characters with a single plus sign
-    encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
-
-    google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
-
-    domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
-
-    term=$(echo "$term" | cut -c 1-350)
-    echo "${term}"...
-
-    if [[ "$debug" -eq 1 ]]; then
-        echo "$domains"
-    fi
-
-    # wc -w does a better job than wc -l for counting domains in this case
-    echo "Domains retrieved: $(echo "$domains" | wc -w)"
-    echo "--------------------------------------"
-
-    # Check if each domain is in the retrieved domains associative array
-    # Note that quoting $domains causes errors
-    for domain in $domains; do
-        if [[ ${retrieved_domains["$domain"]+_} ]]; then
-           continue 
+    # A blank IFS ensures the entire search term is read
+    while IFS= read -r term; do
+        if [[ "$term" =~ ^[[:space:]]*$|^# ]]; then
+            continue
         fi
-        # Add the unique domain to the associative array
-        retrieved_domains["$domain"]=1
-        echo "$domain" >> "$pending_file"
-    done
-done < "$search_terms_file"
+        # gsub replaces consecutive non-alphanumeric characters with a single plus sign
+        encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
-num_retrieved=${#retrieved_domains[@]}
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
+
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
+
+        term=$(echo "$term" | cut -c 1-350)
+        echo "${term}"...
+
+        if [[ "$debug" -eq 1 ]]; then
+            echo "$domains"
+        fi
+
+        # wc -w does a better job than wc -l for counting domains in this case
+        echo "Domains retrieved: $(echo "$domains" | wc -w)"
+        echo "--------------------------------------"
+
+        echo "$domains" >> "$pending_file"
+    done < "$search_terms_file"
+
+    sort -u "$pending_file" -o "$pending_file"
+
+    total_retrieved=$(wc -l < "$pending_file")
+
+    echo -e "\nTotal domains retrieved: $total_retrieved"
+}
 
 function filter_pending {
     cp "$pending_file" "${pending_file}.bak"
@@ -183,13 +181,11 @@ function filter_pending {
         exit 0
     fi
 
-    echo -e "\nTotal domains retrieved: $num_retrieved"
     echo "Pending domains not in blocklist: $(wc -l < $pending_file)"
     echo "Domains:"
     cat "$pending_file"
     
-    # About 8x faster than comm due to not needing to sort the toplist
-    grep -xFf "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
+    comm -12 "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
     if [[ -s in_toplist.tmp ]]; then
         echo -e "\nDomains in toplist:"
@@ -253,6 +249,10 @@ function merge_pending {
 
     exit 0
 }
+
+if [[ "$use_pending_only" -eq 0 ]]; then
+    retrieve_domains
+fi
 
 filter_pending
 

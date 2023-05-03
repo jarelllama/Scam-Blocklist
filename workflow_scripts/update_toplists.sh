@@ -13,11 +13,14 @@ git config user.name "$github_name"
 wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
 wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "$subdomains_toplist_file"
 
+sort -u "$toplist_file" -o "$toplist_file"
+sort -u "$subdomains_toplist_file" -o "$subdomains_toplist_file"
+
 git add "$toplist_file"
 git commit -qm "Update toplists"
 git push -q
 
-grep -xFf "$raw_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
+comm -12 "$raw_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
 if ! [[ -s in_toplist.tmp ]]; then
     echo -e "\nNo domains found in toplist.\n"

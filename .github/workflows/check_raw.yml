@@ -4,6 +4,9 @@ on:
   schedule:
     # Daily at 4am (GMT+8)
     - cron: "0 20 * * *"
+  push:
+    paths:
+      - "legacy/test"
 jobs:
   Valid-entries-check:
     runs-on: ubuntu-latest

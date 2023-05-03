@@ -6,7 +6,7 @@ on:
     - cron: "30 19 * * *"
   push:
     paths:
-      - "legacy/test"
+      - "legacy/test1"
 jobs:
   Add-subdomains:
     runs-on: ubuntu-latest
