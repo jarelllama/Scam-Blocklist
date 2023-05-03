@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: echo "Name is ${{vars.git_email}}"
+        run: if [[ ${{secrets.test_secret == hello ]];then echo "hi"; fi
