@@ -4,7 +4,7 @@ on:
   schedule:
     # Daily at 3:30am (GMT+8)
     - cron: "30 19 * * *"
-  workflow_dispatch
+  [workflow_dispatch]
 jobs:
   Add-subdomains:
     runs-on: ubuntu-latest
