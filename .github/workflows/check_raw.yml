@@ -14,11 +14,10 @@ jobs:
         run: bash "workflow_scripts/check_raw.sh"
       - name: Commit and push changes
         env:
-          COMMIT_MESSAGE: 'Remove invalid entries'
+          commit_message: 'Remove invalid entries'
         run: |
-          echo ${{env.GIT_EMAIL}}"
-          #git config user.email ${{env.GIT_EMAIL}}
-          #git config user.name "${{env.GIT_USERNAME}}"
-          #git add "${{env.RAW_FILE}}"
-          #git commit -m "$COMMIT_MESSAGE"
-          #git push
+          git config user.email "${{secrets.git_email}}"
+          git config user.name "${{vars.git_username}}"
+          git add "${{vars.raw_file}}"
+          git commit -m "$commit_message"
+          git push
