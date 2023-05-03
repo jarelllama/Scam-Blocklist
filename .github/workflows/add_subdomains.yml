@@ -4,9 +4,7 @@ on:
   schedule:
     # Daily at 3:30am (GMT+8)
     - cron: "30 19 * * *"
-  push:
-    paths:
-      - "legacy/test1"
+  workflow_dispatch
 jobs:
   Add-subdomains:
     runs-on: ubuntu-latest
