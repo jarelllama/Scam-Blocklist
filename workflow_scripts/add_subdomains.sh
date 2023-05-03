@@ -40,6 +40,8 @@ function add_toplist_subdomains {
         return
     fi
     
+    sort alive_toplist_subdomains.tmp -o alive_toplist_subdomains.tmp
+
     echo -e "\nSubdomains found in the toplist"
     cat alive_toplist_subdomains.tmp
 
@@ -68,10 +70,6 @@ function add_subdomains_to_wildcards {
     if ! [[ -s wildcard_second_level_domains.tmp ]]; then
         return
     fi
-
-    echo -e "\nWildcard domains found:"
-    cat wildcard_second_level_domains.tmp
-    echo 'The `www` and `m` subdomains will be added to these domains.'
 
     awk '{print "www."$0}' wildcard_second_level_domains.tmp > wildcards_with_www.tmp
 
@@ -110,9 +108,6 @@ function add_subdomains {
             continue
         fi
 
-        echo -e "\nResolving '$subdomain' subdomains found:"
-        cat alive_subdomains.tmp
-
         cat alive_subdomains.tmp >> new_domains.tmp
     done < "$subdomains_file"
 }
@@ -138,7 +133,7 @@ cat unique_domains.tmp >> "$raw_file"
 
 sort "$raw_file" -o "$raw_file"
 
-echo -e "\nAll domains added:"
+echo -e "\nDomains added:"
 cat unique_domains.tmp
 
 echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
