@@ -76,7 +76,7 @@ function retrieve_domains {
         echo "--------------------------------------"
 
         # Check if each domain is in the retrieved domains associative array
-    # Note that quoting $domains causes errors
+        # Note that quoting $domains causes errors
         for domain in $domains; do
             if [[ ${retrieved_domains["$domain"]+_} ]]; then
                continue 
