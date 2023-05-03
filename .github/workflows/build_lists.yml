@@ -5,8 +5,8 @@ on:
     paths:
       - "data/raw.txt"
   schedule:
-    # Daily at 5am (GMT+8)
-    - cron: "0 21 * * *"
+    # Daily at 4:50am (GMT+8)
+    - cron: "50 20 * * *"
   workflow_dispatch:
 jobs:
   Build-blocklist:
