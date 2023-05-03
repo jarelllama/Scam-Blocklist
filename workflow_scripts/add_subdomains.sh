@@ -10,6 +10,8 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
+> new_domains.tmp
+
 while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> only_subdomains.tmp
 done < "$subdomains_file"
