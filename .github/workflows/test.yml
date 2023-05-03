@@ -1,0 +1,12 @@
+name: Test workflow
+on:
+  workflow_dispatch:
+jobs:
+  Valid-entries-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        env:
+          COMMIT_MESSAGE: 'Remove invalid entries'
+        run: |
+          echo "${{env.GIT_EMAIL}}"
