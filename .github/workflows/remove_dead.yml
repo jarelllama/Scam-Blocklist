@@ -4,6 +4,7 @@ on:
   schedule:
     # Daily at 3am (GMT+8)
     - cron: "0 19 * * *"
+  workflow_dispatch:
 jobs:
   Remove-dead-domains:
     runs-on: ubuntu-latest
