@@ -37,7 +37,7 @@ function add_toplist_subdomains {
         return
     fi
     
-    echo -e "\nSubdomains found in the toplist""
+    echo -e "\nSubdomains found in the toplist"
     cat alive_toplist_subdomains.tmp
 
     cat alive_toplist_subdomains.tmp >> new_domains.tmp
