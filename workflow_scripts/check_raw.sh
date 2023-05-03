@@ -10,14 +10,15 @@ git config user.name "$github_name"
 error=0
 
 if grep -q '^[[:space:]]*$' "$raw_file"; then
-    echo -e "\nThe blocklist contains empty lines."
+    echo -e "\nEmpty lines found. Removing..."
     error=1
 fi
 awk NF "$raw_file" > 1.tmp
 
 if grep -q '[A-Z]' 1.tmp; then
-    echo -e "\nThe blocklist contains capitalized letters:"
+    echo -e "\nEntries with capitalized letters found:"
     grep '[A-Z]' 1.tmp | awk '{print $0 " (case)"}'
+    echo "Converting to lowercase..."
     error=1
 fi
 tr '[:upper:]' '[:lower:]' < 1.tmp > 2.tmp
