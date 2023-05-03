@@ -9,4 +9,4 @@ jobs:
         env:
           COMMIT_MESSAGE: 'Remove invalid entries'
         run: |
-          echo "${{env.GIT_EMAIL}}"
+          echo ${{env.GIT_EMAIL}}
