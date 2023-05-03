@@ -15,7 +15,7 @@ jobs:
       - name: Commit and push changes
         env:
           raw_file="data/raw.txt"
-          commit_message='Add subdomains'
+          commit_message='Remove invalid entries'
         run: |
           git config user.email ${{secrets.git_email}}
           git config user.name ${{env.git_username}}
