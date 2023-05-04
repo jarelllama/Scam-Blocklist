@@ -3,7 +3,7 @@
 | Syntax | Entries |
 | --- |:---:|
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3228 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 7215 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 6724 |
 
 ### Stats
 
@@ -13,7 +13,7 @@ Today: 11
 Yesterday: 18
 Total: 3241 (since Apr 12 2023)
 
-Updated: Thu May 04 20:52 UTC
+Updated: Thu May 04 23:21 UTC
 ```
 
 ### How domains are added to the blocklist
