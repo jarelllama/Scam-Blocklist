@@ -32,7 +32,7 @@ function add_toplist_subdomains {
     if ! [[ -s alive_toplist_subdomains.tmp ]]; then
         return
     fi
-    
+
     sort alive_toplist_subdomains.tmp -o alive_toplist_subdomains.tmp
 
     echo -e "\nSubdomains found in the toplist"
@@ -63,6 +63,9 @@ function add_subdomains_to_wildcards {
     if ! [[ -s wildcard_second_level_domains.tmp ]]; then
         return
     fi
+
+    echo -e "\nWildcard domains found:"
+    cat wildcard_second_level_domains.tmp
 
     awk '{print "www."$0}' wildcard_second_level_domains.tmp > wildcards_with_www.tmp
 
