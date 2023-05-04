@@ -5,8 +5,6 @@ subdomains_file="data/subdomains.txt"
 toplist_file="data/subdomains_toplist.txt"
 dead_domains_file="data/dead_domains.txt"
 
-> new_domains.tmp
-
 while read -r subdomain; do
     grep "^$subdomain\." "$raw_file" >> only_subdomains.tmp
 done < "$subdomains_file"
