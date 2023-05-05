@@ -81,14 +81,17 @@ function add_subdomains {
         # Append the current subdomain in the loop to the domains
         awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_wildcards.tmp > 1.tmp
 
+        # Temp
+        mv 1.tmp subdomains.tmp
+
         # Remove subdomains already present in the raw file
-        comm -23 1.tmp "$raw_file" > 2.tmp
+        #comm -23 1.tmp "$raw_file" > 2.tmp
 
         # Remove known dead subdomains
-        comm -23 2.tmp "$dead_domains_file" > 3.tmp
+        #comm -23 2.tmp "$dead_domains_file" > 3.tmp
     
         # Remove subdomains already in the new domains file
-        grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
+        #grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
 
         > alive_subdomains.tmp
 
