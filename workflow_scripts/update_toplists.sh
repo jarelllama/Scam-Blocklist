@@ -5,6 +5,8 @@ blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_toplist_file="data/subdomains_toplist.txt"
 
+echo -e "\nDownloading the toplists..."
+
 wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
 wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "$subdomains_toplist_file"
 
