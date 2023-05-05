@@ -10,5 +10,5 @@ jobs:
           echo "Exiting with error..."
           exit 1
       - name: Command 2
-        if: success()
+        if: failure()
         run: echo "This should show"
