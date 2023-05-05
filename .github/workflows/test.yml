@@ -10,5 +10,5 @@ jobs:
           echo "Exiting with error..."
           exit 1
       - name: Command 2
-        if: !cancelled()
+        if: success()
         run: echo "This should show"
