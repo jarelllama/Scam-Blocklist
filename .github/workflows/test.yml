@@ -6,9 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Command 1
+        continue-on-error: true
         run: |
           echo "Exiting with error..."
           exit 1
       - name: Command 2
-        continue-on-error: true
         run: echo "This should show"
