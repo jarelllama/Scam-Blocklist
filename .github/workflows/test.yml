@@ -5,7 +5,9 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
+      - name: Command 1
         run: |
-          echo "${{vars.git_username}}"
-          echo "${{secrets.git_email}}"
+          echo "Exiting with error..."
+          exit 1
+      - name: Command 2
+        run: echo "This should show"
