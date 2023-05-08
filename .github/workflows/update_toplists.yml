@@ -1,89 +1,47 @@
-name: Valid entries check
-run-name: Valid entries check
+name: Update toplists
+run-name: Update toplists
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 4am (GMT+8)
-    - cron: '0 20 * * *'
+    # Daily at 4:10am (GMT+8)
+    - cron: '10 20 * * *'
 
 jobs:
-  Valid-entries-check:
+  Update-toplists:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Empty line check
+      - name: Download toplists
         run: |
-          if grep -q '^[[:space:]]*$' "${{ vars.RAW_FILE }}"; then
-            echo -e "\nEmpty lines found. Removing..."           
-            awk NF "${{ vars.RAW_FILE }}" > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
-            exit 1
-          fi
+          wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "${{ vars.TOPLIST_FILE }}"
+          sort -u "${{ vars.TOPLIST_FILE }}" -o "${{ vars.TOPLIST_FILE }}"
 
-      - name: Case check
-        if: success() || failure()
+          wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "${{ vars.SUBDOMAINS_TOPLIST_FILE }}"
+          sort -u "${{ vars.SUBDOMAINS_TOPLIST_FILE }}" -o "${{ vars.SUBDOMAINS_TOPLIST_FILE }}"
+
+      - name: Commit and push 
         run: |
-          > check.tmp
-          grep '[A-Z]' "${{ vars.RAW_FILE }}" > check.tmp || true
+          COMMIT_MSG='Update toplists'
+          FILES_TO_ADD=( "${{ vars.TOPLIST_FILE }}" "${{ vars.SUBDOMAINS_TOPLIST_FILE }}" )
 
-          if [[ -s check.tmp ]]; then
-            echo -e "\nEntries with capitalized letters found:"
-            cat check.tmp
-            tr '[:upper:]' '[:lower:]' < "${{ vars.RAW_FILE }}" > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
-            exit 1
-          fi
-
-      - name: Duplicate check
-        if: success() || failure()
-        run: |
-          > check.tmp
-          sort "${{ vars.RAW_FILE }}" | uniq -d > check.tmp
-
-          if [[ -s check.tmp ]]; then
-            echo -e "\nDuplicates found:"
-            cat check.tmp
-            sort -u "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
-            exit 1
-          fi
-
-      - name: Whitelisted TLDs check
-        if: success() || failure()
-        run: |
-          > check.tmp
-          grep -E '\.(gov|edu)(\.[a-z]{2})?$' "${{ vars.RAW_FILE }}" > check.tmp || true
-
-          if [[ -s check.tmp ]]; then
-            echo -e "\nDomains with whitelisted TLDs found:"
-            cat check.tmp
-            comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
-            exit 1
-          fi
-
-      - name: Invalid domains check
-        if: success() || failure()
-        run: |
-          > check.tmp
-          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "${{ vars.RAW_FILE }}" > check.tmp || true
-         
-          if [[ -s check.tmp ]]; then
-            echo -e "\nInvalid domains found:"
-            cat check.tmp
-            comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
-            exit 1
-          fi
-
-      - name: Commit and push
-        if: failure()
-        run: |
-          COMMIT_MSG='Remove invalid entries'
-          FILES_TO_ADD=( "${{ vars.RAW_FILE }}" )
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
           git add "${FILES_TO_ADD[@]}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
           git push
+
+      - name: Blocklist check
+        run: |
+          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > in_toplist.tmp
+
+          if [[ -s in_toplist.tmp ]]; then
+            echo -e "\nDomains found in the toplist:"
+            cat in_toplist.tmp
+            echo
+            exit 1
+          else
+            echo -e "\nNo domains found in the toplist.\n"
+            exit 0
+          fi
