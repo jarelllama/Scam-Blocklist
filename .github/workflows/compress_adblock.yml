@@ -16,7 +16,7 @@ jobs:
         run: |
           COMMIT_MSG="Compress Adblock entries"
           FILES_TO_ADD=( "${{vars.ADBLOCK_FILE}}" "${{vars.COMPRESSED_ENTRIES_FILE}}" )
-          git config user.email "${{secrets.GIT_EMAIL}}"
+          git config user.email "${{vars.GIT_EMAIL}}"
           git config user.name "${{vars.GIT_USERNAME}}"
           git add "${FILES_TO_ADD[@]}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
