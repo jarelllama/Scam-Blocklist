@@ -7,9 +7,9 @@ subdomains_toplist_file="data/subdomains_toplist.txt"
 
 echo -e "\nDownloading the toplists..."
 
-wget https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
+wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
 
-wget https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "$subdomains_toplist_file"
+wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "$subdomains_toplist_file"
 
 sort -u "$toplist_file" -o "$toplist_file"
 
