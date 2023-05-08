@@ -17,8 +17,11 @@ jobs:
         run: |
           if grep -q '^[[:space:]]*$' "${{ vars.RAW_FILE }}"; then
             echo -e "\nEmpty lines found. Removing..."           
+
             awk NF "${{ vars.RAW_FILE }}" > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
+
+            echo
             exit 1
           fi
 
@@ -31,8 +34,11 @@ jobs:
           if [[ -s check.tmp ]]; then
             echo -e "\nEntries with capitalized letters found:"
             cat check.tmp
+
             tr '[:upper:]' '[:lower:]' < "${{ vars.RAW_FILE }}" > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
+
+            echo
             exit 1
           fi
 
@@ -45,7 +51,10 @@ jobs:
           if [[ -s check.tmp ]]; then
             echo -e "\nDuplicates found:"
             cat check.tmp
+
             sort -u "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
+
+            echo
             exit 1
           fi
 
@@ -58,8 +67,11 @@ jobs:
           if [[ -s check.tmp ]]; then
             echo -e "\nDomains with whitelisted TLDs found:"
             cat check.tmp
+
             comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
+
+            echo
             exit 1
           fi
 
@@ -72,8 +84,11 @@ jobs:
           if [[ -s check.tmp ]]; then
             echo -e "\nInvalid domains found:"
             cat check.tmp
+
             comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
+
+            echo
             exit 1
           fi
 
