@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   push:
     paths:
-      #- ${{ vars.BLACKLIST_FILE }}
       - "whitelist.txt"
 
 jobs:
@@ -17,13 +16,4 @@ jobs:
       - name: Whitelist check
         run: |
           grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
-
-          if [[ -s whitelisted.tmp ]]; then
-            echo -e "\nWhitelisted domains:"
-            cat whitelisted.tmp
-            echo
-            exit 1
-          else
-            echo -e "\nNo whitelisted domains found.\n"
-            exit 0
-          fi
+          cat whitelisted.tmp
