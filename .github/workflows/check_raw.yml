@@ -17,7 +17,8 @@ jobs:
         run: |
           if grep -q '^[[:space:]]*$' "${{ vars.RAW_FILE }}"; then
             echo -e "\nEmpty lines found. Removing..."           
-            awk NF "${{ vars.RAW_FILE }}" > 1.tmp
+            awk NF "${{ vars.RAW_FILE }}" > raw.tmp
+            mv raw.tmp "{{ vars.RAW_FILE }}"
             exit 1
           fi
 
@@ -25,12 +26,13 @@ jobs:
         if: success() || failure()
         run: |
           > check.tmp
-          grep '[A-Z]' 1.tmp > check.tmp || true
+          grep '[A-Z]' "{{ vars.RAW_FILE }}" > check.tmp || true
 
           if [[ -s check.tmp ]]; then
             echo -e "\nEntries with capitalized letters found:"
             cat check.tmp
-            tr '[:upper:]' '[:lower:]' < 1.tmp > 2.tmp
+            tr '[:upper:]' '[:lower:]' < "{{ vars.RAW_FILE }}" > raw.tmp
+            mv raw.tmp "{{ vars.RAW_FILE }}"
             exit 1
           fi
 
@@ -38,12 +40,12 @@ jobs:
         if: success() || failure()
         run: |
           > check.tmp
-          sort 2.tmp | uniq -d > check.tmp
+          sort "{{ vars.RAW_FILE }}" | uniq -d > check.tmp
 
           if [[ -s check.tmp ]]; then
             echo -e "\nDuplicates found:"
             cat check.tmp
-            sort -u 2.tmp -o 2.tmp
+            sort -u "{{ vars.RAW_FILE }}" -o "{{ vars.RAW_FILE }}"
             exit 1
           fi
 
@@ -51,29 +53,29 @@ jobs:
         if: success() || failure()
         run: |
           > check.tmp
-          grep -E '\.(gov|edu)(\.[a-z]{2})?$' 2.tmp > check.tmp || true
+          grep -E '\.(gov|edu)(\.[a-z]{2})?$' "{{ vars.RAW_FILE }}" > check.tmp || true
 
           if [[ -s check.tmp ]]; then
             echo -e "\nDomains with whitelisted TLDs found:"
             cat check.tmp
-            comm -23 2.tmp check.tmp > 3.tmp
+            comm -23 "{{ vars.RAW_FILE }}" check.tmp > raw.tmp
+            mv raw.tmp "{{ vars.RAW_FILE }}"
+            exit 1
           fi
 
       - name: Invalid domains check
         if: success() || failure()
         run: |
           > check.tmp
-          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp > check.tmp || true
+          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "{{ vars.RAW_FILE }}" > check.tmp || true
          
           if [[ -s check.tmp ]]; then
             echo -e "\nInvalid domains found:"
             cat check.tmp
-            comm -23 3.tmp check.tmp > 4.tmp
+            comm -23 "{{ vars.RAW_FILE }}" check.tmp > raw.tmp
+            mv raw.tmp "{{ vars.RAW_FILE }}"
+            exit 1
           fi
-
-      - name: Replace blocklist with filtered blocklist 
-        if: failure()
-        run: mv 4.tmp "${{ vars.RAW_FILE }}"
 
       - name: Commit and push
         if: failure()
