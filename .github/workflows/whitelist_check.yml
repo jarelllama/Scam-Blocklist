@@ -18,7 +18,7 @@ jobs:
         # grep outputs exit 1 when no matches are found
         # This means I have to move the rest of the code to a separate step
         continue-on-error: true
-        run: grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
+        run: grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp || true
           
       - name: Blocklist check
         run: |
