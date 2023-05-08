@@ -22,54 +22,54 @@ jobs:
           fi
 
       - name: Case check
-         if: success() || failure()
-         run: |
-           > check.tmp
-           grep '[A-Z]' 1.tmp > check.tmp || true
+        if: success() || failure()
+        run: |
+          > check.tmp
+          grep '[A-Z]' 1.tmp > check.tmp || true
 
-           if [[ -s check.tmp ]]; then
-             echo -e "\nEntries with capitalized letters found:"
-             cat check.tmp
-             tr '[:upper:]' '[:lower:]' < 1.tmp > 2.tmp
-             exit 1
-           fi
+          if [[ -s check.tmp ]]; then
+            echo -e "\nEntries with capitalized letters found:"
+            cat check.tmp
+            tr '[:upper:]' '[:lower:]' < 1.tmp > 2.tmp
+            exit 1
+          fi
 
       - name: Duplicate check
-         if: success() || failure()
-         run: |
-           > check.tmp
-           sort 2.tmp | uniq -d > check.tmp
+        if: success() || failure()
+        run: |
+          > check.tmp
+          sort 2.tmp | uniq -d > check.tmp
 
-           if [[ -s check.tmp ]]; then
-             echo -e "\nDuplicates found:"
-             cat check.tmp
-             sort -u 2.tmp -o 2.tmp
-             exit 1
-           fi
+          if [[ -s check.tmp ]]; then
+            echo -e "\nDuplicates found:"
+            cat check.tmp
+            sort -u 2.tmp -o 2.tmp
+            exit 1
+          fi
 
       - name: Whitelisted TLDs check
-         if: success() || failure()
-         run: |
-           > check.tmp
-           grep -E '\.(gov|edu)(\.[a-z]{2})?$' 2.tmp > check.tmp || true
+        if: success() || failure()
+        run: |
+          > check.tmp
+          grep -E '\.(gov|edu)(\.[a-z]{2})?$' 2.tmp > check.tmp || true
 
-           if [[ -s check.tmp ]]; then
-             echo -e "\nDomains with whitelisted TLDs found:"
-             cat check.tmp
-             comm -23 2.tmp check.tmp > 3.tmp
-           fi
+          if [[ -s check.tmp ]]; then
+            echo -e "\nDomains with whitelisted TLDs found:"
+            cat check.tmp
+            comm -23 2.tmp check.tmp > 3.tmp
+          fi
 
       - name: Invalid domains check
-         if: success() || failure()
-         run: |
-           > check.tmp
-           grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp > check.tmp || true
+        if: success() || failure()
+        run: |
+          > check.tmp
+          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 3.tmp > check.tmp || true
          
-           if [[ -s check.tmp ]]; then
-             echo -e "\nInvalid domains found:"
-             cat check.tmp
-             comm -23 3.tmp check.tmp > 4.tmp
-           fi
+          if [[ -s check.tmp ]]; then
+            echo -e "\nInvalid domains found:"
+            cat check.tmp
+            comm -23 3.tmp check.tmp > 4.tmp
+          fi
 
       - name: Replace blocklist with filtered blocklist 
         if: failure()
