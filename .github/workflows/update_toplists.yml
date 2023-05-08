@@ -21,7 +21,7 @@ jobs:
           wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "${{ vars.SUBDOMAINS_TOPLIST_FILE }}"
           sort -u "${{ vars.SUBDOMAINS_TOPLIST_FILE }}" -o "${{ vars.SUBDOMAINS_TOPLIST_FILE }}"
 
-      - name: Commit and push
+      - name: Commit and push the toplists 
         if: success() || failure()
         run: |
           COMMIT_MSG="Update toplists"
@@ -31,3 +31,20 @@ jobs:
           git add "${FILES_TO_ADD[@]}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
           git push
+
+      - name: Check for domains in the toplist
+        run: |
+          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }} | grep -vxFf "${{ vars.BLACKLIST_FILE }} > in_toplist.tmp
+
+          if ! [[ -s in_toplist.tmp ]]; then
+            echo -e "\nNo domains found in the toplist.\n"
+            rm *.tmp
+            exit 0
+          fi
+
+          echo -e "\nDomains in the toplist:"
+          cat in_toplist.tmp
+          echo
+          exit 1
+
+
