@@ -2,9 +2,9 @@ name: Whitelist check
 run-name: Whitelist check
 on:
   workflow_dispatch:
-  #push:
-  #  paths:
-  #    - "${{ vars.WHITELIST_FILE }}"
+  push:
+    paths:
+      - "${{ vars.WHITELIST_FILE }}"
 
 jobs:
   Whitelist_check:
@@ -15,8 +15,7 @@ jobs:
 
       - name: Whitelist check
         run: |
-          #grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
-          grep -Ff whitelist.txt data/raw.txt | grep -vxFf blacklist.txt > whitelisted.tmp
+          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
 
           if [[ -s whitelisted.tmp ]]; then
             echo -e "\nWhitelisted domains:"
