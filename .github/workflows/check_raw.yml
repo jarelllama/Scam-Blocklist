@@ -7,7 +7,7 @@ on:
     - cron: '0 20 * * *'
 
 jobs:
-  Valid-entries-check:
+  valid-entries-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
