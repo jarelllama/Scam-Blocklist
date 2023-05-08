@@ -6,13 +6,12 @@ subdomains_file="data/subdomains.txt"
 compressed_entries_file="data/compressed_entries.txt"
 
 while read -r subdomain; do
-    grep "^${subdomain}\." "$raw_file" >> subdomains.tmp
+    grep "^${subdomain}\." "$raw_file" >> only_subdomains.tmp
 done < "$subdomains_file"
 
-# Remove subdomains
-comm -23 "$raw_file" subdomains.tmp > 1.tmp
+comm -23 "$raw_file" only_subdomains.tmp > second_level_domains.tmp
 
-awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
+awk '{print "||" $0 "^"}' second_level_domains.tmp > 2.tmp
 
 # Appending || somehow messes up the order
 sort -u 2.tmp -o 2.tmp
