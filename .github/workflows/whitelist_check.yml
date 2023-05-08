@@ -13,5 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: whitelist_check.sh
-        run: bash "workflow_scripts/whitelist_check.sh"
+      - name: Blocklist check
+        run: |
+          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
+
+          if [[ -s whitelisted.tmp ]]; then
+            echo -e "\nWhitelisted domains:"
+            cat whitelisted.tmp
+            echo
+            exit 1
+          else
+            echo -e "\nNo whitelisted domains found.\n"
+            exit 0
+          fi
+
