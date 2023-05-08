@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Command 0
         env:
-          MESSAGE: ${{vars.RAW_FILE}} ${{vars.TOPLIST_FILE}}
+          MESSAGE: '"${{vars.RAW_FILE}}" "${{vars.TOPLIST_FILE}}"'
         run: echo "$MESSAGE"
       - name: Command 1
         run: |
