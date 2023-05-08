@@ -12,8 +12,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: update_toplists.sh
         run: bash "workflow_scripts/update_toplists.sh"
+
       - name: Commit and push
         if: success() || failure()
         run: |
