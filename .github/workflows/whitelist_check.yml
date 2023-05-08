@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - ${{ vars.TOPLIST_FILE }}
+      #- ${{ vars.BLACKLIST_FILE }}
+      - "whitelist.txt"
 
 jobs:
   Whitelist_check:
