@@ -7,7 +7,7 @@ on:
     - cron: '30 19 * * *'
 
 jobs:
-  Add-subdomains:
+  add-subdomains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,10 +18,10 @@ jobs:
 
       - name: Commit and push
         run: |
-          COMMIT_MSG="Add subdomains"
-          FILES_TO_ADD=( "${{vars.RAW_FILE}}" )
-          git config user.email "${{vars.GIT_EMAIL}}"
-          git config user.name "${{vars.GIT_USERNAME}}"
+          COMMIT_MSG='Add subdomains'
+          FILES_TO_ADD=( "${{ vars.RAW_FILE }}" )
+          git config user.email '${{ vars.GIT_EMAIL }}'
+          git config user.name '${{ vars.GIT_USERNAME }}'
           git add "${FILES_TO_ADD[@]}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
           git push
