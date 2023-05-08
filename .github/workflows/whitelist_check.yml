@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      # I can't seem to use a variable here
       - "whitelist.txt"
 
 jobs:
@@ -14,7 +15,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Find whitelisted domains
-        # grep outputs exit 1 when no matches were found
+        # grep outputs exit 1 when no matches are found
+        # This means I have to move the rest of the code to a separate step
         continue-on-error: true
         run: |
           grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
