@@ -15,7 +15,7 @@ jobs:
       - name: Commit and push changes
         env:
           COMMIT_MESSAGE: 'Update toplists'
-          FILES_TO_ADD: ${{vars.TOPLIST_FILE}} ${{vars.SUBDOMAINS_TOPLIST_FILE}}
+          FILES_TO_ADD: '"${{vars.TOPLIST_FILE}}" "${{vars.SUBDOMAINS_TOPLIST_FILE}}"'
         run: |
           git config user.email "${{secrets.GIT_EMAIL}}"
           git config user.name "${{vars.GIT_USERNAME}}"
