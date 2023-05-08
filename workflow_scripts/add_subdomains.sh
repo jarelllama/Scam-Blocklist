@@ -116,7 +116,6 @@ add_subdomains
 
 sort -u new_domains.tmp -o new_domains.tmp
 
-# Remove entries already in the raw file
 comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
 if ! [[ -s unique_domains.tmp ]]; then
