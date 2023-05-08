@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "whitelist.txt"
+      - "${{ vars.WHITELIST_FILE }}"
 
 jobs:
   Whitelisted_domains_check:
