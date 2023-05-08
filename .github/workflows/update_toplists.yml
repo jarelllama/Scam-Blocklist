@@ -1,23 +1,25 @@
 name: Update toplists
 run-name: Update toplists
 on:
+  workflow_dispatch:
   schedule:
     # Daily at 4:10am (GMT+8)
-    - cron: "10 20 * * *"
-  workflow_dispatch:
+    - cron: '10 20 * * *'
+
 jobs:
   Update-toplists:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run update_toplists.sh
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: update_toplists.sh
         run: bash "workflow_scripts/update_toplists.sh"
-      - name: Commit and push changes
+      - name: Commit and push
         if: success() || failure()
         run: |
           COMMIT_MSG="Update toplists"
           FILES_TO_ADD=( "${{vars.TOPLIST_FILE}}" "${{vars.SUBDOMAINS_TOPLIST_FILE}}" )
-          git config user.email "${{secrets.GIT_EMAIL}}"
+          git config user.email "${{vars.GIT_EMAIL}}"
           git config user.name "${{vars.GIT_USERNAME}}"
           git add "${FILES_TO_ADD[@]}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
