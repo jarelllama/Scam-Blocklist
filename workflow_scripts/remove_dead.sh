@@ -58,6 +58,7 @@ function remove_dead {
 }
 
 function add_resurrected {
+    # change this to comm?
     grep -vxFf dead.tmp "$dead_domains_file" > dead_domains.tmp
 
     mv dead_domains.tmp "$dead_domains_file"
