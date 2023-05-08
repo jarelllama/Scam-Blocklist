@@ -1,23 +1,27 @@
 name: Add subdomains
 run-name: Add subdomains
 on:
+  workflow_dispatch:
   schedule:
     # Daily at 3:30am (GMT+8)
-    - cron: "30 19 * * *"
-  workflow_dispatch:
+    - cron: '30 19 * * *'
+
 jobs:
   Add-subdomains:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run add_subdomains.sh
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: add_subdomains.sh
         run: bash "workflow_scripts/add_subdomains.sh"
-      - name: Commit and push changes
-        env:
-          COMMIT_MESSAGE: 'Add subdomains'
+
+      - name: Commit and push
         run: |
-          git config user.email "${{secrets.GIT_EMAIL}}"
+          COMMIT_MSG="Add subdomains"
+          FILES_TO_ADD=( "${{vars.RAW_FILE}}" )
+          git config user.email "${{vars.GIT_EMAIL}}"
           git config user.name "${{vars.GIT_USERNAME}}"
-          git add "${{vars.RAW_FILE}}"
-          git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
+          git add "${FILES_TO_ADD[@]}"
+          git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
           git push
