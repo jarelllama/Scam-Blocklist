@@ -13,6 +13,7 @@ jobs:
       - name: Run update_toplists.sh
         run: bash "workflow_scripts/update_toplists.sh"
       - name: Commit and push changes
+        if: success() || failure()
         env:
           COMMIT_MESSAGE: 'Update toplists'
           FILES_TO_ADD: '"${{vars.TOPLIST_FILE}}" "${{vars.SUBDOMAINS_TOPLIST_FILE}}"'
