@@ -12,7 +12,7 @@ jobs:
       - name: Command 1
         run: |
           echo "Exiting with error..."
-          exit 1
+          exit 0
       - name: Command 2
         if: failure()
         run: echo "This should show"
