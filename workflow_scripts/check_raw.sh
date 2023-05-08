@@ -43,7 +43,7 @@ fi
 rm *.tmp
 
 if [[ "$error" -eq 0 ]]; then
-    echo -e "\nNo invalid entries. Exiting without error..."
+    echo -e "\nNo invalid entries found."
     exit 0
 fi
 
