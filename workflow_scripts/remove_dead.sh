@@ -25,7 +25,7 @@ function check_resolving {
             echo "$domain timed out. Retrying..."
             sleep 0.5
         done
-        if ! [[ "$dig" == *"NXDOMAIN"* ]]; then
+        if [[ "$dig" == *"NXDOMAIN"* ]]; then
             echo "$domain (dead)"
             echo "$domain" >> dead.tmp
         fi
@@ -58,7 +58,8 @@ function remove_dead {
 }
 
 function add_resurrected {
-    grep -vxFf dead_now_alive.tmp "$dead_domains_file" > dead_domains.tmp
+    grep -vxFf dead.tmp "$dead_domains_file" > dead_domains.tmp
+
     mv dead_domains.tmp "$dead_domains_file"
 
     cat dead_now_alive.tmp >> "$raw_file" 
@@ -83,7 +84,9 @@ fi
 
 check_resolving "$dead_domains_file"
 
-if [[ -s dead.tmp ]]; then
+comm -23 "$dead_domains_file" dead.tmp > alive.tmp
+
+if [[ -s alive.tmp ]]; then
     add_resurrected
 fi
 
