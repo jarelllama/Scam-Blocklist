@@ -45,5 +45,3 @@ jobs:
             echo -e "\nNo domains found in the toplist.\n"
             exit 0
           fi
-
-
