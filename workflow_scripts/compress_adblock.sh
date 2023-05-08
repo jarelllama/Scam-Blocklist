@@ -1,12 +1,7 @@
 #!/bin/bash
 
 adblock_file="adblock.txt"
-compressed_entries="data/compressed_entries.txt"
-github_email='91372088+jarelllama@users.noreply.github.com'
-github_name='jarelllama'
-
-git config user.email "$github_email"
-git config user.name "$github_name"
+compressed_entries_file="data/compressed_entries.txt"
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
@@ -24,15 +19,11 @@ if ! [[ -s compressed_entries.tmp ]]; then
     exit 0
 fi
 
-cat compressed_entries.tmp >> "$compressed_entries"
+cat compressed_entries.tmp >> "$compressed_entries_file"
 
 # The output has a high chance of having duplicates
-sort -u "$compressed_entries" -o "$compressed_entries"
+sort -u "$compressed_entries_file" -o "$compressed_entries_file"
 
 echo -e "\nTotal entries removed: $(wc -l < compressed_entries.tmp)\n"
 
 rm *.tmp
-
-git add "$compressed_entries"
-git commit -qm "Compress Adblock entries"
-git push -q
