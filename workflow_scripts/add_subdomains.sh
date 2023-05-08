@@ -6,12 +6,38 @@ toplist_file="data/subdomains_toplist.txt"
 dead_domains_file="data/dead_domains.txt"
 
 while read -r subdomain; do
-    grep "^$subdomain\." "$raw_file" >> only_subdomains.tmp
+    grep "^${subdomain}\." "$raw_file" >> only_subdomains.tmp
 done < "$subdomains_file"
 
 comm -23 "$raw_file" only_subdomains.tmp > second_level_domains.tmp
 
+function check_resolving {
+    > alive.tmp
+    
+    echo -e "\nLog:"
+
+    cat "$1" | xargs -I{} -P8 bash -c '
+        domain="$1"
+        while true; do
+            dig=$(dig @1.1.1.1 "$domain")
+            if ! [[ "$dig" == *"timed out"* ]]; then
+                break
+            fi
+            echo "$domain timed out. Retrying..."
+            sleep 0.5
+        done
+        if ! [[ "$dig" == *"NXDOMAIN"* ]]; then
+            echo "$domain (alive)"
+            echo "$domain" >> alive.tmp
+        fi
+    ' -- {}
+    
+    sort -u alive.tmp -o alive.tmp
+}
+
 function add_toplist_subdomains {
+    echo -e "\nChecking the toplist for subdomains..."
+    
     touch toplist_subdomains.tmp
 
     while read -r domain; do
@@ -20,56 +46,41 @@ function add_toplist_subdomains {
 
     grep -vxFf "$raw_file" toplist_subdomains.tmp > 1.tmp
     grep -vxFf "$dead_domains_file" 1.tmp > unique_toplist_subdomains.tmp
-
-    touch alive_toplist_subdomains.tmp
     
-    cat unique_toplist_subdomains.tmp | xargs -I{} -P8 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> alive_toplist_subdomains.tmp
-        fi
-    "
-
-    if ! [[ -s alive_toplist_subdomains.tmp ]]; then
+    input=unique_toplist_subdomains.tmp
+    
+    check_resolving "$input"
+    
+    if ! [[ -s alive.tmp ]]; then
         return
     fi
 
-    sort alive_toplist_subdomains.tmp -o alive_toplist_subdomains.tmp
-
-    echo -e "\nSubdomains found in the toplist"
-    cat alive_toplist_subdomains.tmp
-
-    cat alive_toplist_subdomains.tmp >> new_domains.tmp
+    cat alive.tmp >> new_domains.tmp
 }
 
 function add_subdomains_to_wildcards {
+    echo -e "\nFinding domains with a wildcard record..."
+    
     random_subdomain='6nd7p7ccay6r5da'
 
     awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level_domains.tmp > random_subdomain.tmp
 
-    touch wildcards.tmp
+    input=random_subdomain.tmp
 
-    # Find domains with a wildcard record (domains that resolve any subdomain)
-    cat random_subdomain.tmp | xargs -I{} -P8 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> wildcards.tmp
-        fi
-    "
+    check_resolving "$input"
 
-    awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' wildcards.tmp > wildcard_second_level_domains.tmp
+    awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' alive.tmp > wildcards.tmp
 
     # Create a file with no wildcard domains. This file is sorted 
-    grep -vxFf wildcard_second_level_domains.tmp second_level_domains.tmp > no_wildcards.tmp
+    grep -vxFf wildcards.tmp second_level_domains.tmp > no_wildcards.tmp
 
-    if ! [[ -s wildcard_second_level_domains.tmp ]]; then
+    if ! [[ -s wildcards.tmp ]]; then
         return
     fi
 
-    echo -e "\nWildcard domains found:"
-    cat wildcard_second_level_domains.tmp
+    awk '{print "www."$0}' wildcards.tmp > wildcards_with_www.tmp
 
-    awk '{print "www."$0}' wildcard_second_level_domains.tmp > wildcards_with_www.tmp
-
-    awk '{print "m."$0}' wildcard_second_level_domains.tmp > wildcards_with_m.tmp
+    awk '{print "m."$0}' wildcards.tmp > wildcards_with_m.tmp
 
     cat wildcards_with_www.tmp >> new_domains.tmp
 
@@ -77,35 +88,30 @@ function add_subdomains_to_wildcards {
 }
 
 function add_subdomains {
+    echo -e "\nChecking for resolving subdomains..."
+    
     while read -r subdomain; do
         # Append the current subdomain in the loop to the domains
         awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_wildcards.tmp > 1.tmp
 
-        # Temp
-        mv 1.tmp subdomains.tmp
-
         # Remove subdomains already present in the raw file
-        #comm -23 1.tmp "$raw_file" > 2.tmp
+        comm -23 1.tmp "$raw_file" > 2.tmp
 
         # Remove known dead subdomains
-        #comm -23 2.tmp "$dead_domains_file" > 3.tmp
+        comm -23 2.tmp "$dead_domains_file" > 3.tmp
     
         # Remove subdomains already in the new domains file
-        #grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
+        grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
 
-        > alive_subdomains.tmp
+        input=subdomains.tmp
 
-        cat subdomains.tmp | xargs -I{} -P8 bash -c "
-            if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-                echo {} >> alive_subdomains.tmp
-            fi
-        "
+        check_resolving "$input"
 
-        if ! [[ -s alive_subdomains.tmp ]]; then
+        if ! [[ -s alive.tmp ]]; then
             continue
         fi
 
-        cat alive_subdomains.tmp >> new_domains.tmp
+        cat alive.tmp >> new_domains.tmp
     done < "$subdomains_file"
 }
 
@@ -130,7 +136,7 @@ cat unique_domains.tmp >> "$raw_file"
 
 sort "$raw_file" -o "$raw_file"
 
-echo -e "\nDomains added:"
+echo -e "\nAll domains added:"
 cat unique_domains.tmp
 
 echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
