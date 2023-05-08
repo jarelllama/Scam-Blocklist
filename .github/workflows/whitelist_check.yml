@@ -10,5 +10,7 @@ jobs:
   Whitelisted_domains_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: bash "workflow_scripts/whitelist_check.sh"
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: whitelist_check.sh
+        run: bash "workflow_scripts/whitelist_check.sh"
