@@ -5,6 +5,10 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
+      - name: Command 0
+        env:
+          MESSAGE: "Hello world!"
+        run: echo "$MESSAGE"
       - name: Command 1
         run: |
           echo "Exiting with error..."
