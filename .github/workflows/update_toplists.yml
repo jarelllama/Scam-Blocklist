@@ -13,8 +13,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: update_toplists.sh
-        run: bash "workflow_scripts/update_toplists.sh"
+      - name: Download toplists
+        run: |
+          echo -e "\nDownloading the toplists..."
+
+          wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "$toplist_file"
+          sort -u "$toplist_file" -o "$toplist_file"
+
+          wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "$subdomains_toplist_file"
+          sort -u "$subdomains_toplist_file" -o "$subdomains_toplist_file"
 
       - name: Commit and push
         if: success() || failure()
