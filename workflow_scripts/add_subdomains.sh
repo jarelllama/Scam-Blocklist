@@ -43,10 +43,10 @@ function add_toplist_subdomains {
     done < second_level_domains.tmp
 
     grep -vxFf "$raw_file" toplist_subdomains.tmp > 1.tmp
+
     grep -vxFf "$dead_domains_file" 1.tmp > unique_toplist_subdomains.tmp
     
     input=unique_toplist_subdomains.tmp
-    
     check_resolving "$input"
     
     if ! [[ -s alive.tmp ]]; then
@@ -64,7 +64,6 @@ function add_subdomains_to_wildcards {
     awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level_domains.tmp > random_subdomain.tmp
 
     input=random_subdomain.tmp
-
     check_resolving "$input"
 
     awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' alive.tmp > wildcards.tmp
@@ -92,17 +91,13 @@ function add_subdomains {
         # Append the current subdomain in the loop to the domains
         awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_wildcards.tmp > 1.tmp
 
-        # Remove subdomains already present in the raw file
         comm -23 1.tmp "$raw_file" > 2.tmp
 
-        # Remove known dead subdomains
         comm -23 2.tmp "$dead_domains_file" > 3.tmp
     
-        # Remove subdomains already in the new domains file
         grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
 
         input=subdomains.tmp
-
         check_resolving "$input"
 
         if ! [[ -s alive.tmp ]]; then
