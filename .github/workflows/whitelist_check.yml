@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "${{ vars.WHITELIST_FILE }}"
+      - ${{ vars.WHITELIST_FILE }}
 
 jobs:
   Whitelist_check:
