@@ -31,8 +31,6 @@ function check_resolving {
             echo "$domain" >> alive.tmp
         fi
     ' -- {}
-    
-    sort -u alive.tmp -o alive.tmp
 }
 
 function add_toplist_subdomains {
