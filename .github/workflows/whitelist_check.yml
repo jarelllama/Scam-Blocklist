@@ -21,7 +21,7 @@ jobs:
           grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp || true
           
           if [[ -s whitelisted.tmp ]]; then
-            echo -e "\nWhitelisted domains:"
+            echo -e "\nWhitelisted domains found:"
             cat whitelisted.tmp
             echo
             exit 1
