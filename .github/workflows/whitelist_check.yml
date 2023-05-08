@@ -26,4 +26,3 @@ jobs:
             echo -e "\nNo whitelisted domains found.\n"
             exit 0
           fi
-
