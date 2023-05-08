@@ -13,13 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Check for whitelisted domains
+      - name: Find whitelisted domains
         # grep outputs exit 1 when no matches were found
         continue-on-error: true
         run: |
           grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
           
-      - name: Print whitelisted domains
+      - name: Blocklist check
         run: |
           if [[ -s whitelisted.tmp ]]; then
             echo -e "\nWhitelisted domains:"
