@@ -12,3 +12,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run compress_adblock.sh
         run: bash "workflow_scripts/compress_adblock.sh"
+      - name: Commit and push changes
+        run: |
+          COMMIT_MSG="Compress Adblock entries"
+          FILES_TO_ADD=( "${{vars.ADBLOCK_FILE}}" "${{vars.COMPRESSED_ENTRIES_FILE}}" )
+          git config user.email "${{secrets.GIT_EMAIL}}"
+          git config user.name "${{vars.GIT_USERNAME}}"
+          git add "${FILES_TO_ADD[@]}"
+          git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
+          git push
