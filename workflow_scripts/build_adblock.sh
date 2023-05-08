@@ -3,10 +3,10 @@
 raw_file="data/raw.txt"
 adblock_file="adblock.txt"
 subdomains_file="data/subdomains.txt"
-compressed_entries="data/compressed_entries.txt"
+compressed_entries_file="data/compressed_entries.txt"
 
 while read -r subdomain; do
-    grep "^$subdomain\." "$raw_file" >> subdomains.tmp
+    grep "^${subdomain}\." "$raw_file" >> subdomains.tmp
 done < "$subdomains_file"
 
 # Remove subdomains
@@ -18,7 +18,7 @@ awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
 sort -u 2.tmp -o 2.tmp
 
 # Remove redundant entries
-comm -23 2.tmp "$compressed_entries" > raw.tmp
+comm -23 2.tmp "$compressed_entries_file" > raw.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
