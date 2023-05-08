@@ -1,21 +1,26 @@
-name: Build blocklist
-run-name: Build blocklist
+name: Build lists
+run-name: Build lists
 on:
+  workflow_dispatch:
   push:
     paths:
       - "data/raw.txt"
   schedule:
     # Daily at 4:50am (GMT+8)
     - cron: "50 20 * * *"
-  workflow_dispatch:
+
 jobs:
-  Build-blocklist:
+  build-lists:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Build Domains list
         run: bash "workflow_scripts/build_domains.sh"
+
       - name: Build Adblock Plus list
         run: bash "workflow_scripts/build_adblock.sh"
+
       - name: Save changes
         run: bash "workflow_scripts/save_changes.sh"
