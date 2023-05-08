@@ -2,9 +2,9 @@ name: Whitelist check
 run-name: Whitelist check
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "${{ vars.WHITELIST_FILE }}"
+  #push:
+  #  paths:
+  #    - "${{ vars.WHITELIST_FILE }}"
 
 jobs:
   Whitelist_check:
