@@ -6,13 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Command 0
-        env:
-          MESSAGE: '"${{vars.RAW_FILE}}" "${{vars.TOPLIST_FILE}}"'
-        run: echo "$MESSAGE"
+        run: exit 1
+        
       - name: Command 1
-        run: |
-          echo "Exiting with error..."
-          exit 0
+        if: success() || failure()
+        run: exit 0
+        
       - name: Command 2
         if: failure()
-        run: echo "This should show"
+        run: echo "failed"
+        
+        
