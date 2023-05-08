@@ -15,9 +15,8 @@ jobs:
 
       - name: Whitelist check
         run: |
-          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
-
-          echo "Test"
+          #grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
+          grep -Ff whitelist.txt data/raw.txt | grep -vxFf blacklist.txt > whitelisted.tmp
 
           if [[ -s whitelisted.tmp ]]; then
             echo -e "\nWhitelisted domains:"
