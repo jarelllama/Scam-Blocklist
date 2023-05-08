@@ -39,6 +39,7 @@ function add_toplist_subdomains {
     touch toplist_subdomains.tmp
 
     while read -r domain; do
+        # Output is not sorted
         grep "\.${domain}$" "$toplist_file" >> toplist_subdomains.tmp
     done < second_level_domains.tmp
 
