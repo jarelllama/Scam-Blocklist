@@ -1,5 +1,5 @@
-name: Whitelisted domains check
-run-name: Whitelisted domains check
+name: Whitelist check
+run-name: Whitelist check
 on:
   workflow_dispatch:
   push:
@@ -7,13 +7,13 @@ on:
       - "${{ vars.WHITELIST_FILE }}"
 
 jobs:
-  Whitelisted_domains_check:
+  Whitelist_check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Blocklist check
+      - name: Whitelist check
         run: |
           grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
 
