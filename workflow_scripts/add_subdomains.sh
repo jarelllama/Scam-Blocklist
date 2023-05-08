@@ -130,13 +130,13 @@ if ! [[ -s unique_domains.tmp ]]; then
     exit 0
 fi
 
-cat unique_domains.tmp >> "$raw_file"
-
-sort "$raw_file" -o "$raw_file"
-
 echo -e "\nAll domains added:"
 cat unique_domains.tmp
 
 echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
+
+cat unique_domains.tmp >> "$raw_file"
+
+sort "$raw_file" -o "$raw_file"
 
 rm *.tmp
