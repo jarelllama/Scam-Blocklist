@@ -17,11 +17,13 @@ jobs:
         run: |
           grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
 
+          echo "Test"
+
           if [[ -s whitelisted.tmp ]]; then
             echo -e "\nWhitelisted domains:"
             cat whitelisted.tmp
             echo
-            #exit 1
+            exit 1
           else
             echo -e "\nNo whitelisted domains found.\n"
             exit 0
