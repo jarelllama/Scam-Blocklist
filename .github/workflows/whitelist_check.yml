@@ -15,5 +15,4 @@ jobs:
 
       - name: Whitelist check
         run: |
-          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp
-          cat whitelisted.tmp
+          cat "${{ vars.WHITELIST_FILE }}"
