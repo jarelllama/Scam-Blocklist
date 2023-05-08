@@ -14,14 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Find whitelisted domains
-        # grep outputs exit 1 when no matches are found
-        # This means I have to move the rest of the code to a separate step
+      - name: Whitelist check
+        # grep returns exit 1 when no matches are found. The '|| true' line is needed to always return 0
         continue-on-error: true
-        run: grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp || true
-          
-      - name: Blocklist check
         run: |
+          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > whitelisted.tmp || true
+          
           if [[ -s whitelisted.tmp ]]; then
             echo -e "\nWhitelisted domains:"
             cat whitelisted.tmp
