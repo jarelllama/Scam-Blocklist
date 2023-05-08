@@ -13,11 +13,12 @@ jobs:
       - name: Run check_raw.sh
         run: bash "workflow_scripts/check_raw.sh"
       - name: Commit and push changes
-        env:
-          COMMIT_MESSAGE: 'Remove invalid entries'
+        if: success() || failure()
         run: |
+          COMMIT_MSG="Remove invalid entries"
+          FILES_TO_ADD=( "${{vars.RAW_FILE}}" )
           git config user.email "${{secrets.GIT_EMAIL}}"
           git config user.name "${{vars.GIT_USERNAME}}"
-          git add "${{vars.RAW_FILE}}"
-          git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
+          git add "${FILES_TO_ADD[@]}"
+          git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
           git push
