@@ -17,8 +17,6 @@ function interrupt_handler() {
     exit 1
 }
 
-trap 'interrupt_handler' INT
-
 function prep_entry {
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
@@ -249,6 +247,8 @@ function push_changes {
     git commit -m "Update list(s)"
     git push
 }
+
+trap 'interrupt_handler' INT
 
 while true; do
     echo -e "\nEdit Lists Menu:"
