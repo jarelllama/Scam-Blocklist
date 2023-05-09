@@ -136,7 +136,7 @@ jobs:
         if: steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_adblock.sh"
-          git add "${{ vars.COMPRESSED_ENTRIES_FILE }}
+          git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
           git commit -m "Compress Adblock rules"
 
       - name: Commit and push
