@@ -127,21 +127,17 @@ jobs:
           fi
 
       - name: Build Domains list
+        id: build_domains
         if: ${{ steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success' }}
         run: bash "workflow_scripts/build_domains.sh"
 
       - name: Build Adblock Plus list
+        id: build_adblock
         if: ${{ steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success' }}
         run: bash "workflow_scripts/build_adblock.sh"
 
-
-      - name: Save changes
-        if: success() || failure()
-        run: bash "workflow_scripts/save_changes.sh"
-
-
       - name: Commit and push
-        if: success() || failure()
+        if: ${{ steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success' }}
         run: |
           COMMIT_MSG='Remove invalid entries'
           FILES_TO_ADD=( "${{ vars.RAW_FILE }}" )
