@@ -98,7 +98,7 @@ jobs:
 
       - name: Whitelist check
         id: whitelist
-        if: success() || failure(
+        if: success() || failure()
         run: |
           > check.tmp
           grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || true
