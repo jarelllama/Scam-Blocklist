@@ -68,7 +68,8 @@ function edit_blocklist {
             
     if [[ "$remove_entry" -eq 1 ]]; then
         # Check if the new entries are unique (not in the blocklist)
-        if comm -23 entries.tmp "$raw_file" | grep -q . ; then
+
+	if ! comm -12 "$raw_file" entries.tmp | grep -q .; then
             echo -e "\nDomain not found in blocklist: $entry"
             return
         fi
@@ -109,8 +110,7 @@ function edit_blocklist {
         grep "${domain}$" "$toplist_file" >> 1.tmp
     done < entries.tmp
     
-    grep -vxFf "$blacklist_file" 1.tmp > in_toplist.tmp 
-
+    comm -23 1.tmp "$blacklist_file" > in_toplist.tmp 
     if [[ -s in_toplist.tmp ]]; then
         echo -e "\nThe domain is found in the toplist. Not added."
         echo "Matches in toplist:"
@@ -171,7 +171,7 @@ function edit_blacklist {
     format_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFqf entries.tmp "$blacklist_file"; then
+        if ! comm -12 "$blacklist_file" entries.tmp | grep -q .; then
             echo -e "\nDomain not found in blacklist: $entry"
             return
         fi
