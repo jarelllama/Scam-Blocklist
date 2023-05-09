@@ -15,13 +15,13 @@ comm -23 raw.tmp only_subdomains.tmp > second_level_domains.tmp
 
 # I've tried using xarg parallelization here to no success
 while read -r entry; do
-    grep "\.${entry}$" second_level_domains.tmp > redundant.tmp
-    if ! [[ -s redundant.tmp ]]; then
+    redundant_entries=$(grep "\.${entry}$" second_level_domains.tmp)
+    if [[ -z "$redundant_entries" ]]; then
         continue
     fi
     echo -e "\nEntries made redundant by '${entry}':"
-    cat redundant.tmp
-    cat redundant.tmp >> "$compressed_entries_file"
+    echo "$redundant_entries"
+    echo "$redundant_entries" >> "$compressed_entries_file"
 done < second_level_domains.tmp
 
 # The output has a high chance of having duplicates
