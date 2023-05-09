@@ -5,11 +5,13 @@ adblock_file="adblock.txt"
 subdomains_file="data/subdomains.txt"
 compressed_entries_file="data/compressed_entries.txt"
 
+comm -23 "$raw_file" "$compressed_entries_file" > raw.tmp
+
 while read -r subdomain; do
-    grep "^${subdomain}\." "$raw_file" >> only_subdomains.tmp
+    grep "^${subdomain}\." raw.tmp >> only_subdomains.tmp
 done < "$subdomains_file"
 
-comm -23 "$raw_file" only_subdomains.tmp > second_level_domains.tmp
+comm -23 raw.tmp only_subdomains.tmp > second_level_domains.tmp
 
 # I've tried using xarg parallelization here to no success
 while read -r entry; do
@@ -17,12 +19,10 @@ while read -r entry; do
     if ! [[ -s redundant.tmp ]]; then
         continue
     fi
-    echo -e "\nEntries made redundant by ${entry}:"
+    echo -e "\nEntries made redundant by '${entry}':"
     cat redundant.tmp
-    cat redundant.tmp >> compressed_entries.tmp
+    cat redundant.tmp >> "$compressed_entries_file"
 done < second_level_domains.tmp
-
-cat compressed_entries.tmp >> "$compressed_entries_file"
 
 # The output has a high chance of having duplicates
 sort -u "$compressed_entries_file" -o "$compressed_entries_file"
@@ -35,17 +35,15 @@ awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
 # Appending || somehow messes up the order
 sort -u 2.tmp -o adblock.tmp
 
-grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
+grep -vE '^(!|$)' "$adblock_file" > previous_adblock.tmp
 
-if diff -q adblock.tmp raw.tmp >/dev/null; then
+if diff -q previous_adblock.tmp adblock.tmp >/dev/null; then
    echo -e "\nNo changes. Exiting...\n"
    rm ./*.tmp
    exit 0
 fi
 
-num_before=$(wc -l < adblock.tmp)
-
-cp raw.tmp adblock.tmp
+num_before=$(wc -l < previous_adblock.tmp)
 
 num_after=$(wc -l < adblock.tmp)
 
