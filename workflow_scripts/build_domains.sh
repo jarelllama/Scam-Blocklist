@@ -3,10 +3,10 @@
 raw_file="data/raw.txt"
 domains_file="domains.txt"
 
-grep -vE '^(#|$)' "$domains_file" > domains.tmp
+grep -vE '^(#|$)' "$domains_file" > previous_domains.tmp
 
-if diff -q domains.tmp "$raw_file" >/dev/null; then
-   echo -e "\nNo changes. Exiting...\n"
+if diff -q previous_domains.tmp "$raw_file" >/dev/null; then
+   echo -e "\nNo changes.\n"
    rm ./*.tmp
    exit 0
 fi
