@@ -140,7 +140,7 @@ jobs:
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
           COMMIT_MSG='Build lists'
-          FILES_TO_ADD=( "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}" )
+          FILES_TO_ADD=( "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}" "${{ vars.COMPRESSED_ENTRIES_FILE }}" )
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
           git add "${FILES_TO_ADD[@]}"
