@@ -60,6 +60,20 @@ jobs:
             exit 1
           fi
 
+      - name: Whitelist check
+        if: success() || failure(
+        run: |
+          > check.tmp
+          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || true
+          
+          if [[ -s check.tmp ]]; then
+            echo -e "\nWhitelisted domains found:"
+            cat check.tmp
+
+            echo
+            exit 1
+          fi
+
       - name: Whitelisted TLDs check
         if: success() || failure()
         run: |
@@ -89,6 +103,19 @@ jobs:
 
             comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
+
+            echo
+            exit 1
+          fi
+
+      - name: Toplist check
+        run: |
+          > check.tmp
+          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp
+
+          if [[ -s check.tmp ]]; then
+            echo -e "\nDomains found in the toplist:"
+            cat check.tmp
 
             echo
             exit 1
