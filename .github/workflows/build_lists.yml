@@ -7,7 +7,7 @@ on:
       - "data/raw.txt"
   schedule:
     # Daily at 4:50am (GMT+8)
-    - cron: "50 20 * * *"
+    - cron: '50 20 * * *'
 
 jobs:
   build-lists:
@@ -134,13 +134,17 @@ jobs:
       - name: Build Adblock Plus list
         id: build_adblock
         if: steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
-        run: bash "workflow_scripts/build_adblock.sh"
+        run: |
+          bash "workflow_scripts/build_adblock.sh"
+          git add "${{ vars.COMPRESSED_ENTRIES_FILE }}
+          git commit -m "Compress Adblock rules"
+
 
       - name: Commit and push
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
           COMMIT_MSG='Build lists'
-          FILES_TO_ADD=( "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}" "${{ vars.COMPRESSED_ENTRIES_FILE }}" )
+          FILES_TO_ADD=( "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}" )
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
           git add "${FILES_TO_ADD[@]}"
