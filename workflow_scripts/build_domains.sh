@@ -7,7 +7,7 @@ grep -vE '^(#|$)' "$domains_file" > domains.tmp
 
 if diff -q domains.tmp "$raw_file" >/dev/null; then
    echo -e "\nNo changes. Exiting...\n"
-   rm *.tmp
+   rm ./*.tmp
    exit 0
 fi
 
@@ -32,4 +32,4 @@ echo "# Title: Jarelllama's Scam Blocklist
 # Total number of domains: $num_after
 " | cat - domains.tmp > "$domains_file"
 
-rm *.tmp
+rm ./*.tmp
