@@ -102,7 +102,7 @@ function filter_pending {
     if ! [[ -s 3.tmp ]]; then
         echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
         rm *.tmp
-        exit 0
+        exit 1
     fi
 
     echo -e "\nDomains removed:"
