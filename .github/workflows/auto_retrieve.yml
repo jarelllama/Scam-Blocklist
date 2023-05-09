@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # Daily at 4:20am (GMT+8)
-    - cron: '20 20 * * *"
+    - cron: '20 20 * * *'
 
 jobs:
   retrieve-domains:
