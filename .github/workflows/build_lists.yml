@@ -139,7 +139,6 @@ jobs:
           git add "${{ vars.COMPRESSED_ENTRIES_FILE }}
           git commit -m "Compress Adblock rules"
 
-
       - name: Commit and push
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
