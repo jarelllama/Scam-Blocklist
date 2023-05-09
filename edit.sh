@@ -17,7 +17,7 @@ function interrupt_handler() {
     exit 1
 }
 
-function prep_entry {
+function format_entry {
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
     remove_entry=0
@@ -48,7 +48,9 @@ function prep_entry {
         sld="${entry#"${subdomain}".}"
     done < "$subdomains_file"
 
-    echo "$sld" > entries.tmp
+    entry="$sld"
+
+    echo "$entry" > entries.tmp
 
     echo "www.${sld}" >> entries.tmp
 
@@ -62,7 +64,7 @@ function edit_blocklist {
     
     cp "$raw_file" "${raw_file}.bak"
 
-    prep_entry
+    format_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
         # Check if the new entries are unique (not in the blocklist)
@@ -86,16 +88,6 @@ function edit_blocklist {
         return
     fi
 
-    # The toplist is checked before removing dead domains to find potential subdomains in the toplist
-    comm -12 entries.tmp "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
-
-    if [[ -s in_toplist.tmp ]]; then
-        echo -e "\nThe domain is found in the toplist. Not added."
-        echo "Matches in toplist:"
-        cat in_toplist.tmp
-        return
-    fi
-
     # mv shows an error when the file doesnt exist
     touch alive_entries.tmp
     cat entries.tmp | xargs -I{} -P6 bash -c "
@@ -111,6 +103,20 @@ function edit_blocklist {
 
     # The dead check messes up the order
     sort alive_entries.tmp -o entries.tmp
+  
+    # Check if the entry is in the toplist
+    while read -r domain; do
+        grep "${domain}$" "$toplist_file" >> 1.tmp
+    done < entries.tmp
+    
+    grep -vxFf "$blacklist_file" 1.tmp > in_toplist.tmp 
+
+    if [[ -s in_toplist.tmp ]]; then
+        echo -e "\nThe domain is found in the toplist. Not added."
+        echo "Matches in toplist:"
+        cat in_toplist.tmp
+        return
+    fi
   
     # Check if the new entries are not unique (already in the blocklist)
     if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
@@ -129,12 +135,9 @@ function edit_blocklist {
 function edit_whitelist {
     echo "WHITELIST"
 
-    read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
+    format_entry
 
-    entry="${entry,,}"
-
-    if [[ "$entry" == -* ]]; then
-        entry="${entry#-}"
+    if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFq "$entry" "$whitelist_file"; then
             echo -e "\nEntry not found in whitelist: $entry"
             return
@@ -165,7 +168,7 @@ function edit_whitelist {
 function edit_blacklist {
     echo "BLACKLIST"
 
-    prep_entry
+    format_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
         if ! grep -xFqf entries.tmp "$blacklist_file"; then
@@ -267,6 +270,7 @@ while true; do
             ;;
         w)
             edit_whitelist
+            rm ./*.tmp
             ;;
         l)
             edit_blacklist
