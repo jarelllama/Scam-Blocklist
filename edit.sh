@@ -11,6 +11,14 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
+function interrupt_handler() {
+    echo -e "\nExiting..."
+    find . -maxdepth 1 -type f -name '*.tmp' -delete
+    exit 1
+}
+
+trap 'interrupt_handler' INT
+
 function prep_entry {
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
