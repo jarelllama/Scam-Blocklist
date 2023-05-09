@@ -23,7 +23,7 @@ grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
 if diff -q adblock.tmp raw.tmp >/dev/null; then
    echo -e "\nNo changes. Exiting...\n"
-   rm *.tmp
+   rm ./*.tmp
    exit 0
 fi
 
@@ -48,4 +48,4 @@ echo "! Title: Jarelllama's Scam Blocklist
 ! Total number of entries: $num_after
 " | cat - adblock.tmp > "$adblock_file"
 
-rm *.tmp
+rm ./*.tmp
