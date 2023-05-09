@@ -77,7 +77,7 @@ function retrieve_domains {
             | sort -u)
 
         term=$(echo "$term" | cut -c 1-350)
-        echo "${term}"...
+        echo "${term}..."
 
         if "$debug"; then
             echo "$domains"
