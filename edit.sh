@@ -263,25 +263,25 @@ while true; do
     case "$choice" in
         b)
             edit_blocklist
-            rm *.tmp
+            rm ./*.tmp
             ;;
         w)
             edit_whitelist
             ;;
         l)
             edit_blacklist
-            rm *.tmp
+            rm ./*.tmp
             ;;
         c)
             check_entry
             ;;
         p)
             push_changes
-            find . -maxdepth 1 -type f -name "*.tmp" -delete
+            find . -maxdepth 1 -type f -name '*.tmp' -delete
             exit 0
             ;;
         x)
-            find . -maxdepth 1 -type f -name "*.tmp" -delete
+            find . -maxdepth 1 -type f -name '*.tmp' -delete
 
             # Check if the script was sourced by another script
             if [[ "${#BASH_SOURCE[@]}" -gt 1 && "${BASH_SOURCE[0]}" != "${0}" ]]; then
