@@ -140,7 +140,7 @@ function edit_whitelist {
             return
         fi
         echo -e "\nRemoved from whitelist: $entry"
-        sed -i "/^$entry$/d" "$whitelist_file"
+        sed -i "/^${entry}$/d" "$whitelist_file"
         return
     fi
 
