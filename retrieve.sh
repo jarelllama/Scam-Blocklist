@@ -16,7 +16,7 @@ git config user.name "$github_name"
 
 function interrupt_handler() {
     echo -e "\nExiting..."
-    find . -maxdepth 1 -type f -name *.tmp -delete
+    find . -maxdepth 1 -type f -name '*.tmp' -delete
     exit 1
 }
 
@@ -94,7 +94,6 @@ function retrieve_domains {
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
-        rm *.tmp
         exit 1
     fi
 
@@ -191,7 +190,7 @@ function filter_pending {
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
-        rm *.tmp
+        rm ./*.tmp
         exit 0
     fi
 
@@ -206,14 +205,14 @@ function filter_pending {
         cat in_toplist.tmp
         if "$unattended"; then
             echo -e "\nExiting...\n"
-            rm *.tmp
+            rm ./*.tmp
             exit 1
         fi
     else
         echo -e "\nNo domains found in toplist."
     fi
     
-    rm *.tmp
+    rm ./*.tmp
 }
 
 function merge_pending {
@@ -240,7 +239,7 @@ function merge_pending {
 
     > "$pending_file"
 
-    rm *.tmp
+    rm ./*.tmp
 
     if ! "$unattended"; then
         read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
@@ -300,7 +299,7 @@ while true; do
             filter_pending
             ;;
         x)
-            find . -maxdepth 1 -type f -name *.tmp -delete
+            find . -maxdepth 1 -type f -name '*.tmp' -delete
             exit 0
             ;;
         *)
