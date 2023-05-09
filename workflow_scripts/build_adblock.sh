@@ -16,6 +16,19 @@ awk '{print "||" $0 "^"}' second_level_domains.tmp > 2.tmp
 # Appending || somehow messes up the order
 sort -u 2.tmp -o 2.tmp
 
+# I've tried using xarg parallelization here to no success
+while read -r entry; do
+    grep "\.${entry#||}$" 2.tmp > redundant.tmp
+    echo -e "\nEntries made redundant by $entry:"
+    cat redundant.tmp
+    cat redundant.tmp >> compressed_entries.tmp
+done < 2.tmp
+
+cat compressed_entries.tmp >> "$compressed_entries_file"
+
+# The output has a high chance of having duplicates
+sort -u "$compressed_entries_file" -o "$compressed_entries_file"
+
 # Remove redundant entries
 comm -23 2.tmp "$compressed_entries_file" > raw.tmp
 
