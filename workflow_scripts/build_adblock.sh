@@ -11,18 +11,16 @@ done < "$subdomains_file"
 
 comm -23 "$raw_file" only_subdomains.tmp > second_level_domains.tmp
 
-awk '{print "||" $0 "^"}' second_level_domains.tmp > 2.tmp
-
-# Appending || somehow messes up the order
-sort -u 2.tmp -o 2.tmp
-
 # I've tried using xarg parallelization here to no success
 while read -r entry; do
-    grep "\.${entry#||}$" 2.tmp > redundant.tmp
-    echo -e "\nEntries made redundant by $entry:"
+    grep "\.${entry}$" second_level_domains.tmp > redundant.tmp
+    if ! [[ -s redundant.tmp ]]; then
+        continue
+    fi
+    echo -e "\nEntries made redundant by ${entry}:"
     cat redundant.tmp
     cat redundant.tmp >> compressed_entries.tmp
-done < 2.tmp
+done < second_level_domains.tmp
 
 cat compressed_entries.tmp >> "$compressed_entries_file"
 
@@ -30,7 +28,12 @@ cat compressed_entries.tmp >> "$compressed_entries_file"
 sort -u "$compressed_entries_file" -o "$compressed_entries_file"
 
 # Remove redundant entries
-comm -23 2.tmp "$compressed_entries_file" > raw.tmp
+comm -23 second_level_domains.tmp "$compressed_entries_file" > 1.tmp
+
+awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
+
+# Appending || somehow messes up the order
+sort -u 2.tmp -o adblock.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > adblock.tmp
 
