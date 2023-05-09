@@ -128,18 +128,18 @@ jobs:
 
       - name: Build Domains list
         id: build_domains
-        if: ${{ steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success' }}
+        if: steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
         run: bash "workflow_scripts/build_domains.sh"
 
       - name: Build Adblock Plus list
         id: build_adblock
-        if: ${{ steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success' }}
+        if: steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
         run: bash "workflow_scripts/build_adblock.sh"
 
       - name: Commit and push
-        if: ${{ steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success' }}
+        if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
-          COMMIT_MSG='Remove invalid entries'
+          COMMIT_MSG='Build lists'
           FILES_TO_ADD=( "${{ vars.RAW_FILE }}" )
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
