@@ -62,7 +62,11 @@ function retrieve_domains {
 
         google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
 
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" | grep -oE '<a href="http\S+"' | awk -F/ '{print $3}' | grep -vxF 'www.google.com' | sort -u)
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" \
+            | grep -oE '<a href="http\S+"' \
+            | awk -F/ '{print $3}' \
+            | grep -vxF 'www.google.com' \
+            | sort -u)
 
         term=$(echo "$term" | cut -c 1-350)
         echo "${term}"...
@@ -91,10 +95,10 @@ function filter_pending {
     tr '[:upper:]' '[:lower:]' < "$pending_file" > 1.tmp
 
     # Duplicates are removed for when the pending file isn't cleared
-    # Note that sort writes to a temporary file before moving it to the output file. That's why the input and output can be the same
+    # Note that sort writes to a temporary file before moving it to the output file
+    # That's why the input and output can be the same
     sort -u 1.tmp -o 1.tmp
 
-    # This removes the majority of pending domains
     comm -23 1.tmp "$raw_file" > 2.tmp
 
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
@@ -130,10 +134,12 @@ function filter_pending {
     "
 
     # It appears that the dead file isn't always sorted
-    # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same. Otherwise, sorting big files with comm is slower than using grep
+    # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same
+    # Otherwise, sorting big files with comm is slower than using grep
     grep -vxFf dead.tmp 6.tmp > pending.tmp
 
-    # This portion of code removes the www subdomain for domains that have it and adds the www subdomains to those that don't. This effectively flips which domains have the www subdomain
+    # This portion of code removes the www subdomain for domains that have it and adds the www subdomains to those that don't
+    # This effectively flips which domains have the www subdomain
 
     grep '^www\.' pending.tmp > with_www.tmp
 
