@@ -62,20 +62,6 @@ jobs:
             exit 1
           fi
 
-      - name: Whitelist check
-        if: success() || failure(
-        run: |
-          > check.tmp
-          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || true
-          
-          if [[ -s check.tmp ]]; then
-            echo -e "\nWhitelisted domains found:"
-            cat check.tmp
-
-            echo
-            exit 1
-          fi
-
       - name: Whitelisted TLDs check
         if: success() || failure()
         run: |
@@ -110,11 +96,27 @@ jobs:
             exit 1
           fi
 
+      - name: Whitelist check
+        id: whitelist
+        if: success() || failure(
+        run: |
+          > check.tmp
+          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || true
+          
+          if [[ -s check.tmp ]]; then
+            echo -e "\nWhitelisted domains found:"
+            cat check.tmp
+
+            echo
+            exit 1
+          fi
+
       - name: Toplist check
+        id: toplist
         if: success() || failure()
         run: |
           > check.tmp
-          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp
+          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || true
 
           if [[ -s check.tmp ]]; then
             echo -e "\nDomains found in the toplist:"
@@ -125,11 +127,11 @@ jobs:
           fi
 
       - name: Build Domains list
-        if: success() || failure()
+        if: ${{ steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success' }}
         run: bash "workflow_scripts/build_domains.sh"
 
       - name: Build Adblock Plus list
-        if: success() || failure()
+        if: ${{ steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success' }}
         run: bash "workflow_scripts/build_adblock.sh"
 
 
