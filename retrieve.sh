@@ -68,7 +68,7 @@ function retrieve_domains {
         # gsub replaces consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:$time_filter"
+        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time_filter}"
 
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" \
             | grep -oE '<a href="http\S+"' \
@@ -295,7 +295,7 @@ while true; do
             ;;
         r)
             echo "Run filter again"
-            cp "$pending_file.bak" "$pending_file"
+            cp "${pending_file}.bak" "$pending_file"
             filter_pending
             ;;
         x)
