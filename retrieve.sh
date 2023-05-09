@@ -14,25 +14,25 @@ github_name='jarelllama'
 git config user.email "$github_email"
 git config user.name "$github_name"
 
-debug=0
-unattended=0
-use_pending_only=0
+debug='false'
+unattended='false'
+use_pending_only='false'
 time_filter='a'
 
 for arg in "$@"; do
     if [[ "$arg" == 'd' ]]; then
-        debug=1
-    elif [[ "$arg" == 'u' ]]; then
-        unattended=1
-        time_filter='y'
+        debug='true'
     elif [[ "$arg" == 'p' ]]; then
-        use_pending_only=1
+        use_pending_only='true'
+    elif [[ "$arg" == 'u' ]]; then
+        unattended='true'
+        time_filter='y'
     else
         time_filter="$arg"
     fi
 done
 
-if [[ -s "$pending_file" ]] && [[ use_pending_only -eq 0 ]]; then
+if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
     read -n 1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
     echo
     if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
@@ -40,10 +40,10 @@ if [[ -s "$pending_file" ]] && [[ use_pending_only -eq 0 ]]; then
     fi
 fi
 
-if [[ "$unattended" -eq 0 ]]; then
-    echo -e "\nRemember to pull the latest changes first!"
-else
+if "$unattended"; then
     echo -e "\nRetrieving domains..."
+else
+    echo -e "\nRemember to pull the latest changes first!"
 fi
 
 function retrieve_domains {
@@ -67,7 +67,7 @@ function retrieve_domains {
         term=$(echo "$term" | cut -c 1-350)
         echo "${term}"...
 
-        if [[ "$debug" -eq 1 ]]; then
+        if "$debug"; then
             echo "$domains"
         fi
 
@@ -190,7 +190,7 @@ function filter_pending {
     if [[ -s in_toplist.tmp ]]; then
         echo -e "\nDomains in toplist:"
         cat in_toplist.tmp
-        if [[ "$unattended" -eq 1 ]]; then
+        if "$unattended"; then
             echo -e "\nExiting...\n"
             rm *.tmp
             exit 1
@@ -228,7 +228,7 @@ function merge_pending {
 
     rm *.tmp
 
-    if [[ unattended -eq 0 ]]; then
+    if ! "$unattended"; then
         read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
         echo
         if ! [[ "$answer" =~ ^[Yy]$ ]] && [[ -n "$answer" ]]; then
@@ -250,13 +250,13 @@ function merge_pending {
     exit 0
 }
 
-if [[ "$use_pending_only" -eq 0 ]]; then
+if ! "$use_pending_only"; then
     retrieve_domains
 fi
 
 filter_pending
 
-if [[ "$unattended" -eq 1 ]]; then
+if "$unattended"; then
     echo -e "\nMerging with blocklist..."
     merge_pending
 fi
