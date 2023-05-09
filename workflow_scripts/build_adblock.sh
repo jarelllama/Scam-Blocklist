@@ -38,7 +38,7 @@ sort -u 2.tmp -o adblock.tmp
 grep -vE '^(!|$)' "$adblock_file" > previous_adblock.tmp
 
 if diff -q previous_adblock.tmp adblock.tmp >/dev/null; then
-   echo -e "\nNo changes. Exiting...\n"
+   echo -e "\nNo changes.\n"
    rm ./*.tmp
    exit 0
 fi
