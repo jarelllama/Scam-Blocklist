@@ -27,6 +27,39 @@ jobs:
             exit 1
           fi
 
+      - name: Case check
+        if: success() || failure()
+        run: |
+          > check.tmp
+          grep '[A-Z]' "${{ vars.RAW_FILE }}" > check.tmp || true
+
+          if [[ -s check.tmp ]]; then
+            echo -e "\nEntries with capitalized letters found:"
+            cat check.tmp
+
+            tr '[:upper:]' '[:lower:]' < "${{ vars.RAW_FILE }}" > raw.tmp
+            mv raw.tmp "${{ vars.RAW_FILE }}"
+
+            echo
+            exit 1
+          fi
+
+      - name: Duplicate check
+        if: success() || failure()
+        run: |
+          > check.tmp
+          sort "${{ vars.RAW_FILE }}" | uniq -d > check.tmp
+
+          if [[ -s check.tmp ]]; then
+            echo -e "\nDuplicates found:"
+            cat check.tmp
+
+            sort -u "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
+
+            echo
+            exit 1
+          fi
+
       - name: Whitelisted TLDs check
         if: success() || failure()
         run: |
