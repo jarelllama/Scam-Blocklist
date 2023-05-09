@@ -84,6 +84,12 @@ function retrieve_domains {
 
     sort -u "$pending_file" -o "$pending_file"
 
+    if ! [[ -s "$pending_file" ]]; then
+        echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
+        rm *.tmp
+        exit 1
+    fi
+
     total_retrieved=$(wc -l < "$pending_file")
 
     echo -e "\nTotal domains retrieved: $total_retrieved"
@@ -102,12 +108,6 @@ function filter_pending {
     comm -23 1.tmp "$raw_file" > 2.tmp
 
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
-    
-    if ! [[ -s 3.tmp ]]; then
-        echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
-        rm *.tmp
-        exit 1
-    fi
 
     echo -e "\nDomains removed:"
 
