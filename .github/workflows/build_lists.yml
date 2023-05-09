@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Empty line check
+        if: success() || failure()
           if [[ -s check.tmp ]]; then
             echo -e "\nDuplicates found:"
             cat check.tmp
@@ -109,6 +110,7 @@ jobs:
           fi
 
       - name: Toplist check
+        if: success() || failure()
         run: |
           > check.tmp
           comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp
