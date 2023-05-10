@@ -142,7 +142,7 @@ jobs:
 
       - name: Update stats
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
-        run |
+        run: |
           domains_count=$(grep -vE '^(#|$)' "${{ vars.DOMAINS_FILE }}" | wc -l)
           adblock_count=$(grep -vE '^(!|$)' "${{ vars.ADBLOCK_FILE }}" | wc -l)
           sed -i "2s/.*/${domains_count}/" "${{ vars.STATS_FILE }}"
