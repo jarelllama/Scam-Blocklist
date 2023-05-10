@@ -67,9 +67,8 @@ function edit_blocklist {
     format_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        # Check if the new entries are unique (not in the blocklist)
-
-        if ! comm -12 "$raw_file" entries.tmp | grep -q .; then
+        # Check if none of the new entries are in the blocklist
+        if ! comm -12 "$raw_file" entries.tmp | grep -q . ; then
             echo -e "\nDomain not found in blocklist: $entry"
             return
         fi
@@ -118,7 +117,7 @@ function edit_blocklist {
         return
     fi
   
-    # Check if the new entries are not unique (already in the blocklist)
+    # Check if none of the new entries are unique
     if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
         echo -e "\nThe domain is already in the blocklist. Not added."
         return
@@ -171,7 +170,7 @@ function edit_blacklist {
     format_entry
             
     if [[ "$remove_entry" -eq 1 ]]; then
-        if ! comm -12 "$blacklist_file" entries.tmp | grep -q .; then
+        if ! comm -12 "$blacklist_file" entries.tmp | grep -q . ; then
             echo -e "\nDomain not found in blacklist: $entry"
             return
         fi
