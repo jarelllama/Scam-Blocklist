@@ -136,14 +136,16 @@ jobs:
         if: success() || steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_domains.sh"
+          git add "${{ vars.DOMAINS_FILE }}"
+          git diff-index --quiet HEAD || git commit -m "Build Domains list"
 
       - name: Build Adblock Plus list
         id: build_adblock
         if: success() || steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_adblock.sh"
-          git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules"
+          git add "${{ vars.ADBLOCK_FILE }}" "${{ vars.COMPRESSED_ENTRIES_FILE }}"
+          git diff-index --quiet HEAD || git commit -m "Build Adblock list"
 
       - name: Update stats
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
@@ -207,10 +209,8 @@ jobs:
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Update README"
 
-      - name: Commit and push
+      - name: Push
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
-          git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Build lists"
           git push
 
