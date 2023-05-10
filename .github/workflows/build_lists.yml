@@ -198,7 +198,6 @@ jobs:
       - name: Commit and push
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
-          git add "${{ vars.DOMAINS_FILE }}" "
-${{ vars.ADBLOCK_FILE }}"
+          git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Build lists"
           git push
