@@ -166,7 +166,6 @@ jobs:
             yest_diff=$(sed -n '8p' "${{ vars.STATS_FILE }}")
 
             sed -i 's/yest_count/'"$yest_diff"'/g' "${{ vars.README_TEMPLATE }}"
-            
           else
             end_of_day_count=$(sed -n '4p' "${{ vars.STATS_FILE }}")
 
@@ -187,6 +186,20 @@ jobs:
 
           sed -i "4s/.*/${current_count}/" "${{ vars.STATS_FILE }}"
        
+          while read -r subdomain; do
+            grep "^$subdomain\." "${{ vars.DEAD_DOMAINS_FILE }}" >> subdomains.tmp
+          done < "${{ vars.SUBDOMAINS_FILE }}"
+
+          comm -23 "${{ vars.DEAD_DOMAINS_FILE }}" subdomains.tmp > dead_domains.tmp
+
+          dead_domains_count=$(wc -l < dead_domains.tmp)
+
+          total_count=$((dead_domains_count + current_count))
+
+          sed -i 's/total_count/'"$total_count"'/g' "${{ vars.README_TEMPLATE }}"
+
+          sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' "${{ vars.README_TEMPLATE }}"
+
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
 
           git restore "${{ vars.README_TEMPLATE }}"
@@ -199,3 +212,4 @@ jobs:
           git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Build lists"
           git push
+
