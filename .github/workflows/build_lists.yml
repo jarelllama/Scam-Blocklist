@@ -189,12 +189,16 @@ jobs:
           fi
 
           sed -i "4s/.*/${current_count}/" "${{ vars.STATS_FILE }}"
-        
+       
+          cp "${{ vars.README_TEMPLATE }}" "{{ vars.README }}"
+
+          git add "{{ vars.README }}" "{{ vars.STATS_FILE }}"
+          git diff-index --quiet HEAD || git commit -m "Update README"
+
       - name: Commit and push
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
-          COMMIT_MSG='Build lists'
-          FILES_TO_ADD=( "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}" )
-          git add "${FILES_TO_ADD[@]}"
-          git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
+          git add "${{ vars.DOMAINS_FILE }}" "
+${{ vars.ADBLOCK_FILE }}"
+          git diff-index --quiet HEAD || git commit -m "Build lists"
           git push
