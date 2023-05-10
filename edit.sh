@@ -5,11 +5,6 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
-github_email='91372088+jarelllama@users.noreply.github.com'
-github_name='jarelllama'
-
-git config user.email "$github_email"
-git config user.name "$github_name"
 
 function interrupt_handler() {
     echo -e "\nExiting..."
