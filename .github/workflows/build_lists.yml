@@ -102,7 +102,7 @@ jobs:
           fi
 
       - name: Save filtered raw file
-        if: failure ()
+        if: failure()
         run: |
           git add "${{ vars.RAW_FILE }}"
           git commit -m "Filter raw file"
