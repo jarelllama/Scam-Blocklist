@@ -16,7 +16,7 @@ function check_resolving() {
     
     echo -e "\nLog:"
 
-    cat "$1" | xargs -I{} -P8 bash -c '
+    cat "$1" | xargs -I{} -P6 bash -c '
         domain="$1"
         while true; do
             dig=$(dig @1.1.1.1 "$domain")
