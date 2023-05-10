@@ -129,7 +129,8 @@ jobs:
       - name: Build Domains list
         id: build_domains
         if: steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
-        run: bash "workflow_scripts/build_domains.sh"
+        run: |
+          bash "workflow_scripts/build_domains.sh"
 
       - name: Build Adblock Plus list
         id: build_adblock
@@ -138,6 +139,16 @@ jobs:
           bash "workflow_scripts/build_adblock.sh"
           git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
           git commit -m "Compress Adblock rules"
+
+      - name: Update stats
+        if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
+        run |
+          domains_count=$(grep -vE '^(#|$)' "${{ vars.DOMAINS_FILE }}" | wc -l)
+          adblock_count=$(grep -vE '^(!|$)' "${{ vars.ADBLOCK_FILE }}" | wc -l)
+          sed -i "2s/.*/${domains_count}/" "${{ vars.STATS_FILE }}"
+          sed -i "4s/.*/${adblock_count}/" "${{ vars.STATS_FILE }}"
+          git add "${{ vars.STATS_FILE }}"
+          git commit -m "Update stats"
 
       - name: Commit and push
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
@@ -149,3 +160,4 @@ jobs:
           git add "${FILES_TO_ADD[@]}"
           git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
           git push
+
