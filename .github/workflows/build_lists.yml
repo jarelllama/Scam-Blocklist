@@ -187,10 +187,10 @@ jobs:
           sed -i "4s/.*/${current_count}/" "${{ vars.STATS_FILE }}"
        
           while read -r subdomain; do
-            grep "^$subdomain\." "${{ vars.DEAD_DOMAINS_FILE }}" >> subdomains.tmp
+            grep "^$subdomain\." "${{ vars.DEAD_DOMAINS_FILE }}" >> subdomains.tmp || true
           done < "${{ vars.SUBDOMAINS_FILE }}"
 
-          comm -23 "${{ vars.DEAD_DOMAINS_FILE }}" subdomains.tmp > dead_domains.tmp || true
+          comm -23 "${{ vars.DEAD_DOMAINS_FILE }}" subdomains.tmp > dead_domains.tmp
 
           dead_domains_count=$(wc -l < dead_domains.tmp)
 
