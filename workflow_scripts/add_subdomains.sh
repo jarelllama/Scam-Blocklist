@@ -11,7 +11,7 @@ done < "$subdomains_file"
 
 comm -23 "$raw_file" only_subdomains.tmp > second_level_domains.tmp
 
-function check_resolving {
+function check_resolving() {
     > alive.tmp
     
     echo -e "\nLog:"
@@ -46,10 +46,9 @@ function add_toplist_subdomains {
     grep -vxFf "$raw_file" toplist_subdomains.tmp > 1.tmp
 
     grep -vxFf "$dead_domains_file" 1.tmp > unique_toplist_subdomains.tmp
-    
-    input=unique_toplist_subdomains.tmp
-    check_resolving "$input"
-    
+
+    check_resolving unique_toplist_subdomains
+
     if ! [[ -s alive.tmp ]]; then
         return
     fi
@@ -64,8 +63,7 @@ function add_subdomains_to_wildcards {
 
     awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level_domains.tmp > random_subdomain.tmp
 
-    input=random_subdomain.tmp
-    check_resolving "$input"
+    check_resolving random_subdomain.tmp
 
     awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' alive.tmp > wildcards.tmp
 
@@ -98,8 +96,7 @@ function add_subdomains {
     
         grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
 
-        input=subdomains.tmp
-        check_resolving "$input"
+        check_resolving subdomains.tmp
 
         if ! [[ -s alive.tmp ]]; then
             continue
@@ -121,7 +118,7 @@ comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
 if ! [[ -s unique_domains.tmp ]]; then
     echo -e "\nNo domains added.\n"
-    rm *.tmp
+    rm ./*.tmp
     exit 0
 fi
 
@@ -134,4 +131,4 @@ cat unique_domains.tmp >> "$raw_file"
 
 sort "$raw_file" -o "$raw_file"
 
-rm *.tmp
+rm ./*.tmp
