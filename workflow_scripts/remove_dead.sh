@@ -1,21 +1,22 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
-blacklist_file="blacklist.txt"
-compressed_entries_file="data/compressed_entries.txt"
+subdomains_file="data/subdomains.txt"
+toplist_file="data/subdomains_toplist.txt"
 dead_domains_file="data/dead_domains.txt"
-git_email='91372088+jarelllama@users.noreply.github.com'
-git_name='jarelllama'
 
-git config user.email "$git_email"
-git config user.name "$git_name"
+while read -r subdomain; do
+    grep "^${subdomain}\." "$raw_file" >> only_subdomains.tmp
+done < "$subdomains_file"
 
-function check_resolving {
-    > dead.tmp
+comm -23 "$raw_file" only_subdomains.tmp > second_level_domains.tmp
+
+function check_resolving() {
+    > alive.tmp
     
     echo -e "\nLog:"
 
-    cat "$1" | xargs -I{} -P8 bash -c '
+    cat "$1" | xargs -I{} -P6 bash -c '
         domain="$1"
         while true; do
             dig=$(dig @1.1.1.1 "$domain")
@@ -25,73 +26,110 @@ function check_resolving {
             echo "$domain timed out. Retrying..."
             sleep 0.5
         done
-        if [[ "$dig" == *"NXDOMAIN"* ]]; then
-            echo "$domain (dead)"
-            echo "$domain" >> dead.tmp
+        if ! [[ "$dig" == *"NXDOMAIN"* ]]; then
+            echo "$domain (alive)"
+            echo "$domain" >> alive.tmp
         fi
     ' -- {}
-    
-    sort -u dead.tmp -o dead.tmp
 }
 
-function remove_dead {
-    comm -23 "$raw_file" dead.tmp > raw.tmp
-    mv raw.tmp "$raw_file"
-
-    comm -23 "$blacklist_file" dead.tmp > blacklist.tmp
-    mv blacklist.tmp "$blacklist_file"
-
-    awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
-    grep -vxFf adblock_dead.tmp "$compressed_entries_file" > compressed_entries_file.tmp
-    mv compressed_entries_file.tmp "$compressed_entries_file"
-
-    cat dead.tmp >> "$dead_domains_file"
-    sort -u "$dead_domains_file" -o "$dead_domains_file"
-
-    echo -e "\nAll dead domains removed:"
-    cat dead.tmp
-
-    echo -e "\nTotal domains removed: $(wc -l < dead.tmp)"
+function add_toplist_subdomains {
+    echo -e "\nChecking the toplist for subdomains..."
     
-    git add "$raw_file" "$blacklist_file" "$compressed_entries_file" "$dead_domains_file"
-    git commit -qm "Remove dead domains"
+    touch toplist_subdomains.tmp
+
+    while read -r domain; do
+        # Output is not sorted
+        grep "\.${domain}$" "$toplist_file" >> toplist_subdomains.tmp
+    done < second_level_domains.tmp
+
+    grep -vxFf "$raw_file" toplist_subdomains.tmp > 1.tmp
+
+    grep -vxFf "$dead_domains_file" 1.tmp > unique_toplist_subdomains.tmp
+
+    check_resolving unique_toplist_subdomains.tmp
+
+    if ! [[ -s alive.tmp ]]; then
+        return
+    fi
+
+    cat alive.tmp >> new_domains.tmp
 }
 
-function add_resurrected {
-    # change this to comm?
-    grep -vxFf dead.tmp "$dead_domains_file" > dead_domains.tmp
-
-    mv dead_domains.tmp "$dead_domains_file"
-
-    cat dead_now_alive.tmp >> "$raw_file" 
-    sort "$raw_file" -o "$raw_file"
-
-    echo -e "\nPreviously dead domains that are alive again:"
-    cat dead_now_alive.tmp
-
-    echo -e "\nTotal domains added: $(wc -l < dead_now_alive.tmp)"
+function add_subdomains_to_wildcards {
+    echo -e "\nFinding domains with a wildcard record..."
     
-    git add "$raw_file" "$dead_domains_file"
-    git commit -qm "Add resurrected domains"
+    random_subdomain='6nd7p7ccay6r5da'
+
+    awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level_domains.tmp > random_subdomain.tmp
+
+    check_resolving random_subdomain.tmp
+
+    awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' alive.tmp > wildcards.tmp
+
+    # Create a file with no wildcard domains. This file is sorted 
+    grep -vxFf wildcards.tmp second_level_domains.tmp > no_wildcards.tmp
+
+    if ! [[ -s wildcards.tmp ]]; then
+        return
+    fi
+
+    awk '{print "www."$0}' wildcards.tmp > wildcards_with_www.tmp
+
+    awk '{print "m."$0}' wildcards.tmp > wildcards_with_m.tmp
+
+    cat wildcards_with_www.tmp >> new_domains.tmp
+
+    cat wildcards_with_m.tmp >> new_domains.tmp
 }
 
-check_resolving "$raw_file"
+function add_subdomains {
+    echo -e "\nChecking for resolving subdomains..."
+    
+    while read -r subdomain; do
+        # Append the current subdomain in the loop to the domains
+        awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_wildcards.tmp > 1.tmp
 
-if [[ -s dead.tmp ]]; then
-    remove_dead
-else
-    echo -e "\nNo dead domains found."
+        comm -23 1.tmp "$raw_file" > 2.tmp
+
+        comm -23 2.tmp "$dead_domains_file" > 3.tmp
+    
+        grep -vxFf new_domains.tmp 3.tmp > subdomains.tmp
+
+        check_resolving subdomains.tmp
+
+        if ! [[ -s alive.tmp ]]; then
+            continue
+        fi
+
+        cat alive.tmp >> new_domains.tmp
+    done < "$subdomains_file"
+}
+
+add_toplist_subdomains
+
+add_subdomains_to_wildcards
+
+add_subdomains
+
+sort -u new_domains.tmp -o new_domains.tmp
+
+comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
+
+if ! [[ -s unique_domains.tmp ]]; then
+    echo -e "\nNo domains added.\n"
+    rm ./*.tmp
+    exit 0
 fi
 
-check_resolving "$dead_domains_file"
+echo -e "\nAll domains added:"
+cat unique_domains.tmp
 
-comm -23 "$dead_domains_file" dead.tmp > alive.tmp
+echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
 
-if [[ -s alive.tmp ]]; then
-    add_resurrected
-fi
+cat unique_domains.tmp >> "$raw_file"
 
-rm *.tmp
+sort "$raw_file" -o "$raw_file"
 
-echo
-git push -q
+rm ./*.tmp
+

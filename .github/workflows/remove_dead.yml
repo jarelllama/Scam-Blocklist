@@ -1,14 +1,26 @@
 name: Remove dead domains
 run-name: Remove dead domains
 on:
+  workflow_dispatch:
   schedule:
     # Daily at 3am (GMT+8)
-    - cron: "0 19 * * *"
-  workflow_dispatch:
+    - cron: '0 19 * * *'
+
 jobs:
   Remove-dead-domains:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run remove_dead.sh
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Provide Git identity
+        run: |
+          git config user.email '${{ vars.GIT_EMAIL }}'
+          git config user.name '${{ vars.GIT_USERNAME }}'
+
+      - name: remove_dead.sh
+        # Commits are done in the script
         run: bash "workflow_scripts/remove_dead.sh"
+
+      - name: Push
+        run: git push
