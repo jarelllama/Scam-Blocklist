@@ -27,12 +27,12 @@ done < second_level_domains.tmp
 # The output has a high chance of having duplicates
 sort -u "$compressed_entries_file" -o "$compressed_entries_file"
 
-# Remove redundant entries
+# Remove new redundant entries
 comm -23 second_level_domains.tmp "$compressed_entries_file" > 1.tmp
 
 awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
 
-# Appending || somehow messes up the order
+# Appending || messes up the order
 sort -u 2.tmp -o adblock.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > previous_adblock.tmp
