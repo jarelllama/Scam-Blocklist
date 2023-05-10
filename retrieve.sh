@@ -85,7 +85,9 @@ function retrieve_domains {
         echo "$domains" >> "$pending_file"
     done < "$search_terms_file"
 
-    sort -u "$pending_file" -o "$pending_file"
+    awk NF "$pending_file" > pending.tmp
+
+    sort -u pending.tmp -o "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
