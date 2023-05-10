@@ -2,8 +2,8 @@
 ! Description: Blocklist for scam sites automatically extracted from Google
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 05.10.160829.2023
-! Last modified: Wed May 10 16:08:29 UTC 2023
+! Version: 05.10.162545.2023
+! Last modified: Wed May 10 16:25:45 UTC 2023
 ! Expires: 4 hours
 ! Syntax: Adblock Plus
 ! Total number of entries: 3407
@@ -312,7 +312,6 @@
 ||bg-sailing.de^
 ||bhafdld.com^
 ||bhtwer.com^
-||bhwnk.securebellonline.com^
 ||biaale.com^
 ||bicycleaccessoriesshop.store^
 ||bicycledepartment.xyz^
@@ -2566,6 +2565,7 @@
 ||seasonnature07.com^
 ||seasonsurveys.com^
 ||secotab.shop^
+||securebellonline.com^
 ||sedigis.com^
 ||sedseative.com^
 ||sedyonline.com^
