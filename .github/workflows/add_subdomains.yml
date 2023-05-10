@@ -3,8 +3,8 @@ run-name: Add subdomains
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 3:30am (GMT+8)
-    - cron: '30 19 * * *'
+    # Daily at 4am (GMT+8)
+    - cron: '0 20 * * *'
 
 jobs:
   add-subdomains:
@@ -18,10 +18,8 @@ jobs:
 
       - name: Commit and push
         run: |
-          COMMIT_MSG='Add subdomains'
-          FILES_TO_ADD=( "${{ vars.RAW_FILE }}" )
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
-          git add "${FILES_TO_ADD[@]}"
-          git diff-index --quiet HEAD || git commit -m "$COMMIT_MSG"
+          git add "${{ vars.RAW_FILE }}"
+          git diff-index --quiet HEAD || git commit -m "Add subdomains"
           git push

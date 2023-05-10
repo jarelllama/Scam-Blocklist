@@ -1,17 +1,13 @@
 ```
 (Time in GMT+8)
 
-Remove dead: 3am (30min runtime)
+Remove dead: 3am (1h runtime)
 
-Add subdomains: 3:30am (60min runtime)
+Add subdomains: 4am (1h runtime)
 
-Check raw: 4:30am (1min runtime)
+Toplist: 5am (1min runtime)
 
-Toplist: 4:35am (1min runtime)
+Auto retrieve: 5:05am (2min runtime)
 
-Auto retrieve: 4:40am (2min runtime)
-
-Compress Adblock: 4:45am (1min runtime)
-
-Build lists: 4:50am (1min runtime)
+Build lists: 5:10am (1min runtime)
 ```

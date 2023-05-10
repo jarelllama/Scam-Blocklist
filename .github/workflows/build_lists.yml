@@ -6,8 +6,8 @@ on:
     paths:
       - "data/raw.txt"
   schedule:
-    # Daily at 4:50am (GMT+8)
-    - cron: '50 20 * * *'
+    # Daily at 5:10am (GMT+8)
+    - cron: '10 21 * * *'
 
 jobs:
   build-lists:
