@@ -82,7 +82,9 @@ function retrieve_domains {
         echo "Domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------"
 
-	[[ -z "$domains" ]] || echo "$domains" >> "$pending_file"
+      	if [[ -n "$domains" ]]; then
+      	    echo "$domains" >> "$pending_file"
+      	fi
     done < "$search_terms_file"
 
     sort -u pending.tmp -o "$pending_file"
