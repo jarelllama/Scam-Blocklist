@@ -112,7 +112,7 @@ jobs:
             echo -e "\nWhitelisted domains found:"
             cat check.tmp
 
-            echo -e "\Will not build lists.\n"
+            echo -e "\nSkipping lists build.\n"
             exit 1
           fi
 
@@ -127,7 +127,7 @@ jobs:
             echo -e "\nDomains found in the toplist:"
             cat check.tmp
 
-            echo -e "\Will not build lists.\n"
+            echo -e "\nSkipping lists build.\n"
             exit 1
           fi
 
@@ -143,7 +143,7 @@ jobs:
         run: |
           bash "workflow_scripts/build_adblock.sh"
           git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
-          git commit -m "Compress Adblock rules"
+          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules"
 
       - name: Update stats
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
@@ -153,7 +153,7 @@ jobs:
           sed -i "2s/.*/${domains_count}/" "${{ vars.STATS_FILE }}"
           sed -i "4s/.*/${adblock_count}/" "${{ vars.STATS_FILE }}"
           git add "${{ vars.STATS_FILE }}"
-          git commit -m "Update stats"
+          git diff-index --quiet HEAD || git commit -m "Update stats"
 
       - name: Commit and push
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
