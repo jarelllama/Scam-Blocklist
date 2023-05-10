@@ -37,8 +37,8 @@ function remove_dead {
     mv blacklist.tmp "$blacklist_file"
 
     awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
-    grep -vxFf adblock_dead.tmp "$compressed_entries_file" > compressed_entries_file.tmp
-    mv compressed_entries_file.tmp "$compressed_entries_file"
+    grep -vxFf adblock_dead.tmp "$compressed_entries_file" > compressed_entries.tmp
+    mv compressed_entries.tmp "$compressed_entries_file"
 
     cat dead.tmp >> "$dead_domains_file"
     sort -u "$dead_domains_file" -o "$dead_domains_file"
