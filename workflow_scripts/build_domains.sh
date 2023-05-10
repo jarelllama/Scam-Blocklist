@@ -11,7 +11,7 @@ if diff -q previous_domains.tmp "$raw_file" >/dev/null; then
    exit 0
 fi
 
-num_before=$(wc -l < domains.tmp)
+num_before=$(wc -l < previous_domains.tmp)
 
 cp "$raw_file" domains.tmp
 
