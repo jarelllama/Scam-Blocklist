@@ -31,7 +31,7 @@ jobs:
 
       - name: Blocklist check
         run: |
-          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > in_toplist.tmp
+          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > in_toplist.tmp || true
 
           if [[ -s in_toplist.tmp ]]; then
             echo -e "\nDomains found in the toplist:"
