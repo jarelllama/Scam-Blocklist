@@ -47,7 +47,7 @@ function add_toplist_subdomains {
 
     grep -vxFf "$dead_domains_file" 1.tmp > unique_toplist_subdomains.tmp
 
-    check_resolving unique_toplist_subdomains
+    check_resolving unique_toplist_subdomains.tmp
 
     if ! [[ -s alive.tmp ]]; then
         return
