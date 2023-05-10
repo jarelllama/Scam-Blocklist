@@ -8,11 +8,6 @@ blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 dead_domains_file="data/dead_domains.txt"
 edit_script="edit.sh"
-github_email='91372088+jarelllama@users.noreply.github.com'
-github_name='jarelllama'
-
-git config user.email "$github_email"
-git config user.name "$github_name"
 
 function interrupt_handler() {
     echo -e "\nExiting..."
