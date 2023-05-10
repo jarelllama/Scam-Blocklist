@@ -190,7 +190,7 @@ jobs:
             grep "^$subdomain\." "${{ vars.DEAD_DOMAINS_FILE }}" >> subdomains.tmp
           done < "${{ vars.SUBDOMAINS_FILE }}"
 
-          comm -23 "${{ vars.DEAD_DOMAINS_FILE }}" subdomains.tmp > dead_domains.tmp
+          comm -23 "${{ vars.DEAD_DOMAINS_FILE }}" subdomains.tmp > dead_domains.tmp || true
 
           dead_domains_count=$(wc -l < dead_domains.tmp)
 
