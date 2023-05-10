@@ -53,18 +53,15 @@ function remove_dead {
 }
 
 function add_resurrected {
-    # change this to comm?
-    comm -23 "$dead_domains_file" dead.tmp > dead_now_alive.tmp
+    mv dead.tmp "$dead_domains_file"
 
-    mv dead_domains.tmp "$dead_domains_file"
-
-    cat dead_now_alive.tmp >> "$raw_file" 
+    cat alive.tmp >> "$raw_file" 
     sort "$raw_file" -o "$raw_file"
 
     echo -e "\nPreviously dead domains that are alive again:"
-    cat dead_now_alive.tmp
+    cat alive.tmp
 
-    echo -e "\nTotal domains added: $(wc -l < dead_now_alive.tmp)"
+    echo -e "\nTotal domains added: $(wc -l < alive.tmp)"
     
     git add "$raw_file" "$dead_domains_file"
     git commit -qm "Add resurrected domains"
