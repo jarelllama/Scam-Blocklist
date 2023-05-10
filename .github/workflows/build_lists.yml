@@ -145,17 +145,14 @@ jobs:
           git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Compress Adblock rules"
 
-      - name: Update entries count
+      - name: Update stats
         if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
           domains_count=$(grep -vE '^(#|$)' "${{ vars.DOMAINS_FILE }}" | wc -l)
           adblock_count=$(grep -vE '^(!|$)' "${{ vars.ADBLOCK_FILE }}" | wc -l)
           sed -i 's/domains_count/'"$domains_count"'/g' "${{ vars.README_TEMPLATE }}"
           sed -i 's/adblock_count/'"$adblock_count"'/g' "${{ vars.README_TEMPLATE }}"
-           
-      - name: Update stats
-        if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
-        run: |
+
           todays_date=$(date -u +"%m%d%y")
           date_in_file=$(sed -n '2p' "${{ vars.STATS_FILE }}")
           current_count="$adblock_count"
