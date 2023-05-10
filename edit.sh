@@ -69,7 +69,7 @@ function edit_blocklist {
     if [[ "$remove_entry" -eq 1 ]]; then
         # Check if the new entries are unique (not in the blocklist)
 
-	if ! comm -12 "$raw_file" entries.tmp | grep -q .; then
+	      if ! comm -12 "$raw_file" entries.tmp | grep -q .; then
             echo -e "\nDomain not found in blocklist: $entry"
             return
         fi
