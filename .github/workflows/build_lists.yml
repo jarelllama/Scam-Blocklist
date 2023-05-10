@@ -202,6 +202,7 @@ jobs:
 
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
 
+          # Not restoring the template causes an error
           git restore "${{ vars.README_TEMPLATE }}"
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Update README"
