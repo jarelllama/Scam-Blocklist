@@ -47,7 +47,7 @@ jobs:
             tr '[:upper:]' '[:lower:]' < "${{ vars.RAW_FILE }}" > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
 
-            echo
+            echo -e "\nRemoving...\n"
             exit 1
           fi
 
@@ -63,7 +63,7 @@ jobs:
 
             sort -u "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
 
-            echo
+            echo -e "\nRemoving...\n"
             exit 1
           fi
 
@@ -80,7 +80,7 @@ jobs:
             comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
 
-            echo
+            echo -e "\nRemoving...\n"
             exit 1
           fi
 
@@ -97,7 +97,7 @@ jobs:
             comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
             mv raw.tmp "${{ vars.RAW_FILE }}"
 
-            echo
+            echo -e "\nRemoving...\n"
             exit 1
           fi
 
@@ -112,7 +112,7 @@ jobs:
             echo -e "\nWhitelisted domains found:"
             cat check.tmp
 
-            echo -e "\nSkipping lists build.\n"
+            echo -e "\nSkipping build steps.\n"
             exit 1
           fi
 
@@ -127,26 +127,26 @@ jobs:
             echo -e "\nDomains found in the toplist:"
             cat check.tmp
 
-            echo -e "\nSkipping lists build.\n"
+            echo -e "\nSkipping build steps.\n"
             exit 1
           fi
 
       - name: Build Domains list
         id: build_domains
-        if: steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
+        if: success() || steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_domains.sh"
 
       - name: Build Adblock Plus list
         id: build_adblock
-        if: steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
+        if: success() || steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_adblock.sh"
           git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Compress Adblock rules"
 
       - name: Update stats
-        if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
+        if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
           domains_count=$(grep -vE '^(#|$)' "${{ vars.DOMAINS_FILE }}" | wc -l)
           adblock_count=$(grep -vE '^(!|$)' "${{ vars.ADBLOCK_FILE }}" | wc -l)
@@ -208,7 +208,7 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update README"
 
       - name: Commit and push
-        if: steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
+        if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
           git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Build lists"
