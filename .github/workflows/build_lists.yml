@@ -101,6 +101,12 @@ jobs:
             exit 1
           fi
 
+      - name: Save filtered raw file
+        if: failure ()
+        run: |
+          git add "${{ vars.RAW_FILE }}"
+          git commit -m "Filter raw file"
+
       - name: Whitelist check
         id: whitelist
         if: success() || failure()
