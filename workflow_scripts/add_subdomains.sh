@@ -16,15 +16,15 @@ function check_resolving() {
     
     echo -e "\nLog:"
 
-    cat "$1" | xargs -I{} -P6 bash -c '
+    cat "$1" | xargs -I{} -P8 bash -c '
         domain="$1"
         while true; do
             dig=$(dig @1.1.1.1 "$domain")
-            if ! [[ "$dig" == *"timed out"* ]]; then
+            if ! [[ "$dig" =~ [Ee]rror|timed\ out ]];
                 break
             fi
             echo "$domain timed out. Retrying..."
-            sleep 0.5
+            sleep 1
         done
         if ! [[ "$dig" == *"NXDOMAIN"* ]]; then
             echo "$domain (alive)"
