@@ -7,7 +7,7 @@ toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
 
 function interrupt_handler() {
-    echo -e "\nExiting..."
+    echo -e "\nExiting...\n"
     find . -maxdepth 1 -type f -name '*.tmp' -delete
     exit 1
 }
