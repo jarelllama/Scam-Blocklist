@@ -2,18 +2,18 @@
 
 | Syntax | Entries |
 | --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3430 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 7175 |
+| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3432 |
+| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 7178 |
 
 ### Stats
 
 ```
 Unique scam sites found:
-Today: 22
+Today: 24
 Yesterday: 208
-Total: 3430 (since May 10 2023)
+Total: 3432 (since May 10 2023)
 
-Updated: Thu May 11 01:33 UTC
+Updated: Thu May 11 02:05 UTC
 ```
 
 ### How domains are added to the blocklist
