@@ -14,7 +14,7 @@ function check_resolving() {
         domain="$1"
         while true; do
             dig=$(dig @1.1.1.1 "$domain")
-            [[ "$dig" =~ [Ee]rror|timed\ out ]] || break
+            [[ "$dig" =~ error|timed\ out ]] || break
             echo "$domain timed out. Retrying..."
             sleep 1
         done
