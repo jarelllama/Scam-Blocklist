@@ -20,7 +20,7 @@ function check_resolving() {
         while true; do
             dig=$(dig @1.1.1.1 "$domain")
             [[ "$dig" =~ error|timed\ out ]] || break
-            echo "$domain timed out. Retrying..."
+            echo "$domain timed out."
             sleep 1
         done
         if ! [[ "$dig" == *"NXDOMAIN"* ]]; then
