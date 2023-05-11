@@ -5,6 +5,8 @@ blacklist_file="blacklist.txt"
 compressed_entries_file="data/compressed_entries.txt"
 dead_domains_file="data/dead_domains.txt"
 
+trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
+
 function remove_dead {
     comm -23 "$raw_file" dead.tmp > raw.tmp
     mv raw.tmp "$raw_file"
@@ -97,5 +99,3 @@ else
 fi
 
 echo
-
-rm ./*.tmp
