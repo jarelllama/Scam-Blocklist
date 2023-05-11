@@ -28,9 +28,7 @@ function format_entry {
 
     entry="${entry%%/*}"
 
-    if ! [[ "$entry" == *.* ]]; then
-        entry="${entry}.com"
-    fi
+    [[ "$entry" == *.* ]] || entry="${entry}.com"
 
     # Assume the entry is a second-level domain and has no subdomain
     sld="$entry"
@@ -213,25 +211,23 @@ function edit_blacklist {
 }
 
 function check_entry {
-    read -p $'\nEnter the entry to check:\n' check_entry
+    read -p $'\nEnter the entry to check:\n' entry
     
-    check_entry="${check_entry,,}"
+    entry="${entry,,}"
 
-    check_entry="${check_entry#*://}"
+    entry="${entry#*://}"
 
-    check_entry="${check_entry%%/*}"
+    entry="${entry%%/*}"
     
-    if ! [[ "$check_entry" == *.* ]]; then
-        check_entry="${check_entry}.com"
-    fi
+    [[ "$entry" == *.* ]] || entry="${entry}.com"
 
-    if ! grep -xFq "$check_entry" "$raw_file"; then
+    if ! grep -xFq "$entry" "$raw_file"; then
         echo -e "\nThe entry is not present."
-        if ! grep -Fq "$check_entry" "$raw_file"; then
+        if ! grep -Fq "$entry" "$raw_file"; then
             return
         fi
         echo "Similar entries:"
-        grep -F "$check_entry" "$raw_file"
+        grep -F "$entry" "$raw_file"
         return
     fi
     echo -e "\nThe entry is present."
