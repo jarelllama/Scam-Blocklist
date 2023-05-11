@@ -272,9 +272,8 @@ while true; do
             find . -maxdepth 1 -type f -name '*.tmp' -delete
 
             # Check if the script was sourced by another script
-            if [[ "${#BASH_SOURCE[@]}" -gt 1 && "${BASH_SOURCE[0]}" != "${0}" ]]; then
-                return
-            fi
+            [[ "${#BASH_SOURCE[@]}" -gt 1 && "${BASH_SOURCE[0]}" != "${0}" ]] \
+                && return
 
             exit 0  
             ;;
