@@ -2,7 +2,6 @@
 
 raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
-toplist_file="data/subdomains_toplist.txt"
 dead_domains_file="data/dead_domains.txt"
 
 while read -r subdomain; do
@@ -29,27 +28,6 @@ function check_resolving() {
             echo "$domain" >> alive.tmp
         fi
     ' -- {}
-}
-
-function add_toplist_subdomains {
-    echo -e "\nChecking the toplist for subdomains..."
-    
-    touch toplist_subdomains.tmp
-
-    while read -r domain; do
-        # Output is not sorted
-        grep "\.${domain}$" "$toplist_file" >> toplist_subdomains.tmp
-    done < second_level_domains.tmp
-
-    grep -vxFf "$raw_file" toplist_subdomains.tmp > 1.tmp
-
-    grep -vxFf "$dead_domains_file" 1.tmp > unique_toplist_subdomains.tmp
-
-    check_resolving unique_toplist_subdomains.tmp
-
-    [[ -s alive.tmp ]] || return
-
-    cat alive.tmp >> new_domains.tmp
 }
 
 function add_subdomains_to_wildcards {
@@ -97,8 +75,6 @@ function add_subdomains {
         cat alive.tmp >> new_domains.tmp
     done < "$subdomains_file"
 }
-
-add_toplist_subdomains
 
 add_subdomains_to_wildcards
 
