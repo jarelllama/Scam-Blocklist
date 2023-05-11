@@ -74,17 +74,13 @@ function retrieve_domains {
         term=$(echo "$term" | cut -c 1-350)
         echo "${term}..."
 
-        if "$debug"; then
-            echo "$domains"
-        fi
+        "$debug" && echo "$domains"
 
         # wc -w does a better job than wc -l for counting domains in this case
         echo "Domains retrieved: $(echo "$domains" | wc -w)"
         echo "--------------------------------------"
 
-      	if [[ -n "$domains" ]]; then
-      	    echo "$domains" >> "$pending_file"
-      	fi
+      	[[ -n "$domains" ]] && echo "$domains" >> "$pending_file"
     done < "$search_terms_file"
 
     sort -u "$pending_file" -o "$pending_file"
@@ -237,17 +233,18 @@ function merge_pending {
     > "$pending_file"
 
     rm ./*.tmp
-
-    if ! "$unattended"; then
-        read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
-        echo
-        if ! [[ "$answer" =~ ^[Yy]$ ]] && [[ -n "$answer" ]]; then
-            exit 0
-        fi
-        commit_msg='Manual domain retrieval'
-    else
+    
+    if "$unattended"; then
         echo -e "\nPushing changes..."
         commit_msg='Automatic domain retrieval'
+    else
+        read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
+        echo
+        if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+            commit_msg="Manual domain retrieval"
+        else
+            exit 0
+        fi
     fi
 
     echo
@@ -260,9 +257,7 @@ function merge_pending {
     exit 0
 }
 
-if ! "$use_pending_only"; then
-    retrieve_domains
-fi
+"$use_pending_only" || retrieve_domains
 
 filter_pending
 
