@@ -6,11 +6,7 @@ blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
 
-function interrupt_handler() {
-    echo -e "\nExiting...\n"
-    find . -maxdepth 1 -type f -name '*.tmp' -delete
-    exit 1
-}
+trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
 function format_entry {
     read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
@@ -235,8 +231,6 @@ function push_changes {
     git push
 }
 
-trap 'interrupt_handler' INT
-
 while true; do
     echo -e "\nEdit Lists Menu:"
     echo "b. Blocklist"
@@ -265,12 +259,9 @@ while true; do
             ;;
         p)
             push_changes
-            find . -maxdepth 1 -type f -name '*.tmp' -delete
             exit 0
             ;;
         x)
-            find . -maxdepth 1 -type f -name '*.tmp' -delete
-
             # Check if the script was sourced by another script
             [[ "${#BASH_SOURCE[@]}" -gt 1 && "${BASH_SOURCE[0]}" != "${0}" ]] \
                 && return
