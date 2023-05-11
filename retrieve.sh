@@ -10,13 +10,7 @@ dead_domains_file="data/dead_domains.txt"
 stats_file="data/stats.txt"
 edit_script="edit.sh"
 
-function interrupt_handler() {
-    echo -e "\nExiting...\n"
-    find . -maxdepth 1 -type f -name '*.tmp' -delete
-    exit 1
-}
-
-trap 'interrupt_handler' INT
+trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
 debug='false'
 unattended='false'
@@ -183,7 +177,6 @@ function filter_pending {
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
-        rm ./*.tmp
         exit 0
     fi
 
@@ -198,7 +191,6 @@ function filter_pending {
         cat in_toplist.tmp
         if "$unattended"; then
             echo -e "\nExiting...\n"
-            rm ./*.tmp
             exit 1
         fi
     else
@@ -233,8 +225,6 @@ function merge_pending {
     echo "Unique sites added: $unique_count"
 
     > "$pending_file"
-
-    rm ./*.tmp
     
     if "$unattended"; then
         echo -e "\nPushing changes..."
@@ -297,7 +287,6 @@ while true; do
             filter_pending
             ;;
         x)
-            find . -maxdepth 1 -type f -name '*.tmp' -delete
             exit 0
             ;;
         *)
