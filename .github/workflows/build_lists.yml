@@ -197,9 +197,7 @@ jobs:
           sed -i "s/manual_count/${manual_count}/g" "${{ vars.README_TEMPLATE }}"
           
           sed -i "s/auto_count/${auto_count}/g" "${{ vars.README_TEMPLATE }}"
-          
-          sed -i "s/total_count/${total_count}/g" "${{ vars.README_TEMPLATE }}"
-       
+ 
           while read -r subdomain; do
             grep "^${subdomain}\." "${{ vars.DEAD_DOMAINS_FILE }}" >> subdomains.tmp || true
           done < "${{ vars.SUBDOMAINS_FILE }}"
