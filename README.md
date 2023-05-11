@@ -13,7 +13,7 @@ Today: 24
 Yesterday: 208
 Total: 3432 (since May 10 2023)
 
-Updated: Thu May 11 02:05 UTC
+Updated: Thu May 11 04:35 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -34,8 +34,6 @@ To see the full filtering and retrieval process check out the code in the reposi
 Common subdomains are added to domains with no [wildcard record](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/). See the list of subdomains checked here: [subdomains.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/data/subdomains.txt)
 
 Only the `www` and `m` subdomains are added to domains with wildcard records so as to not inflate the blocklist size.
-
-Subdomains found in Hagezi's [merged toplist](https://github.com/hagezi/dns-data-collection/tree/main/top) are also added (thank you Hagezi).
 
 All subdomains are only added if they are resolving (in the case of domains with wildcard records, all subdomains resolve).
 
