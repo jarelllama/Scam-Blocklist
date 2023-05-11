@@ -20,9 +20,7 @@ function check_resolving() {
         domain="$1"
         while true; do
             dig=$(dig @1.1.1.1 "$domain")
-            if ! [[ "$dig" =~ [Ee]rror|timed\ out ]];
-                break
-            fi
+            [[ "$dig" =~ [Ee]rror|timed\ out ]] || break
             echo "$domain timed out. Retrying..."
             sleep 1
         done
@@ -49,9 +47,7 @@ function add_toplist_subdomains {
 
     check_resolving unique_toplist_subdomains.tmp
 
-    if ! [[ -s alive.tmp ]]; then
-        return
-    fi
+    [[ -s alive.tmp ]] || return
 
     cat alive.tmp >> new_domains.tmp
 }
@@ -70,9 +66,7 @@ function add_subdomains_to_wildcards {
     # Create a file with no wildcard domains. This file is sorted 
     grep -vxFf wildcards.tmp second_level_domains.tmp > no_wildcards.tmp
 
-    if ! [[ -s wildcards.tmp ]]; then
-        return
-    fi
+    [[ -s wildcards.tmp ]] || return
 
     awk '{print "www."$0}' wildcards.tmp > wildcards_with_www.tmp
 
@@ -98,9 +92,7 @@ function add_subdomains {
 
         check_resolving subdomains.tmp
 
-        if ! [[ -s alive.tmp ]]; then
-            continue
-        fi
+        [[ -s alive.tmp ]] || continue
 
         cat alive.tmp >> new_domains.tmp
     done < "$subdomains_file"
