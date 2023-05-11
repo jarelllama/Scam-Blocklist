@@ -17,15 +17,15 @@ Manually: 3422
 Automatically: 85
 Total: 3507 (since May 10 2023)
 
-Updated: Thu May 11 11:40 UTC
+Updated: Thu May 11 12:01 UTC
 ```
 
 ### How domains are added to the blocklist
 
 - The retrieval script searches Google with a list of search terms almost exclusively used in scam sites. See the list of search terms here: [search_terms.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/search_terms.txt)
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
-- Domains found in the Cisco Umbrella 1M toplist are checked manually
-- Domains found in toplist/whitelist updates are vetted manually
+- Domains found in the Cisco Umbrella 1M toplist are checked manually (checked on retrieval and toplist updates)
+- Domains in the Adblock Plus list with the same second-level domain are compressed into one rule
 
 Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasionally added after being manually inspected.
 
@@ -39,7 +39,7 @@ Common subdomains are added to domains with no [wildcard record](https://develop
 
 Only the `www` and `m` subdomains are added to domains with wildcard records so as to not inflate the blocklist size.
 
-All subdomains are only added if they are resolving (in the case of domains with wildcard records, all subdomains resolve).
+Subdomains are only added if they are resolving (in the case of domains with wildcard records, all subdomains resolve).
 
 ### Dead domains
 
@@ -53,15 +53,17 @@ Although I could never keep up with the number of scam sites created daily, I ai
 
 ### Limitations
 
-Most of the domains retrieved are from manually running the script on my phone's terminal emulator. After successive runs, I have to change VPN servers to overcome Google's IP blocking and retrieve scam sites from different regions.
+Most of the domains retrieved are from manually running the script on my phone's terminal emulator. After successive manual runs, I have to change VPN servers to overcome Google's IP blocking.
 
-Because of these limitations, the number of domains retrieved varies depending on my interest and free time. However, if left unattended, the blocklist is still capable of automatic daily updates but at a much lower daily retrieval rate than if I were to manually run the script in my own free time.
+The number of domains retrieved in a day varies depending on my interest and free time. However, if left unattended, the blocklist is still capable of automatic daily updates but at a much lower retrieval count than if I were to manually run the script.
+
+See [stats](https://github.com/jarelllama/Scam-Blocklist#stats) for the number of unique domains retrieved during manual and automatic runs.
 
 ### See also
 
 [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
 
-[Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Contains both my list and Durablenapkin's list)
+[Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Uses my list as a source)
 
 [Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
 
