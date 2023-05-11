@@ -4,6 +4,8 @@ raw_file="data/raw.txt"
 subdomains_file="data/subdomains.txt"
 dead_domains_file="data/dead_domains.txt"
 
+trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
+
 while read -r subdomain; do
     grep "^${subdomain}\." "$raw_file" >> only_subdomains.tmp
 done < "$subdomains_file"
@@ -86,7 +88,6 @@ comm -23 new_domains.tmp "$raw_file" > unique_domains.tmp
 
 if ! [[ -s unique_domains.tmp ]]; then
     echo -e "\nNo domains added.\n"
-    rm ./*.tmp
     exit 0
 fi
 
@@ -98,5 +99,3 @@ echo -e "\nTotal domains added: $(wc -l < unique_domains.tmp)\n"
 cat unique_domains.tmp >> "$raw_file"
 
 sort "$raw_file" -o "$raw_file"
-
-rm ./*.tmp
