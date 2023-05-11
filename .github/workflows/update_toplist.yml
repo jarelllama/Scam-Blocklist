@@ -1,5 +1,5 @@
-name: Update toplists
-run-name: Update toplists
+name: Update toplist
+run-name: Update toplist
 on:
   workflow_dispatch:
   schedule:
@@ -7,26 +7,23 @@ on:
     - cron: '0 21 * * *'
 
 jobs:
-  Update-toplists:
+  Update-toplist:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Download toplists
+      - name: Download toplist
         run: |
           wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt -O "${{ vars.TOPLIST_FILE }}"
           sort -u "${{ vars.TOPLIST_FILE }}" -o "${{ vars.TOPLIST_FILE }}"
-
-          wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist-merged.txt -O "${{ vars.SUBDOMAINS_TOPLIST_FILE }}"
-          sort -u "${{ vars.SUBDOMAINS_TOPLIST_FILE }}" -o "${{ vars.SUBDOMAINS_TOPLIST_FILE }}"
 
       - name: Commit and push 
         run: |
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
-          git add "${{ vars.TOPLIST_FILE }}" "${{ vars.SUBDOMAINS_TOPLIST_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Update toplists"
+          git add "${{ vars.TOPLIST_FILE }}"
+          git diff-index --quiet HEAD || git commit -m "Update toplist"
           git push
 
       - name: Blocklist check
