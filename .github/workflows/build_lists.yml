@@ -202,7 +202,7 @@ jobs:
 
           sed -i "s/total_count/${total_count}/g" "${{ vars.README_TEMPLATE }}"
 
-          auto_count=$(sed -n '12p' "${{ vars.STATS_FILE }}")
+          auto_count=$(sed -n '10p' "${{ vars.STATS_FILE }}")
 
           manual_count=$((total_count - auto_count))
 
