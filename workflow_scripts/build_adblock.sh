@@ -5,6 +5,8 @@ adblock_file="adblock.txt"
 subdomains_file="data/subdomains.txt"
 compressed_entries_file="data/compressed_entries.txt"
 
+trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
+
 comm -23 "$raw_file" "$compressed_entries_file" > raw.tmp
 
 while read -r subdomain; do
@@ -37,7 +39,6 @@ grep -vE '^(!|$)' "$adblock_file" > previous_adblock.tmp
 
 if diff -q previous_adblock.tmp adblock.tmp >/dev/null; then
    echo -e "\nNo changes.\n"
-   rm ./*.tmp
    exit 0
 fi
 
@@ -59,5 +60,3 @@ echo "! Title: Jarelllama's Scam Blocklist
 ! Syntax: Adblock Plus
 ! Total number of entries: $num_after
 " | cat - adblock.tmp > "$adblock_file"
-
-rm ./*.tmp
