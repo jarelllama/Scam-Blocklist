@@ -190,14 +190,6 @@ jobs:
 
           sed -i "4s/.*/${current_count}/" "${{ vars.STATS_FILE }}"
        
-          manual_count=$(sed -n '10p' "${{ vars.STATS_FILE }}")
-       
-          auto_count=$(sed -n '12p' "${{ vars.STATS_FILE }}")
-       
-          sed -i "s/manual_count/${manual_count}/g" "${{ vars.README_TEMPLATE }}"
-          
-          sed -i "s/auto_count/${auto_count}/g" "${{ vars.README_TEMPLATE }}"
- 
           while read -r subdomain; do
             grep "^${subdomain}\." "${{ vars.DEAD_DOMAINS_FILE }}" >> subdomains.tmp || true
           done < "${{ vars.SUBDOMAINS_FILE }}"
@@ -209,6 +201,14 @@ jobs:
           total_count=$((dead_domains_count + current_count))
 
           sed -i "s/total_count/${total_count}/g" "${{ vars.README_TEMPLATE }}"
+
+          manual_count=$(sed -n '10p' "${{ vars.STATS_FILE }}")
+       
+          auto_count=$((total_count - manual_count))
+
+          sed -i "s/manual_count/${manual_count}/g" "${{ vars.README_TEMPLATE }}"
+          
+          sed -i "s/auto_count/${auto_count}/g" "${{ vars.README_TEMPLATE }}"
 
           sed -i "s/update_time/$(date -u +"%a %b %d %H:%M UTC")/g" "${{ vars.README_TEMPLATE }}"
 
