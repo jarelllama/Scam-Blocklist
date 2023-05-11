@@ -154,8 +154,8 @@ jobs:
         run: |
           domains_count=$(grep -vE '^(#|$)' "${{ vars.DOMAINS_FILE }}" | wc -l)
           adblock_count=$(grep -vE '^(!|$)' "${{ vars.ADBLOCK_FILE }}" | wc -l)
-          sed -i 's/domains_count/'"${domains_count}"'/g' "${{ vars.README_TEMPLATE }}"
-          sed -i 's/adblock_count/'"${adblock_count}"'/g' "${{ vars.README_TEMPLATE }}"
+          sed -i "s/domains_count/${domains_count}/g" "${{ vars.README_TEMPLATE }}"
+          sed -i "s/adblock_count/${adblock_count}/g" "${{ vars.README_TEMPLATE }}"
 
           todays_date=$(date -u +"%m%d%y")
           date_in_file=$(sed -n '2p' "${{ vars.STATS_FILE }}")
@@ -165,21 +165,21 @@ jobs:
           if [[ "$date_in_file" == "$todays_date" ]]; then
             todays_diff=$((current_count - yest_count))
 
-            sed -i 's/todays_count/'"${todays_diff}"'/g' "${{ vars.README_TEMPLATE }}"
+            sed -i "s/todays_count/${todays_diff}/g" "${{ vars.README_TEMPLATE }}"
 
             yest_diff=$(sed -n '8p' "${{ vars.STATS_FILE }}")
 
-            sed -i 's/yest_count/'"${yest_diff}"'/g' "${{ vars.README_TEMPLATE }}"
+            sed -i "s/yest_count/${yest_diff}/g" "${{ vars.README_TEMPLATE }}"
           else
             end_of_day_count=$(sed -n '4p' "${{ vars.STATS_FILE }}")
 
             end_of_day_diff=$((end_of_day_count - yest_count))
 
-            sed -i 's/yest_count/'"${end_of_day_diff}"'/g' "${{ vars.README_TEMPLATE }}"
+            sed -i "s/yest_count/${end_of_day_diff}/g" "${{ vars.README_TEMPLATE }}"
     
             todays_diff=$((current_count - end_of_day_count))
 
-            sed -i 's/todays_count/'"${todays_diff}"'/g' "${{ vars.README_TEMPLATE }}"
+            sed -i "s/todays_count/${todays_diff}/g" "${{ vars.README_TEMPLATE }}"
 
             sed -i "2s/.*/${todays_date}/" "${{ vars.STATS_FILE }}"
 
@@ -200,9 +200,9 @@ jobs:
 
           total_count=$((dead_domains_count + current_count))
 
-          sed -i 's/total_count/'"${total_count}"'/g' "${{ vars.README_TEMPLATE }}"
+          sed -i "s/total_count/${total_count}/g" "${{ vars.README_TEMPLATE }}"
 
-          sed -i 's/update_time/'"$(date -u +"%a %b %d %H:%M UTC")"'/g' "${{ vars.README_TEMPLATE }}"
+          sed -i "s/update_time/$(date -u +"%a %b %d %H:%M UTC")/g" "${{ vars.README_TEMPLATE }}"
 
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
 
