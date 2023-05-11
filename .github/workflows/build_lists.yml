@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "data/raw.txt"
+      - "data/README.md"
   schedule:
     # Daily at 5:10am (GMT+8)
     - cron: '10 21 * * *'
