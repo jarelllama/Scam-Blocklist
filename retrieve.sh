@@ -10,7 +10,7 @@ dead_domains_file="data/dead_domains.txt"
 edit_script="edit.sh"
 
 function interrupt_handler() {
-    echo -e "\nExiting..."
+    echo -e "\nExiting...\n"
     find . -maxdepth 1 -type f -name '*.tmp' -delete
     exit 1
 }
