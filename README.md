@@ -13,7 +13,7 @@ Today: 22
 Yesterday: 208
 Total: 3430 (since May 10 2023)
 
-Updated: Thu May 11 01:03 UTC
+Updated: Thu May 11 01:33 UTC
 ```
 
 ### How domains are added to the blocklist
