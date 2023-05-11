@@ -147,7 +147,8 @@ function edit_whitelist {
     
     if grep -Fq "$entry" "$whitelist_file"; then
         existing_entry=$(grep -F "$entry" "$whitelist_file" | head -n 1)
-        echo -e "\nA similar term is already in the whitelist: $existing_entry"
+        echo -e "\nSimilar term(s) are already in the whitelist:"
+        echo "$existing_entry"
         return
     fi
 
@@ -222,7 +223,7 @@ function check_entry {
     [[ "$entry" == *.* ]] || entry="${entry}.com"
 
     if ! grep -xFq "$entry" "$raw_file"; then
-        echo -e "\nThe entry is not present."
+        echo -e "\nThe entry is not present: $entry"
         if ! grep -Fq "$entry" "$raw_file"; then
             return
         fi
@@ -230,7 +231,7 @@ function check_entry {
         grep -F "$entry" "$raw_file"
         return
     fi
-    echo -e "\nThe entry is present."
+    echo -e "\nThe entry is present: $entry"
 }
 
 function push_changes {
