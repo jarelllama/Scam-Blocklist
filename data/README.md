@@ -16,7 +16,6 @@ Yesterday: yest_count
 Manually: manual_count
 Automatically: auto_count
 Total: total_count (since May 10 2023)
-Active: active_count
 
 Updated: update_time
 ```
