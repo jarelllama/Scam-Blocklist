@@ -12,6 +12,8 @@ Unique scam sites found:
 Today: 24
 Yesterday: 208
 Total: 3432 (since May 10 2023)
+Manually retrieved: 3000
+Automatically: retrieved: 432
 
 Updated: Thu May 11 04:35 UTC
 ```
