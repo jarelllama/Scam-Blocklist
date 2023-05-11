@@ -243,7 +243,7 @@ function merge_pending {
         
         previous_count=$(sed -n '10p' "$stats_file")
         new_count=$((previous_count + unique_count))
-        sed -i "10s/.*/${new_count}/" "$stats_file"
+        sed -i "12s/.*/${new_count}/" "$stats_file"
     else
         read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
         echo
