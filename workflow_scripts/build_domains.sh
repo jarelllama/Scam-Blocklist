@@ -3,11 +3,12 @@
 raw_file="data/raw.txt"
 domains_file="domains.txt"
 
+trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
+
 grep -vE '^(#|$)' "$domains_file" > previous_domains.tmp
 
 if diff -q previous_domains.tmp "$raw_file" >/dev/null; then
    echo -e "\nNo changes.\n"
-   rm ./*.tmp
    exit 0
 fi
 
@@ -31,5 +32,3 @@ echo "# Title: Jarelllama's Scam Blocklist
 # Syntax: Domains
 # Total number of domains: $num_after
 " | cat - domains.tmp > "$domains_file"
-
-rm ./*.tmp
