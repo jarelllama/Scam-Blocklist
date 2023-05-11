@@ -234,7 +234,7 @@ function merge_pending {
         new_count=$((previous_count + unique_count))
         sed -i "10s/.*/${new_count}/" "$stats_file"
     else
-        read -n1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
+        read -n1 -p $'\nDo you want to push the blocklist? (Y/n): ' answer
         echo
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
