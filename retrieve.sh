@@ -7,6 +7,7 @@ whitelist_file="whitelist.txt"
 blacklist_file="blacklist.txt"
 toplist_file="data/toplist.txt"
 dead_domains_file="data/dead_domains.txt"
+stats_file="data/stats.txt"
 edit_script="edit.sh"
 
 function interrupt_handler() {
@@ -225,10 +226,12 @@ function merge_pending {
     
     sort -u unique_sites.tmp -o unique_sites.tmp
 
+    unique_count=$(wc -l < unique_sites.tmp)
+
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $((num_after - num_before))"
     echo "Total domains after: $num_after"
-    echo "Unique sites added: $(wc -l < unique_sites.tmp)"
+    echo "Unique sites added: $unique_count"
 
     > "$pending_file"
 
@@ -237,11 +240,19 @@ function merge_pending {
     if "$unattended"; then
         echo -e "\nPushing changes..."
         commit_msg='Automatic domain retrieval'
+        
+        previous_count=$(sed -n '10p' "$stats_file")
+        new_count=$((previous_count + unique_count))
+        sed -i "10s/.*/${new_count}/" "$stats_file"
     else
         read -n 1 -p $'\nDo you want to push the updated blocklist? (Y/n): ' answer
         echo
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
+            
+            previous_count=$(sed -n '12p' "$stats_file")
+            new_count=$((previous_count + unique_count))
+            sed -i "12s/.*/${new_count}/" "$stats_file"
         else
             exit 0
         fi
@@ -250,7 +261,7 @@ function merge_pending {
     echo
 
     # Push white/black lists too for when they are modified through the editing script
-    git add "$raw_file" "$whitelist_file" "$blacklist_file"
+    git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file"
     git commit -m "$commit_msg"
     git push
 
