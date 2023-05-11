@@ -2,8 +2,8 @@
 ! Description: Blocklist for scam sites automatically retrieved from Google Search
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 05.11.160529.2023
-! Last modified: Thu May 11 16:05:29 UTC 2023
+! Version: 05.11.161325.2023
+! Last modified: Thu May 11 16:13:25 UTC 2023
 ! Expires: 4 hours
 ! Syntax: Adblock Plus
 ! Total number of entries: 3627
@@ -3553,7 +3553,6 @@
 ||xguluer.com^
 ||xiaotoy.shop^
 ||xiazhouint.com^
-||xigfe.zpit-kurpiezielone.pl^
 ||xpressracing.com^
 ||xprrd.com^
 ||xray-disk.com^
@@ -3630,6 +3629,7 @@
 ||zmbond.com^
 ||zodnox.com^
 ||zonin.store^
+||zpit-kurpiezielone.pl^
 ||zqtnqxx.deem.cz^
 ||zstyle68.store^
 ||zupdone.com^
