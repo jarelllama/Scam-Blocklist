@@ -34,10 +34,9 @@ function format_entry {
     sld="$entry"
 
     while read -r subdomain; do
-        if ! [[ "$entry" == "$subdomain".* ]]; then
-            continue
-        fi
-        # Strip the subdomain to the second-level domain
+        # Check if the entry has a subdomain
+        [[ "$entry" == "$subdomain".* ]] || continue
+        # Strip the entry down to the second-level domain
         sld="${entry#"${subdomain}".}"
     done < "$subdomains_file"
 
@@ -97,14 +96,9 @@ function edit_blocklist {
     # The dead check messes up the order
     sort alive_entries.tmp -o entries.tmp
   
-    # Check if the entry is in the toplist
-    while read -r domain; do
-        grep "${domain}$" "$toplist_file" >> 1.tmp
-    done < entries.tmp
-    
-    comm -23 1.tmp "$blacklist_file" > in_toplist.tmp 
+    comm -12 entries.tmp "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
     if [[ -s in_toplist.tmp ]]; then
-        echo -e "\nThe domain is found in the toplist. Not added."
+        echo -e "\nThe domain is in the toplist. Not added."
         echo "Matches in toplist:"
         cat in_toplist.tmp
         return
@@ -224,9 +218,8 @@ function check_entry {
 
     if ! grep -xFq "$entry" "$raw_file"; then
         echo -e "\nThe entry is not present: $entry"
-        if ! grep -Fq "$entry" "$raw_file"; then
-            return
-        fi
+        # Check if there are similar entries
+        grep -Fq "$entry" "$raw_file" || return
         echo "Similar entries:"
         grep -F "$entry" "$raw_file"
         return
