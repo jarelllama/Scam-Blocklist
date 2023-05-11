@@ -249,10 +249,6 @@ function merge_pending {
         echo
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
-            
-            previous_count=$(sed -n '12p' "$stats_file")
-            new_count=$((previous_count + unique_count))
-            sed -i "12s/.*/${new_count}/" "$stats_file"
         else
             exit 0
         fi
