@@ -63,7 +63,7 @@ See [stats](https://github.com/jarelllama/Scam-Blocklist#stats) for the number o
 
 [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
 
-[Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Contains both my list and Durablenapkin's list)
+[Hagezi's Fake list](https://github.com/hagezi/dns-blocklists#fake) (Uses my list as a source)
 
 [Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
 
