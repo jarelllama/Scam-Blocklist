@@ -202,14 +202,14 @@ jobs:
 
           sed -i "s/total_count/${total_count}/g" "${{ vars.README_TEMPLATE }}"
 
-          manual_count=$(sed -n '10p' "${{ vars.STATS_FILE }}")
-       
-          auto_count=$((total_count - manual_count))
+          auto_count=$(sed -n '12p' "${{ vars.STATS_FILE }}")
+
+          manual_count=$((total_count - auto_count))
+
+          sed -i "s/auto_count/${auto_count}/g" "${{ vars.README_TEMPLATE }}"
 
           sed -i "s/manual_count/${manual_count}/g" "${{ vars.README_TEMPLATE }}"
           
-          sed -i "s/auto_count/${auto_count}/g" "${{ vars.README_TEMPLATE }}"
-
           sed -i "s/update_time/$(date -u +"%a %b %d %H:%M UTC")/g" "${{ vars.README_TEMPLATE }}"
 
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
