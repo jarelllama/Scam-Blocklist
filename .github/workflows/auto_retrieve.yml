@@ -1,5 +1,5 @@
-name: Retrieve domains
-run-name: Retrieve domains
+name: Automatically retrieve domains
+run-name: Automatically retrieve domains
 on:
   workflow_dispatch:
   schedule:
