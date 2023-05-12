@@ -122,7 +122,8 @@ jobs:
         run: |
           bash "workflow_scripts/build_adblock.sh"
           git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules"
+          # The '|| true' is needed because when untracked changes are found it returns 1
+          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules" || true
 
       - name: Update stats
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
@@ -190,7 +191,7 @@ jobs:
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
 
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Update README/stats"
+          git diff-index --quiet HEAD || git commit -m "Update README/stats" || true
 
       - name: Commit and push
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
