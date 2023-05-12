@@ -37,11 +37,13 @@ function add_subdomains_to_wildcards {
     
     random_subdomain='6nd7p7ccay6r5da'
 
-    awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level_domains.tmp > random_subdomain.tmp
+    awk -v subdomain="$random_subdomain" '{print subdomain"."$0}' second_level_domains.tmp \
+        > random_subdomain.tmp
 
     check_resolving random_subdomain.tmp
 
-    awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' alive.tmp > wildcards.tmp
+    awk -v subdomain="$random_subdomain" '{sub("^"subdomain"\\.", ""); print}' alive.tmp \
+        > wildcards.tmp
 
     # Create a file with no wildcard domains. This file is sorted 
     grep -vxFf wildcards.tmp second_level_domains.tmp > no_wildcards.tmp
