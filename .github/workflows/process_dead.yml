@@ -1,5 +1,5 @@
-name: Remove dead domains
-run-name: Remove dead domains
+name: Process dead domains
+run-name: Process dead domains
 on:
   workflow_dispatch:
   schedule:
@@ -7,7 +7,7 @@ on:
     - cron: '0 19 * * *'
 
 jobs:
-  Remove-dead-domains:
+  process-dead-domains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -107,4 +107,3 @@ jobs:
           
       - name: Push
         run: git push
-
