@@ -102,12 +102,6 @@ jobs:
             exit 1
           fi
 
-      - name: Save filtered raw file
-        if: failure()
-        run: |
-          git add "${{ vars.RAW_FILE }}"
-          git commit -m "Filter raw file"
-
       - name: Whitelist check
         id: whitelist
         if: success() || failure()
@@ -123,30 +117,21 @@ jobs:
             exit 1
           fi
 
-      - name: Toplist check
-        id: toplist
-        if: success() || failure()
+      - name: Save any new filtering changes
+        if: failure()
         run: |
-          > check.tmp
-          comm -12 "${{ vars.RAW_FILE }}" "${{ vars.TOPLIST_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || true
-
-          if [[ -s check.tmp ]]; then
-            echo -e "\nDomains found in the toplist:"
-            cat check.tmp
-
-            echo -e "\nSkipping build steps.\n"
-            exit 1
-          fi
+          git add "${{ vars.RAW_FILE }}"
+          git commit -m "Filter raw file"
 
       - name: Build Domains list
         id: build_domains
-        if: success() || steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
+        if: success() || steps.whitelist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_domains.sh"
 
       - name: Build Adblock Plus list
         id: build_adblock
-        if: success() || steps.whitelist.conclusion == 'success' && steps.toplist.conclusion == 'success'
+        if: success() || steps.whitelist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_adblock.sh"
 
@@ -216,7 +201,7 @@ jobs:
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
 
           # Not restoring the template causes an error
-          git restore "${{ vars.README_TEMPLATE }}"
+          #git restore "${{ vars.README_TEMPLATE }}"
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Update README/stats"
 
