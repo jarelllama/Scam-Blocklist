@@ -20,7 +20,7 @@ jobs:
 
       - name: Remove dead domains
         run: |
-          echo -e "\nChecking for dead domains...\n"
+          echo -e "\nChecking for dead domains":
 
           > dead.tmp
           cat "${{ vars.RAW_FILE }}" | xargs -I{} -P6 bash -c '
@@ -40,8 +40,7 @@ jobs:
           sort -u dead.tmp -o dead.tmp
         
           if ! [[ -s dead.tmp ]]; then
-            # No need for new line
-            echo -e "No dead domains found.\n"
+            echo -e "\nNo dead domains found.\n"
             exit 0
           fi
 
@@ -68,7 +67,7 @@ jobs:
 
       - name: Add resurrected domains
         run: |
-          echo -e "\nChecking for resurrected domains...\n"
+          echo -e "\nChecking for resurrected domains:"
 
           > alive.tmp
           cat "${{ vars.DEAD_DOMAINS_FILE }}" | xargs -I{} -P6 bash -c '
@@ -88,7 +87,7 @@ jobs:
           sort -u alive.tmp -o alive.tmp
 
           if ! [[ -s alive.tmp ]]; then
-            echo -e "No resurrected domains found.\n"
+            echo -e "\nNo resurrected domains found.\n"
             exit 0
           fi
 
