@@ -17,7 +17,7 @@ Manually: 3647
 Automatically: 86
 Total: 3733 (since May 10 2023)
 
-Updated: Fri May 12 01:15 UTC
+Updated: Fri May 12 01:17 UTC
 ```
 
 ### How domains are added to the blocklist
