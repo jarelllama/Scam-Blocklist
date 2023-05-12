@@ -122,8 +122,8 @@ jobs:
         run: |
           bash "workflow_scripts/build_adblock.sh"
           git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
-          # The '|| true' is needed because when untracked changes are found it returns 1
-          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules" || true
+          # The '|| true' is needed because when untracked changes are found, git commit returns 1
+          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules" > /dev/null || true
 
       - name: Update stats
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
@@ -190,12 +190,13 @@ jobs:
 
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
 
+          git restore "${{ vars.README_TEMPLATE }}"
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Update README/stats" || true
+          git diff-index --quiet HEAD || git commit -m "Update README/stats" > /dev/null || true
 
       - name: Commit and push
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
           git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}"
-          git diff-index --quiet HEAD || git commit -qm "Build lists" || true
+          git diff-index --quiet HEAD || git commit -qm "Build lists" > /dev/null || true
           git push
