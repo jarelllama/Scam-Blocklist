@@ -40,7 +40,8 @@ jobs:
           sort -u dead.tmp -o dead.tmp
         
           if ! [[ -s dead.tmp ]]; then
-            echo -e "\nNo dead domains found.\n"
+            # No need for new line
+            echo -e "No dead domains found.\n"
             exit 0
           fi
 
@@ -87,7 +88,7 @@ jobs:
           sort -u alive.tmp -o alive.tmp
 
           if ! [[ -s alive.tmp ]]; then
-            echo -e "\nNo resurrected domains found.\n"
+            echo -e "No resurrected domains found.\n"
             exit 0
           fi
 
