@@ -50,7 +50,7 @@ function add_resurrected {
     
 echo -e "\nChecking for dead domains...\n"
 
-cat "$raw_file" | xargs -I{} -P8 bash -c '
+cat "$raw_file" | xargs -I{} -P6 bash -c '
     domain="$1"
     while true; do
         dig=$(dig @1.1.1.1 "$domain")
@@ -70,7 +70,7 @@ sort -u dead.tmp -o dead.tmp
 
 echo -e "\nChecking for resurrected domains...\n"
 
-cat "$dead_domains_file" | xargs -I{} -P8 bash -c '
+cat "$dead_domains_file" | xargs -I{} -P6 bash -c '
     domain="$1"
     while true; do
         dig=$(dig @1.1.1.1 "$domain")
