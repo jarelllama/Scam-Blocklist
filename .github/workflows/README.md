@@ -1,7 +1,7 @@
 ```
 (Time in GMT+8)
 
-Remove dead: 3am (1h runtime)
+Process dead: 3am (1h runtime)
 
 Add subdomains: 4am (1h runtime)
 
