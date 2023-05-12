@@ -63,7 +63,7 @@ jobs:
           echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
     
           git add "${{ vars.RAW_FILE }}" "${{ vars.BLACKLIST_FILE }}" "${{ vars.COMPRESSED_ENTRIES_FILE }}" "${{ vars.DEAD_DOMAINS_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Remove dead domains"
+          git commit -m "Remove dead domains"
 
       - name: Add resurrected domains
         run: |
@@ -103,7 +103,7 @@ jobs:
           echo -e "\nTotal domains added: $(wc -l < alive.tmp)\n"
     
           git add "${{ vars.RAW_FILE }}" "${{ vars.DEAD_DOMAINS_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Add resurrected domains"
+          git commit -m "Add resurrected domains"
           
       - name: Push
         run: git push
