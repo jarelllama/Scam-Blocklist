@@ -25,97 +25,84 @@ jobs:
       - name: Empty line check
         if: success() || failure()
         run: |
-          if grep -q '^[[:space:]]*$' "${{ vars.RAW_FILE }}"; then
-            echo -e "\nEmpty lines found. Removing..."           
+          grep -q '^[[:space:]]*$' "${{ vars.RAW_FILE }}" || exit 0
 
-            awk NF "${{ vars.RAW_FILE }}" > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
+          echo -e "\nEmpty lines found. Removing..."           
 
-            echo
-            exit 1
-          fi
+          awk NF "${{ vars.RAW_FILE }}" > raw.tmp
+          mv raw.tmp "${{ vars.RAW_FILE }}"
+
+          echo
+          exit 1
 
       - name: Case check
         if: success() || failure()
         run: |
-          > check.tmp
-          grep '[A-Z]' "${{ vars.RAW_FILE }}" > check.tmp || true
+          grep '[A-Z]' "${{ vars.RAW_FILE }}" > check.tmp || exit 0
 
-          if [[ -s check.tmp ]]; then
-            echo -e "\nEntries with capitalized letters found:"
-            cat check.tmp
+          echo -e "\nEntries with capitalized letters found:"
+          cat check.tmp
 
-            tr '[:upper:]' '[:lower:]' < "${{ vars.RAW_FILE }}" > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
+          tr '[:upper:]' '[:lower:]' < "${{ vars.RAW_FILE }}" > raw.tmp
+          mv raw.tmp "${{ vars.RAW_FILE }}"
 
-            echo -e "\nRemoving...\n"
-            exit 1
-          fi
+          echo -e "\nRemoving...\n"
+          exit 1
 
       - name: Duplicate check
         if: success() || failure()
         run: |
-          > check.tmp
           sort "${{ vars.RAW_FILE }}" | uniq -d > check.tmp
 
-          if [[ -s check.tmp ]]; then
-            echo -e "\nDuplicates found:"
-            cat check.tmp
+          [[ -s check.tmp ]] || exit 0
+          echo -e "\nDuplicates found:"
+          cat check.tmp
 
-            sort -u "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
+          sort -u "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
 
-            echo -e "\nRemoving...\n"
-            exit 1
-          fi
+          echo -e "\nRemoving...\n"
+          exit 1
 
       - name: Whitelisted TLDs check
         if: success() || failure()
         run: |
-          > check.tmp
-          grep -E '\.(gov|edu)(\.[a-z]{2})?$' "${{ vars.RAW_FILE }}" > check.tmp || true
+          grep -E '\.(gov|edu)(\.[a-z]{2})?$' "${{ vars.RAW_FILE }}" > check.tmp || exit 0
 
-          if [[ -s check.tmp ]]; then
-            echo -e "\nDomains with whitelisted TLDs found:"
-            cat check.tmp
+          echo -e "\nDomains with whitelisted TLDs found:"
+          cat check.tmp
 
-            comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
+          comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
+          mv raw.tmp "${{ vars.RAW_FILE }}"
 
-            echo -e "\nRemoving...\n"
-            exit 1
-          fi
+          echo -e "\nRemoving...\n"
+          exit 1
 
       - name: Invalid domains check
         if: success() || failure()
         run: |
-          > check.tmp
-          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "${{ vars.RAW_FILE }}" > check.tmp || true
+          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "${{ vars.RAW_FILE }}" > check.tmp || exit 0
          
-          if [[ -s check.tmp ]]; then
-            echo -e "\nInvalid domains found:"
-            cat check.tmp
+          echo -e "\nInvalid domains found:"
+          cat check.tmp
 
-            comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
-            mv raw.tmp "${{ vars.RAW_FILE }}"
+          comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
+          mv raw.tmp "${{ vars.RAW_FILE }}"
 
-            echo -e "\nRemoving...\n"
-            exit 1
-          fi
+          echo -e "\nRemoving...\n"
+          exit 1
 
       - name: Whitelist check
         id: whitelist
         if: success() || failure()
         run: |
-          > check.tmp
-          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || true
+          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" \
+            | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || exit 0
           
-          if [[ -s check.tmp ]]; then
-            echo -e "\nWhitelisted domains found:"
-            cat check.tmp
+          echo -e "\nWhitelisted domains found:"
+          cat check.tmp
 
-            echo -e "\nSkipping build steps.\n"
-            exit 1
-          fi
+          echo -e "\nSkipping build steps.\n"
+          exit 1
 
       - name: Save any new filtering changes
         if: failure()
@@ -134,6 +121,8 @@ jobs:
         if: success() || steps.whitelist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_adblock.sh"
+          git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
+          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules"
 
       - name: Update stats
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
@@ -200,15 +189,13 @@ jobs:
 
           cp "${{ vars.README_TEMPLATE }}" "${{ vars.README }}"
 
-          # Not restoring the template causes an error
-          #git restore "${{ vars.README_TEMPLATE }}"
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Update README/stats"
 
       - name: Commit and push
         if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
         run: |
-          git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}" "${{ vars.COMPRESSED_ENTRIES_FILE }}"
+          git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Build lists"
           git push
 
