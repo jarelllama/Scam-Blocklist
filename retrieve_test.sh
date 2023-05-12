@@ -39,6 +39,7 @@ if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
 fi
 
 cut -d. -f2- "$compressed_entries_file" > scam_wildcards.tmp
+sort -u scam_wildcards.tmp -o scam_wildcards.tmp
 search_terms_file=scam_wildcards.tmp
 
 if "$unattended"; then
@@ -119,64 +120,8 @@ function filter_pending {
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
     grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp > 6.tmp
 
-    # grep outputs an error when this file is missing
-    touch dead.tmp
-
-    # Use parallel processing
-    cat 6.tmp | xargs -I{} -P6 bash -c "
-        if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> dead.tmp
-            echo '{} (dead)'
-        fi
-    "
-
-    # It appears that the dead file isn't always sorted
-    # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same
-    # Otherwise, sorting big files with comm is slower than using grep
-    grep -vxFf dead.tmp 6.tmp > pending.tmp
-
-    # This portion of code removes the www subdomain for domains that have it and adds the www subdomains to those that don't
-    # This effectively flips which domains have the www subdomain
-
-    grep '^www\.' pending.tmp > with_www.tmp
-
-    comm -23 pending.tmp with_www.tmp > no_www.tmp
-
-    awk '{sub(/^www\./, ""); print}' with_www.tmp > no_www_new.tmp
-
-    awk '{print "www."$0}' no_www.tmp > with_www_new.tmp
-
-    cat no_www_new.tmp with_www_new.tmp > flipped.tmp
-
-    grep -vxFf "$raw_file" flipped.tmp > flipped_unique.tmp
-
-    touch flipped_alive.tmp
-    cat flipped_unique.tmp | xargs -I{} -P6 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> flipped_alive.tmp
-        fi
-    "
-
-    cat flipped_alive.tmp >> pending.tmp
-
-    grep -v '^www\.' pending.tmp > no_www.tmp
-
-    # Append the 'm' subdomain to second-level domains
-    awk '{print "m."$0}' no_www.tmp > with_m.tmp
-
-    grep -vxFf "$raw_file" with_m.tmp > with_m_unique.tmp
-
-    touch with_m_alive.tmp
-    cat with_m_unique.tmp | xargs -I{} -P6 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> with_m_alive.tmp
-        fi
-    "
-
-    cat with_m_alive.tmp >> pending.tmp
-
     # Duplicates are removed again for when the pending file isn't cleared and there are duplicate newly added domains
-    sort -u pending.tmp -o "$pending_file"
+    sort -u 6.tmp -o "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
