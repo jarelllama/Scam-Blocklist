@@ -18,9 +18,93 @@ jobs:
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
 
-      - name: remove_dead.sh
-        # Commits are done in the script
-        run: bash "workflow_scripts/remove_dead.sh"
+      - name: Remove dead domains
+        run: |
+          echo -e "\nChecking for dead domains...\n"
 
+          > dead.tmp
+          cat "${{ vars.RAW_FILE }}" | xargs -I{} -P6 bash -c '
+            domain="$1"
+            while true; do
+              dig=$(dig @1.1.1.1 "$domain")
+              [[ "$dig" =~ error|timed\ out ]] || break
+              echo "$domain timed out."
+              sleep 1
+            done
+            if [[ "$dig" == *"NXDOMAIN"* ]]; then
+              echo "$domain (dead)"
+              echo "$domain" >> dead.tmp
+            fi
+          ' -- {}
+    
+          sort -u dead.tmp -o dead.tmp
+        
+          if ! [[ -s dead.tmp ]]; then
+            echo -e "\nNo dead domains found.\n"
+            exit 0
+          fi
+
+          comm -23 "${{ vars.RAW_FILE }}" dead.tmp > raw.tmp
+          mv raw.tmp "${{ vars.RAW_FILE }}"
+
+          comm -23 "${{ vars.BLACKLIST_FILE }}" dead.tmp > blacklist.tmp
+          mv blacklist.tmp "${{ vars.BLACKLIST_FILE }}"
+
+          awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
+          grep -vxFf adblock_dead.tmp "${{ vars.COMPRESSED_ENTRIES_FILE }}" > compressed_entries.tmp
+           mv compressed_entries.tmp "${{ vars.COMPRESSED_ENTRIES_FILE }}"
+
+          cat dead.tmp >> "${{ vars.DEAD_DOMAINS_FILE }}"
+          sort -u "${{ vars.DEAD_DOMAINS_FILE }}" -o "${{ vars.DEAD_DOMAINS_FILE }}"
+
+          echo -e "\nAll dead domains removed:"
+          cat dead.tmp
+
+          echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
+    
+          git add "${{ vars.RAW_FILE }}" "${{ vars.BLACKLIST_FILE }}" "${{ vars.COMPRESSED_ENTRIES_FILE }}" "${{ vars.DEAD_DOMAINS_FILE }}"
+          git commit -qm "Remove dead domains"
+
+      - name: Add resurrected domains
+        run: |
+          echo -e "\nChecking for resurrected domains...\n"
+
+          > alive.tmp
+          cat "${{ vars.DEAD_DOMAINS_FILE }}" | xargs -I{} -P6 bash -c '
+            domain="$1"
+            while true; do
+              dig=$(dig @1.1.1.1 "$domain")
+              [[ "$dig" =~ error|timed\ out ]] || break
+              echo "$domain timed out."
+              sleep 1
+            done
+            if ! [[ "$dig" == *"NXDOMAIN"* ]]; then
+              echo "$domain (alive)"
+              echo "$domain" >> alive.tmp
+            fi
+          ' -- {}
+    
+          sort -u alive.tmp -o alive.tmp
+
+          if ! [[ -s alive.tmp ]]; then
+            echo -e "\nNo resurrected domains found.\n"
+            exit 0
+          fi
+
+          comm -23 "${{ vars.DEAD_DOMAINS_FILE }}" alive.tmp > dead_domains.tmp
+          mv dead_domains.tmp "${{ vars.DEAD_DOMAINS_FILE }}"
+
+          cat alive.tmp >> "${{ vars.RAW_FILE }}" 
+          sort "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
+
+          echo -e "\nPreviously dead domains that are alive again:"
+          cat alive.tmp
+
+          echo -e "\nTotal domains added: $(wc -l < alive.tmp)\n"
+    
+          git add "${{ vars.RAW_FILE }}" "${{ vars.DEAD_DOMAINS_FILE }}"
+          git commit -qm "Add resurrected domains"
+          
       - name: Push
         run: git push
+
