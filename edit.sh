@@ -29,16 +29,6 @@ function format_entry {
     while read -r subdomain; do
         entry="${entry#"${subdomain}".}"
     done < "$subdomains_file"
-
-    entry="$sld"
-
-    echo "$entry" > entries.tmp
-
-    echo "www.${sld}" >> entries.tmp
-
-    echo "m.${sld}" >> entries.tmp
-
-    sort entries.tmp -o entries.tmp
 }
 
 function edit_blocklist {
