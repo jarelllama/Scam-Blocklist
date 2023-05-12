@@ -62,7 +62,8 @@ jobs:
 
           echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
     
-          git add "${{ vars.RAW_FILE }}" "${{ vars.BLACKLIST_FILE }}" "${{ vars.COMPRESSED_ENTRIES_FILE }}" "${{ vars.DEAD_DOMAINS_FILE }}"
+          git add "${{ vars.RAW_FILE }}" "${{ vars.BLACKLIST_FILE }}" \
+            "${{ vars.COMPRESSED_ENTRIES_FILE }}" "${{ vars.DEAD_DOMAINS_FILE }}"
           git commit -m "Remove dead domains"
 
       - name: Add resurrected domains
