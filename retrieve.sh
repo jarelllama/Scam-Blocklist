@@ -59,11 +59,11 @@ function retrieve_domains {
 
         google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time_filter}"
 
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" |\
-            grep -oE '<a href="http\S+"' |\
-            awk -F/ '{print $3}' |\
-            grep -vxF 'www.google.com' |\
-            sort -u)
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" \
+            | grep -oE '<a href="http\S+"' \
+            | awk -F/ '{print $3}' \
+            | grep -vxF 'www.google.com' \
+            | sort -u)
 
         term=$(echo "$term" | cut -c 1-350)
         echo "${term}..."
