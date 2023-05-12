@@ -75,8 +75,21 @@ function edit_blocklist {
         echo -e "\nInvalid domain. Not added."
         return
     fi
+  
+    # Check if none of the new entries are unique
+    if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
+        echo -e "\nThe domain is already in the blocklist. Not added."
+        return
+    fi        
+  
+    comm -12 entries.tmp "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
+    if [[ -s in_toplist.tmp ]]; then
+        echo -e "\nThe domain is in the toplist. Not added."
+        echo "Matches in toplist:"
+        cat in_toplist.tmp
+        return
+    fi
 
-    # mv shows an error when the file doesnt exist
     touch alive_entries.tmp
     cat entries.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
@@ -91,20 +104,6 @@ function edit_blocklist {
 
     # The dead check messes up the order
     sort alive_entries.tmp -o entries.tmp
-  
-    comm -12 entries.tmp "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
-    if [[ -s in_toplist.tmp ]]; then
-        echo -e "\nThe domain is in the toplist. Not added."
-        echo "Matches in toplist:"
-        cat in_toplist.tmp
-        return
-    fi
-  
-    # Check if none of the new entries are unique
-    if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
-        echo -e "\nThe domain is already in the blocklist. Not added."
-        return
-    fi        
 
     echo -e "\nDomains added:"
     comm -23 entries.tmp "$raw_file"
@@ -174,6 +173,11 @@ function edit_blacklist {
         return
     fi
 
+    if ! comm -23 entries.tmp "$blacklist_file" | grep -q . ; then
+        echo -e "\nThe domain is already in the blacklist. Not added."
+        return
+    fi
+    
     touch alive_entries.tmp
     cat entries.tmp | xargs -I{} -P6 bash -c "
         if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
@@ -187,11 +191,6 @@ function edit_blacklist {
     fi
 
     sort alive_entries.tmp -o entries.tmp
-
-    if ! comm -23 entries.tmp "$blacklist_file" | grep -q . ; then
-        echo -e "\nThe domain is already in the blacklist. Not added."
-        return
-    fi
 
     echo -e "\nDomains added:"
     comm -23 entries.tmp "$blacklist_file"
