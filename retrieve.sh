@@ -135,7 +135,7 @@ function filter_pending {
         grep "\.${entry}$" 6.tmp >> redundant.tmp
     done < 6.tmp
 
-    cat redundant.tmp | awk '{print $0 " (Redundant)"}'
+    cat redundant.tmp | awk '{print $0 " (redundant)"}'
     grep -vxFf redundant.tmp 6.tmp > 7.tmp
 
     # grep outputs an error when this file is missing
@@ -182,7 +182,7 @@ function filter_pending {
     sort -u in_toplist.tmp -o in_toplist.tmp
 
     if [[ -s in_toplist.tmp ]]; then
-        echo -e "\nDomains in toplist:"
+        echo -e "\n! Domains in toplist:"
         cat in_toplist.tmp
         if "$unattended"; then
             echo -e "\nExiting...\n"
