@@ -31,70 +31,58 @@ function format_entry {
     done < "$subdomains_file"
 }
 
+function remove_entry() {
+    if [[ "$remove_entry" -eq 1 ]]; then
+        if ! grep -xFq "$entry" "$2"; then
+            echo -e "\nEntry not found in the ${1}: $entry"
+            return
+        fi
+        echo -e "\nRemoved from the ${1}: $entry"
+        sed -i "/^${entry}$/d" "$2"
+        return
+    fi
+}
+
 function edit_blocklist {
     echo "BLOCKLIST"
-    
-    cp "$raw_file" "${raw_file}.bak"
 
     format_entry
             
-    if [[ "$remove_entry" -eq 1 ]]; then
-        # Check if none of the new entries are in the blocklist
-        if ! comm -12 "$raw_file" entries.tmp | grep -q . ; then
-            echo -e "\nDomain not found in blocklist: $entry"
-            return
-        fi
-
-        echo -e "\nDomains removed:"
-        comm -12 "$raw_file" entries.tmp
-
-        comm -23 "$raw_file" entries.tmp > raw.tmp
-        
-        mv raw.tmp "$raw_file"
-
-        return
-    fi
+    remove_entry blocklist "$raw_file"
 
     if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]-]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
         return
     fi
   
-    # Check if none of the new entries are unique
-    if ! comm -23 entries.tmp "$raw_file" | grep -q . ; then
+    if grep -xF "$entry" "$raw_file"; then
         echo -e "\nThe domain is already in the blocklist. Not added."
-        return
-    fi        
-  
-    comm -12 entries.tmp "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
-    if [[ -s in_toplist.tmp ]]; then
-        echo -e "\nThe domain is in the toplist. Not added."
-        echo "Matches in toplist:"
-        cat in_toplist.tmp
         return
     fi
 
-    touch alive_entries.tmp
-    cat entries.tmp | xargs -I{} -P6 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> alive_entries.tmp
-        fi
-    "
+    if ! grep -xF "$entry" "$blacklist_file"; then
+        echo "$entry" > with_subdomains.tmp
 
-    if ! [[ -s alive_entries.tmp ]]; then
+        while read -r subdomain; do
+            echo "${subdomain}.${entry}" >> with_subdomains.tmp
+        done < "$subdomains_file"
+    
+        if grep -xFf with_subdomains.tmp "$toplist_file"; then
+            echo -e "\nThe domain is in the toplist. Not added."
+            return
+        fi
+    fi
+
+    if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
         echo -e "\nThe domain is dead. Not added."
         return
     fi
 
-    # The dead check messes up the order
-    sort alive_entries.tmp -o entries.tmp
+    echo -e "\nAdded to the blocklist: ${entry}"
 
-    echo -e "\nDomains added:"
-    comm -23 entries.tmp "$raw_file"
+    echo "$entry" >> "$raw_file"
 
-    cat entries.tmp >> "$raw_file" 
-
-    sort -u "$raw_file" -o "$raw_file"
+    sort "$raw_file" -o "$raw_file"
 }
 
 function edit_whitelist {
@@ -102,15 +90,7 @@ function edit_whitelist {
 
     format_entry
 
-    if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFq "$entry" "$whitelist_file"; then
-            echo -e "\nEntry not found in whitelist: $entry"
-            return
-        fi
-        echo -e "\nRemoved from whitelist: $entry"
-        sed -i "/^${entry}$/d" "$whitelist_file"
-        return
-    fi
+    remove_entry whitelist "$whitelist_file"
 
     # Check if the entry contains whitespaces or is empty
     if [[ "$entry" =~ [[:space:]] || -z "$entry" ]]; then
@@ -119,13 +99,13 @@ function edit_whitelist {
     fi
     
     if grep -Fq "$entry" "$whitelist_file"; then
-        existing_entry=$(grep -F "$entry" "$whitelist_file" | head -n 1)
         echo -e "\nSimilar term(s) are already in the whitelist:"
-        echo "$existing_entry"
+        grep -F "$entry" "$whitelist_file"
         return
     fi
 
-    echo -e "\nAdded to whitelist: $entry"
+    echo -e "\nAdded to the whitelist: ${entry}"
+
     echo "$entry" >> "$whitelist_file"
 
     sort "$whitelist_file" -o "$whitelist_file"
@@ -136,52 +116,28 @@ function edit_blacklist {
 
     format_entry
             
-    if [[ "$remove_entry" -eq 1 ]]; then
-        if ! comm -12 "$blacklist_file" entries.tmp | grep -q . ; then
-            echo -e "\nDomain not found in blacklist: $entry"
-            return
-        fi
-
-        echo -e "\nDomains removed:"
-        comm -12 "$blacklist_file" entries.tmp
-
-        comm -23 "$blacklist_file" entries.tmp > blacklist.tmp
-
-        mv blacklist.tmp "$blacklist_file"
-
-        return
-    fi
+    remove_entry blacklist "$blacklist_file"
 
     if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]-]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
         return
     fi
 
-    if ! comm -23 entries.tmp "$blacklist_file" | grep -q . ; then
-        echo -e "\nThe domain is already in the blacklist. Not added."
+    if grep -xF "$entry" "$blacklist_file"; then
+        echo -e "\nThe domain is already in the blocklist. Not added."
         return
     fi
     
-    touch alive_entries.tmp
-    cat entries.tmp | xargs -I{} -P6 bash -c "
-        if ! dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> alive_entries.tmp
-        fi
-    "
-
-    if ! [[ -s alive_entries.tmp ]]; then
+    if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
         echo -e "\nThe domain is dead. Not added."
         return
     fi
 
-    sort alive_entries.tmp -o entries.tmp
+    echo -e "\nAdded to the blacklist: ${entry}"
 
-    echo -e "\nDomains added:"
-    comm -23 entries.tmp "$blacklist_file"
+    echo "$entry" >> "$blacklist_file"
 
-    cat entries.tmp >> "$blacklist_file" 
-
-    sort -u "$blacklist_file" -o "$blacklist_file"
+    sort "$blacklist_file" -o "$blacklist_file"
 }
 
 function check_entry {
