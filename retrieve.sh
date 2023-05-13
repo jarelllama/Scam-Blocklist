@@ -64,27 +64,29 @@ function retrieve_domains {
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" \
             | grep -oE '<a href="http\S+"' \
             | awk -F/ '{print $3}' \
+            | sort -u \
             | grep -vxF 'www.google.com')
 
         term=$(echo "$term" | cut -c 1-350)
         echo "${term}..."
 
-        # Create an empty file so if new domains were retrieved, the count would show 0
-        > domains.tmp
-
-        if [[ -n "$domains" ]]; then
-            "$debug" && echo "$domains"
-        
-            echo "$domains" > domains.tmp
-
-            while read -r subdomain; do
-                sed -i "s/^$subdomain\.//" domains.tmp
-            done < "$subdomains_file"
-
-            sort -u domains.tmp -o domains.tmp
-
-            cat domains.tmp >> "$pending_file"
+        if [[ -z "$domains" ]]; then
+            echo "Domains retrieved: 0"
+            echo "--------------------------------------"
+            continue
         fi
+
+        "$debug" && echo "$domains"
+        
+        echo "$domains" > domains.tmp
+
+        while read -r subdomain; do
+            sed -i "s/^$subdomain\.//" domains.tmp
+        done < "$subdomains_file"
+
+        sort -u domains.tmp -o domains.tmp
+
+        cat domains.tmp >> "$pending_file"
 
         echo "Domains retrieved: $(wc -l < domains.tmp)"
         echo "--------------------------------------"
