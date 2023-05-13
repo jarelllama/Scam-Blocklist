@@ -2,11 +2,6 @@
 
 [![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml)
 
-| Syntax | Entries |
-| --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | adblock_count |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | domains_count |
-
 ### Stats
 
 ```
@@ -32,14 +27,6 @@ Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasio
 Domains are retrieved from multiple regions such as Asia, Europe, and North America.
 
 To see the full filtering and retrieval process check out the code in the repository.
-
-### Subdomains
-
-Common subdomains are added to domains with no [wildcard record](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/). See the list of subdomains checked here: [subdomains.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/data/subdomains.txt)
-
-Only the `www` and `m` subdomains are added to domains with wildcard records so as to not inflate the blocklist size.
-
-Subdomains are only added if they are resolving (in the case of domains with wildcard records, all subdomains resolve).
 
 ### Dead domains
 
