@@ -64,22 +64,24 @@ function retrieve_domains {
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" \
             | grep -oE '<a href="http\S+"' \
             | awk -F/ '{print $3}' \
-            | grep -vxF 'www.google.com' \
-            | sort -u)
+            | grep -vxF 'www.google.com')
 
         term=$(echo "$term" | cut -c 1-350)
         echo "${term}..."
 
-        "$debug" && echo "$domains"
-
-        touch domains.tmp
+        # Create an empty file so if new domains were retrieved, the count would show 0
+        > domains.tmp
 
         if [[ -n "$domains" ]]; then
+            "$debug" && echo "$domains"
+        
             echo "$domains" > domains.tmp
 
             while read -r subdomain; do
                 sed -i "s/^$subdomain\.//" domains.tmp
             done < "$subdomains_file"
+
+            sort -u domains.tmp -o domains.tmp
 
             cat domains.tmp >> "$pending_file"
         fi
@@ -126,17 +128,19 @@ function filter_pending {
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
     grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp > 6.tmp
 
+    > redundant.tmp
     while read -r entry; do
-        grep "\.${entry}$" 6.tmp | awk '{print $0 " (Redundant)"}'
-        
+        grep "\.${entry}$" 6.tmp >> redundant.tmp
     done < 6.tmp
 
+    cat redundant.tmp | awk '{print $0 " (Redundant)"}'
+    grep -vxFf redundant.tmp 6.tmp > 7.tmp
 
     # grep outputs an error when this file is missing
-    touch dead.tmp
+    > dead.tmp
 
     # Use parallel processing
-    cat 6.tmp | xargs -I{} -P6 bash -c "
+    cat 7.tmp | xargs -I{} -P6 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> dead.tmp
             echo '{} (dead)'
@@ -146,9 +150,9 @@ function filter_pending {
     # It appears that the dead file isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same
     # Otherwise, sorting big files with comm is slower than using grep
-    grep -vxFf dead.tmp 6.tmp > 7.tmp
+    grep -vxFf dead.tmp 7.tmp > 8.tmp
 
-    mv 7.tmp "$pending_file"
+    mv 8.tmp "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
@@ -159,20 +163,21 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
     
+    grep -vxFf "$blacklist_file" "$pending_file" > no_black.tmp
+    
+    > with_subdomains.tmp
     while read -r subdomain; do
-        awk -v subdomain="$subdomain" '{print subdomain"."$0}' "$pending_file" >> with_subdomains.tmp
+        awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_black.tmp >> with_subdomains.tmp
     done < "$subdomains_file"
     
-    cat with_subdomains.tmp "$pending_file" > pending_with_subdomains.tmp
+    cat with_subdomains.tmp no_black.tmp > pending_with_subdomains.tmp
     
     grep -xFf pending_with_subdomains.tmp "$toplist_file" > in_toplist.tmp
     
     while read -r subdomain; do
-        sed -i "s/^$subdomain\.//" pending_with_subdomains.tmp
+        sed -i "s/^$subdomain\.//" in_toplist.tmp
     done < "$subdomains_file"
-    sort -u pending_with_subdomains.tmp -o pending_no_subdomains.tmp
-
-    grep -vxFf "$blacklist_file" pending_no_subdomains.tmp > in_toplist.tmp
+    sort -u in_toplist.tmp -o in_toplist.tmp
 
     if [[ -s in_toplist.tmp ]]; then
         echo -e "\nDomains in toplist:"
