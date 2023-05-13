@@ -2,38 +2,12 @@
 
 raw_file="data/raw.txt"
 adblock_file="adblock.txt"
-subdomains_file="data/subdomains.txt"
-compressed_entries_file="data/compressed_entries.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
-comm -23 "$raw_file" "$compressed_entries_file" > raw.tmp
-
-while read -r subdomain; do
-    grep "^${subdomain}\." raw.tmp >> only_subdomains.tmp
-done < "$subdomains_file"
-
-comm -23 raw.tmp only_subdomains.tmp > second_level_domains.tmp
-
-# I've tried using xarg parallelization here to no success
-while read -r entry; do
-    redundant_entries=$(grep "\.${entry}$" second_level_domains.tmp)
-    [[ -z "$redundant_entries" ]] && continue
-    echo -e "\nEntries made redundant by '${entry}':"
-    echo "$redundant_entries"
-    echo "$redundant_entries" >> "$compressed_entries_file"
-done < second_level_domains.tmp
-
-# The output has a high chance of having duplicates
-sort -u "$compressed_entries_file" -o "$compressed_entries_file"
-
-# Remove new redundant entries
-comm -23 second_level_domains.tmp "$compressed_entries_file" > 1.tmp
-
 awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
 
-# Appending || messes up the order
-sort -u 2.tmp -o adblock.tmp
+sort 2.tmp -o adblock.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > previous_adblock.tmp
 
