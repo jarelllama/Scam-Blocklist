@@ -26,25 +26,9 @@ function format_entry {
 
     [[ "$entry" == *.* ]] || entry="${entry}.com"
 
-    # Assume the entry is a second-level domain and has no subdomain
-    sld="$entry"
-
     while read -r subdomain; do
-        # Check if the entry has a subdomain
-        [[ "$entry" == "$subdomain".* ]] || continue
-        # Strip the entry down to the second-level domain
-        sld="${entry#"${subdomain}".}"
+        entry="${entry#"${subdomain}".}"
     done < "$subdomains_file"
-
-    entry="$sld"
-
-    echo "$entry" > entries.tmp
-
-    echo "www.${sld}" >> entries.tmp
-
-    echo "m.${sld}" >> entries.tmp
-
-    sort entries.tmp -o entries.tmp
 }
 
 function edit_blocklist {
