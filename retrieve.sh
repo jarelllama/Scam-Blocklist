@@ -67,7 +67,10 @@ function retrieve_domains {
             | grep -vxF 'www.google.com' \
             | sort -u)
 
-       "$debug" && echo "$domains"
+        term=$(echo "$term" | cut -c 1-350)
+        echo "${term}..."
+
+        "$debug" && echo "$domains"
 
         touch domains.tmp
 
@@ -80,9 +83,6 @@ function retrieve_domains {
 
             cat domains.tmp >> "$pending_file"
         fi
-
-        term=$(echo "$term" | cut -c 1-350)
-        echo "${term}..."
 
         echo "Domains retrieved: $(wc -l < domains.tmp)"
         echo "--------------------------------------"
@@ -157,14 +157,16 @@ function filter_pending {
         awk -v subdomain="$subdomain" '{print subdomain"."$0}' "$pending_file" >> with_subdomains.tmp
     done < "$subdomains_file"
     
-    grep -xFf with_subdomains.tmp "$toplist_file" > in_toplist.tmp
+    cat with_subdomains.tmp "$pending_file" > pending_with_subdomains.tmp
+    
+    grep -xFf pending_with_subdomains.tmp "$toplist_file" > in_toplist.tmp
     
     while read -r subdomain; do
-        sed -i "s/^$subdomain\.//" with_subdomains.tmp
+        sed -i "s/^$subdomain\.//" pending_with_subdomains.tmp
     done < "$subdomains_file"
-    mv with_subdomains.tmp no_subdomains.tmp
+    sort -u pending_with_subdomains.tmp -o pending_no_subdomains.tmp
 
-    grep -vxFf "$blacklist_file" no_subdomains.tmp > in_toplist.tmp
+    grep -vxFf "$blacklist_file" pending_no_subdomains.tmp > in_toplist.tmp
 
     if [[ -s in_toplist.tmp ]]; then
         echo -e "\nDomains in toplist:"
