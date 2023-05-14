@@ -72,7 +72,6 @@ function retrieve_domains {
 
         term=$(echo "$term" | cut -c 1-350)
         echo "${term_num}. ${term}..."
-
         ((term_num++))
 
         if [[ -z "$domains" ]]; then
@@ -136,18 +135,16 @@ function filter_pending {
     done < "$optimised_entries"
 
     "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
+
     grep -vxFf redundant.tmp 6.tmp > 7.tmp
 
     export debug="$debug"
     > dead.tmp
-    # Use parallel processing
     cat 7.tmp | xargs -I{} -P6 bash -c '
         domain="$1"
         if dig @1.1.1.1 "$domain" | grep -Fq "NXDOMAIN"; then
             echo "$domain" >> dead.tmp
-            if [[ "$debug" == "true" ]]; then
-                echo "$domain (dead)"
-            fi
+            "$debug" && echo "$domain (dead)"
         fi
     ' -- {}
 
