@@ -240,6 +240,10 @@ while true; do
 
     case "$choice" in
         m)
+            if [[ -s in_toplist.tmp ]]; then
+                echo -e "\nDomains found in the toplist. Not merging."
+                continue
+            fi
             echo "Merge with blocklist"
             merge_pending
             ;;
