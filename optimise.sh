@@ -14,8 +14,7 @@ while true; do
         | uniq -d > 1.tmp
     
     comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
-    comm -23 2.tmp "$optimised_entries" > 3.tmp
-    comm -23 3.tmp "$raw_file" > domains.tmp
+    comm -23 2.tmp "$optimised_entries" > domains.tmp
 
     if ! [[ -s domains.tmp ]]; then
         echo -e "\nNo potential optimizations found.\n"
@@ -45,7 +44,7 @@ while true; do
         echo -e "\nAdding all domains to the blocklist..."
         cat domains.tmp >> "$raw_file"
         cat domains.tmp >> "$optimised_entries"
-        sort "$raw_file" -o "$raw_file"
+        sort -u "$raw_file" -o "$raw_file"
         sort "$optimised_entries" -o "$optimised_entries"
     else
         chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
