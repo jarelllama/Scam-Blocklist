@@ -20,7 +20,7 @@ while true; do
     domains=$(cat domains.tmp)
 
     if [[ -z "$domains" ]]; then
-        echo -e "\nNo potential optimizations found."
+        echo -e "\nNo potential optimizations found.\n"
     else
         numbered_domains=$(echo "$domains" | awk '{print NR ". " $0}')
         echo -e "\nPotential optimisations:"
