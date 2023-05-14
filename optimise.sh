@@ -20,17 +20,19 @@ while true; do
     numbered_domains=$(echo "$domains" | awk '{print NR " " $0}')
     echo "$numbered_domains"
 
-    echo -e "\nSelect a domain."
+    echo -e "\nSelect a domain"
     echo "or 'p' to push changes"
     echo -e "or 'x' to exit\n"
-    read -rp chosen_number
+    read -r chosen_number
 
     [[ "$chosen_number" == 'x' ]] && exit 0
     
     if [[ "$chosen_number" == 'p' ]]; then
+        echo -e "\nPushing changes..."
         git add "$raw_file" "$optimiser_whitelist" "$optimiser_blacklist"
         git commit -m "Optimise blocklist"
         git push
+        exit 0
     fi
 
     chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
