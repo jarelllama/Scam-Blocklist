@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.101909.2023
-# Last modified: Sun May 14 10:19:09 UTC 2023
+# Version: 05.14.102100.2023
+# Last modified: Sun May 14 10:21:00 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3866
+# Total number of entries: 3867
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -3582,6 +3582,7 @@ address=/uuniqueo.com/#
 address=/uzzia.com/#
 address=/vaatop.com/#
 address=/valarlord.com/#
+address=/valitif.shop/#
 address=/valleyus.co/#
 address=/valuablezhu.shop/#
 address=/valvaz.com/#
