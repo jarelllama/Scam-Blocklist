@@ -1,6 +1,6 @@
 # Scam Blocklist
 
-[![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml)
+[![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml)
 
 | Format | Raw | Syntax |
 | --- | --- | --- |
