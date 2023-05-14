@@ -63,6 +63,25 @@ jobs:
           echo -e "\nRemoving...\n"
           exit 1
 
+      - name: Subdomains check
+        if : success () || failure()
+        run: |
+          > check.tmp
+          while read -r subdomain; do
+            grep "^${subdomain}\." "${{ vars.RAW_FILE }}" >> check.tmp || true
+          done < "${{ vars.SUBDOMAINS_FILE }}"
+
+          [[ -s check.tmp ]] || exit 0
+          echo -e "\nEntries with subdomains found:"
+          cat check.tmp
+
+          while read -r subdomain; do
+            sed -i "s/^${subdomain}\.//" "${{ vars.RAW_FILE }}"
+          done < "${{ vars.SUBDOMAINS_FILE }}"
+
+          echo -e "\nRemoving...\n"
+          exit 1
+
       - name: Whitelisted TLDs check
         if: success() || failure()
         run: |
@@ -94,16 +113,16 @@ jobs:
       - name: Redundant entries check
         if: success() || failure()
         run: |
-          > redundant.tmp
+          > check.tmp
           while read -r entry; do
-            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> redundant.tmp || true
+            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> check.tmp || true
           done < "${{ vars.RAW_FILE }}"
           
-          [[ -s redundant.tmp ]] || exit 0
+          [[ -s check.tmp ]] || exit 0
           echo -e "\nRedundant entries found:"
-          cat redundant.tmp
+          cat check.tmp
 
-          grep -vxFf redundant.tmp "${{ vars.RAW_FILE }}" > raw.tmp || true
+          grep -vxFf check.tmp "${{ vars.RAW_FILE }}" > raw.tmp || true
           mv raw.tmp "${{ vars.RAW_FILE }}"
           
           echo -e "\nRemoving...\n"
