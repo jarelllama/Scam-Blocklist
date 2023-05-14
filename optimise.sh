@@ -6,20 +6,21 @@ optimiser_whitelist="data/optimiser_whitelist.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" exit
 
-grep -E '\..*\.' data/raw.txt \
-    | cut -d '.' -f2- \
-    | awk -F '.' '$1 ~ /.{4,}/ {print}' \
-    | sort \
-    | uniq -d > 1.tmp
-    
-comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
-comm -23 2.tmp "$optimiser_blacklist" > domains.tmp
-
 while true; do
+    grep -E '\..*\.' data/raw.txt \
+        | cut -d '.' -f2- \
+        | awk -F '.' '$1 ~ /.{4,}/ {print}' \
+        | sort \
+        | uniq -d > 1.tmp
+    
+    comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
+    comm -23 2.tmp "$optimiser_blacklist" > domains.tmp
+
     domains=$(cat domains.tmp)
 
     numbered_domains=$(echo "$domains" | awk '{print NR ". " $0}')
-    echo -e "\n${numbered_domains}"
+    echo -e "\nOptimiser Menu:"
+    echo "${numbered_domains}"
 
     echo -e "\nSelect a domain"
     echo "or 'p' to push changes"
