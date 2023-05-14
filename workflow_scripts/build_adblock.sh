@@ -1,24 +1,23 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
-adblock_file="adblock.txt"
+list="adblock.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
 awk '{print "||" $0 "^"}' "$raw_file" > 1.tmp
+sort 1.tmp -o list.tmp
 
-sort 1.tmp -o adblock.tmp
+grep -vE '^!' "$list" > previous.tmp
 
-grep -vE '^(!|$)' "$adblock_file" > previous.tmp
-
-if diff -q previous.tmp adblock.tmp >/dev/null; then
+if diff -q previous.tmp list.tmp >/dev/null; then
    echo -e "\nNo changes.\n"
    exit 0
 fi
 
 num_before=$(wc -l < previous.tmp)
 
-num_after=$(wc -l < adblock.tmp)
+num_after=$(wc -l < list.tmp)
 
 echo -e "\nTotal entries before: $num_before"
 echo "Difference: $((num_after - num_before))"
@@ -33,4 +32,4 @@ echo "! Title: Jarelllama's Scam Blocklist
 ! Expires: 4 hours
 ! Syntax: Adblock Plus
 ! Total number of entries: $num_after
-" | cat - adblock.tmp > "$adblock_file"
+!" | cat - list.tmp > "$list"
