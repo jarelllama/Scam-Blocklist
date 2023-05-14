@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.204253.2023
-# Last modified: Sun May 14 20:42:53 UTC 2023
+# Version: 05.14.221149.2023
+# Last modified: Sun May 14 22:11:49 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3909
+# Total number of entries: 3915
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -24,6 +24,7 @@ local-zone: "77unishop.com." always_nxdomain
 local-zone: "90sfootwear.com." always_nxdomain
 local-zone: "a-mazon.shop." always_nxdomain
 local-zone: "a3review.com." always_nxdomain
+local-zone: "aac667.com." always_nxdomain
 local-zone: "aakida.com." always_nxdomain
 local-zone: "abelcollectibles.shop." always_nxdomain
 local-zone: "abeni.shop." always_nxdomain
@@ -1278,6 +1279,7 @@ local-zone: "furnituresaleshop.com." always_nxdomain
 local-zone: "furnitureshop.store." always_nxdomain
 local-zone: "furnitureshopmall.com." always_nxdomain
 local-zone: "futira.com." always_nxdomain
+local-zone: "fvaypte.dor-reception.fr." always_nxdomain
 local-zone: "fyges.com." always_nxdomain
 local-zone: "fypsex.com." always_nxdomain
 local-zone: "g-host.io." always_nxdomain
@@ -1494,6 +1496,7 @@ local-zone: "hgshopee.com." always_nxdomain
 local-zone: "hguisyus.com." always_nxdomain
 local-zone: "hgvyj.restauraceaplus.cz." always_nxdomain
 local-zone: "hhclothingus.com." always_nxdomain
+local-zone: "hiddenrebatefinder.com." always_nxdomain
 local-zone: "highlevelbody.fr." always_nxdomain
 local-zone: "highlevelmarketing.com." always_nxdomain
 local-zone: "hihetab.xyz." always_nxdomain
@@ -2706,6 +2709,7 @@ local-zone: "qfsgesara.com." always_nxdomain
 local-zone: "qfsnesarag.com." always_nxdomain
 local-zone: "qhqzpt.astis-hunderunde.de." always_nxdomain
 local-zone: "qisoin.com." always_nxdomain
+local-zone: "qkbtil.cvlostendales.es." always_nxdomain
 local-zone: "qmzdo.online." always_nxdomain
 local-zone: "qttlpn.shop." always_nxdomain
 local-zone: "qualityplaything.com." always_nxdomain
@@ -2772,6 +2776,7 @@ local-zone: "renewelle.shop." always_nxdomain
 local-zone: "renolve.com." always_nxdomain
 local-zone: "reshhubs.com." always_nxdomain
 local-zone: "resultsadorable.com." always_nxdomain
+local-zone: "retailreviews.help." always_nxdomain
 local-zone: "revanced.io." always_nxdomain
 local-zone: "revanced.net." always_nxdomain
 local-zone: "revancedapk.org." always_nxdomain
@@ -3549,6 +3554,7 @@ local-zone: "ukonlineclothes.com." always_nxdomain
 local-zone: "ukoutdoordeal.com." always_nxdomain
 local-zone: "ulifted.com." always_nxdomain
 local-zone: "ultrareports.guru." always_nxdomain
+local-zone: "ultrareports.review." always_nxdomain
 local-zone: "umadate.xyz." always_nxdomain
 local-zone: "umagic.net." always_nxdomain
 local-zone: "umifot.com." always_nxdomain
