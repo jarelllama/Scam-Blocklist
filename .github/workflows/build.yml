@@ -128,14 +128,15 @@ jobs:
           git add "${{ vars.RAW_FILE }}"
           git commit -m "Filter raw file"
 
-      - name: Build Adblock Plus list
-        id: build_adblock
+      - name: Build lists
+        id: build_lists
         if: success() || steps.whitelist.conclusion == 'success'
         run: |
-          bash "workflow_scripts/build_adblock.sh"
+          #bash "workflow_scripts/build.sh" 'Adblock Plus' "${{ vars.ADBLOCK_FILE }}" '||' '^' '!'
+          bash "workflow_scripts/build.sh" 'Wildcard Asterisk' "${{ vars.WILDCARD_ASTERISK }}" '*.' '' '#'
 
       - name: Update stats
-        if: success() || steps.build_adblock.conclusion == 'success'
+        if: success() || steps.build_lists.conclusion == 'success'
         run: |
           todays_date=$(date -u +"%m%d%y")
           date_in_file=$(sed -n '2p' "${{ vars.STATS_FILE }}")
@@ -192,10 +193,9 @@ jobs:
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Update README/stats" > /dev/null || true
 
-      - name: Commit and push
-        if: success() || steps.build_adblock.conclusion == 'success'
+      - name: Push
+        if: success() || steps.build_lists.conclusion == 'success'
         run: |
-          git add "${{ vars.ADBLOCK_FILE }}"
           git diff-index --quiet HEAD || git commit -qm "Build lists" > /dev/null || true
           git push
 
