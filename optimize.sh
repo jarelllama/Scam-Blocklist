@@ -19,7 +19,7 @@ while true; do
         | uniq -d \
         | grep -vF 'shop')
 
-    numbered_domains=$(echo "$output" | awk '{print NR " " $0}')
+    numbered_domains=$(echo "$domains" | awk '{print NR " " $0}')
     echo "$numbered_domains"
 
     read -rp "Select a domain ('x' to exit): " chosen_number
