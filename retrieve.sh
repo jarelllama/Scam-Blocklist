@@ -235,8 +235,7 @@ function merge_pending {
 
     num_after=$(wc -l < "$raw_file")
     
-    # might change to after - before 
-    num_added=$(wc -l < "$pending_file")
+    num_added=$((num_after - num_before))
 
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $num_added"
