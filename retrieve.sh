@@ -87,7 +87,6 @@ function retrieve_domains {
         while read -r subdomain; do
             sed -i "s/^${subdomain}\.//" domains.tmp
         done < "$subdomains_file"
-
         sort -u domains.tmp -o domains.tmp
 
         cat domains.tmp >> "$pending_file"
@@ -135,7 +134,6 @@ function filter_pending {
     done < "$optimised_entries"
 
     "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
-
     grep -vxFf redundant.tmp 6.tmp > 7.tmp
 
     export debug="$debug"
@@ -149,8 +147,6 @@ function filter_pending {
     ' -- {}
 
     # It appears that the dead file isn't always sorted
-    # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same
-    # Otherwise, sorting big files with comm is slower than using grep
     grep -vxFf dead.tmp 7.tmp > 8.tmp
 
     mv 8.tmp "$pending_file"
@@ -165,7 +161,6 @@ function filter_pending {
     cat "$pending_file"
 
     comm -12 "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
-
     if ! [[ -s in_toplist.tmp ]]; then
         echo -e "\nNo domains found in toplist."
         return
@@ -173,7 +168,6 @@ function filter_pending {
     
     echo -e "\n! Domains in toplist:"
     cat in_toplist.tmp
-
     if "$unattended"; then
         echo -e "\nExiting...\n"
         exit 1
