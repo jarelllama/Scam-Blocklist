@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | Adblock Plus| [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock.txt) | \|\|scam.com^ |
 | Dnsmasq | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/dnsmasq.txt) | address=/scam.com/# |
-| Unbound | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/unbound.txt) | server:<br/>local-zone: "scam.com." always_nxdomain |
+| Unbound | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/unbound.txt) | local-zone: "scam.com." always_nxdomain |
 | Wildcard Asterisk | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_asterisk.txt) | \*.scam.com |
 | Wildcard Domains<br/>(no subdomains)| [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains.txt) | scam.com |
 
@@ -20,7 +20,7 @@ Manually: 3805
 Automatically: 92
 Total: 3897 (since May 10 2023)
 
-Updated: Sun May 14 11:20 UTC
+Updated: Sun May 14 11:22 UTC
 ```
 
 ### How domains are added to the blocklist
