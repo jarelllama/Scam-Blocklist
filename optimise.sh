@@ -1,7 +1,7 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
-optimised_rules="data/optimised_rules.txt"
+optimised_entries="data/optimised_entries.txt"
 optimiser_whitelist="data/optimiser_whitelist.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" exit
@@ -14,7 +14,7 @@ while true; do
         | uniq -d > 1.tmp
     
     comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
-    comm -23 2.tmp "$optimiser_blacklist" > domains.tmp
+    comm -23 2.tmp "$optimised_entries" > domains.tmp
 
     domains=$(cat domains.tmp)
 
@@ -36,7 +36,7 @@ while true; do
     
     if [[ "$chosen_number" == 'p' ]]; then
         echo -e "\nPushing changes..."
-        git add "$raw_file" "$optimiser_blacklist" "$optimiser_whitelist"
+        git add "$raw_file" "$optimised_entries" "$optimiser_whitelist"
         git commit -m "Optimise blocklist"
         git push
         exit 0
@@ -54,9 +54,9 @@ while true; do
         b)
             echo -e "\nAdded '${chosen_domain}'' to the blocklist."
             echo "$chosen_domain" >> "$raw_file"
-            echo "$chosen_domain" >> "$optimised_rules"
+            echo "$chosen_domain" >> "$optimised_entries"
             sort "$raw_file" -o "$raw_file"
-            sort "$optimiser_blacklist" -o "$optimiser_blacklist"
+            sort "$optimised_entries" -o "$optimised_entries"
             ;;
         w)
             echo -e "\nAdded '${chosen_domain}' to the whitelist."
