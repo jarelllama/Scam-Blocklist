@@ -1,5 +1,5 @@
-name: Copy mirror
-run-name: Copy mirror
+name: Sync mirror
+run-name: Sync mirror
 on:
   workflow_dispatch:
   push:
@@ -7,12 +7,12 @@ on:
       - "mirror"
       
 jobs:
-  copy-mirror:
+  sync-mirror:
   runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Copy mirror
+      - name: Sync mirror
         run: |
           rsync -av "mirror" ".github"
