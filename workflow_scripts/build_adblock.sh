@@ -5,9 +5,9 @@ adblock_file="adblock.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
-awk '{print "||" $0 "^"}' 1.tmp > 2.tmp
+awk '{print "||" $0 "^"}' "$raw_file" > 1.tmp
 
-sort 2.tmp -o adblock.tmp
+sort 1.tmp -o adblock.tmp
 
 grep -vE '^(!|$)' "$adblock_file" > previous_adblock.tmp
 
