@@ -18,7 +18,7 @@ comm -23 2.tmp "$optimiser_blacklist" > domains.tmp
 while true; do
     domains=$(cat domains.tmp)
 
-    numbered_domains=$(echo "$domains" | awk '{print NR " " $0}')
+    numbered_domains=$(echo "$domains" | awk '{print NR ". " $0}')
     echo "$numbered_domains"
 
     echo -e "\nSelect a domain"
@@ -38,7 +38,7 @@ while true; do
 
     chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
 
-    echo -e "\nOptimiser Menu:"
+    echo -e "\nChose what to do with '$chosen_domain':"
     echo "b. Blacklist"
     echo "w. Whitelist"
     echo "x. Return"
@@ -46,12 +46,14 @@ while true; do
     
     case "$choice" in
         b)
+            echo "Added to the blacklist: ${chosen_domain}"
             echo "$chosen_domain" >> "$raw_file"
             echo "$chosen_domain" >> "$optimiser_blacklist"
             sort "$raw_file" -o "$raw_file"
             sort "$optimiser_blacklist" -o "$optimiser_blacklist"
             ;;
         w)
+            echo "Added to the whitelist: ${chosen_domain}"
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
             ;;
