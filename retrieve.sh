@@ -2,7 +2,7 @@
 
 raw_file="data/raw.txt"
 pending_file="pending_domains.txt"
-search_terms_file="search_terms.txt"
+search_terms_file="data/search_terms.txt"
 whitelist_file="data/whitelist.txt"
 blacklist_file="data/blacklist.txt"
 toplist_file="data/toplist.txt"
