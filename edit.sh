@@ -24,6 +24,7 @@ function format_entry() {
 
     [[ "$entry" == *.* ]] || entry="${entry}.com"
 
+    # Remove common subdomains
     while read -r subdomain; do
         entry="${entry#"${subdomain}".}"
     done < "$subdomains_file"
