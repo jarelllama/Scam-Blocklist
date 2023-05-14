@@ -180,15 +180,12 @@ while true; do
     case "$choice" in
         b)
             edit_blocklist
-            rm ./*.tmp
             ;;
         w)
             edit_whitelist
-            rm ./*.tmp
             ;;
         l)
             edit_blacklist
-            rm ./*.tmp
             ;;
         c)
             check_entry
