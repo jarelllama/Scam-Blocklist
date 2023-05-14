@@ -138,9 +138,9 @@ function filter_pending {
     # Use parallel processing
     cat 7.tmp | xargs -I{} -P6 bash -c '
         domain="$1"
-        if dig @1.1.1.1 "$domain" | grep -Fq 'NXDOMAIN'; then
+        if dig @1.1.1.1 "$domain" | grep -Fq "NXDOMAIN"; then
             echo "$domain" >> dead.tmp
-            if [[ "$debug" == 'true' ]]; then
+            if [[ "$debug" == "true" ]]; then
                 echo "$domain (dead)"
             fi
         fi
