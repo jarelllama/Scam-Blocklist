@@ -8,6 +8,7 @@ blacklist_file="data/blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
 dead_domains_file="data/dead_domains.txt"
+optimised_entries="data/optimised_entries.txt"
 stats_file="data/stats.txt"
 edit_script="edit.sh"
 
@@ -125,9 +126,17 @@ function filter_pending {
     grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
     grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp > 6.tmp
 
+    > redundant.tmp
+    while read -r entry; do
+        grep "\.${entry}$" 6.tmp >> redundant.tmp
+    done < "$optimised_entries"
+
+    cat redundant.tmp | awk '{print $0 " (redundant)"}'
+    grep -vxFf redundant.tmp 6.tmp > 7.tmp
+
     > dead.tmp
     # Use parallel processing
-    cat 6.tmp | xargs -I{} -P6 bash -c "
+    cat 7.tmp | xargs -I{} -P6 bash -c "
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
             echo {} >> dead.tmp
             echo '{} (dead)'
@@ -137,9 +146,9 @@ function filter_pending {
     # It appears that the dead file isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same
     # Otherwise, sorting big files with comm is slower than using grep
-    grep -vxFf dead.tmp 6.tmp > 7.tmp
+    grep -vxFf dead.tmp 7.tmp > 8.tmp
 
-    mv 7.tmp "$pending_file"
+    mv 8.tmp "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains.\n"
