@@ -24,8 +24,8 @@ while true; do
         echo -e "\nPotential optimisations:"
         echo "${numbered_domains}"
 
+        echo "Enter the domain number to add it to the whitelist."
         echo -e "\nEnter 'a' to add all domains to the blocklist."
-        echo "Enter a domain number to add it to the whitelist."
     fi
     echo "Enter 'p' to push changes."
     echo "Enter 'x' to exit."
@@ -42,6 +42,7 @@ while true; do
     fi
     
     if [[ $choice == 'a' ]]; then
+        echo -e "\nAdding all domains to the blocklist..."
         cat domains.tmp >> "$raw_file"
         cat domains.tmp >> "$optimised_entries"
         sort "$raw_file" -o "$raw_file"
