@@ -171,23 +171,24 @@ function filter_pending {
     
     grep -xFf pending_with_subdomains.tmp "$toplist_file" > in_toplist.tmp
     
+    if ! [[ -s in_toplist.tmp ]]; then
+        echo -e "\nNo domains found in toplist."
+        return
+    fi
+    
     while read -r subdomain; do
         sed -i "s/^$subdomain\.//" in_toplist.tmp
     done < "$subdomains_file"
+
     sort -u in_toplist.tmp -o in_toplist.tmp
 
-    if [[ -s in_toplist.tmp ]]; then
-        echo -e "\n! Domains in toplist:"
-        cat in_toplist.tmp
-        if "$unattended"; then
-            echo -e "\nExiting...\n"
-            exit 1
-        fi
-    else
-        echo -e "\nNo domains found in toplist."
+    echo -e "\n! Domains in toplist:"
+    cat in_toplist.tmp
+
+    if "$unattended"; then
+        echo -e "\nExiting...\n"
+        exit 1
     fi
-    
-    rm ./*.tmp
 }
 
 function merge_pending {
