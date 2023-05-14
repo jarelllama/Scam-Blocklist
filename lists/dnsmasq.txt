@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.101014.2023
-# Last modified: Sun May 14 10:10:14 UTC 2023
+# Version: 05.14.101456.2023
+# Last modified: Sun May 14 10:14:56 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3862
+# Total number of entries: 3867
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -642,6 +642,7 @@ address=/clquent.com/#
 address=/cluckergifts.company.site/#
 address=/cmngty.com/#
 address=/cnmetalstore.com/#
+address=/coach-shopu.shop/#
 address=/coatfaith.com/#
 address=/cobracmcecco.com/#
 address=/cobratigerdc.com/#
@@ -799,6 +800,7 @@ address=/dcsiteservices.com/#
 address=/dcsnowboard.com/#
 address=/ddoe.shop/#
 address=/ddypjs.com/#
+address=/dea.nidasrent.cz/#
 address=/deal-lady.com/#
 address=/dealalfresco.com/#
 address=/dealweili.shop/#
@@ -2147,6 +2149,7 @@ address=/modernmodishgoods.com/#
 address=/modernpuzzle.shop/#
 address=/modernusfemale.com/#
 address=/moensale.com/#
+address=/mokashe.com/#
 address=/moklemon.com/#
 address=/monacamping.shop/#
 address=/mondolet.com/#
@@ -2694,6 +2697,7 @@ address=/qvcshopus.com/#
 address=/rabbiten.com/#
 address=/racecars24.fr/#
 address=/racerkidz.de/#
+address=/radenar.shop/#
 address=/radisp.com/#
 address=/raefy.com/#
 address=/rainbowter.com/#
@@ -2800,6 +2804,7 @@ address=/rosshopping.com/#
 address=/rossignol-ski.com/#
 address=/rossignolskishop.com/#
 address=/rotarydistrict7030.org/#
+address=/roteceg.shop/#
 address=/rothtop.com/#
 address=/rotyka.com/#
 address=/rovertac.com/#
