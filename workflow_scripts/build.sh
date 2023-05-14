@@ -38,3 +38,6 @@ ${comment} Expires: 4 hours
 ${comment} Syntax: $syntax
 ${comment} Total number of entries: $num_after
 ${comment}" | cat - "${path}.tmp" > "$path"
+
+git add "$path"
+git commit -m "Build ${syntax}"
