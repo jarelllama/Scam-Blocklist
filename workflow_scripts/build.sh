@@ -30,7 +30,8 @@ num_before=$(wc -l < previous.tmp)
 
 num_after=$(wc -l < "${path}.tmp")
 
-echo -e "\nTotal entries before: $num_before"
+echo -e "\nBuilt ${syntax}"
+echo "Total entries before: $num_before"
 echo "Difference: $((num_after - num_before))"
 echo -e "Final entries after: $num_after\n"
 
