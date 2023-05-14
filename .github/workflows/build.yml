@@ -91,6 +91,25 @@ jobs:
           echo -e "\nRemoving...\n"
           exit 1
 
+      - name: Redundant entries check
+        if: success() || failure()
+        run: |
+          > redundant.tmp
+          while read -r entry; do
+            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> redundant.tmp
+          done < "${{ vars.RAW_FILE }}"
+          
+          if [[ -s redundant.tmp ]] || exit 0
+          echo -e "\nRedundant entries found:"
+          cat redundant.tmp
+
+          grep -vxFf redundant.tmp "${{ vars.RAW_FILE }}" > raw.tmp
+          mv raw.tmp "${{ vars.RAW_FILE }}"
+          
+          echo -e "\nRemoving...\n"
+          # No need to return failure
+          exit 0
+
       - name: Whitelist check
         id: whitelist
         if: success() || failure()
@@ -110,32 +129,18 @@ jobs:
           git add "${{ vars.RAW_FILE }}"
           git commit -m "Filter raw file"
 
-      - name: Build Domains list
-        id: build_domains
-        if: success() || steps.whitelist.conclusion == 'success'
-        run: |
-          bash "workflow_scripts/build_domains.sh"
-
       - name: Build Adblock Plus list
         id: build_adblock
         if: success() || steps.whitelist.conclusion == 'success'
         run: |
           bash "workflow_scripts/build_adblock.sh"
-          git add "${{ vars.COMPRESSED_ENTRIES_FILE }}"
-          # The '|| true' is needed because when untracked changes are found, git commit returns 1
-          git diff-index --quiet HEAD || git commit -m "Compress Adblock rules" > /dev/null || true
 
       - name: Update stats
-        if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
+        if: success() || steps.build_adblock.conclusion == 'success'
         run: |
-          domains_count=$(grep -cvE '^(#|$)' "${{ vars.DOMAINS_FILE }}")
-          adblock_count=$(grep -cvE '^(!|$)' "${{ vars.ADBLOCK_FILE }}")
-          sed -i "s/domains_count/${domains_count}/g" "${{ vars.README_TEMPLATE }}"
-          sed -i "s/adblock_count/${adblock_count}/g" "${{ vars.README_TEMPLATE }}"
-
           todays_date=$(date -u +"%m%d%y")
           date_in_file=$(sed -n '2p' "${{ vars.STATS_FILE }}")
-          current_count="$adblock_count"
+          current_count=$(wc -l < "${{ vars.RAW_FILE }})
           yest_count=$(sed -n '6p' "${{ vars.STATS_FILE }}")
 
           if [[ "$date_in_file" == "$todays_date" ]]; then
@@ -166,13 +171,7 @@ jobs:
 
           sed -i "4s/.*/${current_count}/" "${{ vars.STATS_FILE }}"
        
-          while read -r subdomain; do
-            grep "^${subdomain}\." "${{ vars.DEAD_DOMAINS_FILE }}" >> subdomains.tmp || true
-          done < "${{ vars.SUBDOMAINS_FILE }}"
-
-          comm -23 "${{ vars.DEAD_DOMAINS_FILE }}" subdomains.tmp > dead_domains.tmp
-
-          dead_domains_count=$(wc -l < dead_domains.tmp)
+          dead_domains_count=$(wc -l < "${{ vars.DEAD_DOMAINS_FILE }}")
 
           total_count=$((dead_domains_count + current_count))
 
@@ -195,8 +194,9 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update README/stats" > /dev/null || true
 
       - name: Commit and push
-        if: success() || steps.build_domains.conclusion == 'success' && steps.build_adblock.conclusion == 'success'
+        if: success() || steps.build_adblock.conclusion == 'success'
         run: |
-          git add "${{ vars.DOMAINS_FILE }}" "${{ vars.ADBLOCK_FILE }}"
+          git add "${{ vars.ADBLOCK_FILE }}"
           git diff-index --quiet HEAD || git commit -qm "Build lists" > /dev/null || true
           git push
+
