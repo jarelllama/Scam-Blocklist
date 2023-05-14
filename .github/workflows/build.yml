@@ -7,8 +7,8 @@ on:
       - "data/raw.txt"
       - "data/README.md"
   schedule:
-    # Daily at 5:10am (GMT+8)
-    - cron: '10 21 * * *'
+    # Daily at 4:10am (GMT+8)
+    - cron: '10 20 * * *'
 
 jobs:
   build-lists:
@@ -194,11 +194,8 @@ jobs:
 
           git restore "${{ vars.README_TEMPLATE }}"
           git add "${{ vars.README }}" "${{ vars.STATS_FILE }}"
-          git diff-index --quiet HEAD || git commit -m "Update README/stats" > /dev/null || true
+          git commit -m "Update README/stats"
 
       - name: Push
         if: success() || steps.build_lists.conclusion == 'success'
-        run: |
-          git diff-index --quiet HEAD || git commit -qm "Build lists" > /dev/null || true
-          git push
-
+        run: git push
