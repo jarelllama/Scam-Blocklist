@@ -47,7 +47,7 @@ while true; do
         sort -u "$raw_file" -o "$raw_file"
         sort "$optimised_entries" -o "$optimised_entries"
     else
-        chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
+        chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
         echo -e "\nAdded '${chosen_domain}' to the whitelist."
         echo "$chosen_domain" >> "$optimiser_whitelist"
         sort "$optimiser_whitelist" -o "$optimiser_whitelist"
