@@ -9,6 +9,8 @@ comment="$5"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
+touch "$path"
+
 awk -v before="$before" -v after="$after" '{print before $0 after}' "$raw_file" > "${path}.tmp"
 
 sort "${path}.tmp" -o "${path}.tmp"
