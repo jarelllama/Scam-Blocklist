@@ -134,6 +134,8 @@ function filter_pending {
     "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
     grep -vxFf redundant.tmp 6.tmp > 7.tmp
 
+    export debug="$debug"
+
     > dead.tmp
     # Use parallel processing
     cat 7.tmp | xargs -I{} -P6 bash -c '
@@ -144,7 +146,7 @@ function filter_pending {
                 echo "$domain (dead)"
             fi
         fi
-    ' -- {} -e debug="$debug"
+    ' -- {}
 
     # It appears that the dead file isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same
