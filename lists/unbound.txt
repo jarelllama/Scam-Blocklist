@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.221409.2023
-# Last modified: Sun May 14 22:14:09 UTC 2023
+# Version: 05.14.222802.2023
+# Last modified: Sun May 14 22:28:02 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3914
+# Total number of entries: 3919
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1853,6 +1853,7 @@ local-zone: "lanafurniture.xyz." always_nxdomain
 local-zone: "landrope.com." always_nxdomain
 local-zone: "lanelamps.shop." always_nxdomain
 local-zone: "lapadeal.com." always_nxdomain
+local-zone: "lapasticceriaitaliana.de." always_nxdomain
 local-zone: "larosastore.net." always_nxdomain
 local-zone: "lasecool.com." always_nxdomain
 local-zone: "lasertechnics.pl." always_nxdomain
@@ -2691,6 +2692,7 @@ local-zone: "promtot.com." always_nxdomain
 local-zone: "propertiesaugust.com." always_nxdomain
 local-zone: "propertiespfg.com." always_nxdomain
 local-zone: "propertisz.com." always_nxdomain
+local-zone: "proqpace.com." always_nxdomain
 local-zone: "proskechr.com." always_nxdomain
 local-zone: "prospendrr.com." always_nxdomain
 local-zone: "proudgifts.us." always_nxdomain
@@ -2716,6 +2718,7 @@ local-zone: "qualityplaything.com." always_nxdomain
 local-zone: "quarscope.com." always_nxdomain
 local-zone: "quartetleaf.com." always_nxdomain
 local-zone: "queenscattery.com." always_nxdomain
+local-zone: "qufmrcfcy.stara-posta-hodonin.cz." always_nxdomain
 local-zone: "quietkeep.com." always_nxdomain
 local-zone: "quimv.com." always_nxdomain
 local-zone: "quinnandspencer.com." always_nxdomain
@@ -3507,11 +3510,13 @@ local-zone: "tropicaltrends.co." always_nxdomain
 local-zone: "tropimart.co." always_nxdomain
 local-zone: "trouvashopping.com." always_nxdomain
 local-zone: "truckfilters.space." always_nxdomain
+local-zone: "trullejk.ostgermain.fr." always_nxdomain
 local-zone: "trunkduffel.com." always_nxdomain
 local-zone: "trusyo.com." always_nxdomain
 local-zone: "tryems.com." always_nxdomain
 local-zone: "trytodaysdeal.com." always_nxdomain
 local-zone: "tsipps.com." always_nxdomain
+local-zone: "ttsecret.com." always_nxdomain
 local-zone: "tubespartsaccessories.com." always_nxdomain
 local-zone: "tuenhi.info." always_nxdomain
 local-zone: "tugruy.com." always_nxdomain
