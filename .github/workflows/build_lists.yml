@@ -1,5 +1,5 @@
-name: Build_lists
-run-name: Build_lists
+name: Build lists
+run-name: Build lists
 on:
   workflow_dispatch:
   push:
