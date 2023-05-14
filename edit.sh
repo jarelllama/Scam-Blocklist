@@ -28,18 +28,6 @@ function format_entry() {
     done < "$subdomains_file"
 }
 
-function remove_entry() {
-    if [[ "$remove_entry" -eq 1 ]]; then
-        if ! grep -xFq "$entry" "$2"; then
-            echo -e "\nEntry not found in the ${1}: $entry"
-            return
-        fi
-        echo -e "\nRemoved from the ${1}: $entry"
-        sed -i "/^${entry}$/d" "$2"
-        return
-    fi
-}
-
 function edit_blocklist {
     echo "BLOCKLIST"
 
@@ -47,7 +35,15 @@ function edit_blocklist {
 
     format_entry "$entry"
             
-    remove_entry blocklist "$raw_file"
+    if [[ "$remove_entry" -eq 1 ]]; then
+        if ! grep -xFq "$entry" "$raw_file"; then
+            echo -e "\nEntry not found in the blocklist: $entry"
+            return
+        fi
+        echo -e "\nRemoved from the blocklist: $entry"
+        sed -i "/^${entry}$/d" "$raw_file"
+        return
+    fi       
 
     if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]-]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
@@ -83,7 +79,15 @@ function edit_whitelist {
 
     format_entry "$entry"
 
-    remove_entry whitelist "$whitelist_file"
+    if [[ "$remove_entry" -eq 1 ]]; then
+        if ! grep -xFq "$entry" "$whitelist_file"; then
+            echo -e "\nEntry not found in the whitelist: $entry"
+            return
+        fi
+        echo -e "\nRemoved from the whitelist: $entry"
+        sed -i "/^${entry}$/d" "$whitelist_file"
+        return
+    fi       
 
     # Check if the entry contains whitespaces or is empty
     if [[ "$entry" =~ [[:space:]] || -z "$entry" ]]; then
@@ -111,7 +115,15 @@ function edit_blacklist {
 
     format_entry "$entry"
             
-    remove_entry blacklist "$blacklist_file"
+    if [[ "$remove_entry" -eq 1 ]]; then
+        if ! grep -xFq "$entry" "$blacklist_file"; then
+            echo -e "\nEntry not found in the blacklist: $entry"
+            return
+        fi
+        echo -e "\nRemoved from the blacklist: $entry"
+        sed -i "/^${entry}$/d" "$blacklist_file"
+        return
+    fi       
 
     if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]-]{2,}$ ]]; then
         echo -e "\nInvalid domain. Not added."
