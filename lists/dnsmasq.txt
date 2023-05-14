@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.221149.2023
-# Last modified: Sun May 14 22:11:49 UTC 2023
+# Version: 05.14.221409.2023
+# Last modified: Sun May 14 22:14:09 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3914
+# Total number of entries: 3913
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -756,6 +756,7 @@ address=/cutefate.com/#
 address=/cutekittenshomeusa.com/#
 address=/cutpricecamping.com/#
 address=/cuture.us/#
+address=/cvlostendales.es/#
 address=/cwwk.net/#
 address=/cycery.com/#
 address=/cycle100percent.com/#
@@ -2708,7 +2709,6 @@ address=/qfsgesara.com/#
 address=/qfsnesarag.com/#
 address=/qhqzpt.astis-hunderunde.de/#
 address=/qisoin.com/#
-address=/qkbtil.cvlostendales.es/#
 address=/qmzdo.online/#
 address=/qttlpn.shop/#
 address=/qualityplaything.com/#
@@ -2857,7 +2857,6 @@ address=/rugsandcurtains.com/#
 address=/ruispice.com/#
 address=/rungovip.store/#
 address=/runsaucony.com/#
-address=/ruver.cvlostendales.es/#
 address=/ruylfeicne.info/#
 address=/rvruo.shop/#
 address=/ryanurabonpitbullpuppies.com/#
