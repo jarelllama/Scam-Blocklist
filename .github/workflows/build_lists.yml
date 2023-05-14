@@ -1,5 +1,5 @@
-name: Build
-run-name: Build
+name: Build_lists
+run-name: Build_lists
 on:
   workflow_dispatch:
   push:
@@ -11,7 +11,7 @@ on:
     - cron: '10 20 * * *'
 
 jobs:
-  build:
+  build_lists:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -78,6 +78,8 @@ jobs:
           while read -r subdomain; do
             sed -i "s/^${subdomain}\.//" "${{ vars.RAW_FILE }}"
           done < "${{ vars.SUBDOMAINS_FILE }}"
+
+          sort -u "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
 
           echo -e "\nRemoving...\n"
           exit 1
