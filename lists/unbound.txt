@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.104734.2023
-# Last modified: Sun May 14 10:47:34 UTC 2023
+# Version: 05.14.105434.2023
+# Last modified: Sun May 14 10:54:34 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3887
+# Total number of entries: 3896
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -896,6 +896,7 @@ local-zone: "dogfoodsale.shop." always_nxdomain
 local-zone: "dogfoodsales.shop." always_nxdomain
 local-zone: "dogfoodshopmall.website." always_nxdomain
 local-zone: "dogfoodssale.store." always_nxdomain
+local-zone: "dogodw.com." always_nxdomain
 local-zone: "dogsfoodmall.store." always_nxdomain
 local-zone: "dogsfoodsale.shop." always_nxdomain
 local-zone: "dogtoyoutlet.store." always_nxdomain
@@ -1510,6 +1511,7 @@ local-zone: "hoistreplacementparts.com." always_nxdomain
 local-zone: "hoka-us.com." always_nxdomain
 local-zone: "hokaboutique.shop." always_nxdomain
 local-zone: "hokacenter.com." always_nxdomain
+local-zone: "hokaone-run.co." always_nxdomain
 local-zone: "hokaoneoneus.shop." always_nxdomain
 local-zone: "hokaonesport.co." always_nxdomain
 local-zone: "hokashoeshop.com." always_nxdomain
@@ -1885,6 +1887,7 @@ local-zone: "libopaws.com." always_nxdomain
 local-zone: "licoast.com." always_nxdomain
 local-zone: "lidivia.com." always_nxdomain
 local-zone: "lifellx.com." always_nxdomain
+local-zone: "lifeotop.com." always_nxdomain
 local-zone: "lifestylie.com." always_nxdomain
 local-zone: "lightbulbs.space." always_nxdomain
 local-zone: "lightceilingfans.com." always_nxdomain
@@ -1895,6 +1898,7 @@ local-zone: "likaz.com." always_nxdomain
 local-zone: "limehel.com." always_nxdomain
 local-zone: "limewheelsca.com." always_nxdomain
 local-zone: "limitalfresco.com." always_nxdomain
+local-zone: "limithousehold.com." always_nxdomain
 local-zone: "limitofferladies.store." always_nxdomain
 local-zone: "lindexfashion.com." always_nxdomain
 local-zone: "linguatvio.com." always_nxdomain
@@ -1920,6 +1924,7 @@ local-zone: "locymax.com." always_nxdomain
 local-zone: "lofthelsinki.com." always_nxdomain
 local-zone: "login-information-update-online.com." always_nxdomain
 local-zone: "logisol.fr." always_nxdomain
+local-zone: "logisticscontinental.com." always_nxdomain
 local-zone: "logisticskingz.com." always_nxdomain
 local-zone: "loiredgar.com." always_nxdomain
 local-zone: "lokans.shop." always_nxdomain
@@ -2472,6 +2477,7 @@ local-zone: "outdoorwintersports.com." always_nxdomain
 local-zone: "outdorproducts.shop." always_nxdomain
 local-zone: "outextremesport.com." always_nxdomain
 local-zone: "outextremewares.com." always_nxdomain
+local-zone: "outfitiq.com." always_nxdomain
 local-zone: "outfitnewsport.com." always_nxdomain
 local-zone: "outingment.com." always_nxdomain
 local-zone: "outlawmoto.com." always_nxdomain
@@ -3109,6 +3115,7 @@ local-zone: "sontas.shop." always_nxdomain
 local-zone: "soreldiscount.com." always_nxdomain
 local-zone: "sorptress.com." always_nxdomain
 local-zone: "sorweeve.com." always_nxdomain
+local-zone: "sotapam.shop." always_nxdomain
 local-zone: "sotekin.shop." always_nxdomain
 local-zone: "soudkydubove.cz." always_nxdomain
 local-zone: "soul-spa-berlin.de." always_nxdomain
@@ -3367,6 +3374,7 @@ local-zone: "therugscurtains.com." always_nxdomain
 local-zone: "thesfit.store." always_nxdomain
 local-zone: "theshoefootwear.com." always_nxdomain
 local-zone: "thesignaturehardware.com." always_nxdomain
+local-zone: "thestoremate.com." always_nxdomain
 local-zone: "thesurfgear.com." always_nxdomain
 local-zone: "theteamsport.store." always_nxdomain
 local-zone: "thetirestubes.com." always_nxdomain
@@ -3880,6 +3888,7 @@ local-zone: "zinstyles.com." always_nxdomain
 local-zone: "zinwald.com." always_nxdomain
 local-zone: "zipbay.co." always_nxdomain
 local-zone: "zircart.com." always_nxdomain
+local-zone: "zirconkennels.com." always_nxdomain
 local-zone: "ziskhk.salstyr.pl." always_nxdomain
 local-zone: "zivmax.com." always_nxdomain
 local-zone: "zjfshopping.com." always_nxdomain
