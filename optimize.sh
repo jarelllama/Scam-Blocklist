@@ -52,4 +52,5 @@ while true; do
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
             ;;
+    esac
 done
