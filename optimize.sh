@@ -5,15 +5,19 @@ optimiser_whitelist="data/optimise_whitelist"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" exit
 
-while true; do
-    output=$(grep -E '\..*\.' data/raw.txt \
-        | cut -d '.' -f2- \
-        | awk -F '.' '$1 ~ /.{4,}/ {print}' \
-        | sort \
-        | uniq -d \
-        | grep -vF 'shop')
+grep -E '\..*\.' data/raw.txt \
+    | cut -d '.' -f2- \
+    | awk -F '.' '$1 ~ /.{4,}/ {print}' \
+    | sort \
+    | uniq -d > 1.tmp
+    
+comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
+comm -23 2.tmp "$optimiser_blacklist" > domains.tmp
 
-    numbered_domains=$(echo "$output" | awk '{print NR " " $0}')
+while true; do
+    domains=$(cat domains.tmp)
+
+    numbered_domains=$(echo "$domains" | awk '{print NR " " $0}')
     echo "$numbered_domains"
 
     echo -e "\nSelect a domain."
@@ -23,7 +27,7 @@ while true; do
 
     [[ "$chosen_number" == 'x' ]] && exit 0
     
-    if [[ "$chosen_number" == 'p']]; then
+    if [[ "$chosen_number" == 'p' ]]; then
         git add "$raw_file" "$optimiser_whitelist" "$optimiser_blacklist"
         git commit -m "Optimise blocklist"
         git push
