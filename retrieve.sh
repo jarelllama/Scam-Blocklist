@@ -188,19 +188,20 @@ function optimise_blocklist {
     
         [[ -s domains.tmp ]] || return
         numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
-        echo -e "\nOptimiser Menu:"
+        echo -e "\nOPTIMISER MENU"
         echo "Potential optimised entries:"
         echo "${numbered_domains}"
 
-        echo -e "\nEnter the entry number to whitelist it."
+        echo -e "\n*. Enter the entry number to whitelist it."
         echo "a. Add all optimised entries."
-        echo "x. Return to the previous menu."
+        echo "x. Continue with merging."
         read -r choice
 
         [[ "$choice" == 'x' ]] && return
 
         if [[ "$choice" == 'a' ]]; then
-            echo -e "\nAdding all optimisd entries to the blocklist..."
+            echo -e "\nAdding all optimised entries to the blocklist..."
+            echo "Merging..."
             cat domains.tmp >> "$raw_file"
             cat domains.tmp >> "$optimised_entries"
             sort -u "$raw_file" -o "$raw_file"
@@ -277,7 +278,7 @@ if "$unattended"; then
 fi
 
 while true; do
-    echo -e "\nPending Domains Menu:"
+    echo -e "\nPENDING DOMAINS MENU"
     echo "m. Merge with blocklist"
     echo "e. Edit lists"
     echo "r. Run filter again"
