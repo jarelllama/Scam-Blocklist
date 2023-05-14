@@ -107,8 +107,7 @@ jobs:
           mv raw.tmp "${{ vars.RAW_FILE }}"
           
           echo -e "\nRemoving...\n"
-          # No need to return failure
-          exit 0
+          exit 1
 
       - name: Whitelist check
         id: whitelist
@@ -123,7 +122,7 @@ jobs:
           echo -e "\nSkipping build steps.\n"
           exit 1
 
-      - name: Save any new filtering changes
+      - name: Commit filtered raw file
         if: failure()
         run: |
           git add "${{ vars.RAW_FILE }}"
