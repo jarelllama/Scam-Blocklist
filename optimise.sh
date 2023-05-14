@@ -19,7 +19,7 @@ while true; do
     domains=$(cat domains.tmp)
 
     numbered_domains=$(echo "$domains" | awk '{print NR ". " $0}')
-    echo "$numbered_domains"
+    echo -e "\n${numbered_domains}"
 
     echo -e "\nSelect a domain"
     echo "or 'p' to push changes"
@@ -46,14 +46,14 @@ while true; do
     
     case "$choice" in
         b)
-            echo "Added to the blacklist: ${chosen_domain}"
+            echo -e "\nAdded to the blacklist: ${chosen_domain}"
             echo "$chosen_domain" >> "$raw_file"
             echo "$chosen_domain" >> "$optimiser_blacklist"
             sort "$raw_file" -o "$raw_file"
             sort "$optimiser_blacklist" -o "$optimiser_blacklist"
             ;;
         w)
-            echo "Added to the whitelist: ${chosen_domain}"
+            echo -e "\nAdded to the whitelist: ${chosen_domain}"
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
             ;;
