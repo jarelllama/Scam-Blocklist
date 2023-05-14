@@ -47,4 +47,4 @@ ${comment} Total number of entries: $num_after
 ${comment}" | cat - "${path}.tmp" > "$path"
 
 git add "$path"
-git commit -m "Build ${syntax}"
+git commit -qm "Build ${syntax}"
