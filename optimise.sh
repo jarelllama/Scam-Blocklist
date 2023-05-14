@@ -22,14 +22,14 @@ while true; do
 
     echo -e "\nSelect a domain"
     echo "or 'p' to push changes"
-    echo -e "or 'x' to exit\n"
+    echo "or 'x' to exit"
     read -r chosen_number
 
     [[ "$chosen_number" == 'x' ]] && exit 0
     
     if [[ "$chosen_number" == 'p' ]]; then
         echo -e "\nPushing changes..."
-        git add "$raw_file" "$optimiser_whitelist" "$optimiser_blacklist"
+        git add "$raw_file" "$optimiser_blacklist" "$optimiser_blacklist"
         git commit -m "Optimise blocklist"
         git push
         exit 0
