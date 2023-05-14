@@ -17,24 +17,30 @@ while true; do
     comm -23 2.tmp "$optimised_entries" > 3.tmp
     comm -23 3.tmp "$raw_file" > domains.tmp
 
-    domains=$(cat domains.tmp)
-
-    if [[ -z "$domains" ]]; then
+    if ! [[ -s domains.tmp ]]; then
         echo -e "\nNo potential optimizations found.\n"
     else
-        numbered_domains=$(echo "$domains" | awk '{print NR ". " $0}')
+        numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
         echo -e "\nPotential optimisations:"
         echo "${numbered_domains}"
 
-        echo -e "\nSelect a domain with its number."
+        echo -e "\nEnter 'a' to add all domains to the blocklist."
+        echo "\nEnter a domain number to add it to the whitelist."
     fi
     echo "Enter 'p' to push changes."
     echo "Enter 'x' to exit."
-    read -r chosen_number
+    read -r choice
 
-    [[ "$chosen_number" == 'x' ]] && exit 0
+    [[ "$choice" == 'x' ]] && exit 0
     
-    if [[ "$chosen_number" == 'p' ]]; then
+    if [[ $choice == 'a' ]]; then
+        cat domains.tmp >> "$raw_file"
+        cat domains.tmp >> "$optimised_entries"
+        sort "$raw_file" -o "$raw_file"
+        sort "$optimised_entries" -o "$optimised_entries"
+    fi
+    
+    if [[ "$choice" == 'p' ]]; then
         echo -e "\nPushing changes..."
         git add "$raw_file" "$optimised_entries" "$optimiser_whitelist"
         git commit -m "Optimise blocklist"
@@ -44,24 +50,7 @@ while true; do
 
     chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
 
-    echo -e "\nChose what to do with '$chosen_domain':"
-    echo "b. Add to blocklist"
-    echo "w. Add to whitelist"
-    echo "x. Return"
-    read -r choice
-    
-    case "$choice" in
-        b)
-            echo -e "\nAdded '${chosen_domain}'' to the blocklist."
-            echo "$chosen_domain" >> "$raw_file"
-            echo "$chosen_domain" >> "$optimised_entries"
-            sort "$raw_file" -o "$raw_file"
-            sort "$optimised_entries" -o "$optimised_entries"
-            ;;
-        w)
-            echo -e "\nAdded '${chosen_domain}' to the whitelist."
-            echo "$chosen_domain" >> "$optimiser_whitelist"
-            sort "$optimiser_whitelist" -o "$optimiser_whitelist"
-            ;;
-    esac
+    echo -e "\nAdded '${chosen_domain}' to the whitelist."
+    echo "$chosen_domain" >> "$optimiser_whitelist"
+    sort "$optimiser_whitelist" -o "$optimiser_whitelist"
 done
