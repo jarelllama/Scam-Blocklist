@@ -133,7 +133,7 @@ jobs:
         if: success() || steps.whitelist.conclusion == 'success'
         run: |
           #bash "workflow_scripts/build.sh" 'Adblock Plus' "${{ vars.ADBLOCK_FILE }}" '||' '^' '!'
-          bash "workflow_scripts/build.sh" 'Wildcard Asterisk' "${{ vars.WILDCARD_ASTERISK }}" '*.' '' '#'
+          bash "workflow_scripts/build.sh" 'Wildcard Asterisk' "wildcard_asterisk.txt" '*.' '' '#'
 
       - name: Update stats
         if: success() || steps.build_lists.conclusion == 'success'
