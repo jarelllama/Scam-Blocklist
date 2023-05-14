@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.204253.2023
-# Last modified: Sun May 14 20:42:53 UTC 2023
+# Version: 05.14.221149.2023
+# Last modified: Sun May 14 22:11:49 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3908
+# Total number of entries: 3914
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -23,6 +23,7 @@ address=/77unishop.com/#
 address=/90sfootwear.com/#
 address=/a-mazon.shop/#
 address=/a3review.com/#
+address=/aac667.com/#
 address=/aakida.com/#
 address=/abelcollectibles.shop/#
 address=/abeni.shop/#
@@ -1277,6 +1278,7 @@ address=/furnituresaleshop.com/#
 address=/furnitureshop.store/#
 address=/furnitureshopmall.com/#
 address=/futira.com/#
+address=/fvaypte.dor-reception.fr/#
 address=/fyges.com/#
 address=/fypsex.com/#
 address=/g-host.io/#
@@ -1493,6 +1495,7 @@ address=/hgshopee.com/#
 address=/hguisyus.com/#
 address=/hgvyj.restauraceaplus.cz/#
 address=/hhclothingus.com/#
+address=/hiddenrebatefinder.com/#
 address=/highlevelbody.fr/#
 address=/highlevelmarketing.com/#
 address=/hihetab.xyz/#
@@ -2705,6 +2708,7 @@ address=/qfsgesara.com/#
 address=/qfsnesarag.com/#
 address=/qhqzpt.astis-hunderunde.de/#
 address=/qisoin.com/#
+address=/qkbtil.cvlostendales.es/#
 address=/qmzdo.online/#
 address=/qttlpn.shop/#
 address=/qualityplaything.com/#
@@ -2771,6 +2775,7 @@ address=/renewelle.shop/#
 address=/renolve.com/#
 address=/reshhubs.com/#
 address=/resultsadorable.com/#
+address=/retailreviews.help/#
 address=/revanced.io/#
 address=/revanced.net/#
 address=/revancedapk.org/#
@@ -3548,6 +3553,7 @@ address=/ukonlineclothes.com/#
 address=/ukoutdoordeal.com/#
 address=/ulifted.com/#
 address=/ultrareports.guru/#
+address=/ultrareports.review/#
 address=/umadate.xyz/#
 address=/umagic.net/#
 address=/umifot.com/#
