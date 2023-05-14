@@ -9,7 +9,7 @@ comment="$5"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
-echo -e "\nBuilding ${syntax}"
+echo -e "\nBuilding ${syntax}..."
 
 touch "$path"
 
