@@ -140,7 +140,7 @@ function filter_pending {
         domain="$1"
         if dig @1.1.1.1 "$domain" | grep -Fq 'NXDOMAIN'; then
             echo "$domain" >> dead.tmp
-            if "$debug"; then
+            if [[ "$debug" == 'true' ]]; then
                 echo "$domain (dead)"
             fi
         fi
