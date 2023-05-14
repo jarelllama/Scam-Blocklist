@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.101014.2023
-# Last modified: Sun May 14 10:10:14 UTC 2023
+# Version: 05.14.101456.2023
+# Last modified: Sun May 14 10:14:56 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3863
+# Total number of entries: 3868
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -643,6 +643,7 @@ local-zone: "clquent.com." always_nxdomain
 local-zone: "cluckergifts.company.site." always_nxdomain
 local-zone: "cmngty.com." always_nxdomain
 local-zone: "cnmetalstore.com." always_nxdomain
+local-zone: "coach-shopu.shop." always_nxdomain
 local-zone: "coatfaith.com." always_nxdomain
 local-zone: "cobracmcecco.com." always_nxdomain
 local-zone: "cobratigerdc.com." always_nxdomain
@@ -800,6 +801,7 @@ local-zone: "dcsiteservices.com." always_nxdomain
 local-zone: "dcsnowboard.com." always_nxdomain
 local-zone: "ddoe.shop." always_nxdomain
 local-zone: "ddypjs.com." always_nxdomain
+local-zone: "dea.nidasrent.cz." always_nxdomain
 local-zone: "deal-lady.com." always_nxdomain
 local-zone: "dealalfresco.com." always_nxdomain
 local-zone: "dealweili.shop." always_nxdomain
@@ -2148,6 +2150,7 @@ local-zone: "modernmodishgoods.com." always_nxdomain
 local-zone: "modernpuzzle.shop." always_nxdomain
 local-zone: "modernusfemale.com." always_nxdomain
 local-zone: "moensale.com." always_nxdomain
+local-zone: "mokashe.com." always_nxdomain
 local-zone: "moklemon.com." always_nxdomain
 local-zone: "monacamping.shop." always_nxdomain
 local-zone: "mondolet.com." always_nxdomain
@@ -2695,6 +2698,7 @@ local-zone: "qvcshopus.com." always_nxdomain
 local-zone: "rabbiten.com." always_nxdomain
 local-zone: "racecars24.fr." always_nxdomain
 local-zone: "racerkidz.de." always_nxdomain
+local-zone: "radenar.shop." always_nxdomain
 local-zone: "radisp.com." always_nxdomain
 local-zone: "raefy.com." always_nxdomain
 local-zone: "rainbowter.com." always_nxdomain
@@ -2801,6 +2805,7 @@ local-zone: "rosshopping.com." always_nxdomain
 local-zone: "rossignol-ski.com." always_nxdomain
 local-zone: "rossignolskishop.com." always_nxdomain
 local-zone: "rotarydistrict7030.org." always_nxdomain
+local-zone: "roteceg.shop." always_nxdomain
 local-zone: "rothtop.com." always_nxdomain
 local-zone: "rotyka.com." always_nxdomain
 local-zone: "rovertac.com." always_nxdomain
