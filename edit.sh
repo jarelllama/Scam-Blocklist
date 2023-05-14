@@ -8,11 +8,8 @@ subdomains_file="data/subdomains.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
-function format_entry {
-    read -p $'Enter the new entry (add \'-\' to remove entry):\n' entry
-
+function format_entry() {
     remove_entry=0
-
     if [[ "$entry" == -* ]]; then
         entry="${entry#-}"
         remove_entry=1
@@ -46,7 +43,9 @@ function remove_entry() {
 function edit_blocklist {
     echo "BLOCKLIST"
 
-    format_entry
+    read -rp $'Enter the new entry (add \'-\' to remove entry):\n' entry
+
+    format_entry "$entry"
             
     remove_entry blocklist "$raw_file"
 
@@ -88,7 +87,9 @@ function edit_blocklist {
 function edit_whitelist {
     echo "WHITELIST"
 
-    format_entry
+    read -rp $'Enter the new entry (add \'-\' to remove entry):\n' entry
+
+    format_entry "$entry"
 
     remove_entry whitelist "$whitelist_file"
 
@@ -114,7 +115,9 @@ function edit_whitelist {
 function edit_blacklist {
     echo "BLACKLIST"
 
-    format_entry
+    read -rp $'Enter the new entry (add \'-\' to remove entry):\n' entry
+
+    format_entry "$entry"
             
     remove_entry blacklist "$blacklist_file"
 
@@ -141,15 +144,9 @@ function edit_blacklist {
 }
 
 function check_entry {
-    read -p $'\nEnter the entry to check:\n' entry
-    
-    entry="${entry,,}"
+    read -rp $'\nEnter the entry to check:\n' entry
 
-    entry="${entry#*://}"
-
-    entry="${entry%%/*}"
-    
-    [[ "$entry" == *.* ]] || entry="${entry}.com"
+    format_entry "$entry"
 
     if ! grep -xFq "$entry" "$raw_file"; then
         echo -e "\nThe entry is not present: $entry"
@@ -178,7 +175,7 @@ while true; do
     echo "c. Check blocklist entry"
     echo "p. Push list(s) changes"
     echo "x. Exit/return"
-    read choice
+    read -r choice
 
     case "$choice" in
         b)
