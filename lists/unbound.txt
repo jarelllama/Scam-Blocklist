@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.130149.2023
-# Last modified: Sun May 14 13:01:49 UTC 2023
+# Version: 05.14.140514.2023
+# Last modified: Sun May 14 14:05:14 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3904
+# Total number of entries: 3900
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -165,7 +165,6 @@ local-zone: "aoemate.com." always_nxdomain
 local-zone: "aopwix.com." always_nxdomain
 local-zone: "apexforwardcargo.com." always_nxdomain
 local-zone: "aplomey.com." always_nxdomain
-local-zone: "apollo.io." always_nxdomain
 local-zone: "apparelgearbox.com." always_nxdomain
 local-zone: "apparelonsale.store." always_nxdomain
 local-zone: "apparelpeloton.com." always_nxdomain
@@ -976,7 +975,6 @@ local-zone: "eclothone.com." always_nxdomain
 local-zone: "ecoenos.com." always_nxdomain
 local-zone: "ecomgnow.shop." always_nxdomain
 local-zone: "ecommercevallcs.com." always_nxdomain
-local-zone: "ecwid.com." always_nxdomain
 local-zone: "edaintel.com." always_nxdomain
 local-zone: "edcbyesprit.com." always_nxdomain
 local-zone: "edcotools.com." always_nxdomain
@@ -1667,7 +1665,6 @@ local-zone: "janainalbenafsij.com." always_nxdomain
 local-zone: "jasbuy.com." always_nxdomain
 local-zone: "jasminebuy.com." always_nxdomain
 local-zone: "jbfilm.pl." always_nxdomain
-local-zone: "jctrans.net." always_nxdomain
 local-zone: "jdsportt.com." always_nxdomain
 local-zone: "jdssporty.com." always_nxdomain
 local-zone: "jdstockz.com." always_nxdomain
@@ -3080,7 +3077,6 @@ local-zone: "skymedia.media." always_nxdomain
 local-zone: "skysmelluk.com." always_nxdomain
 local-zone: "slearancemsbag.com." always_nxdomain
 local-zone: "sleeveis.com." always_nxdomain
-local-zone: "slideshare.net." always_nxdomain
 local-zone: "slimmingproductsale.store." always_nxdomain
 local-zone: "slimwaist.us." always_nxdomain
 local-zone: "slottoy.shop." always_nxdomain
