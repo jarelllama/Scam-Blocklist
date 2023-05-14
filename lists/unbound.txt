@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.112633.2023
-# Last modified: Sun May 14 11:26:33 UTC 2023
+# Version: 05.14.123128.2023
+# Last modified: Sun May 14 12:31:28 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3899
+# Total number of entries: 3903
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1429,6 +1429,7 @@ local-zone: "guntiony.com." always_nxdomain
 local-zone: "guridft.store." always_nxdomain
 local-zone: "gurucid.com." always_nxdomain
 local-zone: "gusmetn.com." always_nxdomain
+local-zone: "gutebih.shop." always_nxdomain
 local-zone: "gvs-usa.com." always_nxdomain
 local-zone: "gyustio.store." always_nxdomain
 local-zone: "hachipethouse.com." always_nxdomain
@@ -3097,6 +3098,7 @@ local-zone: "snazzywatch.com." always_nxdomain
 local-zone: "snkndl.com." always_nxdomain
 local-zone: "snorprevent.de." always_nxdomain
 local-zone: "snowaker.com." always_nxdomain
+local-zone: "snowb.co.za." always_nxdomain
 local-zone: "snowboard-us.com." always_nxdomain
 local-zone: "snowboardsrace.com." always_nxdomain
 local-zone: "snowgearshop.com." always_nxdomain
@@ -3669,6 +3671,7 @@ local-zone: "volcomofficial.com." always_nxdomain
 local-zone: "volcomoutdoor.com." always_nxdomain
 local-zone: "vollemmshop.com." always_nxdomain
 local-zone: "volsak.store." always_nxdomain
+local-zone: "vovlady.com." always_nxdomain
 local-zone: "voyagexplorer.com." always_nxdomain
 local-zone: "voyboutique.com." always_nxdomain
 local-zone: "vraodorld.com." always_nxdomain
@@ -3711,6 +3714,7 @@ local-zone: "wayhou.shop." always_nxdomain
 local-zone: "wayofhome.com." always_nxdomain
 local-zone: "wbeseae.com." always_nxdomain
 local-zone: "wd-verse.com." always_nxdomain
+local-zone: "wdaridbfd.hifidesign.pl." always_nxdomain
 local-zone: "wdgloballogistics.com." always_nxdomain
 local-zone: "wdrative.com." always_nxdomain
 local-zone: "wearfavorite.com." always_nxdomain
