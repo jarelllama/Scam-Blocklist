@@ -188,7 +188,8 @@ function optimise_blocklist {
     
         [[ -s domains.tmp ]] || return
         numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
-        echo -e "\n! Potential optimised entries:"
+        echo -e "\nOptimiser Menu:"
+        echo "Potential optimised entries:"
         echo "${numbered_domains}"
 
         echo -e "\nEnter the entry number to whitelist it."
