@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.163325.2023
-# Last modified: Sun May 14 16:33:25 UTC 2023
+# Version: 05.14.204253.2023
+# Last modified: Sun May 14 20:42:53 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3913
+# Total number of entries: 3909
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1826,7 +1826,6 @@ local-zone: "krnbcase.com." always_nxdomain
 local-zone: "krystaldecristo.com." always_nxdomain
 local-zone: "ksntpo.com." always_nxdomain
 local-zone: "kudopenguin.com." always_nxdomain
-local-zone: "kuosern.com." always_nxdomain
 local-zone: "kurpiezielone.pl." always_nxdomain
 local-zone: "kwdandy.com." always_nxdomain
 local-zone: "kyayu.com." always_nxdomain
@@ -1838,7 +1837,6 @@ local-zone: "lacento.net." always_nxdomain
 local-zone: "ladiesaccessorieswholesale.store." always_nxdomain
 local-zone: "ladiesclothingonline.store." always_nxdomain
 local-zone: "ladypeterkaiser.com." always_nxdomain
-local-zone: "ladyrunningshoe.com." always_nxdomain
 local-zone: "laeliajr.com." always_nxdomain
 local-zone: "lagigo.us." always_nxdomain
 local-zone: "lagomone.net." always_nxdomain
@@ -2681,7 +2679,6 @@ local-zone: "privatepolls.pro." always_nxdomain
 local-zone: "privatereports.guru." always_nxdomain
 local-zone: "privatesurvey.guru." always_nxdomain
 local-zone: "prodoorhandle.com." always_nxdomain
-local-zone: "productnewfad.com." always_nxdomain
 local-zone: "professionistidelsorriso.eu." always_nxdomain
 local-zone: "promeex.com." always_nxdomain
 local-zone: "promoalfresco.com." always_nxdomain
@@ -3686,7 +3683,6 @@ local-zone: "voyboutique.com." always_nxdomain
 local-zone: "vraodorld.com." always_nxdomain
 local-zone: "vshow.pro." always_nxdomain
 local-zone: "vtechtoyshop.com." always_nxdomain
-local-zone: "vuorlciothing.com." always_nxdomain
 local-zone: "vuquo.myshopify.com." always_nxdomain
 local-zone: "vvocase.com." always_nxdomain
 local-zone: "vvvvicshop.com." always_nxdomain
