@@ -60,6 +60,13 @@ function edit_blocklist {
         return
     fi
 
+    while read -r optimised_entry; do
+        if ! [[ "$entry" == "*.${optimised_entry}" ]]; then
+            continue
+        fi
+        echo -e "\nThe domain is made redundant by '${optimised_entry}'"
+    done < "$optimised_entries"
+
     if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
         echo -e "\nThe domain is dead. Not added."
         return
