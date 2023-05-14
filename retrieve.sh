@@ -137,11 +137,12 @@ function filter_pending {
     > dead.tmp
     # Use parallel processing
     cat 7.tmp | xargs -I{} -P6 bash -c '
+        domain="$1"
         if dig @1.1.1.1 {} | grep -Fq 'NXDOMAIN'; then
-            echo {} >> dead.tmp
-            "$debug" && echo '{} (dead)'
+            echo "$domains" >> dead.tmp
+            "$debug" && echo "$domain (dead)"
         fi
-    '
+    ' -- {}
 
     # It appears that the dead file isn't always sorted
     # Both comm and grep were tested here. When only small files need to be sorted the performance is generally the same
