@@ -17,6 +17,13 @@ jobs:
         run: |
           wget -q https://raw.githubusercontent.com/hagezi/dns-data-collection/main/top/toplist.txt \
             -O "${{ vars.TOPLIST_FILE }}"
+
+      - name: Remove subdomains
+        run: |
+          while read -r subdomain; do
+            sed -i "s/^${subdomain}\.//" "${{ vars.TOPLIST_FILE }}"
+          done < "${{ vars.SUBDOMAINS_FILE }}"
+
           sort -u "${{ vars.TOPLIST_FILE }}" -o "${{ vars.TOPLIST_FILE }}"
 
       - name: Commit and push 
