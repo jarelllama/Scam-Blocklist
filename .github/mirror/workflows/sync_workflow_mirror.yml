@@ -15,7 +15,7 @@ jobs:
         
       - name: Sync mirror
         run: |
-          rsync -av "mirror/" ".github"
+          rsync -av "mirror/" ".github/"
           
       - name: Commit and push
         run: |
