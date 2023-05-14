@@ -1,5 +1,5 @@
-name: Build lists
-run-name: Build lists
+name: Build
+run-name: Build
 on:
   workflow_dispatch:
   push:
@@ -11,7 +11,7 @@ on:
     - cron: '10 20 * * *'
 
 jobs:
-  build-lists:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -135,7 +135,7 @@ jobs:
           bash "${{ vars.BUILD }}" 'Adblock Plus' "lists/adblock.txt" '||' '^' '!'
           bash "${{ vars.BUILD }}" 'Wildcard Domains' "lists/wildcard_domains.txt" '' '' '#'
           bash "${{ vars.BUILD }}" 'Wildcard Asterisk' "lists/wildcard_asterisk.txt" '*.' '' '#'
-          bash "${{ vars.BUILD }}" 'DNSMasq' "lists/dnsmasq.txt" 'address=/' '/#' '#'
+          bash "${{ vars.BUILD }}" 'Dnsmasq' "lists/dnsmasq.txt" 'address=/' '/#' '#'
           bash "${{ vars.BUILD }}" 'Unbound' "lists/unbound.txt" 'local-zone: "' '." always_nxdomain' '#'
 
       - name: Update stats
