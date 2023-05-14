@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.143302.2023
-# Last modified: Sun May 14 14:33:02 UTC 2023
+# Version: 05.14.152822.2023
+# Last modified: Sun May 14 15:28:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3905
+# Total number of entries: 3907
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -770,6 +770,7 @@ local-zone: "d-glory.cfd." always_nxdomain
 local-zone: "d-rough.cfd." always_nxdomain
 local-zone: "d-shake.cfd." always_nxdomain
 local-zone: "d-state.cfd." always_nxdomain
+local-zone: "d-sugar.cfd." always_nxdomain
 local-zone: "d-thank.cfd." always_nxdomain
 local-zone: "d-tough.cfd." always_nxdomain
 local-zone: "dabanshops.com." always_nxdomain
@@ -2690,6 +2691,7 @@ local-zone: "proudgifts.us." always_nxdomain
 local-zone: "prousfemale.com." always_nxdomain
 local-zone: "provencevent.com." always_nxdomain
 local-zone: "psychologdlaukrainy.pl." always_nxdomain
+local-zone: "ptyayonan.mojezkusenostsinvisalign.cz." always_nxdomain
 local-zone: "pubeap.com." always_nxdomain
 local-zone: "pukingyolk.com." always_nxdomain
 local-zone: "pumpstrict.com." always_nxdomain
