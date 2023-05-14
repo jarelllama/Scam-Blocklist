@@ -32,7 +32,7 @@ for arg in "$@"; do
 done
 
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
-    read -n1 -p $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): "  answer
+    read -n1 -rp $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     echo
     if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
         > "$pending_file"
@@ -57,9 +57,9 @@ function retrieve_domains {
         [[ "$term" =~ ^[[:space:]]*$|^# ]] && continue
 
         # gsub replaces consecutive non-alphanumeric characters with a single plus sign
-        encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
+        term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time_filter}"
+        google_search_url="https://www.google.com/search?q=\"${term}\"&num=100&filter=0&tbs=qdr:${time_filter}"
 
         domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" \
             | grep -oE '<a href="http\S+"' \
@@ -222,7 +222,7 @@ function merge_pending {
         new_count=$((previous_count + num_added))
         sed -i "10s/.*/${new_count}/" "$stats_file"
     else
-        read -n1 -p $'\nDo you want to push the blocklist? (Y/n): ' answer
+        read -n1 -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
         echo
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
@@ -256,7 +256,7 @@ while true; do
     echo "e. Edit lists"
     echo "r. Run filter again"
     echo "x. Save pending and exit"
-    read choice
+    read -r choice
 
     case "$choice" in
         m)
