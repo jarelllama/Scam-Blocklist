@@ -14,7 +14,7 @@ while true; do
         | uniq -d > 1.tmp
     
     comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
-    comm -23 2.tmp "$optimised_entries" > 2.tmp
+    comm -23 2.tmp "$optimised_entries" > 3.tmp
     comm -23 3.tmp "$raw_file" > domains.tmp
 
     domains=$(cat domains.tmp)
