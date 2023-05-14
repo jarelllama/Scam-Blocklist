@@ -1,11 +1,11 @@
 ```
 (Time in GMT+8)
 
-Process dead: 3am (1h runtime)
+Process dead: 4am
 
-Update toplist: 4am (1min runtime)
+Update toplist: 4:30am
 
-Auto retrieve: 4:05am (2min runtime)
+Auto retrieve: 4:35am
 
-Build: 4:10am (2min runtime)
+Build: 4:40am (2min runtime)
 ```
