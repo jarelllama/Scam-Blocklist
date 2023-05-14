@@ -25,20 +25,13 @@ while true; do
         echo "${numbered_domains}"
 
         echo -e "\nEnter 'a' to add all domains to the blocklist."
-        echo "\nEnter a domain number to add it to the whitelist."
+        echo "Enter a domain number to add it to the whitelist."
     fi
     echo "Enter 'p' to push changes."
     echo "Enter 'x' to exit."
     read -r choice
 
     [[ "$choice" == 'x' ]] && exit 0
-    
-    if [[ $choice == 'a' ]]; then
-        cat domains.tmp >> "$raw_file"
-        cat domains.tmp >> "$optimised_entries"
-        sort "$raw_file" -o "$raw_file"
-        sort "$optimised_entries" -o "$optimised_entries"
-    fi
     
     if [[ "$choice" == 'p' ]]; then
         echo -e "\nPushing changes..."
@@ -47,10 +40,16 @@ while true; do
         git push
         exit 0
     fi
-
-    chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
-
-    echo -e "\nAdded '${chosen_domain}' to the whitelist."
-    echo "$chosen_domain" >> "$optimiser_whitelist"
-    sort "$optimiser_whitelist" -o "$optimiser_whitelist"
+    
+    if [[ $choice == 'a' ]]; then
+        cat domains.tmp >> "$raw_file"
+        cat domains.tmp >> "$optimised_entries"
+        sort "$raw_file" -o "$raw_file"
+        sort "$optimised_entries" -o "$optimised_entries"
+    else
+        chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
+        echo -e "\nAdded '${chosen_domain}' to the whitelist."
+        echo "$chosen_domain" >> "$optimiser_whitelist"
+        sort "$optimiser_whitelist" -o "$optimiser_whitelist"
+    fi
 done
