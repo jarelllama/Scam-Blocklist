@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.140514.2023
-# Last modified: Sun May 14 14:05:14 UTC 2023
+# Version: 05.14.141611.2023
+# Last modified: Sun May 14 14:16:11 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3899
+# Total number of entries: 3901
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -552,6 +552,8 @@ address=/centara1card.com/#
 address=/centebing.com/#
 address=/cesapsrls.it/#
 address=/cesisoc.com/#
+address=/cetedam.shop/#
+address=/cexcoin.cc/#
 address=/cfmzone.com/#
 address=/championcyclingsell.com/#
 address=/championgift.net/#
