@@ -50,6 +50,9 @@ jobs:
           comm -23 "${{ vars.BLACKLIST_FILE }}" dead.tmp > blacklist.tmp
           mv blacklist.tmp "${{ vars.BLACKLIST_FILE }}"
 
+          comm -23 "${{ vars.OPTIMISED_ENTRIES }}" dead.tmp > optimised_entries.tmp
+          mv optimised_entries.tmp "${{ vars.OPTIMISED_ENTRIES }}"
+
           cat dead.tmp >> "${{ vars.DEAD_DOMAINS_FILE }}"
           sort -u "${{ vars.DEAD_DOMAINS_FILE }}" -o "${{ vars.DEAD_DOMAINS_FILE }}"
 
