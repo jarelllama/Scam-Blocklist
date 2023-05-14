@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.103023.2023
-# Last modified: Sun May 14 10:30:23 UTC 2023
+# Version: 05.14.104150.2023
+# Last modified: Sun May 14 10:41:50 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3871
+# Total number of entries: 3886
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -122,6 +122,7 @@ local-zone: "amazoillo.com." always_nxdomain
 local-zone: "amazonliw.com." always_nxdomain
 local-zone: "amazstyle.com." always_nxdomain
 local-zone: "amberroseshades.com." always_nxdomain
+local-zone: "amcargologistics.com." always_nxdomain
 local-zone: "amcclothes.com." always_nxdomain
 local-zone: "amiguworldvn.com." always_nxdomain
 local-zone: "amillyvo.com." always_nxdomain
@@ -161,7 +162,9 @@ local-zone: "ao-running.com." always_nxdomain
 local-zone: "aocrloib.shop." always_nxdomain
 local-zone: "aoemate.com." always_nxdomain
 local-zone: "aopwix.com." always_nxdomain
+local-zone: "apexforwardcargo.com." always_nxdomain
 local-zone: "aplomey.com." always_nxdomain
+local-zone: "apollo.io." always_nxdomain
 local-zone: "apparelgearbox.com." always_nxdomain
 local-zone: "apparelonsale.store." always_nxdomain
 local-zone: "apparelpeloton.com." always_nxdomain
@@ -601,6 +604,7 @@ local-zone: "cirbee.com." always_nxdomain
 local-zone: "cirropo.com." always_nxdomain
 local-zone: "citadelb.com." always_nxdomain
 local-zone: "citifunny.com." always_nxdomain
+local-zone: "citrary.shop." always_nxdomain
 local-zone: "citrusf.com." always_nxdomain
 local-zone: "cizubeix.com." always_nxdomain
 local-zone: "ckkebt.shop." always_nxdomain
@@ -852,6 +856,7 @@ local-zone: "diliving.info." always_nxdomain
 local-zone: "dillers.shop." always_nxdomain
 local-zone: "dinamondshop.com." always_nxdomain
 local-zone: "dinual.com." always_nxdomain
+local-zone: "diplomatic-delivery.com." always_nxdomain
 local-zone: "dipshow.com." always_nxdomain
 local-zone: "direttaa.com." always_nxdomain
 local-zone: "discountapparels.store." always_nxdomain
@@ -1240,6 +1245,8 @@ local-zone: "freesmarttools.com." always_nxdomain
 local-zone: "freesvalues.com." always_nxdomain
 local-zone: "freewooluk.com." always_nxdomain
 local-zone: "fregully.com." always_nxdomain
+local-zone: "freight-direct.com." always_nxdomain
+local-zone: "freightforwardersfamily.com." always_nxdomain
 local-zone: "frelishay.com." always_nxdomain
 local-zone: "freshdepoot.com." always_nxdomain
 local-zone: "friashion.com." always_nxdomain
@@ -1347,6 +1354,7 @@ local-zone: "glitzce.com." always_nxdomain
 local-zone: "gllomall.com." always_nxdomain
 local-zone: "glo-balexpress.com." always_nxdomain
 local-zone: "global-posts.com." always_nxdomain
+local-zone: "globalcargoairwaylogistics.com." always_nxdomain
 local-zone: "globusfestival.nl." always_nxdomain
 local-zone: "gloriashoe.shop." always_nxdomain
 local-zone: "gninim.com." always_nxdomain
@@ -1612,6 +1620,7 @@ local-zone: "inductiony.com." always_nxdomain
 local-zone: "inerlaya.com." always_nxdomain
 local-zone: "inflatablenshow.com." always_nxdomain
 local-zone: "initote.shop." always_nxdomain
+local-zone: "injaz-dz.com." always_nxdomain
 local-zone: "inmw.shop." always_nxdomain
 local-zone: "innagur.com." always_nxdomain
 local-zone: "innomodelcar.com." always_nxdomain
@@ -1653,6 +1662,7 @@ local-zone: "janainalbenafsij.com." always_nxdomain
 local-zone: "jasbuy.com." always_nxdomain
 local-zone: "jasminebuy.com." always_nxdomain
 local-zone: "jbfilm.pl." always_nxdomain
+local-zone: "jctrans.net." always_nxdomain
 local-zone: "jdsportt.com." always_nxdomain
 local-zone: "jdssporty.com." always_nxdomain
 local-zone: "jdstockz.com." always_nxdomain
@@ -1909,6 +1919,7 @@ local-zone: "locymax.com." always_nxdomain
 local-zone: "lofthelsinki.com." always_nxdomain
 local-zone: "login-information-update-online.com." always_nxdomain
 local-zone: "logisol.fr." always_nxdomain
+local-zone: "logisticskingz.com." always_nxdomain
 local-zone: "loiredgar.com." always_nxdomain
 local-zone: "lokans.shop." always_nxdomain
 local-zone: "lolalife.net." always_nxdomain
@@ -3057,6 +3068,7 @@ local-zone: "skymedia.media." always_nxdomain
 local-zone: "skysmelluk.com." always_nxdomain
 local-zone: "slearancemsbag.com." always_nxdomain
 local-zone: "sleeveis.com." always_nxdomain
+local-zone: "slideshare.net." always_nxdomain
 local-zone: "slimmingproductsale.store." always_nxdomain
 local-zone: "slimwaist.us." always_nxdomain
 local-zone: "slottoy.shop." always_nxdomain
@@ -3446,6 +3458,7 @@ local-zone: "tradesailorshop.com." always_nxdomain
 local-zone: "traeerly.com." always_nxdomain
 local-zone: "traileroutletllc.com." always_nxdomain
 local-zone: "trainersonsale.com." always_nxdomain
+local-zone: "transgloballineexpress.com." always_nxdomain
 local-zone: "translatter.com." always_nxdomain
 local-zone: "trck-maltapost.com." always_nxdomain
 local-zone: "treelinesfurs.com." always_nxdomain
@@ -3530,6 +3543,7 @@ local-zone: "uniquepie.com." always_nxdomain
 local-zone: "unitedexpress.org." always_nxdomain
 local-zone: "unitedmailexpress.com." always_nxdomain
 local-zone: "universal-health88.com." always_nxdomain
+local-zone: "universalprimelogistics.com." always_nxdomain
 local-zone: "unkohoble.com." always_nxdomain
 local-zone: "unlockvigor.com." always_nxdomain
 local-zone: "unmagasine.com." always_nxdomain
@@ -3685,6 +3699,7 @@ local-zone: "wayhou.shop." always_nxdomain
 local-zone: "wayofhome.com." always_nxdomain
 local-zone: "wbeseae.com." always_nxdomain
 local-zone: "wd-verse.com." always_nxdomain
+local-zone: "wdgloballogistics.com." always_nxdomain
 local-zone: "wdrative.com." always_nxdomain
 local-zone: "wearfavorite.com." always_nxdomain
 local-zone: "wearhollister.com." always_nxdomain
