@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.154238.2023
-# Last modified: Sun May 14 15:42:38 UTC 2023
+# Version: 05.14.163325.2023
+# Last modified: Sun May 14 16:33:25 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3910
+# Total number of entries: 3912
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -670,6 +670,7 @@ address=/colorfuluslady.com/#
 address=/columbiaclothings.shop/#
 address=/columbiawears.com/#
 address=/columilsoutletsus.shop/#
+address=/colys.esbu.cz/#
 address=/combont.com/#
 address=/comdorpeopl.com/#
 address=/comfily.shop/#
@@ -3765,6 +3766,7 @@ address=/winning-consulting.com/#
 address=/winpru.com/#
 address=/winreeo.com/#
 address=/winterbo.com/#
+address=/wintergogoy.com/#
 address=/winxinbear.com/#
 address=/wireican.com/#
 address=/wisdomganga.com/#
