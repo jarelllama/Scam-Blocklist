@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.152822.2023
-# Last modified: Sun May 14 15:28:22 UTC 2023
+# Version: 05.14.154238.2023
+# Last modified: Sun May 14 15:42:38 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3907
+# Total number of entries: 3911
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -15,6 +15,7 @@ local-zone: "299691360.mailapelihalli.fi." always_nxdomain
 local-zone: "2s.pizza-napoleon.cz." always_nxdomain
 local-zone: "3d-printing.store." always_nxdomain
 local-zone: "3dsportstore.com." always_nxdomain
+local-zone: "4fstore.com." always_nxdomain
 local-zone: "556602661.kreta-trip.nl." always_nxdomain
 local-zone: "5icustom.com." always_nxdomain
 local-zone: "630563295qq.myshoplaza.com." always_nxdomain
@@ -100,6 +101,7 @@ local-zone: "aliosa.shop." always_nxdomain
 local-zone: "alivelydoll.com." always_nxdomain
 local-zone: "all-charms.com." always_nxdomain
 local-zone: "all-festivals.com." always_nxdomain
+local-zone: "all.vipsmall.xyz." always_nxdomain
 local-zone: "alla-prima.fr." always_nxdomain
 local-zone: "allencoco.com." always_nxdomain
 local-zone: "alleymacro.com." always_nxdomain
@@ -213,6 +215,7 @@ local-zone: "au-app-growthnetwork.com." always_nxdomain
 local-zone: "audll.com." always_nxdomain
 local-zone: "auiteng.com." always_nxdomain
 local-zone: "auroca.com." always_nxdomain
+local-zone: "auroraclothing.gift." always_nxdomain
 local-zone: "auselily.shop." always_nxdomain
 local-zone: "ausflug-mit-kids.de." always_nxdomain
 local-zone: "ausonebathroom.com.au." always_nxdomain
@@ -1669,6 +1672,7 @@ local-zone: "jampastey.com." always_nxdomain
 local-zone: "janainalbenafsij.com." always_nxdomain
 local-zone: "jasbuy.com." always_nxdomain
 local-zone: "jasminebuy.com." always_nxdomain
+local-zone: "jb3.gift-99.top." always_nxdomain
 local-zone: "jbfilm.pl." always_nxdomain
 local-zone: "jdsportt.com." always_nxdomain
 local-zone: "jdssporty.com." always_nxdomain
