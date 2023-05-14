@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.141611.2023
-# Last modified: Sun May 14 14:16:11 UTC 2023
+# Version: 05.14.143302.2023
+# Last modified: Sun May 14 14:33:02 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3902
+# Total number of entries: 3905
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -441,6 +441,7 @@ local-zone: "boxaple.info." always_nxdomain
 local-zone: "boxersmenwear.com." always_nxdomain
 local-zone: "boxingtwins.com." always_nxdomain
 local-zone: "boyishdenim.com." always_nxdomain
+local-zone: "bpueullh.haushofgarten-teschner.de." always_nxdomain
 local-zone: "brandflagshipstore.com." always_nxdomain
 local-zone: "brandlymaker.shop." always_nxdomain
 local-zone: "brandmsaccessories.com." always_nxdomain
@@ -932,6 +933,7 @@ local-zone: "dressupi.com." always_nxdomain
 local-zone: "drhanf.store." always_nxdomain
 local-zone: "dridfinden.com." always_nxdomain
 local-zone: "drleathershoes.com." always_nxdomain
+local-zone: "droneskincare.store." always_nxdomain
 local-zone: "drrodos.com." always_nxdomain
 local-zone: "drunstyle.com." always_nxdomain
 local-zone: "druzycrystal.com." always_nxdomain
@@ -3277,6 +3279,7 @@ local-zone: "tabosep.shop." always_nxdomain
 local-zone: "tacitadr.com." always_nxdomain
 local-zone: "tadgay.com." always_nxdomain
 local-zone: "taekod.com." always_nxdomain
+local-zone: "tahagencyltd.com." always_nxdomain
 local-zone: "tailnaturd.com." always_nxdomain
 local-zone: "taledeals.com." always_nxdomain
 local-zone: "talentgrps.com." always_nxdomain
