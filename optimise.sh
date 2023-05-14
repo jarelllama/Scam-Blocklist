@@ -24,8 +24,8 @@ while true; do
         echo -e "\nPotential optimisations:"
         echo "${numbered_domains}"
 
-        echo "Enter the domain number to add it to the whitelist."
-        echo -e "\nEnter 'a' to add all domains to the blocklist."
+        echo -e "\nEnter the domain number to add it to the whitelist."
+        echo "Enter 'a' to add all domains to the blocklist."
     fi
     echo "Enter 'p' to push changes."
     echo "Enter 'x' to exit."
