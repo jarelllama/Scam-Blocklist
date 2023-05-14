@@ -22,7 +22,7 @@ while true; do
     echo -e "\nOptimiser Menu:"
     echo "${numbered_domains}"
 
-    echo -e "\nSelect a domain"
+    echo -e "\nSelect a domain with its number"
     echo "or 'p' to push changes"
     echo "or 'x' to exit"
     read -r chosen_number
@@ -40,21 +40,21 @@ while true; do
     chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
 
     echo -e "\nChose what to do with '$chosen_domain':"
-    echo "b. Blacklist"
-    echo "w. Whitelist"
+    echo "b. Add to blacklist"
+    echo "w. Add to whitelist"
     echo "x. Return"
     read -r choice
     
     case "$choice" in
         b)
-            echo -e "\nAdded to the blacklist: ${chosen_domain}"
+            echo -e "\nAdded '${chosen_domain}'' to the blacklist."
             echo "$chosen_domain" >> "$raw_file"
             echo "$chosen_domain" >> "$optimiser_blacklist"
             sort "$raw_file" -o "$raw_file"
             sort "$optimiser_blacklist" -o "$optimiser_blacklist"
             ;;
         w)
-            echo -e "\nAdded to the whitelist: ${chosen_domain}"
+            echo -e "\nAdded '${chosen_domain}' to the whitelist."
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
             ;;
