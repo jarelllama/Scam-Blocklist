@@ -2,11 +2,11 @@
 ! Description: Blocklist for scam sites automatically retrieved from Google Search
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 05.14.123128.2023
-! Last modified: Sun May 14 12:31:28 UTC 2023
+! Version: 05.14.130149.2023
+! Last modified: Sun May 14 13:01:49 UTC 2023
 ! Expires: 4 hours
 ! Syntax: Adblock Plus
-! Total number of entries: 3902
+! Total number of entries: 3903
 !
 ||168cyd.com^
 ||17aap.net^
@@ -2776,6 +2776,7 @@
 ||review4customer.com^
 ||reviews4consumers.com^
 ||reviews4customers.com^
+||revolut-pl-id.com^
 ||revorro.com^
 ||rewieva.com^
 ||rexbeta.com^
