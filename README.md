@@ -2,6 +2,13 @@
 
 [![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml)
 
+| Syntax | Raw |
+| Adblock Plus | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock.txt) |
+| Dnsmasq | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/dnsmasq.txt) |
+| Unbound | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/unbound.txt) |
+| Wildcard Asterisk | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_asterisk.txt) |
+| Wildcard Domains | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains.txt) |
+
 ### Stats
 
 ```
@@ -12,7 +19,7 @@ Manually: 3678
 Automatically: 92
 Total: 3770 (since May 10 2023)
 
-Updated: Sun May 14 03:20 UTC
+Updated: Sun May 14 03:29 UTC
 ```
 
 ### How domains are added to the blocklist
