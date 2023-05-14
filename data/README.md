@@ -20,7 +20,6 @@ Updated: update_time
 - The retrieval script searches Google with a list of search terms almost exclusively used in scam sites. See the list of search terms here: [search_terms.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/search_terms.txt)
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
 - Domains found in the Cisco Umbrella 1M toplist are checked manually (checked during retrieval and toplist updates)
-- Domains in the Adblock Plus list with the same second-level domain are compressed into one rule to remove redundant entries
 
 Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasionally added after being manually vetted.
 
