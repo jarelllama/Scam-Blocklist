@@ -76,7 +76,7 @@ jobs:
           exit 1
 
       - name: Subdomains check
-        if : success () || failure()
+        if : success() || failure()
         run: |
           > check.tmp
           while read -r subdomain; do
@@ -124,7 +124,20 @@ jobs:
           echo -e "\nRemoving...\n"
           exit 1
 
-      - name: Redundant entries check
+      - name: Whitelist check
+        id: whitelist
+        if: success() || failure()
+        run: |
+          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" \
+            | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || exit 0
+          
+          echo -e "\nWhitelisted domains found:"
+          cat check.tmp
+
+          echo -e "\nSkipping build steps.\n"
+          exit 1
+
+      - name: Remove redundant entries
         if: success() || failure()
         run: |
           > check.tmp
@@ -140,20 +153,7 @@ jobs:
           mv raw.tmp "${{ vars.RAW_FILE }}"
           
           echo -e "\nRemoving...\n"
-          exit 1
-
-      - name: Whitelist check
-        id: whitelist
-        if: success() || failure()
-        run: |
-          grep -Ff "${{ vars.WHITELIST_FILE }}" "${{ vars.RAW_FILE }}" \
-            | grep -vxFf "${{ vars.BLACKLIST_FILE }}" > check.tmp || exit 0
-          
-          echo -e "\nWhitelisted domains found:"
-          cat check.tmp
-
-          echo -e "\nSkipping build steps.\n"
-          exit 1
+          # No need to return failure
 
       - name: Commit filtered raw file
         if: failure()
