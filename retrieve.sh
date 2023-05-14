@@ -206,6 +206,10 @@ function optimise_blocklist {
             cat domains.tmp >> "$optimised_entries"
             sort -u "$raw_file" -o "$raw_file"
             sort "$optimised_entries" -o "$optimised_entries"
+            
+            #TODO: remove redundant entries from blocklist
+            #       add separate commit
+            
             return
         elif ! [[ "$choice" =~ ^[0-9]+$ ]]; then
             echo -e "\nInvalid option."
