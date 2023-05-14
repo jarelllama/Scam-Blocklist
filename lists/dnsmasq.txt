@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.143302.2023
-# Last modified: Sun May 14 14:33:02 UTC 2023
+# Version: 05.14.152822.2023
+# Last modified: Sun May 14 15:28:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3904
+# Total number of entries: 3906
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -769,6 +769,7 @@ address=/d-glory.cfd/#
 address=/d-rough.cfd/#
 address=/d-shake.cfd/#
 address=/d-state.cfd/#
+address=/d-sugar.cfd/#
 address=/d-thank.cfd/#
 address=/d-tough.cfd/#
 address=/dabanshops.com/#
@@ -2689,6 +2690,7 @@ address=/proudgifts.us/#
 address=/prousfemale.com/#
 address=/provencevent.com/#
 address=/psychologdlaukrainy.pl/#
+address=/ptyayonan.mojezkusenostsinvisalign.cz/#
 address=/pubeap.com/#
 address=/pukingyolk.com/#
 address=/pumpstrict.com/#
