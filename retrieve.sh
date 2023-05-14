@@ -52,6 +52,8 @@ function retrieve_domains {
 
     user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
+    term_num=1
+
     # A blank IFS ensures the entire search term is read
     while IFS= read -r term; do
         # Skip empty lines or comments
@@ -69,7 +71,9 @@ function retrieve_domains {
             | grep -vxF 'www.google.com')
 
         term=$(echo "$term" | cut -c 1-350)
-        echo "${term}..."
+        echo "${term_num}. ${term}..."
+
+        ((term_num++))
 
         if [[ -z "$domains" ]]; then
             echo "Domains retrieved: 0"
