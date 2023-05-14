@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.130149.2023
-# Last modified: Sun May 14 13:01:49 UTC 2023
+# Version: 05.14.140514.2023
+# Last modified: Sun May 14 14:05:14 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3903
+# Total number of entries: 3899
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -164,7 +164,6 @@ address=/aoemate.com/#
 address=/aopwix.com/#
 address=/apexforwardcargo.com/#
 address=/aplomey.com/#
-address=/apollo.io/#
 address=/apparelgearbox.com/#
 address=/apparelonsale.store/#
 address=/apparelpeloton.com/#
@@ -975,7 +974,6 @@ address=/eclothone.com/#
 address=/ecoenos.com/#
 address=/ecomgnow.shop/#
 address=/ecommercevallcs.com/#
-address=/ecwid.com/#
 address=/edaintel.com/#
 address=/edcbyesprit.com/#
 address=/edcotools.com/#
@@ -1666,7 +1664,6 @@ address=/janainalbenafsij.com/#
 address=/jasbuy.com/#
 address=/jasminebuy.com/#
 address=/jbfilm.pl/#
-address=/jctrans.net/#
 address=/jdsportt.com/#
 address=/jdssporty.com/#
 address=/jdstockz.com/#
@@ -3079,7 +3076,6 @@ address=/skymedia.media/#
 address=/skysmelluk.com/#
 address=/slearancemsbag.com/#
 address=/sleeveis.com/#
-address=/slideshare.net/#
 address=/slimmingproductsale.store/#
 address=/slimwaist.us/#
 address=/slottoy.shop/#
