@@ -29,7 +29,7 @@ while true; do
     
     if [[ "$chosen_number" == 'p' ]]; then
         echo -e "\nPushing changes..."
-        git add "$raw_file" "$optimiser_blacklist" "$optimiser_blacklist"
+        git add "$raw_file" "$optimiser_blacklist" "$optimiser_whitelist"
         git commit -m "Optimise blocklist"
         git push
         exit 0
