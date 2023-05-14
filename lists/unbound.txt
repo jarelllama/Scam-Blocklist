@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.025149.2023
-# Last modified: Sun May 14 02:51:49 UTC 2023
+# Version: 05.14.040757.2023
+# Last modified: Sun May 14 04:07:57 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3771
+# Total number of entries: 3770
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -774,6 +774,7 @@ local-zone: "davekoflersbichons.com." always_nxdomain
 local-zone: "daviesshoes.xyz." always_nxdomain
 local-zone: "dawnbaby.shop." always_nxdomain
 local-zone: "daylighty.com." always_nxdomain
+local-zone: "dayuse-agent.online." always_nxdomain
 local-zone: "dbhmnp.shop." always_nxdomain
 local-zone: "dbkdsale.com." always_nxdomain
 local-zone: "dcodtcre.shop." always_nxdomain
@@ -1933,7 +1934,6 @@ local-zone: "luyergeour.com." always_nxdomain
 local-zone: "lydeyw.online." always_nxdomain
 local-zone: "lynahome.com." always_nxdomain
 local-zone: "lynnjewelry.shop." always_nxdomain
-local-zone: "m.dayuse-agent.online." always_nxdomain
 local-zone: "maahizon.com." always_nxdomain
 local-zone: "maajiswim.com." always_nxdomain
 local-zone: "mababinooo.com." always_nxdomain
@@ -3675,7 +3675,6 @@ local-zone: "wrepod.com." always_nxdomain
 local-zone: "wszen.top." always_nxdomain
 local-zone: "wtass.com." always_nxdomain
 local-zone: "wulooofficial.com." always_nxdomain
-local-zone: "www.dayuse-agent.online." always_nxdomain
 local-zone: "www.excellentowk.com." always_nxdomain
 local-zone: "www.ganadeals.com." always_nxdomain
 local-zone: "www.wenuse.com." always_nxdomain
