@@ -99,7 +99,7 @@ jobs:
             grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> redundant.tmp || true
           done < "${{ vars.RAW_FILE }}"
           
-          if [[ -s redundant.tmp ]] || exit 0
+          [[ -s redundant.tmp ]] || exit 0
           echo -e "\nRedundant entries found:"
           cat redundant.tmp
 
