@@ -1,7 +1,7 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
-optimiser_blacklist="data/optimiser_blacklist.txt"
+optimised_rules="data/optimised_rules.txt"
 optimiser_whitelist="data/optimiser_whitelist.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" exit
@@ -18,8 +18,13 @@ while true; do
 
     domains=$(cat domains.tmp)
 
+    if [[ -z "$domains" ]]; then
+        echo -e "\nNo potential optimizations found.\n"
+        exit 0
+    fi
+
     numbered_domains=$(echo "$domains" | awk '{print NR ". " $0}')
-    echo -e "\nOptimiser Menu:"
+    echo -e "\nPotential optimisations:"
     echo "${numbered_domains}"
 
     echo -e "\nSelect a domain with its number"
@@ -40,16 +45,16 @@ while true; do
     chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
 
     echo -e "\nChose what to do with '$chosen_domain':"
-    echo "b. Add to blacklist"
+    echo "b. Add to blocklist"
     echo "w. Add to whitelist"
     echo "x. Return"
     read -r choice
     
     case "$choice" in
         b)
-            echo -e "\nAdded '${chosen_domain}'' to the blacklist."
+            echo -e "\nAdded '${chosen_domain}'' to the blocklist."
             echo "$chosen_domain" >> "$raw_file"
-            echo "$chosen_domain" >> "$optimiser_blacklist"
+            echo "$chosen_domain" >> "$optimised_rules"
             sort "$raw_file" -o "$raw_file"
             sort "$optimiser_blacklist" -o "$optimiser_blacklist"
             ;;
