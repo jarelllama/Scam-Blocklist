@@ -5,6 +5,7 @@ whitelist_file="data/whitelist.txt"
 blacklist_file="data/blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
+optimised_entries="data/optimised_entries.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
