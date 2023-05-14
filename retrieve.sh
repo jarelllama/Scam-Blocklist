@@ -135,7 +135,6 @@ function filter_pending {
     grep -vxFf redundant.tmp 6.tmp > 7.tmp
 
     export debug="$debug"
-
     > dead.tmp
     # Use parallel processing
     cat 7.tmp | xargs -I{} -P6 bash -c '
