@@ -2,8 +2,8 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.040757.2023
-# Last modified: Sun May 14 04:07:57 UTC 2023
+# Version: 05.14.041217.2023
+# Last modified: Sun May 14 04:12:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
 # Total number of entries: 3770
@@ -1052,6 +1052,7 @@ local-zone: "evoosense.com." always_nxdomain
 local-zone: "evorar.com." always_nxdomain
 local-zone: "exaglam.com." always_nxdomain
 local-zone: "excelgadgets.co." always_nxdomain
+local-zone: "excellentowk.com." always_nxdomain
 local-zone: "exclusivefeedback.com." always_nxdomain
 local-zone: "exotekracingparts.com." always_nxdomain
 local-zone: "expenseermart.com." always_nxdomain
@@ -1248,6 +1249,7 @@ local-zone: "galyu.com." always_nxdomain
 local-zone: "gamesales.store." always_nxdomain
 local-zone: "gamestrem.com." always_nxdomain
 local-zone: "gamgoing.com." always_nxdomain
+local-zone: "ganadeals.com." always_nxdomain
 local-zone: "ganebet.uk." always_nxdomain
 local-zone: "gantcliver.com." always_nxdomain
 local-zone: "gantfurni.shop." always_nxdomain
@@ -3608,6 +3610,7 @@ local-zone: "wellappliance.com." always_nxdomain
 local-zone: "wellbinde.com." always_nxdomain
 local-zone: "welldecloth.life." always_nxdomain
 local-zone: "wenoreshop.com." always_nxdomain
+local-zone: "wenuse.com." always_nxdomain
 local-zone: "werfew.com." always_nxdomain
 local-zone: "wernersale.com." always_nxdomain
 local-zone: "westerncodyjames.com." always_nxdomain
@@ -3675,10 +3678,6 @@ local-zone: "wrepod.com." always_nxdomain
 local-zone: "wszen.top." always_nxdomain
 local-zone: "wtass.com." always_nxdomain
 local-zone: "wulooofficial.com." always_nxdomain
-local-zone: "www.excellentowk.com." always_nxdomain
-local-zone: "www.ganadeals.com." always_nxdomain
-local-zone: "www.wenuse.com." always_nxdomain
-local-zone: "www.zazadill.com." always_nxdomain
 local-zone: "wzlooo.com." always_nxdomain
 local-zone: "x-bik.myshopify.com." always_nxdomain
 local-zone: "x-bik.online." always_nxdomain
@@ -3743,6 +3742,7 @@ local-zone: "zaresales.com." always_nxdomain
 local-zone: "zarodress.com." always_nxdomain
 local-zone: "zasastores.com." always_nxdomain
 local-zone: "zatarshop.com." always_nxdomain
+local-zone: "zazadill.com." always_nxdomain
 local-zone: "zazestore.com." always_nxdomain
 local-zone: "zbozxe.shop." always_nxdomain
 local-zone: "zealfox.shop." always_nxdomain
