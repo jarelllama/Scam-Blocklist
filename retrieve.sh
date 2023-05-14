@@ -177,7 +177,7 @@ function filter_pending {
     fi
     
     while read -r subdomain; do
-        sed -i "s/^$subdomain\.//" in_toplist.tmp
+        sed -i "s/^${subdomain}\.//" in_toplist.tmp
     done < "$subdomains_file"
 
     sort -u in_toplist.tmp -o in_toplist.tmp
