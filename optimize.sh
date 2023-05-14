@@ -26,7 +26,7 @@ while true; do
 
     [[ "$chosen_number" == 'x' ]] && exit 0
 
-    chosen_domain=$(echo "$output" | awk -v n="$chosen_number" '$1 == n {print $2}')
+    chosen_domain=$(echo "$numbered_domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
 
     echo "$chosen_domain"
 
