@@ -19,16 +19,16 @@ while true; do
     domains=$(cat domains.tmp)
 
     if [[ -z "$domains" ]]; then
-        echo -e "\nNo potential optimizations found.\n"
-        echo "or 'p' to push changes"
-        echo "or 'x' to exit"
+        echo -e "\nNo potential optimizations found."
     else
         numbered_domains=$(echo "$domains" | awk '{print NR ". " $0}')
         echo -e "\nPotential optimisations:"
         echo "${numbered_domains}"
 
-        echo -e "\nSelect a domain with its number"
+        echo -e "\nSelect a domain with its number."
     fi
+    echo "Enter 'p' to push changes."
+    echo "Enter 'x' to exit."
     read -r chosen_number
 
     [[ "$chosen_number" == 'x' ]] && exit 0
