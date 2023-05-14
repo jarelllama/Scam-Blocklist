@@ -1,23 +1,18 @@
 # Scam Blocklist
 
-[![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml)
-
-| Syntax | Entries |
-| --- |:---:|
-| [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/adblock.txt) | 3765 |
-| [Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/domains.txt) | 8186 |
+[![Build](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml)
 
 ### Stats
 
 ```
 Unique scam sites found:
-Today: 46
-Yesterday: 311
-Manually: 3694
-Automatically: 87
-Total: 3781 (since May 10 2023)
+Today: 4417
+Yesterday: 46
+Manually: 8139
+Automatically: 92
+Total: 8231 (since May 10 2023)
 
-Updated: Fri May 12 21:13 UTC
+Updated: Sun May 14 01:34 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -25,21 +20,12 @@ Updated: Fri May 12 21:13 UTC
 - The retrieval script searches Google with a list of search terms almost exclusively used in scam sites. See the list of search terms here: [search_terms.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/search_terms.txt)
 - Domains are filtered against a whitelist (scam reporting sites, forums, genuine stores, etc.), along with other filtering
 - Domains found in the Cisco Umbrella 1M toplist are checked manually (checked during retrieval and toplist updates)
-- Domains in the Adblock Plus list with the same second-level domain are compressed into one rule to remove redundant entries
 
 Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasionally added after being manually vetted.
 
 Domains are retrieved from multiple regions such as Asia, Europe, and North America.
 
 To see the full filtering and retrieval process check out the code in the repository.
-
-### Subdomains
-
-Common subdomains are added to domains with no [wildcard record](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/). See the list of subdomains checked here: [subdomains.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/data/subdomains.txt)
-
-Only the `www` and `m` subdomains are added to domains with wildcard records so as to not inflate the blocklist size.
-
-Subdomains are only added if they are resolving (in the case of domains with wildcard records, all subdomains resolve).
 
 ### Dead domains
 
