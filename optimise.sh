@@ -17,7 +17,7 @@ while true; do
     comm -23 2.tmp "$optimised_entries" > domains.tmp
 
     if ! [[ -s domains.tmp ]]; then
-        echo -e "\nNo potential optimizations found.\n"
+        echo -e "\nNo potential optimisations found.\n"
     else
         numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
         echo -e "\nPotential optimisations:"
