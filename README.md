@@ -6,13 +6,13 @@
 
 ```
 Unique scam sites found:
-Today: 4417
+Today: 5
 Yesterday: 46
-Manually: 8139
+Manually: 3727
 Automatically: 92
-Total: 8231 (since May 10 2023)
+Total: 3819 (since May 10 2023)
 
-Updated: Sun May 14 01:34 UTC
+Updated: Sun May 14 01:39 UTC
 ```
 
 ### How domains are added to the blocklist
