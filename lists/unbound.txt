@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.221149.2023
-# Last modified: Sun May 14 22:11:49 UTC 2023
+# Version: 05.14.221409.2023
+# Last modified: Sun May 14 22:14:09 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3915
+# Total number of entries: 3914
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -757,6 +757,7 @@ local-zone: "cutefate.com." always_nxdomain
 local-zone: "cutekittenshomeusa.com." always_nxdomain
 local-zone: "cutpricecamping.com." always_nxdomain
 local-zone: "cuture.us." always_nxdomain
+local-zone: "cvlostendales.es." always_nxdomain
 local-zone: "cwwk.net." always_nxdomain
 local-zone: "cycery.com." always_nxdomain
 local-zone: "cycle100percent.com." always_nxdomain
@@ -2709,7 +2710,6 @@ local-zone: "qfsgesara.com." always_nxdomain
 local-zone: "qfsnesarag.com." always_nxdomain
 local-zone: "qhqzpt.astis-hunderunde.de." always_nxdomain
 local-zone: "qisoin.com." always_nxdomain
-local-zone: "qkbtil.cvlostendales.es." always_nxdomain
 local-zone: "qmzdo.online." always_nxdomain
 local-zone: "qttlpn.shop." always_nxdomain
 local-zone: "qualityplaything.com." always_nxdomain
@@ -2858,7 +2858,6 @@ local-zone: "rugsandcurtains.com." always_nxdomain
 local-zone: "ruispice.com." always_nxdomain
 local-zone: "rungovip.store." always_nxdomain
 local-zone: "runsaucony.com." always_nxdomain
-local-zone: "ruver.cvlostendales.es." always_nxdomain
 local-zone: "ruylfeicne.info." always_nxdomain
 local-zone: "rvruo.shop." always_nxdomain
 local-zone: "ryanurabonpitbullpuppies.com." always_nxdomain
