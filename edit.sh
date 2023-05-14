@@ -1,8 +1,8 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
-whitelist_file="whitelist.txt"
-blacklist_file="blacklist.txt"
+whitelist_file="data/whitelist.txt"
+blacklist_file="data/blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
 
