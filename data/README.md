@@ -35,17 +35,19 @@ Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasio
 
 Domains are retrieved from multiple regions such as Asia, Europe, and North America.
 
-### Why the Domains and Host formats aren't supported
+### Why the Domains and Host formats are not supported
 
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow for scammers to create large amounts of subdomains. Often, these subdomains are random strings such as `kwsjla.scam.com`. To block every subdomain would be a waste of effort and would inflate the blocklist substantially.
 
-### Optimizations
+Only formats that make use of wildcard matching are supported as they block all subdomains. This allows for further optimisations that are explained below.
+
+### Optimisations
 
 The list building process makes use of wildcard blocking in two ways:
 
 1. Removal of redundant entries: If the blocklist contains `spam.com`, via wildcard matching, `sub.spam.com` would be blocked as well and is, therefore, redundant and will be removed.
 
-2. Finding common second-level domains: If `abc.spam.com` and `def.spam.com` are both present in the blocklist, they would be replaced with `spam.com` to block all subdomains instead of having separate entries for different subdomains. A whitelist is used to prevent blocking of genuine e-commerce/hosting domains such as `myshopify.com`.
+2. Finding common second-level domains: If `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for different subdomains. A whitelist is used to prevent blocking of genuine e-commerce/hosting domains such as `myshopify.com`.
 
 ### Dead domains
 
