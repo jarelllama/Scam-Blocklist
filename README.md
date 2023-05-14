@@ -1,6 +1,6 @@
 # Scam Blocklist
 
-[![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml)
+[![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml)
 
 | Format | Raw | Syntax |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ Manually: 3677
 Automatically: 92
 Total: 3769 (since May 10 2023)
 
-Updated: Sun May 14 05:07 UTC
+Updated: Sun May 14 05:09 UTC
 ```
 
 ### How domains are added to the blocklist
