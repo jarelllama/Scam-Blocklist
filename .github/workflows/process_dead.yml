@@ -50,10 +50,6 @@ jobs:
           comm -23 "${{ vars.BLACKLIST_FILE }}" dead.tmp > blacklist.tmp
           mv blacklist.tmp "${{ vars.BLACKLIST_FILE }}"
 
-          awk '{print "||" $0 "^"}' dead.tmp > adblock_dead.tmp
-          grep -vxFf adblock_dead.tmp "${{ vars.COMPRESSED_ENTRIES_FILE }}" > compressed_entries.tmp
-          mv compressed_entries.tmp "${{ vars.COMPRESSED_ENTRIES_FILE }}"
-
           cat dead.tmp >> "${{ vars.DEAD_DOMAINS_FILE }}"
           sort -u "${{ vars.DEAD_DOMAINS_FILE }}" -o "${{ vars.DEAD_DOMAINS_FILE }}"
 
@@ -62,8 +58,7 @@ jobs:
 
           echo -e "\nTotal domains removed: $(wc -l < dead.tmp)\n"
     
-          git add "${{ vars.RAW_FILE }}" "${{ vars.BLACKLIST_FILE }}" \
-            "${{ vars.COMPRESSED_ENTRIES_FILE }}" "${{ vars.DEAD_DOMAINS_FILE }}"
+          git add "${{ vars.RAW_FILE }}" "${{ vars.BLACKLIST_FILE }}" "{{ vars.DEAD_DOMAINS_FILE }}"
           git commit -m "Remove dead domains"
 
       - name: Add resurrected domains
