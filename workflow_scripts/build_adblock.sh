@@ -9,14 +9,14 @@ awk '{print "||" $0 "^"}' "$raw_file" > 1.tmp
 
 sort 1.tmp -o adblock.tmp
 
-grep -vE '^(!|$)' "$adblock_file" > previous_adblock.tmp
+grep -vE '^(!|$)' "$adblock_file" > previous.tmp
 
-if diff -q previous_adblock.tmp adblock.tmp >/dev/null; then
+if diff -q previous.tmp adblock.tmp >/dev/null; then
    echo -e "\nNo changes.\n"
    exit 0
 fi
 
-num_before=$(wc -l < previous_adblock.tmp)
+num_before=$(wc -l < previous.tmp)
 
 num_after=$(wc -l < adblock.tmp)
 
