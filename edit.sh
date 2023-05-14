@@ -65,7 +65,7 @@ function edit_blocklist {
         if ! [[ "$entry" == *."${optimised_entry}" ]]; then
             continue
         fi
-        echo -e "\nThe domain is made redundant by '${optimised_entry}'"
+        echo -e "\nThe domain is made redundant by '${optimised_entry}'. Not added."
         return
     done < "$optimised_entries"
 
