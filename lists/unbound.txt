@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.102100.2023
-# Last modified: Sun May 14 10:21:00 UTC 2023
+# Version: 05.14.103023.2023
+# Last modified: Sun May 14 10:30:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3868
+# Total number of entries: 3871
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -57,6 +57,7 @@ local-zone: "advisorl.com." always_nxdomain
 local-zone: "aecinempoli.it." always_nxdomain
 local-zone: "aecpq.com." always_nxdomain
 local-zone: "aestheticsoutfits.com." always_nxdomain
+local-zone: "aezvc.retropolisarcade.com." always_nxdomain
 local-zone: "afamilyspot.com." always_nxdomain
 local-zone: "affjumbo.com." always_nxdomain
 local-zone: "aflycatus.com." always_nxdomain
@@ -2179,6 +2180,7 @@ local-zone: "mpyll.nexgentextile.com." always_nxdomain
 local-zone: "mrkimberly.com." always_nxdomain
 local-zone: "mslicenseskey.com." always_nxdomain
 local-zone: "msmcompare.com." always_nxdomain
+local-zone: "mtnvflitm.behindthebox.de." always_nxdomain
 local-zone: "muazida.com." always_nxdomain
 local-zone: "muckbootsmrheater.com." always_nxdomain
 local-zone: "mulheruniverso.com.br." always_nxdomain
@@ -3840,6 +3842,7 @@ local-zone: "zatarshop.com." always_nxdomain
 local-zone: "zazadill.com." always_nxdomain
 local-zone: "zazestore.com." always_nxdomain
 local-zone: "zbozxe.shop." always_nxdomain
+local-zone: "zddy.deprocesadvocaat.nl." always_nxdomain
 local-zone: "zealfox.shop." always_nxdomain
 local-zone: "zedbubble.com." always_nxdomain
 local-zone: "zedorders.com." always_nxdomain
