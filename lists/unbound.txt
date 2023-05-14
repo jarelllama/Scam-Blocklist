@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.095914.2023
-# Last modified: Sun May 14 09:59:14 UTC 2023
+# Version: 05.14.101014.2023
+# Last modified: Sun May 14 10:10:14 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3865
+# Total number of entries: 3863
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -699,6 +699,7 @@ local-zone: "costuv.com." always_nxdomain
 local-zone: "cotopdeals.store." always_nxdomain
 local-zone: "countrylivingsupply.com." always_nxdomain
 local-zone: "courtyards.shop." always_nxdomain
+local-zone: "covidspot.cz." always_nxdomain
 local-zone: "cowa.shop." always_nxdomain
 local-zone: "coypass.com." always_nxdomain
 local-zone: "cozycoveus.com." always_nxdomain
@@ -1248,7 +1249,6 @@ local-zone: "frucpir.com." always_nxdomain
 local-zone: "fsboling.com." always_nxdomain
 local-zone: "fshoppingo.com." always_nxdomain
 local-zone: "fsoacu.com." always_nxdomain
-local-zone: "ftymmc.covidspot.cz." always_nxdomain
 local-zone: "fulofbright.com." always_nxdomain
 local-zone: "fumekart.com." always_nxdomain
 local-zone: "funtali.com." always_nxdomain
@@ -1704,7 +1704,6 @@ local-zone: "joyfvfrom.com." always_nxdomain
 local-zone: "joytia.com." always_nxdomain
 local-zone: "joyzach.com." always_nxdomain
 local-zone: "jpma.cc." always_nxdomain
-local-zone: "jquzjmh.racerkidz.de." always_nxdomain
 local-zone: "jqwerks.com." always_nxdomain
 local-zone: "jtgsr.pages.dev." always_nxdomain
 local-zone: "juahar.com." always_nxdomain
@@ -2362,7 +2361,6 @@ local-zone: "ocrannow.com." always_nxdomain
 local-zone: "ocycling.com." always_nxdomain
 local-zone: "odlodiscount.com." always_nxdomain
 local-zone: "odrazuu.pl." always_nxdomain
-local-zone: "oefta.racerkidz.de." always_nxdomain
 local-zone: "ofertapromotionala.ro." always_nxdomain
 local-zone: "off-female.com." always_nxdomain
 local-zone: "off-lady.com." always_nxdomain
@@ -2678,7 +2676,6 @@ local-zone: "qfsnesarag.com." always_nxdomain
 local-zone: "qhqzpt.astis-hunderunde.de." always_nxdomain
 local-zone: "qisoin.com." always_nxdomain
 local-zone: "qmzdo.online." always_nxdomain
-local-zone: "qnchhqop.covidspot.cz." always_nxdomain
 local-zone: "qttlpn.shop." always_nxdomain
 local-zone: "qualityplaything.com." always_nxdomain
 local-zone: "quarscope.com." always_nxdomain
@@ -2697,6 +2694,7 @@ local-zone: "qvcdeals-mall.com." always_nxdomain
 local-zone: "qvcshopus.com." always_nxdomain
 local-zone: "rabbiten.com." always_nxdomain
 local-zone: "racecars24.fr." always_nxdomain
+local-zone: "racerkidz.de." always_nxdomain
 local-zone: "radisp.com." always_nxdomain
 local-zone: "raefy.com." always_nxdomain
 local-zone: "rainbowter.com." always_nxdomain
