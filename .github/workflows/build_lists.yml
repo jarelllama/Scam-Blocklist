@@ -49,10 +49,22 @@ jobs:
           echo -e "\nRemoving...\n"
           exit 1
 
+      - name: Sort check
+        if: success() || failure()
+        run : |
+          sort -c raw.txt && exit 0
+          
+          echo -e "\nBlocklist is not sorted."
+          
+          sort "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
+          
+          echo -e "\nSorting..."
+          exit 1
+
       - name: Duplicate check
         if: success() || failure()
         run: |
-          sort "${{ vars.RAW_FILE }}" | uniq -d > check.tmp
+          uniq -d "${{ vars.RAW_FILE }}" > check.tmp
 
           [[ -s check.tmp ]] || exit 0
           echo -e "\nDuplicates found:"
