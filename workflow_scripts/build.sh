@@ -9,6 +9,8 @@ comment="$5"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
 
+echo -e "\nBuilding ${syntax}"
+
 touch "$path"
 
 awk -v before="$before" -v after="$after" '{print before $0 after}' "$raw_file" > "${path}.tmp"
@@ -22,7 +24,7 @@ fi
 grep -vE "^${comment}" "$path" > previous.tmp
 
 if diff -q previous.tmp "${path}.tmp" >/dev/null; then
-   echo -e "\nNo changes.\n"
+   echo "No changes."
    exit 0
 fi
 
@@ -30,7 +32,6 @@ num_before=$(wc -l < previous.tmp)
 
 num_after=$(wc -l < "${path}.tmp")
 
-echo -e "\nBuilt ${syntax}"
 echo "Total entries before: $num_before"
 echo "Difference: $((num_after - num_before))"
 echo -e "Final entries after: $num_after\n"
