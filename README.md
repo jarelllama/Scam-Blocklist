@@ -20,7 +20,7 @@ Manually: 3818
 Automatically: 92
 Total: 3910 (since May 10 2023)
 
-Updated: Sun May 14 16:14 UTC
+Updated: Sun May 14 16:19 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -47,7 +47,7 @@ The list building process makes use of wildcard blocking in two ways:
 
 1. Removal of redundant entries: If the blocklist contains `spam.com`, via wildcard matching, `sub.spam.com` would be blocked as well and is, therefore, redundant and will be removed.
 
-2. Finding common second-level domains: If `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for different subdomains. A whitelist is used to prevent blocking of genuine e-commerce/hosting domains such as `myshopify.com`.
+2. Finding common second-level domains: If `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for each subdomain. A whitelist is used to prevent blocking of genuine e-commerce/hosting domains such as `myshopify.com`.
 
 ### Dead domains
 
