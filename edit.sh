@@ -62,10 +62,11 @@ function edit_blocklist {
     fi
 
     while read -r optimised_entry; do
-        if ! [[ "$entry" == "*.${optimised_entry}" ]]; then
+        if ! [[ "$entry" == *."${optimised_entry}" ]]; then
             continue
         fi
         echo -e "\nThe domain is made redundant by '${optimised_entry}'"
+        return
     done < "$optimised_entries"
 
     if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
