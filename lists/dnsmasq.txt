@@ -2,8 +2,8 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.040757.2023
-# Last modified: Sun May 14 04:07:57 UTC 2023
+# Version: 05.14.041217.2023
+# Last modified: Sun May 14 04:12:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
 # Total number of entries: 3769
@@ -1051,6 +1051,7 @@ address=/evoosense.com/#
 address=/evorar.com/#
 address=/exaglam.com/#
 address=/excelgadgets.co/#
+address=/excellentowk.com/#
 address=/exclusivefeedback.com/#
 address=/exotekracingparts.com/#
 address=/expenseermart.com/#
@@ -1247,6 +1248,7 @@ address=/galyu.com/#
 address=/gamesales.store/#
 address=/gamestrem.com/#
 address=/gamgoing.com/#
+address=/ganadeals.com/#
 address=/ganebet.uk/#
 address=/gantcliver.com/#
 address=/gantfurni.shop/#
@@ -3607,6 +3609,7 @@ address=/wellappliance.com/#
 address=/wellbinde.com/#
 address=/welldecloth.life/#
 address=/wenoreshop.com/#
+address=/wenuse.com/#
 address=/werfew.com/#
 address=/wernersale.com/#
 address=/westerncodyjames.com/#
@@ -3674,10 +3677,6 @@ address=/wrepod.com/#
 address=/wszen.top/#
 address=/wtass.com/#
 address=/wulooofficial.com/#
-address=/www.excellentowk.com/#
-address=/www.ganadeals.com/#
-address=/www.wenuse.com/#
-address=/www.zazadill.com/#
 address=/wzlooo.com/#
 address=/x-bik.myshopify.com/#
 address=/x-bik.online/#
@@ -3742,6 +3741,7 @@ address=/zaresales.com/#
 address=/zarodress.com/#
 address=/zasastores.com/#
 address=/zatarshop.com/#
+address=/zazadill.com/#
 address=/zazestore.com/#
 address=/zbozxe.shop/#
 address=/zealfox.shop/#
