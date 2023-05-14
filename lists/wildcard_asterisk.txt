@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.104150.2023
-# Last modified: Sun May 14 10:41:50 UTC 2023
+# Version: 05.14.104734.2023
+# Last modified: Sun May 14 10:47:34 UTC 2023
 # Expires: 4 hours
 # Syntax: Wildcard Asterisk
-# Total number of entries: 3885
+# Total number of entries: 3886
 #
 *.168cyd.com
 *.17aap.net
@@ -14,6 +14,7 @@
 *.2s.pizza-napoleon.cz
 *.3d-printing.store
 *.3dsportstore.com
+*.556602661.kreta-trip.nl
 *.5icustom.com
 *.630563295qq.myshoplaza.com
 *.68apparel.store
