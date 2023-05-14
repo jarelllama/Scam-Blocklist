@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.102100.2023
-# Last modified: Sun May 14 10:21:00 UTC 2023
+# Version: 05.14.103023.2023
+# Last modified: Sun May 14 10:30:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3867
+# Total number of entries: 3870
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -56,6 +56,7 @@ address=/advisorl.com/#
 address=/aecinempoli.it/#
 address=/aecpq.com/#
 address=/aestheticsoutfits.com/#
+address=/aezvc.retropolisarcade.com/#
 address=/afamilyspot.com/#
 address=/affjumbo.com/#
 address=/aflycatus.com/#
@@ -2178,6 +2179,7 @@ address=/mpyll.nexgentextile.com/#
 address=/mrkimberly.com/#
 address=/mslicenseskey.com/#
 address=/msmcompare.com/#
+address=/mtnvflitm.behindthebox.de/#
 address=/muazida.com/#
 address=/muckbootsmrheater.com/#
 address=/mulheruniverso.com.br/#
@@ -3839,6 +3841,7 @@ address=/zatarshop.com/#
 address=/zazadill.com/#
 address=/zazestore.com/#
 address=/zbozxe.shop/#
+address=/zddy.deprocesadvocaat.nl/#
 address=/zealfox.shop/#
 address=/zedbubble.com/#
 address=/zedorders.com/#
