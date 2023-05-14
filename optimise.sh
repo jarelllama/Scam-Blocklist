@@ -1,7 +1,7 @@
 #!/bin/bash
 
-optimiser_blacklist="data/optimiser_blacklist"
-optimiser_whitelist="data/optimiser_whitelist"
+optimiser_blacklist="data/optimiser_blacklist.txt"
+optimiser_whitelist="data/optimiser_whitelist.txt"
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" exit
 
