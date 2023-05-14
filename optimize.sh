@@ -12,21 +12,21 @@ trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" exit
 #}
 
 while true; do
-    domains=$(grep -E '\..*\.' data/raw.txt \
+    output=$(grep -E '\..*\.' data/raw.txt \
         | cut -d '.' -f2- \
         | awk -F '.' '$1 ~ /.{4,}/ {print}' \
         | sort \
         | uniq -d \
         | grep -vF 'shop')
 
-    numbered_domains=$(echo "$domains" | awk '{print NR " " $0}')
+    numbered_domains=$(echo "$output" | awk '{print NR " " $0}')
     echo "$numbered_domains"
 
     read -rp "Select a domain ('x' to exit): " chosen_number
 
     [[ "$chosen_number" == 'x' ]] && exit 0
 
-    chosen_domain=$(echo "$domains" | awk -v n="$chosen_number" '$1 == n {print $2}')
+    chosen_domain=$(echo "$output" | awk -v n="$chosen_number" '$1 == n {print $2}')
 
     echo "$chosen_domain"
 
