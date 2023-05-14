@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.094821.2023
-# Last modified: Sun May 14 09:48:21 UTC 2023
+# Version: 05.14.095550.2023
+# Last modified: Sun May 14 09:55:50 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3852
+# Total number of entries: 3860
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -82,6 +82,7 @@ local-zone: "akccutlery.com." always_nxdomain
 local-zone: "akjamv.shop." always_nxdomain
 local-zone: "alabosh.com." always_nxdomain
 local-zone: "alahead.com." always_nxdomain
+local-zone: "alanhug.pro." always_nxdomain
 local-zone: "alapeay.com." always_nxdomain
 local-zone: "alaskatag.com." always_nxdomain
 local-zone: "albarayapothecary.com." always_nxdomain
@@ -124,6 +125,7 @@ local-zone: "amcclothes.com." always_nxdomain
 local-zone: "amiguworldvn.com." always_nxdomain
 local-zone: "amillyvo.com." always_nxdomain
 local-zone: "ammyl.com." always_nxdomain
+local-zone: "amoustore.com." always_nxdomain
 local-zone: "amybaby.shop." always_nxdomain
 local-zone: "amybathtub.xyz." always_nxdomain
 local-zone: "amyhome.live." always_nxdomain
@@ -292,6 +294,7 @@ local-zone: "beautifulposhs.com." always_nxdomain
 local-zone: "beautiing.com." always_nxdomain
 local-zone: "beautlife.shop." always_nxdomain
 local-zone: "beautybuzzed.shop." always_nxdomain
+local-zone: "beautyfusionco.com." always_nxdomain
 local-zone: "beautynailhairsalons.com." always_nxdomain
 local-zone: "beawi.com." always_nxdomain
 local-zone: "bebuntlly.com." always_nxdomain
@@ -1318,6 +1321,7 @@ local-zone: "gifnestbuy.com." always_nxdomain
 local-zone: "gift4ls.com." always_nxdomain
 local-zone: "giftflows.com." always_nxdomain
 local-zone: "giftiheaven.com." always_nxdomain
+local-zone: "giftipoint.com." always_nxdomain
 local-zone: "giftmaart.com." always_nxdomain
 local-zone: "gifts4fan.us." always_nxdomain
 local-zone: "giftsholic.com." always_nxdomain
@@ -1751,6 +1755,7 @@ local-zone: "kgnovav.nftjobfinders.com." always_nxdomain
 local-zone: "kianshopy.com." always_nxdomain
 local-zone: "kidspopular.com." always_nxdomain
 local-zone: "kikimiss.com." always_nxdomain
+local-zone: "kilatkuning.shop." always_nxdomain
 local-zone: "kilianes.uk." always_nxdomain
 local-zone: "kincorybeauty.com." always_nxdomain
 local-zone: "kindnessate.online." always_nxdomain
@@ -2343,6 +2348,7 @@ local-zone: "nursingsale.store." always_nxdomain
 local-zone: "nuxcloset.com." always_nxdomain
 local-zone: "nvistle.us." always_nxdomain
 local-zone: "nwtaylor.shop." always_nxdomain
+local-zone: "nxifjfz.alexander-ahrens.de." always_nxdomain
 local-zone: "nycmetroshop.com." always_nxdomain
 local-zone: "oascartrading.com." always_nxdomain
 local-zone: "obzockeydesigns.com." always_nxdomain
@@ -3026,6 +3032,7 @@ local-zone: "sistercute.com." always_nxdomain
 local-zone: "sitememy.com." always_nxdomain
 local-zone: "sitihoz.com." always_nxdomain
 local-zone: "siueang.com." always_nxdomain
+local-zone: "sixcosmetics.shop." always_nxdomain
 local-zone: "sixfingersjewelry.com." always_nxdomain
 local-zone: "sjrggp.shop." always_nxdomain
 local-zone: "skechersshoeoutlets.store." always_nxdomain
@@ -3814,6 +3821,7 @@ local-zone: "yvjexi.shop." always_nxdomain
 local-zone: "zabinmall.com." always_nxdomain
 local-zone: "zabinshop.com." always_nxdomain
 local-zone: "zahestores.com." always_nxdomain
+local-zone: "zakutegift.com." always_nxdomain
 local-zone: "zancus.com." always_nxdomain
 local-zone: "zanyvan.com." always_nxdomain
 local-zone: "zapastores.com." always_nxdomain
