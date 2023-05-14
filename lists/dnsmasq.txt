@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.101456.2023
-# Last modified: Sun May 14 10:14:56 UTC 2023
+# Version: 05.14.101909.2023
+# Last modified: Sun May 14 10:19:09 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3867
+# Total number of entries: 3866
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -800,7 +800,6 @@ address=/dcsiteservices.com/#
 address=/dcsnowboard.com/#
 address=/ddoe.shop/#
 address=/ddypjs.com/#
-address=/dea.nidasrent.cz/#
 address=/deal-lady.com/#
 address=/dealalfresco.com/#
 address=/dealweili.shop/#
@@ -1036,7 +1035,6 @@ address=/enterloop.onshopbase.com/#
 address=/enthusiastichaic.com/#
 address=/entove.com/#
 address=/epicvin.online/#
-address=/eppiusp.nidasrent.cz/#
 address=/equipcycle.com/#
 address=/equipmenthub.shop/#
 address=/equipmentmusic.xyz/#
@@ -2314,6 +2312,7 @@ address=/nicholhoo.com/#
 address=/nickccks.com/#
 address=/nickwolves.com/#
 address=/nicoleroasters.shop/#
+address=/nidasrent.cz/#
 address=/nideckernitro.com/#
 address=/nieruchomosci-walter24.pl/#
 address=/niggnqga.campanamedicalcenter.it/#
