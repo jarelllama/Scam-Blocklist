@@ -2,18 +2,16 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.063430.2023
-# Last modified: Sun May 14 06:34:30 UTC 2023
+# Version: 05.14.085753.2023
+# Last modified: Sun May 14 08:57:53 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3841
+# Total number of entries: 3836
 #
-address=/167476035.maniazieleni.pl/#
 address=/168cyd.com/#
 address=/17aap.net/#
 address=/299691360.mailapelihalli.fi/#
 address=/2s.pizza-napoleon.cz/#
-address=/346910934.maniazieleni.pl/#
 address=/3d-printing.store/#
 address=/3dsportstore.com/#
 address=/5icustom.com/#
@@ -61,7 +59,6 @@ address=/aestheticsoutfits.com/#
 address=/afamilyspot.com/#
 address=/affjumbo.com/#
 address=/aflycatus.com/#
-address=/afsxwc.moon-kielce.pl/#
 address=/agemarts.com/#
 address=/ahediti.com/#
 address=/ahrtdt.store/#
@@ -898,6 +895,7 @@ address=/dollarsmart.top/#
 address=/dollytool.live/#
 address=/dolomiteoutlet.com/#
 address=/domitri.co/#
+address=/dommarzen-ns.pl/#
 address=/donnasharpbed.com/#
 address=/dooyshy.com/#
 address=/dopemelaninart.com/#
@@ -962,6 +960,7 @@ address=/eclothone.com/#
 address=/ecoenos.com/#
 address=/ecomgnow.shop/#
 address=/ecommercevallcs.com/#
+address=/ecwid.com/#
 address=/edaintel.com/#
 address=/edcbyesprit.com/#
 address=/edcotools.com/#
@@ -1203,7 +1202,6 @@ address=/flockurn.com/#
 address=/floralovers.com/#
 address=/flytey.com/#
 address=/flytracy.com/#
-address=/fnekgjv.odrazuu.pl/#
 address=/fodyque.com/#
 address=/folin.space/#
 address=/fomoshill.com/#
@@ -1310,7 +1308,6 @@ address=/getkue.com/#
 address=/getupsized.com/#
 address=/getwomenswear.com/#
 address=/gewqas.com/#
-address=/gglvbq.dommarzen-ns.pl/#
 address=/gibbeverage.shop/#
 address=/gifnest.com/#
 address=/gifnestbuy.com/#
@@ -1984,6 +1981,7 @@ address=/maller.io/#
 address=/malpezeco.com/#
 address=/mamapapaclothing.com/#
 address=/manaboutadog.de/#
+address=/maniazieleni.pl/#
 address=/mannytra.com/#
 address=/manorinteriorskitchen.com/#
 address=/marcellomielno.pl/#
@@ -2046,7 +2044,6 @@ address=/meindlshoes.com/#
 address=/melarus.store/#
 address=/melizamodesty.com/#
 address=/melodybaby.shop/#
-address=/melostyles.ecwid.com/#
 address=/memb-urvey.com/#
 address=/member-surveys.com/#
 address=/memberevaluation.com/#
@@ -2144,6 +2141,7 @@ address=/monscloth.store/#
 address=/monthlyevaluation.com/#
 address=/monthlyfeedback.com/#
 address=/monthlypolls.pro/#
+address=/moon-kielce.pl/#
 address=/moonasity.com/#
 address=/moonbeautylab.com/#
 address=/moongotool.com/#
@@ -2344,6 +2342,7 @@ address=/ocean-boutique.com/#
 address=/ocrannow.com/#
 address=/ocycling.com/#
 address=/odlodiscount.com/#
+address=/odrazuu.pl/#
 address=/oefta.racerkidz.de/#
 address=/ofertapromotionala.ro/#
 address=/off-female.com/#
@@ -2505,7 +2504,6 @@ address=/pcaqqyk.deem.cz/#
 address=/pclandes.fr/#
 address=/peaceshop.pro/#
 address=/peargifts.com/#
-address=/pebryexss.moon-kielce.pl/#
 address=/peculiarm.com/#
 address=/pedroclothing.shop/#
 address=/peinhel.com/#
@@ -3587,7 +3585,6 @@ address=/vicidola.com/#
 address=/vicilo.com/#
 address=/vikalpa.org.in/#
 address=/vinoleather.com/#
-address=/vinpeace.ecwid.com/#
 address=/vintageland.in/#
 address=/vintgift.com/#
 address=/violinlad.com/#
@@ -3710,7 +3707,6 @@ address=/wishbone-evaluation.com/#
 address=/wizgoo.com/#
 address=/wizmazzaken.com/#
 address=/wm.metropolgoesgreen.de/#
-address=/wmpwa.dommarzen-ns.pl/#
 address=/wmsandals.com/#
 address=/wnqxt.mrmaccaroni.it/#
 address=/woamwin.shop/#
@@ -3760,7 +3756,6 @@ address=/xprrd.com/#
 address=/xqkuxby.assonenuphar.fr/#
 address=/xray-disk.com/#
 address=/xuantienarts.com/#
-address=/xyivpmrt.odrazuu.pl/#
 address=/xyzpolls.com/#
 address=/y-stop.com/#
 address=/yadmrd.com/#
