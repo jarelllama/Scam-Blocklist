@@ -81,7 +81,7 @@ function retrieve_domains {
         echo "$domains" > domains.tmp
 
         while read -r subdomain; do
-            sed -i "s/^$subdomain\.//" domains.tmp
+            sed -i "s/^${subdomain}\.//" domains.tmp
         done < "$subdomains_file"
 
         sort -u domains.tmp -o domains.tmp
