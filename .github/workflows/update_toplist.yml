@@ -3,8 +3,8 @@ run-name: Update toplist
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 5am (GMT+8)
-    - cron: '0 21 * * *'
+    # Daily at 4am (GMT+8)
+    - cron: '0 20 * * *'
 
 jobs:
   Update-toplist:
