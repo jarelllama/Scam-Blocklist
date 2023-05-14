@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.095550.2023
-# Last modified: Sun May 14 09:55:50 UTC 2023
+# Version: 05.14.095914.2023
+# Last modified: Sun May 14 09:59:14 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3860
+# Total number of entries: 3865
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1169,6 +1169,7 @@ local-zone: "fernize.com." always_nxdomain
 local-zone: "ferreteriayvarios.com." always_nxdomain
 local-zone: "fertribora.com." always_nxdomain
 local-zone: "fesgistore.com." always_nxdomain
+local-zone: "feujdxmh.wincar.cz." always_nxdomain
 local-zone: "fevdat.com." always_nxdomain
 local-zone: "fgxctrade.com." always_nxdomain
 local-zone: "fiadin.com." always_nxdomain
@@ -1703,6 +1704,7 @@ local-zone: "joyfvfrom.com." always_nxdomain
 local-zone: "joytia.com." always_nxdomain
 local-zone: "joyzach.com." always_nxdomain
 local-zone: "jpma.cc." always_nxdomain
+local-zone: "jquzjmh.racerkidz.de." always_nxdomain
 local-zone: "jqwerks.com." always_nxdomain
 local-zone: "jtgsr.pages.dev." always_nxdomain
 local-zone: "juahar.com." always_nxdomain
@@ -2320,6 +2322,7 @@ local-zone: "nimall.cc." always_nxdomain
 local-zone: "ninabathing.shop." always_nxdomain
 local-zone: "niniclo.com." always_nxdomain
 local-zone: "nizenstore.com." always_nxdomain
+local-zone: "nlpdis.6ipc.pl." always_nxdomain
 local-zone: "nmhagencyltd.com." always_nxdomain
 local-zone: "nohiba.com." always_nxdomain
 local-zone: "noradeals.com." always_nxdomain
@@ -2675,6 +2678,7 @@ local-zone: "qfsnesarag.com." always_nxdomain
 local-zone: "qhqzpt.astis-hunderunde.de." always_nxdomain
 local-zone: "qisoin.com." always_nxdomain
 local-zone: "qmzdo.online." always_nxdomain
+local-zone: "qnchhqop.covidspot.cz." always_nxdomain
 local-zone: "qttlpn.shop." always_nxdomain
 local-zone: "qualityplaything.com." always_nxdomain
 local-zone: "quarscope.com." always_nxdomain
@@ -3795,6 +3799,7 @@ local-zone: "yesslong.com." always_nxdomain
 local-zone: "yetiforsale.com." always_nxdomain
 local-zone: "yicasek.com." always_nxdomain
 local-zone: "yiticapsule.com." always_nxdomain
+local-zone: "ymuomb.lasuite-depotvente.fr." always_nxdomain
 local-zone: "yogmhums.top." always_nxdomain
 local-zone: "yokclick.com." always_nxdomain
 local-zone: "yolofrc.org." always_nxdomain
