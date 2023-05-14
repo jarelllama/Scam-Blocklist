@@ -153,7 +153,7 @@ jobs:
           mv raw.tmp "${{ vars.RAW_FILE }}"
           
           echo -e "\nRemoving...\n"
-          #exit 1
+          exit 1
 
       - name: Commit filtered raw file
         if: failure()
