@@ -52,9 +52,9 @@ jobs:
       - name: Sort check
         if: success() || failure()
         run : |
-          sort -c raw.txt && exit 0
+          sort -c "${{ vars.RAW_FILE }}" && exit 0
           
-          echo -e "\nBlocklist is not sorted."
+          echo -e "\nBlocklist is not sorted alphabetically."
           
           sort "${{ vars.RAW_FILE }}" -o "${{ vars.RAW_FILE }}"
           
