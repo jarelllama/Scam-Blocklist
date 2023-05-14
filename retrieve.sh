@@ -182,7 +182,7 @@ function merge_pending {
 
     cat "$pending_file" >> "$raw_file" 
 
-    sort "$raw_file" -o "$raw_file"
+    sort -u "$raw_file" -o "$raw_file"
 
     num_after=$(wc -l < "$raw_file")
     
