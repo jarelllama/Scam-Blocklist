@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.103023.2023
-# Last modified: Sun May 14 10:30:23 UTC 2023
+# Version: 05.14.104150.2023
+# Last modified: Sun May 14 10:41:50 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3870
+# Total number of entries: 3885
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -121,6 +121,7 @@ address=/amazoillo.com/#
 address=/amazonliw.com/#
 address=/amazstyle.com/#
 address=/amberroseshades.com/#
+address=/amcargologistics.com/#
 address=/amcclothes.com/#
 address=/amiguworldvn.com/#
 address=/amillyvo.com/#
@@ -160,7 +161,9 @@ address=/ao-running.com/#
 address=/aocrloib.shop/#
 address=/aoemate.com/#
 address=/aopwix.com/#
+address=/apexforwardcargo.com/#
 address=/aplomey.com/#
+address=/apollo.io/#
 address=/apparelgearbox.com/#
 address=/apparelonsale.store/#
 address=/apparelpeloton.com/#
@@ -600,6 +603,7 @@ address=/cirbee.com/#
 address=/cirropo.com/#
 address=/citadelb.com/#
 address=/citifunny.com/#
+address=/citrary.shop/#
 address=/citrusf.com/#
 address=/cizubeix.com/#
 address=/ckkebt.shop/#
@@ -851,6 +855,7 @@ address=/diliving.info/#
 address=/dillers.shop/#
 address=/dinamondshop.com/#
 address=/dinual.com/#
+address=/diplomatic-delivery.com/#
 address=/dipshow.com/#
 address=/direttaa.com/#
 address=/discountapparels.store/#
@@ -1239,6 +1244,8 @@ address=/freesmarttools.com/#
 address=/freesvalues.com/#
 address=/freewooluk.com/#
 address=/fregully.com/#
+address=/freight-direct.com/#
+address=/freightforwardersfamily.com/#
 address=/frelishay.com/#
 address=/freshdepoot.com/#
 address=/friashion.com/#
@@ -1346,6 +1353,7 @@ address=/glitzce.com/#
 address=/gllomall.com/#
 address=/glo-balexpress.com/#
 address=/global-posts.com/#
+address=/globalcargoairwaylogistics.com/#
 address=/globusfestival.nl/#
 address=/gloriashoe.shop/#
 address=/gninim.com/#
@@ -1611,6 +1619,7 @@ address=/inductiony.com/#
 address=/inerlaya.com/#
 address=/inflatablenshow.com/#
 address=/initote.shop/#
+address=/injaz-dz.com/#
 address=/inmw.shop/#
 address=/innagur.com/#
 address=/innomodelcar.com/#
@@ -1652,6 +1661,7 @@ address=/janainalbenafsij.com/#
 address=/jasbuy.com/#
 address=/jasminebuy.com/#
 address=/jbfilm.pl/#
+address=/jctrans.net/#
 address=/jdsportt.com/#
 address=/jdssporty.com/#
 address=/jdstockz.com/#
@@ -1908,6 +1918,7 @@ address=/locymax.com/#
 address=/lofthelsinki.com/#
 address=/login-information-update-online.com/#
 address=/logisol.fr/#
+address=/logisticskingz.com/#
 address=/loiredgar.com/#
 address=/lokans.shop/#
 address=/lolalife.net/#
@@ -3056,6 +3067,7 @@ address=/skymedia.media/#
 address=/skysmelluk.com/#
 address=/slearancemsbag.com/#
 address=/sleeveis.com/#
+address=/slideshare.net/#
 address=/slimmingproductsale.store/#
 address=/slimwaist.us/#
 address=/slottoy.shop/#
@@ -3445,6 +3457,7 @@ address=/tradesailorshop.com/#
 address=/traeerly.com/#
 address=/traileroutletllc.com/#
 address=/trainersonsale.com/#
+address=/transgloballineexpress.com/#
 address=/translatter.com/#
 address=/trck-maltapost.com/#
 address=/treelinesfurs.com/#
@@ -3529,6 +3542,7 @@ address=/uniquepie.com/#
 address=/unitedexpress.org/#
 address=/unitedmailexpress.com/#
 address=/universal-health88.com/#
+address=/universalprimelogistics.com/#
 address=/unkohoble.com/#
 address=/unlockvigor.com/#
 address=/unmagasine.com/#
@@ -3684,6 +3698,7 @@ address=/wayhou.shop/#
 address=/wayofhome.com/#
 address=/wbeseae.com/#
 address=/wd-verse.com/#
+address=/wdgloballogistics.com/#
 address=/wdrative.com/#
 address=/wearfavorite.com/#
 address=/wearhollister.com/#
