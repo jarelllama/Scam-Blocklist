@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.085753.2023
-# Last modified: Sun May 14 08:57:53 UTC 2023
+# Version: 05.14.092244.2023
+# Last modified: Sun May 14 09:22:44 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3837
+# Total number of entries: 3840
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1149,6 +1149,7 @@ local-zone: "feedback4companies.com." always_nxdomain
 local-zone: "feedingweaning.com." always_nxdomain
 local-zone: "feellik.com." always_nxdomain
 local-zone: "feleloh.com." always_nxdomain
+local-zone: "felicityy.com." always_nxdomain
 local-zone: "fellatihoes.com." always_nxdomain
 local-zone: "fellowship.pw." always_nxdomain
 local-zone: "femaleabout.com." always_nxdomain
@@ -1970,6 +1971,7 @@ local-zone: "lynnjewelry.shop." always_nxdomain
 local-zone: "maahizon.com." always_nxdomain
 local-zone: "maajiswim.com." always_nxdomain
 local-zone: "mababinooo.com." always_nxdomain
+local-zone: "macineo.com." always_nxdomain
 local-zone: "madrasbazaar.com." always_nxdomain
 local-zone: "madroop.com." always_nxdomain
 local-zone: "maebl.com." always_nxdomain
@@ -3757,6 +3759,7 @@ local-zone: "xprrd.com." always_nxdomain
 local-zone: "xqkuxby.assonenuphar.fr." always_nxdomain
 local-zone: "xray-disk.com." always_nxdomain
 local-zone: "xuantienarts.com." always_nxdomain
+local-zone: "xvpmcj.shop." always_nxdomain
 local-zone: "xyzpolls.com." always_nxdomain
 local-zone: "y-stop.com." always_nxdomain
 local-zone: "yadmrd.com." always_nxdomain
