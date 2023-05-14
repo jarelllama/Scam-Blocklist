@@ -159,29 +159,14 @@ function filter_pending {
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
     echo "Domains:"
     cat "$pending_file"
-    
-    grep -vxFf "$blacklist_file" "$pending_file" > no_black.tmp
-    
-    > with_subdomains.tmp
-    while read -r subdomain; do
-        awk -v subdomain="$subdomain" '{print subdomain"."$0}' no_black.tmp >> with_subdomains.tmp
-    done < "$subdomains_file"
-    
-    cat with_subdomains.tmp no_black.tmp > pending_with_subdomains.tmp
-    
-    grep -xFf pending_with_subdomains.tmp "$toplist_file" > in_toplist.tmp
-    
+
+    comm -12 "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
+
     if ! [[ -s in_toplist.tmp ]]; then
         echo -e "\nNo domains found in toplist."
         return
     fi
     
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" in_toplist.tmp
-    done < "$subdomains_file"
-
-    sort -u in_toplist.tmp -o in_toplist.tmp
-
     echo -e "\n! Domains in toplist:"
     cat in_toplist.tmp
 
