@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.112633.2023
-# Last modified: Sun May 14 11:26:33 UTC 2023
+# Version: 05.14.123128.2023
+# Last modified: Sun May 14 12:31:28 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3898
+# Total number of entries: 3902
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -1428,6 +1428,7 @@ address=/guntiony.com/#
 address=/guridft.store/#
 address=/gurucid.com/#
 address=/gusmetn.com/#
+address=/gutebih.shop/#
 address=/gvs-usa.com/#
 address=/gyustio.store/#
 address=/hachipethouse.com/#
@@ -3096,6 +3097,7 @@ address=/snazzywatch.com/#
 address=/snkndl.com/#
 address=/snorprevent.de/#
 address=/snowaker.com/#
+address=/snowb.co.za/#
 address=/snowboard-us.com/#
 address=/snowboardsrace.com/#
 address=/snowgearshop.com/#
@@ -3668,6 +3670,7 @@ address=/volcomofficial.com/#
 address=/volcomoutdoor.com/#
 address=/vollemmshop.com/#
 address=/volsak.store/#
+address=/vovlady.com/#
 address=/voyagexplorer.com/#
 address=/voyboutique.com/#
 address=/vraodorld.com/#
@@ -3710,6 +3713,7 @@ address=/wayhou.shop/#
 address=/wayofhome.com/#
 address=/wbeseae.com/#
 address=/wd-verse.com/#
+address=/wdaridbfd.hifidesign.pl/#
 address=/wdgloballogistics.com/#
 address=/wdrative.com/#
 address=/wearfavorite.com/#
