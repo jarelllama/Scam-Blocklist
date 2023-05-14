@@ -59,17 +59,9 @@ function edit_blocklist {
         return
     fi
 
-    if ! grep -xF "$entry" "$blacklist_file"; then
-        echo "$entry" > with_subdomains.tmp
-
-        while read -r subdomain; do
-            echo "${subdomain}.${entry}" >> with_subdomains.tmp
-        done < "$subdomains_file"
-    
-        if grep -xFf with_subdomains.tmp "$toplist_file"; then
-            echo -e "\nThe domain is in the toplist. Not added."
-            return
-        fi
+    if grep -xF "$entry" "$toplist_file" | grep -vxF "$blacklist_file"; then
+        echo -e "\nThe domain is in the toplist. Not added."
+        return
     fi
 
     if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
