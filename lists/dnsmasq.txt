@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.025149.2023
-# Last modified: Sun May 14 02:51:49 UTC 2023
+# Version: 05.14.040757.2023
+# Last modified: Sun May 14 04:07:57 UTC 2023
 # Expires: 4 hours
-# Syntax: DNSMasq
-# Total number of entries: 3770
+# Syntax: Dnsmasq
+# Total number of entries: 3769
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -773,6 +773,7 @@ address=/davekoflersbichons.com/#
 address=/daviesshoes.xyz/#
 address=/dawnbaby.shop/#
 address=/daylighty.com/#
+address=/dayuse-agent.online/#
 address=/dbhmnp.shop/#
 address=/dbkdsale.com/#
 address=/dcodtcre.shop/#
@@ -1932,7 +1933,6 @@ address=/luyergeour.com/#
 address=/lydeyw.online/#
 address=/lynahome.com/#
 address=/lynnjewelry.shop/#
-address=/m.dayuse-agent.online/#
 address=/maahizon.com/#
 address=/maajiswim.com/#
 address=/mababinooo.com/#
@@ -3674,7 +3674,6 @@ address=/wrepod.com/#
 address=/wszen.top/#
 address=/wtass.com/#
 address=/wulooofficial.com/#
-address=/www.dayuse-agent.online/#
 address=/www.excellentowk.com/#
 address=/www.ganadeals.com/#
 address=/www.wenuse.com/#
