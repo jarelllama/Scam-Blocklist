@@ -9,6 +9,7 @@ toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
 dead_domains_file="data/dead_domains.txt"
 optimised_entries="data/optimised_entries.txt"
+optimiser_whitelist="data/optimiser_whitelist.txt"
 stats_file="data/stats.txt"
 edit_script="edit.sh"
 
@@ -174,6 +175,47 @@ function filter_pending {
     fi
 }
 
+function optimise_blocklist {
+    while true; do
+        grep -E '\..*\.' "$raw_file" \
+            | cut -d '.' -f2- \
+            | awk -F '.' '$1 ~ /.{4,}/ {print}' \
+            | sort \
+            | uniq -d > 1.tmp
+    
+        comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
+        comm -23 2.tmp "$optimised_entries" > domains.tmp
+    
+        [[ -s domains.tmp ]] || return
+        numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
+        echo -e "\n! Potential optimised entries:"
+        echo "${numbered_domains}"
+
+        echo -e "\nEnter the entry number to whitelist it."
+        echo "a. Add all optimised entries."
+        echo "x. Return to the previous menu."
+        read -r choice
+
+        [[ "$choice" == 'x' ]] && return
+
+        if [[ "$choice" == 'a' ]]; then
+            echo -e "\nAdding all optimisd entries to the blocklist..."
+            cat domains.tmp >> "$raw_file"
+            cat domains.tmp >> "$optimised_entries"
+            sort -u "$raw_file" -o "$raw_file"
+            sort "$optimised_entries" -o "$optimised_entries"
+            return
+        elif ! [[ "$choice" =~ ^[0-9]+$ ]]; then
+            echo -e "\nInvalid option."
+        else
+            chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
+            echo -e "\nAdded '${chosen_domain}' to the whitelist."
+            echo "$chosen_domain" >> "$optimiser_whitelist"
+            sort "$optimiser_whitelist" -o "$optimiser_whitelist"
+        fi
+    done
+}
+
 function merge_pending {
     cp "$raw_file" "${raw_file}.bak"
 
@@ -183,8 +225,11 @@ function merge_pending {
 
     sort -u "$raw_file" -o "$raw_file"
 
+    "$unattended" || optimise_blocklist
+
     num_after=$(wc -l < "$raw_file")
     
+    # might change to after - before 
     num_added=$(wc -l < "$pending_file")
 
     echo -e "\nTotal domains before: $num_before"
@@ -213,7 +258,8 @@ function merge_pending {
     echo
 
     # Push white/black lists too for when they are modified through the editing script
-    git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file"
+    git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
+        "$optimised_entries" "$optimiser_whitelist"
     git commit -m "$commit_msg"
     git push
 
