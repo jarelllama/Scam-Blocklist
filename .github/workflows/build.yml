@@ -96,14 +96,14 @@ jobs:
         run: |
           > redundant.tmp
           while read -r entry; do
-            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> redundant.tmp
+            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> redundant.tmp || true
           done < "${{ vars.RAW_FILE }}"
           
           if [[ -s redundant.tmp ]] || exit 0
           echo -e "\nRedundant entries found:"
           cat redundant.tmp
 
-          grep -vxFf redundant.tmp "${{ vars.RAW_FILE }}" > raw.tmp
+          grep -vxFf redundant.tmp "${{ vars.RAW_FILE }}" > raw.tmp || true
           mv raw.tmp "${{ vars.RAW_FILE }}"
           
           echo -e "\nRemoving...\n"
@@ -140,7 +140,7 @@ jobs:
         run: |
           todays_date=$(date -u +"%m%d%y")
           date_in_file=$(sed -n '2p' "${{ vars.STATS_FILE }}")
-          current_count=$(wc -l < "${{ vars.RAW_FILE }})
+          current_count=$(wc -l < "${{ vars.RAW_FILE }}")
           yest_count=$(sed -n '6p' "${{ vars.STATS_FILE }}")
 
           if [[ "$date_in_file" == "$todays_date" ]]; then
