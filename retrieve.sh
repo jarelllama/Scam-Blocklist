@@ -92,25 +92,20 @@ function retrieve_domains {
         echo "--------------------------------------"
     done < "$search_terms_file"
 
-    sort -u "$pending_file" -o "$pending_file"
-
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
         exit 1
     fi
-
-    total_retrieved=$(wc -l < "$pending_file")
-
-    echo -e "\nTotal domains retrieved: $total_retrieved"
 }
 
 function filter_pending {
-    cp "$pending_file" "${pending_file}.bak"
-
     tr '[:upper:]' '[:lower:]' < "$pending_file" > 1.tmp
 
-    # Duplicates are removed for when the pending file isn't cleared
     sort -u 1.tmp -o 1.tmp
+
+    cp 1.tmp "${pending_file}.bak"
+
+    echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
     # Remove domains already in the blocklist
     comm -23 1.tmp "$raw_file" > 2.tmp
