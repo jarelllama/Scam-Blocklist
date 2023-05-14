@@ -1,5 +1,6 @@
 #!/bin/bash
 
+raw_file="data/raw.txt"
 optimiser_blacklist="data/optimiser_blacklist.txt"
 optimiser_whitelist="data/optimiser_whitelist.txt"
 
