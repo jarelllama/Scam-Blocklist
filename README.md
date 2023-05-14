@@ -2,12 +2,13 @@
 
 [![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml)
 
-| Syntax | Raw |
-| Adblock Plus | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock.txt) |
-| Dnsmasq | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/dnsmasq.txt) |
-| Unbound | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/unbound.txt) |
-| Wildcard Asterisk | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_asterisk.txt) |
-| Wildcard Domains | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains.txt) |
+| Format | Raw | Syntax |
+| --- | --- | --- |
+| Adblock Plus| [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock.txt) | \|\|example.com^ |
+| Dnsmasq | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/dnsmasq.txt) | address=/example.com/# |
+| Unbound | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/unbound.txt) | local-zone: "example.com." always_nxdomain |
+| Wildcard Asterisk | [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_asterisk.txt) | \*.example.com |
+| Wildcard Domains (no subdomains)| [Link](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains.txt) | example.com |
 
 ### Stats
 
@@ -19,7 +20,7 @@ Manually: 3678
 Automatically: 92
 Total: 3770 (since May 10 2023)
 
-Updated: Sun May 14 03:29 UTC
+Updated: Sun May 14 03:38 UTC
 ```
 
 ### How domains are added to the blocklist
