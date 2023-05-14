@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.101456.2023
-# Last modified: Sun May 14 10:14:56 UTC 2023
+# Version: 05.14.101909.2023
+# Last modified: Sun May 14 10:19:09 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3868
+# Total number of entries: 3867
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -801,7 +801,6 @@ local-zone: "dcsiteservices.com." always_nxdomain
 local-zone: "dcsnowboard.com." always_nxdomain
 local-zone: "ddoe.shop." always_nxdomain
 local-zone: "ddypjs.com." always_nxdomain
-local-zone: "dea.nidasrent.cz." always_nxdomain
 local-zone: "deal-lady.com." always_nxdomain
 local-zone: "dealalfresco.com." always_nxdomain
 local-zone: "dealweili.shop." always_nxdomain
@@ -1037,7 +1036,6 @@ local-zone: "enterloop.onshopbase.com." always_nxdomain
 local-zone: "enthusiastichaic.com." always_nxdomain
 local-zone: "entove.com." always_nxdomain
 local-zone: "epicvin.online." always_nxdomain
-local-zone: "eppiusp.nidasrent.cz." always_nxdomain
 local-zone: "equipcycle.com." always_nxdomain
 local-zone: "equipmenthub.shop." always_nxdomain
 local-zone: "equipmentmusic.xyz." always_nxdomain
@@ -2315,6 +2313,7 @@ local-zone: "nicholhoo.com." always_nxdomain
 local-zone: "nickccks.com." always_nxdomain
 local-zone: "nickwolves.com." always_nxdomain
 local-zone: "nicoleroasters.shop." always_nxdomain
+local-zone: "nidasrent.cz." always_nxdomain
 local-zone: "nideckernitro.com." always_nxdomain
 local-zone: "nieruchomosci-walter24.pl." always_nxdomain
 local-zone: "niggnqga.campanamedicalcenter.it." always_nxdomain
