@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.222802.2023
-# Last modified: Sun May 14 22:28:02 UTC 2023
+# Version: 05.14.234036.2023
+# Last modified: Sun May 14 23:40:36 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3919
+# Total number of entries: 3923
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -148,6 +148,7 @@ local-zone: "anawani.shop." always_nxdomain
 local-zone: "aneedwsy.com." always_nxdomain
 local-zone: "angelabath.site." always_nxdomain
 local-zone: "angelamccarthy.shop." always_nxdomain
+local-zone: "angelipreston.world." always_nxdomain
 local-zone: "angeljust.com." always_nxdomain
 local-zone: "angeltatan.com." always_nxdomain
 local-zone: "angiecutlery.shop." always_nxdomain
@@ -2472,6 +2473,7 @@ local-zone: "orisete.shop." always_nxdomain
 local-zone: "orogitee.com." always_nxdomain
 local-zone: "orotonhugesale.store." always_nxdomain
 local-zone: "osnowsports.com." always_nxdomain
+local-zone: "ostgermain.fr." always_nxdomain
 local-zone: "otakugarden.com." always_nxdomain
 local-zone: "oteeiio.shop." always_nxdomain
 local-zone: "otodanu.shop." always_nxdomain
@@ -2867,6 +2869,7 @@ local-zone: "ryanurabonpitbullpuppies.com." always_nxdomain
 local-zone: "ryzue.com." always_nxdomain
 local-zone: "sabansales.com." always_nxdomain
 local-zone: "sabelge.com." always_nxdomain
+local-zone: "sabsam.store." always_nxdomain
 local-zone: "saddog-official.com." always_nxdomain
 local-zone: "sadvan.com." always_nxdomain
 local-zone: "sageribbon.com." always_nxdomain
@@ -3129,6 +3132,7 @@ local-zone: "somegifts4u.com." always_nxdomain
 local-zone: "somegifts4you.com." always_nxdomain
 local-zone: "sonorousi.com." always_nxdomain
 local-zone: "sontas.shop." always_nxdomain
+local-zone: "sopchic.com." always_nxdomain
 local-zone: "soreldiscount.com." always_nxdomain
 local-zone: "sorptress.com." always_nxdomain
 local-zone: "sorweeve.com." always_nxdomain
@@ -3510,7 +3514,6 @@ local-zone: "tropicaltrends.co." always_nxdomain
 local-zone: "tropimart.co." always_nxdomain
 local-zone: "trouvashopping.com." always_nxdomain
 local-zone: "truckfilters.space." always_nxdomain
-local-zone: "trullejk.ostgermain.fr." always_nxdomain
 local-zone: "trunkduffel.com." always_nxdomain
 local-zone: "trusyo.com." always_nxdomain
 local-zone: "tryems.com." always_nxdomain
@@ -3919,6 +3922,7 @@ local-zone: "zlno.shop." always_nxdomain
 local-zone: "zmbond.com." always_nxdomain
 local-zone: "zmwck.aiman-immobilier.fr." always_nxdomain
 local-zone: "zodnox.com." always_nxdomain
+local-zone: "zonexautoparts.com." always_nxdomain
 local-zone: "zonin.store." always_nxdomain
 local-zone: "zpit-kurpiezielone.pl." always_nxdomain
 local-zone: "zqtnqxx.deem.cz." always_nxdomain
