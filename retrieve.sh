@@ -111,7 +111,7 @@ function retrieve_domains {
 }
 
 function check_toplist {
-    sleep 0.5
+    sleep 0.3
 
     while true; do
         comm -12 "$pending_file" "$toplist_file" \
@@ -124,7 +124,7 @@ function check_toplist {
 
         if "$unattended"; then
             echo "Domains in toplist:"
-            sleep 0.5
+            sleep 0.3
             cat in_toplist.tmp
             echo -e "\nExiting..."
             exit 1
@@ -176,6 +176,7 @@ function check_toplist {
         else
             echo -e "\nInvalid option."
         fi
+    sleep 0.3
     done
 }
 
@@ -186,7 +187,7 @@ function filter_pending {
 
     cp 1.tmp "${pending_file}.bak"
 
-    sleep 0.5
+    sleep 0.3
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
     sleep 0.3
@@ -240,7 +241,7 @@ function filter_pending {
     fi
 
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
-    sleep 0.5
+    sleep 0.3
     echo "Domains:"
     cat "$pending_file"
 
@@ -305,7 +306,7 @@ function optimise_blocklist {
 }
 
 function merge_pending {
-    sleep 0.5
+    sleep 0.3
 
     cp "$raw_file" "${raw_file}.bak"
 
