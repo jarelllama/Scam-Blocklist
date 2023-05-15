@@ -123,6 +123,21 @@ function edit_whitelist {
     echo "$entry" >> "$whitelist_file"
 
     sort "$whitelist_file" -o "$whitelist_file"
+    
+    grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+
+    [[ -s whitelisted.tmp ]] || return
+    sleep 0.3
+    echo -e "\nRemoving newly whitelisted entries..."
+    sleep 0.3
+    echo "Removed domains:"
+    sleep 0.3
+    cat whitelisted.tmp
+    
+    comm -23 "$raw_file" whitelisted.tmp > raw.tmp
+    mv raw.tmp "$raw_file"
+    
+    sleep 0.5
 }
 
 function edit_blacklist {
@@ -179,6 +194,7 @@ function check_entry {
         # Check if there are similar entries
         grep -Fq "$entry" "$raw_file" || return
         echo "Similar entries:"
+        sleep 0.3
         grep -F "$entry" "$raw_file"
         return
     fi
