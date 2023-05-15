@@ -167,8 +167,8 @@ function filter_pending {
     fi
 
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
-    sleep 0.5
     echo "Domains:"
+    sleep 0.5
     cat "$pending_file"
 
     sleep 0.5
