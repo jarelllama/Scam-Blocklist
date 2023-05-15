@@ -375,9 +375,6 @@ while true; do
     read -r choice
     case "$choice" in
         m)
-            [[ -s in_toplist.tmp ]] \
-                && echo -e "\nDomains found in the toplist. Not merging." \
-                && continue
             echo -e "\nMerging with blocklist..."
             merge_pending
             ;;
