@@ -45,15 +45,13 @@ if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
     fi
 fi
 
-if "$unattended"; then
-    echo -e "\nRetrieving domains..."
-else
-    echo -e "\nRemember to pull the latest changes first!"
+[[ "$unattended" ]] \
+    || echo -e "\nRemember to pull the latest changes first!" \
     sleep 0.5
-fi
 
 function retrieve_domains {
-    echo -e "\nSearch filter: $time_filter"
+    echo -e "\nRetrieving domains..."
+    echo "Search filter: $time_filter"
     echo "Search terms:"
 
     user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
@@ -198,6 +196,7 @@ function check_toplist {
 
         echo -e "\nTOPLIST MENU"
         echo "$numbered_toplist"
+        echo "*. Add the domain to (white|black)list"
         echo "e. Edit lists"
         echo "r. Run filter again"
         read -r choice
@@ -227,11 +226,11 @@ function check_toplist {
         if [[ "$choice" == 'b' ]]; then
             echo "$chosen_domain" >> "$blacklist_file"
             sort "$blacklist_file" -o "$blacklist_file"
-            echo -e "\nAdded to the blacklist: ${chosen_domain}"
+            echo -e "\nBlacklisted: ${chosen_domain}"
         elif [[ "$choice" == 'w' ]]; then
             echo "$chosen_domain" >> "$whitelist_file"
             sort "$whitelist_file" -o "$whitelist_file"
-            echo -e "\nAdded to the whitelist: ${chosen_domain}"
+            echo -e "\nWhitelisted: ${chosen_domain}"
         else
             echo -e "\nInvalid option."
         fi
@@ -256,14 +255,14 @@ function optimise_blocklist {
         echo -e "\nOPTIMISER MENU"
         echo "Potential optimised entries:"
         echo "$numbered_domains"
-        echo "*. Whitelist the chosen entry"
+        echo "*. Whitelist the entry"
         echo "a. Add all optimised entries"
         read -r choice
 
         if [[ "$choice" =~ ^[0-9]+$ ]]; then
             chosen_domain=$(echo "$numbered_domains" \
                 | awk -v n="$choice" '$1 == n {print $2}')
-            echo -e "\nAdded to the optimiser whitelist: ${chosen_domain}"
+            echo -e "\nWhitelisted: ${chosen_domain}"
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
             continue
@@ -272,7 +271,7 @@ function optimise_blocklist {
             continue
         fi
 
-        echo -e "\nAdded all optimised entries to the blocklist."
+        echo -e "\nAdding optimised entries..."
         cat domains.tmp >> "$raw_file"
         cat domains.tmp >> "$optimised_entries"
         sort -u "$raw_file" -o "$raw_file"
