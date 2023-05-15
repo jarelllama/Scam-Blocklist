@@ -102,7 +102,7 @@ function retrieve_domains {
     done < "$search_terms_file"
 
     if ! [[ -s "$pending_file" ]]; then
-        echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
+        echo -e "\nNo retrieved domains. Try changing VPN servers."
         exit 1
     fi
 
@@ -160,7 +160,7 @@ function filter_pending {
     mv 8.tmp "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
-        echo -e "\nNo pending domains.\n"
+        echo -e "\nNo pending domains."
         exit 0
     fi
 
@@ -184,7 +184,7 @@ function check_toplist {
         if "$unattended"; then
             echo "Domains in toplist:"
             cat in_toplist.tmp
-            echo -e "\nExiting...\n"
+            echo -e "\nExiting..."
             exit 1
         fi
 
