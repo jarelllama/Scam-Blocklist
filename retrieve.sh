@@ -161,18 +161,67 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
 
-    comm -12 "$pending_file" "$toplist_file" | grep -vxFf "$blacklist_file" > in_toplist.tmp
-    if ! [[ -s in_toplist.tmp ]]; then
-        echo -e "\nNo domains found in toplist."
-        return
-    fi
-    
-    echo -e "\n! Domains in toplist:"
-    cat in_toplist.tmp
-    if "$unattended"; then
-        echo -e "\nExiting...\n"
-        exit 1
-    fi
+    check_toplist
+}
+
+function check_toplist {
+    while true; do
+        comm -12 "$pending_file" "$toplist_file" \
+            | grep -vxFf "$blacklist_file" > in_toplist.tmp
+
+        if ! [[ -s in_toplist.tmp ]]; then
+            echo -e "\nNo domains found in toplist."
+            return
+        fi
+
+        echo -e "\nTOPLIST MENU"
+        echo "Domains in toplist:"
+        if "$unattended"; then
+            cat in_toplist.tmp
+            echo -e "\nExiting...\n"
+            exit 1
+        fi
+        numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
+        echo "$numbered_toplist"
+
+        echo -e "\n* w|b. Add the domain to the (white|black)list"
+        echo "e. Edit lists"
+        echo "r. Run filter again"
+        read -r choice
+
+        if [[ "$choice" == 'e' ]]; then
+            echo "Edit lists"
+            echo -e "\nEnter 'x' to go back to the previous menu."
+            source "$edit_script"
+            continue 
+        elif [[ "$choice" == 'r' ]]; then   
+            echo "Run filter again"
+            cp "${pending_file}.bak" "$pending_file"
+            filter_pending
+            exit 0
+        elif ! [[ "$choice" =~ [0-9] ]] \
+            || ! [[ "$choice" =~ [wbWB] ]]; then
+            echo -e "\nInvalid option."
+            continue
+        fi
+
+        chosen_num=$(echo "$choice" | grep -o '[0-9]*' | head -n1)
+        chosen_list=$(echo "$choice" | grep -o '[wbWB]' | head -n1)
+        chosen_domain=$(echo "$numbered_toplist" \
+           | awk -v n="$chosen_num" '$1 == n {print $2}')
+
+        if [[ "$chosen_list" =~ ^[wW]$ ]]; then
+            echo "$chosen_domain" >> "$whitelist_file"
+            sort "$whitelist_file" -o "$whitelist_file"
+            echo -e "\nAdded to the whitelist: ${chosen_domain}"
+        elif [[ "$chosen_list" =~ ^[bB]$ ]]; then
+            echo "$chosen_domain" >> "$blacklist_file"
+            sort "$blacklist_file" -o "$blacklist_file"
+            echo -e "\nAdded to the blacklist: ${chosen_domain}"
+        else
+            echo -e "\nInvalid option."
+        fi
+    done
 }
 
 function optimise_blocklist {
@@ -190,11 +239,11 @@ function optimise_blocklist {
         numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
         echo -e "\nOPTIMISER MENU"
         echo "Potential optimised entries:"
-        echo "${numbered_domains}"
+        echo "$numbered_domains"
 
-        echo -e "\n*. Enter the entry number to whitelist it."
-        echo "a. Add all optimised entries."
-        echo "x. Continue with merging."
+        echo -e "\n*. Whitelist the chosen entry"
+        echo "a. Add all optimised entries"
+        echo "x. Continue with merging"
         read -r choice
 
         [[ "$choice" == 'x' ]] && return
