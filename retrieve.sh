@@ -117,6 +117,7 @@ function filter_pending {
 
     cp 1.tmp "${pending_file}.bak"
 
+    sort 0.5
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
     sleep 0.5
