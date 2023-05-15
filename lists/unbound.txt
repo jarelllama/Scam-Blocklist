@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.035349.2023
-# Last modified: Mon May 15 03:53:49 UTC 2023
+# Version: 05.15.041259.2023
+# Last modified: Mon May 15 04:12:59 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3938
+# Total number of entries: 3939
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -2472,6 +2472,7 @@ local-zone: "oopymjvy.cutundcolor-byinaschmidt.de." always_nxdomain
 local-zone: "opportunityl.com." always_nxdomain
 local-zone: "opt-outfit.com." always_nxdomain
 local-zone: "optimalstyles.com." always_nxdomain
+local-zone: "optimaltackle.com." always_nxdomain
 local-zone: "oquintalfrutaria.com." always_nxdomain
 local-zone: "oralcleaningonline.store." always_nxdomain
 local-zone: "orarang.com." always_nxdomain
