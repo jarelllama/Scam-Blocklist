@@ -48,6 +48,8 @@ function retrieve_domains {
     if [[ -s "$pending_file" ]]; then
         read -rp $'\nThe pending file is not empty. Empty it? (Y/n): ' answer
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+            echo -e "\nEmptied the pending file."
+            sleep 0.5
             > "$pending_file"
         fi
     fi
@@ -347,12 +349,13 @@ function merge_pending {
     exit 0
 }
 
-if [[ "$unattended" ]]; then
+if "$unattended"; then
     echo -e "\nRetrieving domains..."
 else
     echo -e "\nRemember to pull the latest changes beforehand!" 
-    sleep 0.5
 fi
+
+sleep 0.5
 
 "$use_pending_only" || retrieve_domains
 
