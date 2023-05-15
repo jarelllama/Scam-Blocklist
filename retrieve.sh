@@ -45,8 +45,8 @@ while getopts ":dupt:" option; do
 done
 
 function retrieve_domains {
-    if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
-        read -rp $'\nEmpty the pending file? (Y/n): ' answer
+    if [[ -s "$pending_file" ]]; then
+        read -rp $'\nThe pending file is not empty. Empty it? (Y/n): ' answer
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             > "$pending_file"
         fi
@@ -184,38 +184,38 @@ function filter_pending {
 
     sort -u "$pending_file" -o "$pending_file"
 
-    echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
+    echo -e "\nTotal domains retrieved/pending: $(wc -l < ${pending_file})"
 
     # Remove domains already in the blocklist
-    comm -23 1.tmp "$raw_file" > 2.tmp
+    comm -23 "$pending_file" "$raw_file" > 1.tmp
 
-    comm -23 2.tmp "$dead_domains_file" > 3.tmp
+    comm -23 1.tmp "$dead_domains_file" > 2.tmp
 
-    sleep 0.3
+    sleep 0.5
     echo -e "\nFiltering log:"
 
-    grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+    grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
     cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
-    comm -23 3.tmp whitelisted.tmp > 4.tmp
+    comm -23 2.tmp whitelisted.tmp > 3.tmp
 
-    grep -E '\.(gov|edu)(\.[a-z]{2})?$' 4.tmp | awk '{print $0 " (TLD)"}'
-    grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 4.tmp > 5.tmp
+    grep -E '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp | awk '{print $0 " (TLD)"}'
+    grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp > 4.tmp
 
     # This regex matches valid domains. This includes puny code TLDs (.xn--*)
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp | awk '{print $0 " (invalid)"}'
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 5.tmp > 6.tmp
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 4.tmp | awk '{print $0 " (invalid)"}'
+    grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 4.tmp > 5.tmp
 
     > redundant.tmp
     while read -r entry; do
-        grep "\.${entry}$" 6.tmp >> redundant.tmp
+        grep "\.${entry}$" 5.tmp >> redundant.tmp
     done < "$optimised_entries"
 
     "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
-    grep -vxFf redundant.tmp 6.tmp > 7.tmp
+    grep -vxFf redundant.tmp 5.tmp > 6.tmp
 
     export debug="$debug"
     > dead.tmp
-    cat 7.tmp | xargs -I{} -P6 bash -c '
+    cat 6.tmp | xargs -I{} -P6 bash -c '
         domain="$1"
         if dig @1.1.1.1 "$domain" | grep -Fq "NXDOMAIN"; then
             echo "$domain" >> dead.tmp
@@ -224,9 +224,9 @@ function filter_pending {
     ' -- {}
 
     # It appears that the dead file isn't always sorted
-    grep -vxFf dead.tmp 7.tmp > 8.tmp
+    grep -vxFf dead.tmp 6.tmp > 7.tmp
 
-    mv 8.tmp "$pending_file"
+    mv 7.tmp "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
         echo -e "\nNo pending domains."
