@@ -19,4 +19,4 @@ jobs:
           git config user.name '${{ vars.GIT_USERNAME }}'
 
       - name: retrieve.sh
-        run: bash retrieve.sh u
+        run: bash retrieve.sh -u
