@@ -308,8 +308,6 @@ function optimise_blocklist {
 
 function merge_pending {
     echo -e "\nMerging with blocklist..."
-    
-    "$unattended" && sleep 0.5
 
     cp "$raw_file" "${raw_file}.bak"
 
@@ -319,7 +317,7 @@ function merge_pending {
 
     sort -u "$raw_file" -o "$raw_file"
 
-    "$unattended" || optimise_blocklist
+    "$unattended" && sleep 0.5 || optimise_blocklist
 
     num_after=$(wc -l < "$raw_file")
     
