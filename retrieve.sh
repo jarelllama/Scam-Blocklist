@@ -122,6 +122,7 @@ function check_toplist {
 
         if "$unattended"; then
             echo "Domains in toplist:"
+            sleep 0.5
             cat in_toplist.tmp
             echo -e "\nExiting..."
             exit 1
@@ -262,7 +263,7 @@ function optimise_blocklist {
         numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
 
         echo -e "\nOPTIMISER MENU"
-        sleep 0.2
+        sleep 0.3
         echo "Potential optimised entries:"
         echo "$numbered_domains"
         echo "*. Whitelist the entry"
@@ -287,7 +288,7 @@ function optimise_blocklist {
         sort -u "$raw_file" -o "$raw_file"
         sort "$optimised_entries" -o "$optimised_entries"
 
-        sleep 0.5
+        sleep 0.3
             
         echo "Removing redundant entries..."
         while read -r entry; do
@@ -296,7 +297,7 @@ function optimise_blocklist {
         grep -vxFf redundant.tmp "$raw_file" > raw.tmp
         mv raw.tmp "$raw_file"
             
-        sleep 0.5
+        sleep 0.3
             
         echo "Merging..."
         return
@@ -304,6 +305,8 @@ function optimise_blocklist {
 }
 
 function merge_pending {
+    sleep 0.5
+
     cp "$raw_file" "${raw_file}.bak"
 
     num_before=$(wc -l < "$raw_file")
@@ -318,6 +321,7 @@ function merge_pending {
     
     num_added=$((num_after - num_before))
 
+    sleep 0.3
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $num_added"
     echo "Total domains after: $num_after"
@@ -331,6 +335,7 @@ function merge_pending {
         new_count=$((previous_count + num_added))
         sed -i "10s/.*/${new_count}/" "$stats_file"
     else
+        sleep 0.3
         read -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
@@ -339,8 +344,9 @@ function merge_pending {
         fi
     fi
 
+    sleep 0.3
     echo -e "\nPushing changes...\n"
-    sleep 0.5
+    sleep 0.3
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
@@ -357,7 +363,6 @@ filter_pending
 
 if "$unattended"; then
     echo -e "\nMerging with blocklist..."
-    sleep 0.5
     merge_pending
 fi
 
@@ -377,7 +382,6 @@ while true; do
                 continue
             fi
             echo -e "\nMerging with blocklist..."
-            sleep 0.5
             merge_pending
             ;;
         e)
