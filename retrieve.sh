@@ -195,6 +195,7 @@ function check_toplist {
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
 
         echo -e "\nTOPLIST MENU"
+        sleep 0.5
         echo "$numbered_toplist"
         echo "*. Blacklist/whitelist the domain"
         echo "e. Edit lists"
@@ -256,6 +257,7 @@ function optimise_blocklist {
         numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
 
         echo -e "\nOPTIMISER MENU"
+        sleep 0.5
         echo "Potential optimised entries:"
         echo "$numbered_domains"
         sleep 0.5
@@ -355,6 +357,7 @@ fi
 
 while true; do
     echo -e "\nPENDING DOMAINS MENU"
+    sleep 0.5
     echo "m. Merge with blocklist"
     echo "e. Edit lists"
     echo "r. Run filter again"
