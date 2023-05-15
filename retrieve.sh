@@ -18,29 +18,26 @@ function on_exit {
     find . -maxdepth 1 -type f -name '*.tmp' -delete
 }
 
-function pass_arguments {
-    debug='false'
-    unattended='false'
-    use_pending_only='false'
-    time_filter='a'
-
-    for arg in "$@"; do
-        if [[ "$arg" == 'd' ]]; then
-            debug='true'
-        elif [[ "$arg" == 'p' ]]; then
-            use_pending_only='true'
-        elif [[ "$arg" == 'u' ]]; then
-            unattended='true'
-            time_filter='y'
-        else
-            time_filter="$arg"
-        fi
-    done
-}
-
 trap 'on_exit' EXIT
 
-pass_arguments
+debug='false'
+unattended='false'
+use_pending_only='false'
+time_filter='a'
+
+for arg in "$@"; do
+    if [[ "$arg" == 'd' ]]; then
+        debug='true'
+    elif [[ "$arg" == 'p' ]]; then
+        use_pending_only='true'
+    elif [[ "$arg" == 'u' ]]; then
+        unattended='true'
+        time_filter='y'
+    else
+        time_filter="$arg"
+    fi
+done
+
 
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
     read -rp $'\nEmpty the pending file? (Y/n): ' answer
