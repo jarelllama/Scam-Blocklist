@@ -227,20 +227,15 @@ while true; do
 
     case "$choice" in
         b)
-            edit_blocklist
-            ;;
+            edit_blocklist ;;
         w)
-            edit_whitelist
-            ;;
+            edit_whitelist ;;
         l)
-            edit_blacklist
-            ;;
+            edit_blacklist ;;
         c)
-            check_entry
-            ;;
+            check_entry ;;
         p)
-            push_changes
-            ;;
+            push_changes ;;
         x)
             # Check if the script was sourced by another script
             [[ "${#BASH_SOURCE[@]}" -gt 1 && "${BASH_SOURCE[0]}" != "${0}" ]] \
@@ -249,7 +244,6 @@ while true; do
             exit 0  
             ;;
         *)
-            echo -e "\nInvalid option."  
-            ;;
+            echo -e "\nInvalid option." ;;
     esac
 done
