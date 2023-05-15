@@ -53,8 +53,8 @@ function retrieve_domains {
         read -rp $'\nThe pending file is not empty. Empty it? (Y/n): ' answer
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             echo -e "\nEmptied the pending file."
-            sleep 0.5
             > "$pending_file"
+            sleep 0.5
         fi
     fi
 
@@ -307,6 +307,8 @@ function optimise_blocklist {
 }
 
 function merge_pending {
+    echo -e "\nMerging with blocklist..."
+    
     "$unattended" && sleep 0.5
 
     cp "$raw_file" "${raw_file}.bak"
@@ -370,9 +372,7 @@ sleep 0.5
 
 filter_pending
 
-"$unattended" \
-    && echo -e "\nMerging with blocklist..." \
-    && merge_pending
+"$unattended" && merge_pending
 
 while true; do
     echo -e "\nPENDING DOMAINS MENU"
@@ -384,7 +384,6 @@ while true; do
     read -r choice
     case "$choice" in
         m)
-            echo -e "\nMerging with blocklist..."
             merge_pending
             ;;
         e)
