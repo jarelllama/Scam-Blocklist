@@ -111,6 +111,8 @@ function retrieve_domains {
 }
 
 function check_toplist {
+    sleep 0.5
+
     while true; do
         comm -12 "$pending_file" "$toplist_file" \
             | grep -vxFf "$blacklist_file" > in_toplist.tmp
@@ -174,7 +176,6 @@ function check_toplist {
         else
             echo -e "\nInvalid option."
         fi
-        sleep 0.5
     done
 }
 
@@ -243,7 +244,6 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
 
-    sleep 0.5
     check_toplist
 }
 
