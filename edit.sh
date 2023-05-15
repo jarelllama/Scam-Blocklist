@@ -7,7 +7,12 @@ toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
 optimised_entries="data/optimised_entries.txt"
 
-trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
+function on_exit {
+    echo -e "\nExiting...\n"
+    find . -maxdepth 1 -type f -name '*.tmp' -delete
+}
+
+trap 'on_exit' EXIT
 
 function format_entry() {
     remove_entry=0
