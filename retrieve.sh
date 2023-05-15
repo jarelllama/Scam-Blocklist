@@ -116,8 +116,7 @@ function filter_pending {
 
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
-    sleep 1
-
+    sleep 0.5
     echo -e "\nFiltering..."
 
     # Remove domains already in the blocklist
@@ -125,6 +124,7 @@ function filter_pending {
 
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
 
+    sleep 0.5
     echo -e "\nFiltering log:"
 
     grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
@@ -167,6 +167,7 @@ function filter_pending {
     fi
 
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
+    sleep 0.5
     echo "Domains:"
     cat "$pending_file"
 
