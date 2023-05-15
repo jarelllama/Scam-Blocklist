@@ -266,7 +266,7 @@ function optimise_blocklist {
         elif ! [[ "$choice" == 'a' ]]; then
             echo -e "\nInvalid option."
             continue
-        if
+        fi
 
         echo -e "\nAdded all optimised entries to the blocklist."
         cat domains.tmp >> "$raw_file"
