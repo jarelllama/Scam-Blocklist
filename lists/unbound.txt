@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.14.234036.2023
-# Last modified: Sun May 14 23:40:36 UTC 2023
+# Version: 05.15.002729.2023
+# Last modified: Mon May 15 00:27:29 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3923
+# Total number of entries: 3924
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1996,6 +1996,7 @@ local-zone: "ludyfit.com." always_nxdomain
 local-zone: "luebits.com." always_nxdomain
 local-zone: "luenx.com." always_nxdomain
 local-zone: "luffglasses.com." always_nxdomain
+local-zone: "luiow.shop." always_nxdomain
 local-zone: "lukeshoe.com." always_nxdomain
 local-zone: "lunacrystalusa.myshopify.com." always_nxdomain
 local-zone: "lusibikini.com." always_nxdomain
