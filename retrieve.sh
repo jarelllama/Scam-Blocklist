@@ -40,7 +40,6 @@ done
 
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
     read -rp $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
-    echo
     if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
         > "$pending_file"
     fi
