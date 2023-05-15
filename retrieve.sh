@@ -201,15 +201,18 @@ function optimise_blocklist {
 
         if [[ "$choice" == 'a' ]]; then
             echo -e "\nAdding all optimised entries to the blocklist..."
-            echo "Merging..."
             cat domains.tmp >> "$raw_file"
             cat domains.tmp >> "$optimised_entries"
             sort -u "$raw_file" -o "$raw_file"
             sort "$optimised_entries" -o "$optimised_entries"
             
-            #TODO: remove redundant entries from blocklist
-            #       add separate commit
+            while read -r entry; do
+                grep "\.${entry}$" "$raw_file" >> redundant.tmp
+            done < domains.tmp
+            grep -vxFf redundant.tmp "$raw_file" raw.tmp
+            mv raw.tmp "$raw_file"
             
+            echo "Merging..."
             return
         elif ! [[ "$choice" =~ ^[0-9]+$ ]]; then
             echo -e "\nInvalid option."
