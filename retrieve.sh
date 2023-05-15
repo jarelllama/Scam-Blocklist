@@ -50,6 +50,7 @@ if "$unattended"; then
     echo -e "\nRetrieving domains..."
 else
     echo -e "\nRemember to pull the latest changes first!"
+    sleep 0.5
 fi
 
 function retrieve_domains {
@@ -105,13 +106,9 @@ function retrieve_domains {
         echo -e "\nNo retrieved domains. Try changing VPN servers."
         exit 1
     fi
-
-    sleep 1
 }
 
 function filter_pending {
-    echo -e "\nFiltering..."
-
     tr '[:upper:]' '[:lower:]' < "$pending_file" > 1.tmp
 
     sort -u 1.tmp -o 1.tmp
@@ -119,6 +116,10 @@ function filter_pending {
     cp 1.tmp "${pending_file}.bak"
 
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
+
+    sleep 1
+
+    echo -e "\nFiltering..."
 
     # Remove domains already in the blocklist
     comm -23 1.tmp "$raw_file" > 2.tmp
