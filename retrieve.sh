@@ -116,7 +116,7 @@ function filter_pending {
 
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
 
-    echo -e "\nDomains removed:"
+    echo -e "\nDomains filtered:"
 
     grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
     cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
