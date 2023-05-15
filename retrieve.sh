@@ -44,19 +44,14 @@ while getopts ":dupt:" option; do
     esac
 done
 
-if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
-    read -rp $'\nEmpty the pending file? (Y/n): ' answer
-    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
-        > "$pending_file"
-    fi
-fi
-
-if ! "$unattended"; then
-    echo -e "\nRemember to pull the latest changes beforehand!"
-    sleep 0.5
-fi
-
 function retrieve_domains {
+    if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
+        read -rp $'\nEmpty the pending file? (Y/n): ' answer
+        if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+            > "$pending_file"
+        fi
+    fi
+
     echo -e "\nSearch filter: $time_filter"
     echo "Search terms:"
 
@@ -357,14 +352,17 @@ function merge_pending {
     exit 0
 }
 
+"$unattended" \
+    || echo -e "\nRemember to pull the latest changes beforehand!" \
+    && sleep 0.5
+
 "$use_pending_only" || retrieve_domains
 
 filter_pending
 
-if "$unattended"; then
-    echo -e "\nMerging with blocklist..."
-    merge_pending
-fi
+"$unattended" \
+    && echo -e "\nMerging with blocklist..." \
+    && merge_pending
 
 while true; do
     echo -e "\nPENDING DOMAINS MENU"
@@ -374,13 +372,11 @@ while true; do
     echo "r. Run filter again"
     echo "x. Save pending and exit"
     read -r choice
-
     case "$choice" in
         m)
-            if [[ -s in_toplist.tmp ]]; then
-                echo -e "\nDomains found in the toplist. Not merging."
-                continue
-            fi
+            [[ -s in_toplist.tmp ]] \
+                && echo -e "\nDomains found in the toplist. Not merging." \
+                && continue
             echo -e "\nMerging with blocklist..."
             merge_pending
             ;;
@@ -394,10 +390,8 @@ while true; do
             filter_pending
             ;;
         x)
-            exit 0
-            ;;
+            exit 0 ;;
         *)
-            echo -e "\nInvalid option."
-            ;;
+            echo -e "\nInvalid option." ;;
     esac
 done
