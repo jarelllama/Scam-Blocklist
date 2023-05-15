@@ -143,7 +143,11 @@ jobs:
           > check.tmp
           while read -r entry; do
             grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> check.tmp || true
+              #&& echo "$entry" >> "${{ vars.OPTIMISED_ENTRIES_FILE }}" \
+              #|| true
           done < "${{ vars.RAW_FILE }}"
+          
+          # todo: add variable, sort, commit, test
           
           [[ -s check.tmp ]] || exit 0
           echo -e "\nRedundant entries found:"
