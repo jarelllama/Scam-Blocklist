@@ -124,7 +124,7 @@ function edit_whitelist {
 
     sort "$whitelist_file" -o "$whitelist_file"
     
-    grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+    grep -Ff "$whitelist_file" "$raw_file" | grep -vxFf "$blacklist_file" > whitelisted.tmp
 
     [[ -s whitelisted.tmp ]] || return
     sleep 0.3
