@@ -101,10 +101,9 @@ function retrieve_domains {
         echo "--------------------------------------"
     done < "$search_terms_file"
 
-    if ! [[ -s "$pending_file" ]]; then
-        echo -e "\nNo domains retrieved."
-        exit 1
-    fi
+    [[ -s "$pending_file" ]]; \
+        || echo -e "\nNo domains retrieved." \
+        && exit 1
 }
 
 function check_toplist {
@@ -234,7 +233,7 @@ function filter_pending {
     fi
 
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
-    sleep 0.3
+    sleep 0.5
     echo "Domains:"
     cat "$pending_file"
 
