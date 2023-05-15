@@ -193,7 +193,7 @@ function check_toplist {
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
         echo "$numbered_toplist"
         echo "--------------------------------------"
-        echo -e "\n* w|b. (White|Black)list the chosen domain"
+        echo "* w|b. (White|Black)list the chosen domain"
         echo "e. Edit lists"
         echo "r. Run filter again"
         read -r choice
@@ -250,7 +250,7 @@ function optimise_blocklist {
         echo "Potential optimised entries:"
         echo "$numbered_domains"
         echo "--------------------------------------"
-        echo -e "\n*. Whitelist the chosen entry"
+        echo "*. Whitelist the chosen entry"
         echo "a. Add all optimised entries"
         read -r choice
 
@@ -330,7 +330,7 @@ function merge_pending {
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
         "$optimised_entries" "$optimiser_whitelist"
     git commit -m "$commit_msg"
-    git push
+    git push -q
 
     exit 0
 }
