@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.031915.2023
-# Last modified: Mon May 15 03:19:15 UTC 2023
+# Version: 05.15.032148.2023
+# Last modified: Mon May 15 03:21:48 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3934
+# Total number of entries: 3935
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -924,6 +924,7 @@ local-zone: "dolomiteoutlet.com." always_nxdomain
 local-zone: "domitri.co." always_nxdomain
 local-zone: "dommarzen-ns.pl." always_nxdomain
 local-zone: "donnasharpbed.com." always_nxdomain
+local-zone: "dooliverseus.com." always_nxdomain
 local-zone: "dooyshy.com." always_nxdomain
 local-zone: "dopemelaninart.com." always_nxdomain
 local-zone: "dorapet.shop." always_nxdomain
