@@ -49,13 +49,13 @@ if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
     fi
 fi
 
-if ! [[ "$unattended" ]]; then
+if ! "$unattended"; then
     echo -e "\nRemember to pull the latest changes beforehand!"
     sleep 0.5
 fi
 
 function retrieve_domains {
-    echo -e "\nRetrieving domains..."
+    echo -e "\nRetrieving domains...\n"
     echo "Search filter: $time_filter"
     echo "Search terms:"
 
