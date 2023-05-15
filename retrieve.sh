@@ -25,17 +25,23 @@ unattended='false'
 use_pending_only='false'
 time_filter='a'
 
-for arg in "$@"; do
-    if [[ "$arg" == 'd' ]]; then
-        debug='true'
-    elif [[ "$arg" == 'p' ]]; then
-        use_pending_only='true'
-    elif [[ "$arg" == 'u' ]]; then
-        unattended='true'
-        time_filter='y'
-    else
-        time_filter="$arg"
-    fi
+while getopts ":dupt:" option; do
+    case $option in
+        d)
+            debug='true' ;;
+        u)
+            unattended='true'
+            time_filter='y'
+            ;;
+        p)
+            use_pending_only='true' ;;
+        t)
+            time_filter="$OPTARG" ;;
+        \?)
+            echo "Invalid option: -$OPTARG" ;;
+        :)
+            echo "Option -$OPTARG requires an argument" ;;
+    esac
 done
 
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
