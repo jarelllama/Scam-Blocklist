@@ -39,6 +39,7 @@ function format_entry() {
 
 function edit_blocklist {
     echo "BLOCKLIST"
+    sleep 0.3
 
     read -rp $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
@@ -91,6 +92,7 @@ function edit_blocklist {
 
 function edit_whitelist {
     echo "WHITELIST"
+    sleep 0.3
 
     read -rp $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
@@ -142,6 +144,7 @@ function edit_whitelist {
 
 function edit_blacklist {
     echo "BLACKLIST"
+    sleep 0.3
 
     read -rp $'Enter the new entry (add \'-\' to remove entry):\n' entry
 
