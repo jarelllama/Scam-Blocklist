@@ -192,17 +192,17 @@ function check_toplist {
             exit 1
         fi
 
-        echo -e "\nTOPLIST MENU"
-        echo "Domains in toplist:"
+        echo -e "\nDomains in toplist:"
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
         echo "$numbered_toplist"
+        echo "TOPLIST MENU"
         echo "*. Select a domain"
         echo "e. Edit lists"
         echo "r. Run filter again"
         read -r choice
 
         if [[ "$choice" == 'e' ]]; then
-            echo -e "\nEnter 'x' to go back to the previous menu."
+            echo -e "\n\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
             continue 
         elif [[ "$choice" == 'r' ]]; then   
