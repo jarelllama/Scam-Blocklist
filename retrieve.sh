@@ -347,6 +347,7 @@ function merge_pending {
     fi
 
     sleep 0.3
+
     echo -e "\nPushing changes...\n"
     sleep 0.3
 
