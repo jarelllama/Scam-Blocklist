@@ -76,7 +76,7 @@ function retrieve_domains {
             | sort -u \
             | grep -vxF 'www.google.com')
 
-        term=$(echo "$term" | cut -c 1-350)
+        term=$(echo "$term" | cut -c 1-300)
         echo "${term_num}. ${term}..."
         ((term_num++))
 
@@ -123,7 +123,7 @@ function filter_pending {
 
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
 
-    echo -e "\nDomains filtered:"
+    echo -e "\nFiltering log:"
 
     grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
     cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
@@ -199,12 +199,11 @@ function check_toplist {
         read -r choice
 
         if [[ "$choice" == 'e' ]]; then
-            echo "Edit lists"
             echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
             continue 
         elif [[ "$choice" == 'r' ]]; then   
-            echo "Run filter again"
+            echo -e "\nRunning filter again..."
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             exit 0
@@ -318,6 +317,7 @@ function merge_pending {
         read -n1 -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
         echo
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+            echo -e "\nPushing changes..."
             commit_msg="Manual domain retrieval"
         else
             exit 0
@@ -358,17 +358,16 @@ while true; do
                 echo -e "\nDomains found in the toplist. Not merging."
                 continue
             fi
-            echo "Merge with blocklist"
+            echo -e "\nMerging with blocklist..."
             merge_pending
             ;;
         e)
             # Call the editing script
-            echo "Edit lists"
             echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
             ;;
         r)
-            echo "Run filter again"
+            echo -e "\nRunning filter again..."
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             ;;
