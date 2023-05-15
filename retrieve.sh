@@ -257,7 +257,7 @@ function optimise_blocklist {
             while read -r entry; do
                 grep "\.${entry}$" "$raw_file" >> redundant.tmp
             done < domains.tmp
-            grep -vxFf redundant.tmp "$raw_file" raw.tmp
+            grep -vxFf redundant.tmp "$raw_file" > raw.tmp
             mv raw.tmp "$raw_file"
             
             echo "Merging..."
