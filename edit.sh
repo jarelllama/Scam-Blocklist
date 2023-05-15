@@ -183,7 +183,7 @@ function push_changes {
 
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
     git commit -m "Update list(s)"
-    git push
+    git push -q
 }
 
 while true; do
