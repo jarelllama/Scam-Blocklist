@@ -39,7 +39,7 @@ for arg in "$@"; do
 done
 
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
-    read -n1 -rp $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
+    read -rp $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
     echo
     if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
         > "$pending_file"
@@ -319,10 +319,10 @@ function merge_pending {
         new_count=$((previous_count + num_added))
         sed -i "10s/.*/${new_count}/" "$stats_file"
     else
-        read -n1 -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
+        read -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
         echo
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
-            echo -e "\nPushing changes..."
+            echo "Pushing changes..."
             commit_msg="Manual domain retrieval"
         else
             exit 0
