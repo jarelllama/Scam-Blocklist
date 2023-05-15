@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.033856.2023
-# Last modified: Mon May 15 03:38:56 UTC 2023
+# Version: 05.15.035349.2023
+# Last modified: Mon May 15 03:53:49 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3936
+# Total number of entries: 3937
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -3825,6 +3825,7 @@ address=/worldbestpetsupplies.com/#
 address=/worldwebworks.cz/#
 address=/worth2own.com/#
 address=/wowele.com/#
+address=/wq-scooter.com/#
 address=/wreio.com/#
 address=/wrepod.com/#
 address=/wstqgzc.carniceriacharcuterialucas.es/#
