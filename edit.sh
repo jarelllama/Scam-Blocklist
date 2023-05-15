@@ -184,6 +184,8 @@ function push_changes {
     git add "$raw_file" "$whitelist_file" "$blacklist_file"
     git commit -m "Update list(s)"
     git push -q
+
+    exit 0
 }
 
 while true; do
@@ -211,7 +213,6 @@ while true; do
             ;;
         p)
             push_changes
-            exit 0
             ;;
         x)
             # Check if the script was sourced by another script
