@@ -302,6 +302,7 @@ function optimise_blocklist {
         sleep 0.3
             
         echo "Merging..."
+        sleep 0.3
         return
     done
 }
@@ -323,7 +324,6 @@ function merge_pending {
     
     num_added=$((num_after - num_before))
 
-    sleep 0.3
     echo -e "\nTotal domains before: $num_before"
     echo "Total domains added: $num_added"
     echo "Total domains after: $num_after"
