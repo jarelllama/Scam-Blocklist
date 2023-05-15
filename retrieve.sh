@@ -71,9 +71,9 @@ function retrieve_domains {
         # gsub replaces consecutive non-alphanumeric characters with a single plus sign
         encoded_term=$(echo "$term" | awk '{gsub(/[^[:alnum:]]+/,"+"); print}')
 
-        google_search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time_filter}"
+        search_url="https://www.google.com/search?q=\"${encoded_term}\"&num=100&filter=0&tbs=qdr:${time_filter}"
 
-        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$google_search_url" \
+        domains=$(curl -s --max-redirs 0 -H "User-Agent: $user_agent" "$search_url" \
             | grep -oE '<a href="http\S+"' \
             | awk -F/ '{print $3}' \
             | sort -u \
@@ -119,11 +119,9 @@ function filter_pending {
 
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
-    sleep 0.5
+    sleep 1
 
     echo -e "\nFiltering..."
-    
-    sleep 0.5
 
     # Remove domains already in the blocklist
     comm -23 1.tmp "$raw_file" > 2.tmp
