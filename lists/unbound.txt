@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.033856.2023
-# Last modified: Mon May 15 03:38:56 UTC 2023
+# Version: 05.15.035349.2023
+# Last modified: Mon May 15 03:53:49 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3937
+# Total number of entries: 3938
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -3826,6 +3826,7 @@ local-zone: "worldbestpetsupplies.com." always_nxdomain
 local-zone: "worldwebworks.cz." always_nxdomain
 local-zone: "worth2own.com." always_nxdomain
 local-zone: "wowele.com." always_nxdomain
+local-zone: "wq-scooter.com." always_nxdomain
 local-zone: "wreio.com." always_nxdomain
 local-zone: "wrepod.com." always_nxdomain
 local-zone: "wstqgzc.carniceriacharcuterialucas.es." always_nxdomain
