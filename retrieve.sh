@@ -44,11 +44,9 @@ while getopts ":dupt:" option; do
     esac
 done
 
-if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
+if [[ -s "$pending_file" && ! "$use_pending_only" ]]; then
     read -rp $'\nEmpty the pending file? (Y/n): ' answer
-    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
-        > "$pending_file"
-    fi
+    [[ "$answer" =~ ^[Yy]? ]] && > "$pending_file"
 fi
 
 if ! "$unattended"; then
