@@ -51,7 +51,7 @@ done
 function retrieve_domains {
     if [[ -s "$pending_file" ]]; then
         read -rp $'\nThe pending file is not empty. Empty it? (Y/n): ' answer
-        if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+        if [[ "$answer" =~ ^[Yy]$ || -z "$answer" ]]; then
             echo -e "\nEmptied the pending file."
             > "$pending_file"
             sleep 0.5
@@ -342,7 +342,7 @@ function merge_pending {
     else
         sleep 0.5
         read -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
-        if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+        if [[ "$answer" =~ ^[Yy]$ || -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
         else
             exit 0
