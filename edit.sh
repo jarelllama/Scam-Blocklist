@@ -107,7 +107,7 @@ function edit_whitelist {
     fi       
 
     # Check if the entry contains whitespaces or is empty
-    if [[ "$entry" =~ [[:space:]] ]] || [[ -z "$entry" ]]; then
+    if [[ "$entry" =~ [[:space:]] || -z "$entry" ]]; then
         echo -e "\nInvalid entry. Not added."
         return
     fi
