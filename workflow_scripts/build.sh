@@ -17,9 +17,8 @@ awk -v before="$before" -v after="$after" '{print before $0 after}' "$raw_file" 
 
 sort "${path}.tmp" -o "${path}.tmp"
 
-if [[ "$syntax" == 'Unbound' ]]; then
-    sed -i '1s/^/server:\n/' "${path}.tmp"
-fi
+[[ "$syntax" == 'Unbound' ]] \
+    && sed -i '1s/^/server:\n/' "${path}.tmp"
 
 grep -vE "^${comment}" "$path" > previous.tmp
 
