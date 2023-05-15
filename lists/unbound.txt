@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.032148.2023
-# Last modified: Mon May 15 03:21:48 UTC 2023
+# Version: 05.15.033856.2023
+# Last modified: Mon May 15 03:38:56 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3935
+# Total number of entries: 3937
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -2310,6 +2310,7 @@ local-zone: "neseten.shop." always_nxdomain
 local-zone: "nestilin.com." always_nxdomain
 local-zone: "netelar.shop." always_nxdomain
 local-zone: "neueperio.de." always_nxdomain
+local-zone: "neutraln.com." always_nxdomain
 local-zone: "nevaehfitness.store." always_nxdomain
 local-zone: "nevoplus.com." always_nxdomain
 local-zone: "new-climbing.com." always_nxdomain
@@ -2446,6 +2447,7 @@ local-zone: "ondutyearth.com." always_nxdomain
 local-zone: "onefoyou.com." always_nxdomain
 local-zone: "oneiisa.com." always_nxdomain
 local-zone: "oneminimals.com." always_nxdomain
+local-zone: "onenali.shop." always_nxdomain
 local-zone: "oneshoes.best." always_nxdomain
 local-zone: "onethink.shop." always_nxdomain
 local-zone: "onfither.nl." always_nxdomain
