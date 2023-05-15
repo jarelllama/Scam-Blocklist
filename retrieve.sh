@@ -170,7 +170,7 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
 
-    sleep 0.5
+    sleep 1
 
     check_toplist
 }
