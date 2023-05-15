@@ -166,14 +166,14 @@ function check_toplist {
 
         if [[ "$choice" == 'b' ]]; then
             echo "$chosen_domain" >> "$blacklist_file"
-            sort "$blacklist_file" -o "$blacklist_file"
+            sort -u "$blacklist_file" -o "$blacklist_file"
             echo -e "\nBlacklisted: ${chosen_domain}"
             echo
         elif [[ "$choice" == 'w' ]]; then
             echo "$chosen_domain" >> "$whitelist_file"
-            sort "$whitelist_file" -o "$whitelist_file"
+            sort -u "$whitelist_file" -o "$whitelist_file"
             echo -e "\nWhitelisted: ${chosen_domain}"
-            echo "Run the filtering again to apply whitelist change."
+            echo "Run the filtering again to apply changes."
         else
             echo -e "\nInvalid option."
         fi
