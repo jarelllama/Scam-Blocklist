@@ -13,7 +13,12 @@ optimiser_whitelist="data/optimiser_whitelist.txt"
 stats_file="data/stats.txt"
 edit_script="edit.sh"
 
-trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
+function on_exit {
+    echo -e "\nExiting...\n"
+    find . -maxdepth 1 -type f -name '*.tmp' -delete
+}
+
+trap 'on_exit' EXIT
 
 debug='false'
 unattended='false'
@@ -100,6 +105,8 @@ function retrieve_domains {
         echo -e "\nNo retrieved domains. Try changing VPN servers.\n"
         exit 1
     fi
+
+    sleep 1
 }
 
 function filter_pending {
@@ -185,7 +192,7 @@ function check_toplist {
         echo "Domains in toplist:"
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
         echo "$numbered_toplist"
-
+        echo "--------------------------------------"
         echo -e "\n* w|b. (White|Black)list the chosen domain"
         echo "e. Edit lists"
         echo "r. Run filter again"
@@ -242,23 +249,28 @@ function optimise_blocklist {
         echo -e "\nOPTIMISER MENU"
         echo "Potential optimised entries:"
         echo "$numbered_domains"
-
+        echo "--------------------------------------"
         echo -e "\n*. Whitelist the chosen entry"
         echo "a. Add all optimised entries"
         read -r choice
 
         if [[ "$choice" == 'a' ]]; then
-            echo -e "\nAdding all optimised entries to the blocklist..."
+            echo -e "\nAdded all optimised entries to the blocklist."
             cat domains.tmp >> "$raw_file"
             cat domains.tmp >> "$optimised_entries"
             sort -u "$raw_file" -o "$raw_file"
             sort "$optimised_entries" -o "$optimised_entries"
             
+            sleep 0.5
+            
+            echo "Removing redundant entries..."
             while read -r entry; do
                 grep "\.${entry}$" "$raw_file" >> redundant.tmp
             done < domains.tmp
             grep -vxFf redundant.tmp "$raw_file" > raw.tmp
             mv raw.tmp "$raw_file"
+            
+            sleep 0.5
             
             echo "Merging..."
             return
@@ -268,7 +280,7 @@ function optimise_blocklist {
         fi
 
         chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
-        echo -e "\nAdded '${chosen_domain}' to the whitelist."
+        echo -e "\nAdded to the optimiser whitelist: ${chosen_domain}"
         echo "$chosen_domain" >> "$optimiser_whitelist"
         sort "$optimiser_whitelist" -o "$optimiser_whitelist"
     done
