@@ -209,6 +209,7 @@ function check_toplist {
             continue 
         elif [[ "$choice" == 'r' ]]; then   
             echo -e "\nRunning filter again..."
+            sleep 0.5
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             exit 0
@@ -336,6 +337,7 @@ function merge_pending {
     fi
 
     echo -e "\nPushing changes...\n"
+    sleep 0.5
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
@@ -352,6 +354,7 @@ filter_pending
 
 if "$unattended"; then
     echo -e "\nMerging with blocklist..."
+    sleep 0.5
     merge_pending
 fi
 
@@ -371,6 +374,7 @@ while true; do
                 continue
             fi
             echo -e "\nMerging with blocklist..."
+            sleep 0.5
             merge_pending
             ;;
         e)
@@ -380,6 +384,7 @@ while true; do
             ;;
         r)
             echo -e "\nRunning filter again..."
+            sleep 0.5
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             ;;
