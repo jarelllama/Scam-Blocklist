@@ -257,35 +257,36 @@ function optimise_blocklist {
         echo "a. Add all optimised entries"
         read -r choice
 
-        if [[ "$choice" == 'a' ]]; then
-            echo -e "\nAdded all optimised entries to the blocklist."
-            cat domains.tmp >> "$raw_file"
-            cat domains.tmp >> "$optimised_entries"
-            sort -u "$raw_file" -o "$raw_file"
-            sort "$optimised_entries" -o "$optimised_entries"
-            
-            sleep 0.5
-            
-            echo "Removing redundant entries..."
-            while read -r entry; do
-                grep "\.${entry}$" "$raw_file" >> redundant.tmp
-            done < domains.tmp
-            grep -vxFf redundant.tmp "$raw_file" > raw.tmp
-            mv raw.tmp "$raw_file"
-            
-            sleep 0.5
-            
-            echo "Merging..."
-            return
-        elif ! [[ "$choice" =~ ^[0-9]+$ ]]; then
+        if [[ "$choice" =~ ^[0-9]+$ ]]; then
+            chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
+            echo -e "\nAdded to the optimiser whitelist: ${chosen_domain}"
+            echo "$chosen_domain" >> "$optimiser_whitelist"
+            sort "$optimiser_whitelist" -o "$optimiser_whitelist"
+            continue
+        elif ! [[ "$choice" == 'a' ]]; then
             echo -e "\nInvalid option."
             continue
-        fi
+        if
 
-        chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
-        echo -e "\nAdded to the optimiser whitelist: ${chosen_domain}"
-        echo "$chosen_domain" >> "$optimiser_whitelist"
-        sort "$optimiser_whitelist" -o "$optimiser_whitelist"
+        echo -e "\nAdded all optimised entries to the blocklist."
+        cat domains.tmp >> "$raw_file"
+        cat domains.tmp >> "$optimised_entries"
+        sort -u "$raw_file" -o "$raw_file"
+        sort "$optimised_entries" -o "$optimised_entries"
+
+        sleep 0.5
+            
+        echo "Removing redundant entries..."
+        while read -r entry; do
+            grep "\.${entry}$" "$raw_file" >> redundant.tmp
+        done < domains.tmp
+        grep -vxFf redundant.tmp "$raw_file" > raw.tmp
+        mv raw.tmp "$raw_file"
+            
+        sleep 0.5
+            
+        echo "Merging..."
+        return
     done
 }
 
