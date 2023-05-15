@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.032148.2023
-# Last modified: Mon May 15 03:21:48 UTC 2023
+# Version: 05.15.033856.2023
+# Last modified: Mon May 15 03:38:56 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3934
+# Total number of entries: 3936
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -2309,6 +2309,7 @@ address=/neseten.shop/#
 address=/nestilin.com/#
 address=/netelar.shop/#
 address=/neueperio.de/#
+address=/neutraln.com/#
 address=/nevaehfitness.store/#
 address=/nevoplus.com/#
 address=/new-climbing.com/#
@@ -2445,6 +2446,7 @@ address=/ondutyearth.com/#
 address=/onefoyou.com/#
 address=/oneiisa.com/#
 address=/oneminimals.com/#
+address=/onenali.shop/#
 address=/oneshoes.best/#
 address=/onethink.shop/#
 address=/onfither.nl/#
