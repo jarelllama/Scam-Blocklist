@@ -174,17 +174,19 @@ function check_toplist {
             return
         fi
 
-        echo -e "\nTOPLIST MENU"
-        echo "Domains in toplist:"
         if "$unattended"; then
+            echo "Domains in toplist:"
             cat in_toplist.tmp
             echo -e "\nExiting...\n"
             exit 1
         fi
+
+        echo -e "\nTOPLIST MENU"
+        echo "Domains in toplist:"
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
         echo "$numbered_toplist"
 
-        echo -e "\n* w|b. Add the domain to the (white|black)list"
+        echo -e "\n* w|b. (White|Black)list the chosen domain"
         echo "e. Edit lists"
         echo "r. Run filter again"
         read -r choice
@@ -243,10 +245,7 @@ function optimise_blocklist {
 
         echo -e "\n*. Whitelist the chosen entry"
         echo "a. Add all optimised entries"
-        echo "x. Continue with merging"
         read -r choice
-
-        [[ "$choice" == 'x' ]] && return
 
         if [[ "$choice" == 'a' ]]; then
             echo -e "\nAdding all optimised entries to the blocklist..."
@@ -265,12 +264,13 @@ function optimise_blocklist {
             return
         elif ! [[ "$choice" =~ ^[0-9]+$ ]]; then
             echo -e "\nInvalid option."
-        else
-            chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
-            echo -e "\nAdded '${chosen_domain}' to the whitelist."
-            echo "$chosen_domain" >> "$optimiser_whitelist"
-            sort "$optimiser_whitelist" -o "$optimiser_whitelist"
+            continue
         fi
+
+        chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
+        echo -e "\nAdded '${chosen_domain}' to the whitelist."
+        echo "$chosen_domain" >> "$optimiser_whitelist"
+        sort "$optimiser_whitelist" -o "$optimiser_whitelist"
     done
 }
 
