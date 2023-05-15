@@ -347,9 +347,12 @@ function merge_pending {
     exit 0
 }
 
-"$unattended" \
-    || echo -e "\nRemember to pull the latest changes beforehand!" \
-    && sleep 0.5
+if [[ "$unattended" ]]; then
+    echo -e "\nRetrieving domains..."
+else
+    echo -e "\nRemember to pull the latest changes beforehand!" 
+    sleep 0.5
+fi
 
 "$use_pending_only" || retrieve_domains
 
