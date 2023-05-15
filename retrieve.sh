@@ -218,7 +218,7 @@ function check_toplist {
 
         chosen_domain=$(echo "$numbered_toplist" \
            | awk -v n="$choice" '$1 == n {print $2}')
-        echo -e "\nPicked: ${chosen_domain}"
+        echo -e "\nDomain: ${chosen_domain}"
         echo "Choose a list to add to:"
         echo "b. Blacklist"
         echo "w. Whitelist"
@@ -250,7 +250,9 @@ function optimise_blocklist {
         comm -23 2.tmp "$optimised_entries" > domains.tmp
     
         [[ -s domains.tmp ]] || return
+
         numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
+
         echo -e "\nOPTIMISER MENU"
         echo "Potential optimised entries:"
         echo "$numbered_domains"
