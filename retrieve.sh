@@ -202,7 +202,7 @@ function check_toplist {
         read -r choice
 
         if [[ "$choice" == 'e' ]]; then
-            echo -e "\n\nEnter 'x' to go back to the previous menu."
+            echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
             continue 
         elif [[ "$choice" == 'r' ]]; then   
