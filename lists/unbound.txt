@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.082429.2023
-# Last modified: Mon May 15 08:24:29 UTC 2023
+# Version: 05.15.154542.2023
+# Last modified: Mon May 15 15:45:42 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3947
+# Total number of entries: 3954
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -20,6 +20,7 @@ local-zone: "556602661.kreta-trip.nl." always_nxdomain
 local-zone: "5icustom.com." always_nxdomain
 local-zone: "630563295qq.myshoplaza.com." always_nxdomain
 local-zone: "68apparel.store." always_nxdomain
+local-zone: "746776079.autella.fi." always_nxdomain
 local-zone: "77unishop.com." always_nxdomain
 local-zone: "90sfootwear.com." always_nxdomain
 local-zone: "915619962.hochland-kriecherl.at." always_nxdomain
@@ -937,6 +938,7 @@ local-zone: "douvani.com." always_nxdomain
 local-zone: "doyends.com." always_nxdomain
 local-zone: "dr-healing.com." always_nxdomain
 local-zone: "drawingsale.xyz." always_nxdomain
+local-zone: "drcyqoog.cieszyndlaukrainy.pl." always_nxdomain
 local-zone: "dreamgreenshoe.com." always_nxdomain
 local-zone: "dreamstees.com." always_nxdomain
 local-zone: "dresspring.com." always_nxdomain
@@ -1346,6 +1348,7 @@ local-zone: "getupsized.com." always_nxdomain
 local-zone: "getwomenswear.com." always_nxdomain
 local-zone: "gewqas.com." always_nxdomain
 local-zone: "gewudas.shop." always_nxdomain
+local-zone: "gfidwzwt.northsailshoes.pl." always_nxdomain
 local-zone: "gibbeverage.shop." always_nxdomain
 local-zone: "gifnest.com." always_nxdomain
 local-zone: "gifnestbuy.com." always_nxdomain
@@ -1420,7 +1423,6 @@ local-zone: "goxmix.co.za." always_nxdomain
 local-zone: "goxmix.com." always_nxdomain
 local-zone: "gpjholzdesign.de." always_nxdomain
 local-zone: "gqcxp.sandralaumusic.com." always_nxdomain
-local-zone: "gqqasx.gruppojem.it." always_nxdomain
 local-zone: "gradmalaysia.com." always_nxdomain
 local-zone: "graduan.com." always_nxdomain
 local-zone: "grailgg.com." always_nxdomain
@@ -1438,6 +1440,7 @@ local-zone: "grillis.us." always_nxdomain
 local-zone: "grocentro.com." always_nxdomain
 local-zone: "grqgconea.jereconditionne.fr." always_nxdomain
 local-zone: "grtw-frw.cloud." always_nxdomain
+local-zone: "gruppojem.it." always_nxdomain
 local-zone: "gruzabawki.pl." always_nxdomain
 local-zone: "grystores.com." always_nxdomain
 local-zone: "gsi-marex.pl." always_nxdomain
@@ -1663,6 +1666,7 @@ local-zone: "investama92.com." always_nxdomain
 local-zone: "inyard.com." always_nxdomain
 local-zone: "iplflasher.co." always_nxdomain
 local-zone: "iqcreditcheck.com." always_nxdomain
+local-zone: "irefisioterapia.es." always_nxdomain
 local-zone: "iregeto.shop." always_nxdomain
 local-zone: "irongoing.com." always_nxdomain
 local-zone: "irwinpoint.com." always_nxdomain
@@ -2231,6 +2235,7 @@ local-zone: "multibra.net." always_nxdomain
 local-zone: "multicup.org." always_nxdomain
 local-zone: "multinus.com." always_nxdomain
 local-zone: "multiplesportnew.com." always_nxdomain
+local-zone: "munisingflowershop.com." always_nxdomain
 local-zone: "muniso.shop." always_nxdomain
 local-zone: "musicaccessories.store." always_nxdomain
 local-zone: "musicdiscount.store." always_nxdomain
@@ -2557,6 +2562,7 @@ local-zone: "papesolar.de." always_nxdomain
 local-zone: "papifunko.com." always_nxdomain
 local-zone: "paradigmstock.top." always_nxdomain
 local-zone: "paradisekittenrescue.com." always_nxdomain
+local-zone: "parafiagrodek.pl." always_nxdomain
 local-zone: "parcelex.shop." always_nxdomain
 local-zone: "parmaperfume.com." always_nxdomain
 local-zone: "particularchristmas.com." always_nxdomain
@@ -2750,6 +2756,7 @@ local-zone: "qusidy.com." always_nxdomain
 local-zone: "qvcdeal-mall.shop." always_nxdomain
 local-zone: "qvcdeals-mall.com." always_nxdomain
 local-zone: "qvcshopus.com." always_nxdomain
+local-zone: "qvkzxpq.april4business.it." always_nxdomain
 local-zone: "rabbiten.com." always_nxdomain
 local-zone: "racecars24.fr." always_nxdomain
 local-zone: "racerkidz.de." always_nxdomain
@@ -2994,7 +3001,6 @@ local-zone: "sewingiiseasy.com." always_nxdomain
 local-zone: "sewlt.com." always_nxdomain
 local-zone: "sfootwearshop.com." always_nxdomain
 local-zone: "sgohory.com." always_nxdomain
-local-zone: "sgqps.irefisioterapia.es." always_nxdomain
 local-zone: "sgxcoins.com." always_nxdomain
 local-zone: "shaglevip.com." always_nxdomain
 local-zone: "shagorshop.com." always_nxdomain
@@ -3854,6 +3860,7 @@ local-zone: "xiazhouint.com." always_nxdomain
 local-zone: "xibem.bilymak.cz." always_nxdomain
 local-zone: "xoespace.com." always_nxdomain
 local-zone: "xpch.andis-rollende-kueche.de." always_nxdomain
+local-zone: "xpdeml.boucheriehomont.fr." always_nxdomain
 local-zone: "xpressracing.com." always_nxdomain
 local-zone: "xprrd.com." always_nxdomain
 local-zone: "xqkuxby.assonenuphar.fr." always_nxdomain
