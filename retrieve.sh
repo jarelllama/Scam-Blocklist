@@ -57,9 +57,7 @@ if ! "$unattended"; then
 fi
 
 function retrieve_domains {
-    echo -e "\nRetrieving domains...\n"
-    sleep 0.5
-    echo "Search filter: $time_filter"
+    echo -e "\nSearch filter: $time_filter"
     echo "Search terms:"
 
     user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
@@ -96,6 +94,7 @@ function retrieve_domains {
         
         echo "$domains" > domains.tmp
 
+        # Remove subdomains
         while read -r subdomain; do
             sed -i "s/^${subdomain}\.//" domains.tmp
         done < "$subdomains_file"
@@ -184,17 +183,13 @@ function check_toplist {
 }
 
 function filter_pending {
-    tr '[:upper:]' '[:lower:]' < "$pending_file" > 1.tmp
+    sleep 0.5
+    
+    cp "$pending_file" "${pending_file}.bak"
 
-    sort -u 1.tmp -o 1.tmp
+    sort -u "$pending_file" -o "$pending_file"
 
-    cp 1.tmp "${pending_file}.bak"
-
-    sleep 0.3
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
-
-    sleep 0.3
-    echo -e "\nFiltering..."
 
     # Remove domains already in the blocklist
     comm -23 1.tmp "$raw_file" > 2.tmp
