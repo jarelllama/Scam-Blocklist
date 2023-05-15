@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.204254.2023
-# Last modified: Mon May 15 20:42:54 UTC 2023
+# Version: 05.15.230927.2023
+# Last modified: Mon May 15 23:09:27 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3948
+# Total number of entries: 3955
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -21,6 +21,7 @@ address=/630563295qq.myshoplaza.com/#
 address=/68apparel.store/#
 address=/746776079.autella.fi/#
 address=/77unishop.com/#
+address=/842961523.wavesystems.cz/#
 address=/90sfootwear.com/#
 address=/915619962.hochland-kriecherl.at/#
 address=/a-mazon.shop/#
@@ -66,6 +67,7 @@ address=/afamilyspot.com/#
 address=/affjumbo.com/#
 address=/aflycatus.com/#
 address=/agemarts.com/#
+address=/agrdus.laviola-leeste.de/#
 address=/ahediti.com/#
 address=/ahrtdt.store/#
 address=/aiboson.com/#
@@ -400,6 +402,7 @@ address=/bling-beeswax.com/#
 address=/blingblinggoods.myshopify.com/#
 address=/blinggoodies.com/#
 address=/blingmeupbuttercup.co.uk/#
+address=/blizvyshop.com/#
 address=/blrkenarizona.com/#
 address=/blucontue.com/#
 address=/bluekip.com/#
@@ -1346,7 +1349,6 @@ address=/getupsized.com/#
 address=/getwomenswear.com/#
 address=/gewqas.com/#
 address=/gewudas.shop/#
-address=/gfidwzwt.northsailshoes.pl/#
 address=/gibbeverage.shop/#
 address=/gifnest.com/#
 address=/gifnestbuy.com/#
@@ -1442,6 +1444,7 @@ address=/gruppojem.it/#
 address=/gruzabawki.pl/#
 address=/grystores.com/#
 address=/gsi-marex.pl/#
+address=/gthicn.myshoplaza.com/#
 address=/gtsec.funstuffmail.com/#
 address=/guersare.online/#
 address=/guillermocraig.shop/#
@@ -1452,6 +1455,7 @@ address=/gurucid.com/#
 address=/gusmetn.com/#
 address=/gutebih.shop/#
 address=/gvs-usa.com/#
+address=/gybh.successbusiness.com/#
 address=/gyustio.store/#
 address=/hachipethouse.com/#
 address=/hacocid.xyz/#
@@ -1498,6 +1502,7 @@ address=/hellovivi.ca/#
 address=/heloliviana.shop/#
 address=/helpmall.shop/#
 address=/hemingwary.com/#
+address=/hendp.enviedequilibre.fr/#
 address=/henlibyting.com/#
 address=/hestiy.com/#
 address=/heyhome.info/#
@@ -1844,6 +1849,7 @@ address=/ksntpo.com/#
 address=/kudopenguin.com/#
 address=/kurpiezielone.pl/#
 address=/kwdandy.com/#
+address=/kxykln.corona-jobfee.de/#
 address=/kyayu.com/#
 address=/kyolo.net/#
 address=/labogi.com/#
@@ -1936,6 +1942,7 @@ address=/lisnatgomes.shop/#
 address=/litconception.com/#
 address=/literaryfiction.store/#
 address=/lithoiret.com/#
+address=/litnwns.poradnia-empatia.pl/#
 address=/littlecherrynails.com/#
 address=/littleroo.us/#
 address=/liveidu.com/#
@@ -2379,6 +2386,7 @@ address=/noraxmoore1996.com/#
 address=/noraxmoore1998.com/#
 address=/norbas.shop/#
 address=/norburn1999.com/#
+address=/northsailshoes.pl/#
 address=/norvintrucking.com/#
 address=/nostrends.com/#
 address=/noterel.shop/#
@@ -3690,7 +3698,6 @@ address=/violinlad.com/#
 address=/vipmallstore.shop/#
 address=/vipshoppers.review/#
 address=/virallstore.com/#
-address=/virtualgraffiti.com.au/#
 address=/virtuectech.com/#
 address=/visikite.com/#
 address=/visualpaw.com/#
