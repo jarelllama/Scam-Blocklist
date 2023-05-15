@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.230927.2023
-# Last modified: Mon May 15 23:09:27 UTC 2023
+# Version: 05.15.235252.2023
+# Last modified: Mon May 15 23:52:52 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3956
+# Total number of entries: 3960
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1010,6 +1010,7 @@ local-zone: "ehaffhte.com." always_nxdomain
 local-zone: "ehanise.shop." always_nxdomain
 local-zone: "ehwc.shop." always_nxdomain
 local-zone: "eicobuy.com." always_nxdomain
+local-zone: "ejaxww.cargifts.de." always_nxdomain
 local-zone: "ekebalu.shop." always_nxdomain
 local-zone: "ekyfoa.shop." always_nxdomain
 local-zone: "elasticdockline.com." always_nxdomain
@@ -2737,6 +2738,7 @@ local-zone: "pureoiuo.com." always_nxdomain
 local-zone: "pwspsnt.com." always_nxdomain
 local-zone: "qcatowe.store." always_nxdomain
 local-zone: "qcqwwih.cryomet.com." always_nxdomain
+local-zone: "qdkcqhc.blackfridayakcja.pl." always_nxdomain
 local-zone: "qfsgesara.com." always_nxdomain
 local-zone: "qfsnesarag.com." always_nxdomain
 local-zone: "qhqzpt.astis-hunderunde.de." always_nxdomain
@@ -2969,6 +2971,7 @@ local-zone: "scoptal.com." always_nxdomain
 local-zone: "scrubellayyc.com." always_nxdomain
 local-zone: "scurvefashion.com." always_nxdomain
 local-zone: "scvncdbkt.here-sushi.de." always_nxdomain
+local-zone: "sdqvl.zs-woladroszewska.pl." always_nxdomain
 local-zone: "sdrytru.online." always_nxdomain
 local-zone: "seafollysurf.com." always_nxdomain
 local-zone: "seasaltfashion.com." always_nxdomain
@@ -3852,6 +3855,7 @@ local-zone: "wulooofficial.com." always_nxdomain
 local-zone: "wzlooo.com." always_nxdomain
 local-zone: "x-bik.myshopify.com." always_nxdomain
 local-zone: "x-bik.online." always_nxdomain
+local-zone: "xalan14.com." always_nxdomain
 local-zone: "xamtolis.com." always_nxdomain
 local-zone: "xeniapet.shop." always_nxdomain
 local-zone: "xgosunray.shop." always_nxdomain
