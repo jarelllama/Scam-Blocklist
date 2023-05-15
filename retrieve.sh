@@ -198,24 +198,26 @@ function filter_pending {
     sleep 0.5
     echo -e "\nFiltering log:"
 
-    grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
-    cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp \
+        && cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
     comm -23 2.tmp whitelisted.tmp > 3.tmp
 
-    grep -E '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp | awk '{print $0 " (TLD)"}'
-    grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp > 4.tmp
+    grep -E '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp | awk '{print $0 " (TLD)"}' \
+        && grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp > 4.tmp
+    mv 3.tmp 4.tmp
 
     # This regex matches valid domains. This includes puny code TLDs (.xn--*)
-    grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 4.tmp | awk '{print $0 " (invalid)"}'
-    grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 4.tmp > 5.tmp
+    grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 4.tmp | awk '{print $0 " (invalid)"}' \
+        && grep -E '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' 4.tmp > 5.tmp
+    mv 4.tmp 5.tmp
 
     > redundant.tmp
     while read -r entry; do
         grep "\.${entry}$" 5.tmp >> redundant.tmp
     done < "$optimised_entries"
 
-    "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
     grep -vxFf redundant.tmp 5.tmp > 6.tmp
+    "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
 
     export debug="$debug"
     > dead.tmp
