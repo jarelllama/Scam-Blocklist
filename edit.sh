@@ -8,7 +8,7 @@ subdomains_file="data/subdomains.txt"
 optimised_entries="data/optimised_entries.txt"
 
 function on_exit {
-    echo -e "\nExiting...\n"
+    echo -e "\nExiting..."
     find . -maxdepth 1 -type f -name '*.tmp' -delete
 }
 
