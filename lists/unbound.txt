@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.041259.2023
-# Last modified: Mon May 15 04:12:59 UTC 2023
+# Version: 05.15.043341.2023
+# Last modified: Mon May 15 04:33:41 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3939
+# Total number of entries: 3944
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -746,6 +746,7 @@ local-zone: "cshcstore.com." always_nxdomain
 local-zone: "cshoeshop.com." always_nxdomain
 local-zone: "csknife.net." always_nxdomain
 local-zone: "cstwire.com." always_nxdomain
+local-zone: "csvlwtont.adam-leba.pl." always_nxdomain
 local-zone: "cukiernialucynka.pl." always_nxdomain
 local-zone: "curepuff.com." always_nxdomain
 local-zone: "customerreviews.guru." always_nxdomain
@@ -1221,6 +1222,7 @@ local-zone: "fitnessequipmentstore.website." always_nxdomain
 local-zone: "fitnessforte.shop." always_nxdomain
 local-zone: "fitoutcycle.com." always_nxdomain
 local-zone: "fitoutout.com." always_nxdomain
+local-zone: "fjfxgrrv.tomshuette-hohwacht.de." always_nxdomain
 local-zone: "flamingowine.com." always_nxdomain
 local-zone: "flastorm.com." always_nxdomain
 local-zone: "flaurz.com." always_nxdomain
@@ -2041,6 +2043,7 @@ local-zone: "mannytra.com." always_nxdomain
 local-zone: "manorinteriorskitchen.com." always_nxdomain
 local-zone: "marcellomielno.pl." always_nxdomain
 local-zone: "marcuslantern.space." always_nxdomain
+local-zone: "margarefren.com." always_nxdomain
 local-zone: "margiecn.com." always_nxdomain
 local-zone: "mariahu.com." always_nxdomain
 local-zone: "marionmens.com." always_nxdomain
@@ -2679,6 +2682,7 @@ local-zone: "posyoga.com." always_nxdomain
 local-zone: "poutdoorsale.com." always_nxdomain
 local-zone: "poutdoorstore.com." always_nxdomain
 local-zone: "powfull.com." always_nxdomain
+local-zone: "pqlgyi.plomberie-chauffage-sarzeau.fr." always_nxdomain
 local-zone: "practicalstores.com." always_nxdomain
 local-zone: "prdanmr.kunz-modeundmehr.de." always_nxdomain
 local-zone: "preferlikely.com." always_nxdomain
@@ -3264,6 +3268,7 @@ local-zone: "supplyswimwear.com." always_nxdomain
 local-zone: "supplytennis.com." always_nxdomain
 local-zone: "supreme-choicee.com." always_nxdomain
 local-zone: "supsnh.com." always_nxdomain
+local-zone: "surf-novelty.com." always_nxdomain
 local-zone: "surfboardusa.store." always_nxdomain
 local-zone: "surfhandpick.com." always_nxdomain
 local-zone: "surfingvolcom.com." always_nxdomain
