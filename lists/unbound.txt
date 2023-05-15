@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.154542.2023
-# Last modified: Mon May 15 15:45:42 UTC 2023
+# Version: 05.15.204254.2023
+# Last modified: Mon May 15 20:42:54 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3954
+# Total number of entries: 3949
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1094,7 +1094,6 @@ local-zone: "eval-center.com." always_nxdomain
 local-zone: "evaluations-center.com." always_nxdomain
 local-zone: "evasolostore.com." always_nxdomain
 local-zone: "evedat.com." always_nxdomain
-local-zone: "eventstudio.online." always_nxdomain
 local-zone: "everlead.net." always_nxdomain
 local-zone: "evoosense.com." always_nxdomain
 local-zone: "evorar.com." always_nxdomain
@@ -1970,8 +1969,6 @@ local-zone: "lotusgriffon.com." always_nxdomain
 local-zone: "louderbe.com." always_nxdomain
 local-zone: "louisepet.shop." always_nxdomain
 local-zone: "loungeflybags.com." always_nxdomain
-local-zone: "loungeflyoutlets.shop." always_nxdomain
-local-zone: "loungeflyuk.shop." always_nxdomain
 local-zone: "lovastores.com." always_nxdomain
 local-zone: "love-outdoor.com." always_nxdomain
 local-zone: "love4dogs.shop." always_nxdomain
@@ -2547,7 +2544,6 @@ local-zone: "ozringy.com." always_nxdomain
 local-zone: "ozxshop.shop." always_nxdomain
 local-zone: "paceystudio.com." always_nxdomain
 local-zone: "paemag.com." always_nxdomain
-local-zone: "paleogym.shop." always_nxdomain
 local-zone: "palpiy.com." always_nxdomain
 local-zone: "pambagshop.com." always_nxdomain
 local-zone: "pamzen.com." always_nxdomain
@@ -3784,7 +3780,6 @@ local-zone: "westernhats.net." always_nxdomain
 local-zone: "westernhatsale.com." always_nxdomain
 local-zone: "wesybuy.com." always_nxdomain
 local-zone: "wetoweto.com." always_nxdomain
-local-zone: "wewhrg.shop." always_nxdomain
 local-zone: "wfronning.com." always_nxdomain
 local-zone: "whatcomreport.com." always_nxdomain
 local-zone: "wheelsamazing.com." always_nxdomain
