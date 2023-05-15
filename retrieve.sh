@@ -172,6 +172,8 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
 
+    sleep 0.5
+
     check_toplist
 }
 
@@ -192,10 +194,11 @@ function check_toplist {
             exit 1
         fi
 
-        echo -e "\nDomains in toplist:"
+        echo -e "\nTOPLIST MENU"
+        echo "Domains in toplist:"
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
         echo "$numbered_toplist"
-        echo "TOPLIST MENU"
+        echo "Options:"
         echo "*. Select a domain"
         echo "e. Edit lists"
         echo "r. Run filter again"
