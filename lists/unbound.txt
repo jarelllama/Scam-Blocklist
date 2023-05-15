@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.030446.2023
-# Last modified: Mon May 15 03:04:46 UTC 2023
+# Version: 05.15.031915.2023
+# Last modified: Mon May 15 03:19:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3932
+# Total number of entries: 3934
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1718,7 +1718,6 @@ local-zone: "jingzhimucrystals.com." always_nxdomain
 local-zone: "jivania.com." always_nxdomain
 local-zone: "jjhaka.top." always_nxdomain
 local-zone: "jjslight.com." always_nxdomain
-local-zone: "jkhpqxi.obrazyzceska.cz." always_nxdomain
 local-zone: "jlypoint.com." always_nxdomain
 local-zone: "jnblhhdzsm.shop." always_nxdomain
 local-zone: "jocoto.co." always_nxdomain
@@ -2397,6 +2396,7 @@ local-zone: "nwtaylor.shop." always_nxdomain
 local-zone: "nxifjfz.alexander-ahrens.de." always_nxdomain
 local-zone: "nycmetroshop.com." always_nxdomain
 local-zone: "oascartrading.com." always_nxdomain
+local-zone: "obrazyzceska.cz." always_nxdomain
 local-zone: "obzockeydesigns.com." always_nxdomain
 local-zone: "ocandi.com." always_nxdomain
 local-zone: "occurie.com." always_nxdomain
@@ -2722,6 +2722,7 @@ local-zone: "qfsgesara.com." always_nxdomain
 local-zone: "qfsnesarag.com." always_nxdomain
 local-zone: "qhqzpt.astis-hunderunde.de." always_nxdomain
 local-zone: "qisoin.com." always_nxdomain
+local-zone: "qkbao.scansave.pl." always_nxdomain
 local-zone: "qmzdo.online." always_nxdomain
 local-zone: "qttlpn.shop." always_nxdomain
 local-zone: "qualityplaything.com." always_nxdomain
@@ -2871,6 +2872,7 @@ local-zone: "rugsandcurtains.com." always_nxdomain
 local-zone: "ruispice.com." always_nxdomain
 local-zone: "rungovip.store." always_nxdomain
 local-zone: "runsaucony.com." always_nxdomain
+local-zone: "rustoleumspray.com." always_nxdomain
 local-zone: "ruylfeicne.info." always_nxdomain
 local-zone: "rvruo.shop." always_nxdomain
 local-zone: "ryanurabonpitbullpuppies.com." always_nxdomain
