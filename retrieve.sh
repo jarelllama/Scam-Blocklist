@@ -196,9 +196,9 @@ function check_toplist {
         echo "Domains in toplist:"
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
         echo "$numbered_toplist"
-        echo "* w|b: White|blacklist the chosen domain"
-        echo "e: Edit lists"
-        echo "r: Run filter again"
+        echo "*. Select a domain"
+        echo "e. Edit lists"
+        echo "r. Run filter again"
         read -r choice
 
         if [[ "$choice" == 'e' ]]; then
@@ -210,25 +210,27 @@ function check_toplist {
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             exit 0
-        elif ! [[ "$choice" =~ [0-9] ]] \
-            || ! [[ "$choice" =~ [wbWB] ]]; then
+        elif ! [[ "$choice" =~ ^[0-9]+$ ]]; then
             echo -e "\nInvalid option."
             continue
         fi
 
-        chosen_num=$(echo "$choice" | grep -o '[0-9]*' | head -n1)
-        chosen_list=$(echo "$choice" | grep -o '[wbWB]' | head -n1)
         chosen_domain=$(echo "$numbered_toplist" \
-           | awk -v n="$chosen_num" '$1 == n {print $2}')
+           | awk -v n="$choice" '$1 == n {print $2}')
+        echo -e "\nPicked: ${chosen_domain}"
+        echo "Choose a list to add to:"
+        echo "b. Blacklist"
+        echo "w. Whitelist"
+        read -r choice
 
-        if [[ "$chosen_list" =~ ^[wW]$ ]]; then
-            echo "$chosen_domain" >> "$whitelist_file"
-            sort "$whitelist_file" -o "$whitelist_file"
-            echo -e "\nAdded to the whitelist: ${chosen_domain}"
-        elif [[ "$chosen_list" =~ ^[bB]$ ]]; then
+        if [[ "$choice" == 'b' ]]; then
             echo "$chosen_domain" >> "$blacklist_file"
             sort "$blacklist_file" -o "$blacklist_file"
             echo -e "\nAdded to the blacklist: ${chosen_domain}"
+        elif [[ "$choice" == 'w' ]]; then
+            echo "$chosen_domain" >> "$whitelist_file"
+            sort "$whitelist_file" -o "$whitelist_file"
+            echo -e "\nAdded to the whitelist: ${chosen_domain}"
         else
             echo -e "\nInvalid option."
         fi
@@ -251,12 +253,13 @@ function optimise_blocklist {
         echo -e "\nOPTIMISER MENU"
         echo "Potential optimised entries:"
         echo "$numbered_domains"
-        echo "*: Whitelist the chosen entry"
-        echo "a: Add all optimised entries"
+        echo "*. Whitelist the chosen entry"
+        echo "a. Add all optimised entries"
         read -r choice
 
         if [[ "$choice" =~ ^[0-9]+$ ]]; then
-            chosen_domain=$(echo "$numbered_domains" | awk -v n="$choice" '$1 == n {print $2}')
+            chosen_domain=$(echo "$numbered_domains" \
+                | awk -v n="$choice" '$1 == n {print $2}')
             echo -e "\nAdded to the optimiser whitelist: ${chosen_domain}"
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
