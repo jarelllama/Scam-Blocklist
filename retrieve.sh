@@ -312,7 +312,6 @@ function merge_pending {
     > "$pending_file"
     
     if "$unattended"; then
-        echo -e "\nPushing changes..."
         commit_msg='Automatic domain retrieval'
         
         previous_count=$(sed -n '10p' "$stats_file")
@@ -320,16 +319,14 @@ function merge_pending {
         sed -i "10s/.*/${new_count}/" "$stats_file"
     else
         read -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
-        echo
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
-            echo "Pushing changes..."
             commit_msg="Manual domain retrieval"
         else
             exit 0
         fi
     fi
 
-    echo
+    echo -e "\nPushing changes...\n"
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
