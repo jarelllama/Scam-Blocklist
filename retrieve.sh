@@ -18,36 +18,41 @@ function on_exit {
     find . -maxdepth 1 -type f -name '*.tmp' -delete
 }
 
+function pass_arguments {
+    debug='false'
+    unattended='false'
+    use_pending_only='false'
+    time_filter='a'
+
+    for arg in "$@"; do
+        if [[ "$arg" == 'd' ]]; then
+            debug='true'
+        elif [[ "$arg" == 'p' ]]; then
+            use_pending_only='true'
+        elif [[ "$arg" == 'u' ]]; then
+            unattended='true'
+            time_filter='y'
+        else
+            time_filter="$arg"
+        fi
+    done
+}
+
 trap 'on_exit' EXIT
 
-debug='false'
-unattended='false'
-use_pending_only='false'
-time_filter='a'
-
-for arg in "$@"; do
-    if [[ "$arg" == 'd' ]]; then
-        debug='true'
-    elif [[ "$arg" == 'p' ]]; then
-        use_pending_only='true'
-    elif [[ "$arg" == 'u' ]]; then
-        unattended='true'
-        time_filter='y'
-    else
-        time_filter="$arg"
-    fi
-done
+pass_arguments
 
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
-    read -rp $'\n'"$pending_file is not empty. Do you want to empty it? (Y/n): " answer
+    read -rp $'\nEmpty the pending file? (Y/n): ' answer
     if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
         > "$pending_file"
     fi
 fi
 
-[[ "$unattended" ]] \
-    || echo -e "\nRemember to pull the latest changes first!" \
+if ! [[ "$unattended" ]]; then
+    echo -e "\nRemember to pull the latest changes beforehand!"
     sleep 0.5
+fi
 
 function retrieve_domains {
     echo -e "\nRetrieving domains..."
