@@ -56,6 +56,7 @@ fi
 
 function retrieve_domains {
     echo -e "\nRetrieving domains...\n"
+    sleep 0.3
     echo "Search filter: $time_filter"
     echo "Search terms:"
 
