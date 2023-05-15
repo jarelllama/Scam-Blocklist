@@ -15,6 +15,8 @@ function on_exit {
 trap 'on_exit' EXIT
 
 function format_entry() {
+    [[ -n "$entry" ]] || return
+
     remove_entry=0
     if [[ "$entry" == -* ]]; then
         entry="${entry#-}"
