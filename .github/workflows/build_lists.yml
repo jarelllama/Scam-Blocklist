@@ -142,12 +142,10 @@ jobs:
         run: |
           > check.tmp
           while read -r entry; do
-            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> check.tmp || true
-              #&& echo "$entry" >> "${{ vars.OPTIMISED_ENTRIES_FILE }}" \
-              #|| true
+            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> check.tmp \
+              && echo "$entry" >> "${{ vars.OPTIMISED_ENTRIES_FILE }}" \
+              || true
           done < "${{ vars.RAW_FILE }}"
-          
-          # todo: add variable, sort, commit, test
           
           [[ -s check.tmp ]] || exit 0
           echo -e "\nRedundant entries found:"
@@ -155,7 +153,11 @@ jobs:
 
           grep -vxFf check.tmp "${{ vars.RAW_FILE }}" > raw.tmp || true
           mv raw.tmp "${{ vars.RAW_FILE }}"
-          
+  
+          sort -u "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "${{ vars.OPTIMISED_ENTRIES_FILE }}"
+          git add "${{ vars.OPTIMISED_ENTRIES_FILE }}"
+          git diff-index --quiet HEAD || git commit -qm "Remove redundant entries" || true
+
           echo -e "\nRemoving...\n"
           exit 1
 
