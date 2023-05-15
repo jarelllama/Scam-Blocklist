@@ -197,7 +197,7 @@ function push_changes {
 
 while true; do
     echo -e "\nEDIT LISTS MENU"
-    sleep 0.5
+    sleep 0.2
     echo "b. Blocklist"
     echo "w. Whitelist"
     echo "l. Blacklist"
