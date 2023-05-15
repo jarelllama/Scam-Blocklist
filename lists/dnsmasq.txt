@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.154542.2023
-# Last modified: Mon May 15 15:45:42 UTC 2023
+# Version: 05.15.204254.2023
+# Last modified: Mon May 15 20:42:54 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3953
+# Total number of entries: 3948
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -1093,7 +1093,6 @@ address=/eval-center.com/#
 address=/evaluations-center.com/#
 address=/evasolostore.com/#
 address=/evedat.com/#
-address=/eventstudio.online/#
 address=/everlead.net/#
 address=/evoosense.com/#
 address=/evorar.com/#
@@ -1969,8 +1968,6 @@ address=/lotusgriffon.com/#
 address=/louderbe.com/#
 address=/louisepet.shop/#
 address=/loungeflybags.com/#
-address=/loungeflyoutlets.shop/#
-address=/loungeflyuk.shop/#
 address=/lovastores.com/#
 address=/love-outdoor.com/#
 address=/love4dogs.shop/#
@@ -2546,7 +2543,6 @@ address=/ozringy.com/#
 address=/ozxshop.shop/#
 address=/paceystudio.com/#
 address=/paemag.com/#
-address=/paleogym.shop/#
 address=/palpiy.com/#
 address=/pambagshop.com/#
 address=/pamzen.com/#
@@ -3783,7 +3779,6 @@ address=/westernhats.net/#
 address=/westernhatsale.com/#
 address=/wesybuy.com/#
 address=/wetoweto.com/#
-address=/wewhrg.shop/#
 address=/wfronning.com/#
 address=/whatcomreport.com/#
 address=/wheelsamazing.com/#
