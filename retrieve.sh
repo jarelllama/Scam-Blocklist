@@ -110,6 +110,8 @@ function retrieve_domains {
 }
 
 function filter_pending {
+    echo -e "\nFiltering..."
+
     tr '[:upper:]' '[:lower:]' < "$pending_file" > 1.tmp
 
     sort -u 1.tmp -o 1.tmp
