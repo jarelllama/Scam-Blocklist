@@ -194,11 +194,12 @@ function check_toplist {
             exit 1
         fi
 
+        numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
+
         echo -e "\nTOPLIST MENU"
         echo "Domains in toplist:"
-        numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
         echo "$numbered_toplist"
-        echo "Options:"
+        echo
         echo "*. Select a domain"
         echo "e. Edit lists"
         echo "r. Run filter again"
