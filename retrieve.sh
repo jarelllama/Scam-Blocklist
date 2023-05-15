@@ -121,7 +121,6 @@ function check_toplist {
             echo "Domains in toplist:"
             sleep 0.3
             cat in_toplist.tmp
-            echo -e "\nExiting..."
             exit 1
         fi
 
