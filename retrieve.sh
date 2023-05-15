@@ -58,7 +58,7 @@ fi
 
 function retrieve_domains {
     echo -e "\nRetrieving domains...\n"
-    sleep 0.3
+    sleep 0.5
     echo "Search filter: $time_filter"
     echo "Search terms:"
 
@@ -108,7 +108,7 @@ function retrieve_domains {
     done < "$search_terms_file"
 
     if ! [[ -s "$pending_file" ]]; then
-        echo -e "\nNo retrieved domains. Try changing VPN servers."
+        echo -e "\nNo domains retrieved."
         exit 1
     fi
 }
