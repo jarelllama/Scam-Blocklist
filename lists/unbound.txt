@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.002729.2023
-# Last modified: Mon May 15 00:27:29 UTC 2023
+# Version: 05.15.030446.2023
+# Last modified: Mon May 15 03:04:46 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3924
+# Total number of entries: 3932
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -22,6 +22,7 @@ local-zone: "630563295qq.myshoplaza.com." always_nxdomain
 local-zone: "68apparel.store." always_nxdomain
 local-zone: "77unishop.com." always_nxdomain
 local-zone: "90sfootwear.com." always_nxdomain
+local-zone: "915619962.hochland-kriecherl.at." always_nxdomain
 local-zone: "a-mazon.shop." always_nxdomain
 local-zone: "a3review.com." always_nxdomain
 local-zone: "aac667.com." always_nxdomain
@@ -961,6 +962,7 @@ local-zone: "duovana.com." always_nxdomain
 local-zone: "dustin-sales.shop." always_nxdomain
 local-zone: "duvipmalls.store." always_nxdomain
 local-zone: "dwnrod.com." always_nxdomain
+local-zone: "dyjnchpal.zajazd-boryslawice.pl." always_nxdomain
 local-zone: "dynyl.com." always_nxdomain
 local-zone: "dytreasure.com." always_nxdomain
 local-zone: "dzirenation.com." always_nxdomain
@@ -1286,6 +1288,7 @@ local-zone: "fyges.com." always_nxdomain
 local-zone: "fypsex.com." always_nxdomain
 local-zone: "g-host.io." always_nxdomain
 local-zone: "gaberdeal.com." always_nxdomain
+local-zone: "gabistore.cz." always_nxdomain
 local-zone: "gadgetfreak.com.au." always_nxdomain
 local-zone: "gadgetshomestore.com." always_nxdomain
 local-zone: "gadgettype.com." always_nxdomain
@@ -1338,6 +1341,7 @@ local-zone: "getkue.com." always_nxdomain
 local-zone: "getupsized.com." always_nxdomain
 local-zone: "getwomenswear.com." always_nxdomain
 local-zone: "gewqas.com." always_nxdomain
+local-zone: "gewudas.shop." always_nxdomain
 local-zone: "gibbeverage.shop." always_nxdomain
 local-zone: "gifnest.com." always_nxdomain
 local-zone: "gifnestbuy.com." always_nxdomain
@@ -1412,6 +1416,7 @@ local-zone: "goxmix.co.za." always_nxdomain
 local-zone: "goxmix.com." always_nxdomain
 local-zone: "gpjholzdesign.de." always_nxdomain
 local-zone: "gqcxp.sandralaumusic.com." always_nxdomain
+local-zone: "gqqasx.gruppojem.it." always_nxdomain
 local-zone: "gradmalaysia.com." always_nxdomain
 local-zone: "graduan.com." always_nxdomain
 local-zone: "grailgg.com." always_nxdomain
@@ -1783,6 +1788,7 @@ local-zone: "kfthd.com." always_nxdomain
 local-zone: "kgnovav.nftjobfinders.com." always_nxdomain
 local-zone: "kianshopy.com." always_nxdomain
 local-zone: "kidspopular.com." always_nxdomain
+local-zone: "kifodos.shop." always_nxdomain
 local-zone: "kikimiss.com." always_nxdomain
 local-zone: "kilatkuning.shop." always_nxdomain
 local-zone: "kilianes.uk." always_nxdomain
@@ -1933,6 +1939,7 @@ local-zone: "lizcam.com." always_nxdomain
 local-zone: "lizrugs.com." always_nxdomain
 local-zone: "lkuia.shop." always_nxdomain
 local-zone: "llhhtwtln.gentrify.pl." always_nxdomain
+local-zone: "lmhxws.umowymiedzynarodowe.pl." always_nxdomain
 local-zone: "lobbyreviews.net." always_nxdomain
 local-zone: "local-payments.shop." always_nxdomain
 local-zone: "locymax.com." always_nxdomain
@@ -1974,7 +1981,6 @@ local-zone: "lovreko.com." always_nxdomain
 local-zone: "lowprice-outdoor.com." always_nxdomain
 local-zone: "loyalseek.com." always_nxdomain
 local-zone: "lsbgdup.deunatuweb.com." always_nxdomain
-local-zone: "lsjtvjnh.gabistore.cz." always_nxdomain
 local-zone: "lskg.shop." always_nxdomain
 local-zone: "ltasportsz.com." always_nxdomain
 local-zone: "lucchesedeal.store." always_nxdomain
@@ -2290,6 +2296,7 @@ local-zone: "nebulanights.com." always_nxdomain
 local-zone: "nebulosity.shop." always_nxdomain
 local-zone: "neefx.com." always_nxdomain
 local-zone: "neespresso.coffee." always_nxdomain
+local-zone: "nelapar.shop." always_nxdomain
 local-zone: "nelhub.com." always_nxdomain
 local-zone: "nellykstore.com." always_nxdomain
 local-zone: "nellylstore.com." always_nxdomain
@@ -3532,6 +3539,7 @@ local-zone: "turnnetwor.com." always_nxdomain
 local-zone: "turolloy.com." always_nxdomain
 local-zone: "tutanuh.shop." always_nxdomain
 local-zone: "tutesep.shop." always_nxdomain
+local-zone: "tutesoh.xyz." always_nxdomain
 local-zone: "tuthrd.com." always_nxdomain
 local-zone: "twinklepades.shop." always_nxdomain
 local-zone: "twrdft.com." always_nxdomain
