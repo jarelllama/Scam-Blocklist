@@ -51,8 +51,7 @@ if ! "$unattended"; then
 fi
 
 function retrieve_domains {
-    echo -e "\nRetrieving domains..."
-    echo
+    echo -e "\nRetrieving domains...\n"
     echo "Search filter: $time_filter"
     echo "Search terms:"
 
@@ -167,12 +166,12 @@ function filter_pending {
     fi
 
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
+    sleep 0.5
     echo "Domains:"
     sleep 0.5
     cat "$pending_file"
 
     sleep 0.5
-
     check_toplist
 }
 
@@ -197,7 +196,7 @@ function check_toplist {
 
         echo -e "\nTOPLIST MENU"
         echo "$numbered_toplist"
-        echo "*. Add the domain to (white|black)list"
+        echo "*. Blacklist/whitelist the domain"
         echo "e. Edit lists"
         echo "r. Run filter again"
         read -r choice
