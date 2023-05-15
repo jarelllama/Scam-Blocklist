@@ -137,7 +137,7 @@ jobs:
           echo -e "\nSkipping build steps.\n"
           exit 1
 
-      - name: Remove redundant entries
+      - name: Redundant entries check
         if: success() || failure()
         run: |
           > check.tmp
