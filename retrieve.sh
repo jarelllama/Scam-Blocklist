@@ -103,9 +103,10 @@ function retrieve_domains {
         echo "--------------------------------------"
     done < "$search_terms_file"
 
-    [[ -s "$pending_file" ]] \
-        || echo -e "\nNo domains retrieved." \
-        && exit 1
+    if ! [[ -s "$pending_file" ]]; then
+        echo -e "\nNo domains retrieved."
+        exit 1
+    fi
 }
 
 function check_toplist {
@@ -115,9 +116,10 @@ function check_toplist {
         comm -12 "$pending_file" "$toplist_file" \
             | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
-        [[ -s in_toplist.tmp ]] \
-            || echo -e "\nNo domains found in toplist." \
-            && return
+        if ! [[ -s in_toplist.tmp ]]; then
+            echo -e "\nNo domains found in toplist."
+            return
+        fi
 
         if "$unattended"; then
             echo "Domains in toplist:"
@@ -226,9 +228,10 @@ function filter_pending {
 
     mv 7.tmp "$pending_file"
 
-    [[ -s "$pending_file" ]] \
-        || echo -e "\nNo pending domains." \
-        && exit 0
+    if ! [[ -s "$pending_file" ]]; then
+        echo -e "\nNo pending domains."
+        exit 0
+    fi
 
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
     sleep 0.3
