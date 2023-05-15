@@ -171,7 +171,7 @@ function filter_pending {
     echo "Domains:"
     cat "$pending_file"
 
-    sleep 1
+    sleep 0.5
 
     check_toplist
 }
@@ -204,6 +204,7 @@ function check_toplist {
 
         if [[ "$choice" == 'e' ]]; then
             echo -e "\nEnter 'x' to go back to the previous menu."
+            sleep 0.5
             source "$edit_script"
             continue 
         elif [[ "$choice" == 'r' ]]; then   
@@ -219,6 +220,7 @@ function check_toplist {
         chosen_domain=$(echo "$numbered_toplist" \
            | awk -v n="$choice" '$1 == n {print $2}')
         echo -e "\nDomain: ${chosen_domain}"
+        sleep 0.5
         echo "Choose a list to add to:"
         echo "b. Blacklist"
         echo "w. Whitelist"
@@ -235,6 +237,7 @@ function check_toplist {
         else
             echo -e "\nInvalid option."
         fi
+        sleep 0.5
     done
 }
 
@@ -256,6 +259,7 @@ function optimise_blocklist {
         echo -e "\nOPTIMISER MENU"
         echo "Potential optimised entries:"
         echo "$numbered_domains"
+        sleep 0.5
         echo "*. Whitelist the entry"
         echo "a. Add all optimised entries"
         read -r choice
@@ -368,8 +372,8 @@ while true; do
             merge_pending
             ;;
         e)
-            # Call the editing script
             echo -e "\nEnter 'x' to go back to the previous menu."
+            sleep 0.5
             source "$edit_script"
             ;;
         r)
