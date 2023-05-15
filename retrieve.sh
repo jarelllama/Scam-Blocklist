@@ -117,9 +117,11 @@ function filter_pending {
 
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
-    sleep 1
+    sleep 0.5
 
     echo -e "\nFiltering..."
+    
+    sleep 0.5
 
     # Remove domains already in the blocklist
     comm -23 1.tmp "$raw_file" > 2.tmp
