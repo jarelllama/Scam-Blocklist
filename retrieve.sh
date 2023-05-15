@@ -168,7 +168,6 @@ function filter_pending {
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
     sleep 0.5
     echo "Domains:"
-    sleep 0.5
     cat "$pending_file"
 
     sleep 0.5
@@ -204,7 +203,6 @@ function check_toplist {
 
         if [[ "$choice" == 'e' ]]; then
             echo -e "\nEnter 'x' to go back to the previous menu."
-            sleep 0.5
             source "$edit_script"
             continue 
         elif [[ "$choice" == 'r' ]]; then   
@@ -231,10 +229,12 @@ function check_toplist {
             echo "$chosen_domain" >> "$blacklist_file"
             sort "$blacklist_file" -o "$blacklist_file"
             echo -e "\nBlacklisted: ${chosen_domain}"
+            echo
         elif [[ "$choice" == 'w' ]]; then
             echo "$chosen_domain" >> "$whitelist_file"
             sort "$whitelist_file" -o "$whitelist_file"
             echo -e "\nWhitelisted: ${chosen_domain}"
+            echo "Run the filtering again to apply whitelist change."
         else
             echo -e "\nInvalid option."
         fi
@@ -379,7 +379,6 @@ while true; do
             ;;
         e)
             echo -e "\nEnter 'x' to go back to the previous menu."
-            sleep 0.5
             source "$edit_script"
             ;;
         r)
