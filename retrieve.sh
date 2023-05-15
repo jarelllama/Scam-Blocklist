@@ -101,22 +101,21 @@ function retrieve_domains {
         echo "--------------------------------------"
     done < "$search_terms_file"
 
-    [[ -s "$pending_file" ]]; \
+    [[ -s "$pending_file" ]] \
         || echo -e "\nNo domains retrieved." \
         && exit 1
 }
 
 function check_toplist {
-    sleep 0.3
-
     while true; do
+        sleep 0.5
+
         comm -12 "$pending_file" "$toplist_file" \
             | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
-        if ! [[ -s in_toplist.tmp ]]; then
-            echo -e "\nNo domains found in toplist."
-            return
-        fi
+        [[ -s in_toplist.tmp ]] \
+            || echo -e "\nNo domains found in toplist." \
+            && return
 
         if "$unattended"; then
             echo "Domains in toplist:"
@@ -172,7 +171,6 @@ function check_toplist {
         else
             echo -e "\nInvalid option."
         fi
-    sleep 0.3
     done
 }
 
@@ -227,13 +225,12 @@ function filter_pending {
 
     mv 7.tmp "$pending_file"
 
-    if ! [[ -s "$pending_file" ]]; then
-        echo -e "\nNo pending domains."
-        exit 0
-    fi
+    [[ -s "$pending_file" ]] \
+        || echo -e "\nNo pending domains." \
+        && exit 0
 
     echo -e "\nPending domains not in blocklist: $(wc -l < ${pending_file})"
-    sleep 0.5
+    sleep 0.3
     echo "Domains:"
     cat "$pending_file"
 
@@ -242,6 +239,8 @@ function filter_pending {
 
 function optimise_blocklist {
     while true; do
+        sleep 0.5
+
         grep -E '\..*\.' "$raw_file" \
             | cut -d '.' -f2- \
             | awk -F '.' '$1 ~ /.{4,}/ {print}' \
@@ -282,7 +281,6 @@ function optimise_blocklist {
         sort "$optimised_entries" -o "$optimised_entries"
 
         sleep 0.3
-            
         echo "Removing redundant entries..."
         while read -r entry; do
             grep "\.${entry}$" "$raw_file" >> redundant.tmp
@@ -291,15 +289,15 @@ function optimise_blocklist {
         mv raw.tmp "$raw_file"
             
         sleep 0.3
-            
         echo "Merging..."
+
         sleep 0.3
         return
     done
 }
 
 function merge_pending {
-    sleep 0.3
+    "$unattended" && sleep 0.5
 
     cp "$raw_file" "${raw_file}.bak"
 
@@ -327,8 +325,10 @@ function merge_pending {
         previous_count=$(sed -n '10p' "$stats_file")
         new_count=$((previous_count + num_added))
         sed -i "10s/.*/${new_count}/" "$stats_file"
+
+        sleep 0.5
     else
-        sleep 0.3
+        sleep 0.5
         read -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
         if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
@@ -337,10 +337,7 @@ function merge_pending {
         fi
     fi
 
-    sleep 0.3
-
-    echo -e "\nPushing changes...\n"
-    sleep 0.3
+    echo 
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
@@ -387,6 +384,7 @@ while true; do
             echo -e "\nRunning filter again..."
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
+            exit 0
             ;;
         x)
             exit 0 ;;
