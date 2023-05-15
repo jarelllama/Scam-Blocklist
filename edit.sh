@@ -169,6 +169,11 @@ function check_entry {
 
     format_entry "$entry"
 
+    if [[ "$entry" =~ [[:space:]] || -z "$entry" ]]; then
+        echo -e "\nInvalid entry. Not added."
+        return
+    fi
+
     if ! grep -xFq "$entry" "$raw_file"; then
         echo -e "\nThe entry is not present: $entry"
         # Check if there are similar entries
