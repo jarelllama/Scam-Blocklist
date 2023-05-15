@@ -117,10 +117,10 @@ function filter_pending {
 
     cp 1.tmp "${pending_file}.bak"
 
-    sort 0.5
+    sleep 0.5
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
-    sleep 0.5
+    sleep 0.2
     echo -e "\nFiltering..."
 
     # Remove domains already in the blocklist
@@ -128,7 +128,7 @@ function filter_pending {
 
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
 
-    sleep 0.5
+    sleep 0.2
     echo -e "\nFiltering log:"
 
     grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
@@ -212,7 +212,6 @@ function check_toplist {
             continue 
         elif [[ "$choice" == 'r' ]]; then   
             echo -e "\nRunning filter again..."
-            sleep 0.5
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             exit 0
@@ -387,7 +386,6 @@ while true; do
             ;;
         r)
             echo -e "\nRunning filter again..."
-            sleep 0.5
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             ;;
