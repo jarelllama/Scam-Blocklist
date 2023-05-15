@@ -46,7 +46,9 @@ done
 
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
     read -rp $'\nEmpty the pending file? (Y/n): ' answer
-    [[ "$answer" =~ ^[Yy]? ]] && > "$pending_file"
+    if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
+        > "$pending_file"
+    fi
 fi
 
 if ! "$unattended"; then
