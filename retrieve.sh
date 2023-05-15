@@ -14,7 +14,7 @@ stats_file="data/stats.txt"
 edit_script="edit.sh"
 
 function on_exit {
-    echo -e "\nExiting...\n"
+    echo -e "\nExiting..."
     find . -maxdepth 1 -type f -name '*.tmp' -delete
 }
 
