@@ -120,7 +120,7 @@ function filter_pending {
     sleep 0.5
     echo -e "\nTotal domains retrieved/pending: $(wc -l < 1.tmp)"
 
-    sleep 0.2
+    sleep 0.3
     echo -e "\nFiltering..."
 
     # Remove domains already in the blocklist
@@ -128,7 +128,7 @@ function filter_pending {
 
     comm -23 2.tmp "$dead_domains_file" > 3.tmp
 
-    sleep 0.2
+    sleep 0.3
     echo -e "\nFiltering log:"
 
     grep -Ff "$whitelist_file" 3.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
@@ -199,7 +199,7 @@ function check_toplist {
         numbered_toplist=$(cat in_toplist.tmp | awk '{print NR ". " $0}')
 
         echo -e "\nTOPLIST MENU"
-        sleep 0.2
+        sleep 0.3
         echo "$numbered_toplist"
         echo "*. Blacklist/whitelist the domain"
         echo "e. Edit lists"
@@ -223,7 +223,7 @@ function check_toplist {
         chosen_domain=$(echo "$numbered_toplist" \
            | awk -v n="$choice" '$1 == n {print $2}')
         echo -e "\nDomain: ${chosen_domain}"
-        sleep 0.2
+        sleep 0.3
         echo "Choose a list to add to:"
         echo "b. Blacklist"
         echo "w. Whitelist"
@@ -363,7 +363,7 @@ fi
 
 while true; do
     echo -e "\nPENDING DOMAINS MENU"
-    sleep 0.2
+    sleep 0.3
     echo "m. Merge with blocklist"
     echo "e. Edit lists"
     echo "r. Run filter again"
