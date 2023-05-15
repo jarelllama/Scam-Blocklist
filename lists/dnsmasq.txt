@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.002729.2023
-# Last modified: Mon May 15 00:27:29 UTC 2023
+# Version: 05.15.030446.2023
+# Last modified: Mon May 15 03:04:46 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3923
+# Total number of entries: 3931
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -21,6 +21,7 @@ address=/630563295qq.myshoplaza.com/#
 address=/68apparel.store/#
 address=/77unishop.com/#
 address=/90sfootwear.com/#
+address=/915619962.hochland-kriecherl.at/#
 address=/a-mazon.shop/#
 address=/a3review.com/#
 address=/aac667.com/#
@@ -960,6 +961,7 @@ address=/duovana.com/#
 address=/dustin-sales.shop/#
 address=/duvipmalls.store/#
 address=/dwnrod.com/#
+address=/dyjnchpal.zajazd-boryslawice.pl/#
 address=/dynyl.com/#
 address=/dytreasure.com/#
 address=/dzirenation.com/#
@@ -1285,6 +1287,7 @@ address=/fyges.com/#
 address=/fypsex.com/#
 address=/g-host.io/#
 address=/gaberdeal.com/#
+address=/gabistore.cz/#
 address=/gadgetfreak.com.au/#
 address=/gadgetshomestore.com/#
 address=/gadgettype.com/#
@@ -1337,6 +1340,7 @@ address=/getkue.com/#
 address=/getupsized.com/#
 address=/getwomenswear.com/#
 address=/gewqas.com/#
+address=/gewudas.shop/#
 address=/gibbeverage.shop/#
 address=/gifnest.com/#
 address=/gifnestbuy.com/#
@@ -1411,6 +1415,7 @@ address=/goxmix.co.za/#
 address=/goxmix.com/#
 address=/gpjholzdesign.de/#
 address=/gqcxp.sandralaumusic.com/#
+address=/gqqasx.gruppojem.it/#
 address=/gradmalaysia.com/#
 address=/graduan.com/#
 address=/grailgg.com/#
@@ -1782,6 +1787,7 @@ address=/kfthd.com/#
 address=/kgnovav.nftjobfinders.com/#
 address=/kianshopy.com/#
 address=/kidspopular.com/#
+address=/kifodos.shop/#
 address=/kikimiss.com/#
 address=/kilatkuning.shop/#
 address=/kilianes.uk/#
@@ -1932,6 +1938,7 @@ address=/lizcam.com/#
 address=/lizrugs.com/#
 address=/lkuia.shop/#
 address=/llhhtwtln.gentrify.pl/#
+address=/lmhxws.umowymiedzynarodowe.pl/#
 address=/lobbyreviews.net/#
 address=/local-payments.shop/#
 address=/locymax.com/#
@@ -1973,7 +1980,6 @@ address=/lovreko.com/#
 address=/lowprice-outdoor.com/#
 address=/loyalseek.com/#
 address=/lsbgdup.deunatuweb.com/#
-address=/lsjtvjnh.gabistore.cz/#
 address=/lskg.shop/#
 address=/ltasportsz.com/#
 address=/lucchesedeal.store/#
@@ -2289,6 +2295,7 @@ address=/nebulanights.com/#
 address=/nebulosity.shop/#
 address=/neefx.com/#
 address=/neespresso.coffee/#
+address=/nelapar.shop/#
 address=/nelhub.com/#
 address=/nellykstore.com/#
 address=/nellylstore.com/#
@@ -3531,6 +3538,7 @@ address=/turnnetwor.com/#
 address=/turolloy.com/#
 address=/tutanuh.shop/#
 address=/tutesep.shop/#
+address=/tutesoh.xyz/#
 address=/tuthrd.com/#
 address=/twinklepades.shop/#
 address=/twrdft.com/#
