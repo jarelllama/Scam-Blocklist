@@ -38,7 +38,6 @@ for arg in "$@"; do
     fi
 done
 
-
 if [[ -s "$pending_file" ]] && ! "$use_pending_only"; then
     read -rp $'\nEmpty the pending file? (Y/n): ' answer
     if [[ "$answer" =~ ^[Yy]$ ]] || [[ -z "$answer" ]]; then
@@ -52,7 +51,8 @@ if ! "$unattended"; then
 fi
 
 function retrieve_domains {
-    echo -e "\nRetrieving domains...\n"
+    echo -e "\nRetrieving domains..."
+    echo
     echo "Search filter: $time_filter"
     echo "Search terms:"
 
