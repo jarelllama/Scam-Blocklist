@@ -60,10 +60,6 @@ while [[ "$#" -gt 0 ]]; do
             before=''
             after=''
             ;;
-        *)
-            echo "Invalid option: --{$1}"
-            exit 1
-            ;;
     esac
     shift
 done
