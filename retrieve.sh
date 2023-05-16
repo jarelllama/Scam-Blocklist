@@ -260,6 +260,15 @@ function filter_pending {
 }
 
 function optimiser {
+    # Update optimiser TLDs file with the latest TLDs in-
+    # the optimised entries file that make up 5% or more of total domains
+    cat "$optimised_entries_file" \
+       | awk -F. '{print $NF}' \
+       | sort | uniq -c \
+       | awk '{if($1/total >=0.05) print $2}' \
+       total=$(wc -l < "${optimised_entries_file}") \
+       > $optimiser_tld_file
+    
     while true; do
         sleep 0.5
 
@@ -292,7 +301,7 @@ function optimiser {
         echo "Potential optimised entries:"
         num=1
         while read -r optimiser_domain; do
-            # Note the second 'echo' command will always be positive,
+            # Note the second 'echo' command will always be positive,-
             # so A && B || C works here
             grep -xFq "$optimiser_domain" in_toplist.tmp \
                 && echo "${num}. ${optimiser_domain} (in toplist)" \
@@ -388,7 +397,7 @@ function merge_pending {
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
-        "$optimised_entries_file" "$optimiser_whitelist"
+        "$optimised_entries_file" "$optimiser_whitelist" $optimiser_tld_file"
     git commit -m "$commit_msg"
     git push -q
 
