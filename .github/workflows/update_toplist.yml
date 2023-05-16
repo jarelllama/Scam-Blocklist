@@ -45,6 +45,6 @@ jobs:
             echo
             exit 1
           else
-            echo -e "\nNo domains found in the toplist.\n"
+            echo -e "\nNo domains found in the toplist\n"
             exit 0
           fi
