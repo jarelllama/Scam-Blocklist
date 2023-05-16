@@ -181,7 +181,9 @@ jobs:
           bash "${{ vars.BUILD }}" --unbound -i "${{ vars.RAW_FILE }}" -o "scams.txt"
           bash "${{ vars.BUILD }}" --wc-asterisk -i "${{ vars.RAW_FILE }}" -o "scams.txt"
           bash "${{ vars.BUILD }}" --wc-domains -i "${{ vars.RAW_FILE }}" -o "scams.txt"
-          bash "${{ vars.BUILD }}" --wc-domains -i "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "hosters.txt" -t "Jarelllama's Malicious Hosters Blocklist" -d 'Blocklist for malicious hosting domains automatically retrieved from Google Search'
+          bash "${{ vars.BUILD }}" --wc-domains -i "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "hosters.txt" \
+            -t "Jarelllama's Malicious Hosters Blocklist" \
+            -d 'Blocklist for malicious hosting domains automatically retrieved from Google Search'
 
       - name: Update stats
         if: success() || steps.build_lists.conclusion == 'success'
@@ -250,4 +252,3 @@ jobs:
       - name: Push
         if: success() || steps.build_lists.conclusion == 'success'
         run: git push
-
