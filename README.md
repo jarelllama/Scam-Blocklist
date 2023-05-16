@@ -20,7 +20,7 @@ Scam sites found:
 Today: 28
 Yesterday: 37
 
-Updated: Tue May 16 08:34 UTC
+Updated: Tue May 16 08:42 UTC
 ```
 
 ## Other blocklists
@@ -61,7 +61,7 @@ The blocklist maintenance process from domain retrieval to list building makes u
 
 2. Blocking common second-level domains/malicious hosters: if `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for each subdomain. A whitelist is used for genuine e-commerce/hosting domains such as `myshopify.com`. This is an effective way to block malicious hosting domains that host scam/malicious sites on their subdomains. This process is done manually and never unattended.
 
-3. TLD-based detection of malicious hosters: the list of common second-level domains from (2) is used to gather statistics on frequently used TLDs. These TLDs are factored into the domain retrieval process to point out potential malicious hosting domains. The current process uses the TLDs that makeup 5% or more of common second-level domains blocked. These calculated TLDs are then compared to new entries during the retrieval process where flagged domains can be manually added to the blocklist. This process is done manually and never unattended.
+3. TLD-based detection of malicious hosters: the list of common second-level domains from (2) is used to gather statistics on frequently used TLDs. These TLDs are factored into the domain retrieval process to point out potential malicious hosting domains. The current process uses the TLDs that makeup 5% or more of common second-level domains in the list. These calculated TLDs are then compared to new entries during the retrieval process where flagged domains can be manually added to the blocklist. This process is done manually and never unattended.
 
 ## Dead domains
 
@@ -97,13 +97,13 @@ As such, the number of domains added to the blocklist in a day varies depending 
 
 [Hagezi's DNS Blocklist](https://github.com/hagezi/dns-blocklists): inspiration and reference
 
-[TurboGPT](https://turbogpt.ai/): ChatGPT client I used for generating ideas for tricking code
+[TurboGPT](https://turbogpt.ai/): ChatGPT client I used for generating ideas for tricky code
 
 [Grammarly](https://www.grammarly.com): grammar correction and suggestions for README files, comments, etc.
 
 ### Appreciation
 
-Thanks to the following for the help, inspiration, and support!
+Thanks to the following people for the help, inspiration, and support!
 
 [@hagezi](https://github.com/hagezi)
 
