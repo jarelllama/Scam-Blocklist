@@ -142,10 +142,6 @@ jobs:
           grep -vxFf check.tmp "${{ vars.RAW_FILE }}" > raw.tmp || true
           mv raw.tmp "${{ vars.RAW_FILE }}"
   
-          sort -u "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "${{ vars.OPTIMISED_ENTRIES_FILE }}"
-          git add "${{ vars.OPTIMISED_ENTRIES_FILE }}"
-          git diff-index --quiet HEAD || git commit -qm "Remove redundant entries" || true
-
           echo -e "\nRemoving...\n"
           exit 1
 
@@ -165,7 +161,7 @@ jobs:
       - name: Commit filtered raw file
         if: success() || failure()
         run: |
-          git add "${{ vars.RAW_FILE }}"
+          git add "${{ vars.RAW_FILE }}" "${{ vars.OPTIMISED_ENTRIES_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Filter raw file" || true
 
       - name: Build lists
@@ -241,4 +237,3 @@ jobs:
       - name: Push
         if: success() || steps.build_lists.conclusion == 'success'
         run: git push
-
