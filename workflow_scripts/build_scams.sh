@@ -1,13 +1,32 @@
 #!/bin/bash
 
 raw_file="data/raw.txt"
+file='scams.txt'
 syntax="$1"
-path="$2"
-before="$3"
-after="$4"
-comment="$5"
+before="$2"
+after="$3"
+comment='#'
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
+
+if [[ $(echo "$syntax" | grep -i "adblock") ]]; then
+    syntax='Adblock Plus'
+    path="lists/adblock/${file}"
+    comment='!'
+    before='||'
+elif [[ $(echo "$syntax" | grep -i "wildcard domains") ]]; then
+    syntax='Wildcard Domains' 
+    path="lists/wildcard_domains/${file}"
+elif [[ $(echo "$syntax" | grep -i "wildcard asterisk") ]]; then
+    syntax='Wildcard Asterisk' 
+    path="lists/wildcard_asterisk/${file}"
+elif [[ $(echo "$syntax" | grep -i "dnsmasq") ]]; then
+    syntax='Dnsmasq' 
+    path="lists/dnsmasq/${file}"
+elif [[ $(echo "$syntax" | grep -i "unbound") ]]; then
+    syntax='Unbound' 
+    path="lists/unbound/${file}"
+fi
 
 echo -e "\nBuilding ${syntax}..."
 
