@@ -299,8 +299,8 @@ function optimiser {
                 || echo "${num}. ${optimiser_domain}"
             ((num++))
         done < optimiser_domains.tmp
-        echo "*. Whitelist the entry"
         echo "a. Add all optimised entries"
+        echo "*. Whitelist the entry"
         read -r choice
 
         if [[ "$choice" =~ ^[0-9]+$ ]]; then
@@ -320,12 +320,17 @@ function optimiser {
         sort -u "$raw_file" -o "$raw_file"
         sort "$optimised_entries_file" -o "$optimised_entries_file"
 
-        sleep 0.3
-        echo "Removing redundant entries..."
         # Note not to remove redundant.tmp because it is needed during the merge function
         while read -r entry; do
             grep "\.${entry}$" "$raw_file" >> redundant.tmp
         done < optimiser_domains.tmp
+        sleep 0.3
+        echo "Removing redundant entries from blocklist..."
+        sleep 0.3
+        echo "Removed domains:"
+        sleep 0.3
+        cat redundant.tmp
+        
         grep -vxFf redundant.tmp "$raw_file" > raw.tmp
         mv raw.tmp "$raw_file"
             
@@ -371,11 +376,11 @@ function merge_pending {
     else
         sleep 0.5
 
-        read -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
-        if [[ "$answer" =~ ^[Yy]$ || -z "$answer" ]]; then
-            commit_msg="Manual domain retrieval"
-        else
+        read -rp $'\nDo you want to push the blocklist? (y/N): ' answer
+        if [[ "$answer" =~ ^[Nn]$ || -z "$answer" ]]; then
             exit 0
+        else
+            commit_msg="Manual domain retrieval"
         fi
     fi
 
