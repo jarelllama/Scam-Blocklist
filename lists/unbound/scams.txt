@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.174742.2023
-# Last modified: Tue May 16 17:47:42 UTC 2023
+# Version: 05.16.204332.2023
+# Last modified: Tue May 16 20:43:32 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4139
+# Total number of entries: 4142
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -3421,6 +3421,7 @@ local-zone: "subsequentp.com." always_nxdomain
 local-zone: "suilkg.shop." always_nxdomain
 local-zone: "suitpin.com." always_nxdomain
 local-zone: "summernearly.com." always_nxdomain
+local-zone: "summeroutfit.co." always_nxdomain
 local-zone: "summerstor.com." always_nxdomain
 local-zone: "sundaicex.com." always_nxdomain
 local-zone: "sundayliquid.shop." always_nxdomain
@@ -3729,6 +3730,7 @@ local-zone: "trusyo.com." always_nxdomain
 local-zone: "tryems.com." always_nxdomain
 local-zone: "trytodaysdeal.com." always_nxdomain
 local-zone: "tsipps.com." always_nxdomain
+local-zone: "tsmoons.com." always_nxdomain
 local-zone: "ttsecret.com." always_nxdomain
 local-zone: "tubespartsaccessories.com." always_nxdomain
 local-zone: "tuenhi.info." always_nxdomain
@@ -4137,6 +4139,7 @@ local-zone: "zjfshopping.com." always_nxdomain
 local-zone: "zlno.shop." always_nxdomain
 local-zone: "zmbond.com." always_nxdomain
 local-zone: "zodnox.com." always_nxdomain
+local-zone: "zold4pets.com." always_nxdomain
 local-zone: "zonexautoparts.com." always_nxdomain
 local-zone: "zonin.store." always_nxdomain
 local-zone: "zpit-kurpiezielone.pl." always_nxdomain
