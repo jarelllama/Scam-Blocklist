@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.145851.2023
-# Last modified: Tue May 16 14:58:51 UTC 2023
+# Version: 05.16.150656.2023
+# Last modified: Tue May 16 15:06:56 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3995
+# Total number of entries: 3999
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -728,6 +728,7 @@ local-zone: "cooeedesignshop.com." always_nxdomain
 local-zone: "cookiecandyca.com." always_nxdomain
 local-zone: "cookwares.space." always_nxdomain
 local-zone: "coolblo.com." always_nxdomain
+local-zone: "coolhoodie.co." always_nxdomain
 local-zone: "coolsthings.com." always_nxdomain
 local-zone: "coomooy.com." always_nxdomain
 local-zone: "cootank.com." always_nxdomain
@@ -1124,6 +1125,7 @@ local-zone: "evaany.com." always_nxdomain
 local-zone: "evagle.com." always_nxdomain
 local-zone: "eval-center.com." always_nxdomain
 local-zone: "evaluations-center.com." always_nxdomain
+local-zone: "evanescenceusa.com." always_nxdomain
 local-zone: "evasolostore.com." always_nxdomain
 local-zone: "evedat.com." always_nxdomain
 local-zone: "everlead.net." always_nxdomain
@@ -1387,6 +1389,7 @@ local-zone: "giftflows.com." always_nxdomain
 local-zone: "giftiheaven.com." always_nxdomain
 local-zone: "giftipoint.com." always_nxdomain
 local-zone: "giftmaart.com." always_nxdomain
+local-zone: "giftremix.com." always_nxdomain
 local-zone: "gifts4fan.us." always_nxdomain
 local-zone: "giftsholic.com." always_nxdomain
 local-zone: "giftshoptoday.com." always_nxdomain
@@ -3982,6 +3985,7 @@ local-zone: "zewahot.com." always_nxdomain
 local-zone: "zezeii.com." always_nxdomain
 local-zone: "zhoyes.com." always_nxdomain
 local-zone: "zilguru.com." always_nxdomain
+local-zone: "zilpal.com." always_nxdomain
 local-zone: "zinhuis.com." always_nxdomain
 local-zone: "zinstyles.com." always_nxdomain
 local-zone: "zinwald.com." always_nxdomain
