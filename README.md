@@ -13,14 +13,14 @@
 ## Stats
 
 ```
-ALIVE SCAM SITES: 3987
-TOTAL SCAM SITES: 3996
+ALIVE SCAM SITES: 3993
+TOTAL SCAM SITES: 4002
 
 Scam sites found:
-Today: 28
+Today: 34
 Yesterday: 37
 
-Updated: Tue May 16 14:32 UTC
+Updated: Tue May 16 14:43 UTC
 ```
 
 ## Other blocklists
@@ -33,7 +33,7 @@ This list is a byproduct of the blocklist [optimisation](https://github.com/jare
 
 | Format | Entries |
 | --- |:---:|
-| [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/hosters.txt) | 141 |
+| [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/hosters.txt) | 142 |
 
 ## How domains are added to the blocklist
 
