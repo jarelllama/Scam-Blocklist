@@ -1,5 +1,5 @@
-name: Build lists
-run-name: Build lists
+name: Build
+run-name: Build
 on:
   workflow_dispatch:
   push:
@@ -11,7 +11,7 @@ on:
     - cron: '40 20 * * *'
 
 jobs:
-  build_lists:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
