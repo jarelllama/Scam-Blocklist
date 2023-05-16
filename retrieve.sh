@@ -147,17 +147,20 @@ function check_toplist {
         e)
             echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
-            continue 
+            continue
+            ;;
         r)
             echo -e "\nRunning filter again..."
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             exit 0
+            ;;
          *)
             if ! [[ "$choice" =~ ^[0-9]+$ ]]; the 
                 echo -e "\nInvalid option."
                 continue
             fi
+            ;;
         esac
 
         chosen_domain=$(echo "$numbered_toplist" \
