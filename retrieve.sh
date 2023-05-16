@@ -267,7 +267,7 @@ function optimiser {
        | sort | uniq -c \
        | awk '{if($1/total >=0.05) print $2}' \
        total=$(wc -l < "${optimised_entries_file}") \
-       > $optimiser_tld_file
+       > "$optimiser_tld_file"
     
     while true; do
         sleep 0.5
@@ -397,7 +397,7 @@ function merge_pending {
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
-        "$optimised_entries_file" "$optimiser_whitelist" $optimiser_tld_file"
+        "$optimised_entries_file" "$optimiser_whitelist" "$optimiser_tld_file"
     git commit -m "$commit_msg"
     git push -q
 
