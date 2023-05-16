@@ -266,8 +266,7 @@ function optimiser {
         while read -r tld; do
             grep "\.${tld}$" "$raw_file" \
                 | grep -E '\..*\.' \
-                | cut -d '.' -f2- \
-                | sort >> optimiser_pending.tmp
+                | cut -d '.' -f2- >> optimiser_pending.tmp
         done < "$optimiser_tld_file"
 
         grep -E '\..*\.' "$raw_file" \
@@ -367,6 +366,7 @@ function merge_pending {
         sleep 0.5
     else
         sleep 0.5
+
         read -rp $'\nDo you want to push the blocklist? (Y/n): ' answer
         if [[ "$answer" =~ ^[Yy]$ || -z "$answer" ]]; then
             commit_msg="Manual domain retrieval"
