@@ -80,7 +80,7 @@ if [[ -z "$syntax" ]]; then
 fi
 
 list="${dir}/${output}"
-path="list/${list}"
+path="lists/${list}"
 
 echo -e "\nBuilding ${syntax}..."
 
