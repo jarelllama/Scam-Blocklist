@@ -22,7 +22,7 @@ Yesterday: 37
 Manually: 3904
 Automatically: 92
 
-Updated: Tue May 16 06:07 UTC
+Updated: Tue May 16 07:07 UTC
 ```
 
 ### How domains are added to the blocklist
@@ -45,11 +45,13 @@ Only formats that make use of wildcard matching are supported as they block all 
 
 ### Optimisations
 
-The list building process makes use of wildcard blocking in two ways:
+The blocklist maintenance process from domain retrieval to list building makes use of wildcard blocking in these ways:
 
-1. Removal of redundant entries: If the blocklist contains `spam.com`, via wildcard matching, `sub.spam.com` would be blocked as well and is, therefore, redundant and will be removed.
+1. Removal of redundant entries: If the blocklist contains `spam.com`, via wildcard matching, `sub.spam.com` would be blocked as well and is, therefore, redundant and is removed.
 
-2. Finding common second-level domains: If `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for each subdomain. A whitelist is used to prevent blocking genuine e-commerce/hosting domains such as `myshopify.com`.
+2. Blocking common second-level domains/malicious hosters: If `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for each subdomain. A whitelist is used to prevent blocking genuine e-commerce/hosting domains such as `myshopify.com`. This is an effective way to block malicious hosting domains that host scam/malicious sites on their subdomains.
+
+3. TLD-based detection of malicious hosters: The list of common second-level-domains is also used to gather statistics on frequently used TLDs. These TLDs are factored into the blocklist maintenance process to point out potential domains hosting malicious sites. The current process uses the TLDs that make up 5% or more of common second-level-domains blocked.
 
 ### Dead domains
 
@@ -78,3 +80,13 @@ See [stats](https://github.com/jarelllama/Scam-Blocklist#stats) for the number o
 [Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
 
 [Reddit's r/Scams subreddit](https://www.reddit.com/r/Scams)
+
+### Resources
+
+[TurboGPT](https://turbogpt.ai/)
+
+[ShellCheck](https://www.shellcheck.net/)
+
+[LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php)
+
+[Hagezi's DNS Blocklist](https://github.com/hagezi/dns-blocklists) (and thanks alot to [@hagezi](https://github.com/hagezi) for the inspiration and help)
