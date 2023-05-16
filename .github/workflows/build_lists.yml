@@ -209,10 +209,14 @@ jobs:
             sed -i "8s/.*/${end_of_day_diff}/" "${{ vars.STATS_FILE }}"
           fi
 
+          hosters_count=$(wc -l < "${{ vars.OPTIMISED_ENTRIES_FILE }}")
+
+          sed -i "s/hosters_count/${hosters_count}/g" "${{ vars.README_TEMPLATE }}"
+
           sed -i "4s/.*/${current_count}/" "${{ vars.STATS_FILE }}"
 
           sed -i "s/alive_count/${current_count}/g" "${{ vars.README_TEMPLATE }}"
-
+          
           dead_domains_count=$(wc -l < "${{ vars.DEAD_DOMAINS_FILE }}")
 
           total_count=$((dead_domains_count + current_count))
