@@ -2,14 +2,15 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.235252.2023
-# Last modified: Mon May 15 23:52:52 UTC 2023
+# Version: 05.16.025737.2023
+# Last modified: Tue May 16 02:57:37 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3959
+# Total number of entries: 3972
 #
 address=/168cyd.com/#
 address=/17aap.net/#
+address=/201365640.matarocultural.cat/#
 address=/299691360.mailapelihalli.fi/#
 address=/2s.pizza-napoleon.cz/#
 address=/3d-printing.store/#
@@ -21,6 +22,7 @@ address=/630563295qq.myshoplaza.com/#
 address=/68apparel.store/#
 address=/746776079.autella.fi/#
 address=/77unishop.com/#
+address=/796668479.blutsverwandt.at/#
 address=/842961523.wavesystems.cz/#
 address=/90sfootwear.com/#
 address=/915619962.hochland-kriecherl.at/#
@@ -464,6 +466,7 @@ address=/brimwilke.com/#
 address=/bringwellz.com/#
 address=/briskmeind.com/#
 address=/briskrtpto.com/#
+address=/brivalls.cat/#
 address=/brixtee.com/#
 address=/brizzhut.com/#
 address=/brobron.com/#
@@ -798,6 +801,7 @@ address=/dakmag.com/#
 address=/daledog.store/#
 address=/dalypal.com/#
 address=/dalzu.com/#
+address=/danaine.com/#
 address=/danekvalitne.cz/#
 address=/danner-us.shop/#
 address=/dannyart.store/#
@@ -1012,6 +1016,7 @@ address=/eicobuy.com/#
 address=/ejaxww.cargifts.de/#
 address=/ekebalu.shop/#
 address=/ekyfoa.shop/#
+address=/elainstore.com/#
 address=/elasticdockline.com/#
 address=/eldoradoa.com/#
 address=/eldoya.com/#
@@ -1319,6 +1324,7 @@ address=/gardendecoratio.shop/#
 address=/gardenequipmenshopmall.store/#
 address=/gardeningshop.website/#
 address=/garmentvogue.com/#
+address=/gbbbxhspt.lassaggio.cz/#
 address=/gbp-co.uk/#
 address=/gbthoodie.store/#
 address=/gd-workshop.com/#
@@ -1489,6 +1495,7 @@ address=/hazelbath.shop/#
 address=/hazeltoiletries.shop/#
 address=/hbyrts.com/#
 address=/hcglobalshopping.com/#
+address=/hdhqsuiik.papybio.fr/#
 address=/hdjean.online/#
 address=/hdseiin.com/#
 address=/healthfitnessoutlet.com/#
@@ -1608,6 +1615,7 @@ address=/hunisot.com/#
 address=/huntingcameras.shop/#
 address=/huntingtools.shop/#
 address=/huoern.com/#
+address=/hvfzqs.kurakova.pl/#
 address=/hymele.com/#
 address=/hypekartel.com/#
 address=/hyperazt.com/#
@@ -1846,6 +1854,7 @@ address=/koxaz.com/#
 address=/kozmozinspire.com/#
 address=/krnbcase.com/#
 address=/krystaldecristo.com/#
+address=/krzysztofkwasizur.pl/#
 address=/ksntpo.com/#
 address=/kudopenguin.com/#
 address=/kurpiezielone.pl/#
@@ -2531,6 +2540,7 @@ address=/outletbodycare.com/#
 address=/outletclimb.com/#
 address=/outletfarmranch.com/#
 address=/outletgolfequipment.com/#
+address=/outletiro.com/#
 address=/outletnewhome.com/#
 address=/outletnursery.com/#
 address=/outletouterwear.com/#
@@ -3005,6 +3015,7 @@ address=/sesefun.xyz/#
 address=/sessioon.com/#
 address=/sewingiiseasy.com/#
 address=/sewlt.com/#
+address=/sewyrjm.ristrutturazionecasaalassio.it/#
 address=/sfootwearshop.com/#
 address=/sgohory.com/#
 address=/sgxcoins.com/#
@@ -3396,6 +3407,7 @@ address=/theclothesbox.com/#
 address=/thecycleshoes.com/#
 address=/theeaglebrand.company.site/#
 address=/thefitbuy.com/#
+address=/thefrankie.site/#
 address=/thefueledfan.com/#
 address=/thefurnitureusa.com/#
 address=/thegallerify.com/#
@@ -3615,6 +3627,7 @@ address=/unlockvigor.com/#
 address=/unmagasine.com/#
 address=/unusualsurf.com/#
 address=/unyups.com/#
+address=/uobc.monika-koeppes-welt.de/#
 address=/upchest.net/#
 address=/upfores.art/#
 address=/upizone.com/#
