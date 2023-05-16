@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.043906.2023
-# Last modified: Tue May 16 04:39:06 UTC 2023
+# Version: 05.16.055842.2023
+# Last modified: Tue May 16 05:58:42 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3976
+# Total number of entries: 3980
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -139,6 +139,7 @@ local-zone: "amiguworldvn.com." always_nxdomain
 local-zone: "amillyvo.com." always_nxdomain
 local-zone: "ammyl.com." always_nxdomain
 local-zone: "amoustore.com." always_nxdomain
+local-zone: "amstramgrammes.fr." always_nxdomain
 local-zone: "amybaby.shop." always_nxdomain
 local-zone: "amybathtub.xyz." always_nxdomain
 local-zone: "amyhome.live." always_nxdomain
@@ -798,6 +799,7 @@ local-zone: "d-clock.cfd." always_nxdomain
 local-zone: "d-drama.cfd." always_nxdomain
 local-zone: "d-ghost.cfd." always_nxdomain
 local-zone: "d-glory.cfd." always_nxdomain
+local-zone: "d-ivory.cfd." always_nxdomain
 local-zone: "d-rough.cfd." always_nxdomain
 local-zone: "d-shake.cfd." always_nxdomain
 local-zone: "d-state.cfd." always_nxdomain
@@ -1291,6 +1293,7 @@ local-zone: "freightforwardersfamily.com." always_nxdomain
 local-zone: "frelishay.com." always_nxdomain
 local-zone: "freshdepoot.com." always_nxdomain
 local-zone: "friashion.com." always_nxdomain
+local-zone: "friseur-in-hagen.de." always_nxdomain
 local-zone: "fronshop.com." always_nxdomain
 local-zone: "frttyr.com." always_nxdomain
 local-zone: "frtyen.com." always_nxdomain
@@ -1598,6 +1601,7 @@ local-zone: "hopebikeabout.com." always_nxdomain
 local-zone: "hopetaly.com." always_nxdomain
 local-zone: "hoscaleshop.com." always_nxdomain
 local-zone: "hosera.com." always_nxdomain
+local-zone: "hospodanowa.pl." always_nxdomain
 local-zone: "hotcommodity-ring.website." always_nxdomain
 local-zone: "hotjewelry.store." always_nxdomain
 local-zone: "hotsalebicycle.store." always_nxdomain
