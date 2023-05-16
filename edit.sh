@@ -56,28 +56,28 @@ function edit_blocklist {
     fi       
 
     if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]-]{2,}$ ]]; then
-        echo -e "\nInvalid domain. Not added."
+        echo -e "\nInvalid domain. Not added"
         return
     fi
   
     if grep -xF "$entry" "$raw_file"; then
-        echo -e "\nThe domain is already in the blocklist. Not added."
+        echo -e "\nThe domain is already in the blocklist. Not added"
         return
     fi
 
     if grep -xF "$entry" "$toplist_file" | grep -vxF "$blacklist_file"; then
-        echo -e "\nThe domain is in the toplist. Not added."
+        echo -e "\nThe domain is in the toplist. Not added"
         return
     fi
 
     while read -r optimised_entry; do
         [[ "$entry" == *."${optimised_entry}" ]] || continue
-        echo -e "\nThe domain is made redundant by '${optimised_entry}'. Not added."
+        echo -e "\nThe domain is made redundant by '${optimised_entry}'. Not added"
         return
     done < "$optimised_entries"
 
     if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-        echo -e "\nThe domain is dead. Not added."
+        echo -e "\nThe domain is dead. Not added"
         return
     fi
 
@@ -108,7 +108,7 @@ function edit_whitelist {
 
     # Check if the entry contains whitespaces or is empty
     if [[ "$entry" =~ [[:space:]] || -z "$entry" ]]; then
-        echo -e "\nInvalid entry. Not added."
+        echo -e "\nInvalid entry. Not added"
         return
     fi
     
@@ -158,17 +158,17 @@ function edit_blacklist {
     fi       
 
     if ! [[ "$entry" =~ ^[[:alnum:].-]+\.[[:alnum:]-]{2,}$ ]]; then
-        echo -e "\nInvalid domain. Not added."
+        echo -e "\nInvalid domain. Not added"
         return
     fi
 
     if grep -xF "$entry" "$blacklist_file"; then
-        echo -e "\nThe domain is already in the blocklist. Not added."
+        echo -e "\nThe domain is already in the blocklist. Not added"
         return
     fi
     
     if dig @1.1.1.1 "$entry" | grep -Fq 'NXDOMAIN'; then
-        echo -e "\nThe domain is dead. Not added."
+        echo -e "\nThe domain is dead. Not added"
         return
     fi
 
@@ -185,7 +185,7 @@ function check_entry {
     format_entry "$entry"
 
     if [[ "$entry" =~ [[:space:]] || -z "$entry" ]]; then
-        echo -e "\nInvalid entry. Not added."
+        echo -e "\nInvalid entry. Not added"
         return
     fi
 
@@ -241,6 +241,6 @@ while true; do
             exit 0  
             ;;
         *)
-            echo -e "\nInvalid option." ;;
+            echo -e "\nInvalid option" ;;
     esac
 done
