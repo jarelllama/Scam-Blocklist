@@ -82,7 +82,7 @@ fi
 list="${dir}/${output}"
 path="lists/${list}"
 
-echo -e "\nBuilding ${syntax}..."
+echo -e "\nBuilding ${list}..."
 
 touch "$path"
 
