@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.142600.2023
-# Last modified: Tue May 16 14:26:00 UTC 2023
+# Version: 05.16.144304.2023
+# Last modified: Tue May 16 14:43:04 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3987
+# Total number of entries: 3993
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -324,6 +324,7 @@ address=/bediiningsonline.store/#
 address=/beedac.com/#
 address=/begiftstore.com/#
 address=/behindthebox.de/#
+address=/belerf.de/#
 address=/bellacup.net/#
 address=/bellagadgets.co.uk/#
 address=/bellaist.com/#
@@ -796,12 +797,15 @@ address=/cyclingoakl.com/#
 address=/cymbals.space/#
 address=/cyobyo.com/#
 address=/d-clock.cfd/#
+address=/d-crowd.cfd/#
 address=/d-drama.cfd/#
 address=/d-ghost.cfd/#
 address=/d-glory.cfd/#
 address=/d-ivory.cfd/#
+address=/d-judge.cfd/#
 address=/d-rough.cfd/#
 address=/d-shake.cfd/#
+address=/d-staff.cfd/#
 address=/d-state.cfd/#
 address=/d-sugar.cfd/#
 address=/d-thank.cfd/#
@@ -1514,6 +1518,7 @@ address=/hbyrts.com/#
 address=/hcglobalshopping.com/#
 address=/hdjean.online/#
 address=/hdseiin.com/#
+address=/healing-crystal.com/#
 address=/healthfitnessoutlet.com/#
 address=/healthgroupnews.com/#
 address=/healthshopmall.store/#
@@ -2523,6 +2528,7 @@ address=/ordamel.com/#
 address=/ordinarye.com/#
 address=/ordolava.com/#
 address=/oreglory.com/#
+address=/orgalev.com/#
 address=/orisete.shop/#
 address=/orogitee.com/#
 address=/orotonhugesale.store/#
