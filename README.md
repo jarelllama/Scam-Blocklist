@@ -20,7 +20,7 @@ Scam sites found:
 Today: 28
 Yesterday: 37
 
-Updated: Tue May 16 08:27 UTC
+Updated: Tue May 16 08:34 UTC
 ```
 
 ## Other blocklists
@@ -49,7 +49,7 @@ Domains are retrieved from multiple regions such as Asia, Europe, and North Amer
 
 ## Why the Domains and Host formats are not supported
 
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow for scammers to create large amounts of subdomains. Often, these subdomains are random strings such as `kwsjla.scam.com`. To find and add individual subdomains would require much effort and inflate the blocklist size.
+Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomains. Often, these subdomains are random strings such as `kwsjla.scam.com`. To find and add individual subdomains would require much effort and inflate the blocklist size.
 
 Only formats that make use of wildcard matching are supported as they can block all subdomains. This allows for further optimisations explained below.
 
@@ -59,9 +59,9 @@ The blocklist maintenance process from domain retrieval to list building makes u
 
 1. Removal of redundant entries: if the blocklist contains `spam.com`, via wildcard matching, `sub.spam.com` would be blocked as well and is, therefore, redundant and will be removed.
 
-2. Blocking common second-level domains/malicious hosters: if `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for each subdomain. A whitelist is used for genuine e-commerce/hosting domains such as `myshopify.com`. This is an effective way to block malicious hosting domains that host scam/malicious sites on their subdomains. This process is done manually and never unattendedly.
+2. Blocking common second-level domains/malicious hosters: if `abc.spam.com` and `def.spam.com` are both present in the blocklist, they are replaced with `spam.com` to block all subdomains instead of having separate entries for each subdomain. A whitelist is used for genuine e-commerce/hosting domains such as `myshopify.com`. This is an effective way to block malicious hosting domains that host scam/malicious sites on their subdomains. This process is done manually and never unattended.
 
-3. TLD-based detection of malicious hosters: the list of common second-level-domains from (2) is used to gather statistics on frequently used TLDs. These TLDs are factored into the domain retrieval process to point out potential malicious hosting domains. The current process uses the TLDs that make up 5% or more of common second-level-domains blocked. These calculated TLDs are then compared to new entries during the retrieval process where flagged domains can be manually added to the blocklist. This process is done manually and never unattendedly.
+3. TLD-based detection of malicious hosters: the list of common second-level domains from (2) is used to gather statistics on frequently used TLDs. These TLDs are factored into the domain retrieval process to point out potential malicious hosting domains. The current process uses the TLDs that makeup 5% or more of common second-level domains blocked. These calculated TLDs are then compared to new entries during the retrieval process where flagged domains can be manually added to the blocklist. This process is done manually and never unattended.
 
 ## Dead domains
 
@@ -98,6 +98,8 @@ As such, the number of domains added to the blocklist in a day varies depending 
 [Hagezi's DNS Blocklist](https://github.com/hagezi/dns-blocklists): inspiration and reference
 
 [TurboGPT](https://turbogpt.ai/): ChatGPT client I used for generating ideas for tricking code
+
+[Grammarly](https://www.grammarly.com): grammar correction and suggestions for README files, comments, etc.
 
 ### Appreciation
 
