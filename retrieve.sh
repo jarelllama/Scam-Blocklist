@@ -319,7 +319,7 @@ function optimiser {
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
             continue
-        elif ! [[ "$choice" == 'a' ]]; then
+        elif ! [[ "$choice" == 'a' || -z "$choice" ]]; then
             echo -e "\nInvalid option"
             continue
         fi
