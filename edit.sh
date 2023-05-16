@@ -60,12 +60,12 @@ function edit_blocklist {
         return
     fi
   
-    if grep -xF "$entry" "$raw_file"; then
+    if grep -xFq "$entry" "$raw_file"; then
         echo -e "\nThe domain is already in the blocklist. Not added"
         return
     fi
 
-    if grep -xF "$entry" "$toplist_file" | grep -vxF "$blacklist_file"; then
+    if grep -xFq "$entry" "$toplist_file" | grep -vxF "$blacklist_file"; then
         echo -e "\nThe domain is in the toplist. Not added"
         return
     fi
