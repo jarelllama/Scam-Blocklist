@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.055842.2023
-# Last modified: Tue May 16 05:58:42 UTC 2023
+# Version: 05.16.060745.2023
+# Last modified: Tue May 16 06:07:45 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3979
+# Total number of entries: 3987
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -680,6 +680,7 @@ address=/cmngty.com/#
 address=/cnmetalstore.com/#
 address=/coach-shopu.shop/#
 address=/coatfaith.com/#
+address=/coayli.shop/#
 address=/cobracmcecco.com/#
 address=/cobratigerdc.com/#
 address=/cocnata.com/#
@@ -1257,6 +1258,7 @@ address=/fliperzero.shop/#
 address=/flochil.com/#
 address=/flockurn.com/#
 address=/floralovers.com/#
+address=/flouxsarl.fr/#
 address=/flytey.com/#
 address=/flytracy.com/#
 address=/fodyque.com/#
@@ -1352,6 +1354,7 @@ address=/gedebate.com/#
 address=/geesfy.com/#
 address=/geezerdecor.com/#
 address=/geheshop.com/#
+address=/genages.com/#
 address=/genekitchen.shop/#
 address=/generalaguniverse.com/#
 address=/generositym.com/#
@@ -2753,6 +2756,8 @@ address=/prospendrr.com/#
 address=/proudgifts.us/#
 address=/prousfemale.com/#
 address=/provencevent.com/#
+address=/psicotandem.es/#
+address=/psmbedzin.pl/#
 address=/psychologdlaukrainy.pl/#
 address=/pubeap.com/#
 address=/pukingyolk.com/#
@@ -2889,6 +2894,7 @@ address=/rockstargood.com/#
 address=/rocktransit.com/#
 address=/rolix.us/#
 address=/rollrunca.com/#
+address=/roma.it/#
 address=/romeiou.com/#
 address=/ronmeca.store/#
 address=/rootss.shop/#
@@ -3098,6 +3104,7 @@ address=/shopwerner.com/#
 address=/shopwesternhats.com/#
 address=/shopwomenswear.com/#
 address=/shopyourturn.com/#
+address=/shortnotes.pl/#
 address=/shortskirt.top/#
 address=/shotesun.com/#
 address=/showapparels.com/#
@@ -3525,6 +3532,7 @@ address=/toolswilton.com/#
 address=/tooshler.us/#
 address=/top-quality.shop/#
 address=/topafun.com/#
+address=/topair.cz/#
 address=/topcious.co/#
 address=/topeacycle.com/#
 address=/topedo-shop.de/#
