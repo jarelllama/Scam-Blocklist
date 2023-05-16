@@ -31,32 +31,32 @@ while [[ "$#" -gt 0 ]]; do
             ;;
         --adblock)
             syntax='Adblock Plus'
-            dir="lists/adblock"
+            dir="adblock"
             comment='!'
             before='||'
             after='^'
             ;;
         --dnsmasq)   
             syntax='Dnsmasq' 
-            dir="lists/dnsmasq"
+            dir="dnsmasq"
             before='address=/'
             after='/#'
             ;;
         --unbound)       
             syntax='Unbound' 
-            dir="lists/unbound"
+            dir="unbound"
             before='local-zone: "'
             after='." always_nxdomain'
             ;;
         --wc-asterisk)
             syntax='Wildcard Asterisk' 
-            dir="lists/wildcard_asterisk"
+            dir="wildcard_asterisk"
             before='*.'
             after=''
             ;;
         --wc-domains)
             syntax='Wildcard Domains' 
-            dir="lists/wildcard_domains"
+            dir="wildcard_domains"
             before=''
             after=''
             ;;
@@ -79,7 +79,8 @@ if [[ -z "$syntax" ]]; then
     exit 1
 fi
 
-path="${dir}/${output}"
+list="${dir}/${output}"
+path="list/${list}"
 
 echo -e "\nBuilding ${syntax}..."
 
@@ -119,4 +120,4 @@ ${comment} Total number of entries: ${num_after}
 ${comment}" | cat - "${path}.tmp" > "$path"
 
 git add "$path"
-git commit -qm "Build ${syntax}"
+git commit -qm "Build ${list}"
