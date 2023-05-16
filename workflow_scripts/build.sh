@@ -97,7 +97,7 @@ sort "${path}.tmp" -o "${path}.tmp"
 grep -vE "^${comment}" "$path" > previous.tmp
 
 if diff -q previous.tmp "${path}.tmp" >/dev/null; then
-   echo "No changes."
+   echo "No changes"
    exit 0
 fi
 
