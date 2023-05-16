@@ -142,20 +142,22 @@ function check_toplist {
         echo "e. Edit lists"
         echo "r. Run filter again"
         read -r choice
-
-        if [[ "$choice" == 'e' ]]; then
+        case "$choice" in
+        e)
             echo -e "\nEnter 'x' to go back to the previous menu."
             source "$edit_script"
             continue 
-        elif [[ "$choice" == 'r' ]]; then   
+        r)
             echo -e "\nRunning filter again..."
             cp "${pending_file}.bak" "$pending_file"
             filter_pending
             exit 0
-        elif ! [[ "$choice" =~ ^[0-9]+$ ]]; then
-            echo -e "\nInvalid option."
-            continue
-        fi
+         *)
+            if ! [[ "$choice" =~ ^[0-9]+$ ]]; the 
+                echo -e "\nInvalid option."
+                continue
+            fi
+        esac
 
         chosen_domain=$(echo "$numbered_toplist" \
            | awk -v n="$choice" '$1 == n {print $2}')
