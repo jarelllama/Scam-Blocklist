@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.142600.2023
-# Last modified: Tue May 16 14:26:00 UTC 2023
+# Version: 05.16.144304.2023
+# Last modified: Tue May 16 14:43:04 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3988
+# Total number of entries: 3994
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -325,6 +325,7 @@ local-zone: "bediiningsonline.store." always_nxdomain
 local-zone: "beedac.com." always_nxdomain
 local-zone: "begiftstore.com." always_nxdomain
 local-zone: "behindthebox.de." always_nxdomain
+local-zone: "belerf.de." always_nxdomain
 local-zone: "bellacup.net." always_nxdomain
 local-zone: "bellagadgets.co.uk." always_nxdomain
 local-zone: "bellaist.com." always_nxdomain
@@ -797,12 +798,15 @@ local-zone: "cyclingoakl.com." always_nxdomain
 local-zone: "cymbals.space." always_nxdomain
 local-zone: "cyobyo.com." always_nxdomain
 local-zone: "d-clock.cfd." always_nxdomain
+local-zone: "d-crowd.cfd." always_nxdomain
 local-zone: "d-drama.cfd." always_nxdomain
 local-zone: "d-ghost.cfd." always_nxdomain
 local-zone: "d-glory.cfd." always_nxdomain
 local-zone: "d-ivory.cfd." always_nxdomain
+local-zone: "d-judge.cfd." always_nxdomain
 local-zone: "d-rough.cfd." always_nxdomain
 local-zone: "d-shake.cfd." always_nxdomain
+local-zone: "d-staff.cfd." always_nxdomain
 local-zone: "d-state.cfd." always_nxdomain
 local-zone: "d-sugar.cfd." always_nxdomain
 local-zone: "d-thank.cfd." always_nxdomain
@@ -1515,6 +1519,7 @@ local-zone: "hbyrts.com." always_nxdomain
 local-zone: "hcglobalshopping.com." always_nxdomain
 local-zone: "hdjean.online." always_nxdomain
 local-zone: "hdseiin.com." always_nxdomain
+local-zone: "healing-crystal.com." always_nxdomain
 local-zone: "healthfitnessoutlet.com." always_nxdomain
 local-zone: "healthgroupnews.com." always_nxdomain
 local-zone: "healthshopmall.store." always_nxdomain
@@ -2524,6 +2529,7 @@ local-zone: "ordamel.com." always_nxdomain
 local-zone: "ordinarye.com." always_nxdomain
 local-zone: "ordolava.com." always_nxdomain
 local-zone: "oreglory.com." always_nxdomain
+local-zone: "orgalev.com." always_nxdomain
 local-zone: "orisete.shop." always_nxdomain
 local-zone: "orogitee.com." always_nxdomain
 local-zone: "orotonhugesale.store." always_nxdomain
