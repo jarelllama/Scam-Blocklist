@@ -3,8 +3,6 @@
 raw_file="data/raw.txt"
 file='scams.txt'
 syntax="$1"
-before="$2"
-after="$3"
 comment='#'
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
@@ -14,18 +12,27 @@ if [[ $(echo "$syntax" | grep -i "adblock") ]]; then
     path="lists/adblock/${file}"
     comment='!'
     before='||'
+    after='^'
 elif [[ $(echo "$syntax" | grep -i "wildcard domains") ]]; then
     syntax='Wildcard Domains' 
     path="lists/wildcard_domains/${file}"
+    before=''
+    after=''
 elif [[ $(echo "$syntax" | grep -i "wildcard asterisk") ]]; then
     syntax='Wildcard Asterisk' 
     path="lists/wildcard_asterisk/${file}"
+    before='*.'
+    after=''
 elif [[ $(echo "$syntax" | grep -i "dnsmasq") ]]; then
     syntax='Dnsmasq' 
     path="lists/dnsmasq/${file}"
+    before='address=/'
+    after='/#'
 elif [[ $(echo "$syntax" | grep -i "unbound") ]]; then
     syntax='Unbound' 
     path="lists/unbound/${file}"
+    before='local-zone: "'
+    after='." always_nxdomain'
 fi
 
 echo -e "\nBuilding ${syntax}..."
