@@ -1,7 +1,7 @@
 #!/bin/bash
 
 raw_file="data/optimised_entries.txt"
-path="lists/hosters.txt"
+path="lists/wildcard_domains/hosters.txt"
 comment='#'
 
 trap "find . -maxdepth 1 -type f -name '*.tmp' -delete" EXIT
