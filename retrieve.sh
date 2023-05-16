@@ -94,17 +94,17 @@ function retrieve_domains {
 
         "$debug" && echo "$domains"
         
-        echo "$domains" > optimiser_domains.tmp
+        echo "$domains" > retrieved_domains.tmp
 
         # Remove subdomains
         while read -r subdomain; do
-            sed -i "s/^${subdomain}\.//" optimiser_domains.tmp
+            sed -i "s/^${subdomain}\.//" retrieved_domains.tmp
         done < "$subdomains_file"
-        sort -u optimiser_domains.tmp -o optimiser_domains.tmp
+        sort -u retrieved_domains.tmp -o retrieved_domains.tmp
 
-        cat optimiser_domains.tmp >> "$pending_file"
+        cat retrieved_domains.tmp >> "$pending_file"
 
-        echo "Domains retrieved: $(wc -l < optimiser_domains.tmp)"
+        echo "Domains retrieved: $(wc -l < retrieved_domains.tmp)"
         echo "--------------------------------------"
     done < "$search_terms_file"
 
