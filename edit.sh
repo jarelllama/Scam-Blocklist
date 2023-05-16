@@ -71,8 +71,7 @@ function edit_blocklist {
     fi
 
     while read -r optimised_entry; do
-        [[ "$entry" == *."${optimised_entry}" ]] \
-            || continue
+        [[ "$entry" == *."${optimised_entry}" ]] || continue
         echo -e "\nThe domain is made redundant by '${optimised_entry}'. Not added."
         return
     done < "$optimised_entries"
