@@ -20,7 +20,7 @@ Scam sites found:
 Today: 51
 Yesterday: 37
 
-Updated: Tue May 16 15:42 UTC
+Updated: Tue May 16 15:53 UTC
 ```
 
 ## Other blocklists
@@ -33,7 +33,7 @@ This list is a byproduct of the blocklist [optimisation](https://github.com/jare
 
 | Format | Entries |
 | --- |:---:|
-| [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/hosters.txt) | 152 |
+| [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/hosters.txt) | 15 |
 
 ## How domains are added to the blocklist
 
