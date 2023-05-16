@@ -274,19 +274,25 @@ function optimiser {
     
         [[ -s optimiser_domains.tmp ]] || return
 
-        numbered_domains=$(cat optimiser_domains.tmp | awk '{print NR ". " $0}')
+        comm -12 optimiser_domains.tmp "$toplist_file" \
+            | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
         echo -e "\nOPTIMISER MENU"
         sleep 0.3
         echo "Potential optimised entries:"
-        echo "$numbered_domains"
+        num=1
+        while read -r optimiser_domain; do
+            grep -xFq "$optimiser_domain" in_toplist.tmp \
+                && echo "${num}. ${optimiser_domain} (in toplist)" \
+                || echo "${num}. ${optimiser_domain}"
+            ((num++))
+        done < optimiser_domains.tmp
         echo "*. Whitelist the entry"
         echo "a. Add all optimised entries"
         read -r choice
 
         if [[ "$choice" =~ ^[0-9]+$ ]]; then
-            chosen_domain=$(echo "$numbered_domains" \
-                | awk -v n="$choice" '$1 == n {print $2}')
+            chosen_domain=$(sed -n "${choice}p" optimiser_domains.tmp)
             echo -e "\nWhitelisted: ${chosen_domain}"
             echo "$chosen_domain" >> "$optimiser_whitelist"
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
