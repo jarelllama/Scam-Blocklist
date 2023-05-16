@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.035547.2023
-# Last modified: Tue May 16 03:55:47 UTC 2023
+# Version: 05.16.043906.2023
+# Last modified: Tue May 16 04:39:06 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3974
+# Total number of entries: 3976
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -3237,6 +3237,7 @@ local-zone: "stimulatew.com." always_nxdomain
 local-zone: "stinghger.com." always_nxdomain
 local-zone: "stloy.com." always_nxdomain
 local-zone: "stockcycling.com." always_nxdomain
+local-zone: "stoffconcept.de." always_nxdomain
 local-zone: "stofon.shop." always_nxdomain
 local-zone: "stoiupoleney.com." always_nxdomain
 local-zone: "stokten.com." always_nxdomain
@@ -3643,6 +3644,7 @@ local-zone: "upchest.net." always_nxdomain
 local-zone: "upfores.art." always_nxdomain
 local-zone: "upizone.com." always_nxdomain
 local-zone: "uplifttstar.com." always_nxdomain
+local-zone: "upnutritions.com." always_nxdomain
 local-zone: "uppedo.com." always_nxdomain
 local-zone: "uprivia.com." always_nxdomain
 local-zone: "upropeca.com." always_nxdomain
