@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.174416.2023
-# Last modified: Tue May 16 17:44:16 UTC 2023
+# Version: 05.16.174742.2023
+# Last modified: Tue May 16 17:47:42 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4137
+# Total number of entries: 4138
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -3510,6 +3510,7 @@ address=/tazemalls.com/#
 address=/tcgguard.com/#
 address=/teaecesa.com/#
 address=/teamdigitic.com/#
+address=/teampackdealsshop.com/#
 address=/techifyze.shop/#
 address=/technic-carrosserie-rivat.fr/#
 address=/technin.shop/#
