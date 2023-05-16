@@ -163,6 +163,7 @@ jobs:
           exit 1
 
       - name: Commit filtered raw file
+        if: success() || failure()
         run: |
           git add "${{ vars.RAW_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Filter raw file" || true
