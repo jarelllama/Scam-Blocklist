@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.160738.2023
-# Last modified: Tue May 16 16:07:38 UTC 2023
+# Version: 05.16.171114.2023
+# Last modified: Tue May 16 17:11:14 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4014
+# Total number of entries: 4011
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -745,7 +745,6 @@ local-zone: "corona-testzentrum-neubrandenburg.de." always_nxdomain
 local-zone: "costlysunscreen.store." always_nxdomain
 local-zone: "costumo.co." always_nxdomain
 local-zone: "costuv.com." always_nxdomain
-local-zone: "cotopdeals.store." always_nxdomain
 local-zone: "countrylivingsupply.com." always_nxdomain
 local-zone: "courtyards.shop." always_nxdomain
 local-zone: "covidspot.cz." always_nxdomain
@@ -851,7 +850,6 @@ local-zone: "davekoflersbichons.com." always_nxdomain
 local-zone: "daviesshoes.xyz." always_nxdomain
 local-zone: "dawnbaby.shop." always_nxdomain
 local-zone: "daylighty.com." always_nxdomain
-local-zone: "dayuse-agent.online." always_nxdomain
 local-zone: "dbhmnp.shop." always_nxdomain
 local-zone: "dbkdsale.com." always_nxdomain
 local-zone: "dcodtcre.shop." always_nxdomain
@@ -3309,7 +3307,6 @@ local-zone: "subsequentp.com." always_nxdomain
 local-zone: "suilkg.shop." always_nxdomain
 local-zone: "suitpin.com." always_nxdomain
 local-zone: "summernearly.com." always_nxdomain
-local-zone: "summeroutfit.co." always_nxdomain
 local-zone: "summerstor.com." always_nxdomain
 local-zone: "sundaicex.com." always_nxdomain
 local-zone: "sundayliquid.shop." always_nxdomain
