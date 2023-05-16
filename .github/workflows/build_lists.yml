@@ -99,7 +99,8 @@ jobs:
       - name: Whitelisted TLDs check
         if: success() || failure()
         run: |
-          grep -E '\.(gov|edu)(\.[a-z]{2})?$' "${{ vars.RAW_FILE }}" > check.tmp || exit 0
+          grep -E '\.(gov|edu)(\.[a-z]{2})?$' "${{ vars.RAW_FILE }}" > check.tmp \
+            || exit 0
 
           echo -e "\nDomains with whitelisted TLDs found:"
           cat check.tmp
@@ -113,13 +114,37 @@ jobs:
       - name: Invalid domains check
         if: success() || failure()
         run: |
-          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "${{ vars.RAW_FILE }}" > check.tmp || exit 0
+          grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "${{ vars.RAW_FILE }}" > check.tmp \
+            || exit 0
          
           echo -e "\nInvalid domains found:"
           cat check.tmp
 
           comm -23 "${{ vars.RAW_FILE }}" check.tmp > raw.tmp
           mv raw.tmp "${{ vars.RAW_FILE }}"
+
+          echo -e "\nRemoving...\n"
+          exit 1
+
+      - name: Redundant entries check
+        if: success() || failure()
+        run: |
+          > check.tmp
+          while read -r entry; do
+            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> check.tmp \
+              && echo "$entry" >> "${{ vars.OPTIMISED_ENTRIES_FILE }}" || true
+          done < "${{ vars.RAW_FILE }}"
+          
+          [[ -s check.tmp ]] || exit 0
+          echo -e "\nRedundant entries found:"
+          cat check.tmp
+
+          grep -vxFf check.tmp "${{ vars.RAW_FILE }}" > raw.tmp || true
+          mv raw.tmp "${{ vars.RAW_FILE }}"
+  
+          sort -u "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "${{ vars.OPTIMISED_ENTRIES_FILE }}"
+          git add "${{ vars.OPTIMISED_ENTRIES_FILE }}"
+          git diff-index --quiet HEAD || git commit -qm "Remove redundant entries" || true
 
           echo -e "\nRemoving...\n"
           exit 1
@@ -137,35 +162,10 @@ jobs:
           echo -e "\nSkipping build steps.\n"
           exit 1
 
-      - name: Redundant entries check
-        if: success() || failure()
-        run: |
-          > check.tmp
-          while read -r entry; do
-            grep "\.${entry}$" "${{ vars.RAW_FILE }}" >> check.tmp \
-              && echo "$entry" >> "${{ vars.OPTIMISED_ENTRIES_FILE }}" \
-              || true
-          done < "${{ vars.RAW_FILE }}"
-          
-          [[ -s check.tmp ]] || exit 0
-          echo -e "\nRedundant entries found:"
-          cat check.tmp
-
-          grep -vxFf check.tmp "${{ vars.RAW_FILE }}" > raw.tmp || true
-          mv raw.tmp "${{ vars.RAW_FILE }}"
-  
-          sort -u "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "${{ vars.OPTIMISED_ENTRIES_FILE }}"
-          git add "${{ vars.OPTIMISED_ENTRIES_FILE }}"
-          git diff-index --quiet HEAD || git commit -qm "Remove redundant entries" || true
-
-          echo -e "\nRemoving...\n"
-          exit 1
-
       - name: Commit filtered raw file
-        if: failure()
         run: |
           git add "${{ vars.RAW_FILE }}"
-          git commit -m "Filter raw file"
+          git diff-index --quiet HEAD || git commit -m "Filter raw file" || true
 
       - name: Build lists
         id: build_lists
@@ -240,3 +240,4 @@ jobs:
       - name: Push
         if: success() || steps.build_lists.conclusion == 'success'
         run: git push
+
