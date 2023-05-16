@@ -292,6 +292,7 @@ function optimise_blocklist {
 
         sleep 0.3
         echo "Removing redundant entries..."
+        # Note not to remove redundant.tmp because it is needed during the merge function
         while read -r entry; do
             grep "\.${entry}$" "$raw_file" >> redundant.tmp
         done < domains.tmp
@@ -348,6 +349,11 @@ function merge_pending {
     fi
 
     echo 
+
+    if [[ -s redundant.tmp ]]; then
+        git add "$optimised_entries"
+        git commit -m "Remove redundant entries"
+    fi
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
