@@ -277,14 +277,16 @@ function optimiser {
         while read -r tld; do
             grep "\.${tld}$" "$raw_file" \
                 | grep -E '\..*\.' \
-                | cut -d '.' -f2- >> optimiser_pending.tmp
+                | cut -d '.' -f2- >> optimiser_tlds.tmp
         done < "$optimiser_tld_file"
 
         grep -E '\..*\.' "$raw_file" \
             | cut -d '.' -f2- \
             | awk -F '.' '$1 ~ /.{4,}/ {print}' \
             | sort \
-            | uniq -d >> optimiser_pending.tmp
+            | uniq -d >> optimiser_slds.tmp
+
+        cat optimiser_tlds.tmp optimiser_slds.tmp > optimiser_pending.tmp
 
         sort -u optimiser_pending.tmp -o optimiser_pending.tmp
 
@@ -329,16 +331,16 @@ function optimiser {
         sort -u "$raw_file" -o "$raw_file"
         sort "$optimised_entries_file" -o "$optimised_entries_file"
 
-        # Note not to remove redundant.tmp because it is needed during the merge function
         while read -r entry; do
             grep "\.${entry}$" "$raw_file" >> redundant.tmp
-        done < optimiser_domains.tmp
+        done < optimiser_slds.tmp
         sleep 0.3
         echo "Removing redundant entries from blocklist..."
         sleep 0.3
         echo "Removed domains:"
         sleep 0.3
         cat redundant.tmp
+        echo
         
         grep -vxFf redundant.tmp "$raw_file" > raw.tmp
         mv raw.tmp "$raw_file"
