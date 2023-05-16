@@ -27,7 +27,9 @@ Updated: update_time
 
 ### Malicious Hosters
 
-Blocklist for domains commonly used to host scam/malicious sites. This list is a byproduct of the blocklist [optimisation](https://github.com/jarelllama/Scam-Blocklist/edit/main/data/README.md#optimisations) process.
+Blocklist for domains commonly used to host scam/malicious sites.
+
+This list is a byproduct of the blocklist [optimisation](https://github.com/jarelllama/Scam-Blocklist/edit/main/data/README.md#optimisations) process.
 
 | Format | Entries |
 | --- | --- |
@@ -47,9 +49,9 @@ Domains are retrieved from multiple regions such as Asia, Europe, and North Amer
 
 ## Why the Domains and Host formats are not supported
 
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow for scammers to create large amounts of subdomains. Often, these subdomains are random strings such as `kwsjla.scam.com`. To add individual subdomains would inflate the blocklist substantially.
+Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow for scammers to create large amounts of subdomains. Often, these subdomains are random strings such as `kwsjla.scam.com`. To find and add individual subdomains would require much effort and inflate the blocklist size.
 
-Only formats that make use of wildcard matching are supported as they block all subdomains. This allows for further optimisations explained below.
+Only formats that make use of wildcard matching are supported as they can block all subdomains. This allows for further optimisations explained below.
 
 ## Optimisations
 
