@@ -209,6 +209,7 @@ function filter_pending {
 
     sleep 0.5
     echo -e "\nFiltering log:"
+    sleep 0.3
 
     grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
     cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
