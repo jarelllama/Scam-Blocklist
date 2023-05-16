@@ -200,9 +200,7 @@ function filter_pending {
 
     echo -e "\nTotal domains retrieved/pending: $(wc -l < ${pending_file})"
 
-    # Remove domains already in the blocklist
     comm -23 "$pending_file" "$raw_file" > 1.tmp
-
     comm -23 1.tmp "$dead_domains_file" > 2.tmp
 
     sleep 0.5
@@ -225,7 +223,6 @@ function filter_pending {
     while read -r entry; do
         grep "\.${entry}$" 5.tmp >> redundant.tmp
     done < "$optimised_entries_file"
-
     grep -vxFf redundant.tmp 5.tmp > 6.tmp
     "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
 
@@ -238,7 +235,6 @@ function filter_pending {
             "$debug" && echo "$domain (dead)"
         fi
     ' -- {}
-
     # It appears that the dead file isn't always sorted
     grep -vxFf dead.tmp 6.tmp > 7.tmp
 
@@ -375,12 +371,7 @@ function merge_pending {
         fi
     fi
 
-    echo 
-
-    if [[ -s redundant.tmp ]]; then
-        git add "$optimised_entries_file"
-        git commit -m "Remove redundant entries"
-    fi
+    echo
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
