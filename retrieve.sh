@@ -8,7 +8,7 @@ blacklist_file="data/blacklist.txt"
 toplist_file="data/toplist.txt"
 subdomains_file="data/subdomains.txt"
 dead_domains_file="data/dead_domains.txt"
-optimised_entries="data/optimised_entries.txt"
+optimised_entries_file="data/optimised_entries.txt"
 optimiser_whitelist="data/optimiser_whitelist.txt"
 stats_file="data/stats.txt"
 edit_script="edit.sh"
@@ -93,17 +93,17 @@ function retrieve_domains {
 
         "$debug" && echo "$domains"
         
-        echo "$domains" > domains.tmp
+        echo "$domains" > optimiser_domains.tmp
 
         # Remove subdomains
         while read -r subdomain; do
-            sed -i "s/^${subdomain}\.//" domains.tmp
+            sed -i "s/^${subdomain}\.//" optimiser_domains.tmp
         done < "$subdomains_file"
-        sort -u domains.tmp -o domains.tmp
+        sort -u optimiser_domains.tmp -o optimiser_domains.tmp
 
-        cat domains.tmp >> "$pending_file"
+        cat optimiser_domains.tmp >> "$pending_file"
 
-        echo "Domains retrieved: $(wc -l < domains.tmp)"
+        echo "Domains retrieved: $(wc -l < optimiser_domains.tmp)"
         echo "--------------------------------------"
     done < "$search_terms_file"
 
@@ -214,7 +214,7 @@ function filter_pending {
     > redundant.tmp
     while read -r entry; do
         grep "\.${entry}$" 5.tmp >> redundant.tmp
-    done < "$optimised_entries"
+    done < "$optimised_entries_file"
 
     grep -vxFf redundant.tmp 5.tmp > 6.tmp
     "$debug" && cat redundant.tmp | awk '{print $0 " (redundant)"}'
@@ -247,22 +247,31 @@ function filter_pending {
     check_toplist
 }
 
-function optimise_blocklist {
+function optimiser {
     while true; do
         sleep 0.5
+
+        > optimiser_pending.tmp
+
+        while read -r tld; do
+            grep "\.${tld}$" "$raw_file" \
+                | grep -E '\..*\.' \
+                | cut -d '.' -f2- \
+                | sort >> optimiser_pending.tmp
+        done < "$optimiser_tld_file"
 
         grep -E '\..*\.' "$raw_file" \
             | cut -d '.' -f2- \
             | awk -F '.' '$1 ~ /.{4,}/ {print}' \
             | sort \
-            | uniq -d > 1.tmp
+            | uniq -d >> optimiser_pending.tmp
     
-        comm -23 1.tmp "$optimiser_whitelist" > 2.tmp
-        comm -23 2.tmp "$optimised_entries" > domains.tmp
+        comm -23 optimiser_pending.tmp "$optimiser_whitelist" > 1.tmp
+        comm -23 1.tmp "$optimised_entries_file" > optimiser_domains.tmp
     
-        [[ -s domains.tmp ]] || return
+        [[ -s optimiser_domains.tmp ]] || return
 
-        numbered_domains=$(cat domains.tmp | awk '{print NR ". " $0}')
+        numbered_domains=$(cat optimiser_domains.tmp | awk '{print NR ". " $0}')
 
         echo -e "\nOPTIMISER MENU"
         sleep 0.3
@@ -285,17 +294,17 @@ function optimise_blocklist {
         fi
 
         echo -e "\nAdding optimised entries..."
-        cat domains.tmp >> "$raw_file"
-        cat domains.tmp >> "$optimised_entries"
+        cat optimiser_domains.tmp >> "$raw_file"
+        cat optimiser_domains.tmp >> "$optimised_entries_file"
         sort -u "$raw_file" -o "$raw_file"
-        sort "$optimised_entries" -o "$optimised_entries"
+        sort "$optimised_entries_file" -o "$optimised_entries_file"
 
         sleep 0.3
         echo "Removing redundant entries..."
         # Note not to remove redundant.tmp because it is needed during the merge function
         while read -r entry; do
             grep "\.${entry}$" "$raw_file" >> redundant.tmp
-        done < domains.tmp
+        done < optimiser_domains.tmp
         grep -vxFf redundant.tmp "$raw_file" > raw.tmp
         mv raw.tmp "$raw_file"
             
@@ -318,7 +327,7 @@ function merge_pending {
 
     sort -u "$raw_file" -o "$raw_file"
 
-    "$unattended" && sleep 0.5 || optimise_blocklist
+    "$unattended" && sleep 0.5 || optimiser
 
     num_after=$(wc -l < "$raw_file")
     
@@ -351,13 +360,13 @@ function merge_pending {
     echo 
 
     if [[ -s redundant.tmp ]]; then
-        git add "$optimised_entries"
+        git add "$optimised_entries_file"
         git commit -m "Remove redundant entries"
     fi
 
     # Push white/black lists too for when they are modified through the editing script
     git add "$raw_file" "$stats_file" "$whitelist_file" "$blacklist_file" \
-        "$optimised_entries" "$optimiser_whitelist"
+        "$optimised_entries_file" "$optimiser_whitelist"
     git commit -m "$commit_msg"
     git push -q
 
