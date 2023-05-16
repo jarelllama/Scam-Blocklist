@@ -100,6 +100,7 @@ function retrieve_domains {
         while read -r subdomain; do
             sed -i "s/^${subdomain}\.//" retrieved_domains.tmp
         done < "$subdomains_file"
+
         sort -u retrieved_domains.tmp -o retrieved_domains.tmp
 
         cat retrieved_domains.tmp >> "$pending_file"
