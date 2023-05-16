@@ -42,7 +42,7 @@ while [[ "$#" -gt 0 ]]; do
             before='address=/'
             after='/#'
             ;;
-         --unbound)       
+        --unbound)       
             syntax='Unbound' 
             path="lists/unbound/${output}"
             before='local-zone: "'
