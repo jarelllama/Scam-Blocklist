@@ -291,7 +291,7 @@ function optimiser {
         sleep 0.3
         echo "Potential optimised entries:"
         num=1
-        while read -r optimiser_domain; 
+        while read -r optimiser_domain; do
             # Note the second 'echo' command will always be positive,
             # so A && B || C works here
             grep -xFq "$optimiser_domain" in_toplist.tmp \
