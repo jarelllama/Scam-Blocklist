@@ -173,6 +173,7 @@ jobs:
           bash "${{ vars.BUILD }}" 'Wildcard Asterisk' "lists/wildcard_asterisk.txt" '*.' '' '#'
           bash "${{ vars.BUILD }}" 'Dnsmasq' "lists/dnsmasq.txt" 'address=/' '/#' '#'
           bash "${{ vars.BUILD }}" 'Unbound' "lists/unbound.txt" 'local-zone: "' '." always_nxdomain' '#'
+          bash "workflow_scripts/build_hosters.sh"
 
       - name: Update stats
         if: success() || steps.build_lists.conclusion == 'success'
