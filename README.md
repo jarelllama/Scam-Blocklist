@@ -1,6 +1,6 @@
 # Scam Blocklist
 
-[![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_lists.yml)
+[![Build lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build.yml)
 
 | Format | Syntax |
 | --- | --- |
@@ -20,7 +20,7 @@ Scam sites found:
 Today: 28
 Yesterday: 37
 
-Updated: Tue May 16 14:30 UTC
+Updated: Tue May 16 14:31 UTC
 ```
 
 ## Other blocklists
