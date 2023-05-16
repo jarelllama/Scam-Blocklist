@@ -156,7 +156,7 @@ function check_toplist {
             exit 0
             ;;
          *)
-            if ! [[ "$choice" =~ ^[0-9]+$ ]]; the 
+            if ! [[ "$choice" =~ ^[0-9]+$ ]]; then
                 echo -e "\nInvalid option."
                 continue
             fi
@@ -214,6 +214,8 @@ function filter_pending {
     cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
     comm -23 2.tmp whitelisted.tmp > 3.tmp
 
+    # Note that A && B || C is not the same as if-then-else
+    # However, in this case if A is true, B is true too.
     grep -E '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp | awk '{print $0 " (TLD)"}' \
         && grep -vE '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp > 4.tmp \
         || mv 3.tmp 4.tmp
@@ -289,7 +291,9 @@ function optimiser {
         sleep 0.3
         echo "Potential optimised entries:"
         num=1
-        while read -r optimiser_domain; do
+        while read -r optimiser_domain; 
+            # Note the second 'echo' command will always be positive,
+            # so A && B || C works here
             grep -xFq "$optimiser_domain" in_toplist.tmp \
                 && echo "${num}. ${optimiser_domain} (in toplist)" \
                 || echo "${num}. ${optimiser_domain}"
