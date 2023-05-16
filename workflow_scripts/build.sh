@@ -31,32 +31,32 @@ while [[ "$#" -gt 0 ]]; do
             ;;
         --adblock)
             syntax='Adblock Plus'
-            path="lists/adblock/${output}"
+            dir="lists/adblock"
             comment='!'
             before='||'
             after='^'
             ;;
         --dnsmasq)   
             syntax='Dnsmasq' 
-            path="lists/dnsmasq/${output}"
+            dir="lists/dnsmasq"
             before='address=/'
             after='/#'
             ;;
         --unbound)       
             syntax='Unbound' 
-            path="lists/unbound/${output}"
+            dir="lists/unbound"
             before='local-zone: "'
             after='." always_nxdomain'
             ;;
         --wc-asterisk)
             syntax='Wildcard Asterisk' 
-            path="lists/wildcard_asterisk/${output}"
+            dir="lists/wildcard_asterisk"
             before='*.'
             after=''
             ;;
         --wc-domains)
             syntax='Wildcard Domains' 
-            path="lists/wildcard_domains/${output}"
+            dir="lists/wildcard_domains"
             before=''
             after=''
             ;;
@@ -78,6 +78,8 @@ if [[ -z "$syntax" ]]; then
     echo "No syntax provided"
     exit 1
 fi
+
+path="${dir}/${output}"
 
 echo -e "\nBuilding ${syntax}..."
 
