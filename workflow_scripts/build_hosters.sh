@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 raw_file="data/optimised_entries.txt"
