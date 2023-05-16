@@ -164,10 +164,10 @@ jobs:
           git add "${{ vars.RAW_FILE }}" "${{ vars.OPTIMISED_ENTRIES_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Filter raw file" || true
 
-      - name: Update malicious hosters blocklist
+      - name: Update hosters blocklist
         if: success() || failure()
         run: |
-          grep -e '^d-.*\.cfd$' "${{ vars.RAW_FILE }}" > "${{ vars.OPTIMISED_ENTRIES_FILE }}"
+          grep -e '^d-.*\.cfd$' "${{ vars.RAW_FILE }}" >> "${{ vars.OPTIMISED_ENTRIES_FILE }}"
           sort -u "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "${{ vars.OPTIMISED_ENTRIES_FILE }}"
           git add "${{ vars.OPTIMISED_ENTRIES_FILE }}"
           git diff-index --quiet HEAD || git commit -m "Update hosters blocklist" || true
