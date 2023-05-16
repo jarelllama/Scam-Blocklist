@@ -22,7 +22,7 @@ Yesterday: 37
 Manually: 3904
 Automatically: 92
 
-Updated: Tue May 16 07:07 UTC
+Updated: Tue May 16 07:33 UTC
 ```
 
 ### How domains are added to the blocklist
