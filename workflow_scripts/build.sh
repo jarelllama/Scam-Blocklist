@@ -118,6 +118,5 @@ ${comment} Syntax: ${syntax}
 ${comment} Total number of entries: ${num_after}
 ${comment}" | cat - "${path}.tmp" > "$path"
 
-echo
 git add "$path"
 git commit -qm "Build ${syntax}"
