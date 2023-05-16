@@ -266,7 +266,9 @@ function optimiser {
             | awk -F '.' '$1 ~ /.{4,}/ {print}' \
             | sort \
             | uniq -d >> optimiser_pending.tmp
-    
+
+        sort -u optimiser_pending.tmp -o optimiser_pending.tmp
+
         comm -23 optimiser_pending.tmp "$optimiser_whitelist" > 1.tmp
         comm -23 1.tmp "$optimised_entries_file" > optimiser_domains.tmp
     
