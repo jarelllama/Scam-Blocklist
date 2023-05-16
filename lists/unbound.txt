@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.16.055842.2023
-# Last modified: Tue May 16 05:58:42 UTC 2023
+# Version: 05.16.060745.2023
+# Last modified: Tue May 16 06:07:45 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3980
+# Total number of entries: 3988
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -681,6 +681,7 @@ local-zone: "cmngty.com." always_nxdomain
 local-zone: "cnmetalstore.com." always_nxdomain
 local-zone: "coach-shopu.shop." always_nxdomain
 local-zone: "coatfaith.com." always_nxdomain
+local-zone: "coayli.shop." always_nxdomain
 local-zone: "cobracmcecco.com." always_nxdomain
 local-zone: "cobratigerdc.com." always_nxdomain
 local-zone: "cocnata.com." always_nxdomain
@@ -1258,6 +1259,7 @@ local-zone: "fliperzero.shop." always_nxdomain
 local-zone: "flochil.com." always_nxdomain
 local-zone: "flockurn.com." always_nxdomain
 local-zone: "floralovers.com." always_nxdomain
+local-zone: "flouxsarl.fr." always_nxdomain
 local-zone: "flytey.com." always_nxdomain
 local-zone: "flytracy.com." always_nxdomain
 local-zone: "fodyque.com." always_nxdomain
@@ -1353,6 +1355,7 @@ local-zone: "gedebate.com." always_nxdomain
 local-zone: "geesfy.com." always_nxdomain
 local-zone: "geezerdecor.com." always_nxdomain
 local-zone: "geheshop.com." always_nxdomain
+local-zone: "genages.com." always_nxdomain
 local-zone: "genekitchen.shop." always_nxdomain
 local-zone: "generalaguniverse.com." always_nxdomain
 local-zone: "generositym.com." always_nxdomain
@@ -2754,6 +2757,8 @@ local-zone: "prospendrr.com." always_nxdomain
 local-zone: "proudgifts.us." always_nxdomain
 local-zone: "prousfemale.com." always_nxdomain
 local-zone: "provencevent.com." always_nxdomain
+local-zone: "psicotandem.es." always_nxdomain
+local-zone: "psmbedzin.pl." always_nxdomain
 local-zone: "psychologdlaukrainy.pl." always_nxdomain
 local-zone: "pubeap.com." always_nxdomain
 local-zone: "pukingyolk.com." always_nxdomain
@@ -2890,6 +2895,7 @@ local-zone: "rockstargood.com." always_nxdomain
 local-zone: "rocktransit.com." always_nxdomain
 local-zone: "rolix.us." always_nxdomain
 local-zone: "rollrunca.com." always_nxdomain
+local-zone: "roma.it." always_nxdomain
 local-zone: "romeiou.com." always_nxdomain
 local-zone: "ronmeca.store." always_nxdomain
 local-zone: "rootss.shop." always_nxdomain
@@ -3099,6 +3105,7 @@ local-zone: "shopwerner.com." always_nxdomain
 local-zone: "shopwesternhats.com." always_nxdomain
 local-zone: "shopwomenswear.com." always_nxdomain
 local-zone: "shopyourturn.com." always_nxdomain
+local-zone: "shortnotes.pl." always_nxdomain
 local-zone: "shortskirt.top." always_nxdomain
 local-zone: "shotesun.com." always_nxdomain
 local-zone: "showapparels.com." always_nxdomain
@@ -3526,6 +3533,7 @@ local-zone: "toolswilton.com." always_nxdomain
 local-zone: "tooshler.us." always_nxdomain
 local-zone: "top-quality.shop." always_nxdomain
 local-zone: "topafun.com." always_nxdomain
+local-zone: "topair.cz." always_nxdomain
 local-zone: "topcious.co." always_nxdomain
 local-zone: "topeacycle.com." always_nxdomain
 local-zone: "topedo-shop.de." always_nxdomain
