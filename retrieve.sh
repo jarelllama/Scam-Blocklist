@@ -53,7 +53,7 @@ function retrieve_domains {
     if [[ -s "$pending_file" ]]; then
         read -rp $'\nThe pending file is not empty. Empty it? (Y/n): ' answer
         if [[ "$answer" =~ ^[Yy]$ || -z "$answer" ]]; then
-            echo -e "\nEmptied the pending file."
+            echo -e "\nEmptied the pending file"
             > "$pending_file"
             sleep 0.5
         fi
@@ -110,7 +110,7 @@ function retrieve_domains {
     done < "$search_terms_file"
 
     if ! [[ -s "$pending_file" ]]; then
-        echo -e "\nNo domains retrieved."
+        echo -e "\nNo domains retrieved"
         exit 1
     fi
 }
@@ -123,7 +123,7 @@ function check_toplist {
             | grep -vxFf "$blacklist_file" > in_toplist.tmp
 
         if ! [[ -s in_toplist.tmp ]]; then
-            echo -e "\nNo domains found in toplist."
+            echo -e "\nNo domains found in toplist"
             return
         fi
 
@@ -145,7 +145,7 @@ function check_toplist {
         read -r choice
         case "$choice" in
         e)
-            echo -e "\nEnter 'x' to go back to the previous menu."
+            echo -e "\nEnter 'x' to go back to the previous menu"
             source "$edit_script"
             continue
             ;;
@@ -157,7 +157,7 @@ function check_toplist {
             ;;
          *)
             if ! [[ "$choice" =~ ^[0-9]+$ ]]; then
-                echo -e "\nInvalid option."
+                echo -e "\nInvalid option"
                 continue
             fi
             ;;
@@ -185,11 +185,11 @@ function check_toplist {
                 echo "$chosen_domain" >> "$whitelist_file"
                 sort -u "$whitelist_file" -o "$whitelist_file"
                 echo -e "\nWhitelisted: ${chosen_domain}"
-                echo "Run the filtering again to apply changes."
+                echo "Run the filtering again to apply changes"
                 break
                 ;;
             *)
-                echo -e "\nInvalid option." ;;
+                echo -e "\nInvalid option" ;;
             esac
         done
     done
@@ -247,7 +247,7 @@ function filter_pending {
     mv 7.tmp "$pending_file"
 
     if ! [[ -s "$pending_file" ]]; then
-        echo -e "\nNo pending domains."
+        echo -e "\nNo pending domains"
         exit 0
     fi
 
@@ -319,7 +319,7 @@ function optimiser {
             sort "$optimiser_whitelist" -o "$optimiser_whitelist"
             continue
         elif ! [[ "$choice" == 'a' ]]; then
-            echo -e "\nInvalid option."
+            echo -e "\nInvalid option"
             continue
         fi
 
@@ -431,7 +431,7 @@ while true; do
             merge_pending
             ;;
         e)
-            echo -e "\nEnter 'x' to go back to the previous menu."
+            echo -e "\nEnter 'x' to go back to the previous menu"
             source "$edit_script"
             ;;
         r)
@@ -443,6 +443,6 @@ while true; do
         x)
             exit 0 ;;
         *)
-            echo -e "\nInvalid option." ;;
+            echo -e "\nInvalid option" ;;
     esac
 done
