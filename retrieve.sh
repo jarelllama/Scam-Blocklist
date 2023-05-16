@@ -159,26 +159,33 @@ function check_toplist {
 
         chosen_domain=$(echo "$numbered_toplist" \
            | awk -v n="$choice" '$1 == n {print $2}')
-        echo -e "\nDomain: ${chosen_domain}"
-        sleep 0.3
-        echo "Choose a list to add to:"
-        echo "b. Blacklist"
-        echo "w. Whitelist"
-        read -r choice
 
-        if [[ "$choice" == 'b' ]]; then
-            echo "$chosen_domain" >> "$blacklist_file"
-            sort -u "$blacklist_file" -o "$blacklist_file"
-            echo -e "\nBlacklisted: ${chosen_domain}"
-            echo
-        elif [[ "$choice" == 'w' ]]; then
-            echo "$chosen_domain" >> "$whitelist_file"
-            sort -u "$whitelist_file" -o "$whitelist_file"
-            echo -e "\nWhitelisted: ${chosen_domain}"
-            echo "Run the filtering again to apply changes."
-        else
-            echo -e "\nInvalid option."
-        fi
+        while true; do
+            echo -e "\nDomain: ${chosen_domain}"
+            sleep 0.3
+            echo "Choose a list to add to:"
+            echo "b. Blacklist"
+            echo "w. Whitelist"
+            read -r choice
+            case "$choice" in
+            b)
+                echo "$chosen_domain" >> "$blacklist_file"
+                sort -u "$blacklist_file" -o "$blacklist_file"
+                echo -e "\nBlacklisted: ${chosen_domain}"
+                echo
+                break
+                ;;
+            w)
+                echo "$chosen_domain" >> "$whitelist_file"
+                sort -u "$whitelist_file" -o "$whitelist_file"
+                echo -e "\nWhitelisted: ${chosen_domain}"
+                echo "Run the filtering again to apply changes."
+                break
+                ;;
+            *)
+                echo -e "\nInvalid option." ;;
+            esac
+        done
     done
 }
 
