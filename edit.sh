@@ -162,7 +162,7 @@ function edit_blacklist {
         return
     fi
 
-    if grep -xF "$entry" "$blacklist_file"; then
+    if grep -xFq "$entry" "$blacklist_file"; then
         echo -e "\nThe domain is already in the blocklist. Not added"
         return
     fi
