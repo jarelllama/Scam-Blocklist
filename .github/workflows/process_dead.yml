@@ -28,7 +28,7 @@ jobs:
             while true; do
               dig=$(dig @1.1.1.1 "$domain")
               [[ "$dig" =~ error|timed\ out ]] || break
-              echo "$domain timed out."
+              echo "$domain timed out"
               sleep 1
             done
             if [[ "$dig" == *"NXDOMAIN"* ]]; then
@@ -40,7 +40,7 @@ jobs:
           sort -u dead.tmp -o dead.tmp
         
           if ! [[ -s dead.tmp ]]; then
-            echo -e "\nNo dead domains found.\n"
+            echo -e "\nNo dead domains found\n"
             exit 0
           fi
 
@@ -74,7 +74,7 @@ jobs:
             while true; do
               dig=$(dig @1.1.1.1 "$domain")
               [[ "$dig" =~ error|timed\ out ]] || break
-              echo "$domain timed out."
+              echo "$domain timed out"
               sleep 1
             done
             if ! [[ "$dig" == *"NXDOMAIN"* ]]; then
@@ -86,7 +86,7 @@ jobs:
           sort -u alive.tmp -o alive.tmp
 
           if ! [[ -s alive.tmp ]]; then
-            echo -e "\nNo resurrected domains found.\n"
+            echo -e "\nNo resurrected domains found\n"
             exit 0
           fi
 
