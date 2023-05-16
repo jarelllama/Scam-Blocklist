@@ -32,7 +32,7 @@ Blocklist for domains commonly used to host scam/malicious sites.
 This list is a byproduct of the blocklist [optimisation](https://github.com/jarelllama/Scam-Blocklist/edit/main/data/README.md#optimisations) process.
 
 | Format | Entries |
-| --- | --- |
+| --- |:---:|
 | [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/hosters.txt) | hosters_count |
 
 ## How domains are added to the blocklist
