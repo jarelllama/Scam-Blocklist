@@ -340,13 +340,12 @@ function optimiser {
         echo "Removed domains:"
         sleep 0.3
         cat redundant.tmp
-        echo
         
         grep -vxFf redundant.tmp "$raw_file" > raw.tmp
         mv raw.tmp "$raw_file"
             
         sleep 0.3
-        echo "Merging..."
+        echo -e "\nMerging..."
 
         sleep 0.3
         return
