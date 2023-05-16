@@ -10,7 +10,7 @@ subdomains_file="data/subdomains.txt"
 dead_domains_file="data/dead_domains.txt"
 optimised_entries_file="data/optimised_entries.txt"
 optimiser_whitelist="data/optimiser_whitelist.txt"
-$optimiser_tld_file="data/optimiser_tld.txt"
+optimiser_tld_file="data/optimiser_tld.txt"
 stats_file="data/stats.txt"
 edit_script="edit.sh"
 
