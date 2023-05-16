@@ -168,11 +168,11 @@ jobs:
         id: build_lists
         if: success() || steps.whitelist.conclusion == 'success'
         run: |
-          bash "${{ vars.BUILD }}" 'Adblock Plus' "lists/adblock/scams.txt" '||' '^' '!'
-          bash "${{ vars.BUILD }}" 'Wildcard Domains' "lists/wildcard_domains/scams.txt" '' '' '#'
-          bash "${{ vars.BUILD }}" 'Wildcard Asterisk' "lists/wildcard_asterisk/scams.txt" '*.' '' '#'
-          bash "${{ vars.BUILD }}" 'Dnsmasq' "lists/dnsmasq/scams.txt" 'address=/' '/#' '#'
-          bash "${{ vars.BUILD }}" 'Unbound' "lists/unbound/scams.txt" 'local-zone: "' '." always_nxdomain' '#'
+          bash "${{ vars.BUILD_SCAMS }}" 'Adblock Plus' "lists/adblock/scams.txt" '||' '^' '!'
+          bash "${{ vars.BUILD_SCAMS }}" 'Wildcard Domains' "lists/wildcard_domains/scams.txt" '' '' '#'
+          bash "${{ vars.BUILD_SCAMS }}" 'Wildcard Asterisk' "lists/wildcard_asterisk/scams.txt" '*.' '' '#'
+          bash "${{ vars.BUILD_SCAMS }}" 'Dnsmasq' "lists/dnsmasq/scams.txt" 'address=/' '/#' '#'
+          bash "${{ vars.BUILD_SCAMS }}" 'Unbound' "lists/unbound/scams.txt" 'local-zone: "' '." always_nxdomain' '#'
           bash "workflow_scripts/build_hosters.sh"
 
       - name: Update stats
