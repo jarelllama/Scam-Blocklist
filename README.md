@@ -20,7 +20,7 @@ Scam sites found:
 Today: 50
 Yesterday: 37
 
-Updated: Tue May 16 15:34 UTC
+Updated: Tue May 16 15:40 UTC
 ```
 
 ## Other blocklists
