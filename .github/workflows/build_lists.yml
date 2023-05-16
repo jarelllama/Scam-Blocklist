@@ -168,12 +168,12 @@ jobs:
         id: build_lists
         if: success() || steps.whitelist.conclusion == 'success'
         run: |
-          bash "${{ vars.BUILD_SCAMS }}" 'Adblock Plus' '||' '^'
-          bash "${{ vars.BUILD_SCAMS }}" 'Wildcard Domains' '' ''
-          bash "${{ vars.BUILD_SCAMS }}" 'Wildcard Asterisk' '*.' ''
-          bash "${{ vars.BUILD_SCAMS }}" 'Dnsmasq' 'address=/' '/#'
-          bash "${{ vars.BUILD_SCAMS }}" 'Unbound' 'local-zone: "' '." always_nxdomain'
-          bash "workflow_scripts/build_hosters.sh"
+          bash "${{ vars.BUILD }}" --adblock -i "${{ vars.RAW_FILE }}" -o "scams.txt"
+          bash "${{ vars.BUILD }}" --dnsmasq -i "${{ vars.RAW_FILE }}" -o "scams.txt"
+          bash "${{ vars.BUILD }}" --unbound -i "${{ vars.RAW_FILE }}" -o "scams.txt"
+          bash "${{ vars.BUILD }}" --wc-asterisk -i "${{ vars.RAW_FILE }}" -o "scams.txt"
+          bash "${{ vars.BUILD }}" --wc-domains -i "${{ vars.RAW_FILE }}" -o "scams.txt"
+          bash "${{ vars.BUILD }}" --wc-domains -i "${{ vars.OPTIMISED_ENTRIES_FILE }}" -o "hosters.txt" -t "Jarelllama's Malicious Hosters Blocklist" -d 'Blocklist for malicious hosting domains automatically retrieved from Google Search'
 
       - name: Update stats
         if: success() || steps.build_lists.conclusion == 'success'
@@ -242,3 +242,4 @@ jobs:
       - name: Push
         if: success() || steps.build_lists.conclusion == 'success'
         run: git push
+
