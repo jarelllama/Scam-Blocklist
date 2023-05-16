@@ -27,7 +27,7 @@ use_pending_only='false'
 time_filter='a'
 
 while getopts ":dupt:" option; do
-    case $option in
+    case "$option" in
         d)
             debug='true' ;;
         u)
@@ -39,11 +39,11 @@ while getopts ":dupt:" option; do
         t)
             time_filter="$OPTARG" ;;
         \?)
-            echo "Invalid option: -$OPTARG"
+            echo "Invalid option: -${OPTARG}"
             exit 1
             ;;
         :)
-            echo "Option -$OPTARG requires an argument"
+            echo "Option -${OPTARG} requires an argument"
             exit 1
             ;;
     esac
