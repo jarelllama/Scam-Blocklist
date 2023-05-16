@@ -198,8 +198,8 @@ function filter_pending {
     sleep 0.5
     echo -e "\nFiltering log:"
 
-    grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp \
-        && cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
+    grep -Ff "$whitelist_file" 2.tmp | grep -vxFf "$blacklist_file" > whitelisted.tmp
+    cat whitelisted.tmp | awk '{print $0 " (whitelisted)"}'
     comm -23 2.tmp whitelisted.tmp > 3.tmp
 
     grep -E '\.(gov|edu)(\.[a-z]{2})?$' 3.tmp | awk '{print $0 " (TLD)"}' \
