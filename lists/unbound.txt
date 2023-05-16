@@ -2,15 +2,16 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.15.235252.2023
-# Last modified: Mon May 15 23:52:52 UTC 2023
+# Version: 05.16.025737.2023
+# Last modified: Tue May 16 02:57:37 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3960
+# Total number of entries: 3973
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
 local-zone: "17aap.net." always_nxdomain
+local-zone: "201365640.matarocultural.cat." always_nxdomain
 local-zone: "299691360.mailapelihalli.fi." always_nxdomain
 local-zone: "2s.pizza-napoleon.cz." always_nxdomain
 local-zone: "3d-printing.store." always_nxdomain
@@ -22,6 +23,7 @@ local-zone: "630563295qq.myshoplaza.com." always_nxdomain
 local-zone: "68apparel.store." always_nxdomain
 local-zone: "746776079.autella.fi." always_nxdomain
 local-zone: "77unishop.com." always_nxdomain
+local-zone: "796668479.blutsverwandt.at." always_nxdomain
 local-zone: "842961523.wavesystems.cz." always_nxdomain
 local-zone: "90sfootwear.com." always_nxdomain
 local-zone: "915619962.hochland-kriecherl.at." always_nxdomain
@@ -465,6 +467,7 @@ local-zone: "brimwilke.com." always_nxdomain
 local-zone: "bringwellz.com." always_nxdomain
 local-zone: "briskmeind.com." always_nxdomain
 local-zone: "briskrtpto.com." always_nxdomain
+local-zone: "brivalls.cat." always_nxdomain
 local-zone: "brixtee.com." always_nxdomain
 local-zone: "brizzhut.com." always_nxdomain
 local-zone: "brobron.com." always_nxdomain
@@ -799,6 +802,7 @@ local-zone: "dakmag.com." always_nxdomain
 local-zone: "daledog.store." always_nxdomain
 local-zone: "dalypal.com." always_nxdomain
 local-zone: "dalzu.com." always_nxdomain
+local-zone: "danaine.com." always_nxdomain
 local-zone: "danekvalitne.cz." always_nxdomain
 local-zone: "danner-us.shop." always_nxdomain
 local-zone: "dannyart.store." always_nxdomain
@@ -1013,6 +1017,7 @@ local-zone: "eicobuy.com." always_nxdomain
 local-zone: "ejaxww.cargifts.de." always_nxdomain
 local-zone: "ekebalu.shop." always_nxdomain
 local-zone: "ekyfoa.shop." always_nxdomain
+local-zone: "elainstore.com." always_nxdomain
 local-zone: "elasticdockline.com." always_nxdomain
 local-zone: "eldoradoa.com." always_nxdomain
 local-zone: "eldoya.com." always_nxdomain
@@ -1320,6 +1325,7 @@ local-zone: "gardendecoratio.shop." always_nxdomain
 local-zone: "gardenequipmenshopmall.store." always_nxdomain
 local-zone: "gardeningshop.website." always_nxdomain
 local-zone: "garmentvogue.com." always_nxdomain
+local-zone: "gbbbxhspt.lassaggio.cz." always_nxdomain
 local-zone: "gbp-co.uk." always_nxdomain
 local-zone: "gbthoodie.store." always_nxdomain
 local-zone: "gd-workshop.com." always_nxdomain
@@ -1490,6 +1496,7 @@ local-zone: "hazelbath.shop." always_nxdomain
 local-zone: "hazeltoiletries.shop." always_nxdomain
 local-zone: "hbyrts.com." always_nxdomain
 local-zone: "hcglobalshopping.com." always_nxdomain
+local-zone: "hdhqsuiik.papybio.fr." always_nxdomain
 local-zone: "hdjean.online." always_nxdomain
 local-zone: "hdseiin.com." always_nxdomain
 local-zone: "healthfitnessoutlet.com." always_nxdomain
@@ -1609,6 +1616,7 @@ local-zone: "hunisot.com." always_nxdomain
 local-zone: "huntingcameras.shop." always_nxdomain
 local-zone: "huntingtools.shop." always_nxdomain
 local-zone: "huoern.com." always_nxdomain
+local-zone: "hvfzqs.kurakova.pl." always_nxdomain
 local-zone: "hymele.com." always_nxdomain
 local-zone: "hypekartel.com." always_nxdomain
 local-zone: "hyperazt.com." always_nxdomain
@@ -1847,6 +1855,7 @@ local-zone: "koxaz.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
 local-zone: "krnbcase.com." always_nxdomain
 local-zone: "krystaldecristo.com." always_nxdomain
+local-zone: "krzysztofkwasizur.pl." always_nxdomain
 local-zone: "ksntpo.com." always_nxdomain
 local-zone: "kudopenguin.com." always_nxdomain
 local-zone: "kurpiezielone.pl." always_nxdomain
@@ -2532,6 +2541,7 @@ local-zone: "outletbodycare.com." always_nxdomain
 local-zone: "outletclimb.com." always_nxdomain
 local-zone: "outletfarmranch.com." always_nxdomain
 local-zone: "outletgolfequipment.com." always_nxdomain
+local-zone: "outletiro.com." always_nxdomain
 local-zone: "outletnewhome.com." always_nxdomain
 local-zone: "outletnursery.com." always_nxdomain
 local-zone: "outletouterwear.com." always_nxdomain
@@ -3006,6 +3016,7 @@ local-zone: "sesefun.xyz." always_nxdomain
 local-zone: "sessioon.com." always_nxdomain
 local-zone: "sewingiiseasy.com." always_nxdomain
 local-zone: "sewlt.com." always_nxdomain
+local-zone: "sewyrjm.ristrutturazionecasaalassio.it." always_nxdomain
 local-zone: "sfootwearshop.com." always_nxdomain
 local-zone: "sgohory.com." always_nxdomain
 local-zone: "sgxcoins.com." always_nxdomain
@@ -3397,6 +3408,7 @@ local-zone: "theclothesbox.com." always_nxdomain
 local-zone: "thecycleshoes.com." always_nxdomain
 local-zone: "theeaglebrand.company.site." always_nxdomain
 local-zone: "thefitbuy.com." always_nxdomain
+local-zone: "thefrankie.site." always_nxdomain
 local-zone: "thefueledfan.com." always_nxdomain
 local-zone: "thefurnitureusa.com." always_nxdomain
 local-zone: "thegallerify.com." always_nxdomain
@@ -3616,6 +3628,7 @@ local-zone: "unlockvigor.com." always_nxdomain
 local-zone: "unmagasine.com." always_nxdomain
 local-zone: "unusualsurf.com." always_nxdomain
 local-zone: "unyups.com." always_nxdomain
+local-zone: "uobc.monika-koeppes-welt.de." always_nxdomain
 local-zone: "upchest.net." always_nxdomain
 local-zone: "upfores.art." always_nxdomain
 local-zone: "upizone.com." always_nxdomain
