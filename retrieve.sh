@@ -62,7 +62,7 @@ function retrieve_domains {
     echo -e "\nSearch filter: $time_filter"
     echo "Search terms:"
 
-    user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36'
+    user_agent='Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Mobile Safari/537.36'
 
     term_num=1
 
