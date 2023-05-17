@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.17.022315.2023
-# Last modified: Wed May 17 02:23:15 UTC 2023
+# Version: 05.17.023331.2023
+# Last modified: Wed May 17 02:33:31 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4161
+# Total number of entries: 4164
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -965,6 +965,7 @@ local-zone: "discountsshoes.store." always_nxdomain
 local-zone: "discounttoy.store." always_nxdomain
 local-zone: "discounttoys.website." always_nxdomain
 local-zone: "discountwalldecor.com." always_nxdomain
+local-zone: "discreetusspsonline.com." always_nxdomain
 local-zone: "discussionk.com." always_nxdomain
 local-zone: "displacementsjournal.com." always_nxdomain
 local-zone: "divine-wonder.com." always_nxdomain
@@ -2527,6 +2528,7 @@ local-zone: "nideckernitro.com." always_nxdomain
 local-zone: "nieruchomosci-walter24.pl." always_nxdomain
 local-zone: "nigelfish.shop." always_nxdomain
 local-zone: "nijenny.com." always_nxdomain
+local-zone: "nikeshoeoutlets.com." always_nxdomain
 local-zone: "nileapple.com." always_nxdomain
 local-zone: "nimall.cc." always_nxdomain
 local-zone: "ninabathing.shop." always_nxdomain
@@ -3895,6 +3897,7 @@ local-zone: "vibrantgarden.net." always_nxdomain
 local-zone: "vibratolife.com." always_nxdomain
 local-zone: "vicidola.com." always_nxdomain
 local-zone: "vicilo.com." always_nxdomain
+local-zone: "video-earn.homes." always_nxdomain
 local-zone: "vikalpa.org.in." always_nxdomain
 local-zone: "vinoleather.com." always_nxdomain
 local-zone: "vintageland.in." always_nxdomain
