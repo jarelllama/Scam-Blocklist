@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.17.022315.2023
-# Last modified: Wed May 17 02:23:15 UTC 2023
+# Version: 05.17.023331.2023
+# Last modified: Wed May 17 02:33:31 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4160
+# Total number of entries: 4163
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -964,6 +964,7 @@ address=/discountsshoes.store/#
 address=/discounttoy.store/#
 address=/discounttoys.website/#
 address=/discountwalldecor.com/#
+address=/discreetusspsonline.com/#
 address=/discussionk.com/#
 address=/displacementsjournal.com/#
 address=/divine-wonder.com/#
@@ -2526,6 +2527,7 @@ address=/nideckernitro.com/#
 address=/nieruchomosci-walter24.pl/#
 address=/nigelfish.shop/#
 address=/nijenny.com/#
+address=/nikeshoeoutlets.com/#
 address=/nileapple.com/#
 address=/nimall.cc/#
 address=/ninabathing.shop/#
@@ -3894,6 +3896,7 @@ address=/vibrantgarden.net/#
 address=/vibratolife.com/#
 address=/vicidola.com/#
 address=/vicilo.com/#
+address=/video-earn.homes/#
 address=/vikalpa.org.in/#
 address=/vinoleather.com/#
 address=/vintageland.in/#
