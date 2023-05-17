@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.17.023331.2023
-# Last modified: Wed May 17 02:33:31 UTC 2023
+# Version: 05.17.204320.2023
+# Last modified: Wed May 17 20:43:20 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4164
+# Total number of entries: 4161
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -574,7 +574,6 @@ local-zone: "caremite.com." always_nxdomain
 local-zone: "caremytours.com." always_nxdomain
 local-zone: "carenson.com." always_nxdomain
 local-zone: "cargifts.de." always_nxdomain
-local-zone: "carharttoutdoor.com." always_nxdomain
 local-zone: "carmue.online." always_nxdomain
 local-zone: "carniceriacharcuterialucas.es." always_nxdomain
 local-zone: "carolinegear.space." always_nxdomain
@@ -3311,7 +3310,6 @@ local-zone: "skladbelzyce.pl." always_nxdomain
 local-zone: "skullridding.com." always_nxdomain
 local-zone: "skyairdrone.com." always_nxdomain
 local-zone: "skyeline.net." always_nxdomain
-local-zone: "skymedia.media." always_nxdomain
 local-zone: "skysmelluk.com." always_nxdomain
 local-zone: "slearancemsbag.com." always_nxdomain
 local-zone: "sleeveis.com." always_nxdomain
@@ -3582,7 +3580,6 @@ local-zone: "thebentwo.shop." always_nxdomain
 local-zone: "thebikeapparel.com." always_nxdomain
 local-zone: "thebonnie.shop." always_nxdomain
 local-zone: "thebustlight.com." always_nxdomain
-local-zone: "thecarharttwip.com." always_nxdomain
 local-zone: "thecasualclothing.com." always_nxdomain
 local-zone: "thecasualkleding.com." always_nxdomain
 local-zone: "theclassycore.com." always_nxdomain
