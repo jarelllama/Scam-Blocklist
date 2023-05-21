@@ -18,9 +18,9 @@ TOTAL SCAM SITES: 4174
 
 Scam sites found:
 Today: 0
-Yesterday: -2
+Yesterday: 0
 
-Updated: Sat May 20 20:43 UTC
+Updated: Sun May 21 20:43 UTC
 ```
 
 ## Other blocklists
