@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.19.204321.2023
-# Last modified: Fri May 19 20:43:21 UTC 2023
+# Version: 05.22.204315.2023
+# Last modified: Mon May 22 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4155
+# Total number of entries: 4151
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -436,7 +436,6 @@ address=/blingblinggoods.myshopify.com/#
 address=/blinggoodies.com/#
 address=/blingmeupbuttercup.co.uk/#
 address=/blizvyshop.com/#
-address=/blrkenarizona.com/#
 address=/blucontue.com/#
 address=/bluekip.com/#
 address=/bluepoe.com/#
@@ -1026,7 +1025,6 @@ address=/droneskincare.store/#
 address=/drrodos.com/#
 address=/drunstyle.com/#
 address=/druzycrystal.com/#
-address=/drwyatts.com/#
 address=/drywalltools.shop/#
 address=/dsingtse.com/#
 address=/dsvss.com/#
@@ -1547,7 +1545,6 @@ address=/gruzabawki.pl/#
 address=/grystores.com/#
 address=/gsi-marex.pl/#
 address=/gthicn.myshoplaza.com/#
-address=/gtsec.funstuffmail.com/#
 address=/guersare.online/#
 address=/guillermocraig.shop/#
 address=/guitarsale.store/#
@@ -2989,7 +2986,6 @@ address=/review4consumer.com/#
 address=/review4customer.com/#
 address=/reviews4consumers.com/#
 address=/reviews4customers.com/#
-address=/revolut-pl-id.com/#
 address=/revorro.com/#
 address=/rewieva.com/#
 address=/rexbeta.com/#
