@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.19.204322.2023
-# Last modified: Fri May 19 20:43:22 UTC 2023
+# Version: 05.22.204315.2023
+# Last modified: Mon May 22 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4156
+# Total number of entries: 4152
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -437,7 +437,6 @@ local-zone: "blingblinggoods.myshopify.com." always_nxdomain
 local-zone: "blinggoodies.com." always_nxdomain
 local-zone: "blingmeupbuttercup.co.uk." always_nxdomain
 local-zone: "blizvyshop.com." always_nxdomain
-local-zone: "blrkenarizona.com." always_nxdomain
 local-zone: "blucontue.com." always_nxdomain
 local-zone: "bluekip.com." always_nxdomain
 local-zone: "bluepoe.com." always_nxdomain
@@ -1027,7 +1026,6 @@ local-zone: "droneskincare.store." always_nxdomain
 local-zone: "drrodos.com." always_nxdomain
 local-zone: "drunstyle.com." always_nxdomain
 local-zone: "druzycrystal.com." always_nxdomain
-local-zone: "drwyatts.com." always_nxdomain
 local-zone: "drywalltools.shop." always_nxdomain
 local-zone: "dsingtse.com." always_nxdomain
 local-zone: "dsvss.com." always_nxdomain
@@ -1548,7 +1546,6 @@ local-zone: "gruzabawki.pl." always_nxdomain
 local-zone: "grystores.com." always_nxdomain
 local-zone: "gsi-marex.pl." always_nxdomain
 local-zone: "gthicn.myshoplaza.com." always_nxdomain
-local-zone: "gtsec.funstuffmail.com." always_nxdomain
 local-zone: "guersare.online." always_nxdomain
 local-zone: "guillermocraig.shop." always_nxdomain
 local-zone: "guitarsale.store." always_nxdomain
@@ -2990,7 +2987,6 @@ local-zone: "review4consumer.com." always_nxdomain
 local-zone: "review4customer.com." always_nxdomain
 local-zone: "reviews4consumers.com." always_nxdomain
 local-zone: "reviews4customers.com." always_nxdomain
-local-zone: "revolut-pl-id.com." always_nxdomain
 local-zone: "revorro.com." always_nxdomain
 local-zone: "rewieva.com." always_nxdomain
 local-zone: "rexbeta.com." always_nxdomain
