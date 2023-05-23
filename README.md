@@ -13,14 +13,14 @@
 ## Stats
 
 ```
-ALIVE SCAM SITES: 4151
+ALIVE SCAM SITES: 4147
 TOTAL SCAM SITES: 4174
 
 Scam sites found:
 Today: -4
-Yesterday: 0
+Yesterday: -4
 
-Updated: Mon May 22 20:43 UTC
+Updated: Tue May 23 20:43 UTC
 ```
 
 ## Other blocklists
