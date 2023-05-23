@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.22.204315.2023
-# Last modified: Mon May 22 20:43:15 UTC 2023
+# Version: 05.23.204321.2023
+# Last modified: Tue May 23 20:43:21 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4151
+# Total number of entries: 4147
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -301,7 +301,6 @@ address=/balenciagashopus.com/#
 address=/balustradex.pl/#
 address=/bamboocraft.com.au/#
 address=/bamboocrafts.com.au/#
-address=/bamboofinds.com.au/#
 address=/bandwagonusmr.com/#
 address=/baniso.shop/#
 address=/bansa.shop/#
@@ -961,7 +960,6 @@ address=/discountsshoes.store/#
 address=/discounttoy.store/#
 address=/discounttoys.website/#
 address=/discountwalldecor.com/#
-address=/discreetusspsonline.com/#
 address=/discussionk.com/#
 address=/displacementsjournal.com/#
 address=/divine-wonder.com/#
@@ -1216,7 +1214,6 @@ address=/famillegift.com/#
 address=/familybestgifts.com/#
 address=/familygiftville.com/#
 address=/familyteacupschihuahuas.com/#
-address=/famoury.com/#
 address=/fanaticgarment.com/#
 address=/fancygrab.com/#
 address=/fandoras.com/#
@@ -3583,7 +3580,6 @@ address=/thefrankie.site/#
 address=/thefueledfan.com/#
 address=/thefurnitureusa.com/#
 address=/thegallerify.com/#
-address=/thegiftyhouse.com.au/#
 address=/thegirlsclothing.com/#
 address=/thegolfcallaway.com/#
 address=/thehellyhansen.com/#
