@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.22.204315.2023
-# Last modified: Mon May 22 20:43:15 UTC 2023
+# Version: 05.23.204321.2023
+# Last modified: Tue May 23 20:43:21 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4152
+# Total number of entries: 4148
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -302,7 +302,6 @@ local-zone: "balenciagashopus.com." always_nxdomain
 local-zone: "balustradex.pl." always_nxdomain
 local-zone: "bamboocraft.com.au." always_nxdomain
 local-zone: "bamboocrafts.com.au." always_nxdomain
-local-zone: "bamboofinds.com.au." always_nxdomain
 local-zone: "bandwagonusmr.com." always_nxdomain
 local-zone: "baniso.shop." always_nxdomain
 local-zone: "bansa.shop." always_nxdomain
@@ -962,7 +961,6 @@ local-zone: "discountsshoes.store." always_nxdomain
 local-zone: "discounttoy.store." always_nxdomain
 local-zone: "discounttoys.website." always_nxdomain
 local-zone: "discountwalldecor.com." always_nxdomain
-local-zone: "discreetusspsonline.com." always_nxdomain
 local-zone: "discussionk.com." always_nxdomain
 local-zone: "displacementsjournal.com." always_nxdomain
 local-zone: "divine-wonder.com." always_nxdomain
@@ -1217,7 +1215,6 @@ local-zone: "famillegift.com." always_nxdomain
 local-zone: "familybestgifts.com." always_nxdomain
 local-zone: "familygiftville.com." always_nxdomain
 local-zone: "familyteacupschihuahuas.com." always_nxdomain
-local-zone: "famoury.com." always_nxdomain
 local-zone: "fanaticgarment.com." always_nxdomain
 local-zone: "fancygrab.com." always_nxdomain
 local-zone: "fandoras.com." always_nxdomain
@@ -3584,7 +3581,6 @@ local-zone: "thefrankie.site." always_nxdomain
 local-zone: "thefueledfan.com." always_nxdomain
 local-zone: "thefurnitureusa.com." always_nxdomain
 local-zone: "thegallerify.com." always_nxdomain
-local-zone: "thegiftyhouse.com.au." always_nxdomain
 local-zone: "thegirlsclothing.com." always_nxdomain
 local-zone: "thegolfcallaway.com." always_nxdomain
 local-zone: "thehellyhansen.com." always_nxdomain
