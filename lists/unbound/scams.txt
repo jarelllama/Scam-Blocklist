@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.23.204321.2023
-# Last modified: Tue May 23 20:43:21 UTC 2023
+# Version: 05.24.204328.2023
+# Last modified: Wed May 24 20:43:28 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4148
+# Total number of entries: 4146
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -270,6 +270,7 @@ local-zone: "awifethatgiveslife.store." always_nxdomain
 local-zone: "ayafee.com." always_nxdomain
 local-zone: "ayagadgets.com." always_nxdomain
 local-zone: "ayliny.com." always_nxdomain
+local-zone: "aymled.com." always_nxdomain
 local-zone: "azioniassets.com." always_nxdomain
 local-zone: "azonicdentures.com." always_nxdomain
 local-zone: "azuki.com.vn." always_nxdomain
@@ -668,6 +669,7 @@ local-zone: "citadelb.com." always_nxdomain
 local-zone: "citifunny.com." always_nxdomain
 local-zone: "citrary.shop." always_nxdomain
 local-zone: "citrusf.com." always_nxdomain
+local-zone: "citrusj.com." always_nxdomain
 local-zone: "cizubeix.com." always_nxdomain
 local-zone: "ckkebt.shop." always_nxdomain
 local-zone: "ckonlinesale.store." always_nxdomain
@@ -1069,7 +1071,6 @@ local-zone: "ecommercevallcs.com." always_nxdomain
 local-zone: "edaintel.com." always_nxdomain
 local-zone: "edcbyesprit.com." always_nxdomain
 local-zone: "edcotools.com." always_nxdomain
-local-zone: "edithsport.shop." always_nxdomain
 local-zone: "edorz.us." always_nxdomain
 local-zone: "edwinalamp.space." always_nxdomain
 local-zone: "edzoease.com." always_nxdomain
@@ -1820,7 +1821,6 @@ local-zone: "jerseysalesmall.com." always_nxdomain
 local-zone: "jerseysalesstore.com." always_nxdomain
 local-zone: "jerseyviponline.net." always_nxdomain
 local-zone: "jersport.com." always_nxdomain
-local-zone: "jervae.shop." always_nxdomain
 local-zone: "jesscar.shop." always_nxdomain
 local-zone: "jessiegreer.shop." always_nxdomain
 local-zone: "jetelern.com." always_nxdomain
@@ -2316,6 +2316,7 @@ local-zone: "mittyon.com." always_nxdomain
 local-zone: "miusbuy.com." always_nxdomain
 local-zone: "mixchose.com." always_nxdomain
 local-zone: "mixdepot.top." always_nxdomain
+local-zone: "mizukidog.com." always_nxdomain
 local-zone: "mkiplmout.com." always_nxdomain
 local-zone: "mledo.com." always_nxdomain
 local-zone: "mmoutlet.store." always_nxdomain
@@ -3128,7 +3129,6 @@ local-zone: "sarahsmorocco.com." always_nxdomain
 local-zone: "satedeal.com." always_nxdomain
 local-zone: "sauconyshoe.com." always_nxdomain
 local-zone: "saxtapret.xyz." always_nxdomain
-local-zone: "scaleupconsultingau.com." always_nxdomain
 local-zone: "scansave.pl." always_nxdomain
 local-zone: "scarpaoutlet.com." always_nxdomain
 local-zone: "scdchn.com." always_nxdomain
@@ -3300,6 +3300,7 @@ local-zone: "skladbelzyce.pl." always_nxdomain
 local-zone: "skullridding.com." always_nxdomain
 local-zone: "skyairdrone.com." always_nxdomain
 local-zone: "skyeline.net." always_nxdomain
+local-zone: "skymedia.media." always_nxdomain
 local-zone: "skysmelluk.com." always_nxdomain
 local-zone: "slearancemsbag.com." always_nxdomain
 local-zone: "sleeveis.com." always_nxdomain
@@ -3792,7 +3793,6 @@ local-zone: "unineri.shop." always_nxdomain
 local-zone: "uniqueabund.com." always_nxdomain
 local-zone: "uniquehomeshop.com." always_nxdomain
 local-zone: "uniquepie.com." always_nxdomain
-local-zone: "unitedexpress.org." always_nxdomain
 local-zone: "unitedmailexpress.com." always_nxdomain
 local-zone: "universal-health88.com." always_nxdomain
 local-zone: "universalprimelogistics.com." always_nxdomain
@@ -3872,6 +3872,7 @@ local-zone: "vedraf.com." always_nxdomain
 local-zone: "vegadia.com." always_nxdomain
 local-zone: "vehicleequipment.website." always_nxdomain
 local-zone: "ventdeprovence.com." always_nxdomain
+local-zone: "ventrall.com." always_nxdomain
 local-zone: "venturearchitects.pl." always_nxdomain
 local-zone: "veralook.com." always_nxdomain
 local-zone: "vernfootball.xyz." always_nxdomain
@@ -3941,7 +3942,6 @@ local-zone: "wareskids.com." always_nxdomain
 local-zone: "waresnewfad.com." always_nxdomain
 local-zone: "waresusmiss.com." always_nxdomain
 local-zone: "warmclo.com." always_nxdomain
-local-zone: "warmcreativemall.com." always_nxdomain
 local-zone: "warminsun.com." always_nxdomain
 local-zone: "wasakie.myshopify.com." always_nxdomain
 local-zone: "washingsale.shop." always_nxdomain
@@ -4008,7 +4008,6 @@ local-zone: "wireican.com." always_nxdomain
 local-zone: "wisdomganga.com." always_nxdomain
 local-zone: "wisereading.store." always_nxdomain
 local-zone: "wiserot.com." always_nxdomain
-local-zone: "wishbone-evaluation.com." always_nxdomain
 local-zone: "wizgoo.com." always_nxdomain
 local-zone: "wizmazzaken.com." always_nxdomain
 local-zone: "wmsandals.com." always_nxdomain
@@ -4032,7 +4031,6 @@ local-zone: "woodiscounts.com." always_nxdomain
 local-zone: "woodtree.fr." always_nxdomain
 local-zone: "woopker.com." always_nxdomain
 local-zone: "workfootrest.com." always_nxdomain
-local-zone: "works-steelkiwi.com." always_nxdomain
 local-zone: "worldbestpetsupplies.com." always_nxdomain
 local-zone: "worldwebworks.cz." always_nxdomain
 local-zone: "worth2own.com." always_nxdomain
