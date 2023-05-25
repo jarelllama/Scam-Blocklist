@@ -2,8 +2,8 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.24.204328.2023
-# Last modified: Wed May 24 20:43:28 UTC 2023
+# Version: 05.25.204323.2023
+# Last modified: Thu May 25 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
 # Total number of entries: 4146
@@ -801,7 +801,6 @@ local-zone: "crookfishing.com." always_nxdomain
 local-zone: "croutletau.store." always_nxdomain
 local-zone: "crshct.com." always_nxdomain
 local-zone: "crtiveauch.com." always_nxdomain
-local-zone: "cryptcoinwallet.com." always_nxdomain
 local-zone: "crystalmjy.com." always_nxdomain
 local-zone: "crystalparty1.com." always_nxdomain
 local-zone: "csbo.shop." always_nxdomain
@@ -1771,7 +1770,6 @@ local-zone: "inpoexpo.co.uk." always_nxdomain
 local-zone: "inspiree.co." always_nxdomain
 local-zone: "int456.com." always_nxdomain
 local-zone: "intosunning.com." always_nxdomain
-local-zone: "intrendwear.com." always_nxdomain
 local-zone: "intuitivlab.com." always_nxdomain
 local-zone: "inushoes.com." always_nxdomain
 local-zone: "investama92.com." always_nxdomain
@@ -2319,6 +2317,7 @@ local-zone: "mixdepot.top." always_nxdomain
 local-zone: "mizukidog.com." always_nxdomain
 local-zone: "mkiplmout.com." always_nxdomain
 local-zone: "mledo.com." always_nxdomain
+local-zone: "mmapd.shop." always_nxdomain
 local-zone: "mmoutlet.store." always_nxdomain
 local-zone: "mmplus.store." always_nxdomain
 local-zone: "mnaink.com." always_nxdomain
@@ -2355,7 +2354,6 @@ local-zone: "moonymoodwear.com." always_nxdomain
 local-zone: "moopify.com." always_nxdomain
 local-zone: "mops-belchatow.pl." always_nxdomain
 local-zone: "moratihome.com." always_nxdomain
-local-zone: "morlyes.com." always_nxdomain
 local-zone: "most2bar.com." always_nxdomain
 local-zone: "motisy.shop." always_nxdomain
 local-zone: "motiv8performance.com." always_nxdomain
@@ -2692,6 +2690,7 @@ local-zone: "outletrecovery.com." always_nxdomain
 local-zone: "outletsale-usa.com." always_nxdomain
 local-zone: "outletsbike.com." always_nxdomain
 local-zone: "outletselected.com." always_nxdomain
+local-zone: "outletshoe-co.com." always_nxdomain
 local-zone: "outletsrunning.com." always_nxdomain
 local-zone: "outletunit.com." always_nxdomain
 local-zone: "ouzod.uk." always_nxdomain
@@ -3513,6 +3512,7 @@ local-zone: "taledeals.com." always_nxdomain
 local-zone: "talentgrps.com." always_nxdomain
 local-zone: "talonergetic.com." always_nxdomain
 local-zone: "tamed-exotics.com." always_nxdomain
+local-zone: "tanakale.com." always_nxdomain
 local-zone: "tanpulse.com." always_nxdomain
 local-zone: "taprian.com." always_nxdomain
 local-zone: "tartose.com." always_nxdomain
