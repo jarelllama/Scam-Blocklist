@@ -2,8 +2,8 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.24.204328.2023
-# Last modified: Wed May 24 20:43:28 UTC 2023
+# Version: 05.25.204323.2023
+# Last modified: Thu May 25 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
 # Total number of entries: 4145
@@ -800,7 +800,6 @@ address=/crookfishing.com/#
 address=/croutletau.store/#
 address=/crshct.com/#
 address=/crtiveauch.com/#
-address=/cryptcoinwallet.com/#
 address=/crystalmjy.com/#
 address=/crystalparty1.com/#
 address=/csbo.shop/#
@@ -1770,7 +1769,6 @@ address=/inpoexpo.co.uk/#
 address=/inspiree.co/#
 address=/int456.com/#
 address=/intosunning.com/#
-address=/intrendwear.com/#
 address=/intuitivlab.com/#
 address=/inushoes.com/#
 address=/investama92.com/#
@@ -2318,6 +2316,7 @@ address=/mixdepot.top/#
 address=/mizukidog.com/#
 address=/mkiplmout.com/#
 address=/mledo.com/#
+address=/mmapd.shop/#
 address=/mmoutlet.store/#
 address=/mmplus.store/#
 address=/mnaink.com/#
@@ -2354,7 +2353,6 @@ address=/moonymoodwear.com/#
 address=/moopify.com/#
 address=/mops-belchatow.pl/#
 address=/moratihome.com/#
-address=/morlyes.com/#
 address=/most2bar.com/#
 address=/motisy.shop/#
 address=/motiv8performance.com/#
@@ -2691,6 +2689,7 @@ address=/outletrecovery.com/#
 address=/outletsale-usa.com/#
 address=/outletsbike.com/#
 address=/outletselected.com/#
+address=/outletshoe-co.com/#
 address=/outletsrunning.com/#
 address=/outletunit.com/#
 address=/ouzod.uk/#
@@ -3512,6 +3511,7 @@ address=/taledeals.com/#
 address=/talentgrps.com/#
 address=/talonergetic.com/#
 address=/tamed-exotics.com/#
+address=/tanakale.com/#
 address=/tanpulse.com/#
 address=/taprian.com/#
 address=/tartose.com/#
