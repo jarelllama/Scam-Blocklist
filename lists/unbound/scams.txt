@@ -2,8 +2,8 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.27.204330.2023
-# Last modified: Sat May 27 20:43:30 UTC 2023
+# Version: 05.28.204320.2023
+# Last modified: Sun May 28 20:43:20 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
 # Total number of entries: 4142
@@ -648,7 +648,6 @@ local-zone: "chicnailofficial.com." always_nxdomain
 local-zone: "chiconway.com." always_nxdomain
 local-zone: "childbabyclothes.com." always_nxdomain
 local-zone: "childrensclothing.website." always_nxdomain
-local-zone: "china-haoyee.com." always_nxdomain
 local-zone: "chincrux.com." always_nxdomain
 local-zone: "chlebickypraha.cz." always_nxdomain
 local-zone: "choosefeatured.com." always_nxdomain
@@ -1767,6 +1766,7 @@ local-zone: "inpoexpo.co.uk." always_nxdomain
 local-zone: "inspiree.co." always_nxdomain
 local-zone: "int456.com." always_nxdomain
 local-zone: "intosunning.com." always_nxdomain
+local-zone: "intrendwear.com." always_nxdomain
 local-zone: "intuitivlab.com." always_nxdomain
 local-zone: "inushoes.com." always_nxdomain
 local-zone: "investama92.com." always_nxdomain
