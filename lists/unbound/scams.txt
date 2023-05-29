@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.28.204320.2023
-# Last modified: Sun May 28 20:43:20 UTC 2023
+# Version: 05.29.204315.2023
+# Last modified: Mon May 29 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4142
+# Total number of entries: 4137
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -441,7 +441,6 @@ local-zone: "blucontue.com." always_nxdomain
 local-zone: "bluekip.com." always_nxdomain
 local-zone: "bluepoe.com." always_nxdomain
 local-zone: "bluespatuia.com." always_nxdomain
-local-zone: "bluestary.shop." always_nxdomain
 local-zone: "blyli.myshopify.com." always_nxdomain
 local-zone: "bnphouse.com." always_nxdomain
 local-zone: "bodycares.website." always_nxdomain
@@ -1031,7 +1030,6 @@ local-zone: "dtswissbike.com." always_nxdomain
 local-zone: "dtybks.de." always_nxdomain
 local-zone: "duanebattle.myshopify.com." always_nxdomain
 local-zone: "duchaine-paysagiste35.fr." always_nxdomain
-local-zone: "duckyprints.com." always_nxdomain
 local-zone: "duhitu.com." always_nxdomain
 local-zone: "duluthpacksale.com." always_nxdomain
 local-zone: "dunavim.com." always_nxdomain
@@ -1195,7 +1193,6 @@ local-zone: "ezdrone-abundant.onshopbase.com." always_nxdomain
 local-zone: "ezoneeca.com." always_nxdomain
 local-zone: "ezredtool.com." always_nxdomain
 local-zone: "ezzpools.com." always_nxdomain
-local-zone: "ezzymoly.com." always_nxdomain
 local-zone: "fabiang.shop." always_nxdomain
 local-zone: "facilitieshvac.com." always_nxdomain
 local-zone: "factoryds.com." always_nxdomain
@@ -3052,7 +3049,6 @@ local-zone: "rtwtlcie.shop." always_nxdomain
 local-zone: "ruggedsupply.net." always_nxdomain
 local-zone: "rugsandcurtains.com." always_nxdomain
 local-zone: "ruispice.com." always_nxdomain
-local-zone: "rungovip.store." always_nxdomain
 local-zone: "runsaucony.com." always_nxdomain
 local-zone: "rustoleumspray.com." always_nxdomain
 local-zone: "ruylfeicne.info." always_nxdomain
@@ -3691,7 +3687,6 @@ local-zone: "touringclothes.com." always_nxdomain
 local-zone: "touringoutdoors.com." always_nxdomain
 local-zone: "toustote.com." always_nxdomain
 local-zone: "towflank.com." always_nxdomain
-local-zone: "townsvalley.com." always_nxdomain
 local-zone: "toxpas.com." always_nxdomain
 local-zone: "toycollectionstore.website." always_nxdomain
 local-zone: "toyistzone.co." always_nxdomain
