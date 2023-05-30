@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.29.204315.2023
-# Last modified: Mon May 29 20:43:15 UTC 2023
+# Version: 05.30.204316.2023
+# Last modified: Tue May 30 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4137
+# Total number of entries: 4136
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -2312,7 +2312,6 @@ local-zone: "mkiplmout.com." always_nxdomain
 local-zone: "mledo.com." always_nxdomain
 local-zone: "mmapd.shop." always_nxdomain
 local-zone: "mmoutlet.store." always_nxdomain
-local-zone: "mmplus.store." always_nxdomain
 local-zone: "mnaink.com." always_nxdomain
 local-zone: "mnotina.com." always_nxdomain
 local-zone: "mobiamy.com." always_nxdomain
