@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.30.204316.2023
-# Last modified: Tue May 30 20:43:16 UTC 2023
+# Version: 05.31.204322.2023
+# Last modified: Wed May 31 20:43:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4136
+# Total number of entries: 4130
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -767,7 +767,6 @@ local-zone: "coolsthings.com." always_nxdomain
 local-zone: "coomooy.com." always_nxdomain
 local-zone: "cootank.com." always_nxdomain
 local-zone: "coralpuremusic.xyz." always_nxdomain
-local-zone: "coriskit.com." always_nxdomain
 local-zone: "corona-jobfee.de." always_nxdomain
 local-zone: "corona-testzentrum-neubrandenburg.de." always_nxdomain
 local-zone: "costlysunscreen.store." always_nxdomain
@@ -837,9 +836,7 @@ local-zone: "d-clock.cfd." always_nxdomain
 local-zone: "d-crowd.cfd." always_nxdomain
 local-zone: "d-drama.cfd." always_nxdomain
 local-zone: "d-ghost.cfd." always_nxdomain
-local-zone: "d-glory.cfd." always_nxdomain
 local-zone: "d-ivory.cfd." always_nxdomain
-local-zone: "d-judge.cfd." always_nxdomain
 local-zone: "d-lodge.cfd." always_nxdomain
 local-zone: "d-petty.cfd." always_nxdomain
 local-zone: "d-rough.cfd." always_nxdomain
@@ -1170,7 +1167,6 @@ local-zone: "evagle.com." always_nxdomain
 local-zone: "eval-center.com." always_nxdomain
 local-zone: "evaluations-center.com." always_nxdomain
 local-zone: "evanescenceusa.com." always_nxdomain
-local-zone: "evasolostore.com." always_nxdomain
 local-zone: "evedat.com." always_nxdomain
 local-zone: "everlead.net." always_nxdomain
 local-zone: "evoosense.com." always_nxdomain
@@ -2690,7 +2686,6 @@ local-zone: "ouzodbooks.com." always_nxdomain
 local-zone: "overmont.eu." always_nxdomain
 local-zone: "owkshop.shop." always_nxdomain
 local-zone: "owlsand.com." always_nxdomain
-local-zone: "owqdi.top." always_nxdomain
 local-zone: "ozringy.com." always_nxdomain
 local-zone: "ozxshop.shop." always_nxdomain
 local-zone: "paceystudio.com." always_nxdomain
@@ -3879,7 +3874,6 @@ local-zone: "vinoleather.com." always_nxdomain
 local-zone: "vintageland.in." always_nxdomain
 local-zone: "vintgift.com." always_nxdomain
 local-zone: "violinlad.com." always_nxdomain
-local-zone: "vipmallstore.shop." always_nxdomain
 local-zone: "vipshoppers.review." always_nxdomain
 local-zone: "virallstore.com." always_nxdomain
 local-zone: "virtuectech.com." always_nxdomain
