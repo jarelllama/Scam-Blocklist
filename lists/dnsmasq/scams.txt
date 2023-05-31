@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.30.204316.2023
-# Last modified: Tue May 30 20:43:16 UTC 2023
+# Version: 05.31.204322.2023
+# Last modified: Wed May 31 20:43:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4135
+# Total number of entries: 4129
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -766,7 +766,6 @@ address=/coolsthings.com/#
 address=/coomooy.com/#
 address=/cootank.com/#
 address=/coralpuremusic.xyz/#
-address=/coriskit.com/#
 address=/corona-jobfee.de/#
 address=/corona-testzentrum-neubrandenburg.de/#
 address=/costlysunscreen.store/#
@@ -836,9 +835,7 @@ address=/d-clock.cfd/#
 address=/d-crowd.cfd/#
 address=/d-drama.cfd/#
 address=/d-ghost.cfd/#
-address=/d-glory.cfd/#
 address=/d-ivory.cfd/#
-address=/d-judge.cfd/#
 address=/d-lodge.cfd/#
 address=/d-petty.cfd/#
 address=/d-rough.cfd/#
@@ -1169,7 +1166,6 @@ address=/evagle.com/#
 address=/eval-center.com/#
 address=/evaluations-center.com/#
 address=/evanescenceusa.com/#
-address=/evasolostore.com/#
 address=/evedat.com/#
 address=/everlead.net/#
 address=/evoosense.com/#
@@ -2689,7 +2685,6 @@ address=/ouzodbooks.com/#
 address=/overmont.eu/#
 address=/owkshop.shop/#
 address=/owlsand.com/#
-address=/owqdi.top/#
 address=/ozringy.com/#
 address=/ozxshop.shop/#
 address=/paceystudio.com/#
@@ -3878,7 +3873,6 @@ address=/vinoleather.com/#
 address=/vintageland.in/#
 address=/vintgift.com/#
 address=/violinlad.com/#
-address=/vipmallstore.shop/#
 address=/vipshoppers.review/#
 address=/virallstore.com/#
 address=/virtuectech.com/#
