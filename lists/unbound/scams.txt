@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 05.31.204322.2023
-# Last modified: Wed May 31 20:43:22 UTC 2023
+# Version: 06.02.204318.2023
+# Last modified: Fri Jun  2 20:43:18 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4130
+# Total number of entries: 4129
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1218,7 +1218,6 @@ local-zone: "fantings.myshoplaza.com." always_nxdomain
 local-zone: "fapservice.fr." always_nxdomain
 local-zone: "farexon.com." always_nxdomain
 local-zone: "fasamey.com." always_nxdomain
-local-zone: "fashioli.com." always_nxdomain
 local-zone: "fashionadid.com." always_nxdomain
 local-zone: "fashionanklets.space." always_nxdomain
 local-zone: "fashionbagstopsell.store." always_nxdomain
