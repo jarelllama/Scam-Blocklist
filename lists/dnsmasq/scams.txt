@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.02.204318.2023
-# Last modified: Fri Jun  2 20:43:18 UTC 2023
+# Version: 06.03.204315.2023
+# Last modified: Sat Jun  3 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4128
+# Total number of entries: 4126
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -1739,7 +1739,6 @@ address=/imogenpootsonline.com/#
 address=/impossed.com/#
 address=/imwxr.portundi.com/#
 address=/in2kitchenco.com/#
-address=/incartt.com/#
 address=/incommony.com/#
 address=/incredipolls.com/#
 address=/indianshoponlinestore.business.site/#
@@ -3515,7 +3514,6 @@ address=/teebi-boutique.com/#
 address=/teecampie.com/#
 address=/teechipshop.com/#
 address=/teeguys.com/#
-address=/teehute.com/#
 address=/teelove88.com/#
 address=/teemortals.com/#
 address=/teeshopsdd.com/#
