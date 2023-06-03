@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.02.204318.2023
-# Last modified: Fri Jun  2 20:43:18 UTC 2023
+# Version: 06.03.204315.2023
+# Last modified: Sat Jun  3 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4129
+# Total number of entries: 4127
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1740,7 +1740,6 @@ local-zone: "imogenpootsonline.com." always_nxdomain
 local-zone: "impossed.com." always_nxdomain
 local-zone: "imwxr.portundi.com." always_nxdomain
 local-zone: "in2kitchenco.com." always_nxdomain
-local-zone: "incartt.com." always_nxdomain
 local-zone: "incommony.com." always_nxdomain
 local-zone: "incredipolls.com." always_nxdomain
 local-zone: "indianshoponlinestore.business.site." always_nxdomain
@@ -3516,7 +3515,6 @@ local-zone: "teebi-boutique.com." always_nxdomain
 local-zone: "teecampie.com." always_nxdomain
 local-zone: "teechipshop.com." always_nxdomain
 local-zone: "teeguys.com." always_nxdomain
-local-zone: "teehute.com." always_nxdomain
 local-zone: "teelove88.com." always_nxdomain
 local-zone: "teemortals.com." always_nxdomain
 local-zone: "teeshopsdd.com." always_nxdomain
