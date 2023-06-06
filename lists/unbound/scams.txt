@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.05.204316.2023
-# Last modified: Mon Jun  5 20:43:16 UTC 2023
+# Version: 06.06.204334.2023
+# Last modified: Tue Jun  6 20:43:34 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4126
+# Total number of entries: 4125
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1332,7 +1332,6 @@ local-zone: "forksbike.com." always_nxdomain
 local-zone: "forsalebabyclothing.store." always_nxdomain
 local-zone: "fortistrd.com." always_nxdomain
 local-zone: "forumtrustpilot.com." always_nxdomain
-local-zone: "fotoemcaricatura.shop." always_nxdomain
 local-zone: "fotsu.com." always_nxdomain
 local-zone: "fountain.fm." always_nxdomain
 local-zone: "foxaspect.com." always_nxdomain
