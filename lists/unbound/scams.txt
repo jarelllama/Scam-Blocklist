@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.06.204334.2023
-# Last modified: Tue Jun  6 20:43:34 UTC 2023
+# Version: 06.07.204317.2023
+# Last modified: Wed Jun  7 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4125
+# Total number of entries: 4122
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -89,7 +89,6 @@ local-zone: "airupter.life." always_nxdomain
 local-zone: "aiyinsitby.com." always_nxdomain
 local-zone: "ajaxanywhere.com." always_nxdomain
 local-zone: "akasyl-otzberg.de." always_nxdomain
-local-zone: "akccutlery.com." always_nxdomain
 local-zone: "akjamv.shop." always_nxdomain
 local-zone: "alabosh.com." always_nxdomain
 local-zone: "alahead.com." always_nxdomain
@@ -1677,7 +1676,6 @@ local-zone: "hotjewelry.store." always_nxdomain
 local-zone: "hotsalebicycle.store." always_nxdomain
 local-zone: "hotsalefootwear.store." always_nxdomain
 local-zone: "hotsalesmarket.com." always_nxdomain
-local-zone: "hotviphut.store." always_nxdomain
 local-zone: "houbingi.com." always_nxdomain
 local-zone: "hoursclothes.com." always_nxdomain
 local-zone: "housecleaningsale.com." always_nxdomain
@@ -2045,7 +2043,6 @@ local-zone: "lioviablindbox.com." always_nxdomain
 local-zone: "liparijewelry.com." always_nxdomain
 local-zone: "lisaret.shop." always_nxdomain
 local-zone: "lismali.com." always_nxdomain
-local-zone: "lisnatgomes.shop." always_nxdomain
 local-zone: "litconception.com." always_nxdomain
 local-zone: "literaryfiction.store." always_nxdomain
 local-zone: "lithoiret.com." always_nxdomain
