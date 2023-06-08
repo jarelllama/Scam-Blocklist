@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.07.204317.2023
-# Last modified: Wed Jun  7 20:43:17 UTC 2023
+# Version: 06.08.204321.2023
+# Last modified: Thu Jun  8 20:43:21 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4121
+# Total number of entries: 4116
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -244,7 +244,6 @@ address=/ausflug-mit-kids.de/#
 address=/ausonebathroom.com.au/#
 address=/auspost-update.info/#
 address=/austin-sales.shop/#
-address=/authorits.com/#
 address=/automotivediscount.store/#
 address=/automotives.online/#
 address=/autooskup.pl/#
@@ -1017,6 +1016,7 @@ address=/droneskincare.store/#
 address=/drrodos.com/#
 address=/drunstyle.com/#
 address=/druzycrystal.com/#
+address=/drwyatts.com/#
 address=/drywalltools.shop/#
 address=/dsingtse.com/#
 address=/dsvss.com/#
@@ -1529,6 +1529,7 @@ address=/gruzabawki.pl/#
 address=/grystores.com/#
 address=/gsi-marex.pl/#
 address=/gthicn.myshoplaza.com/#
+address=/gtsec.funstuffmail.com/#
 address=/guersare.online/#
 address=/guillermocraig.shop/#
 address=/guitarsale.store/#
@@ -1985,7 +1986,6 @@ address=/latasy.com/#
 address=/latestbicycle.com/#
 address=/latestboxing.com/#
 address=/latestskirt.store/#
-address=/latestwestern.com/#
 address=/launchalive.com/#
 address=/lauraart.shop/#
 address=/laviola-leeste.de/#
@@ -2318,7 +2318,6 @@ address=/mojezkusenostsinvisalign.cz/#
 address=/mokashe.com/#
 address=/moklemon.com/#
 address=/monacamping.shop/#
-address=/mondolet.com/#
 address=/mondowl.com/#
 address=/monika-koeppes-welt.de/#
 address=/monique-sales.shop/#
@@ -2352,7 +2351,6 @@ address=/msmcompare.com/#
 address=/muazida.com/#
 address=/muckbootsmrheater.com/#
 address=/mulheruniverso.com.br/#
-address=/multibra.net/#
 address=/multicup.org/#
 address=/multinus.com/#
 address=/multiplesportnew.com/#
@@ -3262,7 +3260,6 @@ address=/sishangers.com/#
 address=/sisolih.shop/#
 address=/sistercute.com/#
 address=/sitememy.com/#
-address=/sitihoz.com/#
 address=/siueang.com/#
 address=/sixcosmetics.shop/#
 address=/sixfingersjewelry.com/#
@@ -3375,7 +3372,6 @@ address=/stockcycling.com/#
 address=/stoffconcept.de/#
 address=/stofon.shop/#
 address=/stoiupoleney.com/#
-address=/stokten.com/#
 address=/stoopelf.com/#
 address=/storagehome.shop/#
 address=/storagenutrition.com/#
@@ -3868,7 +3864,6 @@ address=/violinlad.com/#
 address=/vipshoppers.review/#
 address=/virallstore.com/#
 address=/virtuectech.com/#
-address=/visikite.com/#
 address=/visualpaw.com/#
 address=/vitaminsale.store/#
 address=/vittoriabike.com/#
