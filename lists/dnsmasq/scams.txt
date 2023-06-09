@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.08.204321.2023
-# Last modified: Thu Jun  8 20:43:21 UTC 2023
+# Version: 06.09.204327.2023
+# Last modified: Fri Jun  9 20:43:27 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4116
+# Total number of entries: 4112
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -25,7 +25,6 @@ address=/77unishop.com/#
 address=/796668479.blutsverwandt.at/#
 address=/90sfootwear.com/#
 address=/915619962.hochland-kriecherl.at/#
-address=/a-mazon.shop/#
 address=/a3review.com/#
 address=/aac667.com/#
 address=/aakida.com/#
@@ -44,7 +43,6 @@ address=/accessoriesnew.com/#
 address=/accessoriesselling.store/#
 address=/accessoriestore.live/#
 address=/accidentaln.com/#
-address=/aceroli.com/#
 address=/acnsa.shop/#
 address=/acslope.com/#
 address=/actionsaturn.com/#
@@ -78,7 +76,6 @@ address=/aietde.store/#
 address=/aikee.world/#
 address=/aikmax.com/#
 address=/aiman-immobilier.fr/#
-address=/aimoon921.com/#
 address=/aioclothes.com/#
 address=/aipucr.xyz/#
 address=/aircgd.shop/#
@@ -1552,7 +1549,6 @@ address=/hakodate-cape.com/#
 address=/haligir.xyz/#
 address=/hallowevening.com/#
 address=/hallucinate.pw/#
-address=/halogof.com/#
 address=/hamburgtree.com/#
 address=/handbagsale.store/#
 address=/handmadework.website/#
