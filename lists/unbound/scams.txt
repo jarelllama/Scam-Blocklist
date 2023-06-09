@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.08.204321.2023
-# Last modified: Thu Jun  8 20:43:21 UTC 2023
+# Version: 06.09.204327.2023
+# Last modified: Fri Jun  9 20:43:27 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4117
+# Total number of entries: 4113
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -26,7 +26,6 @@ local-zone: "77unishop.com." always_nxdomain
 local-zone: "796668479.blutsverwandt.at." always_nxdomain
 local-zone: "90sfootwear.com." always_nxdomain
 local-zone: "915619962.hochland-kriecherl.at." always_nxdomain
-local-zone: "a-mazon.shop." always_nxdomain
 local-zone: "a3review.com." always_nxdomain
 local-zone: "aac667.com." always_nxdomain
 local-zone: "aakida.com." always_nxdomain
@@ -45,7 +44,6 @@ local-zone: "accessoriesnew.com." always_nxdomain
 local-zone: "accessoriesselling.store." always_nxdomain
 local-zone: "accessoriestore.live." always_nxdomain
 local-zone: "accidentaln.com." always_nxdomain
-local-zone: "aceroli.com." always_nxdomain
 local-zone: "acnsa.shop." always_nxdomain
 local-zone: "acslope.com." always_nxdomain
 local-zone: "actionsaturn.com." always_nxdomain
@@ -79,7 +77,6 @@ local-zone: "aietde.store." always_nxdomain
 local-zone: "aikee.world." always_nxdomain
 local-zone: "aikmax.com." always_nxdomain
 local-zone: "aiman-immobilier.fr." always_nxdomain
-local-zone: "aimoon921.com." always_nxdomain
 local-zone: "aioclothes.com." always_nxdomain
 local-zone: "aipucr.xyz." always_nxdomain
 local-zone: "aircgd.shop." always_nxdomain
@@ -1553,7 +1550,6 @@ local-zone: "hakodate-cape.com." always_nxdomain
 local-zone: "haligir.xyz." always_nxdomain
 local-zone: "hallowevening.com." always_nxdomain
 local-zone: "hallucinate.pw." always_nxdomain
-local-zone: "halogof.com." always_nxdomain
 local-zone: "hamburgtree.com." always_nxdomain
 local-zone: "handbagsale.store." always_nxdomain
 local-zone: "handmadework.website." always_nxdomain
