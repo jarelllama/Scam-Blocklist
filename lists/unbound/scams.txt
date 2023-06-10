@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.09.204327.2023
-# Last modified: Fri Jun  9 20:43:27 UTC 2023
+# Version: 06.10.204322.2023
+# Last modified: Sat Jun 10 20:43:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4113
+# Total number of entries: 4112
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -3125,7 +3125,6 @@ local-zone: "sedigis.com." always_nxdomain
 local-zone: "sedseative.com." always_nxdomain
 local-zone: "sedyonline.com." always_nxdomain
 local-zone: "seghet.com." always_nxdomain
-local-zone: "seizebra.com." always_nxdomain
 local-zone: "sejyn.cuppleapp.com." always_nxdomain
 local-zone: "selectconsumers.help." always_nxdomain
 local-zone: "selectcustomers.review." always_nxdomain
