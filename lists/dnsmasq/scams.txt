@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.10.204322.2023
-# Last modified: Sat Jun 10 20:43:22 UTC 2023
+# Version: 06.11.204317.2023
+# Last modified: Sun Jun 11 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4111
+# Total number of entries: 4110
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -358,7 +358,6 @@ address=/bestbasketonline.com/#
 address=/bestbathproduct.com/#
 address=/bestdogsfood.website/#
 address=/bestdsquared.com/#
-address=/bestechcutlery.com/#
 address=/bestfemaless.com/#
 address=/bestparktool.com/#
 address=/bestrepshoes.com/#
@@ -1607,7 +1606,6 @@ address=/hihiglobal.com/#
 address=/hikerpowers.com/#
 address=/hilaryart.live/#
 address=/hillmanhilti.com/#
-address=/hipzelle.com/#
 address=/hirchor.com/#
 address=/hizmetkurdi.com/#
 address=/hk6986.com/#
@@ -3367,6 +3365,7 @@ address=/stockcycling.com/#
 address=/stoffconcept.de/#
 address=/stofon.shop/#
 address=/stoiupoleney.com/#
+address=/stokten.com/#
 address=/stoopelf.com/#
 address=/storagehome.shop/#
 address=/storagenutrition.com/#
