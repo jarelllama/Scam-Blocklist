@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.10.204322.2023
-# Last modified: Sat Jun 10 20:43:22 UTC 2023
+# Version: 06.11.204317.2023
+# Last modified: Sun Jun 11 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4112
+# Total number of entries: 4111
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -359,7 +359,6 @@ local-zone: "bestbasketonline.com." always_nxdomain
 local-zone: "bestbathproduct.com." always_nxdomain
 local-zone: "bestdogsfood.website." always_nxdomain
 local-zone: "bestdsquared.com." always_nxdomain
-local-zone: "bestechcutlery.com." always_nxdomain
 local-zone: "bestfemaless.com." always_nxdomain
 local-zone: "bestparktool.com." always_nxdomain
 local-zone: "bestrepshoes.com." always_nxdomain
@@ -1608,7 +1607,6 @@ local-zone: "hihiglobal.com." always_nxdomain
 local-zone: "hikerpowers.com." always_nxdomain
 local-zone: "hilaryart.live." always_nxdomain
 local-zone: "hillmanhilti.com." always_nxdomain
-local-zone: "hipzelle.com." always_nxdomain
 local-zone: "hirchor.com." always_nxdomain
 local-zone: "hizmetkurdi.com." always_nxdomain
 local-zone: "hk6986.com." always_nxdomain
@@ -3368,6 +3366,7 @@ local-zone: "stockcycling.com." always_nxdomain
 local-zone: "stoffconcept.de." always_nxdomain
 local-zone: "stofon.shop." always_nxdomain
 local-zone: "stoiupoleney.com." always_nxdomain
+local-zone: "stokten.com." always_nxdomain
 local-zone: "stoopelf.com." always_nxdomain
 local-zone: "storagehome.shop." always_nxdomain
 local-zone: "storagenutrition.com." always_nxdomain
