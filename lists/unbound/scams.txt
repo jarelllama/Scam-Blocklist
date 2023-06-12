@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.11.204317.2023
-# Last modified: Sun Jun 11 20:43:17 UTC 2023
+# Version: 06.12.204315.2023
+# Last modified: Mon Jun 12 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4111
+# Total number of entries: 4106
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -307,7 +307,6 @@ local-zone: "barleying.com." always_nxdomain
 local-zone: "barnamesigns.com." always_nxdomain
 local-zone: "barpasaje.com." always_nxdomain
 local-zone: "baruakart.com." always_nxdomain
-local-zone: "barutoin.com." always_nxdomain
 local-zone: "bas.koreapati.com." always_nxdomain
 local-zone: "baseballshop-us.com." always_nxdomain
 local-zone: "basiaphoto.shop." always_nxdomain
@@ -416,7 +415,6 @@ local-zone: "bittoolsale.com." always_nxdomain
 local-zone: "bitypis.com." always_nxdomain
 local-zone: "bjjizx.com." always_nxdomain
 local-zone: "bjornborgdiscount.com." always_nxdomain
-local-zone: "bkonlinestore.shop." always_nxdomain
 local-zone: "blackabdo.company.site." always_nxdomain
 local-zone: "blackfridayakcja.pl." always_nxdomain
 local-zone: "blackgifted.shop." always_nxdomain
@@ -578,7 +576,6 @@ local-zone: "caryou.shop." always_nxdomain
 local-zone: "casavec.com." always_nxdomain
 local-zone: "casebity.com." always_nxdomain
 local-zone: "casebon.com." always_nxdomain
-local-zone: "caseboo.shop." always_nxdomain
 local-zone: "casiecustom.com." always_nxdomain
 local-zone: "castellicycle.com." always_nxdomain
 local-zone: "castillo-art.shop." always_nxdomain
@@ -1675,7 +1672,6 @@ local-zone: "houbingi.com." always_nxdomain
 local-zone: "hoursclothes.com." always_nxdomain
 local-zone: "housecleaningsale.com." always_nxdomain
 local-zone: "houserby.com." always_nxdomain
-local-zone: "howarco.com." always_nxdomain
 local-zone: "howtozila.com." always_nxdomain
 local-zone: "hpawesome.com." always_nxdomain
 local-zone: "hqbag.shop." always_nxdomain
@@ -3633,7 +3629,6 @@ local-zone: "tomclothing.shop." always_nxdomain
 local-zone: "tomshuette-hohwacht.de." always_nxdomain
 local-zone: "tomucir.shop." always_nxdomain
 local-zone: "tonilah.xyz." always_nxdomain
-local-zone: "tonybianco.online." always_nxdomain
 local-zone: "toolandmaintenance.com." always_nxdomain
 local-zone: "toolboxes.top." always_nxdomain
 local-zone: "toolmartin.com." always_nxdomain
