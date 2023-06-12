@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.11.204317.2023
-# Last modified: Sun Jun 11 20:43:17 UTC 2023
+# Version: 06.12.204315.2023
+# Last modified: Mon Jun 12 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4110
+# Total number of entries: 4105
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -306,7 +306,6 @@ address=/barleying.com/#
 address=/barnamesigns.com/#
 address=/barpasaje.com/#
 address=/baruakart.com/#
-address=/barutoin.com/#
 address=/bas.koreapati.com/#
 address=/baseballshop-us.com/#
 address=/basiaphoto.shop/#
@@ -415,7 +414,6 @@ address=/bittoolsale.com/#
 address=/bitypis.com/#
 address=/bjjizx.com/#
 address=/bjornborgdiscount.com/#
-address=/bkonlinestore.shop/#
 address=/blackabdo.company.site/#
 address=/blackfridayakcja.pl/#
 address=/blackgifted.shop/#
@@ -577,7 +575,6 @@ address=/caryou.shop/#
 address=/casavec.com/#
 address=/casebity.com/#
 address=/casebon.com/#
-address=/caseboo.shop/#
 address=/casiecustom.com/#
 address=/castellicycle.com/#
 address=/castillo-art.shop/#
@@ -1674,7 +1671,6 @@ address=/houbingi.com/#
 address=/hoursclothes.com/#
 address=/housecleaningsale.com/#
 address=/houserby.com/#
-address=/howarco.com/#
 address=/howtozila.com/#
 address=/hpawesome.com/#
 address=/hqbag.shop/#
@@ -3632,7 +3628,6 @@ address=/tomclothing.shop/#
 address=/tomshuette-hohwacht.de/#
 address=/tomucir.shop/#
 address=/tonilah.xyz/#
-address=/tonybianco.online/#
 address=/toolandmaintenance.com/#
 address=/toolboxes.top/#
 address=/toolmartin.com/#
