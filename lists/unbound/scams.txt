@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.12.204315.2023
-# Last modified: Mon Jun 12 20:43:15 UTC 2023
+# Version: 06.13.204333.2023
+# Last modified: Tue Jun 13 20:43:33 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4106
+# Total number of entries: 4101
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -288,7 +288,6 @@ local-zone: "backfood.shop." always_nxdomain
 local-zone: "backwardu.com." always_nxdomain
 local-zone: "bagbuckets.com." always_nxdomain
 local-zone: "bagcharmzone.com." always_nxdomain
-local-zone: "bagduffel.com." always_nxdomain
 local-zone: "baggettsale.shop." always_nxdomain
 local-zone: "bagsdeuter.com." always_nxdomain
 local-zone: "bairdsales.shop." always_nxdomain
@@ -1811,7 +1810,6 @@ local-zone: "jingba-support.com." always_nxdomain
 local-zone: "jingzhimucrystals.com." always_nxdomain
 local-zone: "jivania.com." always_nxdomain
 local-zone: "jjhaka.top." always_nxdomain
-local-zone: "jjslight.com." always_nxdomain
 local-zone: "jlypoint.com." always_nxdomain
 local-zone: "jnblhhdzsm.shop." always_nxdomain
 local-zone: "jocoto.co." always_nxdomain
@@ -1996,7 +1994,6 @@ local-zone: "legsforce.com." always_nxdomain
 local-zone: "leiniaokitchen.com." always_nxdomain
 local-zone: "lemiteshop.shop." always_nxdomain
 local-zone: "lemw.shop." always_nxdomain
-local-zone: "lenarank.com." always_nxdomain
 local-zone: "lenasportstore.xyz." always_nxdomain
 local-zone: "leninecloth.com." always_nxdomain
 local-zone: "lenticaselar.com." always_nxdomain
@@ -2593,7 +2590,6 @@ local-zone: "onlynewproduct.com." always_nxdomain
 local-zone: "onlywomenswear.com." always_nxdomain
 local-zone: "onodore.shop." always_nxdomain
 local-zone: "onproaid.com." always_nxdomain
-local-zone: "onrunningstore.com." always_nxdomain
 local-zone: "onsaleclimbshop.com." always_nxdomain
 local-zone: "onsalecustom.com." always_nxdomain
 local-zone: "onsaletoy.store." always_nxdomain
@@ -2630,7 +2626,6 @@ local-zone: "oupinke.watch." always_nxdomain
 local-zone: "outdooramusement.xyz." always_nxdomain
 local-zone: "outdoorplush.com." always_nxdomain
 local-zone: "outdoorr.shop." always_nxdomain
-local-zone: "outdoorsappares.com." always_nxdomain
 local-zone: "outdoorscarpa.com." always_nxdomain
 local-zone: "outdoorsclimb.com." always_nxdomain
 local-zone: "outdoorshoeshop.com." always_nxdomain
