@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.12.204315.2023
-# Last modified: Mon Jun 12 20:43:15 UTC 2023
+# Version: 06.13.204333.2023
+# Last modified: Tue Jun 13 20:43:33 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4105
+# Total number of entries: 4100
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -287,7 +287,6 @@ address=/backfood.shop/#
 address=/backwardu.com/#
 address=/bagbuckets.com/#
 address=/bagcharmzone.com/#
-address=/bagduffel.com/#
 address=/baggettsale.shop/#
 address=/bagsdeuter.com/#
 address=/bairdsales.shop/#
@@ -1810,7 +1809,6 @@ address=/jingba-support.com/#
 address=/jingzhimucrystals.com/#
 address=/jivania.com/#
 address=/jjhaka.top/#
-address=/jjslight.com/#
 address=/jlypoint.com/#
 address=/jnblhhdzsm.shop/#
 address=/jocoto.co/#
@@ -1995,7 +1993,6 @@ address=/legsforce.com/#
 address=/leiniaokitchen.com/#
 address=/lemiteshop.shop/#
 address=/lemw.shop/#
-address=/lenarank.com/#
 address=/lenasportstore.xyz/#
 address=/leninecloth.com/#
 address=/lenticaselar.com/#
@@ -2592,7 +2589,6 @@ address=/onlynewproduct.com/#
 address=/onlywomenswear.com/#
 address=/onodore.shop/#
 address=/onproaid.com/#
-address=/onrunningstore.com/#
 address=/onsaleclimbshop.com/#
 address=/onsalecustom.com/#
 address=/onsaletoy.store/#
@@ -2629,7 +2625,6 @@ address=/oupinke.watch/#
 address=/outdooramusement.xyz/#
 address=/outdoorplush.com/#
 address=/outdoorr.shop/#
-address=/outdoorsappares.com/#
 address=/outdoorscarpa.com/#
 address=/outdoorsclimb.com/#
 address=/outdoorshoeshop.com/#
