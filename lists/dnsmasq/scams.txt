@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.13.204333.2023
-# Last modified: Tue Jun 13 20:43:33 UTC 2023
+# Version: 06.14.204323.2023
+# Last modified: Wed Jun 14 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4100
+# Total number of entries: 4095
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -87,7 +87,6 @@ address=/ajaxanywhere.com/#
 address=/akasyl-otzberg.de/#
 address=/akjamv.shop/#
 address=/alabosh.com/#
-address=/alahead.com/#
 address=/alanhug.pro/#
 address=/alapeay.com/#
 address=/alaskatag.com/#
@@ -1075,7 +1074,6 @@ address=/elecoool.com/#
 address=/electricskateboard.com/#
 address=/elemesu.com/#
 address=/elgdln.com/#
-address=/eli.beckhaul.com/#
 address=/eli.mobpiscinas.com.br/#
 address=/elimaker.shop/#
 address=/ellenmanicure.shop/#
@@ -3174,7 +3172,6 @@ address=/shoessoutlet.store/#
 address=/shoewhitemountain.com/#
 address=/shoopesy.com/#
 address=/shop-homeware.com/#
-address=/shop-western.com/#
 address=/shop-women.store/#
 address=/shop.migucun.com/#
 address=/shop123123.com/#
@@ -3508,7 +3505,6 @@ address=/teraise.com/#
 address=/terkari.com/#
 address=/terrifestival.shop/#
 address=/terryjewelry.shop/#
-address=/terutied.com/#
 address=/terwoao.com/#
 address=/tesauree.com/#
 address=/teslarea.com/#
@@ -4018,7 +4014,6 @@ address=/yaitie.com/#
 address=/yalecollectio.xyz/#
 address=/yaluokeji.com/#
 address=/yamapron.com/#
-address=/yasfel.net/#
 address=/yawanm.com/#
 address=/yearfullca.com/#
 address=/yeejewel.com/#
