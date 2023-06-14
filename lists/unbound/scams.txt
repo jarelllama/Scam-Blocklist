@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.13.204333.2023
-# Last modified: Tue Jun 13 20:43:33 UTC 2023
+# Version: 06.14.204323.2023
+# Last modified: Wed Jun 14 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4101
+# Total number of entries: 4096
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -88,7 +88,6 @@ local-zone: "ajaxanywhere.com." always_nxdomain
 local-zone: "akasyl-otzberg.de." always_nxdomain
 local-zone: "akjamv.shop." always_nxdomain
 local-zone: "alabosh.com." always_nxdomain
-local-zone: "alahead.com." always_nxdomain
 local-zone: "alanhug.pro." always_nxdomain
 local-zone: "alapeay.com." always_nxdomain
 local-zone: "alaskatag.com." always_nxdomain
@@ -1076,7 +1075,6 @@ local-zone: "elecoool.com." always_nxdomain
 local-zone: "electricskateboard.com." always_nxdomain
 local-zone: "elemesu.com." always_nxdomain
 local-zone: "elgdln.com." always_nxdomain
-local-zone: "eli.beckhaul.com." always_nxdomain
 local-zone: "eli.mobpiscinas.com.br." always_nxdomain
 local-zone: "elimaker.shop." always_nxdomain
 local-zone: "ellenmanicure.shop." always_nxdomain
@@ -3175,7 +3173,6 @@ local-zone: "shoessoutlet.store." always_nxdomain
 local-zone: "shoewhitemountain.com." always_nxdomain
 local-zone: "shoopesy.com." always_nxdomain
 local-zone: "shop-homeware.com." always_nxdomain
-local-zone: "shop-western.com." always_nxdomain
 local-zone: "shop-women.store." always_nxdomain
 local-zone: "shop.migucun.com." always_nxdomain
 local-zone: "shop123123.com." always_nxdomain
@@ -3509,7 +3506,6 @@ local-zone: "teraise.com." always_nxdomain
 local-zone: "terkari.com." always_nxdomain
 local-zone: "terrifestival.shop." always_nxdomain
 local-zone: "terryjewelry.shop." always_nxdomain
-local-zone: "terutied.com." always_nxdomain
 local-zone: "terwoao.com." always_nxdomain
 local-zone: "tesauree.com." always_nxdomain
 local-zone: "teslarea.com." always_nxdomain
@@ -4019,7 +4015,6 @@ local-zone: "yaitie.com." always_nxdomain
 local-zone: "yalecollectio.xyz." always_nxdomain
 local-zone: "yaluokeji.com." always_nxdomain
 local-zone: "yamapron.com." always_nxdomain
-local-zone: "yasfel.net." always_nxdomain
 local-zone: "yawanm.com." always_nxdomain
 local-zone: "yearfullca.com." always_nxdomain
 local-zone: "yeejewel.com." always_nxdomain
