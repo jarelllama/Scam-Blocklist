@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.14.204323.2023
-# Last modified: Wed Jun 14 20:43:23 UTC 2023
+# Version: 06.15.204325.2023
+# Last modified: Thu Jun 15 20:43:25 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4096
+# Total number of entries: 4088
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1056,7 +1056,6 @@ local-zone: "edcotools.com." always_nxdomain
 local-zone: "edorz.us." always_nxdomain
 local-zone: "edwinalamp.space." always_nxdomain
 local-zone: "edzoease.com." always_nxdomain
-local-zone: "eecbyfantaseas.com." always_nxdomain
 local-zone: "eettut.com." always_nxdomain
 local-zone: "efxchamp.com." always_nxdomain
 local-zone: "eggdy.shop." always_nxdomain
@@ -1697,7 +1696,6 @@ local-zone: "hznation.shop." always_nxdomain
 local-zone: "i-grade.online." always_nxdomain
 local-zone: "ianfire.com." always_nxdomain
 local-zone: "iankrogers.com." always_nxdomain
-local-zone: "ianscrystal.com." always_nxdomain
 local-zone: "iceao.shop." always_nxdomain
 local-zone: "icebath.cc." always_nxdomain
 local-zone: "icemenruy.com." always_nxdomain
@@ -1738,7 +1736,6 @@ local-zone: "innagur.com." always_nxdomain
 local-zone: "innomodelcar.com." always_nxdomain
 local-zone: "innovation-entwicklung.de." always_nxdomain
 local-zone: "inpcofproti.com." always_nxdomain
-local-zone: "inpoexpo.co.uk." always_nxdomain
 local-zone: "inspiree.co." always_nxdomain
 local-zone: "int456.com." always_nxdomain
 local-zone: "intosunning.com." always_nxdomain
@@ -2761,7 +2758,6 @@ local-zone: "pinvense.com." always_nxdomain
 local-zone: "pinvic.com." always_nxdomain
 local-zone: "piperjewelry.shop." always_nxdomain
 local-zone: "pipfan.com." always_nxdomain
-local-zone: "pittedindustries.com." always_nxdomain
 local-zone: "pixiebra.com." always_nxdomain
 local-zone: "pixisid.com." always_nxdomain
 local-zone: "pizza-napoleon.cz." always_nxdomain
@@ -3146,7 +3142,6 @@ local-zone: "sharekq.cn." always_nxdomain
 local-zone: "sharonbaby.shop." always_nxdomain
 local-zone: "sharpxo.com." always_nxdomain
 local-zone: "shawlzoo.com." always_nxdomain
-local-zone: "shayate.com." always_nxdomain
 local-zone: "shegaga.com." always_nxdomain
 local-zone: "shelbychicboutique.com." always_nxdomain
 local-zone: "shelleyfitn.shop." always_nxdomain
@@ -3334,7 +3329,6 @@ local-zone: "ssl4less.it." always_nxdomain
 local-zone: "stacyadamsshop.store." always_nxdomain
 local-zone: "stacybaby.shop." always_nxdomain
 local-zone: "stallioncredit.com." always_nxdomain
-local-zone: "standbeyoutiful.com." always_nxdomain
 local-zone: "stanein.com." always_nxdomain
 local-zone: "stara-posta-hodonin.cz." always_nxdomain
 local-zone: "stateso.com." always_nxdomain
@@ -3493,7 +3487,6 @@ local-zone: "teemortals.com." always_nxdomain
 local-zone: "teeshopsdd.com." always_nxdomain
 local-zone: "teesworld.online." always_nxdomain
 local-zone: "tehasid.shop." always_nxdomain
-local-zone: "telemedicine-solutions.com." always_nxdomain
 local-zone: "temaliy.shop." always_nxdomain
 local-zone: "temaotrade.com." always_nxdomain
 local-zone: "tempeie.com." always_nxdomain
@@ -3782,7 +3775,6 @@ local-zone: "usdiscountmale.com." always_nxdomain
 local-zone: "usdtminer.org." always_nxdomain
 local-zone: "usefireplace.store." always_nxdomain
 local-zone: "usfootballwear.com." always_nxdomain
-local-zone: "usglacierbay.com." always_nxdomain
 local-zone: "usladyluxury.com." always_nxdomain
 local-zone: "uslashpurchase.shop." always_nxdomain
 local-zone: "usmmagear.com." always_nxdomain
