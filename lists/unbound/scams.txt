@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.16.204326.2023
-# Last modified: Fri Jun 16 20:43:26 UTC 2023
+# Version: 06.17.204322.2023
+# Last modified: Sat Jun 17 20:43:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4071
+# Total number of entries: 4066
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -638,7 +638,6 @@ local-zone: "chosmo.shop." always_nxdomain
 local-zone: "christmaspopular.com." always_nxdomain
 local-zone: "chuopina.com." always_nxdomain
 local-zone: "chuxinxiaopu.com." always_nxdomain
-local-zone: "ciarks.com." always_nxdomain
 local-zone: "cieszyndlaukrainy.pl." always_nxdomain
 local-zone: "cillicstores.com." always_nxdomain
 local-zone: "cimooi.com." always_nxdomain
@@ -1391,7 +1390,6 @@ local-zone: "gearusbike.com." always_nxdomain
 local-zone: "gedebate.com." always_nxdomain
 local-zone: "geesfy.com." always_nxdomain
 local-zone: "geezerdecor.com." always_nxdomain
-local-zone: "geheshop.com." always_nxdomain
 local-zone: "genages.com." always_nxdomain
 local-zone: "genebedstore.xyz." always_nxdomain
 local-zone: "genekitchen.shop." always_nxdomain
@@ -1844,7 +1842,6 @@ local-zone: "karicatie.com." always_nxdomain
 local-zone: "karisshop.com." always_nxdomain
 local-zone: "karolinasadlon.pl." always_nxdomain
 local-zone: "kassiemin.com." always_nxdomain
-local-zone: "kastking.store." always_nxdomain
 local-zone: "katecrafts.shop." always_nxdomain
 local-zone: "kateolson.space." always_nxdomain
 local-zone: "katerh.com." always_nxdomain
@@ -2501,7 +2498,6 @@ local-zone: "nuicard.com." always_nxdomain
 local-zone: "number1store.pl." always_nxdomain
 local-zone: "nuovasantambrogio.it." always_nxdomain
 local-zone: "nursingsale.store." always_nxdomain
-local-zone: "nuxcloset.com." always_nxdomain
 local-zone: "nvistle.us." always_nxdomain
 local-zone: "nwtaylor.shop." always_nxdomain
 local-zone: "nycmetroshop.com." always_nxdomain
@@ -3580,7 +3576,6 @@ local-zone: "tionketn.com." always_nxdomain
 local-zone: "tipijoy.com." always_nxdomain
 local-zone: "tippiesion.com." always_nxdomain
 local-zone: "titemo.com." always_nxdomain
-local-zone: "tiyyf.com." always_nxdomain
 local-zone: "tkshop.life." always_nxdomain
 local-zone: "tkyoyo.com." always_nxdomain
 local-zone: "tmcsale.net." always_nxdomain
