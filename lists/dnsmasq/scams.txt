@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.16.204326.2023
-# Last modified: Fri Jun 16 20:43:26 UTC 2023
+# Version: 06.17.204322.2023
+# Last modified: Sat Jun 17 20:43:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4070
+# Total number of entries: 4065
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -637,7 +637,6 @@ address=/chosmo.shop/#
 address=/christmaspopular.com/#
 address=/chuopina.com/#
 address=/chuxinxiaopu.com/#
-address=/ciarks.com/#
 address=/cieszyndlaukrainy.pl/#
 address=/cillicstores.com/#
 address=/cimooi.com/#
@@ -1390,7 +1389,6 @@ address=/gearusbike.com/#
 address=/gedebate.com/#
 address=/geesfy.com/#
 address=/geezerdecor.com/#
-address=/geheshop.com/#
 address=/genages.com/#
 address=/genebedstore.xyz/#
 address=/genekitchen.shop/#
@@ -1843,7 +1841,6 @@ address=/karicatie.com/#
 address=/karisshop.com/#
 address=/karolinasadlon.pl/#
 address=/kassiemin.com/#
-address=/kastking.store/#
 address=/katecrafts.shop/#
 address=/kateolson.space/#
 address=/katerh.com/#
@@ -2500,7 +2497,6 @@ address=/nuicard.com/#
 address=/number1store.pl/#
 address=/nuovasantambrogio.it/#
 address=/nursingsale.store/#
-address=/nuxcloset.com/#
 address=/nvistle.us/#
 address=/nwtaylor.shop/#
 address=/nycmetroshop.com/#
@@ -3579,7 +3575,6 @@ address=/tionketn.com/#
 address=/tipijoy.com/#
 address=/tippiesion.com/#
 address=/titemo.com/#
-address=/tiyyf.com/#
 address=/tkshop.life/#
 address=/tkyoyo.com/#
 address=/tmcsale.net/#
