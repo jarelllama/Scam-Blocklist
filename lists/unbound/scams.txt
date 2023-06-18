@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.17.204322.2023
-# Last modified: Sat Jun 17 20:43:22 UTC 2023
+# Version: 06.18.204328.2023
+# Last modified: Sun Jun 18 20:43:28 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4066
+# Total number of entries: 4065
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -260,7 +260,6 @@ local-zone: "awewish.com." always_nxdomain
 local-zone: "awifethatgiveslife.store." always_nxdomain
 local-zone: "ayafee.com." always_nxdomain
 local-zone: "ayagadgets.com." always_nxdomain
-local-zone: "ayliny.com." always_nxdomain
 local-zone: "aymled.com." always_nxdomain
 local-zone: "azioniassets.com." always_nxdomain
 local-zone: "azonicdentures.com." always_nxdomain
