@@ -2,8 +2,8 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.19.204315.2023
-# Last modified: Mon Jun 19 20:43:15 UTC 2023
+# Version: 06.20.204320.2023
+# Last modified: Tue Jun 20 20:43:20 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
 # Total number of entries: 4064
@@ -60,7 +60,6 @@ local-zone: "adornmentcustom.com." always_nxdomain
 local-zone: "adowalxa.shop." always_nxdomain
 local-zone: "adventurefitexe.com." always_nxdomain
 local-zone: "advisorl.com." always_nxdomain
-local-zone: "aecinempoli.it." always_nxdomain
 local-zone: "aecpq.com." always_nxdomain
 local-zone: "aestheticsoutfits.com." always_nxdomain
 local-zone: "aezvc.retropolisarcade.com." always_nxdomain
@@ -1388,6 +1387,7 @@ local-zone: "gearusbike.com." always_nxdomain
 local-zone: "gedebate.com." always_nxdomain
 local-zone: "geesfy.com." always_nxdomain
 local-zone: "geezerdecor.com." always_nxdomain
+local-zone: "geheshop.com." always_nxdomain
 local-zone: "genages.com." always_nxdomain
 local-zone: "genebedstore.xyz." always_nxdomain
 local-zone: "genekitchen.shop." always_nxdomain
