@@ -2,8 +2,8 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.19.204315.2023
-# Last modified: Mon Jun 19 20:43:15 UTC 2023
+# Version: 06.20.204320.2023
+# Last modified: Tue Jun 20 20:43:20 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
 # Total number of entries: 4063
@@ -59,7 +59,6 @@ address=/adornmentcustom.com/#
 address=/adowalxa.shop/#
 address=/adventurefitexe.com/#
 address=/advisorl.com/#
-address=/aecinempoli.it/#
 address=/aecpq.com/#
 address=/aestheticsoutfits.com/#
 address=/aezvc.retropolisarcade.com/#
@@ -1387,6 +1386,7 @@ address=/gearusbike.com/#
 address=/gedebate.com/#
 address=/geesfy.com/#
 address=/geezerdecor.com/#
+address=/geheshop.com/#
 address=/genages.com/#
 address=/genebedstore.xyz/#
 address=/genekitchen.shop/#
