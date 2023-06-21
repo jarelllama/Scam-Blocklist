@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.20.204320.2023
-# Last modified: Tue Jun 20 20:43:20 UTC 2023
+# Version: 06.21.204317.2023
+# Last modified: Wed Jun 21 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4064
+# Total number of entries: 4055
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -591,7 +591,6 @@ local-zone: "celulabuy.com." always_nxdomain
 local-zone: "centara1card.com." always_nxdomain
 local-zone: "centebing.com." always_nxdomain
 local-zone: "cesapsrls.it." always_nxdomain
-local-zone: "cesisoc.com." always_nxdomain
 local-zone: "cetedam.shop." always_nxdomain
 local-zone: "cexcoin.cc." always_nxdomain
 local-zone: "cfmzone.com." always_nxdomain
@@ -852,7 +851,6 @@ local-zone: "darkminder.co." always_nxdomain
 local-zone: "darliasmaltesepuppies.com." always_nxdomain
 local-zone: "daryf.com." always_nxdomain
 local-zone: "darylwilkins.space." always_nxdomain
-local-zone: "dasdsut.com." always_nxdomain
 local-zone: "dataline-studien.com." always_nxdomain
 local-zone: "dausauto.com." always_nxdomain
 local-zone: "davekoflersbichons.com." always_nxdomain
@@ -967,7 +965,6 @@ local-zone: "dogtoyoutlet.store." always_nxdomain
 local-zone: "dogtoysale.store." always_nxdomain
 local-zone: "dogtoyselling.store." always_nxdomain
 local-zone: "dogtoywholesale.store." always_nxdomain
-local-zone: "dohibeh.shop." always_nxdomain
 local-zone: "doktorekwpodrozy.pl." always_nxdomain
 local-zone: "dollany.com." always_nxdomain
 local-zone: "dollarsmart.top." always_nxdomain
@@ -1062,7 +1059,6 @@ local-zone: "eldoradoa.com." always_nxdomain
 local-zone: "eldoya.com." always_nxdomain
 local-zone: "elecoool.com." always_nxdomain
 local-zone: "electricskateboard.com." always_nxdomain
-local-zone: "elemesu.com." always_nxdomain
 local-zone: "elgdln.com." always_nxdomain
 local-zone: "eli.mobpiscinas.com.br." always_nxdomain
 local-zone: "elimaker.shop." always_nxdomain
@@ -1129,7 +1125,6 @@ local-zone: "essentialshousehold.com." always_nxdomain
 local-zone: "esttecor.com." always_nxdomain
 local-zone: "etagota.shop." always_nxdomain
 local-zone: "etajedi.com." always_nxdomain
-local-zone: "etefera.com." always_nxdomain
 local-zone: "etereme.com." always_nxdomain
 local-zone: "ethicminer.myshopify.com." always_nxdomain
 local-zone: "etrikoo.com." always_nxdomain
@@ -1144,6 +1139,7 @@ local-zone: "eval-center.com." always_nxdomain
 local-zone: "evaluations-center.com." always_nxdomain
 local-zone: "evanescenceusa.com." always_nxdomain
 local-zone: "evedat.com." always_nxdomain
+local-zone: "eventstudio.online." always_nxdomain
 local-zone: "everlead.net." always_nxdomain
 local-zone: "evoosense.com." always_nxdomain
 local-zone: "evorar.com." always_nxdomain
@@ -2552,7 +2548,6 @@ local-zone: "ondutyearth.com." always_nxdomain
 local-zone: "onefoyou.com." always_nxdomain
 local-zone: "oneiisa.com." always_nxdomain
 local-zone: "oneminimals.com." always_nxdomain
-local-zone: "onenali.shop." always_nxdomain
 local-zone: "oneshoes.best." always_nxdomain
 local-zone: "onethink.shop." always_nxdomain
 local-zone: "onfither.nl." always_nxdomain
@@ -2565,7 +2560,6 @@ local-zone: "onlineussports.com." always_nxdomain
 local-zone: "onlydealsyo.com." always_nxdomain
 local-zone: "onlynewproduct.com." always_nxdomain
 local-zone: "onlywomenswear.com." always_nxdomain
-local-zone: "onodore.shop." always_nxdomain
 local-zone: "onproaid.com." always_nxdomain
 local-zone: "onsaleclimbshop.com." always_nxdomain
 local-zone: "onsalecustom.com." always_nxdomain
@@ -2899,7 +2893,6 @@ local-zone: "reelatinors.com." always_nxdomain
 local-zone: "reeno1.com." always_nxdomain
 local-zone: "reesewalker.shop." always_nxdomain
 local-zone: "regattaretail.com." always_nxdomain
-local-zone: "regotar.shop." always_nxdomain
 local-zone: "regulatehop.com." always_nxdomain
 local-zone: "rehidetes.com." always_nxdomain
 local-zone: "rehobothprophotos.com." always_nxdomain
@@ -3277,7 +3270,6 @@ local-zone: "sopchic.com." always_nxdomain
 local-zone: "soreldiscount.com." always_nxdomain
 local-zone: "sorptress.com." always_nxdomain
 local-zone: "sorweeve.com." always_nxdomain
-local-zone: "sotapam.shop." always_nxdomain
 local-zone: "sotekin.shop." always_nxdomain
 local-zone: "soudkydubove.cz." always_nxdomain
 local-zone: "soul-spa-berlin.de." always_nxdomain
@@ -3946,7 +3938,6 @@ local-zone: "womenshoesale.store." always_nxdomain
 local-zone: "womensuit.store." always_nxdomain
 local-zone: "womtops.com." always_nxdomain
 local-zone: "wonderbeautii.com." always_nxdomain
-local-zone: "wonderr.shop." always_nxdomain
 local-zone: "wondrousdecor.com." always_nxdomain
 local-zone: "woodiscounts.com." always_nxdomain
 local-zone: "woodtree.fr." always_nxdomain
