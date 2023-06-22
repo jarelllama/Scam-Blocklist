@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.21.204317.2023
-# Last modified: Wed Jun 21 20:43:17 UTC 2023
+# Version: 06.22.204316.2023
+# Last modified: Thu Jun 22 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4054
+# Total number of entries: 4049
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -329,7 +329,6 @@ address=/beedac.com/#
 address=/begiftstore.com/#
 address=/behindthebox.de/#
 address=/belerf.de/#
-address=/bellacup.net/#
 address=/bellagadgets.co.uk/#
 address=/bellaist.com/#
 address=/bellestyling.shop/#
@@ -649,7 +648,6 @@ address=/citrusj.com/#
 address=/cizubeix.com/#
 address=/ckkebt.shop/#
 address=/ckonlinesale.store/#
-address=/ckpromotions.store/#
 address=/cktckt.com/#
 address=/clairedresses.space/#
 address=/claokcutlery.shop/#
@@ -1603,7 +1601,6 @@ address=/hokaone-run.co/#
 address=/hokaoneoneus.shop/#
 address=/hokaonesport.co/#
 address=/hokashoeshop.com/#
-address=/hokasstore.shop/#
 address=/hollarys.com/#
 address=/hollisbaby.shop/#
 address=/hollistercoshop.com/#
@@ -1839,7 +1836,6 @@ address=/katecrafts.shop/#
 address=/kateolson.space/#
 address=/katerh.com/#
 address=/katerk.com/#
-address=/kathmandu.deals/#
 address=/kazenove.com/#
 address=/kazzkumar.com/#
 address=/keapfit.com/#
@@ -3009,7 +3005,6 @@ address=/salebakingappliances.com/#
 address=/salebath.com/#
 address=/salebikeframe.com/#
 address=/salechefwear.com/#
-address=/saledynafit.com/#
 address=/salefossil.com/#
 address=/salehappys.com/#
 address=/salehomeandgarden.com/#
