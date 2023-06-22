@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.21.204317.2023
-# Last modified: Wed Jun 21 20:43:17 UTC 2023
+# Version: 06.22.204316.2023
+# Last modified: Thu Jun 22 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4055
+# Total number of entries: 4050
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -330,7 +330,6 @@ local-zone: "beedac.com." always_nxdomain
 local-zone: "begiftstore.com." always_nxdomain
 local-zone: "behindthebox.de." always_nxdomain
 local-zone: "belerf.de." always_nxdomain
-local-zone: "bellacup.net." always_nxdomain
 local-zone: "bellagadgets.co.uk." always_nxdomain
 local-zone: "bellaist.com." always_nxdomain
 local-zone: "bellestyling.shop." always_nxdomain
@@ -650,7 +649,6 @@ local-zone: "citrusj.com." always_nxdomain
 local-zone: "cizubeix.com." always_nxdomain
 local-zone: "ckkebt.shop." always_nxdomain
 local-zone: "ckonlinesale.store." always_nxdomain
-local-zone: "ckpromotions.store." always_nxdomain
 local-zone: "cktckt.com." always_nxdomain
 local-zone: "clairedresses.space." always_nxdomain
 local-zone: "claokcutlery.shop." always_nxdomain
@@ -1604,7 +1602,6 @@ local-zone: "hokaone-run.co." always_nxdomain
 local-zone: "hokaoneoneus.shop." always_nxdomain
 local-zone: "hokaonesport.co." always_nxdomain
 local-zone: "hokashoeshop.com." always_nxdomain
-local-zone: "hokasstore.shop." always_nxdomain
 local-zone: "hollarys.com." always_nxdomain
 local-zone: "hollisbaby.shop." always_nxdomain
 local-zone: "hollistercoshop.com." always_nxdomain
@@ -1840,7 +1837,6 @@ local-zone: "katecrafts.shop." always_nxdomain
 local-zone: "kateolson.space." always_nxdomain
 local-zone: "katerh.com." always_nxdomain
 local-zone: "katerk.com." always_nxdomain
-local-zone: "kathmandu.deals." always_nxdomain
 local-zone: "kazenove.com." always_nxdomain
 local-zone: "kazzkumar.com." always_nxdomain
 local-zone: "keapfit.com." always_nxdomain
@@ -3010,7 +3006,6 @@ local-zone: "salebakingappliances.com." always_nxdomain
 local-zone: "salebath.com." always_nxdomain
 local-zone: "salebikeframe.com." always_nxdomain
 local-zone: "salechefwear.com." always_nxdomain
-local-zone: "saledynafit.com." always_nxdomain
 local-zone: "salefossil.com." always_nxdomain
 local-zone: "salehappys.com." always_nxdomain
 local-zone: "salehomeandgarden.com." always_nxdomain
