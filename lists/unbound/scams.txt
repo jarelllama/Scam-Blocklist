@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.22.204316.2023
-# Last modified: Thu Jun 22 20:43:16 UTC 2023
+# Version: 06.23.204320.2023
+# Last modified: Fri Jun 23 20:43:20 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4050
+# Total number of entries: 4047
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1717,7 +1717,6 @@ local-zone: "inpcofproti.com." always_nxdomain
 local-zone: "inspiree.co." always_nxdomain
 local-zone: "int456.com." always_nxdomain
 local-zone: "intosunning.com." always_nxdomain
-local-zone: "intrendwear.com." always_nxdomain
 local-zone: "intuitivlab.com." always_nxdomain
 local-zone: "inushoes.com." always_nxdomain
 local-zone: "investama92.com." always_nxdomain
@@ -2540,7 +2539,6 @@ local-zone: "omitages.com." always_nxdomain
 local-zone: "on-soprtshoes.com." always_nxdomain
 local-zone: "oncloudshoes.co." always_nxdomain
 local-zone: "ondkwn.shop." always_nxdomain
-local-zone: "ondutyearth.com." always_nxdomain
 local-zone: "onefoyou.com." always_nxdomain
 local-zone: "oneiisa.com." always_nxdomain
 local-zone: "oneminimals.com." always_nxdomain
@@ -2888,7 +2886,6 @@ local-zone: "reedsel.com." always_nxdomain
 local-zone: "reelatinors.com." always_nxdomain
 local-zone: "reeno1.com." always_nxdomain
 local-zone: "reesewalker.shop." always_nxdomain
-local-zone: "regattaretail.com." always_nxdomain
 local-zone: "regulatehop.com." always_nxdomain
 local-zone: "rehidetes.com." always_nxdomain
 local-zone: "rehobothprophotos.com." always_nxdomain
