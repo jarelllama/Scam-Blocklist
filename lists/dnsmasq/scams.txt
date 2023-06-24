@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.23.204320.2023
-# Last modified: Fri Jun 23 20:43:20 UTC 2023
+# Version: 06.24.204323.2023
+# Last modified: Sat Jun 24 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4046
+# Total number of entries: 4043
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -569,7 +569,6 @@ address=/castellicycle.com/#
 address=/castillo-art.shop/#
 address=/casualsportstore.com/#
 address=/catforsale.store/#
-address=/catgr.com/#
 address=/cathotsale.xyz/#
 address=/cathyhouse.net/#
 address=/cattoysale.store/#
@@ -3457,7 +3456,6 @@ address=/tempeie.com/#
 address=/templautar.com/#
 address=/tenloly.com/#
 address=/tennis-babolat.com/#
-address=/tennishotsale.com/#
 address=/tepitir.xyz/#
 address=/teraise.com/#
 address=/terkari.com/#
@@ -3689,7 +3687,6 @@ address=/ukonlineclothes.com/#
 address=/ukoutdoordeal.com/#
 address=/ulifted.com/#
 address=/ultrareports.guru/#
-address=/ultrareports.review/#
 address=/umadate.xyz/#
 address=/umagic.net/#
 address=/umifot.com/#
