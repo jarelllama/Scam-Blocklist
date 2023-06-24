@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.23.204320.2023
-# Last modified: Fri Jun 23 20:43:20 UTC 2023
+# Version: 06.24.204323.2023
+# Last modified: Sat Jun 24 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4047
+# Total number of entries: 4044
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -570,7 +570,6 @@ local-zone: "castellicycle.com." always_nxdomain
 local-zone: "castillo-art.shop." always_nxdomain
 local-zone: "casualsportstore.com." always_nxdomain
 local-zone: "catforsale.store." always_nxdomain
-local-zone: "catgr.com." always_nxdomain
 local-zone: "cathotsale.xyz." always_nxdomain
 local-zone: "cathyhouse.net." always_nxdomain
 local-zone: "cattoysale.store." always_nxdomain
@@ -3458,7 +3457,6 @@ local-zone: "tempeie.com." always_nxdomain
 local-zone: "templautar.com." always_nxdomain
 local-zone: "tenloly.com." always_nxdomain
 local-zone: "tennis-babolat.com." always_nxdomain
-local-zone: "tennishotsale.com." always_nxdomain
 local-zone: "tepitir.xyz." always_nxdomain
 local-zone: "teraise.com." always_nxdomain
 local-zone: "terkari.com." always_nxdomain
@@ -3690,7 +3688,6 @@ local-zone: "ukonlineclothes.com." always_nxdomain
 local-zone: "ukoutdoordeal.com." always_nxdomain
 local-zone: "ulifted.com." always_nxdomain
 local-zone: "ultrareports.guru." always_nxdomain
-local-zone: "ultrareports.review." always_nxdomain
 local-zone: "umadate.xyz." always_nxdomain
 local-zone: "umagic.net." always_nxdomain
 local-zone: "umifot.com." always_nxdomain
