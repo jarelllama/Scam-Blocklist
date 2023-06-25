@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.24.204323.2023
-# Last modified: Sat Jun 24 20:43:23 UTC 2023
+# Version: 06.25.204315.2023
+# Last modified: Sun Jun 25 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4044
+# Total number of entries: 4039
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -700,7 +700,6 @@ local-zone: "coleyz.com." always_nxdomain
 local-zone: "collaboraten.com." always_nxdomain
 local-zone: "collectionsbike.com." always_nxdomain
 local-zone: "colorfulunicorns.com." always_nxdomain
-local-zone: "colorfulus-women.com." always_nxdomain
 local-zone: "colorfuluslady.com." always_nxdomain
 local-zone: "columbiaclothings.shop." always_nxdomain
 local-zone: "columbiawears.com." always_nxdomain
@@ -713,7 +712,6 @@ local-zone: "comitatiquartierebergamo.it." always_nxdomain
 local-zone: "commersv.co." always_nxdomain
 local-zone: "commodityautomotive.com." always_nxdomain
 local-zone: "commoditygear.com." always_nxdomain
-local-zone: "commodityusmiss.com." always_nxdomain
 local-zone: "comohot.com." always_nxdomain
 local-zone: "compaaria.com." always_nxdomain
 local-zone: "company-polls.com." always_nxdomain
@@ -1029,7 +1027,6 @@ local-zone: "ebaheni.shop." always_nxdomain
 local-zone: "ebinalo.com." always_nxdomain
 local-zone: "ebusasa.shop." always_nxdomain
 local-zone: "ecitadi.shop." always_nxdomain
-local-zone: "eclectic-female.com." always_nxdomain
 local-zone: "eclothone.com." always_nxdomain
 local-zone: "ecoenos.com." always_nxdomain
 local-zone: "ecomgnow.shop." always_nxdomain
@@ -2489,7 +2486,6 @@ local-zone: "nursingsale.store." always_nxdomain
 local-zone: "nvistle.us." always_nxdomain
 local-zone: "nwtaylor.shop." always_nxdomain
 local-zone: "nycmetroshop.com." always_nxdomain
-local-zone: "oascartrading.com." always_nxdomain
 local-zone: "obrazyzceska.cz." always_nxdomain
 local-zone: "obzockeydesigns.com." always_nxdomain
 local-zone: "ocandi.com." always_nxdomain
@@ -2547,7 +2543,6 @@ local-zone: "onfither.nl." always_nxdomain
 local-zone: "onlinedogfood.store." always_nxdomain
 local-zone: "onlinehtles.com." always_nxdomain
 local-zone: "onlinekohler.com." always_nxdomain
-local-zone: "onlinerawling.com." always_nxdomain
 local-zone: "onlineumage.com." always_nxdomain
 local-zone: "onlineussports.com." always_nxdomain
 local-zone: "onlydealsyo.com." always_nxdomain
