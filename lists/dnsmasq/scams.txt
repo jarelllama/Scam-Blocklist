@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.25.204315.2023
-# Last modified: Sun Jun 25 20:43:15 UTC 2023
+# Version: 06.26.204322.2023
+# Last modified: Mon Jun 26 20:43:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4038
+# Total number of entries: 4036
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -688,13 +688,11 @@ address=/cmngty.com/#
 address=/cnmetalstore.com/#
 address=/coach-shopu.shop/#
 address=/coatfaith.com/#
-address=/coayli.shop/#
 address=/cobracmcecco.com/#
 address=/cobratigerdc.com/#
 address=/cocnata.com/#
 address=/coffeeteaware.com/#
 address=/cogool.com/#
-address=/coilsad.shop/#
 address=/coleyz.com/#
 address=/collaboraten.com/#
 address=/collectionsbike.com/#
