@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.25.204315.2023
-# Last modified: Sun Jun 25 20:43:15 UTC 2023
+# Version: 06.26.204322.2023
+# Last modified: Mon Jun 26 20:43:22 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4039
+# Total number of entries: 4037
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -689,13 +689,11 @@ local-zone: "cmngty.com." always_nxdomain
 local-zone: "cnmetalstore.com." always_nxdomain
 local-zone: "coach-shopu.shop." always_nxdomain
 local-zone: "coatfaith.com." always_nxdomain
-local-zone: "coayli.shop." always_nxdomain
 local-zone: "cobracmcecco.com." always_nxdomain
 local-zone: "cobratigerdc.com." always_nxdomain
 local-zone: "cocnata.com." always_nxdomain
 local-zone: "coffeeteaware.com." always_nxdomain
 local-zone: "cogool.com." always_nxdomain
-local-zone: "coilsad.shop." always_nxdomain
 local-zone: "coleyz.com." always_nxdomain
 local-zone: "collaboraten.com." always_nxdomain
 local-zone: "collectionsbike.com." always_nxdomain
