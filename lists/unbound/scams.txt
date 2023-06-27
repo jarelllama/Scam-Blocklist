@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.26.204322.2023
-# Last modified: Mon Jun 26 20:43:22 UTC 2023
+# Version: 06.27.204319.2023
+# Last modified: Tue Jun 27 20:43:19 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4037
+# Total number of entries: 4034
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -687,7 +687,6 @@ local-zone: "clquent.com." always_nxdomain
 local-zone: "cluckergifts.company.site." always_nxdomain
 local-zone: "cmngty.com." always_nxdomain
 local-zone: "cnmetalstore.com." always_nxdomain
-local-zone: "coach-shopu.shop." always_nxdomain
 local-zone: "coatfaith.com." always_nxdomain
 local-zone: "cobracmcecco.com." always_nxdomain
 local-zone: "cobratigerdc.com." always_nxdomain
@@ -2097,7 +2096,6 @@ local-zone: "maebl.com." always_nxdomain
 local-zone: "magiceyess.com." always_nxdomain
 local-zone: "mainst-tx.com." always_nxdomain
 local-zone: "makeazt.com." always_nxdomain
-local-zone: "makeglamfg.com." always_nxdomain
 local-zone: "makeupproductsshop.store." always_nxdomain
 local-zone: "maller.io." always_nxdomain
 local-zone: "malpezeco.com." always_nxdomain
@@ -3837,7 +3835,6 @@ local-zone: "waresdining.com." always_nxdomain
 local-zone: "wareskids.com." always_nxdomain
 local-zone: "waresnewfad.com." always_nxdomain
 local-zone: "waresusmiss.com." always_nxdomain
-local-zone: "warmclo.com." always_nxdomain
 local-zone: "warminsun.com." always_nxdomain
 local-zone: "wasakie.myshopify.com." always_nxdomain
 local-zone: "washingsale.shop." always_nxdomain
