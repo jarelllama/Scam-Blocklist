@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.27.204319.2023
-# Last modified: Tue Jun 27 20:43:19 UTC 2023
+# Version: 06.28.204333.2023
+# Last modified: Wed Jun 28 20:43:33 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4033
+# Total number of entries: 4031
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -1297,7 +1297,6 @@ address=/fotsu.com/#
 address=/fountain.fm/#
 address=/foxaspect.com/#
 address=/foxislandembroidery.com/#
-address=/foxyteam.com/#
 address=/franklinhome.shop/#
 address=/fraynyc.com/#
 address=/freealo.com/#
@@ -2054,7 +2053,6 @@ address=/lucchesesale.shop/#
 address=/lucchesestore.online/#
 address=/lucialamps.shop/#
 address=/lucklby.com/#
-address=/luckmoons.com/#
 address=/lucknocker.com/#
 address=/luckycafe.store/#
 address=/luckydaybet99.com/#
@@ -2249,7 +2247,6 @@ address=/mizukidog.com/#
 address=/mkiplmout.com/#
 address=/mledo.com/#
 address=/mmapd.shop/#
-address=/mmoutlet.store/#
 address=/mnaink.com/#
 address=/mnotina.com/#
 address=/mobiamy.com/#
@@ -3690,6 +3687,7 @@ address=/unineri.shop/#
 address=/uniqueabund.com/#
 address=/uniquehomeshop.com/#
 address=/uniquepie.com/#
+address=/unitedexpress.org/#
 address=/unitedmailexpress.com/#
 address=/universal-health88.com/#
 address=/universalprimelogistics.com/#
