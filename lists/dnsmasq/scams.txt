@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.28.204333.2023
-# Last modified: Wed Jun 28 20:43:33 UTC 2023
+# Version: 06.29.204324.2023
+# Last modified: Thu Jun 29 20:43:24 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4031
+# Total number of entries: 4021
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -196,7 +196,6 @@ address=/ariatwear.online/#
 address=/arieljewe.online/#
 address=/ariesjeweller.com/#
 address=/armoires.store/#
-address=/arocosi.shop/#
 address=/arrc.shop/#
 address=/arshiner.com/#
 address=/artdecorations.store/#
@@ -250,7 +249,6 @@ address=/ava-mia.com/#
 address=/averyscarve.xyz/#
 address=/avisborgosanmartino.it/#
 address=/avisical.shop/#
-address=/avttiwa.com/#
 address=/aw-animal.com/#
 address=/awesomegifts4u.com/#
 address=/awesometee.co/#
@@ -299,7 +297,6 @@ address=/barleying.com/#
 address=/barnamesigns.com/#
 address=/barpasaje.com/#
 address=/baruakart.com/#
-address=/bas.koreapati.com/#
 address=/baseballshop-us.com/#
 address=/basiaphoto.shop/#
 address=/bathonline.store/#
@@ -599,7 +596,6 @@ address=/characterizm.com/#
 address=/charlesdavidshoe.com/#
 address=/charmbean.com/#
 address=/charmingpaul.com/#
-address=/charmybra.net/#
 address=/chatrper.com/#
 address=/chaucorner.com/#
 address=/chcremilpo.com/#
@@ -871,7 +867,6 @@ address=/deerfamy.com/#
 address=/defactro.com/#
 address=/defenseweapon.store/#
 address=/degrey.co/#
-address=/dehaput.shop/#
 address=/dehsid.com/#
 address=/dekuin.com/#
 address=/delesales.com/#
@@ -1114,8 +1109,6 @@ address=/especialdogtoy.store/#
 address=/essentialshousehold.com/#
 address=/esttecor.com/#
 address=/etagota.shop/#
-address=/etajedi.com/#
-address=/etereme.com/#
 address=/ethicminer.myshopify.com/#
 address=/etrikoo.com/#
 address=/etronixelectric.com/#
@@ -1352,7 +1345,6 @@ address=/ganadeals.com/#
 address=/ganebet.uk/#
 address=/gantcliver.com/#
 address=/gantfurni.shop/#
-address=/garasoc.com/#
 address=/gardcan.com/#
 address=/gardendecoratio.shop/#
 address=/gardenequipmenshopmall.store/#
@@ -2384,7 +2376,6 @@ address=/nenunlt.com/#
 address=/neon-clothes.com/#
 address=/neonbitepro.com/#
 address=/neonlikez.com/#
-address=/neseten.shop/#
 address=/nestilin.com/#
 address=/netelar.shop/#
 address=/neueperio.de/#
@@ -2761,7 +2752,6 @@ address=/popnewera.com/#
 address=/popularelectrical.com/#
 address=/populargardenmall.store/#
 address=/poradnia-empatia.pl/#
-address=/poserat.shop/#
 address=/posyoga.com/#
 address=/poutdoorsale.com/#
 address=/poutdoorstore.com/#
@@ -3162,7 +3152,6 @@ address=/showapparels.com/#
 address=/showcurvy.com/#
 address=/shundaceramics.com/#
 address=/shyisy.com/#
-address=/shynelia.com/#
 address=/shytoy.shop/#
 address=/sierrabil.com/#
 address=/sigmaeh.com/#
@@ -3723,6 +3712,7 @@ address=/usdiscountmale.com/#
 address=/usdtminer.org/#
 address=/usefireplace.store/#
 address=/usfootballwear.com/#
+address=/usglacierbay.com/#
 address=/usladyluxury.com/#
 address=/uslashpurchase.shop/#
 address=/usmmagear.com/#
