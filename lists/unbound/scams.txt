@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.30.204325.2023
-# Last modified: Fri Jun 30 20:43:25 UTC 2023
+# Version: 07.01.204315.2023
+# Last modified: Sat Jul  1 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4021
+# Total number of entries: 4017
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -328,7 +328,6 @@ local-zone: "begiftstore.com." always_nxdomain
 local-zone: "behindthebox.de." always_nxdomain
 local-zone: "belerf.de." always_nxdomain
 local-zone: "bellagadgets.co.uk." always_nxdomain
-local-zone: "bellaist.com." always_nxdomain
 local-zone: "bellestyling.shop." always_nxdomain
 local-zone: "bellfurniture.store." always_nxdomain
 local-zone: "bellypocket.shop." always_nxdomain
@@ -2391,7 +2390,6 @@ local-zone: "newbylassen.com." always_nxdomain
 local-zone: "newcally.com." always_nxdomain
 local-zone: "newchloe.shop." always_nxdomain
 local-zone: "newclyde.shop." always_nxdomain
-local-zone: "newcodyjames.com." always_nxdomain
 local-zone: "newcolmao.shop." always_nxdomain
 local-zone: "newdelicate-ring.website." always_nxdomain
 local-zone: "newdelxe.shop." always_nxdomain
@@ -3191,7 +3189,6 @@ local-zone: "skitool.shop." always_nxdomain
 local-zone: "skladbelzyce.pl." always_nxdomain
 local-zone: "skullridding.com." always_nxdomain
 local-zone: "skyairdrone.com." always_nxdomain
-local-zone: "skyeline.net." always_nxdomain
 local-zone: "skymedia.media." always_nxdomain
 local-zone: "skysmelluk.com." always_nxdomain
 local-zone: "slearancemsbag.com." always_nxdomain
@@ -3855,7 +3852,6 @@ local-zone: "wenoreshop.com." always_nxdomain
 local-zone: "wenuse.com." always_nxdomain
 local-zone: "werfew.com." always_nxdomain
 local-zone: "wernersale.com." always_nxdomain
-local-zone: "westerncodyjames.com." always_nxdomain
 local-zone: "westerncowboyboot.com." always_nxdomain
 local-zone: "westernhats.net." always_nxdomain
 local-zone: "westernhatsale.com." always_nxdomain
