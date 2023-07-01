@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 06.30.204325.2023
-# Last modified: Fri Jun 30 20:43:25 UTC 2023
+# Version: 07.01.204315.2023
+# Last modified: Sat Jul  1 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4020
+# Total number of entries: 4016
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -327,7 +327,6 @@ address=/begiftstore.com/#
 address=/behindthebox.de/#
 address=/belerf.de/#
 address=/bellagadgets.co.uk/#
-address=/bellaist.com/#
 address=/bellestyling.shop/#
 address=/bellfurniture.store/#
 address=/bellypocket.shop/#
@@ -2390,7 +2389,6 @@ address=/newbylassen.com/#
 address=/newcally.com/#
 address=/newchloe.shop/#
 address=/newclyde.shop/#
-address=/newcodyjames.com/#
 address=/newcolmao.shop/#
 address=/newdelicate-ring.website/#
 address=/newdelxe.shop/#
@@ -3190,7 +3188,6 @@ address=/skitool.shop/#
 address=/skladbelzyce.pl/#
 address=/skullridding.com/#
 address=/skyairdrone.com/#
-address=/skyeline.net/#
 address=/skymedia.media/#
 address=/skysmelluk.com/#
 address=/slearancemsbag.com/#
@@ -3854,7 +3851,6 @@ address=/wenoreshop.com/#
 address=/wenuse.com/#
 address=/werfew.com/#
 address=/wernersale.com/#
-address=/westerncodyjames.com/#
 address=/westerncowboyboot.com/#
 address=/westernhats.net/#
 address=/westernhatsale.com/#
