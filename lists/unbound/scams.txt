@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.01.204315.2023
-# Last modified: Sat Jul  1 20:43:15 UTC 2023
+# Version: 07.02.204316.2023
+# Last modified: Sun Jul  2 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4017
+# Total number of entries: 4002
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -224,7 +224,6 @@ local-zone: "atqdyo.com." always_nxdomain
 local-zone: "atrichor.com." always_nxdomain
 local-zone: "attirecustom.com." always_nxdomain
 local-zone: "attireweb.shop." always_nxdomain
-local-zone: "atulowe.shop." always_nxdomain
 local-zone: "atwood.store." always_nxdomain
 local-zone: "au-app-growthnetwork.com." always_nxdomain
 local-zone: "audll.com." always_nxdomain
@@ -430,7 +429,6 @@ local-zone: "bokerknife.com." always_nxdomain
 local-zone: "bollygoo.com." always_nxdomain
 local-zone: "bomaalshop.com." always_nxdomain
 local-zone: "bomomie.com." always_nxdomain
-local-zone: "bonatut.shop." always_nxdomain
 local-zone: "bonefab.com." always_nxdomain
 local-zone: "bonniefaucet.shop." always_nxdomain
 local-zone: "bonrbox.com." always_nxdomain
@@ -585,7 +583,6 @@ local-zone: "celulabuy.com." always_nxdomain
 local-zone: "centara1card.com." always_nxdomain
 local-zone: "centebing.com." always_nxdomain
 local-zone: "cesapsrls.it." always_nxdomain
-local-zone: "cetedam.shop." always_nxdomain
 local-zone: "cexcoin.cc." always_nxdomain
 local-zone: "cfmzone.com." always_nxdomain
 local-zone: "championcyclingsell.com." always_nxdomain
@@ -881,7 +878,6 @@ local-zone: "departmentstorelive.shop." always_nxdomain
 local-zone: "deroky.com." always_nxdomain
 local-zone: "deskcodes.com." always_nxdomain
 local-zone: "detedeal.com." always_nxdomain
-local-zone: "detulat.shop." always_nxdomain
 local-zone: "deunow.com." always_nxdomain
 local-zone: "deuotrra.com." always_nxdomain
 local-zone: "deutsch-consulting.de." always_nxdomain
@@ -1014,7 +1010,6 @@ local-zone: "eastsiderssoccer.com." always_nxdomain
 local-zone: "easy-shops.store." always_nxdomain
 local-zone: "easyrueo.com." always_nxdomain
 local-zone: "eaxritop.com." always_nxdomain
-local-zone: "ebaheni.shop." always_nxdomain
 local-zone: "ebinalo.com." always_nxdomain
 local-zone: "ebusasa.shop." always_nxdomain
 local-zone: "ecitadi.shop." always_nxdomain
@@ -1382,7 +1377,6 @@ local-zone: "gesoftop.com." always_nxdomain
 local-zone: "getgams.com." always_nxdomain
 local-zone: "getkue.com." always_nxdomain
 local-zone: "getupsized.com." always_nxdomain
-local-zone: "getwomenswear.com." always_nxdomain
 local-zone: "gewqas.com." always_nxdomain
 local-zone: "gewudas.shop." always_nxdomain
 local-zone: "gibbeverage.shop." always_nxdomain
@@ -1492,7 +1486,6 @@ local-zone: "guntiony.com." always_nxdomain
 local-zone: "guridft.store." always_nxdomain
 local-zone: "gurucid.com." always_nxdomain
 local-zone: "gusmetn.com." always_nxdomain
-local-zone: "gutebih.shop." always_nxdomain
 local-zone: "gvs-usa.com." always_nxdomain
 local-zone: "gyustio.store." always_nxdomain
 local-zone: "hachipethouse.com." always_nxdomain
@@ -2229,7 +2222,6 @@ local-zone: "misabra.net." always_nxdomain
 local-zone: "misslemonbeautyshop.com." always_nxdomain
 local-zone: "missouripresscorporation.com." always_nxdomain
 local-zone: "misucb.shop." always_nxdomain
-local-zone: "mitokeh.shop." always_nxdomain
 local-zone: "mitrueshop.com." always_nxdomain
 local-zone: "mittyon.com." always_nxdomain
 local-zone: "miusbuy.com." always_nxdomain
@@ -2249,7 +2241,6 @@ local-zone: "modern-nest.shop." always_nxdomain
 local-zone: "modernclimbshop.com." always_nxdomain
 local-zone: "modernmodishgoods.com." always_nxdomain
 local-zone: "modernpuzzle.shop." always_nxdomain
-local-zone: "modernusfemale.com." always_nxdomain
 local-zone: "moensale.com." always_nxdomain
 local-zone: "mojezkusenostsinvisalign.cz." always_nxdomain
 local-zone: "mokashe.com." always_nxdomain
@@ -2549,7 +2540,6 @@ local-zone: "ordinarye.com." always_nxdomain
 local-zone: "ordolava.com." always_nxdomain
 local-zone: "oreglory.com." always_nxdomain
 local-zone: "orgalev.com." always_nxdomain
-local-zone: "orisete.shop." always_nxdomain
 local-zone: "orogitee.com." always_nxdomain
 local-zone: "orotonhugesale.store." always_nxdomain
 local-zone: "oscarcamping.shop." always_nxdomain
@@ -2983,7 +2973,6 @@ local-zone: "salehomeandgarden.com." always_nxdomain
 local-zone: "salehugo.com." always_nxdomain
 local-zone: "salejimshore.com." always_nxdomain
 local-zone: "salelegrand.com." always_nxdomain
-local-zone: "salemenrunning.com." always_nxdomain
 local-zone: "salemodeltoy.shop." always_nxdomain
 local-zone: "salepickleball.com." always_nxdomain
 local-zone: "saleplaymobil.com." always_nxdomain
@@ -3388,7 +3377,6 @@ local-zone: "syntheticaloutsport.com." always_nxdomain
 local-zone: "sytm9.com." always_nxdomain
 local-zone: "szabo-ontozes.hu." always_nxdomain
 local-zone: "szwstgj.com." always_nxdomain
-local-zone: "tabanih.shop." always_nxdomain
 local-zone: "tabbles.net." always_nxdomain
 local-zone: "tabosep.shop." always_nxdomain
 local-zone: "tacitadr.com." always_nxdomain
@@ -3424,7 +3412,6 @@ local-zone: "teemortals.com." always_nxdomain
 local-zone: "teeshopsdd.com." always_nxdomain
 local-zone: "teesworld.online." always_nxdomain
 local-zone: "tehasid.shop." always_nxdomain
-local-zone: "temaliy.shop." always_nxdomain
 local-zone: "temaotrade.com." always_nxdomain
 local-zone: "tempeie.com." always_nxdomain
 local-zone: "templautar.com." always_nxdomain
@@ -3535,7 +3522,6 @@ local-zone: "tmcsale.net." always_nxdomain
 local-zone: "tmnwrt.com." always_nxdomain
 local-zone: "tnewslite.com." always_nxdomain
 local-zone: "tobuyy.com." always_nxdomain
-local-zone: "tocuwer.shop." always_nxdomain
 local-zone: "today4deal.pro." always_nxdomain
 local-zone: "toddlerpants.shop." always_nxdomain
 local-zone: "toddpromo.shop." always_nxdomain
@@ -3572,7 +3558,6 @@ local-zone: "torfekidbin.com." always_nxdomain
 local-zone: "torontofly.com." always_nxdomain
 local-zone: "tosamalls.com." always_nxdomain
 local-zone: "totamalls.com." always_nxdomain
-local-zone: "totelis.shop." always_nxdomain
 local-zone: "touringclothes.com." always_nxdomain
 local-zone: "touringoutdoors.com." always_nxdomain
 local-zone: "toustote.com." always_nxdomain
