@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.02.204316.2023
-# Last modified: Sun Jul  2 20:43:16 UTC 2023
+# Version: 07.03.204327.2023
+# Last modified: Mon Jul  3 20:43:27 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 4001
+# Total number of entries: 3993
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -1010,8 +1010,6 @@ address=/easy-shops.store/#
 address=/easyrueo.com/#
 address=/eaxritop.com/#
 address=/ebinalo.com/#
-address=/ebusasa.shop/#
-address=/ecitadi.shop/#
 address=/eclothone.com/#
 address=/ecoenos.com/#
 address=/ecomgnow.shop/#
@@ -1102,7 +1100,6 @@ address=/eshoesoutlet.com/#
 address=/especialdogtoy.store/#
 address=/essentialshousehold.com/#
 address=/esttecor.com/#
-address=/etagota.shop/#
 address=/ethicminer.myshopify.com/#
 address=/etrikoo.com/#
 address=/etronixelectric.com/#
@@ -1387,7 +1384,6 @@ address=/giftiheaven.com/#
 address=/giftipoint.com/#
 address=/giftmaart.com/#
 address=/giftremix.com/#
-address=/gifts4fan.us/#
 address=/giftsholic.com/#
 address=/giftshoptoday.com/#
 address=/giftsshop75.com/#
@@ -1941,7 +1937,6 @@ address=/lemiteshop.shop/#
 address=/lemw.shop/#
 address=/lenasportstore.xyz/#
 address=/leninecloth.com/#
-address=/lenticaselar.com/#
 address=/leonacraig.shop/#
 address=/lesliegame.space/#
 address=/leslieshop.space/#
@@ -2845,7 +2840,6 @@ address=/recuirud.com/#
 address=/redjuc.com/#
 address=/redplush.shop/#
 address=/redwingshoes-usa.com/#
-address=/reedsel.com/#
 address=/reelatinors.com/#
 address=/reeno1.com/#
 address=/reesewalker.shop/#
@@ -3504,7 +3498,6 @@ address=/tiapal.com/#
 address=/tideify.com/#
 address=/tidir.net/#
 address=/tiger-survey.com/#
-address=/tilatef.shop/#
 address=/timeless-vogue.com/#
 address=/timelix.us/#
 address=/timesends.com/#
@@ -3683,7 +3676,6 @@ address=/usaoutdoorfootwear.com/#
 address=/usaoutdoorwear.com/#
 address=/usbeachaccessory.com/#
 address=/usbicyclenewin.com/#
-address=/usboots.store/#
 address=/usbossclothes.com/#
 address=/usburtonsnowboard.com/#
 address=/uscartone.com/#
