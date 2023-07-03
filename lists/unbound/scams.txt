@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.02.204316.2023
-# Last modified: Sun Jul  2 20:43:16 UTC 2023
+# Version: 07.03.204327.2023
+# Last modified: Mon Jul  3 20:43:27 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 4002
+# Total number of entries: 3994
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1011,8 +1011,6 @@ local-zone: "easy-shops.store." always_nxdomain
 local-zone: "easyrueo.com." always_nxdomain
 local-zone: "eaxritop.com." always_nxdomain
 local-zone: "ebinalo.com." always_nxdomain
-local-zone: "ebusasa.shop." always_nxdomain
-local-zone: "ecitadi.shop." always_nxdomain
 local-zone: "eclothone.com." always_nxdomain
 local-zone: "ecoenos.com." always_nxdomain
 local-zone: "ecomgnow.shop." always_nxdomain
@@ -1103,7 +1101,6 @@ local-zone: "eshoesoutlet.com." always_nxdomain
 local-zone: "especialdogtoy.store." always_nxdomain
 local-zone: "essentialshousehold.com." always_nxdomain
 local-zone: "esttecor.com." always_nxdomain
-local-zone: "etagota.shop." always_nxdomain
 local-zone: "ethicminer.myshopify.com." always_nxdomain
 local-zone: "etrikoo.com." always_nxdomain
 local-zone: "etronixelectric.com." always_nxdomain
@@ -1388,7 +1385,6 @@ local-zone: "giftiheaven.com." always_nxdomain
 local-zone: "giftipoint.com." always_nxdomain
 local-zone: "giftmaart.com." always_nxdomain
 local-zone: "giftremix.com." always_nxdomain
-local-zone: "gifts4fan.us." always_nxdomain
 local-zone: "giftsholic.com." always_nxdomain
 local-zone: "giftshoptoday.com." always_nxdomain
 local-zone: "giftsshop75.com." always_nxdomain
@@ -1942,7 +1938,6 @@ local-zone: "lemiteshop.shop." always_nxdomain
 local-zone: "lemw.shop." always_nxdomain
 local-zone: "lenasportstore.xyz." always_nxdomain
 local-zone: "leninecloth.com." always_nxdomain
-local-zone: "lenticaselar.com." always_nxdomain
 local-zone: "leonacraig.shop." always_nxdomain
 local-zone: "lesliegame.space." always_nxdomain
 local-zone: "leslieshop.space." always_nxdomain
@@ -2846,7 +2841,6 @@ local-zone: "recuirud.com." always_nxdomain
 local-zone: "redjuc.com." always_nxdomain
 local-zone: "redplush.shop." always_nxdomain
 local-zone: "redwingshoes-usa.com." always_nxdomain
-local-zone: "reedsel.com." always_nxdomain
 local-zone: "reelatinors.com." always_nxdomain
 local-zone: "reeno1.com." always_nxdomain
 local-zone: "reesewalker.shop." always_nxdomain
@@ -3505,7 +3499,6 @@ local-zone: "tiapal.com." always_nxdomain
 local-zone: "tideify.com." always_nxdomain
 local-zone: "tidir.net." always_nxdomain
 local-zone: "tiger-survey.com." always_nxdomain
-local-zone: "tilatef.shop." always_nxdomain
 local-zone: "timeless-vogue.com." always_nxdomain
 local-zone: "timelix.us." always_nxdomain
 local-zone: "timesends.com." always_nxdomain
@@ -3684,7 +3677,6 @@ local-zone: "usaoutdoorfootwear.com." always_nxdomain
 local-zone: "usaoutdoorwear.com." always_nxdomain
 local-zone: "usbeachaccessory.com." always_nxdomain
 local-zone: "usbicyclenewin.com." always_nxdomain
-local-zone: "usboots.store." always_nxdomain
 local-zone: "usbossclothes.com." always_nxdomain
 local-zone: "usburtonsnowboard.com." always_nxdomain
 local-zone: "uscartone.com." always_nxdomain
