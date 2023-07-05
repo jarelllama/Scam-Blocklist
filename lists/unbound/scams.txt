@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.04.204320.2023
-# Last modified: Tue Jul  4 20:43:20 UTC 2023
+# Version: 07.05.204321.2023
+# Last modified: Wed Jul  5 20:43:21 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3971
+# Total number of entries: 3969
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1971,7 +1971,6 @@ local-zone: "lkuia.shop." always_nxdomain
 local-zone: "lobbyreviews.net." always_nxdomain
 local-zone: "local-payments.shop." always_nxdomain
 local-zone: "lockebeauty.shop." always_nxdomain
-local-zone: "locymax.com." always_nxdomain
 local-zone: "lofthelsinki.com." always_nxdomain
 local-zone: "login-information-update-online.com." always_nxdomain
 local-zone: "logisol.fr." always_nxdomain
@@ -3771,7 +3770,6 @@ local-zone: "warehousales.shop." always_nxdomain
 local-zone: "wareoffer.com." always_nxdomain
 local-zone: "waresdining.com." always_nxdomain
 local-zone: "wareskids.com." always_nxdomain
-local-zone: "waresnewfad.com." always_nxdomain
 local-zone: "waresusmiss.com." always_nxdomain
 local-zone: "warminsun.com." always_nxdomain
 local-zone: "wasakie.myshopify.com." always_nxdomain
