@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.04.204320.2023
-# Last modified: Tue Jul  4 20:43:20 UTC 2023
+# Version: 07.05.204321.2023
+# Last modified: Wed Jul  5 20:43:21 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3970
+# Total number of entries: 3968
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -1970,7 +1970,6 @@ address=/lkuia.shop/#
 address=/lobbyreviews.net/#
 address=/local-payments.shop/#
 address=/lockebeauty.shop/#
-address=/locymax.com/#
 address=/lofthelsinki.com/#
 address=/login-information-update-online.com/#
 address=/logisol.fr/#
@@ -3770,7 +3769,6 @@ address=/warehousales.shop/#
 address=/wareoffer.com/#
 address=/waresdining.com/#
 address=/wareskids.com/#
-address=/waresnewfad.com/#
 address=/waresusmiss.com/#
 address=/warminsun.com/#
 address=/wasakie.myshopify.com/#
