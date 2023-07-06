@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.05.204321.2023
-# Last modified: Wed Jul  5 20:43:21 UTC 2023
+# Version: 07.06.204323.2023
+# Last modified: Thu Jul  6 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3969
+# Total number of entries: 3965
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -2393,7 +2393,6 @@ local-zone: "nicelani.com." always_nxdomain
 local-zone: "nicevipo.com." always_nxdomain
 local-zone: "nicewardrobe.co." always_nxdomain
 local-zone: "nicholhoo.com." always_nxdomain
-local-zone: "nickccks.com." always_nxdomain
 local-zone: "nickwolves.com." always_nxdomain
 local-zone: "nicoleroasters.shop." always_nxdomain
 local-zone: "nidasrent.cz." always_nxdomain
@@ -2645,7 +2644,6 @@ local-zone: "petzillashop.com." always_nxdomain
 local-zone: "pflshop.shop." always_nxdomain
 local-zone: "phgliders.com." always_nxdomain
 local-zone: "phillipsbook.shop." always_nxdomain
-local-zone: "phnvmsi.shop." always_nxdomain
 local-zone: "phooom.com." always_nxdomain
 local-zone: "physicalfit.space." always_nxdomain
 local-zone: "piaify.com." always_nxdomain
@@ -2783,7 +2781,6 @@ local-zone: "quimv.com." always_nxdomain
 local-zone: "quinnandspencer.com." always_nxdomain
 local-zone: "quinod.com." always_nxdomain
 local-zone: "quintaldog.cz." always_nxdomain
-local-zone: "quness.store." always_nxdomain
 local-zone: "ququking.com." always_nxdomain
 local-zone: "qusidy.com." always_nxdomain
 local-zone: "qvcdeal-mall.shop." always_nxdomain
@@ -2880,7 +2877,6 @@ local-zone: "riskemployme.com." always_nxdomain
 local-zone: "ristrutturazionecasaalassio.it." always_nxdomain
 local-zone: "river-estates.pl." always_nxdomain
 local-zone: "riwea.com." always_nxdomain
-local-zone: "rjkrdjb.store." always_nxdomain
 local-zone: "rmied.com." always_nxdomain
 local-zone: "rnchrw.com." always_nxdomain
 local-zone: "rnexcellent.com." always_nxdomain
