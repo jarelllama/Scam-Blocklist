@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.07.204320.2023
-# Last modified: Fri Jul  7 20:43:20 UTC 2023
+# Version: 07.08.204316.2023
+# Last modified: Sat Jul  8 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3961
+# Total number of entries: 3958
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -958,7 +958,6 @@ address=/dor-reception.fr/#
 address=/dorapet.shop/#
 address=/doraships.space/#
 address=/doremusicexport.com/#
-address=/dorisbra.com/#
 address=/doussales.com/#
 address=/douvani.com/#
 address=/doyends.com/#
@@ -1594,7 +1593,6 @@ address=/honeysweetheart.com/#
 address=/hongpaicrystals.com/#
 address=/hontaiautoparts.com/#
 address=/hookcan.com/#
-address=/hookestore.online/#
 address=/hopebikeabout.com/#
 address=/hopetaly.com/#
 address=/hoscaleshop.com/#
@@ -2667,7 +2665,6 @@ address=/pinvense.com/#
 address=/pinvic.com/#
 address=/piperjewelry.shop/#
 address=/pipfan.com/#
-address=/pixiebra.com/#
 address=/pixisid.com/#
 address=/pizza-napoleon.cz/#
 address=/plagifier.com/#
