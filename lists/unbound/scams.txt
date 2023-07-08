@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.07.204320.2023
-# Last modified: Fri Jul  7 20:43:20 UTC 2023
+# Version: 07.08.204316.2023
+# Last modified: Sat Jul  8 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3962
+# Total number of entries: 3959
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -959,7 +959,6 @@ local-zone: "dor-reception.fr." always_nxdomain
 local-zone: "dorapet.shop." always_nxdomain
 local-zone: "doraships.space." always_nxdomain
 local-zone: "doremusicexport.com." always_nxdomain
-local-zone: "dorisbra.com." always_nxdomain
 local-zone: "doussales.com." always_nxdomain
 local-zone: "douvani.com." always_nxdomain
 local-zone: "doyends.com." always_nxdomain
@@ -1595,7 +1594,6 @@ local-zone: "honeysweetheart.com." always_nxdomain
 local-zone: "hongpaicrystals.com." always_nxdomain
 local-zone: "hontaiautoparts.com." always_nxdomain
 local-zone: "hookcan.com." always_nxdomain
-local-zone: "hookestore.online." always_nxdomain
 local-zone: "hopebikeabout.com." always_nxdomain
 local-zone: "hopetaly.com." always_nxdomain
 local-zone: "hoscaleshop.com." always_nxdomain
@@ -2668,7 +2666,6 @@ local-zone: "pinvense.com." always_nxdomain
 local-zone: "pinvic.com." always_nxdomain
 local-zone: "piperjewelry.shop." always_nxdomain
 local-zone: "pipfan.com." always_nxdomain
-local-zone: "pixiebra.com." always_nxdomain
 local-zone: "pixisid.com." always_nxdomain
 local-zone: "pizza-napoleon.cz." always_nxdomain
 local-zone: "plagifier.com." always_nxdomain
