@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.08.204316.2023
-# Last modified: Sat Jul  8 20:43:16 UTC 2023
+# Version: 07.09.204318.2023
+# Last modified: Sun Jul  9 20:43:18 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3959
+# Total number of entries: 3957
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -2774,7 +2774,6 @@ local-zone: "quietkeep.com." always_nxdomain
 local-zone: "quiins-kings-fitness.de." always_nxdomain
 local-zone: "quimv.com." always_nxdomain
 local-zone: "quinnandspencer.com." always_nxdomain
-local-zone: "quinod.com." always_nxdomain
 local-zone: "quintaldog.cz." always_nxdomain
 local-zone: "ququking.com." always_nxdomain
 local-zone: "qusidy.com." always_nxdomain
@@ -3344,7 +3343,6 @@ local-zone: "szabo-ontozes.hu." always_nxdomain
 local-zone: "szwstgj.com." always_nxdomain
 local-zone: "tabbles.net." always_nxdomain
 local-zone: "tabosep.shop." always_nxdomain
-local-zone: "tacitadr.com." always_nxdomain
 local-zone: "tadgay.com." always_nxdomain
 local-zone: "taekod.com." always_nxdomain
 local-zone: "tahagencyltd.com." always_nxdomain
