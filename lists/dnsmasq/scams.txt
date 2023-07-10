@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.09.204318.2023
-# Last modified: Sun Jul  9 20:43:18 UTC 2023
+# Version: 07.10.204316.2023
+# Last modified: Mon Jul 10 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3956
+# Total number of entries: 3952
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -438,7 +438,6 @@ address=/bookbargain.shop/#
 address=/bookbinge.shop/#
 address=/bookblogworld.com/#
 address=/bookread.store/#
-address=/booksaccessories.store/#
 address=/booksmusicsales.store/#
 address=/booksshopmall.store/#
 address=/boonestore.shop/#
@@ -493,7 +492,6 @@ address=/buncru.com/#
 address=/burberp.com/#
 address=/buriayre.com/#
 address=/burkinan.com/#
-address=/burtonshop.site/#
 address=/bustlight.com/#
 address=/busul.us/#
 address=/butterfalluk.com/#
@@ -639,7 +637,6 @@ address=/ckkebt.shop/#
 address=/ckonlinesale.store/#
 address=/cktckt.com/#
 address=/clairedresses.space/#
-address=/claokcutlery.shop/#
 address=/clarkosale.shop/#
 address=/clasifiation.com/#
 address=/classicalcoins.shop/#
@@ -2415,7 +2412,6 @@ address=/nostrends.com/#
 address=/noterel.shop/#
 address=/notionhubs.com/#
 address=/nourishfantasy.com/#
-address=/novadasports.shop/#
 address=/novaig.com/#
 address=/novedove.com/#
 address=/nplagencyltd.com/#
