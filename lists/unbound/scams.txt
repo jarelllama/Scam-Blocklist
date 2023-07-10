@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.09.204318.2023
-# Last modified: Sun Jul  9 20:43:18 UTC 2023
+# Version: 07.10.204316.2023
+# Last modified: Mon Jul 10 20:43:16 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3957
+# Total number of entries: 3953
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -439,7 +439,6 @@ local-zone: "bookbargain.shop." always_nxdomain
 local-zone: "bookbinge.shop." always_nxdomain
 local-zone: "bookblogworld.com." always_nxdomain
 local-zone: "bookread.store." always_nxdomain
-local-zone: "booksaccessories.store." always_nxdomain
 local-zone: "booksmusicsales.store." always_nxdomain
 local-zone: "booksshopmall.store." always_nxdomain
 local-zone: "boonestore.shop." always_nxdomain
@@ -494,7 +493,6 @@ local-zone: "buncru.com." always_nxdomain
 local-zone: "burberp.com." always_nxdomain
 local-zone: "buriayre.com." always_nxdomain
 local-zone: "burkinan.com." always_nxdomain
-local-zone: "burtonshop.site." always_nxdomain
 local-zone: "bustlight.com." always_nxdomain
 local-zone: "busul.us." always_nxdomain
 local-zone: "butterfalluk.com." always_nxdomain
@@ -640,7 +638,6 @@ local-zone: "ckkebt.shop." always_nxdomain
 local-zone: "ckonlinesale.store." always_nxdomain
 local-zone: "cktckt.com." always_nxdomain
 local-zone: "clairedresses.space." always_nxdomain
-local-zone: "claokcutlery.shop." always_nxdomain
 local-zone: "clarkosale.shop." always_nxdomain
 local-zone: "clasifiation.com." always_nxdomain
 local-zone: "classicalcoins.shop." always_nxdomain
@@ -2416,7 +2413,6 @@ local-zone: "nostrends.com." always_nxdomain
 local-zone: "noterel.shop." always_nxdomain
 local-zone: "notionhubs.com." always_nxdomain
 local-zone: "nourishfantasy.com." always_nxdomain
-local-zone: "novadasports.shop." always_nxdomain
 local-zone: "novaig.com." always_nxdomain
 local-zone: "novedove.com." always_nxdomain
 local-zone: "nplagencyltd.com." always_nxdomain
