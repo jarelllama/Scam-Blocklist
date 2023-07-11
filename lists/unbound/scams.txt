@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.10.204316.2023
-# Last modified: Mon Jul 10 20:43:16 UTC 2023
+# Version: 07.11.204326.2023
+# Last modified: Tue Jul 11 20:43:26 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3953
+# Total number of entries: 3951
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -2179,7 +2179,6 @@ local-zone: "miatewo.com." always_nxdomain
 local-zone: "michelletore.space." always_nxdomain
 local-zone: "mickclothing.shop." always_nxdomain
 local-zone: "mickcosmetic.shop." always_nxdomain
-local-zone: "microtro.com." always_nxdomain
 local-zone: "miebag.net." always_nxdomain
 local-zone: "mightygenix.shop." always_nxdomain
 local-zone: "mimigift2.com." always_nxdomain
@@ -2204,6 +2203,7 @@ local-zone: "mizukidog.com." always_nxdomain
 local-zone: "mkiplmout.com." always_nxdomain
 local-zone: "mledo.com." always_nxdomain
 local-zone: "mmapd.shop." always_nxdomain
+local-zone: "mmplus.store." always_nxdomain
 local-zone: "mnaink.com." always_nxdomain
 local-zone: "mnotina.com." always_nxdomain
 local-zone: "mobiamy.com." always_nxdomain
@@ -2724,7 +2724,6 @@ local-zone: "prettylaray.com." always_nxdomain
 local-zone: "prettyuup.com." always_nxdomain
 local-zone: "prideearthdesign.com." always_nxdomain
 local-zone: "prideearthone.com." always_nxdomain
-local-zone: "primoyo.com." always_nxdomain
 local-zone: "prinship.com." always_nxdomain
 local-zone: "private-evaluation.com." always_nxdomain
 local-zone: "private-feedback.com." always_nxdomain
@@ -2908,6 +2907,7 @@ local-zone: "rtwtlcie.shop." always_nxdomain
 local-zone: "ruggedsupply.net." always_nxdomain
 local-zone: "rugsandcurtains.com." always_nxdomain
 local-zone: "ruispice.com." always_nxdomain
+local-zone: "rungovip.store." always_nxdomain
 local-zone: "runsaucony.com." always_nxdomain
 local-zone: "rustoleumspray.com." always_nxdomain
 local-zone: "ruylfeicne.info." always_nxdomain
@@ -3564,9 +3564,7 @@ local-zone: "ttsecret.com." always_nxdomain
 local-zone: "tubespartsaccessories.com." always_nxdomain
 local-zone: "tuenhi.info." always_nxdomain
 local-zone: "tugruy.com." always_nxdomain
-local-zone: "turboate.com." always_nxdomain
 local-zone: "turbopb.com." always_nxdomain
-local-zone: "turbotzy.com." always_nxdomain
 local-zone: "turfdecor.com." always_nxdomain
 local-zone: "turnnetwor.com." always_nxdomain
 local-zone: "turolloy.com." always_nxdomain
