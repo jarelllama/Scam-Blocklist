@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.12.204317.2023
-# Last modified: Wed Jul 12 20:43:17 UTC 2023
+# Version: 07.13.204319.2023
+# Last modified: Thu Jul 13 20:43:19 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3932
+# Total number of entries: 3931
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -439,6 +439,7 @@ local-zone: "bookbargain.shop." always_nxdomain
 local-zone: "bookbinge.shop." always_nxdomain
 local-zone: "bookblogworld.com." always_nxdomain
 local-zone: "bookread.store." always_nxdomain
+local-zone: "booksaccessories.store." always_nxdomain
 local-zone: "booksmusicsales.store." always_nxdomain
 local-zone: "booksshopmall.store." always_nxdomain
 local-zone: "boostearthcrust.com." always_nxdomain
@@ -635,6 +636,7 @@ local-zone: "ckkebt.shop." always_nxdomain
 local-zone: "ckonlinesale.store." always_nxdomain
 local-zone: "cktckt.com." always_nxdomain
 local-zone: "clairedresses.space." always_nxdomain
+local-zone: "claokcutlery.shop." always_nxdomain
 local-zone: "clarkosale.shop." always_nxdomain
 local-zone: "clasifiation.com." always_nxdomain
 local-zone: "classicalcoins.shop." always_nxdomain
@@ -2728,7 +2730,6 @@ local-zone: "proqpace.com." always_nxdomain
 local-zone: "proskechr.com." always_nxdomain
 local-zone: "prospendrr.com." always_nxdomain
 local-zone: "proudgifts.us." always_nxdomain
-local-zone: "prousfemale.com." always_nxdomain
 local-zone: "provencevent.com." always_nxdomain
 local-zone: "psicotandem.es." always_nxdomain
 local-zone: "psmbedzin.pl." always_nxdomain
@@ -3290,7 +3291,6 @@ local-zone: "surfrebate.com." always_nxdomain
 local-zone: "surfseafolly.com." always_nxdomain
 local-zone: "surfsnowsports.com." always_nxdomain
 local-zone: "surfstorehouse.com." always_nxdomain
-local-zone: "surfwonderful.com." always_nxdomain
 local-zone: "survey-quick.com." always_nxdomain
 local-zone: "survey-spot.com." always_nxdomain
 local-zone: "survey-xyz.com." always_nxdomain
@@ -3784,7 +3784,6 @@ local-zone: "wholesalepettoys.store." always_nxdomain
 local-zone: "wholesalestore.online." always_nxdomain
 local-zone: "widdeful.com." always_nxdomain
 local-zone: "wiimort.com." always_nxdomain
-local-zone: "wikivito.com." always_nxdomain
 local-zone: "wildanimal.shop." always_nxdomain
 local-zone: "wincar.cz." always_nxdomain
 local-zone: "windowfilm.life." always_nxdomain
