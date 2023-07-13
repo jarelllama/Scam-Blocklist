@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.12.204317.2023
-# Last modified: Wed Jul 12 20:43:17 UTC 2023
+# Version: 07.13.204319.2023
+# Last modified: Thu Jul 13 20:43:19 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3931
+# Total number of entries: 3930
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -438,6 +438,7 @@ address=/bookbargain.shop/#
 address=/bookbinge.shop/#
 address=/bookblogworld.com/#
 address=/bookread.store/#
+address=/booksaccessories.store/#
 address=/booksmusicsales.store/#
 address=/booksshopmall.store/#
 address=/boostearthcrust.com/#
@@ -634,6 +635,7 @@ address=/ckkebt.shop/#
 address=/ckonlinesale.store/#
 address=/cktckt.com/#
 address=/clairedresses.space/#
+address=/claokcutlery.shop/#
 address=/clarkosale.shop/#
 address=/clasifiation.com/#
 address=/classicalcoins.shop/#
@@ -2727,7 +2729,6 @@ address=/proqpace.com/#
 address=/proskechr.com/#
 address=/prospendrr.com/#
 address=/proudgifts.us/#
-address=/prousfemale.com/#
 address=/provencevent.com/#
 address=/psicotandem.es/#
 address=/psmbedzin.pl/#
@@ -3289,7 +3290,6 @@ address=/surfrebate.com/#
 address=/surfseafolly.com/#
 address=/surfsnowsports.com/#
 address=/surfstorehouse.com/#
-address=/surfwonderful.com/#
 address=/survey-quick.com/#
 address=/survey-spot.com/#
 address=/survey-xyz.com/#
@@ -3783,7 +3783,6 @@ address=/wholesalepettoys.store/#
 address=/wholesalestore.online/#
 address=/widdeful.com/#
 address=/wiimort.com/#
-address=/wikivito.com/#
 address=/wildanimal.shop/#
 address=/wincar.cz/#
 address=/windowfilm.life/#
