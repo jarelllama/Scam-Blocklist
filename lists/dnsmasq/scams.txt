@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.13.204319.2023
-# Last modified: Thu Jul 13 20:43:19 UTC 2023
+# Version: 07.14.204323.2023
+# Last modified: Fri Jul 14 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3930
+# Total number of entries: 3928
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -492,6 +492,7 @@ address=/buncru.com/#
 address=/burberp.com/#
 address=/buriayre.com/#
 address=/burkinan.com/#
+address=/burtonshop.site/#
 address=/bustlight.com/#
 address=/busul.us/#
 address=/butterfalluk.com/#
@@ -534,7 +535,6 @@ address=/can-concretio-work.com/#
 address=/cannolly.com/#
 address=/canvasartlove.com/#
 address=/caoefe.shop/#
-address=/caracompu.space/#
 address=/carbonbypablo.com/#
 address=/cardadvantagecast.com/#
 address=/cardioequipmentsale.store/#
@@ -560,6 +560,7 @@ address=/castellicycle.com/#
 address=/castillo-art.shop/#
 address=/casualsportstore.com/#
 address=/catforsale.store/#
+address=/cathotsale.xyz/#
 address=/cathyhouse.net/#
 address=/cattoysale.store/#
 address=/cattoystore.website/#
@@ -841,6 +842,7 @@ address=/dealweili.shop/#
 address=/dearangle.com/#
 address=/debinsale.com/#
 address=/decoden.shop/#
+address=/decorationhome.store/#
 address=/decorationhome.website/#
 address=/decorationsdiscount.store/#
 address=/decorationsoutlet.store/#
@@ -1719,7 +1721,6 @@ address=/jewelryonsale.store/#
 address=/jewelrysale.website/#
 address=/jewelsfairy.com/#
 address=/jfcase.com/#
-address=/jhxaeog.site/#
 address=/jingba-support.com/#
 address=/jingzhimucrystals.com/#
 address=/jivania.com/#
@@ -2032,6 +2033,7 @@ address=/maahizon.com/#
 address=/maajiswim.com/#
 address=/mababinooo.com/#
 address=/macineo.com/#
+address=/madisonpets.store/#
 address=/madrasbazaar.com/#
 address=/madroop.com/#
 address=/maebl.com/#
@@ -2102,7 +2104,6 @@ address=/medstylovnia.pl/#
 address=/meetfireplace.store/#
 address=/meetgladness.com/#
 address=/meeyd.com/#
-address=/megabulltradingoptions.online/#
 address=/megadigifun.com/#
 address=/megaduane.com/#
 address=/megcareproducts.com/#
@@ -2399,6 +2400,7 @@ address=/nostrends.com/#
 address=/noterel.shop/#
 address=/notionhubs.com/#
 address=/nourishfantasy.com/#
+address=/novadasports.shop/#
 address=/novaig.com/#
 address=/novedove.com/#
 address=/nplagencyltd.com/#
@@ -2497,7 +2499,6 @@ address=/ordolava.com/#
 address=/oreglory.com/#
 address=/orgalev.com/#
 address=/orogitee.com/#
-address=/orotonhugesale.store/#
 address=/oscarcamping.shop/#
 address=/osnowsports.com/#
 address=/ostgermain.fr/#
@@ -2962,7 +2963,6 @@ address=/satedeal.com/#
 address=/sauconyshoe.com/#
 address=/saxtapret.xyz/#
 address=/scansave.pl/#
-address=/scarpaoutlet.com/#
 address=/scdchn.com/#
 address=/scenerout.com/#
 address=/schnelltest-hallecenter.de/#
@@ -2973,7 +2973,6 @@ address=/scoptal.com/#
 address=/scrubellayyc.com/#
 address=/scurvefashion.com/#
 address=/sdrytru.online/#
-address=/seafollysurf.com/#
 address=/seasaltfashion.com/#
 address=/seasonalllc.com/#
 address=/seasongca.com/#
@@ -3673,7 +3672,6 @@ address=/venturearchitects.pl/#
 address=/veralook.com/#
 address=/vernfootball.xyz/#
 address=/veronicacarson.shop/#
-address=/verzech.com/#
 address=/vetberry.com/#
 address=/vibrantgarden.net/#
 address=/vibratolife.com/#
