@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.13.204319.2023
-# Last modified: Thu Jul 13 20:43:19 UTC 2023
+# Version: 07.14.204323.2023
+# Last modified: Fri Jul 14 20:43:23 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3931
+# Total number of entries: 3929
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -493,6 +493,7 @@ local-zone: "buncru.com." always_nxdomain
 local-zone: "burberp.com." always_nxdomain
 local-zone: "buriayre.com." always_nxdomain
 local-zone: "burkinan.com." always_nxdomain
+local-zone: "burtonshop.site." always_nxdomain
 local-zone: "bustlight.com." always_nxdomain
 local-zone: "busul.us." always_nxdomain
 local-zone: "butterfalluk.com." always_nxdomain
@@ -535,7 +536,6 @@ local-zone: "can-concretio-work.com." always_nxdomain
 local-zone: "cannolly.com." always_nxdomain
 local-zone: "canvasartlove.com." always_nxdomain
 local-zone: "caoefe.shop." always_nxdomain
-local-zone: "caracompu.space." always_nxdomain
 local-zone: "carbonbypablo.com." always_nxdomain
 local-zone: "cardadvantagecast.com." always_nxdomain
 local-zone: "cardioequipmentsale.store." always_nxdomain
@@ -561,6 +561,7 @@ local-zone: "castellicycle.com." always_nxdomain
 local-zone: "castillo-art.shop." always_nxdomain
 local-zone: "casualsportstore.com." always_nxdomain
 local-zone: "catforsale.store." always_nxdomain
+local-zone: "cathotsale.xyz." always_nxdomain
 local-zone: "cathyhouse.net." always_nxdomain
 local-zone: "cattoysale.store." always_nxdomain
 local-zone: "cattoystore.website." always_nxdomain
@@ -842,6 +843,7 @@ local-zone: "dealweili.shop." always_nxdomain
 local-zone: "dearangle.com." always_nxdomain
 local-zone: "debinsale.com." always_nxdomain
 local-zone: "decoden.shop." always_nxdomain
+local-zone: "decorationhome.store." always_nxdomain
 local-zone: "decorationhome.website." always_nxdomain
 local-zone: "decorationsdiscount.store." always_nxdomain
 local-zone: "decorationsoutlet.store." always_nxdomain
@@ -1720,7 +1722,6 @@ local-zone: "jewelryonsale.store." always_nxdomain
 local-zone: "jewelrysale.website." always_nxdomain
 local-zone: "jewelsfairy.com." always_nxdomain
 local-zone: "jfcase.com." always_nxdomain
-local-zone: "jhxaeog.site." always_nxdomain
 local-zone: "jingba-support.com." always_nxdomain
 local-zone: "jingzhimucrystals.com." always_nxdomain
 local-zone: "jivania.com." always_nxdomain
@@ -2033,6 +2034,7 @@ local-zone: "maahizon.com." always_nxdomain
 local-zone: "maajiswim.com." always_nxdomain
 local-zone: "mababinooo.com." always_nxdomain
 local-zone: "macineo.com." always_nxdomain
+local-zone: "madisonpets.store." always_nxdomain
 local-zone: "madrasbazaar.com." always_nxdomain
 local-zone: "madroop.com." always_nxdomain
 local-zone: "maebl.com." always_nxdomain
@@ -2103,7 +2105,6 @@ local-zone: "medstylovnia.pl." always_nxdomain
 local-zone: "meetfireplace.store." always_nxdomain
 local-zone: "meetgladness.com." always_nxdomain
 local-zone: "meeyd.com." always_nxdomain
-local-zone: "megabulltradingoptions.online." always_nxdomain
 local-zone: "megadigifun.com." always_nxdomain
 local-zone: "megaduane.com." always_nxdomain
 local-zone: "megcareproducts.com." always_nxdomain
@@ -2400,6 +2401,7 @@ local-zone: "nostrends.com." always_nxdomain
 local-zone: "noterel.shop." always_nxdomain
 local-zone: "notionhubs.com." always_nxdomain
 local-zone: "nourishfantasy.com." always_nxdomain
+local-zone: "novadasports.shop." always_nxdomain
 local-zone: "novaig.com." always_nxdomain
 local-zone: "novedove.com." always_nxdomain
 local-zone: "nplagencyltd.com." always_nxdomain
@@ -2498,7 +2500,6 @@ local-zone: "ordolava.com." always_nxdomain
 local-zone: "oreglory.com." always_nxdomain
 local-zone: "orgalev.com." always_nxdomain
 local-zone: "orogitee.com." always_nxdomain
-local-zone: "orotonhugesale.store." always_nxdomain
 local-zone: "oscarcamping.shop." always_nxdomain
 local-zone: "osnowsports.com." always_nxdomain
 local-zone: "ostgermain.fr." always_nxdomain
@@ -2963,7 +2964,6 @@ local-zone: "satedeal.com." always_nxdomain
 local-zone: "sauconyshoe.com." always_nxdomain
 local-zone: "saxtapret.xyz." always_nxdomain
 local-zone: "scansave.pl." always_nxdomain
-local-zone: "scarpaoutlet.com." always_nxdomain
 local-zone: "scdchn.com." always_nxdomain
 local-zone: "scenerout.com." always_nxdomain
 local-zone: "schnelltest-hallecenter.de." always_nxdomain
@@ -2974,7 +2974,6 @@ local-zone: "scoptal.com." always_nxdomain
 local-zone: "scrubellayyc.com." always_nxdomain
 local-zone: "scurvefashion.com." always_nxdomain
 local-zone: "sdrytru.online." always_nxdomain
-local-zone: "seafollysurf.com." always_nxdomain
 local-zone: "seasaltfashion.com." always_nxdomain
 local-zone: "seasonalllc.com." always_nxdomain
 local-zone: "seasongca.com." always_nxdomain
@@ -3674,7 +3673,6 @@ local-zone: "venturearchitects.pl." always_nxdomain
 local-zone: "veralook.com." always_nxdomain
 local-zone: "vernfootball.xyz." always_nxdomain
 local-zone: "veronicacarson.shop." always_nxdomain
-local-zone: "verzech.com." always_nxdomain
 local-zone: "vetberry.com." always_nxdomain
 local-zone: "vibrantgarden.net." always_nxdomain
 local-zone: "vibratolife.com." always_nxdomain
