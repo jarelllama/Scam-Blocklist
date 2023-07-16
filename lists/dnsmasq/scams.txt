@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.15.204317.2023
-# Last modified: Sat Jul 15 20:43:17 UTC 2023
+# Version: 07.16.204317.2023
+# Last modified: Sun Jul 16 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3953
+# Total number of entries: 3946
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -793,13 +793,8 @@ address=/cyclesretail.com/#
 address=/cyclingoakl.com/#
 address=/cymbals.space/#
 address=/cyobyo.com/#
-address=/d-bride.cfd/#
 address=/d-clock.cfd/#
-address=/d-drama.cfd/#
-address=/d-ghost.cfd/#
 address=/d-rough.cfd/#
-address=/d-shake.cfd/#
-address=/d-state.cfd/#
 address=/d-thank.cfd/#
 address=/d-width.cfd/#
 address=/dabanshops.com/#
@@ -935,6 +930,7 @@ address=/dogodw.com/#
 address=/dogsfoodmall.store/#
 address=/dogsfoodsale.shop/#
 address=/dogtoyoutlet.store/#
+address=/dogtoysale.store/#
 address=/dogtoyselling.store/#
 address=/dogtoywholesale.store/#
 address=/doktorekwpodrozy.pl/#
@@ -2057,7 +2053,6 @@ address=/malpezeco.com/#
 address=/mamapapaclothing.com/#
 address=/manaboutadog.de/#
 address=/maniazieleni.pl/#
-address=/mannytra.com/#
 address=/manorinteriorskitchen.com/#
 address=/marcellomielno.pl/#
 address=/marcuslantern.space/#
@@ -2799,7 +2794,6 @@ address=/raypull.com/#
 address=/razesale.com/#
 address=/razuzz.com/#
 address=/rctoycar.shop/#
-address=/rdaptss.com/#
 address=/rddcu.com/#
 address=/realitytackle.com/#
 address=/rebategeneral.com/#
@@ -3060,7 +3054,6 @@ address=/shoessoutlet.store/#
 address=/shoewhitemountain.com/#
 address=/shoopesy.com/#
 address=/shop-homeware.com/#
-address=/shop-women.store/#
 address=/shop.migucun.com/#
 address=/shop123123.com/#
 address=/shop2hop.com/#
