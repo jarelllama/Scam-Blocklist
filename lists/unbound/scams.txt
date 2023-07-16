@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.15.204317.2023
-# Last modified: Sat Jul 15 20:43:17 UTC 2023
+# Version: 07.16.204317.2023
+# Last modified: Sun Jul 16 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3954
+# Total number of entries: 3947
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -794,13 +794,8 @@ local-zone: "cyclesretail.com." always_nxdomain
 local-zone: "cyclingoakl.com." always_nxdomain
 local-zone: "cymbals.space." always_nxdomain
 local-zone: "cyobyo.com." always_nxdomain
-local-zone: "d-bride.cfd." always_nxdomain
 local-zone: "d-clock.cfd." always_nxdomain
-local-zone: "d-drama.cfd." always_nxdomain
-local-zone: "d-ghost.cfd." always_nxdomain
 local-zone: "d-rough.cfd." always_nxdomain
-local-zone: "d-shake.cfd." always_nxdomain
-local-zone: "d-state.cfd." always_nxdomain
 local-zone: "d-thank.cfd." always_nxdomain
 local-zone: "d-width.cfd." always_nxdomain
 local-zone: "dabanshops.com." always_nxdomain
@@ -936,6 +931,7 @@ local-zone: "dogodw.com." always_nxdomain
 local-zone: "dogsfoodmall.store." always_nxdomain
 local-zone: "dogsfoodsale.shop." always_nxdomain
 local-zone: "dogtoyoutlet.store." always_nxdomain
+local-zone: "dogtoysale.store." always_nxdomain
 local-zone: "dogtoyselling.store." always_nxdomain
 local-zone: "dogtoywholesale.store." always_nxdomain
 local-zone: "doktorekwpodrozy.pl." always_nxdomain
@@ -2058,7 +2054,6 @@ local-zone: "malpezeco.com." always_nxdomain
 local-zone: "mamapapaclothing.com." always_nxdomain
 local-zone: "manaboutadog.de." always_nxdomain
 local-zone: "maniazieleni.pl." always_nxdomain
-local-zone: "mannytra.com." always_nxdomain
 local-zone: "manorinteriorskitchen.com." always_nxdomain
 local-zone: "marcellomielno.pl." always_nxdomain
 local-zone: "marcuslantern.space." always_nxdomain
@@ -2800,7 +2795,6 @@ local-zone: "raypull.com." always_nxdomain
 local-zone: "razesale.com." always_nxdomain
 local-zone: "razuzz.com." always_nxdomain
 local-zone: "rctoycar.shop." always_nxdomain
-local-zone: "rdaptss.com." always_nxdomain
 local-zone: "rddcu.com." always_nxdomain
 local-zone: "realitytackle.com." always_nxdomain
 local-zone: "rebategeneral.com." always_nxdomain
@@ -3061,7 +3055,6 @@ local-zone: "shoessoutlet.store." always_nxdomain
 local-zone: "shoewhitemountain.com." always_nxdomain
 local-zone: "shoopesy.com." always_nxdomain
 local-zone: "shop-homeware.com." always_nxdomain
-local-zone: "shop-women.store." always_nxdomain
 local-zone: "shop.migucun.com." always_nxdomain
 local-zone: "shop123123.com." always_nxdomain
 local-zone: "shop2hop.com." always_nxdomain
