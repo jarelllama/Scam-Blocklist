@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.16.204317.2023
-# Last modified: Sun Jul 16 20:43:17 UTC 2023
+# Version: 07.17.204318.2023
+# Last modified: Mon Jul 17 20:43:18 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3947
+# Total number of entries: 3941
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -565,7 +565,6 @@ local-zone: "casiecustom.com." always_nxdomain
 local-zone: "castellicycle.com." always_nxdomain
 local-zone: "castillo-art.shop." always_nxdomain
 local-zone: "casualsportstore.com." always_nxdomain
-local-zone: "catforsale.store." always_nxdomain
 local-zone: "cathotsale.xyz." always_nxdomain
 local-zone: "cathyhouse.net." always_nxdomain
 local-zone: "cattoysale.store." always_nxdomain
@@ -794,10 +793,7 @@ local-zone: "cyclesretail.com." always_nxdomain
 local-zone: "cyclingoakl.com." always_nxdomain
 local-zone: "cymbals.space." always_nxdomain
 local-zone: "cyobyo.com." always_nxdomain
-local-zone: "d-clock.cfd." always_nxdomain
-local-zone: "d-rough.cfd." always_nxdomain
 local-zone: "d-thank.cfd." always_nxdomain
-local-zone: "d-width.cfd." always_nxdomain
 local-zone: "dabanshops.com." always_nxdomain
 local-zone: "dabereshops.com." always_nxdomain
 local-zone: "dahliasocietyy.com." always_nxdomain
@@ -2130,6 +2126,7 @@ local-zone: "members-reviews.com." always_nxdomain
 local-zone: "members-surveys.com." always_nxdomain
 local-zone: "memburvey.com." always_nxdomain
 local-zone: "memobebe.com." always_nxdomain
+local-zone: "men-clothing.store." always_nxdomain
 local-zone: "menaccessoriesoutlet.store." always_nxdomain
 local-zone: "menchoice.us." always_nxdomain
 local-zone: "menclothingforsale.store." always_nxdomain
@@ -2440,7 +2437,6 @@ local-zone: "ofertapromotionala.ro." always_nxdomain
 local-zone: "off-female.com." always_nxdomain
 local-zone: "off-lady.com." always_nxdomain
 local-zone: "offdoorhandle.com." always_nxdomain
-local-zone: "offercat.store." always_nxdomain
 local-zone: "offercat.website." always_nxdomain
 local-zone: "offergardensupplies.store." always_nxdomain
 local-zone: "offerknives.com." always_nxdomain
@@ -3425,7 +3421,6 @@ local-zone: "theownshop.com." always_nxdomain
 local-zone: "theplushies.shop." always_nxdomain
 local-zone: "thepoloshirt.store." always_nxdomain
 local-zone: "thepotspans.com." always_nxdomain
-local-zone: "thepromiseexpress.com." always_nxdomain
 local-zone: "thepshoes.com." always_nxdomain
 local-zone: "therikonrhino.com." always_nxdomain
 local-zone: "thernegy.com." always_nxdomain
@@ -3518,7 +3513,6 @@ local-zone: "toycollectionstore.website." always_nxdomain
 local-zone: "toyistzone.co." always_nxdomain
 local-zone: "toyonsale.com." always_nxdomain
 local-zone: "toysboats.com." always_nxdomain
-local-zone: "toysofficial.store." always_nxdomain
 local-zone: "track718.us." always_nxdomain
 local-zone: "tradesailorshop.com." always_nxdomain
 local-zone: "traeerly.com." always_nxdomain
