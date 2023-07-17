@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.16.204317.2023
-# Last modified: Sun Jul 16 20:43:17 UTC 2023
+# Version: 07.17.204318.2023
+# Last modified: Mon Jul 17 20:43:18 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3946
+# Total number of entries: 3940
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -564,7 +564,6 @@ address=/casiecustom.com/#
 address=/castellicycle.com/#
 address=/castillo-art.shop/#
 address=/casualsportstore.com/#
-address=/catforsale.store/#
 address=/cathotsale.xyz/#
 address=/cathyhouse.net/#
 address=/cattoysale.store/#
@@ -793,10 +792,7 @@ address=/cyclesretail.com/#
 address=/cyclingoakl.com/#
 address=/cymbals.space/#
 address=/cyobyo.com/#
-address=/d-clock.cfd/#
-address=/d-rough.cfd/#
 address=/d-thank.cfd/#
-address=/d-width.cfd/#
 address=/dabanshops.com/#
 address=/dabereshops.com/#
 address=/dahliasocietyy.com/#
@@ -2129,6 +2125,7 @@ address=/members-reviews.com/#
 address=/members-surveys.com/#
 address=/memburvey.com/#
 address=/memobebe.com/#
+address=/men-clothing.store/#
 address=/menaccessoriesoutlet.store/#
 address=/menchoice.us/#
 address=/menclothingforsale.store/#
@@ -2439,7 +2436,6 @@ address=/ofertapromotionala.ro/#
 address=/off-female.com/#
 address=/off-lady.com/#
 address=/offdoorhandle.com/#
-address=/offercat.store/#
 address=/offercat.website/#
 address=/offergardensupplies.store/#
 address=/offerknives.com/#
@@ -3424,7 +3420,6 @@ address=/theownshop.com/#
 address=/theplushies.shop/#
 address=/thepoloshirt.store/#
 address=/thepotspans.com/#
-address=/thepromiseexpress.com/#
 address=/thepshoes.com/#
 address=/therikonrhino.com/#
 address=/thernegy.com/#
@@ -3517,7 +3512,6 @@ address=/toycollectionstore.website/#
 address=/toyistzone.co/#
 address=/toyonsale.com/#
 address=/toysboats.com/#
-address=/toysofficial.store/#
 address=/track718.us/#
 address=/tradesailorshop.com/#
 address=/traeerly.com/#
