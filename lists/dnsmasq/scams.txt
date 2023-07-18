@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.17.204318.2023
-# Last modified: Mon Jul 17 20:43:18 UTC 2023
+# Version: 07.18.204315.2023
+# Last modified: Tue Jul 18 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3940
+# Total number of entries: 3942
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -1592,6 +1592,7 @@ address=/hotjewelry.store/#
 address=/hotsalebicycle.store/#
 address=/hotsalefootwear.store/#
 address=/hotsalesmarket.com/#
+address=/hotviphut.store/#
 address=/houbingi.com/#
 address=/hoursclothes.com/#
 address=/housecleaningsale.com/#
@@ -3480,6 +3481,7 @@ address=/tollgr.com/#
 address=/tomclothing.shop/#
 address=/tomshuette-hohwacht.de/#
 address=/tomucir.shop/#
+address=/tonybianco.online/#
 address=/toolandmaintenance.com/#
 address=/toolmartin.com/#
 address=/toolperfectus.com/#
