@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.17.204318.2023
-# Last modified: Mon Jul 17 20:43:18 UTC 2023
+# Version: 07.18.204315.2023
+# Last modified: Tue Jul 18 20:43:15 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3941
+# Total number of entries: 3943
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -1593,6 +1593,7 @@ local-zone: "hotjewelry.store." always_nxdomain
 local-zone: "hotsalebicycle.store." always_nxdomain
 local-zone: "hotsalefootwear.store." always_nxdomain
 local-zone: "hotsalesmarket.com." always_nxdomain
+local-zone: "hotviphut.store." always_nxdomain
 local-zone: "houbingi.com." always_nxdomain
 local-zone: "hoursclothes.com." always_nxdomain
 local-zone: "housecleaningsale.com." always_nxdomain
@@ -3481,6 +3482,7 @@ local-zone: "tollgr.com." always_nxdomain
 local-zone: "tomclothing.shop." always_nxdomain
 local-zone: "tomshuette-hohwacht.de." always_nxdomain
 local-zone: "tomucir.shop." always_nxdomain
+local-zone: "tonybianco.online." always_nxdomain
 local-zone: "toolandmaintenance.com." always_nxdomain
 local-zone: "toolmartin.com." always_nxdomain
 local-zone: "toolperfectus.com." always_nxdomain
