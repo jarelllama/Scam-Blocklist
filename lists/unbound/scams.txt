@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.18.204315.2023
-# Last modified: Tue Jul 18 20:43:15 UTC 2023
+# Version: 07.19.204319.2023
+# Last modified: Wed Jul 19 20:43:19 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3943
+# Total number of entries: 3939
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -33,7 +33,6 @@ local-zone: "aarp.org." always_nxdomain
 local-zone: "abelcollectibles.shop." always_nxdomain
 local-zone: "abeni.shop." always_nxdomain
 local-zone: "abepet.shop." always_nxdomain
-local-zone: "abercrombiestore.online." always_nxdomain
 local-zone: "abizot.com.ng." always_nxdomain
 local-zone: "abourt.com." always_nxdomain
 local-zone: "absolutepoll.com." always_nxdomain
@@ -657,7 +656,6 @@ local-zone: "cleberm.com." always_nxdomain
 local-zone: "cliffords.shop." always_nxdomain
 local-zone: "climbersequip.com." always_nxdomain
 local-zone: "climbfootwear.com." always_nxdomain
-local-zone: "climbforsale.com." always_nxdomain
 local-zone: "clothen.co." always_nxdomain
 local-zone: "clothesff.com." always_nxdomain
 local-zone: "clothesmania.in." always_nxdomain
@@ -1668,7 +1666,6 @@ local-zone: "intuitivlab.com." always_nxdomain
 local-zone: "inushoes.com." always_nxdomain
 local-zone: "investama92.com." always_nxdomain
 local-zone: "inyard.com." always_nxdomain
-local-zone: "iplflasher.co." always_nxdomain
 local-zone: "iqcreditcheck.com." always_nxdomain
 local-zone: "irefisioterapia.es." always_nxdomain
 local-zone: "iregeto.shop." always_nxdomain
@@ -1816,7 +1813,6 @@ local-zone: "kitchen2mart.shop." always_nxdomain
 local-zone: "kitchenunleash.com." always_nxdomain
 local-zone: "kithet.com." always_nxdomain
 local-zone: "kitnewsport.com." always_nxdomain
-local-zone: "kittenshelter.com." always_nxdomain
 local-zone: "kixwave.com." always_nxdomain
 local-zone: "kizomba-berlinal.de." always_nxdomain
 local-zone: "kkhitlul.top." always_nxdomain
@@ -2108,6 +2104,7 @@ local-zone: "medstylovnia.pl." always_nxdomain
 local-zone: "meetfireplace.store." always_nxdomain
 local-zone: "meetgladness.com." always_nxdomain
 local-zone: "meeyd.com." always_nxdomain
+local-zone: "megabulltradingoptions.online." always_nxdomain
 local-zone: "megadigifun.com." always_nxdomain
 local-zone: "megaduane.com." always_nxdomain
 local-zone: "megcareproducts.com." always_nxdomain
@@ -3052,6 +3049,7 @@ local-zone: "shoessoutlet.store." always_nxdomain
 local-zone: "shoewhitemountain.com." always_nxdomain
 local-zone: "shoopesy.com." always_nxdomain
 local-zone: "shop-homeware.com." always_nxdomain
+local-zone: "shop-women.store." always_nxdomain
 local-zone: "shop.migucun.com." always_nxdomain
 local-zone: "shop123123.com." always_nxdomain
 local-zone: "shop2hop.com." always_nxdomain
@@ -3382,7 +3380,6 @@ local-zone: "tevorr.com." always_nxdomain
 local-zone: "tewez.com." always_nxdomain
 local-zone: "thamius.com." always_nxdomain
 local-zone: "thealthea.shop." always_nxdomain
-local-zone: "theartywalls.co.uk." always_nxdomain
 local-zone: "theaurora.live." always_nxdomain
 local-zone: "theautometaldirect.com." always_nxdomain
 local-zone: "theaviation.shop." always_nxdomain
@@ -3420,7 +3417,6 @@ local-zone: "theonsneaker.com." always_nxdomain
 local-zone: "theoutdoorsgear.com." always_nxdomain
 local-zone: "theownshop.com." always_nxdomain
 local-zone: "theplushies.shop." always_nxdomain
-local-zone: "thepoloshirt.store." always_nxdomain
 local-zone: "thepotspans.com." always_nxdomain
 local-zone: "thepshoes.com." always_nxdomain
 local-zone: "therikonrhino.com." always_nxdomain
