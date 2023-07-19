@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.18.204315.2023
-# Last modified: Tue Jul 18 20:43:15 UTC 2023
+# Version: 07.19.204319.2023
+# Last modified: Wed Jul 19 20:43:19 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3942
+# Total number of entries: 3938
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -32,7 +32,6 @@ address=/aarp.org/#
 address=/abelcollectibles.shop/#
 address=/abeni.shop/#
 address=/abepet.shop/#
-address=/abercrombiestore.online/#
 address=/abizot.com.ng/#
 address=/abourt.com/#
 address=/absolutepoll.com/#
@@ -656,7 +655,6 @@ address=/cleberm.com/#
 address=/cliffords.shop/#
 address=/climbersequip.com/#
 address=/climbfootwear.com/#
-address=/climbforsale.com/#
 address=/clothen.co/#
 address=/clothesff.com/#
 address=/clothesmania.in/#
@@ -1667,7 +1665,6 @@ address=/intuitivlab.com/#
 address=/inushoes.com/#
 address=/investama92.com/#
 address=/inyard.com/#
-address=/iplflasher.co/#
 address=/iqcreditcheck.com/#
 address=/irefisioterapia.es/#
 address=/iregeto.shop/#
@@ -1815,7 +1812,6 @@ address=/kitchen2mart.shop/#
 address=/kitchenunleash.com/#
 address=/kithet.com/#
 address=/kitnewsport.com/#
-address=/kittenshelter.com/#
 address=/kixwave.com/#
 address=/kizomba-berlinal.de/#
 address=/kkhitlul.top/#
@@ -2107,6 +2103,7 @@ address=/medstylovnia.pl/#
 address=/meetfireplace.store/#
 address=/meetgladness.com/#
 address=/meeyd.com/#
+address=/megabulltradingoptions.online/#
 address=/megadigifun.com/#
 address=/megaduane.com/#
 address=/megcareproducts.com/#
@@ -3051,6 +3048,7 @@ address=/shoessoutlet.store/#
 address=/shoewhitemountain.com/#
 address=/shoopesy.com/#
 address=/shop-homeware.com/#
+address=/shop-women.store/#
 address=/shop.migucun.com/#
 address=/shop123123.com/#
 address=/shop2hop.com/#
@@ -3381,7 +3379,6 @@ address=/tevorr.com/#
 address=/tewez.com/#
 address=/thamius.com/#
 address=/thealthea.shop/#
-address=/theartywalls.co.uk/#
 address=/theaurora.live/#
 address=/theautometaldirect.com/#
 address=/theaviation.shop/#
@@ -3419,7 +3416,6 @@ address=/theonsneaker.com/#
 address=/theoutdoorsgear.com/#
 address=/theownshop.com/#
 address=/theplushies.shop/#
-address=/thepoloshirt.store/#
 address=/thepotspans.com/#
 address=/thepshoes.com/#
 address=/therikonrhino.com/#
