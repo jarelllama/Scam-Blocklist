@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.19.204319.2023
-# Last modified: Wed Jul 19 20:43:19 UTC 2023
+# Version: 07.20.204317.2023
+# Last modified: Thu Jul 20 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3938
+# Total number of entries: 3940
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -563,6 +563,7 @@ address=/casiecustom.com/#
 address=/castellicycle.com/#
 address=/castillo-art.shop/#
 address=/casualsportstore.com/#
+address=/catforsale.store/#
 address=/cathotsale.xyz/#
 address=/cathyhouse.net/#
 address=/cattoysale.store/#
@@ -1075,7 +1076,6 @@ address=/ernestoss.com/#
 address=/erofewa.shop/#
 address=/erorene.shop/#
 address=/esbu.cz/#
-address=/escostumes.xyz/#
 address=/eshoesoutlet.com/#
 address=/especialdogtoy.store/#
 address=/essentialshousehold.com/#
@@ -2434,6 +2434,7 @@ address=/ofertapromotionala.ro/#
 address=/off-female.com/#
 address=/off-lady.com/#
 address=/offdoorhandle.com/#
+address=/offercat.store/#
 address=/offercat.website/#
 address=/offergardensupplies.store/#
 address=/offerknives.com/#
@@ -3203,7 +3204,6 @@ address=/sqmywyj.innhishands.com/#
 address=/sqrsuy.shop/#
 address=/ssedltr.com/#
 address=/ssl4less.it/#
-address=/stacyadamsshop.store/#
 address=/stacybaby.shop/#
 address=/stanein.com/#
 address=/stara-posta-hodonin.cz/#
@@ -3417,6 +3417,7 @@ address=/theoutdoorsgear.com/#
 address=/theownshop.com/#
 address=/theplushies.shop/#
 address=/thepotspans.com/#
+address=/thepromiseexpress.com/#
 address=/thepshoes.com/#
 address=/therikonrhino.com/#
 address=/thernegy.com/#
@@ -3510,6 +3511,7 @@ address=/toycollectionstore.website/#
 address=/toyistzone.co/#
 address=/toyonsale.com/#
 address=/toysboats.com/#
+address=/toysofficial.store/#
 address=/track718.us/#
 address=/tradesailorshop.com/#
 address=/traeerly.com/#
