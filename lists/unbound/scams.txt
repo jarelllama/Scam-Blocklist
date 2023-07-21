@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.20.204317.2023
-# Last modified: Thu Jul 20 20:43:17 UTC 2023
+# Version: 07.21.204327.2023
+# Last modified: Fri Jul 21 20:43:27 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3941
+# Total number of entries: 3938
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -687,7 +687,6 @@ local-zone: "coleyz.com." always_nxdomain
 local-zone: "collaboraten.com." always_nxdomain
 local-zone: "collectionsbike.com." always_nxdomain
 local-zone: "colorfulunicorns.com." always_nxdomain
-local-zone: "colorfuluslady.com." always_nxdomain
 local-zone: "columbiaclothings.shop." always_nxdomain
 local-zone: "columbiawears.com." always_nxdomain
 local-zone: "columilsoutletsus.shop." always_nxdomain
@@ -1482,7 +1481,6 @@ local-zone: "hanwen777.com." always_nxdomain
 local-zone: "haopoint.com." always_nxdomain
 local-zone: "happyluckytw.com." always_nxdomain
 local-zone: "happyskingo.co." always_nxdomain
-local-zone: "happyusshop.net." always_nxdomain
 local-zone: "haptalgrows.com." always_nxdomain
 local-zone: "harpious.com." always_nxdomain
 local-zone: "harrypottertoys.com." always_nxdomain
@@ -2474,7 +2472,6 @@ local-zone: "oneiisa.com." always_nxdomain
 local-zone: "oneminimals.com." always_nxdomain
 local-zone: "oneshoes.best." always_nxdomain
 local-zone: "onethink.shop." always_nxdomain
-local-zone: "onfither.nl." always_nxdomain
 local-zone: "onlinedogfood.store." always_nxdomain
 local-zone: "onlinehtles.com." always_nxdomain
 local-zone: "onlinekohler.com." always_nxdomain
