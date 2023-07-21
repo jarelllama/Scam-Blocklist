@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.20.204317.2023
-# Last modified: Thu Jul 20 20:43:17 UTC 2023
+# Version: 07.21.204327.2023
+# Last modified: Fri Jul 21 20:43:27 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3940
+# Total number of entries: 3937
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -686,7 +686,6 @@ address=/coleyz.com/#
 address=/collaboraten.com/#
 address=/collectionsbike.com/#
 address=/colorfulunicorns.com/#
-address=/colorfuluslady.com/#
 address=/columbiaclothings.shop/#
 address=/columbiawears.com/#
 address=/columilsoutletsus.shop/#
@@ -1481,7 +1480,6 @@ address=/hanwen777.com/#
 address=/haopoint.com/#
 address=/happyluckytw.com/#
 address=/happyskingo.co/#
-address=/happyusshop.net/#
 address=/haptalgrows.com/#
 address=/harpious.com/#
 address=/harrypottertoys.com/#
@@ -2473,7 +2471,6 @@ address=/oneiisa.com/#
 address=/oneminimals.com/#
 address=/oneshoes.best/#
 address=/onethink.shop/#
-address=/onfither.nl/#
 address=/onlinedogfood.store/#
 address=/onlinehtles.com/#
 address=/onlinekohler.com/#
