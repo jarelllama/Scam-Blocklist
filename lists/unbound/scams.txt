@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.21.204327.2023
-# Last modified: Fri Jul 21 20:43:27 UTC 2023
+# Version: 07.22.204317.2023
+# Last modified: Sat Jul 22 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3938
+# Total number of entries: 3934
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -182,7 +182,6 @@ local-zone: "apparelgearbox.com." always_nxdomain
 local-zone: "apparelonsale.store." always_nxdomain
 local-zone: "apparelpeloton.com." always_nxdomain
 local-zone: "apparelsboss.com." always_nxdomain
-local-zone: "appearancesimplle.com." always_nxdomain
 local-zone: "appliancesshopmall.store." always_nxdomain
 local-zone: "approcha.com." always_nxdomain
 local-zone: "april4business.it." always_nxdomain
@@ -303,7 +302,6 @@ local-zone: "basiaphoto.shop." always_nxdomain
 local-zone: "bathonline.store." always_nxdomain
 local-zone: "bathoutlet.store." always_nxdomain
 local-zone: "bathproductssale.store." always_nxdomain
-local-zone: "bathroomstore.xyz." always_nxdomain
 local-zone: "batro.shop." always_nxdomain
 local-zone: "bausdeals.com." always_nxdomain
 local-zone: "baysboss.com." always_nxdomain
@@ -609,7 +607,6 @@ local-zone: "cheer-coupons.com." always_nxdomain
 local-zone: "chefwearabout.com." always_nxdomain
 local-zone: "chentale.com." always_nxdomain
 local-zone: "cherryfun4u.com." always_nxdomain
-local-zone: "chewwy.xyz." always_nxdomain
 local-zone: "chiaven.com." always_nxdomain
 local-zone: "chicleading.myshopify.com." always_nxdomain
 local-zone: "chicmsaccessories.com." always_nxdomain
@@ -1066,7 +1063,6 @@ local-zone: "enviedequilibre.fr." always_nxdomain
 local-zone: "epicvin.online." always_nxdomain
 local-zone: "equipcycle.com." always_nxdomain
 local-zone: "equipmenthub.shop." always_nxdomain
-local-zone: "equipmentmusic.xyz." always_nxdomain
 local-zone: "equipnewsport.com." always_nxdomain
 local-zone: "erableinnum.com." always_nxdomain
 local-zone: "ercnnier.com." always_nxdomain
