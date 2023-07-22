@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.21.204327.2023
-# Last modified: Fri Jul 21 20:43:27 UTC 2023
+# Version: 07.22.204317.2023
+# Last modified: Sat Jul 22 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3937
+# Total number of entries: 3933
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -181,7 +181,6 @@ address=/apparelgearbox.com/#
 address=/apparelonsale.store/#
 address=/apparelpeloton.com/#
 address=/apparelsboss.com/#
-address=/appearancesimplle.com/#
 address=/appliancesshopmall.store/#
 address=/approcha.com/#
 address=/april4business.it/#
@@ -302,7 +301,6 @@ address=/basiaphoto.shop/#
 address=/bathonline.store/#
 address=/bathoutlet.store/#
 address=/bathproductssale.store/#
-address=/bathroomstore.xyz/#
 address=/batro.shop/#
 address=/bausdeals.com/#
 address=/baysboss.com/#
@@ -608,7 +606,6 @@ address=/cheer-coupons.com/#
 address=/chefwearabout.com/#
 address=/chentale.com/#
 address=/cherryfun4u.com/#
-address=/chewwy.xyz/#
 address=/chiaven.com/#
 address=/chicleading.myshopify.com/#
 address=/chicmsaccessories.com/#
@@ -1065,7 +1062,6 @@ address=/enviedequilibre.fr/#
 address=/epicvin.online/#
 address=/equipcycle.com/#
 address=/equipmenthub.shop/#
-address=/equipmentmusic.xyz/#
 address=/equipnewsport.com/#
 address=/erableinnum.com/#
 address=/ercnnier.com/#
