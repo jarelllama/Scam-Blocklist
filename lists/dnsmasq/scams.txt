@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.22.204317.2023
-# Last modified: Sat Jul 22 20:43:17 UTC 2023
+# Version: 07.23.204321.2023
+# Last modified: Sun Jul 23 20:43:21 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3933
+# Total number of entries: 3931
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -2446,7 +2446,6 @@ address=/ogimedya.com/#
 address=/ogybi.com/#
 address=/ogyhome.com/#
 address=/ohay.tv/#
-address=/ohitems.com/#
 address=/oilabortle.com/#
 address=/oinepukin.com/#
 address=/okeology.com/#
@@ -3813,7 +3812,6 @@ address=/womenonepiece.store/#
 address=/womenshoesale.store/#
 address=/womensuit.store/#
 address=/womtops.com/#
-address=/wonderbeautii.com/#
 address=/wondrousdecor.com/#
 address=/woodiscounts.com/#
 address=/woodtree.fr/#
