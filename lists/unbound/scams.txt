@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.22.204317.2023
-# Last modified: Sat Jul 22 20:43:17 UTC 2023
+# Version: 07.23.204321.2023
+# Last modified: Sun Jul 23 20:43:21 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3934
+# Total number of entries: 3932
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -2447,7 +2447,6 @@ local-zone: "ogimedya.com." always_nxdomain
 local-zone: "ogybi.com." always_nxdomain
 local-zone: "ogyhome.com." always_nxdomain
 local-zone: "ohay.tv." always_nxdomain
-local-zone: "ohitems.com." always_nxdomain
 local-zone: "oilabortle.com." always_nxdomain
 local-zone: "oinepukin.com." always_nxdomain
 local-zone: "okeology.com." always_nxdomain
@@ -3814,7 +3813,6 @@ local-zone: "womenonepiece.store." always_nxdomain
 local-zone: "womenshoesale.store." always_nxdomain
 local-zone: "womensuit.store." always_nxdomain
 local-zone: "womtops.com." always_nxdomain
-local-zone: "wonderbeautii.com." always_nxdomain
 local-zone: "wondrousdecor.com." always_nxdomain
 local-zone: "woodiscounts.com." always_nxdomain
 local-zone: "woodtree.fr." always_nxdomain
