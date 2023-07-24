@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.23.204321.2023
-# Last modified: Sun Jul 23 20:43:21 UTC 2023
+# Version: 07.24.204320.2023
+# Last modified: Mon Jul 24 20:43:20 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3931
+# Total number of entries: 3929
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -518,7 +518,6 @@ address=/cadbrd.com/#
 address=/cadimanshops.com/#
 address=/cadizy.com/#
 address=/cairnoptical.com/#
-address=/callitspring.online/#
 address=/callown.com/#
 address=/camaragrancanaria.org/#
 address=/campanamedicalcenter.it/#
@@ -2231,7 +2230,6 @@ address=/mpyll.nexgentextile.com/#
 address=/mrkimberly.com/#
 address=/mrmaccaroni.it/#
 address=/mslicenseskey.com/#
-address=/msmcompare.com/#
 address=/muazida.com/#
 address=/muckbootsmrheater.com/#
 address=/mulheruniverso.com.br/#
