@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.24.204320.2023
-# Last modified: Mon Jul 24 20:43:20 UTC 2023
+# Version: 07.25.204318.2023
+# Last modified: Tue Jul 25 20:43:18 UTC 2023
 # Expires: 4 hours
 # Syntax: Dnsmasq
-# Total number of entries: 3929
+# Total number of entries: 3925
 #
 address=/168cyd.com/#
 address=/17aap.net/#
@@ -67,6 +67,7 @@ address=/affjumbo.com/#
 address=/aflycatus.com/#
 address=/agemarts.com/#
 address=/aha.org/#
+address=/ahediti.com/#
 address=/ahrtdt.store/#
 address=/aiboson.com/#
 address=/aieloe.com/#
@@ -186,7 +187,6 @@ address=/approcha.com/#
 address=/april4business.it/#
 address=/apromo.shop/#
 address=/aptoskid.com/#
-address=/aquariumshop.xyz/#
 address=/aquaticsportsmall.store/#
 address=/archictisete.com/#
 address=/architecturm.com/#
@@ -369,7 +369,6 @@ address=/bhafdld.com/#
 address=/bhtwer.com/#
 address=/biaale.com/#
 address=/bicycleaccessoriesshop.store/#
-address=/bicycledepartment.xyz/#
 address=/bicycleleatt.com/#
 address=/bicycleshop.store/#
 address=/bicycleshopmall.store/#
@@ -2184,7 +2183,6 @@ address=/mkiplmout.com/#
 address=/mkrga.com/#
 address=/mledo.com/#
 address=/mmapd.shop/#
-address=/mmplus.store/#
 address=/mnaink.com/#
 address=/mnotina.com/#
 address=/mobiamy.com/#
@@ -2505,7 +2503,6 @@ address=/ottyshop.com/#
 address=/ouncefax.com/#
 address=/ouozre.com/#
 address=/oupinke.watch/#
-address=/outdooramusement.xyz/#
 address=/outdoorplush.com/#
 address=/outdoorr.shop/#
 address=/outdoorscarpa.com/#
@@ -2890,7 +2887,6 @@ address=/rtwtlcie.shop/#
 address=/ruggedsupply.net/#
 address=/rugsandcurtains.com/#
 address=/ruispice.com/#
-address=/rungovip.store/#
 address=/runsaucony.com/#
 address=/rustoleumspray.com/#
 address=/ruylfeicne.info/#
@@ -3358,6 +3354,7 @@ address=/teraise.com/#
 address=/terkari.com/#
 address=/terrifestival.shop/#
 address=/terryjewelry.shop/#
+address=/terutied.com/#
 address=/terwoao.com/#
 address=/tesauree.com/#
 address=/teslarea.com/#
@@ -3911,7 +3908,6 @@ address=/zestorce.com/#
 address=/zevamia.com/#
 address=/zewahot.com/#
 address=/zezeii.com/#
-address=/zhoyes.com/#
 address=/zialdult.com/#
 address=/zilguru.com/#
 address=/zilpal.com/#
