@@ -2,11 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 07.25.204318.2023
-# Last modified: Tue Jul 25 20:43:18 UTC 2023
+# Version: 07.26.204317.2023
+# Last modified: Wed Jul 26 20:43:17 UTC 2023
 # Expires: 4 hours
 # Syntax: Unbound
-# Total number of entries: 3926
+# Total number of entries: 3921
 #
 server:
 local-zone: "168cyd.com." always_nxdomain
@@ -891,7 +891,6 @@ local-zone: "discountskirts.com." always_nxdomain
 local-zone: "discountspaul.com." always_nxdomain
 local-zone: "discountsshoes.store." always_nxdomain
 local-zone: "discounttoy.store." always_nxdomain
-local-zone: "discounttoys.website." always_nxdomain
 local-zone: "discountwalldecor.com." always_nxdomain
 local-zone: "discussionk.com." always_nxdomain
 local-zone: "displacementsjournal.com." always_nxdomain
@@ -1488,7 +1487,6 @@ local-zone: "hcglobalshopping.com." always_nxdomain
 local-zone: "hdjean.online." always_nxdomain
 local-zone: "hdoep.com." always_nxdomain
 local-zone: "hdseiin.com." always_nxdomain
-local-zone: "healing-crystal.com." always_nxdomain
 local-zone: "healthfitnessoutlet.com." always_nxdomain
 local-zone: "healthshopmall.store." always_nxdomain
 local-zone: "hearend.com." always_nxdomain
@@ -2131,7 +2129,6 @@ local-zone: "mensfashionmall.store." always_nxdomain
 local-zone: "mensweardiscount.shop." always_nxdomain
 local-zone: "menthy.shop." always_nxdomain
 local-zone: "mentravismathew.com." always_nxdomain
-local-zone: "menvine.com." always_nxdomain
 local-zone: "meomeogift.com." always_nxdomain
 local-zone: "meowcastle.ca." always_nxdomain
 local-zone: "meowgadget.com." always_nxdomain
@@ -2971,7 +2968,6 @@ local-zone: "sdrytru.online." always_nxdomain
 local-zone: "seasaltfashion.com." always_nxdomain
 local-zone: "seasonalllc.com." always_nxdomain
 local-zone: "seasongca.com." always_nxdomain
-local-zone: "seasonnature07.com." always_nxdomain
 local-zone: "seasonsurveys.com." always_nxdomain
 local-zone: "securebellonline.com." always_nxdomain
 local-zone: "sedseative.com." always_nxdomain
@@ -3158,7 +3154,6 @@ local-zone: "somegifts4u.com." always_nxdomain
 local-zone: "somegifts4you.com." always_nxdomain
 local-zone: "sonorousi.com." always_nxdomain
 local-zone: "sontas.shop." always_nxdomain
-local-zone: "sopchic.com." always_nxdomain
 local-zone: "soreldiscount.com." always_nxdomain
 local-zone: "sorptress.com." always_nxdomain
 local-zone: "sorweeve.com." always_nxdomain
