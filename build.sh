@@ -8,7 +8,7 @@ lists_directory='lists'
 blocklist_name='scams'
 
 function main {
-    command -v csvstat &> /dev/null || pip install csvkit
+    command -v csvstat &> /dev/null || pip install -q csvkit
     build_adblock
     build_dnsmasq
     build_unbound

@@ -21,8 +21,8 @@ if [[ "$CI" != true ]]; then
 fi
 
 function main {
-    command -v csvstat &> /dev/null || pip install csvkit  # Install cvstat
-    command -v jq &> /dev/null || apt install jq  # Install jq
+    command -v csvstat &> /dev/null || pip install -q csvkit  # Install cvstat
+    command -v jq &> /dev/null || apt-get install -y -qq jq  # Install jq
     format_list "$raw_file"
     format_list "$whitelist_file"
     format_list "$blacklist_file"
