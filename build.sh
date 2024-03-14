@@ -143,7 +143,7 @@ function save_and_exit {
         exit "$exit_code"
     fi
     git add .
-    git commit -m "Retrieve domains"
+    git commit -m "Build"
     git push -q
     exit "$exit_code"
 }
