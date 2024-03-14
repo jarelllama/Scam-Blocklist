@@ -28,7 +28,6 @@ function main {
     format_list "$blacklist_file"
     format_list "$subdomains_file"
     format_list "$toplist_file"
-    format_list "$search_terms_file"
 
     # Retrieve domains using search terms only if there are no temporary search results files
     if ! ls data/search_term_*.tmp &> /dev/null; then
@@ -48,6 +47,7 @@ function main {
 
 function retrieve_search_terms {
     echo -e "\nRetrieving domains from search terms...\n"
+    sed -i 's/\r$//' "$search_terms_file"  # Remove carriage return characters 
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             retrieve_domains "$search_term"  # Pass the search term to the domain retrieval function
