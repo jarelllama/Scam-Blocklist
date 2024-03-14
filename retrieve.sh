@@ -174,16 +174,13 @@ function merge_domains {
         save_and_exit 1
     fi
 
-    cp "$raw_file" "${raw_file}.bak"  # Backup raw file
+    count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
     log_event "$(<filtered_domains.tmp)" new_domain
-
-    count_before=$(wc -w < "${raw_file}.bak")
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$count_difference" "$count_after"
-
     save_and_exit 0
 }
 

@@ -21,7 +21,6 @@ function check_dead {
     format_list dead.tmp
     format_list "$dead_domains_file"
     log_event dead.tmp "dead"
-    cp "$raw_file" "${raw_file}.bak"  # Backup raw file
     comm -23 "$raw_file" dead.tmp > "${raw_file}.tmp" && mv "${raw_file}.tmp" "$raw_file"  # Remove dead domains
     [[ -f dead.tmp ]] && rm dead.tmp
 }

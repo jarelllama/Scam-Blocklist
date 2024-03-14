@@ -89,7 +89,6 @@ function check_raw_file {
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
     sleep 0.5
     cat filter_log.tmp
-    cp "$raw_file" "${raw_file}.bak"  # Backup raw file
     printf "%s" "$domains" > "$raw_file"  # Save changes to blocklist
     format_list "$raw_file"
 
