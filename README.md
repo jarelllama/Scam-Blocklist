@@ -13,12 +13,12 @@ Blocklist for scam sites automatically retrieved from Google Search.
 ## Stats
 
 ```
-Total domains: 3161
+Total domains: 3128
 
 Found today: 0
 Found yesterday: 0
 
-5 most recently added domains:
+The 5 most recently added domains:
 ytmtb.com
 yummycrystal.com
 yztassel.com
@@ -51,7 +51,9 @@ Domains with no A records are considered dead and are removed. This check is don
 
 [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
 
-[Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
+[Elliotwutingfeng's Global Anti-Scam Organization Blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
+
+[Elliotwutingfeng's Inversion DNSBL Blocklist](https://github.com/elliotwutingfeng/Inversion-DNSBL-Blocklists)
 
 [r/Scams Subreddit](https://www.reddit.com/r/Scams)
 
