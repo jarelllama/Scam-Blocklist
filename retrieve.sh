@@ -130,8 +130,8 @@ function process_domains {
     # Remove redundant entries
     while read -r domain; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${domain}$" <<< "$pending_domains" | grep -vxFf <(printf "%s" "$domains_in_toplist"))
+        [[ -z "$redundant_domains_count" ]] && continue  # Skip to next wildcard if no matches found
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))  # Count number of redundant domains
-        [[ redundant_domains_count -eq 0 ]] && continue  # Skip to next wildcard if no matches found
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
         log_event "$redundant_domains" "redundant"
         log_event "$domain" "wildcard"
