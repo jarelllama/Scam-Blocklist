@@ -31,8 +31,8 @@ function check_raw_file {
     before_count=$(wc -w <<< "$domains")
     touch filter_log.tmp  # Initialize temp filter log file
 
-    # Remove common subdomains
     domains_with_subdomains_count=0  # Initiliaze domains with common subdomains count
+    # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$domains")
         [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
@@ -61,16 +61,8 @@ function check_raw_file {
         log_event "$whitelisted_TLD_domains" "tld"
     fi
 
-    # Find matching domains in toplist, excluding blacklisted domains
-    domains_in_toplist=$(comm -12 <(printf "%s" "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
-    in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
-    if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
-        awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
-        log_event "$domains_in_toplist" "toplist"
-    fi
-
-    # Remove redundant entries
     redundant_domains_count=0  # Initialize redundant domains count
+    # Remove redundant domains
     while read -r domain; do  # Loop through each domain in the blocklist
         # Find redundant domains via wildcard matching
         redundant_domains=$(grep "\.${domain}$" <<< "$domains")
@@ -84,6 +76,14 @@ function check_raw_file {
         printf "%s\n" "$domain" >> "$wildcards_file"  # Collate the wilcard domains into a file
     done <<< "$domains"
     format_list "$wildcards_file"
+
+    # Find matching domains in toplist, excluding blacklisted domains
+    domains_in_toplist=$(comm -12 <(printf "%s" "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
+    in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
+    if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
+        awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
+        log_event "$domains_in_toplist" "toplist"
+    fi
 
     [[ -s filter_log.tmp ]] || save_and_exit 0  # Exit if no domains were filtered
 
