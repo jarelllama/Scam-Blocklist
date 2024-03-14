@@ -22,7 +22,7 @@ fi
 
 function main {
     command -v csvstat &> /dev/null || pip install -q csvkit  # Install cvstat
-    command -v jq &> /dev/null || apt-get install -y -qq jq  # Install jq
+    command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
     format_list "$raw_file"
     format_list "$whitelist_file"
     format_list "$blacklist_file"
@@ -47,7 +47,7 @@ function main {
 
 function retrieve_search_terms {
     echo -e "\nRetrieving domains from search terms...\n"
-    csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | tail +2 |  # Filter out unused search terms
+    csvgrep -e utf-8 -c 2 -m 'y' -i "$search_terms_file" | csvcut -e utf-8 -c 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             retrieve_domains "$search_term"  # Pass the search term to the domain retrieval function
         done
