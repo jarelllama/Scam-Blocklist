@@ -22,7 +22,7 @@ function update_readme {
     total_count=$(wc -w < "$raw_file")
     total_count_today=$(count_for_day "$todays_date")
     total_count_yesterday=$(count_for_day "$yesterdays_date")
-    # Find last 5 newly added domains
+    # Find 5 most recently added domains
     new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
     cat << EOF > README.md
@@ -63,11 +63,11 @@ Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasio
 
 ## Why the Hosts format is not supported
 
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records. These subdomains are often random strings such as \`longrandomstring.scam.com\`. To find and collate individual subdomains would require much effort and inflate the blocklist size. Therefore, only formats supporting wildcard matching are generated.
+Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records. These subdomains are often random strings such as \`longrandomstring.scam.com\`. To find and collate individual subdomains would require much effort and would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
 ## Dead domains
 
-Domains without A records are considered dead and are removed. This check is done on a weekly basis.
+Domains with no A records are considered dead and are removed. This check is done on a weekly basis.
 
 ## See also
 
