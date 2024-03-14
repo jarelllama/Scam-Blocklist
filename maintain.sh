@@ -30,7 +30,7 @@ function check_raw_file {
     touch filter_log.tmp  # Initialize temp filter log file
 
     # Remove common subdomains
-    domains_with_subdomains_count=0  # Initialize counter for domains with common subdomains
+    #domains_with_subdomains_count=0  # Initialize counter for domains with common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$domains")
         # Count number of domains with common subdomains
