@@ -13,14 +13,17 @@ Blocklist for scam sites automatically retrieved from Google Search.
 ## Stats
 
 ```
-Total domains: 2729
+Total domains: 3161
 
-Found today: 440
-Found yesterday: 0
+Found today: 
+Found yesterday: 
 
 Recently added domains:
-dealsgo.shop
-radsbuys.com
+ytmtb.com
+yummycrystal.com
+yztassel.com
+zirdecor.com
+zivyastore.com
 ```
 
 ## How domains are added to the blocklist
