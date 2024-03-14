@@ -7,7 +7,7 @@ search_terms_file='config/search_terms.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 subdomains_file='config/subdomains.txt'
-wildcards_file='data/wilcards.txt'
+wildcards_file='data/wildcards.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 search_url='https://customsearch.googleapis.com/customsearch/v1'
 
