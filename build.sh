@@ -46,7 +46,7 @@ Total domains: $total_count
 Found today: $total_count_today
 Found yesterday: $total_count_yesterday
 
-5 most recently added domains:
+The 5 most recently added domains:
 $new_domains
 \`\`\`
 
