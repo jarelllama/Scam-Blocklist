@@ -14,8 +14,8 @@ function main {
 function check_dead {
     while read -r domain; do  # Loop through domains in the blocklist
         if host -t a "$domain" | grep -q 'has no A record'; then  # Check if the domain has an A record
-            echo -n "$domain" >> dead.tmp
-            echo -n "$domain" >> "$dead_domains_file"
+            printf "%s\n" "$domain" >> dead.tmp
+            printf "%s\n" "$domain" >> "$dead_domains_file"
         fi
     done < "$raw_file"
     format_list dead.tmp
@@ -28,7 +28,7 @@ function check_dead {
 
 function log_event {
     # Log domain processing events
-    echo -n "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",raw"}' >> "$domain_log"
+    printf "%s" "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",raw"}' >> "$domain_log"
 }
 
 function format_list {
@@ -46,7 +46,7 @@ function save_and_exit {
     # If running locally, exit without pushing changes to repository
     if [[ "$CI" != true ]]; then
         sleep 0.5
-        echo -e "\nScript is running locally. No changes were pushed."
+        printf "\nScript is running locally. No changes were pushed.\n"
         exit "$exit_code"
     fi
     git add .

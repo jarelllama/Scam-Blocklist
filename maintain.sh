@@ -37,7 +37,7 @@ function check_raw_file {
         # Count number of domains with common subdomains
         domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains_count")))
         [[ domains_with_subdomains_count -eq 0 ]] && continue  # Skip to next subdomain if no matches found
-        domains=$(echo -n "$domains" | sed "s/^${subdomain}\.//" | sort -u)  # Remove the subdomain, keeping only the root domain, sort and remove duplicates
+        domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)  # Remove the subdomain, keeping only the root domain, sort and remove duplicates
         awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_file"
@@ -46,7 +46,7 @@ function check_raw_file {
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$domains" | grep -vxFf "$blacklist_file")
     whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
     if [[ whitelisted_count -gt 0 ]]; then  # Check if whitelisted domains were found
-        domains=$(comm -23 <(echo -n "$domains") <(echo -n "$whitelisted_domains"))
+        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))
         awk 'NF {print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
         log_event "$whitelisted_domains" "whitelist"
     fi
@@ -55,13 +55,13 @@ function check_raw_file {
     whitelisted_TLD_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")
     whitelisted_TLD_count=$(wc -w <<< "$whitelisted_TLD_domains")  # Count number of domains with whitelisted TLDs
     if [[ whitelisted_TLD_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
-        domains=$(comm -23 <(echo -n "$domains") <(echo -n "$whitelisted_TLD_domains"))
+        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_TLD_domains"))
         awk 'NF {print $0 " (whitelisted TLD)"}' <<< "$whitelisted_TLD_domains" >> filter_log.tmp
         log_event "$whitelisted_TLD_domains" "tld"
     fi
 
     # Find matching domains in toplist, excluding blacklisted domains
-    domains_in_toplist=$(comm -12 <(echo -n "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
+    domains_in_toplist=$(comm -12 <(printf "%s" "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
     if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
         awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
@@ -75,34 +75,34 @@ function check_raw_file {
         # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         [[ redundant_domains_count -eq 0 ]] && continue  # Skip to next domain if no matches found
-        domains=$(comm -23 <(echo -n "$domains") <(echo -n "$redundant_domains"))
+        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))
         awk 'NF {print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
         log_event "$redundant_domains" "redundant"
         log_event "$domain" "wildcard"
-        echo -n "$domain" >> "$wildcards_file"  # Collate the wilcard domains into a file
+        printf "%s\n" "$domain" >> "$wildcards_file"  # Collate the wilcard domains into a file
     done <<< "$domains"
     format_list "$wildcards_file"
 
     [[ -s filter_log.tmp ]] || save_and_exit 0  # Exit if no domains were filtered
 
     sleep 0.5
-    echo -e "\nProblematic domains ($(wc -l < filter_log.tmp)):"
+    printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
     sleep 0.5
     cat filter_log.tmp
     cp "$raw_file" "${raw_file}.bak"  # Backup raw file
-    echo -n "$domains" > "$raw_file"  # Save changes to blocklist
+    printf "%s" "$domains" > "$raw_file"  # Save changes to blocklist
     format_list "$raw_file"
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_TLD_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -w <<< "$domains")  # Count number of domains after filtering
-    echo -e "\nBefore: $before_count  After: $after_count  Subdomains: $domains_with_subdomains_count  Whitelisted: $total_whitelisted_count  Redundant: $redundant_domains_count  Toplist: $in_toplist_count"
+    printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count"
     save_and_exit 1  # Exit with error if the blocklist required filtering
 }
 
 function log_event {
     # Log domain processing events
     sed -i 's/\r$//' "$domain_log"  # Remove carriage return characters 
-    echo -n "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",raw"}' >> "$domain_log"
+    printf "%s" "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",raw"}' >> "$domain_log"
 }
 
 function format_list {
@@ -121,7 +121,7 @@ function save_and_exit {
     # If running locally, exit without pushing changes to repository
     if [[ "$CI" != true ]]; then
         sleep 0.5
-        echo -e "\nScript is running locally. No changes were pushed."
+        printf "\nScript is running locally. No changes were pushed.\n"
         exit "$exit_code"
     fi
     git add .

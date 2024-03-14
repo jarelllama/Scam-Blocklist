@@ -107,7 +107,7 @@ function count_for_day {
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved that day
     done
-    echo -n "$total_count"
+    printf "%s" "$total_count"  # Return domain count to function caller
 }
 
 function build_list {
@@ -130,8 +130,8 @@ ${3} Total number of entries: ${total_count}
 ${3}
 EOF
 
-    [[ "$syntax" == 'Unbound' ]] && echo "server:" >> "$blocklist_path"  # Special case for Unbound syntax
-    echo -n "$formatted_domains" >> "$blocklist_path"  # Append formatted domains onto blocklist
+    [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound syntax
+    printf "%s\n" "$formatted_domains" >> "$blocklist_path"  # Append formatted domains onto blocklist
 }
 
 function save_and_exit {
@@ -139,7 +139,7 @@ function save_and_exit {
     # If running locally, exit without pushing changes to repository
     if [[ "$CI" != true ]]; then
         sleep 0.5
-        echo -e "\nScript is running locally. No changes were pushed."
+        printf "\nScript is running locally. No changes were pushed.\n"
         exit "$exit_code"
     fi
     git add .
