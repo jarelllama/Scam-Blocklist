@@ -1,4 +1,4 @@
-name: Remove daed domains
+name: Remove dead domains
 run-name: Remove dead domains
 on:
   workflow_dispatch:
