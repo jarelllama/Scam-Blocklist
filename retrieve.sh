@@ -120,7 +120,7 @@ function process_domains {
     domains_in_toplist=$(comm -12 <(echo -n "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
     if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
-        echo -n "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
+        echo "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
         log_event "$domains_in_toplist" "toplist"
     fi
 
