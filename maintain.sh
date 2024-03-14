@@ -34,9 +34,9 @@ function check_raw_file {
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$domains")
+        [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
         # Count number of domains with common subdomains
-        domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains_count")))
-        [[ domains_with_subdomains_count -eq 0 ]] && continue  # Skip to next subdomain if no matches found
+        domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")))
         domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)  # Remove the subdomain, keeping only the root domain, sort and remove duplicates
         awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
@@ -70,11 +70,11 @@ function check_raw_file {
 
     # Remove redundant entries
     while read -r domain; do  # Loop through each domain in the blocklist
-        # Find domains that can be used as wildcards, exluding already filtered domains
-        redundant_domains=$(grep "\.${domain}$" <<< "$domains" | grep -vxFf filter_log.tmp)
+        # Find redundant domains via wildcard matching
+        redundant_domains=$(grep "\.${domain}$" <<< "$domains")
+        [[ -z "$redundant_domains" ]] && continue  # Skip to next domain if no matches found
         # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
-        [[ redundant_domains_count -eq 0 ]] && continue  # Skip to next domain if no matches found
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))
         awk 'NF {print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
         log_event "$redundant_domains" "redundant"
