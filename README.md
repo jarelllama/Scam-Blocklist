@@ -18,7 +18,7 @@ Total domains: 3161
 Found today: 0
 Found yesterday: 0
 
-5 Most recently added domains:
+5 most recently added domains:
 ytmtb.com
 yummycrystal.com
 yztassel.com
@@ -39,11 +39,11 @@ Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasio
 
 ## Why the Hosts format is not supported
 
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records. These subdomains are often random strings such as `longrandomstring.scam.com`. To find and collate individual subdomains would require much effort and inflate the blocklist size. Therefore, only formats supporting wildcard matching are generated.
+Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records. These subdomains are often random strings such as `longrandomstring.scam.com`. To find and collate individual subdomains would require much effort and would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
 ## Dead domains
 
-Domains without A records are considered dead and are removed. This check is done on a weekly basis.
+Domains with no A records are considered dead and are removed. This check is done on a weekly basis.
 
 ## See also
 
