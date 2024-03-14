@@ -75,7 +75,7 @@ Domains with no A records are considered dead and are removed. This check is don
 
 [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
 
-[Elliotwutingfeng's Global Anti Scam Organization blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
+[Elliotwutingfeng's Global Anti Scam Organization Blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
 
 [r/Scams Subreddit](https://www.reddit.com/r/Scams)
 
