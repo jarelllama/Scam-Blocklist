@@ -197,7 +197,7 @@ function log_search_term {
     search_term="${1:0:100}...\""  # Shorten to first 100 characters
     awk -v term="$search_term" -v raw="$2" -v final="$3" -v whitelist="$4" -v redundant="$5" -v toplist_count="$6" -v toplist_domains="$(printf "%s" "$6" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","term","raw","final","whitelist","redundant","toplist_count","toplist_domains}' >> "$search_log"
     printf "%s\nRaw: %s  Final: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$search_term" "$2" "$3" "$4" "$5" "$6"
-    printf "-----------------------------------------------------------------\n"
+    printf "%s\n" "-----------------------------------------------------------------"
 }
 
 function format_list {
