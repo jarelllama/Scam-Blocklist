@@ -37,7 +37,7 @@ function check_raw_file {
         domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains_count")))
         [[ domains_with_subdomains_count -eq 0 ]] && continue  # Skip to next subdomain if no matches found
         domains=$(echo -n "$domains" | sed "s/^${subdomain}\.//" | sort -u)  # Remove the subdomain, keeping only the root domain, sort and remove duplicates
-        awk '{print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
+        awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_file"
 
@@ -46,7 +46,7 @@ function check_raw_file {
     whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
     if [[ whitelisted_count -gt 0 ]]; then  # Check if whitelisted domains were found
         domains=$(comm -23 <(echo -n "$domains") <(echo -n "$whitelisted_domains"))
-        awk '{print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
+        awk 'NF {print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
         log_event "$whitelisted_domains" "whitelist"
     fi
     
@@ -55,7 +55,7 @@ function check_raw_file {
     whitelisted_TLD_count=$(wc -w <<< "$whitelisted_TLD_domains")  # Count number of domains with whitelisted TLDs
     if [[ whitelisted_TLD_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
         domains=$(comm -23 <(echo -n "$domains") <(echo -n "$whitelisted_TLD_domains"))
-        awk '{print $0 " (whitelisted TLD)"}' <<< "$whitelisted_TLD_domains" >> filter_log.tmp
+        awk 'NF {print $0 " (whitelisted TLD)"}' <<< "$whitelisted_TLD_domains" >> filter_log.tmp
         log_event "$whitelisted_TLD_domains" "tld"
     fi
 
@@ -63,7 +63,7 @@ function check_raw_file {
     domains_in_toplist=$(comm -12 <(echo -n "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
     if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
-        awk '{print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
+        awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
     fi
 
@@ -76,7 +76,7 @@ function check_raw_file {
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         [[ redundant_domains_count -eq 0 ]] && continue  # Skip to next domain if no matches found
         domains=$(comm -23 <(echo -n "$domains") <(echo -n "$redundant_domains"))
-        awk '{print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
+        awk 'NF {print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
         log_event "$redundant_domains" "redundant"
         log_event "$domain" "wildcard"
         echo -n "$domain" >> "$wildcards_file"  # Collate the wilcard domains into a file

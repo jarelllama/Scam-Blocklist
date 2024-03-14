@@ -15,8 +15,11 @@ jobs:
 
       - name: Provide Git identity
         run: |
-          git config user.email '${{ vars.GIT_EMAIL }}'
-          git config user.name '${{ vars.GIT_USERNAME }}'
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
 
       - name: retrieve.sh
+        env:
+          search_id: ${{ secrets.SEARCH_ID }}
+          search_api_key: ${{ secrets.SEARCH_API_KEY }}
         run: bash retrieve.sh
