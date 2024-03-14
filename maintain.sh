@@ -30,7 +30,6 @@ function check_raw_file {
     touch filter_log.tmp  # Initialize temp filter log file
 
     # Remove common subdomains
-    #domains_with_subdomains_count=0  # Initialize counter for domains with common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$domains")
         # Count number of domains with common subdomains
@@ -68,7 +67,6 @@ function check_raw_file {
     fi
 
     # Remove redundant entries
-    redundant_domains_count=0  # Initialize redundant domains count
     while read -r domain; do  # Loop through each domain in the blocklist
         # Find domains that can be used as wildcards, exluding already filtered domains
         redundant_domains=$(grep "\.${domain}$" <<< "$domains" | grep -vxFf filter_log.tmp)
