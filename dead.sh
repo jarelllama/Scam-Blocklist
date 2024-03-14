@@ -20,7 +20,7 @@ function check_dead {
     done < "$raw_file"
     format_list dead.tmp
     format_list "$dead_domains_file"
-    log_event dead.tmp "dead"
+    log_event $(<dead.tmp) "dead"
     comm -23 "$raw_file" dead.tmp > "${raw_file}.tmp" && mv "${raw_file}.tmp" "$raw_file"  # Remove dead domains
     [[ -f dead.tmp ]] && rm dead.tmp
 }
@@ -49,7 +49,7 @@ function save_and_exit {
         exit "$exit_code"
     fi
     git add .
-    git commit -m "List maintenance"
+    git commit -m "Remove dead domains"
     git push -q
     exit "$exit_code"
 }
