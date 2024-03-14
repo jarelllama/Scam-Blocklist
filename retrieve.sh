@@ -28,6 +28,10 @@ function main {
     format_list "$blacklist_file"
     format_list "$subdomains_file"
     format_list "$toplist_file"
+    format_list "$search_terms_file"
+    format_list "$search_log"
+    format_list "$domain_log"
+    format_list "$wildcards_file"
 
     # Retrieve domains using search terms only if there are no temporary search results files
     if ! ls data/search_term_*.tmp &> /dev/null; then
@@ -47,7 +51,6 @@ function main {
 
 function retrieve_search_terms {
     echo -e "\nRetrieving domains from search terms...\n"
-    sed -i 's/\r$//' "$search_terms_file"  # Remove carriage return characters 
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             retrieve_domains "$search_term"  # Pass the search term to the domain retrieval function
@@ -64,6 +67,11 @@ function retrieve_domains {
         echo -n "$page_results" | jq -r '.items[].link' >> collated_page_results.tmp  # Collate all pages of results
     done
 
+    # Skip to next search term if no results retrieved
+    if [[ ! -f collated_page_results.tmp ]]; then
+        log_search_term "$search_term" "0" "0" "0" "0" "0" ""
+        return
+    fi
     collated_page_results=$(awk -F/ '{print $3}' collated_page_results.tmp | sort -u)  # Retrieve domains from URLs, sort and remove duplicates
     rm collated_page_results.tmp  # Reset temp file for search results from each search term
     echo -n "$collated_page_results" > "data/search_term_${search_term:0:100}...\".tmp"  # Save search-term-specific results to temp file
@@ -74,11 +82,6 @@ function process_domains {
     search_term="$1"
     pending_domains="$2"
     raw_count=$(wc -w <<< "$pending_domains")  # Count number of unfilitered domains retrieved
-    # Move on to next search term if no domains retrieved
-    if [[ raw_count -eq 0 ]]; then
-        log_search_term "$search_term" "0" "0" "0" "0" "0" ""
-        return  # Return early to skip unecessary filtering below
-    fi
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -121,7 +124,6 @@ function process_domains {
         log_event "$domains_in_toplist" "toplist"
     fi
 
-    format_list "$wildcards_file"
     # Remove wildcard domains that are no longer in the blocklist
     comm -12 "$wildcards_file" "$raw_file" > "${wildcards_file}.tmp" && mv "${wildcards_file}.tmp" "$wildcards_file"
     redundant_domains_count=0  # Initialize redundant domains count
@@ -163,7 +165,7 @@ function merge_domains {
 
     # Exit with error if domains were found in toplist
     if [[ -f in_toplist.tmp ]]; then
-        format_lists in_toplist.tmp
+        format_list in_toplist.tmp
         echo -e "\nDomains found in toplist ($(wc -w < in_toplist.tmp)):"
         sleep 0.5
         cat in_toplist.tmp
@@ -199,6 +201,11 @@ function log_search_term {
 }
 
 function format_list {
+    # If file is a CSV file, do not sort
+    if [[ "$1" == *.csv ]]; then
+        sed -i 's/\r$//' "$1"  
+        return
+    fi
     # Format carriage return characters, remove empty lines, sort and remove duplicates
     tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }

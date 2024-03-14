@@ -6,6 +6,7 @@ time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 function main {
     format_list "$raw_file"
+    format_list "$domain_log"
     check_dead
     save_and_exit 0
 }
@@ -31,6 +32,11 @@ function log_event {
 }
 
 function format_list {
+    # If file is a CSV file, do not sort
+    if [[ "$1" == *.csv ]]; then
+        sed -i 's/\r$//' "$1"  
+        return
+    fi
     # Format carriage return characters, remove empty lines, sort and remove duplicates
     tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }

@@ -14,6 +14,8 @@ function main {
     format_list "$whitelist_file"
     format_list "$blacklist_file"
     format_list "$subdomains_file"
+    format_list "$domain_log"
+    format_list "$wildcards_file"
     retrieve_toplist
     check_raw_file
 }
@@ -99,10 +101,16 @@ function check_raw_file {
 
 function log_event {
     # Log domain processing events
+    sed -i 's/\r$//' "$domain_log"  # Remove carriage return characters 
     echo -n "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",raw"}' >> "$domain_log"
 }
 
 function format_list {
+    # If file is a CSV file, do not sort
+    if [[ "$1" == *.csv ]]; then
+        sed -i 's/\r$//' "$1"  
+        return
+    fi
     # Format carriage return characters, remove empty lines, sort and remove duplicates
     tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
