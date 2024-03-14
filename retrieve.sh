@@ -116,6 +116,19 @@ function process_domains {
         log_event "$whitelisted_TLD_domains" "tld"
     fi
 
+    # Remove wildcard domains that are no longer in the blocklist
+    comm -12 "$wildcards_file" "$raw_file" > "${wildcards_file}.tmp" && mv "${wildcards_file}.tmp" "$wildcards_file"
+    redundant_domains_count=0  # Initialize redundant domains count
+    # Remove redundant domains
+    while read -r domain; do  # Loop through wildcard domains
+        redundant_domains=$(grep "\.${domain}$" <<< "$pending_domains")
+        [[ -z "$redundant_domains" ]] && continue  # Skip to next wildcard if no matches found
+        redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))  # Count number of redundant domains
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
+        log_event "$redundant_domains" "redundant"
+        log_event "$domain" "wildcard"
+    done < "$wildcards_file"
+
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
@@ -123,19 +136,6 @@ function process_domains {
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
         log_event "$domains_in_toplist" "toplist"
     fi
-
-    # Remove wildcard domains that are no longer in the blocklist
-    comm -12 "$wildcards_file" "$raw_file" > "${wildcards_file}.tmp" && mv "${wildcards_file}.tmp" "$wildcards_file"
-    redundant_domains_count=0  # Initialize redundant domains count
-    # Remove redundant entries
-    while read -r domain; do  # Loop through wildcard domains
-        redundant_domains=$(grep "\.${domain}$" <<< "$pending_domains" | grep -vxFf <(printf "%s" "$domains_in_toplist"))
-        [[ -z "$redundant_domains_count" ]] && continue  # Skip to next wildcard if no matches found
-        redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))  # Count number of redundant domains
-        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
-        log_event "$redundant_domains" "redundant"
-        log_event "$domain" "wildcard"
-    done < "$wildcards_file"
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_TLD_count))  # Calculate sum of whitelisted domains
     final_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
