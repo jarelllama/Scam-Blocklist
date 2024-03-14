@@ -32,6 +32,7 @@ function check_raw_file {
     touch filter_log.tmp  # Initialize temp filter log file
 
     # Remove common subdomains
+    domains_with_subdomains_count=0  # Initiliaze domains with common subdomains count
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$domains")
         [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
@@ -69,6 +70,7 @@ function check_raw_file {
     fi
 
     # Remove redundant entries
+    redundant_domains_count=0  # Initialize redundant domains count
     while read -r domain; do  # Loop through each domain in the blocklist
         # Find redundant domains via wildcard matching
         redundant_domains=$(grep "\.${domain}$" <<< "$domains")
