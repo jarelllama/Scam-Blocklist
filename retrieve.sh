@@ -51,7 +51,7 @@ function main {
 
 function retrieve_search_terms {
     echo -e "\nRetrieving domains from search terms...\n"
-    csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | tail +2 |  # Filter out unused search terms
+    csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             retrieve_domains "$search_term"  # Pass the search term to the domain retrieval function
         done
