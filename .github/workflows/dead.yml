@@ -1,13 +1,13 @@
-name: Automatically retrieve domains
-run-name: Automatically retrieve domains
+name: Remove daed domains
+run-name: Remove dead domains
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 4:35am (GMT+8)
-    - cron: '35 20 * * *'
+    # Every Sunday at 2am (GMT+8)
+    - cron: '0 18 * * 0'
 
 jobs:
-  retrieve-domains:
+  remove-dead-domains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,5 +18,5 @@ jobs:
           git config user.email '${{ vars.GIT_EMAIL }}'
           git config user.name '${{ vars.GIT_USERNAME }}'
 
-      - name: retrieve.sh
-        run: bash retrieve.sh -u
+      - name: dead.sh
+        run: bash dead.sh
