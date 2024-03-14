@@ -23,7 +23,7 @@ function update_readme {
     total_count_today=$(count_for_day "$todays_date")
     total_count_yesterday=$(count_for_day "$yesterdays_date")
     # Find last 5 newly added domains
-    new_domains=$(csvgrep -e utf-8 -c 2 -m "new_domain" "$domain_log" | csvcut -e utf-8 -c 3 | tail +2 | tail -5)
+    new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
     cat << EOF > README.md
 # Scam Blocklist
@@ -102,7 +102,7 @@ EOF
 }
 
 function count_for_day {
-    runs=$(csvgrep -e utf-8 -c 1 -r "$1" "$search_log" | csvcut -e utf-8 -c 4 | tail +2)  # Find all runs on that particular day
+    runs=$(csvgrep -c 1 -r "$1" "$search_log" | csvcut -c 4 | tail +2)  # Find all runs on that particular day
     total_count=0
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved that day
