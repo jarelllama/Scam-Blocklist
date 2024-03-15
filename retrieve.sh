@@ -61,7 +61,7 @@ function retrieve_domains {
 
     # Skip to next search term if no results retrieved
     if [[ ! -f collated_page_results.tmp ]]; then
-        log_search_term "$search_term" "0" "0" "0" "0" "0" ""
+        log_search_term "$search_term" "0" "0" "0" "0" "0" "0" ""
         return
     fi
     collated_page_results=$(awk -F/ '{print $3}' collated_page_results.tmp | sort -u)  # Retrieve domains from URLs, sort and remove duplicates
