@@ -12,18 +12,19 @@ function main {
 }
 
 function check_dead {
+    touch dead.tmp  # Initialize temp file for dead domains
     while read -r domain; do  # Loop through domains in the blocklist
         if host -t a "$domain" | grep -q 'has no A record'; then  # Check if the domain has an A record
             printf "%s\n" "$domain" >> dead.tmp
-            printf "%s\n" "$domain" >> "$dead_domains_file"
         fi
     done < "$raw_file"
     format_list dead.tmp
-    format_list "$dead_domains_file"
-    log_event $(<dead.tmp) "dead"
     comm -23 "$raw_file" dead.tmp > "${raw_file}.tmp" && mv "${raw_file}.tmp" "$raw_file"  # Remove dead domains
-    [[ -f dead.tmp ]] && rm dead.tmp
-}
+    log_event "$(<dead.tmp)" "dead"
+    cat dead.tmp >> "$dead_domains_file"
+    format_list "$dead_domains_file"
+    rm dead.tmp
+    }
 
 function log_event {
     # Log domain processing events

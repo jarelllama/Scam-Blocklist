@@ -10,12 +10,9 @@ time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
 
 function main {
-    format_list "$raw_file"
-    format_list "$whitelist_file"
-    format_list "$blacklist_file"
-    format_list "$subdomains_file"
-    format_list "$domain_log"
-    format_list "$wildcards_file"
+    for file in config/* data/*; do  # Format files in the config and data directory
+        format_list "$file"
+    done
     retrieve_toplist
     check_raw_file
 }

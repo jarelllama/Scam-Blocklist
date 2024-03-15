@@ -105,7 +105,7 @@ EOF
 
 function count_for_day {
     runs=$(csvgrep -c 1 -r "$1" "$search_log" | csvcut -c 4 | tail +2)  # Find all runs on that particular day
-    total_count=0
+    total_count=0  # Initiaize total count
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved that day
     done

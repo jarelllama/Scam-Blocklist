@@ -8,13 +8,13 @@ whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 subdomains_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
+dead_domains_file='data/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 search_url='https://customsearch.googleapis.com/customsearch/v1'
 
 # TODO: consider using 'gl' search flag to specify geolocation of end user
 
 # If running locally, use locally stored secrets instead of environment variables
-# Remember to include these environment variables in the GitHub Workflow!
 if [[ "$CI" != true ]]; then
     search_id=$(<secrets/search_id)
     search_api_key=$(<secrets/search_api_key)
@@ -23,15 +23,9 @@ fi
 function main {
     command -v csvstat &> /dev/null || pip install -q csvkit  # Install cvstat
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
-    format_list "$raw_file"
-    format_list "$whitelist_file"
-    format_list "$blacklist_file"
-    format_list "$subdomains_file"
-    format_list "$toplist_file"
-    format_list "$search_terms_file"
-    format_list "$search_log"
-    format_list "$domain_log"
-    format_list "$wildcards_file"
+    for file in config/* data/*; do  # Format files in the config and data directory
+        format_list "$file"
+    done
 
     # Retrieve domains using search terms only if there are no temporary search results files
     if ! ls data/search_term_*.tmp &> /dev/null; then
@@ -63,8 +57,8 @@ function retrieve_domains {
     for start in {1..100..10}; do  # Loop through each page of results (100 is max)
         query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${search_url}?${query_params}")
-        printf "%s" "$page_results" | jq -e '.items' &> /dev/null || break # Break out of loop when there are no more results 
-        printf "%s\n" "$page_results" | jq -r '.items[].link' >> collated_page_results.tmp  # Collate all pages of results
+        jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results 
+        jq -r '.items[].link' <<< "$page_results" >> collated_page_results.tmp  # Collate all pages of results
     done
 
     # Skip to next search term if no results retrieved
@@ -131,6 +125,19 @@ function process_domains {
         log_event "$domain" "wildcard"
     done < "$wildcards_file"
 
+    dead_domains_count=0  # Initialize dead domains count
+    # Remove dead domains
+    while read -r domain; do  # Loop through remaining pending domains
+        if ! host -t a "$domain" | grep -q 'has no A record'; then  # Check if the domain has an A record
+            continue  # Skip to next domain if alive
+        fi
+        pending_domains="${pending_domains/${domain}/}"  # Remove dead domain
+        ((dead_domains_count++))  # Increment dead domains count
+        log_event "$domain" "dead"
+        print "%s\n" "$domain" >> "$dead_domains_file"
+    done <<< "$pending_domains"
+    format_list "$dead_domains_file"
+
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
@@ -141,7 +148,7 @@ function process_domains {
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_TLD_count))  # Calculate sum of whitelisted domains
     final_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
-    log_search_term "$search_term" "$raw_count" "$final_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
+    log_search_term "$search_term" "$raw_count" "$final_count" "$total_whitelisted_count" "$dead_domains_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate the filtered domains to a temp file
 }
 
@@ -194,8 +201,8 @@ function log_event {
 function log_search_term {
     # Print and log statistics for search term
     search_term="${1:0:100}...\""  # Shorten to first 100 characters
-    awk -v term="$search_term" -v raw="$2" -v final="$3" -v whitelist="$4" -v redundant="$5" -v toplist_count="$6" -v toplist_domains="$(printf "%s" "$6" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","term","raw","final","whitelist","redundant","toplist_count","toplist_domains}' >> "$search_log"
-    printf "%s\nRaw: %s  Final: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$search_term" "$2" "$3" "$4" "$5" "$6"
+    awk -v term="$search_term" -v raw="$2" -v final="$3" -v whitelist="$4" -v dead="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","term","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains}' >> "$search_log"
+    printf "%s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s  Redundant: %s  Toplist: %s\n" "$search_term" "$2" "$3" "$4" "$5" "$6" "$7"
 }
 
 function format_list {
