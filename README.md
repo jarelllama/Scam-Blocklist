@@ -13,17 +13,17 @@ Blocklist for scam sites automatically retrieved from Google Search, updated dai
 ## Stats
 
 ```
-Total domains: 3133
+Total domains: 3150
 
-Domains found today: 2
-Domains found yesterday: 0
+Domains found today: 17
+Domains found yesterday: 2
 
 The 5 most recently added domains:
-yztassel.com
-zirdecor.com
-zivyastore.com
-y2k-wave.com
-amaqeng.com
+ptoopen.com
+qdlashfairy.com
+rchbracing.com
+romanticed.shop
+semahomesale.com
 ```
 
 ## How domains are added to the blocklist
