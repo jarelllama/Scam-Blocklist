@@ -23,3 +23,5 @@ jobs:
           search_id: ${{ secrets.SEARCH_ID }}
           search_api_key: ${{ secrets.SEARCH_API_KEY }}
         run: bash retrieve.sh
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

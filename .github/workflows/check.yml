@@ -1,0 +1,19 @@
+name: Check
+run-name: Check
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**.sh'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          ignore_paths: legacy
