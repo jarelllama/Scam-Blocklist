@@ -60,9 +60,9 @@ $new_domains
 - Domains are checked against the [Tranco 1M Toplist](https://tranco-list.eu/) and flagged domains are vetted manually
 - Redundant entries are removed via wildcard matching. For example, if the blocklist contains \`spam.com\`, \`sub.spam.com\` is a wildcard match and is, therefore, redundant
 
-To see the full domain retrieval and filtering process, view the code in the repository.
+The full domain retrieval and filtering process can be viewed in the repository's code.
 
-Malicious domains found in [r/Scams](https://www.reddit.com/r/Scams) are occasionally added after being manually vetted.
+The domain retrieval process is scheduled to run daily at 16:30 UTC.
 
 ## Why the Hosts format is not supported
 
