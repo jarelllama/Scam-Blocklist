@@ -77,12 +77,12 @@ function process_domains {
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
-        # Remove the subdomain, keeping only the root domain, sort and remove duplicates
-        pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
         # Find domains with common subdomains, excluding 'www'
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains" | grep -v "^www\.")
         # Log domains with common subdomains, excluding 'www'
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain"
+        # Remove the subdomain, keeping only the root domain, sort and remove duplicates
+        pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
     done < "$subdomains_file"
 
     # Remove domains already in blocklist
