@@ -132,7 +132,7 @@ function process_domains {
         pending_domains="${pending_domains/${domain}/}"  # Remove dead domain
         ((dead_domains_count++))  # Increment dead domains count
         log_event "$domain" "dead"
-        print "%s\n" "$domain" >> "$dead_domains_file"
+        printf "%s\n" "$domain" >> "$dead_domains_file"
     done <<< "$pending_domains"
     format_list "$dead_domains_file"
 
