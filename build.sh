@@ -9,6 +9,9 @@ blocklist_name='scams'
 
 function main {
     command -v csvstat &> /dev/null || pip install -q csvkit
+    format_list "$raw_file"
+    format_list "$search_log"
+    format_list "$domain_log"
     build_adblock
     build_dnsmasq
     build_unbound
@@ -134,6 +137,16 @@ EOF
 
     [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound syntax
     printf "%s\n" "$formatted_domains" >> "$blocklist_path"  # Append formatted domains onto blocklist
+}
+
+function format_list {
+    # If file is a CSV file, do not sort
+    if [[ "$1" == *.csv ]]; then
+        sed -i 's/\r$//' "$1"  
+        return
+    fi
+    # Format carriage return characters, remove empty lines, sort and remove duplicates
+    tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
 
 function save_and_exit {
