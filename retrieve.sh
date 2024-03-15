@@ -12,8 +12,6 @@ dead_domains_file='data/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 search_url='https://customsearch.googleapis.com/customsearch/v1'
 
-# TODO: consider using 'gl' search flag to specify geolocation of end user
-
 # If running locally, use locally stored secrets instead of environment variables
 if [[ "$CI" != true ]]; then
     search_id=$(<secrets/search_id)
