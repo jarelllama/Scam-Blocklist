@@ -50,7 +50,7 @@ function retrieve_search_terms {
 }
 
 function retrieve_domains {
-    search_term="$1"
+    search_term="${1//\"/}"  # Remove quotes froms search term
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results (100 is max)
         query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
@@ -66,7 +66,7 @@ function retrieve_domains {
     fi
     collated_page_results=$(awk -F/ '{print $3}' collated_page_results.tmp | sort -u)  # Retrieve domains from URLs, sort and remove duplicates
     rm collated_page_results.tmp  # Reset temp file for search results from each search term
-    printf "%s" "$collated_page_results" > "data/search_term_${search_term:0:100}...\".tmp"  # Save search-term-specific results to temp file
+    printf "%s" "$collated_page_results" > "data/search_term_${search_term:0:100}.tmp"  # Save search-term-specific results to temp file
     process_domains "$search_term" "$collated_page_results"  # Pass the search term and the results to the domain processing function
 }
 
@@ -198,7 +198,7 @@ function log_event {
 
 function log_search_term {
     # Print and log statistics for search term
-    search_term="${1:0:100}...\""  # Shorten to first 100 characters
+    search_term="\"${1:0:100}...\""  # Shorten to first 100 characters
     awk -v term="$search_term" -v raw="$2" -v final="$3" -v whitelist="$4" -v dead="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","term","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains}' >> "$search_log"
     printf "%s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s  Redundant: %s  Toplist: %s\n" "$search_term" "$2" "$3" "$4" "$5" "$6" "$7"
 }
