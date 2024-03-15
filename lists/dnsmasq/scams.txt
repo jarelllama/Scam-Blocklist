@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.15.041507.2024
-# Last modified: Fri Mar 15 04:15:07 UTC 2024
+# Version: 03.15.050355.2024
+# Last modified: Fri Mar 15 05:03:55 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 3128
+# Total number of entries: 3131
 #
 local=/01edc.com/
 local=/17aap.net/
@@ -389,6 +389,7 @@ local=/buckprints.com/
 local=/buddekor.com/
 local=/buddhasflowers.com/
 local=/bulksellmart.co.uk/
+local=/bumperhistory.com/
 local=/bunchiez.com/
 local=/buncru.com/
 local=/burberp.com/
@@ -438,6 +439,7 @@ local=/carmue.online/
 local=/carniceriacharcuterialucas.es/
 local=/caromalife.com/
 local=/carrhy.com/
+local=/carswiftvin.com/
 local=/cartist01.com/
 local=/caryboxing.store/
 local=/caryou.shop/
@@ -1078,6 +1080,7 @@ local=/glitzce.com/
 local=/gllomall.com/
 local=/globalcargoairwaylogistics.com/
 local=/globalcommercehub.online/
+local=/globalvins.com/
 local=/globusfestival.nl/
 local=/glowsart.com/
 local=/gninim.com/

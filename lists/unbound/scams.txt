@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.15.041507.2024
-# Last modified: Fri Mar 15 04:15:07 UTC 2024
+# Version: 03.15.050355.2024
+# Last modified: Fri Mar 15 05:03:55 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 3128
+# Total number of entries: 3131
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -390,6 +390,7 @@ local-zone: "buckprints.com." always_nxdomain
 local-zone: "buddekor.com." always_nxdomain
 local-zone: "buddhasflowers.com." always_nxdomain
 local-zone: "bulksellmart.co.uk." always_nxdomain
+local-zone: "bumperhistory.com." always_nxdomain
 local-zone: "bunchiez.com." always_nxdomain
 local-zone: "buncru.com." always_nxdomain
 local-zone: "burberp.com." always_nxdomain
@@ -439,6 +440,7 @@ local-zone: "carmue.online." always_nxdomain
 local-zone: "carniceriacharcuterialucas.es." always_nxdomain
 local-zone: "caromalife.com." always_nxdomain
 local-zone: "carrhy.com." always_nxdomain
+local-zone: "carswiftvin.com." always_nxdomain
 local-zone: "cartist01.com." always_nxdomain
 local-zone: "caryboxing.store." always_nxdomain
 local-zone: "caryou.shop." always_nxdomain
@@ -1079,6 +1081,7 @@ local-zone: "glitzce.com." always_nxdomain
 local-zone: "gllomall.com." always_nxdomain
 local-zone: "globalcargoairwaylogistics.com." always_nxdomain
 local-zone: "globalcommercehub.online." always_nxdomain
+local-zone: "globalvins.com." always_nxdomain
 local-zone: "globusfestival.nl." always_nxdomain
 local-zone: "glowsart.com." always_nxdomain
 local-zone: "gninim.com." always_nxdomain
