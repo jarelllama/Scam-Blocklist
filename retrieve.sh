@@ -31,7 +31,7 @@ function main {
         merge_domains  # Exits early
     fi
 
-    printf "\nUsing existing list of retrieved domains.\n"
+    printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_search_results_file in data/search_term_*.tmp; do  # Loop through each temp search results file
         search_term=${temp_search_results_file#*search_term_}  # Remove header from file name
         search_term=${search_term%.tmp}  # Remove file extension from file name
@@ -42,7 +42,7 @@ function main {
 }
 
 function retrieve_search_terms {
-    printf "\nRetrieving domains from search terms...\n"
+    printf "\nRetrieving domains from search terms...\n\n"
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             retrieve_domains "$search_term"  # Pass the search term to the domain retrieval function
@@ -154,7 +154,7 @@ function merge_domains {
     sleep 0.5
     # Exit if no new domains to add or temp file is missing
     if [[ ! -s filtered_domains.tmp ]]; then
-        printf "\nNo new domains to add.\n"
+        printf "\nNo new domains to add.\n\n"
         save_and_exit 0
     fi
 
@@ -177,7 +177,7 @@ function merge_domains {
         sleep 0.5
         cat in_toplist.tmp
         sleep 0.5
-        printf "\nPending domains saved for rerun.\n"
+        printf "\nPending domains saved for rerun.\n\n"
         save_and_exit 1
     fi
 
@@ -187,7 +187,7 @@ function merge_domains {
     log_event "$(<filtered_domains.tmp)" new_domain
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
-    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$count_difference" "$count_after"
+    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
     save_and_exit 0
 }
 
