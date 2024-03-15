@@ -13,17 +13,17 @@ Blocklist for scam sites automatically retrieved from Google Search.
 ## Stats
 
 ```
-Total domains: 3131
+Total domains: 3133
 
-Found today: 0
+Found today: 2
 Found yesterday: 0
 
 The 5 most recently added domains:
-ytmtb.com
-yummycrystal.com
 yztassel.com
 zirdecor.com
 zivyastore.com
+y2k-wave.com
+amaqeng.com
 ```
 
 ## How domains are added to the blocklist

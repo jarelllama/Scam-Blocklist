@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.15.063119.2024
-# Last modified: Fri Mar 15 06:31:19 UTC 2024
+# Version: 03.15.074310.2024
+# Last modified: Fri Mar 15 07:43:10 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 3131
+# Total number of entries: 3133
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -98,6 +98,7 @@ local-zone: "alloutdoorsale.com." always_nxdomain
 local-zone: "alpswolflamp.com." always_nxdomain
 local-zone: "alver.com." always_nxdomain
 local-zone: "alwaysplushie.com." always_nxdomain
+local-zone: "amaqeng.com." always_nxdomain
 local-zone: "amayeb.com." always_nxdomain
 local-zone: "amazeandsave.shop." always_nxdomain
 local-zone: "amazee.store." always_nxdomain
@@ -3054,6 +3055,7 @@ local-zone: "xray-disk.com." always_nxdomain
 local-zone: "xrivalfitness.com." always_nxdomain
 local-zone: "xyzpolls.com." always_nxdomain
 local-zone: "y-stop.com." always_nxdomain
+local-zone: "y2k-wave.com." always_nxdomain
 local-zone: "yadmrd.com." always_nxdomain
 local-zone: "yaitie.com." always_nxdomain
 local-zone: "yamapron.com." always_nxdomain
