@@ -42,7 +42,7 @@ function main {
         # If source is Google Search
         if grep -q "google_search" "$temp_domains_file"; then
             source="Google Search"
-            item=${temp_domains_file#domains_search_terms_}  # Remove header from file name
+            item=${temp_domains_file#domains_google_search_}  # Remove header from file name
             item=${item%.tmp}  # Rename extension from file name
         else
             # If source is aa419
@@ -56,7 +56,7 @@ function main {
 
 function crawl_aa419 {
     for pgno in {1..20}; do  # Loop through 20 pages
-        query_params="${pgno}/500?fromupd=2022-01-01?Status=active?fields=Domain,Status,DateAdded,Updated"
+        query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
         # Break out of loop when there are no more results
         if grep -q "No rows found" <<< "$page_results"; then
