@@ -3,8 +3,8 @@ run-name: Remove dead domains
 on:
   workflow_dispatch:
   schedule:
-    # Dailt at 1am (GMT+8)
-    - cron: '0 17 * * *'
+    # Daily at 12am (GMT+8)
+    - cron: '0 16 * * *'
 
 jobs:
   remove-dead-domains:

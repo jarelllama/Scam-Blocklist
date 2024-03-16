@@ -3,8 +3,8 @@ run-name: Daily maintenance
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 12am (GMT+8)
-    - cron: '0 16 * * *'
+    # Daily at 12:30am (GMT+8)
+    - cron: '30 16 * * *'
 
 jobs:
   daily-maintenance:
@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Run using PAT to correctly trigger build workfow
 
       - name: maintain.sh
         run: bash maintain.sh

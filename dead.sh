@@ -13,7 +13,7 @@ function main {
 
     npm i -g @adguard/dead-domains-linter  # Install AdGuard Dead Domains Linter
     dead-domains-linter --i "$adblock_file" --export dead.tmp  # Run Linter and export dead domains
-    comm -23 dead.tmp "$wildcards_file"  # Exclude wildcard domains
+    comm -23 dead.tmp "$wildcards_file" > dead.tmp.tmp && mv dead.tmp.tmp dead.tmp # Exclude wildcard domains
     # Exit early if no dead domains found
     if [[ ! -s dead.tmp ]]; then
         rm dead.tmp
@@ -22,7 +22,7 @@ function main {
     comm -23 "$raw_file" dead.tmp > raw.tmp && mv raw.tmp "$raw_file"  # Remove dead domains from raw file
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
-    log_event "$<(dead.tmp)" "dead"
+    log_event "$(<dead.tmp)" "dead"
     rm dead.tmp
 }
 
