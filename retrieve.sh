@@ -59,10 +59,7 @@ function crawl_aa419 {
     for pgno in {1..20}; do  # Loop through 20 pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
-        # Break out of loop when there are no more results
-        if grep -q "No rows found" <<< "$page_results"; then
-            break
-        fi
+        [[ "$page_results" == "*No rows found*" ]] && break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" | sort -u >> collated_aa419_domains.tmp  # Collate domains
     done
     # Skip domain processing if no domains retrieved
@@ -108,7 +105,7 @@ function process_source {
     format_list "$3"  # Format temp file for pending domains
     pending_domains=$(<"$3")  # Store pending domains in a variable
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
-    [[ "$3" == domains_*.tmp ]] && rm "$3"
+    [[ "$3" == domains_*.tmp ]] || rm "$3"
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
