@@ -13,17 +13,17 @@ Blocklist for scam sites automatically retrieved from Google Search, updated dai
 ## Stats
 
 ```
-Total domains: 3066
+Total domains: 3088
 
-Domains found today: 20
-Domains found yesterday: 2
+Domains found today: 1266
+Domains found yesterday: 0
 
 The 5 most recently added domains:
-romanticed.shop
-semahomesale.com
-doubleleaves.com
-fourseasonscourtyard.com
-zupapasports.com
+scpurtz.com
+solidarityk.com
+stylesbymaxxllc.com
+vava00.shop
+vervene.shop
 ```
 
 ## How domains are added to the blocklist

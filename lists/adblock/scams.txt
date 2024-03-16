@@ -2,10 +2,10 @@
 ! Description: Blocklist for scam sites automatically retrieved from Google Search, updated daily. Also includes malicious hosting sites.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Version: 03.16.072317.2024
-! Last modified: Sat Mar 16 07:23:17 UTC 2024
+! Version: 03.16.150427.2024
+! Last modified: Sat Mar 16 15:04:27 UTC 2024
 ! Syntax: Adblock Plus
-! Total number of entries: 3066
+! Total number of entries: 3088
 !
 ||01edc.com^
 ||17aap.net^
@@ -22,6 +22,7 @@
 ||abeni.shop^
 ||abizot.com.ng^
 ||abourt.com^
+||abovejie.com^
 ||abunthous.com^
 ||accessorieschildren.com^
 ||accessoriesnew.com^
@@ -328,6 +329,7 @@
 ||bookbargain.shop^
 ||bookbinge.shop^
 ||bookread.store^
+||bookseey.com^
 ||boonestore.shop^
 ||boostearthcrust.com^
 ||bootcarolina.com^
@@ -338,6 +340,7 @@
 ||bottlesjapan.com^
 ||bouboo.shop^
 ||boucheriehomont.fr^
+||boulevardevent.us^
 ||bourlingsly.com^
 ||boutfitstore.com^
 ||boutiquefeel.com^
@@ -381,6 +384,7 @@
 ||burberp.com^
 ||buriayre.com^
 ||burkinan.com^
+||bushradeals.com^
 ||bustlight.com^
 ||bustoff.store^
 ||butterfalluk.com^
@@ -693,6 +697,7 @@
 ||discussionk.com^
 ||displacementsjournal.com^
 ||divine-wonder.com^
+||divinedecorofdallas.us^
 ||diyjojo.com^
 ||diyjojojp.com^
 ||diytsi.shop^
@@ -934,6 +939,7 @@
 ||flamingowine.com^
 ||flastorm.com^
 ||flaurz.com^
+||flavoryfood.ca^
 ||flexybalance.com^
 ||flexypose.com^
 ||flincheriy.com^
@@ -953,6 +959,7 @@
 ||forevergiftable.com^
 ||forgotanx.com^
 ||fortistrd.com^
+||fourseasonscourtyard.com^
 ||foxaspect.com^
 ||foxislandembroidery.com^
 ||fraynyc.com^
@@ -1179,12 +1186,14 @@
 ||hochland-kriecherl.at^
 ||hodilar.com^
 ||hoftlix.us^
+||hogoto.store^
 ||hokaboutique.shop^
 ||hokacenter.com^
 ||hokaone-run.co^
 ||hokaoneoneus.shop^
 ||hokaonesport.co^
 ||hokashoeshop.com^
+||holigifting.com^
 ||hollarys.com^
 ||hollistercoshop.com^
 ||hollstamps.xyz^
@@ -1198,6 +1207,7 @@
 ||homebyon.com^
 ||homechelsea.com^
 ||homedbkd.com^
+||homeestore.net^
 ||homeforalessi.com^
 ||homehivez.com^
 ||homesily.com^
@@ -1213,6 +1223,7 @@
 ||hookestore.online^
 ||hopebikeabout.com^
 ||hopetaly.com^
+||horizonhorn.com^
 ||hortool.com^
 ||hoscaleshop.com^
 ||hosera.com^
@@ -1236,6 +1247,7 @@
 ||humanitariy.com^
 ||huniity.com^
 ||huntdekor.com^
+||hypeh.shop^
 ||hypekartel.com^
 ||hyperazt.com^
 ||hysterant.com^
@@ -1270,6 +1282,7 @@
 ||in2kitchenco.com^
 ||incommony.com^
 ||indianshoponlinestore.business.site^
+||infantlover.com^
 ||inflatablenshow.com^
 ||injaz-dz.com^
 ||inmw.shop^
@@ -1277,6 +1290,7 @@
 ||innomodelcar.com^
 ||innovation-entwicklung.de^
 ||inpcofproti.com^
+||inspiredblanket.com^
 ||inspiree.co^
 ||instantaneou.com^
 ||int456.com^
@@ -1596,6 +1610,7 @@
 ||mawissa.de^
 ||maxgiftery.com^
 ||maxlife-fundacja.pl^
+||maxsoulshoes.co^
 ||maxwellwilliamshop.com^
 ||maychio.com^
 ||maykawe.com^
@@ -1703,6 +1718,7 @@
 ||moommall.com^
 ||moon-kielce.pl^
 ||moonasity.com^
+||moongotool.com^
 ||moonmystore.com^
 ||moonosa.com^
 ||moonwhouse.com^
@@ -2016,6 +2032,7 @@
 ||perfectmask.pl^
 ||perfectteegift.com^
 ||perfidious.shop^
+||peristudiousa.com^
 ||perlatoshoe.com^
 ||persestence.com^
 ||persisparty.shop^
@@ -2309,6 +2326,7 @@
 ||scifi3d.com^
 ||scifianimetoy.com^
 ||scoptal.com^
+||scpurtz.com^
 ||scrubellayyc.com^
 ||scurvefashion.com^
 ||sdrytru.online^
@@ -2444,6 +2462,7 @@
 ||sokani.shop^
 ||soldstock.top^
 ||soleildocrehome.com^
+||solidarityk.com^
 ||soluckin.com^
 ||soluctech.co.uk^
 ||someacy.com^
@@ -2511,6 +2530,7 @@
 ||streetsavenue.com^
 ||strucmate.com^
 ||stuehen.com^
+||stylesbymaxxllc.com^
 ||styleshapewear.com^
 ||stylewestern.com^
 ||stylippers.store^
@@ -2841,6 +2861,7 @@
 ||varioushometool.com^
 ||variousluxurystore.com^
 ||varnor.com^
+||vava00.shop^
 ||vd-shoppingonline.com^
 ||veberss.com^
 ||veceto.shop^
@@ -2851,6 +2872,7 @@
 ||ventrall.com^
 ||venturearchitects.pl^
 ||veralook.com^
+||vervene.shop^
 ||vetrose.com^
 ||vibrantgarden.net^
 ||vicidola.com^
