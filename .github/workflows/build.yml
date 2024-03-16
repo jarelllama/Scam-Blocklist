@@ -5,6 +5,9 @@ on:
   push:
     paths:
       - "data/raw.txt"
+    schedule:
+      # Daily at 2am (GMT+8)
+      - cron: '0 18 * * *'
 
 jobs:
   build-lists:
