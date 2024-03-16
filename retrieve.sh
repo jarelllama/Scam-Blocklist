@@ -55,6 +55,7 @@ function main {
 }
 
 function crawl_aa419 {
+    printf "\nSource: db.aa419.org\n\n"
     for pgno in {1..20}; do  # Loop through 20 pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
@@ -74,7 +75,7 @@ function crawl_aa419 {
 }
 
 function retrieve_google_search_terms {
-    printf "\nRetrieving domains from Google Search...\n\n"
+    printf "\Source: Google Search\n\n"
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             search_google "$search_term"  # Pass the search term to the search function
