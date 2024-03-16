@@ -135,7 +135,7 @@ function process_domains {
     dead_domains_count=0  # Initialize dead domains count
     # Remove dead domains
     while read -r domain; do  # Loop through remaining pending domains
-        [[ -n "$domains" ]] && continue  # Skip if domain is empty
+        [[ -z "$domains" ]] && continue  # Skip if domain is empty
         if ! host -t a "$domain" | grep -q 'has no A record'; then  # Check if the domain has an A record
             continue  # Skip to next domain if alive
         fi
