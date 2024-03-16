@@ -13,17 +13,17 @@ Blocklist for scam sites automatically retrieved from Google Search, updated dai
 ## Stats
 
 ```
-Total domains: 3151
+Total domains: 3154
 
-Domains found today: 17
+Domains found today: 20
 Domains found yesterday: 2
 
 The 5 most recently added domains:
-ptoopen.com
-qdlashfairy.com
-rchbracing.com
-romanticed.shop
-semahomesale.com
+fourseasonscourtyard.com
+zupapasports.com
+doubleleaves.com
+fourseasonscourtyard.com
+zupapasports.com
 ```
 
 ## How domains are added to the blocklist

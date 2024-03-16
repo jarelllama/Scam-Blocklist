@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.16.002641.2024
-# Last modified: Sat Mar 16 00:26:41 UTC 2024
+# Version: 03.16.032943.2024
+# Last modified: Sat Mar 16 03:29:43 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 3151
+# Total number of entries: 3154
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -738,6 +738,7 @@ local-zone: "domitri.co." always_nxdomain
 local-zone: "dommarzen-ns.pl." always_nxdomain
 local-zone: "donnasharpbed.com." always_nxdomain
 local-zone: "dor-reception.fr." always_nxdomain
+local-zone: "doubleleaves.com." always_nxdomain
 local-zone: "doussales.com." always_nxdomain
 local-zone: "douvani.com." always_nxdomain
 local-zone: "doyends.com." always_nxdomain
@@ -982,6 +983,7 @@ local-zone: "forevergiftable.com." always_nxdomain
 local-zone: "forgotanx.com." always_nxdomain
 local-zone: "fortistrd.com." always_nxdomain
 local-zone: "forumtrustpilot.com." always_nxdomain
+local-zone: "fourseasonscourtyard.com." always_nxdomain
 local-zone: "foxaspect.com." always_nxdomain
 local-zone: "foxislandembroidery.com." always_nxdomain
 local-zone: "fraynyc.com." always_nxdomain
@@ -3157,5 +3159,6 @@ local-zone: "zpit-kurpiezielone.pl." always_nxdomain
 local-zone: "zqtnqxx.deem.cz." always_nxdomain
 local-zone: "zs-woladroszewska.pl." always_nxdomain
 local-zone: "zuimag.com." always_nxdomain
+local-zone: "zupapasports.com." always_nxdomain
 local-zone: "zupdone.com." always_nxdomain
 local-zone: "zwit.shop." always_nxdomain
