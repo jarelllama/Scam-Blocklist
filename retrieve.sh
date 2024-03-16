@@ -64,7 +64,8 @@ function retrieve_domains {
         log_search_term "$search_term" "0" "0" "0" "0" "0" "0" ""
         return
     fi
-    collated_page_results=$(awk -F/ '{print $3}' collated_page_results.tmp | sort -u)  # Retrieve domains from URLs, sort and remove duplicates
+    # Retrieve domains (ignores IP addresse) from URLs, sort and remove duplicates
+    collated_page_results=$(awk -F/ '{print $3}' collated_page_results.tmp | grep '[a-zA-Z]' | sort -u)
     rm collated_page_results.tmp  # Reset temp file for search results from each search term
     printf "%s" "$collated_page_results" > "data/search_term_${search_term:0:100}.tmp"  # Save search-term-specific results to temp file
     process_domains "$search_term" "$collated_page_results"  # Pass the search term and the results to the domain processing function
