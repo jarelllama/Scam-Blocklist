@@ -40,7 +40,7 @@ function main {
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through each temp domains file
         # If source is Google Search
-        if grep -q "google_search" "$temp_domains_file"; then
+        if [[ "$temp_domains_file" == *google_search* ]]; then
             source="Google Search"
             item=${temp_domains_file#domains_google_search_}  # Remove header from file name
             item=${item%.tmp}  # Rename extension from file name
@@ -206,6 +206,12 @@ function merge_domains {
         sleep 0.5
     fi
 
+    # If IP addresses were found, print out addresses
+    if [[ -f ip_addresses.tmp ]]; then
+        format_list ip_addresses.tmp
+        awk 'NF {print $0 " (IP address)"}' ip_addresses.tmp
+    fi
+
     # Exit with error and without adding domains to the raw file if domains were found in the toplist
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
@@ -213,12 +219,6 @@ function merge_domains {
         sleep 0.5
         printf "\nPending domains saved for rerun.\n\n"
         exit 1
-    fi
-
-    # If IP addresses were found, print out addresses
-    if [[ -f ip_addresses.tmp ]]; then
-        format_list ip_addresses.tmp
-        awk 'NF {print $0 " (IP address)"}' ip_addresses.tmp
     fi
 
     count_before=$(wc -w < "$raw_file")
