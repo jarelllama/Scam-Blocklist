@@ -56,11 +56,11 @@ $new_domains
 
 ## How domains are added to the blocklist
 
-#### Source #1: Artists Against 419 (aa419)
+### Source #1: Artists Against 419 (aa419)
 - aa419 provides a database of fake sites which are scraped and cumulated into the blocklist
 - Only active domains from 2022 onwards are retrieved to keep the list size small. The database can be viewed here: [db.aa419.org](https://db.aa419.org/fakebankslist.php)
 
-#### Source #2: Google Search
+### Source #2: Google Search
 - The script searches Google with a list of search terms almost exclusively used in scam sites. These search terms are manually added while investigating sites on r/Scams. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
 ### Filtering
