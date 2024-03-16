@@ -71,7 +71,7 @@ Wildcard domains are added manually to the blocklist to reduce the number of ent
 
 ## Dead domains
 
-Domains with no A records are considered dead and are removed. This check is done on a weekly basis. Domains acting as wildcards are excluded from the check.
+Dead domains are removed daily using [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter). Note that domains acting as wildcards are excluded from this process.
 
 ## See also
 
@@ -87,13 +87,17 @@ Domains with no A records are considered dead and are removed. This check is don
 
 ## Resources
 
-[ShellCheck](https://www.shellcheck.net/): shell script checker
+[ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
 
 [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
 
 [Hagezi's DNS Blocklist](https://github.com/hagezi/dns-blocklists): inspiration and reference
 
 [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction): Google Search API
+
+[Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
+
+[AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking AdBlock rules for dead domains
 
 ## Appreciation
 
