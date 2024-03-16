@@ -139,7 +139,7 @@ function process_domains {
     # Remove dead domains
     while read -r domain; do  # Loop through remaining pending domains
         [[ -z "$domains" ]] && continue  # Skip if domain is empty
-        if ! host -t a "$domain" | grep -q 'has no A record'; then  # Check if the domain has an A record
+        if ! host -t a "$domain" | grep -Eq 'has no A record|NXDOMAIN'; then  # Check if the domain is dead
             continue  # Skip to next domain if alive
         fi
         pending_domains="${pending_domains/${domain}/}"  # Remove dead domain
