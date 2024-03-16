@@ -29,6 +29,7 @@ function main {
     if ! ls data/search_term_*.tmp &> /dev/null; then
         retrieve_search_terms
         merge_domains
+        exit
     fi
 
     printf "\nUsing existing list of retrieved domains.\n\n"
