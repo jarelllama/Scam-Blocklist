@@ -12,6 +12,6 @@ jobs:
 
       - name: Run test
         run: |
-          cd data
+          cd lists/adblock
           npm i -g @adguard/dead-domains-linter
-          dead-domains-linter -i dead_domains.txt --show
+          dead-domains-linter --show
