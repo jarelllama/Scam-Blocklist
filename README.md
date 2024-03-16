@@ -15,10 +15,10 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ```
 Total domains: 6779
 Domains from Google Search: 0
-Domains from aa419: 8990
+Domains from aa419: 4259
 
-Domains found today: 518
-Domains found yesterday: 8475
+Domains found today: 1
+Domains found yesterday: 4261
 
 The 5 most recently added domains:
 yellowpages.marketing
