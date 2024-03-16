@@ -12,6 +12,5 @@ jobs:
 
       - name: Run test
         run: |
-          npm install -D @adguard/aglint
-          npx aglint init
-          npx aglint data/raw.txt
+          npm i -g @adguard/dead-domains-linter
+          dead-domains-linter -i raw.txt --show
