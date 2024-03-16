@@ -2,15 +2,14 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.15.170113.2024
-# Last modified: Fri Mar 15 17:01:13 UTC 2024
+# Version: 03.16.002641.2024
+# Last modified: Sat Mar 16 00:26:41 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 3150
+# Total number of entries: 3151
 #
 server:
 local-zone: "01edc.com." always_nxdomain
 local-zone: "17aap.net." always_nxdomain
-local-zone: "18.116.21.103." always_nxdomain
 local-zone: "1sttheworld.com." always_nxdomain
 local-zone: "201365640.matarocultural.cat." always_nxdomain
 local-zone: "299691360.mailapelihalli.fi." always_nxdomain
@@ -543,6 +542,7 @@ local-zone: "clouddiy.shop." always_nxdomain
 local-zone: "cloudkak.com." always_nxdomain
 local-zone: "cluckergifts.company.site." always_nxdomain
 local-zone: "cmngty.com." always_nxdomain
+local-zone: "cobralys.com." always_nxdomain
 local-zone: "cobratigerdc.com." always_nxdomain
 local-zone: "cocnata.com." always_nxdomain
 local-zone: "coffeecheap.shop." always_nxdomain
@@ -748,6 +748,7 @@ local-zone: "dridfinden.com." always_nxdomain
 local-zone: "drrodos.com." always_nxdomain
 local-zone: "druzycrystal.com." always_nxdomain
 local-zone: "drwyatts.com." always_nxdomain
+local-zone: "dsdetector.com." always_nxdomain
 local-zone: "dsingtse.com." always_nxdomain
 local-zone: "dsvss.com." always_nxdomain
 local-zone: "dtchohw.store." always_nxdomain

@@ -2,14 +2,13 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.15.170113.2024
-# Last modified: Fri Mar 15 17:01:13 UTC 2024
+# Version: 03.16.002641.2024
+# Last modified: Sat Mar 16 00:26:41 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 3150
+# Total number of entries: 3151
 #
 local=/01edc.com/
 local=/17aap.net/
-local=/18.116.21.103/
 local=/1sttheworld.com/
 local=/201365640.matarocultural.cat/
 local=/299691360.mailapelihalli.fi/
@@ -542,6 +541,7 @@ local=/clouddiy.shop/
 local=/cloudkak.com/
 local=/cluckergifts.company.site/
 local=/cmngty.com/
+local=/cobralys.com/
 local=/cobratigerdc.com/
 local=/cocnata.com/
 local=/coffeecheap.shop/
@@ -747,6 +747,7 @@ local=/dridfinden.com/
 local=/drrodos.com/
 local=/druzycrystal.com/
 local=/drwyatts.com/
+local=/dsdetector.com/
 local=/dsingtse.com/
 local=/dsvss.com/
 local=/dtchohw.store/
