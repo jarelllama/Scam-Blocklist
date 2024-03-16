@@ -40,7 +40,7 @@ function main {
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through each temp domains file
         # If source is Google Search
-        if grep -q "search_term" "$temp_domains_file"; then
+        if grep -q "google_search" "$temp_domains_file"; then
             source="Google Search"
             item=${temp_domains_file#domains_search_terms_}  # Remove header from file name
             item=${item%.tmp}  # Rename extension from file name
@@ -107,7 +107,7 @@ function process_source {
     format_list "$3"  # Format temp file for pending domains
     pending_domains=$(<"$3")  # Store pending domains in a variable
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
-    rm "$3"
+    [[ "$3" == domains_*.tmp ]] && rm "$3"
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
