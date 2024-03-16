@@ -178,17 +178,25 @@ function merge_domains {
     fi
     sleep 0.5
 
-    # Exit with error if domains were found in toplist or IP addresses were found
+    # Print out domains in toplist and IP addresses
     if [[ -f in_toplist.tmp ]] || [[ -f ip_addresses.tmp ]]; then
-        format_list in_toplist.tmp
-        format_list ip_addresses.tmp
         printf "\nEntries requiring manual review:\n"
         sleep 0.5
+    fi
+
+    # Exit with error and without adding domains to the raw file if domains were found in the toplist
+    if [[ -f in_toplist.tmp ]]; then
+        format_list in_toplist.tmp
         awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
-        awk 'NF {print $0 " (IP address)"}' ip_adddresses.tmp
         sleep 0.5
-        [[ -f in_toplist.tmp ]] && printf "\nRaw file not saved.\n\n"
+        printf "\nPending domains saved for rerun.\n\n"
         exit 1
+    fi
+
+    # If IP addresses were found, print out addresses
+    if [[ -f ip_addresses.tmp ]]; then
+        format_list ip_addresses.tmp
+        awk 'NF {print $0 " (IP address)"}' ip_addresses.tmp
     fi
 
     count_before=$(wc -w < "$raw_file")
@@ -198,6 +206,7 @@ function merge_domains {
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
+    [[ -f ip_addresses.tmp ]] && exit 1  # Exit with error if IP addresses were found
 }
 
 function log_event {
@@ -225,7 +234,7 @@ function format_list {
 
 function cleanup {
     [[ -f filtered_domains.tmp ]] && rm filtered_domains.tmp  # Reset temp file for filtered domains
-    [[ -f ip_addresses.tmp ]] && rm ip_adddresses.tmp  # Reset temp file for IP addresses
+    [[ -f ip_addresses.tmp ]] && rm ip_addresses.tmp  # Reset temp file for IP addresses
     # Reset temp search results files if there are no domains found in toplist
     if [[ ! -f in_toplist.tmp ]] && ls data/search_term_*.tmp &> /dev/null; then
         rm data/search_term_*.tmp
