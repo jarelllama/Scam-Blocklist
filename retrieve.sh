@@ -113,7 +113,7 @@ function process_domains {
     if [[ -n "$ip_addresses" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$ip_addresses"))
         log_event "$ip_addresses" "ip_address"
-        printf "%s" "$ip_addresses" > ip_addresses.tmp  # Save IP addresses into temp file
+        printf "%s\n" "$ip_addresses" >> ip_addresses.tmp  # Collate  IP addresses into temp file
     fi
 
     # Remove wildcard domains that are no longer in the blocklist
@@ -134,6 +134,7 @@ function process_domains {
     dead_domains_count=0  # Initialize dead domains count
     # Remove dead domains
     while read -r domain; do  # Loop through remaining pending domains
+        [[ -n "$domains" ]] && continue  # Skip if domain is empty
         if ! host -t a "$domain" | grep -q 'has no A record'; then  # Check if the domain has an A record
             continue  # Skip to next domain if alive
         fi
