@@ -1,6 +1,6 @@
 # Jarelllama's Scam Blocklist
 
-Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database [(aa419)](https://db.aa419.org/fakebankslist.php), automatically updated daily.
+Blocklist for scam sites retrieved from Google Search and the Artists Against 419 Fake Site Database [(aa419)](https://db.aa419.org/fakebankslist.php), automatically updated daily.
 
 | Format | Syntax |
 | --- | --- |
@@ -13,12 +13,12 @@ Blocklist for scam sites retrieved from Google Search and from the Artists Again
 ## Stats
 
 ```
-Total domains: 7304
-Domains from Google Search:
-Domains from aa419:
+Total domains: 6779
+Domains from Google Search: 0
+Domains from aa419: 8473
 
-Domains found today: 10288
-Domains found yesterday: 0
+Domains found today: 0
+Domains found yesterday: 8475
 
 The 5 most recently added domains:
 zoubipetro.com
