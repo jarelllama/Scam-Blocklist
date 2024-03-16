@@ -13,7 +13,7 @@ Blocklist for scam sites automatically retrieved from Google Search, updated dai
 ## Stats
 
 ```
-Total domains: 3168
+Total domains: 3066
 
 Domains found today: 20
 Domains found yesterday: 2
