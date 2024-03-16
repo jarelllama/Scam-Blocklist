@@ -73,7 +73,7 @@ function crawl_aa419 {
 }
 
 function retrieve_google_search_terms {
-    printf "\Source: Google Search\n\n"
+    printf "\nSource: Google Search\n\n"
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             search_google "$search_term"  # Pass the search term to the search function
