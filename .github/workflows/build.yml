@@ -1,5 +1,5 @@
-name: Build
-run-name: Build
+name: Build lists
+run-name: Build lists
 on:
   workflow_dispatch:
   push:
@@ -7,7 +7,7 @@ on:
       - "data/raw.txt"
 
 jobs:
-  build:
+  build-lists:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,5 +21,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git commit -m "List maintenance"
+          git commit -m "Build lists"
           git push -q
