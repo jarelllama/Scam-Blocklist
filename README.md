@@ -13,17 +13,17 @@ Blocklist for scam sites automatically retrieved from Google Search, updated dai
 ## Stats
 
 ```
-Total domains: 3088
+Total domains: 7304
 
-Domains found today: 1266
+Domains found today: 10288
 Domains found yesterday: 0
 
 The 5 most recently added domains:
-scpurtz.com
-solidarityk.com
-stylesbymaxxllc.com
-vava00.shop
-vervene.shop
+zoubipetro.com
+zstulogroupptyltd.co.za
+zunioffshorebank.com
+zuversichtlicherfahrer.com
+zwilliamsoil.com
 ```
 
 ## How domains are added to the blocklist
