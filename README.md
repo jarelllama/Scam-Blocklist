@@ -19,8 +19,8 @@ Domains found today: 20
 Domains found yesterday: 2
 
 The 5 most recently added domains:
-fourseasonscourtyard.com
-zupapasports.com
+romanticed.shop
+semahomesale.com
 doubleleaves.com
 fourseasonscourtyard.com
 zupapasports.com
