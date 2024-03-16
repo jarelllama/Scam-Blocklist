@@ -13,19 +13,19 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 ```
-Total domains: 6779
+Total domains: 6789
 Domains from Google Search: 0
-Domains from aa419: 4259
+Domains from aa419: 4267
 
-Domains found today: 1
+Domains found today: 11
 Domains found yesterday: 4261
 
 The 5 most recently added domains:
-yellowpages.marketing
-zafiromarine.com
-zashippingcontainers.net
-zendcouriers.com
-zeru-truckingllc.com
+mulexcorner.com
+pfconnolly.com
+puppiescentral.co.za
+sunshinedoddles.com
+xprovibe.com
 ```
 
 ## How domains are added to the blocklist

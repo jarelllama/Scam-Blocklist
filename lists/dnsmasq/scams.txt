@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.16.233604.2024
-# Last modified: Sat Mar 16 23:36:04 UTC 2024
+# Version: 03.16.235157.2024
+# Last modified: Sat Mar 16 23:51:57 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 6779
+# Total number of entries: 6789
 #
 local=/01edc.com/
 local=/103-boi.com/
@@ -912,6 +912,7 @@ local=/brightclothing.shop/
 local=/brightergrants.com/
 local=/brighterusgp.com/
 local=/brightstarchemicals.com/
+local=/brightstarkittens.com/
 local=/brimglaminvest.com/
 local=/brindonlogisticsdc.com/
 local=/bringwellz.com/
@@ -1211,6 +1212,7 @@ local=/cherryfun4u.com/
 local=/chiangmaiguideline.com/
 local=/chiaven.com/
 local=/chickenpoultryfarm.co.za/
+local=/chickensathome.com/
 local=/chicleading.myshopify.com/
 local=/chicme.com/
 local=/chicmsaccessories.com/
@@ -1663,6 +1665,7 @@ local=/deucesvapeofficial.com/
 local=/deunatuweb.com/
 local=/deunow.com/
 local=/deuotrra.com/
+local=/deutbk.com/
 local=/deutsch-consulting.de/
 local=/deutschetrustfunds.com/
 local=/developk.shop/
@@ -1791,6 +1794,7 @@ local=/druzycrystal.com/
 local=/drwyatts.com/
 local=/dsdetector.com/
 local=/dsingtse.com/
+local=/dsteinmannkittens.co.za/
 local=/dsvcontainers.co.za/
 local=/dsvss.com/
 local=/dtcargoeshub.com/
@@ -3312,6 +3316,7 @@ local=/kimi-home.com/
 local=/kincorybeauty.com/
 local=/kindnessate.online/
 local=/kinean.online/
+local=/kingcharlesandcavapoo.com/
 local=/kingdompawsdachshund.live/
 local=/kingemirateslogistics.com/
 local=/kingfrenchieshome.com/
@@ -4005,6 +4010,7 @@ local=/mtdynamicsconstructions.com/
 local=/mtrexc.com/
 local=/muangchangsugarmill.com/
 local=/muhibbahonlines.com/
+local=/mulexcorner.com/
 local=/mulheruniverso.com.br/
 local=/multinus.com/
 local=/multiplesportnew.com/
@@ -4575,6 +4581,7 @@ local=/petsprestige.co.za/
 local=/petwellshop.co.za/
 local=/petyachtclub.com/
 local=/petzillashop.com/
+local=/pfconnolly.com/
 local=/pflshop.shop/
 local=/pgicl.co.uk/
 local=/pgp-logistik.com/
@@ -4827,6 +4834,7 @@ local=/pugpupspot.com/
 local=/pukingyolk.com/
 local=/pumpstrict.com/
 local=/puppartyhatsllc.com/
+local=/puppiescentral.co.za/
 local=/puppiesforhomes.co.za/
 local=/puppiesforsalenearme.co.za/
 local=/puppieskingdom.co.za/
@@ -5673,6 +5681,7 @@ local=/sunrisepuppyhome.com/
 local=/sunscisolutions.co.za/
 local=/sunseedca.com/
 local=/sunsetintship.com/
+local=/sunshinedoddles.com/
 local=/sunsirui.com/
 local=/sunsolarafrica.co.za/
 local=/sunsolarsuppliers.co.za/
@@ -6656,6 +6665,7 @@ local=/xpertcrypto.net/
 local=/xpolilogistics.com/
 local=/xpressanimaltaxi.com/
 local=/xpressracing.com/
+local=/xprovibe.com/
 local=/xray-disk.com/
 local=/xrivalfitness.com/
 local=/xtragatemetals.com/
