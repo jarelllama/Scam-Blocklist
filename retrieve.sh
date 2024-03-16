@@ -8,6 +8,7 @@ whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 subdomains_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
+dead_domains_file='data/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 search_url='https://customsearch.googleapis.com/customsearch/v1'
 aa419_url='https://api.aa419.org/fakesites'
@@ -119,6 +120,11 @@ function process_source {
 
     # Remove domains already in blocklist
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
+
+    # Remove known dead domains
+    dead_domains=$(comm -12 <(printf "%s" "$pending_domains") "$dead_domains_file")
+    pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$dead_domains_file")
+    log_event "$dead_domains" "dead"
 
     # Find blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")

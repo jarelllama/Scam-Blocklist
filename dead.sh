@@ -7,12 +7,25 @@ domain_log='data/domain_log.csv'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 function main {
+    npm i -g @adguard/dead-domains-linter  # Install AdGuard Dead Domains Linter
     format_list "$raw_file"
     format_list "$wildcards_file"
     format_list "$domain_log"
 
-    npm i -g @adguard/dead-domains-linter  # Install AdGuard Dead Domains Linter
-    dead-domains-linter --i "$adblock_file" --export dead.tmp  # Run Linter and export dead domains
+    touch dead.tmp  # Intitialize temp file for dead domains
+    dead-domains-linter --i "$dead_domains_file" --export dead.tmp  # Find dead domains in the dead domains file
+    mv dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
+    format_list "$dead_domains_file"
+    comm -23 "$dead_domains_file" dead.tmp > alive.tmp  # Find resurrected domains in the dead domains file
+    if [[ -s alive.tmp ]]; then
+        cat alive.tmp > "$raw_file"  # Add resurrected domains to the raw file
+        format_list "$raw_file"
+        log_event "$(<alive.tmp)" "resurrected"
+    fi
+    rm dead.tmp
+    rm alive.tmp
+
+    dead-domains-linter --i "$adblock_file" --export dead.tmp  # Find and export dead domains
     comm -23 dead.tmp "$wildcards_file" > dead.tmp.tmp && mv dead.tmp.tmp dead.tmp # Exclude wildcard domains
     # Exit early if no dead domains found
     if [[ ! -s dead.tmp ]]; then
