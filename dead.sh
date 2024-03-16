@@ -8,7 +8,6 @@ function main {
     format_list "$raw_file"
     format_list "$domain_log"
     check_dead
-    save_and_exit 0
 }
 
 function check_dead {
@@ -32,6 +31,7 @@ function log_event {
 }
 
 function format_list {
+    [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
     if [[ "$1" == *.csv ]]; then
         sed -i 's/\r$//' "$1"  
@@ -39,20 +39,6 @@ function format_list {
     fi
     # Format carriage return characters, remove empty lines, sort and remove duplicates
     tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
-}
-
-function save_and_exit {
-    exit_code="$1"
-    # If running locally, exit without pushing changes to repository
-    if [[ "$CI" != true ]]; then
-        sleep 0.5
-        printf "\nScript is running locally. No changes were pushed.\n"
-        exit "$exit_code"
-    fi
-    git add .
-    git commit -m "Remove dead domains"
-    git push -q
-    exit "$exit_code"
 }
 
 main

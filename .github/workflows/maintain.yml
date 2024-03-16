@@ -13,10 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Provide Git identity
+      - name: maintain.sh
+        run: bash maintain.sh
+
+      - name: Push
+        if: always()
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
-
-      - name: maintain.sh
-        run: bash maintain.sh
+          git add .
+          git commit -m "List maintenance"
+          git push -q

@@ -15,13 +15,16 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Run using PAT to correctly trigger build workfow
 
-      - name: Provide Git identity
-        run: |
-          git config user.email ${{ vars.GIT_EMAIL }}
-          git config user.name ${{ vars.GIT_USERNAME }}
-
       - name: retrieve.sh
         env:
           search_id: ${{ secrets.SEARCH_ID }}
           search_api_key: ${{ secrets.SEARCH_API_KEY }}
         run: bash retrieve.sh
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git commit -m "Retrieve domains"
+          git push -q

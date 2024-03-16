@@ -18,9 +18,10 @@ function main {
 }
 
 function retrieve_toplist {
-    wget -q -O - "$toplist_url" | gunzip - > "${toplist_file}.tmp"  # Download and unzip toplist to temp file
-    awk -F ',' '{print $2}' "${toplist_file}.tmp" > "$toplist_file"  # Format toplist to keep only domains
+    wget -q -O - "$toplist_url" | gunzip - > toplist.tmp  # Download and unzip toplist to temp file
+    awk -F ',' '{print $2}' toplist.tmp > "$toplist_file"  # Format toplist to keep only domains
     format_list "$toplist_file"
+    rm toplist.tmp
 }
 
 function check_raw_file {
@@ -50,12 +51,12 @@ function check_raw_file {
     fi
     
     # Remove domains that have whitelisted TLDs
-    whitelisted_TLD_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")
-    whitelisted_TLD_count=$(wc -w <<< "$whitelisted_TLD_domains")  # Count number of domains with whitelisted TLDs
-    if [[ whitelisted_TLD_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
-        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_TLD_domains"))
-        awk 'NF {print $0 " (whitelisted TLD)"}' <<< "$whitelisted_TLD_domains" >> filter_log.tmp
-        log_event "$whitelisted_TLD_domains" "tld"
+    whitelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")
+    whitelisted_tld_count=$(wc -w <<< "$whitelisted_tld_domains")  # Count number of domains with whitelisted TLDs
+    if [[ whitelisted_tld_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
+        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))
+        awk 'NF {print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
+        log_event "$whitelisted_tld_domains" "tld"
     fi
 
     redundant_domains_count=0  # Initialize redundant domains count
@@ -82,7 +83,10 @@ function check_raw_file {
         log_event "$domains_in_toplist" "toplist"
     fi
 
-    [[ -s filter_log.tmp ]] || save_and_exit 0  # Exit if no domains were filtered
+    if [[ ! -s filter_log.tmp ]]; then
+        rm filter_log.tmp  # Delete temp filter log file
+        exit  # Exit if no domains were filtered
+    fi
 
     sleep 0.5
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
@@ -91,10 +95,12 @@ function check_raw_file {
     printf "%s" "$domains" > "$raw_file"  # Save changes to blocklist
     format_list "$raw_file"
 
-    total_whitelisted_count=$((whitelisted_count + whitelisted_TLD_count))  # Calculate sum of whitelisted domains
+    total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -w <<< "$domains")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count"
-    save_and_exit 1  # Exit with error if the blocklist required filtering
+
+    rm filter_log.tmp  # Delete temp filter log file
+    exit 1  # Exit with error if the blocklist required filtering
 }
 
 function log_event {
@@ -104,6 +110,7 @@ function log_event {
 }
 
 function format_list {
+    [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
     if [[ "$1" == *.csv ]]; then
         sed -i 's/\r$//' "$1"  
@@ -111,21 +118,6 @@ function format_list {
     fi
     # Format carriage return characters, remove empty lines, sort and remove duplicates
     tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
-}
-
-function save_and_exit {
-    [[ -f filter_log.tmp ]] && rm filter_log.tmp  # Delete temp filter log file
-    exit_code="$1"
-    # If running locally, exit without pushing changes to repository
-    if [[ "$CI" != true ]]; then
-        sleep 0.5
-        printf "\nScript is running locally. No changes were pushed.\n"
-        exit "$exit_code"
-    fi
-    git add .
-    git commit -m "List maintenance"
-    git push -q
-    exit "$exit_code"
 }
 
 main

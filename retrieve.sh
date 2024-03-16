@@ -28,7 +28,7 @@ function main {
     # Retrieve domains using search terms only if there are no temporary search results files
     if ! ls data/search_term_*.tmp &> /dev/null; then
         retrieve_search_terms
-        merge_domains  # Exits early
+        merge_domains
     fi
 
     printf "\nUsing existing list of retrieved domains.\n\n"
@@ -50,9 +50,9 @@ function retrieve_search_terms {
 }
 
 function retrieve_domains {
-    search_term="${1//\"/}"  # Remove quotes froms search term
+    search_term="${1//\"/}"  # Remove quotes from search term before encoding
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
-    for start in {1..100..10}; do  # Loop through each page of results (100 is max)
+    for start in {1..100..10}; do  # Loop through each page of results (max of 100 results)
         query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${search_url}?${query_params}")
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results 
@@ -64,8 +64,7 @@ function retrieve_domains {
         log_search_term "$search_term" "0" "0" "0" "0" "0" "0" ""
         return
     fi
-    # Retrieve domains (ignores IP addresse) from URLs, sort and remove duplicates
-    collated_page_results=$(awk -F/ '{print $3}' collated_page_results.tmp | grep '[a-zA-Z]' | sort -u)
+    collated_page_results=$(awk -F/ '{print $3}' collated_page_results.tmp | sort -u)  # Retrieve domains from URLs, sort and remove duplicates
     rm collated_page_results.tmp  # Reset temp file for search results from each search term
     printf "%s" "$collated_page_results" > "data/search_term_${search_term:0:100}.tmp"  # Save search-term-specific results to temp file
     process_domains "$search_term" "$collated_page_results"  # Pass the search term and the results to the domain processing function
@@ -74,7 +73,7 @@ function retrieve_domains {
 function process_domains {
     search_term="$1"
     pending_domains="$2"
-    raw_count=$(wc -w <<< "$pending_domains")  # Count number of unfilitered domains retrieved
+    unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfilitered domains retrieved
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -102,26 +101,34 @@ function process_domains {
     fi
     
     # Remove domains that have whitelisted TLDs
-    whitelisted_TLD_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
-    whitelisted_TLD_count=$(wc -w <<< "$whitelisted_TLD_domains")  # Count number of domains with whitelisted TLDs
-    if [[ whitelisted_TLD_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
-        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_TLD_domains"))
-        log_event "$whitelisted_TLD_domains" "tld"
+    whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
+    whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")  # Count number of domains with whitelisted TLDs
+    if [[ whiltelisted_tld_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
+        log_event "$whiltelisted_tld_domains" "tld"
+    fi
+
+    # Remove IP addresses
+    ip_addresses=$(grep -v '[a-z]' <<< "$pending_domains" | sort -u)
+    if [[ -n "$ip_addresses" ]]; then
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$ip_addresses"))
+        log_event "$ip_addresses" "ip_address"
+        printf "%s" "$ip_addresses" > ip_addresses.tmp  # Save IP addresses into temp file
     fi
 
     # Remove wildcard domains that are no longer in the blocklist
     comm -12 "$wildcards_file" "$raw_file" > "${wildcards_file}.tmp" && mv "${wildcards_file}.tmp" "$wildcards_file"
     redundant_domains_count=0  # Initialize redundant domains count
     # Remove redundant domains
-    while read -r domain; do  # Loop through wildcard domains
+    while read -r wildcard; do  # Loop through wildcard domains
         # Find redundant domains via wildcard matching
-        redundant_domains=$(grep "\.${domain}$" <<< "$pending_domains")
+        redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")
         [[ -z "$redundant_domains" ]] && continue  # Skip to next wildcard if no matches found
         # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
         log_event "$redundant_domains" "redundant"
-        log_event "$domain" "wildcard"
+        log_event "$wildcard" "wildcard"
     done < "$wildcards_file"
 
     dead_domains_count=0  # Initialize dead domains count
@@ -145,9 +152,9 @@ function process_domains {
         log_event "$domains_in_toplist" "toplist"
     fi
 
-    total_whitelisted_count=$((whitelisted_count + whitelisted_TLD_count))  # Calculate sum of whitelisted domains
+    total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
     final_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
-    log_search_term "$search_term" "$raw_count" "$final_count" "$total_whitelisted_count" "$dead_domains_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
+    log_search_term "$search_term" "$unfiltered_count" "$final_count" "$total_whitelisted_count" "$dead_domains_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate the filtered domains to a temp file
 }
 
@@ -156,7 +163,7 @@ function merge_domains {
     # Exit if no new domains to add or temp file is missing
     if [[ ! -s filtered_domains.tmp ]]; then
         printf "\nNo new domains to add.\n\n"
-        save_and_exit 0
+        exit
     fi
 
     format_list filtered_domains.tmp
@@ -171,15 +178,17 @@ function merge_domains {
     fi
     sleep 0.5
 
-    # Exit with error if domains were found in toplist
-    if [[ -f in_toplist.tmp ]]; then
+    # Exit with error if domains were found in toplist or IP addresses were found
+    if [[ -f in_toplist.tmp ]] || [[ -f ip_addresses.tmp ]]; then
         format_list in_toplist.tmp
-        printf "\nDomains found in toplist (%s):\n" "$(wc -w < in_toplist.tmp)"
+        format_list ip_addresses.tmp
+        printf "\nEntries requiring manual review:\n"
         sleep 0.5
-        cat in_toplist.tmp
+        awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
+        awk 'NF {print $0 " (IP address)"}' ip_adddresses.tmp
         sleep 0.5
-        printf "\nPending domains saved for rerun.\n\n"
-        save_and_exit 1
+        [[ -f in_toplist.tmp ]] && printf "\nRaw file not saved.\n\n"
+        exit 1
     fi
 
     count_before=$(wc -w < "$raw_file")
@@ -189,7 +198,6 @@ function merge_domains {
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
-    save_and_exit 0
 }
 
 function log_event {
@@ -205,6 +213,7 @@ function log_search_term {
 }
 
 function format_list {
+    [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
     if [[ "$1" == *.csv ]]; then
         sed -i 's/\r$//' "$1"  
@@ -214,25 +223,15 @@ function format_list {
     tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
 
-function save_and_exit {
+function cleanup {
     [[ -f filtered_domains.tmp ]] && rm filtered_domains.tmp  # Reset temp file for filtered domains
+    [[ -f ip_addresses.tmp ]] && rm ip_adddresses.tmp  # Reset temp file for IP addresses
     # Reset temp search results files if there are no domains found in toplist
     if [[ ! -f in_toplist.tmp ]] && ls data/search_term_*.tmp &> /dev/null; then
         rm data/search_term_*.tmp
     fi
     [[ -f in_toplist.tmp ]] && rm in_toplist.tmp  # Reset temp file for domains found in toplist
-
-    exit_code="$1"
-    # If running locally, exit without pushing changes to repository
-    if [[ "$CI" != true ]]; then
-        sleep 0.5
-        printf "\nScript is running locally. No changes were pushed.\n"
-        exit "$exit_code"
-    fi
-    git add .
-    git commit -m "Retrieve domains"
-    git push -q
-    exit "$exit_code"
 }
 
+trap cleanup EXIT
 main
