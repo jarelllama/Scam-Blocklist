@@ -1,6 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-search_log='data/search_log.csv'
+source_log='data/source_log.csv'
 domain_log='data/domain_log.csv'
 todays_date="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 yesterdays_date="$(TZ=Asia/Singapore date -d "yesterday" +"%d-%m-%y")"
@@ -8,7 +8,7 @@ yesterdays_date="$(TZ=Asia/Singapore date -d "yesterday" +"%d-%m-%y")"
 function main {
     command -v csvstat &> /dev/null || pip install -q csvkit
     format_list "$raw_file"
-    format_list "$search_log"
+    format_list "$source_log"
     format_list "$domain_log"
     build_adblock
     build_dnsmasq
@@ -112,7 +112,7 @@ EOF
 }
 
 function count_for_day {
-    runs=$(csvgrep -c 1 -r "$1" "$search_log" | csvcut -c 4 | tail +2)  # Find all runs on that particular day
+    runs=$(csvgrep -c 1 -r "$1" "$source_log" | csvcut -c 4 | tail +2)  # Find all runs on that particular day
     total_count=0  # Initiaize total count
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved that day
