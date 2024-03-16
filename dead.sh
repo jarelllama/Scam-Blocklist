@@ -1,11 +1,13 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
 domain_log='data/domain_log.csv'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 function main {
     format_list "$raw_file"
+    format_list "$wildcards_file"
     format_list "$domain_log"
     check_dead
 }
@@ -16,7 +18,7 @@ function check_dead {
         if host -t a "$domain" | grep -q 'has no A record'; then  # Check if the domain has an A record
             printf "%s\n" "$domain" >> dead.tmp
         fi
-    done < "$raw_file"
+    done <<< "$(comm -23 "$raw_file" "$wildcards_file")"  # Exclude wildcards as they might not have A records but block subdomains that do
     format_list dead.tmp
     comm -23 "$raw_file" dead.tmp > "${raw_file}.tmp" && mv "${raw_file}.tmp" "$raw_file"  # Remove dead domains
     log_event "$(<dead.tmp)" "dead"
