@@ -19,7 +19,7 @@ jobs:
         env:
           google_search_id: ${{ secrets.SEARCH_ID }}
           google_search_api_key: ${{ secrets.SEARCH_API_KEY }}
-          aa419_api_Id: ${{ secrets.AA419_API_ID }}
+          aa419_api_id: ${{ secrets.AA419_API_ID }}
         run: bash retrieve.sh
 
       - name: Push

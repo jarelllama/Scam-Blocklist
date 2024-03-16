@@ -95,8 +95,8 @@ function search_google {
         log_source "Google Search" "$search_term" "0" "0" "0" "0" "0" "0" ""
         return
     fi
-    awk -F/ '{print $3}' collated_page_results.tmp > collated_search_domains.tmp  # Strip URLs to domains
-    rm collated_page_results.tmp  # Reset temp file for search results from each search term
+    awk -F/ '{print $3}' collated_search_results.tmp > collated_search_domains.tmp  # Strip URLs to domains
+    rm collated_search_results.tmp  # Reset temp file for search results from each search term
     cat collated_search_domains.tmp > "data/domains_google_search_${search_term:0:100}.tmp"  # Save results to search-term-specific temp file
     process_source "Google Search" "$search_term" collated_search_domains.tmp  # Pass the search term and the results to the domain processing function
 }
@@ -239,7 +239,7 @@ function log_source {
     # Print and log statistics for source used
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
-    awk -v source="$1" item="$item" -v raw="$3" -v filtered="$4" -v whitelist="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","filtered","whitelist","redundant","toplist_count","toplist_domains}' >> "$source_log"
+    awk -v source="$1" -v item="$item" -v raw="$3" -v filtered="$4" -v whitelist="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","filtered","whitelist","redundant","toplist_count","toplist_domains}' >> "$source_log"
     printf "Item: %s\nRaw: %s  Filtered: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7"
     printf "%s\n" "---------------------------------------------------------------------"
 }
