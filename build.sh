@@ -128,7 +128,7 @@ function build_list {
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
-${3} Description: Blocklist for scam sites automatically retrieved from Google Search
+${3} Description: Blocklist for scam sites automatically retrieved from Google Search, updated daily. Also includes malicious hosting sites.
 ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Version: $(date -u +"%m.%d.%H%M%S.%Y")
