@@ -12,5 +12,6 @@ jobs:
 
       - name: Run test
         run: |
+          cd data
           npm i -g @adguard/dead-domains-linter
           dead-domains-linter -i raw.txt --show
