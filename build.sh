@@ -4,8 +4,6 @@ search_log='data/search_log.csv'
 domain_log='data/domain_log.csv'
 todays_date="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 yesterdays_date="$(TZ=Asia/Singapore date -d "yesterday" +"%d-%m-%y")"
-lists_directory='lists'
-blocklist_name='scams'
 
 function main {
     command -v csvstat &> /dev/null || pip install -q csvkit
@@ -119,7 +117,7 @@ function count_for_day {
 }
 
 function build_list {
-    blocklist_path="${lists_directory}/${directory}/${blocklist_name}.txt"
+    blocklist_path="lists/${directory}/scams.txt"
     [[ -d "$(dirname $blocklist_path)" ]] || mkdir "$(dirname $blocklist_path)"  # Create directory if not present
 
     # Format domains for each syntax type
