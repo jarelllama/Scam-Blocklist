@@ -38,7 +38,7 @@ function main {
 
     printf "Log:\n"
     tail -9 "$domain_log"
-    printf "\n"
+    printf "%s\n" "---------------------------------------------------------------------"
 
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if script did not run as intended
 }
