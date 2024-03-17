@@ -2,6 +2,7 @@
 raw_file='data/raw.txt'
 wildcards_file='data/wildcards.txt'
 blacklist_file='config/blacklist.txt'
+domain_log='data/domain_log.txt'
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
@@ -9,7 +10,9 @@ function main {
     prepare_sample  # Prepare sample files
     bash retrieve.sh  # Run retrieval script
     printf "%s\n" "---------------------------------------------------------------------"
-    printf "Run completed.\n"
+    printf "Run completed. Log:\n"
+    tail -10 "$domain_log"
+    printf "\n"
 
     # Check returned error code
     if [[ "$?" -eq 1 ]]; then
@@ -38,7 +41,6 @@ function check_wildcards_file {
         return
     fi
     printf "! Wildcards file is incorrect.\n"
-    cat "$wildcards_file"
     exit 1
 }
 
