@@ -1,5 +1,5 @@
-name: ShellCheck
-run-name: ShellCheck
+name: Check script
+run-name: Check script
 on:
   workflow_dispatch:
   push:
@@ -7,13 +7,13 @@ on:
       - '**.sh'
 
 jobs:
-  ShellCheck:
+  check-script:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: ShellCheck
+      - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         with:
           ignore_paths: legacy
