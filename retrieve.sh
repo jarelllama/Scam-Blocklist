@@ -13,8 +13,7 @@ time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 search_url='https://customsearch.googleapis.com/customsearch/v1'
 aa419_url='https://api.aa419.org/fakesites'
 
-# Find potential malicious hosting domains
-# grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3}' | sort -u
+# grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3}' | sort -u  # Find potential wildcards
 
 # If running locally, use locally stored secrets instead of environment variables
 if [[ "$CI" != true ]]; then
