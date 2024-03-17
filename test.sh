@@ -10,17 +10,21 @@ function main {
 
     bash retrieve.sh  # Run retrieval script
     # Check returned error code
-    if [[ 1 -eq 1 ]]; then
-        printf "Script returned an error\n"
+    if [[ "$?" -eq 1 ]]; then
+        printf "Script returned an error\n\n"
+        check_output
         exit 1
     fi
+    check_output
+}
 
+function check_output {
     # Check script output
     if cmp -s "$raw_file" output.tmp; then
-        printf "Output is as expected.\n"
-        exit
+        printf "Output is as expected.\n\n"
+        return
     fi
-    printf "Output is not as expected:\n"
+    printf "Output is not as expected:\n\n"
     cat "$raw_file"
     printf "\n"
     exit 1
