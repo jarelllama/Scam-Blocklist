@@ -1,7 +1,7 @@
 #!/bin/bash
 raw_file='data/raw.txt'
 wildcards_file='data/wildcards.txt'
-blacklist_file='data/blacklist.txt'
+blacklist_file='config/blacklist.txt'
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
@@ -24,7 +24,7 @@ function check_output {
         printf "Output is as expected.\n\n"
         return
     fi
-    printf "Output is not as expected:\n\n"
+    printf "Output is not as expected:\n"
     cat "$raw_file"
     printf "\n"
     exit 1
