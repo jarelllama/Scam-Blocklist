@@ -1,5 +1,5 @@
-name: Check script
-run-name: Check script
+name: Check scripts
+run-name: Check scripts
 on:
   workflow_dispatch:
   push:
@@ -7,7 +7,7 @@ on:
       - '**.sh'
 
 jobs:
-  check-script:
+  check-scripts:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
