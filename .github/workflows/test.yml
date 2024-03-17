@@ -27,3 +27,4 @@ jobs:
       - name: retrieve.sh
         run: |
           bash retrieve.sh
+          printf "Test run concluded with no error\n" 
