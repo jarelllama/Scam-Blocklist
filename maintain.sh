@@ -36,10 +36,13 @@ function check_raw_file {
         [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
         # Count number of domains with common subdomains
         domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")))
-        domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)  # Strip subdomains to root domains
+        domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)  # Keep only root domains
+        root_domains=$(printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//")  # Retrieve the root domains
+        printf "%s\n" "$root_domains" >> "$wildcards_file"  # Add the root domains to the wildcards file so they will not be removed if dead
         awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_file"
+    format_list "$wildcards_file"
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$domains" | grep -vxFf "$blacklist_file")
