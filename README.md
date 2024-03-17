@@ -18,12 +18,12 @@ Domains found today: 0
 Domains found yesterday: 0
 
 Source: Google Search
-Domains found today: 3615
-Domains found yesterday: 3615
+Domains found today: 0
+Domains found yesterday: 0
 
 Source: aa419
-Domains found today: 4264
-Domains found yesterday: 4264
+Domains found today: 0
+Domains found yesterday: 0
 
 The 5 most recently added domains:
 www.zupapasports.com
