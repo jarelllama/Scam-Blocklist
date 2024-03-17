@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 ```
-Total domains: 6786
+Total domains: 6790
 Domains from Google Search: 2576
 Domains from aa419: 4214
 
@@ -21,10 +21,6 @@ Domains found today: 4214
 Domains found yesterday: 2576
 
 The 5 most recently added domains:
-pfconnolly.com
-puppiescentral.co.za
-sunshinedoddles.com
-xprovibe.com
 mynextpuppy.co.za
 ```
 
@@ -72,7 +68,9 @@ Dead domains are removed daily using [AdGuard's Dead Domains Linter](https://git
 
 [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
 
-[Hagezi's DNS Blocklist](https://github.com/hagezi/dns-blocklists): inspiration and reference
+[r/Scams](https://www.reddit.com/r/Scams/)
+
+[r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/)
 
 ## See also
 

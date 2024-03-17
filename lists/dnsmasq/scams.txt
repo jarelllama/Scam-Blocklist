@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.17.093121.2024
-# Last modified: Sun Mar 17 09:31:21 UTC 2024
+# Version: 03.17.124236.2024
+# Last modified: Sun Mar 17 12:42:36 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 6786
+# Total number of entries: 6790
 #
 local=/01edc.com/
 local=/103-boi.com/
@@ -878,6 +878,7 @@ local=/bpurecosmetics.com/
 local=/bradfordcutlery.com/
 local=/bradsmithchambers.com/
 local=/braiinhash.com/
+local=/braintrustfx.net/
 local=/bramancollection.com/
 local=/brandestonpuppiesfarms.co.za/
 local=/brandkeyshop.com/
@@ -1334,6 +1335,7 @@ local=/coffeeteaware.com/
 local=/cogiz.co/
 local=/cogool.com/
 local=/coin-profit.net/
+local=/coinfire.net/
 local=/coinominvestterm.com/
 local=/coins-vest.com/
 local=/coinsfxtrader.com/
@@ -4774,6 +4776,7 @@ local=/prodoorhandle.com/
 local=/proeragroup.com/
 local=/professionistidelsorriso.eu/
 local=/profitable-asset.net/
+local=/profitunits.com/
 local=/proflixcoinage.net/
 local=/profxtradeinvestment.com/
 local=/projasonsecurityexpress.com/
@@ -5830,6 +5833,7 @@ local=/terunami.shop/
 local=/terutied.com/
 local=/terwoao.com/
 local=/tesauree.com/
+local=/teslaminingplatform.therealworldapp.live/
 local=/teslarea.com/
 local=/tesrin.com/
 local=/tessentembeddedanalytics.com/

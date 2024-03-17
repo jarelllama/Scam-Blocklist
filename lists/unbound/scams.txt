@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.17.093121.2024
-# Last modified: Sun Mar 17 09:31:21 UTC 2024
+# Version: 03.17.124236.2024
+# Last modified: Sun Mar 17 12:42:36 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 6786
+# Total number of entries: 6790
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -879,6 +879,7 @@ local-zone: "bpurecosmetics.com." always_nxdomain
 local-zone: "bradfordcutlery.com." always_nxdomain
 local-zone: "bradsmithchambers.com." always_nxdomain
 local-zone: "braiinhash.com." always_nxdomain
+local-zone: "braintrustfx.net." always_nxdomain
 local-zone: "bramancollection.com." always_nxdomain
 local-zone: "brandestonpuppiesfarms.co.za." always_nxdomain
 local-zone: "brandkeyshop.com." always_nxdomain
@@ -1335,6 +1336,7 @@ local-zone: "coffeeteaware.com." always_nxdomain
 local-zone: "cogiz.co." always_nxdomain
 local-zone: "cogool.com." always_nxdomain
 local-zone: "coin-profit.net." always_nxdomain
+local-zone: "coinfire.net." always_nxdomain
 local-zone: "coinominvestterm.com." always_nxdomain
 local-zone: "coins-vest.com." always_nxdomain
 local-zone: "coinsfxtrader.com." always_nxdomain
@@ -4775,6 +4777,7 @@ local-zone: "prodoorhandle.com." always_nxdomain
 local-zone: "proeragroup.com." always_nxdomain
 local-zone: "professionistidelsorriso.eu." always_nxdomain
 local-zone: "profitable-asset.net." always_nxdomain
+local-zone: "profitunits.com." always_nxdomain
 local-zone: "proflixcoinage.net." always_nxdomain
 local-zone: "profxtradeinvestment.com." always_nxdomain
 local-zone: "projasonsecurityexpress.com." always_nxdomain
@@ -5831,6 +5834,7 @@ local-zone: "terunami.shop." always_nxdomain
 local-zone: "terutied.com." always_nxdomain
 local-zone: "terwoao.com." always_nxdomain
 local-zone: "tesauree.com." always_nxdomain
+local-zone: "teslaminingplatform.therealworldapp.live." always_nxdomain
 local-zone: "teslarea.com." always_nxdomain
 local-zone: "tesrin.com." always_nxdomain
 local-zone: "tessentembeddedanalytics.com." always_nxdomain
