@@ -40,7 +40,7 @@ function main {
     fi
 
     printf "\nUsing existing list of retrieved domains.\n\n"
-    for temp_domains_file in data/domains_*.tmp; do  # Loop through each temp domains file
+    for temp_domains_file in data/domains_*.tmp; do  # Loop through temp domains file
         # Assume source is Google Search
         source="Google Search"
         item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
@@ -106,7 +106,7 @@ function process_source {
     format_list "$3"  # Format temp file for pending domains
     pending_domains=$(<"$3")  # Store pending domains in a variable
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
-    [[ "$3" == data/domains_*.tmp ]] || rm "$3"
+    [[ "$3" != data/domains_*.tmp ]] && rm "$3"
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -181,26 +181,38 @@ function process_source {
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
     log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
-    printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate the filtered domains to a temp file
+    printf "%s\n" "$pending_domains" > "data/source_${source}.tmp"  #  Collate the filtered domains to a temp file
 }
 
 function merge_domains {
     sleep 0.5
-    format_list filtered_domains.tmp
-    # Exit if no new domains to add or temp file is missing
-    if [[ ! -s filtered_domains.tmp ]]; then
+
+    # Exit with error if temp source files are not found
+    if ! ls data/source_*.tmp &> /dev/null; then
+        printf "\nNo source files found.\n\n"
+        exit 1
+    fi
+
+    # Collate domains from all sources
+    for temp_source_file in data/source_*.tmp; do  # Loop through temp source files
+        cat "$temp_source_file" >> domains.tmp
+    done
+    format_list domains.tmp
+
+    # Exit if no new domains to add
+    if [[ ! -s domains.tmp ]]; then
         printf "\nNo new domains to add.\n\n"
         exit
     fi
 
-    filtered_domains_count=$(wc -w < filtered_domains.tmp)  # Count number of filtered domains
+    domains_count=$(wc -w < domains.tmp)  # Count total number of domains
     # Print domains if count is less than or equal to 10
-    if [[ filtered_domains_count -le 10 ]]; then
-        printf "\nNew domains retrieved (%s):\n" "$filtered_domains_count"
+    if [[ domains_count -le 10 ]]; then
+        printf "\nNew domains retrieved (%s):\n" "$domains_count"
         sleep 0.5
-        cat filtered_domains.tmp
+        cat domains.tmp
     else
-        printf "\nNew domains retrieved: %s\n" "$filtered_domains_count"
+        printf "\nNew domains retrieved: %s\n" "$domains_count"
     fi
     sleep 0.5
 
@@ -225,10 +237,12 @@ function merge_domains {
         exit 1
     fi
 
+    log_event "$()"
+
     count_before=$(wc -w < "$raw_file")
-    cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
+    cat domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
-    log_event "$(<filtered_domains.tmp)" new_domain "all_sources"
+    log_event "$(<domains.tmp)" "new_domain" "all_sources"
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
@@ -237,7 +251,7 @@ function merge_domains {
 
 function log_event {
     # Log domain processing events
-   printf "%s" "$1" | awk -v event="$2" -v source="$3" -v time="$time_format" '{print time "," event "," $0 "," source}' >> "$domain_log"
+    printf "%s" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" '{print time "," type "," $0 "," source}' >> "$domain_log"
 }
 
 function log_source {
@@ -263,6 +277,10 @@ function format_list {
 function cleanup {
     [[ -f filtered_domains.tmp ]] && rm filtered_domains.tmp  # Reset temp file for filtered domains
     [[ -f ip_addresses.tmp ]] && rm ip_addresses.tmp  # Reset temp file for IP addresses
+    [[ -f domains.tmp ]] && rm domains.tmp  # Reset temp file for collated domains from all sources
+    if ! ls data/source_*.tmp &> /dev/null; then  # Reset temp source files
+        rm data/source_*.tmp
+    fi
     # Reset temp search results files if there are no domains found in toplist
     if [[ ! -f in_toplist.tmp ]] && ls data/domains_*.tmp &> /dev/null; then
         rm data/domains_*.tmp
