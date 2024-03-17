@@ -109,16 +109,15 @@ function process_source {
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains")  # Find domains with common subdomains
-        [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no domains found
-        # Count number of domains with common subdomains
-        domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")))  
-        root_domains=$(printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//")  # Remove the subdomain to get the root domains
-        # Add the root domains into the pending domains list (so they can be added to the wildcards file later)
-        pending_domains=$(printf "%s\n%s" "$pending_domains" "$root_domains" | sort -u)
+        [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
+        pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//")  # Keep only root domains
+        root_domains=$(printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//")  # Retrieve the root domains
+        printf "%s\n" "$root_domains" >> "$wildcards_file"  # Add the root domains to the wildcards file so they will not be removed if dead
         # Find and log domains with common subdomains exluding 'www.'
         domains_with_subdomains=$(grep -v "^www\." <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain" "$source"
     done < "$subdomains_file"
+    format_list "$wildcards_file"
 
     # Remove domains already in blocklist
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
@@ -161,11 +160,11 @@ function process_source {
     redundant_domains_count=0  # Initialize redundant domains count
     # Remove redundant domains
     while read -r wildcard; do  # Loop through wildcard domains
-        # Find redundant domains via wildcard matching
-        redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")
+        redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")  # Find redundant domains via wildcard matching
         [[ -z "$redundant_domains" ]] && continue  # Skip to next wildcard if no matches found
         # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
+        # Remove redundant domains
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
         log_event "$redundant_domains" "redundant" "$source"
     done < "$wildcards_file"
@@ -180,7 +179,6 @@ function process_source {
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
-    filtered_count=$((filtered_count - domains_with_subdomains_count))  # Exclude root domains added
     log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate the filtered domains to a temp file
 }
