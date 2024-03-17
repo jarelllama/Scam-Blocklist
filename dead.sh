@@ -27,7 +27,7 @@ function check_alive {
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to the raw file
     format_list "$raw_file"
-    log_event "$alive_domains" "resurrected"
+    log_event "$alive_domains" "resurrected" "dead_domains_file"
     rm dead.tmp
 }
 
@@ -41,12 +41,12 @@ function check_dead {
     comm -23 "$raw_file" <(printf "%s" "$dead_domains") > raw.tmp && mv raw.tmp "$raw_file"
     printf "%s\n" "$dead_domains" >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
-    log_event "$dead_domains" "dead"
+    log_event "$dead_domains" "dead" "raw"
 }
 
 function log_event {
     # Log domain processing events
-    printf "%s" "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",raw"}' >> "$domain_log"
+    printf "%s" "$1" | awk -v event="$2" -v source="$3" -v time="$time_format" '{print time "," event "," $0 "," source}' >> "$domain_log"
 }
 
 function format_list {
