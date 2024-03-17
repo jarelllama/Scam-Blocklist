@@ -11,7 +11,7 @@ function main {
     bash retrieve.sh  # Run retrieval script
 
     printf "%s\n" "---------------------------------------------------------------------"
-    printf "Run completed.\n\n"
+    printf "Run completed.\n"
 
     # Check returned error code
     if [[ "$?" -eq 1 ]]; then
