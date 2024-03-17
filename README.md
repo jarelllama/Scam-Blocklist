@@ -18,7 +18,7 @@ Domains from Google Search: 0
 Domains from aa419: 4214
 
 Domains found today: 4214
-Domains found yesterday: 576
+Domains found yesterday: 0
 
 The 5 most recently added domains:
 pfconnolly.com
