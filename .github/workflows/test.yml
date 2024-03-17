@@ -27,4 +27,3 @@ jobs:
       - name: retrieve.sh
         run: |
           bash retrieve.sh
-          printf "Exit code: %s\n" "$?" 

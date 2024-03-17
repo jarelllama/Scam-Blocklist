@@ -230,8 +230,7 @@ function merge_domains {
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
-    #[[ -f ip_addresses.tmp ]] && exit 1 || exit 0  # Exit with error if IP addresses were found
-    [[ -f ip_addresses.tmp ]] && exit 1
+    [[ -f ip_addresses.tmp ]] && exit 1 || exit 0  # Exit with error if IP addresses were found
 }
 
 function log_event {
