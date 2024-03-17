@@ -15,9 +15,8 @@ jobs:
 
       - name: Set up test data
         run: |
-          sample_domains=$(head -n 10 raw.txt)
-          printf "%s" "$sample_domains" > raw.txt
-          split -n l/3 raw.txt
+          temp_raw=$(head -n 10 data/raw.txt) && printf "%s" "$temp_raw" > data/raw.txt
+          split -n l/3 data/raw.txt
           mv xaa data/domains_aa419.tmp
           mv xab data/domains_google_search_test_search_term_1.tmp
           mv xac data/domains_google_search_test_search_term_2.tmp
