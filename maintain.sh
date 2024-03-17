@@ -83,6 +83,7 @@ function check_raw_file {
         log_event "$domains_in_toplist" "toplist"
     fi
 
+    format_list filter_log.tmp
     if [[ ! -s filter_log.tmp ]]; then
         rm filter_log.tmp  # Delete temp filter log file
         exit  # Exit if no domains were filtered

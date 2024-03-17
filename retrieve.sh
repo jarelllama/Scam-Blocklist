@@ -154,7 +154,7 @@ function process_source {
     fi
 
     # Remove wildcard domains that are no longer in the blocklist
-    comm -12 "$wildcards_file" "$raw_file" > wildcards_file.tmp && mv wildcards_file.tmp "$wildcards_file"
+    temp_wildcards=$(comm -12 "$wildcards_file" "$raw_file") && printf "%s" "$temp_wildcards" > "$wildcards_file"
     redundant_domains_count=0  # Initialize redundant domains count
     # Remove redundant domains
     while read -r wildcard; do  # Loop through wildcard domains

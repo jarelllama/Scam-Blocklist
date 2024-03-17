@@ -26,7 +26,7 @@ function main {
     rm alive.tmp
 
     dead-domains-linter --i "$adblock_file" --export dead.tmp  # Find and export dead domains
-    comm -23 dead.tmp "$wildcards_file" > dead.tmp.tmp && mv dead.tmp.tmp dead.tmp # Exclude wildcard domains
+    temp_dead=$(comm -23 dead.tmp "$wildcards_file") && printf "%s" "$temp_dead" > dead.tmp  # Exclude wildcard domains
     # Exit early if no dead domains found
     if [[ ! -s dead.tmp ]]; then
         rm dead.tmp

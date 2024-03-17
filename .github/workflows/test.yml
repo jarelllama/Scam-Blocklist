@@ -1,0 +1,26 @@
+name: Test retrieval
+run-name: Test retrieval
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'retrieve.sh'
+
+jobs:
+  test-retrieval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up test data
+        run: |
+          sample_domains=$(head -n 10 raw.txt)
+          printf "%s" "$sample_domains" > raw.txt
+          split -n l/3 raw.txt
+          mv xaa data/domains_aa419.tmp
+          mv xab data/domains_google_search_test_search_term_1.tmp
+          mv xac data/domains_google_search_test_search_term_2.tmp
+
+      - name: retrieve.sh
+        run: bash retrieve.sh
