@@ -25,4 +25,6 @@ jobs:
           rm sample.txt
 
       - name: retrieve.sh
-        run: bash retrieve.sh
+        run: |
+          bash retrieve.sh
+          printf "Exit code: %s\n" "$?" 
