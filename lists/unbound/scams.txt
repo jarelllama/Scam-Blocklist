@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.17.000300.2024
-# Last modified: Sun Mar 17 00:03:00 UTC 2024
+# Version: 03.17.044203.2024
+# Last modified: Sun Mar 17 04:42:03 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 6790
+# Total number of entries: 6782
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1827,7 +1827,6 @@ local-zone: "dxcu-us.com." always_nxdomain
 local-zone: "dymicapoultryfarm.co.za." always_nxdomain
 local-zone: "dynamicbreedershome.co.za." always_nxdomain
 local-zone: "dynamicservicescourier.com." always_nxdomain
-local-zone: "dynamicxpresscourier.com." always_nxdomain
 local-zone: "dynyl.com." always_nxdomain
 local-zone: "dytreasure.com." always_nxdomain
 local-zone: "dzoumy.co.uk." always_nxdomain
@@ -2733,7 +2732,6 @@ local-zone: "gruppojem.it." always_nxdomain
 local-zone: "gruzabawki.pl." always_nxdomain
 local-zone: "grystores.com." always_nxdomain
 local-zone: "gsi-marex.pl." always_nxdomain
-local-zone: "gsservices-en.com." always_nxdomain
 local-zone: "guaranteeib.com." always_nxdomain
 local-zone: "guardiandobermanpuppieshome.com." always_nxdomain
 local-zone: "guardianpuppieskennel.co.za." always_nxdomain
@@ -3784,7 +3782,6 @@ local-zone: "medexchemicallab.com." always_nxdomain
 local-zone: "medi-gal.pl." always_nxdomain
 local-zone: "medibuddispensary.com." always_nxdomain
 local-zone: "medical-meds-online-pharmacy.business.site." always_nxdomain
-local-zone: "medicalmjandpsychedelics.com." always_nxdomain
 local-zone: "medicatedmedsandvapes.com." always_nxdomain
 local-zone: "medicureshop.com." always_nxdomain
 local-zone: "medivaa.com." always_nxdomain
@@ -4011,7 +4008,6 @@ local-zone: "mtdynamicsconstructions.com." always_nxdomain
 local-zone: "mtrexc.com." always_nxdomain
 local-zone: "muangchangsugarmill.com." always_nxdomain
 local-zone: "muhibbahonlines.com." always_nxdomain
-local-zone: "mulexcorner.com." always_nxdomain
 local-zone: "mulheruniverso.com.br." always_nxdomain
 local-zone: "multinus.com." always_nxdomain
 local-zone: "multiplesportnew.com." always_nxdomain
@@ -4598,7 +4594,6 @@ local-zone: "phoinexinter-transfer.com." always_nxdomain
 local-zone: "phooom.com." always_nxdomain
 local-zone: "physicalfit.space." always_nxdomain
 local-zone: "piazzacafe.fi." always_nxdomain
-local-zone: "picaloy.com." always_nxdomain
 local-zone: "picboil.com." always_nxdomain
 local-zone: "picobengals.com." always_nxdomain
 local-zone: "pictureme23.b0tnet.com." always_nxdomain
@@ -4810,7 +4805,6 @@ local-zone: "psicotandem.es." always_nxdomain
 local-zone: "psilocybinmagicmushroomstore.net." always_nxdomain
 local-zone: "psilocybinshop.net." always_nxdomain
 local-zone: "psilocybinworld.net." always_nxdomain
-local-zone: "psilocybinworld24.com." always_nxdomain
 local-zone: "psmbedzin.pl." always_nxdomain
 local-zone: "pssbondedcourier.com." always_nxdomain
 local-zone: "psychedelic-mushroom.org." always_nxdomain
@@ -6166,7 +6160,6 @@ local-zone: "ttpglobaltradingcompany.co.za." always_nxdomain
 local-zone: "tuenhi.info." always_nxdomain
 local-zone: "tunzilivestockfarm.co.za." always_nxdomain
 local-zone: "turbinegeneratorengines.co.za." always_nxdomain
-local-zone: "turbobees.com." always_nxdomain
 local-zone: "turbopb.com." always_nxdomain
 local-zone: "turfdecor.com." always_nxdomain
 local-zone: "turkishexpresscourier.com." always_nxdomain
@@ -6274,7 +6267,6 @@ local-zone: "unitednationsmail.us." always_nxdomain
 local-zone: "unitedparcelsdelivery.com." always_nxdomain
 local-zone: "unitedrsbcbank.com." always_nxdomain
 local-zone: "unitedshippingusps.com." always_nxdomain
-local-zone: "unitedssdchemicalsolutionsltd.com." always_nxdomain
 local-zone: "unitedtbonline.com." always_nxdomain
 local-zone: "unitnatorg.org." always_nxdomain
 local-zone: "unitycattery.wixsite.com." always_nxdomain

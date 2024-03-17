@@ -13,12 +13,12 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 ```
-Total domains: 6790
+Total domains: 6782
 Domains from Google Search: 0
-Domains from aa419: 4268
+Domains from aa419: 4214
 
-Domains found today: 12
-Domains found yesterday: 4261
+Domains found today: 4214
+Domains found yesterday: 576
 
 The 5 most recently added domains:
 pfconnolly.com

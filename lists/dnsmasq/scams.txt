@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.17.000300.2024
-# Last modified: Sun Mar 17 00:03:00 UTC 2024
+# Version: 03.17.044203.2024
+# Last modified: Sun Mar 17 04:42:03 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 6790
+# Total number of entries: 6782
 #
 local=/01edc.com/
 local=/103-boi.com/
@@ -1826,7 +1826,6 @@ local=/dxcu-us.com/
 local=/dymicapoultryfarm.co.za/
 local=/dynamicbreedershome.co.za/
 local=/dynamicservicescourier.com/
-local=/dynamicxpresscourier.com/
 local=/dynyl.com/
 local=/dytreasure.com/
 local=/dzoumy.co.uk/
@@ -2732,7 +2731,6 @@ local=/gruppojem.it/
 local=/gruzabawki.pl/
 local=/grystores.com/
 local=/gsi-marex.pl/
-local=/gsservices-en.com/
 local=/guaranteeib.com/
 local=/guardiandobermanpuppieshome.com/
 local=/guardianpuppieskennel.co.za/
@@ -3783,7 +3781,6 @@ local=/medexchemicallab.com/
 local=/medi-gal.pl/
 local=/medibuddispensary.com/
 local=/medical-meds-online-pharmacy.business.site/
-local=/medicalmjandpsychedelics.com/
 local=/medicatedmedsandvapes.com/
 local=/medicureshop.com/
 local=/medivaa.com/
@@ -4010,7 +4007,6 @@ local=/mtdynamicsconstructions.com/
 local=/mtrexc.com/
 local=/muangchangsugarmill.com/
 local=/muhibbahonlines.com/
-local=/mulexcorner.com/
 local=/mulheruniverso.com.br/
 local=/multinus.com/
 local=/multiplesportnew.com/
@@ -4597,7 +4593,6 @@ local=/phoinexinter-transfer.com/
 local=/phooom.com/
 local=/physicalfit.space/
 local=/piazzacafe.fi/
-local=/picaloy.com/
 local=/picboil.com/
 local=/picobengals.com/
 local=/pictureme23.b0tnet.com/
@@ -4809,7 +4804,6 @@ local=/psicotandem.es/
 local=/psilocybinmagicmushroomstore.net/
 local=/psilocybinshop.net/
 local=/psilocybinworld.net/
-local=/psilocybinworld24.com/
 local=/psmbedzin.pl/
 local=/pssbondedcourier.com/
 local=/psychedelic-mushroom.org/
@@ -6165,7 +6159,6 @@ local=/ttpglobaltradingcompany.co.za/
 local=/tuenhi.info/
 local=/tunzilivestockfarm.co.za/
 local=/turbinegeneratorengines.co.za/
-local=/turbobees.com/
 local=/turbopb.com/
 local=/turfdecor.com/
 local=/turkishexpresscourier.com/
@@ -6273,7 +6266,6 @@ local=/unitednationsmail.us/
 local=/unitedparcelsdelivery.com/
 local=/unitedrsbcbank.com/
 local=/unitedshippingusps.com/
-local=/unitedssdchemicalsolutionsltd.com/
 local=/unitedtbonline.com/
 local=/unitnatorg.org/
 local=/unitycattery.wixsite.com/
