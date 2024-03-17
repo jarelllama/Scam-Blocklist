@@ -93,7 +93,7 @@ function check_raw_file {
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
     sleep 0.5
     cat filter_log.tmp
-    printf "%s" "$domains" > "$raw_file"  # Save changes to blocklist
+    printf "%s\n" "$domains" > "$raw_file"  # Save changes to blocklist
     format_list "$raw_file"
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains

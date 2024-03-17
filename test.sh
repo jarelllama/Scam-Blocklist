@@ -31,10 +31,10 @@ function check_output {
 }
 
 function prepare_sample {
-    printf "in.blocklist.com" > "$raw_file"  # Prepare sample raw file
-    printf "wildcard.in.blocklist.com" >> "$raw_file"
-    printf "wildcard.in.blocklist.com" > "$wildcards_file"  # Prepare sample wildcards file
-    printf "blacklisted.forum.com" > "$blacklist_file"  # Prepare sample blacklist file
+    printf "in.blocklist.com\n" > "$raw_file"  # Prepare sample raw file
+    printf "wildcard.in.blocklist.com\n" >> "$raw_file"
+    printf "wildcard.in.blocklist.com\n" > "$wildcards_file"  # Prepare sample wildcards file
+    printf "blacklisted.forum.com\n" > "$blacklist_file"  # Prepare sample blacklist file
 
     cat << EOF > input.tmp  # Prepare sample input data
 blacklisted.forum.com
