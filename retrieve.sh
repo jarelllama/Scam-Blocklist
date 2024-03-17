@@ -40,7 +40,7 @@ function main {
 
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through each temp domains file
-        # Assume source ig Google Search
+        # Assume source is Google Search
         source="Google Search"
         item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
         item=${item%.tmp}  # Rename extension from file name
