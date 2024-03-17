@@ -110,7 +110,8 @@ function process_source {
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains")  # Find domains with common subdomains
         [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
-        pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//")  # Keep only root domains
+        # Keep only root domains
+        pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
         root_domains=$(printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//")  # Retrieve the root domains
         printf "%s\n" "$root_domains" >> "$wildcards_file"  # Add the root domains to the wildcards file so they will not be removed if dead
         # Find and log domains with common subdomains exluding 'www.'
