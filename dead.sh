@@ -14,6 +14,7 @@ function main {
     format_list "$dead_domains_file"
     check_alive
     check_dead
+    check_line_count
 }   
 
 function check_alive {
@@ -44,6 +45,15 @@ function check_dead {
     printf "%s\n" "$dead_domains" >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$dead_domains" "dead" "raw"
+}
+
+function check_line_count {
+    # Check if the dead domains file has more than 5000 lines
+    dead_domains_count=$(wc -w < "$dead_domains_file")
+    if [[ dead_domains_count -gt 5000 ]]; then
+        # Clear first 1000 lines
+        tail +1001 "$dead_domains_file" > dead.tmp && mv dead.tmp "$dead_domains_file"
+    fi
 }
 
 function log_event {
