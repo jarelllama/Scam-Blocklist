@@ -38,6 +38,7 @@ function check_wildcards_file {
         return
     fi
     printf "! Wildcards file is incorrect.\n"
+    cat "$wildcards_file"
     exit 1
 }
 
