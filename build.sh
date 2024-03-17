@@ -147,7 +147,7 @@ function build_list {
     [[ -d "$(dirname $blocklist_path)" ]] || mkdir "$(dirname $blocklist_path)"  # Create directory if not present
 
     # Format domains for each syntax type
-    formatted_domains=$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file" | sort -u)
+    formatted_domains=$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file")
     total_count=$(wc -l <<< "$formatted_domains")  # Count total of formatted domains
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist

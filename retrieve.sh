@@ -112,8 +112,10 @@ function process_source {
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains" | grep -v "^www\.")
         # Log domains with common subdomains, excluding 'www'
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain" "$source"
-        # Remove the subdomain, keeping only the root domain, sort and remove duplicates
-        pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
+        # Remove the subdomain to get the root domains
+        root_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//")
+        # Add the root domains into the pending domains list (so they can be added to the wildcards file later on)
+        pending_domains=$(printf "%s\n%s" "$pending_domains" "$root_domains" | sort -u)
     done < "$subdomains_file"
 
     # Remove domains already in blocklist
