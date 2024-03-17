@@ -134,12 +134,12 @@ function count_for_day {
 }
 
 function count_for_source {
-    runs=$(csvgrep -c 2 -m "$1" "$source_log" | csvcut -c 5 | tail +2)
+    runs=$(csvgrep -c 2 -m "$1" "$source_log" | csvcut -c 5 | tail +2)  # Find all runs from that particular source
     total_count=0  # Initiaize total count
     for count in $runs; do
-        total_count=$((total_count + count))  # Calculate sum of domains retrieved that day
+        total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
     done
-    printf "%s" "$total_count"
+    printf "%s" "$total_count"  # Return domain count to function caller
 }
 
 function build_list {
