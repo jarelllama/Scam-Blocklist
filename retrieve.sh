@@ -243,8 +243,8 @@ function log_source {
     # Print and log statistics for source used
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
-    awk -v source="$1" -v item="$item" -v raw="$3" -v filtered="$4" -v whitelist="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","filtered","whitelist","redundant","toplist_count","toplist_domains}' >> "$source_log"
-    printf "Item: %s\nRaw: %s  Filtered: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7"
+    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","final","whitelist","redundant","toplist_count","toplist_domains}' >> "$source_log"
+    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7"
     printf "%s\n" "---------------------------------------------------------------------"
 }
 
