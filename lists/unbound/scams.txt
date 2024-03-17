@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.17.152201.2024
-# Last modified: Sun Mar 17 15:22:01 UTC 2024
+# Version: 03.17.194156.2024
+# Last modified: Sun Mar 17 19:41:56 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 6928
+# Total number of entries: 6926
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -97,6 +97,7 @@ local-zone: "acquistaossicodone.com." always_nxdomain
 local-zone: "acslope.com." always_nxdomain
 local-zone: "activatedwork.com." always_nxdomain
 local-zone: "activerollingballs.com." always_nxdomain
+local-zone: "acvtruckingllc.com." always_nxdomain
 local-zone: "adadream.com." always_nxdomain
 local-zone: "adairsoutletau.com." always_nxdomain
 local-zone: "adairssale.com." always_nxdomain
@@ -777,7 +778,6 @@ local-zone: "birkenmall.club." always_nxdomain
 local-zone: "bishopdaycare.com." always_nxdomain
 local-zone: "bitfarmclub.com." always_nxdomain
 local-zone: "bitfinexct.com." always_nxdomain
-local-zone: "bitfreds.com." always_nxdomain
 local-zone: "bitfreds.pro." always_nxdomain
 local-zone: "bitgrowthinvestment.com." always_nxdomain
 local-zone: "bitis.store." always_nxdomain
@@ -970,7 +970,6 @@ local-zone: "btzclothing.com." always_nxdomain
 local-zone: "buckprints.com." always_nxdomain
 local-zone: "buddekor.com." always_nxdomain
 local-zone: "buddhasflowers.com." always_nxdomain
-local-zone: "budsoasis.net." always_nxdomain
 local-zone: "buenacasademascotas.com." always_nxdomain
 local-zone: "bulkfinance.org." always_nxdomain
 local-zone: "bulknepgeld.com." always_nxdomain
@@ -1551,6 +1550,7 @@ local-zone: "ctu-funds.online." always_nxdomain
 local-zone: "cuddlykittensandcats.co.za." always_nxdomain
 local-zone: "cukiernialucynka.pl." always_nxdomain
 local-zone: "culeki.com." always_nxdomain
+local-zone: "cupidbk.com." always_nxdomain
 local-zone: "cupkiki.com." always_nxdomain
 local-zone: "curebeatradingcoltd.com." always_nxdomain
 local-zone: "curepuff.com." always_nxdomain
@@ -1709,6 +1709,7 @@ local-zone: "designbulldogsranch.com." always_nxdomain
 local-zone: "deskcodes.com." always_nxdomain
 local-zone: "destocktwo.fr." always_nxdomain
 local-zone: "detedeal.com." always_nxdomain
+local-zone: "deubni.com." always_nxdomain
 local-zone: "deucesvapeofficial.com." always_nxdomain
 local-zone: "deunatuweb.com." always_nxdomain
 local-zone: "deunow.com." always_nxdomain
@@ -2286,6 +2287,7 @@ local-zone: "fesgistore.com." always_nxdomain
 local-zone: "fevdat.com." always_nxdomain
 local-zone: "fexpresslogisticservice.com." always_nxdomain
 local-zone: "fgxctrade.com." always_nxdomain
+local-zone: "fhbcsnonline.com." always_nxdomain
 local-zone: "fhrerscheinlegal.com." always_nxdomain
 local-zone: "fiberivore.com." always_nxdomain
 local-zone: "fibut.shop." always_nxdomain
@@ -2364,7 +2366,6 @@ local-zone: "floraragdullhome.com." always_nxdomain
 local-zone: "florasiamesehome.com." always_nxdomain
 local-zone: "florida-boatreviews.net." always_nxdomain
 local-zone: "flouxsarl.fr." always_nxdomain
-local-zone: "flowerjoints.com." always_nxdomain
 local-zone: "fluctuatek.com." always_nxdomain
 local-zone: "fluffykennel.co.za." always_nxdomain
 local-zone: "fluffypawskennel.co.za." always_nxdomain
@@ -2372,7 +2373,6 @@ local-zone: "fluidbeverage.com." always_nxdomain
 local-zone: "fluxh.shop." always_nxdomain
 local-zone: "flyapexus.com." always_nxdomain
 local-zone: "flylinkexpressdelivery.com." always_nxdomain
-local-zone: "flypetexpress.com." always_nxdomain
 local-zone: "flytey.com." always_nxdomain
 local-zone: "flytracy.com." always_nxdomain
 local-zone: "fmfinance-gov.com.ng." always_nxdomain
@@ -2407,7 +2407,6 @@ local-zone: "foxaspect.com." always_nxdomain
 local-zone: "foxislandembroidery.com." always_nxdomain
 local-zone: "foxtradefx.com." always_nxdomain
 local-zone: "foxycontainers.com." always_nxdomain
-local-zone: "fpg-crypto.xyz." always_nxdomain
 local-zone: "fracb.org." always_nxdomain
 local-zone: "francoispinaultfoundation.com." always_nxdomain
 local-zone: "frax-credit.com." always_nxdomain
@@ -3478,6 +3477,7 @@ local-zone: "kunin-soutez.cz." always_nxdomain
 local-zone: "kunz-modeundmehr.de." always_nxdomain
 local-zone: "kurakova.pl." always_nxdomain
 local-zone: "kuwaitdogsandpuppiesadoptionandsales.blogspot.com." always_nxdomain
+local-zone: "kuyehandlers.com." always_nxdomain
 local-zone: "kvagen.co.za." always_nxdomain
 local-zone: "kvsolarpanelssolutions.com." always_nxdomain
 local-zone: "kwezidharmaexporters.com." always_nxdomain
@@ -3750,6 +3750,7 @@ local-zone: "magiceyess.com." always_nxdomain
 local-zone: "magnetacticalsuppliers.co.za." always_nxdomain
 local-zone: "mah-united-truckinginc.com." always_nxdomain
 local-zone: "mailapelihalli.fi." always_nxdomain
+local-zone: "mainecooncats.net." always_nxdomain
 local-zone: "mainecooncattery.wixsite.com." always_nxdomain
 local-zone: "mainefielduniversity.com." always_nxdomain
 local-zone: "mainetassettrustltd.com." always_nxdomain
@@ -4265,7 +4266,6 @@ local-zone: "nexcargoservices.com." always_nxdomain
 local-zone: "nexencos.com." always_nxdomain
 local-zone: "nexencu.com." always_nxdomain
 local-zone: "nextdaypuppieskennel.co.za." always_nxdomain
-local-zone: "nextdel.com." always_nxdomain
 local-zone: "nextdoorcouriers.com." always_nxdomain
 local-zone: "nextgensolar.co.za." always_nxdomain
 local-zone: "nflhandbag.co." always_nxdomain
@@ -4825,7 +4825,6 @@ local-zone: "premiumfrozenlivestockexperts.com." always_nxdomain
 local-zone: "premiumfxtrading.com." always_nxdomain
 local-zone: "premiuminsuranceassets.com." always_nxdomain
 local-zone: "premiumirons.com." always_nxdomain
-local-zone: "premiumlegaltrade.com." always_nxdomain
 local-zone: "premiumlightsupplier.com." always_nxdomain
 local-zone: "premiummachinessa.com." always_nxdomain
 local-zone: "premiumnoteshouse.com." always_nxdomain
@@ -5132,6 +5131,7 @@ local-zone: "rickelprodltd.com." always_nxdomain
 local-zone: "rickelproductltd.com." always_nxdomain
 local-zone: "rickelproductsltd.com." always_nxdomain
 local-zone: "ricksimpsonoils.us." always_nxdomain
+local-zone: "ridesafelogistics.com." always_nxdomain
 local-zone: "ridewheelsmfg.com." always_nxdomain
 local-zone: "ridgebackcontainers.co.za." always_nxdomain
 local-zone: "riepty.com." always_nxdomain
@@ -6324,7 +6324,6 @@ local-zone: "uccourierguaranteeservice.com." always_nxdomain
 local-zone: "ucointrades.com." always_nxdomain
 local-zone: "uctttrading.com." always_nxdomain
 local-zone: "udimen.com." always_nxdomain
-local-zone: "udpgovassist.com." always_nxdomain
 local-zone: "udpsgovgrant.com." always_nxdomain
 local-zone: "udsaey.online." always_nxdomain
 local-zone: "ueeeuer.com." always_nxdomain
@@ -6885,7 +6884,6 @@ local-zone: "zeitentdecken.com." always_nxdomain
 local-zone: "zekoicb.com." always_nxdomain
 local-zone: "zellali.com." always_nxdomain
 local-zone: "zellingtonco.com." always_nxdomain
-local-zone: "zeneithcres.com." always_nxdomain
 local-zone: "zenithbk.com." always_nxdomain
 local-zone: "zenithsolarsystems.co.za." always_nxdomain
 local-zone: "zenithssdchemicalssolution.com." always_nxdomain
