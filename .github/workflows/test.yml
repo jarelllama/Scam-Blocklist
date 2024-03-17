@@ -13,18 +13,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up test data
-        run: |
-          head -n 10 data/raw.txt > sample.txt  # Use 10 domains from the raw file as sample data
-          head -n 2 sample.txt > data/raw.txt  # Keep 2 domains in the raw file
-          split -n l/3 sample.txt  # Split the 10 domains into 3 source files
-          mv xaa data/domains_aa419.tmp
-          mv xab data/domains_google_search_test_search_term_1.tmp
-          mv xac data/domains_google_search_test_search_term_2.tmp
-          cat sample.txt
-          rm sample.txt
-
-      - name: retrieve.sh
-        run: |
-          bash retrieve.sh
-          printf "Test run concluded with no error\n" 
+      - name: test.sh
+        run: bash test.sh
