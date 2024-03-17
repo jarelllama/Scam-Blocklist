@@ -9,9 +9,13 @@ function main {
     prepare_sample  # Prepare sample files
 
     bash retrieve.sh  # Run retrieval script
+
+    printf "%s\n" "---------------------------------------------------------------------"
+    printf "Run completed.\n\n"
+
     # Check returned error code
     if [[ "$?" -eq 1 ]]; then
-        printf "Script returned an error\n\n"
+        printf "! Script returned an error.\n"
         check_output
         exit 1
     fi
@@ -24,7 +28,7 @@ function check_output {
         printf "Output is as expected.\n\n"
         return
     fi
-    printf "Output is not as expected:\n"
+    printf "! Output is not as expected:\n"
     cat "$raw_file"
     printf "\n"
     exit 1
