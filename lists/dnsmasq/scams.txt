@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.16.235157.2024
-# Last modified: Sat Mar 16 23:51:57 UTC 2024
+# Version: 03.17.000300.2024
+# Last modified: Sun Mar 17 00:03:00 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 6789
+# Total number of entries: 6790
 #
 local=/01edc.com/
 local=/103-boi.com/
@@ -4056,6 +4056,7 @@ local=/mylawfirmoffice.com/
 local=/mymallsale.us/
 local=/mymobilityaid.com/
 local=/mynamejewelry.shop/
+local=/mynextpuppy.co.za/
 local=/mynnls.org.uk/
 local=/myopic.shop/
 local=/myshoplaza.com/
