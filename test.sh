@@ -54,10 +54,12 @@ EOF
     cat << EOF > output.tmp  # Prepare expected result
 blacklisted.forum.com
 in.blocklist.com
+m.to.block.1.com
 to.block.1.com
 to.block.2.com
 to.block.3.com
 wildcard.in.blocklist.com
+www.to.block.2.com
 EOF
 
     split -n l/3 input.tmp  # Split the 10 domains into 3 source files
