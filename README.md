@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 ```
-Total domains: 6931
+Total domains: 6928
 Domains from Google Search: 3615
 Domains from aa419: 4264
 

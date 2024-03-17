@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.17.143655.2024
-# Last modified: Sun Mar 17 14:36:55 UTC 2024
+# Version: 03.17.152201.2024
+# Last modified: Sun Mar 17 15:22:01 UTC 2024
 # Syntax: Wildcard Asterisk
-# Total number of entries: 6931
+# Total number of entries: 6928
 #
 *.01edc.com
 *.103-boi.com
@@ -6784,9 +6784,6 @@
 *.wulooofficial.com
 *.wuxihat.us
 *.wwdcompany.com
-*.www.boulevardevent.us
-*.www.divinedecorofdallas.us
-*.www.fourseasonscourtyard.com
 *.wzcontainerlineinc.com
 *.wzlooo.com
 *.x-bik.myshopify.com
