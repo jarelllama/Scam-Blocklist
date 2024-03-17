@@ -24,6 +24,7 @@ function retrieve_toplist {
 }
 
 function check_raw_file {
+    warn=false  # Do not exit with error by default
     domains=$(<"$raw_file")
     before_count=$(wc -w <<< "$domains")
     touch filter_log.tmp  # Initialize temp filter log file
@@ -35,6 +36,7 @@ function check_raw_file {
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))
         awk 'NF {print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
         log_event "$whitelisted_domains" "whitelist"
+        warn=true
     fi
     
     # Remove domains that have whitelisted TLDs
@@ -44,6 +46,7 @@ function check_raw_file {
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))
         awk 'NF {print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
         log_event "$whitelisted_tld_domains" "tld"
+        warn=true
     fi
 
     redundant_domains_count=0  # Initialize redundant domains count
@@ -55,9 +58,10 @@ function check_raw_file {
         # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))
+        redundant_domains=$(grep -v "^www\." <<< "$redundant_domains")  # Exclude 'www.' subdomains
+        [[ -z "$redundant_domains" ]] && continue  # Skip to next domain if no matches found after exluding 'www.' subdomains
         awk 'NF {print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
         log_event "$redundant_domains" "redundant"
-        log_event "$domain" "wildcard"
         printf "%s\n" "$domain" >> "$wildcards_file"  # Collate the wilcard domains into a file
     done <<< "$domains"
     format_list "$wildcards_file"
@@ -68,6 +72,7 @@ function check_raw_file {
     if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
         awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
+        warn=true
     fi
 
     format_list filter_log.tmp
@@ -76,7 +81,6 @@ function check_raw_file {
         exit  # Exit if no domains were filtered
     fi
 
-    sleep 0.5
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
     sleep 0.5
     cat filter_log.tmp
@@ -88,7 +92,7 @@ function check_raw_file {
     printf "\nBefore: %s  After: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count"
 
     rm filter_log.tmp  # Delete temp filter log file
-    exit 1  # Exit with error if the blocklist required filtering
+    [[ "$warn" == true ]] && exit 1 || exit 0  # Exit with error if a filtering step deemed it so
 }
 
 function log_event {
