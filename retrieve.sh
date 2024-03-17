@@ -40,13 +40,12 @@ function main {
 
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through each temp domains file
-        # If source is Google Search
-        if [[ "$temp_domains_file" == *google_search* ]]; then
-            source="Google Search"
-            item=${temp_domains_file#domains_google_search_}  # Remove header from file name
-            item=${item%.tmp}  # Rename extension from file name
-        else
-            # If source is aa419
+        # Assume source ig Google Search
+        source="Google Search"
+        item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
+        item=${item%.tmp}  # Rename extension from file name
+        # Check if source is aa419
+        if [[ "$temp_domains_file" == *aa419* ]]; then
             source="db.aa419.org" 
             item="aa419"
         fi
@@ -61,7 +60,7 @@ function crawl_aa419 {
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
-        jq -r '.[].Domain' <<< "$page_results" | sort -u >> collated_aa419_domains.tmp  # Collate domains
+        jq -r '.[].Domain' <<< "$page_results" >> collated_aa419_domains.tmp  # Collate domains
     done
     # Skip domain processing if no domains retrieved
     if [[ ! -f collated_aa419_domains.tmp ]]; then
@@ -106,7 +105,7 @@ function process_source {
     format_list "$3"  # Format temp file for pending domains
     pending_domains=$(<"$3")  # Store pending domains in a variable
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
-    [[ "$3" == domains_*.tmp ]] || rm "$3"
+    [[ "$3" == data/domains_*.tmp ]] || rm "$3"
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -147,7 +146,7 @@ function process_source {
     fi
 
     # Remove IP addresses
-    ip_addresses=$(grep -v '[a-z]' <<< "$pending_domains" | sort -u)
+    ip_addresses=$(grep -v '[a-z]' <<< "$pending_domains")
     if [[ -n "$ip_addresses" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$ip_addresses"))
         log_event "$ip_addresses" "ip_address"
@@ -185,13 +184,13 @@ function process_source {
 
 function merge_domains {
     sleep 0.5
+    format_list filtered_domains.tmp
     # Exit if no new domains to add or temp file is missing
     if [[ ! -s filtered_domains.tmp ]]; then
         printf "\nNo new domains to add.\n\n"
         exit
     fi
 
-    format_list filtered_domains.tmp
     filtered_domains_count=$(wc -w < filtered_domains.tmp)  # Count number of filtered domains
     # Print domains if count is less than or equal to 10
     if [[ filtered_domains_count -le 10 ]]; then
@@ -231,7 +230,7 @@ function merge_domains {
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
-    [[ -f ip_addresses.tmp ]] && exit 1  # Exit with error if IP addresses were found
+    [[ -f ip_addresses.tmp ]] && exit 1 || exit 0  # Exit with error if IP addresses were found
 }
 
 function log_event {

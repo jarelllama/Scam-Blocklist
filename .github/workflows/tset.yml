@@ -1,0 +1,41 @@
+name: Test retrieval
+run-name: Test retrieval
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'retrieve.sh'
+
+jobs:
+  test-retrieval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up test data
+        run: |
+          cat << EOF > raw.txt
+01edc.com
+103-boi.com
+EOF
+
+          cat << EOF > data/domains_aa419.tmp
+17aap.net
+1sttheworld.com
+209primersammoshop.com
+EOF
+
+          cat << EOF > data/domains_google_search_test_search_term_1.tmp 
+247realestatefx.com
+24primetrade.com
+24tradecryptostars.com
+EOF
+
+          cat << EOF > data/domains_google_search_test_search_term_2.tmp 
+209primersglock.com
+247onlinefxtrade.com
+EOF
+
+      - name: retrieve.sh
+        run: bash retrieve.sh
