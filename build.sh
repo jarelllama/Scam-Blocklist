@@ -22,7 +22,7 @@ function update_readme {
     total_count=$(wc -w < "$raw_file")
     total_count_today=$(count_for_day "$todays_date")
     total_count_yesterday=$(count_for_day "$yesterdays_date")
-    google_count=$(count_for_source "Google Count")
+    google_count=$(count_for_source "Google Search")
     aa419_count=$(count_for_source "db.aa419.org")
     # Find 5 most recently added domains
     new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
