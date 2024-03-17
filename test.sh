@@ -7,9 +7,7 @@ blacklist_file='config/blacklist.txt'
 
 function main {
     prepare_sample  # Prepare sample files
-
     bash retrieve.sh  # Run retrieval script
-
     printf "%s\n" "---------------------------------------------------------------------"
     printf "Run completed.\n"
 
