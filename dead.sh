@@ -8,10 +8,11 @@ time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 function main {
     npm i -g @adguard/dead-domains-linter  # Install AdGuard Dead Domains Linter
-    format_list "$raw_file"
-    format_list "$wildcards_file"
-    format_list "$domain_log"
-    format_list "$dead_domains_file"
+    for file in config/* data/*; do  # Format files in the config and data directory
+        format_list "$file"
+    done
+    # Remove wildcard domains that are no longer in the blocklist (needs to run before domain processing)
+    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     check_alive
     check_dead
     check_line_count
@@ -58,7 +59,7 @@ function check_line_count {
 
 function log_event {
     # Log domain processing events
-    printf "%s" "$1" | awk -v event="$2" -v source="$3" -v time="$time_format" '{print time "," event "," $0 "," source}' >> "$domain_log"
+    printf "%s" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" '{print time "," type "," $0 "," source}' >> "$domain_log"
 }
 
 function format_list {

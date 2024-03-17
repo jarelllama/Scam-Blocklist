@@ -13,6 +13,8 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
+    # Remove wildcard domains that are no longer in the blocklist (needs to run before domain processing)
+    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     retrieve_toplist
     check_raw_file
 }
@@ -107,8 +109,7 @@ function check_raw_file {
 
 function log_event {
     # Log domain processing events
-    sed -i 's/\r$//' "$domain_log"  # Remove carriage return characters 
-    printf "%s" "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",raw"}' >> "$domain_log"
+    printf "%s" "$1" | awk -v type="$2" -v time="$time_format" '{print time "," type "," $0 ",raw"}' >> "$domain_log"
 }
 
 function format_list {
