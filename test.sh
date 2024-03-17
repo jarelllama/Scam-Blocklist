@@ -2,7 +2,7 @@
 raw_file='data/raw.txt'
 wildcards_file='data/wildcards.txt'
 blacklist_file='config/blacklist.txt'
-domain_log='data/domain_log.txt'
+domain_log='data/domain_log.csv'
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
