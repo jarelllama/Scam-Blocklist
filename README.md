@@ -14,16 +14,16 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 
 ```
 Total domains: 6926
-Domains found today: 0
-Domains found yesterday: 0
+Domains found today: 7284
+Domains found yesterday: 7284
 
 Source: Google Search
-Domains found today: 0
-Domains found yesterday: 0
+Domains found today: 7284
+Domains found yesterday: 7284
 
 Source: aa419
-Domains found today: 0
-Domains found yesterday: 0
+Domains found today: 7284
+Domains found yesterday: 7284
 
 The 5 most recently added domains:
 www.zupapasports.com
