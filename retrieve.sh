@@ -28,6 +28,8 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
+    # Remove wildcard domains that are no longer in the blocklist
+    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
@@ -156,8 +158,6 @@ function process_source {
         printf "%s\n" "$ip_addresses" >> ip_addresses.tmp  # Collate  IP addresses into temp file
     fi
 
-    # Remove wildcard domains that are no longer in the blocklist
-    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     redundant_domains_count=0  # Initialize redundant domains count
     # Remove redundant domains
     while read -r wildcard; do  # Loop through wildcard domains

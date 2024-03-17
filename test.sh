@@ -12,7 +12,7 @@ function main {
     printf "%s\n" "---------------------------------------------------------------------"
     printf "Run completed. Log:\n"
     tail -10 "$domain_log"
-    printf "\n"
+    printf "\n\n"
 
     # Check returned error code
     if [[ "$?" -eq 1 ]]; then
