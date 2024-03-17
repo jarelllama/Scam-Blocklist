@@ -232,6 +232,12 @@ function merge_domains {
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
+
+    rows=$(csvgrep -c 1 -m "$time_format" "$source_log" | tail -2)  # Find rows in log for this run
+    source=$(grep -vFf <(printf "%s" "$rows") "$source_log")  # Remove rows from log
+    rows=$(printf "%s" "$rows" | sed 's/no/yes/')  # Replace 'no' with 'yes' to record the domains were saved to the raw file
+    printf "%s\n%s" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
+
     [[ -f ip_addresses.tmp ]] && exit 1 || exit 0  # Exit with error if IP addresses were found
 }
 
@@ -244,7 +250,7 @@ function log_source {
     # Print and log statistics for source used
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
-    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","final","whitelist","redundant","toplist_count","toplist_domains}' >> "$source_log"
+    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","final","whitelist","redundant","toplist_count","toplist_domains",no"}' >> "$source_log"
     printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7"
     printf "%s\n" "---------------------------------------------------------------------"
 }
