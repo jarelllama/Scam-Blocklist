@@ -11,13 +11,13 @@ function main {
     format_list "$raw_file"
     format_list "$wildcards_file"
     format_list "$domain_log"
-
-    touch dead.tmp  # Intitialize temp file for dead domains
-    dead-domains-linter --i "$dead_domains_file" --export dead.tmp  # Find dead domains in the dead domains file
-    mv dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
     format_list "$dead_domains_file"
+    
+    dead-domains-linter -i "$dead_domains_file" --export dead.tmp  # Find dead domains in the dead domains file
     comm -23 "$dead_domains_file" dead.tmp > alive.tmp  # Find resurrected domains in the dead domains file
+    # Check if there are resurrected domains
     if [[ -s alive.tmp ]]; then
+        cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
         cat alive.tmp > "$raw_file"  # Add resurrected domains to the raw file
         format_list "$raw_file"
         log_event "$(<alive.tmp)" "resurrected"
@@ -25,14 +25,14 @@ function main {
     rm dead.tmp
     rm alive.tmp
 
-    dead-domains-linter --i "$adblock_file" --export dead.tmp  # Find and export dead domains
+    dead-domains-linter -i "$adblock_file" --export dead.tmp  # Find and export dead domains
     temp_dead=$(comm -23 dead.tmp "$wildcards_file") && printf "%s" "$temp_dead" > dead.tmp  # Exclude wildcard domains
     # Exit early if no dead domains found
     if [[ ! -s dead.tmp ]]; then
         rm dead.tmp
         exit
     fi
-    comm -23 "$raw_file" dead.tmp > raw.tmp && mv raw.tmp "$raw_file"  # Remove dead domains from raw file
+    temp_raw=$(comm -23 "$raw_file" dead.tmp) && printf "%s" "$temp_raw" > "$raw_file"  # Remove dead domains from raw file
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$(<dead.tmp)" "dead"
