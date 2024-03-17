@@ -60,7 +60,7 @@ function crawl_aa419 {
     for pgno in {1..20}; do  # Loop through 20 pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
-        [[ "$page_results" == "*No rows found*" ]] && break  # Break out of loop when there are no more results
+        jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" | sort -u >> collated_aa419_domains.tmp  # Collate domains
     done
     # Skip domain processing if no domains retrieved
