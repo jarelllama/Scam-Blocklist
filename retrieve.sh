@@ -111,7 +111,7 @@ function process_source {
         # Find domains with common subdomains, excluding 'www'
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains" | grep -v "^www\.")
         # Log domains with common subdomains, excluding 'www'
-        [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain"
+        [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain" "$source"
         # Remove the subdomain, keeping only the root domain, sort and remove duplicates
         pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
     done < "$subdomains_file"
@@ -122,18 +122,18 @@ function process_source {
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") "$dead_domains_file")
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$dead_domains_file")
-    log_event "$dead_domains" "dead"
+    log_event "$dead_domains" "dead" "$source"
 
     # Find blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")
-    log_event "$blacklisted_domains" "blacklist"
+    log_event "$blacklisted_domains" "blacklist" "$source"
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$pending_domains" | grep -vxFf "$blacklist_file")
     whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
     if [[ whitelisted_count -gt 0 ]]; then  # Check if whitelisted domains were found
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_domains"))
-        log_event "$whitelisted_domains" "whitelist"
+        log_event "$whitelisted_domains" "whitelist" "$source"
     fi
     
     # Remove domains that have whitelisted TLDs
@@ -141,14 +141,14 @@ function process_source {
     whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")  # Count number of domains with whitelisted TLDs
     if [[ whiltelisted_tld_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
-        log_event "$whiltelisted_tld_domains" "tld"
+        log_event "$whiltelisted_tld_domains" "tld" "$source"
     fi
 
     # Remove IP addresses
     ip_addresses=$(grep -v '[a-z]' <<< "$pending_domains")
     if [[ -n "$ip_addresses" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$ip_addresses"))
-        log_event "$ip_addresses" "ip_address"
+        log_event "$ip_addresses" "ip_address" "$source"
         printf "%s\n" "$ip_addresses" >> ip_addresses.tmp  # Collate  IP addresses into temp file
     fi
 
@@ -163,8 +163,8 @@ function process_source {
         # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
-        log_event "$redundant_domains" "redundant"
-        log_event "$wildcard" "wildcard"
+        log_event "$redundant_domains" "redundant" "$source"
+        log_event "$wildcard" "wildcard" "raw"
     done < "$wildcards_file"
 
     # Find matching domains in toplist, excluding blacklisted domains
@@ -172,7 +172,7 @@ function process_source {
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
     if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
-        log_event "$domains_in_toplist" "toplist"
+        log_event "$domains_in_toplist" "toplist" "$source"
     fi
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
@@ -225,7 +225,7 @@ function merge_domains {
     count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
-    log_event "$(<filtered_domains.tmp)" new_domain
+    log_event "$(<filtered_domains.tmp)" new_domain "all_sources"
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
@@ -234,7 +234,7 @@ function merge_domains {
 
 function log_event {
     # Log domain processing events
-   printf "%s" "$1" | awk -v event="$2" -v time="$time_format" '{print time "," event "," $0 ",new"}' >> "$domain_log"
+   printf "%s" "$1" | awk -v event="$2" -v source="$3" -v time="$time_format" '{print time "," event "," $0 "," source}' >> "$domain_log"
 }
 
 function log_source {
