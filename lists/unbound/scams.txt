@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and from the Artists Against 419 Fake Site Database (aa419), automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.17.044510.2024
-# Last modified: Sun Mar 17 04:45:10 UTC 2024
+# Version: 03.17.080825.2024
+# Last modified: Sun Mar 17 08:08:25 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 6782
+# Total number of entries: 6783
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -4873,6 +4873,7 @@ local-zone: "qdlashfairy.com." always_nxdomain
 local-zone: "qfsnesarag.com." always_nxdomain
 local-zone: "qisoin.com." always_nxdomain
 local-zone: "qmzdo.online." always_nxdomain
+local-zone: "qoeotyj.cn." always_nxdomain
 local-zone: "qoosam.com." always_nxdomain
 local-zone: "qpqaz.com." always_nxdomain
 local-zone: "qrtexpress.com." always_nxdomain
