@@ -28,8 +28,6 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    # Remove wildcard domains that are no longer in the blocklist
-    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
@@ -108,6 +106,8 @@ function process_source {
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
     [[ "$3" == data/domains_*.tmp ]] || rm "$3"
 
+    # Remove wildcard domains that are no longer in the blocklist
+    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains")  # Find domains with common subdomains

@@ -7,41 +7,40 @@ domain_log='data/domain_log.csv'
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
 function main {
+    error=false  # Initilize error variable
     prepare_sample  # Prepare sample files
     bash retrieve.sh  # Run retrieval script
     printf "%s\n" "---------------------------------------------------------------------"
-    printf "Run completed. Log:\n"
-    tail -10 "$domain_log"
-    printf "\n\n"
+    printf "Run completed.\n"
 
     # Check returned error code
     if [[ "$?" -eq 1 ]]; then
         printf "! Script returned an error.\n"
         check_raw_file
-        exit 1
+        error=true
     fi
-    check_raw_file
-}
-
-function check_raw_file {
+    # Check raw file
     if cmp -s "$raw_file" output.tmp; then
         printf "Raw file is as expected.\n"
-        check_wildcards_file
-        return
+    else
+        printf "! Raw file is not as expected:\n"
+        cat "$raw_file"
+        printf "\n"
+        error=true
     fi
-    printf "! Raw file is not as expected:\n"
-    cat "$raw_file"
-    printf "\n"
-    check_wildcards_file
-    exit 1
-}
+    # Check wildcards file
+    if ! grep -q 'to.block.1.com' "$wildcards_file" && grep -q 'to.block.2.com' "$wildcards_file"; then
+        printf "! Wildcards file is incorrect:\n"
+        cat "$wildcards_file"
+        printf "\n"
+        error=true
+    fi
 
-function check_wildcards_file {
-    if grep -q 'to.block.1.com' "$wildcards_file" && grep -q 'to.block.2.com' "$wildcards_file"; then
-        return
-    fi
-    printf "! Wildcards file is incorrect.\n"
-    exit 1
+    printf "Log:\n"
+    tail -9 "$domain_log"
+    printf "\n"
+
+    [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if script did not run as intended
 }
 
 function prepare_sample {
