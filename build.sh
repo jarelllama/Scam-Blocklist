@@ -2,8 +2,8 @@
 raw_file='data/raw.txt'
 source_log='data/source_log.csv'
 domain_log='data/domain_log.csv'
-todays_date="$(TZ=Asia/Singapore date +"%d-%m-%y")"
-yesterdays_date="$(TZ=Asia/Singapore date -d "yesterday" +"%d-%m-%y")"
+today="$(TZ=Asia/Singapore date +"%d-%m-%y")"
+yesterday="$(TZ=Asia/Singapore date -d "yesterday" +"%d-%m-%y")"
 
 function main {
     command -v csvstat &> /dev/null || pip install -q csvkit
@@ -19,11 +19,6 @@ function main {
 }
 
 function update_readme {
-    total_count=$(wc -w < "$raw_file")
-    total_count_today=$(count_for_day "$todays_date")
-    total_count_yesterday=$(count_for_day "$yesterdays_date")
-    google_count=$(count_for_source "Google Search")
-    aa419_count=$(count_for_source "db.aa419.org")
     # Find 5 most recently added domains
     new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
@@ -43,12 +38,17 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 \`\`\`
-Total domains: $total_count
-Domains from Google Search: $google_count
-Domains from aa419: $aa419_count
+Total domains: $(wc -w < "$raw_file")
+Domains found today: $(count "$today" "*")
+Domains found yesterday: $(count "$yesterday" "*")
 
-Domains found today: $total_count_today
-Domains found yesterday: $total_count_yesterday
+Source: Google Search
+Domains found today: $(count "$today" "Google Search")
+Domains found yesterday: $(count "$yesterday" "Google Search")
+
+Source: aa419
+Domains found today: $(count "$today" "db.aa419.org")
+Domains found yesterday: $(count "$yesterday" "db.aa419.org")
 
 The 5 most recently added domains:
 $new_domains
@@ -126,17 +126,8 @@ Thanks to the following people for the help, inspiration and support!
 EOF
 }
 
-function count_for_day {
-    runs=$(csvgrep -c 1 -r "$1" "$source_log" | csvcut -c 5 | tail +2)  # Find all runs on that particular day
-    total_count=0  # Initiaize total count
-    for count in $runs; do
-        total_count=$((total_count + count))  # Calculate sum of domains retrieved that day
-    done
-    printf "%s" "$total_count"  # Return domain count to function caller
-}
-
-function count_for_source {
-    runs=$(csvgrep -c 2 -m "$1" "$source_log" | csvcut -c 5 | tail +2)  # Find all runs from that particular source
+function count {
+    runs=$(csvgrep -c 1 -m "$1" -c 2 -r "$2" "$source_log" | csvcut -c 5 | tail +2)  # Find all runs from that particular source
     total_count=0  # Initiaize total count
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
