@@ -39,8 +39,8 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
-Domains found today: $(count "$today" "*")
-Domains found yesterday: $(count "$yesterday" "*")
+Domains found today: $(count "$today" "")
+Domains found yesterday: $(count "$yesterday" "")
 
 Source: Google Search
 Domains found today: $(count "$today" "Google Search")
@@ -127,7 +127,7 @@ EOF
 }
 
 function count {
-    runs=$(csvgrep -c 1 -m "$1" -c 2 -m "$2" -c 10 -m 'yes' "$source_log" | csvcut -c 5 | tail +2)  # Find all runs from that particular source
+    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 10 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
     total_count=0  # Initiaize total count
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
