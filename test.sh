@@ -14,21 +14,30 @@ function main {
     # Check returned error code
     if [[ "$?" -eq 1 ]]; then
         printf "! Script returned an error.\n"
-        check_output
+        check_raw_file
         exit 1
     fi
-    check_output
+    check_raw_file
 }
 
-function check_output {
-    # Check script output
+function check_raw_file {
     if cmp -s "$raw_file" output.tmp; then
-        printf "Output is as expected.\n\n"
+        printf "Raw file is as expected.\n"
+        check_wildcards_file
         return
     fi
-    printf "! Output is not as expected:\n"
+    printf "! Raw file is not as expected:\n"
     cat "$raw_file"
     printf "\n"
+    check_wildcards_file
+    exit 1
+}
+
+function check_wildcards_file {
+    if grep -q 'to.block.1.com' "$wildcards_file" && grep -q 'to.block.2.com' "$wildcards_file"; then
+        return
+    fi
+    printf "! Wildcards file is incorrect.\n"
     exit 1
 }
 
