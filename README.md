@@ -13,15 +13,19 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 ```
-Total domains: 6790
-Domains from Google Search: 2576
-Domains from aa419: 4214
+Total domains: 7283
+Domains from Google Search: 3615
+Domains from aa419: 4264
 
-Domains found today: 4214
+Domains found today: 5303
 Domains found yesterday: 2576
 
 The 5 most recently added domains:
-mynextpuppy.co.za
+www.zupapasports.com
+xpresschems.com
+xujia.tradefx110.com
+zedexforex.com
+zystfree-heaven.com
 ```
 
 ## How domains are added to the blocklist
