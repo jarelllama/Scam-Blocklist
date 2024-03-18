@@ -16,8 +16,8 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 Total domains: 6926
 
 Total | Today | Yesterday | Source
-- |   469 |      2576 | Google Search
-- |    25 |      4214 | aa419
+    - |   469 |      2576 | Google Search
+    - |    25 |      4214 | aa419
  6926 |   494 |      6790 | all
 
 The 5 most recently added domains:
