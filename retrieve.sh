@@ -107,7 +107,7 @@ function source_stopgunscams {
     source='stopgunscams.com'
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
-    for page in {1..500}; do  # Loop through pages
+    for page in {1..150}; do  # Loop through pages
         page_results=$(curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+\-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">')
         printf "%s\n" "$page_results" >> collated_stopgunscams_results.tmp  # Collate all pages of results
     done
