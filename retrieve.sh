@@ -100,7 +100,7 @@ function source_guntab {
 
 function source_petscams {
     source='petscams.com'
-    url='https://petscams.com/category/puppy-scammer-list/'
+    url='https://petscams.com/category/puppy-scammer-list'
     printf "\nSource: %s\n\n" "$source"
     for page in {1..500}; do  # Loop through 500 pages
         page_results=$(curl -s "${url}/page/${page}/" | grep -oE '<a href="https://petscams.com/puppy-scammer-list/[[:alnum:].-]+\-[[:alnum:]-]{2,}/"')
