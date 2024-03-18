@@ -19,7 +19,7 @@ function main {
 }   
 
 function check_alive {
-    sed 's/^/||/;s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
+    sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
     dead-domains-linter -i formatted_dead_domains_file.tmp --export dead.tmp  # Find dead domains in the dead domains file
     rm formatted_dead_domains_file.tmp
     alive_domains=$(comm -23 "$dead_domains_file" dead.tmp) # Find resurrected domains in the dead domains file
