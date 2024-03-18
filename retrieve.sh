@@ -260,7 +260,7 @@ function merge_domains {
     rows=$(csvgrep -c 1 -m "$time_format" "$source_log" | tail -2)  # Find rows in log for this run
     source=$(grep -vFf <(printf "%s" "$rows") "$source_log")  # Remove rows from log
     rows=$(printf "%s" "$rows" | sed 's/no/yes/')  # Replace 'no' with 'yes' to record the domains were saved to the raw file
-    printf "%s\n%s" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
+    printf "%s\n%s\n" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
 
     [[ -f ip_addresses.tmp ]] && exit 1 || exit 0  # Exit with error if IP addresses were found
 }
