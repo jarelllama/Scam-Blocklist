@@ -119,7 +119,7 @@ function source_petscams {
     # Strip results to domains
     sed -e 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///' \
         -e 's/<a href="https:\/\/petscams.com\/pet-delivery-scam\///' \
-        -e 's|[/".]||g' -e 's|-|.|g' collated_petscams_results.tmp > data/domains_petscams.tmp
+        -e 's/\/"//' -e 's/-/./g' collated_petscams_results.tmp > data/domains_petscams.tmp
     rm collated_petscams_results.tmp
     process_source "$source" "$source" "data/domains_petscams.tmp"
 }
