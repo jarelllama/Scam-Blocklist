@@ -65,7 +65,7 @@ function crawl_aa419 {
     done
     # Skip domain processing if no domains retrieved
     if [[ ! -f collated_aa419_domains.tmp ]]; then
-        log_source "db.aa419.org" "aa419" "0" "0" "0" "0" "0" "0" ""
+        log_source "db.aa419.org" "aa419" "0" "0" "0" "0" "0" ""
         return
     fi
     cat collated_aa419_domains.tmp > "data/domains_aa419.tmp"  # Save domains into a temp file
@@ -91,7 +91,7 @@ function search_google {
     done
     # Skip to next search term if no results retrieved
     if [[ ! -f collated_search_results.tmp ]]; then
-        log_source "Google Search" "$search_term" "0" "0" "0" "0" "0" "0" ""
+        log_source "Google Search" "$search_term" "0" "0" "0" "0" "0" ""
         return
     fi
     awk -F/ '{print $3}' collated_search_results.tmp > collated_search_domains.tmp  # Strip URLs to domains
