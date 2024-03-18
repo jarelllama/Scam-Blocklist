@@ -17,8 +17,9 @@ Total domains: 8698
 
 Total | Today | Yesterday | Source
     - |   476 |      2576 | Google Search
-    - |  1764 |      4214 | Site crawling
- 8698 |  2240 |      6790 | All sources
+    - |    25 |      4214 | aa419.org
+    - |  1739 |         0 | guntab.com
+ 8698 |  2240 |      6790 | All sources 
 
 The 5 most recently added domains:
 yourammoshop.com
@@ -27,11 +28,11 @@ zastavaarmstore.com
 zastavaarmsusashop.com
 zonearms.com
 
-Updated: Mon Mar 18 11:57 UTC
-Note: all data retrieved are publicly available
+Updated: Mon Mar 18 12:35 UTC
+Note: all data retrieved are publicly available 
 ```
 
-## Retrieving scam domains from  Google Search
+## Retrieving scam domains from Google Search
 
 Google provides a [Search API](https://developers.google.com/custom-search/v1/introduction) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve results, of which the domains are added to the blocklist. These search terms are manually added while investigating scam sites. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
@@ -39,7 +40,7 @@ Google provides a [Search API](https://developers.google.com/custom-search/v1/in
 
 Scam sites often do not have a long lifespan; domains can be created and removed within the same month. By searching Google Search using paragraphs of real-world scam sites, new domains can be added as soon as Google crawls the site. The search terms are often taken from sites reported on r/Scams, where real users are encountering these sites in the wild.
 
-The domain retrieval process for Google Search and site crawling can be viewed in the repository's code.
+The domain retrieval process for all sources can be viewed in the repository's code.
 
 ## Filtering process
 
