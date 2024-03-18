@@ -27,6 +27,8 @@ function update_readme {
     google_yesterday=$(count "$yesterday" "Google Search")
     petscams_today=$(count "$today" "petscams.com")
     petscams_yesterday=$(count "$yesterday" "petscams.com")
+    stopgunscams_today=$(count "$today" "stopgunscams.com")
+    stopgunscams_yesterday=$(count "$yesterday" "stopgunscams.com")
     # Find 5 most recently added domains
     new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
@@ -52,6 +54,7 @@ Total | Today | Yesterday | Source
     - |$(printf "%6s" "$google_today") |$(printf "%10s" "$google_yesterday") | Google Search
     - |$(printf "%6s" "$aa419_today") |$(printf "%10s" "$aa419_yesterday") | aa419.org
     - |$(printf "%6s" "$guntab_today") |$(printf "%10s" "$guntab_yesterday") | guntab.com
+    - |$(printf "%6s" "$stopgunscams_today") |$(printf "%10s" "$stopgunscams_yesterday") | stopgunscams.com
     - |$(printf "%6s" "$petscams_today") |$(printf "%10s" "$petscams_yesterday") | petscams.com
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources 
 
@@ -99,6 +102,8 @@ Wildcard domains are added manually to the blocklist to reduce the number of ent
 [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 
 [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
+
+[StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
 
 [PetScams.com](https://petscams.com/): pet scam sites database
 

@@ -31,10 +31,11 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        source_aa419
-        source_guntab
-        source_petscams
-        source_google_search
+        #source_aa419
+        #source_guntab
+        source_stopgunscams
+        #source_petscams
+        #source_google_search
         merge_domains
         exit
     fi
@@ -55,6 +56,10 @@ function main {
                 source="guntab.com" 
                 item="$source"
                 ;;
+            *stopgunscams*)
+                source="stopgunscams.com" 
+                item="$source"
+                ;;
             *petscams*)
                 source="petscams.com" 
                 item="$source"
@@ -69,9 +74,9 @@ function source_aa419 {
     source='aa419.org'
     url='https://api.aa419.org/fakesites'
     printf "\nSource: %s\n\n" "$source"
-    for pgno in {1..20}; do  # Loop through 20 pages
+    for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
-        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}"/"${query_params}")
+        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" >> data/domains_aa419.tmp  # Collate domains
     done
@@ -88,7 +93,7 @@ function source_guntab {
     url='https://www.guntab.com/scam-websites/'
     printf "\nSource: %s\n\n" "$source"
     # Retrieve domains from site
-    curl -s "$url" | grep -Ezo '<table class="datatable-list table">.*</table>' |
+    curl -s "$url" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > data/domains_guntab.tmp
     # Skip domain processing if no domains retrieved
     if [[ ! -s data/domains_guntab.tmp ]]; then
@@ -96,6 +101,25 @@ function source_guntab {
         return
     fi
     process_source "$source" "$source" "data/domains_guntab.tmp"
+}
+
+function source_stopgunscams {
+    source='stopgunscams.com'
+    url='https://stopgunscams.com'
+    printf "\nSource: %s\n\n" "$source"
+    for page in {1..500}; do  # Loop through pages
+        page_results=$(curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+\-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">')
+        printf "%s\n" "$page_results" >> collated_stopgunscams_results.tmp  # Collate all pages of results
+    done
+    # Skip domain processing if no domains retrieved
+    if [[ ! -f collated_stopgunscams_results.tmp ]]; then
+        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
+        return
+    fi
+    # Strip results to domains
+    sed 's/^<a href="\///; s/"><div class="ap-a-img -ic">//; s/-/./g' collated_stopgunscams_results.tmp > domains_stopgunscams.tmp
+    rm collated_stopgunscams_results.tmp
+    process_source "$source" "$source" "data/domains_stopgunscams.tmp"
 }
 
 function source_petscams {
