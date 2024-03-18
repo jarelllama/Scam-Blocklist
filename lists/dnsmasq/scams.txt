@@ -2,14 +2,15 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.184447.2024
-# Last modified: Mon Mar 18 18:44:47 UTC 2024
+# Version: 03.18.191508.2024
+# Last modified: Mon Mar 18 19:15:08 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 12132
+# Total number of entries: 12136
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
 local=/103-boi.com/
+local=/15partsforsaleonline.us/
 local=/17aap.net/
 local=/1sttheworld.com/
 local=/209primersammoshop.com/
@@ -33,6 +34,7 @@ local=/420auweed.org/
 local=/420deliverycanberra.com/
 local=/43logisticslimited.com/
 local=/45smarts.com/
+local=/4lovelyhomes.com/
 local=/4sweethomes.com/
 local=/4threvo.co.za/
 local=/556store.com/
@@ -599,6 +601,7 @@ local=/ammunitionseeker.com/
 local=/ammunitionsguru.com/
 local=/ammunitionsinbulk.com/
 local=/ammunitionsnation.com/
+local=/ammunitionss.com/
 local=/ammunitionstore.ca/
 local=/ammunitionstoreonline.com/
 local=/ammunitionsupplyusa.com/
@@ -734,6 +737,7 @@ local=/aquahomedepot.com/
 local=/aquamarinafishes.com/
 local=/aquariumshop.xyz/
 local=/ar.15partsforsaleonline.us/
+local=/ar15.riffle.parts.com/
 local=/aramexcourierservice.online/
 local=/aramexgloballogistics.com/
 local=/arcadeamsterdambv.com/

@@ -2,15 +2,16 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.184447.2024
-# Last modified: Mon Mar 18 18:44:47 UTC 2024
+# Version: 03.18.191508.2024
+# Last modified: Mon Mar 18 19:15:08 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 12132
+# Total number of entries: 12136
 #
 server:
 local-zone: "01edc.com." always_nxdomain
 local-zone: "101luadalmatians.com." always_nxdomain
 local-zone: "103-boi.com." always_nxdomain
+local-zone: "15partsforsaleonline.us." always_nxdomain
 local-zone: "17aap.net." always_nxdomain
 local-zone: "1sttheworld.com." always_nxdomain
 local-zone: "209primersammoshop.com." always_nxdomain
@@ -34,6 +35,7 @@ local-zone: "420auweed.org." always_nxdomain
 local-zone: "420deliverycanberra.com." always_nxdomain
 local-zone: "43logisticslimited.com." always_nxdomain
 local-zone: "45smarts.com." always_nxdomain
+local-zone: "4lovelyhomes.com." always_nxdomain
 local-zone: "4sweethomes.com." always_nxdomain
 local-zone: "4threvo.co.za." always_nxdomain
 local-zone: "556store.com." always_nxdomain
@@ -600,6 +602,7 @@ local-zone: "ammunitionseeker.com." always_nxdomain
 local-zone: "ammunitionsguru.com." always_nxdomain
 local-zone: "ammunitionsinbulk.com." always_nxdomain
 local-zone: "ammunitionsnation.com." always_nxdomain
+local-zone: "ammunitionss.com." always_nxdomain
 local-zone: "ammunitionstore.ca." always_nxdomain
 local-zone: "ammunitionstoreonline.com." always_nxdomain
 local-zone: "ammunitionsupplyusa.com." always_nxdomain
@@ -735,6 +738,7 @@ local-zone: "aquahomedepot.com." always_nxdomain
 local-zone: "aquamarinafishes.com." always_nxdomain
 local-zone: "aquariumshop.xyz." always_nxdomain
 local-zone: "ar.15partsforsaleonline.us." always_nxdomain
+local-zone: "ar15.riffle.parts.com." always_nxdomain
 local-zone: "aramexcourierservice.online." always_nxdomain
 local-zone: "aramexgloballogistics.com." always_nxdomain
 local-zone: "arcadeamsterdambv.com." always_nxdomain
