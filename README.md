@@ -13,14 +13,14 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 16286
+Total domains: 11903
 
 Total | Today | Yesterday | Source
     - |     0 |       476 | Google Search
     - |     0 |        25 | aa419.org
     - |     0 |      1739 | guntab.com
     - |  7798 |        28 | petscams.com
-16286 |  7798 |      2268 | All sources 
+11903 |  7798 |      2268 | All sources 
 
 The 5 most recently added domains:
 xpresshiping.com
@@ -29,7 +29,7 @@ xpresslogisticsservices.com
 yrcfreightlogistics.com
 zapcouriers.com
 
-Updated: Mon Mar 18 17:13 UTC
+Updated: Mon Mar 18 17:35 UTC
 Note: all data retrieved are publicly available 
 ```
 
