@@ -169,7 +169,6 @@ ${3} Title: Jarelllama's Scam Blocklist
 ${3} Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-${3} Version: $(date -u +"%m.%d.%H%M%S.%Y")
 ${3} Last modified: $(date -u)
 ${3} Syntax: ${1}
 ${3} Total number of entries: ${total_count}
