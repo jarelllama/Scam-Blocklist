@@ -55,7 +55,7 @@ function main {
                 source="guntab.com" 
                 item="$source"
                 ;;
-            *petscams-com*)
+            *petscams*)
                 source="petscams.com" 
                 item="$source"
                 ;;
