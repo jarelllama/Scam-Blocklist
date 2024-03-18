@@ -105,7 +105,7 @@ function source_petscams {
     categories=('puppy-scammer-list' 'pet-delivery-scam')
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
-        for page in {2..50}; do  # Loop through pages
+        for page in {2..20}; do  # Loop through pages
             page_results=$(curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"")
             url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
             printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
