@@ -30,7 +30,7 @@ winchestergun.usa.com
 winchesterguns.usa.com
 yandt.ammofirearms.com
 
-Updated: Mon Mar 18 19:22 UTC
+Updated: Mon Mar 18 20:06 UTC
 Note: all data retrieved are publicly available 
 ```
 
