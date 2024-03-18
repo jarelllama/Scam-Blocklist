@@ -50,7 +50,7 @@ function prepare_sample {
     printf "blacklisted.forum.com\n" > "$blacklist_file"  # Prepare sample blacklist file
 
     cat << EOF > input.tmp  # Prepare sample input data
-also.match.wildcaard.in.blocklist.com
+also.match.wildcard.in.blocklist.com
 blacklisted.forum.com
 in.blocklist.com
 m.to.block.1.com
