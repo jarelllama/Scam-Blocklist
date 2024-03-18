@@ -86,7 +86,7 @@ function check_raw_file {
         log_event "$domains_in_toplist" "toplist"
     fi
 
-    format_list filter_log.tmp
+    tr -s '\n' < filter_log.tmp | sort -u > temp.tmp && mv temp.tmp filter_log.tmp  # Remove empty lines, sort and remove duplicates
     if [[ ! -s filter_log.tmp ]]; then
         rm filter_log.tmp  # Delete temp filter log file
         exit  # Exit if no domains were filtered
