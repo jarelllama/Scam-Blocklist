@@ -39,16 +39,11 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
-Domains found today: $(count "$today" "")
-Domains found yesterday: $(count "$yesterday" "")
 
-Source: Google Search
-Domains found today: $(count "$today" "Google Search")
-Domains found yesterday: $(count "$yesterday" "Google Search")
-
-Source: aa419
-Domains found today: $(count "$today" "db.aa419.org")
-Domains found yesterday: $(count "$yesterday" "db.aa419.org")
+Total | Today | Yesterday | Source
+- |$(printf "%6s" "$(count "$today" "Google Search")") |$(printf "%10s" "$(count "$yesterday" "Google Search")") | Google Search
+- |$(printf "%6s" "$(count "$today" "db.aa419.org")") |$(printf "%10s" "$(count "$yesterday" "db.aa419.org")") | aa419
+$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | all
 
 The 5 most recently added domains:
 $new_domains
