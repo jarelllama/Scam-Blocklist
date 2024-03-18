@@ -31,10 +31,10 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        source_aa419
-        source_guntab
+        #source_aa419
+        #source_guntab
         source_petscams
-        source_google_search
+        #source_google_search
         merge_domains
         exit
     fi
@@ -100,9 +100,17 @@ function source_guntab {
 
 function source_petscams {
     source='petscams.com'
-    url='https://petscams.com/category/puppy-scammer-list'
     printf "\nSource: %s\n\n" "$source"
-    for page in {2..500}; do  # Loop through 500 pages
+    # For pet purchase scams
+    url='https://petscams.com/category/puppy-scammer-list'
+    for page in {2..20}; do  # Loop through pages
+        page_results=$(curl -s "$url/" | grep -oE '<a href="https://petscams.com/puppy-scammer-list/[[:alnum:].-]+\-[[:alnum:]-]{2,}/"')
+        url="https://petscams.com/category/puppy-scammer-list/page/${page}"  # Add '/page' after first run
+        printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
+    done
+    # For pet delivery scams
+    url='https://petscams.com/category/pet-delivery-scam'
+    for page in {2..50}; do  # Loop through pages
         page_results=$(curl -s "$url/" | grep -oE '<a href="https://petscams.com/puppy-scammer-list/[[:alnum:].-]+\-[[:alnum:]-]{2,}/"')
         url="https://petscams.com/category/puppy-scammer-list/page/${page}"  # Add '/page' after first run
         printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
