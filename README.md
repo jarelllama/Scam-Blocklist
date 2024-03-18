@@ -18,7 +18,7 @@ Total domains: 6926
 Total | Today | Yesterday | Source
     - |   469 |      2576 | Google Search
     - |    25 |      4214 | aa419
- 6926 |   494 |      6790 | all
+ 6926 |   494 |      6790 | All sources
 
 The 5 most recently added domains:
 www.zupapasports.com
