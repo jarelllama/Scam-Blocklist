@@ -13,22 +13,23 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 8460
+Total domains: 8475
 
 Total | Today | Yesterday | Source
-    - |   476 |      2576 | Google Search
+    - |   476 |         0 | Google Search
     - |    25 |      4214 | aa419.org
     - |  1739 |         0 | guntab.com
- 8460 |  2240 |      6790 | All sources 
+    - |    15 |         0 | petscams.com
+ 8475 |  2255 |      4214 | All sources 
 
 The 5 most recently added domains:
-yourammoshop.com
-zastavaarmshop.com
-zastavaarmstore.com
-zastavaarmsusashop.com
-zonearms.com
+laradachshund.com
+petbirdsfarm.com
+sheltiehaven.com
+stanblueheelers.com
+thekittenoasis.com
 
-Updated: Mon Mar 18 12:44 UTC
+Updated: Mon Mar 18 15:03 UTC
 Note: all data retrieved are publicly available 
 ```
 
@@ -69,6 +70,8 @@ Wildcard domains are added manually to the blocklist to reduce the number of ent
 [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 
 [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
+
+[PetScams.com](https://petscams.com/): pet scam sites database
 
 [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
 
