@@ -84,7 +84,8 @@ function source_guntab {
     guntab_url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
     domains=$(curl -s "$guntab_url" | grep -Ezo '<table class="datatable-list table">.*</table>' |
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' | sort -u)
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' | sort -u)  # Retrieve domains from site
+    # Skip domain processing if no domains retrieved
     if [[ -z "$domains" ]]; then
         log_source "guntab.com" "guntab" "0" "0" "0" "0" "0" ""
         return
