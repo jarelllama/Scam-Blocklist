@@ -1,6 +1,6 @@
 # Jarelllama's Scam Blocklist
 
-Blocklist for scam sites retrieved from Google Search and site crawling, automatically updated daily at 17:00 UTC.
+Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily at 17:00 UTC.
 
 | Format | Syntax |
 | --- | --- |
@@ -28,6 +28,7 @@ zastavaarmsusashop.com
 zonearms.com
 
 Updated: Mon Mar 18 11:57 UTC
+Note: all data retrieved are publicly available
 ```
 
 ## Retrieving scam domains from  Google Search
@@ -73,6 +74,8 @@ Wildcard domains are added manually to the blocklist to reduce the number of ent
 [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 
 [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
+
+Note: all data retrieved from these sources are publicly available.
 
 ## Resources
 

@@ -23,15 +23,15 @@ function update_readme {
     aa419_yesterday=$(count "$yesterday" "aa419.org")
     guntab_today=$(count "$today" "guntab.com")
     guntab_yesterday=$(count "$yesterday" "guntab.com")
-    crawl_count_today=$((aa419_today + guntab_today))
-    crawl_count_yesterday=$((aa419_yesterday + guntab_yesterday))
+    google_today=$(count "$today" "Google Search")
+    google_yesterday=$(count "$yesterday" "Google Search")
     # Find 5 most recently added domains
     new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 
-Blocklist for scam sites retrieved from Google Search and site crawling, automatically updated daily at 17:00 UTC.
+Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily at 17:00 UTC.
 
 | Format | Syntax |
 | --- | --- |
@@ -47,17 +47,19 @@ Blocklist for scam sites retrieved from Google Search and site crawling, automat
 Total domains: $(wc -w < "$raw_file")
 
 Total | Today | Yesterday | Source
-    - |$(printf "%6s" "$(count "$today" "Google Search")") |$(printf "%10s" "$(count "$yesterday" "Google Search")") | Google Search
-    - |$(printf "%6s" "$crawl_count_today") |$(printf "%10s" "$crawl_count_yesterday") | Site crawling
-$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
+    - |$(printf "%6s" "$google_today") |$(printf "%10s" "$google_yesterday") | Google Search
+    - |$(printf "%6s" "$aa419_today") |$(printf "%10s" "$aa419_yesterday") | aa419.org
+    - |$(printf "%6s" "$guntab_today") |$(printf "%10s" "$guntab_yesterday") | guntab.com
+$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources 
 
 The 5 most recently added domains:
 $new_domains
 
 Updated: $(date -u +"%a %b %d %H:%M UTC")
+Note: all data retrieved are publicly available 
 \`\`\`
 
-## Retrieving scam domains from  Google Search
+## Retrieving scam domains from Google Search
 
 Google provides a [Search API](https://developers.google.com/custom-search/v1/introduction) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve results, of which the domains are added to the blocklist. These search terms are manually added while investigating scam sites. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
@@ -65,7 +67,7 @@ Google provides a [Search API](https://developers.google.com/custom-search/v1/in
 
 Scam sites often do not have a long lifespan; domains can be created and removed within the same month. By searching Google Search using paragraphs of real-world scam sites, new domains can be added as soon as Google crawls the site. The search terms are often taken from sites reported on r/Scams, where real users are encountering these sites in the wild.
 
-The domain retrieval process for Google Search and site crawling can be viewed in the repository's code.
+The domain retrieval process for all sources can be viewed in the repository's code.
 
 ## Filtering process
 
@@ -100,6 +102,8 @@ Wildcard domains are added manually to the blocklist to reduce the number of ent
 [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 
 [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
+
+Note: all data retrieved from these sources are publicly available.
 
 ## Resources
 
@@ -150,7 +154,7 @@ function build_list {
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
-${3} Description: Blocklist for scam sites retrieved from Google Search and site crawling, automatically updated daily.
+${3} Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Version: $(date -u +"%m.%d.%H%M%S.%Y")
