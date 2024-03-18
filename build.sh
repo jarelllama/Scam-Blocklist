@@ -43,7 +43,7 @@ Total domains: $(wc -w < "$raw_file")
 Total | Today | Yesterday | Source
     - |$(printf "%6s" "$(count "$today" "Google Search")") |$(printf "%10s" "$(count "$yesterday" "Google Search")") | Google Search
     - |$(printf "%6s" "$(count "$today" "db.aa419.org")") |$(printf "%10s" "$(count "$yesterday" "db.aa419.org")") | aa419
-$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | all
+$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
 
 The 5 most recently added domains:
 $new_domains
