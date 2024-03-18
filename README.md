@@ -27,7 +27,7 @@ zastavaarmstore.com
 zastavaarmsusashop.com
 zonearms.com
 
-Updated: Mon Mar 18 10:54 UTC
+Updated: Mon Mar 18 11:02 UTC
 ```
 
 ## How domains are added to the blocklist
