@@ -52,13 +52,17 @@ function prepare_sample {
     cat << EOF > input.tmp  # Prepare sample input data
 also.match.wildcard.in.blocklist.com
 blacklisted.forum.com
+forum.in.whitelist.com
 in.blocklist.com
 m.to.block.1.com
 match.wildcard.in.blocklist.com
+shop.to.block.5.com
 to.block.1.com
 to.block.3.com
 to.block.4.com
+to.block.faake.edu.com
 whitelisted.forum.com
+whitelisted.tld.edu
 whitelisted.tld.gov
 wildcard.in.blocklist.com
 www.to.block.2.com
@@ -71,14 +75,17 @@ to.block.1.com
 to.block.2.com
 to.block.3.com
 to.block.4.com
+to.block.5.com
+to.block.faake.edu.com
 wildcard.in.blocklist.com
 EOF
 
-    split -n l/4 input.tmp  # Split the 10 domains into 3 source files
+    split -n l/5 input.tmp  # Split the 10 domains into 3 source files
     mv xaa data/domains_aa419.tmp
     mv xab data/domains_guntab.tmp
     mv xac data/domains_petscams.tmp
     mv xad data/domains_google_search_test_search_term.tmp
+    mv xae data/domains_stopgunscams.tmp
 }
 
 main

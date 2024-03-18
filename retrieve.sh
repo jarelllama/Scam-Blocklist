@@ -117,7 +117,7 @@ function source_stopgunscams {
         return
     fi
     # Strip results to domains
-    sed 's/^<a href="\///; s/"><div class="ap-a-img -ic">//; s/-/./g' collated_stopgunscams_results.tmp > domains_stopgunscams.tmp
+    sed 's/^<a href="\///; s/"><div class="ap-a-img -ic">//; s/-/./g' collated_stopgunscams_results.tmp > data/domains_stopgunscams.tmp
     rm collated_stopgunscams_results.tmp
     process_source "$source" "$source" "data/domains_stopgunscams.tmp"
 }
