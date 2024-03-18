@@ -282,7 +282,7 @@ function merge_domains {
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
 
-    rows=$(csvgrep -c 1 -m "$time_format" "$source_log" | tail -2)  # Find rows in log for this run
+    rows=$(csvgrep -c 1 -m "$time_format" "$source_log" | tail +2)  # Find rows in log for this run
     source=$(grep -vFf <(printf "%s" "$rows") "$source_log")  # Remove rows from log
     rows=$(printf "%s" "$rows" | sed 's/no/yes/')  # Replace 'no' with 'yes' to record the domains were saved to the raw file
     printf "%s\n%s\n" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
