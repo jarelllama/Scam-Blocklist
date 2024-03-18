@@ -50,12 +50,14 @@ function prepare_sample {
     printf "blacklisted.forum.com\n" > "$blacklist_file"  # Prepare sample blacklist file
 
     cat << EOF > input.tmp  # Prepare sample input data
+also.match.wildcaard.in.blocklist.com
 blacklisted.forum.com
 in.blocklist.com
 m.to.block.1.com
 match.wildcard.in.blocklist.com
 to.block.1.com
 to.block.3.com
+to.block.4.com
 whitelisted.forum.com
 whitelisted.tld.gov
 wildcard.in.blocklist.com
@@ -68,13 +70,15 @@ in.blocklist.com
 to.block.1.com
 to.block.2.com
 to.block.3.com
+to.block.4.com
 wildcard.in.blocklist.com
 EOF
 
-    split -n l/3 input.tmp  # Split the 10 domains into 3 source files
+    split -n l/4 input.tmp  # Split the 10 domains into 3 source files
     mv xaa data/domains_aa419.tmp
     mv xab data/domains_guntab.tmp
-    mv xac data/domains_google_search_test_search_term_2.tmp
+    mv xac data/domains_petscams.tmp
+    mv xad data/domains_google_search_test_search_term.tmp
 }
 
 main
