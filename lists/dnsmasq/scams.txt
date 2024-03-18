@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.150316.2024
-# Last modified: Mon Mar 18 15:03:16 UTC 2024
+# Version: 03.18.151156.2024
+# Last modified: Mon Mar 18 15:11:56 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 8475
+# Total number of entries: 8488
 #
 local=/01edc.com/
 local=/103-boi.com/
@@ -219,6 +219,7 @@ local=/ajpoultryfarms.co.za/
 local=/ak-firearms.com/
 local=/ak47gunsshop.com/
 local=/akasyl-otzberg.de/
+local=/akccorgipuppiesforsale.com/
 local=/akcparadise.company.site/
 local=/akgunshop.com/
 local=/akjamv.shop/
@@ -785,6 +786,7 @@ local=/barbowear.com/
 local=/barclaysforeigncurrency.com/
 local=/barcsonlines.com/
 local=/barisedachshundpuppies.com/
+local=/barklessbasenji.com/
 local=/barnamesigns.com/
 local=/baronessabernesemountaindogpuppies.com/
 local=/barrelammoshop.com/
@@ -961,6 +963,7 @@ local=/bgprovidersineurope.wordpress.com/
 local=/bgprovidersinuk.wordpress.com/
 local=/bgsblcproviders.wordpress.com/
 local=/bhafdld.com/
+local=/bhbreptles.com/
 local=/bhtwer.com/
 local=/biaale.com/
 local=/biancaangelskennels.co.za/
@@ -1145,6 +1148,7 @@ local=/bradfordcutlery.com/
 local=/bradsmithchambers.com/
 local=/braiinhash.com/
 local=/braintrustfx.net/
+local=/braisazdachshundbreed.com/
 local=/bramancollection.com/
 local=/brandestonpuppiesfarms.co.za/
 local=/brandkeyshop.com/
@@ -1933,6 +1937,7 @@ local=/cplasvegascorvera.es/
 local=/crackshotfirearms.com/
 local=/craftcrazy.shop/
 local=/craigmore-poultry-and-livestock-farm.business.site/
+local=/craigsmaltipoopuppies.com/
 local=/cramptonukltd.com/
 local=/createdonstar.co/
 local=/creatioiet.com/
@@ -2002,6 +2007,7 @@ local=/cupkiki.com/
 local=/curebeatradingcoltd.com/
 local=/curepuff.com/
 local=/currenciesdeals.com/
+local=/cushionypawspatiencekennel.com/
 local=/customcartssa.co.za/
 local=/customer-adnetwork.me/
 local=/customers-insight.com/
@@ -3653,6 +3659,7 @@ local=/healthypurebredhome.com/
 local=/healthyrussianblues.com/
 local=/heartwarmersflorist.com/
 local=/heavenknives.com/
+local=/heavenlyragdollshome.com/
 local=/heavensprintdeliveryserviceplc.com/
 local=/heavilymedicatedofficial.com/
 local=/hebecar.shop/
@@ -4654,6 +4661,7 @@ local=/magnumresearchshop.com/
 local=/magnumresearchusa.com/
 local=/mah-united-truckinginc.com/
 local=/mailapelihalli.fi/
+local=/mainecooncatforsale.net/
 local=/mainecooncats.net/
 local=/mainecooncattery.wixsite.com/
 local=/mainefielduniversity.com/
@@ -5609,6 +5617,7 @@ local=/paradizedpoutryfarm.co.za/
 local=/parafiagrodek.pl/
 local=/paragononlinecorp.com/
 local=/paramountarmsllc.com/
+local=/paramountfeathers.com/
 local=/paraordnancefirearms.com/
 local=/paraordnanceguns.com/
 local=/parcel2golink.com/
@@ -5650,6 +5659,7 @@ local=/pawsitivekennel.co.za/
 local=/pawsitivepuppies.co.za/
 local=/pawskennelau.com/
 local=/pawslover.co.za/
+local=/pawsompuppieshome.com/
 local=/pay-banks.com/
 local=/payful.net/
 local=/paymntcenter.com/
@@ -5972,6 +5982,7 @@ local=/prokennel.co.za/
 local=/prolaypoultryfarm.com/
 local=/prolificcontainers.co.za/
 local=/prometriccert.com/
+local=/promisedlanddonkeyfarm.com/
 local=/promiselandshihtzus.info/
 local=/promoalfresco.com/
 local=/promoviv.com/
@@ -6406,6 +6417,7 @@ local=/runsaucony.com/
 local=/runtzcartsofficial.com/
 local=/runtzdisposables.com/
 local=/rushteacupshop.co.za/
+local=/russellmaltesepuppies.com/
 local=/russian-hackers.com/
 local=/russianbluetopbreeders.com/
 local=/rutupowersports.com/
@@ -6960,6 +6972,7 @@ local=/springfieldgunstore.com/
 local=/springfieldhellcat.xyz/
 local=/springfieldrounds.com/
 local=/springfieldusafirearms.com/
+local=/springlackhomes.com/
 local=/springmedshop.com/
 local=/springsfirearms.com/
 local=/sprintextrust.com/

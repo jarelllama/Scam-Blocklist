@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.150316.2024
-# Last modified: Mon Mar 18 15:03:16 UTC 2024
+# Version: 03.18.151156.2024
+# Last modified: Mon Mar 18 15:11:56 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 8475
+# Total number of entries: 8488
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -220,6 +220,7 @@ local-zone: "ajpoultryfarms.co.za." always_nxdomain
 local-zone: "ak-firearms.com." always_nxdomain
 local-zone: "ak47gunsshop.com." always_nxdomain
 local-zone: "akasyl-otzberg.de." always_nxdomain
+local-zone: "akccorgipuppiesforsale.com." always_nxdomain
 local-zone: "akcparadise.company.site." always_nxdomain
 local-zone: "akgunshop.com." always_nxdomain
 local-zone: "akjamv.shop." always_nxdomain
@@ -786,6 +787,7 @@ local-zone: "barbowear.com." always_nxdomain
 local-zone: "barclaysforeigncurrency.com." always_nxdomain
 local-zone: "barcsonlines.com." always_nxdomain
 local-zone: "barisedachshundpuppies.com." always_nxdomain
+local-zone: "barklessbasenji.com." always_nxdomain
 local-zone: "barnamesigns.com." always_nxdomain
 local-zone: "baronessabernesemountaindogpuppies.com." always_nxdomain
 local-zone: "barrelammoshop.com." always_nxdomain
@@ -962,6 +964,7 @@ local-zone: "bgprovidersineurope.wordpress.com." always_nxdomain
 local-zone: "bgprovidersinuk.wordpress.com." always_nxdomain
 local-zone: "bgsblcproviders.wordpress.com." always_nxdomain
 local-zone: "bhafdld.com." always_nxdomain
+local-zone: "bhbreptles.com." always_nxdomain
 local-zone: "bhtwer.com." always_nxdomain
 local-zone: "biaale.com." always_nxdomain
 local-zone: "biancaangelskennels.co.za." always_nxdomain
@@ -1146,6 +1149,7 @@ local-zone: "bradfordcutlery.com." always_nxdomain
 local-zone: "bradsmithchambers.com." always_nxdomain
 local-zone: "braiinhash.com." always_nxdomain
 local-zone: "braintrustfx.net." always_nxdomain
+local-zone: "braisazdachshundbreed.com." always_nxdomain
 local-zone: "bramancollection.com." always_nxdomain
 local-zone: "brandestonpuppiesfarms.co.za." always_nxdomain
 local-zone: "brandkeyshop.com." always_nxdomain
@@ -1934,6 +1938,7 @@ local-zone: "cplasvegascorvera.es." always_nxdomain
 local-zone: "crackshotfirearms.com." always_nxdomain
 local-zone: "craftcrazy.shop." always_nxdomain
 local-zone: "craigmore-poultry-and-livestock-farm.business.site." always_nxdomain
+local-zone: "craigsmaltipoopuppies.com." always_nxdomain
 local-zone: "cramptonukltd.com." always_nxdomain
 local-zone: "createdonstar.co." always_nxdomain
 local-zone: "creatioiet.com." always_nxdomain
@@ -2003,6 +2008,7 @@ local-zone: "cupkiki.com." always_nxdomain
 local-zone: "curebeatradingcoltd.com." always_nxdomain
 local-zone: "curepuff.com." always_nxdomain
 local-zone: "currenciesdeals.com." always_nxdomain
+local-zone: "cushionypawspatiencekennel.com." always_nxdomain
 local-zone: "customcartssa.co.za." always_nxdomain
 local-zone: "customer-adnetwork.me." always_nxdomain
 local-zone: "customers-insight.com." always_nxdomain
@@ -3654,6 +3660,7 @@ local-zone: "healthypurebredhome.com." always_nxdomain
 local-zone: "healthyrussianblues.com." always_nxdomain
 local-zone: "heartwarmersflorist.com." always_nxdomain
 local-zone: "heavenknives.com." always_nxdomain
+local-zone: "heavenlyragdollshome.com." always_nxdomain
 local-zone: "heavensprintdeliveryserviceplc.com." always_nxdomain
 local-zone: "heavilymedicatedofficial.com." always_nxdomain
 local-zone: "hebecar.shop." always_nxdomain
@@ -4655,6 +4662,7 @@ local-zone: "magnumresearchshop.com." always_nxdomain
 local-zone: "magnumresearchusa.com." always_nxdomain
 local-zone: "mah-united-truckinginc.com." always_nxdomain
 local-zone: "mailapelihalli.fi." always_nxdomain
+local-zone: "mainecooncatforsale.net." always_nxdomain
 local-zone: "mainecooncats.net." always_nxdomain
 local-zone: "mainecooncattery.wixsite.com." always_nxdomain
 local-zone: "mainefielduniversity.com." always_nxdomain
@@ -5610,6 +5618,7 @@ local-zone: "paradizedpoutryfarm.co.za." always_nxdomain
 local-zone: "parafiagrodek.pl." always_nxdomain
 local-zone: "paragononlinecorp.com." always_nxdomain
 local-zone: "paramountarmsllc.com." always_nxdomain
+local-zone: "paramountfeathers.com." always_nxdomain
 local-zone: "paraordnancefirearms.com." always_nxdomain
 local-zone: "paraordnanceguns.com." always_nxdomain
 local-zone: "parcel2golink.com." always_nxdomain
@@ -5651,6 +5660,7 @@ local-zone: "pawsitivekennel.co.za." always_nxdomain
 local-zone: "pawsitivepuppies.co.za." always_nxdomain
 local-zone: "pawskennelau.com." always_nxdomain
 local-zone: "pawslover.co.za." always_nxdomain
+local-zone: "pawsompuppieshome.com." always_nxdomain
 local-zone: "pay-banks.com." always_nxdomain
 local-zone: "payful.net." always_nxdomain
 local-zone: "paymntcenter.com." always_nxdomain
@@ -5973,6 +5983,7 @@ local-zone: "prokennel.co.za." always_nxdomain
 local-zone: "prolaypoultryfarm.com." always_nxdomain
 local-zone: "prolificcontainers.co.za." always_nxdomain
 local-zone: "prometriccert.com." always_nxdomain
+local-zone: "promisedlanddonkeyfarm.com." always_nxdomain
 local-zone: "promiselandshihtzus.info." always_nxdomain
 local-zone: "promoalfresco.com." always_nxdomain
 local-zone: "promoviv.com." always_nxdomain
@@ -6407,6 +6418,7 @@ local-zone: "runsaucony.com." always_nxdomain
 local-zone: "runtzcartsofficial.com." always_nxdomain
 local-zone: "runtzdisposables.com." always_nxdomain
 local-zone: "rushteacupshop.co.za." always_nxdomain
+local-zone: "russellmaltesepuppies.com." always_nxdomain
 local-zone: "russian-hackers.com." always_nxdomain
 local-zone: "russianbluetopbreeders.com." always_nxdomain
 local-zone: "rutupowersports.com." always_nxdomain
@@ -6961,6 +6973,7 @@ local-zone: "springfieldgunstore.com." always_nxdomain
 local-zone: "springfieldhellcat.xyz." always_nxdomain
 local-zone: "springfieldrounds.com." always_nxdomain
 local-zone: "springfieldusafirearms.com." always_nxdomain
+local-zone: "springlackhomes.com." always_nxdomain
 local-zone: "springmedshop.com." always_nxdomain
 local-zone: "springsfirearms.com." always_nxdomain
 local-zone: "sprintextrust.com." always_nxdomain
