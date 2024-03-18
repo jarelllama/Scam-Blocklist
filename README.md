@@ -13,21 +13,21 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 ```
-Total domains: 6926
+Total domains: 6959
 
 Total | Today | Yesterday | Source
-    - |   469 |      2576 | Google Search
-    - |    25 |      4214 | aa419
- 6926 |   494 |      6790 | All sources
+    - |   476 |      2576 | Google Search
+    - |    25 |      4214 | Site crawling
+ 6959 |   501 |      6790 | All sources
 
 The 5 most recently added domains:
-www.zupapasports.com
-xpresschems.com
-xujia.tradefx110.com
-zedexforex.com
-zystfree-heaven.com
+storemoen.com
+streamptz.com
+supplypickleball.com
+teoutfit.com
+windtouchhair.com
 
-Updated: Mon Mar 18 04:22 UTC
+Updated: Mon Mar 18 10:14 UTC
 ```
 
 ## How domains are added to the blocklist
