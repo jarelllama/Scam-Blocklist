@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.183059.2024
-# Last modified: Mon Mar 18 18:30:59 UTC 2024
+# Version: 03.18.184447.2024
+# Last modified: Mon Mar 18 18:44:47 UTC 2024
 # Syntax: Wildcard Asterisk
-# Total number of entries: 11908
+# Total number of entries: 12132
 #
 *.01edc.com
 *.101luadalmatians.com
@@ -49,6 +49,7 @@
 *.90sfootwear.com
 *.99stocktrades.com
 *.9mm-ammoforsale.com
+*.9mm.ammoforsale.com
 *.a-weier.com
 *.a1-deliveryservice.com
 *.a3review.com
@@ -66,6 +67,7 @@
 *.aasolarenergypanels.com
 *.aawoodpellets.co.za
 *.ababnkgroups.com
+*.abacam.org
 *.abaintercontinentalcontainers.com
 *.abalioglulezitagida.com
 *.abbotrades.com
@@ -136,6 +138,7 @@
 *.adamslivestock.co.za
 *.adamslivestocksfarming.co.za
 *.adcor-defense.com
+*.adcor.defense.com
 *.additary.com
 *.addorablepugpuppiesforcompanionship.com
 *.addyprimelogistics.com
@@ -194,11 +197,13 @@
 *.aedoberman.com
 *.aekkhlachonticha.com
 *.aero-ar15-riffle-parts.com
+*.aero.ar15.riffle.parts.com
 *.aerodeluxeshippers.com
 *.aeroglobalcourierservices.com
 *.aeronacefirearms.com
 *.aerospeeds.com
 *.aestheticsoutfits.com
+*.af1firearms.com
 *.afamilyspot.com
 *.afbni.com
 *.afclgroup.com
@@ -262,6 +267,7 @@
 *.agudub.com
 *.aguilaammostore.com
 *.agunus.com
+*.ahgunstore.com
 *.ahtlogistics.com
 *.aiboson.com
 *.aid-chemical-group-llc.business.site
@@ -285,6 +291,10 @@
 *.airgun-on.com
 *.airgun-us.com
 *.airgun.cc
+*.airgun.on.com
+*.airgun.us.com
+*.airgunk.com
+*.airgunon.site
 *.airgunon.us
 *.airgunsu.com
 *.airgunus.us
@@ -300,6 +310,7 @@
 *.aiyinsitby.com
 *.ajpoultryfarms.co.za
 *.ak-firearms.com
+*.ak.firearms.com
 *.ak47gunsshop.com
 *.akasyl-otzberg.de
 *.akcbulldoghome.com
@@ -484,6 +495,8 @@
 *.american-armory.com
 *.american-bully-breeders.com
 *.american-primers.com
+*.american.armory.com
+*.american.primers.com
 *.americanbullybreeder.us
 *.americanbullypuppyparadise.com
 *.americancountrykennel.com
@@ -505,11 +518,14 @@
 *.amiguworldvn.com
 *.ammiss.com
 *.ammo-master.com
+*.ammo.master.com
 *.ammoand-supply.com
+*.ammoand.supply.com
 *.ammoandarmssupply.shop
 *.ammoandfirearmshop.com
 *.ammoandgunmaster.com
 *.ammoandgunsshop.com
+*.ammoandgunstore.com
 *.ammoband.com
 *.ammocalibers.com
 *.ammocontinental.com
@@ -519,6 +535,7 @@
 *.ammodepotid.com
 *.ammodepotma.com
 *.ammodepotnh.com
+*.ammodepotonlinestore.com
 *.ammodepotshop.com
 *.ammodepotwi.com
 *.ammodynamics.com
@@ -526,6 +543,7 @@
 *.ammoexpres.com
 *.ammofield.com
 *.ammofireamsshop.com
+*.ammoforsales.com
 *.ammogears.com
 *.ammogunsshop.com
 *.ammolandusa.com
@@ -535,10 +553,13 @@
 *.ammonationonline.shop
 *.ammonationx.com
 *.ammopowders.com
+*.ammoreloadingshop.ca
 *.ammoright.com
 *.ammosales-usa.com
+*.ammosales.usa.com
 *.ammosalestore.com
 *.ammosandprimers.com
+*.ammoshome.com
 *.ammoshopinc.com
 *.ammoshoping.com
 *.ammoshopusa.com
@@ -548,31 +569,39 @@
 *.ammostoreonline.com
 *.ammosuppliershop.com
 *.ammosupply-warehouse.com
+*.ammosupply.warehouse.com
 *.ammosupplyusa.com
 *.ammovalleydepot.com
 *.ammoworld404.com
 *.ammoxpres.com
 *.ammozdepot.com
+*.ammunition.store.com
 *.ammunitionandaccessoriesshop.com
 *.ammunitionandgunshop.com
+*.ammunitioncamp.com
 *.ammunitioncanada.ca
 *.ammunitionempirestore.com
 *.ammunitionforsaleonline.com
 *.ammunitiongunbroker.com
 *.ammunitiongunstore.com
 *.ammunitiononline-shop.com
+*.ammunitiononline.shop.com
 *.ammunitiononlineshop.com
+*.ammunitiononlinestore.com
 *.ammunitionreloadcenter.com
 *.ammunitionreloadstorecanada.com
 *.ammunitionsales.shop
 *.ammunitionsalestore.com
 *.ammunitionsbutiksverige.com
+*.ammunitionsdistros.com
 *.ammunitionseek.com
 *.ammunitionseeker.com
 *.ammunitionsguru.com
 *.ammunitionsinbulk.com
 *.ammunitionsnation.com
+*.ammunitionstore.ca
 *.ammunitionstoreonline.com
+*.ammunitionsupplyusa.com
 *.ammunitiontactical.store
 *.ammunitionvendor.com
 *.ammunitionwholesaledealer.com
@@ -663,6 +692,7 @@
 *.aoemate.com
 *.aoiunionbank.com
 *.ap-tacticalshop.com
+*.ap.tacticalshop.com
 *.apasamshipping.com
 *.apcargocourier.com
 *.apeshop.pl
@@ -703,10 +733,12 @@
 *.aquahomedepot.com
 *.aquamarinafishes.com
 *.aquariumshop.xyz
+*.ar.15partsforsaleonline.us
 *.aramexcourierservice.online
 *.aramexgloballogistics.com
 *.arcadeamsterdambv.com
 *.archery-supplier.com
+*.archery.supplier.com
 *.archerysuppliess.com
 *.archictisete.com
 *.architecturm.com
@@ -714,6 +746,7 @@
 *.archivesimf.org
 *.arcuslogisticdeliveryservice.com
 *.areagunsshop.com
+*.argunsamerica.com
 *.ariatwear.online
 *.arielpawslogistics.com
 *.arielpetfarm.com
@@ -739,6 +772,7 @@
 *.armsanammo.com
 *.armscenter.org
 *.armscor-rockislandguns.com
+*.armscor.rockislandguns.com
 *.armsgunshop.com
 *.armshop.org
 *.armsmories.com
@@ -758,6 +792,7 @@
 *.arshiner.com
 *.artementenotizie.it
 *.articakitaskennels.com
+*.artilleryshoponline.com
 *.artisangemantiques.com
 *.artsybrand.com
 *.arv-sales.com
@@ -780,6 +815,7 @@
 *.asliuo.shop
 *.asllogisticsservices.com
 *.aspar-arms.com
+*.aspar.arms.com
 *.aspesiclothes.com
 *.assonenuphar.fr
 *.assurancefidelity.com
@@ -837,6 +873,7 @@
 *.atmoscru.com
 *.atnahspharm.com
 *.atnscopes-usa.com
+*.atnscopes.usa.com
 *.atqdyo.com
 *.atrichor.com
 *.atspdt.com
@@ -907,6 +944,7 @@
 *.auto-gestion.eu
 *.auto-ordnanceusa.com
 *.auto-solutions.co.za
+*.auto.ordnanceusa.com
 *.autocentrumbv.com
 *.autodachshundpuppy.com
 *.autofahreneuropa.com
@@ -1041,6 +1079,7 @@
 *.barrettfirearm.com
 *.barrettfirearms-usa.com
 *.barrettfirearms.shop
+*.barrettfirearms.usa.com
 *.barrettfirearmshop.com
 *.barrettgunshop.com
 *.barrettgunstore.com
@@ -1087,6 +1126,7 @@
 *.beaglesforall.com
 *.beanshootuk.com
 *.bear-archerystore.com
+*.bear.archerystore.com
 *.beararcheryshop.com
 *.beararcherystore.com
 *.beararcheryusa.com
@@ -1132,10 +1172,12 @@
 *.benedettocanecorsohome.com
 *.benellifirearms-usa.com
 *.benellifirearms.com
+*.benellifirearms.usa.com
 *.benellifirearmsamerica.com
 *.benellifirearmsshop.com
 *.benellifirearmstore.com
 *.benelligunstore.com
+*.benelligunstoreusa.com
 *.benelliofficial.com
 *.benelliusa.shop
 *.benelliusashop.com
@@ -1147,6 +1189,7 @@
 *.bengalsafaricattery.com
 *.bengalsgivejoy.com
 *.bengenevievpuppy.com
+*.bengunstore.com
 *.beninrefinery.com
 *.benjiragdollkittens.com
 *.benjisurlesroutes.fr
@@ -1158,6 +1201,8 @@
 *.benzostoreonline.com
 *.berbior.com
 *.beredge.com
+*.berettafirearmdeals.com
+*.berettafirearms.com
 *.berettafirearmsamerica.com
 *.berettafirearmstore.com
 *.berettagunlife.com
@@ -1170,6 +1215,7 @@
 *.berettausafirearms.com
 *.berettausashop.com
 *.berettausastore.com
+*.bergaraarmsusa.com
 *.bergarafirearmsusa.com
 *.bergaragunsale.com
 *.bergaraofficial.com
@@ -1199,6 +1245,7 @@
 *.berylteacuphome.com
 *.bespoke-space.com
 *.bestammoacademy.com
+*.bestammosupplier.com
 *.bestammoweapons.com
 *.bestaucaninehome.com
 *.bestautoenginetrading.com
@@ -1220,6 +1267,7 @@
 *.bestfirearmsusa.com
 *.bestglockgunstores.com
 *.bestgoldenpups.us
+*.bestgunsales.com
 *.bestgunshopinthedmv.com
 *.bestgunshopusa.com
 *.bestgunssale.com
@@ -1362,6 +1410,7 @@
 *.bkhsilverhomekitten.com
 *.black-equations.com
 *.black-market-guns.com
+*.black.market.guns.com
 *.blackabdo.company.site
 *.blackacestacticalusa.com
 *.blackcurves.shop
@@ -1374,6 +1423,8 @@
 *.blackhorn209powderusa.com
 *.blackmarket-firearms.com
 *.blackmarket-guns.com
+*.blackmarket.firearms.com
+*.blackmarket.guns.com
 *.blackmarketarmory.net
 *.blackmarketarmsales.com
 *.blackmarketarmsllc.com
@@ -1485,6 +1536,7 @@
 *.bonafidechems.com
 *.bonaveststockfx.com
 *.bondarms-usa.com
+*.bondarms.usa.com
 *.bondsclothes.com
 *.bonefab.com
 *.bonglapersianhomes.com
@@ -1566,6 +1618,7 @@
 *.brasilchickenbrands.com
 *.brassshopusa.com
 *.brassstore-usa.com
+*.brassstore.usa.com
 *.braveaussiehome.shop
 *.bravebassethounds.com
 *.bravebernesemountains.com
@@ -1582,6 +1635,7 @@
 *.bravewiggletails.com
 *.bravoarmsusa.com
 *.bravocompany-usa.com
+*.bravocompany.usa.com
 *.bravocompanyguns.com
 *.bravokennelhome.co.za
 *.brazil-frozen-food.com
@@ -1653,24 +1707,32 @@
 *.brooksranchdoodles.com
 *.brownellsfirearms.net
 *.brownellsigsauerguns.com
+*.brownellsriflesusa.com
 *.brownenglishbulldogpuppy.com
 *.browning-arms.com
+*.browning.arms.com
+*.browning.usa.com
 *.browningammoshop.com
 *.browningarmory.com
 *.browningarms-usa.com
+*.browningarms.usa.com
+*.browningarmsstore.com
 *.browningarmstore.com
 *.browningarmswarehouse.com
 *.browningfirearms-usa.com
+*.browningfirearms.usa.com
 *.browningfirearmstoreusa.com
 *.browningfirearmsusa.com
 *.browningguns.com
 *.browninggunshop.com
 *.browninggunshopusa.com
 *.browninggunsusa.com
+*.browningofficial.com
 *.browningshotgunsusa.com
 *.browningusafirearms.com
 *.browningusaguns.com
 *.browningusastore.com
+*.browningweapons.com
 *.browningweaponstore.com
 *.browningweaponstoreusa.com
 *.brownpaul-lawfirm.com
@@ -1692,6 +1754,7 @@
 *.bstrustshore.com
 *.bstses.com
 *.bt-usaguns.com
+*.bt.usaguns.com
 *.btrmixer.com
 *.btsbighitfansclub.com
 *.btzclothing.com
@@ -1707,6 +1770,7 @@
 *.bularmoryfirearms.com
 *.bularmoryfirearmsusa.com
 *.bularmorygunbroker-usa.com
+*.bularmorygunbroker.usa.com
 *.bularmorygunshopusa.com
 *.bularmorygunstoreusa.com
 *.bularmorygunsusa.com
@@ -1717,8 +1781,11 @@
 *.bulkammoma.com
 *.bulkammosales.com
 *.bulkammostock.com
+*.bulkammosupplies.com
+*.bulkammotogo.com
 *.bulkammowholesale.com
 *.bulkammunition.ca
+*.bulkammunition.shop
 *.bulkammunitioncaliber.com
 *.bulkammunitionhub.com
 *.bulkammunitioninstock.com
@@ -1727,10 +1794,12 @@
 *.bulkcheapammostore.com
 *.bulkfinance.org
 *.bulkfirearms.com
+*.bulkfirearmsonline.com
 *.bulkmanammo.com
 *.bulkminidach.online
 *.bulknepgeld.com
 *.bulkreloadingsupplies.com
+*.bulksammunition.com
 *.bulksellmart.co.uk
 *.bulkstoredeals.com
 *.bulldogpuppyparadise.net
@@ -1739,6 +1808,7 @@
 *.bulldogsofnorthcarolina.com
 *.bulldogterrierfrendly.com
 *.bullet-crew.com
+*.bullet.crew.com
 *.bullethunt.com
 *.bulletproofarms.com
 *.bulletproofstore.org
@@ -1763,6 +1833,7 @@
 *.burnscanecorsohome.com
 *.burrsshibainupuppies.com
 *.bushmasteracr.shop
+*.bushmasterarmshop.com
 *.bushmasterarmstore.com
 *.bushmasterfirearmstore.com
 *.bushmasterguns.com
@@ -1776,6 +1847,7 @@
 *.butchshepherd.dog
 *.butterfalluk.com
 *.buttermano.com
+*.buy.ammunitiononline.com
 *.buyammoandprimers.com
 *.buyammodaily.com
 *.buyammoprimers.com
@@ -1812,6 +1884,8 @@
 *.buyglockonline.net
 *.buyguns-online.com
 *.buyguns-usa.com
+*.buyguns.online.com
+*.buyguns.usa.com
 *.buygunsandammolineusa.com
 *.buygunsonlinewithterry.com
 *.buygunss.com
@@ -1845,6 +1919,7 @@
 *.buytaurusfirearms.com
 *.buytaurusonline.com
 *.buyundetectablebills.com
+*.buywinchesterammo.com
 *.buyxanaxiety.com
 *.buyyourdocuments.com
 *.buzzfeedprivacyclaims.com
@@ -1878,6 +1953,7 @@
 *.cakedisposables.com
 *.cal-tradings.com
 *.cali-ammoandgunshop.com
+*.cali.ammoandgunshop.com
 *.calibercu.com
 *.caliberreloads.com
 *.calibrearmoury.com
@@ -1885,6 +1961,7 @@
 *.caliexoticstore.com
 *.californiacoltfirearmsstore.com
 *.californiaczfirearmsstore.com
+*.californiafnamericaguns.com
 *.californiahenrygunsshop.com
 *.californiamount.university
 *.calimarijuanad.com
@@ -1908,10 +1985,12 @@
 *.campusfrenchbulldogs.com
 *.can-concretio-work.com
 *.canada.jellyfish.com
+*.canadaammunition.com
 *.canadareloadinghub.com
 *.canadianammo.com
 *.canadianlab.us
 *.canam-shop.com
+*.canam.shop.com
 *.canarybirdsforsale.com
 *.candidschnauzerpuppiesbreeders.com
 *.canecorso.store
@@ -1932,6 +2011,7 @@
 *.canikfirearmsshop.com
 *.canikfirearmsusa.com
 *.canikforsale.com
+*.canikgunsonline.com
 *.canikgunsshop.com
 *.canikgunstore.com
 *.canikgunsusa.com
@@ -1939,6 +2019,7 @@
 *.canikusa.shop
 *.canikusafirearms.com
 *.canikusagundeals.com
+*.canikusashop.com
 *.caninepuppykennel.co.za
 *.cannabisdeliveryaustralia.com
 *.cannabisexpresshop.com
@@ -1974,6 +2055,7 @@
 *.capitaltrustyfinancebnk.com
 *.capitalunitedfinance.com
 *.capitalvantageonline.com
+*.capitalxguns.co.uk
 *.capitexpro.com
 *.capitolcityb.com
 *.captivatinggermanshorthairedpointerpuppies.com
@@ -2023,6 +2105,8 @@
 *.carl-bulldogpuppies.sitey.me
 *.carl-waltherarmstore.com
 *.carl-waltherusa.com
+*.carl.waltherarmstore.com
+*.carl.waltherusa.com
 *.carlosfrenchbulldoghome.com
 *.carniceriacharcuterialucas.es
 *.caromalife.com
@@ -2086,6 +2170,10 @@
 *.cci-ammunitionss.com
 *.cci-primers.com
 *.cci-usaprimers.com
+*.cci.ammostore.com
+*.cci.ammunitionss.com
+*.cci.primers.com
+*.cci.usaprimers.com
 *.cciammocenter.com
 *.cciammunitions.com
 *.cciprimersusa.com
@@ -2123,6 +2211,7 @@
 *.centralfinance.co.za
 *.centraparkkennel.co.za
 *.centurionschnauzers.com
+*.centuryarms.shop
 *.centuryarmsdealer.com
 *.centuryarmshop.com
 *.centuryarmstore.com
@@ -2148,6 +2237,7 @@
 *.cfhomepillow.com
 *.cfinanceuk.co
 *.cfmbuy.com
+*.cfmotosusa.com
 *.cfqualitylab.com
 *.cghnwiprivate.com
 *.cgs-secs.com
@@ -2251,6 +2341,7 @@
 *.chiappagunsusa.com
 *.chiapparhinoarm.com
 *.chiapparhinoarms.com
+*.chiapparhinofirearm.com
 *.chiapparhinofirearms.com
 *.chiapparhinorevolvers.com
 *.chiapparhinostore.com
@@ -2307,6 +2398,8 @@
 *.christensenarmory.com
 *.christensenarms-store.com
 *.christensenarms-usa.com
+*.christensenarms.store.com
+*.christensenarms.usa.com
 *.christensenfirearmsusa.com
 *.christensenguns.com
 *.christianhealthassociationbj.com
@@ -2814,17 +2907,21 @@
 *.cynchowchow.com
 *.cyobyo.com
 *.cz-usafirearms.com
+*.cz.usafirearms.com
 *.czarmory.com
 *.czarmsales.com
 *.czarmstore.com
 *.czarmsusa.com
 *.czfirearms-usa.com
+*.czfirearms.usa.com
 *.czfirearmsales.com
 *.czfirearmstore-usa.com
 *.czfirearmstore.com
+*.czfirearmstore.usa.com
 *.czgun.shop
 *.czgunbrokers.com
 *.czguns-usa.com
+*.czguns.usa.com
 *.czgunshop.com
 *.czgunshop.us
 *.czgunshopcenter.com
@@ -2909,6 +3006,7 @@
 *.danslabradorretriever.com
 *.danwessonarms.com
 *.danwessonfirearms-usa.com
+*.danwessonfirearms.usa.com
 *.danwessonfirearmstore.com
 *.danwessonfirearmsusa.com
 *.danwessonwarehouse.com
@@ -3024,6 +3122,7 @@
 *.dekuin.com
 *.delanelpuppykennel.co.za
 *.delaware-firearms.com
+*.delaware.firearms.com
 *.delesales.com
 *.deliabassethoundhome.com
 *.delightedinschnauzers.com
@@ -3432,6 +3531,7 @@
 *.edaintel.com
 *.edandachshundpuppy.com
 *.edbrown-firearms.com
+*.edbrown.firearms.com
 *.edcbyesprit.com
 *.edelridstore.com
 *.edencourier.com
@@ -3764,6 +3864,7 @@
 *.exp-disp.com
 *.exp.global.courier.com
 *.expansion-firearms.com
+*.expansion.firearms.com
 *.experienceleague.adobe.com
 *.expertfencingsolution.co.za
 *.expertfxbroker.com
@@ -3998,9 +4099,12 @@
 *.fecarrierslogistics.com
 *.fedcargoexpressdelivery.com
 *.federal-primers.com
+*.federal.primers.com
 *.federalammo-usa.com
+*.federalammo.usa.com
 *.federalpremiumshop.com
 *.federalprimers.com
+*.federalprimers.usa.com
 *.federalprimersusa.com
 *.federalshots.com
 *.fedexdeliveryservice.com
@@ -4084,6 +4188,22 @@
 *.firearms-sale.co
 *.firearms-texas.com
 *.firearms-us.com
+*.firearms.accessoriesstore.com
+*.firearms.alabama.com
+*.firearms.arizona.com
+*.firearms.avenue.com
+*.firearms.broker.com
+*.firearms.glov.com
+*.firearms.guns.com
+*.firearms.guns.eu
+*.firearms.missouri.com
+*.firearms.montana.com
+*.firearms.montana.net
+*.firearms.nevada.com
+*.firearms.ohio.com
+*.firearms.sale.co
+*.firearms.texas.com
+*.firearms.us.com
 *.firearms22.com
 *.firearms4protection.com
 *.firearmsacademyinc.com
@@ -4093,6 +4213,7 @@
 *.firearmsbazaar.com
 *.firearmsdealer.us
 *.firearmsdepot-usa.com
+*.firearmsdepot.usa.com
 *.firearmsdispensary.com
 *.firearmsgallery.com
 *.firearmshopus.com
@@ -4190,6 +4311,7 @@
 *.florasiamesehome.com
 *.florida-boatreviews.net
 *.florida-firearms.com
+*.florida.firearms.com
 *.floridacoltfirearmsshop.com
 *.floridaczgunsshop.com
 *.floridaczgunsstore.com
@@ -4290,7 +4412,9 @@
 *.francoispinaultfoundation.com
 *.frankbreeders.net
 *.franklinarmory-usa.com
+*.franklinarmory.usa.com
 *.frankonia-waffen.com
+*.frankonia.waffen.com
 *.frax-credit.com
 *.fraxcr.com
 *.fraxcredit.com
@@ -4489,6 +4613,7 @@
 *.geezerdecor.com
 *.geheshop.com
 *.geissele-usa.com
+*.geissele.usa.com
 *.geisseleautomaticsusa.com
 *.geminiarms.com
 *.gemstonerivers.com
@@ -4513,6 +4638,7 @@
 *.genuzy.com
 *.geoaun.com
 *.georgia-gunshop.com
+*.georgia.gunshop.com
 *.georginamainecoonkittens.com
 *.gerardodelgado.es
 *.germanrottweilerhome.com
@@ -4734,6 +4860,8 @@
 *.globex.shippings.com
 *.globusfestival.nl
 *.glock-firearms.com
+*.glock.26.com
+*.glock.firearms.com
 *.glock.vip
 *.glockammoshop.com
 *.glockamory.com
@@ -5020,6 +5148,7 @@
 *.gulfprojectsint.com
 *.gulliondachshundpuppies.com
 *.gun-ammos.com
+*.gun.ammos.com
 *.gunammo.store
 *.gunammoshop.com
 *.gunammosupply.com
@@ -5113,8 +5242,10 @@
 *.hananacreative.com
 *.handbagsale.store
 *.handgun-shop.com
+*.handgun.shop.com
 *.handleittactical.com
 *.handload-bank.com
+*.handload.bank.com
 *.handpickclothing.com
 *.handraisedpuppieshome.com
 *.handsomedogclub.com
@@ -5336,6 +5467,7 @@
 *.hkfirearmsusa.com
 *.hkgunstore.com
 *.hkusa-guns.com
+*.hkusa.guns.com
 *.hkusafirearms.com
 *.hkusaguns.com
 *.hkusastore.com
@@ -5374,6 +5506,7 @@
 *.holodes.com
 *.holophore.fr
 *.holosun-usa.com
+*.holosun.usa.com
 *.holosunopticshop.com
 *.holosunopticsusa.com
 *.holsingar.com
@@ -5462,6 +5595,7 @@
 *.hoperlabradors.com
 *.hopetaly.com
 *.horizon-firearms.com
+*.horizon.firearms.com
 *.horizoncontainers.com
 *.horizondoxie.com
 *.horizongeneralsuppliers.co.za
@@ -5532,6 +5666,7 @@
 *.huntbay-chemicals.com
 *.huntdekor.com
 *.hunter-precision.com
+*.hunter.precision.com
 *.hunterchowchowhome.com
 *.huntersammoshop.com
 *.huntersammunition.com
@@ -5539,6 +5674,7 @@
 *.huntingandammoshop.com
 *.huntinggears.shop
 *.huntinggunsandrifles.com
+*.huntsman.shop.com
 *.hushdachshundspups.com
 *.husky.cottage.com
 *.huskycharm.com
@@ -5634,13 +5770,16 @@
 *.imperious.university
 *.imporgomaunipessoa.com
 *.imr-powders.com
+*.imr.powders.com
 *.imrpowders-usa.com
+*.imrpowders.usa.com
 *.imrpowderstore.com
 *.in2kitchenco.com
 *.inaniconsa.co.za
 *.incommony.com
 *.indexcapitaltradelive.com
 *.indiana-gunshop.com
+*.indiana.gunshop.com
 *.indianshoponlinestore.business.site
 *.induchemguns.eu
 *.infantlover.com
@@ -5974,6 +6113,7 @@
 *.kanbalivestock.com
 *.kanberishop.top
 *.kansas-gunshop.com
+*.kansas.gunshop.com
 *.kapellbaby.shop
 *.kapitalk9gsds.com
 *.kaptaps.com
@@ -6022,6 +6162,7 @@
 *.keilanibostonterriers.com
 *.keilivestockcc.co.za
 *.kel-tecfirearms.com
+*.kel.tecfirearms.com
 *.kelisbernedoodles.com
 *.kelivinarthurbarristersssociates.com
 *.kellersdachshundhome.com
@@ -6046,6 +6187,7 @@
 *.kennelpuppieshome.com
 *.kennys.sheltiepuppies.com
 *.kentucky-gunshop.com
+*.kentucky.gunshop.com
 *.kerrisonpetsau.com
 *.kerrydachshunds.com
 *.kerrypomsky.com
@@ -6054,6 +6196,7 @@
 *.kexcet.com
 *.keyesden.com
 *.keystone-armorystore.com
+*.keystone.armorystore.com
 *.keystonepuppies.co.za
 *.kftbcase.com
 *.kfthd.com
@@ -6088,6 +6231,7 @@
 *.kinean.online
 *.kingammunitions.com
 *.kingarms-store.com
+*.kingarms.store.com
 *.kingbritishshorthairkitties.com
 *.kingbritishshorthairkittieshome.com
 *.kingcavapoopuppies.com
@@ -6172,6 +6316,8 @@
 *.knivebarkriver.com
 *.knives-case.com
 *.knives-microtech.com
+*.knives.case.com
+*.knives.microtech.com
 *.knivesfoodprep.com
 *.knivesnew.com
 *.knivessteel.com
@@ -6274,6 +6420,7 @@
 *.laporis.com
 *.lappostrading.com
 *.lapuabrass-usa.com
+*.lapuabrass.usa.com
 *.lara-holding-aps.business.site
 *.laraveststock.com
 *.largecoonscattery.com
@@ -6369,6 +6516,7 @@
 *.letapremiumyorkies.com
 *.letstalklanguage.de
 *.lever-action-rifles.com
+*.lever.action.rifles.com
 *.lewisfarmsa.com
 *.lewiswilliamsandassociates.com
 *.lexingtonsbank.com
@@ -6471,6 +6619,7 @@
 *.lmggreencontainer.co.za
 *.lmperialmunchkincattery.com
 *.lmtdefense-usa.com
+*.lmtdefense.usa.com
 *.loadedfirearms.com
 *.lobby-reviews.net
 *.lobbyreviews.net
@@ -6669,6 +6818,7 @@
 *.magnumresearchdeserteagle.com
 *.magnumresearchfirearms-shop.com
 *.magnumresearchfirearms.com
+*.magnumresearchfirearms.shop.com
 *.magnumresearchfirearmsusa.com
 *.magnumresearchguns.com
 *.magnumresearchshop.com
@@ -6786,6 +6936,7 @@
 *.marlifirearmsshop.com
 *.marlin1895-usa.com
 *.marlin1895.com
+*.marlin1895.usa.com
 *.marlinamericafirearms.com
 *.marlinarmsale.com
 *.marlinarmsstore.com
@@ -6794,8 +6945,10 @@
 *.marlinaustralianshepherds.com
 *.marlineenglishbulldogpuppieshome.com
 *.marlinfirearms-usa.com
+*.marlinfirearms.usa.com
 *.marlinfirearmsamerica.com
 *.marlinguns-usa.com
+*.marlinguns.usa.com
 *.marlingunsales.com
 *.marlingunshops.com
 *.marlingunstoreusa.com
@@ -7055,6 +7208,7 @@
 *.michfrenchiespups.com
 *.michigancentralstate.university
 *.mick-ammodepot.com
+*.mick.ammodepot.com
 *.microbulliesplace.com
 *.microminihighlandcow.com
 *.micropetminiaturecattle.com
@@ -7067,6 +7221,7 @@
 *.midlandspuppieshome.co.za
 *.midvalleymaltese.com
 *.midway-tactical.com
+*.midway.tactical.com
 *.midwayammunition.com
 *.midwaybuyusa.com
 *.midwayprimers.com
@@ -7193,6 +7348,7 @@
 *.mocowestpaper.co.za
 *.modern-nest.shop
 *.modern-tacticalriffle.net
+*.modern.tacticalriffle.net
 *.modernacargo.com
 *.modernattirellc.com
 *.modernclimbshop.com
@@ -7258,18 +7414,23 @@
 *.morozscorgipuppies.shop
 *.morphmarkets.com
 *.mosparklejewerly.com
+*.mossberg.store.com
+*.mossberg.usa.com
 *.mossberg247.com
 *.mossbergarmorystore.com
 *.mossbergarmoryusa.com
 *.mossbergarms-usa.com
+*.mossbergarms.usa.com
 *.mossbergfirearms-usa.com
 *.mossbergfirearms.org
+*.mossbergfirearms.usa.com
 *.mossbergfirearmsusa.com
 *.mossbergfirearmusa.com
 *.mossberggunstore.com
 *.mossbergshop.com
 *.mossbergshotguns-usa.com
 *.mossbergshotguns.us
+*.mossbergshotguns.usa.com
 *.mossbergusashop.com
 *.mosselbankgroup.com
 *.most2bar.com
@@ -7550,6 +7711,7 @@
 *.newhomepuppies.com
 *.newinmsaccessories.com
 *.newjersey-gunshop.com
+*.newjersey.gunshop.com
 *.newlandjapspitz.com
 *.newlawngarden.com
 *.newlybulldogs.com
@@ -7602,6 +7764,7 @@
 *.nideckernitro.com
 *.nieruchomosci-walter24.pl
 *.nightforceoptics-usa.com
+*.nightforceoptics.usa.com
 *.nighthawkcustomusa.com
 *.nightvisionspecialist.com
 *.nigraleisure.com
@@ -7649,6 +7812,7 @@
 *.nordvalleyrottweilers.com
 *.norgeaci.com
 *.norma-ammunitionsusa.com
+*.norma.ammunitionsusa.com
 *.normaammoshop.com
 *.normanfreightshipping.com
 *.norrissiberiansite.com
@@ -7662,6 +7826,7 @@
 *.northwoodsprivateassets.com
 *.norvintrucking.com
 *.nosler-ammunitionsusa.com
+*.nosler.ammunitionsusa.com
 *.noslerammostore.com
 *.noslerammunition.com
 *.nostrends.com
@@ -7733,6 +7898,7 @@
 *.off-lady.com
 *.offdoorhandle.com
 *.offer-firearms.com
+*.offer.firearms.com
 *.offerknives.com
 *.offfirearms.com
 *.offgridlin.com
@@ -7803,6 +7969,7 @@
 *.online-zenithbank.com
 *.onlineafin.com
 *.onlineammo-store.com
+*.onlineammo.store.com
 *.onlineanabolicsteroids.com
 *.onlinecargocontainers.com
 *.onlinedegreehelpgenie.com
@@ -7988,7 +8155,9 @@
 *.pantsin.com
 *.panudachwangnuwon.com
 *.panzerarms-usa.com
+*.panzerarms.usa.com
 *.panzerarmstore-usa.com
+*.panzerarmstore.usa.com
 *.panzerarmstoreusa.com
 *.panzerfirearms.com
 *.papageistore.com
@@ -8407,6 +8576,7 @@
 *.preciouspuppiesforhomes.com
 *.preciousteacuppoodles.net
 *.precision-reloads.net
+*.precision.reloads.net
 *.precisionarmsusa.com
 *.precisionlogistics.delivery
 *.precisionreloadings.com
@@ -8513,6 +8683,7 @@
 *.primerfirearmsdeals.com
 *.primeroute.logistics.com
 *.primers-usa.com
+*.primers.usa.com
 *.primersammo.com
 *.primersfirearmsstore.com
 *.primersgunpowder.com
@@ -8525,6 +8696,7 @@
 *.primersshopcanada.com
 *.primerstandards.com
 *.primerstore-usa.com
+*.primerstore.usa.com
 *.primersusa.com
 *.primeshepherdshome.com
 *.primeshipping.agency.com
@@ -8551,6 +8723,8 @@
 *.prkzi.com
 *.pro-shooters.net
 *.pro-tacticalgunshop.com
+*.pro.shooters.net
+*.pro.tacticalgunshop.com
 *.proactivehpt.com
 *.proammodepot.com
 *.proammunitions.com
@@ -8844,6 +9018,7 @@
 *.rapiidairdelivery.com
 *.rapscallionpaws.com
 *.rarebreedtriggers-usa.com
+*.rarebreedtriggers.usa.com
 *.rarebreedtriggershop.com
 *.rarebreedtriggersusa.com
 *.rarediamondheartsaint.com
@@ -8935,6 +9110,8 @@
 *.reloaderscenter.com
 *.reloadingbrass-store.com
 *.reloadingbrass-usa.com
+*.reloadingbrass.store.com
+*.reloadingbrass.usa.com
 *.reloadingcciprimers.com
 *.reloadingdepotusa.com
 *.reloadinghubusa.com
@@ -8950,6 +9127,7 @@
 *.remingtonammunitions.com
 *.remingtonarmstock.com
 *.remingtonfirearms-usa.com
+*.remingtonfirearms.usa.com
 *.remingtonfirearmsusa.com
 *.remingtongun.com
 *.remingtongundepot.com
@@ -9018,6 +9196,7 @@
 *.riepty.com
 *.rifender.com
 *.rifle-armory.com
+*.rifle.armory.com
 *.riflemasters.com
 *.riflescopesshops.com
 *.riflestoreusa.com
@@ -9222,11 +9401,13 @@
 *.rubyparkcavoodle.com
 *.rudydelaldorablepersiankittenshomes.com
 *.ruger-usa.com
+*.ruger.usa.com
 *.rugerarmory.com
 *.rugerarmsshop.com
 *.rugerarmsusa.com
 *.rugerfirearms-usa.com
 *.rugerfirearms.net
+*.rugerfirearms.usa.com
 *.rugerfirearmshop.com
 *.rugerfirearmshopusa.com
 *.rugerfirearmstore.com
@@ -9258,6 +9439,7 @@
 *.ryansamoyedpups.com
 *.ryanurabonpitbullpuppies.com
 *.s-wwarehouse.com
+*.s.wwarehouse.com
 *.s2.q4cdn.com
 *.s2bgroup.co.uk
 *.s36enl.com
@@ -9383,6 +9565,7 @@
 *.sausage.zohosites.com
 *.sausagespot.com
 *.savagearms-usa.com
+*.savagearms.usa.com
 *.savagearmstore.com
 *.savagearmsusa.com
 *.savagefirearmshop.com
@@ -9609,6 +9792,7 @@
 *.shortleggedkittenshome.com
 *.shortnotes.pl
 *.shotgun-ammunition.com
+*.shotgun.ammunition.com
 *.shotgunstoreusa.com
 *.shouldermd.com
 *.showapparels.com
@@ -9644,15 +9828,21 @@
 *.sierrabil.com
 *.sieverslabradorshome.com
 *.sig-sauerfirearms.com
+*.sig.sauerarmoury.com
+*.sig.sauerfirearms.com
 *.sigarmsstore.com
 *.sigmaeh.com
 *.sigmaexportsltd.co.uk
 *.sigmagunstore.com
 *.sigsauer-firearms.com
 *.sigsauer-usa.com
+*.sigsauer.firearm.com
+*.sigsauer.firearms.com
+*.sigsauer.usa.com
 *.sigsauerannex.com
 *.sigsauerarmory.com
 *.sigsauerarms-usa.com
+*.sigsauerarms.usa.com
 *.sigsauerarmshop.com
 *.sigsauerarmstore.com
 *.sigsauerarmsusa.com
@@ -9660,10 +9850,12 @@
 *.sigsauerfirearm.com
 *.sigsauerfirearms-usa.com
 *.sigsauerfirearms.store
+*.sigsauerfirearms.usa.com
 *.sigsauerfirearmsshopusa.com
 *.sigsauerfirearmsstore.com
 *.sigsauerfirearmsusa.com
 *.sigsauerguns-usa.com
+*.sigsauerguns.usa.com
 *.sigsauergunsale.com
 *.sigsauerp320.xyz
 *.sigsauersofficial.com
@@ -9675,6 +9867,7 @@
 *.siimcoimpermeabilizaciones.com
 *.sikdb.com
 *.silencerco-usa.com
+*.silencerco.usa.com
 *.silencerguns.com
 *.siliangtea.com
 *.silicochemicals.com
@@ -9813,6 +10006,7 @@
 *.smileword.com
 *.smiling.kennel.com
 *.smith-wesson-gunshop.com
+*.smith.wesson.gunshop.com
 *.smithaffordablepuppies.com
 *.smithdachshundbreed.com
 *.smithfrenchbulldogshome.com
@@ -9820,8 +10014,10 @@
 *.smithkittens.com
 *.smithsongunshop.shop
 *.smithwessonmp-usa.com
+*.smithwessonmp.usa.com
 *.smokelespowders.com
 *.smokeless-powder.com
+*.smokeless.powder.com
 *.smokelessgunpowder.com
 *.smokelesspowders.com
 *.smokelesspowdersusa.com
@@ -9926,6 +10122,7 @@
 *.speedydservices.com
 *.speedyfreightcargo.com
 *.speer-ammunitionsusa.com
+*.speer.ammunitionsusa.com
 *.speerofficial.com
 *.spexpressdelivery.com
 *.sphericalm.com
@@ -9957,8 +10154,11 @@
 *.springfield-armoryusa.com
 *.springfield-gold.com
 *.springfield-hellcat.com
+*.springfield.armoryusa.com
+*.springfield.hellcat.com
 *.springfieldarmory-usa.com
 *.springfieldarmory.shop
+*.springfieldarmory.usa.com
 *.springfieldarmoryfirearms.com
 *.springfieldarmorygunsusa.com
 *.springfieldarmoryshop.com
@@ -10241,6 +10441,7 @@
 *.surfsnowsports.com
 *.surfstorehouse.com
 *.surplusammo-usa.com
+*.surplusammo.usa.com
 *.surplusammosstore.com
 *.surprisepuppyhome.com
 *.surronbikesales.com
@@ -10328,6 +10529,11 @@
 *.tactical-firearmsusa.com
 *.tactical-gunshop.com
 *.tactical-world.net
+*.tactical.edgefirearms.uk
+*.tactical.firearms.net
+*.tactical.firearmsusa.com
+*.tactical.gunshop.com
+*.tactical.world.net
 *.tacticalachery.com
 *.tacticalammopowders.com
 *.tacticalammostore.com
@@ -10389,11 +10595,13 @@
 *.taurusarmoryusa.com
 *.taurusarms247.com
 *.taurusfirearms-usa.com
+*.taurusfirearms.usa.com
 *.taurusfirearmshop.com
 *.taurusg3c.com
 *.taurusgunbrokers.com
 *.taurusgundealers.com
 *.taurusguns-usa.com
+*.taurusguns.usa.com
 *.taurusgunshopusa.com
 *.taurusjudgeforsale.com
 *.taurusjudgeforsaleonline.com
@@ -10464,6 +10672,7 @@
 *.tendersdcs.org
 *.tenloly.com
 *.tennessee-guns.com
+*.tennessee.guns.com
 *.tennishotsale.com
 *.tentfordbk.com
 *.teoutfit.com
@@ -10488,6 +10697,7 @@
 *.texanoptics.com
 *.texas-gunshop.com
 *.texas-puppy-store.com
+*.texas.gunshop.com
 *.texascoltfirearmsshop.com
 *.texasczfirearmsstore.com
 *.texasglockstore.com
@@ -10650,6 +10860,7 @@
 *.tidevacation.com
 *.tikkafirearms-usa.com
 *.tikkafirearms.com
+*.tikkafirearms.usa.com
 *.tikkafirearmsstore.com
 *.tikkafirearmstore.com
 *.tikkariflesarmstore.com
@@ -10721,6 +10932,7 @@
 *.toolswilton.com
 *.top-guns-and-ammunitions.com
 *.top-quality.shop
+*.top.guns.and.ammunitions.com
 *.top5massagegun.com
 *.topafun.com
 *.topair.cz
@@ -10742,6 +10954,7 @@
 *.topgoldenretrieverpups.com
 *.topgradevanillabeans.com
 *.topgun-firearms.com
+*.topgun.firearms.com
 *.topimportautos.com
 *.topixtrust.com
 *.topkushshop.com
@@ -10904,6 +11117,7 @@
 *.tripypharmacy.com
 *.trishayorkiespuppies.com
 *.tristararms-usa.com
+*.tristararms.usa.com
 *.tristararmstore.com
 *.tristarfirearmsusa.com
 *.troda.pl
@@ -11191,7 +11405,9 @@
 *.usa-hunter.com
 *.usa-millitary.com
 *.usa-reload.com
+*.usa.hunter.com
 *.usa.postalservices.com
+*.usa.reload.com
 *.usabrowningfirearms.com
 *.usaczfirearms.com
 *.usadiscreetshipping.com
@@ -11350,6 +11566,7 @@
 *.vertcron.com
 *.vertigoltd.com
 *.veststore-tactical.com
+*.veststore.tactical.com
 *.veteranammoshop.com
 *.veterangunshop.com
 *.vetmontkennelsparadise.co.za
@@ -11449,10 +11666,12 @@
 *.waltheramory.com
 *.waltherarm.com
 *.waltherarms-usa.com
+*.waltherarms.usa.com
 *.waltherarmshop.com
 *.waltherarmstock.com
 *.waltherarmsusa.com
 *.waltherfirearms-usa.com
+*.waltherfirearms.usa.com
 *.waltherfirearmstore.com
 *.waltherfirearmsusa.com
 *.walthergunshop.com
@@ -11617,8 +11836,10 @@
 *.willowcreekgspkennels.com
 *.willowfrenchieuk.com
 *.wilsoncombat-usa.com
+*.wilsoncombat.usa.com
 *.wincar.cz
 *.winchesterammo-usa.com
+*.winchesterammo.usa.com
 *.winchesterammunitionsusa.com
 *.winchesterarmoryusa.com
 *.winchesterarmstore.com
@@ -11626,7 +11847,9 @@
 *.winchesterfirearmstore.com
 *.winchesterfirearmsusa.com
 *.winchestergun-usa.com
+*.winchestergun.usa.com
 *.winchesterguns-usa.com
+*.winchesterguns.usa.com
 *.winchestergunshop.com
 *.winchestergunstore.com
 *.winchestergunsusa.com
@@ -11759,6 +11982,7 @@
 *.yaitie.com
 *.yamapron.com
 *.yandt-ammofirearms.com
+*.yandt.ammofirearms.com
 *.yanlingresearchchemicallab.com
 *.yawanm.com
 *.ydgjd.com

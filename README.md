@@ -13,24 +13,24 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 11908
+Total domains: 12132
 
 Total | Today | Yesterday | Source
     - |     0 |       476 | Google Search
     - |     0 |        25 | aa419.org
     - |     0 |      1739 | guntab.com
-    - |     0 |         0 | stopgunscams.com
+    - |   224 |         0 | stopgunscams.com
     - |  7798 |        28 | petscams.com
-11908 |  7798 |      2268 | All sources 
+12132 |  8022 |      2268 | All sources 
 
 The 5 most recently added domains:
-xpresshiping.com
-xpresslogisticss.com
-xpresslogisticsservices.com
-yrcfreightlogistics.com
-zapcouriers.com
+wilsoncombat.usa.com
+winchesterammo.usa.com
+winchestergun.usa.com
+winchesterguns.usa.com
+yandt.ammofirearms.com
 
-Updated: Mon Mar 18 18:31 UTC
+Updated: Mon Mar 18 18:44 UTC
 Note: all data retrieved are publicly available 
 ```
 
