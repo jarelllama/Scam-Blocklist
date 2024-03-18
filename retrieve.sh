@@ -101,19 +101,15 @@ function source_guntab {
 function source_petscams {
     source='petscams.com'
     printf "\nSource: %s\n\n" "$source"
-    # For pet purchase scams
-    url='https://petscams.com/category/puppy-scammer-list'
-    for page in {2..20}; do  # Loop through pages
-        page_results=$(curl -s "$url/" | grep -oE '<a href="https://petscams.com/puppy-scammer-list/[[:alnum:].-]+\-[[:alnum:]-]{2,}/"')
-        url="https://petscams.com/category/puppy-scammer-list/page/${page}"  # Add '/page' after first run
-        printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
-    done
-    # For pet delivery scams
-    url='https://petscams.com/category/pet-delivery-scam'
-    for page in {2..50}; do  # Loop through pages
-        page_results=$(curl -s "$url/" | grep -oE '<a href="https://petscams.com/pet-delivery-scam/[[:alnum:].-]+\-[[:alnum:]-]{2,}/"')
-        url="https://petscams.com/category/pet-delivery-scam/page/${page}"  # Add '/page' after first run
-        printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
+    # Loop through the two categories
+    categories=('puppy-scammer-list' 'pet-delivery-scam')
+    for category in "${categories[@]}"; do
+        url="https://petscams.com/category/${category}"
+        for page in {2..50}; do  # Loop through pages
+            page_results=$(curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"")
+            url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
+            printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
+        done
     done
     # Skip domain processing if no domains retrieved
     if [[ ! -f collated_petscams_results.tmp ]]; then
@@ -121,9 +117,10 @@ function source_petscams {
         return
     fi
     # Strip results to domains
-    sed -e 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///' -e 's|[/".]||g' -e 's|-|.|g' collated_petscams_results.tmp > collated_petscams_domains.tmp
+    sed -e 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///' \
+        -e 's/<a href="https:\/\/petscams.com\/pet-delivery-scam\///' \
+        -e 's|[/".]||g' -e 's|-|.|g' collated_petscams_results.tmp > data/domains_petscams.tmp
     rm collated_petscams_results.tmp
-    mv collated_petscams_domains.tmp data/domains_petscams.tmp
     process_source "$source" "$source" "data/domains_petscams.tmp"
 }
 
@@ -151,10 +148,10 @@ function search_google {
         log_source "Google Search" "$search_term" "0" "0" "0" "0" "0" ""
         return
     fi
-    awk -F/ '{print $3}' collated_search_results.tmp > collated_search_domains.tmp  # Strip URLs to domains
-    rm collated_search_results.tmp  # Reset temp file for search results from each search term
-    mv collated_search_domains.tmp "data/domains_google_search_${search_term:0:100}.tmp"  # Save results to search-term-specific temp file
-    process_source "Google Search" "$search_term" "data/domains_google_search_${search_term:0:100}.tmp"  # Pass the search term and the results to the domain processing function
+    # Strip URLs to domains
+    awk -F/ '{print $3}' collated_search_results.tmp > "data/domains_google_search_${search_term:0:100}.tmp"
+    rm collated_search_results.tmp
+    process_source "Google Search" "$search_term" "data/domains_google_search_${search_term:0:100}.tmp"
 }
 
 function process_source {
