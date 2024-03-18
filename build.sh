@@ -169,8 +169,8 @@ function format_list {
         sed -i 's/\r$//' "$1"  
         return
     fi
-    # Format carriage return characters, remove empty lines, sort and remove duplicates
-    tr -d '\r' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
+    # Remove whitespaces, carriage return characters, empty lines, sort and remove duplicates
+    tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
 
 function build_adblock {
