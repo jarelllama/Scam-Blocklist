@@ -76,8 +76,8 @@ function source_aa419 {
     printf "\nSource: %s\n\n" "$source"
     for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
-        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")
-        jq -r '.[].Domain' <<< "$page_results" >> data/domains_aa419.tmp  # Collate domains
+        curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" | jq -r '.[].Domain' \
+            >> data/domains_aa419.tmp  # Collate all pages of domains
     done
     # Skip domain processing if no domains retrieved
     if [[ ! -f data/domains_aa419.tmp ]]; then
@@ -91,9 +91,8 @@ function source_guntab {
     source='guntab.com'
     url='https://www.guntab.com/scam-websites/'
     printf "\nSource: %s\n\n" "$source"
-    # Retrieve domains from site
     curl -s "$url" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > data/domains_guntab.tmp
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > data/domains_guntab.tmp  # Retrieve domains
     # Skip domain processing if no domains retrieved
     if [[ ! -s data/domains_guntab.tmp ]]; then
         log_source "$source" "$source" "0" "0" "0" "0" "0" ""
@@ -107,8 +106,8 @@ function source_stopgunscams {
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
     for page in {1..20}; do  # Loop through pages
-        page_results=$(curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+\-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">')
-        printf "%s\n" "$page_results" >> collated_stopgunscams_results.tmp  # Collate all pages of results
+        curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+\-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">' \
+            >> collated_stopgunscams_results.tmp  # Collate all pages of results
     done
     # Skip domain processing if no domains retrieved
     if [[ ! -f collated_stopgunscams_results.tmp ]]; then
@@ -129,9 +128,9 @@ function source_petscams {
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
         for page in {2..20}; do  # Loop through pages
-            page_results=$(curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"")
+            page_results=$(curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"") \
+                >> collated_petscams_results.tmp  # Collate all pages of results
             url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
-            printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
         done
     done
     # Skip domain processing if no domains retrieved
