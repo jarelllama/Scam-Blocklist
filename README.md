@@ -13,13 +13,13 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 8698
+Total domains: 8460
 
 Total | Today | Yesterday | Source
     - |   476 |      2576 | Google Search
     - |    25 |      4214 | aa419.org
     - |  1739 |         0 | guntab.com
- 8698 |  2240 |      6790 | All sources 
+ 8460 |  2240 |      6790 | All sources 
 
 The 5 most recently added domains:
 yourammoshop.com
@@ -28,7 +28,7 @@ zastavaarmstore.com
 zastavaarmsusashop.com
 zonearms.com
 
-Updated: Mon Mar 18 12:35 UTC
+Updated: Mon Mar 18 12:44 UTC
 Note: all data retrieved are publicly available 
 ```
 

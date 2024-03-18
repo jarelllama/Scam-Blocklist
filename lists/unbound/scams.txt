@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.123554.2024
-# Last modified: Mon Mar 18 12:35:54 UTC 2024
+# Version: 03.18.124452.2024
+# Last modified: Mon Mar 18 12:44:52 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 8698
+# Total number of entries: 8460
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -60,9 +60,9 @@ local-zone: "aandacontainers.co.za." always_nxdomain
 local-zone: "aasolarenergypanels.com." always_nxdomain
 local-zone: "aawoodpellets.co.za." always_nxdomain
 local-zone: "ababnkgroups.com." always_nxdomain
-local-zone: "abacam.org." always_nxdomain
 local-zone: "abaintercontinentalcontainers.com." always_nxdomain
 local-zone: "abalioglulezitagida.com." always_nxdomain
+local-zone: "abbotrades.com." always_nxdomain
 local-zone: "abc-rv.org." always_nxdomain
 local-zone: "abdullazayed-capitals.com." always_nxdomain
 local-zone: "abeni.shop." always_nxdomain
@@ -109,7 +109,6 @@ local-zone: "acslope.com." always_nxdomain
 local-zone: "actionpower.org." always_nxdomain
 local-zone: "activatedwork.com." always_nxdomain
 local-zone: "activerollingballs.com." always_nxdomain
-local-zone: "acvtruckingllc.com." always_nxdomain
 local-zone: "adadream.com." always_nxdomain
 local-zone: "adairsoutletau.com." always_nxdomain
 local-zone: "adairssale.com." always_nxdomain
@@ -143,11 +142,9 @@ local-zone: "aeroglobalcourierservices.com." always_nxdomain
 local-zone: "aeronacefirearms.com." always_nxdomain
 local-zone: "aerospeeds.com." always_nxdomain
 local-zone: "aestheticsoutfits.com." always_nxdomain
-local-zone: "af1firearms.com." always_nxdomain
 local-zone: "afamilyspot.com." always_nxdomain
 local-zone: "afbni.com." always_nxdomain
 local-zone: "afclgroup.com." always_nxdomain
-local-zone: "afexb.com." always_nxdomain
 local-zone: "affectionatepetshome.co.za." always_nxdomain
 local-zone: "affianwanfx.com." always_nxdomain
 local-zone: "affiliatetrustcorp.com." always_nxdomain
@@ -192,7 +189,6 @@ local-zone: "agrovace.com." always_nxdomain
 local-zone: "agudub.com." always_nxdomain
 local-zone: "aguilaammostore.com." always_nxdomain
 local-zone: "agunus.com." always_nxdomain
-local-zone: "ahgunstore.com." always_nxdomain
 local-zone: "ahtlogistics.com." always_nxdomain
 local-zone: "aiboson.com." always_nxdomain
 local-zone: "aid-chemical-group-llc.business.site." always_nxdomain
@@ -211,8 +207,6 @@ local-zone: "airfaxetransport.com." always_nxdomain
 local-zone: "airgun-on.com." always_nxdomain
 local-zone: "airgun-us.com." always_nxdomain
 local-zone: "airgun.cc." always_nxdomain
-local-zone: "airgunk.com." always_nxdomain
-local-zone: "airgunon.site." always_nxdomain
 local-zone: "airgunon.us." always_nxdomain
 local-zone: "airgunsu.com." always_nxdomain
 local-zone: "airgunus.us." always_nxdomain
@@ -294,7 +288,6 @@ local-zone: "alloutdoorsale.com." always_nxdomain
 local-zone: "alluringmunchkincatscattery.com." always_nxdomain
 local-zone: "allystrust.com." always_nxdomain
 local-zone: "almrabella.com." always_nxdomain
-local-zone: "almutainintco.com." always_nxdomain
 local-zone: "alobaimportexport.com." always_nxdomain
 local-zone: "alperdisticaretkimyasanayi.com." always_nxdomain
 local-zone: "alperkimyasanayiveticaret.com." always_nxdomain
@@ -365,7 +358,6 @@ local-zone: "ammoandarmssupply.shop." always_nxdomain
 local-zone: "ammoandfirearmshop.com." always_nxdomain
 local-zone: "ammoandgunmaster.com." always_nxdomain
 local-zone: "ammoandgunsshop.com." always_nxdomain
-local-zone: "ammoandgunstore.com." always_nxdomain
 local-zone: "ammoband.com." always_nxdomain
 local-zone: "ammocalibers.com." always_nxdomain
 local-zone: "ammocontinental.com." always_nxdomain
@@ -375,7 +367,6 @@ local-zone: "ammodepotcanada.com." always_nxdomain
 local-zone: "ammodepotid.com." always_nxdomain
 local-zone: "ammodepotma.com." always_nxdomain
 local-zone: "ammodepotnh.com." always_nxdomain
-local-zone: "ammodepotonlinestore.com." always_nxdomain
 local-zone: "ammodepotshop.com." always_nxdomain
 local-zone: "ammodepotwi.com." always_nxdomain
 local-zone: "ammodynamics.com." always_nxdomain
@@ -383,7 +374,6 @@ local-zone: "ammoexpertzone.com." always_nxdomain
 local-zone: "ammoexpres.com." always_nxdomain
 local-zone: "ammofield.com." always_nxdomain
 local-zone: "ammofireamsshop.com." always_nxdomain
-local-zone: "ammoforsales.com." always_nxdomain
 local-zone: "ammogears.com." always_nxdomain
 local-zone: "ammogunsshop.com." always_nxdomain
 local-zone: "ammolandusa.com." always_nxdomain
@@ -393,12 +383,10 @@ local-zone: "ammomartusa.com." always_nxdomain
 local-zone: "ammonationonline.shop." always_nxdomain
 local-zone: "ammonationx.com." always_nxdomain
 local-zone: "ammopowders.com." always_nxdomain
-local-zone: "ammoreloadingshop.ca." always_nxdomain
 local-zone: "ammoright.com." always_nxdomain
 local-zone: "ammosales-usa.com." always_nxdomain
 local-zone: "ammosalestore.com." always_nxdomain
 local-zone: "ammosandprimers.com." always_nxdomain
-local-zone: "ammoshome.com." always_nxdomain
 local-zone: "ammoshopinc.com." always_nxdomain
 local-zone: "ammoshoping.com." always_nxdomain
 local-zone: "ammoshopusa.com." always_nxdomain
@@ -416,7 +404,6 @@ local-zone: "ammozdepot.com." always_nxdomain
 local-zone: "ammunition-store.com." always_nxdomain
 local-zone: "ammunitionandaccessoriesshop.com." always_nxdomain
 local-zone: "ammunitionandgunshop.com." always_nxdomain
-local-zone: "ammunitioncamp.com." always_nxdomain
 local-zone: "ammunitioncanada.ca." always_nxdomain
 local-zone: "ammunitionempirestore.com." always_nxdomain
 local-zone: "ammunitionforsaleonline.com." always_nxdomain
@@ -424,21 +411,17 @@ local-zone: "ammunitiongunbroker.com." always_nxdomain
 local-zone: "ammunitiongunstore.com." always_nxdomain
 local-zone: "ammunitiononline-shop.com." always_nxdomain
 local-zone: "ammunitiononlineshop.com." always_nxdomain
-local-zone: "ammunitiononlinestore.com." always_nxdomain
 local-zone: "ammunitionreloadcenter.com." always_nxdomain
 local-zone: "ammunitionreloadstorecanada.com." always_nxdomain
 local-zone: "ammunitionsales.shop." always_nxdomain
 local-zone: "ammunitionsalestore.com." always_nxdomain
 local-zone: "ammunitionsbutiksverige.com." always_nxdomain
-local-zone: "ammunitionsdistros.com." always_nxdomain
 local-zone: "ammunitionseek.com." always_nxdomain
 local-zone: "ammunitionseeker.com." always_nxdomain
 local-zone: "ammunitionsguru.com." always_nxdomain
 local-zone: "ammunitionsinbulk.com." always_nxdomain
 local-zone: "ammunitionsnation.com." always_nxdomain
-local-zone: "ammunitionstore.ca." always_nxdomain
 local-zone: "ammunitionstoreonline.com." always_nxdomain
-local-zone: "ammunitionsupplyusa.com." always_nxdomain
 local-zone: "ammunitiontactical.store." always_nxdomain
 local-zone: "ammunitionvendor.com." always_nxdomain
 local-zone: "ammunitionwholesaledealer.com." always_nxdomain
@@ -543,7 +526,6 @@ local-zone: "approcha.com." always_nxdomain
 local-zone: "april4business.it." always_nxdomain
 local-zone: "apromo.shop." always_nxdomain
 local-zone: "aquariumshop.xyz." always_nxdomain
-local-zone: "ar-15partsforsaleonline.us." always_nxdomain
 local-zone: "arcadeamsterdambv.com." always_nxdomain
 local-zone: "archery-supplier.com." always_nxdomain
 local-zone: "archerysuppliess.com." always_nxdomain
@@ -553,7 +535,6 @@ local-zone: "archivesh.com." always_nxdomain
 local-zone: "archivesimf.org." always_nxdomain
 local-zone: "arcuslogisticdeliveryservice.com." always_nxdomain
 local-zone: "areagunsshop.com." always_nxdomain
-local-zone: "argunsamerica.com." always_nxdomain
 local-zone: "ariatwear.online." always_nxdomain
 local-zone: "arielpawslogistics.com." always_nxdomain
 local-zone: "arkaizpegurrak-sl.com." always_nxdomain
@@ -589,7 +570,6 @@ local-zone: "arrecloltd.com." always_nxdomain
 local-zone: "arsenalarmsusa.com." always_nxdomain
 local-zone: "arshiner.com." always_nxdomain
 local-zone: "artementenotizie.it." always_nxdomain
-local-zone: "artilleryshoponline.com." always_nxdomain
 local-zone: "artisangemantiques.com." always_nxdomain
 local-zone: "artsybrand.com." always_nxdomain
 local-zone: "arv-sales.com." always_nxdomain
@@ -879,17 +859,16 @@ local-zone: "bellscunion.com." always_nxdomain
 local-zone: "beltekpowersolutions.com." always_nxdomain
 local-zone: "benchwheel.com." always_nxdomain
 local-zone: "benellifirearms-usa.com." always_nxdomain
+local-zone: "benellifirearms.com." always_nxdomain
 local-zone: "benellifirearmsamerica.com." always_nxdomain
 local-zone: "benellifirearmsshop.com." always_nxdomain
 local-zone: "benellifirearmstore.com." always_nxdomain
 local-zone: "benelligunstore.com." always_nxdomain
-local-zone: "benelligunstoreusa.com." always_nxdomain
 local-zone: "benelliofficial.com." always_nxdomain
 local-zone: "benelliusa.shop." always_nxdomain
 local-zone: "benelliusashop.com." always_nxdomain
 local-zone: "benelliusastore.com." always_nxdomain
 local-zone: "benelliwarehouse.com." always_nxdomain
-local-zone: "bengunstore.com." always_nxdomain
 local-zone: "beninrefinery.com." always_nxdomain
 local-zone: "benjisurlesroutes.fr." always_nxdomain
 local-zone: "benpuppieshome.com." always_nxdomain
@@ -898,8 +877,6 @@ local-zone: "bentlykennel.co.za." always_nxdomain
 local-zone: "benzostoreonline.com." always_nxdomain
 local-zone: "berbior.com." always_nxdomain
 local-zone: "beredge.com." always_nxdomain
-local-zone: "berettafirearmdeals.com." always_nxdomain
-local-zone: "berettafirearms.com." always_nxdomain
 local-zone: "berettafirearmsamerica.com." always_nxdomain
 local-zone: "berettafirearmstore.com." always_nxdomain
 local-zone: "berettagunlife.com." always_nxdomain
@@ -912,7 +889,6 @@ local-zone: "berettamunitions.com." always_nxdomain
 local-zone: "berettausafirearms.com." always_nxdomain
 local-zone: "berettausashop.com." always_nxdomain
 local-zone: "berettausastore.com." always_nxdomain
-local-zone: "bergaraarmsusa.com." always_nxdomain
 local-zone: "bergarafirearmsusa.com." always_nxdomain
 local-zone: "bergaragunsale.com." always_nxdomain
 local-zone: "bergaraofficial.com." always_nxdomain
@@ -930,7 +906,6 @@ local-zone: "bertmag.com." always_nxdomain
 local-zone: "beruitscotplc.com." always_nxdomain
 local-zone: "bespoke-space.com." always_nxdomain
 local-zone: "bestammoacademy.com." always_nxdomain
-local-zone: "bestammosupplier.com." always_nxdomain
 local-zone: "bestammoweapons.com." always_nxdomain
 local-zone: "bestautoenginetrading.com." always_nxdomain
 local-zone: "bestb2kresearch.com." always_nxdomain
@@ -942,7 +917,6 @@ local-zone: "bestfirearmstore.com." always_nxdomain
 local-zone: "bestfirearmsusa.com." always_nxdomain
 local-zone: "bestglockgunstores.com." always_nxdomain
 local-zone: "bestgoldenpups.us." always_nxdomain
-local-zone: "bestgunsales.com." always_nxdomain
 local-zone: "bestgunshopinthedmv.com." always_nxdomain
 local-zone: "bestgunshopusa.com." always_nxdomain
 local-zone: "bestgunssale.com." always_nxdomain
@@ -1026,7 +1000,6 @@ local-zone: "birkenmall.club." always_nxdomain
 local-zone: "bishopdaycare.com." always_nxdomain
 local-zone: "bitfarmclub.com." always_nxdomain
 local-zone: "bitfinexct.com." always_nxdomain
-local-zone: "bitfreds.com." always_nxdomain
 local-zone: "bitfreds.pro." always_nxdomain
 local-zone: "bitgrowthinvestment.com." always_nxdomain
 local-zone: "bitis.store." always_nxdomain
@@ -1214,8 +1187,8 @@ local-zone: "bringwellz.com." always_nxdomain
 local-zone: "briskmeind.com." always_nxdomain
 local-zone: "briskrtpto.com." always_nxdomain
 local-zone: "britishbluecat.com." always_nxdomain
-local-zone: "britishcb.com." always_nxdomain
 local-zone: "britishglobalib.com." always_nxdomain
+local-zone: "britishshorthairus.com." always_nxdomain
 local-zone: "brivalls.cat." always_nxdomain
 local-zone: "brixtee.com." always_nxdomain
 local-zone: "brnousa.com." always_nxdomain
@@ -1228,13 +1201,10 @@ local-zone: "brokerswoodinsurance.co.uk." always_nxdomain
 local-zone: "brookesmainecoonkittens.com." always_nxdomain
 local-zone: "brownellsfirearms.net." always_nxdomain
 local-zone: "brownellsigsauerguns.com." always_nxdomain
-local-zone: "brownellsriflesusa.com." always_nxdomain
 local-zone: "browning-arms.com." always_nxdomain
-local-zone: "browning-usa.com." always_nxdomain
 local-zone: "browningammoshop.com." always_nxdomain
 local-zone: "browningarmory.com." always_nxdomain
 local-zone: "browningarms-usa.com." always_nxdomain
-local-zone: "browningarmsstore.com." always_nxdomain
 local-zone: "browningarmstore.com." always_nxdomain
 local-zone: "browningarmswarehouse.com." always_nxdomain
 local-zone: "browningfirearms-usa.com." always_nxdomain
@@ -1244,12 +1214,10 @@ local-zone: "browningguns.com." always_nxdomain
 local-zone: "browninggunshop.com." always_nxdomain
 local-zone: "browninggunshopusa.com." always_nxdomain
 local-zone: "browninggunsusa.com." always_nxdomain
-local-zone: "browningofficial.com." always_nxdomain
 local-zone: "browningshotgunsusa.com." always_nxdomain
 local-zone: "browningusafirearms.com." always_nxdomain
 local-zone: "browningusaguns.com." always_nxdomain
 local-zone: "browningusastore.com." always_nxdomain
-local-zone: "browningweapons.com." always_nxdomain
 local-zone: "browningweaponstore.com." always_nxdomain
 local-zone: "browningweaponstoreusa.com." always_nxdomain
 local-zone: "brownpaul-lawfirm.com." always_nxdomain
@@ -1292,11 +1260,8 @@ local-zone: "bulkammoforsales.com." always_nxdomain
 local-zone: "bulkammoma.com." always_nxdomain
 local-zone: "bulkammosales.com." always_nxdomain
 local-zone: "bulkammostock.com." always_nxdomain
-local-zone: "bulkammosupplies.com." always_nxdomain
-local-zone: "bulkammotogo.com." always_nxdomain
 local-zone: "bulkammowholesale.com." always_nxdomain
 local-zone: "bulkammunition.ca." always_nxdomain
-local-zone: "bulkammunition.shop." always_nxdomain
 local-zone: "bulkammunitioncaliber.com." always_nxdomain
 local-zone: "bulkammunitionhub.com." always_nxdomain
 local-zone: "bulkammunitioninstock.com." always_nxdomain
@@ -1305,11 +1270,9 @@ local-zone: "bulkcheapammoforsale.com." always_nxdomain
 local-zone: "bulkcheapammostore.com." always_nxdomain
 local-zone: "bulkfinance.org." always_nxdomain
 local-zone: "bulkfirearms.com." always_nxdomain
-local-zone: "bulkfirearmsonline.com." always_nxdomain
 local-zone: "bulkmanammo.com." always_nxdomain
 local-zone: "bulknepgeld.com." always_nxdomain
 local-zone: "bulkreloadingsupplies.com." always_nxdomain
-local-zone: "bulksammunition.com." always_nxdomain
 local-zone: "bulksellmart.co.uk." always_nxdomain
 local-zone: "bulkstoredeals.com." always_nxdomain
 local-zone: "bulldogpuppyparadise.net." always_nxdomain
@@ -1327,7 +1290,6 @@ local-zone: "burberp.com." always_nxdomain
 local-zone: "buriayre.com." always_nxdomain
 local-zone: "burkinan.com." always_nxdomain
 local-zone: "bushmasteracr.shop." always_nxdomain
-local-zone: "bushmasterarmshop.com." always_nxdomain
 local-zone: "bushmasterarmstore.com." always_nxdomain
 local-zone: "bushmasterfirearmstore.com." always_nxdomain
 local-zone: "bushmasterguns.com." always_nxdomain
@@ -1339,7 +1301,6 @@ local-zone: "butbropropapers.co.za." always_nxdomain
 local-zone: "butbrotrading.co.za." always_nxdomain
 local-zone: "butterfalluk.com." always_nxdomain
 local-zone: "buttermano.com." always_nxdomain
-local-zone: "buy-ammunitiononline.com." always_nxdomain
 local-zone: "buyammoandprimers.com." always_nxdomain
 local-zone: "buyammodaily.com." always_nxdomain
 local-zone: "buyammoprimers.com." always_nxdomain
@@ -1399,7 +1360,6 @@ local-zone: "buyslims.com." always_nxdomain
 local-zone: "buytaurusfirearms.com." always_nxdomain
 local-zone: "buytaurusonline.com." always_nxdomain
 local-zone: "buyundetectablebills.com." always_nxdomain
-local-zone: "buywinchesterammo.com." always_nxdomain
 local-zone: "buyxanaxiety.com." always_nxdomain
 local-zone: "buyyourdocuments.com." always_nxdomain
 local-zone: "buzzfeedprivacyclaims.com." always_nxdomain
@@ -1436,7 +1396,6 @@ local-zone: "calibrearmoury.com." always_nxdomain
 local-zone: "caliexoticstore.com." always_nxdomain
 local-zone: "californiacoltfirearmsstore.com." always_nxdomain
 local-zone: "californiaczfirearmsstore.com." always_nxdomain
-local-zone: "californiafnamericaguns.com." always_nxdomain
 local-zone: "californiahenrygunsshop.com." always_nxdomain
 local-zone: "californiamount.university." always_nxdomain
 local-zone: "calimarijuanad.com." always_nxdomain
@@ -1458,7 +1417,6 @@ local-zone: "camplimited.com." always_nxdomain
 local-zone: "campsbaypuppy.net." always_nxdomain
 local-zone: "camptrunkduffel.com." always_nxdomain
 local-zone: "can-concretio-work.com." always_nxdomain
-local-zone: "canadaammunition.com." always_nxdomain
 local-zone: "canadareloadinghub.com." always_nxdomain
 local-zone: "canadianammo.com." always_nxdomain
 local-zone: "canadianlab.us." always_nxdomain
@@ -1467,7 +1425,6 @@ local-zone: "canikarmory.com." always_nxdomain
 local-zone: "canikfirearmsshop.com." always_nxdomain
 local-zone: "canikfirearmsusa.com." always_nxdomain
 local-zone: "canikforsale.com." always_nxdomain
-local-zone: "canikgunsonline.com." always_nxdomain
 local-zone: "canikgunsshop.com." always_nxdomain
 local-zone: "canikgunstore.com." always_nxdomain
 local-zone: "canikgunsusa.com." always_nxdomain
@@ -1475,7 +1432,6 @@ local-zone: "canikusa.org." always_nxdomain
 local-zone: "canikusa.shop." always_nxdomain
 local-zone: "canikusafirearms.com." always_nxdomain
 local-zone: "canikusagundeals.com." always_nxdomain
-local-zone: "canikusashop.com." always_nxdomain
 local-zone: "caninepuppykennel.co.za." always_nxdomain
 local-zone: "cannabisdeliveryaustralia.com." always_nxdomain
 local-zone: "cannabisexpresshop.com." always_nxdomain
@@ -1510,7 +1466,6 @@ local-zone: "capitaltrustfundsbnk.com." always_nxdomain
 local-zone: "capitaltrustyfinancebnk.com." always_nxdomain
 local-zone: "capitalunitedfinance.com." always_nxdomain
 local-zone: "capitalvantageonline.com." always_nxdomain
-local-zone: "capitalxguns.co.uk." always_nxdomain
 local-zone: "capitexpro.com." always_nxdomain
 local-zone: "capitolcityb.com." always_nxdomain
 local-zone: "captonebank.com." always_nxdomain
@@ -1555,7 +1510,6 @@ local-zone: "castellicycle.com." always_nxdomain
 local-zone: "castlefaithbkkltd.com." always_nxdomain
 local-zone: "castlerockfirearms.com." always_nxdomain
 local-zone: "casualsportstore.com." always_nxdomain
-local-zone: "catalunyacaixabanc.com." always_nxdomain
 local-zone: "catalystltd329276820.wordpress.com." always_nxdomain
 local-zone: "catgr.com." always_nxdomain
 local-zone: "cavarpoopuppyshop.com." always_nxdomain
@@ -1565,9 +1519,9 @@ local-zone: "caxa-insurance.com." always_nxdomain
 local-zone: "caxasp.com." always_nxdomain
 local-zone: "cbe-europa.eu." always_nxdomain
 local-zone: "cbnue.shop." always_nxdomain
+local-zone: "cbuaegov.com." always_nxdomain
 local-zone: "ccccccstudio.com." always_nxdomain
 local-zone: "cchopeorg.com." always_nxdomain
-local-zone: "cci-ammostore.com." always_nxdomain
 local-zone: "cci-ammunitionss.com." always_nxdomain
 local-zone: "cci-primers.com." always_nxdomain
 local-zone: "cci-usaprimers.com." always_nxdomain
@@ -1604,7 +1558,6 @@ local-zone: "centralcititrustfinance.com." always_nxdomain
 local-zone: "centralcreditm.com." always_nxdomain
 local-zone: "centralfinance.co.za." always_nxdomain
 local-zone: "centraparkkennel.co.za." always_nxdomain
-local-zone: "centuryarms.shop." always_nxdomain
 local-zone: "centuryarmsdealer.com." always_nxdomain
 local-zone: "centuryarmshop.com." always_nxdomain
 local-zone: "centuryarmstore.com." always_nxdomain
@@ -1625,7 +1578,6 @@ local-zone: "cetizingroup.com." always_nxdomain
 local-zone: "cfhomepillow.com." always_nxdomain
 local-zone: "cfinanceuk.co." always_nxdomain
 local-zone: "cfmbuy.com." always_nxdomain
-local-zone: "cfmotosusa.com." always_nxdomain
 local-zone: "cfqualitylab.com." always_nxdomain
 local-zone: "cghnwiprivate.com." always_nxdomain
 local-zone: "cgs-secs.com." always_nxdomain
@@ -1642,7 +1594,6 @@ local-zone: "characterizm.com." always_nxdomain
 local-zone: "charityfarm.co.za." always_nxdomain
 local-zone: "charlesdalyarms.com." always_nxdomain
 local-zone: "charlesdavidshoe.com." always_nxdomain
-local-zone: "charlizecu.com." always_nxdomain
 local-zone: "charmyteacupyorkies.com." always_nxdomain
 local-zone: "charterarmsusa.com." always_nxdomain
 local-zone: "charteredcreditunionb.com." always_nxdomain
@@ -1683,7 +1634,6 @@ local-zone: "chiappagunshop.com." always_nxdomain
 local-zone: "chiappagunsusa.com." always_nxdomain
 local-zone: "chiapparhinoarm.com." always_nxdomain
 local-zone: "chiapparhinoarms.com." always_nxdomain
-local-zone: "chiapparhinofirearm.com." always_nxdomain
 local-zone: "chiapparhinofirearms.com." always_nxdomain
 local-zone: "chiapparhinorevolvers.com." always_nxdomain
 local-zone: "chiapparhinostore.com." always_nxdomain
@@ -1807,7 +1757,6 @@ local-zone: "clockinvest.com." always_nxdomain
 local-zone: "clonecards.shop." always_nxdomain
 local-zone: "clonecardstender.com." always_nxdomain
 local-zone: "clonecardsvendor.com." always_nxdomain
-local-zone: "closetargetgunshop.store." always_nxdomain
 local-zone: "clothesff.com." always_nxdomain
 local-zone: "clothespalm.com." always_nxdomain
 local-zone: "clothessuper.com." always_nxdomain
@@ -1869,9 +1818,7 @@ local-zone: "coltarmsamerica.com." always_nxdomain
 local-zone: "coltarmstore.com." always_nxdomain
 local-zone: "coltarmsusa.com." always_nxdomain
 local-zone: "coltfirearmshop.com." always_nxdomain
-local-zone: "coltfirearmsstore.com." always_nxdomain
 local-zone: "coltfirearmsusa.com." always_nxdomain
-local-zone: "coltfirearmswarehouse.com." always_nxdomain
 local-zone: "coltguns.shop." always_nxdomain
 local-zone: "coltgunsale.com." always_nxdomain
 local-zone: "coltgunsales.com." always_nxdomain
@@ -2036,12 +1983,10 @@ local-zone: "crystalmjy.com." always_nxdomain
 local-zone: "crystalprestigecredit.com." always_nxdomain
 local-zone: "crystalprestigeonline.com." always_nxdomain
 local-zone: "crystalpuppy.com." always_nxdomain
-local-zone: "csbo.shop." always_nxdomain
 local-zone: "cscustomcycles.com." always_nxdomain
 local-zone: "csgcglobalcorporation.com." always_nxdomain
 local-zone: "cshoeshop.com." always_nxdomain
 local-zone: "csknife.net." always_nxdomain
-local-zone: "cstwire.com." always_nxdomain
 local-zone: "ctmlivestock.com." always_nxdomain
 local-zone: "cttxpress.com." always_nxdomain
 local-zone: "ctu-funds.online." always_nxdomain
@@ -2085,12 +2030,10 @@ local-zone: "cyobyo.com." always_nxdomain
 local-zone: "cz-usafirearms.com." always_nxdomain
 local-zone: "czarmory.com." always_nxdomain
 local-zone: "czarmsales.com." always_nxdomain
-local-zone: "czarmsstore.com." always_nxdomain
 local-zone: "czarmstore.com." always_nxdomain
 local-zone: "czarmsusa.com." always_nxdomain
 local-zone: "czfirearms-usa.com." always_nxdomain
 local-zone: "czfirearmsales.com." always_nxdomain
-local-zone: "czfirearmsdealers.com." always_nxdomain
 local-zone: "czfirearmstore-usa.com." always_nxdomain
 local-zone: "czfirearmstore.com." always_nxdomain
 local-zone: "czgun.shop." always_nxdomain
@@ -2105,9 +2048,7 @@ local-zone: "czgunsusastore.com." always_nxdomain
 local-zone: "czusafirearms.com." always_nxdomain
 local-zone: "czusafirearmshop.com." always_nxdomain
 local-zone: "czusafirearmstore.com." always_nxdomain
-local-zone: "czusagundeals.com." always_nxdomain
 local-zone: "czusaguns.com." always_nxdomain
-local-zone: "czusagunsales.com." always_nxdomain
 local-zone: "czusagunstore.com." always_nxdomain
 local-zone: "czusashop.com." always_nxdomain
 local-zone: "czusastore.com." always_nxdomain
@@ -2131,7 +2072,6 @@ local-zone: "dairylandcattleranch.com." always_nxdomain
 local-zone: "daisysavingcart.com." always_nxdomain
 local-zone: "dakmag.com." always_nxdomain
 local-zone: "daledog.store." always_nxdomain
-local-zone: "dalkinpty.com." always_nxdomain
 local-zone: "daltamwarehousecoltd.com." always_nxdomain
 local-zone: "dalzu.com." always_nxdomain
 local-zone: "damiankennelsfarm.co.za." always_nxdomain
@@ -2147,7 +2087,6 @@ local-zone: "danner-us.shop." always_nxdomain
 local-zone: "dannycatterycoons.com." always_nxdomain
 local-zone: "danwessonarms.com." always_nxdomain
 local-zone: "danwessonfirearms-usa.com." always_nxdomain
-local-zone: "danwessonfirearms.shop." always_nxdomain
 local-zone: "danwessonfirearmstore.com." always_nxdomain
 local-zone: "danwessonfirearmsusa.com." always_nxdomain
 local-zone: "danwessonwarehouse.com." always_nxdomain
@@ -2181,7 +2120,6 @@ local-zone: "dazzlingdecorstore.com." always_nxdomain
 local-zone: "dbcargo-shipping.com." always_nxdomain
 local-zone: "dbhmnp.shop." always_nxdomain
 local-zone: "dbsbk.com." always_nxdomain
-local-zone: "dcammunitionshop.com." always_nxdomain
 local-zone: "dcf-groupe.com." always_nxdomain
 local-zone: "dcmflimitd.blogspot.com." always_nxdomain
 local-zone: "dcodtcre.shop." always_nxdomain
@@ -2244,7 +2182,6 @@ local-zone: "denacob.com." always_nxdomain
 local-zone: "denbyfashion.com." always_nxdomain
 local-zone: "dengines.co.za." always_nxdomain
 local-zone: "denvbk.com." always_nxdomain
-local-zone: "denvergunstore.com." always_nxdomain
 local-zone: "denvermagicmushroomstore.net." always_nxdomain
 local-zone: "denvermagicmushroomstore.us." always_nxdomain
 local-zone: "deotranscouriers.com." always_nxdomain
@@ -2322,7 +2259,6 @@ local-zone: "direttaa.com." always_nxdomain
 local-zone: "dirtyfootmudranch.com." always_nxdomain
 local-zone: "discosaving.com." always_nxdomain
 local-zone: "discountammodepot.com." always_nxdomain
-local-zone: "discountammostorehouse.com." always_nxdomain
 local-zone: "discountammunitionstore.com." always_nxdomain
 local-zone: "discountappliances.co.za." always_nxdomain
 local-zone: "discountcons.com." always_nxdomain
@@ -2339,7 +2275,6 @@ local-zone: "discretegunshop.com." always_nxdomain
 local-zone: "discussionk.com." always_nxdomain
 local-zone: "displacementsjournal.com." always_nxdomain
 local-zone: "disposablevapecarts.com." always_nxdomain
-local-zone: "districtstrappers.com." always_nxdomain
 local-zone: "divine-wonder.com." always_nxdomain
 local-zone: "divinedecorofdallas.us." always_nxdomain
 local-zone: "divineexpressglobaldelivery.com." always_nxdomain
@@ -2401,7 +2336,6 @@ local-zone: "doorstepexpressdelivery.biz." always_nxdomain
 local-zone: "dor-reception.fr." always_nxdomain
 local-zone: "doublea1991company.com." always_nxdomain
 local-zone: "doubleacopypaper.com." always_nxdomain
-local-zone: "doubleactiongunshop.com." always_nxdomain
 local-zone: "doubleapaper1991partner.com." always_nxdomain
 local-zone: "doubleleaves.com." always_nxdomain
 local-zone: "doussales.com." always_nxdomain
@@ -2475,7 +2409,6 @@ local-zone: "e-ridze.store." always_nxdomain
 local-zone: "eaaei.org." always_nxdomain
 local-zone: "eaafirearms.com." always_nxdomain
 local-zone: "eaafirearmsusa.com." always_nxdomain
-local-zone: "eaaguns.shop." always_nxdomain
 local-zone: "eabdti.com." always_nxdomain
 local-zone: "eaglecargocourier.com." always_nxdomain
 local-zone: "eaglegatedelivery.com." always_nxdomain
@@ -2654,7 +2587,6 @@ local-zone: "equnivers.com." always_nxdomain
 local-zone: "erableinnum.com." always_nxdomain
 local-zone: "eraldin.shop." always_nxdomain
 local-zone: "erawangroupltd.com." always_nxdomain
-local-zone: "ercnnier.com." always_nxdomain
 local-zone: "eresortpapers.co.za." always_nxdomain
 local-zone: "ericksengroup.com." always_nxdomain
 local-zone: "erlock.shop." always_nxdomain
@@ -2870,11 +2802,7 @@ local-zone: "fcdlogisticservice.com." always_nxdomain
 local-zone: "fcicu.com." always_nxdomain
 local-zone: "federal-primers.com." always_nxdomain
 local-zone: "federalammo-usa.com." always_nxdomain
-local-zone: "federalammunitions.com." always_nxdomain
-local-zone: "federalammunitionsusa.com." always_nxdomain
-local-zone: "federalgunclub.com." always_nxdomain
 local-zone: "federalpremiumshop.com." always_nxdomain
-local-zone: "federalprimers-usa.com." always_nxdomain
 local-zone: "federalprimers.com." always_nxdomain
 local-zone: "federalprimersusa.com." always_nxdomain
 local-zone: "federalshots.com." always_nxdomain
@@ -2926,7 +2854,6 @@ local-zone: "fintechtradesfx.com." always_nxdomain
 local-zone: "finwardtrust.com." always_nxdomain
 local-zone: "fiocchiammousa.com." always_nxdomain
 local-zone: "fiocchiofficial.com." always_nxdomain
-local-zone: "fireammoshop.com." always_nxdomain
 local-zone: "fireamunitions.com." always_nxdomain
 local-zone: "firearmammostore.com." always_nxdomain
 local-zone: "firearmammosupply.com." always_nxdomain
@@ -2934,7 +2861,6 @@ local-zone: "firearmammunition.com." always_nxdomain
 local-zone: "firearmandammunition.com." always_nxdomain
 local-zone: "firearmberetta.com." always_nxdomain
 local-zone: "firearmonlineshop.com." always_nxdomain
-local-zone: "firearms-accessoriesstore.com." always_nxdomain
 local-zone: "firearms-alabama.com." always_nxdomain
 local-zone: "firearms-arizona.com." always_nxdomain
 local-zone: "firearms-avenue.com." always_nxdomain
@@ -2943,7 +2869,6 @@ local-zone: "firearms-glov.com." always_nxdomain
 local-zone: "firearms-guns.com." always_nxdomain
 local-zone: "firearms-guns.eu." always_nxdomain
 local-zone: "firearms-missouri.com." always_nxdomain
-local-zone: "firearms-montana.com." always_nxdomain
 local-zone: "firearms-montana.net." always_nxdomain
 local-zone: "firearms-nevada.com." always_nxdomain
 local-zone: "firearms-ohio.com." always_nxdomain
@@ -2961,7 +2886,6 @@ local-zone: "firearmsdealer.us." always_nxdomain
 local-zone: "firearmsdepot-usa.com." always_nxdomain
 local-zone: "firearmsdispensary.com." always_nxdomain
 local-zone: "firearmsgallery.com." always_nxdomain
-local-zone: "firearmsgunshop.online." always_nxdomain
 local-zone: "firearmshopus.com." always_nxdomain
 local-zone: "firearmslocker.com." always_nxdomain
 local-zone: "firearmsnew.com." always_nxdomain
@@ -2980,7 +2904,6 @@ local-zone: "firearmsstorecanada.com." always_nxdomain
 local-zone: "firearmsstoreonline.com." always_nxdomain
 local-zone: "firearmsstoreusa.com." always_nxdomain
 local-zone: "firearmssupplier.com." always_nxdomain
-local-zone: "firearmsuniverse.net." always_nxdomain
 local-zone: "firearmsupplyshop.com." always_nxdomain
 local-zone: "firersale.com." always_nxdomain
 local-zone: "fireumbrellauk.com." always_nxdomain
@@ -3048,7 +2971,6 @@ local-zone: "florida-firearms.com." always_nxdomain
 local-zone: "floridacoltfirearmsshop.com." always_nxdomain
 local-zone: "floridaczgunsshop.com." always_nxdomain
 local-zone: "floridaczgunsstore.com." always_nxdomain
-local-zone: "floridahenryriflesstore.com." always_nxdomain
 local-zone: "floridamfngunsshop.com." always_nxdomain
 local-zone: "floridasigsauergunsshop.com." always_nxdomain
 local-zone: "flouxsarl.fr." always_nxdomain
@@ -3061,6 +2983,7 @@ local-zone: "flyapexus.com." always_nxdomain
 local-zone: "flylinkexpressdelivery.com." always_nxdomain
 local-zone: "flytey.com." always_nxdomain
 local-zone: "flytracy.com." always_nxdomain
+local-zone: "fma-gov.kz." always_nxdomain
 local-zone: "fmfinance-gov.com.ng." always_nxdomain
 local-zone: "fmtmedicalstore.com." always_nxdomain
 local-zone: "fnamericagun.com." always_nxdomain
@@ -3068,10 +2991,8 @@ local-zone: "fnamericaguns.com." always_nxdomain
 local-zone: "fnamericagunshop.com." always_nxdomain
 local-zone: "fnamericagunstore.com." always_nxdomain
 local-zone: "fnfirearmsamerica.com." always_nxdomain
-local-zone: "fnfirearmshop.com." always_nxdomain
 local-zone: "fnfirearmsstore.com." always_nxdomain
 local-zone: "fnfirearmsusa.com." always_nxdomain
-local-zone: "fngun.net." always_nxdomain
 local-zone: "fngunsale.com." always_nxdomain
 local-zone: "fnherstalgun.com." always_nxdomain
 local-zone: "fnherstalofficial.com." always_nxdomain
@@ -3094,7 +3015,6 @@ local-zone: "forexstocktrade247.com." always_nxdomain
 local-zone: "forgotanx.com." always_nxdomain
 local-zone: "forjustanswer.com." always_nxdomain
 local-zone: "forresthillcontainerstrading.co.za." always_nxdomain
-local-zone: "forscotransport.com." always_nxdomain
 local-zone: "forteammostore.com." always_nxdomain
 local-zone: "fortistrd.com." always_nxdomain
 local-zone: "fortressloanfinance.com." always_nxdomain
@@ -3247,13 +3167,11 @@ local-zone: "geezerdecor.com." always_nxdomain
 local-zone: "geheshop.com." always_nxdomain
 local-zone: "geissele-usa.com." always_nxdomain
 local-zone: "geisseleautomaticsusa.com." always_nxdomain
-local-zone: "geisseleusa.com." always_nxdomain
 local-zone: "geminiarms.com." always_nxdomain
 local-zone: "gemstonerivers.com." always_nxdomain
 local-zone: "genekitchen.shop." always_nxdomain
 local-zone: "generalautospares.com." always_nxdomain
 local-zone: "generalmedicalsuppliers.com." always_nxdomain
-local-zone: "generaloutdoorsupply.com." always_nxdomain
 local-zone: "generatorprosuppliers.co.za." always_nxdomain
 local-zone: "generositym.com." always_nxdomain
 local-zone: "genievine.com." always_nxdomain
@@ -3265,7 +3183,6 @@ local-zone: "gentrify.pl." always_nxdomain
 local-zone: "genuzy.com." always_nxdomain
 local-zone: "geoaun.com." always_nxdomain
 local-zone: "georgia-gunshop.com." always_nxdomain
-local-zone: "georgiafngunsshop.com." always_nxdomain
 local-zone: "gerardodelgado.es." always_nxdomain
 local-zone: "gerryvenomshop.com." always_nxdomain
 local-zone: "gesoftop.com." always_nxdomain
@@ -3359,9 +3276,7 @@ local-zone: "globalexpressdeliveryx.com." always_nxdomain
 local-zone: "globalexpresspetcourier.net." always_nxdomain
 local-zone: "globalfinanceltdhk.blogspot.com." always_nxdomain
 local-zone: "globalfirearmshop.com." always_nxdomain
-local-zone: "globalfirearmssuppliers.com." always_nxdomain
 local-zone: "globalfxscouts.com." always_nxdomain
-local-zone: "globalgunhouse.com." always_nxdomain
 local-zone: "globalgunsales.com." always_nxdomain
 local-zone: "globalgunsupplier.com." always_nxdomain
 local-zone: "globalguntraders.com." always_nxdomain
@@ -3390,7 +3305,7 @@ local-zone: "globalrealdocuments.com." always_nxdomain
 local-zone: "globalredlogistics.com." always_nxdomain
 local-zone: "globalrootsdeliveryandlog.com." always_nxdomain
 local-zone: "globalscraps.com." always_nxdomain
-local-zone: "globalsgunshop.com." always_nxdomain
+local-zone: "globalsdfa.org." always_nxdomain
 local-zone: "globalshipcargo.com." always_nxdomain
 local-zone: "globalshservices.com." always_nxdomain
 local-zone: "globalsisalltd.com." always_nxdomain
@@ -3415,36 +3330,28 @@ local-zone: "globelinkstarshipping.com." always_nxdomain
 local-zone: "globelkstar.com." always_nxdomain
 local-zone: "globeprologistics.com." always_nxdomain
 local-zone: "globusfestival.nl." always_nxdomain
-local-zone: "glock-26.com." always_nxdomain
 local-zone: "glock-firearms.com." always_nxdomain
 local-zone: "glock.vip." always_nxdomain
-local-zone: "glock43x.com." always_nxdomain
 local-zone: "glockammoshop.com." always_nxdomain
 local-zone: "glockamory.com." always_nxdomain
-local-zone: "glockandgunshop.com." always_nxdomain
 local-zone: "glockempireshop.com." always_nxdomain
 local-zone: "glockenterprise.com." always_nxdomain
 local-zone: "glockfirearmsacademy.com." always_nxdomain
 local-zone: "glockfirearmsusa.com." always_nxdomain
 local-zone: "glockgunsales.com." always_nxdomain
 local-zone: "glockgunsusa.com." always_nxdomain
-local-zone: "glockgunswitch.com." always_nxdomain
 local-zone: "glockpistolsshop.com." always_nxdomain
-local-zone: "glockpistolz.com." always_nxdomain
 local-zone: "glockretail.com." always_nxdomain
 local-zone: "glocksandammunitions.shop." always_nxdomain
-local-zone: "glocksarmory.com." always_nxdomain
 local-zone: "glocksforsale.net." always_nxdomain
 local-zone: "glockshop.org." always_nxdomain
 local-zone: "glocksnation.com." always_nxdomain
 local-zone: "glocksofficial.org." always_nxdomain
 local-zone: "glocksonlineandhandgunshoponline.com." always_nxdomain
-local-zone: "glocksonlineshop.com." always_nxdomain
-local-zone: "glocksparts.com." always_nxdomain
 local-zone: "glockstore19.shop." always_nxdomain
 local-zone: "glockswitch.net." always_nxdomain
-local-zone: "glockszone.com." always_nxdomain
 local-zone: "glockuprise.com." always_nxdomain
+local-zone: "gloflacu.com." always_nxdomain
 local-zone: "gloryglobaltrading.com." always_nxdomain
 local-zone: "glovesinvest.com." always_nxdomain
 local-zone: "glowmetalsgroupltd.com." always_nxdomain
@@ -3527,8 +3434,6 @@ local-zone: "goxmix.com." always_nxdomain
 local-zone: "gpjholzdesign.de." always_nxdomain
 local-zone: "gprbn.com." always_nxdomain
 local-zone: "gqcxp.sandralaumusic.com." always_nxdomain
-local-zone: "grabagun.shop." always_nxdomain
-local-zone: "grabagunusa.com." always_nxdomain
 local-zone: "grabargun.com." always_nxdomain
 local-zone: "grabgalaxy.com." always_nxdomain
 local-zone: "graceakcbulldogsfarm.com." always_nxdomain
@@ -3619,9 +3524,7 @@ local-zone: "gunclubstore.com." always_nxdomain
 local-zone: "gundeals.shop." always_nxdomain
 local-zone: "gundogarmory.net." always_nxdomain
 local-zone: "gunfactory.eu." always_nxdomain
-local-zone: "gunmanshazam.com." always_nxdomain
 local-zone: "gunmeplug.com." always_nxdomain
-local-zone: "gunnerammunition.com." always_nxdomain
 local-zone: "gunnerscart.com." always_nxdomain
 local-zone: "gunnershouse.com." always_nxdomain
 local-zone: "gunnsforsale.com." always_nxdomain
@@ -3636,8 +3539,6 @@ local-zone: "gunsale2021.com." always_nxdomain
 local-zone: "gunsalsoammunitionshop.com." always_nxdomain
 local-zone: "gunsammoonlinestore.com." always_nxdomain
 local-zone: "gunsammoshop.com." always_nxdomain
-local-zone: "gunsanammunition.com." always_nxdomain
-local-zone: "gunsandammolineusa.com." always_nxdomain
 local-zone: "gunsandammos.com." always_nxdomain
 local-zone: "gunsandammoshop.com." always_nxdomain
 local-zone: "gunsandammoshops.com." always_nxdomain
@@ -3651,9 +3552,7 @@ local-zone: "gunsarmoryguide.com." always_nxdomain
 local-zone: "gunsbone.com." always_nxdomain
 local-zone: "gunsbuyer.com." always_nxdomain
 local-zone: "gunsbuyerusa.com." always_nxdomain
-local-zone: "gunscorporate.com." always_nxdomain
 local-zone: "gunsdeal.org." always_nxdomain
-local-zone: "gunsexpres.com." always_nxdomain
 local-zone: "gunsforsale.shop." always_nxdomain
 local-zone: "gunsforsale.tech." always_nxdomain
 local-zone: "gunsforsalecheap.com." always_nxdomain
@@ -3669,11 +3568,9 @@ local-zone: "gunstocks.us." always_nxdomain
 local-zone: "gunstore247.com." always_nxdomain
 local-zone: "gunstorerange.com." always_nxdomain
 local-zone: "gunstrapsarms.com." always_nxdomain
-local-zone: "gunswarehouse.net." always_nxdomain
 local-zone: "gunswitch.org." always_nxdomain
 local-zone: "guntycoons.com." always_nxdomain
 local-zone: "gunvisorestore.com." always_nxdomain
-local-zone: "gunzexperts.com." always_nxdomain
 local-zone: "gunzstore.com." always_nxdomain
 local-zone: "gupreme.com." always_nxdomain
 local-zone: "guridft.store." always_nxdomain
@@ -3684,6 +3581,7 @@ local-zone: "guzelherbs.com." always_nxdomain
 local-zone: "gvs-usa.com." always_nxdomain
 local-zone: "gworldpapersltd.com." always_nxdomain
 local-zone: "gymboy.shop." always_nxdomain
+local-zone: "h-mtreasury.co.uk." always_nxdomain
 local-zone: "habibbsonsmicrobank.com." always_nxdomain
 local-zone: "habibfinanceltd.com." always_nxdomain
 local-zone: "haelectricals.co.za." always_nxdomain
@@ -3699,7 +3597,6 @@ local-zone: "hambricktrustsplc.com." always_nxdomain
 local-zone: "hamburgtree.com." always_nxdomain
 local-zone: "hamofydermalsuppliers.com." always_nxdomain
 local-zone: "hamptonlive.blog." always_nxdomain
-local-zone: "hamsmpguns.com." always_nxdomain
 local-zone: "hananacreative.com." always_nxdomain
 local-zone: "handbagsale.store." always_nxdomain
 local-zone: "handgun-shop.com." always_nxdomain
@@ -3709,7 +3606,6 @@ local-zone: "handpickclothing.com." always_nxdomain
 local-zone: "handsomedogclub.com." always_nxdomain
 local-zone: "haneamy.com." always_nxdomain
 local-zone: "hanielstore.com." always_nxdomain
-local-zone: "hansbrewarmory.com." always_nxdomain
 local-zone: "hanwen777.com." always_nxdomain
 local-zone: "happypetskennel.co.za." always_nxdomain
 local-zone: "happyskingo.co." always_nxdomain
@@ -3766,12 +3662,10 @@ local-zone: "helpmall.shop." always_nxdomain
 local-zone: "hemincu.com." always_nxdomain
 local-zone: "hemingwary.com." always_nxdomain
 local-zone: "henlibyting.com." always_nxdomain
-local-zone: "henryarmssale.com." always_nxdomain
 local-zone: "henryfirearmsstore.com." always_nxdomain
 local-zone: "henrygunsale.com." always_nxdomain
 local-zone: "henryriflesales.com." always_nxdomain
 local-zone: "henryriflesamerica.com." always_nxdomain
-local-zone: "henrystoreusa.com." always_nxdomain
 local-zone: "henryusarifleshop.com." always_nxdomain
 local-zone: "here-sushi.de." always_nxdomain
 local-zone: "heritagefirearmstore.com." always_nxdomain
@@ -3784,7 +3678,6 @@ local-zone: "herrietcuttest.com." always_nxdomain
 local-zone: "herschelfirearms.com." always_nxdomain
 local-zone: "hesidate.com." always_nxdomain
 local-zone: "hestiy.com." always_nxdomain
-local-zone: "hexa-movers.com." always_nxdomain
 local-zone: "hexinfashion.com." always_nxdomain
 local-zone: "hfkscp.com." always_nxdomain
 local-zone: "hglllshop.com." always_nxdomain
@@ -3808,6 +3701,7 @@ local-zone: "hilltonsugarltd.com." always_nxdomain
 local-zone: "hilltopcontainers.co.za." always_nxdomain
 local-zone: "hillviewcredit.com." always_nxdomain
 local-zone: "hilome.shop." always_nxdomain
+local-zone: "hilton-uk.online." always_nxdomain
 local-zone: "hilxfunds.com." always_nxdomain
 local-zone: "hingcapsbnk.org." always_nxdomain
 local-zone: "hipointguns.com." always_nxdomain
@@ -3821,7 +3715,6 @@ local-zone: "hispanicnet.org." always_nxdomain
 local-zone: "hitechchemshomes.com." always_nxdomain
 local-zone: "hkarms.com." always_nxdomain
 local-zone: "hkfirearmsusa.com." always_nxdomain
-local-zone: "hkguns.shop." always_nxdomain
 local-zone: "hkgunstore.com." always_nxdomain
 local-zone: "hkusa-guns.com." always_nxdomain
 local-zone: "hkusafirearms.com." always_nxdomain
@@ -3838,7 +3731,6 @@ local-zone: "hmneiiry.store." always_nxdomain
 local-zone: "hmtpapers.com." always_nxdomain
 local-zone: "hnepoee.com." always_nxdomain
 local-zone: "hochland-kriecherl.at." always_nxdomain
-local-zone: "hodgdonfirearmsstore.com." always_nxdomain
 local-zone: "hodgdonpowdershop.com." always_nxdomain
 local-zone: "hodgdonretailstore.com." always_nxdomain
 local-zone: "hodilar.com." always_nxdomain
@@ -3922,13 +3814,11 @@ local-zone: "houbingi.com." always_nxdomain
 local-zone: "hoursclothes.com." always_nxdomain
 local-zone: "housecleaningsale.com." always_nxdomain
 local-zone: "houseofammunition.com." always_nxdomain
-local-zone: "houseoffirearmss.com." always_nxdomain
 local-zone: "houserby.com." always_nxdomain
 local-zone: "housetrainerottipups.net." always_nxdomain
 local-zone: "houstonglockshop.com." always_nxdomain
 local-zone: "houstonuni.com." always_nxdomain
 local-zone: "howafirearms.com." always_nxdomain
-local-zone: "howafirearmsstore.com." always_nxdomain
 local-zone: "howaguns.com." always_nxdomain
 local-zone: "howardgilbertllp.com." always_nxdomain
 local-zone: "howardloanfunds.simplesite.com." always_nxdomain
@@ -3970,7 +3860,6 @@ local-zone: "huntgunshop.com." always_nxdomain
 local-zone: "huntingandammoshop.com." always_nxdomain
 local-zone: "huntinggears.shop." always_nxdomain
 local-zone: "huntinggunsandrifles.com." always_nxdomain
-local-zone: "huntsman-shop.com." always_nxdomain
 local-zone: "hust.education." always_nxdomain
 local-zone: "hustledetective.com." always_nxdomain
 local-zone: "hybridenergyhome.co.za." always_nxdomain
@@ -4158,7 +4047,6 @@ local-zone: "japanengineandgearboxauto.com." always_nxdomain
 local-zone: "japanenginesgearboxauto.co.za." always_nxdomain
 local-zone: "japanmotorspares.co.za." always_nxdomain
 local-zone: "jarlaws.com." always_nxdomain
-local-zone: "jarvisfirearms.com." always_nxdomain
 local-zone: "jasbuy.com." always_nxdomain
 local-zone: "jasminebuy.com." always_nxdomain
 local-zone: "jasminefxminage.com." always_nxdomain
@@ -4244,7 +4132,6 @@ local-zone: "jpmchb.com." always_nxdomain
 local-zone: "jpmorabank.net." always_nxdomain
 local-zone: "jqwerks.com." always_nxdomain
 local-zone: "jrexpressfreight.com." always_nxdomain
-local-zone: "jrgunshops.com." always_nxdomain
 local-zone: "jsbfirearmslimited.com." always_nxdomain
 local-zone: "jtdynamicsconstruction.com." always_nxdomain
 local-zone: "juaanpaperindustry.com." always_nxdomain
@@ -4269,7 +4156,6 @@ local-zone: "kahrarmsusa.com." always_nxdomain
 local-zone: "kahrusafirearmsgroup.com." always_nxdomain
 local-zone: "kaidensdachshundhome.com." always_nxdomain
 local-zone: "kakazzy.com." always_nxdomain
-local-zone: "kakindustrygunshop.com." always_nxdomain
 local-zone: "kakuii.shop." always_nxdomain
 local-zone: "kalashnikovofficial.com." always_nxdomain
 local-zone: "kalejdoskopfloral.pl." always_nxdomain
@@ -4318,10 +4204,6 @@ local-zone: "kelivinarthurbarristersssociates.com." always_nxdomain
 local-zone: "kellycharming.com." always_nxdomain
 local-zone: "keltecarmory.com." always_nxdomain
 local-zone: "keltecfirearmstore.com." always_nxdomain
-local-zone: "keltecgunshop.com." always_nxdomain
-local-zone: "keltecksg410.xyz." always_nxdomain
-local-zone: "keltecusa.shop." always_nxdomain
-local-zone: "keltecusastore.com." always_nxdomain
 local-zone: "keltecweaponshop.com." always_nxdomain
 local-zone: "keltecweaponstore.com." always_nxdomain
 local-zone: "keltysale.com." always_nxdomain
@@ -4332,7 +4214,6 @@ local-zone: "kenfood.xyz." always_nxdomain
 local-zone: "kenmoy.com." always_nxdomain
 local-zone: "kennelbellevuepups.com." always_nxdomain
 local-zone: "kentucky-gunshop.com." always_nxdomain
-local-zone: "kerrygunstore.com." always_nxdomain
 local-zone: "ketven.com." always_nxdomain
 local-zone: "kexcet.com." always_nxdomain
 local-zone: "keyesden.com." always_nxdomain
@@ -4350,11 +4231,9 @@ local-zone: "kihorsemed.com." always_nxdomain
 local-zone: "kikimiss.com." always_nxdomain
 local-zone: "kilatkuning.shop." always_nxdomain
 local-zone: "killinglyeyecare.com." always_nxdomain
-local-zone: "kimballarmsplc.com." always_nxdomain
 local-zone: "kimberarmshop.com." always_nxdomain
 local-zone: "kimberfirearm.com." always_nxdomain
 local-zone: "kimberfirearmsale.com." always_nxdomain
-local-zone: "kimberfirearmz.com." always_nxdomain
 local-zone: "kimbergunstoreusa.com." always_nxdomain
 local-zone: "kimbergunsusa.com." always_nxdomain
 local-zone: "kimberlybrittinghamk.com." always_nxdomain
@@ -4368,8 +4247,6 @@ local-zone: "kingcharlesandcavapoo.com." always_nxdomain
 local-zone: "kingdompawsdachshund.live." always_nxdomain
 local-zone: "kingemirateslogistics.com." always_nxdomain
 local-zone: "kingfrenchieshome.com." always_nxdomain
-local-zone: "kinggunshop.com." always_nxdomain
-local-zone: "kinglerweapon.com." always_nxdomain
 local-zone: "kingofwhiskeyseries.com." always_nxdomain
 local-zone: "kingsexpressdeliveryservice.com." always_nxdomain
 local-zone: "kingsfirearmshop.com." always_nxdomain
@@ -4381,7 +4258,6 @@ local-zone: "kinyuyholdings.com." always_nxdomain
 local-zone: "kinzino.com." always_nxdomain
 local-zone: "kirinsecret.com." always_nxdomain
 local-zone: "kirkgunsshop.com." always_nxdomain
-local-zone: "kirstiecattlecoons.com." always_nxdomain
 local-zone: "kitchen2mart.shop." always_nxdomain
 local-zone: "kithet.com." always_nxdomain
 local-zone: "kittenlashez.com." always_nxdomain
@@ -4476,7 +4352,6 @@ local-zone: "lacrossehandpick.com." always_nxdomain
 local-zone: "ladangsherbs.com." always_nxdomain
 local-zone: "ladiesclothingonline.store." always_nxdomain
 local-zone: "laeliajr.com." always_nxdomain
-local-zone: "lafirearmsupplies.store." always_nxdomain
 local-zone: "lagomone.net." always_nxdomain
 local-zone: "lah2o.com." always_nxdomain
 local-zone: "laihair.com." always_nxdomain
@@ -4534,7 +4409,6 @@ local-zone: "lecithia.com." always_nxdomain
 local-zone: "leecogo.com." always_nxdomain
 local-zone: "leedscitybk.com." always_nxdomain
 local-zone: "lefikengpoultry.co.za." always_nxdomain
-local-zone: "legacyammunition.com." always_nxdomain
 local-zone: "legacymainecoon.wixsite.com." always_nxdomain
 local-zone: "legacytrade.co.za." always_nxdomain
 local-zone: "legalbolivianshop.com." always_nxdomain
@@ -4632,7 +4506,6 @@ local-zone: "liveunboxed.live." always_nxdomain
 local-zone: "lizamkiltd.com." always_nxdomain
 local-zone: "lizrugs.com." always_nxdomain
 local-zone: "lkstransport.eu." always_nxdomain
-local-zone: "lkuia.shop." always_nxdomain
 local-zone: "llcbest-enterprise.co.za." always_nxdomain
 local-zone: "lloydtacticalshop.com." always_nxdomain
 local-zone: "lmggreencontainer.co.za." always_nxdomain
@@ -4666,10 +4539,8 @@ local-zone: "longfordtrust.com." always_nxdomain
 local-zone: "longmemory.store." always_nxdomain
 local-zone: "lookico.com." always_nxdomain
 local-zone: "looklifters.com." always_nxdomain
-local-zone: "looseknives.com." always_nxdomain
 local-zone: "loozacy.com." always_nxdomain
 local-zone: "lopezpromo.shop." always_nxdomain
-local-zone: "lorickfirearms.com." always_nxdomain
 local-zone: "lostmary-vape.com." always_nxdomain
 local-zone: "lotablefre.com." always_nxdomain
 local-zone: "lotaremandgeneraltradingptyltd.com." always_nxdomain
@@ -4715,7 +4586,6 @@ local-zone: "lucynaa.com." always_nxdomain
 local-zone: "luenx.com." always_nxdomain
 local-zone: "luffglasses.com." always_nxdomain
 local-zone: "luftum.com." always_nxdomain
-local-zone: "luiow.shop." always_nxdomain
 local-zone: "luitinghfouriespoultry.co.za." always_nxdomain
 local-zone: "lukmall.shop." always_nxdomain
 local-zone: "lumimodern.co." always_nxdomain
@@ -4774,7 +4644,6 @@ local-zone: "magnumresearchshop.com." always_nxdomain
 local-zone: "magnumresearchusa.com." always_nxdomain
 local-zone: "mah-united-truckinginc.com." always_nxdomain
 local-zone: "mailapelihalli.fi." always_nxdomain
-local-zone: "mailgunsandammoshop.com." always_nxdomain
 local-zone: "mainecooncats.net." always_nxdomain
 local-zone: "mainecooncattery.wixsite.com." always_nxdomain
 local-zone: "mainefielduniversity.com." always_nxdomain
@@ -4813,7 +4682,6 @@ local-zone: "marcstevenwelpenhaus.de." always_nxdomain
 local-zone: "marethapuppies.com." always_nxdomain
 local-zone: "margarefren.com." always_nxdomain
 local-zone: "margiecn.com." always_nxdomain
-local-zone: "margincure.com." always_nxdomain
 local-zone: "mariahu.com." always_nxdomain
 local-zone: "marinaatlantictrust.com." always_nxdomain
 local-zone: "marinadecoration.com." always_nxdomain
@@ -4825,7 +4693,6 @@ local-zone: "markbentlykennels.co.za." always_nxdomain
 local-zone: "markdownmerge.com." always_nxdomain
 local-zone: "markethops.com." always_nxdomain
 local-zone: "marketplace-item-23339780567.mxsite.co." always_nxdomain
-local-zone: "markwellfirearms.com." always_nxdomain
 local-zone: "markwellpinballs.com." always_nxdomain
 local-zone: "marlborowrap.com." always_nxdomain
 local-zone: "marlifirearmsshop.com." always_nxdomain
@@ -4841,11 +4708,8 @@ local-zone: "marlinfirearmsamerica.com." always_nxdomain
 local-zone: "marlinguns-usa.com." always_nxdomain
 local-zone: "marlingunsales.com." always_nxdomain
 local-zone: "marlingunshops.com." always_nxdomain
-local-zone: "marlingunsshop.com." always_nxdomain
-local-zone: "marlingunstore.com." always_nxdomain
 local-zone: "marlingunstoreusa.com." always_nxdomain
 local-zone: "marlingunsusa.com." always_nxdomain
-local-zone: "marlinriffleusa.com." always_nxdomain
 local-zone: "marlinrifleshop.com." always_nxdomain
 local-zone: "marlinriflestoreusa.com." always_nxdomain
 local-zone: "marlinriflesusa.com." always_nxdomain
@@ -4856,7 +4720,6 @@ local-zone: "marlinusastore.com." always_nxdomain
 local-zone: "marthaharperolteanufoundation.com." always_nxdomain
 local-zone: "martiancourts.com." always_nxdomain
 local-zone: "martils.com." always_nxdomain
-local-zone: "martinezhilton.com." always_nxdomain
 local-zone: "martins-puppies.business.site." always_nxdomain
 local-zone: "martinvilleuniversity.com." always_nxdomain
 local-zone: "marwinfielduniversity.education." always_nxdomain
@@ -5018,14 +4881,12 @@ local-zone: "mfu.education." always_nxdomain
 local-zone: "mgcyrrm.com." always_nxdomain
 local-zone: "mgoodstuff.net." always_nxdomain
 local-zone: "mgsystemsghana.com." always_nxdomain
-local-zone: "mgunshop.com." always_nxdomain
 local-zone: "mhecgov.education." always_nxdomain
 local-zone: "mhsmarthequipment.com." always_nxdomain
 local-zone: "miakittycoons.com." always_nxdomain
 local-zone: "miangifts.com." always_nxdomain
 local-zone: "miaoowa.com." always_nxdomain
 local-zone: "miatewo.com." always_nxdomain
-local-zone: "michaelfarmspuppies.co.za." always_nxdomain
 local-zone: "michigancentralstate.university." always_nxdomain
 local-zone: "mick-ammodepot.com." always_nxdomain
 local-zone: "midcitygunshop.com." always_nxdomain
@@ -5042,7 +4903,6 @@ local-zone: "midwestammunitionshop.com." always_nxdomain
 local-zone: "midwestfirearmsandarchery.com." always_nxdomain
 local-zone: "midwestkittens.co.za." always_nxdomain
 local-zone: "midwestpowders.com." always_nxdomain
-local-zone: "midwestreloadingstore.com." always_nxdomain
 local-zone: "midwestreloads.com." always_nxdomain
 local-zone: "midwestshooterssupply.net." always_nxdomain
 local-zone: "mightygenix.shop." always_nxdomain
@@ -5097,7 +4957,6 @@ local-zone: "mkrga.com." always_nxdomain
 local-zone: "mkrishnaenterprises.com." always_nxdomain
 local-zone: "mledo.com." always_nxdomain
 local-zone: "mmanuel.shop." always_nxdomain
-local-zone: "mmapd.shop." always_nxdomain
 local-zone: "mmbdynamics.co.za." always_nxdomain
 local-zone: "mmi.university." always_nxdomain
 local-zone: "mnaink.com." always_nxdomain
@@ -5152,33 +5011,21 @@ local-zone: "moraybi.com." always_nxdomain
 local-zone: "morfncu.com." always_nxdomain
 local-zone: "morningstarfortmill.com." always_nxdomain
 local-zone: "mosparklejewerly.com." always_nxdomain
-local-zone: "mossberg-store.com." always_nxdomain
-local-zone: "mossberg-usa.com." always_nxdomain
 local-zone: "mossberg247.com." always_nxdomain
-local-zone: "mossbergarm.com." always_nxdomain
 local-zone: "mossbergarmorystore.com." always_nxdomain
 local-zone: "mossbergarmoryusa.com." always_nxdomain
 local-zone: "mossbergarms-usa.com." always_nxdomain
-local-zone: "mossbergarms.com." always_nxdomain
-local-zone: "mossbergarmshop.com." always_nxdomain
-local-zone: "mossbergarmstore.com." always_nxdomain
-local-zone: "mossbergarmsusa.com." always_nxdomain
 local-zone: "mossbergfirearms-usa.com." always_nxdomain
 local-zone: "mossbergfirearms.org." always_nxdomain
 local-zone: "mossbergfirearmsusa.com." always_nxdomain
 local-zone: "mossbergfirearmusa.com." always_nxdomain
-local-zone: "mossberggunshop.com." always_nxdomain
-local-zone: "mossberggunshopsusa.com." always_nxdomain
 local-zone: "mossberggunstore.com." always_nxdomain
 local-zone: "mossbergshop.com." always_nxdomain
 local-zone: "mossbergshotguns-usa.com." always_nxdomain
 local-zone: "mossbergshotguns.us." always_nxdomain
-local-zone: "mossbergusafirearms.com." always_nxdomain
 local-zone: "mossbergusashop.com." always_nxdomain
-local-zone: "mossbergusastore.com." always_nxdomain
 local-zone: "mosselbankgroup.com." always_nxdomain
 local-zone: "most2bar.com." always_nxdomain
-local-zone: "mostwantedfirearms.com." always_nxdomain
 local-zone: "motisy.shop." always_nxdomain
 local-zone: "motiv8performance.com." always_nxdomain
 local-zone: "motizy.com." always_nxdomain
@@ -5255,7 +5102,6 @@ local-zone: "mycomfypair.com." always_nxdomain
 local-zone: "mycrownpet.com." always_nxdomain
 local-zone: "myglobalcheck.com." always_nxdomain
 local-zone: "mygunandammo.com." always_nxdomain
-local-zone: "mygunrights.me." always_nxdomain
 local-zone: "myhanfu.shop." always_nxdomain
 local-zone: "myhousesproduct.com." always_nxdomain
 local-zone: "myisraelsource.com." always_nxdomain
@@ -5336,7 +5182,6 @@ local-zone: "nebulosity.shop." always_nxdomain
 local-zone: "nedburgcapitals.com." always_nxdomain
 local-zone: "needysmart.com." always_nxdomain
 local-zone: "neefx.com." always_nxdomain
-local-zone: "neespresso.coffee." always_nxdomain
 local-zone: "nelhub.com." always_nxdomain
 local-zone: "nemokid.com." always_nxdomain
 local-zone: "nemtal.com." always_nxdomain
@@ -5389,6 +5234,7 @@ local-zone: "nexcargoservices.com." always_nxdomain
 local-zone: "nexencos.com." always_nxdomain
 local-zone: "nexencu.com." always_nxdomain
 local-zone: "nextdaypuppieskennel.co.za." always_nxdomain
+local-zone: "nextdel.com." always_nxdomain
 local-zone: "nextdoorcouriers.com." always_nxdomain
 local-zone: "nextfieldammunition.com." always_nxdomain
 local-zone: "nextgensolar.co.za." always_nxdomain
@@ -5409,7 +5255,6 @@ local-zone: "nidasrent.cz." always_nxdomain
 local-zone: "nideckernitro.com." always_nxdomain
 local-zone: "nieruchomosci-walter24.pl." always_nxdomain
 local-zone: "nightforceoptics-usa.com." always_nxdomain
-local-zone: "nightforceopticsusa.com." always_nxdomain
 local-zone: "nighthawkcustomusa.com." always_nxdomain
 local-zone: "nightvisionspecialist.com." always_nxdomain
 local-zone: "nigraleisure.com." always_nxdomain
@@ -5436,7 +5281,6 @@ local-zone: "noahstuffs.com." always_nxdomain
 local-zone: "nobethaholding.com." always_nxdomain
 local-zone: "noblecarrots.com." always_nxdomain
 local-zone: "nohiba.com." always_nxdomain
-local-zone: "nolimitgunshop.com." always_nxdomain
 local-zone: "nompumilynetunipou.wixsite.com." always_nxdomain
 local-zone: "nomsaglobaltradings.co.za." always_nxdomain
 local-zone: "nomzamoglobalenterprise.com." always_nxdomain
@@ -5469,7 +5313,6 @@ local-zone: "novaig.com." always_nxdomain
 local-zone: "novanaelites.com." always_nxdomain
 local-zone: "novanbirds.com." always_nxdomain
 local-zone: "novapointlb.com." always_nxdomain
-local-zone: "novatofirearms.com." always_nxdomain
 local-zone: "novedove.com." always_nxdomain
 local-zone: "noveltyssdnotessolution.com." always_nxdomain
 local-zone: "nplagencyltd.com." always_nxdomain
@@ -5511,7 +5354,6 @@ local-zone: "ocenkingexportltd.com." always_nxdomain
 local-zone: "ocenkingsexport.com." always_nxdomain
 local-zone: "ocrannow.com." always_nxdomain
 local-zone: "ocsguns.com." always_nxdomain
-local-zone: "octalgunshop.com." always_nxdomain
 local-zone: "octaprimerx.com." always_nxdomain
 local-zone: "ocycling.com." always_nxdomain
 local-zone: "odlodiscount.com." always_nxdomain
@@ -5559,7 +5401,6 @@ local-zone: "oliviachemstore.com." always_nxdomain
 local-zone: "olkina.shop." always_nxdomain
 local-zone: "olympiacreditalliance.com." always_nxdomain
 local-zone: "olympuscoininc.com." always_nxdomain
-local-zone: "olympusfirearms.com." always_nxdomain
 local-zone: "omahapharma.com." always_nxdomain
 local-zone: "omahauni.com." always_nxdomain
 local-zone: "omcpharmacy.com." always_nxdomain
@@ -5570,11 +5411,8 @@ local-zone: "on-soprtshoes.com." always_nxdomain
 local-zone: "ondutyearth.com." always_nxdomain
 local-zone: "onecargoline.com." always_nxdomain
 local-zone: "onefoyou.com." always_nxdomain
-local-zone: "onemangunshop.com." always_nxdomain
 local-zone: "oneminimals.com." always_nxdomain
 local-zone: "oneshoes.best." always_nxdomain
-local-zone: "oneshoparms.com." always_nxdomain
-local-zone: "onetacticalarms.com." always_nxdomain
 local-zone: "onewaydocuments.com." always_nxdomain
 local-zone: "oneworldlogisticservices.com." always_nxdomain
 local-zone: "onexlogisticsservices.com." always_nxdomain
@@ -5662,16 +5500,12 @@ local-zone: "ourlovelypuppies.co.za." always_nxdomain
 local-zone: "outblasts.com." always_nxdomain
 local-zone: "outboardmotorseuropeltd.com." always_nxdomain
 local-zone: "outdoorammory.com." always_nxdomain
-local-zone: "outdoorarmshop.com." always_nxdomain
 local-zone: "outdoordefence.com." always_nxdomain
 local-zone: "outdoorequipmentstore.com." always_nxdomain
-local-zone: "outdoorhuntingcenter.com." always_nxdomain
 local-zone: "outdoorhuntstores.com." always_nxdomain
 local-zone: "outdoorloungefurnitures.com." always_nxdomain
 local-zone: "outdoorplush.com." always_nxdomain
 local-zone: "outdoorr.shop." always_nxdomain
-local-zone: "outdoorsandwoodshop.com." always_nxdomain
-local-zone: "outdoorsarmories.com." always_nxdomain
 local-zone: "outdoorsarmory.com." always_nxdomain
 local-zone: "outdoorsclimb.com." always_nxdomain
 local-zone: "outdoorsgunsandammo.com." always_nxdomain
@@ -5838,7 +5672,6 @@ local-zone: "pentagonunion.com." always_nxdomain
 local-zone: "peopleschoicecourier.com." always_nxdomain
 local-zone: "peopleunitedb.com." always_nxdomain
 local-zone: "percussioncaps10.net." always_nxdomain
-local-zone: "percussioncaps11.store." always_nxdomain
 local-zone: "perfectearners.com." always_nxdomain
 local-zone: "perfectenergy.online." always_nxdomain
 local-zone: "perfectlaboratory.co.za." always_nxdomain
@@ -6013,7 +5846,6 @@ local-zone: "preciousfamilyhome.com." always_nxdomain
 local-zone: "precision-reloads.net." always_nxdomain
 local-zone: "precisionarmsusa.com." always_nxdomain
 local-zone: "precisionlogistics.delivery." always_nxdomain
-local-zone: "precisionreloading.net." always_nxdomain
 local-zone: "precisionreloadings.com." always_nxdomain
 local-zone: "preferlikely.com." always_nxdomain
 local-zone: "premauto.co.za." always_nxdomain
@@ -6025,13 +5857,11 @@ local-zone: "premierranchdoodles.com." always_nxdomain
 local-zone: "premiersignalcoins.com." always_nxdomain
 local-zone: "premierweaponsupply.com." always_nxdomain
 local-zone: "premiomercado.com." always_nxdomain
-local-zone: "premiumammoandfirearms.com." always_nxdomain
 local-zone: "premiumarmsstore.com." always_nxdomain
 local-zone: "premiumautospare.com." always_nxdomain
 local-zone: "premiumcargocarrier.com." always_nxdomain
 local-zone: "premiumcargoworldwidefreightcompany.com." always_nxdomain
 local-zone: "premiumchemlab.com." always_nxdomain
-local-zone: "premiumfirearmsandammo.com." always_nxdomain
 local-zone: "premiumfrozenlivestockexperts.com." always_nxdomain
 local-zone: "premiumfxtrading.com." always_nxdomain
 local-zone: "premiumgunsandfirearms.com." always_nxdomain
@@ -6042,7 +5872,6 @@ local-zone: "premiumlightsupplier.com." always_nxdomain
 local-zone: "premiummachinessa.com." always_nxdomain
 local-zone: "premiumnoteshouse.com." always_nxdomain
 local-zone: "premiumseasfood.com." always_nxdomain
-local-zone: "premiumsecuritystore.com." always_nxdomain
 local-zone: "premiumshutstore.com." always_nxdomain
 local-zone: "premiumteacupbreeders.co.za." always_nxdomain
 local-zone: "premiumtrade231.com." always_nxdomain
@@ -6076,14 +5905,12 @@ local-zone: "primeextreme.link." always_nxdomain
 local-zone: "primefinancebankplc.com." always_nxdomain
 local-zone: "primefirearms.net." always_nxdomain
 local-zone: "primeglockshop.com." always_nxdomain
-local-zone: "primepowders.net." always_nxdomain
 local-zone: "primequibank.com." always_nxdomain
 local-zone: "primeratrade.net." always_nxdomain
 local-zone: "primerfirearmsdeals.com." always_nxdomain
 local-zone: "primers-usa.com." always_nxdomain
 local-zone: "primersammo.com." always_nxdomain
 local-zone: "primersfirearmsstore.com." always_nxdomain
-local-zone: "primersgunhub.com." always_nxdomain
 local-zone: "primersgunpowder.com." always_nxdomain
 local-zone: "primersgunsshop.com." always_nxdomain
 local-zone: "primersonlinestore.com." always_nxdomain
@@ -6092,7 +5919,6 @@ local-zone: "primersreign.com." always_nxdomain
 local-zone: "primerssales22.com." always_nxdomain
 local-zone: "primersshop.ca." always_nxdomain
 local-zone: "primersshopcanada.com." always_nxdomain
-local-zone: "primersstore.com." always_nxdomain
 local-zone: "primerstandards.com." always_nxdomain
 local-zone: "primerstore-usa.com." always_nxdomain
 local-zone: "primersusa.com." always_nxdomain
@@ -6161,6 +5987,7 @@ local-zone: "psicotandem.es." always_nxdomain
 local-zone: "psilocybinmagicmushroomstore.net." always_nxdomain
 local-zone: "psilocybinshop.net." always_nxdomain
 local-zone: "psilocybinworld.net." always_nxdomain
+local-zone: "psilocybinworld24.com." always_nxdomain
 local-zone: "psmbedzin.pl." always_nxdomain
 local-zone: "pssbondedcourier.com." always_nxdomain
 local-zone: "psychedelic-mushroom.org." always_nxdomain
@@ -6299,7 +6126,6 @@ local-zone: "rapiidairdelivery.com." always_nxdomain
 local-zone: "rarebreedtriggers-usa.com." always_nxdomain
 local-zone: "rarebreedtriggershop.com." always_nxdomain
 local-zone: "rarebreedtriggersusa.com." always_nxdomain
-local-zone: "rarebreedtriggerusa.com." always_nxdomain
 local-zone: "rasillogistics.com." always_nxdomain
 local-zone: "raullawfirm.com." always_nxdomain
 local-zone: "ravincrossbowsusa.com." always_nxdomain
@@ -6348,7 +6174,6 @@ local-zone: "reddotsightusa.com." always_nxdomain
 local-zone: "redel.in.net." always_nxdomain
 local-zone: "redell.in.net." always_nxdomain
 local-zone: "redhoumy.com." always_nxdomain
-local-zone: "redlevelfirearms.com." always_nxdomain
 local-zone: "redwoodproperties.co.za." always_nxdomain
 local-zone: "reejoinwell.com." always_nxdomain
 local-zone: "reelammunition.com." always_nxdomain
@@ -6364,25 +6189,19 @@ local-zone: "regulatehop.com." always_nxdomain
 local-zone: "rehidetes.com." always_nxdomain
 local-zone: "rehobothprophotos.com." always_nxdomain
 local-zone: "relayreporty.com." always_nxdomain
-local-zone: "relentlesstriggersusa.com." always_nxdomain
 local-zone: "relianceonlineassets.com." always_nxdomain
 local-zone: "reloadammo.net." always_nxdomain
 local-zone: "reloaderscenter.com." always_nxdomain
 local-zone: "reloadingbrass-store.com." always_nxdomain
 local-zone: "reloadingbrass-usa.com." always_nxdomain
-local-zone: "reloadingbrassusa.com." always_nxdomain
 local-zone: "reloadingcciprimers.com." always_nxdomain
 local-zone: "reloadingdepotusa.com." always_nxdomain
-local-zone: "reloadinghouse.com." always_nxdomain
-local-zone: "reloadinghubcanada.com." always_nxdomain
 local-zone: "reloadinghubusa.com." always_nxdomain
 local-zone: "reloadingprimersshop.ca." always_nxdomain
 local-zone: "reloadingprimersshop.com." always_nxdomain
 local-zone: "reloadingstockprimers.com." always_nxdomain
 local-zone: "reloadingstocks.com." always_nxdomain
-local-zone: "reloadnshoot.com." always_nxdomain
 local-zone: "reloadprimersstore.com." always_nxdomain
-local-zone: "reloadstore.net." always_nxdomain
 local-zone: "reloadswholesale.com." always_nxdomain
 local-zone: "reloadsworld.com." always_nxdomain
 local-zone: "remingtonamericaguns.com." always_nxdomain
@@ -6419,7 +6238,6 @@ local-zone: "review4consumer.com." always_nxdomain
 local-zone: "reviews4consumers.com." always_nxdomain
 local-zone: "revolutionaryfireams.com." always_nxdomain
 local-zone: "revolutionaryfirearmsandsupplies.com." always_nxdomain
-local-zone: "revolutionfirearms.shop." always_nxdomain
 local-zone: "revolvergunstore.com." always_nxdomain
 local-zone: "revorro.com." always_nxdomain
 local-zone: "rewieva.com." always_nxdomain
@@ -6463,7 +6281,6 @@ local-zone: "river-estates.pl." always_nxdomain
 local-zone: "riverwoodsurgentcare.com." always_nxdomain
 local-zone: "riwea.com." always_nxdomain
 local-zone: "rkfirearms.com." always_nxdomain
-local-zone: "rkguns.shop." always_nxdomain
 local-zone: "rkmsparamedsupply.co.za." always_nxdomain
 local-zone: "rlchamber.com." always_nxdomain
 local-zone: "rmberettagunshop.com." always_nxdomain
@@ -6479,7 +6296,6 @@ local-zone: "robmondcavaliers.com." always_nxdomain
 local-zone: "rock-teas.myshopify.com." always_nxdomain
 local-zone: "rocketprotradinginc.com." always_nxdomain
 local-zone: "rockfirearms.com." always_nxdomain
-local-zone: "rockislandarmory.shop." always_nxdomain
 local-zone: "rockislandarmoryguns.com." always_nxdomain
 local-zone: "rockislandarmorystore.com." always_nxdomain
 local-zone: "rockislandarmoryusa.com." always_nxdomain
@@ -6510,12 +6326,9 @@ local-zone: "rosemagnificentpaw.co.za." always_nxdomain
 local-zone: "rosenovllc.com." always_nxdomain
 local-zone: "rosshopping.com." always_nxdomain
 local-zone: "rossiarmstore.com." always_nxdomain
-local-zone: "rossifirearmstoreusa.com." always_nxdomain
 local-zone: "rossifirearmsusa.com." always_nxdomain
 local-zone: "rossignolskishop.com." always_nxdomain
-local-zone: "rossigunsusa.com." always_nxdomain
 local-zone: "rossiofficial.com." always_nxdomain
-local-zone: "rossiusaguns.com." always_nxdomain
 local-zone: "rosyshares.com." always_nxdomain
 local-zone: "rotarydistrict7030.org." always_nxdomain
 local-zone: "rotexsolar.co.za." always_nxdomain
@@ -6549,7 +6362,6 @@ local-zone: "royalsmed.com." always_nxdomain
 local-zone: "royaltypugpuppies.com." always_nxdomain
 local-zone: "royalwolftrailers.com." always_nxdomain
 local-zone: "rptbaa.shop." always_nxdomain
-local-zone: "rqguns.com." always_nxdomain
 local-zone: "rrevetr.shop." always_nxdomain
 local-zone: "rroenest.com." always_nxdomain
 local-zone: "rruiyao.com." always_nxdomain
@@ -6571,11 +6383,9 @@ local-zone: "rugerarmsusa.com." always_nxdomain
 local-zone: "rugerfirearms-usa.com." always_nxdomain
 local-zone: "rugerfirearms.net." always_nxdomain
 local-zone: "rugerfirearmshop.com." always_nxdomain
-local-zone: "rugerfirearmshop.net." always_nxdomain
 local-zone: "rugerfirearmshopusa.com." always_nxdomain
 local-zone: "rugerfirearmstore.com." always_nxdomain
 local-zone: "rugerfirearmsusa.com." always_nxdomain
-local-zone: "rugergunsusa.com." always_nxdomain
 local-zone: "rugerusafirearms.com." always_nxdomain
 local-zone: "rugerusaguns.com." always_nxdomain
 local-zone: "ruggedsupply.net." always_nxdomain
@@ -6624,7 +6434,6 @@ local-zone: "sailesindustrialmachinery.co.za." always_nxdomain
 local-zone: "saintalloiis.net." always_nxdomain
 local-zone: "sakingsautospares.com." always_nxdomain
 local-zone: "sakoarms.com." always_nxdomain
-local-zone: "sakoarmstore.com." always_nxdomain
 local-zone: "sakogunstore.com." always_nxdomain
 local-zone: "sakoriflestore.com." always_nxdomain
 local-zone: "salcouth.com." always_nxdomain
@@ -6688,7 +6497,6 @@ local-zone: "sapapersupply.com." always_nxdomain
 local-zone: "sapglobalinvestg.com." always_nxdomain
 local-zone: "saprimelogistics.info." always_nxdomain
 local-zone: "sarahsmorocco.com." always_nxdomain
-local-zone: "sararms.shop." always_nxdomain
 local-zone: "sarbinfo.org." always_nxdomain
 local-zone: "sarochtapaperltd.com." always_nxdomain
 local-zone: "sarusafirearms.com." always_nxdomain
@@ -6832,7 +6640,6 @@ local-zone: "shoesagl.com." always_nxdomain
 local-zone: "shoesprints.com." always_nxdomain
 local-zone: "shoewhitemountain.com." always_nxdomain
 local-zone: "shoopesy.com." always_nxdomain
-local-zone: "shootersammoshop.com." always_nxdomain
 local-zone: "shootersgunstore.com." always_nxdomain
 local-zone: "shootingeasy.com." always_nxdomain
 local-zone: "shootingnew.com." always_nxdomain
@@ -6841,7 +6648,6 @@ local-zone: "shop-women.store." always_nxdomain
 local-zone: "shop123123.com." always_nxdomain
 local-zone: "shop2hop.com." always_nxdomain
 local-zone: "shopabbi.com." always_nxdomain
-local-zone: "shopammos.com." always_nxdomain
 local-zone: "shopautoparts.website." always_nxdomain
 local-zone: "shopbabyborn.com." always_nxdomain
 local-zone: "shopbrowningarms.com." always_nxdomain
@@ -6864,7 +6670,6 @@ local-zone: "shoppoiu.com." always_nxdomain
 local-zone: "shopraidlight.com." always_nxdomain
 local-zone: "shopsavagearms.com." always_nxdomain
 local-zone: "shopsigsauerguns.com." always_nxdomain
-local-zone: "shopsmithwessonguns.com." always_nxdomain
 local-zone: "shoptopgunsnow.com." always_nxdomain
 local-zone: "shopusagun.com." always_nxdomain
 local-zone: "shopvalleymore.com." always_nxdomain
@@ -6891,15 +6696,12 @@ local-zone: "siberiankittiescattery.com." always_nxdomain
 local-zone: "sichherheitinvestmentfinance.com." always_nxdomain
 local-zone: "siddexrsa.com." always_nxdomain
 local-zone: "siebarib.com." always_nxdomain
-local-zone: "siennafirearms.com." always_nxdomain
 local-zone: "sierrabil.com." always_nxdomain
-local-zone: "sig-sauerarmoury.com." always_nxdomain
 local-zone: "sig-sauerfirearms.com." always_nxdomain
 local-zone: "sigarmsstore.com." always_nxdomain
 local-zone: "sigmaeh.com." always_nxdomain
 local-zone: "sigmaexportsltd.co.uk." always_nxdomain
 local-zone: "sigmagunstore.com." always_nxdomain
-local-zone: "sigsauer-firearm.com." always_nxdomain
 local-zone: "sigsauer-firearms.com." always_nxdomain
 local-zone: "sigsauer-usa.com." always_nxdomain
 local-zone: "sigsauerannex.com." always_nxdomain
@@ -6917,11 +6719,9 @@ local-zone: "sigsauerfirearmsstore.com." always_nxdomain
 local-zone: "sigsauerfirearmsusa.com." always_nxdomain
 local-zone: "sigsauerguns-usa.com." always_nxdomain
 local-zone: "sigsauergunsale.com." always_nxdomain
-local-zone: "sigsauerinventory.com." always_nxdomain
 local-zone: "sigsauerp320.xyz." always_nxdomain
 local-zone: "sigsauersofficial.com." always_nxdomain
 local-zone: "sigsauerstoreusa.com." always_nxdomain
-local-zone: "sigsauerus.com." always_nxdomain
 local-zone: "sigsauerusaarms.com." always_nxdomain
 local-zone: "sigsauerusafirearms.com." always_nxdomain
 local-zone: "sigsauerusaguns.com." always_nxdomain
@@ -6996,7 +6796,6 @@ local-zone: "skywardcapitalb.com." always_nxdomain
 local-zone: "skywaydelivery.com." always_nxdomain
 local-zone: "skywaydeliverycompany.com." always_nxdomain
 local-zone: "slabertkennels.co.za." always_nxdomain
-local-zone: "slangunstore.com." always_nxdomain
 local-zone: "slashkennels.co.za." always_nxdomain
 local-zone: "slearancemsbag.com." always_nxdomain
 local-zone: "sleazypaws.co.za." always_nxdomain
@@ -7129,8 +6928,6 @@ local-zone: "sportsbrooks.com." always_nxdomain
 local-zone: "sportsmansgunshop.com." always_nxdomain
 local-zone: "sportsmansreloads.com." always_nxdomain
 local-zone: "sportteaminform.com." always_nxdomain
-local-zone: "spraguessportsllc.com." always_nxdomain
-local-zone: "spragusstore.com." always_nxdomain
 local-zone: "spring-financelimited.com." always_nxdomain
 local-zone: "springfederalcreditunion.com." always_nxdomain
 local-zone: "springfield-armoryusa.com." always_nxdomain
@@ -7138,15 +6935,11 @@ local-zone: "springfield-gold.com." always_nxdomain
 local-zone: "springfield-hellcat.com." always_nxdomain
 local-zone: "springfieldarmory-usa.com." always_nxdomain
 local-zone: "springfieldarmory.shop." always_nxdomain
-local-zone: "springfieldarmory247.com." always_nxdomain
 local-zone: "springfieldarmoryfirearms.com." always_nxdomain
-local-zone: "springfieldarmoryguns.com." always_nxdomain
 local-zone: "springfieldarmorygunsusa.com." always_nxdomain
-local-zone: "springfieldarmoryonlineshop.com." always_nxdomain
 local-zone: "springfieldarmoryshop.com." always_nxdomain
 local-zone: "springfieldarmsusa.com." always_nxdomain
 local-zone: "springfieldcore.com." always_nxdomain
-local-zone: "springfieldfirearmsamerica.com." always_nxdomain
 local-zone: "springfieldfirearmstore.com." always_nxdomain
 local-zone: "springfieldfirearmsusa.com." always_nxdomain
 local-zone: "springfieldgunsales.com." always_nxdomain
@@ -7181,7 +6974,6 @@ local-zone: "ssolarenergyptyltd.co.za." always_nxdomain
 local-zone: "sspoultryfarm.co.za." always_nxdomain
 local-zone: "st2011pistols.com." always_nxdomain
 local-zone: "staccato2011gun.com." always_nxdomain
-local-zone: "staccato2011usa.com." always_nxdomain
 local-zone: "stachartfin.com." always_nxdomain
 local-zone: "stackgengroupcoltd.com." always_nxdomain
 local-zone: "staffordshirebullterrierkennel.com." always_nxdomain
@@ -7189,7 +6981,6 @@ local-zone: "staffycentral.com." always_nxdomain
 local-zone: "stagarmstore.com." always_nxdomain
 local-zone: "stagarmsusa.com." always_nxdomain
 local-zone: "stagusafirearms.com." always_nxdomain
-local-zone: "stalwartfirearms.com." always_nxdomain
 local-zone: "standardaxisfinance.com." always_nxdomain
 local-zone: "standardchartbnkkr.com." always_nxdomain
 local-zone: "standardchartered-online.es.tl." always_nxdomain
@@ -7209,7 +7000,6 @@ local-zone: "stanluck.com." always_nxdomain
 local-zone: "stanshinhancbonline.com." always_nxdomain
 local-zone: "stara-posta-hodonin.cz." always_nxdomain
 local-zone: "stargardb-pl.com." always_nxdomain
-local-zone: "starlinebrassusa.com." always_nxdomain
 local-zone: "starlinecontainersau.com." always_nxdomain
 local-zone: "starstartree.com." always_nxdomain
 local-zone: "stategunstore.com." always_nxdomain
@@ -7276,8 +7066,6 @@ local-zone: "storemoen.com." always_nxdomain
 local-zone: "storesalewa.com." always_nxdomain
 local-zone: "storeskiwear.com." always_nxdomain
 local-zone: "storestoic.com." always_nxdomain
-local-zone: "strapshouseworldwide.com." always_nxdomain
-local-zone: "strapweaponshop.com." always_nxdomain
 local-zone: "strbags.com." always_nxdomain
 local-zone: "streamptz.com." always_nxdomain
 local-zone: "streetsavenue.com." always_nxdomain
@@ -7425,17 +7213,14 @@ local-zone: "tactical-world.net." always_nxdomain
 local-zone: "tacticalachery.com." always_nxdomain
 local-zone: "tacticalammopowders.com." always_nxdomain
 local-zone: "tacticalammostore.com." always_nxdomain
-local-zone: "tacticalarmory.org." always_nxdomain
 local-zone: "tacticalbase.net." always_nxdomain
 local-zone: "tacticalcrest.net." always_nxdomain
 local-zone: "tacticaledgegear.com." always_nxdomain
 local-zone: "tacticalfirearmguide.com." always_nxdomain
 local-zone: "tacticalfirearms.shop." always_nxdomain
 local-zone: "tacticalfirearmspro.com." always_nxdomain
-local-zone: "tacticalfirearmstore.com." always_nxdomain
 local-zone: "tacticalgearstores.com." always_nxdomain
 local-zone: "tacticalgunsstore.com." always_nxdomain
-local-zone: "tacticalgunstoreusa.com." always_nxdomain
 local-zone: "tacticalknifeoutlet.com." always_nxdomain
 local-zone: "tacticalknifepro.com." always_nxdomain
 local-zone: "tacticalprimersfirearms.com." always_nxdomain
@@ -7446,7 +7231,6 @@ local-zone: "tacticalsground.com." always_nxdomain
 local-zone: "tacticalshootingspots.com." always_nxdomain
 local-zone: "tacticalvestshop.com." always_nxdomain
 local-zone: "tacticoolammoshop.com." always_nxdomain
-local-zone: "tacticoolgunshop.com." always_nxdomain
 local-zone: "tadevc.com." always_nxdomain
 local-zone: "tadgay.com." always_nxdomain
 local-zone: "taekod.com." always_nxdomain
@@ -7472,13 +7256,11 @@ local-zone: "tansantels-equipment.com." always_nxdomain
 local-zone: "tanyascattery.wixsite.com." always_nxdomain
 local-zone: "tapp-harma.com." always_nxdomain
 local-zone: "tarantacticalfirearms.com." always_nxdomain
-local-zone: "tarantacticalinnovationsusa.com." always_nxdomain
 local-zone: "targetammostore.com." always_nxdomain
 local-zone: "tartose.com." always_nxdomain
 local-zone: "taurusamericanfirearms.com." always_nxdomain
 local-zone: "taurusarmoryusa.com." always_nxdomain
 local-zone: "taurusarms247.com." always_nxdomain
-local-zone: "taurusfirearm.com." always_nxdomain
 local-zone: "taurusfirearms-usa.com." always_nxdomain
 local-zone: "taurusfirearmshop.com." always_nxdomain
 local-zone: "taurusg3c.com." always_nxdomain
@@ -7486,17 +7268,13 @@ local-zone: "taurusgunbrokers.com." always_nxdomain
 local-zone: "taurusgundealers.com." always_nxdomain
 local-zone: "taurusguns-usa.com." always_nxdomain
 local-zone: "taurusgunshopusa.com." always_nxdomain
-local-zone: "taurushandgun.com." always_nxdomain
 local-zone: "taurusjudgeforsale.com." always_nxdomain
 local-zone: "taurusjudgeforsaleonline.com." always_nxdomain
-local-zone: "taurusjudgeguns.com." always_nxdomain
-local-zone: "taurusjudgeguns.store." always_nxdomain
 local-zone: "taurusjudgemodels.com." always_nxdomain
 local-zone: "taurusjudgeshop.com." always_nxdomain
 local-zone: "taurusofficial.com." always_nxdomain
 local-zone: "taurususashop.com." always_nxdomain
 local-zone: "taurususastore.com." always_nxdomain
-local-zone: "taurusweaponshop.com." always_nxdomain
 local-zone: "taxidermystore.net." always_nxdomain
 local-zone: "taylorsales.shop." always_nxdomain
 local-zone: "taylorsfirearmshop.com." always_nxdomain
@@ -7508,6 +7286,7 @@ local-zone: "tcdoodleshome.com." always_nxdomain
 local-zone: "tcgguard.com." always_nxdomain
 local-zone: "tclsave.com." always_nxdomain
 local-zone: "tcruisefansclub.com." always_nxdomain
+local-zone: "tcsxpresscompany.com." always_nxdomain
 local-zone: "tdueurope.com." always_nxdomain
 local-zone: "teacuppuppies.su." always_nxdomain
 local-zone: "teaecesa.com." always_nxdomain
@@ -7551,7 +7330,6 @@ local-zone: "texas-gunshop.com." always_nxdomain
 local-zone: "texas-puppy-store.com." always_nxdomain
 local-zone: "texascoltfirearmsshop.com." always_nxdomain
 local-zone: "texasczfirearmsstore.com." always_nxdomain
-local-zone: "texasfnamericashop.com." always_nxdomain
 local-zone: "texasglockstore.com." always_nxdomain
 local-zone: "texasrallysport.com." always_nxdomain
 local-zone: "texasrugerguns.com." always_nxdomain
@@ -7604,7 +7382,6 @@ local-zone: "thefuturecharityfoundation.com." always_nxdomain
 local-zone: "thegemlaw.com." always_nxdomain
 local-zone: "theglocknation.com." always_nxdomain
 local-zone: "thegolfcallaway.com." always_nxdomain
-local-zone: "thegunnershop.com." always_nxdomain
 local-zone: "thegunnerstore.com." always_nxdomain
 local-zone: "thegunshopne.com." always_nxdomain
 local-zone: "thegunskart.com." always_nxdomain
@@ -7631,7 +7408,6 @@ local-zone: "theonsneaker.com." always_nxdomain
 local-zone: "theoutdoorammory.com." always_nxdomain
 local-zone: "theoutdoorsgear.com." always_nxdomain
 local-zone: "theparcelprosagency.com." always_nxdomain
-local-zone: "thepeacemakerfirearms.com." always_nxdomain
 local-zone: "thepfcu.com." always_nxdomain
 local-zone: "theplaceofhope.com." always_nxdomain
 local-zone: "thepoloshirt.store." always_nxdomain
@@ -7677,8 +7453,6 @@ local-zone: "tiapal.com." always_nxdomain
 local-zone: "tidevacation.com." always_nxdomain
 local-zone: "tikkafirearms-usa.com." always_nxdomain
 local-zone: "tikkafirearms.com." always_nxdomain
-local-zone: "tikkafirearmsales.com." always_nxdomain
-local-zone: "tikkafirearmshop.com." always_nxdomain
 local-zone: "tikkafirearmsstore.com." always_nxdomain
 local-zone: "tikkafirearmstore.com." always_nxdomain
 local-zone: "tikkariflesarmstore.com." always_nxdomain
@@ -7694,9 +7468,8 @@ local-zone: "tipijoy.com." always_nxdomain
 local-zone: "tippiesion.com." always_nxdomain
 local-zone: "tisasusafirearms.com." always_nxdomain
 local-zone: "titantrustltd.com." always_nxdomain
-local-zone: "titemo.com." always_nxdomain
-local-zone: "tjayfirearms.com." always_nxdomain
 local-zone: "tkglobalfarmequipment.com." always_nxdomain
+local-zone: "tkrbkupasionline.com." always_nxdomain
 local-zone: "tkrbonline.com." always_nxdomain
 local-zone: "tkyoyo.com." always_nxdomain
 local-zone: "tlbtk.com." always_nxdomain
@@ -7859,8 +7632,6 @@ local-zone: "tricitychildrensdentistry.com." always_nxdomain
 local-zone: "tricountb.com." always_nxdomain
 local-zone: "tridoot.com." always_nxdomain
 local-zone: "trifectagroup.co.ke." always_nxdomain
-local-zone: "triggergunstore.com." always_nxdomain
-local-zone: "triggeroutlaws.com." always_nxdomain
 local-zone: "triiconopticshop.com." always_nxdomain
 local-zone: "trijiopticsusa.com." always_nxdomain
 local-zone: "trilians.com." always_nxdomain
@@ -7925,7 +7696,6 @@ local-zone: "trustpowerammo.com." always_nxdomain
 local-zone: "trustshipdeliveryservice.com." always_nxdomain
 local-zone: "trustunionbank.com." always_nxdomain
 local-zone: "trustydeliveryservice.com." always_nxdomain
-local-zone: "trusyo.com." always_nxdomain
 local-zone: "trutexxpres.com." always_nxdomain
 local-zone: "trytodaysdeal.com." always_nxdomain
 local-zone: "tsgloballogistics.com." always_nxdomain
@@ -7940,6 +7710,7 @@ local-zone: "ttpglobaltradingcompany.co.za." always_nxdomain
 local-zone: "tuenhi.info." always_nxdomain
 local-zone: "tunzilivestockfarm.co.za." always_nxdomain
 local-zone: "turbinegeneratorengines.co.za." always_nxdomain
+local-zone: "turbobees.com." always_nxdomain
 local-zone: "turbopb.com." always_nxdomain
 local-zone: "turfdecor.com." always_nxdomain
 local-zone: "turkishexpresscourier.com." always_nxdomain
@@ -8010,6 +7781,7 @@ local-zone: "umf.education." always_nxdomain
 local-zone: "umowymiedzynarodowe.pl." always_nxdomain
 local-zone: "umsuae.com." always_nxdomain
 local-zone: "umyogo.com." always_nxdomain
+local-zone: "un-govt.org." always_nxdomain
 local-zone: "un-military.icu." always_nxdomain
 local-zone: "unbery.com." always_nxdomain
 local-zone: "uncemi.com." always_nxdomain
@@ -8052,7 +7824,6 @@ local-zone: "unitedbanklimited.com." always_nxdomain
 local-zone: "unitedchartred-finance.com." always_nxdomain
 local-zone: "unitedcontainerdepot.co.za." always_nxdomain
 local-zone: "unitedexpress.org." always_nxdomain
-local-zone: "unitedglockgunstore.com." always_nxdomain
 local-zone: "unitedgunsshop.com." always_nxdomain
 local-zone: "unitedkatscattery.wixsite.com." always_nxdomain
 local-zone: "unitedmailexpress.com." always_nxdomain
@@ -8118,13 +7889,9 @@ local-zone: "usa-millitary.com." always_nxdomain
 local-zone: "usa-reload.com." always_nxdomain
 local-zone: "usabrowningfirearms.com." always_nxdomain
 local-zone: "usaczfirearms.com." always_nxdomain
-local-zone: "usafincen.com." always_nxdomain
-local-zone: "usafirearmshop.com." always_nxdomain
-local-zone: "usaglock.com." always_nxdomain
 local-zone: "usaglocks.com." always_nxdomain
 local-zone: "usagunfactory.com." always_nxdomain
 local-zone: "usagunscollection.com." always_nxdomain
-local-zone: "usagunssales.com." always_nxdomain
 local-zone: "usagunsshop.com." always_nxdomain
 local-zone: "usahkgunsales.com." always_nxdomain
 local-zone: "usahodgdonpowders.com." always_nxdomain
@@ -8219,7 +7986,6 @@ local-zone: "vansasuppliers.com." always_nxdomain
 local-zone: "vanshippingcontainers.co.za." always_nxdomain
 local-zone: "vantagetrustofs.com." always_nxdomain
 local-zone: "vapecartsus.com." always_nxdomain
-local-zone: "vapesngazhome.com." always_nxdomain
 local-zone: "vapestoreaus.com." always_nxdomain
 local-zone: "variohair.com." always_nxdomain
 local-zone: "varioushometool.com." always_nxdomain
@@ -8375,7 +8141,6 @@ local-zone: "weaponsandarms.net." always_nxdomain
 local-zone: "wearfavorite.com." always_nxdomain
 local-zone: "wearhollister.com." always_nxdomain
 local-zone: "weatherbyarms.com." always_nxdomain
-local-zone: "weatherbyarmshop.com." always_nxdomain
 local-zone: "weatherbyfirearms.com." always_nxdomain
 local-zone: "weatherbyfirearmstore.com." always_nxdomain
 local-zone: "weatherbyfirearmsusa.com." always_nxdomain
@@ -8403,7 +8168,6 @@ local-zone: "wenuse.com." always_nxdomain
 local-zone: "werfew.com." always_nxdomain
 local-zone: "wernersale.com." always_nxdomain
 local-zone: "wesaveisrael.org." always_nxdomain
-local-zone: "weshootgunshop.com." always_nxdomain
 local-zone: "wessonguns.com." always_nxdomain
 local-zone: "wesstrbk.com." always_nxdomain
 local-zone: "westcitizensb.com." always_nxdomain
@@ -8439,7 +8203,6 @@ local-zone: "whiteheartdevelopers.com." always_nxdomain
 local-zone: "whitmanlabs.com." always_nxdomain
 local-zone: "whizztradingltd.com." always_nxdomain
 local-zone: "wholesalegroupltd.com." always_nxdomain
-local-zone: "wholesalegunsshop.com." always_nxdomain
 local-zone: "wholesalekeep.com." always_nxdomain
 local-zone: "wholesalereloadingsupplies.com." always_nxdomain
 local-zone: "wholesalestore.online." always_nxdomain
@@ -8478,7 +8241,6 @@ local-zone: "winchesterusafirearms.com." always_nxdomain
 local-zone: "winchesterusaguns.com." always_nxdomain
 local-zone: "winchesterusastore.com." always_nxdomain
 local-zone: "windhamweaponryfirearms.com." always_nxdomain
-local-zone: "windhamweaponrystore.com." always_nxdomain
 local-zone: "windhamweaponryusa.com." always_nxdomain
 local-zone: "windowfilm.life." always_nxdomain
 local-zone: "windtouchhair.com." always_nxdomain
@@ -8502,7 +8264,6 @@ local-zone: "wizmazzaken.com." always_nxdomain
 local-zone: "woderly.com." always_nxdomain
 local-zone: "woiuns.shop." always_nxdomain
 local-zone: "wolf-petrol.com." always_nxdomain
-local-zone: "wolverinedefencefirearm.com." always_nxdomain
 local-zone: "wolvesr.com." always_nxdomain
 local-zone: "womanoceandeal.com." always_nxdomain
 local-zone: "womanoceandeals.com." always_nxdomain
@@ -8655,6 +8416,7 @@ local-zone: "zeitentdecken.com." always_nxdomain
 local-zone: "zekoicb.com." always_nxdomain
 local-zone: "zellali.com." always_nxdomain
 local-zone: "zellingtonco.com." always_nxdomain
+local-zone: "zeneithcres.com." always_nxdomain
 local-zone: "zenithbk.com." always_nxdomain
 local-zone: "zenithsolarsystems.co.za." always_nxdomain
 local-zone: "zenithssdchemicalssolution.com." always_nxdomain
