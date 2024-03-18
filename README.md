@@ -16,9 +16,9 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 Total domains: 8698
 
 Total | Today | Yesterday | Source
-    - |   476 |         0 | Google Search
+    - |   476 |      2576 | Google Search
     - |  1764 |      4214 | Site crawling
- 8698 |  2240 |      4214 | All sources
+ 8698 |  2240 |      6790 | All sources
 
 The 5 most recently added domains:
 yourammoshop.com
@@ -27,7 +27,7 @@ zastavaarmstore.com
 zastavaarmsusashop.com
 zonearms.com
 
-Updated: Mon Mar 18 11:02 UTC
+Updated: Mon Mar 18 11:06 UTC
 ```
 
 ## How domains are added to the blocklist
