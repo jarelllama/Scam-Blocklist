@@ -13,21 +13,21 @@ Blocklist for scam sites retrieved from Google Search and the Artists Against 41
 ## Stats
 
 ```
-Total domains: 6959
+Total domains: 8698
 
 Total | Today | Yesterday | Source
-    - |   476 |      2576 | Google Search
-    - |    25 |      4214 | Site crawling
- 6959 |   501 |      6790 | All sources
+    - |   476 |         0 | Google Search
+    - |  1764 |      4214 | Site crawling
+ 8698 |  2240 |      4214 | All sources
 
 The 5 most recently added domains:
-storemoen.com
-streamptz.com
-supplypickleball.com
-teoutfit.com
-windtouchhair.com
+yourammoshop.com
+zastavaarmshop.com
+zastavaarmstore.com
+zastavaarmsusashop.com
+zonearms.com
 
-Updated: Mon Mar 18 10:14 UTC
+Updated: Mon Mar 18 10:54 UTC
 ```
 
 ## How domains are added to the blocklist
