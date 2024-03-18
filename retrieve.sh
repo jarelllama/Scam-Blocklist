@@ -102,9 +102,9 @@ function source_petscams {
     source='petscams.com'
     url='https://petscams.com/category/puppy-scammer-list'
     printf "\nSource: %s\n\n" "$source"
-    for page in {1..500}; do  # Loop through 500 pages
+    for page in {2..500}; do  # Loop through 500 pages
         page_results=$(curl -s "$url/" | grep -oE '<a href="https://petscams.com/puppy-scammer-list/[[:alnum:].-]+\-[[:alnum:]-]{2,}/"')
-        url=${url}/page/${page}
+        url=${url}/page/${page}  # Add '/page' after first run
         [[ -z "$page_results" ]] && break  # Break out of loop when there are no more results
         printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
     done
