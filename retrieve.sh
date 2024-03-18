@@ -31,11 +31,11 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        #source_aa419
-        #source_guntab
+        source_aa419
+        source_guntab
         source_stopgunscams
-        #source_petscams
-        #source_google_search
+        source_petscams
+        source_google_search
         merge_domains
         exit
     fi
@@ -106,7 +106,7 @@ function source_stopgunscams {
     source='stopgunscams.com'
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
-    for page in {1..150}; do  # Loop through pages
+    for page in {1..20}; do  # Loop through pages
         page_results=$(curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+\-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">')
         printf "%s\n" "$page_results" >> collated_stopgunscams_results.tmp  # Collate all pages of results
     done
