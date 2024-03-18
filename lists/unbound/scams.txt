@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.173505.2024
-# Last modified: Mon Mar 18 17:35:05 UTC 2024
+# Version: 03.18.183059.2024
+# Last modified: Mon Mar 18 18:30:59 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 11903
+# Total number of entries: 11908
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -22,6 +22,7 @@ local-zone: "24primetrade.com." always_nxdomain
 local-zone: "24tradecryptostars.com." always_nxdomain
 local-zone: "2ikcontainerconversions.co.za." always_nxdomain
 local-zone: "2xoffer.com." always_nxdomain
+local-zone: "360shippings.com." always_nxdomain
 local-zone: "365pensionvalue.com." always_nxdomain
 local-zone: "3d-printing.store." always_nxdomain
 local-zone: "3dsportstore.com." always_nxdomain
@@ -33,8 +34,10 @@ local-zone: "420auweed.org." always_nxdomain
 local-zone: "420deliverycanberra.com." always_nxdomain
 local-zone: "43logisticslimited.com." always_nxdomain
 local-zone: "45smarts.com." always_nxdomain
+local-zone: "4sweethomes.com." always_nxdomain
 local-zone: "4threvo.co.za." always_nxdomain
 local-zone: "556store.com." always_nxdomain
+local-zone: "5clogisticsexpressdelivery.info." always_nxdomain
 local-zone: "5daysukdriverslicense.com." always_nxdomain
 local-zone: "624a3e360f878.site123.me." always_nxdomain
 local-zone: "6335078055d51.site123.me." always_nxdomain
@@ -11092,6 +11095,7 @@ local-zone: "uniqueprocurement.com." always_nxdomain
 local-zone: "uniquepupp.com." always_nxdomain
 local-zone: "uniquessdchemicalsolution.com." always_nxdomain
 local-zone: "uniqueyorkiehomes.com." always_nxdomain
+local-zone: "united.shippingusps.com." always_nxdomain
 local-zone: "unitedammoshop.com." always_nxdomain
 local-zone: "unitedbanklimited.com." always_nxdomain
 local-zone: "unitedbullies.com." always_nxdomain
@@ -11282,6 +11286,7 @@ local-zone: "ustrbrew.com." always_nxdomain
 local-zone: "uswesternaccessories.com." always_nxdomain
 local-zone: "usyya.com." always_nxdomain
 local-zone: "utbanque.wixsite.com." always_nxdomain
+local-zone: "utd.deliveryservice.com." always_nxdomain
 local-zone: "utobks.com." always_nxdomain
 local-zone: "utrechtcunion.com." always_nxdomain
 local-zone: "uuniqueo.com." always_nxdomain

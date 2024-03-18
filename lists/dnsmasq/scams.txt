@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.173505.2024
-# Last modified: Mon Mar 18 17:35:05 UTC 2024
+# Version: 03.18.183059.2024
+# Last modified: Mon Mar 18 18:30:59 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 11903
+# Total number of entries: 11908
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -21,6 +21,7 @@ local=/24primetrade.com/
 local=/24tradecryptostars.com/
 local=/2ikcontainerconversions.co.za/
 local=/2xoffer.com/
+local=/360shippings.com/
 local=/365pensionvalue.com/
 local=/3d-printing.store/
 local=/3dsportstore.com/
@@ -32,8 +33,10 @@ local=/420auweed.org/
 local=/420deliverycanberra.com/
 local=/43logisticslimited.com/
 local=/45smarts.com/
+local=/4sweethomes.com/
 local=/4threvo.co.za/
 local=/556store.com/
+local=/5clogisticsexpressdelivery.info/
 local=/5daysukdriverslicense.com/
 local=/624a3e360f878.site123.me/
 local=/6335078055d51.site123.me/
@@ -11091,6 +11094,7 @@ local=/uniqueprocurement.com/
 local=/uniquepupp.com/
 local=/uniquessdchemicalsolution.com/
 local=/uniqueyorkiehomes.com/
+local=/united.shippingusps.com/
 local=/unitedammoshop.com/
 local=/unitedbanklimited.com/
 local=/unitedbullies.com/
@@ -11281,6 +11285,7 @@ local=/ustrbrew.com/
 local=/uswesternaccessories.com/
 local=/usyya.com/
 local=/utbanque.wixsite.com/
+local=/utd.deliveryservice.com/
 local=/utobks.com/
 local=/utrechtcunion.com/
 local=/uuniqueo.com/

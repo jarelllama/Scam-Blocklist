@@ -13,14 +13,15 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 11903
+Total domains: 11908
 
 Total | Today | Yesterday | Source
     - |     0 |       476 | Google Search
     - |     0 |        25 | aa419.org
     - |     0 |      1739 | guntab.com
+    - |     0 |         0 | stopgunscams.com
     - |  7798 |        28 | petscams.com
-11903 |  7798 |      2268 | All sources 
+11908 |  7798 |      2268 | All sources 
 
 The 5 most recently added domains:
 xpresshiping.com
@@ -29,7 +30,7 @@ xpresslogisticsservices.com
 yrcfreightlogistics.com
 zapcouriers.com
 
-Updated: Mon Mar 18 17:35 UTC
+Updated: Mon Mar 18 18:31 UTC
 Note: all data retrieved are publicly available 
 ```
 
@@ -70,6 +71,8 @@ Wildcard domains are added manually to the blocklist to reduce the number of ent
 [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 
 [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
+
+[StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
 
 [PetScams.com](https://petscams.com/): pet scam sites database
 
