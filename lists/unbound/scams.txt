@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.191508.2024
-# Last modified: Mon Mar 18 19:15:08 UTC 2024
+# Version: 03.18.192208.2024
+# Last modified: Mon Mar 18 19:22:08 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 12136
+# Total number of entries: 12132
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -200,7 +200,6 @@ local-zone: "advisorl.com." always_nxdomain
 local-zone: "aedoberman.com." always_nxdomain
 local-zone: "aekkhlachonticha.com." always_nxdomain
 local-zone: "aero-ar15-riffle-parts.com." always_nxdomain
-local-zone: "aero.ar15.riffle.parts.com." always_nxdomain
 local-zone: "aerodeluxeshippers.com." always_nxdomain
 local-zone: "aeroglobalcourierservices.com." always_nxdomain
 local-zone: "aeronacefirearms.com." always_nxdomain
@@ -660,7 +659,6 @@ local-zone: "angleskennel.co.za." always_nxdomain
 local-zone: "anglingpop.com." always_nxdomain
 local-zone: "animalfeedssolution.co.za." always_nxdomain
 local-zone: "animalparkpuppies.com." always_nxdomain
-local-zone: "animals.4lovelyhomes.com." always_nxdomain
 local-zone: "animalsupplies.org." always_nxdomain
 local-zone: "anissti.com." always_nxdomain
 local-zone: "ankaoke.com." always_nxdomain
@@ -737,7 +735,6 @@ local-zone: "apromo.shop." always_nxdomain
 local-zone: "aquahomedepot.com." always_nxdomain
 local-zone: "aquamarinafishes.com." always_nxdomain
 local-zone: "aquariumshop.xyz." always_nxdomain
-local-zone: "ar.15partsforsaleonline.us." always_nxdomain
 local-zone: "ar15.riffle.parts.com." always_nxdomain
 local-zone: "aramexcourierservice.online." always_nxdomain
 local-zone: "aramexgloballogistics.com." always_nxdomain
@@ -2176,7 +2173,6 @@ local-zone: "cci-ammunitionss.com." always_nxdomain
 local-zone: "cci-primers.com." always_nxdomain
 local-zone: "cci-usaprimers.com." always_nxdomain
 local-zone: "cci.ammostore.com." always_nxdomain
-local-zone: "cci.ammunitionss.com." always_nxdomain
 local-zone: "cci.primers.com." always_nxdomain
 local-zone: "cci.usaprimers.com." always_nxdomain
 local-zone: "cciammocenter.com." always_nxdomain
@@ -3870,7 +3866,6 @@ local-zone: "exp-disp.com." always_nxdomain
 local-zone: "exp.global.courier.com." always_nxdomain
 local-zone: "expansion-firearms.com." always_nxdomain
 local-zone: "expansion.firearms.com." always_nxdomain
-local-zone: "experienceleague.adobe.com." always_nxdomain
 local-zone: "expertfencingsolution.co.za." always_nxdomain
 local-zone: "expertfxbroker.com." always_nxdomain
 local-zone: "explicitdrugsstore.com." always_nxdomain
@@ -7683,6 +7678,7 @@ local-zone: "neuroservicesoftexas.com." always_nxdomain
 local-zone: "neutraln.com." always_nxdomain
 local-zone: "nevoplus.com." always_nxdomain
 local-zone: "new-climbing.com." always_nxdomain
+local-zone: "new-s24.click." always_nxdomain
 local-zone: "newalian.com." always_nxdomain
 local-zone: "newamerrug.com." always_nxdomain
 local-zone: "newappliancess.com." always_nxdomain

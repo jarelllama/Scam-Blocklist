@@ -2,10 +2,10 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Version: 03.18.191508.2024
-# Last modified: Mon Mar 18 19:15:08 UTC 2024
+# Version: 03.18.192208.2024
+# Last modified: Mon Mar 18 19:22:08 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 12136
+# Total number of entries: 12132
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -199,7 +199,6 @@ local=/advisorl.com/
 local=/aedoberman.com/
 local=/aekkhlachonticha.com/
 local=/aero-ar15-riffle-parts.com/
-local=/aero.ar15.riffle.parts.com/
 local=/aerodeluxeshippers.com/
 local=/aeroglobalcourierservices.com/
 local=/aeronacefirearms.com/
@@ -659,7 +658,6 @@ local=/angleskennel.co.za/
 local=/anglingpop.com/
 local=/animalfeedssolution.co.za/
 local=/animalparkpuppies.com/
-local=/animals.4lovelyhomes.com/
 local=/animalsupplies.org/
 local=/anissti.com/
 local=/ankaoke.com/
@@ -736,7 +734,6 @@ local=/apromo.shop/
 local=/aquahomedepot.com/
 local=/aquamarinafishes.com/
 local=/aquariumshop.xyz/
-local=/ar.15partsforsaleonline.us/
 local=/ar15.riffle.parts.com/
 local=/aramexcourierservice.online/
 local=/aramexgloballogistics.com/
@@ -2175,7 +2172,6 @@ local=/cci-ammunitionss.com/
 local=/cci-primers.com/
 local=/cci-usaprimers.com/
 local=/cci.ammostore.com/
-local=/cci.ammunitionss.com/
 local=/cci.primers.com/
 local=/cci.usaprimers.com/
 local=/cciammocenter.com/
@@ -3869,7 +3865,6 @@ local=/exp-disp.com/
 local=/exp.global.courier.com/
 local=/expansion-firearms.com/
 local=/expansion.firearms.com/
-local=/experienceleague.adobe.com/
 local=/expertfencingsolution.co.za/
 local=/expertfxbroker.com/
 local=/explicitdrugsstore.com/
@@ -7682,6 +7677,7 @@ local=/neuroservicesoftexas.com/
 local=/neutraln.com/
 local=/nevoplus.com/
 local=/new-climbing.com/
+local=/new-s24.click/
 local=/newalian.com/
 local=/newamerrug.com/
 local=/newappliancess.com/
