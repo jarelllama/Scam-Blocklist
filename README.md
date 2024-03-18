@@ -85,6 +85,8 @@ Note: all data retrieved from these sources are publicly available.
 
 [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
 
+[Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): Quinn Emanuel Urquhart & Sullivan law firm's memoranda on web scraping
+
 ## See also
 
 [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
