@@ -73,7 +73,7 @@ EOF
 
     split -n l/3 input.tmp  # Split the 10 domains into 3 source files
     mv xaa data/domains_aa419.tmp
-    mv xab data/domains_google_search_test_search_term_1.tmp
+    mv xab data/domains_guntab.tmp
     mv xac data/domains_google_search_test_search_term_2.tmp
 }
 

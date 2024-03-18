@@ -10,8 +10,6 @@ subdomains_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
-search_url='https://customsearch.googleapis.com/customsearch/v1'
-aa419_url='https://api.aa419.org/fakesites'
 
 # grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3}' | sort -u  # Find potential wildcards
 
@@ -34,6 +32,7 @@ function main {
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
         crawl_aa419
+        crawl_guntab
         retrieve_google_search_terms
         merge_domains
         exit
@@ -41,22 +40,29 @@ function main {
 
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through temp domains file
-        # Assume source is Google Search
-        source="Google Search"
-        item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
-        item=${item%.tmp}  # Rename extension from file name
-        # Check if source is aa419
-        if [[ "$temp_domains_file" == *aa419* ]]; then
-            source="db.aa419.org" 
-            item="aa419"
-        fi
+        case $temp_domains_file in
+            *google_search*)
+                source="Google Search"
+                item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
+                item=${item%.tmp}  # Rename extension from file name
+                ;;
+            *aa419*)
+                source="aa419.org" 
+                item="aa419"
+                ;;
+            *guntab*)
+                source="guntab.com" 
+                item="guntab"
+                ;;
+        esac
         process_source "$source" "$item" "$temp_domains_file"
     done
     merge_domains
 }
 
 function crawl_aa419 {
-    printf "\nSource: db.aa419.org\n\n"
+    aa419_url='https://api.aa419.org/fakesites'
+    printf "\nSource: aa419.org\n\n"
     for pgno in {1..20}; do  # Loop through 20 pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
@@ -65,12 +71,25 @@ function crawl_aa419 {
     done
     # Skip domain processing if no domains retrieved
     if [[ ! -f collated_aa419_domains.tmp ]]; then
-        log_source "db.aa419.org" "aa419" "0" "0" "0" "0" "0" ""
+        log_source "aa419.org" "aa419" "0" "0" "0" "0" "0" ""
         return
     fi
     cat collated_aa419_domains.tmp > "data/domains_aa419.tmp"  # Save domains into a temp file
-    process_source "db.aa419.org" "aa419" "collated_aa419_domains.tmp"
+    process_source "aa419.org" "aa419" "collated_aa419_domains.tmp"
 }
+
+function crawl_guntab {
+    guntab_url='https://www.guntab.com/scam-websites'
+    domains=$(curl -s "$guntab_url" -o site.html | grep -Ezo '<table class="datatable-list table">.*</table>' |
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' | sort -u)
+    if [[ -z "$domains" ]]; then
+        log_source "guntab.com" "guntab" "0" "0" "0" "0" "0" ""
+        return
+    fi
+    printf "%s\n" "$domains" > data/domains_guntab.tmp  # Save domains into a temp file
+    process_source "guntab.com" "guntab" "data/domains_guntab.tmp"
+}
+
 
 function retrieve_google_search_terms {
     printf "\nSource: Google Search\n\n"
@@ -81,6 +100,7 @@ function retrieve_google_search_terms {
 }
 
 function search_google {
+    search_url='https://customsearch.googleapis.com/customsearch/v1'
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results (max of 100 results)

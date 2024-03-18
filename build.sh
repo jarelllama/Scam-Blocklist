@@ -19,6 +19,12 @@ function main {
 }
 
 function update_readme {
+    aa419_today=$(count "$today" "aa419.org")
+    aa419_yesterday=$(count "$yesterday" "aa419.org")
+    guntab_today=$(count "$today" "guntab.com")
+    guntab_yesterday=$(count "$yesterday" "guntab.com")
+    crawl_count_today=$((aa419_today + guntab_today))
+    crawl_count_yesterday=$((aa419_yesterday + guntab_yesterday))
     # Find 5 most recently added domains
     new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
@@ -42,7 +48,7 @@ Total domains: $(wc -w < "$raw_file")
 
 Total | Today | Yesterday | Source
     - |$(printf "%6s" "$(count "$today" "Google Search")") |$(printf "%10s" "$(count "$yesterday" "Google Search")") | Google Search
-    - |$(printf "%6s" "$(count "$today" "db.aa419.org")") |$(printf "%10s" "$(count "$yesterday" "db.aa419.org")") | aa419
+    - |$(printf "%6s" "$crawl_count_today") |$(printf "%10s" "$crawl_count_yesterday") | Site crawling
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
 
 The 5 most recently added domains:
