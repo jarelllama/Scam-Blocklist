@@ -25,6 +25,8 @@ function update_readme {
     guntab_yesterday=$(count "$yesterday" "guntab.com")
     google_today=$(count "$today" "Google Search")
     google_yesterday=$(count "$yesterday" "Google Search")
+    petscams_today=$(count "$today" "petscams.com")
+    petscams_yesterday=$(count "$yesterday" "petscams.com")
     # Find 5 most recently added domains
     new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
@@ -50,6 +52,7 @@ Total | Today | Yesterday | Source
     - |$(printf "%6s" "$google_today") |$(printf "%10s" "$google_yesterday") | Google Search
     - |$(printf "%6s" "$aa419_today") |$(printf "%10s" "$aa419_yesterday") | aa419.org
     - |$(printf "%6s" "$guntab_today") |$(printf "%10s" "$guntab_yesterday") | guntab.com
+    - |$(printf "%6s" "$petscams_today") |$(printf "%10s" "$petscams_yesterday") | petscams.com
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources 
 
 The 5 most recently added domains:
@@ -96,6 +99,8 @@ Wildcard domains are added manually to the blocklist to reduce the number of ent
 [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 
 [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
+
+[PetScams.com](https://petscams.com/): pet scam sites database
 
 [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
 

@@ -31,9 +31,10 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        source_aa419
-        source_guntab
-        source_google_search
+        #source_aa419
+        #source_guntab
+        source_petscams
+        #source_google_search
         merge_domains
         exit
     fi
@@ -48,11 +49,15 @@ function main {
                 ;;
             *aa419*)
                 source="aa419.org" 
-                item="aa419"
+                item="$source"
                 ;;
             *guntab*)
                 source="guntab.com" 
-                item="guntab"
+                item="$source"
+                ;;
+            *petscams-com*)
+                source="petscams.com" 
+                item="$source"
                 ;;
         esac
         process_source "$source" "$item" "$temp_domains_file"
@@ -62,36 +67,56 @@ function main {
 
 function source_aa419 {
     source='aa419.org'
-    aa419_url='https://api.aa419.org/fakesites'
+    url='https://api.aa419.org/fakesites'
     printf "\nSource: %s\n\n" "$source"
     for pgno in {1..20}; do  # Loop through 20 pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
-        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
+        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}"/"${query_params}")
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
-        jq -r '.[].Domain' <<< "$page_results" >> collated_aa419_domains.tmp  # Collate domains
+        jq -r '.[].Domain' <<< "$page_results" >> data/domains_aa419.tmp  # Collate domains
     done
     # Skip domain processing if no domains retrieved
-    if [[ ! -f collated_aa419_domains.tmp ]]; then
-        log_source "aa419.org" "aa419" "0" "0" "0" "0" "0" ""
+    if [[ ! -f data/domains_aa419.tmp ]]; then
+        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
         return
     fi
-    cat collated_aa419_domains.tmp > "data/domains_aa419.tmp"  # Save domains into a temp file
-    process_source "aa419.org" "aa419" "collated_aa419_domains.tmp"
+    process_source "$source" "$source" "data/domains_aa419.tmp"
 }
 
 function source_guntab {
     source='guntab.com'
-    guntab_url='https://www.guntab.com/scam-websites'
+    url='https://www.guntab.com/scam-websites/'
     printf "\nSource: %s\n\n" "$source"
-    domains=$(curl -s "$guntab_url" | grep -Ezo '<table class="datatable-list table">.*</table>' |
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' | sort -u)  # Retrieve domains from site
+    # Retrieve domains from site
+    curl -s "$url" | grep -Ezo '<table class="datatable-list table">.*</table>' |
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > data/domains_guntab.tmp
     # Skip domain processing if no domains retrieved
-    if [[ -z "$domains" ]]; then
-        log_source "guntab.com" "guntab" "0" "0" "0" "0" "0" ""
+    if [[ ! -s data/domains_guntab.tmp ]]; then
+        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
         return
     fi
-    printf "%s\n" "$domains" > data/domains_guntab.tmp  # Save domains into a temp file
-    process_source "guntab.com" "guntab" "data/domains_guntab.tmp"
+    process_source "$source" "$source" "data/domains_guntab.tmp"
+}
+
+function source_petscams {
+    source='petscams.com'
+    url='https://petscams.com/category/puppy-scammer-list/'
+    printf "\nSource: %s\n\n" "$source"
+    for page in {1..500}; do  # Loop through 500 pages
+        page_results=$(curl -s "${url}/${page}/" | grep -oE '<a href="https://petscams.com/puppy-scammer-list/[[:alnum:].-]+\-[[:alnum:]-]{2,}/"')
+        [[ -z "$page_results" ]] && break  # Break out of loop when there are no more results
+        printf "%s\n" "$page_results" >> collated_petscams_results.tmp  # Collate all pages of results
+    done
+    # Skip domain processing if no domains retrieved
+    if [[ ! -f collated_petscams_results.tmp ]]; then
+        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
+        return
+    fi
+    # Strip results to domains
+    sed -e 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///' -e 's|[/".]||g' -e 's|-|.|g' collated_petscams_results.tmp > collated_petscams_domains.tmp
+    rm collated_petscams_results.tmp
+    mv collated_petscams_domains.tmp data/domains_petscams.tmp
+    process_source "$source" "$source" "data/domains_petscams.tmp"
 }
 
 function source_google_search {
@@ -104,12 +129,12 @@ function source_google_search {
 }
 
 function search_google {
-    search_url='https://customsearch.googleapis.com/customsearch/v1'
+    url='https://customsearch.googleapis.com/customsearch/v1'
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results (max of 100 results)
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-        page_results=$(curl -s "${search_url}?${query_params}")
+        page_results=$(curl -s "${url}?${query_params}")
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results 
         jq -r '.items[].link' <<< "$page_results" >> collated_search_results.tmp  # Collate all pages of results
     done
@@ -120,8 +145,8 @@ function search_google {
     fi
     awk -F/ '{print $3}' collated_search_results.tmp > collated_search_domains.tmp  # Strip URLs to domains
     rm collated_search_results.tmp  # Reset temp file for search results from each search term
-    cat collated_search_domains.tmp > "data/domains_google_search_${search_term:0:100}.tmp"  # Save results to search-term-specific temp file
-    process_source "Google Search" "$search_term" collated_search_domains.tmp  # Pass the search term and the results to the domain processing function
+    mv collated_search_domains.tmp "data/domains_google_search_${search_term:0:100}.tmp"  # Save results to search-term-specific temp file
+    process_source "Google Search" "$search_term" "data/domains_google_search_${search_term:0:100}.tmp"  # Pass the search term and the results to the domain processing function
 }
 
 function process_source {
