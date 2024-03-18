@@ -13,23 +13,23 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 8488
+Total domains: 15584
 
 Total | Today | Yesterday | Source
-    - |   476 |      2576 | Google Search
-    - |    25 |         0 | aa419.org
-    - |  1739 |         0 | guntab.com
-    - |    28 |         0 | petscams.com
- 8488 |  2268 |      2576 | All sources 
+    - |     0 |       476 | Google Search
+    - |     0 |        25 | aa419.org
+    - |     0 |      1739 | guntab.com
+    - |  7096 |        28 | petscams.com
+15584 |  7096 |      2268 | All sources 
 
 The 5 most recently added domains:
-paramountfeathers.com
-pawsompuppieshome.com
-promisedlanddonkeyfarm.com
-russellmaltesepuppies.com
-springlackhomes.com
+zoropet.com
+zulaspoodles.com
+zumbachyorkies.com
+zuzupuppies.com
+zwergspitzpomeranian.com
 
-Updated: Mon Mar 18 15:11 UTC
+Updated: Mon Mar 18 16:39 UTC
 Note: all data retrieved are publicly available 
 ```
 
