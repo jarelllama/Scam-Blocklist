@@ -47,6 +47,8 @@ $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")")
 
 The 5 most recently added domains:
 $new_domains
+
+Updated at $(date -u +"%a %b %d %H:%M UTC")
 \`\`\`
 
 ## How domains are added to the blocklist
