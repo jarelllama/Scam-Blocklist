@@ -26,6 +26,8 @@ xpresschems.com
 xujia.tradefx110.com
 zedexforex.com
 zystfree-heaven.com
+
+Updated at Mon Mar 18 04:22 UTC
 ```
 
 ## How domains are added to the blocklist
