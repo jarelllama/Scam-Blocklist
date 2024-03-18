@@ -81,8 +81,8 @@ function source_aa419 {
 
 function source_guntab {
     source='guntab.com'
-    printf "\nSource: %s\n\n" "$source"
     guntab_url='https://www.guntab.com/scam-websites'
+    printf "\nSource: %s\n\n" "$source"
     domains=$(curl -s "$guntab_url" | grep -Ezo '<table class="datatable-list table">.*</table>' |
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' | sort -u)
     if [[ -z "$domains" ]]; then
