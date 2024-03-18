@@ -31,9 +31,9 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        crawl_aa419
-        crawl_guntab
-        retrieve_google_search_terms
+        #source_aa419
+        source_guntab
+        #source_google_search
         merge_domains
         exit
     fi
@@ -60,9 +60,10 @@ function main {
     merge_domains
 }
 
-function crawl_aa419 {
+function source_aa419 {
+    source='aa419.org'
     aa419_url='https://api.aa419.org/fakesites'
-    printf "\nSource: aa419.org\n\n"
+    printf "\nSource: %s\n\n" "$source"
     for pgno in {1..20}; do  # Loop through 20 pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${aa419_url}"/"${query_params}")
@@ -78,9 +79,11 @@ function crawl_aa419 {
     process_source "aa419.org" "aa419" "collated_aa419_domains.tmp"
 }
 
-function crawl_guntab {
+function source_guntab {
+    source='guntab.com'
+    printf "\nSource: %s\n\n" "$source"
     guntab_url='https://www.guntab.com/scam-websites'
-    domains=$(curl -s "$guntab_url" -o site.html | grep -Ezo '<table class="datatable-list table">.*</table>' |
+    domains=$(curl -s "$guntab_url" | grep -Ezo '<table class="datatable-list table">.*</table>' |
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' | sort -u)
     if [[ -z "$domains" ]]; then
         log_source "guntab.com" "guntab" "0" "0" "0" "0" "0" ""
@@ -90,9 +93,9 @@ function crawl_guntab {
     process_source "guntab.com" "guntab" "data/domains_guntab.tmp"
 }
 
-
-function retrieve_google_search_terms {
-    printf "\nSource: Google Search\n\n"
+function source_google_search {
+    source='Google Search'
+    printf "\nSource: %s\n\n" "$source"
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             search_google "$search_term"  # Pass the search term to the search function
