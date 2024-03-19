@@ -33,7 +33,7 @@ zoneswimopt-com
 zoravip-com
 zwillingeu-com
 
-Updated: Tue Mar 19 14:28 UTC
+Updated: Tue Mar 19 14:37 UTC
 ```
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
