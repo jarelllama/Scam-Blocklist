@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 19:46:10 UTC 2024
+# Last modified: Tue Mar 19 19:56:54 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15896
+# Total number of entries: 15898
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -8027,6 +8027,7 @@ local-zone: "keyesden.com." always_nxdomain
 local-zone: "keystone-armorystore.com." always_nxdomain
 local-zone: "keystone.armorystore.com." always_nxdomain
 local-zone: "keystonepuppies.co.za." always_nxdomain
+local-zone: "kfdsjkfdkjdkf.com." always_nxdomain
 local-zone: "kftbcase.com." always_nxdomain
 local-zone: "kfthd.com." always_nxdomain
 local-zone: "kgnovav.nftjobfinders.com." always_nxdomain
@@ -13928,6 +13929,7 @@ local-zone: "teslarea.com." always_nxdomain
 local-zone: "tesrin.com." always_nxdomain
 local-zone: "tessentembeddedanalytics.com." always_nxdomain
 local-zone: "tesseractfs-top." always_nxdomain
+local-zone: "test.kfdsjkfdkjdkf.com." always_nxdomain
 local-zone: "test122223.info." always_nxdomain
 local-zone: "testalinetrading.com." always_nxdomain
 local-zone: "tewez.com." always_nxdomain

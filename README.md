@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15896
+Total domains: 15898
 
 Total | Today | Yesterday | Source *
     - |    23 |         3 | Google Search
@@ -23,7 +23,7 @@ Total | Today | Yesterday | Source *
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
     - |     1 |       224 | stopgunscams.com
-15896 |    39 |     10081 | All sources
+15898 |    39 |     10081 | All sources
 
 The 5 most recently added domains:
 tropicalvanlines.com
