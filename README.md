@@ -24,7 +24,7 @@ Total | Today | Yesterday | Source
     - |  1250 |         0 | scam.directory
  2600 |     - |         - | stop419scams.com (not active)
     - |   224 |         0 | stopgunscams.com
-16374 | 10081 |      2268 | All sources 
+16374 | 10081 |      2268 | All sources
 
 The 5 most recently added domains:
 zonefashionus-com

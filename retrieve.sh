@@ -31,12 +31,12 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        #source_aa419
-        #source_guntab
-        #source_stopgunscams
-        #source_petscams
-        #source_google_search
-        #source_scamdelivery
+        source_aa419
+        source_guntab
+        source_stopgunscams
+        source_petscams
+        source_google_search
+        source_scamdelivery
         source_scamdirectory
         merge_domains
         exit
@@ -161,7 +161,7 @@ function source_scamdelivery {
     source='scam.delivery'
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
-    for page in {2..70}; do  # Loop through pages 
+    for page in {2..20}; do  # Loop through pages 
         curl -s "$url" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' \
             >> collated_scamdelivery_results.tmp  # Collate all pages of results
         url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run

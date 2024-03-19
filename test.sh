@@ -57,21 +57,20 @@ m.to.block2.com
 forum2.com
 also.match.wildcard.in.blocklist.com
 shop.to.block3.com
-blacklisted_forum.com
+blacklisted.forum.com
 store.to.block4.com
-blacklisted_forums.com
-already.in.blocklist1.com
+blacklisted_forum.com
+to.block5.com
 to.block1.com
 whitelisted.tld.mil
-already.in.blocklist2.com
 to.block2.com
 whitelisted.tld.gov
-already.in.blocklist3.com
+to.block6.com
 whitelisted.tld.edu
 EOF
 
     cat << EOF > output.tmp  # Prepare expected result
-blacklisted_forum.com
+blacklisted.forum.com
 in.blocklist.com
 to.block1.com
 to.block2.com
