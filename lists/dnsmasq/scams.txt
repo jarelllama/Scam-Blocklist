@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 21:11:55 UTC 2024
+# Last modified: Tue Mar 19 21:13:49 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 15896
+# Total number of entries: 15900
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -2753,6 +2753,7 @@ local=/cci-ammunitionss.com/
 local=/cci-primers.com/
 local=/cci-usaprimers.com/
 local=/cci.ammostore.com/
+local=/cci.ammunitionss.com/
 local=/cciammocenter.com/
 local=/cciammunitions.com/
 local=/cciprimersusa.com/
@@ -11343,6 +11344,7 @@ local=/probmxbikes-com/
 local=/procaid.com/
 local=/proceedsexpressdelivery.online/
 local=/prochain.vip/
+local=/prochemislaboratory.weebly.com/
 local=/procoremarkets.com/
 local=/prodeliverysecuritycompany.com/
 local=/prodexeasyvest.com/
@@ -13246,6 +13248,7 @@ local=/ssd-solution-chemicalsvectrol-paste-activation.business.site/
 local=/ssd-solution-to-clean-defaced-money.business.site/
 local=/ssdchemicalssolutions.com/
 local=/ssdchems.com/
+local=/ssdendurelab.co.za/
 local=/ssdsolution658879496.wordpress.com/
 local=/ssdsolutionchemicalsvectrolpasteactivation.business.site/
 local=/ssdsolutionservice.com/
@@ -15477,6 +15480,7 @@ local=/willclaytonscorgis.com/
 local=/williamgeary.com/
 local=/williamsfamilybeaglepuppies.com/
 local=/williamsheeranantiques.com/
+local=/williamspethome.com/
 local=/williamsteacupchihuahua.com/
 local=/willianfarms.com/
 local=/willowcreekgspkennels.com/

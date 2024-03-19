@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 21:11:55 UTC 2024
+# Last modified: Tue Mar 19 21:13:49 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15896
+# Total number of entries: 15900
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2754,6 +2754,7 @@ local-zone: "cci-ammunitionss.com." always_nxdomain
 local-zone: "cci-primers.com." always_nxdomain
 local-zone: "cci-usaprimers.com." always_nxdomain
 local-zone: "cci.ammostore.com." always_nxdomain
+local-zone: "cci.ammunitionss.com." always_nxdomain
 local-zone: "cciammocenter.com." always_nxdomain
 local-zone: "cciammunitions.com." always_nxdomain
 local-zone: "cciprimersusa.com." always_nxdomain
@@ -11344,6 +11345,7 @@ local-zone: "probmxbikes-com." always_nxdomain
 local-zone: "procaid.com." always_nxdomain
 local-zone: "proceedsexpressdelivery.online." always_nxdomain
 local-zone: "prochain.vip." always_nxdomain
+local-zone: "prochemislaboratory.weebly.com." always_nxdomain
 local-zone: "procoremarkets.com." always_nxdomain
 local-zone: "prodeliverysecuritycompany.com." always_nxdomain
 local-zone: "prodexeasyvest.com." always_nxdomain
@@ -13247,6 +13249,7 @@ local-zone: "ssd-solution-chemicalsvectrol-paste-activation.business.site." alwa
 local-zone: "ssd-solution-to-clean-defaced-money.business.site." always_nxdomain
 local-zone: "ssdchemicalssolutions.com." always_nxdomain
 local-zone: "ssdchems.com." always_nxdomain
+local-zone: "ssdendurelab.co.za." always_nxdomain
 local-zone: "ssdsolution658879496.wordpress.com." always_nxdomain
 local-zone: "ssdsolutionchemicalsvectrolpasteactivation.business.site." always_nxdomain
 local-zone: "ssdsolutionservice.com." always_nxdomain
@@ -15478,6 +15481,7 @@ local-zone: "willclaytonscorgis.com." always_nxdomain
 local-zone: "williamgeary.com." always_nxdomain
 local-zone: "williamsfamilybeaglepuppies.com." always_nxdomain
 local-zone: "williamsheeranantiques.com." always_nxdomain
+local-zone: "williamspethome.com." always_nxdomain
 local-zone: "williamsteacupchihuahua.com." always_nxdomain
 local-zone: "willianfarms.com." always_nxdomain
 local-zone: "willowcreekgspkennels.com." always_nxdomain
