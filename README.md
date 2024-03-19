@@ -31,8 +31,8 @@ britishshorthair4home.com
 chappeldachshundbreed.com
 
 Updated: Tue Mar 19 06:15 UTC
-Note: all data retrieved are publicly available 
 ```
+Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search
 
