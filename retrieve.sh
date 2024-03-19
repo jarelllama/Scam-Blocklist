@@ -91,7 +91,7 @@ function source_aa419 {
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" >> data/domains_aa419.tmp  # Collate all pages of domains
     done
-    log_source "$source" "$source" "data/domains_aa419.tmp"
+    log_source_empty "$source" "$source" "data/domains_aa419.tmp"
     process_source "$source" "$source" "data/domains_aa419.tmp"
 }
 
@@ -101,7 +101,7 @@ function source_guntab {
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' > data/domains_guntab.tmp  # Retrieve domains
-    log_source "$source" "$source" "data/domains_guntab.tmp"
+    log_source_empty "$source" "$source" "data/domains_guntab.tmp"
     process_source "$source" "$source" "data/domains_guntab.tmp"
 }
 
