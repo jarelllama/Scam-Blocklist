@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 13:11:57 UTC 2024
+# Last modified: Tue Mar 19 13:39:23 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 16374
+# Total number of entries: 16375
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -9090,6 +9090,7 @@ local=/lydeyw.online/
 local=/lyeecyee.com/
 local=/lynahome.com/
 local=/m-kingconstructions.com/
+local=/m.2xoffer.com/
 local=/m4capitals.com/
 local=/maahizon.com/
 local=/maahze.com/

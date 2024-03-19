@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 13:11:57 UTC 2024
+# Last modified: Tue Mar 19 13:39:23 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 16374
+# Total number of entries: 16375
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -9091,6 +9091,7 @@ local-zone: "lydeyw.online." always_nxdomain
 local-zone: "lyeecyee.com." always_nxdomain
 local-zone: "lynahome.com." always_nxdomain
 local-zone: "m-kingconstructions.com." always_nxdomain
+local-zone: "m.2xoffer.com." always_nxdomain
 local-zone: "m4capitals.com." always_nxdomain
 local-zone: "maahizon.com." always_nxdomain
 local-zone: "maahze.com." always_nxdomain
