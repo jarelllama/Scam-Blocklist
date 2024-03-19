@@ -31,11 +31,11 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        source_aa419
-        source_guntab
-        source_stopgunscams
+        #source_aa419
+        #source_guntab
+        #source_stopgunscams
         source_petscams
-        source_google_search
+        #source_google_search
         merge_domains
         exit
     fi
@@ -129,7 +129,7 @@ function source_petscams {
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
         for page in {2..20}; do  # Loop through pages
-            page_results=$(curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"") \
+            curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"" \
                 >> collated_petscams_results.tmp  # Collate all pages of results
             url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
         done
