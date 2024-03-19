@@ -1,14 +1,14 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-toplist_file='data/toplist.txt'
 domain_log='data/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
-subdomains_file='data/subdomains.txt'
-root_domains_file='data/root_domains.txt'
+toplist_file='data/processing/toplist.txt'
+root_domains_file='data/processing/root_domains.txt'
+subdomains_file='data/processing/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
-wildcards_file='data/wildcards.txt'
-redundant_domains_file='data/redundant_domains.txt'
+wildcards_file='data/processing/wildcards.txt'
+redundant_domains_file='data/processing/redundant_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
 

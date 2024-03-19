@@ -1,11 +1,11 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-blacklist_file='config/blacklist.txt'
-subdomains_file='data/subdomains.txt'
-root_domains_file='data/root_domains.txt'
-wildcards_file='data/wildcards.txt'
-redundant_domains_file='data/redundant_domains.txt'
 domain_log='data/domain_log.csv'
+blacklist_file='config/blacklist.txt'
+root_domains_file='data/processing/root_domains.txt'
+subdomains_file='data/processing/subdomains.txt'
+wildcards_file='data/processing/wildcards.txt'
+redundant_domains_file='data/processing/redundant_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally

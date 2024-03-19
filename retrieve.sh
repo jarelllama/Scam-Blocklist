@@ -1,17 +1,17 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-toplist_file='data/toplist.txt'
 source_log='data/source_log.csv'
 domain_log='data/domain_log.csv'
 search_terms_file='config/search_terms.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
-subdomains_file='data/subdomains.txt'
-root_domains_file='data/root_domains.txt'
+toplist_file='data/processing/toplist.txt'
+root_domains_file='data/processing/root_domains.txt'
+subdomains_file='data/processing/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
-wildcards_file='data/wildcards.txt'
-redundant_domains_file='data/redundant_domains.txt'
-dead_domains_file='data/dead_domains.txt'
+wildcards_file='data/processing/wildcards.txt'
+redundant_domains_file='data/processing/redundant_domains.txt'
+dead_domains_file='data/processing/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 # grep '\..*\.' domains.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
@@ -34,10 +34,10 @@ function main {
     if ! ls data/domains_*.tmp &> /dev/null; then
         source_aa419
         source_guntab
-        source_stopgunscams
         source_petscams
         source_scamdelivery
         source_scamdirectory
+        source_stopgunscams
         source_google_search
         merge_domains
         exit
