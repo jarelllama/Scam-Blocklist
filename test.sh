@@ -3,6 +3,7 @@ raw_file='data/raw.txt'
 wildcards_file='data/wildcards.txt'
 blacklist_file='config/blacklist.txt'
 domain_log='data/domain_log.csv'
+time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
@@ -37,7 +38,7 @@ function main {
     fi
 
     printf "Log:\n"
-    tail -9 "$domain_log"
+    grep "$time_format" "$domain_log"
     printf "%s\n" "---------------------------------------------------------------------"
 
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if script did not run as intended
