@@ -76,8 +76,9 @@ function source_aa419 {
     printf "\nSource: %s\n\n" "$source"
     for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
-        curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" | jq -r '.[].Domain' \
-            >> data/domains_aa419.tmp  # Collate all pages of domains
+        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")
+        jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
+        jq -r '.[].Domain' <<< "$page_results" >> data/domains_aa419.tmp  # Collate all pages of domains
     done
     # Skip domain processing if no domains retrieved
     if [[ ! -f data/domains_aa419.tmp ]]; then
