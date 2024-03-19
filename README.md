@@ -13,24 +13,24 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15816
+Total domains: 15896
 
 Total | Today | Yesterday | Source *
-    - |     0 |         3 | Google Search
-    - |     0 |       105 | aa419.org
+    - |    23 |         3 | Google Search
+    - |    12 |       105 | aa419.org
     - |     0 |         5 | guntab.com
-    - |     0 |      7801 | petscams.com
+    - |     3 |      7801 | petscams.com
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
-    - |     0 |       224 | stopgunscams.com
-15816 |     0 |     10081 | All sources
+    - |     1 |       224 | stopgunscams.com
+15896 |    39 |     10081 | All sources
 
 The 5 most recently added domains:
-zonefashionus-com
-zoneperfume-com
-zoneswimopt-com
-zoravip-com
-zwillingeu-com
+tropicalvanlines.com
+unicaresb.com
+usdfakes.com
+vortexreloads.com
+xflyrc.com
 
 *Domains added manually are excluded from the daily figures.
 ```
