@@ -240,15 +240,15 @@ function process_source {
         # Keep only root domains
         pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
         # Collate subdomains for dead check
-        printf "%s\n" "$domains_with_subdomains" >> "$subdomains_file"
+        printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exlude from dead check
-        printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> "$root_domains_file"
+        printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
         # Find and log domains with common subdomains exluding 'www.'
         domains_with_subdomains=$(grep -v "^www\." <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain" "$source"
     done < "$subdomains_to_remove_file"
-    format_list "$subdomains_file"
-    format_list "$root_domains_file"
+    format_list subdomains.tmp
+    format_list root_domains.tmp
 
     # Remove domains already in blocklist
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
@@ -296,10 +296,10 @@ function process_source {
         # Remove redundant domains
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
         # Collate redundant domains for dead check
-        printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"
+        printf "%s\n" "$redundant_domains" >> redundant_domains.tmp
         log_event "$redundant_domains" "redundant" "$source"
     done < "$wildcards_file"
-    format_list "$redundant_domains_file"
+    format_list redundant_domains.tmp
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
@@ -356,6 +356,14 @@ function merge_domains {
         exit 1
     fi
 
+    comm -12 filtered_domains.tmp redundant_domains.tmp >> "$redundant_domains_file"  # Add filtered redundant domains to the redundant domains file
+    root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
+    subdomains=$(grep -Ff "$(printf "%s" "$root_domains")" subdomains.tmp)  # Retrieve filtered subdomains
+    printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
+    printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
+    format_list "$root_domains_file"
+    format_list "$subdomains_file"
+
     count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
@@ -398,8 +406,11 @@ function format_list {
 }
 
 function cleanup {
-    [[ -f filtered_domains.tmp ]] && rm filtered_domains.tmp  # Reset temp file for filtered domains
-    [[ -f ip_addresses.tmp ]] && rm ip_addresses.tmp  # Reset temp file for IP addresses
+    [[ -f filtered_domains.tmp ]] && rm filtered_domains.tmp
+    [[ -f ip_addresses.tmp ]] && rm ip_addresses.tmp
+    [[ -f redundant_domains.tmp ]] && rm redundant_domains.tmp
+    [[ -f subdomains.tmp ]] && rm subdomains.tmp
+    [[ -f root_domains.tmp ]] && rm root_domains.tmp
     # Reset temp search results files if there are no domains found in toplist
     if [[ ! -f in_toplist.tmp ]] && ls data/domains_*.tmp &> /dev/null; then
         rm data/domains_*.tmp
