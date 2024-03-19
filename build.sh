@@ -59,15 +59,15 @@ Total | Today | Yesterday | Source
     - |$(printf "%6s" "$petscams_today") |$(printf "%10s" "$petscams_yesterday") | petscams.com
     - |$(printf "%6s" "$scamdelivery_today") |$(printf "%10s" "$scamdelivery_yesterday") | scam.delivery
     - |$(printf "%6s" "$scamdirectory_today") |$(printf "%10s" "$scamdirectory_yesterday") | scam.directory
- 2600 |     - |         - | stop419scams.com (not active)
     - |$(printf "%6s" "$stopgunscams_today") |$(printf "%10s" "$stopgunscams_yesterday") | stopgunscams.com
-$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources 
+$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
 
 The 5 most recently added domains:
 $(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
-Updated: $(date -u +"%a %b %d %H:%M UTC")
+Note: domains added manually are excluded from the daily figures.
 \`\`\`
+
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search

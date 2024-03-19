@@ -22,9 +22,8 @@ Total | Today | Yesterday | Source
     - |  7801 |        28 | petscams.com
     - |   693 |         0 | scam.delivery
     - |  1250 |         0 | scam.directory
- 2600 |     - |         - | stop419scams.com (not active)
     - |   224 |         0 | stopgunscams.com
-15814 | 10081 |      2268 | All sources 
+15814 | 10081 |      2268 | All sources
 
 The 5 most recently added domains:
 zonefashionus-com
@@ -33,8 +32,9 @@ zoneswimopt-com
 zoravip-com
 zwillingeu-com
 
-Updated: Tue Mar 19 14:37 UTC
+Note: domains added manually are excluded from the daily figures.
 ```
+
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search
