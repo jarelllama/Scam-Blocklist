@@ -62,8 +62,8 @@ The 5 most recently added domains:
 $new_domains
 
 Updated: $(date -u +"%a %b %d %H:%M UTC")
-Note: all data retrieved are publicly available 
 \`\`\`
+Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search
 
