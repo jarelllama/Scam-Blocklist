@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 20:12:02 UTC 2024
+# Last modified: Tue Mar 19 20:54:15 UTC 2024
 # Syntax: Dnsmasq
 # Total number of entries: 15896
 #
@@ -7862,6 +7862,7 @@ local=/jsbfirearmslimited.com/
 local=/jsckvkzbakhchisaray.com/
 local=/jscnckazmunaygas.kz/
 local=/jshoesover-com/
+local=/jsjfdls.kfdsjkfdkjdkf.com/
 local=/jtdynamicsconstruction.com/
 local=/jteveninexa-com/
 local=/juaanpaperindustry.com/
@@ -13926,7 +13927,6 @@ local=/teslarea.com/
 local=/tesrin.com/
 local=/tessentembeddedanalytics.com/
 local=/tesseractfs-top/
-local=/test.kfdsjkfdkjdkf.com/
 local=/test122223.info/
 local=/testalinetrading.com/
 local=/tewez.com/
