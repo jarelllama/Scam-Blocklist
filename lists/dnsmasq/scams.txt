@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 21:21:33 UTC 2024
+# Last modified: Tue Mar 19 21:45:11 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 15897
+# Total number of entries: 15909
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -199,6 +199,7 @@ local=/activecargologistics.com/
 local=/activerollingballs.com/
 local=/activesexykittens.com/
 local=/activestaffordshirebullterrier.com/
+local=/acvtruckingllc.com/
 local=/adadream.com/
 local=/adairsau-com/
 local=/adairsau-shop/
@@ -1396,6 +1397,7 @@ local=/bansa.shop/
 local=/bantenpuppieshome.co.za/
 local=/baolongcavoodles.com/
 local=/barbowear.com/
+local=/barcfin.co.uk/
 local=/barclaysforeigncurrency.com/
 local=/barclaysplc.us/
 local=/barcsonlines.com/
@@ -4450,6 +4452,7 @@ local=/eastvtcorp.com/
 local=/eastwestnb.com/
 local=/easy-shops.store/
 local=/easycfdgain.net/
+local=/easyclickexpress.com/
 local=/easyexpresscouriers.com/
 local=/easyfreightlogistic.com/
 local=/easyfruitsltd-com/
@@ -5264,6 +5267,7 @@ local=/federalprimers.com/
 local=/federalprimers.usa.com/
 local=/federalprimershop.com/
 local=/federalprimersusa.com/
+local=/federalreservebnk.com/
 local=/federalreservesafe.com/
 local=/federalshots.com/
 local=/fedexdeliveryservice.com/
@@ -7365,6 +7369,7 @@ local=/icenturyfamily.us/
 local=/icetree.shop/
 local=/iceymed.com/
 local=/icomm-unesco.online/
+local=/icondachshunds.com/
 local=/iconicfashion-online/
 local=/iconrabatt-com/
 local=/icresearchchemicals.com/
@@ -7674,6 +7679,7 @@ local=/jamiesigsauer.com/
 local=/jampastey.com/
 local=/janellemaltipoodogs.com/
 local=/janennepomskydogs.com/
+local=/janetchihuahuas.com/
 local=/jankittenshome.co.za/
 local=/japanauto-spare.co.za/
 local=/japanengineandgearboxauto.com/
@@ -7866,6 +7872,7 @@ local=/jtdynamicsconstruction.com/
 local=/jteveninexa-com/
 local=/juaanpaperindustry.com/
 local=/juahar.com/
+local=/juanitacorgishome.com/
 local=/judgeic.com/
 local=/judybritishkitts.com/
 local=/judyparsonrussellterrierpups.com/
@@ -10110,6 +10117,7 @@ local=/nmcsmall-com/
 local=/nmcuniversity.com/
 local=/nmengineering.org/
 local=/nmhagencyltd.com/
+local=/nmotiongloballogistics.com/
 local=/nmunioa.com/
 local=/nnk-groupllc.ru/
 local=/nnkien-shop/
@@ -10714,6 +10722,7 @@ local=/partrickspuppies.com/
 local=/parts4-sale-com/
 local=/partyclothes-sale-com/
 local=/partyoftenuk.com/
+local=/passion.dogsbirds.com/
 local=/passionateranchdoodles.com/
 local=/passionfrenchbulldogshome.com/
 local=/passionhomepoeticpuppies.online/
@@ -11583,6 +11592,7 @@ local=/qoosam.com/
 local=/qovlaty.com/
 local=/qppc-qa.org/
 local=/qpqaz.com/
+local=/qrtexpress.com/
 local=/qttlpn.shop/
 local=/quality-carts.com/
 local=/quality-containers.com/
@@ -12084,6 +12094,7 @@ local=/rosemountmetal.com/
 local=/rosenovllc.com/
 local=/roserianabassethound.shop/
 local=/rosshopping.com/
+local=/rossiarmstore.com/
 local=/rossifirearmsusa.com/
 local=/rossignolskishop.com/
 local=/rossiofficial.com/
@@ -14594,6 +14605,7 @@ local=/turkishexpresscourier.com/
 local=/turkiyeis-bankasi.com/
 local=/turnnetwor.com/
 local=/turolloy.com/
+local=/tursisbulldoghome.com/
 local=/tursyearthquake.com/
 local=/tuthrd.com/
 local=/twinklepades.shop/
