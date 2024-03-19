@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 03:13:24 UTC 2024
+# Last modified: Tue Mar 19 03:15:42 UTC 2024
 # Syntax: Unbound
 # Total number of entries: 12046
 #
@@ -2012,6 +2012,7 @@ local-zone: "capitalunitedfinance.com." always_nxdomain
 local-zone: "capitalvantageonline.com." always_nxdomain
 local-zone: "capitexpro.com." always_nxdomain
 local-zone: "capitolcityb.com." always_nxdomain
+local-zone: "capitolrecords-works.com." always_nxdomain
 local-zone: "captivatinggermanshorthairedpointerpuppies.com." always_nxdomain
 local-zone: "captivereptiles.com." always_nxdomain
 local-zone: "captonebank.com." always_nxdomain
@@ -11865,7 +11866,6 @@ local-zone: "wtass.com." always_nxdomain
 local-zone: "wulooofficial.com." always_nxdomain
 local-zone: "wuxihat.us." always_nxdomain
 local-zone: "wwdcompany.com." always_nxdomain
-local-zone: "www.capitolrecords-works.com." always_nxdomain
 local-zone: "wyliegunstore.com." always_nxdomain
 local-zone: "wzcontainerlineinc.com." always_nxdomain
 local-zone: "wzlooo.com." always_nxdomain
