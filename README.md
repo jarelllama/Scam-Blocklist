@@ -13,24 +13,24 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 12161
+Total domains: 12164
 
 Total | Today | Yesterday | Source
     - |     3 |       476 | Google Search
     - |   105 |        25 | aa419.org
     - |     5 |      1739 | guntab.com
     - |   224 |         0 | stopgunscams.com
-    - |  7798 |        28 | petscams.com
-12161 |  8135 |      2268 | All sources 
+    - |  7801 |        28 | petscams.com
+12164 |  8138 |      2268 | All sources 
 
 The 5 most recently added domains:
-citylightscourierparcel.us
-inlineskatestore.com
-sbikeparts.com
 ski-coaches.com
 unacoopeci.com
+arconedachshundpuppies.com
+britishshorthair4home.com
+chappeldachshundbreed.com
 
-Updated: Tue Mar 19 03:48 UTC
+Updated: Tue Mar 19 03:52 UTC
 Note: all data retrieved are publicly available 
 ```
 

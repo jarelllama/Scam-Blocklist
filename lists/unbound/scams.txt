@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 03:48:45 UTC 2024
+# Last modified: Tue Mar 19 03:52:50 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 12161
+# Total number of entries: 12164
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -759,6 +759,7 @@ local-zone: "archictisete.com." always_nxdomain
 local-zone: "architecturm.com." always_nxdomain
 local-zone: "archivesh.com." always_nxdomain
 local-zone: "archivesimf.org." always_nxdomain
+local-zone: "arconedachshundpuppies.com." always_nxdomain
 local-zone: "arcuslogisticdeliveryservice.com." always_nxdomain
 local-zone: "areagunsshop.com." always_nxdomain
 local-zone: "argontrade.org." always_nxdomain
@@ -1729,6 +1730,7 @@ local-zone: "britishbluecat.com." always_nxdomain
 local-zone: "britishcb.com." always_nxdomain
 local-zone: "britishglobalib.com." always_nxdomain
 local-zone: "britishroyaltytalescattery.com." always_nxdomain
+local-zone: "britishshorthair4home.com." always_nxdomain
 local-zone: "britishshorthairkittenaustralia.com." always_nxdomain
 local-zone: "britishshorthairpalace.com." always_nxdomain
 local-zone: "britishshorthairus.com." always_nxdomain
@@ -2319,6 +2321,7 @@ local-zone: "champpapillonpuppies.com." always_nxdomain
 local-zone: "changocontainer.co.za." always_nxdomain
 local-zone: "channelhome.co.za." always_nxdomain
 local-zone: "chantelleunionbnkplc.com." always_nxdomain
+local-zone: "chappeldachshundbreed.com." always_nxdomain
 local-zone: "characterizm.com." always_nxdomain
 local-zone: "chariotcooperate.com." always_nxdomain
 local-zone: "chariotcorgiworld.com." always_nxdomain
