@@ -1,7 +1,10 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-wildcards_file='data/wildcards.txt'
 blacklist_file='config/blacklist.txt'
+subdomains_file='data/subdomains.txt'
+root_domains_file='data/root_domains.txt'
+wildcards_file='data/wildcards.txt'
+redundant_domains_file='data/redundant_domains.txt'
 domain_log='data/domain_log.csv'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
@@ -35,6 +38,31 @@ function main {
 
         printf "! Wildcards file is incorrect:\n"
         cat "$wildcards_file"
+        printf "\n"
+        error=true
+    fi
+    # Check redundant domains file
+    if ! grep -q 'match.wildcard.in.blocklist.com' "$redundant_domains_file" && grep -q 'also.match.wildcard.in.blocklist.com' "$redundant_domains_file"; then
+        printf "! Redundant domains file is incorrect:\n"
+        cat "$redundant_domains_file"
+        printf "\n"
+        error=true
+    fi
+    # Check root domains file
+    if ! grep -q 'to.block1.com' "$root_domains_file" && grep -q 'to.block2.com' "$root_domains_file" &&
+        grep -q 'to.block3.com' "$root_domains_file" && grep -q 'to.block4.com' "$root_domains_file"; then
+
+        printf "! Root domains file is incorrect:\n"
+        cat "$root_domains_file"
+        printf "\n"
+        error=true
+    fi
+    # Check subdomains file
+    if ! grep -q 'www.to.block1.com' "$root_domains_file" && grep -q 'm.block1.com' "$root_domains_file" &&
+        grep -q 'shop.to.block3.com' "$root_domains_file" && grep -q 'store.to.block4.com' "$root_domains_file"; then
+
+        printf "! Subdomains file is incorrect:\n"
+        cat "$subdomains_file"
         printf "\n"
         error=true
     fi
