@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 21:13:49 UTC 2024
+# Last modified: Tue Mar 19 21:21:33 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15900
+# Total number of entries: 15897
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2754,7 +2754,6 @@ local-zone: "cci-ammunitionss.com." always_nxdomain
 local-zone: "cci-primers.com." always_nxdomain
 local-zone: "cci-usaprimers.com." always_nxdomain
 local-zone: "cci.ammostore.com." always_nxdomain
-local-zone: "cci.ammunitionss.com." always_nxdomain
 local-zone: "cciammocenter.com." always_nxdomain
 local-zone: "cciammunitions.com." always_nxdomain
 local-zone: "cciprimersusa.com." always_nxdomain
@@ -7779,7 +7778,6 @@ local-zone: "jjhaka.top." always_nxdomain
 local-zone: "jjhsupplements.com." always_nxdomain
 local-zone: "jjmovingcompany.com." always_nxdomain
 local-zone: "jkintlgroup.com." always_nxdomain
-local-zone: "jksjdlf.kfdsjkfdkjdkf.com." always_nxdomain
 local-zone: "jlegalcounsel.com." always_nxdomain
 local-zone: "jlnsdynamic.com." always_nxdomain
 local-zone: "jlypoint.com." always_nxdomain
@@ -8028,7 +8026,6 @@ local-zone: "keyesden.com." always_nxdomain
 local-zone: "keystone-armorystore.com." always_nxdomain
 local-zone: "keystone.armorystore.com." always_nxdomain
 local-zone: "keystonepuppies.co.za." always_nxdomain
-local-zone: "kfdsjkfdkjdkf.com." always_nxdomain
 local-zone: "kftbcase.com." always_nxdomain
 local-zone: "kfthd.com." always_nxdomain
 local-zone: "kgnovav.nftjobfinders.com." always_nxdomain

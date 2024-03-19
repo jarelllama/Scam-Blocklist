@@ -13,17 +13,17 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15900
+Total domains: 15897
 
 Total | Today | Yesterday | Source *
     - |    23 |         3 | Google Search
-    - |       |       105 | aa419.org
-    - |       |         5 | guntab.com
+    - |    14 |       105 | aa419.org
+    - |     0 |         5 | guntab.com
     - |     4 |      7801 | petscams.com
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
     - |     2 |       224 | stopgunscams.com
-15900 |       |     10081 | All sources
+15897 |    43 |     10081 | All sources
 
 The 5 most recently added domains:
 xflyrc.com
