@@ -36,7 +36,7 @@ function main {
         #source_stopgunscams
         #source_petscams
         #source_google_search
-        source_scamdelivery
+        #source_scamdelivery
         source_scamdirectory
         merge_domains
         exit
@@ -181,7 +181,7 @@ function source_scamdirectory {
     source='scam.directory'
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
-    grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
+    curl -s "$url" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
         sed 's/href="\///; s/" title//' > data/domains_scamdirectory.tmp  # Retrieve domains
     # Skip domain processing if no domains retrieved
     if [[ ! -f data/domains_scamdirectory.tmp ]]; then

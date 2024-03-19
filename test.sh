@@ -50,33 +50,35 @@ function prepare_sample {
     printf "blacklisted.forum.com\n" > "$blacklist_file"  # Prepare sample blacklist file
 
     cat << EOF > input.tmp  # Prepare sample input data
-also.match.wildcard.in.blocklist.com
-blacklisted.forum.com
-forum.in.whitelist.com
-in.blocklist.com
-m.to.block.1.com
+www.to.block1.com
+forum1.com
 match.wildcard.in.blocklist.com
-shop.to.block.5.com
-to.block.1.com
-to.block.3.com
-to.block.4.com
-to.block.faake.edu.com
-whitelisted.forum.com
-whitelisted.tld.edu
+m.to.block2.com
+forum2.com
+also.match.wildcard.in.blocklist.com
+shop.to.block3.com
+blacklisted_forum.com
+store.to.block4.com
+blacklisted_forums.com
+already.in.blocklist1.com
+to.block1.com
+whitelisted.tld.mil
+already.in.blocklist2.com
+to.block2.com
 whitelisted.tld.gov
-wildcard.in.blocklist.com
-www.to.block.2.com
+already.in.blocklist3.com
+whitelisted.tld.edu
 EOF
 
     cat << EOF > output.tmp  # Prepare expected result
-blacklisted.forum.com
+blacklisted_forum.com
 in.blocklist.com
-to.block.1.com
-to.block.2.com
-to.block.3.com
-to.block.4.com
-to.block.5.com
-to.block.faake.edu.com
+to.block1.com
+to.block2.com
+to.block3.com
+to.block4.com
+to.block5.com
+to.block6.com
 wildcard.in.blocklist.com
 EOF
 
@@ -86,6 +88,8 @@ EOF
     mv xac data/domains_petscams.tmp
     mv xad data/domains_google_search_test_search_term.tmp
     mv xae data/domains_stopgunscams.tmp
+    mv xaf data/domains_scamdelivery.tmp
+    mv xag data/domains_scamdirectory.tmp
 }
 
 main
