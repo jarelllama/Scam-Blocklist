@@ -56,6 +56,7 @@ Total | Today | Yesterday | Source
     - |$(printf "%6s" "$guntab_today") |$(printf "%10s" "$guntab_yesterday") | guntab.com
     - |$(printf "%6s" "$stopgunscams_today") |$(printf "%10s" "$stopgunscams_yesterday") | stopgunscams.com
     - |$(printf "%6s" "$petscams_today") |$(printf "%10s" "$petscams_yesterday") | petscams.com
+ 2642 |     - |         - | stop419scams.com (not active)
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources 
 
 The 5 most recently added domains:
@@ -113,7 +114,7 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
 - [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 - [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
-- [stop419scams.com](https://www.stop419scams.com/): scam reporting forum (source not in use, but 2642 domains were manually retrieved from it)
+- [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
 
 Note: all data retrieved from these sources are publicly available.
 

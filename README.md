@@ -21,6 +21,7 @@ Total | Today | Yesterday | Source
     - |     5 |      1739 | guntab.com
     - |   224 |         0 | stopgunscams.com
     - |  7801 |        28 | petscams.com
+ 2642 |     - |         - | stop419scams.com (not active)
 14530 |  8138 |      2268 | All sources 
 
 The 5 most recently added domains:
@@ -32,6 +33,7 @@ chappeldachshundbreed.com
 
 Updated: Tue Mar 19 10:30 UTC
 ```
+
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search
@@ -82,7 +84,7 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
 - [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 - [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
-- [stop419scams.com](https://www.stop419scams.com/): scam reporting forum (source not in use, but 2642 domains were manually retrieved from it)
+- [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
 
 Note: all data retrieved from these sources are publicly available.
 
