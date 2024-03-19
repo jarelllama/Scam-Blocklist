@@ -113,6 +113,7 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
 - [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 - [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
+- [stop419scams.com](https://www.stop419scams.com/): scam reporting forum (source not in use, but 2642 domains were manually retrieved from it)
 
 Note: all data retrieved from these sources are publicly available.
 
