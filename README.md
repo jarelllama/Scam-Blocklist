@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 12046
+Total domains: 12047
 
 Total | Today | Yesterday | Source
     - |     0 |       476 | Google Search
@@ -21,7 +21,7 @@ Total | Today | Yesterday | Source
     - |     0 |      1739 | guntab.com
     - |   224 |         0 | stopgunscams.com
     - |  7798 |        28 | petscams.com
-12046 |  8022 |      2268 | All sources 
+12047 |  8022 |      2268 | All sources 
 
 The 5 most recently added domains:
 wilsoncombat.usa.com
@@ -30,7 +30,7 @@ winchestergun.usa.com
 winchesterguns.usa.com
 yandt.ammofirearms.com
 
-Updated: Tue Mar 19 03:15 UTC
+Updated: Tue Mar 19 03:21 UTC
 Note: all data retrieved are publicly available 
 ```
 

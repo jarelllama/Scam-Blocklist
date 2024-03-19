@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 03:15:42 UTC 2024
+# Last modified: Tue Mar 19 03:21:42 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 12046
+# Total number of entries: 12047
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -10252,6 +10252,7 @@ local=/streamptz.com/
 local=/streetsavenue.com/
 local=/strikingbalinesekitten.com/
 local=/strongdogoargentino.com/
+local=/strongmanlabor.com/
 local=/strucmate.com/
 local=/stuartfellstaffordshirebullterriers.com/
 local=/stuartkittenshome.com/
