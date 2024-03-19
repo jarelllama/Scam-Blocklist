@@ -11,7 +11,7 @@ wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
-# grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3}' | sort -u  # Find potential wildcards
+# grep '\..*\.' domains.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
 
 # If running locally, use locally stored secrets instead of environment variables
 if [[ "$CI" != true ]]; then
