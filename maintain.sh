@@ -44,14 +44,14 @@ function check_raw_file {
         # Keep only root domains
         domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)
         # Collate subdomains for dead check
-        printf "%s\n" "$domains_with_subdomains" >> "$subdomains_file"
+        printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exclude from dead check
-        printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> "$root_domains_file" 
+        printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
         awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_to_remove_file"
-    format_list "$subdomains_file"
-    format_list "$root_domains_file"
+    format_list subdomains.tmp
+    format_list root_domains.tmp
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$domains" | grep -vxFf "$blacklist_file")
@@ -81,14 +81,14 @@ function check_raw_file {
         # Remove redundant domains
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))
         # Collate redundant domains for dead check
-        printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"
+        printf "%s\n" "$redundant_domains" >> redundant_domains.tmp
         # Collate wilcard domains to exclude from dead check
-        printf "%s\n" "$domain" >> "$wildcards_file"
+        printf "%s\n" "$domain" >> wildcards.tmp
         awk 'NF {print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
         log_event "$redundant_domains" "redundant"
     done <<< "$domains"
-    format_list "$redundant_domains_file"
-    format_list "$wildcards_file"
+    format_list redundant_domains.tmp
+    format_list wildcards.tmp
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
@@ -103,6 +103,19 @@ function check_raw_file {
         rm filter_log.tmp  # Delete temp filter log file
         exit  # Exit if no domains were filtered
     fi
+
+    wildcards=$(comm -12 filtered_domains.tmp wildcards.tmp)  # Retrieve filtered wildcard domains
+    redundant_domains=$(grep -Ff <<< "$wildcards" redundant_domains.tmp)  # Retrieve filtered redundant domains
+    printf "%s\n" "$wildcards" >> "$wildcards_file" # Add the filtered wildcards domains to the wildcards file
+    printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"  # Add the filtered redundant domains to the redundant domains file
+    format_list "$wildcards_file"
+    format_list "$redundant_domains_file"
+    root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
+    subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
+    printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
+    printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
+    format_list "$root_domains_file"
+    format_list "$subdomains_file"
 
     sleep 0.5
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"

@@ -358,7 +358,7 @@ function merge_domains {
 
     comm -12 filtered_domains.tmp redundant_domains.tmp >> "$redundant_domains_file"  # Add filtered redundant domains to the redundant domains file
     root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
-    subdomains=$(grep -Ff "$(printf "%s" "$root_domains")" subdomains.tmp)  # Retrieve filtered subdomains
+    subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
     printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
     printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
     format_list "$root_domains_file"
