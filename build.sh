@@ -109,12 +109,12 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction): Google Search API
 - [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 - [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
-- [StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
 - [PetScams.com](https://petscams.com/): pet scam sites database
+- [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
+- [StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
 - [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
 - [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 - [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
-- [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
 
 Note: all data retrieved from these sources are publicly available.
 
