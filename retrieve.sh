@@ -8,7 +8,7 @@ whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 subdomains_file='data/subdomains.txt'
 root_domains_file='data/root_domains.txt'
-subdomains_to_remove_file='config/subdomains_to_remove.txt'
+subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
@@ -29,8 +29,6 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    # Remove wildcard domains that are no longer in the blocklist (needs to run before domain processing)
-    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
@@ -93,11 +91,7 @@ function source_aa419 {
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" >> data/domains_aa419.tmp  # Collate all pages of domains
     done
-    # Skip domain processing if no domains retrieved
-    if [[ ! -f data/domains_aa419.tmp ]]; then
-        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
-        return
-    fi
+    log_source "$source" "$source" "data/domains_aa419.tmp"
     process_source "$source" "$source" "data/domains_aa419.tmp"
 }
 
@@ -107,11 +101,7 @@ function source_guntab {
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' > data/domains_guntab.tmp  # Retrieve domains
-    # Skip domain processing if no domains retrieved
-    if [[ ! -s data/domains_guntab.tmp ]]; then
-        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
-        return
-    fi
+    log_source "$source" "$source" "data/domains_guntab.tmp"
     process_source "$source" "$source" "data/domains_guntab.tmp"
 }
 
@@ -123,15 +113,10 @@ function source_stopgunscams {
         curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">' \
             >> collated_stopgunscams_results.tmp  # Collate all pages of results
     done
-    # Skip domain processing if no domains retrieved
-    if [[ ! -f collated_stopgunscams_results.tmp ]]; then
-        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
-        return
-    fi
+    log_source_empty "$source" "$source" "collated_stopgunscams_results.tmp"
     # Strip results to domains
     sed 's/^<a href="\///; s/"><div class="ap-a-img -ic">//;
         s/-/./g' collated_stopgunscams_results.tmp > data/domains_stopgunscams.tmp
-    rm collated_stopgunscams_results.tmp
     process_source "$source" "$source" "data/domains_stopgunscams.tmp"
 }
 
@@ -148,15 +133,10 @@ function source_petscams {
             url="https://petscams.com/category/${category}/page/${page}/"  # Add '/page' after first run
         done
     done
-    # Skip domain processing if no domains retrieved
-    if [[ ! -f collated_petscams_results.tmp ]]; then
-        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
-        return
-    fi
+    log_source_empty "$source" "$source" "collated_petscams_results.tmp"
     # Strip results to domains
     sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///; s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///;
         s/\/"//; s/-/./g' collated_petscams_results.tmp > data/domains_petscams.tmp
-    rm collated_petscams_results.tmp
     process_source "$source" "$source" "data/domains_petscams.tmp"
 }
 
@@ -169,15 +149,10 @@ function source_scamdelivery {
             >> collated_scamdelivery_results.tmp  # Collate all pages of results
         url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
     done
-    # Skip domain processing if no domains retrieved
-    if [[ ! -f collated_scamdelivery_results.tmp ]]; then
-        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
-        return
-    fi
+    log_source_empty "$source" "$source" "collated_scamdelivery_results.tmp"
     # Strip results to domains
     sed 's/title="//; s/"><\/a>//' collated_scamdelivery_results.tmp |
         tr '[:upper:]' '[:lower:]' > data/domains_scamdelivery.tmp
-    rm collated_scamdelivery_results.tmp
     process_source "$source" "$source" "data/domains_scamdelivery.tmp"
 }
 
@@ -187,11 +162,7 @@ function source_scamdirectory {
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
         sed 's/href="\///; s/" title//' > data/domains_scamdirectory.tmp  # Retrieve domains
-    # Skip domain processing if no domains retrieved
-    if [[ ! -f data/domains_scamdirectory.tmp ]]; then
-        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
-        return
-    fi
+    log_source_empty "$source" "$source" "data/domains_scamdirectory.tmp"
     process_source "$source" "$source" "data/domains_scamdirectory.tmp"
 }
 
@@ -214,14 +185,10 @@ function search_google {
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results 
         jq -r '.items[].link' <<< "$page_results" >> collated_search_results.tmp  # Collate all pages of results
     done
-    # Skip to next search term if no results retrieved
-    if [[ ! -f collated_search_results.tmp ]]; then
-        log_source "Google Search" "$search_term" "0" "0" "0" "0" "0" ""
-        return
-    fi
+    log_source_empty "Google Search" "$search_term" "collated_search_results.tmp"
     # Strip URLs to domains
     awk -F/ '{print $3}' collated_search_results.tmp > "data/domains_google_search_${search_term:0:100}.tmp"
-    rm collated_search_results.tmp
+    rm collated_search_results.tmp  # Reset temp search-term-specific results file
     process_source "Google Search" "$search_term" "data/domains_google_search_${search_term:0:100}.tmp"
 }
 
@@ -231,7 +198,6 @@ function process_source {
     format_list "$3"  # Format temp file for pending domains
     pending_domains=$(<"$3")  # Store pending domains in a variable
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
-    [[ "$3" != data/domains_*.tmp ]] && rm "$3"
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -316,7 +282,6 @@ function process_source {
 }
 
 function merge_domains {
-    sleep 0.5
     format_list filtered_domains.tmp
     # Exit if no new domains to add or temp file is missing
     if [[ ! -s filtered_domains.tmp ]]; then
@@ -328,30 +293,24 @@ function merge_domains {
     # Print domains if count is less than or equal to 10
     if [[ filtered_domains_count -le 10 ]]; then
         printf "\nNew domains retrieved (%s):\n" "$filtered_domains_count"
-        sleep 0.5
         cat filtered_domains.tmp
     else
         printf "\nNew domains retrieved: %s\n" "$filtered_domains_count"
     fi
-    sleep 0.5
 
     # Print out domains in toplist and IP addresses
     if [[ -f in_toplist.tmp ]] || [[ -f ip_addresses.tmp ]]; then
         printf "\nEntries requiring manual review:\n"
-        sleep 0.5
     fi
-
     # If IP addresses were found, print out addresses
     if [[ -f ip_addresses.tmp ]]; then
         format_list ip_addresses.tmp
         awk 'NF {print $0 " (IP address)"}' ip_addresses.tmp
     fi
-
     # Exit with error and without adding domains to the raw file if domains were found in the toplist
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
-        sleep 0.5
         printf "\nPending domains saved for rerun.\n\n"
         exit 1
     fi
@@ -360,13 +319,12 @@ function merge_domains {
     [[ -f redundant_domains.tmp ]] && comm -12 filtered_domains.tmp redundant_domains.tmp >> "$redundant_domains_file"
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
-        subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
+        subdomains=$(grep -Ff <(printf "%s" "$root_domains") subdomains.tmp)  # Retrieve filtered subdomains
         printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
         printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
         format_list "$root_domains_file"
         format_list "$subdomains_file"
     fi
-
 
     count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
@@ -398,6 +356,14 @@ function log_source {
     printf "%s\n" "---------------------------------------------------------------------"
 }
 
+function log_source_empty {
+    # Skip to next source/item if no results retrieved
+    if [[ ! -f "$3" ]]; then
+        log_source "$1" "$2" "0" "0" "0" "0" "0" ""
+        return
+    fi
+}
+
 function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
@@ -410,16 +376,11 @@ function format_list {
 }
 
 function cleanup {
-    [[ -f filtered_domains.tmp ]] && rm filtered_domains.tmp
-    [[ -f ip_addresses.tmp ]] && rm ip_addresses.tmp
-    [[ -f redundant_domains.tmp ]] && rm redundant_domains.tmp
-    [[ -f subdomains.tmp ]] && rm subdomains.tmp
-    [[ -f root_domains.tmp ]] && rm root_domains.tmp
     # Reset temp search results files if there are no domains found in toplist
     if [[ ! -f in_toplist.tmp ]] && ls data/domains_*.tmp &> /dev/null; then
         rm data/domains_*.tmp
     fi
-    [[ -f in_toplist.tmp ]] && rm in_toplist.tmp  # Reset temp file for domains found in toplist
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
 trap cleanup EXIT

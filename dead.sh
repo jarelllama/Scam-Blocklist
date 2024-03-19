@@ -3,7 +3,7 @@ raw_file='data/raw.txt'
 adblock_file='lists/adblock/scams.txt'
 subdomains_file='data/subdomains.txt'
 root_domains_file='data/root_domains.txt'
-subdomains_to_remove_file='config/subdomains_to_remove.txt'
+subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
@@ -15,8 +15,6 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    # Remove wildcard domains that are no longer in the blocklist (needs to run before domain processing)
-    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     check_alive
     check_subdomains
     check_redundant
@@ -27,7 +25,6 @@ function main {
 function check_alive {
     sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
     dead-domains-linter -i formatted_dead_domains_file.tmp --export dead.tmp  # Find dead domains in the dead domains file
-    rm formatted_dead_domains_file.tmp
     alive_domains=$(comm -23 "$dead_domains_file" dead.tmp) # Find resurrected domains in the dead domains file
     if [[ -z "$alive_domains" ]]; then
         rm dead.tmp
@@ -59,7 +56,6 @@ function check_subdomains {
     cat collated_dead_root_domains.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$(<collated_dead_root_domains.tmp)" "dead" "raw"
-    rm collated_dead_root_domains.tmp
 }
 
 function check_redundant {
@@ -83,7 +79,6 @@ function check_redundant {
     cat collated_dead_wildcards.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$(<collated_dead_wildcards.tmp)" "dead" "wildcard"
-    rm collated_dead_wildcards.tmp
 }
 
 function check_dead {
@@ -124,5 +119,10 @@ function format_list {
     tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
 
+function cleanup {
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
+}
+
+trap cleanup EXIT
 main
 

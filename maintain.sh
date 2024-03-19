@@ -6,7 +6,7 @@ whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 subdomains_file='data/subdomains.txt'
 root_domains_file='data/root_domains.txt'
-subdomains_to_remove_file='config/subdomains_to_remove.txt'
+subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
@@ -16,8 +16,6 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    # Remove wildcard domains that are no longer in the blocklist (needs to run before domain processing)
-    comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     retrieve_toplist
     check_raw_file
 }
@@ -26,7 +24,6 @@ function retrieve_toplist {
     wget -q -O - "$toplist_url" | gunzip - > toplist.tmp  # Download and unzip toplist to temp file
     awk -F ',' '{print $2}' toplist.tmp > "$toplist_file"  # Format toplist to keep only domains
     format_list "$toplist_file"
-    rm toplist.tmp
 }
 
 function check_raw_file {
@@ -99,10 +96,7 @@ function check_raw_file {
     fi
 
     tr -s '\n' < filter_log.tmp | sort -u > temp.tmp && mv temp.tmp filter_log.tmp  # Remove empty lines, sort and remove duplicates
-    if [[ ! -s filter_log.tmp ]]; then
-        rm filter_log.tmp  # Delete temp filter log file
-        exit  # Exit if no domains were filtered
-    fi
+    [[ ! -s filter_log.tmp ]] && exit  # Exit if no domains were filtered
 
     if [[ -f wildcards.tmp ]]; then
         wildcards=$(comm -23 wildcards.tmp filter_log.tmp)  # Retrieve filtered wildcard domains
@@ -111,23 +105,17 @@ function check_raw_file {
         printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"  # Add the filtered redundant domains to the redundant domains file
         format_list "$wildcards_file"
         format_list "$redundant_domains_file"
-        rm wildcards.tmpr
-        rm redundant_domains.tmp
     fi
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -23 root_domains.tmp filter_log.tmp)  # Retrieve filtered root domains
-        subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
+        subdomains=$(grep -Ff <(prinft "%s" "$root_domains") subdomains.tmp)  # Retrieve filtered subdomains
         printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
         printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
         format_list "$root_domains_file"
         format_list "$subdomains_file"
-        rm root_domains.tmp
-        rm subdomains.tmp
     fi
 
-    sleep 0.5
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
-    sleep 0.5
     cat filter_log.tmp
     printf "%s\n" "$domains" > "$raw_file"  # Save changes to blocklist
     format_list "$raw_file"
@@ -136,8 +124,7 @@ function check_raw_file {
     after_count=$(wc -w <<< "$domains")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count"
 
-    rm filter_log.tmp  # Delete temp filter log file
-    exit 1  # Exit with error if the blocklist required filtering
+    [[ -s filter_log.tmp ]] && exit 1 || exit 0 # Exit with error if the blocklist required filtering
 }
 
 function log_event {
@@ -156,4 +143,9 @@ function format_list {
     tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
 
+function cleanup {
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
+}
+
+trap cleanup EXIT
 main
