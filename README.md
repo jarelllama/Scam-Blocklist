@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 14431
+Total domains: 15124
 
 Total | Today | Yesterday | Source
     - |     3 |       476 | Google Search
@@ -22,16 +22,16 @@ Total | Today | Yesterday | Source
     - |  7801 |        28 | petscams.com
  2600 |     - |         - | stop419scams.com (not active)
     - |   224 |         0 | stopgunscams.com
-14431 |  8138 |      2268 | All sources 
+15124 |  8831 |      2268 | All sources 
 
 The 5 most recently added domains:
-ski-coaches.com
-unacoopeci.com
-arconedachshundpuppies.com
-britishshorthair4home.com
-chappeldachshundbreed.com
+xpressfreightservices.com
+yodelcourierexpress.com
+zachlogistics.com
+zentnercourierexpress.online
+zipmentdeliveryservice.com
 
-Updated: Tue Mar 19 11:01 UTC
+Updated: Tue Mar 19 12:55 UTC
 ```
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
