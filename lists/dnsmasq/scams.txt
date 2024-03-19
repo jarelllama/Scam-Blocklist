@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 03:52:50 UTC 2024
+# Last modified: Tue Mar 19 06:15:06 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 12164
+# Total number of entries: 12165
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -11231,6 +11231,7 @@ local=/twrdft.com/
 local=/twsdc.com/
 local=/twufx.com/
 local=/txcryptotrade.com/
+local=/tyark.com/
 local=/tyfirearmstore.com/
 local=/tykagroupofcompanies.com/
 local=/tyreplusgroup.com/

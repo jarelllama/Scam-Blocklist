@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 03:52:50 UTC 2024
+# Last modified: Tue Mar 19 06:15:06 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 12164
+# Total number of entries: 12165
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -11232,6 +11232,7 @@ local-zone: "twrdft.com." always_nxdomain
 local-zone: "twsdc.com." always_nxdomain
 local-zone: "twufx.com." always_nxdomain
 local-zone: "txcryptotrade.com." always_nxdomain
+local-zone: "tyark.com." always_nxdomain
 local-zone: "tyfirearmstore.com." always_nxdomain
 local-zone: "tykagroupofcompanies.com." always_nxdomain
 local-zone: "tyreplusgroup.com." always_nxdomain
