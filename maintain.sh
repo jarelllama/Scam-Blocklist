@@ -104,18 +104,26 @@ function check_raw_file {
         exit  # Exit if no domains were filtered
     fi
 
-    wildcards=$(comm -23 wildcards.tmp filter_log.tmp)  # Retrieve filtered wildcard domains
-    redundant_domains=$(grep -Ff <<< "$wildcards" redundant_domains.tmp)  # Retrieve filtered redundant domains
-    printf "%s\n" "$wildcards" >> "$wildcards_file" # Add the filtered wildcards domains to the wildcards file
-    printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"  # Add the filtered redundant domains to the redundant domains file
-    format_list "$wildcards_file"
-    format_list "$redundant_domains_file"
-    root_domains=$(comm -23 root_domains.tmp filter_log.tmp)  # Retrieve filtered root domains
-    subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
-    printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
-    printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
-    format_list "$root_domains_file"
-    format_list "$subdomains_file"
+    if [[ -f wildcards.tmp ]]; then
+        wildcards=$(comm -23 wildcards.tmp filter_log.tmp)  # Retrieve filtered wildcard domains
+        redundant_domains=$(grep -Ff <<< "$wildcards" redundant_domains.tmp)  # Retrieve filtered redundant domains
+        printf "%s\n" "$wildcards" >> "$wildcards_file" # Add the filtered wildcards domains to the wildcards file
+        printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"  # Add the filtered redundant domains to the redundant domains file
+        format_list "$wildcards_file"
+        format_list "$redundant_domains_file"
+        rm wildcards.tmpr
+        rm redundant_domains.tmp
+    fi
+    if [[ -f root_domains.tmp ]]; then
+        root_domains=$(comm -23 root_domains.tmp filter_log.tmp)  # Retrieve filtered root domains
+        subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
+        printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
+        format_list "$root_domains_file"
+        format_list "$subdomains_file"
+        rm root_domains.tmp
+        rm subdomains.tmp
+    fi
 
     sleep 0.5
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"

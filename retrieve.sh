@@ -356,13 +356,17 @@ function merge_domains {
         exit 1
     fi
 
-    comm -12 filtered_domains.tmp redundant_domains.tmp >> "$redundant_domains_file"  # Add filtered redundant domains to the redundant domains file
-    root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
-    subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
-    printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
-    printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
-    format_list "$root_domains_file"
-    format_list "$subdomains_file"
+    # Add filtered redundant domains to the redundant domains file
+    [[ -f redundant_domains.tmp ]] && comm -12 filtered_domains.tmp redundant_domains.tmp >> "$redundant_domains_file"
+    if [[ -f root_domains.tmp ]]; then
+        root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
+        subdomains=$(grep -Ff <<< "$root_domains" subdomains.tmp)  # Retrieve filtered subdomains
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
+        printf "%s\n" "$subdomains" >> "$subdomains_file"  # Add the filtered subdomiains to the subdomains file
+        format_list "$root_domains_file"
+        format_list "$subdomains_file"
+    fi
+
 
     count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
