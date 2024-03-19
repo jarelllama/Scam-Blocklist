@@ -31,11 +31,13 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        source_aa419
-        source_guntab
-        source_stopgunscams
-        source_petscams
-        source_google_search
+        #source_aa419
+        #source_guntab
+        #source_stopgunscams
+        #source_petscams
+        #source_google_search
+        source_scamdelivery
+        source_scamdirectory
         merge_domains
         exit
     fi
@@ -62,6 +64,14 @@ function main {
                 ;;
             *petscams*)
                 source="petscams.com" 
+                item="$source"
+                ;;
+            *scamdelivery*)
+                source="scam.delivery" 
+                item="$source"
+                ;;
+            *scamdirectory*)
+                source="scam.directory" 
                 item="$source"
                 ;;
         esac
@@ -93,7 +103,7 @@ function source_guntab {
     url='https://www.guntab.com/scam-websites/'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > data/domains_guntab.tmp  # Retrieve domains
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' > data/domains_guntab.tmp  # Retrieve domains
     # Skip domain processing if no domains retrieved
     if [[ ! -s data/domains_guntab.tmp ]]; then
         log_source "$source" "$source" "0" "0" "0" "0" "0" ""
@@ -107,7 +117,7 @@ function source_stopgunscams {
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
     for page in {1..20}; do  # Loop through pages
-        curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+\-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">' \
+        curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">' \
             >> collated_stopgunscams_results.tmp  # Collate all pages of results
     done
     # Skip domain processing if no domains retrieved
@@ -129,7 +139,7 @@ function source_petscams {
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}/"
         for page in {2..20}; do  # Loop through pages
-            curl -s "$url" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"" \
+            curl -s "$url" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\"" \
                 >> collated_petscams_results.tmp  # Collate all pages of results
             url="https://petscams.com/category/${category}/page/${page}/"  # Add '/page' after first run
         done
@@ -145,6 +155,40 @@ function source_petscams {
         s/\/"//; s/-/./g' collated_petscams_results.tmp > data/domains_petscams.tmp
     rm collated_petscams_results.tmp
     process_source "$source" "$source" "data/domains_petscams.tmp"
+}
+
+function source_scamdelivery {
+    source='scam.delivery'
+    printf "\nSource: %s\n\n" "$source"
+    url='https://scam.delivery/category/review'
+    for page in {2..70}; do  # Loop through pages 
+        curl -s "$url" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' \
+            >> collated_scamdelivery_results.tmp  # Collate all pages of results
+        url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
+    done
+    # Skip domain processing if no domains retrieved
+    if [[ ! -f collated_scamdelivery_results.tmp ]]; then
+        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
+        return
+    fi
+    # Strip results to domains
+    sed 's/title="//; s/"><\/a>//' collated_scamdelivery_results.tmp |
+        tr '[:upper:]' '[:lower:]' > data/domains_scamdelivery.tmp
+    process_source "$source" "$source" "data/domains_scamdelivery.tmp"
+}
+
+function source_scamdirectory {
+    source='scam.directory'
+    url='https://scam.directory/category'
+    printf "\nSource: %s\n\n" "$source"
+    grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
+        sed 's/href="\///; s/" title//' > data/domains_scamdirectory.tmp  # Retrieve domains
+    # Skip domain processing if no domains retrieved
+    if [[ ! -f data/domains_scamdirectory.tmp ]]; then
+        log_source "$source" "$source" "0" "0" "0" "0" "0" ""
+        return
+    fi
+    process_source "$source" "$source" "data/domains_scamdirectory.tmp"
 }
 
 function source_google_search {
