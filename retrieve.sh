@@ -127,11 +127,11 @@ function source_petscams {
     # Loop through the two categories
     categories=('puppy-scammer-list' 'pet-delivery-scam')
     for category in "${categories[@]}"; do
-        url="https://petscams.com/category/${category}"
+        url="https://petscams.com/category/${category}/"
         for page in {2..20}; do  # Loop through pages
-            curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"" \
+            curl -s "$url" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+\-[[:alnum:]-]{2,}/\"" \
                 >> collated_petscams_results.tmp  # Collate all pages of results
-            url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
+            url="https://petscams.com/category/${category}/page/${page}/"  # Add '/page' after first run
         done
     done
     # Skip domain processing if no domains retrieved
