@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 02:57:56 UTC 2024
+# Last modified: Tue Mar 19 03:13:24 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 12043
+# Total number of entries: 12046
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -4028,6 +4028,7 @@ local-zone: "favoriteswimwear.com." always_nxdomain
 local-zone: "favorpekingesehomely.com." always_nxdomain
 local-zone: "fawnfrenchbulldog.com." always_nxdomain
 local-zone: "faxonfirearmsusa.com." always_nxdomain
+local-zone: "fb_marketplace_item552511.redirectlinknow.com." always_nxdomain
 local-zone: "fbi-us-gov.org." always_nxdomain
 local-zone: "fbihouston.com." always_nxdomain
 local-zone: "fblon.com." always_nxdomain
@@ -4326,6 +4327,7 @@ local-zone: "forexhiexperts.com." always_nxdomain
 local-zone: "forexstocktrade247.com." always_nxdomain
 local-zone: "forgotanx.com." always_nxdomain
 local-zone: "forjustanswer.com." always_nxdomain
+local-zone: "formativeco-us.com." always_nxdomain
 local-zone: "forresthillcontainerstrading.co.za." always_nxdomain
 local-zone: "forteammostore.com." always_nxdomain
 local-zone: "fortistrd.com." always_nxdomain
@@ -11863,6 +11865,7 @@ local-zone: "wtass.com." always_nxdomain
 local-zone: "wulooofficial.com." always_nxdomain
 local-zone: "wuxihat.us." always_nxdomain
 local-zone: "wwdcompany.com." always_nxdomain
+local-zone: "www.capitolrecords-works.com." always_nxdomain
 local-zone: "wyliegunstore.com." always_nxdomain
 local-zone: "wzcontainerlineinc.com." always_nxdomain
 local-zone: "wzlooo.com." always_nxdomain

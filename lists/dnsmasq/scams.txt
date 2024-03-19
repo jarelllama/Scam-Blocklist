@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 02:57:56 UTC 2024
+# Last modified: Tue Mar 19 03:13:24 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 12043
+# Total number of entries: 12046
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -4027,6 +4027,7 @@ local=/favoriteswimwear.com/
 local=/favorpekingesehomely.com/
 local=/fawnfrenchbulldog.com/
 local=/faxonfirearmsusa.com/
+local=/fb_marketplace_item552511.redirectlinknow.com/
 local=/fbi-us-gov.org/
 local=/fbihouston.com/
 local=/fblon.com/
@@ -4325,6 +4326,7 @@ local=/forexhiexperts.com/
 local=/forexstocktrade247.com/
 local=/forgotanx.com/
 local=/forjustanswer.com/
+local=/formativeco-us.com/
 local=/forresthillcontainerstrading.co.za/
 local=/forteammostore.com/
 local=/fortistrd.com/
@@ -11862,6 +11864,7 @@ local=/wtass.com/
 local=/wulooofficial.com/
 local=/wuxihat.us/
 local=/wwdcompany.com/
+local=/www.capitolrecords-works.com/
 local=/wyliegunstore.com/
 local=/wzcontainerlineinc.com/
 local=/wzlooo.com/
