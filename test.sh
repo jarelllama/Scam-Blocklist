@@ -30,7 +30,9 @@ function main {
         error=true
     fi
     # Check wildcards file
-    if ! grep -q 'to.block.1.com' "$wildcards_file" && grep -q 'to.block.2.com' "$wildcards_file"; then
+    if ! grep -q 'to.block.1.com' "$wildcards_file" &&  grep -q 'to.block.2.com' "$wildcards_file" &&
+        grep -q 'to.block.3.com' "$wildcards_file" && grep -q 'to.block.4.com' "$wildcards_file"; then
+
         printf "! Wildcards file is incorrect:\n"
         cat "$wildcards_file"
         printf "\n"

@@ -126,7 +126,8 @@ function source_stopgunscams {
         return
     fi
     # Strip results to domains
-    sed 's/^<a href="\///; s/"><div class="ap-a-img -ic">//; s/-/./g' collated_stopgunscams_results.tmp > data/domains_stopgunscams.tmp
+    sed 's/^<a href="\///; s/"><div class="ap-a-img -ic">//;
+        s/-/./g' collated_stopgunscams_results.tmp > data/domains_stopgunscams.tmp
     rm collated_stopgunscams_results.tmp
     process_source "$source" "$source" "data/domains_stopgunscams.tmp"
 }
@@ -150,8 +151,7 @@ function source_petscams {
         return
     fi
     # Strip results to domains
-    sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///;
-        s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///;
+    sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///; s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///;
         s/\/"//; s/-/./g' collated_petscams_results.tmp > data/domains_petscams.tmp
     rm collated_petscams_results.tmp
     process_source "$source" "$source" "data/domains_petscams.tmp"
@@ -174,6 +174,7 @@ function source_scamdelivery {
     # Strip results to domains
     sed 's/title="//; s/"><\/a>//' collated_scamdelivery_results.tmp |
         tr '[:upper:]' '[:lower:]' > data/domains_scamdelivery.tmp
+    rm collated_scamdelivery_results.tmp
     process_source "$source" "$source" "data/domains_scamdelivery.tmp"
 }
 

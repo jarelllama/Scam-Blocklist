@@ -33,8 +33,6 @@ function update_readme {
     scamdelivery_yesterday=$(count "$yesterday" "scam.delivery")
     scamdirectory_today=$(count "$today" "scam.directory")
     scamdirectory_yesterday=$(count "$yesterday" "scam.directory")
-    # Find 5 most recently added domains
-    new_domains=$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
@@ -66,7 +64,7 @@ Total | Today | Yesterday | Source
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources 
 
 The 5 most recently added domains:
-$new_domains
+$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
 Updated: $(date -u +"%a %b %d %H:%M UTC")
 \`\`\`
@@ -158,22 +156,12 @@ Thanks to the following people for the help, inspiration and support!
 EOF
 }
 
-function count {
-    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 10 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
-    total_count=0  # Initiaize total count
-    for count in $runs; do
-        total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
-    done
-    printf "%s" "$total_count"  # Return domain count to function caller
-}
-
 function build_list {
     blocklist_path="lists/${directory}/scams.txt"
     [[ -d "$(dirname $blocklist_path)" ]] || mkdir "$(dirname $blocklist_path)"  # Create directory if not present
 
     # Format domains for each syntax type
     formatted_domains=$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file")
-    total_count=$(wc -l <<< "$formatted_domains")  # Count total of formatted domains
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
@@ -182,12 +170,21 @@ ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Last modified: $(date -u)
 ${3} Syntax: ${1}
-${3} Total number of entries: ${total_count}
+${3} Total number of entries: $(wc -l <<< "$formatted_domains")
 ${3}
 EOF
 
     [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound syntax
     printf "%s\n" "$formatted_domains" >> "$blocklist_path"  # Append formatted domains onto blocklist
+}
+
+function count {
+    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 10 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
+    total_count=0  # Initiaize total count
+    for count in $runs; do
+        total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
+    done
+    printf "%s" "$total_count"  # Return domain count to function caller
 }
 
 function format_list {
