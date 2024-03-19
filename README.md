@@ -21,7 +21,7 @@ Total | Today | Yesterday | Source
     - |     5 |      1739 | guntab.com
     - |   224 |         0 | stopgunscams.com
     - |  7801 |        28 | petscams.com
- 2642 |     - |         - | stop419scams.com (not active)
+ 2600 |     - |         - | stop419scams.com (not active)
 14530 |  8138 |      2268 | All sources 
 
 The 5 most recently added domains:
