@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 19:56:54 UTC 2024
+# Last modified: Tue Mar 19 20:12:02 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15898
+# Total number of entries: 15896
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2754,7 +2754,6 @@ local-zone: "cci-ammunitionss.com." always_nxdomain
 local-zone: "cci-primers.com." always_nxdomain
 local-zone: "cci-usaprimers.com." always_nxdomain
 local-zone: "cci.ammostore.com." always_nxdomain
-local-zone: "cci.ammunitionss.com." always_nxdomain
 local-zone: "cciammocenter.com." always_nxdomain
 local-zone: "cciammunitions.com." always_nxdomain
 local-zone: "cciprimersusa.com." always_nxdomain
@@ -8864,7 +8863,6 @@ local-zone: "magnumresearchguns.com." always_nxdomain
 local-zone: "magnumresearchshop.com." always_nxdomain
 local-zone: "magnumresearchusa.com." always_nxdomain
 local-zone: "mah-united-truckinginc.com." always_nxdomain
-local-zone: "mail.int456.com." always_nxdomain
 local-zone: "mailapelihalli.fi." always_nxdomain
 local-zone: "mailingontime.com." always_nxdomain
 local-zone: "maily.doodles.com." always_nxdomain
