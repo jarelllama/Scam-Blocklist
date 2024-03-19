@@ -116,7 +116,7 @@ function source_stopgunscams {
     source='stopgunscams.com'
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
-    for page in {1..20}; do  # Loop through pages
+    for page in {1..5}; do  # Loop through pages
         curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">' \
             >> collated_stopgunscams_results.tmp  # Collate all pages of results
     done
@@ -139,7 +139,7 @@ function source_petscams {
     categories=('puppy-scammer-list' 'pet-delivery-scam')
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}/"
-        for page in {2..20}; do  # Loop through pages
+        for page in {2..25}; do  # Loop through pages
             curl -s "$url" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\"" \
                 >> collated_petscams_results.tmp  # Collate all pages of results
             url="https://petscams.com/category/${category}/page/${page}/"  # Add '/page' after first run
@@ -161,7 +161,7 @@ function source_scamdelivery {
     source='scam.delivery'
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
-    for page in {2..20}; do  # Loop through pages 
+    for page in {2..5}; do  # Loop through pages 
         curl -s "$url" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' \
             >> collated_scamdelivery_results.tmp  # Collate all pages of results
         url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
