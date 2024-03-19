@@ -4,8 +4,11 @@ toplist_file='data/toplist.txt'
 domain_log='data/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
-subdomains_file='config/subdomains.txt'
+subdomains_file='data/subdomains.txt'
+root_domains_file='data/root_domains.txt'
+subdomains_to_remove_file='config/subdomains_to_remove.txt'
 wildcards_file='data/wildcards.txt'
+redundant_domains_file='data/redundant_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
 
@@ -38,13 +41,17 @@ function check_raw_file {
         [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
         # Count number of domains with common subdomains
         domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")))
-        domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)  # Keep only root domains
-        root_domains=$(printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//")  # Retrieve the root domains
-        printf "%s\n" "$root_domains" >> "$wildcards_file"  # Add the root domains to the wildcards file so they will not be removed if dead
+        # Keep only root domains
+        domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)
+        # Collate subdomains for dead check
+        printf "%s\n" "$domains_with_subdomains" >> "$subdomains_file"
+        # Collate root domains to exclude from dead check
+        printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> "$root_domains_file" 
         awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
-    done < "$subdomains_file"
-    format_list "$wildcards_file"
+    done < "$subdomains_to_remove_file"
+    format_list "$subdomains_file"
+    format_list "$root_domains_file"
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$domains" | grep -vxFf "$blacklist_file")
@@ -71,11 +78,16 @@ function check_raw_file {
         [[ -z "$redundant_domains" ]] && continue  # Skip to next domain if no matches found
         # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
-        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))  # Remove redundant domains
+        # Remove redundant domains
+        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))
+        # Collate redundant domains for dead check
+        printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"
+        # Collate wilcard domains to exclude from dead check
+        printf "%s\n" "$domain" >> "$wildcards_file"
         awk 'NF {print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
         log_event "$redundant_domains" "redundant"
-        printf "%s\n" "$domain" >> "$wildcards_file"  # Collate the wilcard domains into a file
     done <<< "$domains"
+    format_list "$redundant_domains_file"
     format_list "$wildcards_file"
 
     # Find matching domains in toplist, excluding blacklisted domains

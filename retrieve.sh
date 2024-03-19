@@ -6,8 +6,11 @@ domain_log='data/domain_log.csv'
 search_terms_file='config/search_terms.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
-subdomains_file='config/subdomains.txt'
+subdomains_file='data/subdomains.txt'
+root_domains_file='data/root_domains.txt'
+subdomains_to_remove_file='config/subdomains_to_remove.txt'
 wildcards_file='data/wildcards.txt'
+redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
@@ -35,9 +38,9 @@ function main {
         source_guntab
         source_stopgunscams
         source_petscams
-        source_google_search
         source_scamdelivery
         source_scamdirectory
+        source_google_search
         merge_domains
         exit
     fi
@@ -236,13 +239,16 @@ function process_source {
         [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
         # Keep only root domains
         pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
-        root_domains=$(printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//")  # Retrieve the root domains
-        printf "%s\n" "$root_domains" >> "$wildcards_file"  # Add the root domains to the wildcards file so they will not be removed if dead
+        # Collate subdomains for dead check
+        printf "%s\n" "$domains_with_subdomains" >> "$subdomains_file"
+        # Collate root domains to exlude from dead check
+        printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> "$root_domains_file"
         # Find and log domains with common subdomains exluding 'www.'
         domains_with_subdomains=$(grep -v "^www\." <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain" "$source"
-    done < "$subdomains_file"
-    format_list "$wildcards_file"
+    done < "$subdomains_to_remove_file"
+    format_list "$subdomains_file"
+    format_list "$root_domains_file"
 
     # Remove domains already in blocklist
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
@@ -289,8 +295,11 @@ function process_source {
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         # Remove redundant domains
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
+        # Collate redundant domains for dead check
+        printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"
         log_event "$redundant_domains" "redundant" "$source"
     done < "$wildcards_file"
+    format_list "$redundant_domains_file"
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")

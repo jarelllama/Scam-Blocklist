@@ -1,7 +1,11 @@
 #!/bin/bash
 raw_file='data/raw.txt'
 adblock_file='lists/adblock/scams.txt'
+subdomains_file='data/subdomains.txt'
+root_domains_file='data/root_domains.txt'
+subdomains_to_remove_file='config/subdomains_to_remove.txt'
 wildcards_file='data/wildcards.txt'
+redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
 domain_log='data/domain_log.csv'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
@@ -14,6 +18,8 @@ function main {
     # Remove wildcard domains that are no longer in the blocklist (needs to run before domain processing)
     comm -12 "$wildcards_file" "$raw_file" > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     check_alive
+    check_subdomains
+    check_redundant
     check_dead
     check_line_count
 }   
@@ -23,24 +29,69 @@ function check_alive {
     dead-domains-linter -i formatted_dead_domains_file.tmp --export dead.tmp  # Find dead domains in the dead domains file
     rm formatted_dead_domains_file.tmp
     alive_domains=$(comm -23 "$dead_domains_file" dead.tmp) # Find resurrected domains in the dead domains file
-    # Return early if no alive domains found
     if [[ -z "$alive_domains" ]]; then
         rm dead.tmp
-        return
+        return  # Return early if no alive domains found
     fi
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
+    rm dead.tmp
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to the raw file
     format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
+}
+
+function check_subdomains {
+    dead-domains-linter -i "$subdomains_file" --export dead.tmp  # Find and export dead domains with subdomains
+    if [[ ! -s dead.tmp ]]; then
+        rm dead.tmp
+        return  # Return if no dead domains found
+    fi
+    # Remove dead domains with subdomains from domains with subdomains file
+    comm -23 "$subdomains_file" dead.tmp > subdomains.tmp && mv subdomains.tmp "$subdomains_file"
+    while read -r subdomain; do  # Loop through common subdomains
+        sed "s/^${subdomain}\.//" dead.tmp >> collated_dead_root_domains.tmp  # Strip to root domains and collate into file
+    done < "$subdomains_to_remove_file"
     rm dead.tmp
+    sort -u collated_dead_root_domains.tmp -o collated_dead_root_domains.tmp
+    # Remove dead root domains from raw file and root domains file
+    comm -23 "$raw_file" collated_dead_root_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
+    comm -23 "$root_domains_file" collated_dead_root_domains.tmp > root.tmp && mv root.tmp "$root_domains_file"
+    cat collated_dead_root_domains.tmp >> "$dead_domains_file"  # Collate dead domains
+    format_list "$dead_domains_file"
+    log_event "$(<collated_dead_root_domains.tmp)" "dead" "raw"
+    rm collated_dead_root_domains.tmp
+}
+
+function check_redundant {
+    dead-domains-linter -i "$redundant_domains_file" --export dead.tmp  # Find and export dead redundant domains
+    if [[ ! -s dead.tmp ]]; then
+        rm dead.tmp
+        return  # Return if no dead domains found
+    fi
+    # Remove dead redundant domains from redundant domains file
+    comm -23 "$redundant_domains_file" dead.tmp > redundant.tmp && mv redundant.tmp "$redundant_domains_file"
+    rm dead.tmp
+    while read -r wildcard; do  # Loop through wildcard domains
+        redundant_domains=$(grep "\.${wildcard}$" "$redundant_domains_file")  # Find redundant domains remaining in the redundant domains file
+        [[ -n "$redundant_domains" ]] && continue  # Skip to next wildcard if not all matches are dead
+        printf "%s\n" "$wildcard" >> collated_dead_wildcards.tmp  # Collate unused wildcard domains
+    done < "$wildcards_file"
+    sort -u collated_dead_wildcards.tmp -o collated_dead_wildcards.tmp
+    # Remove unused wildcard domains from raw file and wildcards file
+    comm -23 "$raw_file" collated_dead_wildcards.tmp > raw.tmp && mv raw.tmp "$raw_file"
+    comm -23 "$wildcards_file" collated_dead_wildcards.tmp > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
+    cat collated_dead_wildcards.tmp >> "$dead_domains_file"  # Collate dead domains
+    format_list "$dead_domains_file"
+    log_event "$(<collated_dead_wildcards.tmp)" "dead" "wildcard"
+    rm collated_dead_wildcards.tmp
 }
 
 function check_dead {
     dead-domains-linter -i "$adblock_file" --export dead.tmp  # Find and export dead domains
-    # Exclude wildcard domains
-    dead_domains=$(comm -23 dead.tmp "$wildcards_file")
+    dead_domains=$(comm -23 dead.tmp "$root_domains_file")  # Exclude subdomains stripped to root domains
+    dead_domains=$(comm -23 <(printf "%s" "$dead_domains" "$wildcards_file"))  # Exclude wildcard domains
     rm dead.tmp
-    [[ -z "$dead_domains" ]] && return  # Return early if no dead domains found
+    [[ -z "$dead_domains" ]] && return  # Return if no dead domains found
     # Remove dead domains from raw file
     comm -23 "$raw_file" <(printf "%s" "$dead_domains") > raw.tmp && mv raw.tmp "$raw_file"
     printf "%s\n" "$dead_domains" >> "$dead_domains_file"  # Collate dead domains
