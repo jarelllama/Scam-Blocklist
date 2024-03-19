@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 16375
+Total domains: 15814
 
 Total | Today | Yesterday | Source
     - |     3 |       476 | Google Search
@@ -24,7 +24,7 @@ Total | Today | Yesterday | Source
     - |  1250 |         0 | scam.directory
  2600 |     - |         - | stop419scams.com (not active)
     - |   224 |         0 | stopgunscams.com
-16375 | 10081 |      2268 | All sources 
+15814 | 10081 |      2268 | All sources 
 
 The 5 most recently added domains:
 zonefashionus-com
@@ -33,7 +33,7 @@ zoneswimopt-com
 zoravip-com
 zwillingeu-com
 
-Updated: Tue Mar 19 13:39 UTC
+Updated: Tue Mar 19 14:28 UTC
 ```
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
