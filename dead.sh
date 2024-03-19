@@ -38,12 +38,13 @@ function check_alive {
 }
 
 function check_subdomains {
-    dead-domains-linter -i "$subdomains_file" --export dead.tmp  # Find and export dead domains with subdomains
+    sed 's/^/||/; s/$/^/' "$subdomains_file" > formatted_subdomains_file.tmp # Format subdomains file
+    dead-domains-linter -i formatted_subdomains_file.tmp --export dead.tmp  # Find and export dead domains with subdomains
     if [[ ! -s dead.tmp ]]; then
         rm dead.tmp
         return  # Return if no dead domains found
     fi
-    # Remove dead domains with subdomains from domains with subdomains file
+    # Remove dead subdomains from domains with subdomains file
     comm -23 "$subdomains_file" dead.tmp > subdomains.tmp && mv subdomains.tmp "$subdomains_file"
     while read -r subdomain; do  # Loop through common subdomains
         sed "s/^${subdomain}\.//" dead.tmp >> collated_dead_root_domains.tmp  # Strip to root domains and collate into file
@@ -59,7 +60,8 @@ function check_subdomains {
 }
 
 function check_redundant {
-    dead-domains-linter -i "$redundant_domains_file" --export dead.tmp  # Find and export dead redundant domains
+    sed 's/^/||/; s/$/^/' "$redundant_domains_file" > formatted_redundant_domains_file.tmp # Format redundant domains file
+    dead-domains-linter -i formatted_redundant_domains_file.tmp --export dead.tmp  # Find and export dead redundant domains
     if [[ ! -s dead.tmp ]]; then
         rm dead.tmp
         return  # Return if no dead domains found
