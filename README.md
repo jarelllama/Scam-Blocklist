@@ -19,9 +19,9 @@ Total | Today | Yesterday | Source
     - |     3 |       476 | Google Search
     - |   105 |        25 | aa419.org
     - |     5 |      1739 | guntab.com
-    - |   224 |         0 | stopgunscams.com
     - |  7801 |        28 | petscams.com
  2600 |     - |         - | stop419scams.com (not active)
+    - |   224 |         0 | stopgunscams.com
 14530 |  8138 |      2268 | All sources 
 
 The 5 most recently added domains:
@@ -31,7 +31,7 @@ arconedachshundpuppies.com
 britishshorthair4home.com
 chappeldachshundbreed.com
 
-Updated: Tue Mar 19 10:41 UTC
+Updated: Tue Mar 19 10:48 UTC
 ```
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
