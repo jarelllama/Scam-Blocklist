@@ -93,6 +93,8 @@ The full filtering process can be viewed in the repository's code.
 
 Dead domains are removed daily using [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter). Note that domains acting as wildcards are excluded from this process.
 
+Dead domains that have become alive again are added back into the blocklist. This check for resurrected domains is also done daily.
+
 ## Why the Hosts format is not supported
 
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'long-random-subdomain.scam.com'. To collate individual subdomains would be a difficult task and would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
