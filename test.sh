@@ -24,7 +24,7 @@ function main {
         error=true
     fi
     # Check raw file
-    if cmp -s "$raw_file" output.tmp; then
+    if cmp -s "$raw_file" output.txt; then
         printf "Raw file is as expected.\n"
     else
         printf "! Raw file is not as expected:\n"
@@ -80,7 +80,7 @@ function prepare_sample {
     printf "wildcard.in.blocklist.com\n" > "$wildcards_file"  # Prepare sample wildcards file
     printf "blacklisted.forum.com\n" > "$blacklist_file"  # Prepare sample blacklist file
 
-    cat << EOF > input.tmp  # Prepare sample input data
+    cat << EOF > input.txt  # Prepare sample input data
 www.to.block1.com
 forum1.com
 match.wildcard.in.blocklist.com
@@ -100,7 +100,7 @@ to.block6.com
 whitelisted.tld.edu
 EOF
 
-    cat << EOF > output.tmp  # Prepare expected result
+    cat << EOF > output.txt  # Prepare expected result
 blacklisted.forum.com
 in.blocklist.com
 to.block1.com
@@ -112,7 +112,7 @@ to.block6.com
 wildcard.in.blocklist.com
 EOF
 
-    split -n l/7 input.tmp  # Split the domains
+    split -n l/7 input.txt  # Split the domains
     mv xaa data/domains_aa419.tmp
     mv xab data/domains_guntab.tmp
     mv xac data/domains_petscams.tmp
