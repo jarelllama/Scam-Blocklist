@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 14:37:43 UTC 2024
+# Last modified: Tue Mar 19 15:56:04 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15814
+# Total number of entries: 15815
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -8177,6 +8177,7 @@ local-zone: "kosticfranzosischebulldoggen.com." always_nxdomain
 local-zone: "koxaz.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
 local-zone: "krdes-net-in." always_nxdomain
+local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kreamlenpuppies.com." always_nxdomain
 local-zone: "kreevesfansclub.com." always_nxdomain
 local-zone: "krestcreditunion.com." always_nxdomain

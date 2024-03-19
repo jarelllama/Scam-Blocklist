@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15814
+Total domains: 15815
 
 Total | Today | Yesterday | Source *
     - |     3 |       476 | Google Search
@@ -23,7 +23,7 @@ Total | Today | Yesterday | Source *
     - |   693 |         0 | scam.delivery
     - |  1250 |         0 | scam.directory
     - |   224 |         0 | stopgunscams.com
-15814 | 10081 |      2268 | All sources
+15815 | 10081 |      2268 | All sources
 
 The 5 most recently added domains:
 zonefashionus-com
