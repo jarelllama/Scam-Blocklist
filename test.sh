@@ -81,7 +81,7 @@ to.block6.com
 wildcard.in.blocklist.com
 EOF
 
-    split -n l/5 input.tmp  # Split the 10 domains into 3 source files
+    split -n l/7 input.tmp  # Split the domains
     mv xaa data/domains_aa419.tmp
     mv xab data/domains_guntab.tmp
     mv xac data/domains_petscams.tmp
