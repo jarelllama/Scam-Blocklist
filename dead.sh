@@ -86,7 +86,7 @@ function check_redundant {
 function check_dead {
     dead-domains-linter -i "$adblock_file" --export dead.tmp  # Find and export dead domains
     dead_domains=$(comm -23 dead.tmp "$root_domains_file")  # Exclude subdomains stripped to root domains
-    dead_domains=$(comm -23 <(printf "%s" "$dead_domains" "$wildcards_file"))  # Exclude wildcard domains
+    dead_domains=$(comm -23 <(printf "%s" "$dead_domains") "$wildcards_file")  # Exclude wildcard domains
     rm dead.tmp
     [[ -z "$dead_domains" ]] && return  # Return if no dead domains found
     # Remove dead domains from raw file
