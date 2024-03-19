@@ -100,7 +100,7 @@ function check_raw_file {
 
     if [[ -f wildcards.tmp ]]; then
         wildcards=$(comm -23 wildcards.tmp filter_log.tmp)  # Retrieve filtered wildcard domains
-        redundant_domains=$(grep -Ff <<< "$wildcards" redundant_domains.tmp)  # Retrieve filtered redundant domains
+        redundant_domains=$(grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp)  # Retrieve filtered redundant domains
         printf "%s\n" "$wildcards" >> "$wildcards_file" # Add the filtered wildcards domains to the wildcards file
         printf "%s\n" "$redundant_domains" >> "$redundant_domains_file"  # Add the filtered redundant domains to the redundant domains file
         format_list "$wildcards_file"
