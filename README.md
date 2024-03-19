@@ -13,25 +13,27 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15124
+Total domains: 16374
 
 Total | Today | Yesterday | Source
     - |     3 |       476 | Google Search
     - |   105 |        25 | aa419.org
     - |     5 |      1739 | guntab.com
     - |  7801 |        28 | petscams.com
+    - |   693 |         0 | scam.delivery
+    - |  1250 |         0 | scam.directory
  2600 |     - |         - | stop419scams.com (not active)
     - |   224 |         0 | stopgunscams.com
-15124 |  8831 |      2268 | All sources 
+16374 | 10081 |      2268 | All sources 
 
 The 5 most recently added domains:
-xpressfreightservices.com
-yodelcourierexpress.com
-zachlogistics.com
-zentnercourierexpress.online
-zipmentdeliveryservice.com
+zonefashionus-com
+zoneperfume-com
+zoneswimopt-com
+zoravip-com
+zwillingeu-com
 
-Updated: Tue Mar 19 12:55 UTC
+Updated: Tue Mar 19 13:12 UTC
 ```
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
@@ -79,6 +81,8 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 - [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
 - [PetScams.com](https://petscams.com/): pet scam sites database
+- [scam.delivery](https://scam.delivery/): delivery scam sites database
+- [Scam Directory](https://scam.directory/): non-delivery scam sites database
 - [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
 - [StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
 - [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
