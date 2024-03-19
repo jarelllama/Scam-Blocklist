@@ -52,7 +52,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
 
-Total | Today | Yesterday | Source
+Total | Today | Yesterday | Source *
     - |$(printf "%6s" "$google_today") |$(printf "%10s" "$google_yesterday") | Google Search
     - |$(printf "%6s" "$aa419_today") |$(printf "%10s" "$aa419_yesterday") | aa419.org
     - |$(printf "%6s" "$guntab_today") |$(printf "%10s" "$guntab_yesterday") | guntab.com
@@ -65,10 +65,10 @@ $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")")
 The 5 most recently added domains:
 $(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
 
-Note: domains added manually are excluded from the daily figures.
+*Domains added manually are excluded from the daily figures.
 \`\`\`
 
-Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
+All data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search
 
@@ -122,7 +122,7 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 - [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
 
-Note: all data retrieved from these sources are publicly available.
+All data retrieved from these sources are publicly available.
 
 ## Resources
 

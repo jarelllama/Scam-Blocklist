@@ -15,7 +15,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ```
 Total domains: 15814
 
-Total | Today | Yesterday | Source
+Total | Today | Yesterday | Source *
     - |     3 |       476 | Google Search
     - |   105 |        25 | aa419.org
     - |     5 |      1739 | guntab.com
@@ -32,10 +32,10 @@ zoneswimopt-com
 zoravip-com
 zwillingeu-com
 
-Note: domains added manually are excluded from the daily figures.
+*Domains added manually are excluded from the daily figures.
 ```
 
-Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
+All data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search
 
@@ -89,7 +89,7 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
 - [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
 
-Note: all data retrieved from these sources are publicly available.
+All data retrieved from these sources are publicly available.
 
 ## Resources
 
