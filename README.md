@@ -31,9 +31,8 @@ arconedachshundpuppies.com
 britishshorthair4home.com
 chappeldachshundbreed.com
 
-Updated: Tue Mar 19 10:30 UTC
+Updated: Tue Mar 19 10:41 UTC
 ```
-
 Note: all data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
 ## Retrieving scam domains from Google Search
