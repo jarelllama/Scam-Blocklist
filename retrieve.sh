@@ -276,7 +276,7 @@ function process_source {
     if [[ -n "$ip_addresses" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$ip_addresses"))
         log_event "$ip_addresses" "ip_address" "$source"
-        printf "%s\n" "$ip_addresses" >> ip_addresses.tmp  # Collate  IP addresses into temp file
+        printf "%s\n" "$ip_addresses" >> ip_addresses.tmp  # Collate IP addresses into temp file
     fi
 
     redundant_domains_count=0  # Initialize redundant domains count
