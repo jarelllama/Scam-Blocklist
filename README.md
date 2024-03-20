@@ -13,25 +13,25 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15916
+Total domains: 16264
 
 Total | Today | Yesterday | Source *
-    - |    23 |         3 | Google Search
-    - |    18 |       105 | aa419.org
-    - |     0 |         5 | guntab.com
-    - |     4 |      7801 | petscams.com
+    - |   115 |         3 | Google Search
+    - |   182 |       105 | aa419.org
+    - |    62 |         5 | guntab.com
+    - |    21 |      7801 | petscams.com
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
-    - |   140 |         0 | scamadviser.com
-    - |     3 |       224 | stopgunscams.com
-15916 |   188 |     10081 | All sources
+    - |   148 |         0 | scamadviser.com
+    - |     4 |       224 | stopgunscams.com
+16264 |   532 |     10081 | All sources
 
 The 5 most recently added domains:
-workxon.com
-yunrock.com
-zasamo.com
-zcz898.com
-zethalal.com
+yhaire.com
+yitangsj.com
+yuannue.com
+zimuzhijia.com
+zyjpzx.com
 
 *Domains added manually are excluded from the daily figures.
 ```
