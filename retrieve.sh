@@ -166,7 +166,7 @@ function source_scamdirectory {
     source='scam.directory'
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
-    curl "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
+    curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
         sed 's/href="\///; s/" //' | sort -u > data/domains_scamdirectory.tmp  # Retrieve domains
     log_source_empty "$source" "$source" "data/domains_scamdirectory.tmp"
     process_source "$source" "$source" "data/domains_scamdirectory.tmp"
