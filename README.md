@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15818
+Total domains: 15958
 
 Total | Today | Yesterday | Source *
     - |    23 |         3 | Google Search
@@ -23,14 +23,14 @@ Total | Today | Yesterday | Source *
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
     - |     3 |       224 | stopgunscams.com
-15818 |    48 |     10081 | All sources
+15958 |   188 |     10081 | All sources
 
 The 5 most recently added domains:
-cci.ammunitionss.com
-americanakitapupy.store
-buypassportsonline.com
-chemicalprosolution.webnode.page
-enrollchemicalssd.co.za
+workxon.com
+yunrock.com
+zasamo.com
+zcz898.com
+zethalal.com
 
 *Domains added manually are excluded from the daily figures.
 ```
