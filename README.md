@@ -71,7 +71,7 @@ Dead domains that have become alive again are added back into the blocklist. Thi
 
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'long-random-subdomain.scam.com'. To collate individual subdomains would be difficult and would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
-Occasionally, wildcard domains are added manually to the blocklist to reduce the number of entries via wildcard matching.
+Additionally, wildcard domains are periodically added manually to the blocklist to reduce the number of entries via wildcard matching.
 
 ## Sources
 
