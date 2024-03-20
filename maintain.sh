@@ -108,7 +108,7 @@ function check_raw_file {
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 root_domains.tmp <(printf "%s" "$domains"))  # Retrieve unfiltered root domains
         printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the unfiltered root domains to the root domains file
-        grep -Ff <(prinft "%s" "$root_domains") subdomains.tmp >> "$subdomains_file" # Retrieve and add filtered subdomains to subdomains file
+        grep -F <(prinft "%s" "$root_domains") subdomains.tmp >> "$subdomains_file" # Retrieve and add filtered subdomains to subdomains file
         format_list "$root_domains_file"
         format_list "$subdomains_file"
     fi
