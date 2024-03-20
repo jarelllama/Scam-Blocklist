@@ -27,11 +27,11 @@ Total | Today | Yesterday | Source *
 16264 |   532 |     10081 | All sources
 
 The 5 most recently added domains:
-yhaire.com
-yitangsj.com
-yuannue.com
-zimuzhijia.com
-zyjpzx.com
+nobleshibainupups.online
+wegocourierexpress.com
+a1savannahs.us
+classicrussianblues.com
+purecattery4home.com
 
 *Domains added manually are excluded from the daily figures.
 ```
