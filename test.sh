@@ -202,6 +202,8 @@ function check_output {
         cat "$2"
         printf "\n"
         error=true
+    else
+        printf "No errors found.\n"
     fi
 }
 
