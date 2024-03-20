@@ -13,6 +13,7 @@ wildcards_file='data/processing/wildcards.txt'
 dead_domains_file='data/processing/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.3'
+query_count=0  # Initialize query count (only increments for Google Search terms)
 
 # grep '\..*\.' domains.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
 
@@ -199,6 +200,7 @@ function search_google {
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results (max of 100 results)
+        ((query_count++))
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results 
@@ -296,7 +298,7 @@ function process_source {
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
-    log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$dead_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
+    log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$dead_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist" "$query_count"
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp # Collate the filtered domains to a temp file
 }
 
@@ -368,7 +370,7 @@ function log_source {
     # Print and log statistics for source used
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
-    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v redundant="$7" -v toplist_count="$8" -v toplist_domains="$(printf "%s" "$9" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains",no"}' >> "$source_log"
+    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v redundant="$7" -v toplist_count="$8" -v toplist_domains="$(printf "%s" "$9" | tr '\n' ' ')" -v time="$time_format" -v queries="${10}" 'BEGIN {print time","source","item","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains","queries",no"}' >> "$source_log"
     printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
     printf "%s\n" "---------------------------------------------------------------------"
 }
@@ -376,7 +378,7 @@ function log_source {
 function log_source_empty {
     # Skip to next source/item if no results retrieved
     if [[ ! -f "$3" ]]; then
-        log_source "$1" "$2" "0" "0" "0" "0" "0" "0" ""
+        log_source "$1" "$2" "0" "0" "0" "0" "0" "0" "" "$query_count" "no"
         return
     fi
 }

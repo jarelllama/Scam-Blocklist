@@ -185,7 +185,7 @@ EOF
 }
 
 function count {
-    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 11 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
+    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 12 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
     total_count=0  # Initiaize total count
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
