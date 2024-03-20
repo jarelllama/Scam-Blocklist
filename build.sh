@@ -66,7 +66,7 @@ Total | Today | Yesterday | Source *
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
 
 The 5 most recently added domains:
-$(csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | tail +2 | tail -5)
+$(csvgrep -c 1 -m "$today" | csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | shuf -n 5)
 
 *Domains added manually are excluded from the daily figures.
 \`\`\`
