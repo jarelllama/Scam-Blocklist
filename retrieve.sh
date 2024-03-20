@@ -239,8 +239,8 @@ function process_source {
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
 
     # Remove known dead domains
-    dead_domains=$(comm -12 <(printf "%s" "$pending_domains") "$dead_domains_file")
-    pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$dead_domains_file")
+    dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
+    pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
     log_event "$dead_domains" "dead" "$source"
 
     # Find blacklisted domains
@@ -385,6 +385,12 @@ function format_list {
         sed -i 's/\r$//' "$1"  
         return
     fi
+    # Do not sort the dead domains file
+    if [[ "$1" == *dead_domains_file* ]]; then
+        tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
+        return
+    fi
+
     # Remove whitespaces, carriage return characters, empty lines, sort and remove duplicates
     tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
