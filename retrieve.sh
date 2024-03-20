@@ -378,7 +378,7 @@ function log_source {
 function log_source_empty {
     # Skip to next source/item if no results retrieved
     if [[ ! -f "$3" ]]; then
-        log_source "$1" "$2" "0" "0" "0" "0" "0" "0" "" "$query_count" "no"
+        log_source "$1" "$2" "0" "0" "0" "0" "0" "0" "" "$query_count"
         return
     fi
 }
