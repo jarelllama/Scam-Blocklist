@@ -33,12 +33,12 @@ function main {
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
         source_aa419
-        source_guntab
-        source_petscams
+        #source_guntab
+        #source_petscams
         source_scamadviser
         #source_scamdelivery  # Has captchas
-        source_scamdirectory
-        source_stopgunscams
+        #source_scamdirectory
+        #source_stopgunscams
         #source_google_search
         merge_domains
         exit
