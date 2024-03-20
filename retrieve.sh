@@ -13,7 +13,7 @@ wildcards_file='data/processing/wildcards.txt'
 redundant_domains_file='data/processing/redundant_domains.txt'
 dead_domains_file='data/processing/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
-user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.3'
 
 # grep '\..*\.' domains.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
 
@@ -33,14 +33,14 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        #source_aa419
-        #source_guntab
-        #source_petscams
+        source_aa419
+        source_guntab
+        source_petscams
         source_scamdelivery  # Has captchas
-        #source_scamdirectory
-        #source_scamadviser
-        #source_stopgunscams
-        #source_google_search
+        source_scamdirectory
+        source_scamadviser
+        source_stopgunscams
+        source_google_search
         merge_domains
         exit
     fi
@@ -146,7 +146,7 @@ function source_scamdelivery {
     source='scam.delivery'
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
-    for page in {2..5}; do  # Loop through pages 
+    for page in {1..2}; do  # Loop through 2 pages
         # Use User Agent to reduce captcha blocking
         curl -sA "$user_agent" "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' | sort -u \
             >> collated_scamdelivery_results.tmp  # Collate all pages of results
