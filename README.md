@@ -26,12 +26,12 @@ Total | Today | Yesterday | Source *
     - |     4 |       224 | stopgunscams.com
 16264 |   532 |     10081 | All sources
 
-The 5 most recently added domains:
-nobleshibainupups.online
-wegocourierexpress.com
-a1savannahs.us
-classicrussianblues.com
-purecattery4home.com
+5 recently added domains:
+hurleyardlabradorshome.com
+safegloballogistics.com
+jakesbeaglepups.com
+a1-courier.net
+schnauzermatters.com
 
 *Domains added manually are excluded from the daily figures.
 ```
