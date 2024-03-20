@@ -13,24 +13,24 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15814
+Total domains: 15818
 
 Total | Today | Yesterday | Source *
     - |    23 |         3 | Google Search
-    - |    14 |       105 | aa419.org
+    - |    18 |       105 | aa419.org
     - |     0 |         5 | guntab.com
     - |     4 |      7801 | petscams.com
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
     - |     3 |       224 | stopgunscams.com
-15814 |    44 |     10081 | All sources
+15818 |    48 |     10081 | All sources
 
 The 5 most recently added domains:
-prochemislaboratory.weebly.com
-ssdendurelab.co.za
-williamspethome.com
-""
 cci.ammunitionss.com
+americanakitapupy.store
+buypassportsonline.com
+chemicalprosolution.webnode.page
+enrollchemicalssd.co.za
 
 *Domains added manually are excluded from the daily figures.
 ```
