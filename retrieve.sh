@@ -242,7 +242,7 @@ function process_source {
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
     dead_count=$(wc -w <<< "$dead_domains")  # Count number of dead domains
     if [[ "$dead_count" -gt 0 ]]; then
-        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
         log_event "$dead_domains" "dead" "$source"
     fi
 
