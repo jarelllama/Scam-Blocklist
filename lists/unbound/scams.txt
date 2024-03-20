@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Mar 20 15:49:44 UTC 2024
+# Last modified: Wed Mar 20 16:36:49 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 16264
+# Total number of entries: 16266
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -556,6 +556,7 @@ local-zone: "alla-prima.fr." always_nxdomain
 local-zone: "allahrukssdlab.co.za." always_nxdomain
 local-zone: "allammoshop.com." always_nxdomain
 local-zone: "allate.shop." always_nxdomain
+local-zone: "allbirdssale.us." always_nxdomain
 local-zone: "allcityguns.com." always_nxdomain
 local-zone: "allcmmgstore.com." always_nxdomain
 local-zone: "allcoinstake.com." always_nxdomain
@@ -2442,6 +2443,7 @@ local-zone: "bulliesbreeders.com." always_nxdomain
 local-zone: "bullmastiffcreek.com." always_nxdomain
 local-zone: "bullseyegunstore.com." always_nxdomain
 local-zone: "bullterrierpupforsale.com." always_nxdomain
+local-zone: "bullterrierpuppiesforsale.com.2." always_nxdomain
 local-zone: "bullterrierpups4u.com." always_nxdomain
 local-zone: "bullterriers4homes.com." always_nxdomain
 local-zone: "bully4home.com." always_nxdomain
@@ -8569,6 +8571,7 @@ local-zone: "labradordynasty.com." always_nxdomain
 local-zone: "labradorhome.online." always_nxdomain
 local-zone: "labradorsretriever.com." always_nxdomain
 local-zone: "labralodgeestates.com." always_nxdomain
+local-zone: "labrayard.com." always_nxdomain
 local-zone: "labsace.co.za." always_nxdomain
 local-zone: "lacansterrottiepups.com." always_nxdomain
 local-zone: "lacoshihtzu.com." always_nxdomain
@@ -9154,7 +9157,6 @@ local-zone: "magnumresearchshop.com." always_nxdomain
 local-zone: "magnumresearchusa.com." always_nxdomain
 local-zone: "mah-united-truckinginc.com." always_nxdomain
 local-zone: "mahawk.com." always_nxdomain
-local-zone: "mail.int456.com." always_nxdomain
 local-zone: "mailapelihalli.fi." always_nxdomain
 local-zone: "mailingontime.com." always_nxdomain
 local-zone: "maily.doodles.com." always_nxdomain

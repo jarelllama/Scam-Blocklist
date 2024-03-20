@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Mar 20 15:49:44 UTC 2024
+# Last modified: Wed Mar 20 16:36:49 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 16264
+# Total number of entries: 16266
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -555,6 +555,7 @@ local=/alla-prima.fr/
 local=/allahrukssdlab.co.za/
 local=/allammoshop.com/
 local=/allate.shop/
+local=/allbirdssale.us/
 local=/allcityguns.com/
 local=/allcmmgstore.com/
 local=/allcoinstake.com/
@@ -2441,6 +2442,7 @@ local=/bulliesbreeders.com/
 local=/bullmastiffcreek.com/
 local=/bullseyegunstore.com/
 local=/bullterrierpupforsale.com/
+local=/bullterrierpuppiesforsale.com.2/
 local=/bullterrierpups4u.com/
 local=/bullterriers4homes.com/
 local=/bully4home.com/
@@ -8568,6 +8570,7 @@ local=/labradordynasty.com/
 local=/labradorhome.online/
 local=/labradorsretriever.com/
 local=/labralodgeestates.com/
+local=/labrayard.com/
 local=/labsace.co.za/
 local=/lacansterrottiepups.com/
 local=/lacoshihtzu.com/
@@ -9153,7 +9156,6 @@ local=/magnumresearchshop.com/
 local=/magnumresearchusa.com/
 local=/mah-united-truckinginc.com/
 local=/mahawk.com/
-local=/mail.int456.com/
 local=/mailapelihalli.fi/
 local=/mailingontime.com/
 local=/maily.doodles.com/

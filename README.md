@@ -13,25 +13,21 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 16264
+Total domains: 16266
 
 Total | Today | Yesterday | Source *
-    - |   115 |         3 | Google Search
-    - |   182 |       105 | aa419.org
-    - |    62 |         5 | guntab.com
-    - |    21 |      7801 | petscams.com
-    - |     0 |       693 | scam.delivery
-    - |     0 |      1250 | scam.directory
-    - |   148 |         0 | scamadviser.com
-    - |     4 |       224 | stopgunscams.com
-16264 |   532 |     10081 | All sources
+    - |     0 |       115 | Google Search
+    - |     1 |       182 | aa419.org
+    - |     0 |        62 | guntab.com
+    - |     2 |        21 | petscams.com
+    - |     0 |         0 | scam.delivery
+    - |     0 |         0 | scam.directory
+    - |     0 |         0 | scamadviser.com
+    - |     0 |         4 | stopgunscams.com
+16266 |     3 |       532 | All sources
 
 5 recently added domains:
-lovelyfamilyteacuppoodles.com
-oceanfreightcarriers.com
-gunsandammosshop.com
-rareliquor-collection-com
-uspsdeliveryexpress.com
+Domain
 
 *Domains added manually are excluded from the daily figures.
 ```
