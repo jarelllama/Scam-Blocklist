@@ -27,11 +27,11 @@ Total | Today | Yesterday | Source *
 16264 |   532 |     10081 | All sources
 
 5 recently added domains:
-championmorkiepuppies.com
-teacupmaltipooforsale.com
-thecheapcloth-com
-dachshundbrancully.com
-airriflestore.com
+primehousesheepadoodles.com
+alltoplogs.com
+myafricangreyscompanions.com
+bulkammoforsales.com
+lucchesesale-com
 
 *Domains added manually are excluded from the daily figures.
 ```
@@ -52,7 +52,7 @@ The list of search terms is proactively updated and is mostly retrieved from new
 
 The Google Custom Search JSON API only provides 100 free search queries per day. Because of the number of search terms used, the Google Search source can only be employed once a day.
 
-To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives.
+To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
 
 #### Regarding other sources
 
