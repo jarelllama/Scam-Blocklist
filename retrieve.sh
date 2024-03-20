@@ -77,6 +77,10 @@ function main {
                 source="scam.directory" 
                 item="$source"
                 ;;
+            *scamadviser*)
+                source="scamadviser.com" 
+                item="$source"
+                ;;
         esac
         process_source "$source" "$item" "$temp_domains_file"
     done
