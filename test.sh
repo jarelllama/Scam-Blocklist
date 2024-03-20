@@ -20,7 +20,6 @@ function main {
     # Check returned error code
     if [[ "$?" -eq 1 ]]; then
         printf "! Script returned an error.\n"
-        check_raw_file
         error=true
     fi
     # Check raw file
@@ -68,7 +67,7 @@ function main {
     fi
 
     printf "Log:\n"
-    grep "$time_format" "$domain_log"
+    grep "$time_format" "$domain_log"  # Print log
     printf "%s\n" "---------------------------------------------------------------------"
 
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if script did not run as intended
