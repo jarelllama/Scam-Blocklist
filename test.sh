@@ -99,9 +99,7 @@ function test_retrieval_maintainence {
         mv input.txt "$raw_file"  # Prepare sample raw file
         bash maintain.sh || true  # Run maintainence script and ignore returned exit code
     fi
-    
     printf "%s\n" "---------------------------------------------------------------------"
-    printf "Run completed.\n"
 
     # Check returned error code
     if [[ "$errored" == true ]]; then
@@ -121,6 +119,7 @@ function test_retrieval_maintainence {
         check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"
     fi
 
+    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     printf "Log:\n"
     grep "$time_format" "$domain_log"  # Print log
     printf "%s\n" "---------------------------------------------------------------------"
@@ -167,7 +166,6 @@ function test_dead {
     bash dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
     printf "%s\n" "---------------------------------------------------------------------"
-    printf "Run completed.\n"
 
     # Check returned error code
     if [[ "$errored" == true ]]; then
@@ -187,6 +185,7 @@ function test_dead {
     # Check wildcards file
     check_if_dead_present "$wildcards_file" "Wildcards"
 
+    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     printf "Log:\n"
     grep "$time_format" "$domain_log"  # Print log
     printf "%s\n" "---------------------------------------------------------------------"
@@ -202,8 +201,6 @@ function check_output {
         cat "$2"
         printf "\n"
         error=true
-    else
-        printf "No errors found.\n"
     fi
 }
 
