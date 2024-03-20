@@ -97,6 +97,9 @@ to.block2.com
 whitelisted.tld.gov
 to.block6.com
 whitelisted.tld.edu
+to.block7.com
+whitelisted_forum.com
+to.block8.com
 EOF
 
     cat << EOF > output.txt  # Prepare expected result
@@ -108,6 +111,8 @@ to.block3.com
 to.block4.com
 to.block5.com
 to.block6.com
+to.block7.com
+to.block8.com
 wildcard.in.blocklist.com
 EOF
 
@@ -119,6 +124,7 @@ EOF
     mv xae data/domains_stopgunscams.tmp
     mv xaf data/domains_scamdelivery.tmp
     mv xag data/domains_scamdirectory.tmp
+    mv xah data/domains_scamadviser.tmp
 }
 
 main

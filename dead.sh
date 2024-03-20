@@ -39,6 +39,7 @@ function check_subdomains {
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead subdomains from domains with subdomains file
     comm -23 "$subdomains_file" dead.tmp > subdomains.tmp && mv subdomains.tmp "$subdomains_file"
+    cat dead.tmp >> "$dead_domains_file"  # Collate dead domains with subdomains
     while read -r subdomain; do  # Loop through common subdomains
         sed "s/^${subdomain}\.//" dead.tmp >> collated_dead_root_domains.tmp  # Strip to root domains and collate into file
     done < "$subdomains_to_remove_file"
@@ -46,7 +47,6 @@ function check_subdomains {
     # Remove dead root domains from raw file and root domains file
     comm -23 "$raw_file" collated_dead_root_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
     comm -23 "$root_domains_file" collated_dead_root_domains.tmp > root.tmp && mv root.tmp "$root_domains_file"
-    cat collated_dead_root_domains.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$(<collated_dead_root_domains.tmp)" "dead" "raw"
 }
@@ -57,6 +57,7 @@ function check_redundant {
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead redundant domains from redundant domains file
     comm -23 "$redundant_domains_file" dead.tmp > redundant.tmp && mv redundant.tmp "$redundant_domains_file"
+    cat dead.tmp >> "$dead_domains_file"  # Collate dead redundant domains
     while read -r wildcard; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${wildcard}$" "$redundant_domains_file")  # Find redundant domains remaining in the redundant domains file
         [[ -n "$redundant_domains" ]] && continue  # Skip to next wildcard if not all matches are dead
@@ -66,7 +67,6 @@ function check_redundant {
     # Remove unused wildcard domains from raw file and wildcards file
     comm -23 "$raw_file" collated_dead_wildcards.tmp > raw.tmp && mv raw.tmp "$raw_file"
     comm -23 "$wildcards_file" collated_dead_wildcards.tmp > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
-    cat collated_dead_wildcards.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$(<collated_dead_wildcards.tmp)" "dead" "wildcard"
 }
