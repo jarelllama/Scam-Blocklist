@@ -35,10 +35,10 @@ function main {
         source_aa419
         source_guntab
         source_petscams
-        source_scamdelivery
+        #source_scamdelivery  # Has captchas
         source_scamdirectory
         source_stopgunscams
-        source_google_search
+        #source_google_search
         merge_domains
         exit
     fi
@@ -87,9 +87,9 @@ function source_aa419 {
     printf "\nSource: %s\n\n" "$source"
     for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
-        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")
+        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}/")
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
-        jq -r '.[].Domain' <<< "$page_results" >> data/domains_aa419.tmp  # Collate all pages of domains
+        jq -r '.[].Domain' <<< "$page_results" | sort -u >> data/domains_aa419.tmp  # Collate all pages of domains
     done
     log_source_empty "$source" "$source" "data/domains_aa419.tmp"
     process_source "$source" "$source" "data/domains_aa419.tmp"
@@ -97,10 +97,10 @@ function source_aa419 {
 
 function source_guntab {
     source='guntab.com'
-    url='https://www.guntab.com/scam-websites/'
+    url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
-    curl -s "$url" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' > data/domains_guntab.tmp  # Retrieve domains
+    curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sort -u > data/domains_guntab.tmp  # Retrieve domains
     log_source_empty "$source" "$source" "data/domains_guntab.tmp"
     process_source "$source" "$source" "data/domains_guntab.tmp"
 }
@@ -110,13 +110,13 @@ function source_stopgunscams {
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
     for page in {1..5}; do  # Loop through pages
-        curl -s "${url}/?page=${page}" | grep -oE '<a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}"><div class="ap-a-img -ic">' \
-            >> collated_stopgunscams_results.tmp  # Collate all pages of results
+        curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}">' |
+            sort -u >> collated_stopgunscams_results.tmp  # Collate all pages of results
     done
     log_source_empty "$source" "$source" "collated_stopgunscams_results.tmp"
     # Strip results to domains
-    sed 's/^<a href="\///; s/"><div class="ap-a-img -ic">//;
-        s/-/./g' collated_stopgunscams_results.tmp > data/domains_stopgunscams.tmp
+    sed 's/<h4 class="-ih"><a href="\///; s/">//; s/-/./g' collated_stopgunscams_results.tmp \
+        > data/domains_stopgunscams.tmp
     process_source "$source" "$source" "data/domains_stopgunscams.tmp"
 }
 
@@ -126,17 +126,17 @@ function source_petscams {
     # Loop through the two categories
     categories=('puppy-scammer-list' 'pet-delivery-scam')
     for category in "${categories[@]}"; do
-        url="https://petscams.com/category/${category}/"
+        url="https://petscams.com/category/${category}"
         for page in {2..25}; do  # Loop through pages
-            curl -s "$url" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\"" \
-                >> collated_petscams_results.tmp  # Collate all pages of results
-            url="https://petscams.com/category/${category}/page/${page}/"  # Add '/page' after first run
+            curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
+                sort -u >> collated_petscams_results.tmp  # Collate all pages of results
+            url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
         done
     done
     log_source_empty "$source" "$source" "collated_petscams_results.tmp"
     # Strip results to domains
     sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///; s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///;
-        s/\/"//; s/-/./g' collated_petscams_results.tmp > data/domains_petscams.tmp
+        s/\/" //; s/-/./g' collated_petscams_results.tmp > data/domains_petscams.tmp
     process_source "$source" "$source" "data/domains_petscams.tmp"
 }
 
@@ -145,7 +145,7 @@ function source_scamdelivery {
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
     for page in {2..5}; do  # Loop through pages 
-        curl -s "$url" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' \
+        curl -s "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' | sort -u \
             >> collated_scamdelivery_results.tmp  # Collate all pages of results
         url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
     done
@@ -160,10 +160,23 @@ function source_scamdirectory {
     source='scam.directory'
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
-    curl -s "$url" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
-        sed 's/href="\///; s/" title//' > data/domains_scamdirectory.tmp  # Retrieve domains
+    curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' | sed 's/href="\///; s/" //' |
+        sort -u > data/domains_scamdirectory.tmp  # Retrieve domains
     log_source_empty "$source" "$source" "data/domains_scamdirectory.tmp"
     process_source "$source" "$source" "data/domains_scamdirectory.tmp"
+}
+
+function source_scamadviser {
+    source='scamadviser.com'
+    printf "\nSource: %s\n\n" "$source"
+    url='https://www.scamadviser.com/articles/scam-alerts'
+    for page in {1..50}; do  # Loop through pages 
+        curl -s "${url}?p=${page}/" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles
+            grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' | tr '[:upper:]' '[:lower:]' | sort -u \
+                >> data/domains_scamadviser.tmp  # Collate all pages of domains
+    done
+    log_source_empty "$source" "$source" "data/domains_scamadviser.tmp"
+    process_source "$source" "$source" "data/domains_scamadviser.tmp"
 }
 
 function source_google_search {
