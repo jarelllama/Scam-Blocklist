@@ -185,7 +185,7 @@ EOF
 }
 
 function count {
-    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 10 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
+    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 11 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
     total_count=0  # Initiaize total count
     for count in $runs; do
         total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
@@ -205,7 +205,6 @@ function format_list {
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
         return
     fi
-
     # Remove whitespaces, carriage return characters, empty lines, sort and remove duplicates
     tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }

@@ -142,7 +142,6 @@ function format_list {
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
         return
     fi
-
     # Remove whitespaces, carriage return characters, empty lines, sort and remove duplicates
     tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }

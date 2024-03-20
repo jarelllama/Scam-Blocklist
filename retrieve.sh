@@ -240,8 +240,11 @@ function process_source {
 
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
-    pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
-    log_event "$dead_domains" "dead" "$source"
+    dead_count=$(wc -w <<< "$dead_domains")  # Count number of dead domains
+    if [[ "$dead_count" -gt 0 ]]; then
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
+        log_event "$dead_domains" "dead" "$source"
+    fi
 
     # Find blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")
@@ -250,7 +253,7 @@ function process_source {
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$pending_domains" | grep -vxFf "$blacklist_file")
     whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
-    if [[ "$whitelisted_count" -gt 0 ]]; then  # Check if whitelisted domains were found
+    if [[ "$whitelisted_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_domains"))
         log_event "$whitelisted_domains" "whitelist" "$source"
     fi
@@ -258,7 +261,7 @@ function process_source {
     # Remove domains that have whitelisted TLDs
     whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
     whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")  # Count number of domains with whitelisted TLDs
-    if [[ "$whiltelisted_tld_count" -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
+    if [[ "$whiltelisted_tld_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
         log_event "$whiltelisted_tld_domains" "tld" "$source"
     fi
@@ -286,14 +289,14 @@ function process_source {
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
-    if [[ "$in_toplist_count" -gt 0 ]]; then  # Check if domains were found in toplist
+    if [[ "$in_toplist_count" -gt 0 ]]; then
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
         log_event "$domains_in_toplist" "toplist" "$source"
     fi
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
-    log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
+    log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$dead_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist"
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp # Collate the filtered domains to a temp file
 }
 
@@ -365,15 +368,15 @@ function log_source {
     # Print and log statistics for source used
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
-    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v redundant="$6" -v toplist_count="$7" -v toplist_domains="$(printf "%s" "$8" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","final","whitelist","redundant","toplist_count","toplist_domains",no"}' >> "$source_log"
-    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7"
+    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v redundant="$7" -v toplist_count="$8" -v toplist_domains="$(printf "%s" "$9" | tr '\n' ' ')" -v time="$time_format" 'BEGIN {print time","source","item","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains",no"}' >> "$source_log"
+    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
     printf "%s\n" "---------------------------------------------------------------------"
 }
 
 function log_source_empty {
     # Skip to next source/item if no results retrieved
     if [[ ! -f "$3" ]]; then
-        log_source "$1" "$2" "0" "0" "0" "0" "0" ""
+        log_source "$1" "$2" "0" "0" "0" "0" "0" "0" ""
         return
     fi
 }
@@ -390,7 +393,6 @@ function format_list {
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
         return
     fi
-
     # Remove whitespaces, carriage return characters, empty lines, sort and remove duplicates
     tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
 }
