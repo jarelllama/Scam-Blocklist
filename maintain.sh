@@ -99,15 +99,15 @@ function check_raw_file {
     [[ ! -s filter_log.tmp ]] && exit  # Exit if no domains were filtered
 
     if [[ -f wildcards.tmp ]]; then
-        wildcards=$(comm -12 wildcards.tmp filter_log.tmp)  # Retrieve filtered wildcard domains
-        printf "%s\n" "$wildcards" >> "$wildcards_file" # Add the filtered wildcards domains to the wildcards file
+        wildcards=$(comm -12 wildcards.tmp <(printf "%s" "$domains"))  # Retrieve unfiltered wildcard domains
+        printf "%s\n" "$wildcards" >> "$wildcards_file" # Add the unfiltered wildcards domains to the wildcards file
         grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp >> "$redundant_domains_file" # Retrieve and add filtered redundant domains to redundant domains file
         format_list "$wildcards_file"
         format_list "$redundant_domains_file"
     fi
     if [[ -f root_domains.tmp ]]; then
-        root_domains=$(comm -12 root_domains.tmp filter_log.tmp)  # Retrieve filtered root domains
-        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
+        root_domains=$(comm -12 root_domains.tmp <(printf "%s" "$domains"))  # Retrieve unfiltered root domains
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the unfiltered root domains to the root domains file
         grep -Ff <(prinft "%s" "$root_domains") subdomains.tmp >> "$subdomains_file" # Retrieve and add filtered subdomains to subdomains file
         format_list "$root_domains_file"
         format_list "$subdomains_file"

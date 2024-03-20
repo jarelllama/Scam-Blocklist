@@ -93,12 +93,9 @@ function test_retrieval_maintainence {
         mv xaa data/domains_aa419.tmp
         mv xab data/domains_google_search_search-term-1.tmp
         mv xac data/domains_google_search_search-term-2.tmp
-        
         bash retrieve.sh  # Run retrievel script
         [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
-    fi
-
-    if [[ "$script_to_test" == 'maintain' ]]; then
+    elif [[ "$script_to_test" == 'maintain' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
         bash maintain.sh || true  # Run maintainence script and ignore returned exit code
     fi

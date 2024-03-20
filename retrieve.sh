@@ -331,11 +331,11 @@ function merge_domains {
         exit 1
     fi
 
-    # Collate filtered subdomains and root domains
+    # Collate unfiltered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
-        root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
-        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add filtered root domains to root domains file to exclude from dead check
-        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file for dead check
+        root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve unfiltered root domains
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add unfiltered root domains to root domains file to exclude from dead check
+        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add unfiltered subdomains to subdomains file for dead check
         format_list "$root_domains_file"
         format_list "$subdomains_file"
     fi
