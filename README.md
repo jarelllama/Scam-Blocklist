@@ -26,9 +26,6 @@ Total | Today | Yesterday | Source *
     - |     0 |         4 | stopgunscams.com
 15995 |     3 |       532 | All sources
 
-5 recently added domains:
-Domain
-
 *Domains added manually are excluded from the daily figures.
 ```
 
@@ -50,7 +47,7 @@ The Google Custom Search JSON API only provides 100 free search queries per day.
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
 
-Queries made today: 0
+> Queries made today: 0
 
 #### Regarding other sources
 
