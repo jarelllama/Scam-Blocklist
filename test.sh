@@ -13,16 +13,18 @@ time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
-error=false  # Initialize error variable
-errored=false  # Initialize whether script returned with error
-: > "$raw_file"  # Initialize raw file
+function main {
+    error=false  # Initialize error variable
+    errored=false  # Initialize whether script returned with error
+    : > "$raw_file"  # Initialize raw file
 
-# Do not run when there are existing domain files
-if [[ "$1" == 'retrieval' ]] && ! ls data/domains_*.tmp &> /dev/null; then
-    test_retrieval_maintainence "$1"
-fi
-[[ "$1" == 'maintain' ]] && test_retrieval_maintainence "$1"
-[[ "$1" == 'dead' ]] && test_dead
+    # Do not run when there are existing domain files
+    if [[ "$1" == 'retrieval' ]] && ! ls data/domains_*.tmp &> /dev/null; then
+        test_retrieval_maintainence "$1"
+    fi
+    [[ "$1" == 'maintain' ]] && test_retrieval_maintainence "$1"
+    [[ "$1" == 'dead' ]] && test_dead
+}
 
 function test_retrieval_maintainence {
     script_to_test="$1"
@@ -210,3 +212,5 @@ function check_if_dead_present {
         error=true
     fi
 }
+
+main "$1"
