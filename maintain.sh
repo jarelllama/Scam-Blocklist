@@ -53,7 +53,7 @@ function check_raw_file {
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$domains" | grep -vxFf "$blacklist_file")
     whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
-    if [[ whitelisted_count -gt 0 ]]; then  # Check if whitelisted domains were found
+    if [[ "$whitelisted_count" -gt 0 ]]; then  # Check if whitelisted domains were found
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))
         awk 'NF {print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
         log_event "$whitelisted_domains" "whitelist"
@@ -62,7 +62,7 @@ function check_raw_file {
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")
     whitelisted_tld_count=$(wc -w <<< "$whitelisted_tld_domains")  # Count number of domains with whitelisted TLDs
-    if [[ whitelisted_tld_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
+    if [[ "$whitelisted_tld_count" -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))
         awk 'NF {print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
         log_event "$whitelisted_tld_domains" "tld"
@@ -90,7 +90,7 @@ function check_raw_file {
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
-    if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
+    if [[ "$in_toplist_count" -gt 0 ]]; then  # Check if domains were found in toplist
         awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
     fi

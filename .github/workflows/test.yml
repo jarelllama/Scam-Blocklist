@@ -4,14 +4,43 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'retrieve.sh'
+      - '**.sh'
 
 jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          ignore_paths: legacy
+
   test-retrieval:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: test.sh
+      - name: test.sh retrieval
+        run: bash test.sh
+
+  test-maintain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: test.sh maintain
+        run: bash test.sh
+
+  test-dead:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: test.sh dead
         run: bash test.sh

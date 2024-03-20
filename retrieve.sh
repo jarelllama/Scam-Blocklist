@@ -251,7 +251,7 @@ function process_source {
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$pending_domains" | grep -vxFf "$blacklist_file")
     whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
-    if [[ whitelisted_count -gt 0 ]]; then  # Check if whitelisted domains were found
+    if [[ "$whitelisted_count" -gt 0 ]]; then  # Check if whitelisted domains were found
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_domains"))
         log_event "$whitelisted_domains" "whitelist" "$source"
     fi
@@ -259,7 +259,7 @@ function process_source {
     # Remove domains that have whitelisted TLDs
     whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
     whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")  # Count number of domains with whitelisted TLDs
-    if [[ whiltelisted_tld_count -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
+    if [[ "$whiltelisted_tld_count" -gt 0 ]]; then  # Check if domains with whitelisted TLDs were found
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
         log_event "$whiltelisted_tld_domains" "tld" "$source"
     fi
@@ -290,7 +290,7 @@ function process_source {
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
-    if [[ in_toplist_count -gt 0 ]]; then  # Check if domains were found in toplist
+    if [[ "$in_toplist_count" -gt 0 ]]; then  # Check if domains were found in toplist
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
         log_event "$domains_in_toplist" "toplist" "$source"
     fi
@@ -311,7 +311,7 @@ function merge_domains {
 
     filtered_domains_count=$(wc -w < filtered_domains.tmp)  # Count total number of filtered domains
     # Print domains if count is less than or equal to 10
-    if [[ filtered_domains_count -le 10 ]]; then
+    if [[ "$filtered_domains_count" -le 10 ]]; then
         printf "\nNew domains retrieved (%s):\n" "$filtered_domains_count"
         cat filtered_domains.tmp
     else
