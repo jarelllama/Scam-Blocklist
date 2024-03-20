@@ -1,5 +1,5 @@
-name: Test scripts
-run-name: Test scripts
+name: Test functions
+run-name: Test functions
 on:
   workflow_dispatch:
   push:
@@ -27,14 +27,14 @@ jobs:
       - name: Test retrieve.sh
         run: bash test.sh retrieval
 
-  test-maintain:
+  test-lists-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Test maintain.sh
-        run: bash test.sh maintain
+      - name: Test check.sh
+        run: bash test.sh check
 
   test-dead:
     runs-on: ubuntu-latest

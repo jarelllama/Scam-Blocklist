@@ -20,13 +20,13 @@ function main {
 
     # Do not run when there are existing domain files
     if [[ "$1" == 'retrieval' ]] && ! ls data/domains_*.tmp &> /dev/null; then
-        test_retrieval_maintainence "$1"
+        test_retrieval_check "$1"
     fi
-    [[ "$1" == 'maintain' ]] && test_retrieval_maintainence "$1"
+    [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
 }
 
-function test_retrieval_maintainence {
+function test_retrieval_check {
     script_to_test="$1"
 
     # Test removal of common subdomains
@@ -71,8 +71,8 @@ function test_retrieval_maintainence {
     : > "$redundant_domains_file"  # Initialize redundant domains file
     printf "redundant-test.com\n" > "$wildcards_file"  # Add test wildcard to wildcards file
     printf "domain.redundant-test.com\n" >> input.txt
-    if [[ "$script_to_test" == 'maintain' ]]; then
-        : > "$wildcards_file"  # Initialize wildcards file for maintainence script test
+    if [[ "$script_to_test" == 'check' ]]; then
+        : > "$wildcards_file"  # Initialize wildcards file for lists check script test
         printf "redundant-test.com\n" >> input.txt  # Add test wildcard to input file
         # Add expected results
         printf "redundant-test.com\n" >> out_raw.txt
@@ -95,9 +95,9 @@ function test_retrieval_maintainence {
         mv xac data/domains_google_search_search-term-2.tmp
         bash retrieve.sh  # Run retrievel script
         [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
-    elif [[ "$script_to_test" == 'maintain' ]]; then
+    elif [[ "$script_to_test" == 'check' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
-        bash maintain.sh || true  # Run maintainence script and ignore returned exit code
+        bash check.sh || true  # Run lists check script and ignore returned exit code
     fi
     printf "%s\n" "---------------------------------------------------------------------"
 
@@ -112,7 +112,7 @@ function test_retrieval_maintainence {
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"
     # Check root domains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"
-    if [[ "$script_to_test" == 'maintain' ]]; then
+    if [[ "$script_to_test" == 'check' ]]; then
         # Check redundant domains file
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"
         # Check wildcards file

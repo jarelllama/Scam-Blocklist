@@ -1,5 +1,5 @@
-name: Daily maintenance
-run-name: Daily maintenance
+name: Check lists
+run-name: Check lists
 on:
   workflow_dispatch:
   schedule:
@@ -7,14 +7,14 @@ on:
     - cron: '0 16 * * *'
 
 jobs:
-  daily-maintenance:
+  check-lists:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: maintain.sh
-        run: bash maintain.sh
+      - name: check.sh
+        run: bash check.sh
 
       - name: Push
         if: always()
@@ -22,5 +22,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "List maintenance"
+          git diff-index --quiet HEAD || git commit -m "Check lists"
           git push -q
