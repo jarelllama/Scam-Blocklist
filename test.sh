@@ -117,10 +117,12 @@ function test_retrieval_maintainence {
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"
     # Check root domains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"
-    # Check redundant domains file
-    check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"
-    # Check wildcards file
-    [[ "$script_to_test" == 'maintain' ]] && check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"
+    if [[ "$script_to_test" == 'maintain' ]]; then
+        # Check redundant domains file
+        check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"
+        # Check wildcards file
+        check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"
+    fi
 
     printf "Log:\n"
     grep "$time_format" "$domain_log"  # Print log
@@ -203,8 +205,6 @@ function check_output {
         cat "$2"
         printf "\n"
         error=true
-    else
-        [[ "$1" == "$raw_file" ]] && printf "Raw file is as expected.\n"
     fi
 }
 
