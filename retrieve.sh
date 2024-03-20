@@ -243,7 +243,7 @@ function process_source {
     dead_count=$(wc -w <<< "$dead_domains")  # Count number of dead domains
     if [[ "$dead_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
-        log_event "$dead_domains" "dead" "$source"
+        #log_event "$dead_domains" "dead" "$source"  # Logs too many lines
     fi
 
     # Find blacklisted domains
@@ -346,7 +346,7 @@ function merge_domains {
     count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
-    log_event "$(<filtered_domains.tmp)" "new_domain" "all_sources"
+    #log_event "$(<filtered_domains.tmp)" "new_domain" "all_sources"
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
