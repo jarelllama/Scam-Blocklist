@@ -66,7 +66,7 @@ Total | Today | Yesterday | Source *
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
 
 5 recently added domains:
-$(csvgrep -c 1 -m "$today" | csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | shuf -n 5)
+$(csvgrep -c 1 -m "$today" -m "$yesterday" | csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | shuf -n 5)
 
 *Domains added manually are excluded from the daily figures.
 \`\`\`
@@ -187,6 +187,9 @@ EOF
 }
 
 function count {
+
+
+
     runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 12 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
     total_count=0  # Initiaize total count
     for count in $runs; do
