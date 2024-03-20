@@ -22,7 +22,7 @@ Total | Today | Yesterday | Source *
     - |     2 |        21 | petscams.com
     - |     0 |         0 | scam.delivery
     - |     0 |         0 | scam.directory
-    - |     0 |         0 | scamadviser.com
+    - |     0 |       148 | scamadviser.com
     - |     0 |         4 | stopgunscams.com
 15995 |     3 |       532 | All sources
 
