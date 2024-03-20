@@ -19,23 +19,6 @@ function main {
 }
 
 function update_readme {
-    aa419_today=$(count "$today" "aa419.org")
-    aa419_yesterday=$(count "$yesterday" "aa419.org")
-    guntab_today=$(count "$today" "guntab.com")
-    guntab_yesterday=$(count "$yesterday" "guntab.com")
-    google_today=$(count "$today" "Google Search")
-    google_yesterday=$(count "$yesterday" "Google Search")
-    petscams_today=$(count "$today" "petscams.com")
-    petscams_yesterday=$(count "$yesterday" "petscams.com")
-    stopgunscams_today=$(count "$today" "stopgunscams.com")
-    stopgunscams_yesterday=$(count "$yesterday" "stopgunscams.com")
-    scamdelivery_today=$(count "$today" "scam.delivery")
-    scamdelivery_yesterday=$(count "$yesterday" "scam.delivery")
-    scamdirectory_today=$(count "$today" "scam.directory")
-    scamdirectory_yesterday=$(count "$yesterday" "scam.directory")
-    scamadviser_today=$(count "$today" "scamadviser.com")
-    scamadviser_yesterday=$(count "yesterday" "scamadvisor.com")
-
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 
@@ -56,13 +39,13 @@ Total domains: $(wc -w < "$raw_file")
 
 Total | Today | Yesterday | Source *
 $(stats "Google Search" "Google Search")
-    - |$(printf "%6s" "$aa419_today") |$(printf "%10s" "$aa419_yesterday") | aa419.org
-    - |$(printf "%6s" "$guntab_today") |$(printf "%10s" "$guntab_yesterday") | guntab.com
-    - |$(printf "%6s" "$petscams_today") |$(printf "%10s" "$petscams_yesterday") | petscams.com
-    - |$(printf "%6s" "$scamdelivery_today") |$(printf "%10s" "$scamdelivery_yesterday") | scam.delivery
-    - |$(printf "%6s" "$scamdirectory_today") |$(printf "%10s" "$scamdirectory_yesterday") | scam.directory
-    - |$(printf "%6s" "$scamadviser_today") |$(printf "%10s" "$scamadviser_yesterday") | scamadviser.com
-    - |$(printf "%6s" "$stopgunscams_today") |$(printf "%10s" "$stopgunscams_yesterday") | stopgunscams.com
+$(stats "aa419.org" "aa419.org")
+$(stats "guntab.com" "guntab.com")
+$(stats "petscams.com" "petscams.com")
+$(stats "scam.delivery" "scam.delivery")
+$(stats "scam.directory" "scam.directory")
+$(stats "scamadviser.com" "scamadviser.com")
+$(stats "stopgunscams.com" "stopgunscams.com")
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
 
 5 recently added domains:
