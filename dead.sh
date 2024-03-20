@@ -26,12 +26,8 @@ function check_alive {
     sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
     dead-domains-linter -i formatted_dead_domains_file.tmp --export dead.tmp  # Find dead domains in the dead domains file
     alive_domains=$(comm -23 "$dead_domains_file" dead.tmp) # Find resurrected domains in the dead domains file
-    if [[ -z "$alive_domains" ]]; then
-        rm dead.tmp
-        return  # Return early if no alive domains found
-    fi
+    [[ -z "$alive_domains" ]] && return  # Return if no alive domains found
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
-    rm dead.tmp
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to the raw file
     format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
@@ -40,16 +36,12 @@ function check_alive {
 function check_subdomains {
     sed 's/^/||/; s/$/^/' "$subdomains_file" > formatted_subdomains_file.tmp # Format subdomains file
     dead-domains-linter -i formatted_subdomains_file.tmp --export dead.tmp  # Find and export dead domains with subdomains
-    if [[ ! -s dead.tmp ]]; then
-        rm dead.tmp
-        return  # Return if no dead domains found
-    fi
+    [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead subdomains from domains with subdomains file
     comm -23 "$subdomains_file" dead.tmp > subdomains.tmp && mv subdomains.tmp "$subdomains_file"
     while read -r subdomain; do  # Loop through common subdomains
         sed "s/^${subdomain}\.//" dead.tmp >> collated_dead_root_domains.tmp  # Strip to root domains and collate into file
     done < "$subdomains_to_remove_file"
-    rm dead.tmp
     sort -u collated_dead_root_domains.tmp -o collated_dead_root_domains.tmp
     # Remove dead root domains from raw file and root domains file
     comm -23 "$raw_file" collated_dead_root_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
@@ -62,13 +54,9 @@ function check_subdomains {
 function check_redundant {
     sed 's/^/||/; s/$/^/' "$redundant_domains_file" > formatted_redundant_domains_file.tmp # Format redundant domains file
     dead-domains-linter -i formatted_redundant_domains_file.tmp --export dead.tmp  # Find and export dead redundant domains
-    if [[ ! -s dead.tmp ]]; then
-        rm dead.tmp
-        return  # Return if no dead domains found
-    fi
+    [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead redundant domains from redundant domains file
     comm -23 "$redundant_domains_file" dead.tmp > redundant.tmp && mv redundant.tmp "$redundant_domains_file"
-    rm dead.tmp
     while read -r wildcard; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${wildcard}$" "$redundant_domains_file")  # Find redundant domains remaining in the redundant domains file
         [[ -n "$redundant_domains" ]] && continue  # Skip to next wildcard if not all matches are dead
@@ -87,7 +75,6 @@ function check_dead {
     dead-domains-linter -i "$adblock_file" --export dead.tmp  # Find and export dead domains
     dead_domains=$(comm -23 dead.tmp "$root_domains_file")  # Exclude subdomains stripped to root domains
     dead_domains=$(comm -23 <(printf "%s" "$dead_domains") "$wildcards_file")  # Exclude wildcard domains
-    rm dead.tmp
     [[ -z "$dead_domains" ]] && return  # Return if no dead domains found
     # Remove dead domains from raw file
     comm -23 "$raw_file" <(printf "%s" "$dead_domains") > raw.tmp && mv raw.tmp "$raw_file"
