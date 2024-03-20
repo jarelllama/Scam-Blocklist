@@ -36,7 +36,7 @@ function main {
         #source_aa419
         #source_guntab
         #source_petscams
-        source_scamadviser
+        #source_scamadviser
         source_scamdelivery  # Has captchas
         #source_scamdirectory
         #source_stopgunscams
@@ -173,7 +173,7 @@ function source_scamadviser {
     source='scamadviser.com'
     printf "\nSource: %s\n\n" "$source"
     url='https://www.scamadviser.com/articles'
-    for page in {1..50}; do  # Loop through pages 
+    for page in {1..20}; do  # Loop through pages 
         curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing / breaks curl
             grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' | tr '[:upper:]' '[:lower:]' | sort -u \
                 >> data/domains_scamadviser.tmp  # Collate all pages of domains
