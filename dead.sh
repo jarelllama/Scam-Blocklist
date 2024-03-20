@@ -24,7 +24,7 @@ function main {
 function check_alive {
     sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
     dead-domains-linter -i formatted_dead_domains_file.tmp --export dead.tmp  # Find dead domains in the dead domains file
-    alive_domains=$(grep -vxFf dead.tmp "$dead_domains_file")  # Find resurrected domains in the dead domains file
+    alive_domains=$(grep -vxFf dead.tmp "$dead_domains_file")  # Find resurrected domains in the dead domains file (note dead domains file is not sorted)
     [[ -z "$alive_domains" ]] && return  # Return if no alive domains found
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to the raw file
@@ -39,6 +39,7 @@ function check_subdomains {
     # Remove dead subdomains from domains with subdomains file
     comm -23 "$subdomains_file" dead.tmp > subdomains.tmp && mv subdomains.tmp "$subdomains_file"
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains with subdomains
+    format_list "$dead_domains_file"
     while read -r subdomain; do  # Loop through common subdomains
         sed "s/^${subdomain}\.//" dead.tmp >> collated_dead_root_domains.tmp  # Strip to root domains and collate into file
     done < "$subdomains_to_remove_file"
@@ -46,7 +47,6 @@ function check_subdomains {
     # Remove dead root domains from raw file and root domains file
     comm -23 "$raw_file" collated_dead_root_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
     comm -23 "$root_domains_file" collated_dead_root_domains.tmp > root.tmp && mv root.tmp "$root_domains_file"
-    format_list "$dead_domains_file"
     log_event "$(<collated_dead_root_domains.tmp)" "dead" "raw"
 }
 
@@ -57,6 +57,7 @@ function check_redundant {
     # Remove dead redundant domains from redundant domains file
     comm -23 "$redundant_domains_file" dead.tmp > redundant.tmp && mv redundant.tmp "$redundant_domains_file"
     cat dead.tmp >> "$dead_domains_file"  # Collate dead redundant domains
+    format_list "$dead_domains_file"
     while read -r wildcard; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${wildcard}$" "$redundant_domains_file")  # Find redundant domains remaining in the redundant domains file
         [[ -n "$redundant_domains" ]] && continue  # Skip to next wildcard if not all matches are dead
@@ -66,7 +67,6 @@ function check_redundant {
     # Remove unused wildcard domains from raw file and wildcards file
     comm -23 "$raw_file" collated_dead_wildcards.tmp > raw.tmp && mv raw.tmp "$raw_file"
     comm -23 "$wildcards_file" collated_dead_wildcards.tmp > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
-    format_list "$dead_domains_file"
     log_event "$(<collated_dead_wildcards.tmp)" "dead" "wildcard"
 }
 
@@ -103,9 +103,7 @@ function format_list {
     if [[ "$1" == *.csv ]]; then
         sed -i 's/\r$//' "$1"  
         return
-    fi
-    # Do not sort the dead domains file
-    if [[ "$1" == *dead_domains_file* ]]; then
+    elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
         return
     fi

@@ -1,7 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
 source_log='data/source_log.csv'
-domain_log='data/domain_log.csv'
 today="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 yesterday="$(TZ=Asia/Singapore date -d "yesterday" +"%d-%m-%y")"
 
@@ -38,18 +37,15 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 Total domains: $(wc -w < "$raw_file")
 
 Total | Today | Yesterday | Source *
-$(stats "Google Search" "Google Search")
-$(stats "aa419.org" "aa419.org")
-$(stats "guntab.com" "guntab.com")
-$(stats "petscams.com" "petscams.com")
-$(stats "scam.delivery" "scam.delivery")
-$(stats "scam.directory" "scam.directory")
-$(stats "scamadviser.com" "scamadviser.com")
-$(stats "stopgunscams.com" "stopgunscams.com")
+$(print_stats "Google Search" "Google Search")
+$(print_stats "aa419.org" "aa419.org")
+$(print_stats "guntab.com" "guntab.com")
+$(print_stats "petscams.com" "petscams.com")
+$(print_stats "scam.delivery" "scam.delivery")
+$(print_stats "scam.directory" "scam.directory")
+$(print_stats "scamadviser.com" "scamadviser.com")
+$(print_stats "stopgunscams.com" "stopgunscams.com")
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
-
-5 recently added domains:
-$(csvgrep -c 1 -m "$today" -m "$yesterday" | csvgrep -c 2 -m "new_domain" "$domain_log" | csvcut -c 3 | shuf -n 5)
 
 *Domains added manually are excluded from the daily figures.
 \`\`\`
@@ -72,7 +68,7 @@ The Google Custom Search JSON API only provides 100 free search queries per day.
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
 
-Queries made today: $(csvgrep -c 2 -m 'Google Search' "$source_log" | csvcut -c 11 | awk '{total += $1} END {print total}')
+> Queries made today: $(csvgrep -c 2 -m 'Google Search' "$source_log" | csvcut -c 11 | awk '{total += $1} END {print total}')
 
 #### Regarding other sources
 
@@ -151,9 +147,6 @@ function build_list {
     blocklist_path="lists/${directory}/scams.txt"
     [[ -d "$(dirname $blocklist_path)" ]] || mkdir "$(dirname $blocklist_path)"  # Create directory if not present
 
-    # Format domains for each syntax type
-    formatted_domains=$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file")
-
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
 ${3} Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
@@ -161,25 +154,25 @@ ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Last modified: $(date -u)
 ${3} Syntax: ${1}
-${3} Total number of entries: $(wc -l <<< "$formatted_domains")
+${3} Total number of entries: $(wc -l <<< "$raw_file")
 ${3}
 EOF
 
     [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound syntax
-    printf "%s\n" "$formatted_domains" >> "$blocklist_path"  # Append formatted domains onto blocklist
+    printf "%s\n" "$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file")" \
+     >> "$blocklist_path"  # Append formatted domains onto blocklist
 }
 
-function stats {
+function print_stats {
     # Return stats to function caller
     printf "    - |%6s |%10s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$2"
 }
 
 function count {
-    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 12 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
+    # Find all runs from that particular source on that specific day
+    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 12 -m 'yes' | csvcut -c 5 | tail +2)
     total_count=0  # Initiaize total count
-    for count in $runs; do
-        total_count=$((total_count + count))  # Calculate sum of domains retrieved from that source
-    done
+    total_count=$(echo "$runs" | awk '{total += $1} END {print total}')  # Sum up domains retrieved from all runs of that source
     printf "%s" "$total_count"  # Return domain count to function caller
 }
 
@@ -189,9 +182,7 @@ function format_list {
     if [[ "$1" == *.csv ]]; then
         sed -i 's/\r$//' "$1"  
         return
-    fi
-    # Do not sort the dead domains file
-    if [[ "$1" == *dead_domains_file* ]]; then
+    elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
         return
     fi

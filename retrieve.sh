@@ -348,7 +348,7 @@ function merge_domains {
     count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
-    #log_event "$(<filtered_domains.tmp)" "new_domain" "all_sources"
+    #log_event "$(<filtered_domains.tmp)" "new_domain" "all_sources"  # Logs too much
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
@@ -389,9 +389,7 @@ function format_list {
     if [[ "$1" == *.csv ]]; then
         sed -i 's/\r$//' "$1"  
         return
-    fi
-    # Do not sort the dead domains file
-    if [[ "$1" == *dead_domains_file* ]]; then
+    elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
         return
     fi

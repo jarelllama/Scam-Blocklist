@@ -95,7 +95,7 @@ function check_raw_file {
         log_event "$domains_in_toplist" "toplist"
     fi
 
-    tr -s '\n' < filter_log.tmp | sort -u > temp.tmp && mv temp.tmp filter_log.tmp  # Remove empty lines, sort and remove duplicates
+    tr -s '\n' < filter_log.tmp | sort -u > temp.tmp && mv temp.tmp filter_log.tmp  # Remove empty lines, sort and remove duplicates (note filter log has whitespaces)
     [[ ! -s filter_log.tmp ]] && exit  # Exit if no domains were filtered
 
     if [[ -f wildcards.tmp ]]; then
@@ -136,9 +136,7 @@ function format_list {
     if [[ "$1" == *.csv ]]; then
         sed -i 's/\r$//' "$1"  
         return
-    fi
-    # Do not sort the dead domains file
-    if [[ "$1" == *dead_domains_file* ]]; then
+    elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
         return
     fi
