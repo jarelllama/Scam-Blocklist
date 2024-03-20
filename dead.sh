@@ -12,7 +12,7 @@ time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 function main {
     npm i -g @adguard/dead-domains-linter  # Install AdGuard Dead Domains Linter
-    for file in config/* data/*; do  # Format files in the config and data directory
+    for file in config/* data/* data/processing/*; do  # Format files in the config and data directory
         format_list "$file"
     done
     check_alive

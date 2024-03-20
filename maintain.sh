@@ -13,7 +13,7 @@ time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
 
 function main {
-    for file in config/* data/*; do  # Format files in the config and data directory
+    for file in config/* data/* data/processing/*; do  # Format files in the config and data directory
         format_list "$file"
     done
     retrieve_toplist
