@@ -36,9 +36,9 @@ function main {
         #source_aa419
         #source_guntab
         #source_petscams
-        #source_scamadviser
         source_scamdelivery  # Has captchas
         #source_scamdirectory
+        #source_scamadviser
         #source_stopgunscams
         #source_google_search
         merge_domains
@@ -147,7 +147,8 @@ function source_scamdelivery {
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
     for page in {2..5}; do  # Loop through pages 
-        curl -s "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' | sort -u \
+        # Use User Agent to reduce captcha blocking
+        curl -sA "$user_agent" "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' | sort -u \
             >> collated_scamdelivery_results.tmp  # Collate all pages of results
         url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
     done
@@ -162,8 +163,7 @@ function source_scamdirectory {
     source='scam.directory'
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
-    # Use User Agent to reduce captcha blocking
-    curl -sA "$user_agent" "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
+    curl "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
         sed 's/href="\///; s/" //' | sort -u > data/domains_scamdirectory.tmp  # Retrieve domains
     log_source_empty "$source" "$source" "data/domains_scamdirectory.tmp"
     process_source "$source" "$source" "data/domains_scamdirectory.tmp"

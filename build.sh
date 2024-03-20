@@ -33,6 +33,8 @@ function update_readme {
     scamdelivery_yesterday=$(count "$yesterday" "scam.delivery")
     scamdirectory_today=$(count "$today" "scam.directory")
     scamdirectory_yesterday=$(count "$yesterday" "scam.directory")
+    scamadviser_today=$(count "$today" "scamadviser.com")
+    scamadviser_yesterday=$(count "yesterday" "scamadvisor.com")
 
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
@@ -59,6 +61,7 @@ Total | Today | Yesterday | Source *
     - |$(printf "%6s" "$petscams_today") |$(printf "%10s" "$petscams_yesterday") | petscams.com
     - |$(printf "%6s" "$scamdelivery_today") |$(printf "%10s" "$scamdelivery_yesterday") | scam.delivery
     - |$(printf "%6s" "$scamdirectory_today") |$(printf "%10s" "$scamdirectory_yesterday") | scam.directory
+    - |$(printf "%6s" "$scamadviser_today") |$(printf "%10s" "$scamadviser_yesterday") | scamadviser.com
     - |$(printf "%6s" "$stopgunscams_today") |$(printf "%10s" "$stopgunscams_yesterday") | stopgunscams.com
 $(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
 
@@ -114,7 +117,8 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 - [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
 - [PetScams.com](https://petscams.com/): pet scam sites database
-- [scam.delivery](https://scam.delivery/): delivery scam sites database
+- [Scam.Delivery](https://scam.delivery/): delivery scam sites database
+- [ScamAdvisor](https://www.scamadviser.com/): scam sites database
 - [Scam Directory](https://scam.directory/): non-delivery scam sites database
 - [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
 - [StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
