@@ -22,9 +22,9 @@ Total | Today | Yesterday | Source *
     - |     4 |      7801 | petscams.com
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
-    - |    10 |         0 | scamadviser.com
+    - |   140 |         0 | scamadviser.com
     - |     3 |       224 | stopgunscams.com
-15958 |    58 |     10081 | All sources
+15958 |   188 |     10081 | All sources
 
 The 5 most recently added domains:
 workxon.com
