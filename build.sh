@@ -55,7 +55,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 Total domains: $(wc -w < "$raw_file")
 
 Total | Today | Yesterday | Source *
-    - |$(printf "%6s" "$google_today") |$(printf "%10s" "$google_yesterday") | Google Search
+$(stats "Google Search" "Google Search")
     - |$(printf "%6s" "$aa419_today") |$(printf "%10s" "$aa419_yesterday") | aa419.org
     - |$(printf "%6s" "$guntab_today") |$(printf "%10s" "$guntab_yesterday") | guntab.com
     - |$(printf "%6s" "$petscams_today") |$(printf "%10s" "$petscams_yesterday") | petscams.com
@@ -186,10 +186,12 @@ EOF
     printf "%s\n" "$formatted_domains" >> "$blocklist_path"  # Append formatted domains onto blocklist
 }
 
+function stats {
+    # Return stats to function caller
+    printf "    - |%6s |%10s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$2"
+}
+
 function count {
-
-
-
     runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 12 -m 'yes' | csvcut -c 5 | tail +2)  # Find all runs from that particular source
     total_count=0  # Initiaize total count
     for count in $runs; do
