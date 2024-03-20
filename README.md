@@ -27,11 +27,11 @@ Total | Today | Yesterday | Source *
 16264 |   532 |     10081 | All sources
 
 5 recently added domains:
-primehousesheepadoodles.com
-alltoplogs.com
-myafricangreyscompanions.com
-bulkammoforsales.com
-lucchesesale-com
+lovelyfamilyteacuppoodles.com
+oceanfreightcarriers.com
+gunsandammosshop.com
+rareliquor-collection-com
+uspsdeliveryexpress.com
 
 *Domains added manually are excluded from the daily figures.
 ```
