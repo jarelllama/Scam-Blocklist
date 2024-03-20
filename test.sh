@@ -9,6 +9,9 @@ redundant_domains_file='data/processing/redundant_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
+if ls data/domains_*.tmp &> /dev/null; then  # Do not run when there are existing domain files
+    exit
+fi
 
 function main {
     error=false  # Initilize error variable
