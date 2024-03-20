@@ -33,7 +33,7 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        source_aa419
+        #source_aa419
         #source_guntab
         #source_petscams
         source_scamadviser
@@ -89,7 +89,7 @@ function source_aa419 {
     printf "\nSource: %s\n\n" "$source"
     for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
-        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Ending slash breaks API call
+        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Trailing / breaks API call
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" | sort -u >> data/domains_aa419.tmp  # Collate all pages of domains
     done
@@ -174,7 +174,7 @@ function source_scamadviser {
     printf "\nSource: %s\n\n" "$source"
     url='https://www.scamadviser.com/articles'
     for page in {1..50}; do  # Loop through pages 
-        curl -s "${url}?p=${page}/" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles
+        curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing / breaks curl
             grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' | tr '[:upper:]' '[:lower:]' | sort -u \
                 >> data/domains_scamadviser.tmp  # Collate all pages of domains
     done
@@ -300,7 +300,7 @@ function process_source {
 function merge_domains {
     format_list filtered_domains.tmp
     # Exit if no new domains to add or temp file is missing
-    if [[ ! -s filtered_domains.tmp ]]; then
+    if ! grep -q '[[:alpha:]]' filtered_domains.tmp; then  # -s does not seem to work well here
         printf "\nNo new domains to add.\n\n"
         exit
     fi
