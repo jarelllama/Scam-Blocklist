@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15958
+Total domains: 15916
 
 Total | Today | Yesterday | Source *
     - |    23 |         3 | Google Search
@@ -24,7 +24,7 @@ Total | Today | Yesterday | Source *
     - |     0 |      1250 | scam.directory
     - |   140 |         0 | scamadviser.com
     - |     3 |       224 | stopgunscams.com
-15958 |   188 |     10081 | All sources
+15916 |   188 |     10081 | All sources
 
 The 5 most recently added domains:
 workxon.com
