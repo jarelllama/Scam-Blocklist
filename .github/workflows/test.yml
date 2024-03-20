@@ -1,5 +1,5 @@
-name: Test retrieval
-run-name: Test retrieval
+name: Test scripts
+run-name: Test scripts
 on:
   workflow_dispatch:
   push:
