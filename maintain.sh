@@ -43,7 +43,7 @@ function check_raw_file {
         # Collate subdomains for dead check
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exclude from dead check
-        printf "%s" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
+        printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
         awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_to_remove_file"

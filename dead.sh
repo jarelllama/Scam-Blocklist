@@ -1,6 +1,5 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-adblock_file='lists/adblock/scams.txt'
 domain_log='data/domain_log.csv'
 root_domains_file='data/processing/root_domains.txt'
 subdomains_file='data/processing/subdomains.txt'
@@ -52,7 +51,7 @@ function check_subdomains {
 }
 
 function check_redundant {
-    sed 's/^/||/; s/$/^/' "$redundant_domains_file" > formatted_redundant_domains_file.tmp # Format redundant domains file
+    sed 's/^/||/; s/$/^/' "$redundant_domains_file" > formatted_redundant_domains_file.tmp  # Format redundant domains file
     dead-domains-linter -i formatted_redundant_domains_file.tmp --export dead.tmp  # Find and export dead redundant domains
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead redundant domains from redundant domains file
@@ -72,7 +71,8 @@ function check_redundant {
 }
 
 function check_dead {
-    dead-domains-linter -i "$adblock_file" --export dead.tmp  # Find and export dead domains
+    sed 's/^/||/; s/$/^/' "$raw_file" > formatted_raw_file.tmp  # Format raw file
+    dead-domains-linter -i formatted_raw_file.tmp --export dead.tmp  # Find and export dead domains
     dead_domains=$(comm -23 dead.tmp "$root_domains_file")  # Exclude subdomains stripped to root domains
     dead_domains=$(comm -23 <(printf "%s" "$dead_domains") "$wildcards_file")  # Exclude wildcard domains
     [[ -z "$dead_domains" ]] && return  # Return if no dead domains found

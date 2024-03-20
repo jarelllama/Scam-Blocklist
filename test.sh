@@ -44,6 +44,7 @@ function test_retrieval_maintainence {
         # Test removal of domains already in blocklist
         printf "in-blocklist-test.com\n" >> "$raw_file"  # Add test domain to raw file
         printf "in-blocklist-test.com\n" >> input.txt
+        printf "in-blocklist-test.com\n" >> out_raw.txt  # Add expected result to expected raw file 
 
         # Test removal of known dead domains
         printf "dead-test.com\n" > "$dead_domains_file"  # Add test domain to dead domains file
@@ -70,11 +71,13 @@ function test_retrieval_maintainence {
     : > "$redundant_domains_file"  # Initialize redundant domains file
     printf "redundant-test.com\n" > "$wildcards_file"  # Add test wildcard to wildcards file
     printf "domain.redundant-test.com\n" >> input.txt
-    printf "domain.redundant-test.com\n" >> out_redundant.txt  # Add expected result to redundant domains file
     if [[ "$script_to_test" == 'maintain' ]]; then
         : > "$wildcards_file"  # Initialize wildcards file for maintainence script test
         printf "redundant-test.com\n" >> input.txt  # Add test wildcard to input file
-        printf "redundant-test.com\n" >> out_wildcards.txt  # Add expected result to wildcards file
+        # Add expected results
+        printf "redundant-test.com\n" >> out_raw.txt
+        printf "redundant-test.com\n" >> out_wildcards.txt
+        printf "domain.redundant-test.com\n" >> out_redundant.txt
     fi
 
     # Skip toplist test since it returns an error code of 1
@@ -141,6 +144,7 @@ function test_dead {
     done < "$subdomains_to_remove_file"
 
     # Test removal of dead redundant domains and wildcards
+    : > "$redundant_domains_file"  # Initialize redundant domains file
     printf "493053dead-wildcard-test.com\n" >> "$raw_file"  # Add test dead wildcard to raw file
     printf "493053dead-wildcard-test.com\n" > "$wildcards_file"  # Add test dead wildcard to wildcards file
     {

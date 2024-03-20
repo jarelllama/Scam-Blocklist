@@ -10,7 +10,6 @@ root_domains_file='data/processing/root_domains.txt'
 subdomains_file='data/processing/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/processing/wildcards.txt'
-redundant_domains_file='data/processing/redundant_domains.txt'
 dead_domains_file='data/processing/dead_domains.txt'
 time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.3'
@@ -281,11 +280,8 @@ function process_source {
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         # Remove redundant domains
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
-        # Collate redundant domains for dead check
-        printf "%s\n" "$redundant_domains" >> redundant_domains.tmp
         log_event "$redundant_domains" "redundant" "$source"
     done < "$wildcards_file"
-    format_list redundant_domains.tmp
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
@@ -335,12 +331,11 @@ function merge_domains {
         exit 1
     fi
 
-    # Add filtered redundant domains to the redundant domains file
-    [[ -f redundant_domains.tmp ]] && comm -12 filtered_domains.tmp redundant_domains.tmp >> "$redundant_domains_file"
+    # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
-        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
-        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add filtered root domains to root domains file to exclude from dead check
+        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file for dead check
         format_list "$root_domains_file"
         format_list "$subdomains_file"
     fi
