@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15813
+Total domains: 15814
 
 Total | Today | Yesterday | Source *
     - |    23 |         3 | Google Search
@@ -22,15 +22,15 @@ Total | Today | Yesterday | Source *
     - |     4 |      7801 | petscams.com
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
-    - |     2 |       224 | stopgunscams.com
-15813 |    43 |     10081 | All sources
+    - |     3 |       224 | stopgunscams.com
+15814 |    44 |     10081 | All sources
 
 The 5 most recently added domains:
-xflyrc.com
-cci.ammunitionss.com
 prochemislaboratory.weebly.com
 ssdendurelab.co.za
 williamspethome.com
+""
+cci.ammunitionss.com
 
 *Domains added manually are excluded from the daily figures.
 ```

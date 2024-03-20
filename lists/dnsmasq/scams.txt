@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 19 22:12:07 UTC 2024
+# Last modified: Wed Mar 20 05:47:02 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 15813
+# Total number of entries: 15814
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -2733,6 +2733,7 @@ local=/cci-ammunitionss.com/
 local=/cci-primers.com/
 local=/cci-usaprimers.com/
 local=/cci.ammostore.com/
+local=/cci.ammunitionss.com/
 local=/cciammocenter.com/
 local=/cciammunitions.com/
 local=/cciprimersusa.com/
