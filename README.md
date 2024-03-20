@@ -27,11 +27,11 @@ Total | Today | Yesterday | Source *
 16264 |   532 |     10081 | All sources
 
 5 recently added domains:
-roseberners.com
-bravecanecorsohome.com
-borisshichonkennel.com
-glocksforsale.net
-ashdavefrenchies.com
+championmorkiepuppies.com
+teacupmaltipooforsale.com
+thecheapcloth-com
+dachshundbrancully.com
+airriflestore.com
 
 *Domains added manually are excluded from the daily figures.
 ```
@@ -74,11 +74,9 @@ Dead domains that have become alive again are added back into the blocklist. Thi
 
 ## Why the Hosts format is not supported
 
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'long-random-subdomain.scam.com'. To collate individual subdomains would be a difficult task and would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
+Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'long-random-subdomain.scam.com'. To collate individual subdomains would be difficult and would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
-## Malicious hosting sites
-
-Some wildcard domains are added manually to the blocklist to reduce the number of entries via wildcard matching. Many of these wildcard domains are discovered to be malicious hosting sites with multiple subdomains pointing to scam sites. These malicious hosting sites are included in the blocklist and can be found among the wildcard domains in [wildcards.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/wildcards.txt).
+Occasionally, wildcard domains are added manually to the blocklist to reduce the number of entries via wildcard matching.
 
 ## Sources
 
