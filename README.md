@@ -22,6 +22,7 @@ Total | Today | Yesterday | Source *
     - |     4 |      7801 | petscams.com
     - |     0 |       693 | scam.delivery
     - |     0 |      1250 | scam.directory
+    - |     0 |         0 | scamadviser.com
     - |     3 |       224 | stopgunscams.com
 15958 |   188 |     10081 | All sources
 
@@ -81,7 +82,8 @@ Some wildcard domains are added manually to the blocklist to reduce the number o
 - [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 - [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
 - [PetScams.com](https://petscams.com/): pet scam sites database
-- [scam.delivery](https://scam.delivery/): delivery scam sites database
+- [Scam.Delivery](https://scam.delivery/): delivery scam sites database
+- [ScamAdvisor](https://www.scamadviser.com/): scam sites database
 - [Scam Directory](https://scam.directory/): non-delivery scam sites database
 - [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
 - [StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
