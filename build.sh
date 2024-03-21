@@ -1,8 +1,8 @@
 #!/bin/bash
 raw_file='data/raw.txt'
 source_log='data/source_log.csv'
-today="$(TZ=Asia/Singapore date +"%d-%m-%y")"
-yesterday="$(TZ=Asia/Singapore date -d "yesterday" +"%d-%m-%y")"
+today="$(date -u +"%d-%m-%y")"
+yesterday="$(date -ud "yesterday" +"%d-%m-%y")"
 
 function main {
     command -v csvstat &> /dev/null || pip install -q csvkit
@@ -68,7 +68,7 @@ The Google Custom Search JSON API only provides 100 free search queries per day.
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
 
-> Queries made today: $(csvgrep -c 2 -m 'Google Search' "$source_log" | csvcut -c 11 | awk '{total += $1} END {print total}')
+> Queries made today: $(csvgrep -c 1 -m "$today" | csvgrep -c 2 -m 'Google Search' "$source_log" | csvcut -c 11 | awk '{total += $1} END {print total}')
 
 #### Regarding other sources
 
@@ -169,7 +169,7 @@ function print_stats {
 
 function count {
     # Find all runs from that particular source on that specific day
-    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 12 -m 'yes' | csvcut -c 5 | tail +2)
+    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 | tail +2)
     printf "%s" "$runs" | awk '{total += $1} END {print total}'  # Sum up domains retrieved from all runs of that source
 }
 

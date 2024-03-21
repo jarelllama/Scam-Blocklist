@@ -9,7 +9,7 @@ subdomains_file='data/processing/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/processing/wildcards.txt'
 redundant_domains_file='data/processing/redundant_domains.txt'
-time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
+time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
 
 function main {

@@ -11,7 +11,7 @@ subdomains_file='data/processing/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/processing/wildcards.txt'
 dead_domains_file='data/processing/dead_domains.txt'
-time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
+time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.3'
 query_count=0  # Initialize query count (only increments for Google Search terms)
 

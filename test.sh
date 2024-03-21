@@ -9,7 +9,7 @@ subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/processing/wildcards.txt'
 redundant_domains_file='data/processing/redundant_domains.txt'
 dead_domains_file='data/processing/dead_domains.txt'
-time_format="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
+time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
