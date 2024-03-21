@@ -92,7 +92,7 @@ function check_line_count {
 
 function log_event {
     # Log domain processing events
-    printf "%s" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" '{print time "," type "," $0 "," source}' >> "$domain_log"
+    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" '{print time "," type "," $0 "," source}' >> "$domain_log"
 }
 
 function format_list {

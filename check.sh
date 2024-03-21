@@ -68,6 +68,15 @@ function check_raw_file {
         log_event "$whitelisted_tld_domains" "tld"
     fi
 
+    # Remove invalid entries including IP addresses This excludes punycode TLDs (.xn--*)
+    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$' <<< "$domains")
+    invalid_entries_count=$(wc -w <<< "$invalid_entries")
+    if [[ "$invalid_entries_count" -gt 0 ]]; then
+        domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))
+        awk 'NF {print $0 " (invalid)"}' <<< "$invalid_entries" >> filter_log.tmp
+        log_event "$invalid_entries" "invalid"
+    fi
+
     redundant_domains_count=0  # Initialize redundant domains count
     # Remove redundant domains
     while read -r domain; do  # Loop through each domain in the blocklist
@@ -122,14 +131,14 @@ function check_raw_file {
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -w <<< "$domains")  # Count number of domains after filtering
-    printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$redundant_domains_count" "$in_toplist_count"
+    printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_domains_count" "$in_toplist_count"
 
     [[ -s filter_log.tmp ]] && exit 1 || exit 0 # Exit with error if the blocklist required filtering
 }
 
 function log_event {
     # Log domain processing events
-    printf "%s" "$1" | awk -v type="$2" -v time="$time_format" '{print time "," type "," $0 ",raw"}' >> "$domain_log"
+    printf "%s\n" "$1" | awk -v type="$2" -v time="$time_format" '{print time "," type "," $0 ",raw"}' >> "$domain_log"
 }
 
 function format_list {

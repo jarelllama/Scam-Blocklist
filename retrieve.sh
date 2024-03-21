@@ -259,7 +259,7 @@ function process_source {
     fi
 
     # Remove invalid entries including IP addresses This excludes punycode TLDs (.xn--*)
-    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$')
+    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$' <<< "$pending_domains")
     if [[ -n "$invalid_entries" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$invalid_entries"))
         log_event "$invalid_entries" "invalid" "$source"
@@ -346,7 +346,7 @@ function merge_domains {
 
 function log_event {
     # Log domain processing events
-    printf "%s" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" '{print time "," type "," $0 "," source}' >> "$domain_log"
+    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" '{print time "," type "," $0 "," source}' >> "$domain_log"
 }
 
 function log_source {
