@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Mar 21 12:33:58 UTC 2024
+# Last modified: Thu Mar 21 12:34:54 UTC 2024
 # Syntax: Unbound
 # Total number of entries: 1
 #
@@ -28,6 +28,7 @@ local-zone: "24cloudsfx.com." always_nxdomain
 local-zone: "24goexpress.com." always_nxdomain
 local-zone: "24primetrade.com." always_nxdomain
 local-zone: "24tradecryptostars.com." always_nxdomain
+local-zone: "2cool-forum.me." always_nxdomain
 local-zone: "2ikcontainerconversions.co.za." always_nxdomain
 local-zone: "2xoffer.com." always_nxdomain
 local-zone: "360globalexpress.com." always_nxdomain
@@ -127,6 +128,7 @@ local-zone: "ablogisticsexpress.com." always_nxdomain
 local-zone: "abnamrob-nl.com." always_nxdomain
 local-zone: "abncapllc.com." always_nxdomain
 local-zone: "abourt.com." always_nxdomain
+local-zone: "about-forum.net." always_nxdomain
 local-zone: "aboutbeautyus.com." always_nxdomain
 local-zone: "aboutvogueshoes-com." always_nxdomain
 local-zone: "abovejie.com." always_nxdomain
@@ -1706,6 +1708,7 @@ local-zone: "beverlyemarykittens.co.za." always_nxdomain
 local-zone: "beverlyminipaws.com." always_nxdomain
 local-zone: "bexio-shop." always_nxdomain
 local-zone: "beyends.com." always_nxdomain
+local-zone: "beyond-forums.net." always_nxdomain
 local-zone: "beyondbcontainers.com." always_nxdomain
 local-zone: "bezstratnie.pl." always_nxdomain
 local-zone: "bfashionstyle-com." always_nxdomain
@@ -1778,6 +1781,7 @@ local-zone: "billypuppies.com." always_nxdomain
 local-zone: "bilymak.cz." always_nxdomain
 local-zone: "bimbagoldltd-com." always_nxdomain
 local-zone: "bimitee.com." always_nxdomain
+local-zone: "bimmerforums.org." always_nxdomain
 local-zone: "binaryinvestmentpro.com." always_nxdomain
 local-zone: "binaryoptions-tradings.com." always_nxdomain
 local-zone: "binarytriggersusa.com." always_nxdomain
@@ -3443,6 +3447,7 @@ local-zone: "corralpanelsale.com." always_nxdomain
 local-zone: "correos-eu.com." always_nxdomain
 local-zone: "correos.eu.com." always_nxdomain
 local-zone: "corsaireuropholding.com." always_nxdomain
+local-zone: "corvetteforum.live." always_nxdomain
 local-zone: "coscoexpertshipping.com." always_nxdomain
 local-zone: "cosetek.com." always_nxdomain
 local-zone: "cosmeticoptimalus-com." always_nxdomain
@@ -5641,6 +5646,7 @@ local-zone: "forbecapitalinvest.com." always_nxdomain
 local-zone: "forbefxoptn.com." always_nxdomain
 local-zone: "foreseew.com." always_nxdomain
 local-zone: "forestq.shop." always_nxdomain
+local-zone: "forestriverforums.org." always_nxdomain
 local-zone: "forestryparrotsbreeder.com." always_nxdomain
 local-zone: "forever.home.puppies.com." always_nxdomain
 local-zone: "forever.puppy.org." always_nxdomain
@@ -5675,6 +5681,9 @@ local-zone: "fortpaynemovers.com." always_nxdomain
 local-zone: "fortressloanfinance.com." always_nxdomain
 local-zone: "fortunadoxies.com." always_nxdomain
 local-zone: "fortunetrustfxinvest.com." always_nxdomain
+local-zone: "forum-bass.me." always_nxdomain
+local-zone: "forums-city.live." always_nxdomain
+local-zone: "forums-omra.net." always_nxdomain
 local-zone: "forward-look.live." always_nxdomain
 local-zone: "fossilssale.us." always_nxdomain
 local-zone: "foundalovingstar.com." always_nxdomain
@@ -6159,6 +6168,7 @@ local-zone: "globalcryptoinvestment.org." always_nxdomain
 local-zone: "globalcryptotradingcore.com." always_nxdomain
 local-zone: "globaldeliveryline.com." always_nxdomain
 local-zone: "globaldigitfx.net." always_nxdomain
+local-zone: "globaldocforum.com." always_nxdomain
 local-zone: "globaldominiongrps.co.uk." always_nxdomain
 local-zone: "globaledgetrade.com." always_nxdomain
 local-zone: "globalexpresdeliveries.com." always_nxdomain
@@ -12062,6 +12072,7 @@ local-zone: "riskemployme.com." always_nxdomain
 local-zone: "ritalinexpress.com." always_nxdomain
 local-zone: "ritassteacupmaltipoohomes.com." always_nxdomain
 local-zone: "river-estates.pl." always_nxdomain
+local-zone: "river-forums.org." always_nxdomain
 local-zone: "riverdalecreditoffshore.com." always_nxdomain
 local-zone: "riverdaleoffshores.com." always_nxdomain
 local-zone: "riversidedachshundpuppies.com." always_nxdomain
@@ -12329,6 +12340,7 @@ local-zone: "russianbluekittyscattery.com." always_nxdomain
 local-zone: "russianbluetopbreeders.com." always_nxdomain
 local-zone: "rusttooloff-com." always_nxdomain
 local-zone: "rutupowersports.com." always_nxdomain
+local-zone: "rvforum.org." always_nxdomain
 local-zone: "rw-gfy.org." always_nxdomain
 local-zone: "rwetradingbv.com." always_nxdomain
 local-zone: "rwingshome.co.za." always_nxdomain
@@ -12445,6 +12457,7 @@ local-zone: "salwire.com." always_nxdomain
 local-zone: "samanthacattery.com." always_nxdomain
 local-zone: "samanthacecillemuncy.us." always_nxdomain
 local-zone: "samaritaninsurancecompany.com." always_nxdomain
+local-zone: "samba-forum.com." always_nxdomain
 local-zone: "samedaydeliveryxpress.com." always_nxdomain
 local-zone: "samexsuppliersltd.co.za." always_nxdomain
 local-zone: "samfrog.com." always_nxdomain
@@ -15089,6 +15102,7 @@ local-zone: "uspsworldwidefreightlogistics.com." always_nxdomain
 local-zone: "uspsworldwidelogistics.com." always_nxdomain
 local-zone: "usrpreliefgrant.com." always_nxdomain
 local-zone: "usrpreliefgrant.org." always_nxdomain
+local-zone: "usrv-forum.com." always_nxdomain
 local-zone: "ussportabout.com." always_nxdomain
 local-zone: "ussportpioneer.com." always_nxdomain
 local-zone: "ussportswearstyle-com." always_nxdomain
