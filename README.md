@@ -13,7 +13,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 15952
+Total domains: 15954
 
 Total | Today | Yesterday | Source *
     - |     0 |       115 | Google Search
@@ -24,7 +24,7 @@ Total | Today | Yesterday | Source *
     - |     0 |         0 | scam.directory
     - |     0 |       148 | scamadviser.com
     - |     0 |         4 | stopgunscams.com
-15952 |     3 |       532 | All sources
+15954 |     3 |       532 | All sources
 
 *Domains added manually are excluded from the daily figures.
 ```

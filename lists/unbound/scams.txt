@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Mar 20 23:26:32 UTC 2024
+# Last modified: Thu Mar 21 04:55:00 UTC 2024
 # Syntax: Unbound
 # Total number of entries: 1
 #
@@ -2314,6 +2314,7 @@ local-zone: "bulliesbreeders.com." always_nxdomain
 local-zone: "bullmastiffcreek.com." always_nxdomain
 local-zone: "bullseyegunstore.com." always_nxdomain
 local-zone: "bullterrierpupforsale.com." always_nxdomain
+local-zone: "bullterrierpuppiesforsale.com." always_nxdomain
 local-zone: "bullterrierpups4u.com." always_nxdomain
 local-zone: "bullterriers4homes.com." always_nxdomain
 local-zone: "bully4home.com." always_nxdomain
@@ -8068,6 +8069,7 @@ local-zone: "kingbritishshorthairkittieshome.com." always_nxdomain
 local-zone: "kingcavapoopuppies.com." always_nxdomain
 local-zone: "kingcharlesandcavapoo.com." always_nxdomain
 local-zone: "kingcharlescanine.com." always_nxdomain
+local-zone: "kingcharlespups.com." always_nxdomain
 local-zone: "kingcorsoforsale.com." always_nxdomain
 local-zone: "kingcotondetulearpups.com." always_nxdomain
 local-zone: "kingcourierservice.com." always_nxdomain

@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Mar 20 23:26:32 UTC 2024
+# Last modified: Thu Mar 21 04:55:00 UTC 2024
 # Syntax: Dnsmasq
 # Total number of entries: 1
 #
@@ -2313,6 +2313,7 @@ local=/bulliesbreeders.com/
 local=/bullmastiffcreek.com/
 local=/bullseyegunstore.com/
 local=/bullterrierpupforsale.com/
+local=/bullterrierpuppiesforsale.com/
 local=/bullterrierpups4u.com/
 local=/bullterriers4homes.com/
 local=/bully4home.com/
@@ -8067,6 +8068,7 @@ local=/kingbritishshorthairkittieshome.com/
 local=/kingcavapoopuppies.com/
 local=/kingcharlesandcavapoo.com/
 local=/kingcharlescanine.com/
+local=/kingcharlespups.com/
 local=/kingcorsoforsale.com/
 local=/kingcotondetulearpups.com/
 local=/kingcourierservice.com/
