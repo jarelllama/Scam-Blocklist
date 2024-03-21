@@ -40,7 +40,7 @@ function test_retrieval_check {
         grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt  # Expected output
     done < "$subdomains_to_remove_file"
     # Expected output
-    [[ "$script_to_test" == 'check' ]] && printf "www.subdomain-test.com\n" >> out_log.txt  # Check script does not exclude 'www' subdomains
+    [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # Check script does not exclude 'www' subdomains
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
 
