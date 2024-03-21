@@ -143,8 +143,7 @@ function test_retrieval_check {
     check_log  # Check log file
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
-    printf "Log:\n"
-    cat "$domain_log"
+    [[ "$log_error" == false ]] && printf "Log:\n%s" "$(<$domain_log)"
     printf "%s\n" "---------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
@@ -241,21 +240,20 @@ function check_if_dead_present {
 }
 
 function check_log {
+    log_error=false
     while read -r log_term; do
         if ! grep -qF "$log_term" "$domain_log"; then
             log_error=true
             break
         fi
     done < out_log.txt
-    if [[ "$log_error" == false ]]; then
-        return
-    fi
+    [[ "$log_error" == false ]] && return
     printf "! Log file is not as expected:\n"
     cat "$domain_log"
     printf "\nTerms expected in log:\n"
     cat out_log.txt
     printf "\n"
     error=true
-}
+    }
 
 main "$1"
