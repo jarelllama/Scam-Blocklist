@@ -9,7 +9,6 @@ subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/processing/wildcards.txt'
 redundant_domains_file='data/processing/redundant_domains.txt'
 dead_domains_file='data/processing/dead_domains.txt'
-time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
@@ -91,12 +90,12 @@ function test_retrieval_check {
         printf "invalid-test.1x\n"
     } >> input.txt  # Input
     printf "invalid-test.xn--909fds\n" >> out_raw.txt
-    printf "invalid-test.1x\n" >> out_raw.txt
     {
         printf "invalid,invalid-test-com\n"
         prinft "invalid,100.100.100.100\n"
         printf "invalid,invalid-test.x\n"
         printf "invalid,invalid-test.100\n"
+        printf "invalid,invalid-test.1x\n"
     } >> out_log.txt  # Expected output
 
     # Test removal of redundant domains
@@ -124,7 +123,7 @@ function test_retrieval_check {
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Distribute the sample input into 3 files
         split -n l/3 input.txt
-        mv xaa data/domains_aa419.tmp
+        mv xaa data/domains_aa419.org.tmp
         mv xab data/domains_google_search_search-term-1.tmp
         mv xac data/domains_google_search_search-term-2.tmp
         bash retrieve.sh || true  # Run retrievel script and ignore returned exit code
