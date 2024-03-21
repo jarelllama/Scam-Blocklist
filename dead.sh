@@ -71,9 +71,8 @@ function check_redundant {
 }
 
 function check_dead {
-    comm -23 "$raw_file" <(sort "$dead_domains_file") > dead.tmp  # Exclude previously checked domains
-    comm -23 dead.tmp "$root_domains_file" > dead.tmp.tmp  # Exclude subdomains stripped to root domains
-    comm -23 dead.tmp.tmp "$wildcards_file" | sed 's/^/||/; s/$/^/' > formatted_raw_file.tmp  # Exclude wildcard domains
+    grep -vFf "$dead_domains_file" -f "$root_domains_file" -f "$wildcards_file" "$raw_file" |
+      sed 's/^/||/; s/$/^/' > formatted_raw_file.tmp  # Exclude previously checked domains
     dead-domains-linter -i formatted_raw_file.tmp --export dead.tmp  # Find and export dead domains
     if ! grep -q '[[:alnum:]]' dead.tmp; then
         return  # Return if no dead domains found
