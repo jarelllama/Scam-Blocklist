@@ -209,7 +209,7 @@ function process_source {
     domains_file="$3"
 
     # Skip to next source/item if no results retrieved
-    if ! grep -q '[[:alpha:]]' "$domains_file"; then
+    if ! grep -q '[[:alnum:]]' "$domains_file"; then
         log_source "$source" "$item" "0" "0" "0" "0" "0" "0" "" "$query_count"
         return
     fi
@@ -302,7 +302,7 @@ function process_source {
 
 function merge_domains {
     # Exit if no new domains to add or temp file is missing
-    if ! grep -q '[[:alpha:]]' filtered_domains.tmp; then  # -s does not seem to work well here
+    if ! grep -q '[[:alnum:]]' filtered_domains.tmp; then  # -s does not seem to work well here
         printf "\nNo new domains to add.\n\n"
         exit
     fi

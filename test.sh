@@ -206,7 +206,7 @@ function check_output {
 }
 
 function check_if_dead_present {
-    if grep -q '[[:alpha:]]' "$1"; then
+    if grep -q '[[:alnum:]]' "$1"; then
         printf "! %s file still has dead domains:\n" "$2"
         cat "$1"
         printf "\n"
