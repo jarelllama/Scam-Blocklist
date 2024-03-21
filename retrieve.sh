@@ -25,7 +25,7 @@ if [[ "$CI" != true ]]; then
 fi
 
 function main {
-    command -v csvstat &> /dev/null || pip install -q csvkit  # Install cvstat
+    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install cvstat
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
     for file in config/* data/* data/processing/*; do  # Format files in the config and data directory
         format_list "$file"
@@ -33,14 +33,14 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        source_aa419
-        source_guntab
+        #source_aa419
+        #source_guntab
         source_petscams
-        source_scamdelivery  # Has captchas
-        source_scamdirectory
-        source_scamadviser
-        source_stopgunscams
-        source_google_search
+        #source_scamdelivery  # Has captchas
+        #source_scamdirectory
+        #source_scamadviser
+        #source_stopgunscams
+        #source_google_search
         merge_domains
         exit
     fi
@@ -175,6 +175,7 @@ function source_google_search {
 }
 
 function search_google {
+    query_count=0  # Initliaze query count for each search term
     url='https://customsearch.googleapis.com/customsearch/v1'
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     domains_file="data/domains_google_search_${search_term:0:100}.tmp"
@@ -337,9 +338,9 @@ function merge_domains {
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
 
     # Marked the source as saved in the source log file
-    rows=$(csvgrep -c 1 -m "$time_format" "$source_log" | tail +2)  # Find rows in log for this run
+    rows=$(grep -F "$time_format" "$source_log")  # Find rows in log for this run
     source=$(grep -vFf <(printf "%s" "$rows") "$source_log")  # Remove rows from log
-    rows=$(printf "%s" "$rows" | sed 's/no/yes/')  # Replace 'no' with 'yes' to record the domains were saved to the raw file
+    rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record the domains were saved to the raw file
     printf "%s\n%s\n" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
 
     [[ -f ip_addresses.tmp ]] && exit 1 || exit 0  # Exit with error if IP addresses were found

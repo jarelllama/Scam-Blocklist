@@ -121,7 +121,7 @@ function test_retrieval_check {
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     printf "Log:\n"
-    grep "$time_format" "$domain_log"  # Print log
+    grep -F "$time_format" "$domain_log"  # Print log
     printf "%s\n" "---------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
