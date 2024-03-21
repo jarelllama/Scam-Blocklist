@@ -198,7 +198,7 @@ function test_dead {
 
     bash dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
-    printf "%s\n" "---------------------------------------------------------------------"
+    printf "\n%s\n" "---------------------------------------------------------------------"
 
     # Check returned error code
     if [[ "$errored" == true ]]; then
