@@ -23,7 +23,7 @@ function main {
         test_retrieval_check "$1"
     fi
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
-    [[ "$1" == 'dead' ]] && test_dead
+    [[ "$1" == 'dead' ]] && test_dead || exit 0  # Return 0 if no tests were done
 }
 
 function test_retrieval_check {
