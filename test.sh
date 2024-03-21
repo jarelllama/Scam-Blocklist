@@ -70,14 +70,14 @@ function test_retrieval_check {
 
     # Test removal of domains with whitelisted TLDs
     {
-        printf "whitelisted-tld-test.gov\n"
-        printf "whitelisted-tld-test.edu\n"
-        printf "whitelisted-tld-test.mil\n"
+        printf "white-tld-test.gov\n"
+        printf "white-tld-test.edu\n"
+        printf "white-tld-test.mil\n"
     } >> input.txt  # Input
     {
-        printf "tld,whitelisted-tld-test.gov\n"
-        printf "tld,whitelisted-tld-test.edu\n"
-        printf "tld,whitelisted-tld-test.mil\n"
+        printf "tld,white-tld-test.gov\n"
+        printf "tld,white-tld-test.edu\n"
+        printf "tld,white-tld-test.mil\n"
     } >> out_log.txt  # Expected output
 
     # Test removal of invalid entries and IP addresses
