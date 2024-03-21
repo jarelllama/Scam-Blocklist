@@ -48,12 +48,9 @@ function main {
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through temp domains file
         source="Empty"  # Reintialize source
-        case $temp_domains_file in
+        case "$temp_domains_file" in
             *google_search*)
-                source="Google Search"
-                item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
-                item=${item%.tmp}  # Remove file extension from file name
-                ;;
+                source="Google Search" ;;
             *aa419.org*)
                 source="aa419.org" ;;
             *guntab.com*)
@@ -69,8 +66,13 @@ function main {
             *scamadviser.com*)
                 source="scamadviser.com" ;;
         esac
-        [[ "$source" != 'Google Search' ]] && item="$source"
-        process_source "$source" "$item" "$temp_domains_file"
+        [[ "$source" != 'Google Search' ]] && process_source "$source" "$source" "$temp_domains_file"
+    done
+    # Run Google search terms last
+    for temp_domains_file in data/domains_google_search_*.tmp; do
+        item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
+        item=${item%.tmp}  # Remove file extension from file name
+        process_source "Google Search" "$item" "$temp_domains_file"
     done
     merge_domains
 }
