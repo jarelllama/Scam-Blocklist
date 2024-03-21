@@ -89,7 +89,7 @@ function test_retrieval_check {
         printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
     } >> input.txt  # Input
-    printf "invalid-test.xn--909fds\n" >> out_raw.txt
+    printf "invalid-test.xn--903fds\n" >> out_raw.txt
     {
         printf "invalid,invalid-test-com\n"
         prinft "invalid,100.100.100.100\n"
