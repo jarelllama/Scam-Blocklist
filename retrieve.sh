@@ -47,25 +47,26 @@ function main {
 
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through temp domains file
+        source="Empty"  # Reintialize source
         case $temp_domains_file in
             *google_search*)
                 source="Google Search"
                 item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
                 item=${item%.tmp}  # Remove file extension from file name
                 ;;
-            *aa419*)
+            *aa419.org*)
                 source="aa419.org" ;;
-            *guntab*)
+            *guntab.com*)
                 source="guntab.com" ;;
-            *stopgunscams*)
+            *stopgunscams.com*)
                 source="stopgunscams.com" ;;
-            *petscams*)
+            *petscams.com*)
                 source="petscams.com" ;;
-            *scamdelivery*)
+            *scam.delivery*)
                 source="scam.delivery" ;;
-            *scamdirectory*)
+            *scam.directory*)
                 source="scam.directory" ;;
-            *scamadviser*)
+            *scamadviser.com*)
                 source="scamadviser.com" ;;
         esac
         [[ "$source" != 'Google Search' ]] && item="$source"
@@ -175,18 +176,21 @@ function source_google_search {
 }
 
 function search_google {
-    query_count=0  # Initliaze query count for each search term
     url='https://customsearch.googleapis.com/customsearch/v1'
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     domains_file="data/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Initialize domains file
+    query_count=0  # Reinitliaze query count for each search term
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results (max of 100 results)
         ((query_count++))  # Track number of search queries used
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results
-        jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' >> "$domains_file"  # Strip URLs to domains
+        jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' | sort -u >> "$domains_file"  # Strip URLs to domains
+        if [[ $(wc -w < "$domains_file") -lt 10 ]]; then
+            break  # Break out of loop if no more pages are required
+        fi
     done
     process_source "Google Search" "$search_term" "$domains_file"
 }
