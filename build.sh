@@ -168,9 +168,9 @@ function print_stats {
 }
 
 function count {
-    # Find all runs from that particular source on that specific day
-    runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 | tail +2)
-    printf "%s" "$runs" | awk '{total += $1} END {print total}'  # Sum up domains retrieved from all runs of that source
+    # Sum up all domains retrieved by that source for that day
+    csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 |
+        tail +2| awk '{total += $1} END {print total}'
 }
 
 function format_list {

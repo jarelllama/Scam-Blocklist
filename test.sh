@@ -16,7 +16,9 @@ time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 function main {
     error=false  # Initialize error variable
     errored=false  # Initialize whether script returned with error
+    log_error=false  # Initialize whether log file has an error
     : > "$raw_file"  # Initialize raw file
+    sed '1q' "$domain_log" > log.tmp && mv log.tmp "$domain_log"  # Intialize domain log file
 
     # Do not run when there are existing domain files
     if [[ "$1" == 'retrieval' ]] && ! ls data/domains_*.tmp &> /dev/null; then
@@ -34,53 +36,87 @@ function test_retrieval_check {
     : > "$root_domains_file"  # Initialize root domains file
     while read -r subdomain; do
         subdomain="${subdomain}.subdomain-test.com"
-        printf "%s\n" "$subdomain" >> input.txt  # Add subdomain to input file
-        printf "%s\n" "$subdomain" >> out_subdomains.txt  # Add subdomain to expected subdomains file
+        printf "%s\n" "$subdomain" >> input.txt  # Input
+        printf "%s\n" "$subdomain" >> out_subdomains.txt  # Expected output
+        grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt  # Expected output
     done < "$subdomains_to_remove_file"
-    printf "subdomain-test.com\n" >> out_raw.txt  # Add expected result to expected raw file
-    printf "subdomain-test.com\n" >> out_root_domains.txt  # Add expected result to root domains file
+    # Expected output
+    printf "subdomain-test.com\n" >> out_raw.txt
+    printf "subdomain-test.com\n" >> out_root_domains.txt
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Test removal of domains already in blocklist
-        printf "in-blocklist-test.com\n" >> "$raw_file"  # Add test domain to raw file
-        printf "in-blocklist-test.com\n" >> input.txt
-        printf "in-blocklist-test.com\n" >> out_raw.txt  # Add expected result to expected raw file
+        printf "in-blocklist-test.com\n" >> "$raw_file"  # Sample data
+        printf "in-blocklist-test.com\n" >> out_raw.txt  # Domain should already be present in expected raw file
+        printf "in-blocklist-test.com\n" >> input.txt  # Input
 
         # Test removal of known dead domains
-        printf "dead-test.com\n" > "$dead_domains_file"  # Add test domain to dead domains file
-        printf "dead-test.com\n" >> input.txt
+        printf "dead-test.com\n" > "$dead_domains_file"  # Sample data
+        printf "dead-test.com\n" >> input.txt  # Input
+        
+        # No expected output for both tests
     fi
 
     # Test removal of whitelisted domains and blacklist exclusion
-    printf "whitelist\n" > "$whitelist_file"  # Add test whitelist term to whitelist file
-    printf "whitelist-blacklisted-test.com\n" > "$blacklist_file"  # Add test blacklisted domain to blacklist file
+    # Sample data
+    printf "whitelist\n" > "$whitelist_file"
+    printf "whitelist-blacklisted-test.com\n" > "$blacklist_file"
+    # Input
     printf "whitelist-test.com\n" >> input.txt
     printf "whitelist-blacklisted-test.com\n" >> input.txt
-    printf "whitelist-blacklisted-test.com\n" >> out_raw.txt  # Add expected result to expected raw file
+    # Expected output
+    printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
+    printf "whitelist,whitelist-test.com\n" >> out_log.txt
+    printf "blacklist,whitelist-blacklisted-test.com\n" >> out_log.txt
 
     # Test removal of domains with whitelisted TLDs
     {
         printf "whitelisted-tld-test.gov\n"
         printf "whitelisted-tld-test.edu\n"
         printf "whitelisted-tld-test.mil\n"
-    } >> input.txt
+    } >> input.txt  # Input
+    {
+        printf "tld,whitelisted-tld-test.gov\n"
+        printf "tld,whitelisted-tld-test.edu\n"
+        printf "tld,whitelisted-tld-test.mil\n"
+    } >> out_log.txt  # Expected output
 
-    # Skip IP address removal since it returns an error code of 1
+    # Test removal of invalid entries and IP addresses
+    {
+        printf "invalid-test-com\n"
+        prinft "100.100.100.100\n"
+        printf "invalid-test.xn--903fds\n"
+        printf "invalid-test.x\n"
+        printf "invalid-test.100\n"
+        printf "invalid-test.1x\n"
+    } >> input.txt  # Input
+    printf "invalid-test.xn--909fds\n" >> out_raw.txt
+    printf "invalid-test.1x\n" >> out_raw.txt
+    {
+        printf "invalid,invalid-test-com\n"
+        prinft "invalid,100.100.100.100\n"
+        printf "invalid,invalid-test.x\n"
+        printf "invalid,invalid-test.100\n"
+    } >> out_log.txt  # Expected output
 
     # Test removal of redundant domains
     : > "$redundant_domains_file"  # Initialize redundant domains file
-    printf "redundant-test.com\n" > "$wildcards_file"  # Add test wildcard to wildcards file
-    printf "domain.redundant-test.com\n" >> input.txt
+    printf "redundant-test.com\n" > "$wildcards_file"  # Sample data
+    printf "domain.redundant-test.com\n" >> input.txt  # Input
+    # No expected output for retrieval script test
     if [[ "$script_to_test" == 'check' ]]; then
-        : > "$wildcards_file"  # Initialize wildcards file for lists check script test
-        printf "redundant-test.com\n" >> input.txt  # Add test wildcard to input file
-        # Add expected results
-        printf "redundant-test.com\n" >> out_raw.txt
+        : > "$wildcards_file"  # Initialize wildcards file
+        printf "redundant-test.com\n" >> input.txt  # Input
+        printf "redundant-test.com\n" >> out_raw.txt  # Wildcard should already be present in expected raw file
+        # Expected output
         printf "redundant-test.com\n" >> out_wildcards.txt
         printf "domain.redundant-test.com\n" >> out_redundant.txt
+        printf "redundant,domain.redundant-test.com\n" >> out_log.txt
     fi
 
-    # Skip toplist test since it returns an error code of 1
+    # Test toplist check
+    printf "google.com\n" >> input.txt  # Input
+    printf "toplist,google.com\n" >> out_log.txt  # Expected output
 
     # Prepare expected output files
     for file in out_*; do
@@ -88,36 +124,26 @@ function test_retrieval_check {
     done
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        # Distribute the sample input domains into 3 files
+        # Distribute the sample input into 3 files
         split -n l/3 input.txt
         mv xaa data/domains_aa419.tmp
         mv xab data/domains_google_search_search-term-1.tmp
         mv xac data/domains_google_search_search-term-2.tmp
-        bash retrieve.sh  # Run retrievel script
-        [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
+        bash retrieve.sh || true  # Run retrievel script and ignore returned exit code
     elif [[ "$script_to_test" == 'check' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
         bash check.sh || true  # Run lists check script and ignore returned exit code
     fi
     printf "%s\n" "---------------------------------------------------------------------"
 
-    # Check returned error code
-    if [[ "$errored" == true ]]; then
-        printf "! Script returned an error.\n"
-        error=true
-    fi
-    # Check raw file
-    check_output "$raw_file" "out_raw.txt" "Raw"
-    # Check subdomains file
-    check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"
-    # Check root domains file
-    check_output "$root_domains_file" "out_root_domains.txt" "Root domains"
+    check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
+    check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
+    check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'check' ]]; then
-        # Check redundant domains file
-        check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"
-        # Check wildcards file
-        check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"
+        check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
+        check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"  # Check wildcards file
     fi
+    check_log  # Check log file
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     printf "Log:\n"
@@ -128,35 +154,44 @@ function test_retrieval_check {
 
 function test_dead {
     # Test addition of resurrected domains
-    printf "google.com\n" > "$dead_domains_file"  # Add test domain to dead domains file
-    printf "google.com\n" >> out_raw.txt  # Add expected result to expected raw file
+    printf "google.com\n" > "$dead_domains_file"  # Input
+    printf "google.com\n" >> out_raw.txt  # Expected output
+    printf "resurrected,google.com,dead domains file\n" >> out_log.txt  # Expected output
 
     # Test removal of dead domains with subdomains
     : > "$subdomains_file"  # Initialize subdomains file
-    printf "584308-dead-subdomain-test.com\n" >> "$raw_file"  # Add test dead root domain to raw file
-    printf "584308-dead-subdomain-test.com\n" > "$root_domains_file"  # Add test dead root domain to root domains file
+    # Input
+    printf "584308-dead-subdomain-test.com\n" >> "$raw_file"
+    printf "584308-dead-subdomain-test.com\n" > "$root_domains_file"
     while read -r subdomain; do
         subdomain="${subdomain}.584308-dead-subdomain-test.com"
-        printf "%s\n" "$subdomain" >> "$subdomains_file"  # Add test dead subdomain to subdomains flie
-        printf "%s\n" "$subdomain" >> out_dead.txt  # Add expected result to dead domains flie
+        printf "%s\n" "$subdomain" >> "$subdomains_file"  # Input
+        printf "%s\n" "$subdomain" >> out_dead.txt  # Expected output
     done < "$subdomains_to_remove_file"
+    printf "%s\n" "dead,584308-dead-subdomain-test.com,raw" >> out_log.txt  # Expected output
 
     # Test removal of dead redundant domains and wildcards
     : > "$redundant_domains_file"  # Initialize redundant domains file
-    printf "493053dead-wildcard-test.com\n" >> "$raw_file"  # Add test dead wildcard to raw file
-    printf "493053dead-wildcard-test.com\n" > "$wildcards_file"  # Add test dead wildcard to wildcards file
+    # Input
+    printf "493053dead-wildcard-test.com\n" >> "$raw_file"
+    printf "493053dead-wildcard-test.com\n" > "$wildcards_file"
     {
         printf "redundant-1.493053dead-wildcard-test.com\n"
         printf "redundant-2.493053dead-wildcard-test.com\n"
-    } >> "$redundant_domains_file"  # Add test dead redundant domain to raw file
+    } >> "$redundant_domains_file"  # Input
     {
         printf "redundant-1.493053dead-wildcard-test.com\n"
         printf "redundant-2.493053dead-wildcard-test.com\n"
-    } >> out_dead.txt  # Add expected results to dead domains file
+    } >> out_dead.txt  # Expected output
+    {
+        printf "dead,493053dead-wildcard-test.com,wildcard\n"
+        printf "dead,493053dead-wildcard-test.com,wildcard\n"
+    } >> out_log.txt # Expected output
 
     # Check removal of dead domains
-    printf "49532dead-domain-test.com\n" >> "$raw_file"  # Add test dead domain to dead domains file
-    printf "49532dead-domain-test.com\n" >> out_dead.txt  # Add expected result to dead domains file
+    printf "49532dead-domain-test.com\n" >> "$raw_file"  # Input
+    printf "49532dead-domain-test.com\n" >> out_dead.txt  # Expected output
+    printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt  # Expected output
 
     # Prepare expected output files
     for file in out_*; do
@@ -172,18 +207,13 @@ function test_dead {
         printf "! Script returned an error.\n"
         error=true
     fi
-    # Check raw file
-    check_output "$raw_file" "out_raw.txt" "Raw"
-    # Check dead domains file
-    check_output "$dead_domains_file" "out_dead.txt" "Dead domains"
-    # Check subdomains file
-    check_if_dead_present "$subdomains_file" "Subdomains"
-    # Check root domains file
-    check_if_dead_present "$root_domains_file" "Root domains"
-    # Check redundant domains file
-    check_if_dead_present "$redundant_domains_file" "Redundant domains"
-    # Check wildcards file
-    check_if_dead_present "$wildcards_file" "Wildcards"
+    check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
+    check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
+    check_if_dead_present "$subdomains_file" "Subdomains"  # Check subdomains file
+    check_if_dead_present "$root_domains_file" "Root domains"  # Check root domains file
+    check_if_dead_present "$redundant_domains_file" "Redundant domains"  # Check redundant domains file
+    check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
+    check_log  # Check log file
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n" ||
         printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
@@ -194,24 +224,43 @@ function test_dead {
 }
 
 function check_output {
-    if ! cmp -s "$1" "$2"; then
-        printf "! %s file is not as expected:\n" "$3"
-        cat "$1"
-        printf "\n"
-        printf "Expected output:\n"
-        cat "$2"
-        printf "\n"
-        error=true
+    if cmp -s "$1" "$2"; then
+        return
     fi
+    printf "! %s file is not as expected:\n" "$3"
+    cat "$1"
+    printf "\nExpected output:\n"
+    cat "$2"
+    printf "\n"
+    error=true
 }
 
 function check_if_dead_present {
-    if grep -q '[[:alnum:]]' "$1"; then
-        printf "! %s file still has dead domains:\n" "$2"
-        cat "$1"
-        printf "\n"
-        error=true
+    if ! grep -q '[[:alnum:]]' "$1"; then
+        return
     fi
+    printf "! %s file still has dead domains:\n" "$2"
+    cat "$1"
+    printf "\n"
+    error=true
+}
+
+function check_log {
+    while read -r log_term; do
+        if ! grep -qF "$log_term" "$domain_log"; then
+            log_error=true
+            break
+        fi
+    done < out_log.txt
+    if [[ "$log_error" == false ]]; then
+        return
+    fi
+    printf "! Log file is not as expected:\n"
+    cat "$domain_log"
+    printf "\nTerms expected in log:\n"
+    cat out_log.txt
+    printf "\n"
+    error=true
 }
 
 main "$1"

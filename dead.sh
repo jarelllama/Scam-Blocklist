@@ -60,9 +60,9 @@ function check_redundant {
     cat dead.tmp >> "$dead_domains_file"  # Collate dead redundant domains
     format_list "$dead_domains_file"
     while read -r wildcard; do  # Loop through wildcard domains
-        redundant_domains=$(grep "\.${wildcard}$" "$redundant_domains_file")  # Find redundant domains remaining in the redundant domains file
-        [[ -n "$redundant_domains" ]] && continue  # Skip to next wildcard if not all matches are dead
-        printf "%s\n" "$wildcard" >> collated_dead_wildcards.tmp  # Collate unused wildcard domains
+        if ! grep -q "\.${wildcard}$" "$redundant_domains_file"; then  # If no matches remaining, consider wildcard as dead
+            printf "%s\n" "$wildcard" >> collated_dead_wildcards.tmp
+        fi
     done < "$wildcards_file"
     sort -u collated_dead_wildcards.tmp -o collated_dead_wildcards.tmp
     # Remove unused wildcard domains from raw file and wildcards file
@@ -85,10 +85,8 @@ function check_dead {
 }
 
 function check_line_count {
-    # Check if the dead domains file has more than 5000 lines
-    dead_domains_count=$(wc -w < "$dead_domains_file")
-    if [[ "$dead_domains_count" -gt 5000 ]]; then
-        # Clear first 1000 lines
+    # Clear first 1000 lines if dead domains file is over 5000 lines
+    if [[ $(wc -w < "$dead_domains_file") -gt 5000 ]]; then
         tail +1001 "$dead_domains_file" > dead.tmp && mv dead.tmp "$dead_domains_file"
     fi
 }

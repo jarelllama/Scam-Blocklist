@@ -179,7 +179,7 @@ function search_google {
     url='https://customsearch.googleapis.com/customsearch/v1'
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     domains_file="data/domains_google_search_${search_term:0:100}.tmp"
-    touch "$domains_file"  # Initialize domains file
+    touch "$domains_file"  # Create domains file if not present
     query_count=0  # Reinitliaze query count for each search term
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results
@@ -221,7 +221,7 @@ function process_source {
         # Collate root domains to exlude from dead check
         printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
         # Find and log domains with common subdomains exluding 'www.'
-        domains_with_subdomains=$(grep -v "^www\." <<< "$domains_with_subdomains")
+        domains_with_subdomains=$(grep -v '^www\.' <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain" "$source"
     done < "$subdomains_to_remove_file"
     format_list subdomains.tmp
@@ -258,15 +258,15 @@ function process_source {
         log_event "$whiltelisted_tld_domains" "tld" "$source"
     fi
 
-    # Remove IP addresses
-    ip_addresses=$(grep -v '[a-z]' <<< "$pending_domains")
-    if [[ -n "$ip_addresses" ]]; then
-        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$ip_addresses"))
-        log_event "$ip_addresses" "ip_address" "$source"
-        printf "%s\n" "$ip_addresses" >> ip_addresses.tmp  # Collate IP addresses into temp file
+    # Remove invalid entries including IP addresses This excludes punycode TLDs (.xn--*)
+    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$')
+    if [[ -n "$invalid_entries" ]]; then
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$invalid_entries"))
+        log_event "$invalid_entries" "invalid" "$source"
+        printf "%s\n" "$invalid_entries" >> invalid_entries.tmp  # Collate invalid entries into temp file
     fi
 
-    redundant_domains_count=0  # Initialize redundant domains count
+    redundant_domains_count=0  # Initialize redundant domains count for each source
     # Remove redundant domains
     while read -r wildcard; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")  # Find redundant domains via wildcard matching
@@ -300,24 +300,18 @@ function merge_domains {
     fi
 
     format_list filtered_domains.tmp
-    filtered_domains_count=$(wc -w < filtered_domains.tmp)  # Count total number of filtered domains
-    # Print domains if count is less than or equal to 10
-    if [[ "$filtered_domains_count" -le 10 ]]; then
-        printf "\nNew domains retrieved (%s):\n" "$filtered_domains_count"
-        cat filtered_domains.tmp
-    else
-        printf "\nNew domains retrieved: %s\n" "$filtered_domains_count"
-    fi
-    # Print out domains in toplist and IP addresses
-    if [[ -f in_toplist.tmp ]] || [[ -f ip_addresses.tmp ]]; then
+    printf "\nNew domains retrieved: %s\n" "$(wc -w < filtered_domains.tmp)"
+
+    # Print out domains in toplist and invalid entries
+    if [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]]; then
         printf "\nEntries requiring manual review:\n"
     fi
-    # If IP addresses were found, print out addresses
-    if [[ -f ip_addresses.tmp ]]; then
-        format_list ip_addresses.tmp
-        awk 'NF {print $0 " (IP address)"}' ip_addresses.tmp
+    # Print invalid entries
+    if [[ -f invalid_entries.tmp ]]; then
+        format_list invalid_entries.tmp
+        awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp
     fi
-    # Exit with error and without adding domains to the raw file if domains were found in the toplist
+    # If domains were found in toplist, exit with error and without saving domains to raw file
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
@@ -341,13 +335,13 @@ function merge_domains {
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
 
-    # Marked the source as saved in the source log file
+    # Mark the source as saved in the source log file
     rows=$(grep -F "$time_format" "$source_log")  # Find rows in log for this run
-    source=$(grep -vFf <(printf "%s" "$rows") "$source_log")  # Remove rows from log
-    rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record the domains were saved to the raw file
+    source=$(grep -vF "$time_format" "$source_log")  # Remove rows from log
+    rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved to the raw file
     printf "%s\n%s\n" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
 
-    [[ -f ip_addresses.tmp ]] && exit 1 || exit 0  # Exit with error if IP addresses were found
+    [[ -f invalid_entries.tmp ]] && exit 1 || exit 0  # Exit with error if invalid entries were found
 }
 
 function log_event {
