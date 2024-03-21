@@ -150,7 +150,7 @@ function source_scamdirectory {
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
-        sed 's/href="\///; s/" // s/-/./g' > "$domains_file"
+        sed 's/href="\///; s/" //; s/-/./g' > "$domains_file"
     process_source "$source" "$source" "$domains_file"
 }
 
@@ -186,10 +186,11 @@ function search_google {
         ((query_count++))  # Track number of search queries used
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
+        jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop if the first page has no results
         page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' | sort -u)
         printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
         if [[ $(wc -w <<< "$page_domains") -lt 10 ]]; then
-            break  # Break out of loop if no more pages are required to save API calls
+            break  # Break out of loop if no more pages are required
         fi
     done
     process_source "Google Search" "$search_term" "$domains_file"
