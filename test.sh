@@ -40,6 +40,7 @@ function test_retrieval_check {
         grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt  # Expected output
     done < "$subdomains_to_remove_file"
     # Expected output
+    [[ "$script_to_test" == 'check' ]] && printf "www.subdomain-test.com" >> out_log.txt  # Check script does not exclude 'www' subdomains
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
 
@@ -143,7 +144,7 @@ function test_retrieval_check {
     check_log  # Check log file
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
-    [[ "$log_error" == false ]] && printf "Log:\n%s" "$(<$domain_log)"
+    [[ "$log_error" == false ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     printf "%s\n" "---------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
@@ -251,8 +252,7 @@ function check_log {
     printf "! Log file is not as expected:\n"
     cat "$domain_log"
     printf "\nTerms expected in log:\n"
-    cat out_log.txt
-    printf "\n"
+    cat out_log.txt  # No need for additional new line since the log is not printed again
     error=true
     }
 

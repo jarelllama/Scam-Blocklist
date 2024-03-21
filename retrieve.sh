@@ -220,7 +220,7 @@ function process_source {
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exlude from dead check
         printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
-        # Find and log domains with common subdomains exluding 'www.'
+        # Find and log domains with common subdomains exluding 'www'
         domains_with_subdomains=$(grep -v '^www\.' <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain" "$source"
     done < "$subdomains_to_remove_file"
