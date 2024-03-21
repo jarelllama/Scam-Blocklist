@@ -19,9 +19,9 @@ Total | Today | Yesterday | Source *
     - |    15 |       115 | Google Search
     - |    12 |       182 | aa419.org
     - |     2 |        62 | guntab.com
-    - |     1 |        21 | petscams.com
-    - |       |         0 | scam.delivery
-    - |       |         0 | scam.directory
+    - |     0 |        21 | petscams.com
+    - |     0 |         0 | scam.delivery
+    - |     1 |         0 | scam.directory
     - |     0 |       148 | scamadviser.com
     - |     2 |         4 | stopgunscams.com
 15985 |    32 |       532 | All sources
@@ -47,7 +47,7 @@ The Google Custom Search JSON API only provides 100 free search queries per day.
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
 
-> Queries made today: 700
+> Queries made today: 95
 
 #### Regarding other sources
 
