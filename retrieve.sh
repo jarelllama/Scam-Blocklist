@@ -51,37 +51,24 @@ function main {
             *google_search*)
                 source="Google Search"
                 item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
-                item=${item%.tmp}  # Rename extension from file name
+                item=${item%.tmp}  # Remove file extension from file name
                 ;;
             *aa419*)
-                source="aa419.org"
-                item="$source"
-                ;;
+                source="aa419.org" ;;
             *guntab*)
-                source="guntab.com"
-                item="$source"
-                ;;
+                source="guntab.com" ;;
             *stopgunscams*)
-                source="stopgunscams.com"
-                item="$source"
-                ;;
+                source="stopgunscams.com" ;;
             *petscams*)
-                source="petscams.com"
-                item="$source"
-                ;;
+                source="petscams.com" ;;
             *scamdelivery*)
-                source="scam.delivery"
-                item="$source"
-                ;;
+                source="scam.delivery" ;;
             *scamdirectory*)
-                source="scam.directory"
-                item="$source"
-                ;;
+                source="scam.directory" ;;
             *scamadviser*)
-                source="scamadviser.com"
-                item="$source"
-                ;;
+                source="scamadviser.com" ;;
         esac
+        [[ "$source" != 'Google Search' ]] && item="$source"
         process_source "$source" "$item" "$temp_domains_file"
     done
     merge_domains
@@ -316,7 +303,6 @@ function merge_domains {
     else
         printf "\nNew domains retrieved: %s\n" "$filtered_domains_count"
     fi
-
     # Print out domains in toplist and IP addresses
     if [[ -f in_toplist.tmp ]] || [[ -f ip_addresses.tmp ]]; then
         printf "\nEntries requiring manual review:\n"
@@ -333,7 +319,6 @@ function merge_domains {
         printf "\nPending domains saved for rerun.\n\n"
         exit 1
     fi
-
     # Collate unfiltered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve unfiltered root domains
@@ -351,6 +336,7 @@ function merge_domains {
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
 
+    # Marked the source as saved in the source log file
     rows=$(csvgrep -c 1 -m "$time_format" "$source_log" | tail +2)  # Find rows in log for this run
     source=$(grep -vFf <(printf "%s" "$rows") "$source_log")  # Remove rows from log
     rows=$(printf "%s" "$rows" | sed 's/no/yes/')  # Replace 'no' with 'yes' to record the domains were saved to the raw file

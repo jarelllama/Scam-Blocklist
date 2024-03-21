@@ -24,6 +24,7 @@ function main {
     fi
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
+    exit 1  # Return with error if no tests were performed
 }
 
 function test_retrieval_check {
