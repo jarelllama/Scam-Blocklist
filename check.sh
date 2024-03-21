@@ -134,7 +134,7 @@ function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
     if [[ "$1" == *.csv ]]; then
-        sed -i 's/\r$//' "$1"
+        sed -i 's/\r//; /^$/d' "$1"
         return
     elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
