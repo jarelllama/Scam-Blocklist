@@ -33,7 +33,7 @@ function test_retrieval_check {
     : > "$subdomains_file"  # Initialize subdomains file
     : > "$root_domains_file"  # Initialize root domains file
     while read -r subdomain; do
-        subdomain="${subdomain}.subdomain-test.com" 
+        subdomain="${subdomain}.subdomain-test.com"
         printf "%s\n" "$subdomain" >> input.txt  # Add subdomain to input file
         printf "%s\n" "$subdomain" >> out_subdomains.txt  # Add subdomain to expected subdomains file
     done < "$subdomains_to_remove_file"
@@ -44,11 +44,11 @@ function test_retrieval_check {
         # Test removal of domains already in blocklist
         printf "in-blocklist-test.com\n" >> "$raw_file"  # Add test domain to raw file
         printf "in-blocklist-test.com\n" >> input.txt
-        printf "in-blocklist-test.com\n" >> out_raw.txt  # Add expected result to expected raw file 
+        printf "in-blocklist-test.com\n" >> out_raw.txt  # Add expected result to expected raw file
 
         # Test removal of known dead domains
         printf "dead-test.com\n" > "$dead_domains_file"  # Add test domain to dead domains file
-        printf "dead-test.com\n" >> input.txt 
+        printf "dead-test.com\n" >> input.txt
     fi
 
     # Test removal of whitelisted domains and blacklist exclusion
@@ -62,7 +62,7 @@ function test_retrieval_check {
     {
         printf "whitelisted-tld-test.gov\n"
         printf "whitelisted-tld-test.edu\n"
-        printf "whitelisted-tld-test.mil\n" 
+        printf "whitelisted-tld-test.mil\n"
     } >> input.txt
 
     # Skip IP address removal since it returns an error code of 1
@@ -132,11 +132,11 @@ function test_dead {
     printf "google.com\n" >> out_raw.txt  # Add expected result to expected raw file
 
     # Test removal of dead domains with subdomains
-    : > "$subdomains_file"  # Initialize subdomains file 
+    : > "$subdomains_file"  # Initialize subdomains file
     printf "584308-dead-subdomain-test.com\n" >> "$raw_file"  # Add test dead root domain to raw file
     printf "584308-dead-subdomain-test.com\n" > "$root_domains_file"  # Add test dead root domain to root domains file
     while read -r subdomain; do
-        subdomain="${subdomain}.584308-dead-subdomain-test.com" 
+        subdomain="${subdomain}.584308-dead-subdomain-test.com"
         printf "%s\n" "$subdomain" >> "$subdomains_file"  # Add test dead subdomain to subdomains flie
         printf "%s\n" "$subdomain" >> out_dead.txt  # Add expected result to dead domains flie
     done < "$subdomains_to_remove_file"

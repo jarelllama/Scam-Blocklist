@@ -54,31 +54,31 @@ function main {
                 item=${item%.tmp}  # Rename extension from file name
                 ;;
             *aa419*)
-                source="aa419.org" 
+                source="aa419.org"
                 item="$source"
                 ;;
             *guntab*)
-                source="guntab.com" 
+                source="guntab.com"
                 item="$source"
                 ;;
             *stopgunscams*)
-                source="stopgunscams.com" 
+                source="stopgunscams.com"
                 item="$source"
                 ;;
             *petscams*)
-                source="petscams.com" 
+                source="petscams.com"
                 item="$source"
                 ;;
             *scamdelivery*)
-                source="scam.delivery" 
+                source="scam.delivery"
                 item="$source"
                 ;;
             *scamdirectory*)
-                source="scam.directory" 
+                source="scam.directory"
                 item="$source"
                 ;;
             *scamadviser*)
-                source="scamadviser.com" 
+                source="scamadviser.com"
                 item="$source"
                 ;;
         esac
@@ -171,7 +171,7 @@ function source_scamadviser {
     domains_file="data/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     url='https://www.scamadviser.com/articles'
-    for page in {1..20}; do  # Loop through pages 
+    for page in {1..20}; do  # Loop through pages
         curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing / breaks curl
             grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' | tr '[:upper:]' '[:lower:]' >> "$domains_file"
     done
@@ -197,7 +197,7 @@ function search_google {
         ((query_count++))  # Track number of search queries used
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
-        jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results 
+        jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results
         jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' >> "$domains_file"  # Strip URLs to domains
     done
     process_source "Google Search" "$search_term" "$domains_file"
@@ -257,7 +257,7 @@ function process_source {
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_domains"))
         log_event "$whitelisted_domains" "whitelist" "$source"
     fi
-    
+
     # Remove domains that have whitelisted TLDs
     whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
     whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")  # Count number of domains with whitelisted TLDs
@@ -377,7 +377,7 @@ function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
     if [[ "$1" == *.csv ]]; then
-        sed -i 's/\r$//' "$1"  
+        sed -i 's/\r$//' "$1"
         return
     elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"

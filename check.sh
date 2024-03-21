@@ -58,7 +58,7 @@ function check_raw_file {
         awk 'NF {print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
         log_event "$whitelisted_domains" "whitelist"
     fi
-    
+
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")
     whitelisted_tld_count=$(wc -w <<< "$whitelisted_tld_domains")  # Count number of domains with whitelisted TLDs
@@ -134,7 +134,7 @@ function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
     if [[ "$1" == *.csv ]]; then
-        sed -i 's/\r$//' "$1"  
+        sed -i 's/\r$//' "$1"
         return
     elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"

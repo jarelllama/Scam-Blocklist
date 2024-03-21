@@ -19,7 +19,7 @@ function main {
     check_redundant
     check_dead
     check_line_count
-}   
+}
 
 function check_alive {
     sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
@@ -29,7 +29,7 @@ function check_alive {
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to the raw file
     format_list "$dead_domains_file"
-    format_list "$raw_file"    
+    format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
 }
 
@@ -102,7 +102,7 @@ function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
     # If file is a CSV file, do not sort
     if [[ "$1" == *.csv ]]; then
-        sed -i 's/\r$//' "$1"  
+        sed -i 's/\r$//' "$1"
         return
     elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
         tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
@@ -118,4 +118,3 @@ function cleanup {
 
 trap cleanup EXIT
 main
-
