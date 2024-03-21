@@ -28,7 +28,8 @@ function check_alive {
     [[ -z "$alive_domains" ]] && return  # Return if no alive domains found
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to the raw file
-    format_list "$raw_file"
+    format_list "$dead_domains_file"
+    format_list "$raw_file"    
     log_event "$alive_domains" "resurrected" "dead_domains_file"
 }
 
@@ -41,13 +42,13 @@ function check_subdomains {
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains with subdomains
     format_list "$dead_domains_file"
     while read -r subdomain; do  # Loop through common subdomains
-        sed "s/^${subdomain}\.//" dead.tmp >> collated_dead_root_domains.tmp  # Strip to root domains and collate into file
+        sed "s/^${subdomain}\.//" dead.tmp >> dead_root_domains.tmp  # Strip to root domains and collate into file
     done < "$subdomains_to_remove_file"
-    sort -u collated_dead_root_domains.tmp -o collated_dead_root_domains.tmp
+    sort -u dead_root_domains.tmp -o dead_root_domains.tmp
     # Remove dead root domains from raw file and root domains file
-    comm -23 "$raw_file" collated_dead_root_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
-    comm -23 "$root_domains_file" collated_dead_root_domains.tmp > root.tmp && mv root.tmp "$root_domains_file"
-    log_event "$(<collated_dead_root_domains.tmp)" "dead" "raw"
+    comm -23 "$raw_file" dead_root_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
+    comm -23 "$root_domains_file" dead_root_domains.tmp > root.tmp && mv root.tmp "$root_domains_file"
+    log_event "$(<dead_root_domains.tmp)" "dead" "raw"
 }
 
 function check_redundant {

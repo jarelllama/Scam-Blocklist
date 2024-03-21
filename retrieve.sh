@@ -89,45 +89,44 @@ function main {
 
 function source_aa419 {
     source='aa419.org'
+    domains_file="data/domains_${source}.tmp"
     url='https://api.aa419.org/fakesites'
     printf "\nSource: %s\n\n" "$source"
+    touch "$domains_file"  # Initialize domains file
     for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Trailing / breaks API call
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
-        jq -r '.[].Domain' <<< "$page_results" | sort -u >> data/domains_aa419.tmp  # Collate all pages of domains
+        jq -r '.[].Domain' <<< "$page_results" >> "$domains_file"
     done
-    log_source_empty "$source" "$source" "data/domains_aa419.tmp"
-    process_source "$source" "$source" "data/domains_aa419.tmp"
+    process_source "$source" "$source" "$domains_file"
 }
 
 function source_guntab {
     source='guntab.com'
+    domains_file="data/domains_${source}.tmp"
     url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sort -u > data/domains_guntab.tmp  # Retrieve domains
-    log_source_empty "$source" "$source" "data/domains_guntab.tmp"
-    process_source "$source" "$source" "data/domains_guntab.tmp"
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' > "$domains_file"
+    process_source "$source" "$source" "$domains_file"
 }
 
 function source_stopgunscams {
     source='stopgunscams.com'
+    domains_file="data/domains_${source}.tmp"
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
     for page in {1..5}; do  # Loop through pages
         curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}">' |
-            sort -u >> collated_stopgunscams_results.tmp  # Collate all pages of results
+            sed 's/<h4 class="-ih"><a href="\///; s/">//; s/-/./g' >> "$domains_file"
     done
-    log_source_empty "$source" "$source" "collated_stopgunscams_results.tmp"
-    # Strip results to domains
-    sed 's/<h4 class="-ih"><a href="\///; s/">//; s/-/./g' collated_stopgunscams_results.tmp \
-        > data/domains_stopgunscams.tmp
-    process_source "$source" "$source" "data/domains_stopgunscams.tmp"
+    process_source "$source" "$source" "$domains_file"
 }
 
 function source_petscams {
     source='petscams.com'
+    domains_file="data/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     # Loop through the two categories
     categories=('puppy-scammer-list' 'pet-delivery-scam')
@@ -135,55 +134,48 @@ function source_petscams {
         url="https://petscams.com/category/${category}"
         for page in {2..25}; do  # Loop through pages
             curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
-                sort -u >> collated_petscams_results.tmp  # Collate all pages of results
+                sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///;
+                s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///; s/-\?[0-9]\?\/" // s/-/./g ' >> "$domains_file"
             url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
         done
     done
-    log_source_empty "$source" "$source" "collated_petscams_results.tmp"
-    # Strip results to domains
-    sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///; s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///;
-        s/\/" //; s/-/./g' collated_petscams_results.tmp > data/domains_petscams.tmp
-    process_source "$source" "$source" "data/domains_petscams.tmp"
+    process_source "$source" "$source" "$domains_file"
 }
 
 function source_scamdelivery {
     source='scam.delivery'
+    domains_file="data/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
     for page in {1..2}; do  # Loop through 2 pages
         # Use User Agent to reduce captcha blocking
-        curl -sA "$user_agent" "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' | sort -u \
-            >> collated_scamdelivery_results.tmp  # Collate all pages of results
+        curl -sA "$user_agent" "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' |
+            sed 's/title="//; s/"><\/a>//' | tr '[:upper:]' '[:lower:]' >> "$domains_file"
         url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
     done
-    log_source_empty "$source" "$source" "collated_scamdelivery_results.tmp"
-    # Strip results to domains
-    sed 's/title="//; s/"><\/a>//' collated_scamdelivery_results.tmp |
-        tr '[:upper:]' '[:lower:]' > data/domains_scamdelivery.tmp
-    process_source "$source" "$source" "data/domains_scamdelivery.tmp"
+    process_source "$source" "$source" "$domains_file"
 }
 
 function source_scamdirectory {
     source='scam.directory'
+    domains_file="data/domains_${source}.tmp"
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
-        sed 's/href="\///; s/" //' | sort -u > data/domains_scamdirectory.tmp  # Retrieve domains
-    log_source_empty "$source" "$source" "data/domains_scamdirectory.tmp"
-    process_source "$source" "$source" "data/domains_scamdirectory.tmp"
+        sed 's/href="\///; s/" //' > "$domains_file"
+    process_source "$source" "$source" "$domains_file"
 }
 
 function source_scamadviser {
     source='scamadviser.com'
+    domains_file="data/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages 
         curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing / breaks curl
-            grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' | tr '[:upper:]' '[:lower:]' | sort -u \
-                >> data/domains_scamadviser.tmp  # Collate all pages of domains
+            grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' | tr '[:upper:]' '[:lower:]' >> "$domains_file"
     done
-    log_source_empty "$source" "$source" "data/domains_scamadviser.tmp"
-    process_source "$source" "$source" "data/domains_scamadviser.tmp"
+    process_source "$source" "$source" "$domains_file"
 }
 
 function source_google_search {
@@ -198,25 +190,31 @@ function source_google_search {
 function search_google {
     url='https://customsearch.googleapis.com/customsearch/v1'
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
+    domains_file="data/domains_google_search_${search_term:0:100}.tmp"
+    touch "$domains_file"  # Initialize domains file
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results (max of 100 results)
-        ((query_count++))
+        ((query_count++))  # Track number of search queries used
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results 
-        jq -r '.items[].link' <<< "$page_results" >> collated_search_results.tmp  # Collate all pages of results
+        jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' >> "$domains_file"  # Strip URLs to domains
     done
-    log_source_empty "Google Search" "$search_term" "collated_search_results.tmp"
-    # Strip URLs to domains
-    awk -F/ '{print $3}' collated_search_results.tmp > "data/domains_google_search_${search_term:0:100}.tmp"
-    rm collated_search_results.tmp  # Reset temp search-term-specific results file
-    process_source "Google Search" "$search_term" "data/domains_google_search_${search_term:0:100}.tmp"
+    process_source "Google Search" "$search_term" "$domains_file"
 }
 
 function process_source {
     source="$1"
     item="$2"
-    format_list "$3"  # Format temp file for pending domains
+    domains_file="$3"
+
+    # Skip to next source/item if no results retrieved
+    if ! grep -q '[[:alpha:]]' "$domains_file"; then
+        log_source "$source" "$item" "0" "0" "0" "0" "0" "0" "" "$query_count"
+        return
+    fi
+
+    format_list "$domains_file"  # Format temp file for pending domains
     pending_domains=$(<"$3")  # Store pending domains in a variable
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
 
@@ -303,13 +301,13 @@ function process_source {
 }
 
 function merge_domains {
-    format_list filtered_domains.tmp
     # Exit if no new domains to add or temp file is missing
     if ! grep -q '[[:alpha:]]' filtered_domains.tmp; then  # -s does not seem to work well here
         printf "\nNo new domains to add.\n\n"
         exit
     fi
 
+    format_list filtered_domains.tmp
     filtered_domains_count=$(wc -w < filtered_domains.tmp)  # Count total number of filtered domains
     # Print domains if count is less than or equal to 10
     if [[ "$filtered_domains_count" -le 10 ]]; then
@@ -373,14 +371,6 @@ function log_source {
     awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v redundant="$7" -v toplist_count="$8" -v toplist_domains="$(printf "%s" "$9" | tr '\n' ' ')" -v time="$time_format" -v queries="${10}" 'BEGIN {print time","source","item","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains","queries",no"}' >> "$source_log"
     printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
     printf "%s\n" "---------------------------------------------------------------------"
-}
-
-function log_source_empty {
-    # Skip to next source/item if no results retrieved
-    if [[ ! -f "$3" ]]; then
-        log_source "$1" "$2" "0" "0" "0" "0" "0" "0" "" "$query_count"
-        return
-    fi
 }
 
 function format_list {
