@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Mar 21 12:34:54 UTC 2024
+# Last modified: Thu Mar 21 12:37:08 UTC 2024
 # Syntax: Dnsmasq
 # Total number of entries: 1
 #
@@ -4829,6 +4829,7 @@ local=/etoile-mode-com/
 local=/etradertrust.com/
 local=/etronixelectric.com/
 local=/etspenhousec.com/
+local=/eu-anti-fraudoffice.com/
 local=/eu-ecco-shop/
 local=/eu-expressfuh-de/
 local=/eu-legalefahren.com/
