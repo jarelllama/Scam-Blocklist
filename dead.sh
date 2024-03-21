@@ -42,13 +42,12 @@ function check_subdomains {
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains with subdomains
     format_list "$dead_domains_file"
     while read -r subdomain; do  # Loop through common subdomains
-        sed "s/^${subdomain}\.//" dead.tmp >> dead_root_domains.tmp  # Strip to root domains and collate into file
+        dead_root_domains=$(sed "s/^${subdomain}\.//" dead.tmp | sort -u)  # Strip to root domains and collate into file
     done < "$subdomains_to_remove_file"
-    sort -u dead_root_domains.tmp -o dead_root_domains.tmp
     # Remove dead root domains from raw file and root domains file
-    comm -23 "$raw_file" dead_root_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
-    comm -23 "$root_domains_file" dead_root_domains.tmp > root.tmp && mv root.tmp "$root_domains_file"
-    log_event "$(<dead_root_domains.tmp)" "dead" "raw"
+    comm -23 "$raw_file" <(printf "%s" "$dead_root_domains") > raw.tmp && mv raw.tmp "$raw_file"
+    comm -23 "$root_domains_file" <(printf "%s" "$dead_root_domains") > root.tmp && mv root.tmp "$root_domains_file"
+    log_event "$dead_root_domains" "dead" "raw"
 }
 
 function check_redundant {

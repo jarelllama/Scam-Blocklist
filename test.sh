@@ -145,7 +145,7 @@ function test_retrieval_check {
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     printf "Log:\n"
-    grep -F "$time_format" "$domain_log"  # Print log
+    cat "$domain_log"
     printf "%s\n" "---------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
@@ -154,7 +154,7 @@ function test_dead {
     # Test addition of resurrected domains
     printf "google.com\n" > "$dead_domains_file"  # Input
     printf "google.com\n" >> out_raw.txt  # Expected output
-    printf "resurrected,google.com,dead domains file\n" >> out_log.txt  # Expected output
+    printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt  # Expected output
 
     # Test removal of dead domains with subdomains
     : > "$subdomains_file"  # Initialize subdomains file
@@ -213,10 +213,8 @@ function test_dead {
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
     check_log  # Check log file
 
-    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n" ||
-        printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
-    printf "Log:\n"
-    grep -F "$time_format" "$domain_log"  # Print log
+    [[ "$error" == false ]] && printf "Test completed. No errors found.\n" ||
+        printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n"
     printf "%s\n" "---------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
