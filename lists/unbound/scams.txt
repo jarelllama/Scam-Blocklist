@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Mar 21 12:11:01 UTC 2024
+# Last modified: Thu Mar 21 12:33:58 UTC 2024
 # Syntax: Unbound
 # Total number of entries: 1
 #
@@ -1610,6 +1610,7 @@ local-zone: "best-floorcleaners-com." always_nxdomain
 local-zone: "best420travelguide.com." always_nxdomain
 local-zone: "bestammoacademy.com." always_nxdomain
 local-zone: "bestammoweapons.com." always_nxdomain
+local-zone: "bestammunitionsstore.com." always_nxdomain
 local-zone: "bestaucaninehome.com." always_nxdomain
 local-zone: "bestautoenginetrading.com." always_nxdomain
 local-zone: "bestb2kresearch.com." always_nxdomain

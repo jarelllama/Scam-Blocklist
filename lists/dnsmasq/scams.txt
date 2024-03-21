@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Mar 21 12:11:01 UTC 2024
+# Last modified: Thu Mar 21 12:33:58 UTC 2024
 # Syntax: Dnsmasq
 # Total number of entries: 1
 #
@@ -1609,6 +1609,7 @@ local=/best-floorcleaners-com/
 local=/best420travelguide.com/
 local=/bestammoacademy.com/
 local=/bestammoweapons.com/
+local=/bestammunitionsstore.com/
 local=/bestaucaninehome.com/
 local=/bestautoenginetrading.com/
 local=/bestb2kresearch.com/
