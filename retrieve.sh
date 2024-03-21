@@ -241,7 +241,7 @@ function process_source {
 
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
-    dead_count=$(wc -w <<< "$dead_domains")  # Count number of dead domains
+    dead_count=$(wc -w <<< "$dead_domains")
     if [[ "$dead_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
         #log_event "$dead_domains" "dead" "$source"  # Logs too many lines
@@ -252,8 +252,8 @@ function process_source {
     log_event "$blacklisted_domains" "blacklist" "$source"
 
     # Remove whitelisted domains, excluding blacklisted domains
-    whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$pending_domains" | grep -vxFf "$blacklist_file")
-    whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
+    whitelisted_domains=$(comm -23 <(grep -Ff "$whitelist_file" <<< "$pending_domains") "$blacklist_file")
+    whitelisted_count=$(wc -w <<< "$whitelisted_domains")
     if [[ "$whitelisted_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_domains"))
         log_event "$whitelisted_domains" "whitelist" "$source"
@@ -261,7 +261,7 @@ function process_source {
 
     # Remove domains that have whitelisted TLDs
     whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
-    whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")  # Count number of domains with whitelisted TLDs
+    whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")
     if [[ "$whiltelisted_tld_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
         log_event "$whiltelisted_tld_domains" "tld" "$source"
@@ -275,21 +275,19 @@ function process_source {
         printf "%s\n" "$invalid_entries" >> invalid_entries.tmp  # Collate invalid entries into temp file
     fi
 
-    redundant_domains_count=0  # Initialize redundant domains count for each source
     # Remove redundant domains
+    redundant_domains_count=0  # Initialize redundant domains count for each source
     while read -r wildcard; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")  # Find redundant domains via wildcard matching
         [[ -z "$redundant_domains" ]] && continue  # Skip to next wildcard if no matches found
-        # Count number of redundant domains
         redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
-        # Remove redundant domains
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
         log_event "$redundant_domains" "redundant" "$source"
     done < "$wildcards_file"
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
-    in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
+    in_toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$in_toplist_count" -gt 0 ]]; then
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
         log_event "$domains_in_toplist" "toplist" "$source"
