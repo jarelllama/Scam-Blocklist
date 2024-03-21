@@ -33,14 +33,14 @@ function main {
 
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
-        #source_aa419
-        #source_guntab
+        source_aa419
+        source_guntab
         source_petscams
-        #source_scamdelivery  # Has captchas
-        #source_scamdirectory
-        #source_scamadviser
-        #source_stopgunscams
-        #source_google_search
+        source_scamdelivery  # Has captchas
+        source_scamdirectory
+        source_scamadviser
+        source_stopgunscams
+        source_google_search
         merge_domains
         exit
     fi
@@ -182,14 +182,14 @@ function search_google {
     touch "$domains_file"  # Initialize domains file
     query_count=0  # Reinitliaze query count for each search term
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
-    for start in {1..100..10}; do  # Loop through each page of results (max of 100 results)
+    for start in {1..100..10}; do  # Loop through each page of results
         ((query_count++))  # Track number of search queries used
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
-        jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop when there are no more results
-        jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' | sort -u >> "$domains_file"  # Strip URLs to domains
-        if [[ $(wc -w < "$domains_file") -lt 10 ]]; then
-            break  # Break out of loop if no more pages are required
+        page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' | sort -u)
+        printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
+        if [[ $(wc -w <<< "$page_domains") -lt 10 ]]; then
+            break  # Break out of loop if no more pages are required to save API calls
         fi
     done
     process_source "Google Search" "$search_term" "$domains_file"
