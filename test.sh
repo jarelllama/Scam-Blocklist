@@ -83,7 +83,7 @@ function test_retrieval_check {
     # Test removal of invalid entries and IP addresses
     {
         printf "invalid-test-com\n"
-        prinft "100.100.100.100\n"
+        printf "100.100.100.100\n"
         printf "invalid-test.xn--903fds\n"
         printf "invalid-test.x\n"
         printf "invalid-test.100\n"
@@ -92,7 +92,7 @@ function test_retrieval_check {
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
     {
         printf "invalid,invalid-test-com\n"
-        prinft "invalid,100.100.100.100\n"
+        printf "invalid,100.100.100.100\n"
         printf "invalid,invalid-test.x\n"
         printf "invalid,invalid-test.100\n"
         printf "invalid,invalid-test.1x\n"
