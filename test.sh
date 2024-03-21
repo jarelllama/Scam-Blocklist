@@ -67,7 +67,8 @@ function test_retrieval_check {
     # Expected output
     printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
-    printf "blacklist,whitelist-blacklisted-test.com\n" >> out_log.txt
+    [[ "$script_to_test" == 'retrieve' ]] && printf "blacklist,whitelist-blacklisted-test.com\n" \
+        >> out_log.txt  # Check script does not log blacklisted domains
 
     # Test removal of domains with whitelisted TLDs
     {
