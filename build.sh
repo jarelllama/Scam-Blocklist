@@ -64,11 +64,11 @@ The list of search terms is proactively updated and is mostly retrieved from new
 
 #### Limitations
 
-The Google Custom Search JSON API only provides 100 free search queries per day. Because of the number of search terms used, the Google Search source can only be employed once a day.
+The Google Custom Search JSON API only provides ~100 free search queries per day. Because of the number of search terms used, the Google Search source can only be employed once a day.
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
 
-> Queries made today: $(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
+> Queries made today: $(count_queries)
 
 #### Regarding other sources
 
@@ -171,6 +171,15 @@ function count {
     # Sum up all domains retrieved by that source for that day
     csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 |
         tail +2| awk '{total += $1} END {print total}'
+}
+
+function count_queries {
+    queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
+    if [[ "$queries" -gt 100 ]]; then
+        printf "%s (rate limited)" "$queries"
+        return
+    fi
+    printf "%s" "$queries"
 }
 
 function format_list {
