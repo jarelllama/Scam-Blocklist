@@ -135,7 +135,7 @@ function source_petscams {
         for page in {2..25}; do  # Loop through pages
             curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
                 sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///;
-                s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///; s/-\?[0-9]\?\/" // s/-/./g ' >> "$domains_file"
+                s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
             url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
         done
     done
