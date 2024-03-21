@@ -13,18 +13,18 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 16021
+Total domains: 16045
 
 Total | Today | Yesterday | Source *
-    - |    15 |       115 | Google Search
-    - |    26 |       182 | aa419.org
+    - |    20 |       115 | Google Search
+    - |    28 |       182 | aa419.org
     - |     2 |        62 | guntab.com
-    - |    20 |        21 | petscams.com
+    - |    32 |        21 | petscams.com
     - |     0 |         0 | scam.delivery
     - |     1 |         0 | scam.directory
-    - |     0 |       148 | scamadviser.com
-    - |     2 |         4 | stopgunscams.com
-16021 |    66 |       532 | All sources
+    - |     3 |       148 | scamadviser.com
+    - |     9 |         4 | stopgunscams.com
+16045 |    95 |       532 | All sources
 
 *Domains added manually are excluded from the daily figures.
 ```
@@ -47,7 +47,7 @@ The Google Custom Search JSON API only provides 100 free search queries per day.
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
 
-> Queries made today: 95
+> Queries made today: 117
 
 #### Regarding other sources
 
