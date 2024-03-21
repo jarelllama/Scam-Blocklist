@@ -154,7 +154,7 @@ ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Last modified: $(date -u)
 ${3} Syntax: ${1}
-${3} Total number of entries: $(wc -l <<< "$raw_file")
+${3} Total number of entries: $(wc -w < "$raw_file")
 ${3}
 EOF
 
