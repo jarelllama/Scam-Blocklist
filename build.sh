@@ -160,26 +160,22 @@ EOF
 
     [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound syntax
     printf "%s\n" "$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file")" \
-     >> "$blocklist_path"  # Append formatted domains onto blocklist
+        >> "$blocklist_path"  # Append formatted domains onto blocklist
 }
 
 function print_stats {
-    # Return stats to function caller
     printf "    - |%6s |%10s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$2"
 }
 
 function count {
     # Find all runs from that particular source on that specific day
     runs=$(csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 12 -m 'yes' | csvcut -c 5 | tail +2)
-    total_count=0  # Initiaize total count
-    total_count=$(echo "$runs" | awk '{total += $1} END {print total}')  # Sum up domains retrieved from all runs of that source
-    printf "%s" "$total_count"  # Return domain count to function caller
+    printf "%s" "$runs" | awk '{total += $1} END {print total}'  # Sum up domains retrieved from all runs of that source
 }
 
 function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
-    # If file is a CSV file, do not sort
-    if [[ "$1" == *.csv ]]; then
+    if [[ "$1" == *.csv ]]; then  # If file is a CSV file, do not sort
         sed -i 's/\r//; /^$/d' "$1"
         return
     elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file

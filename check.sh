@@ -132,8 +132,7 @@ function log_event {
 
 function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
-    # If file is a CSV file, do not sort
-    if [[ "$1" == *.csv ]]; then
+    if [[ "$1" == *.csv ]]; then  # If file is a CSV file, do not sort
         sed -i 's/\r//; /^$/d' "$1"
         return
     elif [[ "$1" == *dead_domains_file* ]]; then  # Do not sort the dead domains file
