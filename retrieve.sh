@@ -30,7 +30,11 @@ function main {
     for file in config/* data/* data/processing/*; do  # Format files in the config and data directory
         format_list "$file"
     done
+    retrieve_new
+    retrieve_existing
+}
 
+function retrieve_new {
     # Retrieve domains from sources only if there are no existing domain files
     if ! ls data/domains_*.tmp &> /dev/null; then
         source_aa419
@@ -44,7 +48,9 @@ function main {
         merge_domains
         exit
     fi
+}
 
+function retrieve_existing {
     printf "\nUsing existing list of retrieved domains.\n\n"
     for temp_domains_file in data/domains_*.tmp; do  # Loop through temp domains file
         source="Empty"  # Reintialize source
@@ -68,7 +74,7 @@ function main {
         esac
         [[ "$source" != 'Google Search' ]] && process_source "$source" "$source" "$temp_domains_file"
     done
-    # Run Google search terms last
+    # Process Google search terms last
     for temp_domains_file in data/domains_google_search_*.tmp; do
         item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
         item=${item%.tmp}  # Remove file extension from file name
