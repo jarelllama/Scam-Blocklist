@@ -2,7 +2,7 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Mar 21 12:37:08 UTC 2024
+# Last modified: Thu Mar 21 12:42:42 UTC 2024
 # Syntax: Unbound
 # Total number of entries: 1
 #
@@ -3377,7 +3377,7 @@ local-zone: "containerdynasty.com." always_nxdomain
 local-zone: "containerholdingsptyltd.com." always_nxdomain
 local-zone: "containerpro.co.za." always_nxdomain
 local-zone: "containers2gogmbh.de." always_nxdomain
-local-zone: "containersalesjapan-com." always_nxdomain
+local-zone: "containersalesjapan.com." always_nxdomain
 local-zone: "containersandreefers.com." always_nxdomain
 local-zone: "containerscompany.co.za." always_nxdomain
 local-zone: "containershomeplan.com." always_nxdomain
