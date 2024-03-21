@@ -71,16 +71,18 @@ function check_redundant {
 }
 
 function check_dead {
-    sed 's/^/||/; s/$/^/' "$raw_file" > formatted_raw_file.tmp  # Format raw file
+    comm -23 "$raw_file" <(sort "$dead_domains_file") > dead.tmp  # Exclude previously checked domains
+    comm -23 dead.tmp "$root_domains_file" > dead.tmp.tmp  # Exclude subdomains stripped to root domains
+    comm -23 dead.tmp.tmp "$wildcards_file" | sed 's/^/||/; s/$/^/' > formatted_raw_file.tmp  # Exclude wildcard domains
     dead-domains-linter -i formatted_raw_file.tmp --export dead.tmp  # Find and export dead domains
-    dead_domains=$(comm -23 dead.tmp "$root_domains_file")  # Exclude subdomains stripped to root domains
-    dead_domains=$(comm -23 <(printf "%s" "$dead_domains") "$wildcards_file")  # Exclude wildcard domains
-    [[ -z "$dead_domains" ]] && return  # Return if no dead domains found
+    if ! grep -q '[[:alnum:]]' dead.tmp; then
+        return  # Return if no dead domains found
+    fi
     # Remove dead domains from raw file
-    comm -23 "$raw_file" <(printf "%s" "$dead_domains") > raw.tmp && mv raw.tmp "$raw_file"
-    printf "%s\n" "$dead_domains" >> "$dead_domains_file"  # Collate dead domains
+    comm -23 "$raw_file" dead.tmp > raw.tmp && mv raw.tmp "$raw_file"
+    cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
-    log_event "$dead_domains" "dead" "raw"
+    log_event "$(<dead.tmp)" "dead" "raw"
 }
 
 function check_line_count {
