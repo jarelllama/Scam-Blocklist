@@ -40,7 +40,7 @@ function retrieve_new {
         source_aa419
         source_guntab
         source_petscams
-        source_scamdelivery  # Has captchas
+        #source_scamdelivery  # Has captchas
         source_scamdirectory
         source_scamadviser
         source_stopgunscams
@@ -124,7 +124,7 @@ function source_petscams {
     categories=('puppy-scammer-list' 'pet-delivery-scam')
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
-        for page in {2..26}; do  # Loop through 25 pages
+        for page in {2..21}; do  # Loop through 20 pages
             curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
                 sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///;
                 s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
