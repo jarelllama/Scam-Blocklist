@@ -18,7 +18,7 @@ function main {
     check_subdomains
     check_redundant
     check_for_dead
-    clean_dead_domains_file
+    #clean_dead_domains_file
 }
 
 function check_for_alive {
