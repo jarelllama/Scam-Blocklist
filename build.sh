@@ -47,7 +47,8 @@ $(print_stats "scamadviser.com")
 $(print_stats "stopgunscams.com")
 $(print_stats "")
 
-*Domains added manually are excluded from the daily figures.
+* Domains added manually are excluded from the daily figures.
+* Dead % gets more accurate over time.
 \`\`\`
 
 All data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
