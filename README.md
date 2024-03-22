@@ -20,7 +20,7 @@ Total domains: 15842
      8 |        28 |  11% | aa419.org
      0 |         2 |  13% | guntab.com
      0 |        32 |   8% | petscams.com
-     0 |         0 |   0% | scam.delivery (inactive)
+     0 |         0 |   0% | scam.delivery
   1175 |         1 |   3% | scam.directory
      0 |         3 |  19% | scamadviser.com
      0 |         9 |   6% | stopgunscams.com
