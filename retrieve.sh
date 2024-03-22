@@ -342,7 +342,6 @@ function merge_domains {
     rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved into the raw file
     printf "%s\n%s\n" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
 
-    rm -r data/pending  # Initialize the pending directory if domains were saved into raw file
     [[ -f invalid_entries.tmp ]] && exit 1 || exit 0  # Exit with error if invalid entries were found
 }
 
@@ -374,6 +373,7 @@ function format_list {
 }
 
 function cleanup {
+    [[ ! -f in_toplist.tmp ]] && rm -r data/pending  # Initialize pending file is no pending domains to be saved
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
