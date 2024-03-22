@@ -194,7 +194,7 @@ function test_dead {
 
     # Prepare expected output files
     for file in out_*; do
-        [[ "$file" == "$dead_domains_file" ]] && continue  # Do not sort dead domains file
+        [[ "$file" == out_dead.txt ]] && continue  # Dead domains file is not sorted
         sort "$file" -o "$file"
     done
 
