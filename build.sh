@@ -172,10 +172,12 @@ function count {
     # Count % dead
     if [[ "$1" == 'dead' ]]; then
         raw_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 4 | awk '{total += $1} END {print total}')
-        [[ "$raw_count" -eq 0 ]] && return  # Return if zero to prevent divide by zero error
         dead_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 7 | awk '{total += $1} END {print total}')
-        percentage_dead=$((dead_count*100/raw_count))  # Calculate % of dead of the raw count
-        printf "%s" "$percentage_dead"
+        if [[ "$raw_count" -eq 0 ]] || [[ "$dead_count" -eq 0 ]]; then
+            printf "0%%"
+            return  # Return if zero to prevent divide by zero error
+        fi
+        ((dead_count*100/raw_count))  # Calculate % of dead of the raw count
         return
     fi
 
