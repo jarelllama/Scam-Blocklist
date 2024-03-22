@@ -1,6 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-domain_log='data/domain_log.csv'
+domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 toplist_file='data/toplist.txt'

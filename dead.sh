@@ -1,6 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-domain_log='data/domain_log.csv'
+domain_log='config/domain_log.csv'
 root_domains_file='data/root_domains.txt'
 subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
