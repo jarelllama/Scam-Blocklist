@@ -36,7 +36,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
 
- Today | Yesterday | Dead | Source *
+Today | Yesterday | Dead | Source *
 $(print_stats "Google Search")
 $(print_stats "aa419.org")
 $(print_stats "guntab.com")
@@ -155,7 +155,7 @@ EOF
 
 function print_stats {
     [[ "$1" == '' ]] && source="All sources" || source="$1"
-    printf "%6s |%10s |%4s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
+    printf "%5s |%10s |%4s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
 }
 
 function count {
