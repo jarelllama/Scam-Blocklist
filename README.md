@@ -16,15 +16,15 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 Total domains: 16029
 
 Total | Today | Yesterday | Source *
-    - |       |        20 | Google Search
-    - |       |        28 | aa419.org
-    - |       |         2 | guntab.com
-    - |       |        32 | petscams.com
-    - |       |         0 | scam.delivery
-    - |       |         1 | scam.directory
-    - |       |         3 | scamadviser.com
-    - |       |         9 | stopgunscams.com
-16029 |       |        95 | All sources
+    - |     - |        20 | Google Search
+    - |     - |        28 | aa419.org
+    - |     - |         2 | guntab.com
+    - |     - |        32 | petscams.com
+    - |     - |         0 | scam.delivery
+    - |     - |         1 | scam.directory
+    - |     - |         3 | scamadviser.com
+    - |     - |         9 | stopgunscams.com
+16029 |     - |        95 | All sources
 
 *Domains added manually are excluded from the daily figures.
 ```
