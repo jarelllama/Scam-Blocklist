@@ -16,15 +16,15 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 Total domains: 17209
 
 Total | Today | Yesterday | Source *
-    - |     - |         - | Google Search
-    - |     - |         - | aa419.org
-    - |     - |         - | guntab.com
-    - |     - |         - | petscams.com
-    - |     - |         - | scam.delivery
-    - |     - |         - | scam.directory
-    - |     - |         - | scamadviser.com
-    - |     - |         - | stopgunscams.com
-17209 |     - |         - | All sources
+    - |     0 |        20 | Google Search
+    - |     5 |        28 | aa419.org
+    - |     0 |         2 | guntab.com
+    - |     0 |        32 | petscams.com
+    - |     0 |         0 | scam.delivery
+    - |  1175 |         1 | scam.directory
+    - |     0 |         3 | scamadviser.com
+    - |     0 |         9 | stopgunscams.com
+17209 |  1180 |        95 | All sources
 
 *Domains added manually are excluded from the daily figures.
 ```
@@ -45,9 +45,9 @@ The list of search terms is proactively updated and is mostly retrieved from new
 
 The Google Custom Search JSON API only provides ~100 free search queries per day. Because of the number of search terms used, the Google Search source can only be employed once a day.
 
-To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/source_log.csv)
+To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
-> Queries made today: 0
+> Queries made today: 11
 
 #### Regarding other sources
 
