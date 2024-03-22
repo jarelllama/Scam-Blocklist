@@ -51,7 +51,7 @@ function check_raw_file {
     format_list root_domains.tmp
 
     # Remove whitelisted domains, excluding blacklisted domains
-    whitelisted_domains=$(grep -Ff "$whitelist_file" <<< "$domains" | grep -vxFf "$blacklist_file")
+    whitelisted_domains=$(comm -23 <(grep -Ff "$whitelist_file" <<< "$domains") "$blacklist_file")
     whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
     if [[ "$whitelisted_count" -gt 0 ]]; then
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))
@@ -97,7 +97,7 @@ function check_raw_file {
     format_list wildcards.tmp
 
     # Find matching domains in toplist, excluding blacklisted domains
-    domains_in_toplist=$(comm -12 <(printf "%s" "$domains") "$toplist_file" | grep -vxFf "$blacklist_file")
+    domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$domains") "$toplist_file") "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
     if [[ "$in_toplist_count" -gt 0 ]]; then
         awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
