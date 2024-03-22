@@ -70,11 +70,14 @@ function retrieve_existing {
                 source="scam.directory" ;;
             *scamadviser.com*)
                 source="scamadviser.com" ;;
+            *dfpi.ca.gov*)
+                source="dfpi.ca.gov" ;;
         esac
         [[ "$source" != 'Google Search' ]] && process_source "$source" "$source" "$temp_domains_file"
     done
     # Process Google search terms last
     for temp_domains_file in data/pending/domains_google_search_*.tmp; do
+        [[ ! -f "$temp_domains_file" ]] && break
         item=${temp_domains_file#data/pending/domains_google_search_}  # Remove header from file name
         item=${item%.tmp}  # Remove file extension from file name
         process_source "Google Search" "$item" "$temp_domains_file"
