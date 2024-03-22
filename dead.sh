@@ -14,14 +14,14 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    check_alive
+    check_for_alive
     check_subdomains
     check_redundant
-    check_dead
-    check_line_count
+    check_for_dead
+    clean_dead_domains_file
 }
 
-function check_alive {
+function check_for_alive {
     sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
     dead-domains-linter -i formatted_dead_domains_file.tmp --export dead.tmp  # Find dead domains in the dead domains file
     alive_domains=$(comm -23 <(sort "$dead_domains_file") dead.tmp)  # Find resurrected domains in the dead domains file (note dead domains file is not sorted)
@@ -70,9 +70,9 @@ function check_redundant {
     log_event "$(<collated_dead_wildcards.tmp)" "dead" "wildcard"
 }
 
-function check_dead {
-    comm -23 "$raw_file" <(sort "$dead_domains_file" "$root_domains_file" "$wildcards_file") |
-        sed 's/^/||/; s/$/^/' > formatted_raw_file.tmp  # Exclude previously checked domains
+function check_for_dead {
+    comm -23 "$raw_file" <(sort "$root_domains_file" "$wildcards_file") |  # Exclude wilcards and root domains of subdomains
+        sed 's/^/||/; s/$/^/' > formatted_raw_file.tmp  # Format raw file
     dead-domains-linter -i formatted_raw_file.tmp --export dead.tmp  # Find and export dead domains
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead domains from raw file
@@ -82,10 +82,9 @@ function check_dead {
     log_event "$(<dead.tmp)" "dead" "raw"
 }
 
-function check_line_count {
-    # Clear first 1000 lines if dead domains file is over 5000 lines
+function clean_dead_domains_file {
     if [[ $(wc -w < "$dead_domains_file") -gt 5000 ]]; then
-        tail +1001 "$dead_domains_file" > dead.tmp && mv dead.tmp "$dead_domains_file"
+        sed -i '1,100d' "$dead_domains_file"
     fi
 }
 

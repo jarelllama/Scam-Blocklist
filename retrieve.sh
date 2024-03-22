@@ -101,7 +101,7 @@ function source_guntab {
     url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' > "$domains_file"
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | head -500 > "$domains_file"  # Keep only newest 500 domains
     process_source "$source" "$source" "$domains_file"
 }
 
@@ -155,7 +155,7 @@ function source_scamdirectory {
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
-        sed 's/href="\///; s/" //; s/-/./g' > "$domains_file"
+        sed 's/href="\///; s/" //; s/-/./g' | head -500 > "$domains_file"  # Keep only newest 500 domains
     process_source "$source" "$source" "$domains_file"
 }
 
@@ -334,7 +334,7 @@ function merge_domains {
     count_before=$(wc -w < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
-    #log_event "$(<filtered_domains.tmp)" "new_domain" "all_sources"  # Logs too much
+    log_event "$(<filtered_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -w < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"

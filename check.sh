@@ -133,7 +133,14 @@ function check_raw_file {
     after_count=$(wc -w <<< "$domains")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_domains_count" "$in_toplist_count"
 
+    clean_domain_log
     [[ -s filter_log.tmp ]] && exit 1 || exit 0 # Exit with error if the blocklist required filtering
+}
+
+function clean_domain_log {
+    if [[ $(wc -w < "$domain_log") -gt 10000 ]]; then
+        sed -i '1,200d' "$domain_log"
+    fi
 }
 
 function log_event {
