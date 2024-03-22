@@ -249,7 +249,7 @@ function process_source {
 
     # Find blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")
-    log_event "$blacklisted_domains" "blacklist" "$source"
+    [[ -n "$blacklisted_domains" ]] && log_event "$blacklisted_domains" "blacklist" "$source"
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(comm -23 <(grep -Ff "$whitelist_file" <<< "$pending_domains") "$blacklist_file")
