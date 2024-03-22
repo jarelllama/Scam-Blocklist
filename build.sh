@@ -165,19 +165,15 @@ EOF
 
 function print_stats {
     [[ "$1" == '' ]] && source="All sources" || source="$1"
-    printf "%6s |%10s |%5s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
+    printf "%6s |%10s |%5s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
 }
 
 function count {
-    # Count % dead
+    # Count % dead of raw count
     if [[ "$1" == 'dead' ]]; then
-        raw_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 4 | awk '{total += $1} END {print total}')
-        dead_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 7 | awk '{total += $1} END {print total}')
-        if [[ "$raw_count" -eq 0 ]] || [[ "$dead_count" -eq 0 ]]; then
-            printf "0%%"
-            return  # Return if zero to prevent divide by zero error
-        fi
-        ((dead_count*100/raw_count))  # Calculate % of dead of the raw count
+        raw_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$2" | csvcut -c 4 | awk '{total += $1} END {print total}')
+        dead_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$2" | csvcut -c 7 | awk '{total += $1} END {print total}')
+        [[ "$raw_count" -ne 0 ]] && printf "%s" "$((dead_count*100/raw_count))" || printf "0"
         return
     fi
 
@@ -187,8 +183,7 @@ function count {
         return
     fi
     # Sum up all domains retrieved by that source for that day
-    csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" |
-        csvcut -c 5 | awk '{total += $1} END {print total}'
+    csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 | awk '{total += $1} END {print total}'
 }
 
 function count_queries {
