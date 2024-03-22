@@ -37,16 +37,15 @@ function main {
 
 function retrieve_new {
         mkdir data/pending  # Intialize pending directory
-        #source_aa419
-        source_chainabuse
-        #source_dfpi
-        #source_guntab
-        #source_petscams
-        #source_scamdelivery  # Has captchas
-        #source_scamdirectory
-        #source_scamadviser
-        #source_stopgunscams
-        #source_google_search
+        source_aa419
+        source_dfpi
+        source_guntab
+        source_petscams
+        source_scamdelivery  # Has captchas
+        source_scamdirectory
+        source_scamadviser
+        source_stopgunscams
+        source_google_search
 }
 
 function retrieve_existing {
@@ -182,18 +181,6 @@ function source_dfpi {
     printf "\nSource: %s\n\n" "$source"
     curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
         sed 's/<td class="column-5">//; s/<a href="//' > "$domains_file"
-    process_source "$source" "$source" "$domains_file"
-}
-
-function source_chainabuse {
-    source='chainabuse.com'
-    domains_file="data/pending/domains_${source}.tmp"
-    url='https://www.chainabuse.com'
-    printf "\nSource: %s\n\n" "$source"
-    for page in {0..9}; do  # Loop through pages
-        curl -s "${url}/reports?page=${page}sort=newest/" | grep -oE '"domain":"(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
-            sed 's/"domain":"//' >> "$domains_file"
-    done
     process_source "$source" "$source" "$domains_file"
 }
 
