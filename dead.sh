@@ -83,9 +83,7 @@ function check_for_dead {
 }
 
 function clean_dead_domains_file {
-    if [[ $(wc -w < "$dead_domains_file") -gt 5000 ]]; then
-        sed -i '1,100d' "$dead_domains_file"
-    fi
+    [[ $(wc -w < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file"
 }
 
 function log_event {

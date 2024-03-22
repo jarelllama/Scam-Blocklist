@@ -194,9 +194,7 @@ function search_google {
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop if the first page has no results
         page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' | sort -u)
         printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
-        if [[ $(wc -w <<< "$page_domains") -lt 10 ]]; then
-            break  # Break out of loop if no more pages are required
-        fi
+        [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
     done
     process_source "Google Search" "$search_term" "$domains_file"
 }

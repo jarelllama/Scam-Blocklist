@@ -145,7 +145,7 @@ EOF
 
 function build_list {
     blocklist_path="lists/${directory}/scams.txt"
-    [[ -d "$(dirname $blocklist_path)" ]] || mkdir "$(dirname $blocklist_path)"  # Create directory if not present
+    [[ -d "$(dirname "$blocklist_path")" ]] || mkdir "$(dirname "$blocklist_path")"  # Create directory if not present
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
@@ -176,7 +176,6 @@ function count {
         [[ "$raw_count" -ne 0 ]] && printf "%s" "$((dead_count*100/raw_count))" || printf "0"
         return
     fi
-
     # Print dash if no runs for that day found
     if ! grep -qF "$1" "$source_log"; then
         printf "-"

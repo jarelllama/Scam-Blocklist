@@ -138,9 +138,7 @@ function check_raw_file {
 }
 
 function clean_domain_log {
-    if [[ $(wc -w < "$domain_log") -gt 10000 ]]; then
-        sed -i '1,200d' "$domain_log"
-    fi
+    [[ $(wc -w < "$domain_log") -gt 10000 ]] && sed -i '1,200d' "$domain_log"
 }
 
 function log_event {
