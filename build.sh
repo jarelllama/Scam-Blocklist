@@ -111,6 +111,8 @@ All data retrieved from these sources are publicly available.
 
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
 
+- [who.is](https://who.is/): WHOIS and DNS lookup tool
+
 - [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
 
 - [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): The law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
