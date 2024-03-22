@@ -36,7 +36,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
 
-Today | Yesterday | Source *
+ Today | Yesterday | Dead | Source *
 $(print_stats "Google Search")
 $(print_stats "aa419.org")
 $(print_stats "guntab.com")
@@ -165,10 +165,19 @@ EOF
 
 function print_stats {
     [[ "$1" == '' ]] && source="All sources" || source="$1"
-    printf "%6s |%10s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$source"
+    printf "%6s |%10s |%5s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
 }
 
 function count {
+    # Count % dead
+    if [[ "$1" == 'dead' ]]; then
+        dead_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 7)
+        raw_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 4)
+        percentage_dead=$(printf "%s" "scale=2; (${dead_count}/${raw_count})*100" | bc)  # Calculate % of dead of the raw count
+        printf "%s%%" "$percentage_dead"
+        return
+    fi
+
     # Print dash if no runs for that day found
     if ! grep -qF "$1" "$source_log"; then
         printf "-"
@@ -181,11 +190,7 @@ function count {
 
 function count_queries {
     queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
-    if [[ "$queries" -gt 100 ]]; then
-        printf "%s (rate limited)" "$queries"
-        return
-    fi
-    printf "%s" "$queries"
+    [[ "$queries" -le 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
 }
 
 function format_list {
