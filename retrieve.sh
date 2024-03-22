@@ -100,7 +100,7 @@ function source_guntab {
     url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}; 501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source "$source" "$source" "$domains_file"
 }
 
@@ -154,7 +154,7 @@ function source_scamdirectory {
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
-        sed 's/href="\///; s/" //; s/-/./g' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
+        sed 's/href="\///; s/" //; s/-/./g; 501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source "$source" "$source" "$domains_file"
 }
 
