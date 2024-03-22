@@ -36,16 +36,16 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
 
-Total | Today | Yesterday | Source *
-$(print_stats "Google Search" "Google Search")
-$(print_stats "aa419.org" "aa419.org")
-$(print_stats "guntab.com" "guntab.com")
-$(print_stats "petscams.com" "petscams.com")
-$(print_stats "scam.delivery" "scam.delivery")
-$(print_stats "scam.directory" "scam.directory")
-$(print_stats "scamadviser.com" "scamadviser.com")
-$(print_stats "stopgunscams.com" "stopgunscams.com")
-$(printf "%5s" "$(wc -w < "$raw_file")") |$(printf "%6s" "$(count "$today" "")") |$(printf "%10s" "$(count "$yesterday" "")") | All sources
+Today | Yesterday | Source *
+$(print_stats "Google Search")
+$(print_stats "aa419.org")
+$(print_stats "guntab.com")
+$(print_stats "petscams.com")
+$(print_stats "scam.delivery")
+$(print_stats "scam.directory")
+$(print_stats "scamadviser.com")
+$(print_stats "stopgunscams.com")
+$(print_stats "")
 
 *Domains added manually are excluded from the daily figures.
 \`\`\`
@@ -164,7 +164,8 @@ EOF
 }
 
 function print_stats {
-    printf "    - |%6s |%10s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$2"
+    [[ "$1" == '' ]] && source="All sources" || source="$1"
+    printf "%6s |%10s | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$source"
 }
 
 function count {
