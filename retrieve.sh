@@ -40,7 +40,7 @@ function retrieve_new {
         source_aa419
         source_guntab
         source_petscams
-        #source_scamdelivery  # Has captchas
+        source_scamdelivery  # Has captchas
         source_scamdirectory
         source_scamadviser
         source_stopgunscams
