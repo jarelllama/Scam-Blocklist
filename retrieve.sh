@@ -12,7 +12,7 @@ subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
 time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
-user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.3'
+user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.1'
 query_count=0  # Initialize query count (only increments for Google Search terms)
 
 # grep '\..*\.' domains.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
@@ -44,7 +44,7 @@ function retrieve_new {
         source_scamdirectory
         source_scamadviser
         source_stopgunscams
-        #source_google_search
+        source_google_search
 }
 
 function retrieve_existing {
@@ -100,7 +100,7 @@ function source_guntab {
     url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | head -500 > "$domains_file"  # Keep only newest 500 domains
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | head -n 500 > "$domains_file"  # Keep only newest 500 domains
     process_source "$source" "$source" "$domains_file"
 }
 
@@ -154,7 +154,7 @@ function source_scamdirectory {
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
-        sed 's/href="\///; s/" //; s/-/./g' | head -500 > "$domains_file"  # Keep only newest 500 domains
+        sed 's/href="\///; s/" //; s/-/./g' | head -n 500 > "$domains_file"  # Keep only newest 500 domains
     process_source "$source" "$source" "$domains_file"
 }
 
@@ -173,7 +173,7 @@ function source_scamadviser {
 function source_google_search {
     source='Google Search'
     printf "\nSource: %s\n\n" "$source"
-    csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail +2 |  # Filter out unused search terms
+    csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             search_google "$search_term"  # Pass the search term to the search function
         done
