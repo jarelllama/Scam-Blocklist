@@ -191,7 +191,7 @@ function search_google {
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop if the first page has no results
-        page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}' | sort -u)
+        page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')
         printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
         [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
     done
