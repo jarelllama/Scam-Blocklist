@@ -47,9 +47,9 @@ $(print_stats "scamadviser.com")
 $(print_stats "stopgunscams.com")
 $(print_stats "")
 
+* Dead domains are counted upon retrieval and are
+  not included in the blocklist.
 * Domains added manually are not counted as a source.
-* Dead % is measured upon retrieval,
-the blocklist itself is purged of dead domains daily.
 \`\`\`
 All data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
