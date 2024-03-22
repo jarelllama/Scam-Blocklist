@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Mar 22 11:35:03 UTC 2024
+# Last modified: Fri Mar 22 16:34:58 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15846
+# Total number of entries: 15854
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -4133,6 +4133,7 @@ local-zone: "dispenserdrugstore.com." always_nxdomain
 local-zone: "displacementsjournal.com." always_nxdomain
 local-zone: "disposablevapecarts.com." always_nxdomain
 local-zone: "divine-wonder.com." always_nxdomain
+local-zone: "divinedecorofdallas.us." always_nxdomain
 local-zone: "divineexpressglobaldelivery.com." always_nxdomain
 local-zone: "divinegreatdanes.com." always_nxdomain
 local-zone: "divinexpressdelivery.com." always_nxdomain
@@ -5972,6 +5973,7 @@ local-zone: "gesiempirepugpuppies.com." always_nxdomain
 local-zone: "gesoftop.com." always_nxdomain
 local-zone: "get-carts.com." always_nxdomain
 local-zone: "get-vapecarts.com." always_nxdomain
+local-zone: "getbiocultura.com." always_nxdomain
 local-zone: "getcarspareparts.com." always_nxdomain
 local-zone: "getcocaineonline.com." always_nxdomain
 local-zone: "getgams.com." always_nxdomain
@@ -6007,6 +6009,7 @@ local-zone: "gifnest.com." always_nxdomain
 local-zone: "gifnestbuy.com." always_nxdomain
 local-zone: "gift-99.top." always_nxdomain
 local-zone: "gift4ls.com." always_nxdomain
+local-zone: "giftbeing.com." always_nxdomain
 local-zone: "giftflows.com." always_nxdomain
 local-zone: "giftiheaven.com." always_nxdomain
 local-zone: "giftipoint.com." always_nxdomain
@@ -8409,6 +8412,7 @@ local-zone: "lewisfarmsa.com." always_nxdomain
 local-zone: "lewiswilliamsandassociates.com." always_nxdomain
 local-zone: "lexingtonsbank.com." always_nxdomain
 local-zone: "lfbxtrade.com." always_nxdomain
+local-zone: "lgkprints.com." always_nxdomain
 local-zone: "lgsgunsammo.com." always_nxdomain
 local-zone: "lgswa-logistics.com." always_nxdomain
 local-zone: "lhbplc.com." always_nxdomain
@@ -10502,6 +10506,7 @@ local-zone: "outsportequip.com." always_nxdomain
 local-zone: "outstandingyorkie.wixsite.com." always_nxdomain
 local-zone: "ouzod.uk." always_nxdomain
 local-zone: "ouzodbooks.com." always_nxdomain
+local-zone: "ovaltee.store." always_nxdomain
 local-zone: "over.outdoor.com." always_nxdomain
 local-zone: "over.riding.com." always_nxdomain
 local-zone: "over.sportswear.com." always_nxdomain
@@ -11288,6 +11293,7 @@ local-zone: "proactivehpt.com." always_nxdomain
 local-zone: "proammodepot.com." always_nxdomain
 local-zone: "proammunitions.com." always_nxdomain
 local-zone: "proautomotivegroup.com." always_nxdomain
+local-zone: "probirshop.com." always_nxdomain
 local-zone: "probity-services.com." always_nxdomain
 local-zone: "probmxbikes.com." always_nxdomain
 local-zone: "procaid.com." always_nxdomain
@@ -12177,6 +12183,7 @@ local-zone: "ruggedsupply.net." always_nxdomain
 local-zone: "rugsandcurtains.com." always_nxdomain
 local-zone: "ruidianmedia.com." always_nxdomain
 local-zone: "rujirakeaonin.com." always_nxdomain
+local-zone: "rulfloor.com." always_nxdomain
 local-zone: "runsaucony.com." always_nxdomain
 local-zone: "runtzcartsofficial.com." always_nxdomain
 local-zone: "runtzdisposables.com." always_nxdomain
@@ -12649,6 +12656,7 @@ local-zone: "shopfootballna.com." always_nxdomain
 local-zone: "shopglockpistols.com." always_nxdomain
 local-zone: "shophardware.net." always_nxdomain
 local-zone: "shophive.in." always_nxdomain
+local-zone: "shopingsa.com." always_nxdomain
 local-zone: "shopitfasts.com." always_nxdomain
 local-zone: "shopitsy.com." always_nxdomain
 local-zone: "shopjbweld.com." always_nxdomain
