@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Mar 22 18:29:38 UTC 2024
+# Last modified: Fri Mar 22 18:31:28 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15967
+# Total number of entries: 15968
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -11254,6 +11254,7 @@ local-zone: "premiumyorkiepuppies.com." always_nxdomain
 local-zone: "premuimaccess.shop." always_nxdomain
 local-zone: "premuimcapital.com." always_nxdomain
 local-zone: "prerenewables.com." always_nxdomain
+local-zone: "presale.doge20.site." always_nxdomain
 local-zone: "presgloble.com." always_nxdomain
 local-zone: "prestige-nails.fr." always_nxdomain
 local-zone: "prestigeassurancesecurity.com." always_nxdomain
