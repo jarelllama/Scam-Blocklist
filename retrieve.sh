@@ -37,14 +37,16 @@ function main {
 
 function retrieve_new {
         mkdir data/pending  # Intialize pending directory
-        source_aa419
-        source_guntab
-        source_petscams
-        source_scamdelivery  # Has captchas
-        source_scamdirectory
-        source_scamadviser
-        source_stopgunscams
-        source_google_search
+        #source_aa419
+        source_chainabuse
+        source_dfpi
+        #source_guntab
+        #source_petscams
+        #source_scamdelivery  # Has captchas
+        #source_scamdirectory
+        #source_scamadviser
+        #source_stopgunscams
+        #source_google_search
 }
 
 function retrieve_existing {
@@ -86,7 +88,7 @@ function source_aa419 {
     printf "\nSource: %s\n\n" "$source"
     touch "$domains_file"  # Initialize domains file
     for pgno in {1..20}; do  # Loop through pages
-        query_params="${pgno}/500?fromupd=2022-01-01&Status=active&fields=Domain,Status,DateAdded,Updated"
+        query_params="${pgno}/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Trailing / breaks API call
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" >> "$domains_file"
@@ -99,7 +101,7 @@ function source_guntab {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
-    curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
+    curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source "$source" "$source" "$domains_file"
 }
@@ -110,8 +112,8 @@ function source_stopgunscams {
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
     for page in {1..5}; do  # Loop through pages
-        curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}">' |
-            sed 's/<h4 class="-ih"><a href="\///; s/">//; s/-/./g' >> "$domains_file"
+        curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
+            sed 's/<h4 class="-ih"><a href="\///; s/-/./g' >> "$domains_file"
     done
     process_source "$source" "$source" "$domains_file"
 }
@@ -125,7 +127,7 @@ function source_petscams {
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
         for page in {2..21}; do  # Loop through 20 pages
-            curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
+            curl -s "${url}/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
                 sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///;
                 s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
             url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
@@ -141,8 +143,8 @@ function source_scamdelivery {
     url='https://scam.delivery/category/review'
     for page in {2..3}; do  # Loop through 2 pages
         # Use User Agent to reduce captcha blocking
-        curl -sA "$user_agent" "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' |
-            sed 's/title="//; s/"><\/a>//' | tr '[:upper:]' '[:lower:]' >> "$domains_file"
+        curl -sA "$user_agent" "${url}/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' |
+            sed 's/title="//; s/"><\/a>//' >> "$domains_file"
         url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
     done
     process_source "$source" "$source" "$domains_file"
@@ -153,7 +155,7 @@ function source_scamdirectory {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
-    curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
+    curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
         sed 's/href="\///; s/" //; s/-/./g; 501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source "$source" "$source" "$domains_file"
 }
@@ -165,7 +167,29 @@ function source_scamadviser {
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
         curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing / breaks curl
-            grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' | tr '[:upper:]' '[:lower:]' >> "$domains_file"
+            grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$domains_file"
+    done
+    process_source "$source" "$source" "$domains_file"
+}
+
+function source_dfpi {
+    source='dfpi.ca.gov'
+    domains_file="data/pending/domains_${source}.tmp"
+    url='https://dfpi.ca.gov/crypto-scams'
+    printf "\nSource: %s\n\n" "$source"
+    curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
+        sed 's/<td class="column-5">//; s/<a href="//' > "$domains_file"
+    process_source "$source" "$source" "$domains_file"
+}
+
+function source_chainabuse {
+    source='chainabuse.com'
+    domains_file="data/pending/domains_${source}.tmp"
+    url='https://www.chainabuse.com'
+    printf "\nSource: %s\n\n" "$source"
+    for page in {0..9}; do  # Loop through pages
+        curl -s "${url}/reports?page=${page}&sort=newest/" | grep -oE '"domain":"(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
+            sed 's/"domain":"//' >> "$domains_file"
     done
     process_source "$source" "$source" "$domains_file"
 }
@@ -209,6 +233,8 @@ function process_source {
         return
     fi
 
+    # Remove https:// and convert to lowercase
+    sed 's/https:\/\///; s/http:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
     format_list "$domains_file"  # Format temp file for pending domains
     pending_domains=$(<"$3")  # Store pending domains in a variable
     unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
