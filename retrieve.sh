@@ -44,7 +44,7 @@ function retrieve_new {
         source_scamdirectory
         source_scamadviser
         source_stopgunscams
-        source_google_search
+        #source_google_search
 }
 
 function retrieve_existing {
