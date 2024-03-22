@@ -6,7 +6,7 @@ yesterday="$(date -ud "yesterday" +"%d-%m-%y")"
 
 function main {
     command -v csvgrep &> /dev/null || pip install -q csvkit
-    for file in config/* data/* data/processing/*; do  # Format files in the config and data directory
+    for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
     build_adblock

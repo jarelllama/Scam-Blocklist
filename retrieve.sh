@@ -1,16 +1,16 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-source_log='data/source_log.csv'
-domain_log='data/domain_log.csv'
+source_log='config/source_log.csv'
+domain_log='config/domain_log.csv'
 search_terms_file='config/search_terms.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
-toplist_file='data/processing/toplist.txt'
-root_domains_file='data/processing/root_domains.txt'
-subdomains_file='data/processing/subdomains.txt'
+toplist_file='data/toplist.txt'
+root_domains_file='data/root_domains.txt'
+subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
-wildcards_file='data/processing/wildcards.txt'
-dead_domains_file='data/processing/dead_domains.txt'
+wildcards_file='data/wildcards.txt'
+dead_domains_file='data/dead_domains.txt'
 time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.3'
 query_count=0  # Initialize query count (only increments for Google Search terms)
@@ -27,16 +27,15 @@ fi
 function main {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install cvstat
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
-    for file in config/* data/* data/processing/*; do  # Format files in the config and data directory
+    for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
+    [[ -d data/pending ]] && retrieve_existing  # Use existing pending domains if pending directory present
     retrieve_new
-    retrieve_existing
 }
 
 function retrieve_new {
-    # Retrieve domains from sources only if there are no existing domain files
-    if ! ls data/domains_*.tmp &> /dev/null; then
+        mkdir data/pending  # Intialize pending directory
         source_aa419
         source_guntab
         source_petscams
@@ -46,13 +45,11 @@ function retrieve_new {
         source_stopgunscams
         source_google_search
         merge_domains
-        exit
-    fi
 }
 
 function retrieve_existing {
     printf "\nUsing existing list of retrieved domains.\n\n"
-    for temp_domains_file in data/domains_*.tmp; do  # Loop through temp domains file
+    for temp_domains_file in data/pending/domains_*.tmp; do  # Loop through temp domains file
         source="Empty"  # Reintialize source
         case "$temp_domains_file" in
             *google_search*)
@@ -75,8 +72,8 @@ function retrieve_existing {
         [[ "$source" != 'Google Search' ]] && process_source "$source" "$source" "$temp_domains_file"
     done
     # Process Google search terms last
-    for temp_domains_file in data/domains_google_search_*.tmp; do
-        item=${temp_domains_file#data/domains_google_search_}  # Remove header from file name
+    for temp_domains_file in data/pending/domains_google_search_*.tmp; do
+        item=${temp_domains_file#data/pending/domains_google_search_}  # Remove header from file name
         item=${item%.tmp}  # Remove file extension from file name
         process_source "Google Search" "$item" "$temp_domains_file"
     done
@@ -85,7 +82,7 @@ function retrieve_existing {
 
 function source_aa419 {
     source='aa419.org'
-    domains_file="data/domains_${source}.tmp"
+    domains_file="data/pending/domains_${source}.tmp"
     url='https://api.aa419.org/fakesites'
     printf "\nSource: %s\n\n" "$source"
     touch "$domains_file"  # Initialize domains file
@@ -100,7 +97,7 @@ function source_aa419 {
 
 function source_guntab {
     source='guntab.com'
-    domains_file="data/domains_${source}.tmp"
+    domains_file="data/pending/domains_${source}.tmp"
     url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
@@ -110,7 +107,7 @@ function source_guntab {
 
 function source_stopgunscams {
     source='stopgunscams.com'
-    domains_file="data/domains_${source}.tmp"
+    domains_file="data/pending/domains_${source}.tmp"
     url='https://stopgunscams.com'
     printf "\nSource: %s\n\n" "$source"
     for page in {1..5}; do  # Loop through pages
@@ -122,7 +119,7 @@ function source_stopgunscams {
 
 function source_petscams {
     source='petscams.com'
-    domains_file="data/domains_${source}.tmp"
+    domains_file="data/pending/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     # Loop through the two categories
     categories=('puppy-scammer-list' 'pet-delivery-scam')
@@ -140,7 +137,7 @@ function source_petscams {
 
 function source_scamdelivery {
     source='scam.delivery'
-    domains_file="data/domains_${source}.tmp"
+    domains_file="data/pending/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
     for page in {1..2}; do  # Loop through 2 pages
@@ -154,7 +151,7 @@ function source_scamdelivery {
 
 function source_scamdirectory {
     source='scam.directory'
-    domains_file="data/domains_${source}.tmp"
+    domains_file="data/pending/domains_${source}.tmp"
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
@@ -164,7 +161,7 @@ function source_scamdirectory {
 
 function source_scamadviser {
     source='scamadviser.com'
-    domains_file="data/domains_${source}.tmp"
+    domains_file="data/pending/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
@@ -186,7 +183,7 @@ function source_google_search {
 function search_google {
     url='https://customsearch.googleapis.com/customsearch/v1'
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
-    domains_file="data/domains_google_search_${search_term:0:100}.tmp"
+    domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Create domains file if not present
     query_count=0  # Reinitliaze query count for each search term
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
@@ -345,9 +342,10 @@ function merge_domains {
     # Mark the source as saved in the source log file
     rows=$(grep -F "$time_format" "$source_log")  # Find rows in log for this run
     source=$(grep -vF "$time_format" "$source_log")  # Remove rows from log
-    rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved to the raw file
+    rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved into the raw file
     printf "%s\n%s\n" "$source" "$rows" > "$source_log"  # Add the edited rows back to the log
 
+    rm -r data/pending  # Initialize the pending directory if domains were saved into raw file
     [[ -f invalid_entries.tmp ]] && exit 1 || exit 0  # Exit with error if invalid entries were found
 }
 
@@ -361,7 +359,7 @@ function log_source {
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
     awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v redundant="$7" -v toplist_count="$8" -v toplist_domains="$(printf "%s" "$9" | tr '\n' ' ')" -v time="$time_format" -v queries="${10}" 'BEGIN {print time","source","item","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains","queries",no"}' >> "$source_log"
-    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
+    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s  Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
     printf "%s\n" "---------------------------------------------------------------------"
 }
 
@@ -379,10 +377,6 @@ function format_list {
 }
 
 function cleanup {
-    # Reset temp search results files if there are no domains found in toplist
-    if [[ ! -f in_toplist.tmp ]] && ls data/domains_*.tmp &> /dev/null; then
-        rm data/domains_*.tmp
-    fi
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 

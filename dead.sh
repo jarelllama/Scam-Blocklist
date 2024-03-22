@@ -1,17 +1,17 @@
 #!/bin/bash
 raw_file='data/raw.txt'
 domain_log='data/domain_log.csv'
-root_domains_file='data/processing/root_domains.txt'
-subdomains_file='data/processing/subdomains.txt'
+root_domains_file='data/root_domains.txt'
+subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
-wildcards_file='data/processing/wildcards.txt'
-redundant_domains_file='data/processing/redundant_domains.txt'
-dead_domains_file='data/processing/dead_domains.txt'
+wildcards_file='data/wildcards.txt'
+redundant_domains_file='data/redundant_domains.txt'
+dead_domains_file='data/dead_domains.txt'
 time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 function main {
     npm i -g @adguard/dead-domains-linter  # Install AdGuard Dead Domains Linter
-    for file in config/* data/* data/processing/*; do  # Format files in the config and data directory
+    for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
     check_alive

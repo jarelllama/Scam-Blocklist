@@ -3,12 +3,12 @@ raw_file='data/raw.txt'
 domain_log='data/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
-root_domains_file='data/processing/root_domains.txt'
-subdomains_file='data/processing/subdomains.txt'
+root_domains_file='data/root_domains.txt'
+subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
-wildcards_file='data/processing/wildcards.txt'
-redundant_domains_file='data/processing/redundant_domains.txt'
-dead_domains_file='data/processing/dead_domains.txt'
+wildcards_file='data/wildcards.txt'
+redundant_domains_file='data/redundant_domains.txt'
+dead_domains_file='data/dead_domains.txt'
 
 [[ "$CI" != true ]] && exit  # Do not allow running locally
 
@@ -20,7 +20,7 @@ function main {
     sed '1q' "$domain_log" > log.tmp && mv log.tmp "$domain_log"  # Intialize domain log file
 
     # Do not run when there are existing domain files
-    if [[ "$1" == 'retrieval' ]] && ! ls data/domains_*.tmp &> /dev/null; then
+    if [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]]; then
         test_retrieval_check "$1"
     fi
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
@@ -124,10 +124,11 @@ function test_retrieval_check {
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Distribute the sample input into 3 files
+        mkdir data/pending
         split -n l/3 input.txt
-        mv xaa data/domains_aa419.org.tmp
-        mv xab data/domains_google_search_search-term-1.tmp
-        mv xac data/domains_google_search_search-term-2.tmp
+        mv xaa data/pending/domains_aa419.org.tmp
+        mv xab data/pending/domains_google_search_search-term-1.tmp
+        mv xac data/pending/domains_google_search_search-term-2.tmp
         bash retrieve.sh || true  # Run retrievel script and ignore returned exit code
     elif [[ "$script_to_test" == 'check' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
