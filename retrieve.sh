@@ -39,7 +39,7 @@ function retrieve_new {
         mkdir data/pending  # Intialize pending directory
         #source_aa419
         source_chainabuse
-        source_dfpi
+        #source_dfpi
         #source_guntab
         #source_petscams
         #source_scamdelivery  # Has captchas
@@ -188,7 +188,7 @@ function source_chainabuse {
     url='https://www.chainabuse.com'
     printf "\nSource: %s\n\n" "$source"
     for page in {0..9}; do  # Loop through pages
-        curl -s "${url}/reports?page=${page}&sort=newest/" | grep -oE '"domain":"(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
+        curl -s "${url}/reports?page=${page}sort=newest/" | grep -oE '"domain":"(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
             sed 's/"domain":"//' >> "$domains_file"
     done
     process_source "$source" "$source" "$domains_file"
