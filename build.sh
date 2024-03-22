@@ -171,8 +171,8 @@ function print_stats {
 function count {
     # Count % dead
     if [[ "$1" == 'dead' ]]; then
-        dead_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 7)
-        raw_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 4)
+        dead_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 7 | awk '{total += $1} END {print total}')
+        raw_count=$(csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 4 | awk '{total += $1} END {print total}')
         percentage_dead=$(printf "%s" "scale=2; (${dead_count}/${raw_count})*100" | bc)  # Calculate % of dead of the raw count
         printf "%s%%" "$percentage_dead"
         return
@@ -184,8 +184,8 @@ function count {
         return
     fi
     # Sum up all domains retrieved by that source for that day
-    csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 |
-        tail +2 | awk '{total += $1} END {print total}'
+    csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" |
+        csvcut -c 5 | awk '{total += $1} END {print total}'
 }
 
 function count_queries {
