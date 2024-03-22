@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites retrieved from Google Search and public databases, automatically updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Mar 22 08:25:38 UTC 2024
+# Last modified: Fri Mar 22 09:37:25 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 15713
+# Total number of entries: 15721
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -5550,6 +5550,7 @@ local-zone: "folin.space." always_nxdomain
 local-zone: "fondnessminigoats.com." always_nxdomain
 local-zone: "fondpegasinvest.info." always_nxdomain
 local-zone: "fonsatrade.com." always_nxdomain
+local-zone: "food.big-marts.com." always_nxdomain
 local-zone: "football.perfect.com." always_nxdomain
 local-zone: "footiedachshundhome.com." always_nxdomain
 local-zone: "footwearelite.com." always_nxdomain
@@ -8705,6 +8706,7 @@ local-zone: "macwhiskyhome.com." always_nxdomain
 local-zone: "macy-home.com." always_nxdomain
 local-zone: "macyfrenchie.com." always_nxdomain
 local-zone: "macymaltesepuppies.com." always_nxdomain
+local-zone: "macysmall.shop." always_nxdomain
 local-zone: "madetee.com." always_nxdomain
 local-zone: "madiganemastiffs.com." always_nxdomain
 local-zone: "madisonplusasset.com." always_nxdomain
@@ -9663,6 +9665,7 @@ local-zone: "myforeverpetshop.com." always_nxdomain
 local-zone: "myfrenchbulldogstar.com." always_nxdomain
 local-zone: "myfrenchiepaws.com." always_nxdomain
 local-zone: "myglobalcheck.com." always_nxdomain
+local-zone: "mygoldenretrieverpuppies.com." always_nxdomain
 local-zone: "mygunandammo.com." always_nxdomain
 local-zone: "myhanfu.shop." always_nxdomain
 local-zone: "myhappypuppys.net." always_nxdomain
@@ -10268,6 +10271,7 @@ local-zone: "onrunningstore.com." always_nxdomain
 local-zone: "onsaleairsoft.com." always_nxdomain
 local-zone: "onsaleclimbshop.com." always_nxdomain
 local-zone: "onsalecustom.com." always_nxdomain
+local-zone: "ontariocourts-setfines-ca.com." always_nxdomain
 local-zone: "onthegocourierservices.com." always_nxdomain
 local-zone: "ontraclogistcis.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
@@ -10793,6 +10797,7 @@ local-zone: "philomenasigmundsamanthafoundation.com." always_nxdomain
 local-zone: "philsshorthairorientalkittens.com." always_nxdomain
 local-zone: "phooom.com." always_nxdomain
 local-zone: "phoribengalkittenshome.com." always_nxdomain
+local-zone: "photo.kooerys.com." always_nxdomain
 local-zone: "physicalfit.space." always_nxdomain
 local-zone: "piazzacafe.fi." always_nxdomain
 local-zone: "picboil.com." always_nxdomain
@@ -11380,6 +11385,7 @@ local-zone: "purebredmainecoons.com." always_nxdomain
 local-zone: "purebredpup.net." always_nxdomain
 local-zone: "purebredsaintbernardpuppies.com." always_nxdomain
 local-zone: "purebredsamoyedpuppies.com." always_nxdomain
+local-zone: "purebreedcanines.com." always_nxdomain
 local-zone: "purebreedpuppiesforsale.com." always_nxdomain
 local-zone: "purebreedspuppies.com." always_nxdomain
 local-zone: "purebreedteacupyokiehome.com." always_nxdomain
@@ -13519,6 +13525,7 @@ local-zone: "swiftpalcredunio.com." always_nxdomain
 local-zone: "swiftpallogistic.com." always_nxdomain
 local-zone: "swiftparcelexdl.com." always_nxdomain
 local-zone: "swiftpostalservices.com." always_nxdomain
+local-zone: "swiftpromining.com." always_nxdomain
 local-zone: "swiftraysfreights.com." always_nxdomain
 local-zone: "swiftroutecourier.com." always_nxdomain
 local-zone: "swiftsafelogistics.com." always_nxdomain
@@ -15472,6 +15479,7 @@ local-zone: "xalan14.com." always_nxdomain
 local-zone: "xandy-poultry.co.za." always_nxdomain
 local-zone: "xbase-logistics.com." always_nxdomain
 local-zone: "xbase.logistics.com." always_nxdomain
+local-zone: "xbraininfotech.com." always_nxdomain
 local-zone: "xflyrc.com." always_nxdomain
 local-zone: "xgrlsx.com." always_nxdomain
 local-zone: "xiangxinyingshi.com." always_nxdomain
