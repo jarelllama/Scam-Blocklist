@@ -20,6 +20,7 @@ Statistics for each source*:
 Today | Yesterday | Dead | Source
   126 |        20 |   0% | Google Search
     8 |        28 |  11% | aa419.org
+  133 |         0 |   0% | dfpi.ca.gov
     0 |         2 |  13% | guntab.com
     0 |        32 |   8% | petscams.com
     0 |         0 |   0% | scam.delivery
@@ -72,6 +73,7 @@ Additionally, wildcard domains are periodically added manually to the blocklist 
 ## Sources
 - [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction): Google Search API
 - [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
+- [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/): crypto scams database
 - [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
 - [PetScams.com](https://petscams.com/): pet scam sites database
 - [Scam.Delivery](https://scam.delivery/): delivery scam sites database
