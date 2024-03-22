@@ -165,7 +165,7 @@ EOF
 
 function print_stats {
     [[ "$1" == '' ]] && source="All sources" || source="$1"
-    printf "%6s |%10s |%5s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
+    printf "%6s |%10s |%4s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
 }
 
 function count {
