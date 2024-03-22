@@ -171,11 +171,10 @@ function count {
     # Print dash if no runs for that day found
     if ! csvgrep -c 1 -m "$1" "$source_log" &> /dev/null; then
         printf "-"
-        return
     fi
     # Sum up all domains retrieved by that source for that day
     csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 |
-        tail +2| awk '{total += $1} END {print total}'
+        tail +2 | awk '{total += $1} END {print total}'
 }
 
 function count_queries {
