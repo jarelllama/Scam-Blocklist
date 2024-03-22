@@ -154,7 +154,7 @@ function source_scamdirectory {
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
-        sed 's/href="\///; s/" //; s/-/./g' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains
+        sed 's/href="\///; s/" //; s/-/./g' | sed '6,$d' > "$domains_file"  # Keep only newest 500 domains
     process_source "$source" "$source" "$domains_file"
 }
 
