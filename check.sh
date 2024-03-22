@@ -104,6 +104,8 @@ function check_raw_file {
         log_event "$domains_in_toplist" "toplist"
     fi
 
+    clean_domain_log  # Clean domain log
+
     tr -s '\n' < filter_log.tmp | sort -u > temp.tmp && mv temp.tmp filter_log.tmp  # Remove empty lines, sort and remove duplicates (note filter log has whitespaces)
     [[ ! -s filter_log.tmp ]] && exit  # Exit if no domains were filtered
 
@@ -133,12 +135,11 @@ function check_raw_file {
     after_count=$(wc -w <<< "$domains")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_domains_count" "$in_toplist_count"
 
-    clean_domain_log
     [[ -s filter_log.tmp ]] && exit 1 || exit 0 # Exit with error if the blocklist required filtering
 }
 
 function clean_domain_log {
-    [[ $(wc -w < "$domain_log") -gt 10000 ]] && sed -i '1,200d' "$domain_log"
+    [[ $(wc -w < "$domain_log") -gt 10000 ]] && sed -i '1,200d' "$domain_log" || printf ""  # printf to return 0
 }
 
 function log_event {

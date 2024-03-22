@@ -18,7 +18,7 @@ function main {
     check_subdomains
     check_redundant
     check_for_dead
-    #clean_dead_domains_file
+    clean_dead_domains_file
 }
 
 function check_for_alive {
@@ -83,7 +83,7 @@ function check_for_dead {
 }
 
 function clean_dead_domains_file {
-    [[ $(wc -w < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file"
+    [[ $(wc -w < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file" || printf ""  # printf to return 0
 }
 
 function log_event {
