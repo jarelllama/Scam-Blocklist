@@ -26,7 +26,8 @@ Total domains: 16965
      0 |         9 |   6% | stopgunscams.com
   1180 |        95 |  10% | All sources
 
-*Domains added manually are excluded from the daily figures.
+* Domains added manually are excluded from the daily figures.
+* Dead % gets more accurate over time.
 ```
 
 All data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
