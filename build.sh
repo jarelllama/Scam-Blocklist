@@ -29,14 +29,16 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 | [Wildcard Asterisk](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_asterisk/scams.txt) | \*.scam.com |
 | [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/scams.txt) | scam.com |
 
-## Stats
+## Statistics
 [![Retrieve domains](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/retrieve.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/retrieve.yml)
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
 
-Today | Yesterday | Dead | Source *
+Statistics for each source*:
+
+Today | Yesterday | Dead | Source
 $(print_stats "Google Search")
 $(print_stats "aa419.org")
 $(print_stats "guntab.com")
