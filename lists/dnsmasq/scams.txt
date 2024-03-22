@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Mar 22 18:31:28 UTC 2024
+# Last modified: Fri Mar 22 18:33:39 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 15968
+# Total number of entries: 15967
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -11253,7 +11253,6 @@ local=/premiumyorkiepuppies.com/
 local=/premuimaccess.shop/
 local=/premuimcapital.com/
 local=/prerenewables.com/
-local=/presale.doge20.site/
 local=/presgloble.com/
 local=/prestige-nails.fr/
 local=/prestigeassurancesecurity.com/
