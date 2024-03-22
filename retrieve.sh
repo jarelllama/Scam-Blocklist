@@ -286,7 +286,7 @@ function process_source {
     done < "$wildcards_file"
 
     # Find matching domains in toplist, excluding blacklisted domains
-    domains_in_toplist=$(comm -12 <(printf "%s" "$pending_domains") "$toplist_file" | grep -vxFf "$blacklist_file")
+    domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$pending_domains") "$toplist_file") "$blacklist_file")
     in_toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$in_toplist_count" -gt 0 ]]; then
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
