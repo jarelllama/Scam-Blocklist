@@ -28,9 +28,9 @@ Today | Yesterday | Dead | Source
     0 |         9 |   6% | stopgunscams.com
  1301 |        95 |  10% | All sources
 
-* Dead domains are counted upon retrieval and are
-  not included in the blocklist.
-* Domains added manually are not counted as a source.
+*Dead domains are counted upon retrieval and are
+ not included in the blocklist.
+*Domains added manually are not counted as a source.
 ```
 All data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
 
