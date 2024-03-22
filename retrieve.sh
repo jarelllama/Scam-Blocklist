@@ -37,13 +37,13 @@ function main {
 
 function retrieve_new {
         mkdir data/pending  # Intialize pending directory
-        source_aa419
+        #source_aa419
         source_guntab
-        source_petscams
-        source_scamdelivery  # Has captchas
+        #source_petscams
+        #source_scamdelivery  # Has captchas
         source_scamdirectory
-        source_scamadviser
-        source_stopgunscams
+        #source_scamadviser
+        #source_stopgunscams
         #source_google_search
 }
 
@@ -100,7 +100,7 @@ function source_guntab {
     url='https://www.guntab.com/scam-websites'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | head -n 500 > "$domains_file"  # Keep only newest 500 domains
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains
     process_source "$source" "$source" "$domains_file"
 }
 
@@ -154,7 +154,7 @@ function source_scamdirectory {
     url='https://scam.directory/category'
     printf "\nSource: %s\n\n" "$source"
     curl -s "$url/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" ' |
-        sed 's/href="\///; s/" //; s/-/./g' | head -n 500 > "$domains_file"  # Keep only newest 500 domains
+        sed 's/href="\///; s/" //; s/-/./g' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains
     process_source "$source" "$source" "$domains_file"
 }
 
