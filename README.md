@@ -16,7 +16,7 @@ Blocklist for scam sites retrieved from Google Search and public databases, auto
 ## Stats
 
 ```
-Total domains: 16965
+Total domains: 15713
 
  Today | Yesterday | Dead | Source *
      0 |        20 |   0% | Google Search
