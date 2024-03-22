@@ -31,7 +31,8 @@ function main {
         format_list "$file"
     done
     [[ -d data/pending ]] && retrieve_existing  # Use existing pending domains if pending directory present
-    retrieve_new
+    [[ ! -d data/pending ]] && retrieve_new
+    merge_domains
 }
 
 function retrieve_new {
@@ -43,8 +44,7 @@ function retrieve_new {
         source_scamdirectory
         source_scamadviser
         source_stopgunscams
-        source_google_search
-        merge_domains
+        #source_google_search
 }
 
 function retrieve_existing {
@@ -77,7 +77,6 @@ function retrieve_existing {
         item=${item%.tmp}  # Remove file extension from file name
         process_source "Google Search" "$item" "$temp_domains_file"
     done
-    merge_domains
 }
 
 function source_aa419 {
@@ -125,7 +124,7 @@ function source_petscams {
     categories=('puppy-scammer-list' 'pet-delivery-scam')
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
-        for page in {2..25}; do  # Loop through pages
+        for page in {2..26}; do  # Loop through 25 pages
             curl -s "$url/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
                 sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///;
                 s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
@@ -140,7 +139,7 @@ function source_scamdelivery {
     domains_file="data/pending/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
     url='https://scam.delivery/category/review'
-    for page in {1..2}; do  # Loop through 2 pages
+    for page in {2..3}; do  # Loop through 2 pages
         # Use User Agent to reduce captcha blocking
         curl -sA "$user_agent" "$url/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' |
             sed 's/title="//; s/"><\/a>//' | tr '[:upper:]' '[:lower:]' >> "$domains_file"
