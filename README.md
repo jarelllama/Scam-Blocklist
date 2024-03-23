@@ -31,7 +31,8 @@ Today | Yesterday | Dead | Source
 
 *Dead domains are counted upon retrieval and are
  not included in the blocklist.
-*Domains added manually are not counted as a source.
+*Only active sources are shown. See the full list
+ of sources in SOURCES.md.
 ```
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
