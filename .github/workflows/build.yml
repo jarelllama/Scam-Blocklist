@@ -5,7 +5,6 @@ on:
   push:
     paths:
       - "data/raw.txt"
-      - "build.sh"
 
 jobs:
   build-lists:
