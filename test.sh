@@ -153,9 +153,13 @@ function test_retrieval_check {
 
 function test_dead {
     # Test addition of resurrected domains
-    printf "google.com\n" > "$dead_domains_file"  # Input
-    printf "google.com\n" >> out_raw.txt  # Expected output
-    printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt  # Expected output
+    # Input
+    printf "google.com\n" > "$dead_domains_file"
+    printf "584031dead-domain-test.com\n" >> "$dead_domains_file"
+    # Expected output
+    printf "google.com\n" >> out_raw.txt
+    printf "584031dead-domain-test.com\n" >> out_dead.tmp
+    printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt
 
     # Test removal of dead domains with subdomains
     : > "$subdomains_file"  # Initialize subdomains file
