@@ -36,7 +36,7 @@ Blocklist for scam sites automatically retrieved from Google Search and public d
 \`\`\`
 Total domains: $(wc -w < "$raw_file")
 
-Statistics for each source*:
+Statistics for each source:
 
 Today | Yesterday | Dead | Source
 $(print_stats "Google Search")
@@ -50,10 +50,10 @@ $(print_stats "scamadviser.com")
 $(print_stats "stopgunscams.com")
 $(print_stats "")
 
-*Dead domains are counted upon retrieval and are
- not included in the blocklist.
-*Only active sources are shown. See the full list
- of sources in SOURCES.md.
+*Dead domains are counted upon retrieval
+ and are excluded from the blocklist.
+*Only active sources are shown. See the
+ full list of sources in SOURCES.md.
 \`\`\`
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
