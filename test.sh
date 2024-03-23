@@ -3,7 +3,6 @@ raw_file='data/raw.txt'
 domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
-parked_domains_file='data/parked_domains.txt'
 root_domains_file='data/root_domains.txt'
 subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
@@ -54,10 +53,8 @@ function test_retrieval_check {
         # Test removal of known dead domains
         printf "dead-test.com\n" > "$dead_domains_file"  # Sample data
         printf "dead-test.com\n" >> input.txt  # Input
-        
-        # Test removal of know parked domains
-        printf "parked-test.com\n" > "$parked_domains_file"  # Sample data
-        printf "parked-test.com\n" >> input.txt  # Input
+
+        # No expected output for both tests
     fi
 
     # Test removal of whitelisted domains and blacklist exclusion
@@ -71,7 +68,7 @@ function test_retrieval_check {
     printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
     [[ "$script_to_test" == 'retrieve' ]] && printf "blacklist,whitelist-blacklisted-test.com\n" \
-        >> out_log.txt  # Check script does not log blacklisted domains
+        >> out_log.txt  # The check script does not log blacklisted domains
 
     # Test removal of domains with whitelisted TLDs
     {
@@ -137,7 +134,7 @@ function test_retrieval_check {
         mv input.txt "$raw_file"  # Prepare sample raw file
         bash check.sh || true  # Run lists check script and ignore returned exit code
     fi
-    printf "%s\n" "---------------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
@@ -150,7 +147,7 @@ function test_retrieval_check {
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     [[ "$log_error" == false ]] && printf "Log:\n%s\n" "$(<$domain_log)"
-    printf "%s\n" "---------------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
 
@@ -197,16 +194,6 @@ function test_dead {
     printf "49532dead-domain-test.com\n" >> out_dead.txt  # Expected output
     printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt  # Expected output
 
-    # Test addition of unparked domains
-    printf "apple.com\n" > "$parked_domains_file"  # Input
-    printf "apple.com\n" >> out_raw.txt  # Expected output
-    printf "unparked,apple.com,parked_domains_file\n" >> out_log.txt  # Expected output
-
-    # Test removal of parked domains
-    printf "ifansonly.com\n" >> "$raw_file"  # Input
-    printf "ifansonly.com\n" > out_parked.txt  # Expected output
-    printf "parked,ifansonly.com,raw\n" >> out_log.txt  # Expected output
-    
     # Prepare expected output files
     for file in out_*; do
         [[ "$file" == out_dead.txt ]] && continue  # Dead domains file is not sorted
@@ -215,7 +202,7 @@ function test_dead {
 
     bash dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
-    printf "\n%s\n" "---------------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------"
 
     # Check returned error code
     if [[ "$errored" == true ]]; then
@@ -228,12 +215,11 @@ function test_dead {
     check_if_dead_present "$root_domains_file" "Root domains"  # Check root domains file
     check_if_dead_present "$redundant_domains_file" "Redundant domains"  # Check redundant domains file
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
-    check_output "$parked_domains_file" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n" ||
         printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n"
-    printf "%s\n" "---------------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
 

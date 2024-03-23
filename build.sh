@@ -34,7 +34,7 @@ Blocklist for scam sites automatically retrieved from Google Search and public d
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 \`\`\`
-Total domains: $(wc -w < "$raw_file")
+Total domains: $(wc -l < "$raw_file")
 
 Statistics for each source:
 
@@ -70,7 +70,7 @@ The Google Custom Search JSON API only provides ~100 free search queries per day
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
-> Queries made today: $(count_queries)
+> Queries made today: $(count "queries")
 
 #### Regarding other sources
 The full domain retrieval process for all sources can be viewed in the repository's code.
@@ -127,7 +127,7 @@ ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Last modified: $(date -u)
 ${3} Syntax: ${1}
-${3} Total number of entries: $(wc -w < "$raw_file")
+${3} Total number of entries: $(wc -l < "$raw_file")
 ${3}
 EOF
 
@@ -138,34 +138,41 @@ EOF
 
 function print_stats {
     [[ "$1" == '' ]] && source="All sources" || source="$1"
-    printf "%5s |%10s |%4s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "dead" "$1" )" "$source"
+    printf "%5s |%10s |%8s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "excluded" "$1" )" "$source"
 }
 
 function count {
-    # Count % dead of raw count
-    if [[ "$1" == 'dead' ]]; then
-        raw_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$2" | csvcut -c 4 | awk '{total += $1} END {print total}')
-        dead_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$2" | csvcut -c 7 | awk '{total += $1} END {print total}')
-        [[ "$raw_count" -ne 0 ]] && printf "%s" "$((dead_count*100/raw_count))" || printf "0"
+    scope="$1"
+    source="$2"
+    if [[ "$scope" == 'excluded' ]]; then
+        raw_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 4 | awk '{total += $1} END {print total}')
+        if [[ "$raw_count" -eq 0 ]]; then
+            printf "0"
+            return
+        fi
+        white_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 6 | awk '{total += $1} END {print total}')
+        dead_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 7 | awk '{total += $1} END {print total}')
+        redundant_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 8 | awk '{total += $1} END {print total}')
+        excluded_count=$((white_count + dead_count + redundant_count))
+        printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded of raw count
+        return
+    elif [[ "$scope" == 'queries' ]]; then  # Count number of Google Search queries made
+        queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
+        [[ "$queries" -le 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
         return
     fi
     # Print dash if no runs for that day found
-    if ! grep -qF "$1" "$source_log"; then
+    if ! grep -qF "$scope" "$source_log"; then
         printf "-"
         return
     fi
     # Sum up all domains retrieved by that source for that day
-    csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$2" | csvcut -c 5 | awk '{total += $1} END {print total}'
-}
-
-function count_queries {
-    queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
-    [[ "$queries" -le 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
+    csvgrep -c 1 -m "$scope" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$source" | csvcut -c 5 | awk '{total += $1} END {print total}'
 }
 
 function format_list {
-    [[ -f "$1" ]] || return  # Return if file does not exist
-    case $1 in
+    [[ ! -f "$1" ]] && return  # Return if file does not exist
+    case "$1" in
         *.csv)
             mv "$1" "${1}.tmp" ;;
         *dead_domains*)  # Remove whitespaces and duplicates
@@ -176,8 +183,7 @@ function format_list {
             tr -d ' ' < "$1" | sort -u > "${1}.tmp" ;;
     esac
     # Remove carraige return characters and empty lines
-    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
-    rm "${1}.tmp"
+    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1" && rm "${1}.tmp"
 }
 
 function build_adblock {

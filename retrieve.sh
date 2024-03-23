@@ -3,7 +3,6 @@ raw_file='data/raw.txt'
 source_log='config/source_log.csv'
 domain_log='config/domain_log.csv'
 search_terms_file='config/search_terms.csv'
-parked_domains_file='data/parked_domains.txt'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 toplist_file='data/toplist.txt'
@@ -125,8 +124,7 @@ function source_petscams {
     source='petscams.com'
     domains_file="data/pending/domains_${source}.tmp"
     printf "\nSource: %s\n\n" "$source"
-    # Loop through the two categories
-    categories=('puppy-scammer-list' 'pet-delivery-scam')
+    categories=('puppy-scammer-list' 'pet-delivery-scam')  # Loop through the two categories
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
         for page in {2..21}; do  # Loop through 20 pages
@@ -200,7 +198,7 @@ function search_google {
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Create domains file if not present
     query_count=0  # Reinitliaze query count for each search term
-    encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace whitespaces and non-alphanumeric characters with '%20'
+    encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results
         ((query_count++))  # Track number of search queries used
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
@@ -208,7 +206,7 @@ function search_google {
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop if the first page has no results
         page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')
         printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
-        [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
+        [[ $(wc -l <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
     done
     process_source "Google Search" "$search_term" "$domains_file"
 }
@@ -224,11 +222,11 @@ function process_source {
         return
     fi
 
-    # Remove https:// and convert to lowercase
-    sed 's/https:\/\///; s/http:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
-    format_list "$domains_file"  # Format temp file for pending domains
-    pending_domains=$(<"$3")  # Store pending domains in a variable
-    unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
+    # Remove https:// or http:// and convert to lowercase
+    sed 's/https\?:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
+    format_list "$domains_file"
+    pending_domains=$(<"$domains_file")  # Store pending domains in a variable
+    unfiltered_count=$(wc -l <<< "$pending_domains")  # Count number of unfiltered domains pending
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -252,17 +250,9 @@ function process_source {
 
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
-    dead_count=$(wc -w <<< "$dead_domains")
+    dead_count=$(wc -l <<< "$dead_domains")
     if [[ "$dead_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
-        #log_event "$dead_domains" "dead" "$source"  # Logs too many lines
-    fi
-
-    # Remove known parked domains
-    parked_domains=$(comm -12 <(printf "%s" "$pending_domains") "$parked_domains_file")
-    parked_count=$(wc -w <<< "$parked_domains")
-    if [[ "$parked_count" -gt 0 ]]; then
-        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$parked_domains"))
         #log_event "$dead_domains" "dead" "$source"  # Logs too many lines
     fi
 
@@ -272,7 +262,7 @@ function process_source {
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(comm -23 <(grep -Ff "$whitelist_file" <<< "$pending_domains") "$blacklist_file")
-    whitelisted_count=$(wc -w <<< "$whitelisted_domains")
+    whitelisted_count=$(wc -l <<< "$whitelisted_domains")
     if [[ "$whitelisted_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_domains"))
         log_event "$whitelisted_domains" "whitelist" "$source"
@@ -280,7 +270,7 @@ function process_source {
 
     # Remove domains that have whitelisted TLDs
     whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
-    whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")
+    whiltelisted_tld_count=$(wc -l <<< "$whiltelisted_tld_domains")
     if [[ "$whiltelisted_tld_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
         log_event "$whiltelisted_tld_domains" "tld" "$source"
@@ -299,34 +289,34 @@ function process_source {
     while read -r wildcard; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")  # Find redundant domains via wildcard matching
         [[ -z "$redundant_domains" ]] && continue  # Skip to next wildcard if no matches found
-        redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
+        redundant_domains_count=$((redundant_domains_count + $(wc -l <<< "$redundant_domains")))
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
         log_event "$redundant_domains" "redundant" "$source"
     done < "$wildcards_file"
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$pending_domains") "$toplist_file") "$blacklist_file")
-    in_toplist_count=$(wc -w <<< "$domains_in_toplist")
+    in_toplist_count=$(wc -l <<< "$domains_in_toplist")
     if [[ "$in_toplist_count" -gt 0 ]]; then
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
         log_event "$domains_in_toplist" "toplist" "$source"
     fi
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
-    filtered_count=$(wc -w <<< "$pending_domains")  # Count number of domains after filtering
+    filtered_count=$(wc -l <<< "$(tr -s '\n' <<< "$pending_domains")")  # Count number of domains after filtering
     log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$dead_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist" "$query_count"
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp # Collate the filtered domains to a temp file
 }
 
 function merge_domains {
-    # Exit if no new domains to add or temp file is missing
+    # Exit if no new domains to add
     if ! grep -q '[[:alnum:]]' filtered_domains.tmp; then  # -s does not seem to work well here
         printf "\nNo new domains to add.\n\n"
         exit
     fi
 
     format_list filtered_domains.tmp
-    printf "\nNew domains retrieved: %s\n" "$(wc -w < filtered_domains.tmp)"
+    printf "\nNew domains retrieved: %s\n" "$(wc -l < filtered_domains.tmp)"
 
     # Print out domains in toplist and invalid entries
     if [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]]; then
@@ -344,20 +334,20 @@ function merge_domains {
         printf "\nPending domains saved for rerun.\n\n"
         exit 1
     fi
-    # Collate unfiltered subdomains and root domains
+    # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
-        root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve unfiltered root domains
-        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add unfiltered root domains to root domains file to exclude from dead check
-        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add unfiltered subdomains to subdomains file for dead check
+        root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add filtered root domains to root domains file to exclude from dead check
+        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file for dead check
         format_list "$root_domains_file"
         format_list "$subdomains_file"
     fi
 
-    count_before=$(wc -w < "$raw_file")
+    count_before=$(wc -l < "$raw_file")
     cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
     format_list "$raw_file"
     log_event "$(<filtered_domains.tmp)" "new_domain" "retrieval"
-    count_after=$(wc -w < "$raw_file")
+    count_after=$(wc -l < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
 
@@ -379,16 +369,16 @@ function log_source {
     # Print and log statistics for source used
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
-    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v parked="$7" -v redundant="$8" -v toplist_count="$9" \
-        -v toplist_domains="$(printf "%s" "${10}" | tr '\n' ' ')" -v time="$time_format" -v queries="${11}" \
-        'BEGIN {print time","source","item","raw","final","whitelist","dead","parked","redundant","toplist_count","toplist_domains","queries",no"}' >> "$source_log"
-    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s  Parked: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
-    printf "%s\n" "---------------------------------------------------------------------"
+    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v redundant="$7" -v toplist_count="$8" \
+        -v toplist_domains="$(printf "%s" "$9" | tr '\n' ' ')" -v time="$time_format" -v queries="${10}" \
+        'BEGIN {print time","source","item","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains","queries",no"}' >> "$source_log"
+    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$8"
+    printf "%s\n" "------------------------------------------------------------"
 }
 
 function format_list {
-    [[ -f "$1" ]] || return  # Return if file does not exist
-    case $1 in
+    [[ ! -f "$1" ]] && return  # Return if file does not exist
+    case "$1" in
         *.csv)
             mv "$1" "${1}.tmp" ;;
         *dead_domains*)  # Remove whitespaces and duplicates
@@ -399,12 +389,11 @@ function format_list {
             tr -d ' ' < "$1" | sort -u > "${1}.tmp" ;;
     esac
     # Remove carraige return characters and empty lines
-    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
-    rm "${1}.tmp"
+    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1" && rm "${1}.tmp"
 }
 
 function cleanup {
-    [[ ! -f in_toplist.tmp ]] && rm -r data/pending  # Initialize pending file is no pending domains to be saved
+    [[ ! -f in_toplist.tmp ]] && rm -r data/pending  # Initialize pending directory is no pending domains to be saved
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 

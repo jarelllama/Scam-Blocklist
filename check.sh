@@ -28,7 +28,7 @@ function retrieve_toplist {
 
 function check_raw_file {
     domains=$(<"$raw_file")
-    before_count=$(wc -w <<< "$domains")
+    before_count=$(wc -l <<< "$domains")
     touch filter_log.tmp  # Initialize temp filter log file
 
     domains_with_subdomains_count=0  # Initiliaze domains with common subdomains count
@@ -37,7 +37,7 @@ function check_raw_file {
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$domains")  # Find domains with common subdomains
         [[ -z "$domains_with_subdomains" ]] && continue  # Skip to next subdomain if no matches found
         # Count number of domains with common subdomains
-        domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")))
+        domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -l <<< "$domains_with_subdomains")))
         # Keep only root domains
         domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)
         # Collate subdomains for dead check
@@ -52,7 +52,7 @@ function check_raw_file {
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(comm -23 <(grep -Ff "$whitelist_file" <<< "$domains") "$blacklist_file")
-    whitelisted_count=$(wc -w <<< "$whitelisted_domains")  # Count number of whitelisted domains
+    whitelisted_count=$(wc -l <<< "$whitelisted_domains")  # Count number of whitelisted domains
     if [[ "$whitelisted_count" -gt 0 ]]; then
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))
         awk 'NF {print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
@@ -61,7 +61,7 @@ function check_raw_file {
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")
-    whitelisted_tld_count=$(wc -w <<< "$whitelisted_tld_domains")  # Count number of domains with whitelisted TLDs
+    whitelisted_tld_count=$(wc -l <<< "$whitelisted_tld_domains")  # Count number of domains with whitelisted TLDs
     if [[ "$whitelisted_tld_count" -gt 0 ]]; then
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))
         awk 'NF {print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
@@ -70,7 +70,7 @@ function check_raw_file {
 
     # Remove invalid entries including IP addresses This excludes punycode TLDs (.xn--*)
     invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$' <<< "$domains")
-    invalid_entries_count=$(wc -w <<< "$invalid_entries")
+    invalid_entries_count=$(wc -l <<< "$invalid_entries")
     if [[ "$invalid_entries_count" -gt 0 ]]; then
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))
         awk 'NF {print $0 " (invalid)"}' <<< "$invalid_entries" >> filter_log.tmp
@@ -83,7 +83,7 @@ function check_raw_file {
         redundant_domains=$(grep "\.${domain}$" <<< "$domains")  # Find redundant domains via wildcard matching
         [[ -z "$redundant_domains" ]] && continue  # Skip to next domain if no matches found
         # Count number of redundant domains
-        redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
+        redundant_domains_count=$((redundant_domains_count + $(wc -l <<< "$redundant_domains")))
         # Remove redundant domains
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))
         # Collate redundant domains for dead check
@@ -98,7 +98,7 @@ function check_raw_file {
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$domains") "$toplist_file") "$blacklist_file")
-    in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
+    in_toplist_count=$(wc -l <<< "$domains_in_toplist")  # Count number of domains found in toplist
     if [[ "$in_toplist_count" -gt 0 ]]; then
         awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
@@ -132,14 +132,14 @@ function check_raw_file {
     format_list "$raw_file"
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
-    after_count=$(wc -w <<< "$domains")  # Count number of domains after filtering
+    after_count=$(wc -l <<< "$domains")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_domains_count" "$in_toplist_count"
 
     [[ -s filter_log.tmp ]] && exit 1 || exit 0 # Exit with error if the blocklist required filtering
 }
 
 function clean_domain_log {
-    [[ $(wc -w < "$domain_log") -gt 10000 ]] && sed -i '2,300d' "$domain_log" || printf ""  # printf to return 0
+    [[ $(wc -l < "$domain_log") -gt 10000 ]] && sed -i '2,300d' "$domain_log" || printf ""  # printf to negate return 1
 }
 
 function log_event {
@@ -148,8 +148,8 @@ function log_event {
 }
 
 function format_list {
-    [[ -f "$1" ]] || return  # Return if file does not exist
-    case $1 in
+    [[ ! -f "$1" ]] && return  # Return if file does not exist
+    case "$1" in
         *.csv)
             mv "$1" "${1}.tmp" ;;
         *dead_domains*)  # Remove whitespaces and duplicates
@@ -160,8 +160,7 @@ function format_list {
             tr -d ' ' < "$1" | sort -u > "${1}.tmp" ;;
     esac
     # Remove carraige return characters and empty lines
-    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
-    rm "${1}.tmp"
+    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1" && rm "${1}.tmp"
 }
 
 function cleanup {

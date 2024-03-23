@@ -1,8 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
 domain_log='config/domain_log.csv'
-parked_terms_file='config/parked_terms.txt'
-parked_domains_file='data/parked_domains.txt'
 root_domains_file='data/root_domains.txt'
 subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
@@ -86,39 +84,8 @@ function check_for_dead {
     log_event "$(<dead.tmp)" "dead" "raw"
 }
 
-function check_for_unparked {
-    # Check for parked message in site's HTML
-    while read -r domain; do
-        if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/")"; then
-            printf "%s\n" "$domain" >> unparked_domains.tmp  # Collate unparked domains
-        fi
-    done < "$parked_domains_file"
-    [[ ! -f unparked_domains.tmp ]] && return  # Return if no unparked domains found
-    # Remove unparked domains from parked domains file
-    comm -23 "$parked_domains_file" unparked_domains.tmp > parked.tmp && mv parked.tmp "$parked_domains_file"
-    cat unparked_domains.tmp >> "$raw_file"  # Add unparked domains to raw file
-    format_list "$raw_file"
-    log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
-}
-
-function check_for_parked {
-    # Check for parked message in site's HTML
-    while read -r domain; do
-        if grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/")"; then
-            printf "%s\n" "$domain" >> parked_domains.tmp  # Collate parked domains
-        fi
-    done < "$raw_file"
-    # Remove parked domains from raw file
-    comm -23 "$raw_file" parked_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
-    cat parked_domains.tmp >> "$parked_domains_file"  # Collate parked domains
-    format_list "$parked_domains_file"
-    log_event "$(<parked_domains.tmp)" "parked" "raw"
-}
-
 function clean_cache_files {
-    [[ $(wc -w < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file"
-    [[ $(wc -w < "$parked_domains_file") -gt 5000 ]] && sed -i '1,100d' "$parked_domains_file"
-    true  # Negate any return 1s
+    [[ $(wc -l < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file" || printf ""  # printf to negate return 1
 }
 
 function log_event {
@@ -127,8 +94,8 @@ function log_event {
 }
 
 function format_list {
-    [[ -f "$1" ]] || return  # Return if file does not exist
-    case $1 in
+    [[ ! -f "$1" ]] && return  # Return if file does not exist
+    case "$1" in
         *.csv)
             mv "$1" "${1}.tmp" ;;
         *dead_domains*)  # Remove whitespaces and duplicates
@@ -139,13 +106,8 @@ function format_list {
             tr -d ' ' < "$1" | sort -u > "${1}.tmp" ;;
     esac
     # Remove carraige return characters and empty lines
-    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
-    rm "${1}.tmp"
+    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1" && rm "${1}.tmp"
 }
 
-function cleanup {
-    find . -maxdepth 1 -type f -name "*.tmp" -delete
-}
-
-trap cleanup EXIT
+trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 main
