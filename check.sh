@@ -161,6 +161,7 @@ function format_list {
     esac
     # Remove carraige return characters and empty lines
     tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
+    rm "${1}.tmp"
 }
 
 function cleanup {
