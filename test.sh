@@ -3,6 +3,7 @@ raw_file='data/raw.txt'
 domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
+parked_domains_file='data/parked_domains.txt'
 root_domains_file='data/root_domains.txt'
 subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
@@ -163,9 +164,8 @@ function test_dead {
 
     # Test removal of dead domains with subdomains
     : > "$subdomains_file"  # Initialize subdomains file
-    # Input
-    printf "584308-dead-subdomain-test.com\n" >> "$raw_file"
-    printf "584308-dead-subdomain-test.com\n" > "$root_domains_file"
+    printf "584308-dead-subdomain-test.com\n" >> "$raw_file"  # Input
+    printf "584308-dead-subdomain-test.com\n" > "$root_domains_file"  # Input
     while read -r subdomain; do
         subdomain="${subdomain}.584308-dead-subdomain-test.com"
         printf "%s\n" "$subdomain" >> "$subdomains_file"  # Input
@@ -175,9 +175,8 @@ function test_dead {
 
     # Test removal of dead redundant domains and wildcards
     : > "$redundant_domains_file"  # Initialize redundant domains file
-    # Input
-    printf "493053dead-wildcard-test.com\n" >> "$raw_file"
-    printf "493053dead-wildcard-test.com\n" > "$wildcards_file"
+    printf "493053dead-wildcard-test.com\n" >> "$raw_file"  # Input
+    printf "493053dead-wildcard-test.com\n" > "$wildcards_file"  # Input
     {
         printf "redundant-1.493053dead-wildcard-test.com\n"
         printf "redundant-2.493053dead-wildcard-test.com\n"
@@ -196,6 +195,16 @@ function test_dead {
     printf "49532dead-domain-test.com\n" >> out_dead.txt  # Expected output
     printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt  # Expected output
 
+    # Test addition of unparked domains
+    printf "apple.com\n" > "$parked_domains_file"  # Input
+    printf "apple.com\n" >> out_raw.txt  # Expected output
+    printf "unparked,apple.com,parked_domains_file\n" >> out_log.txt  # Expected output
+
+    # Test removal of parked domains
+    printf "ifansonly.com\n" >> "$raw_file"  # Input
+    printf "ifansonly.com\n" > out_parked.txt  # Expected output
+    printf "parked,ifansonly.com,raw\n" >> out_log.txt  # Expected output
+    
     # Prepare expected output files
     for file in out_*; do
         [[ "$file" == out_dead.txt ]] && continue  # Dead domains file is not sorted
@@ -217,6 +226,7 @@ function test_dead {
     check_if_dead_present "$root_domains_file" "Root domains"  # Check root domains file
     check_if_dead_present "$redundant_domains_file" "Redundant domains"  # Check redundant domains file
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
+    check_output "$parked_domains_file" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n" ||

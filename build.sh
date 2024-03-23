@@ -165,15 +165,18 @@ function count_queries {
 
 function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
-    if [[ "$1" == *.csv ]]; then  # If file is a CSV file, do not sort
-        sed -i 's/\r//; /^$/d' "$1"
-        return
-    elif [[ "$1" == *dead_domains* ]]; then  # Do not sort the dead domains file
-        tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
-        return
-    fi
-    # Remove whitespaces, carriage return characters, empty lines, sort and remove duplicates
-    tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
+    case $1 in
+        *.csv)
+            mv "$1" "${1}.tmp" ;;
+        *dead_domains*)  # Remove whitespaces and duplicates
+            tr -d '[:space:]' < "$1" | awk '!seen[$0]++' > "${1}.tmp" ;;
+        *parked_terms*)  # Sort and remove duplicates
+            sort -u "$1" -o "${1}.tmp" ;;
+        *)  # Remove whitespaces, sort and remove duplicates
+            tr -d '[:space:]' < "$1" | sort -u > "${1}.tmp" ;;
+    esac
+    # Remove carraige return characters and empty lines
+    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
 }
 
 function build_adblock {

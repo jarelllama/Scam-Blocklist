@@ -3,6 +3,7 @@ raw_file='data/raw.txt'
 source_log='config/source_log.csv'
 domain_log='config/domain_log.csv'
 search_terms_file='config/search_terms.csv'
+parked_domains_file='data/parked_domains.txt'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
 toplist_file='data/toplist.txt'
@@ -257,6 +258,14 @@ function process_source {
         #log_event "$dead_domains" "dead" "$source"  # Logs too many lines
     fi
 
+    # Remove known parked domains
+    parked_domains=$(comm -12 <(printf "%s" "$pending_domains") "$parked_domains_file")
+    parked_count=$(wc -w <<< "$parked_domains")
+    if [[ "$parked_count" -gt 0 ]]; then
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$parked_domains"))
+        #log_event "$dead_domains" "dead" "$source"  # Logs too many lines
+    fi
+
     # Find blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")
     [[ -n "$blacklisted_domains" ]] && log_event "$blacklisted_domains" "blacklist" "$source"
@@ -370,22 +379,27 @@ function log_source {
     # Print and log statistics for source used
     item="$2"
     [[ "$1" == 'Google Search' ]] && item="\"${item:0:100}...\""  # Shorten Google Search term to first 100 characters
-    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v redundant="$7" -v toplist_count="$8" -v toplist_domains="$(printf "%s" "$9" | tr '\n' ' ')" -v time="$time_format" -v queries="${10}" 'BEGIN {print time","source","item","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains","queries",no"}' >> "$source_log"
-    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s  Redundant: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
+    awk -v source="$1" -v item="$item" -v raw="$3" -v final="$4" -v whitelist="$5" -v dead="$6" -v parked="$7" -v redundant="$8" -v toplist_count="$9" \
+        -v toplist_domains="$(printf "%s" "${10}" | tr '\n' ' ')" -v time="$time_format" -v queries="${11}" \
+        'BEGIN {print time","source","item","raw","final","whitelist","dead","parked","redundant","toplist_count","toplist_domains","queries",no"}' >> "$source_log"
+    printf "Item: %s\nRaw: %s  Final: %s  Whitelisted: %s  Dead: %s  Parked: %s  Toplist: %s\n" "$item" "$3" "$4" "$5" "$6" "$7" "$8"
     printf "%s\n" "---------------------------------------------------------------------"
 }
 
 function format_list {
     [[ -f "$1" ]] || return  # Return if file does not exist
-    if [[ "$1" == *.csv ]]; then  # If file is a CSV file, do not sort
-        sed -i 's/\r//; /^$/d' "$1"
-        return
-    elif [[ "$1" == *dead_domains* ]]; then  # Do not sort the dead domains file
-        tr -d ' \r' < "$1" | tr -s '\n' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1"
-        return
-    fi
-    # Remove whitespaces, carriage return characters, empty lines, sort and remove duplicates
-    tr -d ' \r' < "$1" | tr -s '\n' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1"
+    case $1 in
+        *.csv)
+            mv "$1" "${1}.tmp" ;;
+        *dead_domains*)  # Remove whitespaces and duplicates
+            tr -d '[:space:]' < "$1" | awk '!seen[$0]++' > "${1}.tmp" ;;
+        *parked_terms*)  # Sort and remove duplicates
+            sort -u "$1" -o "${1}.tmp" ;;
+        *)  # Remove whitespaces, sort and remove duplicates
+            tr -d '[:space:]' < "$1" | sort -u > "${1}.tmp" ;;
+    esac
+    # Remove carraige return characters and empty lines
+    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
 }
 
 function cleanup {
