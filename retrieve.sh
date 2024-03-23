@@ -15,7 +15,7 @@ time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.1'
 query_count=0  # Initialize query count (only increments for Google Search terms)
 
-# grep '\..*\.' domains.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
+# grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
 
 # If running locally, use locally stored secrets instead of environment variables
 if [[ "$CI" != true ]]; then
