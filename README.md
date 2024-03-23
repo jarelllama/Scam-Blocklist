@@ -72,6 +72,7 @@ Additionally, wildcard domains are periodically added manually to the blocklist 
 
 ## Sources
 - [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction): Google Search API
+- [ANFRAS](https://anfras.com/fakeshops/): fake sites database
 - [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
 - [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/): crypto scams database
 - [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
