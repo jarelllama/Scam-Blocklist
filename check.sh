@@ -153,11 +153,11 @@ function format_list {
         *.csv)
             mv "$1" "${1}.tmp" ;;
         *dead_domains*)  # Remove whitespaces and duplicates
-            tr -d '[:space:]' < "$1" | awk '!seen[$0]++' > "${1}.tmp" ;;
+            tr -d ' ' < "$1" | awk '!seen[$0]++' > "${1}.tmp" ;;
         *parked_terms*)  # Sort and remove duplicates
             sort -u "$1" -o "${1}.tmp" ;;
         *)  # Remove whitespaces, sort and remove duplicates
-            tr -d '[:space:]' < "$1" | sort -u > "${1}.tmp" ;;
+            tr -d ' ' < "$1" | sort -u > "${1}.tmp" ;;
     esac
     # Remove carraige return characters and empty lines
     tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1"
