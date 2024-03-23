@@ -97,32 +97,22 @@ Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOU
 
 ## Resources
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
-
+- [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): The law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
+- [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
-
 - [who.is](https://who.is/): WHOIS and DNS lookup tool
 
-- [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
-
-- [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): The law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
-
 ## See also
-- [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
-
 - [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
-
 - [Elliotwutingfeng's Global Anti-Scam Organization Blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
-
 - [Elliotwutingfeng's Inversion DNSBL Blocklist](https://github.com/elliotwutingfeng/Inversion-DNSBL-Blocklists)
+- [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
 
 ## Appreciation
 Thanks to the following people for the help, inspiration and support!
-
-- [@hagezi](https://github.com/hagezi)
-
-- [@iam-py-test](https://github.com/iam-py-test)
-
 - [@bongochong](https://github.com/bongochong)
+- [@hagezi](https://github.com/hagezi)
+- [@iam-py-test](https://github.com/iam-py-test)
 EOF
 }
 
