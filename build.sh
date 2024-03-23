@@ -54,7 +54,7 @@ $(print_stats "")
  not included in the blocklist.
 *Domains added manually are not counted as a source.
 \`\`\`
-All data retrieved are publicly available and can be viewed in their respective [sources](https://github.com/jarelllama/Scam-Blocklist/#Sources).
+All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 ## Retrieving scam domains from Google Search
 Google provides a [Search API](https://developers.google.com/custom-search/v1/introduction) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. These search terms are manually added while investigating scam sites. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
@@ -92,22 +92,7 @@ Malicious domains often have [wildcard DNS records](https://developers.cloudflar
 Additionally, wildcard domains are periodically added manually to the blocklist to reduce the number of entries via wildcard matching.
 
 ## Sources
-- [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction): Google Search API
-- [ANFRAS](https://anfras.com/fakeshops/): fake sites database
-- [Artists Against 419](https://db.aa419.org/fakebankslist.php): fake sites database
-- [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/): crypto scams database
-- [GunTab](https://www.guntab.com/scam-websites): firearm scam sites database
-- [PetScams.com](https://petscams.com/): pet scam sites database
-- [Scam.Delivery](https://scam.delivery/): delivery scam sites database
-- [ScamAdvisor](https://www.scamadviser.com/): scam sites database
-- [Scam Directory](https://scam.directory/): non-delivery scam sites database
-- [stop419scams.com](https://www.stop419scams.com/): forum for reporting and exposing scams
-- [StopGunScams.com](https://stopgunscams.com/): firearm scam sites database
-- [Tranco Toplist](https://tranco-list.eu/): list of the 1 million top ranked domains
-- [r/Scams](https://www.reddit.com/r/Scams/): for manually added sites and search terms
-- [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/): for manually added sites and search terms
-
-All data retrieved from these sources are publicly available.
+Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 ## Resources
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
