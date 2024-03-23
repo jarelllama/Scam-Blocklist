@@ -1,4 +1,6 @@
 ## Sources
+All data retrieved from the following sources are publicly available.
+
 Source | Type
 :--- |:---
 [ANFRAS](https://anfras.com/fakeshops/) | Fake
@@ -14,5 +16,3 @@ Source | Type
 [Scam Directory](https://scam.directory/) | Any
 [stop419scams.com](https://www.stop419scams.com/) | Any
 [StopGunScams.com](https://stopgunscams.com/) | Firearm
-
-All data retrieved from these sources are publicly available.
