@@ -13,7 +13,7 @@ Blocklist for scam sites automatically retrieved from Google Search and public d
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 ```
-Total domains: 23163
+Total domains: 23766
 
 Statistics for each source:
 
@@ -49,7 +49,7 @@ The Google Custom Search JSON API only provides ~100 free search queries per day
 
 To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
-> Queries made today: 0
+> Queries made today: 107 (rate limited)
 
 #### Regarding other sources
 The full domain retrieval process for all sources can be viewed in the repository's code.

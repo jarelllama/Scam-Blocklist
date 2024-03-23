@@ -2,10 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sat Mar 23 11:35:47 UTC 2024
+# Last modified: Sat Mar 23 16:36:08 UTC 2024
 # Syntax: Wildcard Asterisk
-# Total number of entries: 23163
+# Total number of entries: 23766
 #
+*.
 *.01edc.com
 *.101luadalmatians.com
 *.103-boi.com
@@ -88,14 +89,17 @@
 *.5-drugs.com
 *.50bikes.de
 *.556store.com
+*.5577mx.com
 *.5starcourierservices.com
 *.5starjersey.com
+*.5starjersey.comtitle
 *.6-drugs.com
 *.602a84.myshopify.com
 *.624a3e360f878.site123.me
 *.62mobile.com
 *.6335078055d51.site123.me
 *.650fxoption.com
+*.66mall.shoptitle
 *.68bank.wixsite.com
 *.6ipc.pl
 *.6wh8.com
@@ -296,6 +300,7 @@
 *.adifootballshop.com
 *.adjafashmine.com
 *.adjustablechristmastree.com
+*.adjustablechristmastree.comtitle
 *.admotours.de
 *.adnmall.com
 *.adnoc-vendor.com
@@ -305,6 +310,7 @@
 *.adonexbk.com
 *.adoptbigdogs.com
 *.adoptionpaths.com
+*.adoptmainecoonkittys.com
 *.adoptmaltipoopuppies.com
 *.adoptpomeranianpuppy.com
 *.adorable.maltipoo.com
@@ -442,11 +448,13 @@
 *.agrilivestockmarket.com
 *.agriram.es
 *.agrisourcecoltd.com
+*.agrisourcecoltd.comtitle
 *.agro-afriquecoltd.com
 *.agro-funds.com
 *.agro-garten-market.de
 *.agro-manufacturer.com
 *.agro-poultryholdings.com
+*.agro.afriquecoltd.comtitle
 *.agroafriquecommodities.com
 *.agroequipmentonline.co.za
 *.agrofarmimportandexport.com
@@ -506,6 +514,7 @@
 *.airiball.com
 *.airjetpetmoversdelivery.com
 *.airjordan.at
+*.airjordanofficial.us.com
 *.airmaxsecuritycourier.org
 *.airoil.de
 *.airpetdelivery.com
@@ -517,6 +526,7 @@
 *.airpurtech.de
 *.airriflestore.com
 *.airscottishexpresslogistics.page.tl
+*.airseatransport.com
 *.airsevenexpress.com
 *.airsoftbulldogs.com
 *.airtapexpress.com
@@ -605,6 +615,7 @@
 *.alexamazingpuppies.com
 *.alexander-ahrens.de
 *.alexanderrobot.com
+*.alexanderrobot.comtitle
 *.alexdocumentation.com
 *.alexisshaw.shop
 *.alexmalteseandcross.com
@@ -711,6 +722,7 @@
 *.allsaintsaustria.at
 *.allskigear.com
 *.allsparepartsforsale.com
+*.allsparepartsforsale.comtitle
 *.allstarpitbullkennels.com
 *.allsummerdress.com
 *.alltools-store.com
@@ -724,6 +736,7 @@
 *.allyoucanfindstore.com
 *.allystrust.com
 *.almadeal.com
+*.almadeal.comtitle
 *.almashreqlogistics.com
 *.almonddelivery.com
 *.almondlogistics.com
@@ -789,9 +802,11 @@
 *.althanifinhouse.com
 *.althanigfh.com
 *.altra.outlet.com
+*.altra.outlet.comtitle
 *.altralaufschuhe.com
 *.altraosterreich.com
 *.aluminumfoilcloth.com
+*.aluminumfoilcloth.comtitle
 *.aluproholz.shop
 *.alver.com
 *.alwadhagroup.com
@@ -829,6 +844,7 @@
 *.amazingmainecoonkittens.com
 *.amazingoldenglishsheepdogpuppies.com
 *.amazingoutboards.com
+*.amazingoutboards.comtitle
 *.amazingparrotsforsale.com
 *.amazingpuppies345.com
 *.amazingpuppyshop.com
@@ -846,6 +862,7 @@
 *.amcargologistics.com
 *.amcclothes.com
 *.amceou.com
+*.amceou.comtitle
 *.amcstylish.com
 *.amendedfirearms.com
 *.americacbank.com
@@ -936,6 +953,7 @@
 *.ammovalleydepot.com
 *.ammoxpres.com
 *.ammozdepot.com
+*.ammunition-store.com
 *.ammunition.store.com
 *.ammunitionandaccessoriesshop.com
 *.ammunitionandgunshop.com
@@ -1048,7 +1066,9 @@
 *.animalsupplies.org
 *.animaltravellocality24-7.com
 *.animedwarf.com
+*.animedwarf.comtitle
 *.animefansite.com
+*.animefansite.comtitle
 *.animestorify.com
 *.anissti.com
 *.ankaoke.com
@@ -1085,6 +1105,7 @@
 *.anthonymonkeyhome.com
 *.anthonyrotpuppies.com
 *.anthropologieussale.shop
+*.anthropologieussale.shoptitle
 *.antiescortcourierdelivery.com
 *.antifreezesnow.com
 *.antike-magie.de
@@ -1125,6 +1146,7 @@
 *.apexcouriersdelivery.com
 *.apexdeliveryservice.org
 *.apexdrinksworld.com
+*.apexdrinksworld.comtitle
 *.apexengineeringsupplies.co.za
 *.apexforextrade247hrs.com
 *.apexforwardcargo.com
@@ -1194,8 +1216,10 @@
 *.appexcux.com
 *.appleeden.de
 *.applesoutlet.com
+*.applesoutlet.comtitle
 *.appliancescafe.com
 *.appliancesshopmall.store
+*.applyforunvacation.com
 *.applyforunvacation.online
 *.appointcu.com
 *.approcha.com
@@ -1214,6 +1238,7 @@
 *.aquariumopt.com
 *.aquariumshop.xyz
 *.aquaticoutboards.shop
+*.aquaticoutboards.shoptitle
 *.aquaticsarea.com
 *.aquaticsbest.com
 *.aquaticscategory.com
@@ -1238,9 +1263,11 @@
 *.architecturm.com
 *.archivesh.com
 *.archivesimf.org
+*.arconedachshundpuppies.com
 *.arcteryx-outlet.at
 *.arcteryxoutletdeutschland.de
 *.arcticfootwear.com
+*.arcticfootwear.comtitle
 *.arcuslogisticdeliveryservice.com
 *.area-fashion.com
 *.areadytowear.com
@@ -1261,6 +1288,7 @@
 *.arketchic.com
 *.arketrabatt.de
 *.arketsalese.com
+*.arketsalese.comtitle
 *.arkline.us
 *.arlton.shop
 *.armaaco.shop
@@ -1335,6 +1363,7 @@
 *.asanskamineralsltd.com
 *.asargold.com
 *.asb-online.com
+*.asb965.com
 *.asbonlines.com
 *.ascensiontrustgroup.com
 *.asci-ipy.de
@@ -1367,6 +1396,8 @@
 *.asllogisticsservices.com
 *.asolodeutschland.com
 *.asoosvip.com
+*.asoosvip.comtitle
+*.asosuk.shoptitle
 *.aspar-arms.com
 *.aspar.arms.com
 *.aspectgoodsshop.com
@@ -1384,6 +1415,7 @@
 *.assortmentoftoys.com
 *.assosbike.com
 *.assosvip.com
+*.assosvip.comtitle
 *.assurancefidelity.com
 *.assurancetrustbnk.com
 *.astericmen.net
@@ -1496,6 +1528,7 @@
 *.aufladekarten24.de
 *.augsburgholz.com
 *.augustbergwatch.store
+*.auiman.com
 *.auiteng.com
 *.aumachinerybrokers.com
 *.auniversaltool.com
@@ -1533,6 +1566,7 @@
 *.austmachinerybrokers.net
 *.australia420weed.com
 *.australiabuds.com
+*.australiakittens.com
 *.australian-psychedelic.com
 *.australiancavoodle.com
 *.australiandeliveryservices.com
@@ -1554,6 +1588,7 @@
 *.autella.fi
 *.auth-citizen.com
 *.authentic-chemlab.com
+*.authenticclonedcard.com
 *.authenticdocments.com
 *.authenticdocsff.com
 *.authenticfakenotes.com
@@ -1686,6 +1721,7 @@
 *.autotools.website
 *.autotradingmasters.live
 *.autowashmachines.com
+*.autowashmachines.comtitle
 *.autowiseenginesngearbox.co.za
 *.autoxpedia.com
 *.autozubehr.com
@@ -1711,6 +1747,7 @@
 *.avestaltd.com
 *.avestunion.com
 *.aviaryexpress.com
+*.aviaryexpress.us
 *.aviaterminal.com
 *.avid.chihuahua.com
 *.avieni.site
@@ -1781,6 +1818,7 @@
 *.babybottoms.shop
 *.babycare-new.com
 *.babycaremart.us
+*.babycaremart.ustitle
 *.babygirlsweetie.com
 *.babyhealthmall.store
 *.babyonlines.store
@@ -1844,6 +1882,7 @@
 *.ballgamesoff.com
 *.ballgamesofficial.com
 *.ballglovespro.com
+*.ballglovespro.comtitle
 *.ballistaguns.com
 *.ballmastershub.com
 *.ballpythonspetshop.com
@@ -1857,6 +1896,7 @@
 *.baltimorepuppieshome.co.za
 *.baltracodepot.com
 *.balustradex.pl
+*.bamboocrafts.com.au
 *.bamelabuy.shop
 *.ban-kubs.com
 *.banamike.com
@@ -1897,6 +1937,7 @@
 *.bargainknife.com
 *.bargainmerge.com
 *.bargashop.com
+*.barisedachshundpuppies.com
 *.barkershoes-uk.com
 *.barklessbasenji.com
 *.barnamesigns.com
@@ -1937,6 +1978,7 @@
 *.baseballclaim.com
 *.baseballgeardis.com
 *.baseballglovesforsale.com
+*.baseballglovesforsale.comtitle
 *.baseballmodern.com
 *.baseballoverus.com
 *.baseballshop-us.com
@@ -2096,6 +2138,7 @@
 *.belagus.com
 *.belairdachshunds.com
 *.belapuppieshouse.com
+*.belendan.com
 *.belerf.de
 *.belhomekitopt.com
 *.belindatrea.shop
@@ -2121,6 +2164,7 @@
 *.bemax.shop
 *.bemyo.xyz
 *.benchwheel.com
+*.bendeelakennels.com
 *.bender-reifen.com
 *.benedettocanecorsohome.com
 *.benelinie.de
@@ -2161,6 +2205,7 @@
 *.berando.de
 *.berbior.com
 *.beredge.com
+*.berettafirearms.com
 *.berettafirearmsamerica.com
 *.berettafirearmstore.com
 *.berettagunlife.com
@@ -2184,6 +2229,7 @@
 *.bergarausashop.com
 *.bergarausastore.com
 *.berghausale.com
+*.berghausale.comtitle
 *.berghausdeutschland.com
 *.bergmann-markt.de
 *.bergshepherds.com
@@ -2211,10 +2257,12 @@
 *.bernicefrenchie.com
 *.berniebaerchen.de
 *.beroys.shop
+*.beroys.shoptitle
 *.bersafirearmstore.com
 *.bersaguns.com
 *.bertbaby.shop
 *.bertlove.shop
+*.bertlove.shoptitle
 *.bertmag.com
 *.bertoualocalminerscoltd.com
 *.bertseypugpuppieshome.com
@@ -2268,6 +2316,7 @@
 *.bestes-brennholz.com
 *.bestesholzz.de
 *.bestestheticonlinesupply.com
+*.bestestheticonlinesupply.comtitle
 *.bestexport1989limited.com
 *.bestfemaless.com
 *.bestfirearmstore.com
@@ -2364,6 +2413,7 @@
 *.betefo.shop
 *.betercscios.com
 *.bethanybulies.com
+*.bethanycc.net
 *.bethlehemcanishome.com
 *.bethtrustbank.com
 *.betsimaltipoodogs.com
@@ -2374,8 +2424,10 @@
 *.betterwaycourier.com
 *.bettorceau.com
 *.bettyfashion2024.store
+*.bettyfashion2024.storetitle
 *.bettysmaltipoodogs.com
 *.betz-autoreifen.com
+*.beunst.com
 *.beutyful312.com
 *.bevanleebordercollies.com
 *.bevanleecavaliers.com
@@ -2389,9 +2441,11 @@
 *.bezstratnie.pl
 *.bfashionstyle.com
 *.bfcc.club
+*.bfcc.clubtitle
 *.bffsocks.com
 *.bfirearms.com
 *.bfscontainersales.com
+*.bfsuop.com
 *.bg-sailing.de
 *.bgamenet.com
 *.bgb-online.info
@@ -2445,6 +2499,7 @@
 *.bidcebidtg.net
 *.biddleandboptoys.com
 *.biddletrendy.com
+*.bideoak.shop
 *.bienchoix.fr
 *.bienlumieresolicitors.com
 *.biewerspot.com
@@ -2504,6 +2559,7 @@
 *.bikeshotsale.store
 *.bikesiteopt.com
 *.bikesonline24.com
+*.bikesonline24.comtitle
 *.bikeusover.com
 *.bikeussite.com
 *.bikeusstyle.com
@@ -2561,6 +2617,7 @@
 *.birdsupplies.shop
 *.birkenmall.club
 *.birkenstocke.com
+*.birkenstocke.comtitle
 *.birkenstocks-greece.com
 *.birkenstocksgreece.com
 *.birmankittenscattery.com
@@ -2739,6 +2796,7 @@
 *.blueswiftcourier.com
 *.bluetradingfx.com
 *.bluewavecontainers.com
+*.bluewavecontainers.comtitle
 *.bluewavelogis.com
 *.bluhm-reinhardt.de
 *.blum-reifen.com
@@ -2848,6 +2906,7 @@
 *.bordercollieshome.com
 *.bordercolliesranch.com
 *.boredxpressx.com
+*.borhng.com
 *.born-reifenversand.shop
 *.boroszewo.pl
 *.bosasheriff.com
@@ -2878,9 +2937,11 @@
 *.bouboo.shop
 *.boucheriehomont.fr
 *.boughloaf.com
+*.bouqas.com
 *.bourbonfoundryhouse.com
 *.bourbonliquorstore.com
 *.bourbontennesseelovers.shop
+*.bourbontennesseelovers.shoptitle
 *.bourbonwhiskeywarehouse.com
 *.bourbonwhiskybrands.com
 *.bourlingsly.com
@@ -2889,6 +2950,7 @@
 *.boutiiqur.com
 *.boutique-body.com
 *.boutique1861ca.com
+*.boutique1861ca.comtitle
 *.boutiquefeel.com
 *.boutiquestorese.shop
 *.boutiquestyle.us
@@ -2952,6 +3014,7 @@
 *.brandtteacyorkie.com
 *.brandundies.com
 *.brandvendingmachine.shop
+*.brandvendingmachine.shoptitle
 *.brascocompanylimited.com
 *.brasilchickenbrands.com
 *.brassshopusa.com
@@ -2959,6 +3022,7 @@
 *.brassstore.usa.com
 *.brasus.net
 *.brasusbau24.de
+*.braunsale.storetitle
 *.brautkleider-24.de
 *.brautkleiderrabatt.com
 *.brautschuss.de
@@ -2970,6 +3034,7 @@
 *.bravebullmastiffs.com
 *.bravecanecorso.com
 *.bravedoodles.com
+*.bravedue.com
 *.bravefrenchbulldogs.com
 *.braveglobelogistic.com
 *.bravehuntingdogs.com
@@ -2982,14 +3047,18 @@
 *.bravokennelhome.co.za
 *.brazil-frozen-food.com
 *.brazilbestchickens.com
+*.brazilbestchickens.comtitle
 *.brazilbestsugar.com
+*.brazilbestsugar.comtitle
 *.brazilfrozenchickenexports.com
 *.brazilfrozenlivestockexporters.com
 *.brazilian.sugarexporter.com
+*.brazilian.sugarexporter.comtitle
 *.brazilianpoultryexports.com
 *.brazilmeatexporters.com
 *.brazilprimefrozenmeat.com
 *.brazilrefinedsugar.com
+*.brazilrefinedsugar.comtitle
 *.brazilworldexports.com
 *.breaddes.online
 *.breakerssell.com
@@ -3068,6 +3137,7 @@
 *.briskmeind.com
 *.briskrtpto.com
 *.brissmalkittenshop.com
+*.britaxus.com
 *.british-trades.com
 *.britishbluecat.com
 *.britishcertifications.com
@@ -3155,7 +3225,9 @@
 *.bsic-groupe.com
 *.bsictrustgroup.com
 *.bsinvestmentslimited.com
+*.bsksale.comtitle
 *.bslzeecontainer.co
+*.bslzeecontainer.cotitle
 *.bst-logistik-ab.com
 *.bstfirewood.com
 *.bstrustshore.com
@@ -3224,6 +3296,7 @@
 *.bulkgoldsales.com
 *.bulkmanammo.com
 *.bulkmeatexporters.com
+*.bulkmeatexporters.comtitle
 *.bulkminidach.online
 *.bulkmunitionsdepot.com
 *.bulknepgeld.com
@@ -3241,6 +3314,7 @@
 *.bullethunt.com
 *.bulletproofarms.com
 *.bulletproofstore.org
+*.bulletproofstore.orgtitle
 *.bulliesbreeders.com
 *.bullmastiffcreek.com
 *.bullseyegunstore.com
@@ -3266,6 +3340,7 @@
 *.burnout-cockpit.de
 *.burnscanecorsohome.com
 *.burrmall.com
+*.burrmall.comtitle
 *.burrsshibainupuppies.com
 *.burstabout.net
 *.burtonsnowboard.de
@@ -3303,12 +3378,16 @@
 *.buycheapsaxenda.com
 *.buychildus.com
 *.buycigarsonline.org
+*.buycigarsonline.orgtitle
+*.buyclonecardsonline.net
+*.buyclonedcardsnnotes.com
 *.buycocaineinaustralia.com
 *.buycoinstry.com
 *.buycolombiancoke.com
 *.buycoltfirearms.com
 *.buycounterfeitdoc.com
 *.buycounterfeitnotes.com
+*.buycounterfietnote.com
 *.buycreamdeluxesonline.com
 *.buydachshundpuppies.com
 *.buydachshundpuppiesonline.com
@@ -3372,11 +3451,13 @@
 *.buypsychedelicdrugs.com
 *.buypsychedelicsusa.com
 *.buyresearchchemicalsstoreusa.com
+*.buyresearchchemicalsstoreusa.comtitle
 *.buyricksimpsonoils.com
 *.buyrottweiler.com
 *.buyseafishing.com
 *.buyshihtzushop.com
 *.buyshippingcontainers.co.uk
+*.buyshippingcontainers.co.uktitle
 *.buyshoeproduct.com
 *.buyshroomsaustralia.com
 *.buyslims.com
@@ -3406,6 +3487,7 @@
 *.bx25dlbkubota.fahrzeugs.com
 *.bxhgk.com
 *.bxmshop.com
+*.bybpoz.com
 *.byclothes.com
 *.byebob.com
 *.byeuys.shop
@@ -3477,8 +3559,10 @@
 *.caluaniechems.com
 *.caluaniemuelearusa.com
 *.calvarywelpenzuhaus.de
+*.calvinkleinofficial.comtitle
 *.calvira.de
 *.camafly.de
+*.camelxpressdelivery.online
 *.camerllia.com
 *.cameroon-gold-mining-limited.business.site
 *.cameroongoldminingltd.com
@@ -3494,6 +3578,7 @@
 *.campershavenoutlet.com
 *.campershavenshop.com
 *.campershow.shop
+*.campershow.shoptitle
 *.campevery.com
 *.campgearsell.com
 *.camping-cozy.com
@@ -3524,6 +3609,7 @@
 *.canadareloadinghub.com
 *.canadasale365.com
 *.canadatrustmed.com
+*.canadazzt.shoptitle
 *.canadianammo.com
 *.canadianhealthcaremalll.com
 *.canadianlab.us
@@ -3667,6 +3753,7 @@
 *.cargoxpress.online
 *.cargoxpressd.services
 *.carharttus.store
+*.carharttus.storetitle
 *.caringhometeacupmaltese.com
 *.carl-bulldogpuppies.sitey.me
 *.carl-waltherarmstore.com
@@ -3714,15 +3801,18 @@
 *.castinocanecorsoangels.com
 *.castlefaithbkkltd.com
 *.castlegift.shop
+*.castlegift.shoptitle
 *.castleguardcanecorsopups.com
 *.castlehilldachshunds.com
 *.castlemedmenstore.com
 *.castlerockfirearms.com
 *.castmastergear.com
+*.castoramatop.shoptitle
 *.casuallaceupshoes.com
 *.casualsportsbag.com
 *.casualsportstore.com
 *.casualwearvip.com
+*.casualwearvip.comtitle
 *.catahoulapuppiesforsale.com
 *.catalunyafarm.com
 *.catalystltd329276820.wordpress.com
@@ -3738,9 +3828,11 @@
 *.catherinelaina.shop
 *.cathkidstonoutlets.com
 *.cathkidstonuksaleuk.com
+*.cathkidstonuksaleuk.comtitle
 *.catholicpethome.com
 *.cathydachshund.com
 *.cathysragdollkittensforsale.com
+*.catshoeus.com
 *.catsinaustralia.com
 *.catsiteopt.com
 *.catteryofortegagiantmainecoonpets.com
@@ -3778,6 +3870,7 @@
 *.cbtltgroupe.com
 *.cbtwohousehold.com
 *.cbuaegov.com
+*.ccardsandnotes.com
 *.ccccccstudio.com
 *.cccuae.net
 *.cchopeorg.com
@@ -3794,22 +3887,28 @@
 *.ccwbusinesslawyers.com
 *.ccy-space.com
 *.cdcauldron.com
+*.cdfinalsale.comtitle
 *.cdo-forum-germany.de
 *.cdonlinedeal.com
+*.cdonlinedeal.comtitle
+*.cdonlinesale.shoptitle
 *.cdressesb.com
 *.cdtopdeal.com
+*.cdtopdeal.comtitle
 *.cebesale.com
 *.cebestore.com
 *.cebeyalegal.com
 *.cecglobalwholesales.com
 *.cecilelove.shop
 *.cecilfansvip.com
+*.cecilfansvip.comtitle
 *.cedarparkobgyn.com
 *.cedarridgefamilymedicine.com
 *.cedarsave.com
 *.cedarsavecr.com
 *.cedarsavecredit.com
 *.cedarsavecu.com
+*.ceggcc.vip
 *.cegner.de
 *.ceilingu.shop
 *.celebrityfrenchies.com
@@ -3906,6 +4005,7 @@
 *.championsblood.com
 *.championwien.at
 *.champofarm.com
+*.champofarm.comtitle
 *.champpapillonpuppies.com
 *.changocontainer.co.za
 *.chantelleunionbnkplc.com
@@ -3931,6 +4031,7 @@
 *.charmymaltese.com
 *.charmyteacupyorkies.com
 *.charnleymagllc.com
+*.charnleymagllc.comtitle
 *.charterarmsusa.com
 *.charteredcreditunionb.com
 *.charteredfinancecorps.com
@@ -4027,6 +4128,7 @@
 *.chicballsports.com
 *.chicballus.com
 *.chicchaussure.com
+*.chiccouss.com
 *.chiccouturez.com
 *.chiccutlery.com
 *.chicdiscounts.com
@@ -4052,6 +4154,7 @@
 *.chicnailofficial.com
 *.chiconway.com
 *.chicosofficial.com
+*.chicosofficial.comtitle
 *.chicsafetytool.com
 *.chicshirtfantasy.com
 *.chicshoevogue.com
@@ -4109,9 +4212,11 @@
 *.choppersden.com
 *.chopragard.online
 *.chosmo.shop
+*.choumainecoon.com
 *.chouyatou.com
 *.chowamein.com
 *.chowchowbreedershome.com
+*.chowchowforsale.com
 *.chowchowheavens.com
 *.chowchowpuppiesforsale.org
 *.chowchowspot.com
@@ -4142,6 +4247,7 @@
 *.christmasnewyearragdoll.com
 *.christmaspopular.com
 *.christmasprelittrees.com
+*.christmasprelittrees.comtitle
 *.christmaspremier.com
 *.christmastinyyorkiepuppies.com
 *.christmasunique.com
@@ -4231,6 +4337,8 @@
 *.ckonlinesale.store
 *.cktckt.com
 *.ckvipmall.com
+*.ckvipmall.comtitle
+*.ckvipshop.comtitle
 *.cl.cattery.com
 *.clairebeagles.com
 *.clairepuppies.com
@@ -4260,6 +4368,7 @@
 *.classickittens.co.za
 *.classicnewfoundlandpuppyhome.com
 *.classicovespaandbikes.com
+*.classicovespaandbikes.comtitle
 *.classicrottweilerboutique.com
 *.classicteacupyorkiepuppies.com
 *.classicusjewelry.com
@@ -4286,6 +4395,7 @@
 *.clearance-bike.com
 *.clearance-kitchen.com
 *.clearanceapple.com
+*.clearanceapple.comtitle
 *.clearancebath.com
 *.clearancedecor.com
 *.clearancefish.com
@@ -4302,6 +4412,7 @@
 *.cleoscuties.online
 *.clexan.com
 *.clicktechpro.com
+*.clicktechpro.comtitle
 *.climatepublicfinancedac-ae.com
 *.climbdmm.com
 *.climbersequip.com
@@ -4323,6 +4434,7 @@
 *.clothesessential.com
 *.clothesff.com
 *.clothesmalleu.shop
+*.clothesmalleu.shoptitle
 *.clothesmountain.com
 *.clothesoptinfo.com
 *.clothesoptoff.com
@@ -4348,7 +4460,9 @@
 *.clothingqiu.com
 *.clothingrevel.com
 *.clothingsyi.com
+*.clothingvipdiscount.comtitle
 *.clothssyy.com
+*.clothssyy.comtitle
 *.cloudcapitaloptions.com
 *.clouddiy.shop
 *.cloudeo-shop.com
@@ -4363,6 +4477,7 @@
 *.cltexpresscouriers.com
 *.clubllondons.us
 *.clubwear888.store
+*.clubwear888.storetitle
 *.cluckergifts.company.site
 *.clydeonlineaccess.com
 *.cmcfxsignals.com
@@ -4371,6 +4486,7 @@
 *.cmmgfirearmsusa.com
 *.cmngty.com
 *.cmpfoot.shop
+*.cmpfoot.shoptitle
 *.cmsjadulh.shop
 *.cmuga.shop
 *.cnbiochemicals.com
@@ -4489,6 +4605,7 @@
 *.columbiaclothings.shop
 *.columbiaosterreich.at
 *.columbiavipsale.com
+*.columbiavipsale.comtitle
 *.combatamp.com
 *.combatfirearmsusa.com
 *.combont.com
@@ -4497,11 +4614,13 @@
 *.comfie.de
 *.comfily.shop
 *.comfimerch.com
+*.comfimerch.comtitle
 *.comfortablefeme.com
 *.comfortablejewelry.com
 *.comfortablemen.com
 *.comfortableraiment.com
 *.comfortablewears.shop
+*.comfortablewears.shoptitle
 *.comfortdanes.com
 *.comfortteacuppuppies.com
 *.comido-versand.com
@@ -4552,6 +4671,7 @@
 *.confide.shop
 *.confidencekennels.shop
 *.confimerch.com
+*.confimerch.comtitle
 *.coniproasset.com
 *.conjunctiom.com
 *.connectbuds420dispensary.com
@@ -4573,6 +4693,7 @@
 *.containerpro.co.za
 *.containers2gogmbh.de
 *.containersalesjapan.com
+*.containersalesjapan.comtitle
 *.containersandreefers.com
 *.containerscompany.co.za
 *.containershomeplan.com
@@ -4632,6 +4753,7 @@
 *.coreammunition.com
 *.coremarketsfx.com
 *.coreslife.shop
+*.coreslife.shoptitle
 *.corgi.welpen.com
 *.corgibreedersfamily.com
 *.corgibreedersstore.com
@@ -4656,6 +4778,9 @@
 *.correos.eu.com
 *.corsaireuropholding.com
 *.corteiz.co
+*.corteiz.us
+*.corteizhoodieofficial.com
+*.corteizstore.com
 *.coscoexpertshipping.com
 *.coscultureshop.com
 *.cosetek.com
@@ -4671,6 +4796,7 @@
 *.cosmeticsilky.com
 *.cosmetictradekftonlineshop.com
 *.cosmetiquetotalefrance.com
+*.cosmetiquetotalefrance.comtitle
 *.cosmospharmaceutical.com
 *.cosmosreachint.com
 *.cosmotechpapers.com
@@ -4695,6 +4821,7 @@
 *.counterfeitmoneyshop.com
 *.counterfeitpropmoney.com
 *.counterfeitsbills.org
+*.counterfeitzone.com
 *.countrylivingsupply.com
 *.countrysidefrenchbulldogs.com
 *.courierallianceslimitedcompany.com
@@ -4728,6 +4855,7 @@
 *.cozysleepzone.com
 *.cozyusfilms.com
 *.cp24.pl
+*.cpcompanytop.shoptitle
 *.cpee.top
 *.cpengineperformance.com
 *.cpfchemical.com
@@ -4782,6 +4910,7 @@
 *.crivasa.com
 *.crktcutlery.com
 *.crm.balitteknologikaret.co.id
+*.crm.stunwill.com
 *.crncreditunion.com
 *.crocsosterreich.at
 *.croixlogistics.com
@@ -4873,10 +5002,12 @@
 *.cstrevenue.com
 *.ctechfinance.com
 *.ctmlivestock.com
+*.ctmlivestock.comtitle
 *.ctrustfu.com
 *.cttxpress.com
 *.ctu-funds.online
 *.cub.container.com
+*.cub.container.comtitle
 *.cube-bike-de.com
 *.cuddleckcspups.com
 *.cuddlecutiespoos.com
@@ -4964,6 +5095,7 @@
 *.cvafirearmshop.com
 *.cvafirearmsusa.com
 *.cvk165.com
+*.cvk165.comtitle
 *.cvlostendales.es
 *.cwbintl.com
 *.cwswine.com
@@ -5037,6 +5169,7 @@
 *.dabereshops.com
 *.dabiya-clairvoyant.ca
 *.dabstarspharma.com
+*.dachigolfcarts.comtitle
 *.dachshundcompanions.com
 *.dachshundcutecuddles.com
 *.dachshundcutepups.com
@@ -5076,8 +5209,10 @@
 *.dailypotteredstore.com
 *.dailyswipecouriers.com
 *.daineseride.com
+*.daineseride.comtitle
 *.dainpark-blog.de
 *.daiport.com
+*.daisuka.com
 *.daisysavingcart.com
 *.dakmag.com
 *.daledog.store
@@ -5118,6 +5253,7 @@
 *.dannergermany.com
 *.danneronlineshop.at
 *.dannerschuhe.at
+*.dannerus.com
 *.dannycatterycoons.com
 *.dannypuppieshome.online
 *.dansalmontrading.com
@@ -5219,6 +5355,7 @@
 *.dcsgov.org
 *.dcsgovpretoria.org
 *.dcsgovprocurement.org
+*.dcsgovprocurements.org
 *.dcshoesaustria.at
 *.dcsiteservices.com
 *.dcskaterschuhe.de
@@ -5296,6 +5433,7 @@
 *.decorustools.com
 *.decotrustbank.com
 *.decproch.com
+*.decurretbit.com
 *.dedynafitsport.com
 *.deepseaexpresscourier.com
 *.deepseashippingservices.com
@@ -5395,6 +5533,7 @@
 *.dependablebicycle.com
 *.dependabledeliveryservices.com
 *.deportesberja.com
+*.deportesberja.comtitle
 *.depotbicycle.com
 *.depotcandle.com
 *.depotlamps.com
@@ -5423,6 +5562,7 @@
 *.deserttechfirearmsusa.com
 *.desharonsjewelry.com
 *.desi.es.com
+*.desi.es.comtitle
 *.desiehomedachshund.com
 *.design.org
 *.designacushion.com
@@ -5432,7 +5572,9 @@
 *.designerjoules.com
 *.designerpethome.com
 *.designersunglass.store
+*.designhomebuy.comtitle
 *.designhomeeu.com
+*.designhomeeu.comtitle
 *.designmensshoes.com
 *.designsaquatics.com
 *.designsautoparts.com
@@ -5445,6 +5587,7 @@
 *.designwisehome.com
 *.desigualosterreich.com
 *.desigualshow.shop
+*.desigualshow.shoptitle
 *.deskcodes.com
 *.desmitrabatt.com
 *.despielzeugautos.com
@@ -5489,6 +5632,7 @@
 *.devotedbostonterriers.com
 *.devotedpuppies4you.com
 *.dewemalls.com
+*.deworkclothes.comtitle
 *.dewtoolshop.com
 *.dexatruistcourier.com
 *.dexcts.com
@@ -5514,6 +5658,7 @@
 *.diamondback.us
 *.diamondbackarmstore.com
 *.diamondbackbikesales.com
+*.diamondbackbikesales.comtitle
 *.diamondbackfirearmsusa.com
 *.diamondbackgunshop.com
 *.diamondbackgunstore.com
@@ -5534,6 +5679,7 @@
 *.diamondvalleypuppies.net
 *.diamonvalleyshihtzupuppies.com
 *.dianeangllc.com
+*.dianeangllc.comtitle
 *.diapount.com
 *.diarw.com
 *.diaskfz.com
@@ -5541,6 +5687,7 @@
 *.diceprints.com
 *.dick-reifen.com
 *.dicksportstore.shop
+*.dicksportstore.shoptitle
 *.dididiker.com
 *.diection.com
 *.diehl-reifen.com
@@ -5549,6 +5696,7 @@
 *.dienstfhrerschein.de
 *.dieselofficialsale.de
 *.dieselosterreich.com
+*.dieselsusa.com
 *.dietrich-reifenhandel.com
 *.digibytetrusttrade.com
 *.digikwfinance.com
@@ -5560,6 +5708,7 @@
 *.dikahandel.de
 *.diligentransportlogistics.com
 *.dillardsclearance.com
+*.dillardsclearance.comtitle
 *.dimasgunstore.com
 *.dinastywoodtrading.com
 *.dinnerfiresale.com
@@ -5610,6 +5759,7 @@
 *.discountsmma.com
 *.discountspaul.com
 *.discountsrc.com
+*.discountstamp.viptitle
 *.discounttoy.store
 *.discountwalldecor.com
 *.discrctoys.com
@@ -5640,6 +5790,7 @@
 *.dittsmeier.de
 *.diveintostyle.com
 *.divine-wonder.com
+*.divinedecorofdallas.us
 *.divineexpressglobaldelivery.com
 *.divinegreatdanes.com
 *.divinexpressdelivery.com
@@ -5649,6 +5800,7 @@
 *.diyjojojp.com
 *.diytsi.shop
 *.dkj466.com
+*.dkj466.comtitle
 *.dklmvni.com
 *.dkowuc.shop
 *.dkshippingservices.com
@@ -5808,6 +5960,7 @@
 *.dpcbicyclepro.com
 *.dpdshipment.online
 *.dpllehhgg.store
+*.dpllehhgg.storetitle
 *.dpprorecruit.com
 *.dqexpertstrade.com
 *.dr-healing.com
@@ -5953,6 +6106,8 @@
 *.duvipmalls.store
 *.duzhaocapitalhk.com
 *.dvfofficial.com
+*.dvfofficial.comtitle
+*.dwa150.com
 *.dwarkacourierltd.online
 *.dwfirearms.com
 *.dwnrod.com
@@ -5967,6 +6122,7 @@
 *.dynamicsphynxkittenshome.com
 *.dynamite-pro.com
 *.dynamitecaofficial.com
+*.dynamitecaofficial.comtitle
 *.dynamos.at
 *.dynastyakitas.com
 *.dynastyangorakittens.com
@@ -6012,6 +6168,7 @@
 *.eagleswiftdeliveryservices.com
 *.eagleswiftlogistics.com
 *.eagletrustb.com
+*.eagleviewfirearmss.com
 *.eaglewingslogistics.com
 *.earleane.com
 *.earlybirdaviary.com
@@ -6064,6 +6221,7 @@
 *.ebert-reifenhandel.shop
 *.eberwein-versand.de
 *.ebikeandchristmasdecor.com
+*.ebikeandchristmasdecor.comtitle
 *.ebikesgeschaft.com
 *.ebinalo.com
 *.eblattholz.com
@@ -6091,6 +6249,7 @@
 *.eclothone.com
 *.ecmlibltdmy.com
 *.ecn195.com
+*.ecn195.comtitle
 *.eco-gravity.com
 *.ecobeautesupplierau.com
 *.ecoflair.org
@@ -6223,6 +6382,7 @@
 *.electratoolworld.com
 *.electricalknife.com
 *.electricappliance.shop
+*.electricappliance.shoptitle
 *.electricgolfcartsforsale.net
 *.electricitysavingboxosterreich.wordpress.com
 *.electrics-appliance.com
@@ -6232,6 +6392,7 @@
 *.electrifytools.com
 *.electrolux.at
 *.electroniconlive.com
+*.electronics.sale.shoptitle
 *.electroshop24.de
 *.electrosun.co.za
 *.eleeganz.de
@@ -6409,6 +6570,7 @@
 *.empowerorphans.info
 *.empowerorphans.online
 *.emptyrooms.top
+*.ems-inspection-solutions.co.uk
 *.emsdeliverpost.com
 *.emsfastlogistics.com
 *.emsglobalexpress.com
@@ -6424,6 +6586,7 @@
 *.enchantingpoodles.com
 *.enchantressbank.com
 *.enchic.store
+*.enchic.storetitle
 *.endeavorh.com
 *.endofyearkennel.co.za
 *.endtimecustoms.com
@@ -6436,6 +6599,7 @@
 *.energeticfrenchies.com
 *.energeticpomeranianpuppies.com
 *.energeticsale.com
+*.energeticsale.comtitle
 *.energeticyorkiehome.com
 *.energie-brennholz.com
 *.energie-fsd.de
@@ -6457,6 +6621,8 @@
 *.enfedx.com
 *.enfodream.com
 *.engel-autoreifen.shop
+*.engelbertstraussvip.comtitle
+*.engelbertworks.comtitle
 *.engelhardt-autoreifen.com
 *.engelke-reifen.com
 *.engels-mode.com
@@ -6563,6 +6729,7 @@
 *.escrow-ng.com
 *.escrowoffshores.com
 *.eshoesoutlet.com
+*.eshop9.com
 *.esioupe.shop
 *.esiwok.com
 *.esmolab.net
@@ -6611,10 +6778,13 @@
 *.eu-legalefahren.com
 *.eu-med-mart.com
 *.eu.ecco.shop
+*.eu.ecco.shoptitle
 *.eubesthome.shop
+*.eubesthome.shoptitle
 *.euchems.me
 *.eudeutchfuhrerschein.com
 *.eufahrradzubehor.de
+*.eufashions.storetitle
 *.eugadneu.de
 *.euheadsport.de
 *.euholz.com
@@ -6653,6 +6823,7 @@
 *.euronixstore.com
 *.europ-lab.com
 *.europ.lab.com
+*.europ.lab.comtitle
 *.europaa-market.de
 *.europabestellung.nl
 *.europadokumente24hrs.de
@@ -6983,6 +7154,7 @@
 *.falk-reifenhandel.com
 *.falk-reifenversand.com
 *.falkewear.shop
+*.falkewear.shoptitle
 *.fallacture.com
 *.falltoy.com
 *.falsodinero.net
@@ -7020,11 +7192,13 @@
 *.familypugpuppies.com
 *.familyraisedaustralianshepherd.com
 *.familyraisedbloodhounds.com
+*.familyraiseditaliangreyhound.com
 *.familyraiseditaliangreyhoundpuppies.com
 *.familyraisedsheltie.com
 *.familyraisedshibainu.com
 *.familyraisedshibainupp.com
 *.familyraisedshihtzus.com
+*.familyraisedsiamesekittens.com
 *.familyrottiehomes.com
 *.familysmartpuppies.com
 *.familyteacuppoodles.com
@@ -7089,6 +7263,7 @@
 *.farmspain.com
 *.farrenheitboxerpuppies.com
 *.farysay.com
+*.farysay.comtitle
 *.fasamey.com
 *.faschingskapparelde.com
 *.fashglamorous.com
@@ -7103,6 +7278,7 @@
 *.fashionadorable.com
 *.fashionarykitchen.com
 *.fashionbagssale.shop
+*.fashionbagssale.shoptitle
 *.fashionbagstopsell.store
 *.fashionbedroom.com
 *.fashionbens.com
@@ -7114,6 +7290,7 @@
 *.fashionconfide.com
 *.fashioncosmetics.store
 *.fashiondresssale.store
+*.fashiondresssale.storetitle
 *.fashioneffectual.com
 *.fashionegl.com
 *.fashionersi.com
@@ -7153,6 +7330,7 @@
 *.fashionssurf.com
 *.fashionstb.com
 *.fashionstoreats.shop
+*.fashionstoreats.shoptitle
 *.fashionstormfusion.com
 *.fashionsviolet.com
 *.fashiontrendkit.com
@@ -7161,6 +7339,7 @@
 *.fashionusregion.com
 *.fashionvila.com
 *.fashionvvip.com
+*.fashionvvip.comtitle
 *.fashionwomenwo.com
 *.fastcitycourierservices.com
 *.fastclockllc.com
@@ -7211,6 +7390,7 @@
 *.faststandardtrade.com
 *.fasttrackdeliveryservices.com
 *.fasttrackglobalfreightways.com
+*.fasttrackingagency.com
 *.fasttracklineexpress.com
 *.fasttracklinklogistics.com
 *.fasttracklogisticspro.com
@@ -7294,6 +7474,8 @@
 *.feior.com
 *.feldmann-reifen.com
 *.felicianes.com
+*.felicianes.comtitle
+*.feliciia.com
 *.felicityy.com
 *.felineforeverhomes.com
 *.felinepalacecattery.com
@@ -7343,6 +7525,7 @@
 *.fexcargos.com
 *.fexpresslogisticservice.com
 *.fey656.com
+*.fey656.comtitle
 *.ffcpb.net
 *.fgbanking.com
 *.fgxctrade.com
@@ -7369,6 +7552,7 @@
 *.figico.net
 *.figurinestoys.com
 *.fildropsservices.com
+*.file-coinfo.com
 *.filmmentol.com
 *.filmstvz.com
 *.filmteam-nieheim.de
@@ -7376,7 +7560,9 @@
 *.filous-shop.de
 *.finaclefx.org
 *.finalsalestore.shop
+*.finalsalestore.shoptitle
 *.finalsalestore.vip
+*.finalsalestore.viptitle
 *.finalstoppuppies.com
 *.finance-markets.net
 *.financeat.net
@@ -7603,9 +7789,11 @@
 *.fitness-shopsale.com
 *.fitnessforte.shop
 *.fitnesshomeequipments.com
+*.fitnesshomeequipments.comtitle
 *.fitnessrb.com
 *.fitnesssuperdeals.com
 *.fitnessvipstore.com
+*.fitnessvipstore.comtitle
 *.fitnestar.de
 *.fitoutcycle.com
 *.fitoutusoffice.com
@@ -7618,16 +7806,21 @@
 *.fiyavertrieb.de
 *.fizzabasenjipups.com
 *.fjallravenes.com
+*.fjallravenes.comtitle
 *.fjallraveninc.com
 *.fjallravenmall.com
+*.fjallravenmall.comtitle
 *.fjallravenonline.shop
+*.fjallravenonline.shoptitle
 *.fjallravensale.de
+*.fjallravenus.com
 *.fjoutdoorus.com
 *.fjoutlet.store
 *.fkbrnoguns.com
 *.fkepowersupply.co.za
 *.fl-handel.net
 *.flaircontainers.com
+*.flaircontainers.comtitle
 *.flamingowine.com
 *.flamna.de
 *.flashcryptotrade247.com
@@ -7724,6 +7917,7 @@
 *.flyway-travels.com
 *.flywaymaillogistics.com
 *.fmacdi.com
+*.fmacdi.comtitle
 *.fmcgloballogistics.com
 *.fmfinance-gov.com.ng
 *.fmsgloballogistics.com
@@ -7762,6 +7956,7 @@
 *.footwearbogs.com
 *.footwearedge.com
 *.footwearelite.com
+*.footwearelite.comtitle
 *.footwearhoka.com
 *.footwearjolly.com
 *.footwearmagic.com
@@ -7863,6 +8058,9 @@
 *.frbnj.com
 *.frcomposants.com
 *.freddyaustralianshepherdpuppies.com
+*.fredperrystore.comtitle
+*.fredsport.shoptitle
+*.fredvipperry.comtitle
 *.free-maket.com
 *.freeacorbetts.com
 *.freealo.com
@@ -7931,6 +8129,7 @@
 *.friendlypuppiesshome.com
 *.friendlyrussianblue.com
 *.friendlyyorkieandcorgipups.com
+*.friends-lounge.store
 *.fries-reifenversand.shop
 *.friescandy.com
 *.frigatecontainers.com
@@ -7956,7 +8155,9 @@
 *.frostsports.net
 *.frozenchickengroup.com
 *.frozenmeatproducer.com
+*.frozenmeatproducer.comtitle
 *.frozenmeatsolutions.com
+*.frozenmeatsolutions.comtitle
 *.frsportsoldes.com
 *.frttrigger.com
 *.frttyr.com
@@ -7985,6 +8186,7 @@
 *.fuhrmann-reifen.com
 *.fullmoonshihtzus.com
 *.fulofbright.com
+*.fun-eth.com
 *.functional-bike.com
 *.functoolslp.com
 *.fund-fort.com
@@ -8020,6 +8222,7 @@
 *.furnishingbrand.com
 *.furnishingschic.com
 *.furnishingssale.com
+*.furnishingssale.comtitle
 *.furnishingus.com
 *.furnishproz.com
 *.furnishxpert.com
@@ -8097,6 +8300,7 @@
 *.fxcryptominers.com
 *.fxdeliveryexpress.com
 *.fxflzsale.shop
+*.fxflzsale.shoptitle
 *.fxglobalscouts.com
 *.fxinvestmentworld.com
 *.fxlinkdigital.com
@@ -8198,13 +8402,17 @@
 *.ganja-australia.com
 *.ganja-estates.com
 *.gant.fun
+*.gant.funtitle
 *.gant.gr.com
+*.gant.gr.comtitle
 *.gantcliver.com
 *.gantvogue.com
 *.gaoxp1.shop
+*.gaoxp1.shoptitle
 *.gapotheke.de
 *.gapstrading.com
 *.garageclothingca.shop
+*.garageclothingca.shoptitle
 *.garanbk.com
 *.garbagerackofficial.com
 *.garcotrb.online
@@ -8318,6 +8526,7 @@
 *.gemstonerivers.com
 *.gen-direkt.de
 *.genekitchen.shop
+*.genemartinautosales.comtitle
 *.generalautospares.com
 *.generaldachshundpups.com
 *.generallogisticscompany.com
@@ -8342,6 +8551,7 @@
 *.gennyfashion.com
 *.genpomblobalgroup.co.za
 *.gentlebosslook.com
+*.gentlebosslook.comtitle
 *.gentleclawscattery.com
 *.gentlegiantshome.co.za
 *.gentlemanbostonterriers.com
@@ -8358,6 +8568,7 @@
 *.genzfshop.com
 *.geoaun.com
 *.georgerichardsca.com
+*.georgerichardsca.comtitle
 *.georgia-gunshop.com
 *.georgia.gunshop.com
 *.georgiafngunsshop.com
@@ -8426,6 +8637,7 @@
 *.gewqas.com
 *.gexosltd.com
 *.gfarmhousesupply.com
+*.gfarmhousesupply.comtitle
 *.gfootwearus.com
 *.gglobalshippingexpress.com
 *.ggoddesses.com
@@ -8676,6 +8888,7 @@
 *.globalprimeexchange.com
 *.globalprioritymailservice.com
 *.globalproductsen.shop
+*.globalproductsen.shoptitle
 *.globalrapidlogistics.com
 *.globalrealdocuments.com
 *.globalredlogistics.com
@@ -8729,7 +8942,9 @@
 *.globangelsinvestment.com
 *.globanknotes.com
 *.globapall.com
+*.globapall.comtitle
 *.globaxlogistics.com
+*.globcoff.com
 *.globe24secure.com
 *.globedeliverexpress.com
 *.globeflightlogistics.com
@@ -8841,6 +9056,7 @@
 *.gokoayz.online
 *.gokugelis.com
 *.golaberlin.de
+*.golagb.shoptitle
 *.golaschuhewebsite.de
 *.golawien.at
 *.gold-handel-deutschland.de
@@ -8857,6 +9073,7 @@
 *.goldeagleafrica.com
 *.golden.frenchies.com
 *.goldenagemininggroup.com
+*.goldenammoshop.com
 *.goldenbernesemountain.com
 *.goldenbirdsshop.com
 *.goldencavapoopuppies.com
@@ -9014,6 +9231,7 @@
 *.goxmix.co.za
 *.goxmix.com
 *.goyardnn.com
+*.gpc-syria.com
 *.gpjholzdesign.de
 *.gprbn.com
 *.gqcxp.sandralaumusic.com
@@ -9089,7 +9307,9 @@
 *.greathottabs.com
 *.greatlylabradorpuppies.com
 *.greatoffereu.com
+*.greatoffereu.comtitle
 *.greatoffereu.shop
+*.greatoffereu.shoptitle
 *.greatpoofamilypups.com
 *.greatpugpuppies.com
 *.greatpyreneeskennel.com
@@ -9197,6 +9417,7 @@
 *.gsppupsforsale.com
 *.gsservices-en.com
 *.gtbikesshop.com
+*.gtbikesshop.comtitle
 *.gtbtr.com
 *.gtl-shipping.com
 *.guaranteedvanline.com
@@ -9218,6 +9439,7 @@
 *.guessrabatt.com
 *.guesssale.us
 *.guesstore.shop
+*.guesstore.shoptitle
 *.guessunique.com
 *.guglielmofregoso19.wixsite.com
 *.guiltyb.com
@@ -9319,6 +9541,7 @@
 *.gutesbrennholz.com
 *.gutkauf.shop
 *.guue.store
+*.guue.storetitle
 *.guul-truckingllc.com
 *.guyhardly.com
 *.guyleonardltd.com
@@ -9329,6 +9552,7 @@
 *.gym2goshop.de
 *.gymboy.shop
 *.gymequipmentoutlet.com
+*.gymequipmentoutlet.comtitle
 *.gymess24.com
 *.gymshark-austria.at
 *.gymshark-austria.com
@@ -9368,6 +9592,7 @@
 *.hairlessgalaxy.com
 *.hairmpress.com
 *.hairwaysdoodle.com
+*.hakeemstrapsgunstore.com
 *.hakodate-cape.com
 *.halicanto.com
 *.halifaxrifles.shop
@@ -9388,9 +9613,11 @@
 *.halloweenspielen.com
 *.hallucinate.pw
 *.haltivip.com
+*.haltivip.comtitle
 *.hamacaa4.com
 *.hambricktrustsplc.com
 *.hamburgtree.com
+*.hamdinfazzafansclub.com
 *.hamofydermalsuppliers.com
 *.hamptonlive.blog
 *.hananacreative.com
@@ -9402,6 +9629,7 @@
 *.handload-bank.com
 *.handload.bank.com
 *.handmadeproducts.store
+*.handmadeproducts.storetitle
 *.handpickclothing.com
 *.handpickdecoration.com
 *.handpickgeneralstore.com
@@ -9450,6 +9678,7 @@
 *.happycheerfulpuppies.com
 *.happychildmarket.com
 *.happyconsumer.shop
+*.happyconsumer.shoptitle
 *.happycorgihome.com
 *.happydayteacupyorkie.com
 *.happydobbabies.com
@@ -9485,17 +9714,22 @@
 *.harlequinpaws.com
 *.harleybelgianmalinois.com
 *.harleydavidsonbp.com
+*.harleydavidsonbp.comtitle
 *.harleymaltipoopp.com
 *.harleypart.shop
+*.harleypart.shoptitle
 *.harleystores.shop
+*.harleystores.shoptitle
 *.harleywestiebabies.com
 *.harmonie-fuhrerschein.de
 *.harmonypompups.com
 *.harodius.com
+*.harpediscount.comtitle
 *.harpious.com
 *.harriods.com
 *.harrisdachshundbreed.com
 *.harristopqualitysaddles.com
+*.harristopqualitysaddles.comtitle
 *.harrypottertoys.com
 *.hartfordlogisticsuk.com
 *.hartforduni.com
@@ -9566,6 +9800,7 @@
 *.haydanhome.com
 *.hazeuhren.com
 *.hbflashsale.men.com
+*.hbflashsale.men.comtitle
 *.hbteacuppoodles.com
 *.hbyrts.com
 *.hc-spedition.com
@@ -9607,11 +9842,13 @@
 *.healthyyorkshirepuppies.xyz
 *.heartbeatkennel.com
 *.heartforsneakersinc.com
+*.heartforsneakersinc.comtitle
 *.heartsminiaturedachshunds.com
 *.heartspembrokecorgis.com
 *.heartwarmersflorist.com
 *.heatingdevicesshop.com
 *.heatingstoves.shop
+*.heatingstoves.shoptitle
 *.heatingtool.com
 *.heavenballgames.com
 *.heavenhomeakitas.com
@@ -9729,6 +9966,7 @@
 *.heritagesinvestment.com
 *.hermanknives.net
 *.hermnd.com
+*.herno.shoptitle
 *.hero.bullion.com
 *.heroicprofessions.com
 *.heroinekaufen.de
@@ -9752,6 +9990,7 @@
 *.heybuye.com
 *.heydude-schuhe.de
 *.heydudeschuhedeutschland.com
+*.heydudexus.com
 *.hfashionshop.com
 *.hfdeals.shop
 *.hfkscp.com
@@ -9792,6 +10031,7 @@
 *.highvelcontainers.co.za
 *.highwayscargo.com
 *.hihiglobal.com
+*.hijosdetomasmartinsl.comtitle
 *.hikerpowers.com
 *.hikingbivouac.com
 *.hikingcute.com
@@ -9808,6 +10048,7 @@
 *.hillhavenschnauzers.com
 *.hillpeakdelivery.online
 *.hillsdachshundhome.com
+*.hillsideweighlossmed.comtitle
 *.hilltonsugarltd.com
 *.hilltopcontainers.co.za
 *.hillvents.com
@@ -9835,6 +10076,7 @@
 *.hizlicourierservice.com
 *.hkarms.com
 *.hkchaopai.online
+*.hkchaopai.onlinetitle
 *.hkfirearmsusa.com
 *.hkguns.shop
 *.hkgunstore.com
@@ -9856,8 +10098,11 @@
 *.hmboutiques.com
 *.hmdefenses.com
 *.hmfurniture.eu.com
+*.hmfurniture.eu.comtitle
 *.hmhomevip.com
+*.hmhomevip.comtitle
 *.hmhonevip.com
+*.hmhonevip.comtitle
 *.hmneiiry.store
 *.hmrcs.info
 *.hmtpapers.com
@@ -9897,6 +10142,9 @@
 *.hoffsneakersale.com
 *.hofmann-reifenversand.shop
 *.hoftlix.us
+*.hogansvipshop.comtitle
+*.hoganvipshop.comtitle
+*.hoganvvip.comtitle
 *.hogglobaldelivery.com
 *.hogoto.store
 *.hohmann-reifen.com
@@ -9973,6 +10221,7 @@
 *.homedecorbetter.com
 *.homedecorfine.com
 *.homedecors.top
+*.homedecors.toptitle
 *.homeestore.net
 *.homefixturesshop.com
 *.homeforalessi.com
@@ -10032,6 +10281,7 @@
 *.homerobust.com
 *.homerootsoutlet.com
 *.homesdecoration.shop
+*.homesdecoration.shoptitle
 *.homeshotpoodles.com
 *.homesily.com
 *.homesizy.com
@@ -10047,6 +10297,7 @@
 *.homewaredeal.com
 *.homewareemco.com
 *.homewarefine.com
+*.homewareikea.comtitle
 *.homewaremodus.com
 *.homewareoff.com
 *.homewareoffers.com
@@ -10067,6 +10318,7 @@
 *.hondamotorcyclestore.com
 *.hondjieteler.co.za
 *.hondpower.com
+*.hondpower.comtitle
 *.honestskateboard.com
 *.honeycreekkennel.co.za
 *.honeysweetheart.com
@@ -10086,6 +10338,7 @@
 *.hopesport.de
 *.hopetaly.com
 *.hopkinsliquorcollection.com
+*.hopkinsliquorcollection.comtitle
 *.hoppe.reifen.com
 *.horexcargo.com
 *.horizon-firearms.com
@@ -10135,6 +10388,7 @@
 *.hotsaletennis.com
 *.hotsalethebike.com
 *.hotsneakers.net
+*.hotsneakers.nettitle
 *.hottestfurniture.com
 *.hotviphut.store
 *.houbingi.com
@@ -10175,6 +10429,7 @@
 *.houstonglockshop.com
 *.houstonuni.com
 *.hover1store.com
+*.hover1store.comtitle
 *.howafirearms.com
 *.howaguns.com
 *.howardgilbertllp.com
@@ -10206,6 +10461,7 @@
 *.htpclub.com
 *.httpcelebritysaintbernardhome.com
 *.hty542.com
+*.hty542.comtitle
 *.hubalfresco.com
 *.hubbicycleopt.com
 *.hubcitysale.com
@@ -10220,6 +10476,7 @@
 *.hudyrc.com
 *.huesslers.de
 *.hugeamount.shop
+*.hugeamount.shoptitle
 *.hugecargofreight.com
 *.huggyberries.com
 *.hughfurniture.xyz
@@ -10240,6 +10497,7 @@
 *.humanskullshop.com
 *.hummels-berlin.com
 *.humminbirdus.shop
+*.humminbirdus.shoptitle
 *.humpriaweeds.com
 *.hundefutterliefern.com
 *.hundessen.com
@@ -10268,6 +10526,7 @@
 *.huntsman.shop.com
 *.hunzagwien.at
 *.hup498.com
+*.hup498.comtitle
 *.hurtiglane-shop.com
 *.hushdachshundspups.com
 *.husky.cottage.com
@@ -10345,6 +10604,7 @@
 *.idolsiberians.com
 *.idssec.com
 *.ieabanks.com
+*.iediscount.shoptitle
 *.ielts-ptebureau.com
 *.ieltsandptecerts.com
 *.ieltsandptefacilitator.com
@@ -10360,6 +10620,7 @@
 *.iflyingw.com
 *.ifncprivate.com
 *.ift170.com
+*.ift170.comtitle
 *.igalaxyeye.com
 *.igfsolutions.uk
 *.igi-invest.com
@@ -10445,6 +10706,7 @@
 *.inaniconsa.co.za
 *.incehaustechnik.de
 *.incensesoulmate.com
+*.incensesoulmate.comtitle
 *.incgroupintl.com
 *.incomeclub.club
 *.incommony.com
@@ -10499,6 +10761,7 @@
 *.inov-8osterreich.at
 *.inpcofproti.com
 *.insdas.com
+*.insdas.comtitle
 *.inspirasikus.com
 *.inspiredblanket.com
 *.inspiree.co
@@ -10592,11 +10855,13 @@
 *.ipanemaosterreich.com
 *.ipcailud.com
 *.iphone14pro.shop
+*.iphone14pro.shoptitle
 *.iplflasher.co
 *.ipmfi.com
 *.ipostexpresslogistics.com
 *.iprc-gh.org
 *.iptvsmarterservices.com
+*.iptvsmarterservices.comtitle
 *.iqcreditcheck.com
 *.iqonfin.com
 *.ique-robot.de
@@ -10652,6 +10917,7 @@
 *.ittanas.com
 *.ittca.org
 *.iuh861.com
+*.iuh861.comtitle
 *.ivabriketts.com
 *.ivermectinkaufen.com
 *.ivoilrefinery.ru
@@ -10668,7 +10934,9 @@
 *.jacandsharpholdings.net
 *.jacarandalivestockfarm.com
 *.jackchic.shop
+*.jackchic.shoptitle
 *.jackdiscount.shop
+*.jackdiscount.shoptitle
 *.jackenpascher.com
 *.jackrussellhomes.com
 *.jackrussellpuppiesfarm.com
@@ -10688,6 +10956,7 @@
 *.jacobs-reifenhandel.com
 *.jacobs-reifenversand.com
 *.jacquemushopping.shop
+*.jacquemushopping.shoptitle
 *.jagadiskennel.co.za
 *.jagute.de
 *.jahn-reifen.com
@@ -10699,6 +10968,7 @@
 *.jakesbeaglepups.com
 *.jakob-reifen.com
 *.jalkinfo.shop
+*.jalkinfo.shoptitle
 *.jalpakhabar.com
 *.jamboards.com
 *.jamesalisacavapoo.com
@@ -10734,6 +11004,7 @@
 *.javoncorgibreeders.com
 *.jawaeyes.com
 *.jay0609.com
+*.jay0609.comtitle
 *.jayaviary.com
 *.jaykarrim.com
 *.jaynewfoundlandpups.com
@@ -10751,6 +11022,7 @@
 *.jdeepfans.com
 *.jdesign-agentur.de
 *.jdlogisticscourier.com
+*.jdmboonyalukattacheep.com
 *.jdmenge.com
 *.jdmengge.com
 *.jdmengineforsale.com
@@ -10758,6 +11030,7 @@
 *.jdsportt.com
 *.jdssporty.com
 *.jdstocks.net
+*.jdstocks.nettitle
 *.jeammiyo.com
 *.jeanragdollkittenshome.com
 *.jeansrabatt.de
@@ -10828,6 +11101,7 @@
 *.jfpureminidachshundhome.com
 *.jgglobals.com
 *.jhgoldendoodlekennel.com
+*.jhs345.com
 *.jhvwf.com
 *.jihomenew.com
 *.jillcavalierkingcharlesspaniel.com
@@ -10858,6 +11132,9 @@
 *.jmhcargo.com
 *.jmmgp.com
 *.jmshopsus.com
+*.jmshopsus.comtitle
+*.jmwestonofficial.comtitle
+*.jmwestonsale.comtitle
 *.jnbchihuahuahome.com
 *.joanspuppieshome.co.za
 *.jobdonkeys.com
@@ -10867,6 +11144,7 @@
 *.jodyclothing.shop
 *.jodyosborn.com
 *.joefreshclearance.store
+*.joefreshclearance.storetitle
 *.joesclothing.com
 *.joethemoverllc.net
 *.johanneslemke.de
@@ -10919,7 +11197,9 @@
 *.josmunchkincattery.com
 *.jossandmainsale.com
 *.jotexhome.shop
+*.jotexhome.shoptitle
 *.jotexse.shop
+*.jotexse.shoptitle
 *.jottliujo.com
 *.jovialcockerspanielpuppies.com
 *.jovialmaltesehome.com
@@ -10955,6 +11235,7 @@
 *.jscnckazmunaygas.kz
 *.jshoesover.com
 *.jstarsgifts.com
+*.jstarsgifts.comtitle
 *.jtdynamicsconstruction.com
 *.jteveninexa.com
 *.jtssr.com
@@ -10995,6 +11276,7 @@
 *.justtice.com
 *.justvanilla.de
 *.jwfancy.com
+*.jwfancy.comtitle
 *.jxlbullies.com
 *.jyardskids.com
 *.k2skigear.com
@@ -11072,6 +11354,7 @@
 *.kastking.store
 *.katanalimit.com
 *.katanaswordsforsale.com
+*.katanaswordsforsale.comtitle
 *.katelynsuttonpuppies.com
 *.katerh.com
 *.katerk.com
@@ -11097,6 +11380,7 @@
 *.kaugeliefgert.com
 *.kausholz.com
 *.kavehomesale.shop
+*.kavehomesale.shoptitle
 *.kavlakfoodanddrinksgmbh.com
 *.kawaiiroleplay.com
 *.kaybeeglobalproducts.com
@@ -11137,6 +11421,7 @@
 *.keesocial.com
 *.keevakatzecattery.com
 *.kegaoog.com
+*.kegaoog.comtitle
 *.kehan-handel.com
 *.keil-reifenhandel.com
 *.keilanibostonterriers.com
@@ -11145,6 +11430,7 @@
 *.kekkium.com
 *.kel-tecfirearms.com
 *.keleas.store
+*.keleas.storetitle
 *.kelisbernedoodles.com
 *.kelivinarthurbarristersssociates.com
 *.kelkoprocurement.com
@@ -11176,9 +11462,11 @@
 *.kennykaylogistics.com
 *.kennys.sheltiepuppies.com
 *.kenrapidlogistics.com
+*.kenskrksr.com
 *.kentucky-gunshop.com
 *.kentucky.gunshop.com
 *.kenzoparisonline.shop
+*.kenzoparisonline.shoptitle
 *.kerlinemkt.de
 *.kern-reifenversand.shop
 *.kerrisonpetsau.com
@@ -11195,6 +11483,7 @@
 *.ketven.com
 *.kevindurantshoes.net
 *.keviniansllc.shop
+*.keviniansllc.shoptitle
 *.kexcet.com
 *.keyboardpopular.com
 *.keyesden.com
@@ -11212,6 +11501,7 @@
 *.khmerinvestmentcap.com
 *.khooenenterpriseltd.co.za
 *.khufugermanshepherd.com
+*.kiabivipshop.comtitle
 *.kiaelektro.com
 *.kianshopy.com
 *.kickarea.cn
@@ -11243,6 +11533,7 @@
 *.kijanes.com
 *.kikimiss.com
 *.kikoconcealer.shop
+*.kikoconcealer.shoptitle
 *.kilatkuning.shop
 *.killinglyeyecare.com
 *.kimberarmshop.com
@@ -11311,6 +11602,7 @@
 *.kinzino.com
 *.kipandcoofficial.com
 *.kiplingeu.shop
+*.kiplingeu.shoptitle
 *.kippmann-garten.de
 *.kirchenaustritt24.at
 *.kirchner-reifenversand.shop
@@ -11343,6 +11635,7 @@
 *.kitchenware-cook.com
 *.kitchenware-kit.com
 *.kitchenwarede.de
+*.kitchenwareeu.comtitle
 *.kitchenwarehubde.com
 *.kitchenwareoff.com
 *.kitchenyummy.com
@@ -11350,6 +11643,7 @@
 *.kitfishpro.com
 *.kithet.com
 *.kitmm.com
+*.kitmm.comtitle
 *.kitsretrievers.sitebeat.crazydomains.com
 *.kittenanesthesia.com
 *.kittenlashez.com
@@ -11523,6 +11817,7 @@
 *.kranz-autoreifen.shop
 *.kraus-autoreifen.shop
 *.krdes.net.in
+*.krdes.net.intitle
 *.kreamlenpuppies.com
 *.kreativtravel.de
 *.krechtinger.de
@@ -11562,6 +11857,7 @@
 *.kstranslogistics.com
 *.ktkfcase.com
 *.ktristandy.com
+*.kubhc.vip
 *.kucheninseln.de
 *.kuchukov-house.com
 *.kucoin-rx.com
@@ -11590,6 +11886,7 @@
 *.kvalitetapotek.com
 *.kvalitetapotek.net
 *.kvsolarpanelssolutions.com
+*.kwahzifarm.comtitle
 *.kwbwittenburgbv.com
 *.kwearshop.com
 *.kwezaminerals.com
@@ -11649,6 +11946,7 @@
 *.lagomone.net
 *.lagomscoons.com
 *.lah2o.com
+*.lahomemall.shoptitle
 *.laihair.com
 *.lalahomeofteacupmaltese.com
 *.lalpui.com
@@ -11670,6 +11968,7 @@
 *.lampxiexportsltd.com
 *.lancasterdobermann.com
 *.lanceltop.shop
+*.lanceltop.shoptitle
 *.landbike.eu
 *.landbikini.com
 *.landcutlery.com
@@ -11681,11 +11980,13 @@
 *.landrope.com
 *.landscapeservicecreditunion.com
 *.landsendsale.shop
+*.landsendsale.shoptitle
 *.lang-reifenhandel.com
 *.lange-reifenhandel.shop
 *.langer-reifenversand.shop
 *.lannisterboxerpuppies.com
 *.lansacel.shop
+*.lansacel.shoptitle
 *.lansgrupo.com
 *.lantana-handel.com
 *.lantana-handel.de
@@ -11703,8 +12004,11 @@
 *.lara-holding-aps.business.site
 *.laraveststock.com
 *.laredoutefr.com
+*.laredoutefr.comtitle
 *.laredoutesale.com
+*.laredoutesale.comtitle
 *.laredoutesale.shop
+*.laredoutesale.shoptitle
 *.laregionalebank.com
 *.largecoonscattery.com
 *.largefier.com
@@ -11712,12 +12016,14 @@
 *.largeshopnew.com
 *.largeshoppro.com
 *.largesizeca.com
+*.largesizeca.comtitle
 *.larineq.shop
 *.larosawelpen.de
 *.larosawelpenhaus.com
 *.larryfox20175.wixsite.com
 *.larryhallattorneys.com
 *.larrylabradoretriever.com
+*.lascassaseyecare.com
 *.laserexpresscourier.com
 *.lasershipcourier.com
 *.laserspeeddelivery.com
@@ -11734,6 +12040,7 @@
 *.lasportivaonsale.com
 *.lasportivast.com
 *.lasportonline.shop
+*.lasportonline.shoptitle
 *.lassaggio.cz
 *.lasueaer.shop
 *.lasuite-depotvente.fr
@@ -11760,18 +12067,29 @@
 *.launchalive.com
 *.launderino.de
 *.launffline.shop
+*.launffline.shoptitle
 *.laura.canada.com
 *.lauracanadaonline.shop
+*.lauracanadaonline.shoptitle
+*.lauracanadaoutlet.comtitle
 *.lauracasales.com
+*.lauracasales.comtitle
+*.lauracastore.comtitle
 *.laurackclearance.com
+*.laurackclearance.comtitle
 *.lauraofficialca.com
+*.lauraofficialca.comtitle
 *.lauraofficialonline.com
+*.lauraofficialonline.comtitle
 *.lauraoffilcial.com
+*.lauraoffilcial.comtitle
 *.laurasale.com
+*.laurasale.comtitle
 *.laurascuddybeagles.com
 *.laurealism.com
 *.laurentinasjewelers.com
 *.lauriesmaltipoodogs.com
+*.lavendersshop.com
 *.lavernegolf.shop
 *.laverneteacuppoodlehome.com
 *.laviola-leeste.de
@@ -11891,6 +12209,7 @@
 *.levelbikes.de
 *.lever-action-rifles.com
 *.lever.action.rifles.com
+*.levivip.shoptitle
 *.lewisfarmsa.com
 *.lewiswilliamsandassociates.com
 *.lexer-rasenmaher.com
@@ -11961,6 +12280,7 @@
 *.lilacraftvn.com
 *.lillianbassethoundbreeder.com
 *.lillypulitzervipus.com
+*.lillypulitzervipus.comtitle
 *.lilyyorkiecattery.com
 *.limehel.com
 *.limelightengbullies.com
@@ -11975,6 +12295,7 @@
 *.limitcarlsontool.com
 *.limitcovogue.com
 *.limitdiscounts.vip
+*.limitdiscounts.viptitle
 *.limited-cycle.com
 *.limitedexchangepro.com
 *.limitedfishing.com
@@ -11989,6 +12310,7 @@
 *.lindatropicalfriuts.com
 *.lindbauer.com
 *.lindemann-reifen.com
+*.lindexmall.comtitle
 *.lindner-autoreifen.shop
 *.lindner-reifenhandel.shop
 *.lindosminicachorros.us
@@ -12006,6 +12328,7 @@
 *.linkglobalgroups.com
 *.linkinvestmentuk.com
 *.linlinetwork.com
+*.linlinetwork.comtitle
 *.linofx.com
 *.linpugs.com
 *.lionheartbulldogs.com
@@ -12045,14 +12368,17 @@
 *.littlepuppiesparadise.co.za
 *.littlerockiemunchkincattery.com
 *.littleyorkielove.com
+*.liuczp.shoptitle
 *.liugongequipments.com
 *.liuxmiu.shop
 *.liuzyt.com
+*.liuzyt.comtitle
 *.livablefurniture.com
 *.live-trawler.net
 *.live5-news.net
 *.liveavastockmarket.com
 *.livebenp.com
+*.livecaoutlet.storetitle
 *.livecattleexported.webnode.com
 *.livecryptooption.com
 *.liveg-tech.de
@@ -12078,8 +12404,10 @@
 *.livsy.de
 *.lizamkiltd.com
 *.lizrugs.com
+*.lizssiberiankittens.com
 *.lizzyan.com
 *.ljnbklsme.shop
+*.ljnbklsme.shoptitle
 *.lkjfinancial.com
 *.lknzmzd.com
 *.lkstransport.eu
@@ -12148,6 +12476,7 @@
 *.loktru.com
 *.lolamarkt.com
 *.lolelifeca.com
+*.lolelifeca.comtitle
 *.lolianchihuahua.com
 *.lollovita.com
 *.loloswood.com
@@ -12156,9 +12485,11 @@
 *.lomutradingbvba.com
 *.lonewolfgunbuyer.com
 *.longbeachoffcoastport.com
+*.longbeachoffshoreshippingport.comtitle
 *.longchamposterreich.at
 *.longchamposterrelch.com
 *.longchampoutleteu.shop
+*.longchampoutleteu.shoptitle
 *.longmemory.store
 *.lookico.com
 *.loosepantsofficial.com
@@ -12167,6 +12498,7 @@
 *.lopezpromo.shop
 *.lopsddf.com
 *.lorabijoux.com
+*.lorabijoux.comtitle
 *.lorenz-reifen.com
 *.lornajanedeutschland.de
 *.lorrainecanecorsohome.com
@@ -12178,9 +12510,11 @@
 *.lotablefre.com
 *.lotaremandgeneraltradingptyltd.com
 *.lottoeu.top
+*.lottoeu.toptitle
 *.louderbe.com
 *.louisepet.shop
 *.louisluxury2.shop
+*.louisluxury2.shoptitle
 *.louisvuttn.com
 *.loungembelnic.de
 *.loushastore.com
@@ -12266,6 +12600,7 @@
 *.loydteacuppoms.com
 *.loyisopuppieshome.online
 *.lrsalesfr.shop
+*.lrsalesfr.shoptitle
 *.ls2verkauf.de
 *.lscodockersat.com
 *.lsdforsale.com
@@ -12282,8 +12617,10 @@
 *.lucchesedeal.store
 *.luccheseoutlet.online
 *.lucchesesale.com
+*.lucchesesale.comtitle
 *.lucchesestore.online
 *.luccheseusstore.com
+*.luccheseusstore.comtitle
 *.luccidecorlight.com
 *.lucialamps.shop
 *.lucibulldogs.sitebeat.crazydomains.com
@@ -12297,6 +12634,7 @@
 *.luckydoberman.com
 *.luckygunnerarmory.com
 *.luckylj.com
+*.luckylj.comtitle
 *.luckylliquidation.com
 *.luckypoodlespuphome.com
 *.luckypuppyco.com
@@ -12317,6 +12655,7 @@
 *.lululemonosterreich.at
 *.luluvipstore.com
 *.luluxxvip.com
+*.luluxxvip.comtitle
 *.lumentes.com
 *.lumifie.de
 *.lumimodern.co
@@ -12395,8 +12734,10 @@
 *.mack-reifen.com
 *.macmillianguncenter.com
 *.macneltradingenterprise.co.za
+*.maconlineau.comtitle
 *.macottrottweiler.com
 *.macpacvip.com
+*.macpacvipstore.comtitle
 *.macwalveslogistics.com
 *.macwhiskyhome.com
 *.macy-home.com
@@ -12478,7 +12819,9 @@
 *.maipuppy.com
 *.maisheeggsandchickenfarm.co.za
 *.maisonsdumondefr.shop
+*.maisonsdumondefr.shoptitle
 *.maizaicai.com
+*.maizaicai.comtitle
 *.majestic.cattery.com
 *.majesticaustralianshepherd.com
 *.majesticcorgi.com
@@ -12510,6 +12853,7 @@
 *.malinoisparadise.com
 *.mall888mall.com
 *.malleb.com
+*.malleb.comtitle
 *.maller.io
 *.mallexercise.com
 *.mallfemale.com
@@ -12525,6 +12869,7 @@
 *.malpezeco.com
 *.maltergroups.com
 *.maltersgroup.com
+*.maltersgroup.comtitle
 *.malteseandpoodlelovers.com
 *.maltesebeaglehome.com
 *.maltesehomecare.com
@@ -12592,6 +12937,7 @@
 *.marcoefex.com
 *.marcosbrito.com
 *.marcosengines.com
+*.marcosengines.comtitle
 *.marcstevenwelpenhaus.de
 *.marethapuppies.com
 *.margarefren.com
@@ -12608,6 +12954,7 @@
 *.marinashippingcontainers.com
 *.marinatlantictrust.com
 *.marinbikesshop.com
+*.marinbikesshop.comtitle
 *.marincentral.com
 *.marinefishingelectronics.com
 *.marinegunsandammo.com
@@ -12636,11 +12983,14 @@
 *.markmale.de
 *.markodocuments.com
 *.markoshandel.de
+*.marksandspencersaleshop.comtitle
 *.marksca.store
+*.marksca.storetitle
 *.markschnauzerhome.com
 *.marktplatz-apo.com
 *.markusviefhues-legal.com
 *.markwellpinballs.com
+*.markwellpinballs.comtitle
 *.marlborowrap.com
 *.marleymainecoonkittens.com
 *.marleysbostons.com
@@ -12708,6 +13058,7 @@
 *.mashopstore.com
 *.masienger.com
 *.masongolfcarts.com
+*.masongolfcarts.comtitle
 *.masonkittencattery.com
 *.masscontainers.co.za
 *.mastercastfishery.com
@@ -12737,6 +13088,7 @@
 *.matrix-reactor.com
 *.matrixblockstream.com
 *.matteochambers.com
+*.mauijimusale.com
 *.maur-rasenmaher.com
 *.mauserfirearms.com
 *.mauserfirearmshop.com
@@ -12746,6 +13098,7 @@
 *.maventechdeals.com
 *.mavicsale.com
 *.mavipsale.com
+*.mavipsale.comtitle
 *.mawissa.de
 *.max-steroids.com
 *.maxammodepot.com
@@ -12822,6 +13175,7 @@
 *.mcpoodlebreeders.com
 *.mcppty.com
 *.mcprograms.com
+*.mcqueenus.com
 *.mcreinhold.com
 *.mcroyalragdolls.com
 *.mcsglobalcargo.com
@@ -12958,6 +13312,7 @@
 *.melissapomeranianhome.com
 *.melissasdoodlehome.com
 *.melizamodesty.com
+*.mellaseelh.storetitle
 *.melody-crafters.com
 *.melongroups.com
 *.melorcaguilla.com
@@ -12969,6 +13324,7 @@
 *.members-feedback.com
 *.members-polls.com
 *.members-reviews.com
+*.memorialwestiebreedershome.com
 *.memoryfoambra.com
 *.memphisianpetdelivery.website
 *.men-accessories.store
@@ -13022,7 +13378,9 @@
 *.merchantexpressllc.com
 *.merchantt.cc
 *.merchidea.com
+*.merchidea.comtitle
 *.merchspirit.com
+*.merchspirit.comtitle
 *.merchstagram.com
 *.merchwonder.com
 *.mercimunich.de
@@ -13032,6 +13390,7 @@
 *.mergesportnew.com
 *.meridabikes247.com
 *.meridabikesshop.com
+*.meridabikesshop.comtitle
 *.meridianexpresscourier.com
 *.meridianhouseitem.com
 *.merinpuppies.co.uk
@@ -13052,6 +13411,7 @@
 *.merrell-osterreich.com
 *.merrellclearance.store
 *.merrellofficial.com
+*.merrellofficial.comtitle
 *.merrellosterreich.at
 *.merrelloutletonline.de
 *.merrellschuhe.de
@@ -13220,6 +13580,12 @@
 *.millenumhotels.com
 *.millerpompuppies.com
 *.millersdesignermaltipoodogs.com
+*.milletfrstore.comtitle
+*.milletmountains.comtitle
+*.milletoutlet.comtitle
+*.milletsalefr.comtitle
+*.milletshopsale.comtitle
+*.milletstorefr.comtitle
 *.milliniumpharmacy.com
 *.millioncrystal.com
 *.millyhomepool.com
@@ -13227,6 +13593,7 @@
 *.milpitspot.com
 *.miltonas.com
 *.milwaukeedeals1.com
+*.milwaukesaleus.shoptitle
 *.mimigift2.com
 *.mimiprt.com
 *.minelandspuppies.co.za
@@ -13258,6 +13625,7 @@
 *.minigolden.doodles.com
 *.miniguarddogs.com
 *.minihighlandcattlefarm.com
+*.minihighlandcattlefarm.comtitle
 *.minimalistcostume.com
 *.minimalitor.com
 *.minimaltipoos.com
@@ -13289,6 +13657,7 @@
 *.minpinfamilypups.com
 *.minpinnearme.com
 *.minpinpups.com
+*.minpsychedelics.com
 *.mintgreenhub.com
 *.mintmines-gov.cc
 *.mintssdsolution.com
@@ -13334,6 +13703,7 @@
 *.mizunsports.com
 *.mkb.frenchies.com
 *.mkcaluanie.com
+*.mkcaluanie.comtitle
 *.mkiplmout.com
 *.mklelectric.com
 *.mkrayfinance.com
@@ -13430,6 +13800,9 @@
 *.monamarkets.com
 *.monarchhousekit.com
 *.monclediscountvip.com
+*.monclediscountvip.comtitle
+*.moncleronlinevip.comtitle
+*.monclershopping.comtitle
 *.mondayslotto.com
 *.mondiakittenshome.com
 *.mondialglobalsuccess.com
@@ -13450,6 +13823,7 @@
 *.monoss.us
 *.monsieur-pharmacien.com
 *.monsoonsaleus.com
+*.monsoonstores.shoptitle
 *.monsoonukstore.com
 *.monsroyales.com
 *.monsterexotics.com
@@ -13538,6 +13912,7 @@
 *.motionexports.com
 *.motionwearshop.com
 *.motios6.com
+*.motios6.comtitle
 *.motiv8performance.com
 *.motizy.com
 *.motor-mover-trans.com
@@ -13616,18 +13991,22 @@
 *.mrpetscare.com
 *.mscgloballogistic.com
 *.mscloth.com
+*.mscloth.comtitle
 *.msfinvestment.com
 *.msfreightforwarder.com
 *.msmcompare.com
 *.msnhandcraft.com
 *.mssbabe.shop
+*.mssbabe.shoptitle
 *.msytoyhome.com
 *.mt4crypto4.com
 *.mt4cryptotrades.com
 *.mt7stockmarket.com
+*.mtalltjanst-transport.com
 *.mtbchainringssales.com
 *.mtd-garden.de
 *.mtrexc.com
+*.mu-fgpro.info
 *.muangchangsugarmill.com
 *.muaythaisite.com
 *.muchfashionable.com
@@ -13692,6 +14071,7 @@
 *.murraybichonhome.com
 *.murraypropoultryfarm.com
 *.mushroomchocolatebar.com
+*.mushroomdoseland.com
 *.mushroomschocolatebars.com
 *.mushroomstate.com
 *.music-disk.com
@@ -13722,6 +14102,7 @@
 *.mvxhdy.club
 *.mwfuniversity.com
 *.mwomenclothita.shop
+*.mwomenclothita.shoptitle
 *.mwsgts.com
 *.mwslivestockpoultry.co.za
 *.mxbraaaplife.com
@@ -13798,6 +14179,7 @@
 *.myspotifygifts.com.au
 *.myspyally.com
 *.mystampsonline.com
+*.mystampsonline.comtitle
 *.mystiqueearth.com
 *.mystiquemode.com
 *.mystockupusa.com
@@ -13812,6 +14194,7 @@
 *.myvivianshop.com
 *.mywonderfy.com
 *.myworldwatches.com
+*.myworldwatches.comtitle
 *.mzansicontainers.co.za
 *.mzanzianglovalltradings.com
 *.mzanzipupkennel.com
@@ -13829,6 +14212,7 @@
 *.naiticks.com
 *.najwaso.shop
 *.nakeonline.com
+*.nakeonline.comtitle
 *.naleauto.com
 *.naledeals.com
 *.namaftrandcoltd.com
@@ -13867,12 +14251,14 @@
 *.nationwideliquor.com
 *.nationwideshipuk.com
 *.nativelovespells.com
+*.natsle.com
 *.naturalcosmeticssales.com
 *.naturalcureforlife.com
 *.naturalhatu-shop.com
 *.naturalhunting.com
 *.naturalismstudio.com
 *.naturallifeus.com
+*.naturallifeus.comtitle
 *.naturalpetwarehouse.com
 *.naturbaustoffe-onlineshop.de
 *.natureetsens73.fr
@@ -13886,9 +14272,11 @@
 *.natwhome.services
 *.naucah.com
 *.nausard.com
+*.navaccorporation.co.za
 *.naval-electro.com
 *.navigationshop.eu
 *.navyfashionoutlet.shop
+*.navyfashionoutlet.shoptitle
 *.nawaagahome.com
 *.nawadeal.com
 *.nawfrenchie.com
@@ -13944,6 +14332,7 @@
 *.neosysco.com
 *.neoveris.shop
 *.neptuneselectronics.com
+*.neptuneselectronics.comtitle
 *.nepuppiesforsale.com
 *.neroxlogistics.com
 *.nestilin.com
@@ -14121,6 +14510,7 @@
 *.nexencos.com
 *.nexencu.com
 *.nexepro.com
+*.nexfy.co
 *.next-neu.de
 *.nextdaybritishshorthairkittens.com
 *.nextdaydachshundshome.com
@@ -14139,6 +14529,7 @@
 *.nftseahub.com
 *.ngagrofarmltd.com
 *.ngangsishorthairkittens.com
+*.ngh921.com
 *.nginaspot.com
 *.ngomascotanlimited.com
 *.ngpomeranian.co
@@ -14163,6 +14554,7 @@
 *.nicocattlerange.co.za
 *.nicolefrenchieshaus.com
 *.nicoleonardluxurywatches.com
+*.nicoleonardluxurywatches.comtitle
 *.nidasrent.cz
 *.nideckernitro.com
 *.niemann-autoreifen.com
@@ -14183,6 +14575,7 @@
 *.nikkygreatdanes.com
 *.niko-energie.de
 *.niko247.com
+*.niko247.comtitle
 *.nikoil-llc.com
 *.nileapple.com
 *.nimall.cc
@@ -14218,10 +14611,12 @@
 *.nlcu.education
 *.nlexch.ltd
 *.nlfashion.shop
+*.nlfashion.shoptitle
 *.nlynelly.com
 *.nmafrica.com
 *.nmbsico.top
 *.nmcsmall.com
+*.nmcsmall.comtitle
 *.nmcuniversity.com
 *.nmengineering.org
 *.nmhagencyltd.com
@@ -14229,6 +14624,7 @@
 *.nmunioa.com
 *.nnk-groupllc.ru
 *.nnkien.shop
+*.nnkien.shoptitle
 *.noahstuffs.com
 *.nobethaholding.com
 *.nobleafricangreyparrots.com
@@ -14244,6 +14640,7 @@
 *.nobullstoredeutschland.com
 *.nohiba.com
 *.noirtease.com
+*.noirtease.comtitle
 *.nolandsports.shop
 *.nolanverkauf.de
 *.nomaw.de
@@ -14262,8 +14659,10 @@
 *.norden-brennholz.com
 *.nordeuropeshipping.com
 *.nordiccommerbk.com
+*.nordicnestse.shoptitle
 *.nordicxpress.com
 *.nordmerch.com
+*.nordmerch.comtitle
 *.nordshipping.ru
 *.nordvalleyrottweilers.com
 *.norge-ed.com
@@ -14275,6 +14674,7 @@
 *.normanfreightshipping.com
 *.norrissiberiansite.com
 *.norronasales.com
+*.norronasales.comtitle
 *.norsk-apotek24.com
 *.norskeapotek.net
 *.northamericanarmsshop.com
@@ -14326,6 +14726,7 @@
 *.nowgreenhealthes.com
 *.npaq-meia.com
 *.npautospares.com
+*.npautospares.comtitle
 *.npcgh.org
 *.npic-gh.org
 *.nplagencyltd.com
@@ -14340,6 +14741,7 @@
 *.nt-transport.co.uk
 *.ntahcorgihome.com
 *.ntlsecuritybnk.weebly.com
+*.ntm716.com
 *.ntnagencyltd.com
 *.ntpaper.com
 *.nttagencyltd.com
@@ -14491,6 +14893,7 @@
 *.officialcanecorsopuppies.com
 *.officialclimbing.com
 *.officialclothingca.com
+*.officialclothingca.comtitle
 *.officialfirearms.com
 *.officialfurnitures.com
 *.officialgoldcoastclears.com
@@ -14607,6 +15010,7 @@
 *.onecargoline.com
 *.onecoinvictims.com
 *.onedollarsale.shop
+*.onedollarsale.shoptitle
 *.onefoyou.com
 *.oneglobalexpressdelivery.com
 *.oneminimals.com
@@ -14660,16 +15064,20 @@
 *.onlinegunstoreusa.com
 *.onlinehalkbank.com
 *.onlinehealthworldtrust.com
+*.onlineherbalincense.com
 *.onlinejogging.com
 *.onlineladywear.com
 *.onlinemarijuanabestrates.com
 *.onlinemaripe.com
 *.onlinemensdenim.com
 *.onlinemlb.com
+*.onlinemlb.comtitle
 *.onlinemodish.com
 *.onlinenba.net
+*.onlinenba.nettitle
 *.onlinenewfad.com
 *.onlineobey.shop
+*.onlineobey.shoptitle
 *.onlineoutboardshop.com
 *.onlineoutdoorsnew.com
 *.onlinepharmacopoeia.com
@@ -14827,6 +15235,7 @@
 *.orbitgains.com
 *.orchesctric.com
 *.orchestramall.shop
+*.orchestramall.shoptitle
 *.orchidcoin.net
 *.ordamel.com
 *.order.trendy.com
@@ -14911,9 +15320,11 @@
 *.outboard-autotrading.com
 *.outboard.motorshop.com
 *.outboardautos.com
+*.outboardautos.comtitle
 *.outboardmotorsengine.com
 *.outboardmotorseuropeltd.com
 *.outboardsxm.com
+*.outboardsxm.comtitle
 *.outdoor-familien.de
 *.outdoor-over.com
 *.outdoor-scott.com
@@ -14926,6 +15337,7 @@
 *.outdoorcabelas.com
 *.outdoorclothinggeardiscout.com
 *.outdoordefence.com
+*.outdoordiscountstore.shoptitle
 *.outdoorelektronik.com
 *.outdoorequipmentstore.com
 *.outdooressentialsshop.com
@@ -14964,6 +15376,7 @@
 *.outdoorslivings.com
 *.outdoorsport-us.com
 *.outdoorsretail.com
+*.outdoortools.storetitle
 *.outdoorusoffer.com
 *.outdoorwintersports.com
 *.outdorproducts.shop
@@ -15152,10 +15565,12 @@
 *.panamajackdeutschland.com
 *.panamajackdeutschland.de
 *.panamajackshoe.com
+*.panamajackshoe.comtitle
 *.panamajackwien.at
 *.panamajackzagreb.com
 *.pandora-deutschland.de
 *.pandorasonline.com
+*.pandorasonline.comtitle
 *.panel-ploty.cz
 *.pangikailogold.com
 *.panrush.com
@@ -15180,6 +15595,7 @@
 *.papillonpawpotal.com
 *.papillonpuppiesusa.com
 *.pappyvanwinklestore.com
+*.pappyvanwinklestore.comtitle
 *.papybio.fr
 *.para15trigger.com
 *.parabootdeutschland.com
@@ -15270,6 +15686,7 @@
 *.passiotive.com
 *.passpopay.com
 *.patagoniaeushop.top
+*.patagoniaeushop.toptitle
 *.patakhay.com
 *.pateim.com
 *.pathprom.com
@@ -15279,6 +15696,7 @@
 *.patriciadobermanpuppieshome.com
 *.patriotdefensearmory.com
 *.patriotshelties.com
+*.patshopping.shoptitle
 *.patwlta.shop
 *.paul-lombard.com
 *.paul-reifenversand.com
@@ -15351,6 +15769,7 @@
 *.peakfundfinance.com
 *.peakminerinvestment.com
 *.peakperformancemall.com
+*.peakperformancemall.comtitle
 *.peaksfastexpress.com
 *.peaktoolhub.com
 *.pearltoys.shop
@@ -15409,6 +15828,7 @@
 *.perfectlaboratory.co.za
 *.perfectlitterhome.com
 *.perfectmask.pl
+*.perfectpuppiesonline.com
 *.perfectshoes-us.com
 *.perfectshootersgunstore.com
 *.perfectshopus.com
@@ -15419,8 +15839,10 @@
 *.perfumemirth.com
 *.perfumeowner.com
 *.perfumrry.com
+*.perfumrry.comtitle
 *.perlatoshoe.com
 *.permanentdiscountstamp.com
+*.permanentdiscountstamp.comtitle
 *.perrixmoore.com
 *.persestence.com
 *.persisparty.shop
@@ -15560,6 +15982,7 @@
 *.pickledfoodonline.com
 *.picobengals.com
 *.picturefr.shop
+*.picturefr.shoptitle
 *.pictureframe-sale.com
 *.pictureme23.b0tnet.com
 *.pictureoutdooor.com
@@ -15598,6 +16021,7 @@
 *.pinavsxpress.com
 *.pinball-machinesforsale.com
 *.pinballclassic.com
+*.pinballclassic.comtitle
 *.pinballenterprise.com
 *.pinballfxm.com
 *.pinballhem.com
@@ -15613,9 +16037,13 @@
 *.pinkglock.com
 *.pinkmemoriess.com
 *.pinko.eu.com
+*.pinko.eu.comtitle
 *.pinkonlines.com
+*.pinkonlines.comtitle
 *.pinkosales.top
+*.pinkosales.toptitle
 *.pinkostores.shop
+*.pinkostores.shoptitle
 *.pinnacleb.com
 *.pinnaclebnks.com
 *.pinnaclefsp.com
@@ -15709,6 +16137,7 @@
 *.plusret.com
 *.plussize-clothes.com
 *.plussizeca.com
+*.plussizeca.comtitle
 *.plussizescurve.com
 *.plussizetrendyus.com
 *.plussport-shop.com
@@ -15720,6 +16149,7 @@
 *.pmcammunition.com
 *.pmcammunitionstore.com
 *.pmfootballs.com
+*.pmkoutlets.shoptitle
 *.pmpapermanufacturers.wordpress.com
 *.pnc-finance.com
 *.pnfmbk.com
@@ -15776,6 +16206,7 @@
 *.pomeranianshops.com
 *.pomespot.com
 *.pomsky1234.com
+*.pomskykennels.com
 *.pomskypuppiesspot.com
 *.pomskyspot.com
 *.ponderosapeds.com
@@ -15867,6 +16298,7 @@
 *.powerball.agency
 *.powerballclaim.com
 *.powerblockenergy.com
+*.powerblockenergy.comtitle
 *.poweredup-tools.com
 *.powerelectricalsupply.co.za
 *.powerfitnessgym.co.uk
@@ -16002,7 +16434,10 @@
 *.prideearthone.com
 *.primagermanshepherdpups.com
 *.primark.eu.com
+*.primark.eu.comtitle
+*.primarkie.shoptitle
 *.primarkiesale.shop
+*.primarkiesale.shoptitle
 *.primarycaremedstore.com
 *.primaryearrings.com
 *.primaryfirearms.com
@@ -16028,6 +16463,7 @@
 *.primehouse.store
 *.primehousesheepadoodles.com
 *.primeirochicken.com
+*.primeirochicken.comtitle
 *.primelogistic-services.com
 *.primelogistic.services.com
 *.primelogisticllc.com
@@ -16059,6 +16495,7 @@
 *.primeshipping.agency.com
 *.primestewardbank.com
 *.primetimepinballs.com
+*.primetimepinballs.comtitle
 *.primetractorszone.com
 *.primetradestandards.com
 *.primevaultsec.com
@@ -16068,6 +16505,7 @@
 *.primoglobalshipping.com
 *.primoreloading.com
 *.primorvipshop.com
+*.primorvipshop.comtitle
 *.primrosepaws.co.za
 *.primuselektro.de
 *.primärheizung.com
@@ -16110,6 +16548,7 @@
 *.probirshop.com
 *.probity-services.com
 *.probmxbikes.com
+*.probmxbikes.comtitle
 *.procaid.com
 *.proceedsexpressdelivery.online
 *.prochain.vip
@@ -16188,6 +16627,7 @@
 *.proridegear.com
 *.proridinghub.com
 *.prosizeca.com
+*.prosizeca.comtitle
 *.proskechr.com
 *.prospaints.com
 *.prospectvaleteacuphome.com
@@ -16229,6 +16669,7 @@
 *.psadagger.com
 *.psbconlineservice.com
 *.psclotheseu.com
+*.psclotheseu.comtitle
 *.psdeliveryservice.com
 *.psearcheryusa.com
 *.psexoticshouse.com
@@ -16269,6 +16710,7 @@
 *.pthanse-versand.com
 *.pthanse-versand.de
 *.ptmcontainers.com
+*.ptmcontainers.comtitle
 *.ptoopen.com
 *.ptrfirearmsusa.com
 *.pubcrawl.at
@@ -16291,6 +16733,7 @@
 *.pukingyolk.com
 *.pukkashopeu.com
 *.pulleysswivelsshop.com
+*.pullvipbear.comtitle
 *.pulsarscopes.com
 *.pulseexpresslogistics.com
 *.puma-austria.at
@@ -16358,6 +16801,7 @@
 *.puredreamsminipomeranians.com
 *.purefrenchiespups.com
 *.pureglim.store
+*.pureglim.storetitle
 *.puregoldbarshop.com
 *.purekittenhome.co.za
 *.purekittensfarm.com
@@ -16433,6 +16877,7 @@
 *.qualityfirearms4sale.com
 *.qualitygermanshorthairedpointer.online
 *.qualityhayandfeedllc.us
+*.qualityhayandfeedllc.ustitle
 *.qualityheritagegoldenretrievers.com
 *.qualityhometool.com
 *.qualityhouse-us.com
@@ -16473,6 +16918,7 @@
 *.quift.de
 *.quiins-kings-fitness.de
 *.quiksilverclothes.shop
+*.quiksilverclothes.shoptitle
 *.quimv.com
 *.quintaldog.cz
 *.quirky-nft.com
@@ -16483,10 +16929,12 @@
 *.qurduadab.shop
 *.qusidy.com
 *.qvcallthings.com
+*.qvcbykrtshopy.comtitle
 *.qvceverything.com
 *.qvcshopus.com
 *.qvctimonlinestore.com
 *.qvctvonline-mall.com
+*.qvcxlshop.comtitle
 *.ra-ganske.de
 *.rabaisdepot.com
 *.rabatt-disney.de
@@ -16560,6 +17008,7 @@
 *.radisp.com
 *.radissonfirearms.com
 *.radleylondonstore.com
+*.radleylondonstore.comtitle
 *.radonsale.com
 *.radsbuys.com
 *.radtke-reifen.com
@@ -16593,7 +17042,9 @@
 *.rainsdescuento.com
 *.ralphandashdachshundpuppy.com
 *.ralphonlin.com
+*.ralphonlin.comtitle
 *.ralphshopping.com
+*.ralphshopping.comtitle
 *.ralphstoreonline.com
 *.ramarstvitrigon.cz
 *.rampage-hunters.com
@@ -16667,6 +17118,8 @@
 *.razerwien.at
 *.razesale.com
 *.razorscootershop.com
+*.razorscootershop.comtitle
+*.razorscooterus.com
 *.razuzz.com
 *.rbccreditunion.com
 *.rbdccompany.com
@@ -17050,6 +17503,7 @@
 *.reliablecourtyard.com
 *.reliabledomestic.com
 *.reliablehandtools.com
+*.reliableoptiontrade.com
 *.reliableswiftindexplatform.com
 *.relianceadvocates.com
 *.relianceonlineassets.com
@@ -17177,6 +17631,7 @@
 *.rgmls-logistics.com
 *.rgtitduh.store
 *.rhapsodybikeparts.com
+*.rhapsodybikeparts.comtitle
 *.rheineule.de
 *.rhemakorskola.com
 *.rheumcenter.com
@@ -17189,6 +17644,7 @@
 *.riaradeals.co.ke
 *.riari-elektronik.com
 *.ricasrucksack.com
+*.ricciforged.luxurywheelsrims.comtitle
 *.richardaspenconstruction.com
 *.richardkhatun.com
 *.richmond-magazine.net
@@ -17233,6 +17689,7 @@
 *.rinasyorkieplace.com
 *.rinnei.online
 *.ripcurlofficial.com
+*.ripcurlofficial.comtitle
 *.ripcurlswim.com
 *.ripe2pipeganjashop.com
 *.riquedevil.de
@@ -17334,6 +17791,7 @@
 *.rolexmotorslimited.com
 *.rolexstealthcourierservices.com
 *.rolexsworld.com
+*.rolexsworld.comtitle
 *.rolexwanduhr.de
 *.rolexwatchesretailer.com
 *.rolexyeals.com
@@ -17362,6 +17820,7 @@
 *.rootsandwings.at
 *.ropepflege.de
 *.ropingdummyonwheel.com
+*.ropingdummyonwheel.comtitle
 *.rosch-maschinenhandel.com
 *.rosdachshundsh.com
 *.rosebeagle.com
@@ -17427,7 +17886,9 @@
 *.royalcommunitiesunion.com
 *.royalcoonscattery.wixsite.com
 *.royalcopenhagenstore.com
+*.royalcopenhagenstore.comtitle
 *.royalcopenhagenusa.com
+*.royalcopenhagenvip.comtitle
 *.royalcopypapers.com
 *.royalcorgihome.com
 *.royalcorgishome.com
@@ -17544,8 +18005,10 @@
 *.ruhrgeratrabatt.com
 *.ruhrmove.de
 *.ruidianmedia.com
+*.ruidianmedia.comtitle
 *.ruizo.store
 *.rujirakeaonin.com
+*.rulfloor.com
 *.runelitegear.com
 *.runfitfrenzy.com
 *.runnersparadiseshop.com
@@ -17589,14 +18052,17 @@
 *.rvcaaustria.com
 *.rw-gfy.org
 *.rw.co.ca.com
+*.rw.co.ca.comtitle
 *.rwb-stuttgart.com
 *.rwb-stuttgart.de
 *.rwcohugesale.com
+*.rwcohugesale.comtitle
 *.rwcstore.com
 *.rwetradingbv.com
 *.rwingshome.co.za
 *.rwoodshome.co.za
 *.rwsafetyshoes.com
+*.rwsafetyshoes.comtitle
 *.rx-budapest.com
 *.rx-ezy.com
 *.rx-pharma.net
@@ -17612,7 +18078,9 @@
 *.ryansamoyedpups.com
 *.ryanurabonpitbullpuppies.com
 *.ryobltoolssales.com
+*.ryobltoolssales.comtitle
 *.ryobltoolsvipsale.com
+*.ryobltoolsvipsale.comtitle
 *.s-wwarehouse.com
 *.s.wwarehouse.com
 *.s2.q4cdn.com
@@ -17668,6 +18136,7 @@
 *.saharalogisticsltd.com
 *.sahaviriyapapers.com
 *.sailesindustrialmachinery.co.za
+*.sailnovo.shop
 *.saintalloiis.net
 *.saintbernardcreek.com
 *.saintbernardpuppyforsale.com
@@ -17675,6 +18144,7 @@
 *.saintlypharma.com
 *.saiton.de
 *.sakingsautospares.com
+*.sakingsautospares.comtitle
 *.sakmarainvestneft.ru
 *.sakoarms.com
 *.sakogunstore.com
@@ -17701,6 +18171,7 @@
 *.salebathroomkit.com
 *.salebathroomstore.com
 *.salebedbath.com
+*.salebershka.comtitle
 *.salebikeframe.com
 *.salebrandtools.com
 *.salecampingshop.com
@@ -17778,6 +18249,7 @@
 *.saletennisshop.com
 *.saletheclothes.com
 *.saletomtailor.com
+*.saletomtailor.comtitle
 *.saletoolopt.com
 *.saletoolsonline.com
 *.saletrendstore.com
@@ -17790,6 +18262,7 @@
 *.salewentools.com
 *.salewintergear.com
 *.salewonline.shop
+*.salewonline.shoptitle
 *.saleworkshopequip.com
 *.salfinpethome.co.za
 *.salihiyafreightservices.com
@@ -17800,6 +18273,7 @@
 *.salomon-schuhe.com
 *.salomon-schuhes.com
 *.salomongift.com
+*.salomongift.comtitle
 *.salomononlineshop.at
 *.salomonoutletdeutschland.com
 *.salomonoutletgermany.de
@@ -17928,6 +18402,7 @@
 *.scbnv.com
 *.scbonlineae.com
 *.sccdream.com
+*.sccdream.comtitle
 *.sccyarms.com
 *.sccyfirearmsusa.com
 *.sccyguns.com
@@ -18057,6 +18532,7 @@
 *.seacrest-nft.com
 *.seafollywear.com
 *.seafoodfeast.shop
+*.seafoodfeast.shoptitle
 *.seagul-logistics.com
 *.seak-store.de
 *.sealanddelivery.com
@@ -18065,7 +18541,9 @@
 *.searchmilitaryprofile.com
 *.seasaltfashion.com
 *.seasonaldiscount.shop
+*.seasonaldiscount.shoptitle
 *.seasonaldiscount.store
+*.seasonaldiscount.storetitle
 *.seasonalhalloween.com
 *.seasonalllc.com
 *.seasongca.com
@@ -18121,6 +18599,7 @@
 *.seldomdobermanpinschers.com
 *.select-football.com
 *.selectchoiceus.com
+*.selectchoiceus.comtitle
 *.selectconsumers.help
 *.selectedmedsonline.com
 *.selectedtabsonline.com
@@ -18173,6 +18652,7 @@
 *.serengetidiscount.com
 *.serenitychowchows.com
 *.serenitylamp.com
+*.serenitytoypoodles.com
 *.seriesofappliance.com
 *.seriesofbikeus.com
 *.seriesofclothing.com
@@ -18195,15 +18675,19 @@
 *.setiey.de
 *.seubrentequip.com
 *.sevipstore.shop
+*.sevipstore.shoptitle
 *.sewingiiseasy.com
 *.sexapotheke24.com
 *.sexylingerieca.shop
+*.sexylingerieca.shoptitle
 *.sezanstore.com
+*.sezanstore.comtitle
 *.sf-gartenbau.de
 *.sfaswimwearnew.com
 *.sfootwearshop.com
 *.sfswimheaven.com
 *.sgautosom.com
+*.sgd498.com
 *.sglabsstrumenti.com
 *.sgohory.com
 *.sgpill.com
@@ -18237,6 +18721,7 @@
 *.shelbychicboutique.com
 *.shelleyfitn.shop
 *.shellneft.com
+*.shelterutilities.com
 *.sheltiefamilypuppies.com
 *.sheltiehaven.com
 *.sheltiepuppiesforadoption.com
@@ -18250,6 +18735,7 @@
 *.shibainupuppiesforsale.company.site
 *.shiepod.com
 *.shifeitisale.com
+*.shifeitisale.comtitle
 *.shiftbrakeleverde.com
 *.shigag1n.com
 *.shih.tzu.puppies.com
@@ -18277,8 +18763,11 @@
 *.shippills.com
 *.shippingcentrallogistics.com
 *.shippingcontainersource.com
+*.shippingcontainersource.comtitle
 *.shippingcontainerss.com
+*.shippingcontainerss.comtitle
 *.shippingcontainerwitheddie.com
+*.shippingcontainerwitheddie.comtitle
 *.shippoff.com
 *.shipsagemover.com
 *.shipsdcourrier.com
@@ -18429,6 +18918,7 @@
 *.shoppingcutlery.com
 *.shoppingpsychedelics.com
 *.shoppingsalewa.shop
+*.shoppingsalewa.shoptitle
 *.shoppoiu.com
 *.shoppremiumoutlet.us
 *.shoppymix.com
@@ -18466,6 +18956,7 @@
 *.shopwhiskeyonline.com
 *.shopwomenswear.com
 *.shopwoodpellets.com
+*.shopwoodpellets.comtitle
 *.shopyourturn.com
 *.shoretanks.com
 *.shoretfc.com
@@ -18592,6 +19083,7 @@
 *.silvertradeinvestment.com
 *.silvertrtbk.com
 *.silverwearco.com
+*.silverwearco.comtitle
 *.simaholz.com
 *.simaxdalretrievers.com
 *.similarpills.com
@@ -18691,6 +19183,7 @@
 *.skyfundunion.com
 *.skyhigh-market.com
 *.skyhighliquor.com
+*.skyhighliquor.comtitle
 *.skyjetclearance.com
 *.skylandoverseas.com
 *.skylandranchdoodles.com
@@ -18837,6 +19330,7 @@
 *.smithwessonmp-usa.com
 *.smithwessonmp.usa.com
 *.smokecigarss.com
+*.smokecigarss.comtitle
 *.smokelespowders.com
 *.smokeless-powder.com
 *.smokeless.powder.com
@@ -18861,6 +19355,7 @@
 *.sneaker-storeshop.com
 *.sneakershopswien.com
 *.sneakersoutletseu.com
+*.sneakersoutletseu.comtitle
 *.snkidstore.com
 *.snkndl.com
 *.snlog.nl
@@ -18971,6 +19466,7 @@
 *.sosilicaherbs.com
 *.soudkydubove.cz
 *.soul-spa-berlin.de
+*.soundpeatsg.com
 *.soundvivo.com
 *.southboatportal.com
 *.southcreastminiaturehighlands.com
@@ -19006,6 +19502,7 @@
 *.spacetoolsus.com
 *.spanxsale.us
 *.sparepartsnation.com
+*.sparepartsnation.comtitle
 *.sparepartsonlineshop.com
 *.sparepartswholesalers.com
 *.sparklogistic.com
@@ -19018,6 +19515,7 @@
 *.specialcosplay.com
 *.specialhomes.co.za
 *.specializedbikesshop.com
+*.specializedbikesshop.comtitle
 *.specializednewbike.com
 *.specialmilitarycorp.com
 *.specialnewfoundland.com
@@ -19077,6 +19575,7 @@
 *.spielzeugladenprada.com
 *.spinevo.com
 *.spinleaf.online
+*.spinleaf.onlinetitle
 *.spinnerbaitsofficial.com
 *.spinterna.co.za
 *.spiralhappy.com
@@ -19124,6 +19623,7 @@
 *.sportstorepro.com
 *.sportswear-pro.com
 *.sportswearmerch.com
+*.sportswearmerch.comtitle
 *.sportteaminform.com
 *.sportusmusthave.com
 *.sportusnovelty.com
@@ -19133,6 +19633,7 @@
 *.sportusspace.com
 *.sportwearchic.com
 *.sportwearmerch.com
+*.sportwearmerch.comtitle
 *.sportybetadders.com
 *.sportyglobe.com
 *.sportyline.de
@@ -19185,8 +19686,10 @@
 *.spyderkids.com
 *.spydersale.de
 *.spygreyparrots.com
+*.sr.handelsug.sitetitle
 *.srackup.com
 *.srglobalenterprisepvtltd.in
+*.srglobalenterprisepvtltd.intitle
 *.srheumatology.com
 *.srsahda.com
 *.srsmotorsports.shop
@@ -19239,6 +19742,7 @@
 *.stakingscapital.com
 *.stallnut.com
 *.stampskingdom.shop
+*.stampskingdom.shoptitle
 *.stanblueheelers.com
 *.standardaxisfinance.com
 *.standardchartbnkkr.com
@@ -19295,6 +19799,7 @@
 *.stategunstore.com
 *.statehouse-gov-ng.org
 *.statelinetack.shop
+*.statelinetack.shoptitle
 *.statesbulkammoforsale.com
 *.stateso.com
 *.statespitbullhome.com
@@ -19303,6 +19808,7 @@
 *.stationeryopt.com
 *.stationerythe.com
 *.stationsparty.de
+*.statuesquesally.shoptitle
 *.staubsauger24.net
 *.staud-deutschland.com
 *.stauddeutschland.com
@@ -19343,6 +19849,7 @@
 *.steroidspharmastore.com
 *.sterroll.com
 *.stevemaddenca.shop
+*.stevemaddenca.shoptitle
 *.stevemaddenwien.at
 *.stevenjenks.com
 *.stevensonbakerassociatechambers.co.za
@@ -19482,6 +19989,7 @@
 *.strapology.co
 *.straps-shop.com
 *.straub-reifen.com
+*.straussworksvip.comtitle
 *.strbags.com
 *.streamlinedlight.com
 *.streamptz.com
@@ -19580,6 +20088,7 @@
 *.subwaysfinancialinstitutes.com
 *.successtrusts.com
 *.succulentsbox.online
+*.succulentsbox.onlinetitle
 *.sucuredcapitalfx.com
 *.sugagatradingcompany.com
 *.sugarglidersfamily.com
@@ -19587,6 +20096,7 @@
 *.suilkg.shop
 *.suitpin.com
 *.sultanpapers.co.za
+*.summerbikesstore.com
 *.summercorgi.com
 *.summerlinjewel.com
 *.summernearly.com
@@ -19607,6 +20117,7 @@
 *.sunglassdc.com
 *.sunglasses-best.com
 *.sunglassesstyleus.com
+*.sunglassforme.nettitle
 *.sunglasshut.latest-style-polarized.com
 *.sunglasslike.com
 *.sunglowshade.com
@@ -19661,6 +20172,12 @@
 *.supercutechipups.com
 *.supercutedoodles.com
 *.superdry.vip.com
+*.superdry.vip.comtitle
+*.superdryonlines.comtitle
+*.superdrysale.comtitle
+*.superdrysales.comtitle
+*.superdryshop.comtitle
+*.superdrystore.shoptitle
 *.superfaditem.com
 *.superfreighttransportion.com
 *.superheizung.de
@@ -19676,6 +20193,7 @@
 *.superstarkennelsa.co.za
 *.supertoolspace.com
 *.superxb.com
+*.superxb.comtitle
 *.suplexgunstore.com
 *.suplusmunition.com
 *.supower.shop
@@ -19790,6 +20308,7 @@
 *.suytdt.com
 *.suzitee.com
 *.suzukioutboardsforsale.com
+*.suzukioutboardsforsale.comtitle
 *.suzynmom.com
 *.sv-blaschke.de
 *.svcoin.space
@@ -19882,6 +20401,7 @@
 *.swiftwaygloballogistics.com
 *.swiftwaysdeliveries.online
 *.swiftwhiskeysupply.com
+*.swiftwhiskeysupply.comtitle
 *.swimcouturex.com
 *.swimfinest.com
 *.swimgearnew.com
@@ -19924,12 +20444,14 @@
 *.swissportlogistics.com
 *.swissportxpress.com
 *.swisswatchch.com
+*.swisswatchch.comtitle
 *.switchfmhaiti001.com
 *.swixeinkaufen.com
 *.swixski.de
 *.swnthstonline.com
 *.swstt.online
 *.sxseroe.com
+*.sxseroe.comtitle
 *.sydneyparrotsfarm.com
 *.sylviamartens.de
 *.symbolpapperab.com
@@ -19948,7 +20470,9 @@
 *.syntheticalusbag.com
 *.sytm9.com
 *.sz-fishing.de
+*.szwearsfr.shoptitle
 *.t-shirtssalede.com
+*.t.imberland.comtitle
 *.ta2bc.com
 *.tabathapoodlepuppies.online
 *.tableorchairjj.com
@@ -20009,6 +20533,7 @@
 *.tailwisekennels.com
 *.takebicycle.com
 *.takechic.shop
+*.takechic.shoptitle
 *.takesofa.com
 *.talberlyhouse.com
 *.taledeals.com
@@ -20040,6 +20565,7 @@
 *.tanyadachshund.com
 *.tanyascattery.wixsite.com
 *.taphousebourbon.com
+*.taphousebourbon.comtitle
 *.tapp-harma.com
 *.tarantacticalfirearms.com
 *.taranthe.com
@@ -20143,6 +20669,7 @@
 *.technospeedglobal.com
 *.tecimex-bau.de
 *.tedbakerfactorystore.com
+*.tedbakerfactorystore.comtitle
 *.teddybearchowspal.com
 *.teddycatahoulasdog.com
 *.teddywinsphynxkitten.com
@@ -20164,11 +20691,13 @@
 *.tele-mag.de
 *.telersvansuid-afrika.co.za
 *.telfars.us
+*.telfarsale.us
 *.teller-store.com
 *.telmasgoldies.com
 *.temaliy.shop
 *.temaotrade.com
 *.teme123.com
+*.teme123.comtitle
 *.temfashionhub.com
 *.tempeie.com
 *.temperaent.com
@@ -20214,6 +20743,7 @@
 *.tesrin.com
 *.tessentembeddedanalytics.com
 *.tesseractfs.top
+*.tesseractfs.toptitle
 *.test122223.info
 *.test4.com
 *.testalinetrading.com
@@ -20241,6 +20771,7 @@
 *.textileproductss.com
 *.tfbplc.net
 *.tfhomemall.com
+*.tfhomemall.comtitle
 *.tfigc.com
 *.th-outboards.com
 *.thabangeggfarm.co.za
@@ -20551,6 +21082,7 @@
 *.tierfriedhof-kamps.de
 *.tigarsolution.com
 *.tigerjeo.com
+*.tigerjeo.comtitle
 *.tikafastcargo.com
 *.tikkafirearms-usa.com
 *.tikkafirearms.com
@@ -20563,9 +21095,13 @@
 *.tikkausagunshop.com
 *.tiktokmall-shop.net
 *.tiktokuk.online
+*.tiktokuk.onlinetitle
 *.tillobeheerbv.com
 *.timberlandofficial.com
+*.timberlandofficial.comtitle
+*.timberlaneu.comtitle
 *.timbermatspzoo.com
+*.timbermatspzoo.comtitle
 *.timelessartistry.shop
 *.timelessfurn.com
 *.timelessschnauzers.com
@@ -20624,6 +21160,7 @@
 *.tmgolfoff.com
 *.tmnwrt.com
 *.tmoreautomachinery.com
+*.tmoreautomachinery.comtitle
 *.tms-markets.com
 *.tmsftr.com
 *.tmvpuppies.co.za
@@ -20651,17 +21188,22 @@
 *.tollgr.com
 *.toltechomenew.com
 *.tommmyhiilfilgers.store
+*.tommmyhiilfilgers.storetitle
 *.tommybahama.us.com
+*.tommybahama.us.comtitle
 *.tommybahamaonline.shop
+*.tommybahamaonline.shoptitle
 *.tommygunforsale.com
 *.tommyhilfigerosterreich.at
 *.tommypuppyhome.com
 *.tommyskennel.com
 *.tommystoreus.com
+*.tommystoreus.comtitle
 *.tomo9foundation.com
 *.tompottytottweilerhome.com
 *.tomshuette-hohwacht.de
 *.tomtailorvip.com
+*.tomtailorvip.comtitle
 *.tonedo.de
 *.tonybianco.online
 *.tonygolfover.com
@@ -20718,6 +21260,7 @@
 *.toolregionlead.com
 *.tools-genius.com
 *.tools-total.com
+*.toolsale.us
 *.toolsalezone.com
 *.toolsandtuning.com
 *.toolsboxes.shop
@@ -20740,6 +21283,7 @@
 *.toolsuperior.com
 *.toolsuperus.com
 *.toolsus.shop
+*.toolsus.shoptitle
 *.toolsusportable.com
 *.toolsvarious.com
 *.toolsweare.com
@@ -20805,6 +21349,7 @@
 *.topmarijuanadispensary.com
 *.topmarkendeutschland.com
 *.topnotchcigarsshop.com
+*.topnotchcigarsshop.comtitle
 *.topnotchsdispensary.com
 *.topoptionstrade.com
 *.toposchuheonlineshop.com
@@ -20849,6 +21394,7 @@
 *.totamalls.com
 *.totrendybags.com
 *.toubags.com
+*.toubags.comtitle
 *.touringclothes.com
 *.touringoutdoors.com
 *.towatch.shop
@@ -21017,6 +21563,7 @@
 *.travano.de
 *.traveledgy.com
 *.travelmagictouches.com
+*.travelpr.us
 *.travodo.de
 *.treaderoutlet.com
 *.treasurelinklogisticsww.com
@@ -21070,6 +21617,7 @@
 *.trenzjar.com
 *.treslac.com
 *.trespassvip.shop
+*.trespassvip.shoptitle
 *.tretornosterreich.com
 *.tretpedal.com
 *.trevorsdoodleshome.com
@@ -21118,6 +21666,7 @@
 *.tristarfirearmsusa.com
 *.triumphantlawfirm.com
 *.trivegloexp.com
+*.tro346.com
 *.troda.pl
 *.troncoinvest.com
 *.tropicaldeliveryline.com
@@ -21191,6 +21740,7 @@
 *.trustoceanicbcc.com
 *.trustpharm7pills.com
 *.trustpharmacys.com
+*.trustpilots.uk
 *.trustpitbullusa.com
 *.trustplusfxinvestment.com
 *.trustpoultryfarm.co.za
@@ -21238,6 +21788,7 @@
 *.turolloy.com
 *.tursisbulldoghome.com
 *.tursyearthquake.com
+*.turtlebeachusa.com
 *.turwinal.com
 *.tuthrd.com
 *.tuxieon.com
@@ -21318,6 +21869,7 @@
 *.ukchildclothes.com
 *.ukchristmasdecor.com
 *.ukcigsstore.com
+*.ukcigsstore.comtitle
 *.ukcosmeticsltd.com
 *.ukevenodd.com
 *.uklicenceweb.com
@@ -21665,6 +22217,7 @@
 *.usedcarsdealershipnearme.com
 *.usedcarsgallery.com
 *.usedoutboardmotorsonline.com
+*.usedoutboardmotorsonline.comtitle
 *.usedshippingcontainers247.com
 *.usepicsurfing.com
 *.user-friendlyequipment.com
@@ -21835,6 +22388,7 @@
 *.usualpet.com
 *.usualshoes.com
 *.usvineyardvines.com
+*.usvineyardvines.comtitle
 *.usvoguefield.com
 *.usvoguemen.com
 *.usvogueoffer.com
@@ -21905,6 +22459,7 @@
 *.vapescartsupply.com
 *.vapestoreaus.com
 *.vaporkauppa.com
+*.vaporkauppa.comtitle
 *.varianelectronics.com
 *.variohair.com
 *.variousball.com
@@ -21948,6 +22503,7 @@
 *.veja-at.com
 *.veja.at
 *.vejaonline.shop
+*.vejaonline.shoptitle
 *.vejaosterreich.com
 *.vejashop.at
 *.vejasneakerswien.at
@@ -21957,8 +22513,11 @@
 *.velocityforce.org
 *.velvettrustonline.com
 *.vencatop.shop
+*.vencatop.shoptitle
 *.vendexmachines.store
+*.vendexmachines.storetitle
 *.vendingvenue.com
+*.vendingvenue.comtitle
 *.vendors.mikolo.com
 *.vendusa.de
 *.venessashop.com
@@ -22018,9 +22577,12 @@
 *.vevorz.com
 *.vexjex.cc
 *.veyscattery.com
+*.vf.ceulemans.cotitle
+*.vgk047.com
 *.vgmarketing-nl.com
 *.vhatkevada.shop
 *.vhmanimalfeed.com
+*.vhmanimalfeed.comtitle
 *.vhmpapers.com
 *.vhmwholesale.com
 *.viagra-kaufen-österreich.com
@@ -22053,6 +22615,7 @@
 *.vihtavuoripowdersusa.com
 *.villagelocalminers.com
 *.villageminers.com
+*.villageminers.comtitle
 *.villakittensvillage.com
 *.villaparadisepughome.com
 *.villapuppiesvillage.com
@@ -22080,8 +22643,11 @@
 *.vipbusyaa.xyz
 *.vipcelebritybooking.com
 *.vipfashionbeauty.com
+*.vipfashionbeauty.comtitle
 *.vipfrenchiesbulldogs.com
 *.vipmangonline.com
+*.vipmangonline.comtitle
+*.vippatagonizw.comtitle
 *.vippetcourier.com
 *.vipship.co.uk
 *.vipshoppers.review
@@ -22130,6 +22696,7 @@
 *.vivobarefootösterreich.at
 *.vivoberafootatonline.com
 *.vivokauppa.com
+*.vivokauppa.comtitle
 *.vivulla68.com
 *.viymy.com
 *.vizslapupskennel.com
@@ -22181,6 +22748,7 @@
 *.voguestorehouse.com
 *.voguestyleowner.com
 *.voguetote.store
+*.voguetote.storetitle
 *.vogueusland.com
 *.vogueusoffer.com
 *.vogueusparadise.com
@@ -22215,6 +22783,7 @@
 *.vonsrottspupps.com
 *.vooldpoeal.com
 *.vopinko.shop
+*.vopinko.shoptitle
 *.vorlaufigerverkauf.com
 *.vortexreloads.com
 *.vosen.shop
@@ -22242,6 +22811,7 @@
 *.vukv-mitterfels.de
 *.vulcanus.at
 *.vuquo.myshopify.com
+*.vvbrfoot.comtitle
 *.vvocase.com
 *.vystarcreditunionbk.com
 *.wabpp.org
@@ -22308,6 +22878,7 @@
 *.wardu.org
 *.warehousales.shop
 *.warehouseoneca.shop
+*.warehouseoneca.shoptitle
 *.waresdining.com
 *.waresfishingus.com
 *.waresmergechic.com
@@ -22333,6 +22904,7 @@
 *.wasmond.de
 *.waste2ship.org
 *.watchassassin.store
+*.watchassassin.storetitle
 *.watchdachshundpuppies.com
 *.watchlap.com
 *.watchshop99.com
@@ -22370,6 +22942,7 @@
 *.wdgloballogistics.com
 *.wdrative.com
 *.wduanwu.site
+*.wduanwu.sitetitle
 *.wealth-barcap.com
 *.wealthprivatb.com
 *.weaponsandammunitions.com
@@ -22520,6 +23093,7 @@
 *.westward-freight.com
 *.westwayusa.com
 *.westwingslaes.shop
+*.westwingslaes.shoptitle
 *.westwood-galerie.com
 *.westybeaglehome.com
 *.wesybuy.com
@@ -22534,6 +23108,7 @@
 *.wheelsprint.com
 *.whiskerscattery.org
 *.whiskeyforsaleonline.com
+*.whiskeyforsaleonline.comtitle
 *.whiskyfindershop.com
 *.whiskyliquorstore.com
 *.whiskyreseller.com
@@ -22554,9 +23129,11 @@
 *.whizztradingltd.com
 *.wholemeltextract.com
 *.wholesale.soccer.shirt.com
+*.wholesale.soccer.shirt.comtitle
 *.wholesalegroupltd.com
 *.wholesalekeep.com
 *.wholesalepalletsliquidation.com
+*.wholesalepalletsliquidation.comtitle
 *.wholesalereloadingsupplies.com
 *.wholesalerkitchen.com
 *.wholesalestore.online
@@ -22685,6 +23262,7 @@
 *.wknsb.abel-lopez.com
 *.wlmanagementnlbvltd.com
 *.wlnkevin.com
+*.wlnkevin.comtitle
 *.wmt-exchange.org
 *.wndirectusa.com
 *.woderly.com
@@ -22713,6 +23291,7 @@
 *.womencircus.com
 *.womenclothesbe.com
 *.womenclothingca.shop
+*.womenclothingca.shoptitle
 *.womendress.online
 *.womenedgy.com
 *.womenfarmsale.com
@@ -22723,6 +23302,7 @@
 *.womenustrendy.com
 *.womenweardeal.com
 *.womenweares.shop
+*.womenweares.shoptitle
 *.womtops.com
 *.wonderfulknives.com
 *.wonderlanddachshunds.com
@@ -22738,7 +23318,9 @@
 *.woodlandcavapoos.com
 *.woodlandkrafts.com
 *.woodllama.com
+*.woodllama.comtitle
 *.woodpallets.shop
+*.woodpallets.shoptitle
 *.woodpalletsourcing.com
 *.woodpelletsshop.com
 *.woodtree.fr
@@ -22760,6 +23342,7 @@
 *.worldcarecourier.com
 *.worldchicstyles.com
 *.worldcontainersgiant.com
+*.worldcontainersgiant.comtitle
 *.worldcourierexpresslog.com
 *.worldcourierxpresslogistics.com
 *.worldfinanceremittance.com
@@ -22835,6 +23418,7 @@
 *.wzlooo.com
 *.x-bik.myshopify.com
 *.x-bik.online
+*.x.bionic.toptitle
 *.xalan14.com
 *.xandy-poultry.co.za
 *.xbase-logistics.com
@@ -22845,9 +23429,11 @@
 *.xgrlsx.com
 *.xiangxinyingshi.com
 *.xiaozyue.com
+*.xiaozyue.comtitle
 *.xinghly.com
 *.xinyuekj.com
 *.xiongsi.vip
+*.xiongsi.viptitle
 *.xistrap.com
 *.xiyir.com
 *.xlkjshop1688.com
@@ -22885,6 +23471,7 @@
 *.xtragatemetals.com
 *.xtraminnters.com
 *.xtransformers.net
+*.xtransformers.nettitle
 *.xtransitlogistics.com
 *.xtrasfastmovers.com
 *.xtreamfxpro.com
@@ -22892,6 +23479,7 @@
 *.xwbrt.shop
 *.xxlsuperstore.com
 *.xyong1.com
+*.xyong1.comtitle
 *.y-stop.com
 *.y2k-wave.com
 *.yadmrd.com
@@ -22931,6 +23519,7 @@
 *.yitangsj.com
 *.yiticapsule.com
 *.ylbag.shop
+*.ylbag.shoptitle
 *.yndrm.bio
 *.yodazoo.com
 *.yogaathleta.de
@@ -22995,8 +23584,10 @@
 *.yvjexi.shop
 *.yvmg.com
 *.yxkj.store
+*.yxkj.storetitle
 *.yyyqqqqqqq.top
 *.yzlmssen.store
+*.yzlmssen.storetitle
 *.yztassel.com
 *.yzyshoes.us.com
 *.z-discount.com
@@ -23021,14 +23612,24 @@
 *.zapastores.com
 *.zapatrading.com
 *.zaplanelservices.com
+*.zarafree.comtitle
+*.zarahomeofferssale.comtitle
+*.zarahomevip.comtitle
 *.zaralive.com
 *.zaramainecoons.com
 *.zaraviphome.com
+*.zaraviphome.comtitle
+*.zaravipshop.comtitle
 *.zarehomesale.com
+*.zarehomesale.comtitle
 *.zaresales.com
 *.zarhomeshop.com
+*.zarhomeshop.comtitle
+*.zarhomestore.comtitle
 *.zarhomevip.com
+*.zarhomevip.comtitle
 *.zarhomevipstore.com
+*.zarhomevipstore.comtitle
 *.zarodress.com
 *.zasastores.com
 *.zastavaarmshop.com
@@ -23111,6 +23712,7 @@
 *.zivmax.com
 *.zivyastore.com
 *.zj1e.top
+*.zj1e.toptitle
 *.zjfshopping.com
 *.zliteexpress-courier.com
 *.zlitelight.com
@@ -23143,6 +23745,7 @@
 *.zoomexpress.net
 *.zoomil.de
 *.zoravip.com
+*.zoravip.comtitle
 *.zoropet.com
 *.zoubipetro.com
 *.zouiexpress.com
@@ -23165,6 +23768,7 @@
 *.zuzupuppies.com
 *.zwergspitzpomeranian.com
 *.zwilliamsoil.com
+*.zwillingeu.comtitle
 *.zwit.shop
 *.zyjpzx.com
 *.zystfree-heaven.com
