@@ -15,7 +15,7 @@ Blocklist for scam sites automatically retrieved from Google Search and public d
 ```
 Total domains: 23163
 
-Statistics for each source*:
+Statistics for each source:
 
 Today | Yesterday | Dead | Source
     0 |       126 |   0% | Google Search
@@ -29,10 +29,10 @@ Today | Yesterday | Dead | Source
     0 |         0 |   6% | stopgunscams.com
  7376 |      1442 |   8% | All sources
 
-*Dead domains are counted upon retrieval and are
- not included in the blocklist.
-*Only active sources are shown. See the full list
- of sources in SOURCES.md.
+*Dead domains are counted upon retrieval
+ and are excluded from the blocklist.
+*Only active sources are shown. See the
+ full list of sources in SOURCES.md.
 ```
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
