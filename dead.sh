@@ -94,7 +94,8 @@ function check_for_unparked {
         fi
     done < "$parked_domains_file"
     [[ ! -f unparked_domains.tmp ]] && return  # Return if no unparked domains found
-    comm -23 "$parked_domains_file" unparked_domains.tmp  # Remove unparked domains from parked domains file
+    # Remove unparked domains from parked domains file
+    comm -23 "$parked_domains_file" unparked_domains.tmp > parked.tmp && mv parked.tmp "$parked_domains_file"
     cat unparked_domains.tmp >> "$raw_file"  # Add unparked domains to raw file
     format_list "$raw_file"
     log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
@@ -107,7 +108,8 @@ function check_for_parked {
             printf "%s\n" "$domain" >> parked_domains.tmp  # Collate parked domains
         fi
     done < "$raw_file"
-    comm -23 "$raw_file" parked_domains.tmp  # Remove parked domains from raw file
+    # Remove parked domains from raw file
+    comm -23 "$raw_file" parked_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
     cat parked_domains.tmp >> "$parked_domains_file"  # Collate parked domains
     format_list "$parked_domains_file"
     log_event "$(<parked_domains.tmp)" "parked" "raw"
