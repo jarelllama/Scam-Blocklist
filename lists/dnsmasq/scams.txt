@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sat Mar 23 02:55:50 UTC 2024
+# Last modified: Sat Mar 23 03:21:47 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 15802
+# Total number of entries: 15798
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -3739,7 +3739,6 @@ local=/daiport.com/
 local=/daisysavingcart.com/
 local=/dakmag.com/
 local=/daledog.store/
-local=/dalkinpty.com/
 local=/dalmatianhomepty.com/
 local=/dalmatianpuppiesfarm.com/
 local=/dalmatiansonthemove.com/
@@ -4153,6 +4152,7 @@ local=/dobermanfidelity.com/
 local=/dobermanforsaleincalifornia.shop/
 local=/dobermanforsalesnearme.shop/
 local=/dobermannpuppiesforsale.com/
+local=/dobermannpups.com/
 local=/dobermannshophub.com/
 local=/dobermanpalatial.com/
 local=/dobermanpincherpuppies.com/
@@ -6713,6 +6713,7 @@ local=/gymboy.shop/
 local=/gymequipmentoutlet.com/
 local=/gyostol.de/
 local=/h.birds.com/
+local=/habbibnk-ch.com/
 local=/habibbsonsmicrobank.com/
 local=/habibfinanceltd.com/
 local=/haelectricals.co.za/
@@ -7235,7 +7236,6 @@ local=/hugecargofreight.com/
 local=/huggyberries.com/
 local=/hughfurniture.xyz/
 local=/hughmodestcompanionsfarm.com/
-local=/hughsolicitors.com/
 local=/hugo-live-band.de/
 local=/hugohaustierenachhause.de/
 local=/hugomascotasacasa.es/
@@ -8051,7 +8051,6 @@ local=/kitchenwareoff.com/
 local=/kithet.com/
 local=/kitmm.com/
 local=/kitsretrievers.sitebeat.crazydomains.com/
-local=/kitten.adorablekittenfarm.com/
 local=/kittenanesthesia.com/
 local=/kittenlashez.com/
 local=/kittens4home.com/
@@ -9015,6 +9014,7 @@ local=/maximilianchowchowhome.com/
 local=/maximo-profit.com/
 local=/maximomarket.com/
 local=/maximusprojectmanagement.com/
+local=/maxinexpresscargo.com/
 local=/maxlife-fundacja.pl/
 local=/maxpostsecuredelivery.yolasite.com/
 local=/maxsonpharmacy.com/
@@ -11391,7 +11391,6 @@ local=/punchbaredibles.com/
 local=/puphen.com/
 local=/puphomes.com/
 local=/puppartyhatsllc.com/
-local=/puppies.adorablekittenfarm.com/
 local=/puppies.for.sale.usa.com/
 local=/puppies.shop.online/
 local=/puppiescentral.co.za/
@@ -11965,6 +11964,7 @@ local=/rolexsworld.com/
 local=/rolexwatchesretailer.com/
 local=/rollacefinancebnk.com/
 local=/rollrunca.com/
+local=/romacreditbk.com/
 local=/romandachshundbreed.com/
 local=/romanmotorsandspares.co.za/
 local=/romanticed.shop/
@@ -13742,7 +13742,6 @@ local=/tclsave.com/
 local=/tcmonsters.com/
 local=/tcruisefansclub.com/
 local=/tcsbuk.com/
-local=/tcsxpresscompany.com/
 local=/tctractors.com/
 local=/tcupchihuahuapuppies.com/
 local=/tcuppoodlepuppies.org/
@@ -14394,7 +14393,6 @@ local=/triovancredit.com/
 local=/tripcopapers.co.za/
 local=/tripcopoultry.co.za/
 local=/triplecrownpetlogistics.com/
-local=/tripleroutescargo.com/
 local=/trippygalaxyvibe.com/
 local=/trippyhallucinogens.com/
 local=/trippypsychedelicspice.com/
@@ -15202,7 +15200,6 @@ local=/watchassassin.store/
 local=/watchdachshundpuppies.com/
 local=/watchlap.com/
 local=/watchshop99.com/
-local=/watcint.org/
 local=/watersportshouse.com/
 local=/watersportsoffers.com/
 local=/wathati.com/
@@ -15530,7 +15527,6 @@ local=/worldwidexpresservices.com/
 local=/worldzoomlogistics.com/
 local=/worth2own.com/
 local=/worthstart-trading.com/
-local=/worwidexpress.com/
 local=/wottrigger.com/
 local=/wowbicycleover.com/
 local=/wowdogdeals.com/
