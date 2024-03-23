@@ -158,7 +158,7 @@ function test_dead {
     printf "584031dead-domain-test.com\n" >> "$dead_domains_file"
     # Expected output
     printf "google.com\n" >> out_raw.txt
-    printf "584031dead-domain-test.com\n" >> out_dead.tmp
+    printf "584031dead-domain-test.com\n" >> out_dead.txt
     printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt
 
     # Test removal of dead domains with subdomains
