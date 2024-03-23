@@ -55,7 +55,9 @@ function test_retrieval_check {
         printf "dead-test.com\n" > "$dead_domains_file"  # Sample data
         printf "dead-test.com\n" >> input.txt  # Input
         
-        # No expected output for both tests
+        # Test removal of know parked domains
+        prinft "parked-test.com\n" > "$parked_domains_file"  # Sample data
+        prinft "parked-test.com\n" >> input.txt  # Input
     fi
 
     # Test removal of whitelisted domains and blacklist exclusion
