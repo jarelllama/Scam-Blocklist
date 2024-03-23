@@ -2,9 +2,9 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sat Mar 23 02:53:56 UTC 2024
+# Last modified: Sat Mar 23 02:55:50 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 15801
+# Total number of entries: 15802
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -242,6 +242,7 @@ local=/adorablefrenchiesss.com/
 local=/adorablefurpuppiesforadoption.com/
 local=/adorablegoldendoodlepups.com/
 local=/adorablegoldenretriever.com/
+local=/adorablekittenfarm.com/
 local=/adorablelabradorretrieverpuppy.com/
 local=/adorablelittleones.com/
 local=/adorablelittlepups.com/
