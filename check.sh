@@ -139,7 +139,7 @@ function check_raw_file {
 }
 
 function clean_domain_log {
-    [[ $(wc -w < "$domain_log") -gt 10000 ]] && sed -i '2,200d' "$domain_log" || printf ""  # printf to return 0
+    [[ $(wc -w < "$domain_log") -gt 10000 ]] && sed -i '2,300d' "$domain_log" || printf ""  # printf to return 0
 }
 
 function log_event {
