@@ -78,7 +78,7 @@ function retrieve_existing {
         [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
         source='Google Search'
         search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
-        search_term=${item%.tmp}  # Remove file extension from file name
+        search_term=${search_term%.tmp}  # Remove file extension from file name
         process_source "$search_term"
     done
 }
