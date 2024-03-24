@@ -51,7 +51,7 @@ function retrieve_new {
 function retrieve_existing {
     printf "\nUsing existing list of retrieved domains.\n\n"
     for domains_file in data/pending/domains_*.tmp; do  # Loop through temp domains file
-        source='Empty'  # Reintialize source
+        source='Empty'  # Intialize source
         case "$domains_file" in
             *google_search*)
                 source="Google Search" ;;
