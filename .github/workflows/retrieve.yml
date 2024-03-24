@@ -3,8 +3,8 @@ run-name: Retrieve domains
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 12:30am (GMT+8)
-    - cron: '30 16 * * *'
+    # Daily at 12:30am
+    - cron: '30 0 * * *'
 
 jobs:
   retrieve-domains:

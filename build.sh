@@ -20,7 +20,7 @@ function main {
 function update_readme {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
-Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily at 17:00 UTC.
+Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -38,7 +38,7 @@ Total domains: $(wc -l < "$raw_file")
 
 Statistics for each source:
 
-Today | Yesterday | Dead | Source
+Today | Yesterday | Excluded | Source
 $(print_stats "Google Search")
 $(print_stats "aa419.org")
 $(print_stats "dfpi.ca.gov")
@@ -50,10 +50,10 @@ $(print_stats "scamadviser.com")
 $(print_stats "stopgunscams.com")
 $(print_stats "")
 
-*Dead domains are counted upon retrieval
- and are excluded from the blocklist.
-*Only active sources are shown. See the
- full list of sources in SOURCES.md.
+*The excluded % is of domains not included in the
+ blocklist. Mostly dead and whitelisted domains.
+*Only active sources are shown. See the full list of
+ sources in SOURCES.md.
 \`\`\`
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 

@@ -3,8 +3,8 @@ run-name: Dead check
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 1am (GMT+8)
-    - cron: '0 17 * * *'
+    # Daily at 1am
+    - cron: '0 1 * * *'
 
 jobs:
   dead-check:
