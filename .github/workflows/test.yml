@@ -17,7 +17,9 @@ jobs:
         #uses: ludeeus/action-shellcheck@master
         #with:
         #  ignore_paths: legacy
-        run: shellcheck *.sh
+        run: | 
+          shellcheck -V
+          shellcheck *.sh
 
   test-retrieval:
     runs-on: ubuntu-latest
