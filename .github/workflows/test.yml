@@ -17,7 +17,9 @@ jobs:
         run: | 
           wget -qO - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xJ
           shellcheck-stable/shellcheck --version
-          find . -type f -name "*.sh" -not -path "./legacy*" -exec shellcheck-stable/shellcheck {} \;
+          for script in *.sh */*.sh; do
+            [[ "$script" != legacy/* ]] && shellcheck "$script" && printf "Checked %s\n" "$script"
+          done
 
   test-retrieval:
     runs-on: ubuntu-latest
