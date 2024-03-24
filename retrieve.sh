@@ -191,7 +191,7 @@ function source_google_search {
 
 function search_google {
     url='https://customsearch.googleapis.com/customsearch/v1'
-    query_count=0  # Reinitliaze query count for each search term
+    query_count=0  # Initliaze query count for each search term
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Create domains file if not present
@@ -318,7 +318,7 @@ function merge_domains {
 
     format_list filtered_domains.tmp
 
-    # Print out domains in toplist and invalid entries
+    # Print domains in toplist and invalid entries
     if [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]]; then
         printf "\nEntries requiring manual review:\n"
     fi
