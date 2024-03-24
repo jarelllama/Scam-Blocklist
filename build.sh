@@ -20,7 +20,7 @@ function main {
 function update_readme {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
-Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily at 00:30 UTC.
+Blocklist for scam site domains automatically retrieved from Google Search and public databases, updated daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -50,7 +50,7 @@ $(print_stats "scamadviser.com")
 $(print_stats "stopgunscams.com")
 $(print_stats)
 
-*The excluded % is of domains not included in the
+*The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
 *Only active sources are shown. See the full list of
  sources in SOURCES.md.
@@ -58,17 +58,17 @@ $(print_stats)
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 ## Retrieving scam domains from Google Search
-Google provides a [Search API](https://developers.google.com/custom-search/v1/introduction) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. These search terms are manually added while investigating scam sites. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
+Google provides a [Search API](https://developers.google.com/custom-search/v1/introduction) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
 #### Rationale
 Scam sites often do not have a long lifespan; malicious domains may be replaced before they can be manually reported. By programmatically searching Google using paragraphs from real-world scam sites, new domains can be added as soon as Google crawls the site. This requires no manual reporting.
 
-The list of search terms is proactively updated and is mostly retrieved from new scam site templates seen on r/Scams.
+The list of search terms is proactively updated and is mostly sourced from investigating new scam site templates seen on r/Scams.
 
 #### Limitations
-The Google Custom Search JSON API only provides ~100 free search queries per day. Because of the number of search terms used, the Google Search source can only be employed once a day.
+The Google Custom Search JSON API only provides ~100 free search queries per day. This limits the number of search terms that can be employed a day.
 
-To optimise the number of search queries made, each search term is frequently benchmarked on their numbers for new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+To optimise the number of queries made, each search term is frequently benchmarked on their number of new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
 > Queries made today: $(count "queries")
 
@@ -76,9 +76,10 @@ To optimise the number of search queries made, each search term is frequently be
 The full domain retrieval process for all sources can be viewed in the repository's code.
 
 ## Filtering process
-- The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted companies, etc.), along with other filtering
-- The domains are checked against the [Tranco 1M Toplist](https://tranco-list.eu/) for potential false positives and flagged domains are vetted manually
+- The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted companies, etc.)
+- The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives and flagged domains are vetted manually
 - Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
+- Only domains are included in the blocklist. IP addresss are checked for resolving domains and URLs are stripped down to the domain
 
 The full filtering process can be viewed in the repository's code.
 
@@ -100,6 +101,7 @@ Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOU
 - [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): The law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 - [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
+- [Tranco List](https://tranco-list.eu/): Ranking of the top 1 million domains
 - [who.is](https://who.is/): WHOIS and DNS lookup tool
 
 ## See also
@@ -122,7 +124,7 @@ function build_list {
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
-${3} Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
+${3} Description: Blocklist for scam site domains automatically retrieved from Google Search and public databases, updated daily.
 ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Last modified: $(date -u)
