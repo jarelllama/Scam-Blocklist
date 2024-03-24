@@ -24,10 +24,10 @@ Today | Yesterday | Excluded | Source
     9 |         0 |      12% | guntab.com
    22 |         0 |       8% | petscams.com
     0 |         0 |       0% | scam.delivery
-  504 |      1175 |      18% | scam.directory
+    4 |      1175 |       8% | scam.directory
    11 |         0 |      29% | scamadviser.com
     3 |         0 |       6% | stopgunscams.com
-  672 |      8818 |       9% | All sources
+  172 |      8818 |       8% | All sources
 
 *The excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
