@@ -16,7 +16,7 @@ jobs:
       - name: Run ShellCheck
         run: | 
           wget -qO - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xJ
-          shellcheck-stable/shellcheck --version
+          printf "%s\n\n" "$(shellcheck-stable/shellcheck --version)"
           for script in *.sh */*.sh; do
             [[ "$script" != legacy/* ]] && shellcheck "$script" && printf "Checked %s\n" "$script"
           done
