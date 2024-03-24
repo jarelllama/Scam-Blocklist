@@ -5,26 +5,18 @@ on:
   push:
     paths:
       - '**.sh'
-      - '**.yml'
 
 jobs:
-  super-linter:
+  shellcheck:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Run Super-Linter
-        uses: super-linter/super-linter/slim@v6.3.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILTER_REGEX_EXCLUDE: .*legacy/.*
-          VALIDATE_BASH_EXEC: false
-          VALIDATE_CHECKOV: false
-          VALIDATE_MARKDOWN: false
-          VALIDATE_SHELL_SHFMT: false
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          ignore_paths: legacy
 
   test-retrieval:
     runs-on: ubuntu-latest
