@@ -21,7 +21,7 @@ function main {
 }
 
 function retrieve_toplist {
-    wget -q -O - "$toplist_url" | gunzip - > toplist.tmp  # Download and unzip toplist to temp file
+    wget -qO - "$toplist_url" | unzip - > toplist.tmp  # Download and unzip toplist to temp file
     awk -F ',' '{print $2}' toplist.tmp > "$toplist_file"  # Format toplist to keep only domains
     format_list "$toplist_file"
 }
