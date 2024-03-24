@@ -18,7 +18,8 @@ jobs:
           wget -qO - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xJ
           printf "%s\n\n" "$(shellcheck-stable/shellcheck --version)"
           for script in *.sh */*.sh; do
-            [[ "$script" != legacy/* ]] && shellcheck "$script" && printf "Checked %s\n" "$script"
+            [[ "$script" == legacy/* ]] && continue
+            shellcheck "$script" && printf "Checked %s\n" "$script"
           done
 
   test-retrieval:
