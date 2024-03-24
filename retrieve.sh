@@ -92,7 +92,7 @@ function source_aa419 {
     touch "$domains_file"  # Initialize domains file
     for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
-        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Trailing / breaks API call
+        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Trailing slash breaks API call
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
         jq -r '.[].Domain' <<< "$page_results" >> "$domains_file"
     done
@@ -127,8 +127,8 @@ function source_petscams {
         url="https://petscams.com/category/${category}"
         for page in {2..21}; do  # Loop through 20 pages
             curl -s "${url}/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
-                sed 's/<a href="https:\/\/petscams.com\/puppy-scammer-list\///;
-                s/<a href="https:\/\/petscams.com\/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
+                sed 's/<a href="https:\/\/petscams.com\///; s/puppy-scammer-list\///;
+                s/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
             url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
         done
     done
