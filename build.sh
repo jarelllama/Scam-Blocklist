@@ -109,7 +109,7 @@ Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOU
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
 
 ## Appreciation
-Thanks to the following people for the help, inspiration and support!
+Thanks to the following people for the help, inspiration, and support!
 - [@bongochong](https://github.com/bongochong)
 - [@hagezi](https://github.com/hagezi)
 - [@iam-py-test](https://github.com/iam-py-test)
