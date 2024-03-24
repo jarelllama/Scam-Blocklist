@@ -2,12 +2,11 @@
 # Description: Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sun Mar 24 07:56:50 UTC 2024
+# Last modified: Sun Mar 24 07:58:04 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 23198
+# Total number of entries: 23197
 #
 server:
-local-zone: "." always_nxdomain
 local-zone: "01edc.com." always_nxdomain
 local-zone: "101luadalmatians.com." always_nxdomain
 local-zone: "103-boi.com." always_nxdomain
