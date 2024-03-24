@@ -133,7 +133,7 @@ function test_retrieval_check {
         mv input.txt "$raw_file"  # Prepare sample raw file
         bash check.sh || true  # Run lists check script and ignore returned exit code
     fi
-    printf "%s\n" "------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------------"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
@@ -146,7 +146,7 @@ function test_retrieval_check {
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n"
     [[ "$log_error" == false ]] && printf "\nLog:\n%s\n" "$(<$domain_log)"
-    printf "%s\n" "------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
 
@@ -200,7 +200,7 @@ function test_dead {
 
     bash dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
-    printf "%s\n" "------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------------"
 
     # Check returned error code
     if [[ "$errored" == true ]]; then
@@ -218,7 +218,7 @@ function test_dead {
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n" ||
         printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n"
     [[ "$log_error" == false ]] && printf "\nLog:\n%s\n" "$(<$domain_log)"
-    printf "%s\n" "------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
 

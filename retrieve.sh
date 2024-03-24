@@ -227,7 +227,7 @@ function process_source {
     format_list "$domains_file"
     unfiltered_count=$(wc -l < "$domains_file")  # Count number of unfiltered domains pending
     pending_domains=$(<"$domains_file")  # Store pending domains in a variable
-    
+
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains")  # Find domains with common subdomains
@@ -371,9 +371,9 @@ function log_source {
     awk -v source="$source" -v search_term="$search_term" -v raw="$unfiltered_count" -v final="$filtered_count" -v whitelist="$total_whitelisted_count" -v dead="$dead_count" -v redundant="$redundant_count" \
         -v toplist_count="$toplist_count" -v toplist_domains="$(printf "%s" "$domains_in_toplist" | tr '\n' ' ')" -v queries="$query_count" -v rate_limited="$rate_limited" -v time="$time_format" \
         'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
-    [[ "$source" == 'Google Search' ]] && source="\"${search_term:0:100}...\""
+    [[ "$source" == 'Google Search' ]] && source="$search_term"
     printf "Source: %s\nRaw:%4s  Final:%4s  Whitelisted:%4s  Dead:%4s  Toplist:%4s\n" "$source" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$dead_count" "$toplist_count"
-    printf "%s\n" "------------------------------------------------------------"
+    printf "%s\n" "------------------------------------------------------------------"
 }
 
 function format_list {
