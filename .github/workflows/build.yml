@@ -21,6 +21,5 @@ jobs:
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
-          git add .
-          git commit -m "Build lists"
+          git commit -am "Build lists"
           git push -q
