@@ -145,13 +145,13 @@ function count {
     scope="$1"
     source="$2"
     if [[ "$scope" == 'excluded' ]]; then
-        raw_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 4 | awk '{total += $1} END {print total}')
+        raw_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 4 | awk '{total += $1} END {print total}')
         if [[ "$raw_count" -eq 0 ]]; then
             printf "0" && return
         fi
-        white_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 6 | awk '{total += $1} END {print total}')
-        dead_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 7 | awk '{total += $1} END {print total}')
-        redundant_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 8 | awk '{total += $1} END {print total}')
+        white_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 6 | awk '{total += $1} END {print total}')
+        dead_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 7 | awk '{total += $1} END {print total}')
+        redundant_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 8 | awk '{total += $1} END {print total}')
         excluded_count=$((white_count + dead_count + redundant_count))
         printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded of raw count
         return
@@ -165,7 +165,7 @@ function count {
         printf "-" && return
     fi
     # Sum up all domains retrieved by that source for that day
-    csvgrep -c 1 -m "$scope" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$source" | csvcut -c 5 | awk '{total += $1} END {print total}'
+    csvgrep -c 1 -m "$scope" "$source_log" | csvgrep -c 13 -m 'yes' | csvgrep -c 2 -m "$source" | csvcut -c 5 | awk '{total += $1} END {print total}'
 }
 
 function format_list {
