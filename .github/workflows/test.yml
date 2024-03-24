@@ -1,5 +1,5 @@
-name: Test functions
-run-name: Test functions
+name: Run tests
+run-name: Run tests
 on:
   workflow_dispatch:
   push:
