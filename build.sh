@@ -157,7 +157,7 @@ function count {
         return
     elif [[ "$scope" == 'queries' ]]; then  # Count number of Google Search queries made
         queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
-        [[ "$queries" -le 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
+        [[ "$queries" -lt 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
         return
     fi
     # Print dash if no runs for that day found
