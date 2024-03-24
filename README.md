@@ -13,21 +13,21 @@ Blocklist for scam sites automatically retrieved from Google Search and public d
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 ```
-Total domains: 23197
+Total domains: 23223
 
 Statistics for each source:
 
 Today | Yesterday | Excluded | Source
    19 |       126 |       2% | Google Search
-   68 |         8 |      10% | aa419.org
-   11 |       133 |      42% | dfpi.ca.gov
-    2 |         0 |      13% | guntab.com
-   15 |         0 |       8% | petscams.com
+   71 |         8 |      10% | aa419.org
+   23 |       133 |      47% | dfpi.ca.gov
+    6 |         0 |      12% | guntab.com
+   17 |         0 |       8% | petscams.com
     0 |         0 |       0% | scam.delivery
-  500 |      1175 |       6% | scam.directory
-    4 |         0 |      31% | scamadviser.com
+  500 |      1175 |      18% | scam.directory
+    8 |         0 |      30% | scamadviser.com
     3 |         0 |       6% | stopgunscams.com
-  622 |      8818 |       8% | All sources
+  647 |      8818 |       9% | All sources
 
 *The excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
