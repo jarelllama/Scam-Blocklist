@@ -47,7 +47,7 @@ The list of search terms is proactively updated and is mostly sourced from inves
 #### Limitations
 The Google Custom Search JSON API only provides ~100 free search queries per day. This limits the number of search terms that can be employed a day.
 
-To optimise the number of queries made, each search term is frequently benchmarked on their number of new domains and false positives. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+Each search term is frequently benchmarked on their number of new domains and false positives. Underperforming search terms are disabled to optimise the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
 > Queries made today: 108 (rate limited)
 
