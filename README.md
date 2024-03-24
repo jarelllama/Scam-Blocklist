@@ -1,5 +1,5 @@
 # Jarelllama's Scam Blocklist
-Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily at 17:00 UTC.
+Blocklist for scam sites automatically retrieved from Google Search and public databases, updated daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -17,7 +17,7 @@ Total domains: 23767
 
 Statistics for each source:
 
-Today | Yesterday | Dead | Source
+Today | Yesterday | Excluded | Source
     - |        19 |       2% | Google Search
     - |        49 |      11% | aa419.org
     - |        11 |      32% | dfpi.ca.gov
