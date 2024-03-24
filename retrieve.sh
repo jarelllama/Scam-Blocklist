@@ -90,7 +90,7 @@ function source_aa419 {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://api.aa419.org/fakesites'
     touch "$domains_file"  # Initialize domains file
-    for pgno in {1..20}; do  # Loop through pages
+    for pgno in {1..10}; do  # Loop through pages
         query_params="${pgno}/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
         page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Trailing slash breaks API call
         jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
@@ -103,8 +103,8 @@ function source_guntab {
     source='guntab.com'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://www.guntab.com/scam-websites'
-    curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
+    curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' | grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
+        grep -vxF 'stopgunscams.com' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source
 }
 
@@ -125,7 +125,7 @@ function source_petscams {
     categories=('puppy-scammer-list' 'pet-delivery-scam')  # Loop through the two categories
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
-        for page in {2..21}; do  # Loop through 20 pages
+        for page in {2..11}; do  # Loop through pages
             curl -s "${url}/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
                 sed 's/<a href="https:\/\/petscams.com\///; s/puppy-scammer-list\///;
                 s/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
@@ -153,7 +153,7 @@ function source_scamdirectory {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://scam.directory/category'
     curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
-        sed 's/href="\///; s/" title//; s/-/./g; 501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
+        sed 's/href="\///; s/" title//; s/-/./g; 101,$d' > "$domains_file"  # Keep only newest 100 domains
     process_source
 }
 
@@ -173,7 +173,7 @@ function source_dfpi {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
-        sed 's/<td class="column-5">//; s/<a href="//' > "$domains_file"
+        sed 's/<td class="column-5">//; s/<a href="//; 21,$d' > "$domains_file"  # Keep only newest 21 domains
     process_source
 }
 
