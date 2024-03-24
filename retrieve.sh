@@ -173,7 +173,7 @@ function source_dfpi {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
-        sed 's/<td class="column-5">//; s/<a href="//; 21,$d' > "$domains_file"  # Keep only newest 21 domains
+        sed 's/<td class="column-5">//; s/<a href="//; 21,$d' > "$domains_file"  # Keep only newest 20 domains
     process_source
 }
 
