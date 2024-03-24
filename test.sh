@@ -15,7 +15,6 @@ dead_domains_file='data/dead_domains.txt'
 function main {
     error=false  # Initialize error variable
     errored=false  # Initialize whether script returned with error
-    log_error=false  # Initialize whether log file has an error
     : > "$raw_file"  # Initialize raw file
     sed '1q' "$domain_log" > log.tmp && mv log.tmp "$domain_log"  # Intialize domain log file
 
@@ -145,8 +144,8 @@ function test_retrieval_check {
     fi
     check_log  # Check log file
 
-    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
-    [[ "$log_error" == false ]] && printf "Log:\n%s\n" "$(<$domain_log)"
+    [[ "$error" == false ]] && printf "Test completed. No errors found.\n"
+    [[ "$log_error" == false ]] && printf "\nLog:\n%s\n" "$(<$domain_log)"
     printf "%s\n" "------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
@@ -196,8 +195,7 @@ function test_dead {
 
     # Prepare expected output files
     for file in out_*; do
-        [[ "$file" == out_dead.txt ]] && continue  # Dead domains file is not sorted
-        sort "$file" -o "$file"
+        [[ "$file" != out_dead.txt ]] && sort "$file" -o "$file"  # Dead domains file is not sorted
     done
 
     bash dead.sh  # Run dead script
@@ -219,14 +217,13 @@ function test_dead {
 
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n" ||
         printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n"
+    [[ "$log_error" == false ]] && printf "\nLog:\n%s\n" "$(<$domain_log)"
     printf "%s\n" "------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
 }
 
 function check_output {
-    if cmp -s "$1" "$2"; then
-        return
-    fi
+    cmp -s "$1" "$2" && return  # Return if files are the same
     printf "! %s file is not as expected:\n" "$3"
     cat "$1"
     printf "\nExpected output:\n"
@@ -236,9 +233,7 @@ function check_output {
 }
 
 function check_if_dead_present {
-    if ! grep -q '[[:alnum:]]' "$1"; then
-        return
-    fi
+    ! grep -q '[[:alnum:]]' "$1" && return  # Return if file has no domains
     printf "! %s file still has dead domains:\n" "$2"
     cat "$1"
     printf "\n"
@@ -246,14 +241,11 @@ function check_if_dead_present {
 }
 
 function check_log {
-    log_error=false
     while read -r log_term; do
-        if ! grep -qF "$log_term" "$domain_log"; then
-            log_error=true
-            break
-        fi
+        grep -qF "$log_term" "$domain_log" && log_error=false || log_error=true
+        [[ "$log_error" == true ]] && break # Break when error found
     done < out_log.txt
-    [[ "$log_error" == false ]] && return
+    [[ "$log_error" == false ]] && return  # Return if no error found
     printf "! Log file is not as expected:\n"
     cat "$domain_log"
     printf "\nTerms expected in log:\n"

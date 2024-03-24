@@ -48,7 +48,7 @@ $(print_stats "scam.delivery")
 $(print_stats "scam.directory")
 $(print_stats "scamadviser.com")
 $(print_stats "stopgunscams.com")
-$(print_stats "")
+$(print_stats)
 
 *The excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -137,7 +137,7 @@ EOF
 }
 
 function print_stats {
-    [[ "$1" == '' ]] && source="All sources" || source="$1"
+    [[ -n "$1" ]] && source="$1" || source="All sources" 
     printf "%5s |%10s |%8s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "excluded" "$1" )" "$source"
 }
 
@@ -147,8 +147,7 @@ function count {
     if [[ "$scope" == 'excluded' ]]; then
         raw_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 4 | awk '{total += $1} END {print total}')
         if [[ "$raw_count" -eq 0 ]]; then
-            printf "0"
-            return
+            printf "0" && return
         fi
         white_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 6 | awk '{total += $1} END {print total}')
         dead_count=$(csvgrep -c 12 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 7 | awk '{total += $1} END {print total}')
@@ -163,8 +162,7 @@ function count {
     fi
     # Print dash if no runs for that day found
     if ! grep -qF "$scope" "$source_log"; then
-        printf "-"
-        return
+        printf "-" && return
     fi
     # Sum up all domains retrieved by that source for that day
     csvgrep -c 1 -m "$scope" "$source_log" | csvgrep -c 12 -m 'yes' | csvgrep -c 2 -m "$source" | csvcut -c 5 | awk '{total += $1} END {print total}'

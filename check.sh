@@ -77,13 +77,13 @@ function check_raw_file {
         log_event "$invalid_entries" "invalid"
     fi
 
-    redundant_domains_count=0  # Initialize redundant domains count
+    redundant_count=0  # Initialize redundant domains count
     # Remove redundant domains
     while read -r domain; do  # Loop through each domain in the blocklist
         redundant_domains=$(grep "\.${domain}$" <<< "$domains")  # Find redundant domains via wildcard matching
         [[ -z "$redundant_domains" ]] && continue  # Skip to next domain if no matches found
         # Count number of redundant domains
-        redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
+        redundant_count=$((redundant_count + $(wc -w <<< "$redundant_domains")))
         # Remove redundant domains
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))
         # Collate redundant domains for dead check
@@ -98,8 +98,8 @@ function check_raw_file {
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$domains") "$toplist_file") "$blacklist_file")
-    in_toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
-    if [[ "$in_toplist_count" -gt 0 ]]; then
+    toplist_count=$(wc -w <<< "$domains_in_toplist")  # Count number of domains found in toplist
+    if [[ "$toplist_count" -gt 0 ]]; then
         awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
     fi
@@ -133,7 +133,7 @@ function check_raw_file {
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -l < "$raw_file")  # Count number of domains after filtering
-    printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_domains_count" "$in_toplist_count"
+    printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_count" "$toplist_count"
 
     [[ -s filter_log.tmp ]] && exit 1 || exit 0 # Exit with error if the blocklist required filtering
 }
@@ -143,7 +143,7 @@ function clean_domain_log {
 }
 
 function log_event {
-    # Log domain processing events
+    # Log domain events
     printf "%s\n" "$1" | awk -v type="$2" -v time="$time_format" '{print time "," type "," $0 ",raw"}' >> "$domain_log"
 }
 
