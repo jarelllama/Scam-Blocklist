@@ -23,7 +23,21 @@ function main {
         test_retrieval_check "$1"
     fi
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
-    [[ "$1" == 'dead' ]] && test_dead || exit 0  # Return 0 if no tests were done
+    [[ "$1" == 'dead' ]] && test_dead
+    [[ "$1" == 'shellcheck' ]] && shellcheck || exit 0  # Return 0 if no tests were done
+}
+
+function shellcheck {
+    url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
+    wget -qO - "$url" | tar -xJ  # Download ShellCheck
+    printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
+    for script in *.sh */*.sh; do  # Find scripts
+        [[ "$script" == legacy/* ]] && continue  # Ignore the legacy folder
+        scripts=$(printf "%s\n%s\n" "$scripts" "$script")  # Collate scripts checked
+        shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck
+    done
+    printf "\nScripts checked:%s\n" "$scripts"
+    [[ "$error" == true ]] && exit 1 || exit 0
 }
 
 function test_retrieval_check {
