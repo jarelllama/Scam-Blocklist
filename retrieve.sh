@@ -206,7 +206,7 @@ function search_google {
         jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop if the first page has no results
         page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')
         printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
-        [[ $(wc -l <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
+        [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
     done
     process_source "Google Search" "$search_term" "$domains_file"
 }
@@ -226,7 +226,7 @@ function process_source {
     sed 's/https\?:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
     format_list "$domains_file"
     pending_domains=$(<"$domains_file")  # Store pending domains in a variable
-    unfiltered_count=$(wc -l <<< "$pending_domains")  # Count number of unfiltered domains pending
+    unfiltered_count=$(wc -w <<< "$pending_domains")  # Count number of unfiltered domains pending
 
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -250,7 +250,7 @@ function process_source {
 
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
-    dead_count=$(wc -l <<< "$dead_domains")
+    dead_count=$(wc -w <<< "$dead_domains")
     if [[ "$dead_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
         #log_event "$dead_domains" "dead" "$source"  # Logs too many lines
@@ -262,7 +262,7 @@ function process_source {
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(comm -23 <(grep -Ff "$whitelist_file" <<< "$pending_domains") "$blacklist_file")
-    whitelisted_count=$(wc -l <<< "$whitelisted_domains")
+    whitelisted_count=$(wc -w <<< "$whitelisted_domains")
     if [[ "$whitelisted_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_domains"))
         log_event "$whitelisted_domains" "whitelist" "$source"
@@ -270,7 +270,7 @@ function process_source {
 
     # Remove domains that have whitelisted TLDs
     whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
-    whiltelisted_tld_count=$(wc -l <<< "$whiltelisted_tld_domains")
+    whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")
     if [[ "$whiltelisted_tld_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
         log_event "$whiltelisted_tld_domains" "tld" "$source"
@@ -289,21 +289,21 @@ function process_source {
     while read -r wildcard; do  # Loop through wildcard domains
         redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")  # Find redundant domains via wildcard matching
         [[ -z "$redundant_domains" ]] && continue  # Skip to next wildcard if no matches found
-        redundant_domains_count=$((redundant_domains_count + $(wc -l <<< "$redundant_domains")))
+        redundant_domains_count=$((redundant_domains_count + $(wc -w <<< "$redundant_domains")))
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$redundant_domains"))
         log_event "$redundant_domains" "redundant" "$source"
     done < "$wildcards_file"
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$pending_domains") "$toplist_file") "$blacklist_file")
-    in_toplist_count=$(wc -l <<< "$domains_in_toplist")
+    in_toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$in_toplist_count" -gt 0 ]]; then
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
         log_event "$domains_in_toplist" "toplist" "$source"
     fi
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
-    filtered_count=$(wc -l <<< "$(tr -s '\n' <<< "$pending_domains")")  # Count number of domains after filtering
+    filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
     log_source "$source" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$dead_count" "$redundant_domains_count" "$in_toplist_count" "$domains_in_toplist" "$query_count"
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp # Collate the filtered domains to a temp file
 }
