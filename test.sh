@@ -33,10 +33,12 @@ function shellcheck {
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
     for script in *.sh */*.sh; do  # Find scripts
         [[ "$script" == legacy/* ]] && continue  # Ignore the legacy folder
-        scripts=$(printf "%s\n%s\n" "$scripts" "$script")  # Collate scripts checked
+        printf "%s\n" "$script" >> scripts.tmp  # Collate scripts checked
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck
     done
-    printf "\nScripts checked:%s\n" "$scripts"
+    printf "%s\n" "------------------------------------------------------------------"
+    printf "Scripts checked:\n%s\n" "$(<scripts.tmp)"
+    printf "%s\n" "------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0
 }
 
