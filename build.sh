@@ -91,8 +91,6 @@ Dead domains that have become resolving again are included back into the blockli
 ## Why the Hosts format is not supported
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a seperate scam site and to collate them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
-Additionally, wildcard domains are periodically added manually to the blocklist to reduce the number of entries via wildcard matching.
-
 ## Sources
 Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
