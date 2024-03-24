@@ -19,7 +19,7 @@ jobs:
           printf "%s\n\n" "$(shellcheck-stable/shellcheck --version)"
           for script in *.sh */*.sh; do
             [[ "$script" == legacy/* ]] && continue
-            shellcheck "$script" && printf "Checked %s\n" "$script"
+            shellcheck-stable/shellcheck "$script" && printf "Checked %s\n" "$script"
           done
 
   test-retrieval:
