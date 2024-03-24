@@ -18,8 +18,6 @@ function main {
     check_subdomains
     check_redundant
     check_for_dead
-    check_for_unparked
-    check_for_parked
     clean_cache_files
 }
 

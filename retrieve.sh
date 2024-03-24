@@ -71,9 +71,9 @@ function retrieve_existing {
             *dfpi.ca.gov*)
                 source="dfpi.ca.gov" ;;
         esac
-        [[ "$source" != 'Google Search' ]] && process_source "$source" "$source" "$temp_domains_file"
+        [[ "$source" != 'Google Search' ]] && process_source  # Skip Google Search till the end
     done
-    # Process Google search terms last
+    # Process Google search terms
     for domains_file in data/pending/domains_google_search_*.tmp; do
         [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
         source='Google Search'
@@ -87,7 +87,7 @@ function source_aa419 {
     source='aa419.org'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://api.aa419.org/fakesites'
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     touch "$domains_file"  # Initialize domains file
     for pgno in {1..20}; do  # Loop through pages
         query_params="${pgno}/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
@@ -102,7 +102,7 @@ function source_guntab {
     source='guntab.com'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://www.guntab.com/scam-websites'
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' |  # Isolate table section
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source
@@ -112,7 +112,7 @@ function source_stopgunscams {
     source='stopgunscams.com'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://stopgunscams.com'
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     for page in {1..5}; do  # Loop through pages
         curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
             sed 's/<h4 class="-ih"><a href="\///; s/-/./g' >> "$domains_file"
@@ -123,7 +123,7 @@ function source_stopgunscams {
 function source_petscams {
     source='petscams.com'
     domains_file="data/pending/domains_${source}.tmp"
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     categories=('puppy-scammer-list' 'pet-delivery-scam')  # Loop through the two categories
     for category in "${categories[@]}"; do
         url="https://petscams.com/category/${category}"
@@ -140,7 +140,7 @@ function source_petscams {
 function source_scamdelivery {
     source='scam.delivery'
     domains_file="data/pending/domains_${source}.tmp"
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     url='https://scam.delivery/category/review'
     for page in {2..3}; do  # Loop through 2 pages
         # Use User Agent to reduce captcha blocking
@@ -155,7 +155,7 @@ function source_scamdirectory {
     source='scam.directory'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://scam.directory/category'
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
         sed 's/href="\///; s/" //; s/-/./g; 501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source
@@ -164,7 +164,7 @@ function source_scamdirectory {
 function source_scamadviser {
     source='scamadviser.com'
     domains_file="data/pending/domains_${source}.tmp"
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
         curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing / breaks curl
@@ -177,7 +177,7 @@ function source_dfpi {
     source='dfpi.ca.gov'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://dfpi.ca.gov/crypto-scams'
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
         sed 's/<td class="column-5">//; s/<a href="//' > "$domains_file"
     process_source
@@ -185,7 +185,7 @@ function source_dfpi {
 
 function source_google_search {
     source='Google Search'
-    printf "\nSource: %s\n\n" "$source"
+    printf "\nSource: %s\n" "$source"
     rate_limited=false  # Initialzie whether API is rate limited
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
@@ -320,7 +320,7 @@ function process_source {
 function merge_domains {
     # Exit if no new domains to add
     if ! grep -q '[[:alnum:]]' filtered_domains.tmp; then  # -s does not seem to work well here
-        printf "\nNo new domains to add.\n\n"
+        printf "\nNo new domains to add.\n"
         exit
     fi
 
@@ -340,7 +340,7 @@ function merge_domains {
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
-        printf "\nPending domains saved for rerun.\n\n"
+        printf "\nPending domains saved for rerun.\n"
         exit 1
     fi
     # Collate filtered subdomains and root domains
@@ -358,7 +358,7 @@ function merge_domains {
     log_event "$(<filtered_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
     count_difference=$((count_after - count_before))
-    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n\n" "$count_before" "$count_difference" "$count_after"
+    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$count_difference" "$count_after"
 
     # Mark the source as saved in the source log file
     rows=$(grep -F "$time_format" "$source_log")  # Find rows in log for this run
