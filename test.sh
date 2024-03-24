@@ -37,7 +37,7 @@ function shellcheck {
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck
     done
     printf "%s\n" "------------------------------------------------------------------"
-    printf "Scripts checked:\n%s\n" "$(<scripts.tmp)"
+    printf "Scripts checked (%s):\n%s\n" "$(wc -l < scripts.tmp)" "$(<scripts.tmp)"
     printf "%s\n" "------------------------------------------------------------------"
     [[ "$error" == true ]] && exit 1 || exit 0
 }
