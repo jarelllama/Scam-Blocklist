@@ -20,7 +20,7 @@ function main {
 function update_readme {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
-Blocklist for scam site domains automatically retrieved from Google Search and public databases, updated daily at 00:30 UTC.
+Blocklist for scam site domains automatically retrieved from Google Search and public databases updated daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -68,7 +68,7 @@ The list of search terms is proactively updated and is mostly sourced from inves
 #### Limitations
 The Google Custom Search JSON API only provides ~100 free search queries per day. This limits the number of search terms that can be employed a day.
 
-Each search term is frequently benchmarked on their number of new domains and false positives. Underperforming search terms are disabled to optimise the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+Each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are disabled to optimize the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
 > Queries made today: $(count "queries")
 
@@ -79,7 +79,7 @@ The full domain retrieval process for all sources can be viewed in the repositor
 - The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted companies, etc.)
 - The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives and flagged domains are vetted manually
 - Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
-- Only domains are included in the blocklist. IP addresss are checked for resolving DNS records and URLs are stripped down to their domains
+- Only domains are included in the blocklist. IP addresses are checked for resolving DNS records and URLs are stripped down to their domains
 
 The full filtering process can be viewed in the repository's code.
 
@@ -89,7 +89,7 @@ Dead domains are removed daily using [AdGuard's Dead Domains Linter](https://git
 Dead domains that have become resolving again are included back into the blocklist.
 
 ## Why the Hosts format is not supported
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a seperate scam site and to collate them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
+Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
 ## Sources
 Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
@@ -122,7 +122,7 @@ function build_list {
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
-${3} Description: Blocklist for scam site domains automatically retrieved from Google Search and public databases, updated daily.
+${3} Description: Blocklist for scam site domains automatically retrieved from Google Search and public databases updated daily.
 ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Last modified: $(date -u)
