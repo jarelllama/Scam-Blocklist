@@ -153,7 +153,7 @@ function source_scamdirectory {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://scam.directory/category'
     curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
-        sed 's/href="\///; s/" //; s/-/./g; 501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
+        sed 's/href="\///; s/" title//; s/-/./g; 501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
     process_source
 }
 
