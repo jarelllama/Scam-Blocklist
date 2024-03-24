@@ -51,28 +51,29 @@ function retrieve_new {
 function retrieve_existing {
     printf "\nUsing existing list of retrieved domains.\n\n"
     for domains_file in data/pending/domains_*.tmp; do  # Loop through temp domains file
-        source='Empty'  # Intialize source
         case "$domains_file" in
             *google_search*)
-                source="Google Search" ;;
+                continue ;;  # Skip Google Search till the end
             *aa419.org*)
-                source="aa419.org" ;;
+                source='aa419.org' ;;
             *guntab.com*)
-                source="guntab.com" ;;
+                source='guntab.com' ;;
             *stopgunscams.com*)
-                source="stopgunscams.com" ;;
+                source='stopgunscams.com' ;;
             *petscams.com*)
-                source="petscams.com" ;;
+                source='petscams.com' ;;
             *scam.delivery*)
-                source="scam.delivery" ;;
+                source='scam.delivery' ;;
             *scam.directory*)
-                source="scam.directory" ;;
+                source='scam.directory' ;;
             *scamadviser.com*)
-                source="scamadviser.com" ;;
+                source='scamadviser.com' ;;
             *dfpi.ca.gov*)
-                source="dfpi.ca.gov" ;;
+                source='dfpi.ca.gov' ;;
+            *)
+                source='Unknown' ;;
         esac
-        [[ "$source" != 'Google Search' ]] && process_source  # Skip Google Search till the end
+        process_source
     done
     # Process Google search terms
     for domains_file in data/pending/domains_google_search_*.tmp; do
