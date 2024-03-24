@@ -79,7 +79,7 @@ The full domain retrieval process for all sources can be viewed in the repositor
 - The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted companies, etc.)
 - The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives and flagged domains are vetted manually
 - Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
-- Only domains are included in the blocklist. IP addresss are checked for resolving domains and URLs are stripped down to the domain
+- Only domains are included in the blocklist. IP addresss are checked for resolving DNS records and URLs are stripped down to their domains
 
 The full filtering process can be viewed in the repository's code.
 
