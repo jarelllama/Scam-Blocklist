@@ -33,11 +33,10 @@ function shellcheck {
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     wget -qO - "$url" | tar -xJ  # Download ShellCheck
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
-    for script in *.sh */*.sh; do  # Find scripts
-        [[ "$script" == legacy/* ]] && continue  # Ignore the legacy folder
-        printf "%s\n" "$script" >> scripts.tmp  # Collate scripts checked
+    scripts="$(grep -rl '\.sh$' --exclude-dir=legacy .)"
+    while read -r script; do  # Find scripts
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck
-    done
+    done <<< "$scripts"
     # Check for trailing whitespaces
     problematic_files=$(grep -rnE '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
@@ -52,7 +51,7 @@ function shellcheck {
         printf "%s\n" "$problematic_files"
         error=true
     fi
-    printf "\nScripts checked (%s):\n%s\n" "$(wc -l < scripts.tmp)" "$(<scripts.tmp)"
+    printf "\nScripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
     check_error
 }
 
