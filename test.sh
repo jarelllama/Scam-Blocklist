@@ -51,6 +51,20 @@ function shellcheck {
         printf "%s\n" "$problematic_files"
         error=true
     fi
+    # Check for unnecessary quotes
+    problematic_files=$(grep -rl '="$(' --exclude-dir={legacy,.git,shellcheck-stable} .)
+    if [[ -n "$problematic_files" ]]; then
+        printf "\nLines with unnecessary quotes:\n"
+        printf "%s\n" "$problematic_files"
+        error=true
+    fi
+    # Check for missing space for comments
+    problematic_files=$(grep -rl ' #' --exclude-dir={legacy,.git,shellcheck-stable} .)
+    if [[ -n "$problematic_files" ]]; then
+        printf "\nLines with missing space for comments:\n"
+        printf "%s\n" "$problematic_files"
+        error=true
+    fi
     printf "\nScripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
     check_error
 }
