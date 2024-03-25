@@ -13,8 +13,6 @@ dead_domains_file='data/dead_domains.txt'
 [[ "$CI" != true ]] && exit 1  # Do not allow running locally
 
 function main {
-    error=false  # Initialize error variable
-    errored=false  # Initialize whether script returned with error
     : > "$raw_file"  # Initialize raw file
     sed -i '1q' "$domain_log"  # Initialize domain log file
 
@@ -171,8 +169,8 @@ function test_retrieval_check {
     fi
     check_log  # Check log file
 
-    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
-    [[ "$log_error" == false ]] && printf "Log:\n%s\n" "$(<$domain_log)"
+    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
+    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     check_error
 }
 
@@ -225,11 +223,11 @@ function test_dead {
     done
 
     bash dead.sh  # Run dead script
-    [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
+    [[ "$?" -eq 1 ]] || errored=false  # Check returned error code
     printf "%s\n" "------------------------------------------------------------------"
 
     # Check returned error code
-    [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }
+    [[ "$errored" != false ]] && { printf "! Script returned an error.\n"; error=true; }
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
@@ -239,9 +237,9 @@ function test_dead {
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
     check_log  # Check log file
 
-    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n" ||
+    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n" ||
         printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
-    [[ "$log_error" == false ]] && printf "Log:\n%s\n" "$(<$domain_log)"
+    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     check_error
 }
 

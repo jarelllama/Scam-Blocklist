@@ -13,7 +13,7 @@ function format {
             tr -d ' ' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" ;;
         data/dead_domains.txt)  # Remove whitespaces, empty lines and duplicates
             tr -d ' ' < "$1" | sed '/^$/d' | awk '!seen[$0]++' > "${1}.tmp" ;;
-        *.txt)  # Remove whitespaces, empty lines, sort and remove duplicates
+        *.txt|*.tmp)  # Remove whitespaces, empty lines, sort and remove duplicates
              tr -d ' ' < "$1" | sed '/^$/d' | sort -u > "${1}.tmp" ;;
     esac
     [[ -f "${1}.tmp" ]] && mv "${1}.tmp" "$1"
