@@ -33,7 +33,7 @@ function shellcheck {
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     wget -qO - "$url" | tar -xJ  # Download ShellCheck
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
-    scripts="$(grep -rl '*.sh' --exclude-dir={legacy,.git,shellcheck-stable} .)"  # Find scripts
+    scripts="$(grep -r *.sh --exclude-dir={legacy,.git,shellcheck-stable} .)"  # Find scripts
     while read -r script; do  # Loop through scripts
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck for each script
     done <<< "$scripts"
