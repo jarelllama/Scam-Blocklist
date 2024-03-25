@@ -1,5 +1,5 @@
 # Jarelllama's Scam Blocklist
-Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval is done daily at 00:30 UTC.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval done daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
