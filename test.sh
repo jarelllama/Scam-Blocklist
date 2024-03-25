@@ -40,15 +40,15 @@ function shellcheck {
     done
 
     # Check for trailing whitespaces
-    if grep -qrnE '[[:space:]]$' --exclude-dir=legacy .; then
+    if grep -qrnE '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .; then
         printf "\nLines with trailing whitespaces:\n"
-        grep -rnE '[[:space:]]$' --exclude-dir=legacy .
+        grep -rnE '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .
         error=true
     fi
     # Check for carriage return characters
-    if grep -qrl $'\r' --exclude-dir=legacy .; then
+    if grep -qrl $'\r' --exclude-{legacy,.git,shellcheck-stable} .; then
         printf "\nLines with carriage return characters:\n"
-        grep -rl $'\r' --exclude-dir=legacy .
+        grep -rl $'\r' --exclude-{legacy,.git,shellcheck-stable} .
         error=true
     fi
 
