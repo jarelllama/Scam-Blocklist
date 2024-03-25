@@ -118,15 +118,11 @@ function source_stopgunscams {
 function source_petscams {
     source='petscams.com'
     domains_file="data/pending/domains_${source}.tmp"
-    categories=('puppy-scammer-list' 'pet-delivery-scam')  # Loop through the two categories
-    for category in "${categories[@]}"; do
-        url="https://petscams.com/category/${category}"
-        for page in {2..11}; do  # Loop through pages
-            curl -s "${url}/" | grep -oE "<a href=\"https://petscams.com/${category}/[[:alnum:].-]+-[[:alnum:]-]{2,}/\" " |
-                sed 's/<a href="https:\/\/petscams.com\///; s/puppy-scammer-list\///;
-                s/pet-delivery-scam\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
-            url="https://petscams.com/category/${category}/page/${page}"  # Add '/page' after first run
-        done
+    url="https://petscams.com"
+    for page in {2..21}; do  # Loop through 20 pages
+        curl -s "${url}/" | grep -oE 'alt="https://petscams.com/[[:alnum:].-]+\.[[:alnum:]-]{2,}" data' |
+            sed 's/alt="//; s/" data//; s/-\?[0-9]\?\/" //' >> "$domains_file"
+        url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
     process_source
 }
