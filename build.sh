@@ -1,8 +1,8 @@
 #!/bin/bash
 raw_file='data/raw.txt'
 source_log='config/source_log.csv'
-today="$(date -u +"%d-%m-%y")"
-yesterday="$(date -ud "yesterday" +"%d-%m-%y")"
+today=$(date -u +"%d-%m-%y")
+yesterday=$(date -ud "yesterday" +"%d-%m-%y")
 
 function main {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
