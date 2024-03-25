@@ -89,13 +89,9 @@ function source_aa419 {
     source='aa419.org'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://api.aa419.org/fakesites'
-    touch "$domains_file"  # Initialize domains file
-    for pgno in {1..10}; do  # Loop through pages
-        query_params="${pgno}/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
-        page_results=$(curl -s -H "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}")  # Trailing slash breaks API call
-        jq -e '.[].Domain' &> /dev/null <<< "$page_results" || break  # Break out of loop when there are no more results
-        jq -r '.[].Domain' <<< "$page_results" >> "$domains_file"
-    done
+    query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
+    curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}") | # Trailing slash breaks API call
+        jq -r '.[].Domain' >> "$domains_file"
     process_source
 }
 
