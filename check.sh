@@ -13,9 +13,9 @@ time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
 
 function main {
-    for file in config/* data/*; do  # Format files in the config and data directory
-        format_list "$file"
-    done
+    # Format ALL files including scripts
+    find . -type f -exec bash -c 'bash data/tools.sh "format" "$1"' _ {} \;
+
     retrieve_toplist
     check_raw_file
 }
@@ -148,19 +148,7 @@ function log_event {
 }
 
 function format_list {
-    [[ ! -f "$1" ]] && return  # Return if file does not exist
-    case "$1" in
-        *.csv)
-            mv "$1" "${1}.tmp" ;;
-        *dead_domains*)  # Remove whitespaces and duplicates
-            tr -d ' ' < "$1" | awk '!seen[$0]++' > "${1}.tmp" ;;
-        *parked_terms*)  # Sort and remove duplicates
-            sort -u "$1" -o "${1}.tmp" ;;
-        *)  # Remove whitespaces, sort and remove duplicates
-            tr -d ' ' < "$1" | sort -u > "${1}.tmp" ;;
-    esac
-    # Remove carraige return characters and empty lines
-    tr -d '\r' < "${1}.tmp" | tr -s '\n' > "$1" && rm "${1}.tmp"
+    bash data/tools.sh "format" "$1"
 }
 
 function cleanup {

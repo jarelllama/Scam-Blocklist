@@ -32,7 +32,7 @@ function shellcheck {
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     wget -qO - "$url" | tar -xJ  # Download ShellCheck
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
-    for script in *.sh */*.sh; do  # Find scripts
+    for script in *.sh */*.sh */*/*.sh; do  # Find scripts in 3 levels
         [[ "$script" == legacy/* ]] && continue  # Ignore the legacy folder
         printf "%s\n" "$script" >> scripts.tmp  # Collate scripts checked
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck
