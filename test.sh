@@ -29,6 +29,7 @@ function main {
 }
 
 function shellcheck {
+    # Download and run ShellCheck
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     wget -qO - "$url" | tar -xJ  # Download ShellCheck
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
@@ -37,7 +38,21 @@ function shellcheck {
         printf "%s\n" "$script" >> scripts.tmp  # Collate scripts checked
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck
     done
-    printf "%s\n" "------------------------------------------------------------------"
+
+    # Check for trailing whitespaces
+    if grep -rnE '[[:space:]]$' .; then
+        printf "\nLines with trailing whitespaces:\n"
+        grep -rnE '[[:space:]]$' .
+        error=true
+    fi
+    # Check for carriage return characters
+    if grep -rl $'\r' .; then
+        printf "\nLines with carriage return characters:\n"
+        grep -rl $'\r' .
+        error=true
+    fi
+
+    printf "\n%s\n" "------------------------------------------------------------------"
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     printf "Scripts checked (%s):\n%s\n" "$(wc -l < scripts.tmp)" "$(<scripts.tmp)"
     check_error

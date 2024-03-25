@@ -13,9 +13,9 @@ time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
  
 function main {
-    # Format ALL files including scripts
-    find . -type f -exec bash -c 'bash data/tools.sh "format" "$1"' _ {} \;
-
+    for file in config/* data/*; do  # Format files in the config and data directory
+        format_list "$file"
+    done
     retrieve_toplist
     check_raw_file
 }
