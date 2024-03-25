@@ -149,7 +149,7 @@ function source_scamdirectory {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://scam.directory/category'
     curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
-        sed 's/href="\///; s/" title//; s/-/./g; 101,$d' > "$domains_file"  # Keep only newest 100 domains
+        sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$domains_file"  # Keep only newly added domains
     process_source
 }
 
@@ -169,7 +169,7 @@ function source_dfpi {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
-        sed 's/<td class="column-5">//; s/<a href="//; 21,$d' > "$domains_file"  # Keep only newest 20 domains
+        sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$domains_file"  # Keep only newly added domains
     process_source
 }
 
