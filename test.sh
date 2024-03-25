@@ -10,7 +10,7 @@ wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
 
-[[ "$CI" != true ]] && exit  # Do not allow running locally
+[[ "$CI" != true ]] && exit 1  # Do not allow running locally
 
 function main {
     error=false  # Initialize error variable
@@ -24,7 +24,8 @@ function main {
     fi
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
-    [[ "$1" == 'shellcheck' ]] && shellcheck || exit 0  # Return 0 if no tests were done
+    [[ "$1" == 'shellcheck' ]] && shellcheck
+    exit 0  # Return 0 if no tests were done
 }
 
 function shellcheck {
@@ -39,8 +40,7 @@ function shellcheck {
     printf "%s\n" "------------------------------------------------------------------"
     [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
     printf "Scripts checked (%s):\n%s\n" "$(wc -l < scripts.tmp)" "$(<scripts.tmp)"
-    printf "%s\n" "------------------------------------------------------------------"
-    [[ "$error" == true ]] && exit 1 || exit 0
+    check_error
 }
 
 function test_retrieval_check {
@@ -56,7 +56,7 @@ function test_retrieval_check {
         grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt  # Expected output
     done < "$subdomains_to_remove_file"
     # Expected output
-    [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # Check script does not exclude 'www' subdomains
+    [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The ceck script does not exclude 'www' subdomains
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
 
@@ -131,7 +131,7 @@ function test_retrieval_check {
         printf "redundant,domain.redundant-test.com\n" >> out_log.txt
     fi
 
-    # Skip toplist test since it prevents the changes from being saved to the raw file
+    # Skip toplist test because it prevents the changes from being saved to the raw file
 
     # Prepare expected output files
     for file in out_*; do
@@ -161,10 +161,9 @@ function test_retrieval_check {
     fi
     check_log  # Check log file
 
-    [[ "$error" == false ]] && printf "Test completed. No errors found.\n"
-    [[ "$log_error" == false ]] && printf "\nLog:\n%s\n" "$(<$domain_log)"
-    printf "%s\n" "------------------------------------------------------------------"
-    [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
+    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
+    [[ "$log_error" == false ]] && printf "Log:\n%s\n" "$(<$domain_log)"
+    check_error
 }
 
 function test_dead {
@@ -232,11 +231,10 @@ function test_dead {
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
     check_log  # Check log file
 
-    [[ "$error" == false ]] && printf "Test completed. No errors found.\n" ||
-        printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n"
-    [[ "$log_error" == false ]] && printf "\nLog:\n%s\n" "$(<$domain_log)"
-    printf "%s\n" "------------------------------------------------------------------"
-    [[ "$error" == true ]] && exit 1 || exit 0  # Exit with error if test failed
+    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n" ||
+        printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
+    [[ "$log_error" == false ]] && printf "Log:\n%s\n" "$(<$domain_log)"
+    check_error
 }
 
 function check_output {
@@ -268,6 +266,13 @@ function check_log {
     printf "\nTerms expected in log:\n"
     cat out_log.txt  # No need for additional new line since the log is not printed again
     error=true
-    }
+}
+
+function check_error {
+    # Exit with error if test failed
+    if [[ "$error" == true ]]; then
+        printf "\n" && exit 1
+    fi
+}
 
 main "$1"

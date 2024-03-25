@@ -25,8 +25,8 @@ function check_for_alive {
     sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
     dead-domains-linter -i formatted_dead_domains_file.tmp --export dead.tmp  # Find dead domains in the dead domains file
     alive_domains=$(comm -23 <(sort "$dead_domains_file") <(sort dead.tmp))  # Find resurrected domains in the dead domains file (note dead domains file is not sorted)
-    [[ -z "$alive_domains" ]] && return  # Return if no alive domains found
-    cp dead.tmp "$dead_domains_file"  # Update dead domains file to include only dead domains
+    [[ -z "$alive_domains" ]] && return  # Return if no resurrected domains found
+    cp dead.tmp "$dead_domains_file"  # Update dead domains file to exclude resurrected domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to raw file
     format_list "$dead_domains_file"
     format_list "$raw_file"
@@ -42,10 +42,10 @@ function check_subdomains {
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
 
-    # Remove dead root domains from raw file and root domains file
     while read -r subdomain; do  # Loop through common subdomains
         dead_root_domains=$(sed "s/^${subdomain}\.//" dead.tmp | sort -u)  # Strip to root domains
     done < "$subdomains_to_remove_file"
+    # Remove dead root domains from raw file and root domains file
     comm -23 "$raw_file" <(printf "%s" "$dead_root_domains") > raw.tmp && mv raw.tmp "$raw_file"
     comm -23 "$root_domains_file" <(printf "%s" "$dead_root_domains") > root.tmp && mv root.tmp "$root_domains_file"
     log_event "$dead_root_domains" "dead" "raw"
@@ -60,13 +60,13 @@ function check_redundant {
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
 
-    # Remove unused wildcard domains from raw file and wildcards file
-    while read -r wildcard; do  # Loop through wildcard domains
+    while read -r wildcard; do  # Loop through wildcards
         # If no matches remaining, consider wildcard as dead
         ! grep -q "\.${wildcard}$" "$redundant_domains_file" && printf "%s\n" "$wildcard" >> collated_dead_wildcards.tmp
     done < "$wildcards_file"
     [[ ! -f collated_dead_wildcards.tmp ]] && return  # Return if no unused wildcards found
     sort -u collated_dead_wildcards.tmp -o collated_dead_wildcards.tmp
+    # Remove unused wildcards from raw file and wildcards file
     comm -23 "$raw_file" collated_dead_wildcards.tmp > raw.tmp && mv raw.tmp "$raw_file"
     comm -23 "$wildcards_file" collated_dead_wildcards.tmp > wildcards.tmp && mv wildcards.tmp "$wildcards_file"
     log_event "$(<collated_dead_wildcards.tmp)" "dead" "wildcard"

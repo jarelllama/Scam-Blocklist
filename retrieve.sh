@@ -24,7 +24,7 @@ if [[ "$CI" != true ]]; then
 fi
 
 function main {
-    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install cvstat
+    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
@@ -154,7 +154,7 @@ function source_scamadviser {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
-        curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing / breaks curl
+        curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing slash breaks curl
             grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$domains_file"
     done
     process_source
@@ -229,7 +229,7 @@ function process_source {
         pending_domains=$(printf "%s" "$pending_domains" | sed "s/^${subdomain}\.//" | sort -u)
         # Collate subdomains for dead check
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
-        # Collate root domains to exlude from dead check
+        # Collate root domains to exclude from dead check
         printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
         # Find and log domains with common subdomains exluding 'www'
         domains_with_subdomains=$(grep -v '^www\.' <<< "$domains_with_subdomains")
@@ -249,7 +249,7 @@ function process_source {
         #log_event "$dead_domains" "dead" # Logs too many lines
     fi
 
-    # Find blacklisted domains
+    # Log blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")
     [[ -n "$blacklisted_domains" ]] && log_event "$blacklisted_domains" "blacklist"
 
@@ -269,17 +269,17 @@ function process_source {
         log_event "$whiltelisted_tld_domains" "tld"
     fi
 
-    # Remove invalid entries including IP addresses This excludes punycode TLDs (.xn--*)
+    # Remove invalid entries including IP addresses. This excludes punycode TLDs (.xn--*)
     invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$' <<< "$pending_domains")
     if [[ -n "$invalid_entries" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$invalid_entries"))
         log_event "$invalid_entries" "invalid"
-        printf "%s\n" "$invalid_entries" >> invalid_entries.tmp  # Collate invalid entries into temp file
+        printf "%s\n" "$invalid_entries" >> invalid_entries.tmp  # Collate invalid entries
     fi
 
     # Remove redundant domains
     redundant_count=0  # Initialize redundant domains count for each source
-    while read -r wildcard; do  # Loop through wildcard domains
+    while read -r wildcard; do  # Loop through wildcards
         redundant_domains=$(grep "\.${wildcard}$" <<< "$pending_domains")  # Find redundant domains via wildcard matching
         [[ -z "$redundant_domains" ]] && continue  # Skip to next wildcard if no matches found
         redundant_count=$((redundant_count + $(wc -w <<< "$redundant_domains")))
@@ -291,13 +291,13 @@ function process_source {
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$pending_domains") "$toplist_file") "$blacklist_file")
     toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$toplist_count" -gt 0 ]]; then
-        printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Save domains found in toplist into temp file
+        printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Collate domains found in toplist
         log_event "$domains_in_toplist" "toplist"
     fi
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
-    printf "%s\n" "$pending_domains" >> filtered_domains.tmp # Collate the filtered domains to a temp file
+    printf "%s\n" "$pending_domains" >> filtered_domains.tmp # Collate the filtered domains into a temp file
     log_source
 }
 
@@ -305,7 +305,7 @@ function merge_domains {
     # Exit if no new domains to add
     if ! grep -q '[[:alnum:]]' filtered_domains.tmp; then  # -s does not seem to work well here
         printf "\nNo new domains to add.\n"
-        exit
+        exit 0
     fi
 
     format_list filtered_domains.tmp
@@ -319,11 +319,11 @@ function merge_domains {
         format_list invalid_entries.tmp
         awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp
     fi
-    # If domains were found in toplist, exit with error and without saving domains to raw file
+    # If domains were found in toplist, exit with error without saving domains to raw file
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
-        printf "\nPending domains saved for rerun.\n"
+        printf "\nPending domains saved for rerun.\n\n"
         exit 1
     fi
     # Collate filtered subdomains and root domains
@@ -349,7 +349,12 @@ function merge_domains {
     rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved into the raw file
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$source_log"  # Add the edited rows back to the log
 
-    [[ -f invalid_entries.tmp ]] && exit 1 || exit 0  # Exit with error if invalid entries were found
+    # Exit with error if invalid entries were found
+    if [[ -f invalid_entries.tmp ]]; then
+        printf "\n" && exit 1
+    else
+        exit 0
+    fi
 }
 
 function log_event {

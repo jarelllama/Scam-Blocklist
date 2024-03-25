@@ -5,7 +5,7 @@ today="$(date -u +"%d-%m-%y")"
 yesterday="$(date -ud "yesterday" +"%d-%m-%y")"
 
 function main {
-    command -v csvgrep &> /dev/null || pip install -q csvkit
+    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
@@ -131,7 +131,7 @@ ${3} Total number of entries: $(wc -l < "$raw_file")
 ${3}
 EOF
 
-    [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound syntax
+    [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound format
     printf "%s\n" "$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file")" \
         >> "$blocklist_path"  # Append formatted domains onto blocklist
 }
@@ -144,6 +144,7 @@ function print_stats {
 function count {
     scope="$1"
     source="$2"
+    # Count % of excluded domains of raw count retrieved from each source
     if [[ "$scope" == 'excluded' ]]; then
         raw_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 4 | awk '{total += $1} END {print total}')
         if [[ "$raw_count" -eq 0 ]]; then
@@ -153,9 +154,10 @@ function count {
         dead_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 7 | awk '{total += $1} END {print total}')
         redundant_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 8 | awk '{total += $1} END {print total}')
         excluded_count=$((white_count + dead_count + redundant_count))
-        printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded of raw count
+        printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded
         return
-    elif [[ "$scope" == 'queries' ]]; then  # Count number of Google Search queries made
+    # Count number of Google Search queries made
+    elif [[ "$scope" == 'queries' ]]; then
         queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
         [[ "$queries" -lt 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
         return
