@@ -59,7 +59,7 @@ function shellcheck {
         error=true
     fi
     # Check for missing space for comments
-    problematic_files=$(grep -rn '[^#\S]#' --exclude-dir={legacy,.git,shellcheck-stable} .)
+    problematic_files=$(grep -rn '[^#\S] #' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
         printf "\nLines with missing space for comments:\n"
         printf "%s\n" "$problematic_files"
