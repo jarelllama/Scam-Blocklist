@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Mar 25 18:52:40 UTC 2024
+# Last modified: Mon Mar 25 19:18:26 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 23182
+# Total number of entries: 23196
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -23,6 +23,7 @@ local-zone: "1stroyalcreditunion.com." always_nxdomain
 local-zone: "1sttheworld.com." always_nxdomain
 local-zone: "1to1reps.store." always_nxdomain
 local-zone: "200pills.com." always_nxdomain
+local-zone: "2022factorysale.ru." always_nxdomain
 local-zone: "2023fanaticofficialshop.com." always_nxdomain
 local-zone: "209primersammoshop.com." always_nxdomain
 local-zone: "209primersglock.com." always_nxdomain
@@ -545,6 +546,7 @@ local-zone: "ajutlabled.com." always_nxdomain
 local-zone: "ak-firearms.com." always_nxdomain
 local-zone: "ak.firearms.com." always_nxdomain
 local-zone: "ak47gunsshop.com." always_nxdomain
+local-zone: "akademiaszefakuchni.pl." always_nxdomain
 local-zone: "akamai24.us." always_nxdomain
 local-zone: "akasyl-otzberg.de." always_nxdomain
 local-zone: "akcbulldoghome.com." always_nxdomain
@@ -958,6 +960,7 @@ local-zone: "ammunitionforsaleonline.com." always_nxdomain
 local-zone: "ammunitiongunbroker.com." always_nxdomain
 local-zone: "ammunitiongunstore.com." always_nxdomain
 local-zone: "ammunitiononline-shop.com." always_nxdomain
+local-zone: "ammunitiononline.com." always_nxdomain
 local-zone: "ammunitiononline.shop.com." always_nxdomain
 local-zone: "ammunitiononlineshop.com." always_nxdomain
 local-zone: "ammunitionreloadcenter.com." always_nxdomain
@@ -1393,6 +1396,7 @@ local-zone: "assemblytoolprada.com." always_nxdomain
 local-zone: "assetsfxtrader.com." always_nxdomain
 local-zone: "assistukraine.org." always_nxdomain
 local-zone: "associatedalliance.com." always_nxdomain
+local-zone: "associazionechien.org." always_nxdomain
 local-zone: "assonenuphar.fr." always_nxdomain
 local-zone: "assortedfurniture.com." always_nxdomain
 local-zone: "assortmentoftoys.com." always_nxdomain
@@ -4309,6 +4313,7 @@ local-zone: "clearancefishing.com." always_nxdomain
 local-zone: "clearancefitness.com." always_nxdomain
 local-zone: "clearancemen.com." always_nxdomain
 local-zone: "clearanceoutdoorsnew.com." always_nxdomain
+local-zone: "clearancesales2023.com." always_nxdomain
 local-zone: "clearancesurfsale.com." always_nxdomain
 local-zone: "clearancewarehouse.co." always_nxdomain
 local-zone: "clearlyss.store." always_nxdomain
@@ -10562,6 +10567,7 @@ local-zone: "interestingchild.com." always_nxdomain
 local-zone: "interflon-tradingcompanyllc.com." always_nxdomain
 local-zone: "interfreightcyprus.com." always_nxdomain
 local-zone: "interglobalcargoexpress.com." always_nxdomain
+local-zone: "interierovystylista.cz." always_nxdomain
 local-zone: "interiorlightingshop.com." always_nxdomain
 local-zone: "interiorofficial.com." always_nxdomain
 local-zone: "interlogisticscargoshipping.com." always_nxdomain
@@ -14706,6 +14712,7 @@ local-zone: "onlinepsychedelichub.com." always_nxdomain
 local-zone: "onlinepurch.de." always_nxdomain
 local-zone: "onlineravipharmacy.com." always_nxdomain
 local-zone: "onlinereorg.com." always_nxdomain
+local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onlineskitchen.com." always_nxdomain
 local-zone: "onlinestandardtrust.com." always_nxdomain
 local-zone: "onlinestarreviews.org." always_nxdomain
@@ -15523,6 +15530,7 @@ local-zone: "petsporters.com." always_nxdomain
 local-zone: "petsprestige.co.za." always_nxdomain
 local-zone: "petsstoreusa.com." always_nxdomain
 local-zone: "petstalented.com." always_nxdomain
+local-zone: "pettisrumseycpa.com." always_nxdomain
 local-zone: "pettransitexpress.com." always_nxdomain
 local-zone: "petwellshop.co.za." always_nxdomain
 local-zone: "petyachtclub.com." always_nxdomain
@@ -15610,6 +15618,7 @@ local-zone: "pilleninbottle.com." always_nxdomain
 local-zone: "pillenwelt.at." always_nxdomain
 local-zone: "pillows-decor.com." always_nxdomain
 local-zone: "pills-au.com." always_nxdomain
+local-zone: "pills-store-online24.com." always_nxdomain
 local-zone: "pillshop.co.uk." always_nxdomain
 local-zone: "pillslane.com." always_nxdomain
 local-zone: "pillsm.net." always_nxdomain
@@ -16216,6 +16225,7 @@ local-zone: "proridegear.com." always_nxdomain
 local-zone: "proridinghub.com." always_nxdomain
 local-zone: "prosizeca.com." always_nxdomain
 local-zone: "proskechr.com." always_nxdomain
+local-zone: "prosoftwares.fr." always_nxdomain
 local-zone: "prospaints.com." always_nxdomain
 local-zone: "prospectvaleteacuphome.com." always_nxdomain
 local-zone: "prospectvaleteacuphomes.com." always_nxdomain
@@ -17246,6 +17256,7 @@ local-zone: "riehm-baustoffe.com." always_nxdomain
 local-zone: "riekeroutlet.de." always_nxdomain
 local-zone: "riepty.com." always_nxdomain
 local-zone: "rifender.com." always_nxdomain
+local-zone: "riffle.parts.com." always_nxdomain
 local-zone: "rifle-armory.com." always_nxdomain
 local-zone: "rifle.armory.com." always_nxdomain
 local-zone: "riflemasters.com." always_nxdomain
@@ -17966,6 +17977,7 @@ local-zone: "scheu-fahrrad.com." always_nxdomain
 local-zone: "schiller-reifenversand.com." always_nxdomain
 local-zone: "schillerstore.de." always_nxdomain
 local-zone: "schilling-reifenversand.com." always_nxdomain
+local-zone: "schimmelpeter.cz." always_nxdomain
 local-zone: "schipholcargo.com." always_nxdomain
 local-zone: "schirmlampenneu.de." always_nxdomain
 local-zone: "schlagerwolf.de." always_nxdomain
@@ -18638,6 +18650,7 @@ local-zone: "sinsakurai.com." always_nxdomain
 local-zone: "siouxshoe.com." always_nxdomain
 local-zone: "sipcafenashville.com." always_nxdomain
 local-zone: "sistercute.com." always_nxdomain
+local-zone: "sistersbeautyworld-lhs.de." always_nxdomain
 local-zone: "site-outdoor.com." always_nxdomain
 local-zone: "site-shoes.com." always_nxdomain
 local-zone: "siteaccessory.com." always_nxdomain
@@ -22241,6 +22254,7 @@ local-zone: "vosen.shop." always_nxdomain
 local-zone: "voss-autoreifen.com." always_nxdomain
 local-zone: "voss-reifenversand.com." always_nxdomain
 local-zone: "votexusaoptics.com." always_nxdomain
+local-zone: "votremaisoninterieure.fr." always_nxdomain
 local-zone: "vovlady.com." always_nxdomain
 local-zone: "voyageshiftexpress.com." always_nxdomain
 local-zone: "voyagexplorer.com." always_nxdomain
