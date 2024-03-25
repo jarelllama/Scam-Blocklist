@@ -16,7 +16,7 @@ function main {
     error=false  # Initialize error variable
     errored=false  # Initialize whether script returned with error
     : > "$raw_file"  # Initialize raw file
-    sed '1q' "$domain_log" > log.tmp && mv log.tmp "$domain_log"  # Initialize domain log file
+    sed -i '1q' "$domain_log"  # Initialize domain log file
 
     # Do not run when there are existing domain files
     if [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]]; then
@@ -44,10 +44,10 @@ function shellcheck {
         printf "%s\n" "$problematic_files"
         error=true
     fi
-    # Check for missing space for comments
+    # Check for missing space before comments
     problematic_files=$(grep -rn '\S\s#' --exclude-dir={legacy,.git,shellcheck-stable} --exclude=*.csv .)
     if [[ -n "$problematic_files" ]]; then
-        printf "\nLines with missing space for comments:\n"
+        printf "\nLines with missing space before comments:\n"
         printf "%s\n" "$problematic_files"
         error=true
     fi
