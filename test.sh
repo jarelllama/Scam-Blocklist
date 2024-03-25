@@ -38,7 +38,6 @@ function shellcheck {
         printf "%s\n" "$script" >> scripts.tmp  # Collate scripts checked
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck
     done
-
     # Check for trailing whitespaces
     problematic_files=$(grep -rnE '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
@@ -53,7 +52,6 @@ function shellcheck {
         printf "%s\n" "$problematic_files"
         error=true
     fi
-
     printf "\nScripts checked (%s):\n%s\n" "$(wc -l < scripts.tmp)" "$(<scripts.tmp)"
     check_error
 }
