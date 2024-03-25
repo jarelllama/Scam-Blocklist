@@ -102,7 +102,7 @@ Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOU
 
 ## Resources
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
-- [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): The law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
+- [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 - [LinuxCommand's Coding Standards](https://linuxcommand.org/lc3_adv_standards.php): shell script coding standard
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
 - [Tranco List](https://tranco-list.eu/): ranking of the top 1 million domains
