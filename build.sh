@@ -20,7 +20,7 @@ function main {
 function update_readme {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
-Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval done daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
