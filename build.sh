@@ -72,7 +72,11 @@ The Google Custom Search JSON API only provides ~100 free search queries per day
 Each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are disabled to optimize the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
 ### Statistics
-\`Active search terms: $(count "active_search_terms")      Queries made today: $(count "queries")\`
+\`\`\`
+Active search terms: $(count "active_search_terms")
+Queries made today: $(count "queries")
+Domains retrieved today: $(count "$today" "Google Search")
+\`\`\`
 
 #### Regarding other sources
 The full domain retrieval process for all sources can be viewed in the repository's code.
@@ -146,6 +150,7 @@ function print_stats {
 function count {
     scope="$1"
     source="$2"
+
     # Count % of excluded domains of raw count retrieved from each source
     if [[ "$scope" == 'excluded' ]]; then
         raw_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 4 | awk '{total += $1} END {print total}')
@@ -156,16 +161,19 @@ function count {
         excluded_count=$((white_count + dead_count + redundant_count))
         printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded
         return
+
     # Count number of Google Search queries made
     elif [[ "$scope" == 'queries' ]]; then
         queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
         [[ "$queries" -lt 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
         return
+
     # Count number of active search terms
     elif [[ "$scope" == 'active_search_terms' ]]; then
         csvgrep -c 2 -m 'y' -i "$search_terms_file" | wc -l
         return
     fi
+
     # Sum up all domains retrieved by that source for that day
     ! grep -qF "$scope" "$source_log" && { printf "-"; return; }  # Print dash if no runs for that day found
     csvgrep -c 1 -m "$scope" "$source_log" | csvgrep -c 13 -m 'yes' | csvgrep -c 2 -m "$source" | csvcut -c 5 | awk '{total += $1} END {print total}'
