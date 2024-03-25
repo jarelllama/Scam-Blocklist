@@ -195,7 +195,7 @@ function search_google {
             rate_limited=true && break  # Break out of loop if rate limited
         fi
         ((query_count++))
-        jq -e '.items' &> /dev/null <<< "$page_results" || break # Break out of loop if the first page has no results
+        jq -e '.items' &> /dev/null <<< "$page_results" || break  # Break out of loop if the first page has no results
         page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')
         printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
         [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
@@ -246,7 +246,7 @@ function process_source {
     dead_count=$(wc -w <<< "$dead_domains")
     if [[ "$dead_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
-        #log_event "$dead_domains" "dead" # Logs too many lines
+        #log_event "$dead_domains" "dead"  # Logs too many lines
     fi
 
     # Log blacklisted domains
@@ -297,7 +297,7 @@ function process_source {
 
     total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
-    printf "%s\n" "$pending_domains" >> filtered_domains.tmp # Collate the filtered domains into a temp file
+    printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate the filtered domains into a temp file
     log_source
 }
 

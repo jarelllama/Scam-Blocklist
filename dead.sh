@@ -34,7 +34,7 @@ function check_for_alive {
 }
 
 function check_subdomains {
-    sed 's/^/||/; s/$/^/' "$subdomains_file" > formatted_subdomains_file.tmp # Format subdomains file
+    sed 's/^/||/; s/$/^/' "$subdomains_file" > formatted_subdomains_file.tmp  # Format subdomains file
     dead-domains-linter -i formatted_subdomains_file.tmp --export dead.tmp  # Find and export dead domains with subdomains
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead subdomains from subdomains file

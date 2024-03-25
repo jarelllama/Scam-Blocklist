@@ -221,7 +221,7 @@ function test_dead {
     {
         printf "dead,493053dead-wildcard-test.com,wildcard\n"
         printf "dead,493053dead-wildcard-test.com,wildcard\n"
-    } >> out_log.txt # Expected output
+    } >> out_log.txt  # Expected output
 
     # Check removal of dead domains
     printf "49532dead-domain-test.com\n" >> "$raw_file"  # Input
@@ -277,7 +277,7 @@ function check_if_dead_present {
 function check_log {
     while read -r log_term; do
         grep -qF "$log_term" "$domain_log" && log_error=false || log_error=true
-        [[ "$log_error" == true ]] && break # Break when error found
+        [[ "$log_error" == true ]] && break  # Break when error found
     done < out_log.txt
     [[ "$log_error" == false ]] && return  # Return if no error found
     printf "! Log file is not as expected:\n"
