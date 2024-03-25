@@ -54,9 +54,7 @@ function shellcheck {
         error=true
     fi
 
-    printf "\n%s\n" "------------------------------------------------------------------"
-    [[ "$error" == false ]] && printf "Test completed. No errors found.\n\n"
-    printf "Scripts checked (%s):\n%s\n" "$(wc -l < scripts.tmp)" "$(<scripts.tmp)"
+    printf "\nScripts checked (%s):\n%s\n" "$(wc -l < scripts.tmp)" "$(<scripts.tmp)"
     check_error
 }
 
