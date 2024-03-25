@@ -170,7 +170,7 @@ function count {
 
     # Count number of active search terms
     elif [[ "$scope" == 'active_search_terms' ]]; then
-        csvgrep -c 2 -m 'y' -i "$search_terms_file" | wc -l
+        csvgrep -c 2 -m 'y' -i "$search_terms_file" | tail -n +2 | wc -l
         return
     fi
 
