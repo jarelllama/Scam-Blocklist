@@ -11,7 +11,7 @@ wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
 toplist_url='https://tranco-list.eu/top-1m.csv.zip'
-
+ 
 function main {
     # Format ALL files including scripts
     find . -type f -exec bash -c 'bash data/tools.sh "format" "$1"' _ {} \;
