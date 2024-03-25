@@ -11,7 +11,7 @@ subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
-time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
+time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.1'
 
 # grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
