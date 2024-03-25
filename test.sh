@@ -65,7 +65,7 @@ function test_retrieval_check {
     done < "$subdomains_to_remove_file"
     # Expected output
     [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The Check script does not exclude 'www' subdomains
-    printf "subdomain-test.com\n" >> out_raw.txt
+    #printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
