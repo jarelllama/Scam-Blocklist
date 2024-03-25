@@ -84,7 +84,7 @@ function retrieve_existing {
         process_source
     done
 }
- 
+
 function source_aa419 {
     source='aa419.org'
     domains_file="data/pending/domains_${source}.tmp"

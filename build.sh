@@ -137,7 +137,7 @@ EOF
 }
 
 function print_stats {
-    [[ -n "$1" ]] && source="$1" || source="All sources" 
+    [[ -n "$1" ]] && source="$1" || source="All sources"
     printf "%5s |%10s |%8s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count "excluded" "$1" )" "$source"
 }
 
