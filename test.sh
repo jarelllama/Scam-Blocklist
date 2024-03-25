@@ -19,9 +19,7 @@ function main {
     sed -i '1q' "$domain_log"  # Initialize domain log file
 
     # Do not run when there are existing domain files
-    if [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]]; then
-        test_retrieval_check "$1"
-    fi
+    [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
     [[ "$1" == 'shellcheck' ]] && shellcheck
@@ -231,10 +229,8 @@ function test_dead {
     printf "%s\n" "------------------------------------------------------------------"
 
     # Check returned error code
-    if [[ "$errored" == true ]]; then
-        printf "! Script returned an error.\n"
-        error=true
-    fi
+    [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }
+
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
     check_if_dead_present "$subdomains_file" "Subdomains"  # Check subdomains file
@@ -269,10 +265,9 @@ function check_if_dead_present {
 
 function check_log {
     while read -r log_term; do
-        grep -qF "$log_term" "$domain_log" && log_error=false || log_error=true
-        [[ "$log_error" == true ]] && break  # Break when error found
+        ! grep -qF "$log_term" "$domain_log" && { log_error=true; break; }  # Break when error found
     done < out_log.txt
-    [[ "$log_error" == false ]] && return  # Return if no error found
+    [[ "$log_error" != true ]] && return  # Return if no error found
     printf "! Log file is not as expected:\n"
     cat "$domain_log"
     printf "\nTerms expected in log:\n"
@@ -281,10 +276,7 @@ function check_log {
 }
 
 function check_error {
-    # Exit with error if test failed
-    if [[ "$error" == true ]]; then
-        printf "\n" && exit 1
-    fi
+    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
 main "$1"

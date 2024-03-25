@@ -16,11 +16,8 @@ user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15
 
 # grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
 
-if [[ "$CI" != true ]]; then  # If running locally, use locally stored secrets instead of environment variables
-    google_search_id=
-    google_search_api_key=
-    aa419_api_id=
-fi
+# If running locally, use locally stored secrets instead of environment variables
+[[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; }
 
 function main {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
@@ -171,13 +168,11 @@ function source_dfpi {
 function source_google_search {
     source='Google Search'
     rate_limited=false  # Initialize whether API is rate limited
-    csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2 |  # Filter out unused search terms
-        while read -r search_term; do  # Loop through search terms
-            if [[ "$rate_limited" == true ]]; then
-                printf "! Custom Search JSON API rate limited.\n" && break  # Break out of loop if rate limited
-            fi
-            search_google "$search_term"  # Search using search term if not rate limited
-        done
+    while read -r search_term; do  # Loop through search terms
+        # Break out of loop if rate limited
+        [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
+        search_google "$search_term"  # Search using search term if not rate limited
+    done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
 
 function search_google {
@@ -190,9 +185,7 @@ function search_google {
     for start in {1..100..10}; do  # Loop through each page of results
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
-        if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
-            rate_limited=true && break  # Break out of loop if rate limited
-        fi
+        grep -qF 'rateLimitExceeded' <<< "$page_results" && { rate_limited=true; break; }  # Break out of loop if rate limited
         ((query_count++))
         jq -e '.items' &> /dev/null <<< "$page_results" || break  # Break out of loop if the first page has no results
         page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')
@@ -210,9 +203,7 @@ function process_source {
     [[ -z "$rate_limited" ]] && rate_limited=false
 
     # Skip to next source if no results retrieved
-    if ! grep -q '[[:alnum:]]' "$domains_file"; then
-        log_source && return
-    fi
+    ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }
 
     # Remove https:// or http:// and convert to lowercase
     sed 's/https\?:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
@@ -301,18 +292,13 @@ function process_source {
 }
 
 function merge_domains {
-    # Exit if no new domains to add
-    if ! grep -q '[[:alnum:]]' filtered_domains.tmp; then  # -s does not seem to work well here
-        printf "\nNo new domains to add.\n"
-        exit 0
-    fi
+    # Exit if no new domains to add (-s does not seem to work well here)
+    ! grep -q '[[:alnum:]]' filtered_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
 
     format_list filtered_domains.tmp
 
     # Print domains in toplist and invalid entries
-    if [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]]; then
-        printf "\nEntries requiring manual review:\n"
-    fi
+    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n"
     # Print invalid entries
     if [[ -f invalid_entries.tmp ]]; then
         format_list invalid_entries.tmp
@@ -349,11 +335,7 @@ function merge_domains {
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$source_log"  # Add the edited rows back to the log
 
     # Exit with error if invalid entries were found
-    if [[ -f invalid_entries.tmp ]]; then
-        printf "\n" && exit 1
-    else
-        exit 0
-    fi
+    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0
 }
 
 function log_event {
