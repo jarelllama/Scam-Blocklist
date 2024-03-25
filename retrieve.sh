@@ -120,8 +120,8 @@ function source_petscams {
     domains_file="data/pending/domains_${source}.tmp"
     url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
-        curl -s "${url}/" | grep -oE 'alt="https://petscams.com/[[:alnum:].-]+\.[[:alnum:]-]{2,}" data' |
-            sed 's/alt="//; s/" data//; s/-\?[0-9]\?\/" //' >> "$domains_file"
+        curl -s "${url}/" | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/" ' |
+            sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
     process_source
