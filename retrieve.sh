@@ -99,8 +99,8 @@ function source_guntab {
     source='guntab.com'
     domains_file="data/pending/domains_${source}.tmp"
     url='https://www.guntab.com/scam-websites'
-    curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' | grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
-        grep -vxF 'stopgunscams.com' | sed '501,$d' > "$domains_file"  # Keep only newest 500 domains (note piping to head causes errors in Github's runner)
+    curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' |
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$domains_file"  # Note results are not sorted by time added
     process_source
 }
 
