@@ -90,8 +90,7 @@ function source_aa419 {
     domains_file="data/pending/domains_${source}.tmp"
     url='https://api.aa419.org/fakesites'
     query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
-    curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}") | # Trailing slash breaks API call
-        jq -r '.[].Domain' >> "$domains_file"
+    curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" | jq -r '.[].Domain' >> "$domains_file"  # Note trailing slash breaks API call
     process_source
 }
 
@@ -120,8 +119,9 @@ function source_petscams {
     domains_file="data/pending/domains_${source}.tmp"
     url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
-        curl -s "${url}/" | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/" ' |
-            sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///; s/-\?[0-9]\?\/" //; s/-/./g' >> "$domains_file"
+        curl -s "${url}/" | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+-[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
+             sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
+                s/-\?[0-9]\?\/">//; s/-/./g' >> "$domains_file"
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
     process_source
