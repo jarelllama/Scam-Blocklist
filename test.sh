@@ -40,15 +40,15 @@ function shellcheck {
     done
 
     # Check for trailing whitespaces
-    problematic_files=$(grep -rnE '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable})
-    if [[ -z "$problematic_files" ]]; then
+    problematic_files=$(grep -rnE '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .)
+    if [[ -n "$problematic_files" ]]; then
         printf "\nLines with trailing whitespaces:\n"
         printf "%s\n" "$problematic_files"
         error=true
     fi
     # Check for carriage return characters
     problematic_files=$(grep -rl $'\r' --exclude-dir={legacy,.git,shellcheck-stable} .)
-    if [[ -z "$problematic_files" ]]; then
+    if [[ -n "$problematic_files" ]]; then
         printf "\nLines with carriage return characters:\n"
         printf "%s\n" "$problematic_files"
         error=true
