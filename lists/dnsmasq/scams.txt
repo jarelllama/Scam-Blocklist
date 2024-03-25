@@ -1,10 +1,10 @@
 # Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam site domains automatically retrieved from Google Search and public databases updated daily.
+# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Mar 25 09:21:56 UTC 2024
+# Last modified: Mon Mar 25 13:26:41 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 23183
+# Total number of entries: 23182
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -5660,6 +5660,7 @@ local=/dittmann-reifenhandel.com/
 local=/dittsmeier.de/
 local=/diveintostyle.com/
 local=/divine-wonder.com/
+local=/divinedecorofdallas.us/
 local=/divineexpressglobaldelivery.com/
 local=/divinegreatdanes.com/
 local=/divinexpressdelivery.com/
@@ -12406,7 +12407,6 @@ local=/lynahome.com/
 local=/lynch-care.com/
 local=/lynnret.shop/
 local=/m-kingconstructions.com/
-local=/m.2xoffer.com/
 local=/m4capitals.com/
 local=/maahizon.com/
 local=/maahze.com/
@@ -17571,6 +17571,7 @@ local=/ruhrmove.de/
 local=/ruidianmedia.com/
 local=/ruizo.store/
 local=/rujirakeaonin.com/
+local=/rulfloor.com/
 local=/runelitegear.com/
 local=/runfitfrenzy.com/
 local=/runnersparadiseshop.com/
@@ -22851,8 +22852,6 @@ local=/wunderwild.de/
 local=/wuxihat.us/
 local=/ww-vermittlung.de/
 local=/wwdcompany.com/
-local=/www.divinedecorofdallas.us/
-local=/www.rulfloor.com/
 local=/wyliegunstore.com/
 local=/wzcontainerlineinc.com/
 local=/wzlooo.com/

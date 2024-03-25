@@ -1,10 +1,10 @@
 # Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam site domains automatically retrieved from Google Search and public databases updated daily.
+# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Mar 25 09:21:56 UTC 2024
+# Last modified: Mon Mar 25 13:26:41 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 23183
+# Total number of entries: 23182
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -5661,6 +5661,7 @@ local-zone: "dittmann-reifenhandel.com." always_nxdomain
 local-zone: "dittsmeier.de." always_nxdomain
 local-zone: "diveintostyle.com." always_nxdomain
 local-zone: "divine-wonder.com." always_nxdomain
+local-zone: "divinedecorofdallas.us." always_nxdomain
 local-zone: "divineexpressglobaldelivery.com." always_nxdomain
 local-zone: "divinegreatdanes.com." always_nxdomain
 local-zone: "divinexpressdelivery.com." always_nxdomain
@@ -12407,7 +12408,6 @@ local-zone: "lynahome.com." always_nxdomain
 local-zone: "lynch-care.com." always_nxdomain
 local-zone: "lynnret.shop." always_nxdomain
 local-zone: "m-kingconstructions.com." always_nxdomain
-local-zone: "m.2xoffer.com." always_nxdomain
 local-zone: "m4capitals.com." always_nxdomain
 local-zone: "maahizon.com." always_nxdomain
 local-zone: "maahze.com." always_nxdomain
@@ -17572,6 +17572,7 @@ local-zone: "ruhrmove.de." always_nxdomain
 local-zone: "ruidianmedia.com." always_nxdomain
 local-zone: "ruizo.store." always_nxdomain
 local-zone: "rujirakeaonin.com." always_nxdomain
+local-zone: "rulfloor.com." always_nxdomain
 local-zone: "runelitegear.com." always_nxdomain
 local-zone: "runfitfrenzy.com." always_nxdomain
 local-zone: "runnersparadiseshop.com." always_nxdomain
@@ -22852,8 +22853,6 @@ local-zone: "wunderwild.de." always_nxdomain
 local-zone: "wuxihat.us." always_nxdomain
 local-zone: "ww-vermittlung.de." always_nxdomain
 local-zone: "wwdcompany.com." always_nxdomain
-local-zone: "www.divinedecorofdallas.us." always_nxdomain
-local-zone: "www.rulfloor.com." always_nxdomain
 local-zone: "wyliegunstore.com." always_nxdomain
 local-zone: "wzcontainerlineinc.com." always_nxdomain
 local-zone: "wzlooo.com." always_nxdomain

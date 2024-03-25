@@ -1,5 +1,5 @@
 # Jarelllama's Scam Blocklist
-Blocklist for scam site domains automatically retrieved from Google Search and public databases updated daily at 00:30 UTC.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -13,7 +13,7 @@ Blocklist for scam site domains automatically retrieved from Google Search and p
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 ```
-Total domains: 23183
+Total domains: 23182
 
 Statistics for each source:
 
