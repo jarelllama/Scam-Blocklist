@@ -20,7 +20,7 @@ function main {
 function update_readme {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
-Blocklist for scam site domains automatically retrieved from Google Search and public databases updated daily at 00:30 UTC.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -122,7 +122,7 @@ function build_list {
 
     cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${3} Title: Jarelllama's Scam Blocklist
-${3} Description: Blocklist for scam site domains automatically retrieved from Google Search and public databases updated daily.
+${3} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${3} Last modified: $(date -u)
