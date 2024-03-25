@@ -13,21 +13,21 @@ Blocklist for scam site domains automatically retrieved from Google Search and p
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 ```
-Total domains: 23153
+Total domains: 23170
 
 Statistics for each source:
 
 Today | Yesterday | Excluded | Source
-   19 |       126 |       2% | Google Search
-   80 |         8 |      10% | aa419.org
-   24 |       133 |      50% | dfpi.ca.gov
-    9 |         0 |      12% | guntab.com
-   22 |         0 |       8% | petscams.com
+    0 |        19 |       2% | Google Search
+    4 |        80 |      10% | aa419.org
+    2 |        24 |      50% | dfpi.ca.gov
+    9 |         9 |      12% | guntab.com
+    2 |        22 |       7% | petscams.com
     0 |         0 |       0% | scam.delivery
-    4 |      1175 |       8% | scam.directory
-   11 |         0 |      29% | scamadviser.com
-    3 |         0 |       6% | stopgunscams.com
-  172 |      8818 |       8% | All sources
+    0 |         4 |       8% | scam.directory
+    0 |        11 |      29% | scamadviser.com
+    0 |         3 |       6% | stopgunscams.com
+   17 |       172 |       8% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -49,7 +49,7 @@ The Google Custom Search JSON API only provides ~100 free search queries per day
 
 Each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are disabled to optimize the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
-> Queries made today: 108 (rate limited)
+> Queries made today: 0
 
 #### Regarding other sources
 The full domain retrieval process for all sources can be viewed in the repository's code.
