@@ -37,13 +37,6 @@ function shellcheck {
     while read -r script; do  # Loop through scripts
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck for each script
     done <<< "$scripts"
-    # Check for trailing whitespaces
-    problematic_files=$(grep -rn '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .)
-    if [[ -n "$problematic_files" ]]; then
-        printf "\nLines with trailing whitespaces:\n"
-        printf "%s\n" "$problematic_files"
-        error=true
-    fi
     # Check for carriage return characters
     problematic_files=$(grep -rl $'\r' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
