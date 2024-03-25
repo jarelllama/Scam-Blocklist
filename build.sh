@@ -1,5 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+search_terms_file='config/search_terms.csv'
 source_log='config/source_log.csv'
 today=$(date -u +"%d-%m-%y")
 yesterday=$(date -ud "yesterday" +"%d-%m-%y")
@@ -70,7 +71,8 @@ The Google Custom Search JSON API only provides ~100 free search queries per day
 
 Each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are disabled to optimize the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
-> Queries made today: $(count "queries")
+### Statistics
+\`Active search terms: $(count "active_search_terms")      Queries made today: $(count "queries")\`
 
 #### Regarding other sources
 The full domain retrieval process for all sources can be viewed in the repository's code.
@@ -158,6 +160,10 @@ function count {
     elif [[ "$scope" == 'queries' ]]; then
         queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
         [[ "$queries" -lt 100 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
+        return
+    # Count number of active search terms
+    elif [[ "$scope" == 'active_search_terms' ]]; then
+        csvgrep -c 2 -m 'y' -i "$search_terms_file" | wc -l
         return
     fi
     # Sum up all domains retrieved by that source for that day
