@@ -1,7 +1,7 @@
 ## Sources
 All data retrieved from the following sources are publicly available.
 
-Sources marked as inactive are no longer being automaticallly employed to retrieve domains.
+Sources marked as inactive are no longer being automatically employed to retrieve domains.
 
 Source | Type | Inactive
 :--- |:--- |:---

@@ -16,7 +16,7 @@ function main {
     error=false  # Initialize error variable
     errored=false  # Initialize whether script returned with error
     : > "$raw_file"  # Initialize raw file
-    sed '1q' "$domain_log" > log.tmp && mv log.tmp "$domain_log"  # Intialize domain log file
+    sed '1q' "$domain_log" > log.tmp && mv log.tmp "$domain_log"  # Initialize domain log file
 
     # Do not run when there are existing domain files
     if [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]]; then
@@ -38,7 +38,7 @@ function shellcheck {
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck for each script
     done <<< "$scripts"
     # Check for trailing whitespaces
-    problematic_files=$(grep -rnE '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .)
+    problematic_files=$(grep -rn '[[:space:]]$' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
         printf "\nLines with trailing whitespaces:\n"
         printf "%s\n" "$problematic_files"
@@ -75,7 +75,7 @@ function test_retrieval_check {
         grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt  # Expected output
     done < "$subdomains_to_remove_file"
     # Expected output
-    [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The ceck script does not exclude 'www' subdomains
+    [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The Check script does not exclude 'www' subdomains
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
 
@@ -164,7 +164,7 @@ function test_retrieval_check {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
-        bash retrieve.sh || true  # Run retrievel script and ignore returned exit code
+        bash retrieve.sh || true  # Run retrieval script and ignore returned exit code
     elif [[ "$script_to_test" == 'check' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
         bash check.sh || true  # Run lists check script and ignore returned exit code

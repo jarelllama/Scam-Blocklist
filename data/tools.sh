@@ -4,7 +4,7 @@
 function format {
     [[ ! -f "$1" ]] && return  # Return if file does not exist
 
-    # Remove carraige return characters and trailing whitespaces
+    # Remove carriage return characters and trailing whitespaces
     sed -i 's/\r//g; s/[[:space:]]*$//' "$1"
 
     # For specific files/extensions:

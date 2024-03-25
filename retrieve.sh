@@ -16,8 +16,7 @@ user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15
 
 # grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
 
-# If running locally, use locally stored secrets instead of environment variables
-if [[ "$CI" != true ]]; then
+if [[ "$CI" != true ]]; then  # If running locally, use locally stored secrets instead of environment variables
     google_search_id=
     google_search_api_key=
     aa419_api_id=
@@ -35,7 +34,7 @@ function main {
 }
 
 function retrieve_new {
-        mkdir data/pending  # Intialize pending directory
+        mkdir data/pending  # Initialize pending directory
         printf "\n"
         source_aa419
         source_dfpi
@@ -171,7 +170,7 @@ function source_dfpi {
 
 function source_google_search {
     source='Google Search'
-    rate_limited=false  # Initialzie whether API is rate limited
+    rate_limited=false  # Initialize whether API is rate limited
     csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2 |  # Filter out unused search terms
         while read -r search_term; do  # Loop through search terms
             if [[ "$rate_limited" == true ]]; then
@@ -183,7 +182,7 @@ function source_google_search {
 
 function search_google {
     url='https://customsearch.googleapis.com/customsearch/v1'
-    query_count=0  # Initliaze query count for each search term
+    query_count=0  # Initialize query count for each search term
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Create domains file if not present
@@ -231,7 +230,7 @@ function process_source {
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exclude from dead check
         printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
-        # Find and log domains with common subdomains exluding 'www'
+        # Find and log domains with common subdomains excluding 'www'
         domains_with_subdomains=$(grep -v '^www\.' <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_to_remove_file"
@@ -262,11 +261,11 @@ function process_source {
     fi
 
     # Remove domains that have whitelisted TLDs
-    whiltelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
-    whiltelisted_tld_count=$(wc -w <<< "$whiltelisted_tld_domains")
-    if [[ "$whiltelisted_tld_count" -gt 0 ]]; then
-        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whiltelisted_tld_domains"))
-        log_event "$whiltelisted_tld_domains" "tld"
+    whitelisted_tld_domains=$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$pending_domains")
+    whitelisted_tld_count=$(wc -w <<< "$whitelisted_tld_domains")
+    if [[ "$whitelisted_tld_count" -gt 0 ]]; then
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$whitelisted_tld_domains"))
+        log_event "$whitelisted_tld_domains" "tld"
     fi
 
     # Remove invalid entries including IP addresses. This excludes punycode TLDs (.xn--*)
@@ -295,7 +294,7 @@ function process_source {
         log_event "$domains_in_toplist" "toplist"
     fi
 
-    total_whitelisted_count=$((whitelisted_count + whiltelisted_tld_count))  # Calculate sum of whitelisted domains
+    total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate the filtered domains into a temp file
     log_source
