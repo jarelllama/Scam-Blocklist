@@ -154,7 +154,7 @@ function test_retrieval_check {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
-        mv out_raw.txt out_light.txt  # Expected output for raw light file
+        cp out_raw.txt out_light.txt  # Expected output for raw light file
         bash retrieve.sh || true  # Run retrieval script and ignore exit status
     elif [[ "$script_to_test" == 'check' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
