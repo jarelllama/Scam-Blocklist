@@ -167,7 +167,7 @@ function test_retrieval_check {
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'retrieval' ]]; then
         check_output "$raw_light_file" "out_light.txt" "Raw light"  # Check raw light file
-        [[ -d data/pending ]] && { printf "! Pending directory not removed.\n"; error=true; } # Check pending directory
+        [[ -d data/pending ]] && { printf "! Pending directory not removed.\n"; error=true; }  # Check pending directory
     elif [[ "$script_to_test" == 'check' ]]; then
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
         check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"  # Check wildcards file

@@ -45,6 +45,7 @@ function main {
 
 function source_aa419 {
     source='aa419.org'
+    ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://api.aa419.org/fakesites'
@@ -55,7 +56,7 @@ function source_aa419 {
 
 function source_guntab {
     source='guntab.com'
-    ignore_from_light=true
+    ignore_from_light=true  # Do not use as a source for light version
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://www.guntab.com/scam-websites'
@@ -66,6 +67,7 @@ function source_guntab {
 
 function source_stopgunscams {
     source='stopgunscams.com'
+    ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://stopgunscams.com'
@@ -78,6 +80,7 @@ function source_stopgunscams {
 
 function source_petscams {
     source='petscams.com'
+    ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url="https://petscams.com"
@@ -92,7 +95,7 @@ function source_petscams {
 
 function source_scamdelivery {
     source='scam.delivery'
-    ignore_from_light=true
+    ignore_from_light=true  # Do not use as a source for light version
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://scam.delivery/category/review'
@@ -107,6 +110,7 @@ function source_scamdelivery {
 
 function source_scamdirectory {
     source='scam.directory'
+    ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://scam.directory/category'
@@ -117,6 +121,7 @@ function source_scamdirectory {
 
 function source_scamadviser {
     source='scamadviser.com'
+    ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://www.scamadviser.com/articles'
@@ -129,6 +134,7 @@ function source_scamadviser {
 
 function source_dfpi {
     source='dfpi.ca.gov'
+    ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
     [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://dfpi.ca.gov/crypto-scams'
@@ -139,6 +145,7 @@ function source_dfpi {
 
 function source_google_search {
     source='Google Search'
+    ignore_from_light=
     if [[ "$use_pending" != true ]]; then
         # Retrieve new domains
         while read -r search_term; do  # Loop through search terms
@@ -182,13 +189,16 @@ function search_google {
 
 function process_source {
     [[ ! -f "$domains_file" ]] && return  # Return if domains file does not exist
-    ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }  # Skip to next source if no results retrieved
 
     # Initialize variables
     unfiltered_count=0 && filtered_count=0 && total_whitelisted_count=0
     dead_count=0 && redundant_count=0 && toplist_count=0 && domains_in_toplist=''
     [[ -z "$query_count" ]] && query_count=0
     [[ -z "$rate_limited" ]] && rate_limited=false
+    [[ -z "$ignore_from_light" ]] && ignore_from_light=false
+
+    # Skip to next source if no results retrieved
+    ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }
 
     # Remove https:// or http:// and convert to lowercase
     sed 's/https\?:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
@@ -274,7 +284,6 @@ function process_source {
     filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate filtered domains
     [[ "$ignore_from_light" != true ]] && printf "%s\n" "$pending_domains" >> filtered_light_domains.tmp  # Collate filtered domains from light sources
-    ignore_from_light=false  # Reinitialize whether to ignore source from light version
     log_source
 }
 
