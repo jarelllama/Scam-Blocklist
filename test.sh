@@ -161,6 +161,9 @@ function test_retrieval_check {
     fi
     printf "%s\n" "------------------------------------------------------------------"
 
+    if [[ "$script_to_test" == 'retrieval' ]] && [[ -d data/pending ]]; then  # Check pending directory
+        printf "! Pending directory not removed.\n" && error=true
+    fi
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
@@ -179,7 +182,7 @@ function test_toplist {
     : > "$whitelist_file"  # Remove all whitelisted terms
     mkdir data/pending
     printf "google.com\n" > data/pending/domains_toplist-check.tmp  # Input
-    printf "google.com\n" > out_log.txt  # Expected output
+    printf "toplist,google.com\n" > out_log.txt  # Expected output
     bash retrieve.sh || true  # Run retrieval script and ignore returned exit code
     printf "%s\n" "------------------------------------------------------------------"
     [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; exit 1; }  # Check pending directory
