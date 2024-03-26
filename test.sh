@@ -126,24 +126,23 @@ function test_retrieval_check {
         printf "invalid,invalid-test.1x\n"
     } >> out_log.txt  # Expected output
 
-    # Test removal of redundant domains
     : > "$redundant_domains_file"  # Initialize redundant domains file
-    printf "redundant-test.com\n" > "$wildcards_file"  # Input
-    printf "redundant-test.com\n" >> out_wildcards.txt  # Wildcard should already be in expected wildcards file
-    printf "redundant-test.com\n" >> out_raw.txt  # Wildcard should already be in expected raw file
-    printf "domain.redundant-test.com\n" >> input.txt  # Input
-    printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
-    if [[ "$script_to_test" == 'check' ]]; then
-        printf "domain.redundant-test.com\n" >> out_redundant.txt  # Expected output
-        # Test new wildcard detection
-        # Input
-        printf "redundant-test-2.com\n" >> input.txt
-        printf "domain.redundant-test-2.com\n" >> input.txt
+    if [[ "$script_to_test" == 'retrieval' ]]; then
+        # Test removal of redundant domains
+        printf "redundant-test.com\n" > "$raw_file"  # Sample data
+        printf "redundant-test.com\n" > "$wildcards_file"  # Sample data
+        printf "redundant-test.com\n" >> out_wildcards.txt  # Wildcard should already be in expected wildcards file
+        printf "domain.redundant-test.com\n" >> input.txt  # Input
+        printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
+    elif [[ "$script_to_test" == 'check' ]]; then
+        # Test addition of new wildcard from wildcard file
+        printf "domain.redundant-test.com\n" >> input.txt  # Sample data
+        printf "redundant-test.com\n" > "$wildcards_file"  # Input
         # Expected output
-        printf "redundant-test-2.com\n" >> out_raw.txt
-        printf "redundant-test-2.com\n" >> out_wildcards.txt
-        printf "domain.redundant-test-2.com\n" >> out_redundant.txt
-        printf "redundant,domain.redundant-test-2.com\n" >> out_log.txt
+        printf "redundant-test.com\n" >> out_raw.txt
+        printf "redundant-test.com\n" >> out_wildcards.txt
+        printf "domain.redundant-test.com\n" >> out_redundant.txt
+        printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
     fi
 
     if [[ "$script_to_test" == 'check' ]]; then
