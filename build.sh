@@ -1,5 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+raw_light_file='data/raw_light.txt'
 search_terms_file='config/search_terms.csv'
 source_log='config/source_log.csv'
 today=$(date -u +"%d-%m-%y")
@@ -123,23 +124,30 @@ EOF
 }
 
 function build_list {
-    blocklist_path="lists/${directory}/scams.txt"
-    [[ -d "$(dirname "$blocklist_path")" ]] || mkdir "$(dirname "$blocklist_path")"  # Create directory if not present
+    [[ -z "$comment" ]] && comment='#'  # Set default comment to #
 
-    cat << EOF > "$blocklist_path"  # Append header onto blocklist
-${3} Title: Jarelllama's Scam Blocklist
-${3} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
-${3} Homepage: https://github.com/jarelllama/Scam-Blocklist
-${3} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-${3} Last modified: $(date -u)
-${3} Syntax: ${1}
-${3} Total number of entries: $(wc -l < "$raw_file")
-${3}
+    # Loop through the two blocklist versions
+    for i in {1..2}; do
+        [[ "$i" -eq 1 ]] && { list_name='scam.txt'; version=''; }
+        [[ "$i" -eq 2 ]] && { list_name='scam_light.txt'; version='LIGHT VERSION'; raw_file="$raw_light_file"; }
+        blocklist_path="lists/${directory}/${list_name}"
+        [[ ! -d "$(dirname "$blocklist_path")" ]] && mkdir "$(dirname "$blocklist_path")"  # Create directory if not present
+
+        cat << EOF > "$blocklist_path"  # Append header onto blocklist
+${comment} Title: Jarelllama's Scam Blocklist ${version}
+${comment} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
+${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
+${comment} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
+${comment} Last modified: $(date -u)
+${comment} Syntax: ${syntax}
+${comment} Total number of entries: $(wc -l < "$raw_file")
+${comment}
 EOF
 
-    [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound format
-    printf "%s\n" "$(awk -v before="$4" -v after="$5" '{print before $0 after}' "$raw_file")" \
-        >> "$blocklist_path"  # Append formatted domains onto blocklist
+        [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound format
+        # Append formatted domains onto blocklist
+        printf "%s\n" "$(awk -v before="$before" -v after="$after" '{print before $0 after}' "$raw_file")" >> "$blocklist_path"
+    done
 }
 
 function print_stats {
@@ -184,48 +192,28 @@ function format_list {
 }
 
 function build_adblock {
-    syntax='Adblock Plus'
-    directory="adblock"
-    comment='!'
-    before='||'
-    after='^'
-    build_list "$syntax" "$directory" "$comment" "$before" "$after"
+    syntax='Adblock Plus' && directory='adblock' && comment='!' && before='||' && after='^'
+    build_list
 }
 
 function build_dnsmasq {
-    syntax='Dnsmasq'
-    directory="dnsmasq"
-    comment='#'
-    before='local=/'
-    after='/'
-    build_list "$syntax" "$directory" "$comment" "$before" "$after"
+    syntax='Dnsmasq' && directory='dnsmasq' && before='local=/' && after='/'
+    build_list
 }
 
 function build_unbound {
-    syntax='Unbound'
-    directory="unbound"
-    comment='#'
-    before='local-zone: "'
-    after='." always_nxdomain'
-    build_list "$syntax" "$directory" "$comment" "$before" "$after"
+    syntax='Unbound' && directory='unbound' && before='local-zone: "' && after='." always_nxdomain'
+    build_list
 }
 
 function build_wildcard_asterisk {
-    syntax='Wildcard Asterisk'
-    directory="wildcard_asterisk"
-    comment='#'
-    before='*.'
-    after=''
-    build_list "$syntax" "$directory" "$comment" "$before" "$after"
+    syntax='Wildcard Asterisk' && directory='wildcard_asterisk' && before='*.' && after=''
+    build_list
 }
 
 function build_wildcard_domains {
-    syntax='Wildcard Domains'
-    directory="wildcard_domains"
-    comment='#'
-    before=''
-    after=''
-    build_list "$syntax" "$directory" "$comment" "$before" "$after"
+    syntax='Wildcard Domains' && directory='wildcard_domains' && before='' && after=''
+    build_list
 }
 
 main

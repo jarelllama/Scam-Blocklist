@@ -1,5 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+raw_light_file='data/raw_light.txt'
 domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
@@ -135,7 +136,13 @@ function check_raw_file {
     after_count=$(wc -l < "$raw_file")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_count" "$toplist_count"
 
-    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if the blocklist required filtering
+    update_light_file  # Update light version
+
+    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
+}
+
+function update_light_file {
+    comm -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
 }
 
 function clean_domain_log {

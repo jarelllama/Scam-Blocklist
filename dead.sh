@@ -1,5 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+raw_light_file='data/raw_light.txt'
 domain_log='config/domain_log.csv'
 root_domains_file='data/root_domains.txt'
 subdomains_file='data/subdomains.txt'
@@ -18,6 +19,7 @@ function main {
     check_subdomains
     check_redundant
     check_for_dead
+    update_light_file
     clean_cache_files
 }
 
@@ -82,6 +84,10 @@ function check_for_dead {
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$(<dead.tmp)" "dead" "raw"
+}
+
+function update_light_file {
+    comm -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
 }
 
 function clean_cache_files {

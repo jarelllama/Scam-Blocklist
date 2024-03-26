@@ -1,5 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+raw_light_file='data/raw_light.txt'
 domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
@@ -153,6 +154,7 @@ function test_retrieval_check {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
+        mv out_raw.txt out_light.txt  # Expected output for raw light file
         bash retrieve.sh || true  # Run retrieval script and ignore exit status
     elif [[ "$script_to_test" == 'check' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
@@ -161,6 +163,7 @@ function test_retrieval_check {
     printf "%s\n" "------------------------------------------------------------------"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
+    check_output "$raw_light_file" "out_light.txt" "Raw light"  # Check raw light file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'retrieval' ]] && [[ -d data/pending ]]; then  # Check pending directory

@@ -1,5 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+raw_light_file='data/raw_light.txt'
 source_log='config/source_log.csv'
 domain_log='config/domain_log.csv'
 search_terms_file='config/search_terms.csv'
@@ -25,14 +26,9 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    [[ -d data/pending ]] && retrieve_existing  # Use existing pending domains if pending directory present
-    [[ ! -d data/pending ]] && retrieve_new
-    merge_domains
-}
-
-function retrieve_new {
-    mkdir data/pending  # Initialize pending directory
     printf "\n"
+    # Check for existing domains file
+    [[ ! -d data/pending ]] && mkdir data/pending || printf "Using existing lists of retrieved domains.\n\n"
     source_aa419
     source_dfpi
     source_guntab
@@ -42,48 +38,13 @@ function retrieve_new {
     source_scamadviser
     source_stopgunscams
     source_google_search
-}
-
-function retrieve_existing {
-    printf "\nUsing existing lists of retrieved domains.\n\n"
-    for domains_file in data/pending/domains_*.tmp; do  # Loop through temp domains file
-        case "$domains_file" in
-            *google_search*)
-                continue ;;  # Skip Google Search till the end
-            *aa419.org*)
-                source='aa419.org' ;;
-            *guntab.com*)
-                source='guntab.com' ;;
-            *stopgunscams.com*)
-                source='stopgunscams.com' ;;
-            *petscams.com*)
-                source='petscams.com' ;;
-            *scam.delivery*)
-                source='scam.delivery' ;;
-            *scam.directory*)
-                source='scam.directory' ;;
-            *scamadviser.com*)
-                source='scamadviser.com' ;;
-            *dfpi.ca.gov*)
-                source='dfpi.ca.gov' ;;
-            *)
-                source='Unknown' ;;
-        esac
-        process_source
-    done
-    # Process Google search terms
-    for domains_file in data/pending/domains_google_search_*.tmp; do
-        [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
-        source='Google Search'
-        search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
-        search_term=${search_term%.tmp}  # Remove file extension from file name
-        process_source
-    done
+    build_raw
 }
 
 function source_aa419 {
     source='aa419.org'
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url='https://api.aa419.org/fakesites'
     query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
     curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" | jq -r '.[].Domain' >> "$domains_file"  # Note trailing slash breaks API call
@@ -92,7 +53,9 @@ function source_aa419 {
 
 function source_guntab {
     source='guntab.com'
+    ignore_from_light=true
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url='https://www.guntab.com/scam-websites'
     curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' |
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$domains_file"  # Note results are not sorted by time added
@@ -102,6 +65,7 @@ function source_guntab {
 function source_stopgunscams {
     source='stopgunscams.com'
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url='https://stopgunscams.com'
     for page in {1..5}; do  # Loop through pages
         curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
@@ -113,6 +77,7 @@ function source_stopgunscams {
 function source_petscams {
     source='petscams.com'
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
         curl -s "${url}/" | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+-[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
@@ -125,7 +90,9 @@ function source_petscams {
 
 function source_scamdelivery {
     source='scam.delivery'
+    ignore_from_light=true
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url='https://scam.delivery/category/review'
     for page in {2..3}; do  # Loop through 2 pages
         # Use User Agent to reduce captcha blocking
@@ -139,6 +106,7 @@ function source_scamdelivery {
 function source_scamdirectory {
     source='scam.directory'
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url='https://scam.directory/category'
     curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
         sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$domains_file"  # Keep only newly added domains
@@ -148,6 +116,7 @@ function source_scamdirectory {
 function source_scamadviser {
     source='scamadviser.com'
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
         curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing slash breaks curl
@@ -159,6 +128,7 @@ function source_scamadviser {
 function source_dfpi {
     source='dfpi.ca.gov'
     domains_file="data/pending/domains_${source}.tmp"
+    [[ -f "$domains_file" ]] && { process_source; return; }
     url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
         sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$domains_file"  # Keep only newly added domains
@@ -167,6 +137,14 @@ function source_dfpi {
 
 function source_google_search {
     source='Google Search'
+    # Check for existing domains file
+    for domains_file in data/pending/domains_google_search_*.tmp; do
+        [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
+        search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
+        search_term=${search_term%.tmp}  # Remove file extension from file name
+        process_source && return
+    done
+    # Retrieve new domains
     while read -r search_term; do  # Loop through search terms
         # Break out of loop if rate limited
         [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
@@ -231,7 +209,7 @@ function process_source {
     format_list subdomains.tmp
     format_list root_domains.tmp
 
-    # Remove domains already in blocklist
+    # Remove domains already in raw file
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
 
     # Remove known dead domains
@@ -290,11 +268,12 @@ function process_source {
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
-    printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate the filtered domains into a temp file
+    printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate filtered domains
+    [[ "$ignore_from_light" != true ]] && printf "%s\n" "$pending_domains" >> filtered_light_domains.tmp  # Collate filtered domains from light sources
     log_source
 }
 
-function merge_domains {
+function build_raw {
     # Exit if no new domains to add (-s does not seem to work well here)
     ! grep -q '[[:alnum:]]' filtered_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
 
@@ -322,8 +301,14 @@ function merge_domains {
         format_list "$subdomains_file"
     fi
 
+    # Build raw light file
+    if grep -q '[[:alnum:]]' filtered_light_domains.tmp; then
+        cat filtered_light_domains.tmp >> "$raw_light_file"
+        format_list "$raw_light_file"
+    fi
+
     count_before=$(wc -l < "$raw_file")
-    cat filtered_domains.tmp >> "$raw_file"  # Add new domains to blocklist
+    cat filtered_domains.tmp >> "$raw_file"  # Add new domains to raw file
     format_list "$raw_file"
     log_event "$(<filtered_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
