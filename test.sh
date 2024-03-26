@@ -183,7 +183,7 @@ function test_retrieval_check {
 function test_toplist {
     mkdir data/pending
     : > "$whitelist_file"  # Sample data
-    printf "google.com\n" > data/pending/domains_toplist-check.tmp  # Input
+    printf "google.com\n" > data/pending/domains_google_search_toplist-test.tmp  # Input
     printf "toplist,google.com\n" > out_log.txt  # Expected output
     bash retrieve.sh || true  # Run retrieval script and ignore exit status
     printf "%s\n" "------------------------------------------------------------------"
