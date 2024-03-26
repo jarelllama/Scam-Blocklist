@@ -19,7 +19,7 @@ function main {
     done
     retrieve_toplist
     check_raw_file "$raw_file"
-    check_raw_file "$raw_light_file" #&> /dev/null
+    check_raw_file "$raw_light_file" &> /dev/null
     [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklists required filtering
 }
 
