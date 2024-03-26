@@ -18,16 +18,16 @@ Total domains: 23179
 Statistics for each source:
 
 Today | Yesterday | Excluded | Source
-    0 |        19 |       2% | Google Search
-    4 |        80 |      10% | aa419.org
-    2 |        24 |      50% | dfpi.ca.gov
-    9 |         9 |      12% | guntab.com
-    2 |        22 |       7% | petscams.com
+    0 |         0 |       2% | Google Search
+    0 |         4 |      10% | aa419.org
+    0 |         2 |      50% | dfpi.ca.gov
+    0 |         9 |      12% | guntab.com
+    0 |         2 |       7% | petscams.com
     0 |         0 |       0% | scam.delivery
-    0 |         4 |       8% | scam.directory
-    0 |        11 |      29% | scamadviser.com
-    0 |         3 |       6% | stopgunscams.com
-   17 |       172 |       8% | All sources
+    0 |         0 |       8% | scam.directory
+    0 |         0 |      29% | scamadviser.com
+    0 |         0 |       6% | stopgunscams.com
+    0 |        17 |       8% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -52,7 +52,7 @@ Each search term is frequently benchmarked on its number of new domains and fals
 #### Statistics
 ```
 Active search terms: 17
-Queries made today: 0
+Queries made today: 10
 Domains retrieved today: 0
 ```
 
