@@ -146,8 +146,8 @@ function test_retrieval_check {
 
     if [[ "$script_to_test" == 'check' ]]; then
         # Test toplist check
-        : > "$whitelist_file"  # Sample data
         printf "google.com\n" >> input.txt  # Input
+        printf "google.com\n" >> out_raw.txt  # Expected output
         printf "toplist,google.com\n" >> out_log.txt  # Expected output
     fi
 
@@ -156,7 +156,7 @@ function test_retrieval_check {
         cp "$raw_file" "$raw_light_file"  # Sample data
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
-        grep -vF 'raw-light-test.com' out_raw.txt > out_raw_light.txt  # Expected output
+        grep -vF 'raw-light-test.com' out_raw.txt > out_raw_light.txt  # Expected output (guntab.com is an excluded source)
     elif [[ "$script_to_test" == 'check' ]]; then
         cp out_raw.txt out_raw_light.txt  # Expected output
     fi
@@ -255,7 +255,7 @@ function test_dead {
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
-    cp out_raw.txt out_raw_light.txt  # Expected output
+    grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (resurrected domains are not added back to light blocklist)
 
     # Prepare expected output files
     for file in out_*; do
