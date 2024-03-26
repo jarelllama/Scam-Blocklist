@@ -1,11 +1,11 @@
-# Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
-# Homepage: https://github.com/jarelllama/Scam-Blocklist
-# License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 26 05:29:09 UTC 2024
-# Syntax: Dnsmasq
-# Total number of entries: 23179
-#
+! Title: Jarelllama's Scam Blocklist 
+! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
+! Homepage: https://github.com/jarelllama/Scam-Blocklist
+! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
+! Last modified: Tue Mar 26 11:30:34 UTC 2024
+! Syntax: Dnsmasq
+! Total number of entries: 23181
+!
 local=/01edc.com/
 local=/101luadalmatians.com/
 local=/103-boi.com/
@@ -3826,6 +3826,7 @@ local=/cedarsave.com/
 local=/cedarsavecr.com/
 local=/cedarsavecredit.com/
 local=/cedarsavecu.com/
+local=/ceggcc.vip/
 local=/cegner.de/
 local=/ceilingu.shop/
 local=/celebrityfrenchies.com/
@@ -11174,6 +11175,7 @@ local=/kennelpuppieshome.com/
 local=/kennykaylogistics.com/
 local=/kennys.sheltiepuppies.com/
 local=/kenrapidlogistics.com/
+local=/kenskrksr.com/
 local=/kentucky-gunshop.com/
 local=/kentucky.gunshop.com/
 local=/kenzoparisonline.shop/

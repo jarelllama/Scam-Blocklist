@@ -1,11 +1,11 @@
-# Title: Jarelllama's Scam Blocklist
-# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
-# Homepage: https://github.com/jarelllama/Scam-Blocklist
-# License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Mar 26 05:29:09 UTC 2024
-# Syntax: Unbound
-# Total number of entries: 23179
-#
+! Title: Jarelllama's Scam Blocklist 
+! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
+! Homepage: https://github.com/jarelllama/Scam-Blocklist
+! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
+! Last modified: Tue Mar 26 11:30:34 UTC 2024
+! Syntax: Unbound
+! Total number of entries: 23181
+!
 server:
 local-zone: "01edc.com." always_nxdomain
 local-zone: "101luadalmatians.com." always_nxdomain
@@ -3827,6 +3827,7 @@ local-zone: "cedarsave.com." always_nxdomain
 local-zone: "cedarsavecr.com." always_nxdomain
 local-zone: "cedarsavecredit.com." always_nxdomain
 local-zone: "cedarsavecu.com." always_nxdomain
+local-zone: "ceggcc.vip." always_nxdomain
 local-zone: "cegner.de." always_nxdomain
 local-zone: "ceilingu.shop." always_nxdomain
 local-zone: "celebrityfrenchies.com." always_nxdomain
@@ -11175,6 +11176,7 @@ local-zone: "kennelpuppieshome.com." always_nxdomain
 local-zone: "kennykaylogistics.com." always_nxdomain
 local-zone: "kennys.sheltiepuppies.com." always_nxdomain
 local-zone: "kenrapidlogistics.com." always_nxdomain
+local-zone: "kenskrksr.com." always_nxdomain
 local-zone: "kentucky-gunshop.com." always_nxdomain
 local-zone: "kentucky.gunshop.com." always_nxdomain
 local-zone: "kenzoparisonline.shop." always_nxdomain
