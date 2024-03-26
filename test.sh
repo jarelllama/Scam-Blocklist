@@ -166,7 +166,7 @@ function test_retrieval_check {
     if [[ "$script_to_test" == 'check' ]]; then
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
         check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"  # Check wildcards file
-    elif [[ "$script_to_test" == 'check' ]]; then
+    elif [[ "$script_to_test" == 'retrieval' ]]; then
         [[ ! -d data/pending ]] && printf "! Pending directory is missing.\n"  # Check pending directory
     fi
     check_log  # Check log file
