@@ -13,7 +13,6 @@ subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
 time_format=$(date -u +"%H:%M:%S %d-%m-%y")
-user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.1'
 
 # grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
 
@@ -34,7 +33,6 @@ function main {
     source_dfpi
     source_guntab
     source_petscams
-    source_scamdelivery  # Has captchas
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
@@ -90,21 +88,6 @@ function source_petscams {
             sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
                 s/-\?[0-9]\?\/">//; s/-/./g' >> "$domains_file"
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
-    done
-    process_source
-}
-
-function source_scamdelivery {
-    source='scam.delivery'
-    ignore_from_light=true  # Do not use as a source for light version
-    domains_file="data/pending/domains_${source}.tmp"
-    [[ "$use_pending" == true ]] && { process_source; return; }
-    url='https://scam.delivery/category/review'
-    for page in {2..3}; do  # Loop through 2 pages
-        # Use User Agent to reduce captcha blocking
-        curl -sA "$user_agent" "${url}/" | grep -oE 'title="[[:alnum:].-]+\.[[:alnum:]-]{2,}"></a>' |
-            sed 's/title="//; s/"><\/a>//' >> "$domains_file"
-        url="https://scam.delivery/category/review/page/${page}"  # Add '/page' after first run
     done
     process_source
 }
