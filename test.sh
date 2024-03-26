@@ -181,8 +181,11 @@ function test_toplist {
     printf "google.com\n" > data/pending/domains_toplist-check.tmp  # Input
     printf "google.com\n" > out_log.txt  # Expected output
     bash retrieve.sh || true  # Run retrieval script and ignore returned exit code
+    printf "%s\n" "------------------------------------------------------------------"
     [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; exit 1; }  # Check pending directory
-    check_log && check_error
+    check_log
+    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
+    check_error
 }
 
 function test_dead {
