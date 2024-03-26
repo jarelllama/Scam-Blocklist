@@ -104,7 +104,7 @@ function format_list {
 
 function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
-    clean_dead_domains_file # Clean dead domains file
+    clean_dead_domains_file  # Clean dead domains file
 }
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
