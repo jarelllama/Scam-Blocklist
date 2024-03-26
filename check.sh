@@ -19,7 +19,7 @@ function main {
     done
     retrieve_toplist
     check_raw_file "$raw_file"
-    check_raw_file "$raw_light_file" &> /dev/null
+    check_raw_file "$raw_light_file" #&> /dev/null
 }
 
 function retrieve_toplist {
