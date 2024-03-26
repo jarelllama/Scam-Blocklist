@@ -22,6 +22,7 @@ function main {
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
     [[ "$1" == 'shellcheck' ]] && shellcheck
+    exit 0
 }
 
 function shellcheck {

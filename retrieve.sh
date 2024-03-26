@@ -328,7 +328,7 @@ function build_raw {
 
 function build_raw_light {
     ! grep -q '[[:alnum:]]' filtered_light_domains.tmp && return  # Return if no domains to add
-    cat filtered_light_domains.tmp >> "$raw_light_file"
+    cat filtered_light_domains.tmp >> "$raw_light_file"  # Add domains to raw light file
     format_list "$raw_light_file"
 }
 
