@@ -30,6 +30,10 @@ function retrieve_toplist {
 }
 
 function check_raw_file {
+    # Add any new wildcards to the raw files
+    cat "$wildcards_file" >> "$raw_file"
+    cat "$wildcards_file" >> "$raw_light_file"
+    format_list "$raw_file" && format_list "$raw_light_file"
     domains=$(<"$raw_file")
     before_count=$(wc -l < "$raw_file")
     touch filter_log.tmp
@@ -82,10 +86,6 @@ function check_raw_file {
         log_event "$invalid_entries" "invalid"
     fi
 
-    # Add any new wildcards to the raw files
-    cat "$wildcards_file" >> "$raw_file"
-    cat "$wildcards_file" >> "$raw_light_file"
-    format_list "$raw_file" && format_list "$raw_light_file"
     # Remove redundant domains
     redundant_count=0  # Initialize redundant domains count
     while read -r domain; do  # Loop through each domain in the blocklist
