@@ -26,9 +26,11 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
+
     printf "\n"
-    # Check for existing domains file
-    [[ ! -d data/pending ]] && mkdir data/pending || printf "Using existing lists of retrieved domains.\n\n"
+    # Check for existing pending domains file
+    [[ ! -d data/pending ]] && mkdir data/pending
+    [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
     source_aa419
     source_dfpi
     source_guntab
@@ -44,7 +46,7 @@ function main {
 function source_aa419 {
     source='aa419.org'
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://api.aa419.org/fakesites'
     query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
     curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" | jq -r '.[].Domain' >> "$domains_file"  # Note trailing slash breaks API call
@@ -55,7 +57,7 @@ function source_guntab {
     source='guntab.com'
     ignore_from_light=true
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://www.guntab.com/scam-websites'
     curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' |
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$domains_file"  # Note results are not sorted by time added
@@ -65,7 +67,7 @@ function source_guntab {
 function source_stopgunscams {
     source='stopgunscams.com'
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://stopgunscams.com'
     for page in {1..5}; do  # Loop through pages
         curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
@@ -77,7 +79,7 @@ function source_stopgunscams {
 function source_petscams {
     source='petscams.com'
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
         curl -s "${url}/" | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+-[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
@@ -92,7 +94,7 @@ function source_scamdelivery {
     source='scam.delivery'
     ignore_from_light=true
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://scam.delivery/category/review'
     for page in {2..3}; do  # Loop through 2 pages
         # Use User Agent to reduce captcha blocking
@@ -106,7 +108,7 @@ function source_scamdelivery {
 function source_scamdirectory {
     source='scam.directory'
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://scam.directory/category'
     curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
         sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$domains_file"  # Keep only newly added domains
@@ -116,7 +118,7 @@ function source_scamdirectory {
 function source_scamadviser {
     source='scamadviser.com'
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
         curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing slash breaks curl
@@ -128,7 +130,7 @@ function source_scamadviser {
 function source_dfpi {
     source='dfpi.ca.gov'
     domains_file="data/pending/domains_${source}.tmp"
-    [[ -f "$domains_file" ]] && { process_source; return; }
+    [[ "$use_pending" == true ]] && { process_source; return; }
     url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
         sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$domains_file"  # Keep only newly added domains
@@ -137,19 +139,21 @@ function source_dfpi {
 
 function source_google_search {
     source='Google Search'
-    # Check for existing domains file
+    if [[ "$use_pending" != true ]]; then
+        # Retrieve new domains
+        while read -r search_term; do  # Loop through search terms
+            # Break out of loop if rate limited
+            [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
+            search_google "$search_term"
+        done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
+    fi
+    # Use existing pending domains file
     for domains_file in data/pending/domains_google_search_*.tmp; do
         [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
         search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
         search_term=${search_term%.tmp}  # Remove file extension from file name
         process_source && return
     done
-    # Retrieve new domains
-    while read -r search_term; do  # Loop through search terms
-        # Break out of loop if rate limited
-        [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
-        search_google "$search_term"
-    done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
 
 function search_google {
@@ -177,14 +181,14 @@ function search_google {
 }
 
 function process_source {
+    [[ ! -f "$domains_file" ]] && return  # Return if domains file does not exist
+    ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }  # Skip to next source if no results retrieved
+
     # Initialize variables
     unfiltered_count=0 && filtered_count=0 && total_whitelisted_count=0
     dead_count=0 && redundant_count=0 && toplist_count=0 && domains_in_toplist=''
     [[ -z "$query_count" ]] && query_count=0
     [[ -z "$rate_limited" ]] && rate_limited=false
-
-    # Skip to next source if no results retrieved
-    ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }
 
     # Remove https:// or http:// and convert to lowercase
     sed 's/https\?:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
