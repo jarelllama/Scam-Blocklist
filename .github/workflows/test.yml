@@ -34,6 +34,15 @@ jobs:
       - name: Test check.sh
         run: bash test.sh 'check'
 
+  test-toplist-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test toplist check
+        run: bash test.sh 'toplist'
+
   test-dead:
     runs-on: ubuntu-latest
     steps:
