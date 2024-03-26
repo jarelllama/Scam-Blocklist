@@ -242,9 +242,7 @@ function test_dead {
     [[ "$?" -eq 1 ]] || errored=false  # Check returned error code
     printf "%s\n" "------------------------------------------------------------------"
 
-    # Check returned error code
-    [[ "$errored" != false ]] && { printf "! Script returned an error.\n"; error=true; }
-
+    [[ "$errored" != false ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
     check_if_dead_present "$subdomains_file" "Subdomains"  # Check subdomains file
