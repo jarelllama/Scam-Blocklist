@@ -129,12 +129,13 @@ function test_retrieval_check {
     # Test removal of redundant domains
     : > "$redundant_domains_file"  # Initialize redundant domains file
     printf "redundant-test.com\n" > "$wildcards_file"  # Input
+    printf "redundant-test.com\n" >> out_wildcards.txt  # Wildcard should already be in expected wildcards file
+    printf "redundant-test.com\n" >> out_raw.txt  # Wildcard should already be in expected raw file
     printf "domain.redundant-test.com\n" >> input.txt  # Input
     printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
     if [[ "$script_to_test" == 'check' ]]; then
-        printf "redundant-test.com\n" >> out_raw.txt  # Expected output
         printf "domain.redundant-test.com\n" >> out_redundant.txt  # Expected output
-        # Test new wildcard match added to raw file
+        # Test new wildcard detection
         # Input
         printf "redundant-test-2.com\n" >> input.txt
         printf "domain.redundant-test-2.com\n" >> input.txt
