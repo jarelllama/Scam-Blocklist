@@ -107,5 +107,5 @@ function cleanup {
     clean_dead_domains_file  # Clean dead domains file
 }
 
-trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
+trap cleanup EXIT
 main
