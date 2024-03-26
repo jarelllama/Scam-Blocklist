@@ -133,8 +133,8 @@ function test_retrieval_check {
     # No expected output for retrieval script test
     if [[ "$script_to_test" == 'check' ]]; then
         printf "redundant-test.com\n" > "$wildcards_file"  # Input
-        print "redundant-test-2.com\n" >> input.txt  # Input
-        print "redundant-test.com\n" >> out_raw.txt  # Expected output
+        printf "redundant-test-2.com\n" >> input.txt  # Input
+        printf "redundant-test.com\n" >> out_raw.txt  # Expected output
         printf "redundant-test-2.com\n" >> out_raw.txt  # Expected output
         # Expected output
         printf "redundant-test.com\n" >> out_wildcards.txt

@@ -19,7 +19,7 @@ function main {
     check_subdomains
     check_redundant
     check_for_dead
-    #update_light_file
+    update_light_file
 }
 
 function check_for_alive {
