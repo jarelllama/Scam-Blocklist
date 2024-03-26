@@ -16,7 +16,7 @@ function main {
         format_list "$file"
     done
     check "$raw_file"
-    check "$raw_light_file" &> /dev/null
+    check "$raw_light_file" #&> /dev/null
 }
 
 function check {

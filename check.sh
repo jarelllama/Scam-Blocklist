@@ -20,6 +20,7 @@ function main {
     retrieve_toplist
     check_raw_file "$raw_file"
     check_raw_file "$raw_light_file" #&> /dev/null
+    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
 }
 
 function retrieve_toplist {
@@ -108,7 +109,7 @@ function check_raw_file {
     fi
 
     sed '/^$/d' filter_log.tmp | sort -u > temp.tmp && mv temp.tmp filter_log.tmp  # Remove empty lines, sort and remove duplicates (note filter log has whitespaces)
-    [[ ! -s filter_log.tmp ]] && exit 0  # Exit if no domains were filtered
+    [[ ! -s filter_log.tmp ]] && return  # Return if no domains were filtered
 
     # Collate filtered wildcards
     if [[ -f wildcards.tmp ]]; then
@@ -135,8 +136,6 @@ function check_raw_file {
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -l < "$raw_file")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_count" "$toplist_count"
-
-    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
 }
 
 function clean_domain_log {
