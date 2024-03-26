@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Tue Mar 26 18:18:05 UTC 2024
+! Last modified: Tue Mar 26 19:14:55 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 23183
+! Total number of entries: 23188
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2700,6 +2700,7 @@ local-zone: "block-reifenversand.com." always_nxdomain
 local-zone: "block-wisefx.com." always_nxdomain
 local-zone: "blockchaininvestmentllc.com." always_nxdomain
 local-zone: "blockchainminingpools.com." always_nxdomain
+local-zone: "blockdag.network." always_nxdomain
 local-zone: "blockearn.net." always_nxdomain
 local-zone: "blockexchange.live." always_nxdomain
 local-zone: "blockiexc.com." always_nxdomain
@@ -5233,6 +5234,7 @@ local-zone: "dbhmnp.shop." always_nxdomain
 local-zone: "dbsbk.com." always_nxdomain
 local-zone: "dcctanzania.com." always_nxdomain
 local-zone: "dcf-groupe.com." always_nxdomain
+local-zone: "dcmcoin.net." always_nxdomain
 local-zone: "dcmflimitd.blogspot.com." always_nxdomain
 local-zone: "dcodtcre.shop." always_nxdomain
 local-zone: "dcomprice.com." always_nxdomain
@@ -5334,6 +5336,7 @@ local-zone: "defahrradzubehoer.com." always_nxdomain
 local-zone: "defencefinancialsavings.com." always_nxdomain
 local-zone: "defendarms.com." always_nxdomain
 local-zone: "defenseofficials.com." always_nxdomain
+local-zone: "defi-bit.com." always_nxdomain
 local-zone: "defisdartiste.com." always_nxdomain
 local-zone: "degomet.net." always_nxdomain
 local-zone: "degrey.co." always_nxdomain
@@ -6609,6 +6612,7 @@ local-zone: "ethicalbreedersa.com." always_nxdomain
 local-zone: "ethicminer.myshopify.com." always_nxdomain
 local-zone: "ethikadeutschland.com." always_nxdomain
 local-zone: "ethlkadeutschland.com." always_nxdomain
+local-zone: "ethminegg.com." always_nxdomain
 local-zone: "etkick.de." always_nxdomain
 local-zone: "etoile.mode.com." always_nxdomain
 local-zone: "etr-karlsruhe.de." always_nxdomain
@@ -8889,6 +8893,7 @@ local-zone: "goldenretrieverwelpenkaufen.com." always_nxdomain
 local-zone: "goldenstallions.com." always_nxdomain
 local-zone: "goldenswiftexps.com." always_nxdomain
 local-zone: "goldenvalleyanimalhospital.com." always_nxdomain
+local-zone: "goldenzeil.com." always_nxdomain
 local-zone: "goldenzurich.com." always_nxdomain
 local-zone: "goldernfrenchies.com." always_nxdomain
 local-zone: "goldforworld.com." always_nxdomain
@@ -16803,6 +16808,7 @@ local-zone: "reemfharris.com." always_nxdomain
 local-zone: "reeno1.com." always_nxdomain
 local-zone: "reesewalker.shop." always_nxdomain
 local-zone: "reetata.com." always_nxdomain
+local-zone: "reetcapital.com." always_nxdomain
 local-zone: "refinedesktrade.com." always_nxdomain
 local-zone: "refinedstockex.com." always_nxdomain
 local-zone: "refinesunfloweroil.com." always_nxdomain
@@ -17947,7 +17953,6 @@ local-zone: "sbdmmarket.com." always_nxdomain
 local-zone: "sbdmstore.com." always_nxdomain
 local-zone: "sbgfgrants.com." always_nxdomain
 local-zone: "sbikeparts.com." always_nxdomain
-local-zone: "scam.delivery." always_nxdomain
 local-zone: "scansave.pl." always_nxdomain
 local-zone: "scarpaoutletportugal.com." always_nxdomain
 local-zone: "scavaliersbreeder.com." always_nxdomain

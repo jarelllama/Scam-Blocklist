@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Tue Mar 26 18:18:05 UTC 2024
+! Last modified: Tue Mar 26 19:14:55 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 23183
+! Total number of entries: 23188
 !
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -2699,6 +2699,7 @@ local=/block-reifenversand.com/
 local=/block-wisefx.com/
 local=/blockchaininvestmentllc.com/
 local=/blockchainminingpools.com/
+local=/blockdag.network/
 local=/blockearn.net/
 local=/blockexchange.live/
 local=/blockiexc.com/
@@ -5232,6 +5233,7 @@ local=/dbhmnp.shop/
 local=/dbsbk.com/
 local=/dcctanzania.com/
 local=/dcf-groupe.com/
+local=/dcmcoin.net/
 local=/dcmflimitd.blogspot.com/
 local=/dcodtcre.shop/
 local=/dcomprice.com/
@@ -5333,6 +5335,7 @@ local=/defahrradzubehoer.com/
 local=/defencefinancialsavings.com/
 local=/defendarms.com/
 local=/defenseofficials.com/
+local=/defi-bit.com/
 local=/defisdartiste.com/
 local=/degomet.net/
 local=/degrey.co/
@@ -6608,6 +6611,7 @@ local=/ethicalbreedersa.com/
 local=/ethicminer.myshopify.com/
 local=/ethikadeutschland.com/
 local=/ethlkadeutschland.com/
+local=/ethminegg.com/
 local=/etkick.de/
 local=/etoile.mode.com/
 local=/etr-karlsruhe.de/
@@ -8888,6 +8892,7 @@ local=/goldenretrieverwelpenkaufen.com/
 local=/goldenstallions.com/
 local=/goldenswiftexps.com/
 local=/goldenvalleyanimalhospital.com/
+local=/goldenzeil.com/
 local=/goldenzurich.com/
 local=/goldernfrenchies.com/
 local=/goldforworld.com/
@@ -16802,6 +16807,7 @@ local=/reemfharris.com/
 local=/reeno1.com/
 local=/reesewalker.shop/
 local=/reetata.com/
+local=/reetcapital.com/
 local=/refinedesktrade.com/
 local=/refinedstockex.com/
 local=/refinesunfloweroil.com/
@@ -17946,7 +17952,6 @@ local=/sbdmmarket.com/
 local=/sbdmstore.com/
 local=/sbgfgrants.com/
 local=/sbikeparts.com/
-local=/scam.delivery/
 local=/scansave.pl/
 local=/scarpaoutletportugal.com/
 local=/scavaliersbreeder.com/
