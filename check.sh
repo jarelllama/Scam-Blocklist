@@ -20,7 +20,7 @@ function main {
     retrieve_toplist
     check_raw_file "$raw_file"
     check_raw_file "$raw_light_file" #&> /dev/null
-    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
+    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklists required filtering
 }
 
 function retrieve_toplist {
@@ -51,8 +51,7 @@ function check_raw_file {
         awk 'NF {print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
         log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_to_remove_file"
-    format_list subdomains.tmp
-    format_list root_domains.tmp
+    format_list subdomains.tmp && format_list root_domains.tmp
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains=$(comm -23 <(grep -Ff "$whitelist_file" <<< "$domains") "$blacklist_file")
@@ -97,8 +96,7 @@ function check_raw_file {
         awk 'NF {print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
         log_event "$redundant_domains" "redundant"
     done <<< "$domains"
-    format_list redundant_domains.tmp
-    format_list wildcards.tmp
+    format_list redundant_domains.tmp && format_list wildcards.tmp
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$domains") "$toplist_file") "$blacklist_file")
@@ -116,23 +114,20 @@ function check_raw_file {
         wildcards=$(comm -12 wildcards.tmp <(printf "%s" "$domains"))  # Retrieve filtered wildcard domains
         printf "%s\n" "$wildcards" >> "$wildcards_file"  # Add the filtered wildcards domains to the wildcards file
         grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp >> "$redundant_domains_file"  # Retrieve and add filtered redundant domains to redundant domains file
-        format_list "$wildcards_file"
-        format_list "$redundant_domains_file"
+        format_list "$wildcards_file" && format_list "$redundant_domains_file"
     fi
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 root_domains.tmp <(printf "%s" "$domains"))  # Retrieve filtered root domains
         printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
         grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file
-        format_list "$root_domains_file"
-        format_list "$subdomains_file"
+        format_list "$root_domains_file" && format_list "$subdomains_file"
     fi
 
     printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
     cat filter_log.tmp
     printf "%s\n" "$domains" > "$raw_file"  # Save changes to blocklist
     format_list "$raw_file"
-
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -l < "$raw_file")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_count" "$toplist_count"

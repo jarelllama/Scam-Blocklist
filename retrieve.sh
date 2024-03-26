@@ -26,7 +26,6 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-
     printf "\n"
     # Check for existing pending domains file
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
@@ -41,6 +40,8 @@ function main {
     source_stopgunscams
     source_google_search
     build_raw
+    build_raw_light
+    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid domains found
 }
 
 function source_aa419 {
@@ -218,8 +219,7 @@ function process_source {
         domains_with_subdomains=$(grep -v '^www\.' <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_to_remove_file"
-    format_list subdomains.tmp
-    format_list root_domains.tmp
+    format_list subdomains.tmp && format_list root_domains.tmp
 
     # Remove domains already in raw file
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
@@ -288,8 +288,7 @@ function process_source {
 function build_raw {
     # Exit if no new domains to add (-s does not seem to work well here)
     ! grep -q '[[:alnum:]]' filtered_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
-
-    format_list filtered_domains.tmp
+    format_list filtered_domains.tmp && format_list "$raw_file"
 
     [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n"
     # Print invalid entries
@@ -297,7 +296,7 @@ function build_raw {
         format_list invalid_entries.tmp
         awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp
     fi
-    # If domains were found in toplist, exit with error without saving domains to raw file
+    # If domains found in toplist, exit with error without saving to raw file
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
@@ -309,18 +308,11 @@ function build_raw {
         root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
         printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add filtered root domains to root domains file to exclude from dead check
         grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file for dead check
-        format_list "$root_domains_file"
-        format_list "$subdomains_file"
-    fi
-
-    # Build raw light file
-    if grep -q '[[:alnum:]]' filtered_light_domains.tmp; then
-        cat filtered_light_domains.tmp >> "$raw_light_file"
-        format_list "$raw_light_file"
+        format_list "$root_domains_file" && format_list "$subdomains_file"
     fi
 
     count_before=$(wc -l < "$raw_file")
-    cat filtered_domains.tmp >> "$raw_file"  # Add new domains to raw file
+    cat filtered_domains.tmp >> "$raw_file"  # Add domains to raw file
     format_list "$raw_file"
     log_event "$(<filtered_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
@@ -332,8 +324,12 @@ function build_raw {
     temp_source_log=$(grep -vF "$time_format" "$source_log")  # Remove rows from log
     rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved into the raw file
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$source_log"  # Add the edited rows back to the log
+}
 
-    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid entries were found
+function build_raw_light {
+    ! grep -q '[[:alnum:]]' filtered_light_domains.tmp && return  # Return if no domains to add
+    cat filtered_light_domains.tmp >> "$raw_light_file"
+    format_list "$raw_light_file"
 }
 
 function log_event {

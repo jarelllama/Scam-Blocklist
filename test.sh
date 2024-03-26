@@ -1,5 +1,6 @@
 #!/bin/bash
 raw_file='data/raw.txt'
+raw_light_file='data/raw_light.txt'
 domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
@@ -14,13 +15,13 @@ dead_domains_file='data/dead_domains.txt'
 
 function main {
     : > "$raw_file"  # Initialize raw file
+    : > "$raw_light_file"  # Initialize raw light file
     sed -i '1q' "$domain_log"  # Initialize domain log file
     [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"  # Do not run when there are existing domain files
     [[ "$1" == 'toplist' ]] && test_toplist
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
     [[ "$1" == 'shellcheck' ]] && shellcheck
-    exit 0  # Return 0 if no tests were done
 }
 
 function shellcheck {
@@ -140,13 +141,21 @@ function test_retrieval_check {
 
     # Skip toplist test because it prevents the changes from being saved to the raw file
 
+    if [[ "$script_to_test" == 'retrieval' ]]; then
+        # Test light raw file build
+        cp "$raw_file" "$raw_light_file"  # Sample data
+        printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
+        printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
+        grep -vF 'raw-light-test.com' out_raw.txt > out_raw_light.txt  # Expected output
+    fi
+
     # Prepare expected output files
     for file in out_*; do
         sort "$file" -o "$file"
     done
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        # Distribute the sample input into 3 files
+        # Distribute the sample input into various sources
         mkdir data/pending
         split -n l/3 input.txt
         mv xaa data/pending/domains_aa419.org.tmp
@@ -154,12 +163,14 @@ function test_retrieval_check {
         mv xac data/pending/domains_google_search_search-term-2.tmp
         bash retrieve.sh || true  # Run retrieval script and ignore exit status
     elif [[ "$script_to_test" == 'check' ]]; then
-        mv input.txt "$raw_file"  # Prepare sample raw file
+        cp input.txt "$raw_file"  # Input
+        mv input.txt "$raw_light_file"  # Input
         bash check.sh || true  # Run lists check script and ignore exit status
     fi
     printf "%s\n" "------------------------------------------------------------------"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
+    check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'retrieval' ]]; then
@@ -182,7 +193,7 @@ function test_toplist {
     printf "toplist,google.com\n" > out_log.txt  # Expected output
     bash retrieve.sh || true  # Run retrieval script and ignore exit status
     printf "%s\n" "------------------------------------------------------------------"
-    [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; exit 1; }  # Check pending directory
+    [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; error=true; }  # Check pending directory
     check_log
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
     check_error
@@ -231,6 +242,9 @@ function test_dead {
     printf "49532dead-domain-test.com\n" >> out_dead.txt  # Expected output
     printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt  # Expected output
 
+    # Test raw light file
+    cp "$raw_file" "$raw_light_file"  # Input
+
     # Prepare expected output files
     for file in out_*; do
         [[ "$file" != out_dead.txt ]] && sort "$file" -o "$file"  # Dead domains file is not sorted
@@ -242,6 +256,7 @@ function test_dead {
 
     [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
+    check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
     check_if_dead_present "$subdomains_file" "Subdomains"  # Check subdomains file
     check_if_dead_present "$root_domains_file" "Root domains"  # Check root domains file
