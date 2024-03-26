@@ -23,7 +23,6 @@ Today | Yesterday | Excluded | Source
     4 |         2 |      51% | dfpi.ca.gov
    45 |         9 |      12% | guntab.com
    10 |         2 |       7% | petscams.com
-    0 |         0 |       0% | scam.delivery
     0 |         0 |       9% | scam.directory
     6 |         0 |      29% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
