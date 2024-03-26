@@ -274,6 +274,7 @@ function process_source {
     filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
     printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate filtered domains
     [[ "$ignore_from_light" != true ]] && printf "%s\n" "$pending_domains" >> filtered_light_domains.tmp  # Collate filtered domains from light sources
+    ignore_from_light=false  # Reinitialize whether to ignore source from light version
     log_source
 }
 
