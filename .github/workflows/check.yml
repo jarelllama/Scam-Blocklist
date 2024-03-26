@@ -3,8 +3,7 @@ run-name: Check lists
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 12am
-    - cron: '0 0 * * *'
+    - cron: '30 23 * * *'
 
 jobs:
   check-lists:
