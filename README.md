@@ -1,5 +1,5 @@
 # Jarelllama's Scam Blocklist
-Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval done daily at 00:30 UTC.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval is done daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -35,6 +35,21 @@ Today | Yesterday | Excluded | Source
  sources in SOURCES.md.
 ```
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
+
+## Light version
+Mainly for list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
+
+<details>
+<summary>Details about the light version</summary>
+<ul>
+<li>Includes Google Search results</li>
+<li>Does not use sources whose domains cannot be filtered by date added</li>
+<li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full list includes domains added from 2 months back and onwards</li>
+</ul>
+Sources included in the light version are marked in SOURCES.md.
+
+Total domains: 1000
+</details>
 
 ## Retrieving scam domains from Google Search
 Google provides a [Search API](https://developers.google.com/custom-search/v1/introduction) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)

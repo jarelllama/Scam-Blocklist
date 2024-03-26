@@ -39,7 +39,7 @@ function main {
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    #source_google_search
+    source_google_search
     build_raw
 }
 

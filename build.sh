@@ -22,7 +22,7 @@ function main {
 function update_readme {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
-Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval done daily at 00:30 UTC.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval is done daily at 00:30 UTC.
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -58,6 +58,21 @@ $(print_stats)
  sources in SOURCES.md.
 \`\`\`
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
+
+## Light version
+Mainly for list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
+
+<details>
+<summary>Details about the light version</summary>
+<ul>
+<li>Includes Google Search results</li>
+<li>Does not use sources whose domains cannot be filtered by date added</li>
+<li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full list includes domains added from 2 months back and onwards</li>
+</ul>
+Sources included in the light version are marked in SOURCES.md.
+
+Total domains: 1000
+</details>
 
 ## Retrieving scam domains from Google Search
 Google provides a [Search API](https://developers.google.com/custom-search/v1/introduction) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
@@ -128,8 +143,8 @@ function build_list {
 
     # Loop through the two blocklist versions
     for i in {1..2}; do
-        [[ "$i" -eq 1 ]] && { list_name='scam.txt'; version=''; }
-        [[ "$i" -eq 2 ]] && { list_name='scam_light.txt'; version='LIGHT VERSION'; raw_file="$raw_light_file"; }
+        [[ "$i" -eq 1 ]] && { list_name='scam.txt'; version=''; source_file="$raw_file"; }
+        [[ "$i" -eq 2 ]] && { list_name='scam_light.txt'; version='LIGHT VERSION'; source_file="$raw_light_file"; }
         blocklist_path="lists/${directory}/${list_name}"
         [[ ! -d "$(dirname "$blocklist_path")" ]] && mkdir "$(dirname "$blocklist_path")"  # Create directory if not present
 
@@ -140,13 +155,13 @@ ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${comment} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${comment} Last modified: $(date -u)
 ${comment} Syntax: ${syntax}
-${comment} Total number of entries: $(wc -l < "$raw_file")
+${comment} Total number of entries: $(wc -l < "$source_file")
 ${comment}
 EOF
 
         [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound format
         # Append formatted domains onto blocklist
-        printf "%s\n" "$(awk -v before="$before" -v after="$after" '{print before $0 after}' "$raw_file")" >> "$blocklist_path"
+        printf "%s\n" "$(awk -v before="$before" -v after="$after" '{print before $0 after}' "$source_file")" >> "$blocklist_path"
     done
 }
 
