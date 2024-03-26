@@ -26,5 +26,6 @@ jobs:
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
-          git diff-index --quiet HEAD || git commit -am "Retrieve domains"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Retrieve domains"
           git push -q
