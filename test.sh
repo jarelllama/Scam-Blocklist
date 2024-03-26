@@ -139,6 +139,7 @@ function test_retrieval_check {
         printf "redundant-test-2.com\n" >> input.txt
         printf "domain.redundant-test-2.com\n" >> input.txt
         # Expected output
+        printf "redundant-test-2.com\n" >> out_raw.txt
         printf "redundant-test-2.com\n" >> out_wildcards.txt
         printf "domain.redundant-test-2.com\n" >> out_redundant.txt
         printf "redundant,domain.redundant-test-2.com\n" >> out_log.txt
