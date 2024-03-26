@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Find root domains that occur more than once
+# grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d
+
 # Format files
 function format {
     [[ ! -f "$1" ]] && return  # Return if file does not exist

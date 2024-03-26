@@ -78,7 +78,7 @@ function check_raw_file {
     fi
 
     # Remove invalid entries including IP addresses. This excludes punycode TLDs (.xn--*)
-    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$' <<< "$domains")
+    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")
     invalid_entries_count=$(wc -w <<< "$invalid_entries")
     if [[ "$invalid_entries_count" -gt 0 ]]; then
         domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))
@@ -118,16 +118,16 @@ function check_raw_file {
     # Collate filtered wildcards
     if [[ -f wildcards.tmp ]]; then
         wildcards=$(comm -12 wildcards.tmp <(printf "%s" "$domains"))  # Retrieve filtered wildcard domains
-        printf "%s\n" "$wildcards" >> "$wildcards_file"  # Add the filtered wildcards domains to the wildcards file
-        grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp >> "$redundant_domains_file"  # Retrieve and add filtered redundant domains to redundant domains file
+        printf "%s\n" "$wildcards" >> "$wildcards_file"  # Collate filtered wildcards
+        grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp >> "$redundant_domains_file"  # Collate filtered redundant domains for dead check
         format_list "$wildcards_file" && format_list "$redundant_domains_file"
     fi
 
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 root_domains.tmp <(printf "%s" "$domains"))  # Retrieve filtered root domains
-        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add the filtered root domains to the root domains file
-        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Collate filtered root domains to exclude from dead check
+        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Collate filtered subdomains for dead check
         format_list "$root_domains_file" && format_list "$subdomains_file"
     fi
 

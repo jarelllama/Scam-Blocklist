@@ -14,8 +14,6 @@ wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
 time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 
-# grep '\..*\.' raw.txt | awk -F '.' '{print $2"."$3"."$4}' | sort | uniq -d  # Find root domains that occur more than once
-
 # If running locally, use locally stored secrets instead of environment variables
 [[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; }
 
@@ -210,10 +208,8 @@ function process_source {
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
     dead_count=$(wc -w <<< "$dead_domains")
-    if [[ "$dead_count" -gt 0 ]]; then
-        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
-        #log_event "$dead_domains" "dead"  # Logs too many lines
-    fi
+    [[ "$dead_count" -gt 0 ]] && pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
+    # Logging removed as it inflated log size by too much
 
     # Log blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")
@@ -235,8 +231,8 @@ function process_source {
         log_event "$whitelisted_tld_domains" "tld"
     fi
 
-    # Remove invalid entries including IP addresses. This excludes punycode TLDs (.xn--*)
-    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[[:alpha:]][[:alnum:]-]{1,}$' <<< "$pending_domains")
+    # Remove invalid entries including IP addresses. Punycode TLDs (.xn--*) are allowed
+    invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$pending_domains")
     if [[ -n "$invalid_entries" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$invalid_entries"))
         log_event "$invalid_entries" "invalid"
@@ -274,11 +270,13 @@ function build_raw {
     format_list filtered_domains.tmp && format_list "$raw_file"
 
     [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n"
+
     # Print invalid entries
     if [[ -f invalid_entries.tmp ]]; then
         format_list invalid_entries.tmp
         awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp
     fi
+
     # If domains found in toplist, exit with error without saving to raw file
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
@@ -286,11 +284,12 @@ function build_raw {
         printf "\nPending domains saved for rerun.\n\n"
         exit 1
     fi
+
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
-        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Add filtered root domains to root domains file to exclude from dead check
-        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Retrieve and add filtered subdomains to subdomains file for dead check
+        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Collate filtered root domains to exclude from dead check
+        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Collate filtered subdomains for dead check
         format_list "$root_domains_file" && format_list "$subdomains_file"
     fi
 
@@ -302,11 +301,10 @@ function build_raw {
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$count_difference" "$count_after"
 
-    # Mark the source as saved in the source log file
-    rows=$(grep -F "$time_format" "$source_log")  # Find rows in log for this run
+    # Mark sources as saved in the source log file
+    rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file
     temp_source_log=$(grep -vF "$time_format" "$source_log")  # Remove rows from log
-    rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved into the raw file
-    printf "%s\n%s\n" "$temp_source_log" "$rows" > "$source_log"  # Add the edited rows back to the log
+    printf "%s\n%s\n" "$temp_source_log" "$rows" > "$source_log"  # Add the updated rows to the log
 }
 
 function build_raw_light {
