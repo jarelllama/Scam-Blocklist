@@ -52,7 +52,7 @@ Each search term is frequently benchmarked on its number of new domains and fals
 #### Statistics
 ```
 Active search terms: 17
-Queries made today: 11
+Queries made today: 109 (rate limited)
 Domains retrieved today: 0
 ```
 
