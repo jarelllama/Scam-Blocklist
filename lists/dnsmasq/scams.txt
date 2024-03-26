@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Tue Mar 26 17:03:37 UTC 2024
+! Last modified: Tue Mar 26 18:18:05 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 23181
+! Total number of entries: 23183
 !
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -8652,6 +8652,7 @@ local=/globalmerchantandindustrial.com/
 local=/globalmetalsltd.com/
 local=/globalmininghub.com/
 local=/globalminingtanzania.com/
+local=/globalmoversdelivery-co.com/
 local=/globalmoversdelivery.co.com/
 local=/globalmoversexpress.com/
 local=/globalogisticsservices.com/
@@ -17945,6 +17946,7 @@ local=/sbdmmarket.com/
 local=/sbdmstore.com/
 local=/sbgfgrants.com/
 local=/sbikeparts.com/
+local=/scam.delivery/
 local=/scansave.pl/
 local=/scarpaoutletportugal.com/
 local=/scavaliersbreeder.com/

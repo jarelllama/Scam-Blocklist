@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Tue Mar 26 17:03:37 UTC 2024
+! Last modified: Tue Mar 26 18:18:05 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 23181
+! Total number of entries: 23183
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -8653,6 +8653,7 @@ local-zone: "globalmerchantandindustrial.com." always_nxdomain
 local-zone: "globalmetalsltd.com." always_nxdomain
 local-zone: "globalmininghub.com." always_nxdomain
 local-zone: "globalminingtanzania.com." always_nxdomain
+local-zone: "globalmoversdelivery-co.com." always_nxdomain
 local-zone: "globalmoversdelivery.co.com." always_nxdomain
 local-zone: "globalmoversexpress.com." always_nxdomain
 local-zone: "globalogisticsservices.com." always_nxdomain
@@ -17946,6 +17947,7 @@ local-zone: "sbdmmarket.com." always_nxdomain
 local-zone: "sbdmstore.com." always_nxdomain
 local-zone: "sbgfgrants.com." always_nxdomain
 local-zone: "sbikeparts.com." always_nxdomain
+local-zone: "scam.delivery." always_nxdomain
 local-zone: "scansave.pl." always_nxdomain
 local-zone: "scarpaoutletportugal.com." always_nxdomain
 local-zone: "scavaliersbreeder.com." always_nxdomain
