@@ -128,8 +128,9 @@ function test_retrieval_check {
 
     : > "$redundant_domains_file"  # Initialize redundant domains file
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        # Test removal of redundant domains
+        # Test removal of new redundant domains
         printf "redundant-test.com\n" > "$raw_file"  # Sample data
+        printf "redundant-test.com\n" >> out_raw.txt  # Wildcard should already be in expected raw file
         printf "redundant-test.com\n" > "$wildcards_file"  # Sample data
         printf "redundant-test.com\n" >> out_wildcards.txt  # Wildcard should already be in expected wildcards file
         printf "domain.redundant-test.com\n" >> input.txt  # Input
@@ -152,12 +153,12 @@ function test_retrieval_check {
         printf "toplist,google.com\n" >> out_log.txt  # Expected output
     fi
 
-    # Test light raw file
+    # Test light raw file exclusion of specific sources
     if [[ "$script_to_test" == 'retrieval' ]]; then
         cp "$raw_file" "$raw_light_file"  # Sample data
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
+        cp out_raw.txt out_raw_light.txt  # Expected output
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
-        grep -vF 'raw-light-test.com' out_raw.txt > out_raw_light.txt  # Expected output (guntab.com is an excluded source)
     elif [[ "$script_to_test" == 'check' ]]; then
         cp out_raw.txt out_raw_light.txt  # Expected output
     fi
