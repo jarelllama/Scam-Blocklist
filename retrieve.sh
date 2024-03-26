@@ -360,7 +360,6 @@ function format_list {
 }
 
 function cleanup {
-    ls
     [[ ! -f in_toplist.tmp ]] && rm -r data/pending  # Initialize pending directory is no pending domains to be saved
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
