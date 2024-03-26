@@ -33,15 +33,15 @@ function main {
 function retrieve_new {
         mkdir data/pending  # Initialize pending directory
         printf "\n"
-        source_aa419
-        source_dfpi
-        source_guntab
-        source_petscams
-        source_scamdelivery  # Has captchas
-        source_scamdirectory
-        source_scamadviser
-        source_stopgunscams
-        source_google_search
+        #source_aa419
+        #source_dfpi
+        #source_guntab
+        #source_petscams
+        #source_scamdelivery  # Has captchas
+        #source_scamdirectory
+        #source_scamadviser
+        #source_stopgunscams
+        #source_google_search
 }
 
 function retrieve_existing {
