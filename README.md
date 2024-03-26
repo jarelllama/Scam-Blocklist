@@ -37,7 +37,7 @@ Today | Yesterday | Excluded | Source
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 ## Light version
-Mainly for list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
+Targeted at list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
 
 <details>
 <summary>Details about the light version</summary>

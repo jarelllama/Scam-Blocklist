@@ -60,18 +60,18 @@ $(print_stats)
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 ## Light version
-Mainly for list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
+Targeted at list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
 
 <details>
 <summary>Details about the light version</summary>
 <ul>
-<li>Includes Google Search results</li>
+<li>Includes Google Search as a source</li>
 <li>Does not use sources whose domains cannot be filtered by date added</li>
-<li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full list includes domains added from 2 months back and onwards</li>
+<li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full blocklist includes domains added from 2 months back and onwards</li>
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
 
-Total domains: $(wc -l "$raw_light_file")
+Total domains: $(wc -l < "$raw_light_file")
 </details>
 
 ## Retrieving scam domains from Google Search
