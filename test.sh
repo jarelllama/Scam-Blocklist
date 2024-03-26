@@ -72,8 +72,8 @@ function test_retrieval_check {
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Test removal of domains already in blocklist
         printf "in-blocklist-test.com\n" >> "$raw_file"  # Sample data
+        printf "in-blocklist-test.com\n" >> "$raw_light_file"  # Sample data
         printf "in-blocklist-test.com\n" >> out_raw.txt  # Domain should already be present in expected raw file
-        printf "in-blocklist-test.com\n" >> out_light.txt   # Domain should already be present in expected raw light file
         printf "in-blocklist-test.com\n" >> input.txt  # Input
 
         # Test removal of known dead domains
