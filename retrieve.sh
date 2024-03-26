@@ -188,8 +188,6 @@ function search_google {
 }
 
 function process_source {
-    [[ ! -f "$domains_file" ]] && return  # Return if domains file does not exist
-
     # Initialize variables
     unfiltered_count=0 && filtered_count=0 && total_whitelisted_count=0
     dead_count=0 && redundant_count=0 && toplist_count=0 && domains_in_toplist=''
@@ -197,8 +195,8 @@ function process_source {
     [[ -z "$rate_limited" ]] && rate_limited=false
     [[ -z "$ignore_from_light" ]] && ignore_from_light=false
 
-    # Skip to next source if no results retrieved
-    ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }
+    [[ ! -f "$domains_file" ]] && return  # Return if domains file does not exist
+    ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }  # Skip to next source if no results retrieved
 
     # Remove https:// or http:// and convert to lowercase
     sed 's/https\?:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
