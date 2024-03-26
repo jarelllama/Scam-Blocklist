@@ -18,9 +18,7 @@ function main {
         format_list "$file"
     done
     retrieve_toplist
-    check_raw_file "$raw_file"
-    check_raw_file "$raw_light_file" &> /dev/null
-    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklists required filtering
+    check_raw_file
 }
 
 function retrieve_toplist {
@@ -30,7 +28,6 @@ function retrieve_toplist {
 }
 
 function check_raw_file {
-    raw_file="$1"
     domains=$(<"$raw_file")
     before_count=$(wc -l < "$raw_file")
     touch filter_log.tmp  # Initialize temp filter log file
@@ -44,6 +41,8 @@ function check_raw_file {
         domains_with_subdomains_count=$((domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")))
         # Keep only root domains
         domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)
+        # Keep only root domains in raw light file
+        sed "s/^${subdomain}\.//" "$raw_light_file" | sort -u > light.tmp && mv light.tmp "$raw_light_file"
         # Collate subdomains for dead check
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exclude from dead check
@@ -131,6 +130,14 @@ function check_raw_file {
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -l < "$raw_file")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_count" "$toplist_count"
+
+    update_light_file
+
+    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
+}
+
+function update_light_file {
+    comm -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
 }
 
 function clean_domain_log {
