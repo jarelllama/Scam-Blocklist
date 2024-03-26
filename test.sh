@@ -247,7 +247,7 @@ function test_dead {
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
-    cp out_raw.txt out_raw_light.txt  # Output
+    cp out_raw.txt out_raw_light.txt  # Expected output
 
     # Prepare expected output files
     for file in out_*; do
