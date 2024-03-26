@@ -10,11 +10,11 @@ function format {
     # For specific files/extensions:
     case "$1" in
         data/pending/*)  # Remove whitespaces, empty lines, sort and remove duplicates
-            sed 's/ //g; /^$/d' | sort -u -o "$1" ;;
+            sed 's/ //g; /^$/d' "$1" | sort -u -o "$1" ;;
         data/dead_domains.txt)  # Remove whitespaces, empty lines and duplicates
-            sed 's/ //g; /^$/d' | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1";;
+            sed 's/ //g; /^$/d' "$1" | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1";;
         *.txt|*.tmp)  # Remove whitespaces, empty lines, sort and remove duplicates
-            sed 's/ //g; /^$/d' | sort -u -o "$1" ;;
+            sed 's/ //g; /^$/d' "$1" | sort -u -o "$1" ;;
     esac
 }
 
