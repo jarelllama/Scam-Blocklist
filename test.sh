@@ -142,12 +142,14 @@ function test_retrieval_check {
 
     # Skip toplist test because it prevents the changes from being saved to the raw file
 
+    # Test light raw file
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        # Test light raw file build
         cp "$raw_file" "$raw_light_file"  # Sample data
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
         grep -vF 'raw-light-test.com' out_raw.txt > out_raw_light.txt  # Expected output
+    elif [[ "$script_to_test" == 'check' ]]; then
+        cp out_raw.txt out_raw_light.txt  # Expected output
     fi
 
     # Prepare expected output files

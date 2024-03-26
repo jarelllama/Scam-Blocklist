@@ -15,15 +15,11 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    check "$raw_file"
-    check "$raw_light_file" #&> /dev/null
-}
-
-function check {
     check_for_alive
     check_subdomains
     check_redundant
     check_for_dead
+    update_light_file
 }
 
 function check_for_alive {
@@ -33,6 +29,7 @@ function check_for_alive {
     [[ -z "$alive_domains" ]] && return  # Return if no resurrected domains found
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to exclude resurrected domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to raw file
+    printf "%s\n" "$alive_domains" >> "$raw_light_file"  # Add resurrected domains to raw light file
     format_list "$dead_domains_file"
     format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
@@ -87,6 +84,10 @@ function check_for_dead {
     cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
     format_list "$dead_domains_file"
     log_event "$(<dead.tmp)" "dead" "raw"
+}
+
+function update_light_file {
+    com -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
 }
 
 function clean_dead_domains_file {
