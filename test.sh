@@ -128,21 +128,28 @@ function test_retrieval_check {
 
     # Test removal of redundant domains
     : > "$redundant_domains_file"  # Initialize redundant domains file
-    printf "redundant-test.com\n" > "$wildcards_file"  # Sample data
+    printf "redundant-test.com\n" > "$wildcards_file"  # Input
     printf "domain.redundant-test.com\n" >> input.txt  # Input
-    # No expected output for retrieval script test
+    printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
     if [[ "$script_to_test" == 'check' ]]; then
-        printf "redundant-test.com\n" > "$wildcards_file"  # Input
-        printf "redundant-test-2.com\n" >> input.txt  # Input
         printf "redundant-test.com\n" >> out_raw.txt  # Expected output
-        printf "redundant-test-2.com\n" >> out_raw.txt  # Expected output
+        printf "domain.redundant-test.com\n" >> out_redundant.txt  # Expected output
+        # Test new wildcard match added to raw file
+        # Input
+        printf "redundant-test-2.com\n" >> input.txt
+        printf "domain.redundant-test-2.com\n" >> input.txt
         # Expected output
-        printf "redundant-test.com\n" >> out_wildcards.txt
-        printf "domain.redundant-test.com\n" >> out_redundant.txt
-        printf "redundant,domain.redundant-test.com\n" >> out_log.txt
+        printf "redundant-test-2.com\n" >> out_wildcards.txt
+        printf "domain.redundant-test-2.com\n" >> out_redundant.txt
+        printf "redundant,domain.redundant-test-2.com\n" >> out_log.txt
     fi
 
-    # Skip toplist test because it prevents the changes from being saved to the raw file
+    if [[ "$script_to_test" == 'check' ]]; then
+        # Test toplist check
+        : > "$whitelist_file"  # Sample data
+        printf "google.com\n" >> input.txt  # Input
+        printf "toplist,google.com\n" >> out_log.txt  # Expected output
+    fi
 
     # Test light raw file
     if [[ "$script_to_test" == 'retrieval' ]]; then
