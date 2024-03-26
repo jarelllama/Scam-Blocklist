@@ -39,7 +39,7 @@ function main {
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    source_google_search
+    #source_google_search
     build_raw
 }
 
@@ -222,7 +222,7 @@ function process_source {
     format_list root_domains.tmp
 
     # Remove domains already in raw file
-    pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
+    #pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
 
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
@@ -320,7 +320,7 @@ function build_raw {
     fi
 
     count_before=$(wc -l < "$raw_file")
-    cat filtered_domains.tmp >> "$raw_file"  # Add new domains to raw file
+    #cat filtered_domains.tmp >> "$raw_file"  # Add new domains to raw file
     format_list "$raw_file"
     log_event "$(<filtered_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
