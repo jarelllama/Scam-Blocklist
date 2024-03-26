@@ -161,13 +161,12 @@ function test_retrieval_check {
     fi
     printf "%s\n" "------------------------------------------------------------------"
 
-    if [[ "$script_to_test" == 'retrieval' ]] && [[ -d data/pending ]]; then  # Check pending directory
-        printf "! Pending directory not removed.\n" && error=true
-    fi
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
-    if [[ "$script_to_test" == 'check' ]]; then
+    if [[ "$script_to_test" == 'retrieval' ]] && [[ -d data/pending ]]; then  # Check pending directory
+        printf "! Pending directory not removed.\n" && error=true
+    elif [[ "$script_to_test" == 'check' ]]; then
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
         check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"  # Check wildcards file
     fi
