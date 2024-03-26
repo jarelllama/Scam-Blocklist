@@ -159,7 +159,7 @@ function source_google_search {
         [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
         search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
         search_term=${search_term%.tmp}  # Remove file extension from file name
-        process_source && return
+        process_source
     done
 }
 
