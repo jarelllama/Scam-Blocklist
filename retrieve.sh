@@ -29,8 +29,8 @@ function main {
 
     printf "\n"
     # Check for existing pending domains file
-    [[ ! -d data/pending ]] && mkdir data/pending
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
+    [[ ! -d data/pending ]] && mkdir data/pending
     source_aa419
     source_dfpi
     source_guntab
