@@ -53,6 +53,7 @@ function shellcheck {
 
 function test_retrieval_check {
     script_to_test="$1"
+    [[ "$script_to_test" == 'retrieval' ]] && mkdir data/pending
 
     # Test removal of common subdomains
     : > "$subdomains_file"  # Initialize subdomains file
@@ -156,7 +157,6 @@ function test_retrieval_check {
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Distribute the sample input into various sources
-        mkdir data/pending
         split -n l/3 input.txt
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
