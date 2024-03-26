@@ -148,8 +148,7 @@ function test_retrieval_check {
         cp "$raw_file" "$raw_light_file"  # Sample data
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
-        #grep -vF 'raw-light-test.com' out_raw.txt > out_raw_light.txt  # Expected output
-        cp out_raw.txt out_raw_light.txt
+        grep -vF 'raw-light-test.com' out_raw.txt > out_raw_light.txt  # Expected output
     elif [[ "$script_to_test" == 'check' ]]; then
         cp out_raw.txt out_raw_light.txt  # Expected output
     fi
@@ -248,6 +247,7 @@ function test_dead {
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
+    cp out_raw.txt out_raw_light.txt  # Output
 
     # Prepare expected output files
     for file in out_*; do
