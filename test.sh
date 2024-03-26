@@ -235,6 +235,7 @@ function test_dead {
     check_if_dead_present "$root_domains_file" "Root domains"  # Check root domains file
     check_if_dead_present "$redundant_domains_file" "Redundant domains"  # Check redundant domains file
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
+    [[ "$script_to_check" == 'retrieval' ]] && [[ -d data/pending ]] || printf "! Pending directory is missing.\n"
     check_log  # Check log file
 
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n" ||
