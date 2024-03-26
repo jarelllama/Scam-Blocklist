@@ -29,8 +29,7 @@ function check_for_alive {
     [[ -z "$alive_domains" ]] && return  # Return if no resurrected domains found
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to exclude resurrected domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to raw file
-    printf "%s\n" "$alive_domains" >> "$raw_light_file"  # Add resurrected domains to raw light file
-    format_list "$dead_domains_file" && format_list "$raw_file" && format_list "$raw_light_file"
+    format_list "$dead_domains_file" && format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
 }
 

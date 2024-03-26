@@ -48,7 +48,7 @@ function check_raw_file {
         # Keep only root domains
         domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)
         # Keep only root domains in raw light file
-        sed "s/^${subdomain}\.//" "$raw_light_file" | sort -u > light.tmp && mv light.tmp "$raw_light_file"
+        sed "s/^${subdomain}\.//" "$raw_light_file" | sort -u -o "$raw_light_file"
         format_list "$raw_light_file"
         # Collate subdomains for dead check
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
