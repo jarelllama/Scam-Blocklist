@@ -31,18 +31,17 @@ function main {
 }
 
 function retrieve_new {
-        mkdir data/pending  # Initialize pending directory
-        printf "\n"
-        #source_aa419
-        #source_dfpi
-        #source_guntab
-        #source_petscams
-        #source_scamdelivery  # Has captchas
-        #source_scamdirectory
-        #source_scamadviser
-        #source_stopgunscams
-        #source_google_search
-        source_test
+    mkdir data/pending  # Initialize pending directory
+    printf "\n"
+    source_aa419
+    source_dfpi
+    source_guntab
+    source_petscams
+    source_scamdelivery  # Has captchas
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 }
 
 function retrieve_existing {
@@ -82,13 +81,6 @@ function retrieve_existing {
     done
 }
 
-function source_test {
-    source='Test'
-    domains_file="data/pending/domains_${source}.tmp"
-    printf "zzzyfsgs.com\n" > "$domains_file"
-    process_source
-}
-
 function source_aa419 {
     source='aa419.org'
     domains_file="data/pending/domains_${source}.tmp"
@@ -124,7 +116,7 @@ function source_petscams {
     url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
         curl -s "${url}/" | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+-[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
-             sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
+            sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
                 s/-\?[0-9]\?\/">//; s/-/./g' >> "$domains_file"
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
@@ -175,11 +167,10 @@ function source_dfpi {
 
 function source_google_search {
     source='Google Search'
-    rate_limited=false  # Initialize whether API is rate limited
     while read -r search_term; do  # Loop through search terms
         # Break out of loop if rate limited
         [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
-        search_google "$search_term"  # Search using search term if not rate limited
+        search_google "$search_term"
     done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
 
@@ -187,18 +178,22 @@ function search_google {
     url='https://customsearch.googleapis.com/customsearch/v1'
     query_count=0  # Initialize query count for each search term
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
+    encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace non-alphanumeric characters with '%20'
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Create domains file if not present
-    encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace non-alphanumeric characters with '%20'
     for start in {1..100..10}; do  # Loop through each page of results
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
-        grep -qF 'rateLimitExceeded' <<< "$page_results" && { rate_limited=true; break; }  # Break out of loop if rate limited
-        ((query_count++))
-        jq -e '.items' &> /dev/null <<< "$page_results" || break  # Break out of loop if the first page has no results
+        # Break out of loop if rate limited
+        grep -qF 'rateLimitExceeded' <<< "$page_results" && { rate_limited=true; break; } || rate_limited=false
+        ((query_count++))  # Increment query count
+        # Break out of loop if the first page has no results
+        jq -e '.items' &> /dev/null <<< "$page_results" || break
+        # Collate domains from each page
         page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')
-        printf "%s\n" "$page_domains" >> "$domains_file"  # Collate domains from each page
-        [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break  # Break out of loop if no more pages are required
+        printf "%s\n" "$page_domains" >> "$domains_file"
+        # Break out of loop if no more pages are required
+        [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break
     done
     process_source
 }
@@ -305,7 +300,6 @@ function merge_domains {
 
     format_list filtered_domains.tmp
 
-    # Print domains in toplist and invalid entries
     [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n"
     # Print invalid entries
     if [[ -f invalid_entries.tmp ]]; then
@@ -342,8 +336,7 @@ function merge_domains {
     rows=$(printf "%s" "$rows" | sed 's/,no/,yes/')  # Replace ',no' with ',yes' to record that the domains were saved into the raw file
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$source_log"  # Add the edited rows back to the log
 
-    # Exit with error if invalid entries were found
-    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0
+    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid entries were found
 }
 
 function log_event {

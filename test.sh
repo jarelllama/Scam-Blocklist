@@ -16,8 +16,7 @@ function main {
     : > "$raw_file"  # Initialize raw file
     sed -i '1q' "$domain_log"  # Initialize domain log file
 
-    # Do not run when there are existing domain files
-    [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"
+    [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"  # Do not run when there are existing domain files
     [[ "$1" == 'toplist' ]] && test_toplist
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
@@ -239,10 +238,10 @@ function test_dead {
     done
 
     bash dead.sh  # Run dead script
-    [[ "$?" -eq 1 ]] || errored=false  # Check returned error code
+    [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
     printf "%s\n" "------------------------------------------------------------------"
 
-    [[ "$errored" != false ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
+    [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
     check_if_dead_present "$subdomains_file" "Subdomains"  # Check subdomains file

@@ -20,5 +20,6 @@ jobs:
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
-          git diff-index --quiet HEAD || git commit -am "Check lists"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Check lists"
           git push -q
