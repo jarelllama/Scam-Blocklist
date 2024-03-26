@@ -18,6 +18,7 @@ function main {
 
     # Do not run when there are existing domain files
     [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"
+    [[ "$1" == 'toplist' ]] && test_toplist
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
     [[ "$1" == 'shellcheck' ]] && shellcheck
@@ -172,6 +173,14 @@ function test_retrieval_check {
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     check_error
+}
+
+function test_toplist {
+    printf "google.com\n" > data/pending/domains_toplist-check.tmp  # Input
+    printf "google.com\n" > out_log.txt  # Expected output
+    bash retrieve.sh || true  # Run retrieval script and ignore returned exit code
+    [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; exit 1; }  # Check pending directory
+    check_log  # Check log file
 }
 
 function test_dead {
