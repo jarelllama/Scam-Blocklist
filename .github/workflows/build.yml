@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "data/raw.txt"
-      - "build.sh"
+      - 'data/raw.txt'
+      - 'build.sh'
 
 jobs:
   build-lists:
