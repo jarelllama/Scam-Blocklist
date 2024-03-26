@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Tue Mar 26 03:37:43 UTC 2024
+! Last modified: Tue Mar 26 04:39:41 UTC 2024
 ! Syntax: Adblock Plus
-! Total number of entries: 23179
+! Total number of entries: 23245
 !
 ||01edc.com^
 ||101luadalmatians.com^
@@ -137,6 +137,7 @@
 ||aawoodpellets.co.za^
 ||ab-brennholz.com^
 ||ababnkgroups.com^
+||abacam.org^
 ||abaintercontinentalcontainers.com^
 ||abalioglulezitagida.com^
 ||abathtowel.com^
@@ -472,6 +473,7 @@
 ||agunus.com^
 ||ah-deutschland.de^
 ||ahealthcare.online^
+||ahgunstore.com^
 ||ahmedseverydayspecials.com^
 ||ahold-auto.com^
 ||ahtlogistics.com^
@@ -507,6 +509,8 @@
 ||airgun.on.com^
 ||airgun.us.com^
 ||airguncapital.com^
+||airgunk.com^
+||airgunon.site^
 ||airgunon.us^
 ||airgunsu.com^
 ||airgunus.us^
@@ -718,6 +722,7 @@
 ||allpetmovers.com^
 ||allpetsdelivery.com^
 ||allpillswebsite.com^
+||allqualityhay.com^
 ||allrealbanknotesssd.com^
 ||allroundliquorshop.com^
 ||allsaintsaustria.at^
@@ -904,6 +909,7 @@
 ||ammoandfirearmshop.com^
 ||ammoandgunmaster.com^
 ||ammoandgunsshop.com^
+||ammoandgunstore.com^
 ||ammoband.com^
 ||ammocalibers.com^
 ||ammocontinental.com^
@@ -913,6 +919,7 @@
 ||ammodepotid.com^
 ||ammodepotma.com^
 ||ammodepotnh.com^
+||ammodepotonlinestore.com^
 ||ammodepotshop.com^
 ||ammodepotwi.com^
 ||ammodynamics.com^
@@ -921,6 +928,7 @@
 ||ammofield.com^
 ||ammofireamsshop.com^
 ||ammoforsale.com^
+||ammoforsales.com^
 ||ammogears.com^
 ||ammogunsshop.com^
 ||ammolandusa.com^
@@ -936,6 +944,7 @@
 ||ammosales.usa.com^
 ||ammosalestore.com^
 ||ammosandprimers.com^
+||ammoshome.com^
 ||ammoshopinc.com^
 ||ammoshoping.com^
 ||ammoshopusa.com^
@@ -953,6 +962,7 @@
 ||ammunition.store.com^
 ||ammunitionandaccessoriesshop.com^
 ||ammunitionandgunshop.com^
+||ammunitioncamp.com^
 ||ammunitioncanada.ca^
 ||ammunitionempirestore.com^
 ||ammunitionforsaleonline.com^
@@ -962,17 +972,21 @@
 ||ammunitiononline.com^
 ||ammunitiononline.shop.com^
 ||ammunitiononlineshop.com^
+||ammunitiononlinestore.com^
 ||ammunitionreloadcenter.com^
 ||ammunitionreloadstorecanada.com^
 ||ammunitionsales.shop^
 ||ammunitionsalestore.com^
 ||ammunitionsbutiksverige.com^
+||ammunitionsdistros.com^
 ||ammunitionseek.com^
 ||ammunitionseeker.com^
 ||ammunitionsguru.com^
 ||ammunitionsinbulk.com^
 ||ammunitionsnation.com^
+||ammunitionstore.ca^
 ||ammunitionstoreonline.com^
+||ammunitionsupplyusa.com^
 ||ammunitiontactical.store^
 ||ammunitionvendor.com^
 ||ammunitionwholesaledealer.com^
@@ -1237,6 +1251,7 @@
 ||aquaticsoptkit.com^
 ||aquaticsportscp.com^
 ||aquaticsstoreus.com^
+||ar-15partsforsaleonline.us^
 ||arabues.de^
 ||aramexcourierservice.online^
 ||aramexgloballogistics.com^
@@ -1262,6 +1277,7 @@
 ||arenaswimstore.com^
 ||arestreasures.com^
 ||argentinameats.com^
+||argunsamerica.com^
 ||ariat-osterreich.at^
 ||ariat-western.com^
 ||ariatwear.online^
@@ -1286,6 +1302,7 @@
 ||armed-force.com^
 ||armeriafrinchillucci.eu^
 ||armlogisticsmaritime.co.za^
+||armmoreloads.com^
 ||armoires.store^
 ||armoredkit.com^
 ||armorxpress.us^
@@ -1333,6 +1350,7 @@
 ||artexcellene.com^
 ||arthacksler.de^
 ||articakitaskennels.com^
+||artilleryshoponline.com^
 ||artisangemantiques.com^
 ||artisticcosplay.com^
 ||artisticlivingroom.com^
@@ -1548,6 +1566,7 @@
 ||austmachinerybrokers.net^
 ||australia420weed.com^
 ||australiabuds.com^
+||australiacounterfeitnotes.com^
 ||australian-psychedelic.com^
 ||australiancavoodle.com^
 ||australiandeliveryservices.com^
@@ -2149,6 +2168,7 @@
 ||benellifirearmsshop.com^
 ||benellifirearmstore.com^
 ||benelligunstore.com^
+||benelligunstoreusa.com^
 ||benelliofficial.com^
 ||benelliusa.shop^
 ||benelliusashop.com^
@@ -2162,6 +2182,7 @@
 ||bengalsgivejoy.com^
 ||bengenevievpuppy.com^
 ||bengjin.com^
+||bengunstore.com^
 ||benin-boa.com^
 ||beninrefinery.com^
 ||benjamin-crane.com^
@@ -2179,6 +2200,7 @@
 ||berando.de^
 ||berbior.com^
 ||beredge.com^
+||berettafirearmdeals.com^
 ||berettafirearmsamerica.com^
 ||berettafirearmstore.com^
 ||berettagunlife.com^
@@ -2192,8 +2214,10 @@
 ||berettausashop.com^
 ||berettausastore.com^
 ||berg-reifenversand.com^
+||bergaraarmsusa.com^
 ||bergarab14hmr.com^
 ||bergarafirearmsusa.com^
+||bergaragunsale.com^
 ||bergaraofficial.com^
 ||bergararifle.org^
 ||bergararifleswarehouse.com^
@@ -2250,6 +2274,7 @@
 ||best4you.org^
 ||bestalpinism.com^
 ||bestammoacademy.com^
+||bestammosupplier.com^
 ||bestammoweapons.com^
 ||bestammunitionsstore.com^
 ||bestaucaninehome.com^
@@ -2298,6 +2323,7 @@
 ||bestglockgunstores.com^
 ||bestgoldenpups.us^
 ||bestgunmark.com^
+||bestgunsales.com^
 ||bestgunshopinthedmv.com^
 ||bestgunshopusa.com^
 ||bestgunssale.com^
@@ -3122,6 +3148,7 @@
 ||brooksschuhe.de^
 ||brownellsfirearms.net^
 ||brownellsigsauerguns.com^
+||brownellsriflesusa.com^
 ||brownenglishbulldogpuppy.com^
 ||browning-arms.com^
 ||browning.arms.com^
@@ -3140,10 +3167,12 @@
 ||browninggunshop.com^
 ||browninggunshopusa.com^
 ||browninggunsusa.com^
+||browningofficial.com^
 ||browningshotgunsusa.com^
 ||browningusafirearms.com^
 ||browningusaguns.com^
 ||browningusastore.com^
+||browningweapons.com^
 ||browningweaponstore.com^
 ||browningweaponstoreusa.com^
 ||brownpaul-lawfirm.com^
@@ -3200,6 +3229,7 @@
 ||budgetparcel.com^
 ||budowaffen.de^
 ||budsandstoners.com^
+||budsgunshopdeath.com^
 ||buenacasademascotas.com^
 ||buendiasranchs.com^
 ||buenodeutschland.com^
@@ -3233,6 +3263,7 @@
 ||bulkcheapammostore.com^
 ||bulkfinance.org^
 ||bulkfirearms.com^
+||bulkfirearmsonline.com^
 ||bulkgoldbars.com^
 ||bulkgoldsales.com^
 ||bulkmanammo.com^
@@ -3284,6 +3315,7 @@
 ||burstabout.net^
 ||burtonsnowboard.de^
 ||bushmasteracr.shop^
+||bushmasterarmshop.com^
 ||bushmasterarmstore.com^
 ||bushmasterfirearmstore.com^
 ||bushmasterguns.com^
@@ -3300,11 +3332,13 @@
 ||butterfalluk.com^
 ||buttermano.com^
 ||buxtownbeacher.de^
+||buy-ammunitiononline.com^
 ||buyalpinism.com^
 ||buyammoandprimers.com^
 ||buyammodaily.com^
 ||buyammoprimers.com^
 ||buyballsportproduct.com^
+||buybenellishotguns.com^
 ||buyberettafirearmsonline.com^
 ||buybestguns.com^
 ||buybestmeds.com^
@@ -3320,6 +3354,7 @@
 ||buycocaineinaustralia.com^
 ||buycoinstry.com^
 ||buycolombiancoke.com^
+||buycoltfirearms.com^
 ||buycounterfeitdoc.com^
 ||buycounterfeitnotes.com^
 ||buycounterfietnote.com^
@@ -3400,6 +3435,7 @@
 ||buyundetectablebills.com^
 ||buyweed-420.com^
 ||buyweedau.com^
+||buywinchesterammo.com^
 ||buyxanaxiety.com^
 ||buyxanaxonline.net^
 ||buyyohimbine.com^
@@ -3534,6 +3570,7 @@
 ||canaantradeoption.com^
 ||canabisdeliver.com^
 ||canada.jellyfish.com^
+||canadaammunition.com^
 ||canadaims.org^
 ||canadapharmacytrust.net^
 ||canadareloadinghub.com^
@@ -3568,6 +3605,7 @@
 ||canikfirearmsshop.com^
 ||canikfirearmsusa.com^
 ||canikforsale.com^
+||canikgunsonline.com^
 ||canikgunsshop.com^
 ||canikgunstore.com^
 ||canikgunsusa.com^
@@ -3575,6 +3613,7 @@
 ||canikusa.shop^
 ||canikusafirearms.com^
 ||canikusagundeals.com^
+||canikusashop.com^
 ||caninepuppykennel.co.za^
 ||canis-feles.de^
 ||canna-med-house.com^
@@ -3660,6 +3699,7 @@
 ||cargo.airexpress.com^
 ||cargo.linkexpress.com^
 ||cargoairmails.com^
+||cargocontinental.com^
 ||cargocourierexpress.com^
 ||cargodeliveryexpress.com^
 ||cargoescortliners.com^
@@ -3799,6 +3839,7 @@
 ||cci-ammunitionss.com^
 ||cci-immobilien.de^
 ||cci-primers.com^
+||cci-usaprimers.com^
 ||cci.ammostore.com^
 ||cciammocenter.com^
 ||cciammunitions.com^
@@ -3825,6 +3866,7 @@
 ||cedarsavecr.com^
 ||cedarsavecredit.com^
 ||cedarsavecu.com^
+||ceggcc.vip^
 ||cegner.de^
 ||ceilingu.shop^
 ||celebrityfrenchies.com^
@@ -3856,6 +3898,7 @@
 ||centralstatefinancial.com^
 ||centraparkkennel.co.za^
 ||centurionschnauzers.com^
+||centuryarms.shop^
 ||centuryarmsdealer.com^
 ||centuryarmshop.com^
 ||centuryarmstore.com^
@@ -4027,6 +4070,7 @@
 ||chiapparhino60ds.com^
 ||chiapparhinoarm.com^
 ||chiapparhinoarms.com^
+||chiapparhinofirearm.com^
 ||chiapparhinofirearms.com^
 ||chiapparhinorevolvers.com^
 ||chiapparhinostore.com^
@@ -4291,6 +4335,7 @@
 ||classyusfurniture.com^
 ||classywomenoutfit.com^
 ||clatexinvestment.com^
+||claudachshundpuppies.com^
 ||claudia-finke.de^
 ||claudia-preuss.de^
 ||claudiapugpuppies.com^
@@ -4495,7 +4540,9 @@
 ||coltarmstore.com^
 ||coltarmsusa.com^
 ||coltfirearmshop.com^
+||coltfirearmsstore.com^
 ||coltfirearmsusa.com^
+||coltfirearmswarehouse.com^
 ||coltguns.shop^
 ||coltgunsale.com^
 ||coltgunsales.com^
@@ -5704,6 +5751,7 @@
 ||dobermanpinscher.site^
 ||dobermanpinscherkennel.ca^
 ||dobermanprime.com^
+||dobermanprudent.com^
 ||dobermanpuppiesaustralia.com^
 ||dobermanresolute.com^
 ||dobermansheaven.com^
@@ -7856,6 +7904,7 @@
 ||fouque.de^
 ||fouriepoultry.co.za^
 ||foxaspect.com^
+||foxhilldogkennels.com^
 ||foxislandembroidery.com^
 ||foxrabatt.de^
 ||foxtradefx.com^
@@ -10265,6 +10314,7 @@
 ||huntdekor.com^
 ||hunter-deutschland.com^
 ||hunter-osterreich.com^
+||hunter-precision.com^
 ||hunter.lamp.com^
 ||hunter.precision.com^
 ||hunterchowchowhome.com^
@@ -11194,6 +11244,7 @@
 ||kennykaylogistics.com^
 ||kennys.sheltiepuppies.com^
 ||kenrapidlogistics.com^
+||kenskrksr.com^
 ||kentucky-gunshop.com^
 ||kentucky.gunshop.com^
 ||kenzoparisonline.shop^
@@ -11316,6 +11367,7 @@
 ||kingsmailing.com^
 ||kingsolajiltd.com^
 ||kingspawz.com^
+||kingsranchdoodles.com^
 ||kingsrestcontainers.co.za^
 ||kingstonbathroom.com^
 ||kingteacuppuppieshome.com^
@@ -11430,6 +11482,7 @@
 ||kluge-reifenversand.com^
 ||km-holz.de^
 ||kmachine.shop^
+||kmkusdt.com^
 ||knapp-reifen.com^
 ||knife-limit.com^
 ||knife-plus.com^
@@ -12513,6 +12566,7 @@
 ||majesticjackrussellterrier.com^
 ||majestictoypoodles.com^
 ||majestydogoargentino.com^
+||majestymainecoonhome.com^
 ||majestymonkeyshome.com^
 ||majestyxpress.com^
 ||make-hntd.beauty^
@@ -13890,6 +13944,7 @@
 ||naturalcosmeticssales.com^
 ||naturalcureforlife.com^
 ||naturalhatu-shop.com^
+||naturalhunting.com^
 ||naturalismstudio.com^
 ||naturallifeus.com^
 ||naturalpetwarehouse.com^
@@ -14251,6 +14306,7 @@
 ||noahstuffs.com^
 ||nobethaholding.com^
 ||nobleafricangreyparrots.com^
+||nobleal.online^
 ||nobleboxerpuppies.com^
 ||noblecanecorsopuppies.com^
 ||noblecarrots.com^
@@ -14558,6 +14614,7 @@
 ||ohcontainerhomes.com^
 ||ohioreptilecompany.com^
 ||ohpollydeutschland.de^
+||ohspotlight.com^
 ||oikeau.com^
 ||oilabortle.com^
 ||oilbold.com^
@@ -18367,6 +18424,7 @@
 ||shootersgunstore.com^
 ||shooting-site.com^
 ||shootingeasy.com^
+||shootingnew.com^
 ||shootingserene.com^
 ||shootingsnug.com^
 ||shop-alarmsystem.com^
@@ -19052,6 +19110,7 @@
 ||specialtoolsstore.com^
 ||specialtradefx.com^
 ||specprofit.com^
+||spectaculartollers.com^
 ||speed-courierservice.com^
 ||speed-gaming.com^
 ||speedaxexpress.com^
@@ -19612,6 +19671,7 @@
 ||suibl.com^
 ||suilkg.shop^
 ||suitpin.com^
+||sukissy.com^
 ||sultanpapers.co.za^
 ||summerbikesstore.com^
 ||summercorgi.com^
@@ -20383,6 +20443,7 @@
 ||thehellyhansen.com^
 ||thehermpfarm.com^
 ||thehikingshoe.com^
+||thehomeofyorkies.com^
 ||thehomeraisedpuppies.com^
 ||thehopefurniture.com^
 ||thehqcourierservices.online^
@@ -20605,6 +20666,7 @@
 ||tintancontainers-usa.com^
 ||tinybreedsavailable.com^
 ||tinyminiaturepinscherspot.com^
+||tinypawspoodlehaven.com^
 ||tinypawyorkiesmorkiepuppies.com^
 ||tinyplayland.com^
 ||tinyteacup.poodles.com^
@@ -21138,6 +21200,7 @@
 ||tristararms.usa.com^
 ||tristararmstore.com^
 ||tristarfirearmsusa.com^
+||trisunshine.com^
 ||triumphantlawfirm.com^
 ||trivegloexp.com^
 ||tro346.com^
@@ -22056,6 +22119,7 @@
 ||vicilo.com^
 ||viciousmime.com^
 ||vicpota.com^
+||victonydachshundpuppies.com^
 ||victoriacockerspanielpuppies.com^
 ||victoriaphamacy.com^
 ||victoriapuppies.com^
@@ -22758,6 +22822,7 @@
 ||woodfieldpomskies.com^
 ||woodfuelshop.com^
 ||woodlandcavapoos.com^
+||woodlandgiantschnauzer.com^
 ||woodlandkrafts.com^
 ||woodllama.com^
 ||woodpallets.shop^
@@ -23116,6 +23181,7 @@
 ||zinaxkomiwoautos.com^
 ||zinelogistics.org^
 ||zinhuis.com^
+||ziniaofotec.com^
 ||zinpp.com^
 ||zinstyles.com^
 ||zionwelpenheim.de^

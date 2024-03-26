@@ -13,21 +13,21 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 ```
-Total domains: 23179
+Total domains: 23245
 
 Statistics for each source:
 
 Today | Yesterday | Excluded | Source
     0 |         0 |       2% | Google Search
-    0 |         4 |      10% | aa419.org
-    0 |         2 |      50% | dfpi.ca.gov
-    0 |         9 |      12% | guntab.com
-    0 |         2 |       7% | petscams.com
+    3 |         4 |       9% | aa419.org
+    2 |         2 |      50% | dfpi.ca.gov
+   45 |         9 |      11% | guntab.com
+   10 |         2 |       7% | petscams.com
     0 |         0 |       0% | scam.delivery
-    0 |         0 |       8% | scam.directory
-    0 |         0 |      29% | scamadviser.com
-    0 |         0 |       6% | stopgunscams.com
-    0 |        17 |       8% | All sources
+    0 |         0 |       9% | scam.directory
+    6 |         0 |      29% | scamadviser.com
+    0 |         0 |       5% | stopgunscams.com
+   66 |        17 |       8% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -52,7 +52,7 @@ Each search term is frequently benchmarked on its number of new domains and fals
 #### Statistics
 ```
 Active search terms: 17
-Queries made today: 10
+Queries made today: 11
 Domains retrieved today: 0
 ```
 
