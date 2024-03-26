@@ -42,12 +42,13 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <details>
 <summary>Details about the light version</summary>
 <ul>
-<li>Includes Google Search as a source</li>
 <li>Does not use sources whose domains cannot be filtered by date added</li>
 <li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full blocklist includes domains added from 2 months back and onwards</li>
+<li>Intended for collated blocklists cautious about size
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
-
+<br>
+<br>
 Total domains: 2
 </details>
 
