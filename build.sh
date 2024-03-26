@@ -124,7 +124,7 @@ EOF
 }
 
 function build_list {
-    [[ -z "$comment" ]] && comment='#'  # Set default comment to #
+    [[ -z "$comment" ]] && comment='#'  # Set default comment to '#'
 
     # Loop through the two blocklist versions
     for i in {1..2}; do
