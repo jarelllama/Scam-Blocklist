@@ -69,9 +69,9 @@ Mainly for list maintainers, a light version of the blocklist is available in th
 <li>Does not use sources whose domains cannot be filtered by date added</li>
 <li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full list includes domains added from 2 months back and onwards</li>
 </ul>
-Sources included in the light version are marked in SOURCES.md.
+Sources excluded from the light version are marked in SOURCES.md.
 
-Total domains: 1000
+Total domains: $(wc -l "$raw_light_file")
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -143,8 +143,8 @@ function build_list {
 
     # Loop through the two blocklist versions
     for i in {1..2}; do
-        [[ "$i" -eq 1 ]] && { list_name='scam.txt'; version=''; source_file="$raw_file"; }
-        [[ "$i" -eq 2 ]] && { list_name='scam_light.txt'; version='LIGHT VERSION'; source_file="$raw_light_file"; }
+        [[ "$i" -eq 1 ]] && { list_name='scams.txt'; version=''; source_file="$raw_file"; }
+        [[ "$i" -eq 2 ]] && { list_name='scams_light.txt'; version='LIGHT VERSION'; source_file="$raw_light_file"; }
         blocklist_path="lists/${directory}/${list_name}"
         [[ ! -d "$(dirname "$blocklist_path")" ]] && mkdir "$(dirname "$blocklist_path")"  # Create directory if not present
 
