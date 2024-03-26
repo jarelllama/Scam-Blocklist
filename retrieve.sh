@@ -42,6 +42,7 @@ function retrieve_new {
         #source_scamadviser
         #source_stopgunscams
         #source_google_search
+        source_test
 }
 
 function retrieve_existing {
@@ -79,6 +80,13 @@ function retrieve_existing {
         search_term=${search_term%.tmp}  # Remove file extension from file name
         process_source
     done
+}
+
+function source_test {
+    source='Test'
+    domains_file="data/pending/domains_${source}.tmp"
+    printf "zzzyfsgs.com\n" > "$domains_file"
+    process_source
 }
 
 function source_aa419 {
