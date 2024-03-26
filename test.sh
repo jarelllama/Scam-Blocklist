@@ -154,10 +154,10 @@ function test_retrieval_check {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
-        bash retrieve.sh || true  # Run retrieval script and ignore returned exit code
+        bash retrieve.sh || true  # Run retrieval script and ignore exit status
     elif [[ "$script_to_test" == 'check' ]]; then
         mv input.txt "$raw_file"  # Prepare sample raw file
-        bash check.sh || true  # Run lists check script and ignore returned exit code
+        bash check.sh || true  # Run lists check script and ignore exit status
     fi
     printf "%s\n" "------------------------------------------------------------------"
 
@@ -178,11 +178,11 @@ function test_retrieval_check {
 }
 
 function test_toplist {
-    : > "$whitelist_file"  # Remove all whitelisted terms
     mkdir data/pending
+    : > "$whitelist_file"  # Sample data
     printf "google.com\n" > data/pending/domains_toplist-check.tmp  # Input
     printf "toplist,google.com\n" > out_log.txt  # Expected output
-    bash retrieve.sh || true  # Run retrieval script and ignore returned exit code
+    bash retrieve.sh || true  # Run retrieval script and ignore exit status
     printf "%s\n" "------------------------------------------------------------------"
     [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; exit 1; }  # Check pending directory
     check_log
