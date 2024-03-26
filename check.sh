@@ -19,6 +19,8 @@ function main {
     done
     retrieve_toplist
     check_raw_file
+    update_light_file
+    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
 }
 
 function retrieve_toplist {
@@ -30,7 +32,7 @@ function retrieve_toplist {
 function check_raw_file {
     domains=$(<"$raw_file")
     before_count=$(wc -l < "$raw_file")
-    touch filter_log.tmp  # Initialize temp filter log file
+    touch filter_log.tmp
 
     # Remove common subdomains
     domains_with_subdomains_count=0  # Initialize domains with common subdomains count
@@ -42,7 +44,8 @@ function check_raw_file {
         # Keep only root domains
         domains=$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)
         # Keep only root domains in raw light file
-        #sed "s/^${subdomain}\.//" "$raw_light_file" | sort -u > light.tmp && mv light.tmp "$raw_light_file"
+        sed "s/^${subdomain}\.//" "$raw_light_file" | sort -u > light.tmp && mv light.tmp "$raw_light_file"
+        format_list "$raw_light_file"
         # Collate subdomains for dead check
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exclude from dead check
@@ -79,6 +82,10 @@ function check_raw_file {
         log_event "$invalid_entries" "invalid"
     fi
 
+    # Add any new wildcards to the raw files
+    cat "$wildcards_file" >> "$raw_file"
+    cat "$wildcards_file" >> "$raw_light_file"
+    format_list "$raw_file" && format_list "$raw_light_file"
     # Remove redundant domains
     redundant_count=0  # Initialize redundant domains count
     while read -r domain; do  # Loop through each domain in the blocklist
@@ -105,7 +112,7 @@ function check_raw_file {
         log_event "$domains_in_toplist" "toplist"
     fi
 
-    sed '/^$/d' filter_log.tmp | sort -u > temp.tmp && mv temp.tmp filter_log.tmp  # Remove empty lines, sort and remove duplicates (note filter log has whitespaces)
+    sed '/^$/d' filter_log.tmp | sort -u -o filter_log.tmp  # Remove empty lines, sort and remove duplicates (note filter log has whitespaces)
     [[ ! -s filter_log.tmp ]] && return  # Return if no domains were filtered
 
     # Collate filtered wildcards
@@ -115,6 +122,7 @@ function check_raw_file {
         grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp >> "$redundant_domains_file"  # Retrieve and add filtered redundant domains to redundant domains file
         format_list "$wildcards_file" && format_list "$redundant_domains_file"
     fi
+
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 root_domains.tmp <(printf "%s" "$domains"))  # Retrieve filtered root domains
@@ -130,10 +138,6 @@ function check_raw_file {
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     after_count=$(wc -l < "$raw_file")  # Count number of domains after filtering
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" "$invalid_entries_count" "$redundant_count" "$toplist_count"
-
-    update_light_file
-
-    [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
 }
 
 function update_light_file {
@@ -141,7 +145,7 @@ function update_light_file {
 }
 
 function clean_domain_log {
-    [[ $(wc -l < "$domain_log") -gt 10000 ]] && sed -i '2,300d' "$domain_log" || printf ""  # printf to negate return 1
+    [[ $(wc -l < "$domain_log") -gt 10000 ]] && sed -i '2,300d' "$domain_log" || printf ""  # printf to negate exit status 1
 }
 
 function log_event {

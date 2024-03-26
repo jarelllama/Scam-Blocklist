@@ -132,9 +132,10 @@ function test_retrieval_check {
     printf "domain.redundant-test.com\n" >> input.txt  # Input
     # No expected output for retrieval script test
     if [[ "$script_to_test" == 'check' ]]; then
-        : > "$wildcards_file"  # Initialize wildcards file
-        printf "redundant-test.com\n" >> input.txt  # Input
-        printf "redundant-test.com\n" >> out_raw.txt  # Wildcard should already be present in expected raw file
+        printf "redundant-test.com\n" > "$wildcards_file"  # Input
+        print "redundant-test-2.com\n" >> input.txt  # Input
+        print "redundant-test-2.com\n" >> out_raw.txt  # Expected output
+        printf "redundant-test.com-2\n" >> out_raw.txt  # Expected output
         # Expected output
         printf "redundant-test.com\n" >> out_wildcards.txt
         printf "domain.redundant-test.com\n" >> out_redundant.txt

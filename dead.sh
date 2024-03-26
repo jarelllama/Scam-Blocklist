@@ -19,7 +19,7 @@ function main {
     check_subdomains
     check_redundant
     check_for_dead
-    update_light_file
+    #update_light_file
 }
 
 function check_for_alive {
@@ -30,8 +30,7 @@ function check_for_alive {
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to exclude resurrected domains
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to raw file
     printf "%s\n" "$alive_domains" >> "$raw_light_file"  # Add resurrected domains to raw light file
-    format_list "$dead_domains_file"
-    format_list "$raw_file"
+    format_list "$dead_domains_file" && format_list "$raw_file" && format_list "$raw_light_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
 }
 
@@ -91,7 +90,7 @@ function update_light_file {
 }
 
 function clean_dead_domains_file {
-    [[ $(wc -l < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file" || printf ""  # printf to negate return 1
+    [[ $(wc -l < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file" || printf ""  # printf to negate exit status 1
 }
 
 function log_event {
