@@ -1,6 +1,5 @@
 #!/bin/bash
 raw_file='data/raw.txt'
-raw_light_file='data/raw_light.txt'
 domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
@@ -16,7 +15,6 @@ dead_domains_file='data/dead_domains.txt'
 function main {
     : > "$raw_file"  # Initialize raw file
     sed -i '1q' "$domain_log"  # Initialize domain log file
-
     [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"  # Do not run when there are existing domain files
     [[ "$1" == 'toplist' ]] && test_toplist
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
@@ -72,7 +70,6 @@ function test_retrieval_check {
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Test removal of domains already in blocklist
         printf "in-blocklist-test.com\n" >> "$raw_file"  # Sample data
-        printf "in-blocklist-test.com\n" > "$raw_light_file"  # Sample data
         printf "in-blocklist-test.com\n" >> out_raw.txt  # Domain should already be present in expected raw file
         printf "in-blocklist-test.com\n" >> input.txt  # Input
 
@@ -167,7 +164,6 @@ function test_retrieval_check {
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        check_output "$raw_light_file" "out_light.txt" "Raw light"  # Check raw light file
         [[ -d data/pending ]] && { printf "! Pending directory not removed.\n"; error=true; }  # Check pending directory
     elif [[ "$script_to_test" == 'check' ]]; then
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file

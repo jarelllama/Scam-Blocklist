@@ -15,12 +15,15 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
+    check "$raw_file"
+    check "$raw_light_file" &> /dev/null
+}
+
+function check {
     check_for_alive
     check_subdomains
     check_redundant
     check_for_dead
-    update_light_file
-    clean_cache_files
 }
 
 function check_for_alive {
@@ -86,11 +89,7 @@ function check_for_dead {
     log_event "$(<dead.tmp)" "dead" "raw"
 }
 
-function update_light_file {
-    comm -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
-}
-
-function clean_cache_files {
+function clean_dead_domains_file {
     [[ $(wc -l < "$dead_domains_file") -gt 5000 ]] && sed -i '1,100d' "$dead_domains_file" || printf ""  # printf to negate return 1
 }
 
@@ -101,6 +100,11 @@ function log_event {
 
 function format_list {
     bash data/tools.sh "format" "$1"
+}
+
+function cleanup {
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
+    clean_dead_domains_file # Clean dead domains file
 }
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
