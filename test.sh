@@ -176,6 +176,7 @@ function test_retrieval_check {
 }
 
 function test_toplist {
+    mkdir data/pending
     printf "google.com\n" > data/pending/domains_toplist-check.tmp  # Input
     printf "google.com\n" > out_log.txt  # Expected output
     bash retrieve.sh || true  # Run retrieval script and ignore returned exit code
