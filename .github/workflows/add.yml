@@ -19,4 +19,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            console.log(domains);
+            console.log(domains.data.body);
