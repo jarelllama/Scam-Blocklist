@@ -1,5 +1,5 @@
 name: Manually add domains
-run-name: Manuall add domains
+run-name: Manually add domains
 on:
   issues:
     types:
@@ -8,6 +8,7 @@ on:
 jobs:
   read_domains:
     if: github.event.label.name == 'add domain'
+    runs-on: ubuntu-latest
     steps:
       - name: Read issue content
         uses: actions/github-script@v7
