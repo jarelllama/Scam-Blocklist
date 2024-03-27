@@ -177,7 +177,7 @@ function search_google {
         page_results=$(curl -s "${url}?${query_params}")
 
         printf "%s\n" "$using_key"  # For debugging
-        [[ "$using_key" == 'two' ]]; echo -e "$page_results\n\n\n\n\n\n" >> test.txt
+        echo -e "$page_results\n\n\n---\n\n\n" >> test.txt
 
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
