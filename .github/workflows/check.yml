@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 12 * * *'
+  push:
+    paths:
+      - 'config/blacklist.txt'
+      - 'config/subdomains.txt'
+      - 'config/whitelist.txt'
 permissions:
   contents: write
 
