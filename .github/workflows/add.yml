@@ -21,6 +21,11 @@ jobs:
           [[ ! -d data/pending ]] && mkdir data/pending
           printf "%s\n" "${{ github.event.issue.body }}" > data/pending/domains_manual.tmp
 
+      - name: Close issue
+        run: gh issue close ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Push
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
@@ -32,14 +37,3 @@ jobs:
   add:
     needs: read-domains
     uses: ./.github/workflows/retrieve.yml
-
-  close-issue:
-    needs: add
-    runs-on: ubuntu-latest
-    steps:
-      - name: Close issue
-        run: gh issue close ${{ github.event.issue.number }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-
