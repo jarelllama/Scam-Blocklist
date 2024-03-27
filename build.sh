@@ -49,7 +49,7 @@ $(print_stats "petscams.com")
 $(print_stats "scam.directory")
 $(print_stats "scamadviser.com")
 $(print_stats "stopgunscams.com")
-$(print_stats "Manual")
+$(print_stats "Manual") Entries
 $(print_stats)
 
 *The Excluded % is of domains not included in the
