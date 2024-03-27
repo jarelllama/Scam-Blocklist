@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:29:24 UTC 2024
+! Last modified: Wed Mar 27 09:03:02 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1968
+! Total number of entries: 1972
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -554,6 +554,7 @@ local-zone: "dynamitecaofficial.com." always_nxdomain
 local-zone: "dynastyfrenchie.com." always_nxdomain
 local-zone: "e-papuha.com." always_nxdomain
 local-zone: "eagleviewfirearmss.com." always_nxdomain
+local-zone: "earnglobal.co." always_nxdomain
 local-zone: "eastidahoent.com." always_nxdomain
 local-zone: "easy-earn.homes." always_nxdomain
 local-zone: "ebikeandchristmasdecor.com." always_nxdomain
@@ -1075,6 +1076,7 @@ local-zone: "lubamining.com." always_nxdomain
 local-zone: "luccheseusstore.com." always_nxdomain
 local-zone: "luckygunnerarmory.com." always_nxdomain
 local-zone: "luckypawz.us." always_nxdomain
+local-zone: "luizeva.com." always_nxdomain
 local-zone: "lukasminiteacups.com." always_nxdomain
 local-zone: "lukmall.shop." always_nxdomain
 local-zone: "luluxxvip.com." always_nxdomain
@@ -1433,6 +1435,7 @@ local-zone: "prometriccert.com." always_nxdomain
 local-zone: "promisedlanddonkeyfarm.com." always_nxdomain
 local-zone: "prosizeca.com." always_nxdomain
 local-zone: "prosoftwares.fr." always_nxdomain
+local-zone: "prostargift.com." always_nxdomain
 local-zone: "protectivemastiff.com." always_nxdomain
 local-zone: "proximoresearchs.com." always_nxdomain
 local-zone: "psclotheseu.com." always_nxdomain
@@ -1460,6 +1463,7 @@ local-zone: "qdlashfairy.com." always_nxdomain
 local-zone: "qssion.com." always_nxdomain
 local-zone: "qualityhayandfeedllc.us." always_nxdomain
 local-zone: "quiksilverclothes.shop." always_nxdomain
+local-zone: "quirkleaf.com." always_nxdomain
 local-zone: "quotedcs.co.za." always_nxdomain
 local-zone: "racegippsland.com." always_nxdomain
 local-zone: "radarak.com." always_nxdomain

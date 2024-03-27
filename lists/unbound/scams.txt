@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:29:24 UTC 2024
+! Last modified: Wed Mar 27 09:03:02 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 23089
+! Total number of entries: 23093
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -5999,6 +5999,7 @@ local-zone: "earlyevince.com." always_nxdomain
 local-zone: "earlystagecu.com." always_nxdomain
 local-zone: "earnaen.shop." always_nxdomain
 local-zone: "earncryptostock.com." always_nxdomain
+local-zone: "earnglobal.co." always_nxdomain
 local-zone: "earthmailexpress.com." always_nxdomain
 local-zone: "eartischleuchten.com." always_nxdomain
 local-zone: "easdm.maxlaza.com." always_nxdomain
@@ -12255,6 +12256,7 @@ local-zone: "luenx.com." always_nxdomain
 local-zone: "luffglasses.com." always_nxdomain
 local-zone: "luftum.com." always_nxdomain
 local-zone: "luitinghfouriespoultry.co.za." always_nxdomain
+local-zone: "luizeva.com." always_nxdomain
 local-zone: "lukasenergie.com." always_nxdomain
 local-zone: "lukasminiteacups.com." always_nxdomain
 local-zone: "lukemann.de." always_nxdomain
@@ -16143,6 +16145,7 @@ local-zone: "prospectvaleteacuphomes.com." always_nxdomain
 local-zone: "prospendrr.com." always_nxdomain
 local-zone: "prosperitypets.co.za." always_nxdomain
 local-zone: "prostamin-forte.com." always_nxdomain
+local-zone: "prostargift.com." always_nxdomain
 local-zone: "prostovit-official.site." always_nxdomain
 local-zone: "protecthumanity.org." always_nxdomain
 local-zone: "protectivemastiff.com." always_nxdomain
@@ -16422,6 +16425,7 @@ local-zone: "quiins-kings-fitness.de." always_nxdomain
 local-zone: "quiksilverclothes.shop." always_nxdomain
 local-zone: "quimv.com." always_nxdomain
 local-zone: "quintaldog.cz." always_nxdomain
+local-zone: "quirkleaf.com." always_nxdomain
 local-zone: "quirky-nft.com." always_nxdomain
 local-zone: "quitransporten.com." always_nxdomain
 local-zone: "quobilelayersancages.co.za." always_nxdomain

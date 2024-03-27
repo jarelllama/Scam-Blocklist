@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:29:24 UTC 2024
+! Last modified: Wed Mar 27 09:03:02 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 23089
+! Total number of entries: 23093
 !
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -5998,6 +5998,7 @@ local=/earlyevince.com/
 local=/earlystagecu.com/
 local=/earnaen.shop/
 local=/earncryptostock.com/
+local=/earnglobal.co/
 local=/earthmailexpress.com/
 local=/eartischleuchten.com/
 local=/easdm.maxlaza.com/
@@ -12254,6 +12255,7 @@ local=/luenx.com/
 local=/luffglasses.com/
 local=/luftum.com/
 local=/luitinghfouriespoultry.co.za/
+local=/luizeva.com/
 local=/lukasenergie.com/
 local=/lukasminiteacups.com/
 local=/lukemann.de/
@@ -16142,6 +16144,7 @@ local=/prospectvaleteacuphomes.com/
 local=/prospendrr.com/
 local=/prosperitypets.co.za/
 local=/prostamin-forte.com/
+local=/prostargift.com/
 local=/prostovit-official.site/
 local=/protecthumanity.org/
 local=/protectivemastiff.com/
@@ -16421,6 +16424,7 @@ local=/quiins-kings-fitness.de/
 local=/quiksilverclothes.shop/
 local=/quimv.com/
 local=/quintaldog.cz/
+local=/quirkleaf.com/
 local=/quirky-nft.com/
 local=/quitransporten.com/
 local=/quobilelayersancages.co.za/

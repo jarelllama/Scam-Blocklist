@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:29:24 UTC 2024
+! Last modified: Wed Mar 27 09:03:02 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1968
+! Total number of entries: 1972
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -553,6 +553,7 @@ local=/dynamitecaofficial.com/
 local=/dynastyfrenchie.com/
 local=/e-papuha.com/
 local=/eagleviewfirearmss.com/
+local=/earnglobal.co/
 local=/eastidahoent.com/
 local=/easy-earn.homes/
 local=/ebikeandchristmasdecor.com/
@@ -1074,6 +1075,7 @@ local=/lubamining.com/
 local=/luccheseusstore.com/
 local=/luckygunnerarmory.com/
 local=/luckypawz.us/
+local=/luizeva.com/
 local=/lukasminiteacups.com/
 local=/lukmall.shop/
 local=/luluxxvip.com/
@@ -1432,6 +1434,7 @@ local=/prometriccert.com/
 local=/promisedlanddonkeyfarm.com/
 local=/prosizeca.com/
 local=/prosoftwares.fr/
+local=/prostargift.com/
 local=/protectivemastiff.com/
 local=/proximoresearchs.com/
 local=/psclotheseu.com/
@@ -1459,6 +1462,7 @@ local=/qdlashfairy.com/
 local=/qssion.com/
 local=/qualityhayandfeedllc.us/
 local=/quiksilverclothes.shop/
+local=/quirkleaf.com/
 local=/quotedcs.co.za/
 local=/racegippsland.com/
 local=/radarak.com/
