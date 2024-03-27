@@ -35,7 +35,7 @@ function main {
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    source_google_search
+    #source_google_search
     build_raw
     build_raw_light
     [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid domains found

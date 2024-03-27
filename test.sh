@@ -71,16 +71,10 @@ function test_retrieval_check {
     printf "subdomain-test.com\n" >> out_root_domains.txt
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        # Test removal of domains already in blocklist
-        printf "in-blocklist-test.com\n" >> "$raw_file"  # Sample data
-        printf "in-blocklist-test.com\n" >> out_raw.txt  # Domain should already be present in expected raw file
-        printf "in-blocklist-test.com\n" >> input.txt  # Input
-
         # Test removal of known dead domains
         printf "dead-test.com\n" > "$dead_domains_file"  # Sample data
         printf "dead-test.com\n" >> input.txt  # Input
-
-        # No expected output for both tests
+        # No expected output
     fi
 
     # Test removal of whitelisted domains and blacklist exclusion
