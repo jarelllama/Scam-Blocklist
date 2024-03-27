@@ -18,7 +18,7 @@ jobs:
       - name: Read domains
         run: |
           [[ ! -d data/pending ]] && mkdir data/pending
-          printf "%s\n" ${{ github.event.issue.body }} > data/pending/domains_manual.tmp
+          printf "%s\n" "${{ github.event.issue.body }}" > data/pending/domains_manual.tmp
 
       - name: Push
         run: |
