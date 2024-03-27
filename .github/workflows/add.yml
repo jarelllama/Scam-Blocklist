@@ -40,5 +40,5 @@ jobs:
     uses: ./.github/workflows/retrieve.yml
 
   build:
-    needs: read-domains
+    needs: add
     uses: ./.github/workflows/build.yml
