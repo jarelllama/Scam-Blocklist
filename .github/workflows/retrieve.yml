@@ -23,7 +23,6 @@ jobs:
         run: bash retrieve.sh
 
       - name: Push
-        if: github.event_name != 'workflow_call'
         #if: ${{ success() || failure() && github.event_name != 'workflow_dispatch' && github.event_name != 'workflow_call' }}
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
