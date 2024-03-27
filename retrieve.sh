@@ -166,6 +166,7 @@ function search_google {
 
     search_id="$google_search_id"  # FOR DEBUGGING
     api_key="$google_search_api_key"  # FOR DEBUGGING
+    using_key=one
 
     touch "$domains_file"  # Create domains file if not present
 
@@ -177,6 +178,7 @@ function search_google {
 
         printf "%s\n" "$start"  # FOR DEBUGGING
         printf "%s\n\n\n\n\n\n" "$page_results" >> test.txt  # FOR DEBUGGING
+        printf "%s\n" "$using_key"
 
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
@@ -184,6 +186,7 @@ function search_google {
             [[ "$api_key" == "$google_search_api_key_2" ]] && { echo "BOTH RATE LIMITED"; rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
             api_key="$google_search_api_key_2" && search_id="$google_search_id_2"
+            using_key=two  # FOR DEBUGGING
             break  # Break to stop looping through pages (page 2 onwards does not seem to have the rate limit message)
         fi
 
