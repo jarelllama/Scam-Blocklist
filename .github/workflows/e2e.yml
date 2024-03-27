@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/toplist.yml
 
   retrieve:
-    needs: [test, update-toplist]
+    needs: [test, prep]
     uses: ./.github/workflows/retrieve.yml
     secrets: inherit
 
