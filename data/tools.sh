@@ -14,7 +14,7 @@ function format {
         data/dead_domains.txt)  # Remove whitespaces, empty lines and duplicates
             sed 's/ //g; /^$/d' "$1" | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1" ;;
         data/parked_domains.txt)  # Remove empty lines, sort and remove duplicates
-            sed '/^$/d' | sort -u -o "$1" ;;
+            sed '/^$/d' "$1" | sort -u -o "$1" ;;
         *.txt|*.tmp)  # Remove whitespaces, empty lines, sort and remove duplicates
             sed 's/ //g; /^$/d' "$1" | sort -u -o "$1" ;;
     esac
