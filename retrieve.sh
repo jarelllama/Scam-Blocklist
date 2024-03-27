@@ -174,7 +174,7 @@ function search_google {
     # REMEMBER TO CHANGE BACK TO 100
     for start in {1..30..10}; do  # Loop through each page of results
         query_params="cx=${search_id}&key=${api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-        page_results=$(curl -s "${url}?${query_params}")
+        page_results=$(curl "${url}?${query_params}")   # REMEMEBEER TO ADD BACK -s
 
         printf "%s\n" "$using_key"  # For debugging
         echo -e "$page_results\n\n\n---\n\n\n" >> test.txt
