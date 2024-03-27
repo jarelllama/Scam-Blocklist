@@ -136,6 +136,12 @@ function source_dfpi {
 }
 
 function source_google_search {
+
+    search_id="$google_search_id"  # FOR DEBUGGING
+    api_key="$google_search_api_key"  # FOR DEBUGGING
+    using_key=one
+
+
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     source='Google Search'
     ignore_from_light=
@@ -163,13 +169,7 @@ function search_google {
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace non-alphanumeric characters with '%20'
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
-
-    search_id="$google_search_id"  # FOR DEBUGGING
-    api_key="$google_search_api_key"  # FOR DEBUGGING
-    using_key=one
-
     touch "$domains_file"  # Create domains file if not present
-
 
     # REMEMBER TO CHANGE BACK TO 100
     for start in {1..30..10}; do  # Loop through each page of results
@@ -177,7 +177,6 @@ function search_google {
         page_results=$(curl -s "${url}?${query_params}")
 
         printf "%s\n" "$start"  # FOR DEBUGGING
-        printf "%s\n\n\n\n\n\n" "$page_results" >> test.txt  # FOR DEBUGGING
         printf "%s\n" "$using_key"
 
         # Use next API key if first key is rate limited
