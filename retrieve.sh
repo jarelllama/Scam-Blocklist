@@ -25,7 +25,6 @@ function main {
 }
 
 function prepare {
-    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
@@ -141,6 +140,7 @@ function source_dfpi {
 }
 
 function source_google_search {
+    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     source='Google Search'
     ignore_from_light=
     if [[ "$use_pending" == true ]]; then
