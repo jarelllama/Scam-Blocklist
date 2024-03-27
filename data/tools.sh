@@ -34,6 +34,9 @@ function remove_parked_domains {
     check_for_parked "x08" & check_for_parked "x09" &
     check_for_parked "x10" & check_for_parked "x11"
 
+    format "$parked_domains_file"
+    comm -23 "$raw_file" "$parked_domains_file" > temp && mv temp "$raw_file"
+
     find . -maxdepth 1 -type f -name "parked_domains_x*.tmp" -delete
     find . -maxdepth 1 -type f -name "x*" -delete
 }

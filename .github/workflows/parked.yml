@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Remove parked domains from light version
-        run: bash data/tools.sh "data/raw_light.txt"
+        run: bash data/tools.sh "parked" "data/raw_light.txt"
 
       - name: Push
         run: |
