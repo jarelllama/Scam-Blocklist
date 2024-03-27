@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 18:34:49 UTC 2024
+! Last modified: Wed Mar 27 18:38:00 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 23154
+! Total number of entries: 23158
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1016,6 +1016,7 @@ local-zone: "andrewgoldensretrievers.com." always_nxdomain
 local-zone: "andrewresenfield.com." always_nxdomain
 local-zone: "anduni.de." always_nxdomain
 local-zone: "andycockerspanielpuppies.com." always_nxdomain
+local-zone: "andylabradorretrieverhome.com." always_nxdomain
 local-zone: "andyskennel.com." always_nxdomain
 local-zone: "aneedwsy.com." always_nxdomain
 local-zone: "anewscheng.com." always_nxdomain
@@ -5342,6 +5343,7 @@ local-zone: "deliveryexpresscargo.com." always_nxdomain
 local-zone: "deliverynationwide.com." always_nxdomain
 local-zone: "deliveryposteservice.com." always_nxdomain
 local-zone: "deliveryxpressworld.com." always_nxdomain
+local-zone: "delmarvapferdestall.org." always_nxdomain
 local-zone: "deloresshorthairedpointers.com." always_nxdomain
 local-zone: "delson.de." always_nxdomain
 local-zone: "delta-pet-delivery.com." always_nxdomain
@@ -8997,6 +8999,7 @@ local-zone: "grabgalaxy.com." always_nxdomain
 local-zone: "graceadorablecoons.com." always_nxdomain
 local-zone: "graceakcbulldogsfarm.com." always_nxdomain
 local-zone: "gracebordercollie.com." always_nxdomain
+local-zone: "gracebritishshorthairkitten.com." always_nxdomain
 local-zone: "graceevfree.org." always_nxdomain
 local-zone: "gracefulmoversllc.com." always_nxdomain
 local-zone: "gracegoldendoodlepuppies.info." always_nxdomain
@@ -13386,6 +13389,7 @@ local-zone: "mohr-autoreifen.com." always_nxdomain
 local-zone: "mohr-reifenversand.shop." always_nxdomain
 local-zone: "mohre-gov.com." always_nxdomain
 local-zone: "mohtinto.co.tz." always_nxdomain
+local-zone: "moikola.com." always_nxdomain
 local-zone: "moja-laden.com." always_nxdomain
 local-zone: "mojezkusenostsinvisalign.cz." always_nxdomain
 local-zone: "mokashe.com." always_nxdomain

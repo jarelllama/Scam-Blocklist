@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 18:34:49 UTC 2024
+! Last modified: Wed Mar 27 18:38:00 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1976
+! Total number of entries: 1980
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -96,6 +96,7 @@ local=/ammunitionsales.shop/
 local=/ammunitionyard.com/
 local=/amreahome.com/
 local=/analystcase.com/
+local=/andylabradorretrieverhome.com/
 local=/anewscheng.com/
 local=/angelicteacuppoodle.net/
 local=/animalsupplies.org/
@@ -488,6 +489,7 @@ local=/dcsgovprocurements.org/
 local=/dealsgo.shop/
 local=/dehsid.com/
 local=/delightfuljackrussellterriers.com/
+local=/delmarvapferdestall.org/
 local=/denbyfashion.com/
 local=/depanten-gel.site/
 local=/deportesberja.com/
@@ -769,6 +771,7 @@ local=/goodteacherlife.com/
 local=/gorgeousshepherdpuppies.com/
 local=/goxmix.com/
 local=/grabgalaxy.com/
+local=/gracebritishshorthairkitten.com/
 local=/grailgg.com/
 local=/greatdanepuppyhome.com/
 local=/greatoffereu.com/
@@ -1189,6 +1192,7 @@ local=/modern-dove.com/
 local=/modernattirellc.com/
 local=/modernmealmakers.com/
 local=/moespupfamily.online/
+local=/moikola.com/
 local=/mollyminidachshundpuppies.com/
 local=/momnfancy.com/
 local=/momondoexpress.com/
