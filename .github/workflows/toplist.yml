@@ -19,7 +19,7 @@ jobs:
         run: |
           wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
           awk -F ',' '{print $2}' toplist.tmp > data/toplist.txt
-          #bash data/tools.sh "format" "data/toplist.txt"
+          bash data/tools.sh "format" "data/toplist.txt"
           rm toplist.tmp
 
       - name: Push

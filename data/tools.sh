@@ -56,3 +56,4 @@ function check_for_parked {
 
 [[ "$1" == 'format' ]] && format "$2"
 [[ "$1" == 'parked' ]] && remove_parked_domains "$2"
+exit 0
