@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Run using PAT to correctly trigger build workfow
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: retrieve.sh
         env:
@@ -29,3 +29,8 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Retrieve domains"  # Note commit -am does not commit the pending directory
           git push -q
+
+      - name: Build
+          if: github.event_name == 'schedule'
+          run: |
+            echo "This command will only run if triggered by a schedule event."

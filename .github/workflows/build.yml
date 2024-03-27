@@ -2,10 +2,12 @@ name: Build lists
 run-name: Build lists
 on:
   workflow_dispatch:
+  workflow_call:
+  schedule:
+    - cron: '0 1 * * *'
   push:
     paths:
-      - 'data/raw.txt'
-      - 'build.sh'
+      - 'build.sh'  # Update readme if changed in build.sh
 
 jobs:
   build-lists:

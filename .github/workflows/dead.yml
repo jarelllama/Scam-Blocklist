@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Run using PAT to correctly trigger build workfow
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: dead.sh
         run: bash dead.sh
