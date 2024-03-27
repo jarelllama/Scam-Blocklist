@@ -39,7 +39,6 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 Total domains: $(wc -l < "$raw_file")
 
 Statistics for each source:
-
 Today | Yesterday | Excluded | Source
 $(print_stats "Google Search")
 $(print_stats "aa419.org")
@@ -100,9 +99,9 @@ Domains retrieved today: $(count "$today" "Google Search")
 The full domain retrieval process for all sources can be viewed in the repository's code.
 
 ## Filtering process
-- The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted companies, etc.)
-- The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives and flagged domains are vetted manually
-- Common subdomains like 'www' are removed to make use of wildcard matching for all other subdomains. See the list of checked subdomains here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
+- The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted stores, etc.)
+- The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
+- Common subdomains like 'www.' are removed to make use of wildcard matching for all other subdomains. See the list of checked subdomains here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
 - Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
 - Only domains are included in the blocklist; IP addresses are checked for resolving DNS records and URLs are stripped down to their domains
 
@@ -111,7 +110,7 @@ The full filtering process can be viewed in the repository's code.
 ## Dead domains
 Dead domains are removed daily using [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter). Note that domains acting as wildcards are excluded from this process.
 
-Dead domains that have become resolving again are included back into the blocklist.
+Dead domains that are resolving again are included back into the blocklist.
 
 ## Why the Hosts format is not supported
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.

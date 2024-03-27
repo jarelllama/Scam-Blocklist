@@ -16,7 +16,6 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 Total domains: 23154
 
 Statistics for each source:
-
 Today | Yesterday | Excluded | Source
    86 |         0 |       2% | Google Search
     0 |         3 |       9% | aa419.org
