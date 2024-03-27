@@ -29,13 +29,17 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Manually add domains"
           git push -q
 
+  add:
+    needs: read-domains
+    uses: ./.github/workflows/retrieve.yml
+
+  close-issue:
+    needs: add
+    runs-on: ubuntu-latest
+    steps:
       - name: Close issue
         run: gh issue close ${{ github.event.issue.number }}
         env:
           GH_TOKEN: ${{ github.token }}
-
-  add:
-    needs: read-domains
-    uses: ./.github/workflows/retrieve.yml
 
 
