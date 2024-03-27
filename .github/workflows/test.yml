@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Test dead.sh
