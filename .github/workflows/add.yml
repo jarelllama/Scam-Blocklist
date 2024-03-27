@@ -21,7 +21,6 @@ jobs:
         run: |
           [[ ! -d data/pending ]] && mkdir data/pending
           printf "%s\n" "$domains" > data/pending/domains_manual.tmp
-          bash retrieve.sh
 
       - name: Push
         run: |
@@ -30,3 +29,8 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Manually add domains"
           git push -q
+
+  retrieve-domains:
+    needs: read-domains
+    uses: ./.github/workflows/retrieve.yml
+    secrets: inherit
