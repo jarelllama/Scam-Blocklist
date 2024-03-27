@@ -13,20 +13,20 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 ```
-Total domains: 23014
+Total domains: 23083
 
 Statistics for each source:
 
 Today | Yesterday | Excluded | Source
-    - |         0 |       2% | Google Search
-    - |         3 |       9% | aa419.org
-    - |         4 |      51% | dfpi.ca.gov
-    - |        45 |      12% | guntab.com
-    - |        10 |       7% | petscams.com
-    - |         0 |       9% | scam.directory
-    - |         6 |      29% | scamadviser.com
-    - |         0 |       5% | stopgunscams.com
-    - |        68 |       8% | All sources
+ 1652 |         0 |       2% | Google Search
+  469 |         3 |       9% | aa419.org
+   12 |         4 |      51% | dfpi.ca.gov
+ 1526 |        45 |      12% | guntab.com
+  244 |        10 |       7% | petscams.com
+  248 |         0 |      10% | scam.directory
+   51 |         6 |      30% | scamadviser.com
+   71 |         0 |       5% | stopgunscams.com
+ 4273 |        68 |       9% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -49,7 +49,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1106
+Total domains: 1962
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -68,8 +68,8 @@ Each search term is frequently benchmarked on its number of new domains and fals
 #### Statistics
 ```
 Active search terms: 18
-Queries made today: 0
-Domains retrieved today: -
+Queries made today: 104 (rate limited)
+Domains retrieved today: 1652
 ```
 
 #### Regarding other sources
