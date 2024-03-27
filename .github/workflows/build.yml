@@ -9,7 +9,7 @@ on:
     paths:
       - 'build.sh'  # Update readme if changed in build.sh
 permissions:
-  - contents: write
+  contents: write
 
 jobs:
   build-lists:

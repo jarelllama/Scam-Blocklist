@@ -5,7 +5,7 @@ on:
     types:
       - labeled
 permissions:
-  - contents: write
+  contents: write
 
 jobs:
   read-domains:
