@@ -176,8 +176,8 @@ function search_google {
         query_params="cx=${search_id}&key=${api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
 
-        printf "%s\n" "$start"  # FOR DEBUGGING
-        printf "%s\n" "$using_key"
+        printf "%s\n" "$using_key"  # For debugging
+        [[ "$using_key" == 'two' ]]; echo -e "$page_results\n\n\n\n\n\n" >> test.txt
 
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
