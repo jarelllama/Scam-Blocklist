@@ -32,13 +32,13 @@ function source {
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
     [[ "$use_pending" == true ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
-    #source_aa419
-    #source_dfpi
-    #source_guntab
-    #source_petscams
-    #source_scamdirectory
-    #source_scamadviser
-    #source_stopgunscams
+    source_aa419
+    source_dfpi
+    source_guntab
+    source_petscams
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
     source_google_search
 }
 
