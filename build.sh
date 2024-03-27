@@ -177,13 +177,15 @@ function count {
 
     # Count % of excluded domains of raw count retrieved from each source
     if [[ "$scope" == 'excluded' ]]; then
-        raw_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 4 | awk '{total += $1} END {print total}')
+        csvgrep -c 2 -m "$source" "$source_log" | csvgrep -c 13 -m 'yes' > source_rows.tmp
+        raw_count=$(csvcut -c 4 source_rows.tmp | awk '{total += $1} END {print total}')
         [[ "$raw_count" -eq 0 ]] && { printf "0"; return; }  # Return if raw count is 0 to avoid divide by zero error
-        white_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 6 | awk '{total += $1} END {print total}')
-        dead_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 7 | awk '{total += $1} END {print total}')
-        redundant_count=$(csvgrep -c 13 -m 'yes' "$source_log" | csvgrep -c 2 -m "$source" | csvcut -c 8 | awk '{total += $1} END {print total}')
+        white_count=$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')
+        dead_count=$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')
+        redundant_count=$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')
         excluded_count=$((white_count + dead_count + redundant_count))
         printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded
+        rm source_rows.tmp
         return
 
     # Count number of Google Search queries made
