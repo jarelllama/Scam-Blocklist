@@ -26,6 +26,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |       9% | scam.directory
     0 |         6 |      29% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
+    6 |         0 |       0% | Manual
    47 |        68 |       8% | All sources
 
 *The Excluded % is of domains not included in the
