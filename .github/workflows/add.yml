@@ -9,8 +9,6 @@ jobs:
   read-domains:
     if: ${{ github.event.label.name == 'add domains' && github.actor == github.repository_owner }}
     runs-on: ubuntu-latest
-    env:
-      domains: ${{ github.event.issue.body }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,11 +16,21 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Read domains
+        env:
+          domains: ${{ github.event.issue.body }}
         run: |
           [[ ! -d data/pending ]] && mkdir data/pending
           printf "%s\n" "$domains" > data/pending/domains_manual.tmp
 
-  retrieve-domains:
-    needs: read-domains
-    uses: ./.github/workflows/retrieve.yml
-    secrets: inherit
+      - name: Retreive domains
+        needs: read-domains
+        uses: ./.github/workflows/retrieve.yml
+        secrets: inherit
+
+      - name: Push
+        run: |
+        git config user.email ${{ vars.GIT_EMAIL }}
+        git config user.name ${{ vars.GIT_USERNAME }}
+        git add .
+        git diff-index --quiet HEAD || git commit -m "Manually add domains"
+        git push -q

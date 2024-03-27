@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        if: github.event_name != 'workflow_call'
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
@@ -24,7 +23,8 @@ jobs:
         run: bash retrieve.sh
 
       - name: Push
-        if: ${{ success() || failure() && github.event_name != 'workflow_dispatch' && github.event_name != 'workflow_call' }}
+        if: github.event_name != 'workflow_call'
+        #if: ${{ success() || failure() && github.event_name != 'workflow_dispatch' && github.event_name != 'workflow_call' }}
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
