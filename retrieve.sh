@@ -18,17 +18,14 @@ time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 [[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; }
 
 function main {
-    printf "\n"
-    prepare
-    source
-    build
-}
-
-function prepare {
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
+    printf "\n"
+    prepare
+    source
+    build
 }
 
 function source {
