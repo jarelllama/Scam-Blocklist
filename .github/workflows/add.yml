@@ -24,7 +24,6 @@ jobs:
 
       - name: Retreive domains
         uses: ./.github/workflows/retrieve.yml
-        secrets: inherit
 
       - name: Push
         run: |
