@@ -136,12 +136,6 @@ function source_dfpi {
 }
 
 function source_google_search {
-
-    search_id="$google_search_id"  # FOR DEBUGGING
-    api_key="$google_search_api_key"  # FOR DEBUGGING
-    using_key=one
-
-
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     source='Google Search'
     ignore_from_light=
@@ -171,22 +165,17 @@ function search_google {
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Create domains file if not present
 
-    # REMEMBER TO CHANGE BACK TO 100
     for start in {1..20..10}; do  # Loop through each page of results
-        query_params="cx=${search_id}&key=${api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-        page_results=$(curl "${url}?${query_params}")   # REMEMEBEER TO ADD BACK -s
-
-        printf "%s\n" "$using_key"  # For debugging
+        query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
+        page_results=$(curl -s "${url}?${query_params}")
 
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
-            # Break loop if second key is rate limited
-            [[ "$using_key" == 'two' ]] && { echo "BOTH RATE LIMITED"; rate_limited=true; break; } || rate_limited=false
+            # Break loop if second key is also rate limited
+            [[ "$google_search_id" == "$google_search_id_2" ]] && { rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
-            api_key="$google_search_api_key_2"
-            search_id="$google_search_id_2"
-            using_key=two  # FOR DEBUGGING
-            break  # Break to stop looping through pages (page 2 onwards does not seem to have the rate limit message)
+            google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
+            continue  # Continue to next page (current rate limited page is not repeated)
         fi
 
         ((query_count++))  # Increment query count
