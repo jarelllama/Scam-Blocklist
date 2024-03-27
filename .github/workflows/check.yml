@@ -1,4 +1,4 @@
-name: Check lists
+name: Check listsworkf
 run-name: Check lists
 on:
   workflow_dispatch:
@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: check.sh
         run: bash check.sh
@@ -29,6 +27,6 @@ jobs:
           git push -q
 
   build:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name != 'schedule'
     needs: check-lists
     uses: ./.github/workflows/build.yml

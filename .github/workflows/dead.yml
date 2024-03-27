@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: dead.sh
         run: bash dead.sh
@@ -28,6 +26,6 @@ jobs:
           git push -q
 
   build:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name != 'schedule'
     needs: dead-check
     uses: ./.github/workflows/build.yml
