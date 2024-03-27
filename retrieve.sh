@@ -18,33 +18,40 @@ time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 [[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; }
 
 function main {
+    printf "\n"
+    prepare
+    source
+    build
+}
+
+function prepare {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    printf "\n"
+}
+
+function source {
     # Check for existing pending domains file
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
-    [[ ! -d data/pending ]] && mkdir data/pending
-    [[ "$use_pending" == true ]] && source_manual  # Only run if existing pending domains are present
-    #source_aa419
-    #source_dfpi
-    #source_guntab
-    #source_petscams
-    #source_scamdirectory
-    #source_scamadviser
-    #source_stopgunscams
-    #source_google_search
-    build_raw
-    build_raw_light
-    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid domains found
+    [[ "$use_pending" == true ]] && source_manual  # Retrieve manually added domains
+    mkdir -p data/pending
+    source_aa419
+    source_dfpi
+    source_guntab
+    source_petscams
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 }
 
 function source_manual {
     source='Manual'
     ignore_from_light=
     domains_file='data/pending/domains_manual.tmp'
+    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "$domains_file" > domains.tmp && mv domains.tmp "$domains_file"
     process_source
 }
 
@@ -267,15 +274,15 @@ function process_source {
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
     filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
-    printf "%s\n" "$pending_domains" >> filtered_domains.tmp  # Collate filtered domains
-    [[ "$ignore_from_light" != true ]] && printf "%s\n" "$pending_domains" >> filtered_light_domains.tmp  # Collate filtered domains from light sources
+    printf "%s\n" "$pending_domains" >> retrieved_domains.tmp  # Collate filtered domains
+    [[ "$ignore_from_light" != true ]] && printf "%s\n" "$pending_domains" >> retrieved_light_domains.tmp  # Collate filtered domains from light sources
     log_source
 }
 
-function build_raw {
+function build {
     # Exit if no new domains to add (-s does not seem to work well here)
-    ! grep -q '[[:alnum:]]' filtered_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
-    format_list filtered_domains.tmp && format_list "$raw_file"
+    ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
+    format_list retrieved_domains.tmp && format_list "$raw_file"
 
     [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n"
 
@@ -295,16 +302,16 @@ function build_raw {
 
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
-        root_domains=$(comm -12 filtered_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
+        root_domains=$(comm -12 retrieved_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
         printf "%s\n" "$root_domains" >> "$root_domains_file"  # Collate filtered root domains to exclude from dead check
         grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Collate filtered subdomains for dead check
         format_list "$root_domains_file" && format_list "$subdomains_file"
     fi
 
     count_before=$(wc -l < "$raw_file")
-    cat filtered_domains.tmp >> "$raw_file"  # Add domains to raw file
+    cat retrieved_domains.tmp >> "$raw_file"  # Add domains to raw file
     format_list "$raw_file"
-    log_event "$(<filtered_domains.tmp)" "new_domain" "retrieval"
+    log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
     count_difference=$((count_after - count_before))
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$count_difference" "$count_after"
@@ -313,12 +320,14 @@ function build_raw {
     rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file
     temp_source_log=$(grep -vF "$time_format" "$source_log")  # Remove rows from log
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$source_log"  # Add the updated rows to the log
-}
 
-function build_raw_light {
-    ! grep -q '[[:alnum:]]' filtered_light_domains.tmp && return  # Return if no domains to add
-    cat filtered_light_domains.tmp >> "$raw_light_file"  # Add domains to raw light file
-    format_list "$raw_light_file"
+    # Build raw light file
+    if grep -q '[[:alnum:]]' retrieved_light_domains.tmp; then
+        cat retrieved_light_domains.tmp >> "$raw_light_file"
+        format_list "$raw_light_file"
+    fi
+
+    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid domains found
 }
 
 function log_event {

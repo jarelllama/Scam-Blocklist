@@ -1,5 +1,4 @@
 name: Build lists
-run-name: Build lists
 on:
   workflow_dispatch:
   workflow_call:
