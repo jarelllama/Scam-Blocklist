@@ -68,8 +68,8 @@ Each search term is frequently benchmarked on its number of new domains and fals
 
 #### Statistics
 ```
-Active search terms: 20
-Queries made today: 111 (rate limited)
+Active search terms: 18
+Queries made today: 129 (rate limited)
 Domains retrieved today: 57
 ```
 
