@@ -1,0 +1,26 @@
+name: Remove parked domains
+run-name: Remove parked domains
+on:
+  workflow_dispatch:
+  #schedule:
+  #  - cron: '30 23 * * *'
+permissions:
+  contents: write
+
+jobs:
+  remove-parked:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove parked domains from light version
+        run: bash data/tools.sh "data/raw_light.txt"
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Check lists"
+          git push -q
