@@ -7,8 +7,10 @@ on:
 
 jobs:
   read_domains:
-    if: github.event.label.name == 'add domain'
+    if: github.event.label.name == 'add domains'
     runs-on: ubuntu-latest
+    env:
+      domains: ${{ github.event.issue.body }}
     steps:
       - name: Read issue body
-        run: printf "%s\n" ${{ github.event.issue.body }}"
+        run: printf "%s\n" "$domains"
