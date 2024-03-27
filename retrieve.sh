@@ -44,7 +44,7 @@ function main {
 function source_manual {
     source='Manual'
     ignore_from_light=
-    domains_file="data/pending/domains_manual.tmp"
+    domains_file='data/pending/domains_manual.tmp'
     process_source
 }
 

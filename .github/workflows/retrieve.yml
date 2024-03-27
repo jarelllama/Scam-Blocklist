@@ -13,6 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: main
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: retrieve.sh
