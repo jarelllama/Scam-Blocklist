@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        if: github.event_name != 'workflow_call'
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
@@ -23,7 +24,7 @@ jobs:
         run: bash retrieve.sh
 
       - name: Push
-        if: ${{ success() || failure() && ! (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call') }}
+        if: ${{ success() || failure() && github.event_name != 'workflow_dispatch' && github.event_name != 'workflow_call' }}
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
@@ -31,8 +32,4 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Retrieve domains"  # Note commit -am does not commit the pending directory
           git push -q
 
-  build:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' }}
-    needs: retrieve-domains
-    uses: ./.github/workflows/build.yml
-    secrets: inherit
+
