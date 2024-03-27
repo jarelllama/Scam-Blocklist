@@ -2,6 +2,7 @@ name: Run tests
 run-name: Run tests
 on:
   workflow_dispatch:
+  workflow_call:
   push:
     paths:
       - '**.sh'
@@ -12,7 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          ref: main
       - name: Run ShellCheck
         run: bash test.sh 'shellcheck'
 
@@ -21,7 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          ref: main
       - name: Test retrieve.sh
         run: bash test.sh 'retrieval'
 
@@ -30,7 +33,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          ref: main
       - name: Test toplist check
         run: bash test.sh 'toplist'
 
@@ -39,7 +43,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          ref: main
       - name: Test check.sh
         run: bash test.sh 'check'
 
@@ -47,7 +52,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@
+        with:
+          ref: main
       - name: Test dead.sh
         run: bash test.sh 'dead'

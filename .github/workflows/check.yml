@@ -3,7 +3,7 @@ run-name: Check lists
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 23 * * *'
+    - cron: '0 12 * * *'
 permissions:
   contents: write
 
@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: check.sh
         run: bash check.sh
@@ -27,6 +29,5 @@ jobs:
           git push -q
 
   build:
-    if: github.event_name != 'schedule'
     needs: check-lists
     uses: ./.github/workflows/build.yml

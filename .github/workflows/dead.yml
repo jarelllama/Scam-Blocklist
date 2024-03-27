@@ -2,8 +2,7 @@ name: Dead check
 run-name: Dead check
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 0 * * *'
+  workflow_call:
 permissions:
   contents: write
 
@@ -13,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: dead.sh
         run: bash dead.sh
@@ -26,6 +27,6 @@ jobs:
           git push -q
 
   build:
-    if: github.event_name != 'schedule'
+    if: github.event_name == 'workflow_dispatch'
     needs: dead-check
     uses: ./.github/workflows/build.yml

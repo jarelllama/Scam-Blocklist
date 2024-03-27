@@ -2,8 +2,8 @@ name: Remove parked domains
 run-name: Remove parked domains
 on:
   workflow_dispatch:
-  #schedule:
-  #  - cron: '30 23 * * *'
+  schedule:
+    - cron: '0 1 * * *'
 permissions:
   contents: write
 
@@ -13,8 +13,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
-      - name: Remove parked domains from light version
+      - name: Remove parked domains from light
         run: bash data/tools.sh "parked" "data/raw_light.txt"
 
       - name: Push
@@ -24,3 +26,7 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Check lists"
           git push -q
+
+  build:
+    needs: remove-parked
+    uses: ./.github/workflows/build.yml

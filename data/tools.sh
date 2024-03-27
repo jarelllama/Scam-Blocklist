@@ -12,10 +12,10 @@ function format {
 
     # For specific files/extensions:
     case "$1" in
-        data/pending/*)  # Remove whitespaces, empty lines, sort and remove duplicates
-            sed 's/ //g; /^$/d' "$1" | sort -u -o "$1" ;;
         data/dead_domains.txt)  # Remove whitespaces, empty lines and duplicates
             sed 's/ //g; /^$/d' "$1" | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1" ;;
+        data/parked_domains.txt)  # Remove empty lines, sort and remove duplicates
+            sed '/^$/d' | sort -u -o "$1" ;;
         *.txt|*.tmp)  # Remove whitespaces, empty lines, sort and remove duplicates
             sed 's/ //g; /^$/d' "$1" | sort -u -o "$1" ;;
     esac
@@ -36,9 +36,6 @@ function remove_parked_domains {
 
     format "$parked_domains_file"
     comm -23 "$raw_file" "$parked_domains_file" > temp && mv temp "$raw_file"
-
-    find . -maxdepth 1 -type f -name "parked_domains_x*.tmp" -delete
-    find . -maxdepth 1 -type f -name "x*" -delete
 }
 
 function check_for_parked {
@@ -54,6 +51,8 @@ function check_for_parked {
         ((count++))
     done < "$1"
     [[ -f "parked_domains_${1}.tmp" ]] && cat "parked_domains_${1}.tmp" >> "$parked_domains_file"
+    rm "$1"
+    rm "parked_domains_${1}.tmp"
 }
 
 [[ "$1" == 'format' ]] && format "$2"

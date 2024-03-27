@@ -1,0 +1,28 @@
+name: End-to-end build
+run-name: End-to-end build
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+permissions:
+  contents: write
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  update-toplist:
+    uses: ./.github/workflows/toplist.yml
+
+  retrieve:
+    needs: [test, update-toplist]
+    uses: ./.github/workflows/retrieve.yml
+
+  dead-check:
+    needs: retrieve
+    uses: ./.github/workflows/dead.yml
+
+  build:
+    needs: dead-check
+    uses: ./.github/workflows/build.yml
+

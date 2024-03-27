@@ -3,8 +3,6 @@ run-name: Retrieve domains
 on:
   workflow_dispatch:
   workflow_call:
-  schedule:
-    - cron: '0 0 * * *'
 permissions:
   contents: write
 
@@ -36,7 +34,6 @@ jobs:
           git push -q
 
   build:
-    if: github.event_name != 'schedule'
+    if: github.event_name == 'workflow_dispatch'
     needs: retrieve-domains
     uses: ./.github/workflows/build.yml
-

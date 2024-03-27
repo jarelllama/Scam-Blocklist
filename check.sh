@@ -11,22 +11,14 @@ subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 time_format=$(date -u +"%H:%M:%S %d-%m-%y")
-toplist_url='https://tranco-list.eu/top-1m.csv.zip'
 
 function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    retrieve_toplist
     check_raw_file
     update_light_file
     [[ -s filter_log.tmp ]] && exit 1 || exit 0  # Exit with error if blocklist required filtering
-}
-
-function retrieve_toplist {
-    wget -qO - "$toplist_url" | gunzip - > toplist.tmp  # Download and unzip toplist to temp file
-    awk -F ',' '{print $2}' toplist.tmp > "$toplist_file"  # Format toplist to keep only domains
-    format_list "$toplist_file"
 }
 
 function check_raw_file {
