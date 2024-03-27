@@ -51,7 +51,7 @@ function source_manual {
     source='Manual'
     ignore_from_light=
     domains_file='data/pending/domains_manual.tmp'
-    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' "$domains_file" > domains.tmp && mv domains.tmp "$domains_file"
+    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$domains_file" > domains.tmp && mv domains.tmp "$domains_file"
     process_source
 }
 
