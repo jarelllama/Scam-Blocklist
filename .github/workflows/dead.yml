@@ -3,6 +3,10 @@ run-name: Dead check
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      called:
+        type: boolean
+        default: true
 permissions:
   contents: write
 
@@ -27,6 +31,7 @@ jobs:
           git push -q
 
   build:
-    if: github.event_name == 'workflow_dispatch'
+    # Only trigger if not called from another workflow
+    if: ${{ ! inputs.called }}
     needs: dead-check
     uses: ./.github/workflows/build.yml
