@@ -56,6 +56,17 @@ function test_retrieval_check {
     script_to_test="$1"
     [[ "$script_to_test" == 'retrieval' ]] && mkdir data/pending
 
+    if [[ "$script_to_test" == 'retrieval' ]]; then
+        # Test removal of known dead domains
+        # Sample data
+        printf "dead-test.com\n" > "$dead_domains_file"
+        printf "www.dead-test-2.com\n" >> "$dead_domains_file"
+        # Input
+        printf "dead-test.com\n" >> input.txt
+        printf "www.dead-test-2.com\n" >> input.txt
+        # No expected output
+    fi
+
     # Test removal of common subdomains
     : > "$subdomains_file"  # Initialize subdomains file
     : > "$root_domains_file"  # Initialize root domains file
@@ -69,13 +80,6 @@ function test_retrieval_check {
     [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The Check script does not exclude 'www' subdomains
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
-
-    if [[ "$script_to_test" == 'retrieval' ]]; then
-        # Test removal of known dead domains
-        printf "dead-test.com\n" > "$dead_domains_file"  # Sample data
-        printf "dead-test.com\n" >> input.txt  # Input
-        # No expected output
-    fi
 
     # Test removal of whitelisted domains and blacklist exclusion
     # Sample data

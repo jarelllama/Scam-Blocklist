@@ -204,6 +204,12 @@ function process_source {
     unfiltered_count=$(wc -l < "$domains_file")  # Count number of unfiltered domains pending
     pending_domains=$(<"$domains_file")  # Store pending domains in a variable
 
+    # Remove known dead domains (dead domains file contains subdomains and redundant domains)
+    dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
+    dead_count=$(wc -w <<< "$dead_domains")
+    [[ "$dead_count" -gt 0 ]] && pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
+    # Logging removed as it inflated log size by too much
+
     # Remove common subdomains
     while read -r subdomain; do  # Loop through common subdomains
         domains_with_subdomains=$(grep "^${subdomain}\." <<< "$pending_domains")  # Find domains with common subdomains
@@ -222,12 +228,6 @@ function process_source {
 
     # Remove domains already in raw file
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
-
-    # Remove known dead domains
-    dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
-    dead_count=$(wc -w <<< "$dead_domains")
-    [[ "$dead_count" -gt 0 ]] && pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
-    # Logging removed as it inflated log size by too much
 
     # Log blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")

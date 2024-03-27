@@ -39,7 +39,7 @@ function check_subdomains {
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead subdomains from subdomains file
     comm -23 "$subdomains_file" dead.tmp > subdomains.tmp && mv subdomains.tmp "$subdomains_file"
-    cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
+    cat dead.tmp >> "$dead_domains_file"  # Collate dead domains with subdomains to filter out from newly retrieved domains
     format_list "$dead_domains_file"
 
     while read -r subdomain; do  # Loop through common subdomains
@@ -57,7 +57,7 @@ function check_redundant {
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead redundant domains from redundant domains file
     comm -23 "$redundant_domains_file" dead.tmp > redundant.tmp && mv redundant.tmp "$redundant_domains_file"
-    cat dead.tmp >> "$dead_domains_file"  # Collate dead domains
+    cat dead.tmp >> "$dead_domains_file"  # Collate dead redundant domains to filter out from newly retrieved domains
     format_list "$dead_domains_file"
 
     while read -r wildcard; do  # Loop through wildcards
