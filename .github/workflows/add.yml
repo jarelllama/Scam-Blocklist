@@ -30,6 +30,8 @@ jobs:
 
       - name: Close issue
         run: gh issue close ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ github.token }}
 
   add:
     needs: read-domains
