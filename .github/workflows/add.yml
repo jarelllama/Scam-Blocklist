@@ -16,11 +16,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Read domains
-        env:
-          domains: ${{ github.event.issue.body }}
         run: |
           [[ ! -d data/pending ]] && mkdir data/pending
-          printf "%s\n" "$domains" > data/pending/domains_manual.tmp
+          printf "%s\n" ${{ github.event.issue.body }} > data/pending/domains_manual.tmp
 
       - name: Push
         run: |
@@ -29,6 +27,9 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Manually add domains"
           git push -q
+
+      - name: Close issue
+        run: gh issue close ${{ github.event.issue.number }}
 
   add:
     needs: read-domains
