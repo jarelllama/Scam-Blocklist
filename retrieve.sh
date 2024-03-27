@@ -182,7 +182,7 @@ function search_google {
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Break loop if second key is rate limited
-            [[ "$api_key" == "$google_search_api_key_2" ]] && { echo "BOTH RATE LIMITED"; rate_limited=true; break; } || rate_limited=false
+            [[ "$using_key" == 'two' ]] && { echo "BOTH RATE LIMITED"; rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
             api_key="$google_search_api_key_2" && search_id="$google_search_id_2"
             using_key=two  # FOR DEBUGGING
