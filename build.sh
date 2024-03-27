@@ -85,9 +85,9 @@ Scam sites often do not have a long lifespan; malicious domains may be replaced 
 The list of search terms is proactively updated and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 #### Limitations
-The Google Custom Search JSON API only provides ~100 free search queries per day. This limits the number of search terms that can be employed a day.
+The Google Custom Search JSON API only provides 100 daily free search queries per API key (which is why this project uses two API keys). This limits the number of search terms that can be employed.
 
-Each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are disabled to optimize the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+To optimize the number of queries required, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
 #### Statistics
 \`\`\`
