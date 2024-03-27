@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 19:02:05 UTC 2024
+! Last modified: Wed Mar 27 19:28:28 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1959
+! Total number of entries: 1963
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -487,6 +487,7 @@ local=/dealsgo.shop/
 local=/dehsid.com/
 local=/delightfuljackrussellterriers.com/
 local=/delmarvapferdestall.org/
+local=/deminexpress.com/
 local=/denbyfashion.com/
 local=/depanten-gel.site/
 local=/deportesberja.com/
@@ -745,6 +746,7 @@ local=/globallogisticsairlines.com/
 local=/globalmedschemicals.com/
 local=/globalmoversdelivery.co.com/
 local=/globalproductsen.shop/
+local=/globaltradingsltd.com/
 local=/globalwealthplanner.com/
 local=/globcoff.com/
 local=/globelinkstarshipping.com/
@@ -1227,6 +1229,7 @@ local=/munchkincatcattery.com/
 local=/munoituo.com/
 local=/murphyteacuppups.com/
 local=/mushroomdoseland.com/
+local=/mushroomspsychedelics.com/
 local=/mwfuniversity.com/
 local=/mwomenclothita.shop/
 local=/mychemshoplap.com/
@@ -1309,6 +1312,7 @@ local=/onexlogisticsservices.com/
 local=/onezbuds.com/
 local=/onligg.com/
 local=/onlineammo-store.com/
+local=/onlinedoctornearme.com/
 local=/onlineherbalincense.com/
 local=/onlinemlb.com/
 local=/onlinenba.net/

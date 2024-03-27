@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 19:02:05 UTC 2024
+! Last modified: Wed Mar 27 19:28:28 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1959
+! Total number of entries: 1963
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -488,6 +488,7 @@ local-zone: "dealsgo.shop." always_nxdomain
 local-zone: "dehsid.com." always_nxdomain
 local-zone: "delightfuljackrussellterriers.com." always_nxdomain
 local-zone: "delmarvapferdestall.org." always_nxdomain
+local-zone: "deminexpress.com." always_nxdomain
 local-zone: "denbyfashion.com." always_nxdomain
 local-zone: "depanten-gel.site." always_nxdomain
 local-zone: "deportesberja.com." always_nxdomain
@@ -746,6 +747,7 @@ local-zone: "globallogisticsairlines.com." always_nxdomain
 local-zone: "globalmedschemicals.com." always_nxdomain
 local-zone: "globalmoversdelivery.co.com." always_nxdomain
 local-zone: "globalproductsen.shop." always_nxdomain
+local-zone: "globaltradingsltd.com." always_nxdomain
 local-zone: "globalwealthplanner.com." always_nxdomain
 local-zone: "globcoff.com." always_nxdomain
 local-zone: "globelinkstarshipping.com." always_nxdomain
@@ -1228,6 +1230,7 @@ local-zone: "munchkincatcattery.com." always_nxdomain
 local-zone: "munoituo.com." always_nxdomain
 local-zone: "murphyteacuppups.com." always_nxdomain
 local-zone: "mushroomdoseland.com." always_nxdomain
+local-zone: "mushroomspsychedelics.com." always_nxdomain
 local-zone: "mwfuniversity.com." always_nxdomain
 local-zone: "mwomenclothita.shop." always_nxdomain
 local-zone: "mychemshoplap.com." always_nxdomain
@@ -1310,6 +1313,7 @@ local-zone: "onexlogisticsservices.com." always_nxdomain
 local-zone: "onezbuds.com." always_nxdomain
 local-zone: "onligg.com." always_nxdomain
 local-zone: "onlineammo-store.com." always_nxdomain
+local-zone: "onlinedoctornearme.com." always_nxdomain
 local-zone: "onlineherbalincense.com." always_nxdomain
 local-zone: "onlinemlb.com." always_nxdomain
 local-zone: "onlinenba.net." always_nxdomain
