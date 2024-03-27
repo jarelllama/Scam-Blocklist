@@ -163,12 +163,17 @@ function search_google {
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace non-alphanumeric characters with '%20'
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
+
+    search_id="$google_search_id"  # FOR DEBUGGING
+    api_key="$google_search_api_key"  # FOR DEBUGGING
+
     touch "$domains_file"  # Create domains file if not present
 
     for start in {1..100..10}; do  # Loop through each page of results
-        query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
+        query_params="cx=${search_id}&key=${api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
 
+        printf "%s\n" "$start"  # FOR DEBUGGING
         printf "%s\n\n\n\n\n\n" "$page_results" >> test.txt  # FOR DEBUGGING
 
         # Use next API key if first key is rate limited
@@ -176,7 +181,7 @@ function search_google {
             # Break loop if second key is rate limited
             [[ "$google_search_api_key" == "$google_search_api_key_2" ]] && { rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
-            google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
+            api_key="$google_search_api_key_2" && search_id="$google_search_id_2"
             continue  # Continue on with next page
         fi
 
