@@ -169,7 +169,9 @@ function search_google {
 
     touch "$domains_file"  # Create domains file if not present
 
-    for start in {1..100..10}; do  # Loop through each page of results
+
+    # REMEMBER TO CHANGE BACK TO 100
+    for start in {1..30..10}; do  # Loop through each page of results
         query_params="cx=${search_id}&key=${api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
 
@@ -182,7 +184,7 @@ function search_google {
             [[ "$api_key" == "$google_search_api_key_2" ]] && { echo "BOTH RATE LIMITED"; rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
             api_key="$google_search_api_key_2" && search_id="$google_search_id_2"
-            continue  # Continue on with next page
+            break  # Break to stop looping through pages (page 2 onwards does not seem to have the rate limit message)
         fi
 
         ((query_count++))  # Increment query count
