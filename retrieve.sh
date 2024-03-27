@@ -169,13 +169,14 @@ function search_google {
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
 
+        "$page_results" >> test.txt  # FOR DEBUGGING
+
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Break loop if second key is rate limited
             [[ "$google_search_api_key" == "$google_search_api_key_2" ]] && { rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
             google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
-            page_results=${page_results//rateLimitExceeded/}  # Remote rate limit message so API key 2 can run
             continue  # Continue on with next page
         fi
 
