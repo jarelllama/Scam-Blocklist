@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '30 0 * * *'
+permissions:
+  - contents: write
 
 jobs:
   dead-check:

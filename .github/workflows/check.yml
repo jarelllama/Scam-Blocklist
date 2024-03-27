@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '30 23 * * *'
+permissions:
+  - contents: write
 
 jobs:
   check-lists:

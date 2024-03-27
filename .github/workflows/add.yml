@@ -4,6 +4,8 @@ on:
   issues:
     types:
       - labeled
+permissions:
+  - contents: write
 
 jobs:
   read-domains:
