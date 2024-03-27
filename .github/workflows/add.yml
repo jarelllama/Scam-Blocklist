@@ -29,8 +29,8 @@ jobs:
 
       - name: Push
         run: |
-        git config user.email ${{ vars.GIT_EMAIL }}
-        git config user.name ${{ vars.GIT_USERNAME }}
-        git add .
-        git diff-index --quiet HEAD || git commit -m "Manually add domains"
-        git push -q
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Manually add domains"
+          git push -q
