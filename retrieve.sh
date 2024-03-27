@@ -28,14 +28,14 @@ function main {
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
     [[ ! -d data/pending ]] && mkdir data/pending
     [[ "$use_pending" == true ]] && source_manual  # Only run if existing pending domains are present
-    #source_aa419
-    #source_dfpi
-    #source_guntab
-    #source_petscams
-    #source_scamdirectory
-    #source_scamadviser
-    #source_stopgunscams
-    source_google_search
+    source_aa419
+    source_dfpi
+    source_guntab
+    source_petscams
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    #source_google_search
     build_raw
     build_raw_light
     [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid domains found
@@ -211,7 +211,7 @@ function process_source {
     format_list subdomains.tmp && format_list root_domains.tmp
 
     # Remove domains already in raw file
-    #pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
+    pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
 
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
