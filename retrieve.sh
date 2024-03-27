@@ -177,14 +177,14 @@ function search_google {
         page_results=$(curl "${url}?${query_params}")   # REMEMEBEER TO ADD BACK -s
 
         printf "%s\n" "$using_key"  # For debugging
-        echo -e "$page_results\n\n\n---\n\n\n" >> test.txt
 
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Break loop if second key is rate limited
             [[ "$using_key" == 'two' ]] && { echo "BOTH RATE LIMITED"; rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
-            api_key="$google_search_api_key_2" && search_id="$google_search_id_2"
+            api_key="$google_search_api_key_2"
+            search_id="$google_search_id_2"
             echo "$search_id"  # FOR DEBUGGING
             using_key=two  # FOR DEBUGGING
             break  # Break to stop looping through pages (page 2 onwards does not seem to have the rate limit message)
