@@ -1,5 +1,4 @@
 name: Manually add domains
-run-name: Manually add domains
 on:
   issues:
     types:
