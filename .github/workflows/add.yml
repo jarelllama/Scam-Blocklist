@@ -12,20 +12,19 @@ jobs:
     env:
       domains: ${{ github.event.issue.body }}
     steps:
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-        - name: Read domains
-          run: |
-            [[ ! -f data/pending ]] && mkdir data/pending
-            printf "%s\n" "$domains" > data/pending/domains_manual.tmp
-            #bash retrieve.sh
+      - name: Read domains
+        run: |
+          [[ ! -f data/pending ]] && mkdir data/pending
+          printf "%s\n" "$domains" > data/pending/domains_manual.tmp
+          #bash retrieve.sh
 
-        - name: Push
-          run: |
-            git config user.email ${{ vars.GIT_EMAIL }}
-            git config user.name ${{ vars.GIT_USERNAME }}
-            git add .
-            git diff-index --quiet HEAD || git commit -m "Build lists"
-            git push -q
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Build lists"
+          git push -q

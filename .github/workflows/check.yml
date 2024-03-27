@@ -28,5 +28,5 @@ jobs:
 
   build:
     if: github.event_name == 'workflow_dispatch'
-    needs: retrieve-domains
+    needs: check-lists
     uses: ./.github/workflows/build.yml
