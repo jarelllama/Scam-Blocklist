@@ -52,5 +52,5 @@ jobs:
       - name: Test dead.sh
         run: bash test.sh 'dead'
 
-    test-build:
-      uses: ./.github/workflows/build.yml
+  test-build:
+    uses: ./.github/workflows/build.yml
