@@ -13,12 +13,12 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 ```
-Total domains: 23109
+Total domains: 23154
 
 Statistics for each source:
 
 Today | Yesterday | Excluded | Source
-   41 |         0 |       2% | Google Search
+   86 |         0 |       2% | Google Search
     0 |         3 |       9% | aa419.org
     0 |         4 |      51% | dfpi.ca.gov
     0 |        45 |      12% | guntab.com
@@ -27,7 +27,7 @@ Today | Yesterday | Excluded | Source
     0 |         6 |      29% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
    10 |         0 |       0% | Manual Entries
-   51 |        68 |       8% | All sources
+   96 |        68 |       8% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -50,7 +50,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1988
+Total domains: 2033
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -70,7 +70,7 @@ To optimize the number of queries required, each search term is frequently bench
 ```
 Active search terms: 18
 Queries made today: 31
-Domains retrieved today: 41
+Domains retrieved today: 86
 ```
 
 #### Regarding other sources
