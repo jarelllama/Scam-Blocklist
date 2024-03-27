@@ -23,7 +23,7 @@ jobs:
         run: bash retrieve.sh
 
       - name: Push
-        if: always()
+        if: ${{ success() || failure() && ! (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call') }}
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
@@ -32,7 +32,7 @@ jobs:
           git push -q
 
   build:
-    if: github.event_name == 'workflow_dispatch'
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' }}
     needs: retrieve-domains
     uses: ./.github/workflows/build.yml
     secrets: inherit

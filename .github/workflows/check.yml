@@ -18,7 +18,7 @@ jobs:
         run: bash check.sh
 
       - name: Push
-        if: always()
+        if: ${{ success() || failure() }}
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}

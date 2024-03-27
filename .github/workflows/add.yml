@@ -22,8 +22,6 @@ jobs:
           [[ ! -d data/pending ]] && mkdir data/pending
           printf "%s\n" "$domains" > data/pending/domains_manual.tmp
 
-
-
   retrieve-domains:
     needs: read-domains
     uses: ./.github/workflows/retrieve.yml
