@@ -175,6 +175,7 @@ function search_google {
             [[ "$google_search_api_key" == "$google_search_api_key_2" ]] && { rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
             google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
+            page_results=${page_results//rateLimitExceeded/}  # Remote rate limit message so API key 2 can run
             continue  # Continue on with next page
         fi
 
