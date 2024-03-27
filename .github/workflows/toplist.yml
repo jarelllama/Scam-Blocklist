@@ -17,7 +17,7 @@ jobs:
 
       - name: Update toplist
         run: |
-          wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
+          wget -O - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
           awk -F ',' '{print $2}' toplist.tmp > data/toplist.txt
           bash data/tools.sh "format" "data/toplist.txt"
           rm toplist.tmp
