@@ -18,16 +18,16 @@ Total domains: 23109
 Statistics for each source:
 
 Today | Yesterday | Excluded | Source
-   57 |         0 |       2% | Google Search
+   41 |         0 |       2% | Google Search
     0 |         3 |       9% | aa419.org
     0 |         4 |      51% | dfpi.ca.gov
     0 |        45 |      12% | guntab.com
     0 |        10 |       7% | petscams.com
-    0 |         0 |      10% | scam.directory
+    0 |         0 |       9% | scam.directory
     0 |         6 |      29% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
    10 |         0 |       0% | Manual Entries
-   67 |        68 |       9% | All sources
+   51 |        68 |       8% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -62,15 +62,15 @@ Scam sites often do not have a long lifespan; malicious domains may be replaced 
 The list of search terms is proactively updated and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 #### Limitations
-The Google Custom Search JSON API only provides 100 daily free search queries per API key (which is why this project uses two API keys). This limits the number of search terms that can be employed.
+The Google Custom Search JSON API only provides ~100 free search queries per day. This limits the number of search terms that can be employed a day.
 
-To optimize the number of queries required, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+Each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are disabled to optimize the number of queries made. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
 #### Statistics
 ```
 Active search terms: 18
-Queries made today: 394 (rate limited)
-Domains retrieved today: 57
+Queries made today: 31
+Domains retrieved today: 41
 ```
 
 #### Regarding other sources
