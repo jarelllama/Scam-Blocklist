@@ -17,12 +17,7 @@ jobs:
   retrieve:
     needs: [test, update-toplist]
     uses: ./.github/workflows/retrieve.yml
-    env:
-      google_search_id: ${{ secrets.SEARCH_ID }}
-      google_search_id_2: ${{ secrets.SEARCH_ID2 }}
-      google_search_api_key: ${{ secrets.SEARCH_API_KEY }}
-      google_search_api_key_2: ${{ secrets.SEARCH_API_KEY2 }}
-      aa419_api_id: ${{ secrets.AA419_API_ID }}
+    secrets: inherit
 
   dead-check:
     needs: retrieve
