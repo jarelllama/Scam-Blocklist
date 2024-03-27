@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 19:28:28 UTC 2024
+! Last modified: Wed Mar 27 20:11:13 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1963
+! Total number of entries: 1962
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -676,7 +676,6 @@ local-zone: "foreseew.com." always_nxdomain
 local-zone: "forevergiftable.com." always_nxdomain
 local-zone: "forexhiexperts.com." always_nxdomain
 local-zone: "forexstocktrade247.com." always_nxdomain
-local-zone: "forteammostore.com." always_nxdomain
 local-zone: "forums.sassnet.com." always_nxdomain
 local-zone: "fossilssale.us." always_nxdomain
 local-zone: "fotache.ro." always_nxdomain

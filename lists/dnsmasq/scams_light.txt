@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 19:28:28 UTC 2024
+! Last modified: Wed Mar 27 20:11:13 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1963
+! Total number of entries: 1962
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -675,7 +675,6 @@ local=/foreseew.com/
 local=/forevergiftable.com/
 local=/forexhiexperts.com/
 local=/forexstocktrade247.com/
-local=/forteammostore.com/
 local=/forums.sassnet.com/
 local=/fossilssale.us/
 local=/fotache.ro/

@@ -51,7 +51,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1963
+Total domains: 1962
 </details>
 
 ## Retrieving scam domains from Google Search
