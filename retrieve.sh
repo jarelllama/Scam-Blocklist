@@ -27,6 +27,7 @@ function main {
     # Check for existing pending domains file
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
     [[ ! -d data/pending ]] && mkdir data/pending
+    [[ "$use_pending" == true ]] && source_manual  # Only run if existing pending domains are present
     source_aa419
     source_dfpi
     source_guntab
@@ -38,6 +39,13 @@ function main {
     build_raw
     build_raw_light
     [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid domains found
+}
+
+function source_manual {
+    source='Manual'
+    ignore_from_light=
+    domains_file="data/pending/domains_manual.tmp"
+    process_source
 }
 
 function source_aa419 {
@@ -180,8 +188,8 @@ function process_source {
     [[ ! -f "$domains_file" ]] && return  # Return if domains file does not exist
     ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }  # Skip to next source if no results retrieved
 
-    # Remove https:// or http:// and convert to lowercase
-    sed 's/https\?:\/\///' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
+    # Remove https: or http:, remove slashes  and convert to lowercase
+    sed 's/https\?://; s/\///g' "$domains_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$domains_file"
     format_list "$domains_file"
     unfiltered_count=$(wc -l < "$domains_file")  # Count number of unfiltered domains pending
     pending_domains=$(<"$domains_file")  # Store pending domains in a variable
@@ -203,7 +211,7 @@ function process_source {
     format_list subdomains.tmp && format_list root_domains.tmp
 
     # Remove domains already in raw file
-    pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
+    #pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
 
     # Remove known dead domains
     dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
