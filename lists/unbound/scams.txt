@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:10:07 UTC 2024
+! Last modified: Wed Mar 27 08:25:44 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 23083
+! Total number of entries: 23089
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1365,6 +1365,7 @@ local-zone: "asics-schweiz.com." always_nxdomain
 local-zone: "asicsosterreich.at." always_nxdomain
 local-zone: "asicstop.us." always_nxdomain
 local-zone: "asitapapercartoncoltd.com." always_nxdomain
+local-zone: "askotrade.net." always_nxdomain
 local-zone: "asliuo.shop." always_nxdomain
 local-zone: "asllogisticsservices.com." always_nxdomain
 local-zone: "asolodeutschland.com." always_nxdomain
@@ -2531,6 +2532,7 @@ local-zone: "binaso.shop." always_nxdomain
 local-zone: "bindado.de." always_nxdomain
 local-zone: "bineidlegalserv.com." always_nxdomain
 local-zone: "binggrondahlshop.com." always_nxdomain
+local-zone: "binozy.com." always_nxdomain
 local-zone: "binwan.shop." always_nxdomain
 local-zone: "binzayedinvestment.com." always_nxdomain
 local-zone: "bio-finergyenergy.com." always_nxdomain
@@ -9712,6 +9714,7 @@ local-zone: "hfashionshop.com." always_nxdomain
 local-zone: "hfdeals.shop." always_nxdomain
 local-zone: "hfkscp.com." always_nxdomain
 local-zone: "hfro.sunsperience.com." always_nxdomain
+local-zone: "hft-fyfc.com." always_nxdomain
 local-zone: "hgcip.com." always_nxdomain
 local-zone: "hglllshop.com." always_nxdomain
 local-zone: "hgshopee.com." always_nxdomain
@@ -13367,6 +13370,7 @@ local-zone: "moms-artikel.com." always_nxdomain
 local-zone: "monacamping.shop." always_nxdomain
 local-zone: "monamarkets.com." always_nxdomain
 local-zone: "monarchhousekit.com." always_nxdomain
+local-zone: "monarchlibertygroup.cc." always_nxdomain
 local-zone: "monclediscountvip.com." always_nxdomain
 local-zone: "mondayslotto.com." always_nxdomain
 local-zone: "mondiakittenshome.com." always_nxdomain
@@ -15703,6 +15707,7 @@ local-zone: "polls4companies.com." always_nxdomain
 local-zone: "pollyanaboxerpuppies.com." always_nxdomain
 local-zone: "poloonly.com." always_nxdomain
 local-zone: "polvest.com." always_nxdomain
+local-zone: "polybox.finance." always_nxdomain
 local-zone: "polyspotsltd.com." always_nxdomain
 local-zone: "pom-paradise.com." always_nxdomain
 local-zone: "pomandpomskiesforsale.com." always_nxdomain
@@ -17788,6 +17793,7 @@ local-zone: "sandominingcompany.com." always_nxdomain
 local-zone: "sandra-und-tobias.de." always_nxdomain
 local-zone: "sandscontainers.co.za." always_nxdomain
 local-zone: "sanebo.net." always_nxdomain
+local-zone: "sanexer.com." always_nxdomain
 local-zone: "sanexpetexpress.com." always_nxdomain
 local-zone: "sanfordcustomknives.com." always_nxdomain
 local-zone: "sangastin.com." always_nxdomain

@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:10:07 UTC 2024
+! Last modified: Wed Mar 27 08:25:44 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1962
+! Total number of entries: 1968
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -121,6 +121,7 @@ local-zone: "asb965.com." always_nxdomain
 local-zone: "ashdachshundhome.com." always_nxdomain
 local-zone: "ashroots.shop." always_nxdomain
 local-zone: "asicstop.us." always_nxdomain
+local-zone: "askotrade.net." always_nxdomain
 local-zone: "asoosvip.com." always_nxdomain
 local-zone: "associazionechien.org." always_nxdomain
 local-zone: "astropneumatictools.com." always_nxdomain
@@ -210,6 +211,7 @@ local-zone: "bicyclepoc.com." always_nxdomain
 local-zone: "bikefoxsuspension.com." always_nxdomain
 local-zone: "bikemethelmets.com." always_nxdomain
 local-zone: "bikesonline24.com." always_nxdomain
+local-zone: "binozy.com." always_nxdomain
 local-zone: "birkenstocke.com." always_nxdomain
 local-zone: "birmankittenscattery.com." always_nxdomain
 local-zone: "bishopdaycare.com." always_nxdomain
@@ -816,6 +818,7 @@ local-zone: "hermnd.com." always_nxdomain
 local-zone: "heroicprofessions.com." always_nxdomain
 local-zone: "hewittgunshop.com." always_nxdomain
 local-zone: "hfkscp.com." always_nxdomain
+local-zone: "hft-fyfc.com." always_nxdomain
 local-zone: "hgshopee.com." always_nxdomain
 local-zone: "hgugw.com." always_nxdomain
 local-zone: "highmarketspace.com." always_nxdomain
@@ -1190,6 +1193,7 @@ local-zone: "moespupfamily.online." always_nxdomain
 local-zone: "mollyminidachshundpuppies.com." always_nxdomain
 local-zone: "momnfancy.com." always_nxdomain
 local-zone: "momondoexpress.com." always_nxdomain
+local-zone: "monarchlibertygroup.cc." always_nxdomain
 local-zone: "monclediscountvip.com." always_nxdomain
 local-zone: "mondayslotto.com." always_nxdomain
 local-zone: "moneyeasily-gsx.top." always_nxdomain
@@ -1396,6 +1400,7 @@ local-zone: "plussizeca.com." always_nxdomain
 local-zone: "pochipet.net." always_nxdomain
 local-zone: "pocsportss.us." always_nxdomain
 local-zone: "podicomfort.com." always_nxdomain
+local-zone: "polybox.finance." always_nxdomain
 local-zone: "pom-paradise.com." always_nxdomain
 local-zone: "pomeraniangiovan.com." always_nxdomain
 local-zone: "pomskykennels.com." always_nxdomain
@@ -1533,6 +1538,7 @@ local-zone: "salesupsurf.com." always_nxdomain
 local-zone: "saletomtailor.com." always_nxdomain
 local-zone: "salewonline.shop." always_nxdomain
 local-zone: "samibags.shop." always_nxdomain
+local-zone: "sanexer.com." always_nxdomain
 local-zone: "sangastinly.com." always_nxdomain
 local-zone: "savoryahome.com." always_nxdomain
 local-zone: "sb-bank.org." always_nxdomain

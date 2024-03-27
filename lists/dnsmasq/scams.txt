@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:10:07 UTC 2024
+! Last modified: Wed Mar 27 08:25:44 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 23083
+! Total number of entries: 23089
 !
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -1364,6 +1364,7 @@ local=/asics-schweiz.com/
 local=/asicsosterreich.at/
 local=/asicstop.us/
 local=/asitapapercartoncoltd.com/
+local=/askotrade.net/
 local=/asliuo.shop/
 local=/asllogisticsservices.com/
 local=/asolodeutschland.com/
@@ -2530,6 +2531,7 @@ local=/binaso.shop/
 local=/bindado.de/
 local=/bineidlegalserv.com/
 local=/binggrondahlshop.com/
+local=/binozy.com/
 local=/binwan.shop/
 local=/binzayedinvestment.com/
 local=/bio-finergyenergy.com/
@@ -9711,6 +9713,7 @@ local=/hfashionshop.com/
 local=/hfdeals.shop/
 local=/hfkscp.com/
 local=/hfro.sunsperience.com/
+local=/hft-fyfc.com/
 local=/hgcip.com/
 local=/hglllshop.com/
 local=/hgshopee.com/
@@ -13366,6 +13369,7 @@ local=/moms-artikel.com/
 local=/monacamping.shop/
 local=/monamarkets.com/
 local=/monarchhousekit.com/
+local=/monarchlibertygroup.cc/
 local=/monclediscountvip.com/
 local=/mondayslotto.com/
 local=/mondiakittenshome.com/
@@ -15702,6 +15706,7 @@ local=/polls4companies.com/
 local=/pollyanaboxerpuppies.com/
 local=/poloonly.com/
 local=/polvest.com/
+local=/polybox.finance/
 local=/polyspotsltd.com/
 local=/pom-paradise.com/
 local=/pomandpomskiesforsale.com/
@@ -17787,6 +17792,7 @@ local=/sandominingcompany.com/
 local=/sandra-und-tobias.de/
 local=/sandscontainers.co.za/
 local=/sanebo.net/
+local=/sanexer.com/
 local=/sanexpetexpress.com/
 local=/sanfordcustomknives.com/
 local=/sangastin.com/

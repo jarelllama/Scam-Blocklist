@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Wed Mar 27 08:10:07 UTC 2024
+! Last modified: Wed Mar 27 08:25:44 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1962
+! Total number of entries: 1968
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -120,6 +120,7 @@ local=/asb965.com/
 local=/ashdachshundhome.com/
 local=/ashroots.shop/
 local=/asicstop.us/
+local=/askotrade.net/
 local=/asoosvip.com/
 local=/associazionechien.org/
 local=/astropneumatictools.com/
@@ -209,6 +210,7 @@ local=/bicyclepoc.com/
 local=/bikefoxsuspension.com/
 local=/bikemethelmets.com/
 local=/bikesonline24.com/
+local=/binozy.com/
 local=/birkenstocke.com/
 local=/birmankittenscattery.com/
 local=/bishopdaycare.com/
@@ -815,6 +817,7 @@ local=/hermnd.com/
 local=/heroicprofessions.com/
 local=/hewittgunshop.com/
 local=/hfkscp.com/
+local=/hft-fyfc.com/
 local=/hgshopee.com/
 local=/hgugw.com/
 local=/highmarketspace.com/
@@ -1189,6 +1192,7 @@ local=/moespupfamily.online/
 local=/mollyminidachshundpuppies.com/
 local=/momnfancy.com/
 local=/momondoexpress.com/
+local=/monarchlibertygroup.cc/
 local=/monclediscountvip.com/
 local=/mondayslotto.com/
 local=/moneyeasily-gsx.top/
@@ -1395,6 +1399,7 @@ local=/plussizeca.com/
 local=/pochipet.net/
 local=/pocsportss.us/
 local=/podicomfort.com/
+local=/polybox.finance/
 local=/pom-paradise.com/
 local=/pomeraniangiovan.com/
 local=/pomskykennels.com/
@@ -1532,6 +1537,7 @@ local=/salesupsurf.com/
 local=/saletomtailor.com/
 local=/salewonline.shop/
 local=/samibags.shop/
+local=/sanexer.com/
 local=/sangastinly.com/
 local=/savoryahome.com/
 local=/sb-bank.org/
