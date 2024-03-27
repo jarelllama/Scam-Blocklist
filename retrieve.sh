@@ -143,21 +143,22 @@ function source_dfpi {
 function source_google_search {
     source='Google Search'
     ignore_from_light=
-    if [[ "$use_pending" != true ]]; then
-        # Retrieve new domains
-        while read -r search_term; do  # Loop through search terms
-            # Break out of loop if rate limited
-            [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
-            search_google "$search_term"
-        done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
+    if [[ "$use_pending" == true ]]; then
+        # Use existing pending domains file
+        for domains_file in data/pending/domains_google_search_*.tmp; do
+            [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
+            search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
+            search_term=${search_term%.tmp}  # Remove file extension from file name
+            process_source
+        done
+        return
     fi
-    # Use existing pending domains file
-    for domains_file in data/pending/domains_google_search_*.tmp; do
-        [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
-        search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
-        search_term=${search_term%.tmp}  # Remove file extension from file name
-        process_source
-    done
+    # Retrieve new domains
+    while read -r search_term; do  # Loop through search terms
+        # Break out of loop if rate limited
+        [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
+        search_google "$search_term"
+    done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
 
 function search_google {
