@@ -184,7 +184,7 @@ function search_google {
             # Break loop if second key is rate limited
             [[ "$using_key" == 'two' ]] && { echo "BOTH RATE LIMITED"; rate_limited=true; break; } || rate_limited=false
             printf "! Rate limited. Switching API keys.\n"
-            api_key="$google_search_api_key_2" && search_id="$google_search_id_2"
+            api_key=$google_search_api_key_2 && search_id=$google_search_id_2
             using_key=two  # FOR DEBUGGING
             break  # Break to stop looping through pages (page 2 onwards does not seem to have the rate limit message)
         fi
