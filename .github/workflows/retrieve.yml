@@ -2,6 +2,7 @@ name: Retrieve domains
 run-name: Retrieve domains
 on:
   workflow_dispatch:
+  workflow_call:
   schedule:
     - cron: '0 0 * * *'
 
