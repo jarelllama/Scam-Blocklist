@@ -25,3 +25,8 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Check lists"
           git push -q
+
+  build:
+    if: github.event_name == 'workflow_dispatch'
+    needs: retrieve-domains
+    uses: ./.github/workflows/build.yml

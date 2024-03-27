@@ -31,4 +31,6 @@ jobs:
           git push -q
 
   build:
+    if: github.event_name == 'workflow_dispatch'
+    needs: retrieve-domains
     uses: ./.github/workflows/build.yml
