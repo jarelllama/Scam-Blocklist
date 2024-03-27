@@ -15,7 +15,7 @@ dead_domains_file='data/dead_domains.txt'
 time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 
 # If running locally, use locally stored secrets instead of environment variables
-[[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; }
+[[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; google_search_id_2=; google_search_api_key_2=;}
 
 function main {
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
@@ -142,7 +142,7 @@ function source_google_search {
     if [[ "$use_pending" == true ]]; then
         # Use existing pending domains file
         for domains_file in data/pending/domains_google_search_*.tmp; do
-            [[ ! -f "$domains_file" ]] && break  # Break loop if no Google search terms found
+            [[ ! -f "$domains_file" ]] && return  # Return if no search term files found
             search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
             search_term=${search_term%.tmp}  # Remove file extension from file name
             process_source
@@ -151,8 +151,8 @@ function source_google_search {
     fi
     # Retrieve new domains
     while read -r search_term; do  # Loop through search terms
-        # Break out of loop if rate limited
-        [[ "$rate_limited" == true ]] && { printf "! Custom Search JSON API rate limited.\n"; break; }
+        # Return if rate limited
+        [[ "$rate_limited" == true ]] && { printf "! Both API keys are rate limited.\n"; return; }
         search_google "$search_term"
     done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
@@ -164,19 +164,25 @@ function search_google {
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace non-alphanumeric characters with '%20'
     domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$domains_file"  # Create domains file if not present
+
     for start in {1..100..10}; do  # Loop through each page of results
         query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results=$(curl -s "${url}?${query_params}")
-        # Break out of loop if rate limited
-        grep -qF 'rateLimitExceeded' <<< "$page_results" && { rate_limited=true; break; } || rate_limited=false
+
+        # Use next API key if first key is rate limited
+        if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
+            # Break loop if second key is rate limited
+            [[ "$google_search_api_key" == "$google_search_api_key_2" ]] && { rate_limited=true; break; } || rate_limited=false
+            printf "! Rate limited. Switching API keys.\n"
+            google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
+            continue  # Continue on with next page
+        fi
+
         ((query_count++))  # Increment query count
-        # Break out of loop if the first page has no results
-        jq -e '.items' &> /dev/null <<< "$page_results" || break
-        # Collate domains from each page
-        page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')
+        jq -e '.items' &> /dev/null <<< "$page_results" || break  # Break if page 1 has no results
+        page_domains=$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')  # Collate domains from each page
         printf "%s\n" "$page_domains" >> "$domains_file"
-        # Break out of loop if no more pages are required
-        [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break
+        [[ $(wc -w <<< "$page_domains") -lt 10 ]] && break  # Break if no more pages are required
     done
     process_source
 }
