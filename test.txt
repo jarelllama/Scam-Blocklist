@@ -161,3 +161,166 @@
 
 
 
+{
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'customsearch.googleapis.com' for consumer 'project_number:907839836391'.",
+    "errors": [
+      {
+        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'customsearch.googleapis.com' for consumer 'project_number:907839836391'.",
+        "domain": "global",
+        "reason": "rateLimitExceeded"
+      }
+    ],
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_limit_value": "100",
+          "quota_location": "global",
+          "quota_metric": "customsearch.googleapis.com/requests",
+          "service": "customsearch.googleapis.com",
+          "quota_limit": "DefaultPerDayPerProject",
+          "consumer": "projects/907839836391"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quota#requesting_higher_quota"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---
+
+
+
