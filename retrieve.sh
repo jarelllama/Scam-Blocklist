@@ -23,7 +23,6 @@ function main {
         format_list "$file"
     done
     printf "\n"
-    prepare
     source
     build
 }
