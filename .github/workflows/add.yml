@@ -6,7 +6,7 @@ on:
       - labeled
 
 jobs:
-  read_domains:
+  read-domains:
     if: ${{ github.event.label.name == 'add domains' && github.actor == github.repository_owner }}
     runs-on: ubuntu-latest
     env:
