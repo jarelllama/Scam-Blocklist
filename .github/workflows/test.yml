@@ -52,5 +52,6 @@ jobs:
       - name: Test dead.sh
         run: bash test.sh 'dead'
 
-  test-build:
+  build:
+    if: github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/build.yml

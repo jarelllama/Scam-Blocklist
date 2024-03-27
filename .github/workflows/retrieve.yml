@@ -30,7 +30,5 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Retrieve domains"  # Note commit -am does not commit the pending directory
           git push -q
 
-      - name: Build
-          if: github.event_name == 'schedule'
-          run: |
-            echo "This command will only run if triggered by a schedule event."
+  build:
+    uses: ./.github/workflows/build.yml
