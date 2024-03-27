@@ -62,9 +62,9 @@ Scam sites often do not have a long lifespan; malicious domains may be replaced 
 The list of search terms is proactively updated and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 #### Limitations
-The Google Custom Search JSON API only provides 100 daily free search queries per API key (which is why this project uses two API keys). This limits the number of search terms that can be employed.
+The Google Custom Search JSON API only provides 100 daily free search queries per API key (which is why this project uses two API keys).
 
-To optimize the number of queries required, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+To optimize the number of search queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
 #### Statistics
 ```
@@ -79,8 +79,9 @@ The full domain retrieval process for all sources can be viewed in the repositor
 ## Filtering process
 - The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted companies, etc.)
 - The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives and flagged domains are vetted manually
+- Common subdomains like 'www' are removed to make use of wildcard matching for all other subdomains. See the list of checked subdomains here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
 - Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
-- Only domains are included in the blocklist. IP addresses are checked for resolving DNS records and URLs are stripped down to their domains
+- Only domains are included in the blocklist; IP addresses are checked for resolving DNS records and URLs are stripped down to their domains
 
 The full filtering process can be viewed in the repository's code.
 
