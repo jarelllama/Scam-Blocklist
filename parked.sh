@@ -42,6 +42,8 @@ function add_unparked_domains {
 }
 
 function remove_parked_domains {
+    ls "$raw_file"
+
     touch parked_domains.tmp
     printf "\nChecking for parked domains.\n"
 
@@ -52,6 +54,8 @@ function remove_parked_domains {
     check_for_parked "x04" & check_for_parked "x05" &
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09"
+
+    cat x09
 
     wait
 
@@ -99,9 +103,7 @@ function check_for_parked {
         fi
         if [[ "$2" == 'main' ]]; then
             percentage_count="$((count*100/total))"
-
-            #((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
-
+            ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
             ((count++))
         fi
     done < "$1"
