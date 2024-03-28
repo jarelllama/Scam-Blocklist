@@ -56,7 +56,7 @@ function remove_parked_domains {
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09" &
     check_for_parked "x10" & check_for_parked "x11" &
-    [[ -f x12 ]] && check_for_parked "x12" || printf ""
+    [[ -f x12 ]] && check_for_parked "x12"
 
     find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 
@@ -104,7 +104,7 @@ function check_for_parked {
         fi
     done < "$1"
     # Collate parked domains
-    [[ -f "parked_domains_${1}.tmp" ]] && { cat "parked_domains_${1}.tmp" >> parked_domains.tmp; }
+    [[ -f "parked_domains_${1}.tmp" ]] && cat "parked_domains_${1}.tmp" >> parked_domains.tmp
 }
 
 function update_light_file {
