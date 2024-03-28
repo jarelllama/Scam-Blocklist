@@ -13,7 +13,7 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    add_unparked_domains
+    #add_unparked_domains
     remove_parked_domains
     #update_light_file
 }
