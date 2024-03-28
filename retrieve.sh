@@ -23,12 +23,12 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    printf "\n"
     source
     build
 }
 
 function source {
+    printf "\n"
     # Check for existing pending domains file
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
     [[ "$use_pending" == true ]] && source_manual  # Retrieve manually added domains

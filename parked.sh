@@ -1,8 +1,5 @@
 #!/bin/bash
-raw_file='data/raw_light.txt'
-
-
-
+raw_file='data/raw.txt'
 raw_light_file='data/raw_light.txt'
 parked_terms_file='config/parked_terms.txt'
 parked_domains_file='data/parked_domains.txt'
@@ -15,14 +12,14 @@ function main {
     done
     add_unparked_domains
     remove_parked_domains
-    #update_light_file
+    update_light_file
 }
 
 function add_unparked_domains {
     touch unparked_domains.tmp
     printf "\nChecking for domains that have been unparked.\n"
 
-    # Split into 12 equal files
+    # Split into 10 equal files
     split -d -l $(($(wc -l < "$parked_domains_file")/10)) "$parked_domains_file"
     check_for_unparked "x00" "main" & check_for_unparked "x01" &
     check_for_unparked "x02" & check_for_unparked "x03" &
@@ -46,7 +43,7 @@ function remove_parked_domains {
     touch parked_domains.tmp
     printf "\nChecking for parked domains.\n"
 
-    # Split into 12 equal files
+    # Split into 10 equal files
     split -d -l $(($(wc -l < "$raw_file")/10)) "$raw_file"
     check_for_parked "x00" "main" & check_for_parked "x01" &
     check_for_parked "x02" & check_for_parked "x03" &
@@ -119,6 +116,7 @@ function format_list {
 
 function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
+    find . -maxdepth 1 -type f -name "x??" -delete
 }
 
 trap cleanup EXIT

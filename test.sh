@@ -292,8 +292,8 @@ function test_dead {
 }
 
 function test_parked {
-    # Requires at least 12 line to properly split
-    placeholder_lines=$(head -n 12 data/toplist.txt)
+    # At least 10 lines are required for proper split
+    placeholder_lines=$(head -n 10 data/toplist.txt)
     printf "%s\n" "$placeholder_lines" > "$raw_file"
     printf "%s\n" "$placeholder_lines" > "$parked_domains_file"
 
