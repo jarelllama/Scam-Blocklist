@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 01:27:56 UTC 2024
+! Last modified: Thu Mar 28 03:27:12 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 23121
+! Total number of entries: 23123
 !
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -491,6 +491,7 @@ local=/aimaxstorage.com/
 local=/aimpointshopusa.com/
 local=/aioclothes.com/
 local=/air-cargoservices.com/
+local=/airbnbsex.com/
 local=/aircargodeliveryservice.com/
 local=/aircgd.shop/
 local=/airconecttexpresdl.com/
@@ -5143,6 +5144,7 @@ local=/dashingbassets.com/
 local=/dashingdachshundpuppies.com/
 local=/dashingschnauzzers.com/
 local=/datein.shop/
+local=/datemeetsmart.link/
 local=/datjprints.com/
 local=/datook-de.com/
 local=/daunenjacken-shop.com/

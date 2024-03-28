@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 01:27:56 UTC 2024
+! Last modified: Thu Mar 28 03:27:12 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 23121
+! Total number of entries: 23123
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -492,6 +492,7 @@ local-zone: "aimaxstorage.com." always_nxdomain
 local-zone: "aimpointshopusa.com." always_nxdomain
 local-zone: "aioclothes.com." always_nxdomain
 local-zone: "air-cargoservices.com." always_nxdomain
+local-zone: "airbnbsex.com." always_nxdomain
 local-zone: "aircargodeliveryservice.com." always_nxdomain
 local-zone: "aircgd.shop." always_nxdomain
 local-zone: "airconecttexpresdl.com." always_nxdomain
@@ -5144,6 +5145,7 @@ local-zone: "dashingbassets.com." always_nxdomain
 local-zone: "dashingdachshundpuppies.com." always_nxdomain
 local-zone: "dashingschnauzzers.com." always_nxdomain
 local-zone: "datein.shop." always_nxdomain
+local-zone: "datemeetsmart.link." always_nxdomain
 local-zone: "datjprints.com." always_nxdomain
 local-zone: "datook-de.com." always_nxdomain
 local-zone: "daunenjacken-shop.com." always_nxdomain

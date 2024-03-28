@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 01:27:56 UTC 2024
+! Last modified: Thu Mar 28 03:27:12 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1966
+! Total number of entries: 1968
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -52,6 +52,7 @@ local=/aghhome.com/
 local=/agilityfleet-logistics.com/
 local=/agnescrystalbar.com/
 local=/agriculturaladvancementsllc.com/
+local=/airbnbsex.com/
 local=/airseatransport.com/
 local=/airtapexpress.com/
 local=/ajutlabled.com/
@@ -472,6 +473,7 @@ local=/danitk.com/
 local=/dannerus.com/
 local=/dark-net-market.com/
 local=/darkmarketsales.com/
+local=/datemeetsmart.link/
 local=/daveamor.us/
 local=/davegermanshepherds.com/
 local=/davidmakovermd.com/
