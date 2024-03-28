@@ -43,8 +43,6 @@ function add_unparked_domains {
 }
 
 function remove_parked_domains {
-    cat "$raw_file"
-
     touch parked_domains.tmp
     printf "\nChecking for parked domains.\n"
 
@@ -72,7 +70,7 @@ function remove_parked_domains {
 }
 
 function check_for_unparked {
-    [[ -f "$1" ]] && return  # Return if split file not found
+    [[ ! -f "$1" ]] && return  # Return if split file not found
 
     total=$(wc -l < "$1")
     count=1
@@ -93,7 +91,7 @@ function check_for_unparked {
 }
 
 function check_for_parked {
-    [[ -f "$1" ]] && return  # Return if split file not found
+    [[ ! -f "$1" ]] && return  # Return if split file not found
 
     total=$(wc -l < "$1")
     count=1
