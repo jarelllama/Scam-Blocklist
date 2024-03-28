@@ -74,7 +74,7 @@ function check_for_unparked {
     while read -r domain; do
         ((count++))
         # Check for parked message in site's HTML
-        if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/" | tr -d '\0')"; then
+        if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 5 "http://${domain}/" | tr -d '\0')"; then
             printf "Unparked: %s\n" "$domain"
             printf "%s\n" "$domain" >> "unparked_domains_${1}.tmp"
         fi
