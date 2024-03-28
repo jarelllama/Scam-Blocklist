@@ -78,8 +78,7 @@ function check_for_unparked {
         fi
         if [[ "$2" == 'main' ]]; then
             percentage_count="$((count*100/total))"
-            printf "%s\n" "$count"
-            #((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
+            ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
             ((count++))
         fi
     done < "$1"
@@ -97,8 +96,11 @@ function check_for_parked {
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
         if [[ "$2" == 'main' ]]; then
+
+            printf "%s\n" "$count"
+
             percentage_count="$((count*100/total))"
-            ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
+            #((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
             ((count++))
         fi
     done < "$1"
