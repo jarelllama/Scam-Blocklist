@@ -25,7 +25,8 @@ function add_unparked_domains {
     check_for_unparked "x02" & check_for_unparked "x03" &
     check_for_unparked "x04" & check_for_unparked "x05" &
     check_for_unparked "x06" & check_for_unparked "x07" &
-    check_for_unparked "x08" & check_for_unparked "x09"
+    check_for_unparked "x08" & check_for_unparked "x09" &
+    check_for_unparked "x10" & check_for_unparked "x11"
 
     wait
 
@@ -53,7 +54,8 @@ function remove_parked_domains {
     check_for_parked "x02" & check_for_parked "x03" &
     check_for_parked "x04" & check_for_parked "x05" &
     check_for_parked "x06" & check_for_parked "x07" &
-    check_for_parked "x08" & check_for_parked "x09"
+    check_for_parked "x08" & check_for_parked "x09" &
+    check_for_parked "x10" & check_for_parked "x11"
 
     wait
 
@@ -70,6 +72,8 @@ function remove_parked_domains {
 }
 
 function check_for_unparked {
+    [[ -f "$1" ]] && return  # Return if split file not found
+
     total=$(wc -l < "$1")
     count=1
     # Check for parked message in site's HTML
@@ -89,6 +93,8 @@ function check_for_unparked {
 }
 
 function check_for_parked {
+    [[ -f "$1" ]] && return  # Return if split file not found
+
     total=$(wc -l < "$1")
     count=1
     # Check for parked message in site's HTML
