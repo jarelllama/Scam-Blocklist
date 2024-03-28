@@ -30,7 +30,6 @@ function add_unparked_domains {
     check_for_unparked "x12" & check_for_unparked "x13"
     wait
 
-
     [[ ! -s unparked_domains.tmp ]] && return
     format_list unparked_domains.tmp
 
