@@ -39,8 +39,7 @@ function add_unparked_domains {
     format_list "$raw_file"
     log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
 
-    find . -maxdepth 1 -type f -name "x??" -delete
-    find . -maxdepth 1 -type f -name "*.tmp" -delete
+    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files before next run
 }
 
 function remove_parked_domains {
@@ -64,8 +63,7 @@ function remove_parked_domains {
     format_list "$parked_domains_file"
     log_event "$(<parked_domains.tmp)" "parked" "raw"
 
-    find . -maxdepth 1 -type f -name "x??" -delete
-    find . -maxdepth 1 -type f -name "*.tmp" -delete
+    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 }
 
 function check_for_unparked {
@@ -123,5 +121,5 @@ function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
-#trap cleanup EXIT
+trap cleanup EXIT
 main
