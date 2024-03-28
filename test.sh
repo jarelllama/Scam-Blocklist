@@ -311,12 +311,12 @@ function test_parked {
     # Test removal of parked domains
     printf "github\n" >> "$parked_terms_file"  # Sample parked term
     # Input
-    printf "github.com\n" >> "$raw_file"
+    printf "tradexchange.online\n" >> "$raw_file"
     printf "apple.com\n" >> "$raw_file"
     # Expected output
-    printf "github.com\n" >> out_parked.txt
+    printf "tradexchange.online\n" >> out_parked.txt
     printf "apple.com\n" >> out_raw.txt
-    printf "parked,github.com,raw\n" >> out_log.txt
+    printf "parked,tradexchange.online,raw\n" >> out_log.txt
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"

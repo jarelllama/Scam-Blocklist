@@ -88,7 +88,7 @@ function check_for_unparked {
 
 function check_for_parked {
     [[ ! -f "$1" ]] && return  # Return if split file not found
-    [[ "$1" == 'x00' ]] && { track=true; count=0; }  # Track progress for first split file
+    [[ "$1" == 'x00' ]] && { track=true; count=0; } || track=false  # Track progress for first split file
     while read -r domain; do
         ((count++))
         # Check for parked message in site's HTML
