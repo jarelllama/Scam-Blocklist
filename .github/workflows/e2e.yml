@@ -27,3 +27,25 @@ jobs:
     needs: dead-check
     uses: ./.github/workflows/build.yml
 
+  tidy_log:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Tidy logs
+        run: |
+          [[ $(wc -l < config/domain_log.csv) -gt 10000 ]] && sed -i '2,300d' config/domain_log.csv
+          [[ $(wc -l < config/source_log.csv) -gt 1000 ]] && sed -i '2,100d' config/source_log.csv
+          true  # To negate exit status 1
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Tidy logs"
+          git push -q

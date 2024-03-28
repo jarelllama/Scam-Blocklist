@@ -136,10 +136,6 @@ function update_light_file {
     comm -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
 }
 
-function clean_domain_log {
-    [[ $(wc -l < "$domain_log") -gt 10000 ]] && sed -i '2,300d' "$domain_log" || printf ""  # printf to negate exit status 1
-}
-
 function log_event {
     # Log domain events
     printf "%s\n" "$1" | awk -v type="$2" -v time="$time_format" '{print time "," type "," $0 ",raw"}' >> "$domain_log"
@@ -151,7 +147,6 @@ function format_list {
 
 function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
-    clean_domain_log  # Clean domain log
 }
 
 trap cleanup EXIT

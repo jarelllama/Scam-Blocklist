@@ -1,14 +1,19 @@
-name: Remove parked domains
-run-name: Remove parked domains
+name: Parked check
+run-name: Parked check
 on:
   workflow_dispatch:
+    workflow_call:
+      inputs:
+        called:
+          type: boolean
+          default: true
   schedule:
     - cron: '0 1 * * *'
 permissions:
   contents: write
 
 jobs:
-  remove-parked:
+  parked-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,8 +21,8 @@ jobs:
         with:
           ref: main
 
-      - name: Remove parked domains from light
-        run: bash data/tools.sh "parked" "data/raw_light.txt"
+      - name: parked.sh
+        run: bash parked.sh
 
       - name: Push
         run: |
@@ -28,5 +33,7 @@ jobs:
           git push -q
 
   build:
+    # Only trigger if not called from another workflow
+    if: ${{ ! inputs.called }}
     needs: remove-parked
     uses: ./.github/workflows/build.yml
