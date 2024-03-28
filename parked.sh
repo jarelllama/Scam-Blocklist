@@ -14,7 +14,7 @@ function main {
         format_list "$file"
     done
     add_unparked_domains
-    #remove_parked_domains
+    remove_parked_domains
     #update_light_file
 }
 
@@ -48,16 +48,12 @@ function remove_parked_domains {
     printf "\nChecking for parked domains.\n"
 
     # Split into 12 equal files
-    split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
+    split -d -l $(($(wc -l < "$raw_file")/10)) "$raw_file"
     check_for_parked "x00" "main" & check_for_parked "x01" &
     check_for_parked "x02" & check_for_parked "x03" &
     check_for_parked "x04" & check_for_parked "x05" &
     check_for_parked "x06" & check_for_parked "x07" &
-    check_for_parked "x08" & check_for_parked "x09" &
-    check_for_parked "x10" & check_for_parked "x11" &
-    [[ -f x12 ]] && check_for_parked "x12" || printf ""  # printf to negate exit status 1
-
-    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
+    check_for_parked "x08" & check_for_parked "x09"
 
     [[ ! -f parked_domains.tmp ]] && return
     format_list parked_domains.tmp
@@ -67,6 +63,9 @@ function remove_parked_domains {
     cat parked_domains.tmp >> "$parked_domains_file"  # Add parked domains to parked domains file
     format_list "$parked_domains_file"
     log_event "$(<parked_domains.tmp)" "parked" "raw"
+
+    find . -maxdepth 1 -type f -name "x??" -delete
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
 function check_for_unparked {
