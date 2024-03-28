@@ -294,11 +294,11 @@ function test_dead {
 }
 
 function test_parked {
-    unparked_placeholder=$(head -n 50 "$toplist_file")
+    not_parked_placeholder=$(head -n 50 "$toplist_file")
     parked_placeholder=$(head -n 50 "$parked_domains_file")
-    printf "%s\n" "$unparked_placeholder" > placeholders.txt
+    printf "%s\n" "$not_parked_placeholder" > placeholders.txt
     printf "%s\n" "$parked_placeholder" >> placeholders.txt
-    printf "%s\n" "$unparked_placeholder" > "$raw_file"
+    printf "%s\n" "$not_parked_placeholder" > "$raw_file"
     printf "%s\n" "$parked_placeholder" > "$parked_domains_file"
 
     # Test addition of unparked domains
@@ -311,11 +311,11 @@ function test_parked {
     printf "github\n" >> "$parked_terms_file"  # Sample parked term
     # Input
     printf "apple.com\n" >> "$raw_file"
-    printf "github.com\n" >> "$raw_file"
+    printf "tradexchange.online\n" >> "$raw_file"
     # Expected output
     printf "apple.com\n" >> out_raw.txt
-    printf "github.com\n" >> out_parked.txt
-    printf "parked,github.com,raw\n" >> out_log.txt
+    printf "tradexchange.online\n" >> out_parked.txt
+    printf "parked,tradexchange.online,raw\n" >> out_log.txt
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
