@@ -25,13 +25,13 @@ function remove_parked_domains {
     parked_terms_file='data/parked_terms.txt'
     parked_domains_file='data/parked_domains.txt'
 
-    split -n '1/12' -d "$raw_file" parked_
-    check_for_parked "parked_00" & check_for_parked "parked_01" &
-    check_for_parked "parked_02" & check_for_parked "parked_03" &
-    check_for_parked "parked_04" & check_for_parked "parked_05" &
-    check_for_parked "parked_06" & check_for_parked "parked_07" &
-    check_for_parked "parked_08" & check_for_parked "parked_09" &
-    check_for_parked "parked_10" & check_for_parked "parked_11"
+    split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
+    check_for_parked "x00" & check_for_parked "x01" &
+    check_for_parked "x02" & check_for_parked "x03" &
+    check_for_parked "x04" & check_for_parked "x05" &
+    check_for_parked "x06" & check_for_parked "x07" &
+    check_for_parked "x08" & check_for_parked "x09" &
+    check_for_parked "x10" & check_for_parked "x11"
 
     format "$parked_domains_file"
     comm -23 "$raw_file" "$parked_domains_file" > temp && mv temp "$raw_file"
