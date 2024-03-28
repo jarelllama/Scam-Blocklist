@@ -33,8 +33,8 @@ function add_unparked_domains {
     [[ ! -s unparked_domains.tmp ]] && return
     format_list unparked_domains.tmp
 
-    # Remove unparked domains from parked domains file
-    comm -23 "$parked_domains_file" unparked_domains.tmp > parked.tmp && mv parked.tmp "$parked_domains_file"
+    # Remove unparked domains from parked domains file (parked domains file is unsorted)
+    grep -vxFf unparked_domains.tmp "$parked_domains_file" > parked.tmp && mv parked.tmp "$parked_domains_file"
     cat unparked_domains.tmp >> "$raw_file"  # Add unparked domains to raw file
     format_list "$raw_file"
     log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
@@ -109,6 +109,10 @@ function update_light_file {
     comm -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
 }
 
+function clean_parked_domains_file {
+    [[ $(wc -l < "$parked_domains_file") -gt 4000 ]] && sed -i '1,100d' "$parked_domains_file" || printf ""  # printf to negate exit status 1
+}
+
 function log_event {
     # Log domain events
     printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" '{print time "," type "," $0 "," source}' >> "$domain_log"
@@ -121,6 +125,7 @@ function format_list {
 function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
     find . -maxdepth 1 -type f -name "x??" -delete
+    clean_parked_domains_file
 }
 
 trap cleanup EXIT

@@ -11,7 +11,7 @@ function format {
 
     # For specific files/extensions:
     case "$1" in
-        data/dead_domains.txt)  # Remove whitespaces, empty lines and duplicates
+        *dead_domains.txt|*parked_domains.txt)  # Remove whitespaces, empty lines and duplicates
             sed 's/ //g; /^$/d' "$1" | awk '!seen[$0]++' > "${1}.tmp" && mv "${1}.tmp" "$1" ;;
         config/parked_terms.txt)  # Remove empty lines, convert to lowercase, sort and remove duplicates
              sed '/^$/d' "$1" | tr '[:upper:]' '[:lower:]' | sort -u > "${1}.tmp" && mv "${1}.tmp" "$1" ;;
