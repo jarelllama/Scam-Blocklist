@@ -4,12 +4,14 @@ raw_light_file='data/raw_light.txt'
 domain_log='config/domain_log.csv'
 whitelist_file='config/whitelist.txt'
 blacklist_file='config/blacklist.txt'
+toplist_file='data/toplist.txt'
 root_domains_file='data/root_domains.txt'
 subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
+parked_terms_file='config/parked_terms.txt'
 parked_domains_file='data/parked_domains.txt'
 
 [[ "$CI" != true ]] && exit 1  # Do not allow running locally
@@ -292,28 +294,25 @@ function test_dead {
 }
 
 function test_parked {
-    # At least 10 lines are required for proper split
-    placeholder_lines=$(head -n 10 data/toplist.txt)
+    placeholder_lines=$(head -n 100 "$toplist_file")
     printf "%s\n" "$placeholder_lines" > "$raw_file"
     printf "%s\n" "$placeholder_lines" > "$parked_domains_file"
 
     # Test addition of unparked domains
-    # Input
-    printf "google.com\n" >> "$parked_domains_file"
-    printf "accesstrades247.com\n" >> "$parked_domains_file"
+    printf "google.com\n" >> "$parked_domains_file"  # Input
     # Expected output
     printf "google.com\n" >> out_raw.txt
-    printf "accesstrades247.com\n" >> out_parked.txt
     printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
 
     # Test removal of parked domains
+    printf "godaddy\n" >> "$parked_terms_file"  # Sample parked term
     # Input
     printf "apple.com\n" >> "$raw_file"
-    printf "atlantictrustbank.com\n" >> "$raw_file"
+    printf "godaddy.com\n" >> "$raw_file"
     # Expected output
     printf "apple.com\n" >> out_raw.txt
-    printf "atlantictrustbank.com\n" >> out_parked.txt
-    printf "parked,atlantictrustbank.com,raw\n" >> out_log.txt
+    printf "godaddy.com\n" >> out_parked.txt
+    printf "parked,godaddy.com,raw\n" >> out_log.txt
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
@@ -329,9 +328,9 @@ function test_parked {
     [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
 
     # Remove placeholder lines
-    grep -vxF "$placeholder_lines" "$raw_file" > raw.tmp && mv raw.tmp "$raw_file"
-    grep -vxF "$placeholder_lines" "$raw_light_file" > raw.tmp && mv raw.tmp "$raw_light_file"
-    grep -vxF "$placeholder_lines" "$parked_domains_file" > raw.tmp && mv raw.tmp "$parked_domains_file"
+    comm -23 "$raw_file" "$placeholder_lines" > raw.tmp && mv raw.tmp "$raw_file"
+    comm -23 "$raw_light_file" "$placeholder_lines" > raw_light.tmp && mv raw_light.tmp "$raw_light_file"
+    comm -23 "$parked_domains_file" "$placeholder_lines" > parked.tmp && mv parked.tmp "$parked_domains_file"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
