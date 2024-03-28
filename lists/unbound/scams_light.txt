@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 14:37:24 UTC 2024
+! Last modified: Thu Mar 28 15:15:59 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1976
+! Total number of entries: 1967
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -309,7 +309,6 @@ local-zone: "bxmshop.com." always_nxdomain
 local-zone: "cadbrd.com." always_nxdomain
 local-zone: "cadimanshops.com." always_nxdomain
 local-zone: "cainiw.com." always_nxdomain
-local-zone: "cakecartsofficial.org." always_nxdomain
 local-zone: "callown.com." always_nxdomain
 local-zone: "camelxpressdelivery.online." always_nxdomain
 local-zone: "campershow.shop." always_nxdomain
@@ -397,7 +396,6 @@ local-zone: "clicktechpro.com." always_nxdomain
 local-zone: "clicktoearn.co." always_nxdomain
 local-zone: "clonecards.shop." always_nxdomain
 local-zone: "clonecardshop.com." always_nxdomain
-local-zone: "clonecardstore.com." always_nxdomain
 local-zone: "clonecardsvendor.com." always_nxdomain
 local-zone: "clonedcardshouse.com." always_nxdomain
 local-zone: "clonedscard.com." always_nxdomain
@@ -488,7 +486,6 @@ local-zone: "dazzlingdecorstore.com." always_nxdomain
 local-zone: "dazzlingwesthighlandterries.com." always_nxdomain
 local-zone: "dbsbk.com." always_nxdomain
 local-zone: "dealsgo.shop." always_nxdomain
-local-zone: "deandevelo.com." always_nxdomain
 local-zone: "dehsid.com." always_nxdomain
 local-zone: "delightfuljackrussellterriers.com." always_nxdomain
 local-zone: "delmarvapferdestall.org." always_nxdomain
@@ -504,7 +501,6 @@ local-zone: "designhomeeu.com." always_nxdomain
 local-zone: "desigualshow.shop." always_nxdomain
 local-zone: "destinydachshund.com." always_nxdomain
 local-zone: "deunow.com." always_nxdomain
-local-zone: "deutbk.com." always_nxdomain
 local-zone: "dexlac.com." always_nxdomain
 local-zone: "dezoabyssiniancattery.com." always_nxdomain
 local-zone: "dianeangllc.com." always_nxdomain
@@ -982,7 +978,6 @@ local-zone: "koinembassy.com." always_nxdomain
 local-zone: "kokokostore.net." always_nxdomain
 local-zone: "koowofficial.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
-local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kristaldentistry.com." always_nxdomain
 local-zone: "krminidachshunds.com." always_nxdomain
 local-zone: "krpethome.com." always_nxdomain
@@ -1201,7 +1196,6 @@ local-zone: "momondoexpress.com." always_nxdomain
 local-zone: "monarchlibertygroup.cc." always_nxdomain
 local-zone: "monclediscountvip.com." always_nxdomain
 local-zone: "mondayslotto.com." always_nxdomain
-local-zone: "moneyeasily-gsx.top." always_nxdomain
 local-zone: "monkeysober.com." always_nxdomain
 local-zone: "monodeal.net." always_nxdomain
 local-zone: "monoss.us." always_nxdomain
@@ -1325,7 +1319,6 @@ local-zone: "onlineherbalincense.com." always_nxdomain
 local-zone: "onlinemlb.com." always_nxdomain
 local-zone: "onlinenba.net." always_nxdomain
 local-zone: "onlineobey.shop." always_nxdomain
-local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onpointshipppers.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
 local-zone: "opjus.com." always_nxdomain
@@ -1431,7 +1424,6 @@ local-zone: "priyatrading.co.za." always_nxdomain
 local-zone: "pro-perfume.com." always_nxdomain
 local-zone: "proactivehpt.com." always_nxdomain
 local-zone: "proammunitions.com." always_nxdomain
-local-zone: "probity-services.com." always_nxdomain
 local-zone: "probmxbikes.com." always_nxdomain
 local-zone: "prochain.vip." always_nxdomain
 local-zone: "prochemislaboratory.weebly.com." always_nxdomain
@@ -1573,7 +1565,6 @@ local-zone: "share2pay.co." always_nxdomain
 local-zone: "sheinza.com." always_nxdomain
 local-zone: "shelterutilities.com." always_nxdomain
 local-zone: "sheltiehaven.com." always_nxdomain
-local-zone: "shipfasterlogistics.com." always_nxdomain
 local-zone: "shippingcontainersource.com." always_nxdomain
 local-zone: "shoesagl.com." always_nxdomain
 local-zone: "shoesforcrew.us." always_nxdomain

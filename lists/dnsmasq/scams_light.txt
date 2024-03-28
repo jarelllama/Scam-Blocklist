@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 14:37:24 UTC 2024
+! Last modified: Thu Mar 28 15:15:59 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1976
+! Total number of entries: 1967
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -308,7 +308,6 @@ local=/bxmshop.com/
 local=/cadbrd.com/
 local=/cadimanshops.com/
 local=/cainiw.com/
-local=/cakecartsofficial.org/
 local=/callown.com/
 local=/camelxpressdelivery.online/
 local=/campershow.shop/
@@ -396,7 +395,6 @@ local=/clicktechpro.com/
 local=/clicktoearn.co/
 local=/clonecards.shop/
 local=/clonecardshop.com/
-local=/clonecardstore.com/
 local=/clonecardsvendor.com/
 local=/clonedcardshouse.com/
 local=/clonedscard.com/
@@ -487,7 +485,6 @@ local=/dazzlingdecorstore.com/
 local=/dazzlingwesthighlandterries.com/
 local=/dbsbk.com/
 local=/dealsgo.shop/
-local=/deandevelo.com/
 local=/dehsid.com/
 local=/delightfuljackrussellterriers.com/
 local=/delmarvapferdestall.org/
@@ -503,7 +500,6 @@ local=/designhomeeu.com/
 local=/desigualshow.shop/
 local=/destinydachshund.com/
 local=/deunow.com/
-local=/deutbk.com/
 local=/dexlac.com/
 local=/dezoabyssiniancattery.com/
 local=/dianeangllc.com/
@@ -981,7 +977,6 @@ local=/koinembassy.com/
 local=/kokokostore.net/
 local=/koowofficial.com/
 local=/kozmozinspire.com/
-local=/krdes.net.in/
 local=/kristaldentistry.com/
 local=/krminidachshunds.com/
 local=/krpethome.com/
@@ -1200,7 +1195,6 @@ local=/momondoexpress.com/
 local=/monarchlibertygroup.cc/
 local=/monclediscountvip.com/
 local=/mondayslotto.com/
-local=/moneyeasily-gsx.top/
 local=/monkeysober.com/
 local=/monodeal.net/
 local=/monoss.us/
@@ -1324,7 +1318,6 @@ local=/onlineherbalincense.com/
 local=/onlinemlb.com/
 local=/onlinenba.net/
 local=/onlineobey.shop/
-local=/onlinesale2022.ru/
 local=/onpointshipppers.com/
 local=/onwofe.com/
 local=/opjus.com/
@@ -1430,7 +1423,6 @@ local=/priyatrading.co.za/
 local=/pro-perfume.com/
 local=/proactivehpt.com/
 local=/proammunitions.com/
-local=/probity-services.com/
 local=/probmxbikes.com/
 local=/prochain.vip/
 local=/prochemislaboratory.weebly.com/
@@ -1572,7 +1564,6 @@ local=/share2pay.co/
 local=/sheinza.com/
 local=/shelterutilities.com/
 local=/sheltiehaven.com/
-local=/shipfasterlogistics.com/
 local=/shippingcontainersource.com/
 local=/shoesagl.com/
 local=/shoesforcrew.us/
