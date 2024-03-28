@@ -14,7 +14,7 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Run tests](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 [![End-to-end build](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/e2e.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/e2e.yml)
 ```
-Total domains: 20994
+Total domains: 20924
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
