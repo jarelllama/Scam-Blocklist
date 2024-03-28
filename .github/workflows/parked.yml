@@ -35,5 +35,5 @@ jobs:
   build:
     # Only trigger if not called from another workflow
     if: ${{ ! inputs.called }}
-    needs: remove-parked
+    needs: parked-check
     uses: ./.github/workflows/build.yml
