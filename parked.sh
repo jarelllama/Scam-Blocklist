@@ -82,7 +82,7 @@ function check_for_unparked {
         fi
     done < "$1"
     # Collate unparked domains
-    [[ -f "unparked_domains_${1}.tmp" ]] && { cat "unparked_domains_${1}.tmp" >> unparked_domains.tmp; }
+    [[ -f "unparked_domains_${1}.tmp" ]] && cat "unparked_domains_${1}.tmp" >> unparked_domains.tmp
 }
 
 function check_for_parked {
