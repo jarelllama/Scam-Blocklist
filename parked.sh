@@ -19,15 +19,17 @@ function add_unparked_domains {
     touch unparked_domains.tmp
     printf "\nChecking for domains that have been unparked.\n"
 
-    # Split into 10 equal files
-    split -d -l $(($(wc -l < "$parked_domains_file")/10)) "$parked_domains_file"
+    # Split into 12 equal files
+    split -d -l $(($(wc -l < "$parked_domains_file")/12)) "$parked_domains_file"
     check_for_unparked "x00" & check_for_unparked "x01" &
     check_for_unparked "x02" & check_for_unparked "x03" &
     check_for_unparked "x04" & check_for_unparked "x05" &
     check_for_unparked "x06" & check_for_unparked "x07" &
     check_for_unparked "x08" & check_for_unparked "x09" &
-    check_for_unparked "x10" & check_for_unparked "x11"
+    check_for_unparked "x10" & check_for_unparked "x11" &
+    check_for_unparked "x12" & check_for_unparked "x13"
     wait
+
 
     [[ ! -s unparked_domains.tmp ]] && return
     format_list unparked_domains.tmp
