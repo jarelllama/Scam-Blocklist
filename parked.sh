@@ -23,7 +23,7 @@ function add_unparked_domains {
     printf "\nChecking for domains that have been unparked.\n"
 
     # Split into 12 equal files
-    split -d -l $(($(wc -l < "$parked_domains_file")/12)) "$parked_domains_file"
+    split -d -n 1/12 "$parked_domains_file" x
 
     ls
 
