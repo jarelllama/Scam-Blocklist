@@ -365,18 +365,6 @@ function check_if_dead_present {
     error=true
 }
 
-function check_parked {
-    while read -r line; do
-        ! grep -qxF "$line" "$1" && { parked_error=true; break; }  # Break when error found
-    done < "$2"
-    [[ "$parked_error" != true ]] && return  # Return if no error found
-    printf "! %s file is not as expected." "$3"
-    printf "\nTerms expected:\n"
-    cat "$2"
-    printf "\n"
-    error=true
-}
-
 function check_log {
     while read -r log_term; do
         ! grep -qF "$log_term" "$domain_log" && { log_error=true; break; }  # Break when error found
