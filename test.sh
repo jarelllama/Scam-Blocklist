@@ -295,8 +295,8 @@ function test_dead {
 
 function test_parked {
     # Placeholders needed as sample data (split does not work well without enough records)
-    not_parked_placeholder=$(head -n 25 "$toplist_file")
-    parked_placeholder=$(head -n 25 "$parked_domains_file")
+    not_parked_placeholder=$(head -n 50 "$toplist_file")
+    parked_placeholder=$(head -n 50 "$parked_domains_file")
     printf "%s\n" "$not_parked_placeholder" > placeholders.txt
     printf "%s\n" "$not_parked_placeholder" > "$raw_file"
     printf "%s\n" "$parked_placeholder" >> placeholders.txt
