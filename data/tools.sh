@@ -25,6 +25,7 @@ function remove_parked_domains {
     parked_terms_file='data/parked_terms.txt'
     parked_domains_file='data/parked_domains.txt'
 
+    # Split into 12 equal files
     split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
     check_for_parked "x00" & check_for_parked "x01" &
     check_for_parked "x02" & check_for_parked "x03" &
@@ -40,15 +41,18 @@ function remove_parked_domains {
 function check_for_parked {
     total=$(wc -l < "$1")
     count=1
+    process="${1//x/}"
     # Check for parked message in site's HTML
     while read -r domain; do
-        percentage_count="$((count*100/total))"
-        ((percentage_count % 10 == 0)) && printf "%s%%\n" "$percentage_count"
         if grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 1 "http://${domain}/" | tr -d '\0')"; then
             printf "Parked: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
-        ((count++))
+
+        [[ "$i" -eq 12 ]] && i=0
+        percentage_count="$((count*100/total))"
+        ((percentage_count % 10 == 0)) && [[ "$i" == "$process" ]] && printf "%s%%\n" "$percentage_count"
+        ((i++)) && ((count++))
     done < "$1"
     [[ -f "parked_domains_${1}.tmp" ]] && { cat "parked_domains_${1}.tmp" >> "$parked_domains_file";
         rm "parked_domains_${1}.tmp"; }
