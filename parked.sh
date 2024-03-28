@@ -42,7 +42,7 @@ function add_unparked_domains {
 }
 
 function remove_parked_domains {
-    ls "$raw_file"
+    cat "$raw_file"
 
     touch parked_domains.tmp
     printf "\nChecking for parked domains.\n"
@@ -54,8 +54,6 @@ function remove_parked_domains {
     check_for_parked "x04" & check_for_parked "x05" &
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09"
-
-    cat x09
 
     wait
 
@@ -95,8 +93,6 @@ function check_for_parked {
     count=1
     # Check for parked message in site's HTML
     while read -r domain; do
-        echo "$domain"
-
         if grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/" | tr -d '\0')"; then
             printf "Parked: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
