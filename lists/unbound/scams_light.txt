@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 10:12:59 UTC 2024
+! Last modified: Thu Mar 28 10:16:01 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1973
+! Total number of entries: 1975
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1465,6 +1465,7 @@ local-zone: "qualityhayandfeedllc.us." always_nxdomain
 local-zone: "queencontainers.org." always_nxdomain
 local-zone: "quiksilverclothes.shop." always_nxdomain
 local-zone: "quirkleaf.com." always_nxdomain
+local-zone: "quotedcs.co.za." always_nxdomain
 local-zone: "racegippsland.com." always_nxdomain
 local-zone: "radarak.com." always_nxdomain
 local-zone: "raincrossshihtzubreeder.com." always_nxdomain
@@ -1686,6 +1687,7 @@ local-zone: "sunrisewellness.net." always_nxdomain
 local-zone: "sunshinedoddles.com." always_nxdomain
 local-zone: "sunshinepuppieshome.co.za." always_nxdomain
 local-zone: "sunsolarafrica.co.za." always_nxdomain
+local-zone: "sunsolarsuppliers.co.za." always_nxdomain
 local-zone: "superbwigs.com." always_nxdomain
 local-zone: "superdry.vip.com." always_nxdomain
 local-zone: "superiorsharpei.com." always_nxdomain
