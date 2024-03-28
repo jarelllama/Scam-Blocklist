@@ -34,7 +34,7 @@ function add_unparked_domains {
 
     # Remove unparked domains from parked domains file
     comm -23 "$parked_domains_file" unparked_domains.tmp > parked.tmp && mv parked.tmp "$parked_domains_file"
-    cat unparked_domains.tmp > "$raw_file"  # Add unparked domains to raw file
+    cat unparked_domains.tmp >> "$raw_file"  # Add unparked domains to raw file
     format_list "$raw_file"
     log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
 }
@@ -57,7 +57,7 @@ function remove_parked_domains {
 
     # Remove parked domains from raw file
     comm -23 "$raw_file" parked_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
-    cat parked_domains.tmp > "$parked_domains_file"  # Add parked domains to parked domains file
+    cat parked_domains.tmp >> "$parked_domains_file"  # Add parked domains to parked domains file
     format_list "$parked_domains_file"
     log_event "$(<parked_domains.tmp)" "parked" "raw"
 }
