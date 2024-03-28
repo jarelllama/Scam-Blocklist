@@ -10,6 +10,7 @@ subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
+parked_domains_file='data/parked_domains.txt'
 
 [[ "$CI" != true ]] && exit 1  # Do not allow running locally
 
@@ -21,6 +22,7 @@ function main {
     [[ "$1" == 'toplist' ]] && test_toplist
     [[ "$1" == 'check' ]] && test_retrieval_check "$1"
     [[ "$1" == 'dead' ]] && test_dead
+    [[ "$1" == 'parked' ]] && test_parked
     [[ "$1" == 'shellcheck' ]] && shellcheck
     exit 0
 }
@@ -247,9 +249,13 @@ function test_dead {
     } >> out_log.txt  # Expected output
 
     # Check removal of dead domains
+    # Input
+    printf "apple.com\n" >> "$raw_file"
     printf "49532dead-domain-test.com\n" >> "$raw_file"  # Input
-    printf "49532dead-domain-test.com\n" >> out_dead.txt  # Expected output
-    printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt  # Expected output
+    # Expected output
+    printf "apple.com\n" >> out_log.txt
+    printf "49532dead-domain-test.com\n" >> out_dead.txt
+    printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
@@ -278,6 +284,45 @@ function test_dead {
         printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     check_error
+}
+
+function test_parked {
+    # Test addition of unparked domains
+    # Input
+    printf "google.com\n" > "$parked_domains_file"
+    printf "accesstrades247.comn" >> "$parked_domains_file"
+    # Expected output
+    printf "google.com\n" >> out_raw.txt
+    printf "accesstrades247.comn" >> out_parked.txt
+    printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
+
+    # Test removal of parked domains
+    # Input
+    printf "apple.com\n" >> "$raw_file"
+    printf "atlantictrustbank.com\n" >> "$raw_file"
+    # Expected output
+    printf "apple.com\n" >> out_raw.txt
+    printf "atlantictrustbank.com\n" >> out_parked.txt
+    printf "parked,atlantictrustbank.com,raw\n" >> out_log.txt
+
+    # Test raw light file
+    cp "$raw_file" "$raw_light_file"  # Input
+    grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (unparked domains are not added back to light blocklist)
+
+    # Prepare expected output files
+    for file in out_*; do
+        [[ "$file" != out_dead.txt ]] && sort "$file" -o "$file"  # Dead domains file is not sorted
+    done
+
+    bash parked.sh  # Run parked script
+    [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
+    printf "%s\n" "------------------------------------------------------------------"
+
+    [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
+    check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
+    check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
+    check_output "$parked_domains_file" "out_parked.txt" "Parked domains"
+    check_log  # Check log file
 }
 
 function check_output {
