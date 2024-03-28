@@ -1,5 +1,8 @@
 #!/bin/bash
-raw_file='data/raw.txt'
+raw_file='data/raw_light.txt'
+
+
+
 raw_light_file='data/raw_light.txt'
 parked_terms_file='config/parked_terms.txt'
 parked_domains_file='data/parked_domains.txt'
@@ -12,7 +15,7 @@ function main {
     done
     add_unparked_domains
     remove_parked_domains
-    update_light_file
+    #update_light_file
 }
 
 function add_unparked_domains {
@@ -53,7 +56,7 @@ function remove_parked_domains {
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09" &
     check_for_parked "x10" & check_for_parked "x11" &
-    [[ -f x12 ]] && check_for_parked "x11" || printf ""  # printf to negate exit status 1
+    [[ -f x12 ]] && check_for_parked "x12" || printf ""  # printf to negate exit status 1
 
     find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 
