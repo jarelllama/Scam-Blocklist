@@ -308,14 +308,14 @@ function test_parked {
     printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
 
     # Test removal of parked domains
-    printf "301 Moved Permanently\n" >> "$parked_terms_file"  # Sample parked term
+    printf "github\n" >> "$parked_terms_file"  # Sample parked term
     # Input
     printf "apple.com\n" >> "$raw_file"
-    printf "namecheap.com\n" >> "$raw_file"
+    printf "github.com\n" >> "$raw_file"
     # Expected output
     printf "apple.com\n" >> out_raw.txt
-    printf "namecheap.com\n" >> out_parked.txt
-    printf "parked,namecheap.com,raw\n" >> out_log.txt
+    printf "github.com\n" >> out_parked.txt
+    printf "parked,github.com,raw\n" >> out_log.txt
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
