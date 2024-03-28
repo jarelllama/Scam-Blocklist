@@ -31,7 +31,7 @@ function source {
     printf "\n"
     # Check for existing pending domains file
     [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
-    [[ "$use_pending" == true ]] && source_manual  # Retrieve manually added domains
+    [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419
     source_dfpi
