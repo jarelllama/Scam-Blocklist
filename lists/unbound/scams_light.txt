@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 09:59:48 UTC 2024
+! Last modified: Thu Mar 28 10:07:54 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1971
+! Total number of entries: 1973
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1198,6 +1198,7 @@ local-zone: "momondoexpress.com." always_nxdomain
 local-zone: "monarchlibertygroup.cc." always_nxdomain
 local-zone: "monclediscountvip.com." always_nxdomain
 local-zone: "mondayslotto.com." always_nxdomain
+local-zone: "moneyeasily-gsx.top." always_nxdomain
 local-zone: "monkeysober.com." always_nxdomain
 local-zone: "monodeal.net." always_nxdomain
 local-zone: "monoss.us." always_nxdomain
@@ -1656,6 +1657,7 @@ local-zone: "starstartree.com." always_nxdomain
 local-zone: "statelinetack.shop." always_nxdomain
 local-zone: "statetreasury.org." always_nxdomain
 local-zone: "steelite-au.com." always_nxdomain
+local-zone: "stefanopessina.online." always_nxdomain
 local-zone: "stefunton.com." always_nxdomain
 local-zone: "stevemaddenca.shop." always_nxdomain
 local-zone: "stiffcranks.com." always_nxdomain

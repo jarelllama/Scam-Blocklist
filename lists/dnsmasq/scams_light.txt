@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 09:59:48 UTC 2024
+! Last modified: Thu Mar 28 10:07:54 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1971
+! Total number of entries: 1973
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -1197,6 +1197,7 @@ local=/momondoexpress.com/
 local=/monarchlibertygroup.cc/
 local=/monclediscountvip.com/
 local=/mondayslotto.com/
+local=/moneyeasily-gsx.top/
 local=/monkeysober.com/
 local=/monodeal.net/
 local=/monoss.us/
@@ -1655,6 +1656,7 @@ local=/starstartree.com/
 local=/statelinetack.shop/
 local=/statetreasury.org/
 local=/steelite-au.com/
+local=/stefanopessina.online/
 local=/stefunton.com/
 local=/stevemaddenca.shop/
 local=/stiffcranks.com/
