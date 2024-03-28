@@ -11,7 +11,6 @@ subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 redundant_domains_file='data/redundant_domains.txt'
 dead_domains_file='data/dead_domains.txt'
-parked_terms_file='config/parked_terms.txt'
 parked_domains_file='data/parked_domains.txt'
 
 [[ "$CI" != true ]] && exit 1  # Do not allow running locally
@@ -30,14 +29,15 @@ function main {
 }
 
 function shellcheck {
-    # Download and run ShellCheck
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     wget -qO - "$url" | tar -xJ  # Download ShellCheck
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
+
     scripts=$(find . ! -path "./legacy/*" -type f -name "*.sh")  # Find scripts
     while read -r script; do  # Loop through scripts
         shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck for each script
     done <<< "$scripts"
+
     # Check for carriage return characters
     problematic_files=$(grep -rl $'\r' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
@@ -45,6 +45,7 @@ function shellcheck {
         printf "%s\n" "$problematic_files"
         error=true
     fi
+
     # Check for missing space before comments
     problematic_files=$(grep -rn '\S\s#' --exclude-dir={legacy,.git,shellcheck-stable} --exclude=*.csv .)
     if [[ -n "$problematic_files" ]]; then
@@ -52,6 +53,7 @@ function shellcheck {
         printf "%s\n" "$problematic_files"
         error=true
     fi
+
     printf "\nScripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
     check_error
 }
@@ -62,12 +64,14 @@ function test_retrieval_check {
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Test removal of known dead domains
-        # Sample data
-        printf "dead-test.com\n" > "$dead_domains_file"
-        printf "www.dead-test-2.com\n" >> "$dead_domains_file"
-        # Input
-        printf "dead-test.com\n" >> input.txt
-        printf "www.dead-test-2.com\n" >> input.txt
+        {
+            printf "dead-test.com\n"
+            printf "www.dead-test-2.com\n"
+        } > "$dead_domains_file"  # Sample data
+        {
+            printf "dead-test.com\n"
+            printf "www.dead-test-2.com\n"
+        } > input.txt  # Input
         # No expected output (dead domains check does not log)
     fi
 
@@ -128,7 +132,7 @@ function test_retrieval_check {
         printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
     } >> input.txt  # Input
-    printf "invalid-test.xn--903fds\n" >> out_raw.txt
+    printf "invalid-test.xn--903fds\n" >> out_raw.txt  # Expected output
     {
         printf "invalid,invalid-test-com\n"
         printf "invalid,100.100.100.100\n"
@@ -145,7 +149,7 @@ function test_retrieval_check {
         printf "domain.redundant-test.com\n" >> input.txt  # Input
         printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
     elif [[ "$script_to_test" == 'check' ]]; then
-        # Test addition of new wildcard from wildcard file
+        # Test addition of new wildcard from wildcard file (manually adding a new wildcard to wildcards file)
         printf "domain.redundant-test.com\n" >> input.txt  # Sample data
         printf "redundant-test.com\n" > "$wildcards_file"  # Input
         # Expected output
@@ -164,16 +168,15 @@ function test_retrieval_check {
 
     # Test light raw file exclusion of specific sources
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        cp "$raw_file" "$raw_light_file"  # Sample data
+        cp "$raw_file" "$raw_light_file"
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
-        grep -vF "raw-light-test.com" out_raw.txt > out_raw_light.txt  # Expected output
+        grep -vF "raw-light-test.com" out_raw.txt > out_raw_light.txt  # Expected output for light (source excluded from light)
     elif [[ "$script_to_test" == 'check' ]]; then
-        cp out_raw.txt out_raw_light.txt  # Expected output
+        cp out_raw.txt out_raw_light.txt  # Expected output for light
     fi
 
-    # Prepare expected output files
-    prep_output
+    prep_output  # Prepare expected output files
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Distribute the sample input into various sources
@@ -208,7 +211,7 @@ function test_retrieval_check {
 
 function test_toplist {
     mkdir data/pending
-    : > "$whitelist_file"  # Sample data
+    : > "$whitelist_file"  # Clear whitelist file
     printf "google.com\n" > data/pending/domains_google_search_toplist-test.tmp  # Input
     printf "toplist,google.com\n" > out_log.txt  # Expected output
     bash retrieve.sh || true  # Run retrieval script and ignore exit status
@@ -267,12 +270,10 @@ function test_dead {
     printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt
 
     # Test raw light file
-    cp "$raw_file" "$raw_light_file"  # Input
-    grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (resurrected domains are not added back to light blocklist)
+    cp "$raw_file" "$raw_light_file"
+    grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output for light (resurrected domains are not added back to light)
 
-    # Prepare expected output files
-    prep_output
-
+    prep_output  # Prepare expected output files
     bash dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
     printf "%s\n" "------------------------------------------------------------------"
@@ -309,7 +310,6 @@ function test_parked {
     printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
 
     # Test removal of parked domains
-    printf "github\n" >> "$parked_terms_file"  # Sample parked term
     # Input
     printf "tradexchange.online\n" >> "$raw_file"
     printf "apple.com\n" >> "$raw_file"

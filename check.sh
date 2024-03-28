@@ -22,7 +22,7 @@ function main {
 }
 
 function check_raw_file {
-    # Add any new wildcards to the raw files
+    # Add new wildcards to the raw files
     cat "$wildcards_file" >> "$raw_file"
     cat "$wildcards_file" >> "$raw_light_file"
     format_list "$raw_file" && format_list "$raw_light_file"
@@ -100,7 +100,7 @@ function check_raw_file {
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$domains") "$toplist_file") "$blacklist_file")
     toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$toplist_count" -gt 0 ]]; then
-        awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
+        awk 'NF {print "! " $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
     fi
 

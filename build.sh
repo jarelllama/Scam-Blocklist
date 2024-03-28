@@ -186,14 +186,15 @@ function count {
         white_count=$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')
         dead_count=$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')
         redundant_count=$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')
-        excluded_count=$((white_count + dead_count + redundant_count))
+        parked_count=$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')
+        excluded_count=$((white_count + dead_count + redundant_count + parked_count))
         printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded
         rm source_rows.tmp
         return
 
     # Count number of Google Search queries made
     elif [[ "$scope" == 'queries' ]]; then
-        queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 11 | awk '{total += $1} END {print total}')
+        queries=$(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')
         [[ "$queries" -lt 205 ]] && printf "%s" "$queries" || printf "%s (rate limited)" "$queries"
         return
 

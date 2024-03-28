@@ -221,7 +221,7 @@ function process_source {
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exclude from dead check
         printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
-        # Find and log domains with common subdomains excluding 'www'
+        # Log domains with common subdomains excluding 'www'
         domains_with_subdomains=$(grep -v '^www\.' <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_to_remove_file"
@@ -352,8 +352,8 @@ function log_source {
     # Print and log statistics for source used
     [[ "$source" == 'Google Search' ]] && search_term="\"${search_term:0:100}...\"" || search_term=''
     awk -v source="$source" -v search_term="$search_term" -v raw="$unfiltered_count" -v final="$filtered_count" -v whitelist="$total_whitelisted_count" -v dead="$dead_count" -v redundant="$redundant_count" \
-        -v toplist_count="$toplist_count" -v toplist_domains="$(printf "%s" "$domains_in_toplist" | tr '\n' ' ')" -v queries="$query_count" -v rate_limited="$rate_limited" -v time="$time_format" \
-        'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
+        -v parked="$parked_count" -v toplist_count="$toplist_count" -v toplist_domains="$(printf "%s" "$domains_in_toplist" | tr '\n' ' ')" -v queries="$query_count" -v rate_limited="$rate_limited" -v time="$time_format" \
+        'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","parked","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
     [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
     printf "Source: %s\nRaw:%4s  Final:%4s  Whitelisted:%4s  Dead:%4s  Toplist:%4s\n" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$dead_count" "$toplist_count"
     printf "%s\n" "------------------------------------------------------------------"
