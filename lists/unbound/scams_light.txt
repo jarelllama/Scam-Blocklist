@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 10:20:41 UTC 2024
+! Last modified: Thu Mar 28 10:23:59 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1976
+! Total number of entries: 1978
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -310,6 +310,7 @@ local-zone: "bxmshop.com." always_nxdomain
 local-zone: "cadbrd.com." always_nxdomain
 local-zone: "cadimanshops.com." always_nxdomain
 local-zone: "cainiw.com." always_nxdomain
+local-zone: "cakecartsofficial.org." always_nxdomain
 local-zone: "callown.com." always_nxdomain
 local-zone: "camelxpressdelivery.online." always_nxdomain
 local-zone: "campershow.shop." always_nxdomain
@@ -1718,6 +1719,7 @@ local-zone: "tatadress.com." always_nxdomain
 local-zone: "taylorsfirearmsusa.com." always_nxdomain
 local-zone: "taziti.com." always_nxdomain
 local-zone: "tcgguard.com." always_nxdomain
+local-zone: "tcruisefansclub.com." always_nxdomain
 local-zone: "teacupmaltipooforsale.com." always_nxdomain
 local-zone: "tedbakerfactorystore.com." always_nxdomain
 local-zone: "teddybearchowspal.com." always_nxdomain
