@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 10:29:12 UTC 2024
+! Last modified: Thu Mar 28 10:35:15 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1979
+! Total number of entries: 1976
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -488,6 +488,7 @@ local-zone: "dazzlingdecorstore.com." always_nxdomain
 local-zone: "dazzlingwesthighlandterries.com." always_nxdomain
 local-zone: "dbsbk.com." always_nxdomain
 local-zone: "dealsgo.shop." always_nxdomain
+local-zone: "deandevelo.com." always_nxdomain
 local-zone: "dehsid.com." always_nxdomain
 local-zone: "delightfuljackrussellterriers.com." always_nxdomain
 local-zone: "delmarvapferdestall.org." always_nxdomain
@@ -1468,7 +1469,6 @@ local-zone: "qualityhayandfeedllc.us." always_nxdomain
 local-zone: "queencontainers.org." always_nxdomain
 local-zone: "quiksilverclothes.shop." always_nxdomain
 local-zone: "quirkleaf.com." always_nxdomain
-local-zone: "quotedcs.co.za." always_nxdomain
 local-zone: "racegippsland.com." always_nxdomain
 local-zone: "radarak.com." always_nxdomain
 local-zone: "raincrossshihtzubreeder.com." always_nxdomain
@@ -1661,7 +1661,6 @@ local-zone: "starstartree.com." always_nxdomain
 local-zone: "statelinetack.shop." always_nxdomain
 local-zone: "statetreasury.org." always_nxdomain
 local-zone: "steelite-au.com." always_nxdomain
-local-zone: "stefanopessina.online." always_nxdomain
 local-zone: "stefunton.com." always_nxdomain
 local-zone: "stevemaddenca.shop." always_nxdomain
 local-zone: "stiffcranks.com." always_nxdomain
@@ -1690,7 +1689,6 @@ local-zone: "sunrisewellness.net." always_nxdomain
 local-zone: "sunshinedoddles.com." always_nxdomain
 local-zone: "sunshinepuppieshome.co.za." always_nxdomain
 local-zone: "sunsolarafrica.co.za." always_nxdomain
-local-zone: "sunsolarsuppliers.co.za." always_nxdomain
 local-zone: "superbwigs.com." always_nxdomain
 local-zone: "superdry.vip.com." always_nxdomain
 local-zone: "superiorsharpei.com." always_nxdomain
@@ -1720,7 +1718,6 @@ local-zone: "tatadress.com." always_nxdomain
 local-zone: "taylorsfirearmsusa.com." always_nxdomain
 local-zone: "taziti.com." always_nxdomain
 local-zone: "tcgguard.com." always_nxdomain
-local-zone: "tcruisefansclub.com." always_nxdomain
 local-zone: "teacupmaltipooforsale.com." always_nxdomain
 local-zone: "tedbakerfactorystore.com." always_nxdomain
 local-zone: "teddybearchowspal.com." always_nxdomain

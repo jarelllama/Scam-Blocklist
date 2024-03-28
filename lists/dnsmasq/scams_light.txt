@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 10:29:12 UTC 2024
+! Last modified: Thu Mar 28 10:35:15 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1979
+! Total number of entries: 1976
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -487,6 +487,7 @@ local=/dazzlingdecorstore.com/
 local=/dazzlingwesthighlandterries.com/
 local=/dbsbk.com/
 local=/dealsgo.shop/
+local=/deandevelo.com/
 local=/dehsid.com/
 local=/delightfuljackrussellterriers.com/
 local=/delmarvapferdestall.org/
@@ -1467,7 +1468,6 @@ local=/qualityhayandfeedllc.us/
 local=/queencontainers.org/
 local=/quiksilverclothes.shop/
 local=/quirkleaf.com/
-local=/quotedcs.co.za/
 local=/racegippsland.com/
 local=/radarak.com/
 local=/raincrossshihtzubreeder.com/
@@ -1660,7 +1660,6 @@ local=/starstartree.com/
 local=/statelinetack.shop/
 local=/statetreasury.org/
 local=/steelite-au.com/
-local=/stefanopessina.online/
 local=/stefunton.com/
 local=/stevemaddenca.shop/
 local=/stiffcranks.com/
@@ -1689,7 +1688,6 @@ local=/sunrisewellness.net/
 local=/sunshinedoddles.com/
 local=/sunshinepuppieshome.co.za/
 local=/sunsolarafrica.co.za/
-local=/sunsolarsuppliers.co.za/
 local=/superbwigs.com/
 local=/superdry.vip.com/
 local=/superiorsharpei.com/
@@ -1719,7 +1717,6 @@ local=/tatadress.com/
 local=/taylorsfirearmsusa.com/
 local=/taziti.com/
 local=/tcgguard.com/
-local=/tcruisefansclub.com/
 local=/teacupmaltipooforsale.com/
 local=/tedbakerfactorystore.com/
 local=/teddybearchowspal.com/
