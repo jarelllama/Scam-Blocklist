@@ -53,7 +53,7 @@ $(print_stats "Manual") Entries
 $(print_stats)
 
 *The Excluded % is of domains not included in the
- blocklist. Mostly dead and whitelisted domains.
+ blocklist. Mostly dead, whitelisted and parked domains.
 *Only active sources are shown. See the full list of
  sources in SOURCES.md.
 \`\`\`
@@ -68,8 +68,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <li>Intended for collated blocklists cautious about size</li>
 <li>Does not use sources whose domains cannot be filtered by date added</li>
 <li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full blocklist includes domains added from 2 months back and onwards</li>
-<li>Parked domains are removed from the list. This is currently only being done for the light version due to the processing time required</li>
-<li>! Dead domains that become alive again are not added back to the blocklist (due to limitations in the way the dead domains are recorded)</li>
+<li>! Dead and parked domains that become alive/unparked are not added back to the blocklist (due to limitations in the way these domains are recorded)</li>
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
@@ -110,10 +109,14 @@ The full domain retrieval process for all sources can be viewed in the repositor
 The full filtering process can be viewed in the repository's code.
 
 ## Dead domains
-Dead domains are removed daily using [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter). Note that domains acting as wildcards are excluded from this process.
+Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter). Note that domains acting as wildcards are excluded from this process.
 
-Dead domains that are resolving again are included back into the blocklist.
+Dead domains that are resolving again are included back in the blocklist.
 
+## Parked domains
+From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/84e682fea95866670dd99f5c98f350bc7377011a) of the blocklist consisted of [parked domains](https://www.godaddy.com/resources/ae/skills/parked-domain) that inflate the number of entries. Because these domains pose no real threat (besides the obnoxious advertising), they are removed from the blocklist daily. A list of common parked domain messages is used to detect these domains and can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
+
+If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back to the blocklist.
 ## Why the Hosts format is not supported
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
