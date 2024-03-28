@@ -33,10 +33,7 @@ function add_unparked_domains {
     check_for_unparked "x02" & check_for_unparked "x03" &
     check_for_unparked "x04" & check_for_unparked "x05" &
     check_for_unparked "x06" & check_for_unparked "x07" &
-    check_for_unparked "x08" & check_for_unparked "x09" &
-    [[ -f x10 ]] && check_for_unparked "x10" & [[ -f x11 ]] && check_for_unparked "x11"
-
-    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
+    check_for_unparked "x08" & check_for_unparked "x09"
 
     [[ ! -f unparked_domains.tmp ]] && return
     format_list unparked_domains.tmp
@@ -75,7 +72,6 @@ function remove_parked_domains {
 }
 
 function check_for_unparked {
-    echo "File: $1"
     total=$(wc -l < "$1")
     count=1
     # Check for parked message in site's HTML
@@ -127,6 +123,7 @@ function format_list {
 
 function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
+    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 }
 
 trap cleanup EXIT
