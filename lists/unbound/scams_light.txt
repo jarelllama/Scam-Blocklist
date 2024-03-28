@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 09:57:49 UTC 2024
+! Last modified: Thu Mar 28 09:59:48 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1968
+! Total number of entries: 1971
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -674,6 +674,7 @@ local-zone: "forcedresettriggerusa.com." always_nxdomain
 local-zone: "foreseew.com." always_nxdomain
 local-zone: "forevergiftable.com." always_nxdomain
 local-zone: "forexhiexperts.com." always_nxdomain
+local-zone: "forexstocktrade247.com." always_nxdomain
 local-zone: "forums.sassnet.com." always_nxdomain
 local-zone: "fossilssale.us." always_nxdomain
 local-zone: "fotache.ro." always_nxdomain
@@ -971,6 +972,7 @@ local-zone: "klassiccanecorsos.com." always_nxdomain
 local-zone: "kleankitz.com." always_nxdomain
 local-zone: "kloud-shop.com." always_nxdomain
 local-zone: "kls2kresearch.com." always_nxdomain
+local-zone: "kmkusdt.com." always_nxdomain
 local-zone: "knifemaverick.com." always_nxdomain
 local-zone: "knightsgunsusa.com." always_nxdomain
 local-zone: "knivesfoodprep.com." always_nxdomain
@@ -1319,6 +1321,7 @@ local-zone: "onlineherbalincense.com." always_nxdomain
 local-zone: "onlinemlb.com." always_nxdomain
 local-zone: "onlinenba.net." always_nxdomain
 local-zone: "onlineobey.shop." always_nxdomain
+local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onpointshipppers.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
 local-zone: "opjus.com." always_nxdomain
