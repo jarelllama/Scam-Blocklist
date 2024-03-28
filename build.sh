@@ -89,7 +89,7 @@ The Google Custom Search JSON API only provides 100 daily free search queries pe
 
 To optimize the number of search queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
 
-#### Statistics
+#### Statistics for Google Search source
 \`\`\`
 Active search terms: $(count "active_search_terms")
 Queries made today: $(count "queries")
