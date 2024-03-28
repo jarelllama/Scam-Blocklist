@@ -1,8 +1,5 @@
 #!/bin/bash
-raw_file='data/raw_light.txt'
-
-
-
+raw_file='data/raw.txt'
 raw_light_file='data/raw_light.txt'
 parked_terms_file='config/parked_terms.txt'
 parked_domains_file='data/parked_domains.txt'
@@ -13,9 +10,9 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    #add_unparked_domains
+    add_unparked_domains
     remove_parked_domains
-    #update_light_file
+    update_light_file
 }
 
 function add_unparked_domains {
@@ -30,7 +27,7 @@ function add_unparked_domains {
     check_for_unparked "x06" & check_for_unparked "x07" &
     check_for_unparked "x08" & check_for_unparked "x09" &
     check_for_unparked "x10" & check_for_unparked "x11" &
-    [[ -f x12 ]] && check_for_unparked "x12"
+    [[ -f x12 ]] && check_for_unparked "x12" || printf ""  # printf to negate exit status 1
 
     find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 
@@ -56,7 +53,7 @@ function remove_parked_domains {
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09" &
     check_for_parked "x10" & check_for_parked "x11" &
-    [[ -f x12 ]] && check_for_parked "x11" || printf ""
+    [[ -f x12 ]] && check_for_parked "x11" || printf ""  # printf to negate exit status 1
 
     find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 
