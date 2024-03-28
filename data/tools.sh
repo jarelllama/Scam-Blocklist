@@ -55,7 +55,7 @@ function check_for_parked {
     done < "$1"
     [[ -f "parked_domains_${1}.tmp" ]] && { cat "parked_domains_${1}.tmp" >> "$parked_domains_file";
         rm "parked_domains_${1}.tmp"; }
-    rm "$1"
+    rm -f "$1"
 }
 
 [[ "$1" == 'format' ]] && format "$2"
