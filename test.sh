@@ -293,16 +293,17 @@ function test_dead {
 
 function test_parked {
     # Requires at least 12 line to properly split
-    printf "%s\n" "$(head -n 12 data/toplist.txt)" > "$raw_file"
-    printf "%s\n" "$(head -n 12 data/toplist.txt)" > "$parked_domains_file"
+    placeholder_lines=$(head -n 12 data/toplist.txt)
+    printf "%s\n" "$placeholder_lines" > "$raw_file"
+    printf "%s\n" "$placeholder_lines" > "$parked_domains_file"
 
     # Test addition of unparked domains
     # Input
     printf "google.com\n" >> "$parked_domains_file"
-    printf "accesstrades247.comn" >> "$parked_domains_file"
+    printf "accesstrades247.com\n" >> "$parked_domains_file"
     # Expected output
     printf "google.com\n" >> out_raw.txt
-    printf "accesstrades247.comn" >> out_parked.txt
+    printf "accesstrades247.com\n" >> out_parked.txt
     printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
 
     # Test removal of parked domains
@@ -316,7 +317,7 @@ function test_parked {
 
     # Test raw light file
     cp "$raw_file" "$raw_light_file"  # Input
-    grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (unparked domains are not added back to light blocklist)
+    grep -vxF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (unparked domains are not added back to light blocklist)
 
     # Prepare expected output files
     prep_output
@@ -327,10 +328,14 @@ function test_parked {
 
     [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
 
-    # Check raw file
-    check_parked "$raw_file" "out_raw.txt" "Raw"
-    # Check parked domains file
-    check_parked "$parked_domains_file" "out_parked.txt" "Parked domains"
+    # Remove placeholder lines
+    grep -vxF "$placeholder_lines" "$raw_file" > raw.tmp && mv raw.tmp "$raw_file"
+    grep -vxF "$placeholder_lines" "$raw_light_file" > raw.tmp && mv raw.tmp "$raw_light_file"
+    grep -vxF "$placeholder_lines" "$parked_domains_file" > raw.tmp && mv raw.tmp "$parked_domains_file"
+
+    check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
+    check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
+    check_output "$parked_domains_file" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
     check_error
