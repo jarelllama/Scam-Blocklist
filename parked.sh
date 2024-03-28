@@ -56,7 +56,7 @@ function remove_parked_domains {
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09" &
     check_for_parked "x10" & check_for_parked "x11" &
-    [[ -f x12 ]] && check_for_parked "x12"
+    [[ -f x12 ]] && check_for_parked "x12" || printf ""
 
     find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 
