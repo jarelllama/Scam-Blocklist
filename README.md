@@ -69,7 +69,7 @@ To optimize the number of search queries made, each search term is frequently be
 
 #### Statistics
 ```
-Active search terms: 18
+Active search terms: 20
 Queries made today: 0
 Domains retrieved today: 0
 ```
