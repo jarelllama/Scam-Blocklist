@@ -66,7 +66,7 @@ function test_retrieval_check {
         # Input
         printf "dead-test.com\n" >> input.txt
         printf "www.dead-test-2.com\n" >> input.txt
-        # No expected output
+        # No expected output (dead domains check does not log)
     fi
 
     # Test removal of common subdomains
@@ -82,6 +82,15 @@ function test_retrieval_check {
     [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The Check script does not exclude 'www' subdomains
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
+
+    # Removal of domains already in raw file is redundant to test
+
+    if [[ "$script_to_test" == 'retrieval' ]]; then
+        # Test removal of known parked domains
+        printf "parked-domains-test.com\n" > "$parked_domains_file"  # Sample data
+        printf "parked-domains-test.com\n" >> input.txt  # Input
+        printf "parked,parked-domains-test.com\n" >> out_log.txt  # Expected output
+    fi
 
     # Test removal of whitelisted domains and blacklist exclusion
     # Sample data
@@ -141,7 +150,7 @@ function test_retrieval_check {
         printf "redundant-test.com\n" >> out_raw.txt
         printf "redundant-test.com\n" >> out_wildcards.txt
         printf "domain.redundant-test.com\n" >> out_redundant.txt
-        printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
+        printf "redundant,domain.redundant-test.com\n" >> out_log.txt
     fi
 
     if [[ "$script_to_test" == 'check' ]]; then
@@ -155,16 +164,14 @@ function test_retrieval_check {
     if [[ "$script_to_test" == 'retrieval' ]]; then
         cp "$raw_file" "$raw_light_file"  # Sample data
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
-        cp out_raw.txt out_raw_light.txt  # Expected output
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
+        grep -vF "raw-light-test.com" out_raw.txt > out_raw_light.txt  # Expected output
     elif [[ "$script_to_test" == 'check' ]]; then
         cp out_raw.txt out_raw_light.txt  # Expected output
     fi
 
     # Prepare expected output files
-    for file in out_*; do
-        sort "$file" -o "$file"
-    done
+    prep_output
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Distribute the sample input into various sources
@@ -253,7 +260,7 @@ function test_dead {
     printf "apple.com\n" >> "$raw_file"
     printf "49532dead-domain-test.com\n" >> "$raw_file"  # Input
     # Expected output
-    printf "apple.com\n" >> out_log.txt
+    printf "apple.com\n" >> out_raw.txt
     printf "49532dead-domain-test.com\n" >> out_dead.txt
     printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt
 
@@ -262,9 +269,7 @@ function test_dead {
     grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (resurrected domains are not added back to light blocklist)
 
     # Prepare expected output files
-    for file in out_*; do
-        [[ "$file" != out_dead.txt ]] && sort "$file" -o "$file"  # Dead domains file is not sorted
-    done
+    prep_output
 
     bash dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
@@ -310,9 +315,7 @@ function test_parked {
     grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (unparked domains are not added back to light blocklist)
 
     # Prepare expected output files
-    for file in out_*; do
-        [[ "$file" != out_dead.txt ]] && sort "$file" -o "$file"  # Dead domains file is not sorted
-    done
+    prep_output
 
     bash parked.sh  # Run parked script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
@@ -323,6 +326,14 @@ function test_parked {
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$parked_domains_file" "out_parked.txt" "Parked domains"
     check_log  # Check log file
+    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
+    check_error
+}
+
+function prep_output {
+    for file in out_*; do
+        [[ "$file" != out_dead.txt ]] && sort "$file" -o "$file"  # Dead domains file is not sorted
+    done
 }
 
 function check_output {

@@ -12,6 +12,7 @@ subdomains_file='data/subdomains.txt'
 subdomains_to_remove_file='config/subdomains.txt'
 wildcards_file='data/wildcards.txt'
 dead_domains_file='data/dead_domains.txt'
+parked_domains_file='data/parked_domains.txt'
 time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 
 # If running locally, use locally stored secrets instead of environment variables
@@ -228,6 +229,14 @@ function process_source {
 
     # Remove domains already in raw file
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
+
+    # Remove known parked domains
+    parked_domains=$(comm -12 <(printf "%s" "$pending_domains") "$parked_domains_file")
+    parked_count=$(wc -w <<< "$parked_domains")
+    if [[ "$parked_count" -gt 0 ]]; then
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$parked_domains"))
+        log_event "$parked_domains" "parked"
+    fi
 
     # Log blacklisted domains
     blacklisted_domains=$(comm -12 <(printf "%s" "$pending_domains") "$blacklist_file")

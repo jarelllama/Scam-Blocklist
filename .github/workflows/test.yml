@@ -57,3 +57,13 @@ jobs:
           ref: main
       - name: Test dead.sh
         run: bash test.sh 'dead'
+
+  test-parked:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Test parked.sh
+        run: bash test.sh 'parked'
