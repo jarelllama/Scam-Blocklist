@@ -34,7 +34,7 @@ function check_for_alive {
     alive_domains=$(comm -23 <(sort "$dead_domains_file") <(sort dead.tmp))  # Find resurrected domains in the dead domains file
     [[ -z "$alive_domains" ]] && return  # Return if no resurrected domains found
     # Update dead domains file to exclude resurrected domain
-    grep -Ff dead.tmp "$dead_domains_file" > dead_domains_file.tmp && mv dead_domains_file.tmp "$dead_domains_file"
+    grep -xFf dead.tmp "$dead_domains_file" > dead_domains_file.tmp && mv dead_domains_file.tmp "$dead_domains_file"
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to raw file
     format_list "$dead_domains_file" && format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
