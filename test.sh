@@ -274,7 +274,7 @@ function test_dead {
     prep_output
 
     bash dead.sh  # Run dead script
-    [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
+    [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
     printf "%s\n" "------------------------------------------------------------------"
 
     [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
@@ -294,15 +294,16 @@ function test_dead {
 }
 
 function test_parked {
-    not_parked_placeholder=$(head -n 50 "$toplist_file")
-    parked_placeholder=$(head -n 50 "$parked_domains_file")
+    # Placeholders needed as sample data (split does not work well without enough records)
+    not_parked_placeholder=$(head -n 25 "$toplist_file")
+    parked_placeholder=$(head -n 25 "$parked_domains_file")
     printf "%s\n" "$not_parked_placeholder" > placeholders.txt
-    printf "%s\n" "$parked_placeholder" >> placeholders.txt
     printf "%s\n" "$not_parked_placeholder" > "$raw_file"
+    printf "%s\n" "$parked_placeholder" >> placeholders.txt
     printf "%s\n" "$parked_placeholder" > "$parked_domains_file"
 
-    # Test addition of unparked domains
-    printf "google.com\n" >> "$parked_domains_file"  # Input
+    # Test addition of unparked domains in parked domains file
+    printf "google.com\n" >> "$parked_domains_file"  # Unparked domain as input
     # Expected output
     printf "google.com\n" >> out_raw.txt
     printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
@@ -310,22 +311,20 @@ function test_parked {
     # Test removal of parked domains
     printf "github\n" >> "$parked_terms_file"  # Sample parked term
     # Input
+    printf "github.com\n" >> "$raw_file"
     printf "apple.com\n" >> "$raw_file"
-    printf "tradexchange.online\n" >> "$raw_file"
     # Expected output
+    printf "github.com\n" >> out_parked.txt
     printf "apple.com\n" >> out_raw.txt
-    printf "tradexchange.online\n" >> out_parked.txt
-    printf "parked,tradexchange.online,raw\n" >> out_log.txt
+    printf "parked,github.com,raw\n" >> out_log.txt
 
     # Test raw light file
-    cp "$raw_file" "$raw_light_file"  # Input
-    grep -vxF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output (unparked domains are not added back to light blocklist)
+    cp "$raw_file" "$raw_light_file"
+    grep -vxF 'google.com' out_raw.txt > out_raw_light.txt  # Unparked domains are not added back to light
 
-    # Prepare expected output files
-    prep_output
-
+    prep_output # Prepare expected output files
     bash parked.sh  # Run parked script
-    [[ "$?" -eq 1 ]] && errored=true  # Check returned error code
+    [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
     printf "%s\n" "------------------------------------------------------------------"
 
     [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status

@@ -21,13 +21,12 @@ function add_unparked_domains {
 
     # Split into 10 equal files
     split -d -l $(($(wc -l < "$parked_domains_file")/10)) "$parked_domains_file"
-    check_for_unparked "x00" "main" & check_for_unparked "x01" &
+    check_for_unparked "x00" & check_for_unparked "x01" &
     check_for_unparked "x02" & check_for_unparked "x03" &
     check_for_unparked "x04" & check_for_unparked "x05" &
     check_for_unparked "x06" & check_for_unparked "x07" &
     check_for_unparked "x08" & check_for_unparked "x09" &
     check_for_unparked "x10" & check_for_unparked "x11"
-
     wait
 
     [[ ! -f unparked_domains.tmp ]] && return
@@ -46,15 +45,15 @@ function remove_parked_domains {
     touch parked_domains.tmp
     printf "\nChecking for parked domains.\n"
 
-    # Split into 10 equal files
-    split -d -l $(($(wc -l < "$raw_file")/10)) "$raw_file"
-    check_for_parked "x00" "main" & check_for_parked "x01" &
+    # Split into 12 equal files
+    split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
+    check_for_parked "x00" & check_for_parked "x01" &
     check_for_parked "x02" & check_for_parked "x03" &
     check_for_parked "x04" & check_for_parked "x05" &
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09" &
-    check_for_parked "x10" & check_for_parked "x11"
-
+    check_for_parked "x10" & check_for_parked "x11" &
+    check_for_parked "x12" & check_for_parked "x13"
     wait
 
     [[ ! -f parked_domains.tmp ]] && return
@@ -71,20 +70,17 @@ function remove_parked_domains {
 
 function check_for_unparked {
     [[ ! -f "$1" ]] && return  # Return if split file not found
-
-    total=$(wc -l < "$1")
-    count=1
-    # Check for parked message in site's HTML
+    [[ "$1" == 'x00' ]] && { track=true; count=0; } || track=false  # Track progress for first split file
     while read -r domain; do
+        ((count++))
+        # Check for parked message in site's HTML
         if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/" | tr -d '\0')"; then
             printf "Unparked: %s\n" "$domain"
             printf "%s\n" "$domain" >> "unparked_domains_${1}.tmp"
         fi
-        if [[ "$2" == 'main' ]]; then
-            percentage_count="$((count*100/total))"
-            ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
-            ((count++))
-        fi
+        [[ "$track" == false ]] && continue  # Skip progress tracking if not first split file
+        percentage_count="$((count * 100 / $(wc -l < "$1")))"
+        ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
     done < "$1"
     # Collate unparked domains
     [[ -f "unparked_domains_${1}.tmp" ]] && cat "unparked_domains_${1}.tmp" >> unparked_domains.tmp
@@ -92,20 +88,17 @@ function check_for_unparked {
 
 function check_for_parked {
     [[ ! -f "$1" ]] && return  # Return if split file not found
-
-    total=$(wc -l < "$1")
-    count=1
-    # Check for parked message in site's HTML
+    [[ "$1" == 'x00' ]] && { track=true; count=0; }  # Track progress for first split file
     while read -r domain; do
+        ((count++))
+        # Check for parked message in site's HTML
         if grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/" | tr -d '\0')"; then
             printf "Parked: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
-        if [[ "$2" == 'main' ]]; then
-            percentage_count="$((count*100/total))"
-            ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
-            ((count++))
-        fi
+        [[ "$track" == false ]] && continue  # Skip progress tracking if not first split file
+        percentage_count="$((count * 100 / $(wc -l < "$1")))"
+        ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
     done < "$1"
     # Collate parked domains
     [[ -f "parked_domains_${1}.tmp" ]] && cat "parked_domains_${1}.tmp" >> parked_domains.tmp
