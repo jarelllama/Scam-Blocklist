@@ -91,16 +91,17 @@ function check_for_parked {
     count=1
     # Check for parked message in site's HTML
     while read -r domain; do
+        echo "$domain"
+
         if grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/" | tr -d '\0')"; then
             printf "Parked: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
         if [[ "$2" == 'main' ]]; then
-
-            printf "%s\n" "$count"
-
             percentage_count="$((count*100/total))"
+
             #((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
+
             ((count++))
         fi
     done < "$1"
