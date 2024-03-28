@@ -153,7 +153,7 @@ function build_list {
         [[ "$i" -eq 1 ]] && { list_name='scams.txt'; version=''; source_file="$raw_file"; }
         [[ "$i" -eq 2 ]] && { list_name='scams_light.txt'; version='LIGHT VERSION'; source_file="$raw_light_file"; }
         blocklist_path="lists/${directory}/${list_name}"
-        [[ ! -d "$(dirname "$blocklist_path")" ]] && mkdir "$(dirname "$blocklist_path")"  # Create directory if not present
+        mkdir -p "$(dirname "$blocklist_path")"  # Create directory if not present
 
         cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${comment} Title: Jarelllama's Scam Blocklist ${version}

@@ -17,7 +17,6 @@ parked_domains_file='data/parked_domains.txt'
 
 function main {
     : > "$raw_file"  # Initialize raw file
-    : > "$raw_light_file"  # Initialize raw light file
     sed -i '1q' "$domain_log"  # Initialize domain log file
     [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"  # Do not run when there are existing domain files
     [[ "$1" == 'toplist' ]] && test_toplist
@@ -332,7 +331,7 @@ function test_parked {
     # Remove placeholder lines
     comm -23 "$raw_file" placeholders.txt > raw.tmp && mv raw.tmp "$raw_file"
     comm -23 "$raw_light_file" placeholders.txt > raw_light.tmp && mv raw_light.tmp "$raw_light_file"
-    comm -23 "$parked_domains_file" placeholders.txt > parked.tmp && mv parked.tmp "$parked_domains_file"
+    grep -vxFf placeholders.txt "$parked_domains_file" > parked.tmp && mv parked.tmp "$parked_domains_file"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
@@ -344,7 +343,7 @@ function test_parked {
 
 function prep_output {
     for file in out_*; do
-        [[ "$file" != out_dead.txt ]] && sort "$file" -o "$file"  # Dead domains file is not sorted
+        [[ "$file" != out_dead.txt ]] && [[ "$file" != out_parked.txt ]] && sort "$file" -o "$file"
     done
 }
 
