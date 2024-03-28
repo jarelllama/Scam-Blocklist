@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 00:24:42 UTC 2024
+! Last modified: Thu Mar 28 01:27:56 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1979
+! Total number of entries: 1966
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -384,7 +384,6 @@ local=/citizencrt.cc/
 local=/cityarmories.com/
 local=/cktckt.com/
 local=/ckvipmall.com/
-local=/cl.cattery.com/
 local=/classicalcourrier.com/
 local=/claudachshundpuppies.com/
 local=/clearance-bike.com/
@@ -395,7 +394,6 @@ local=/clicktechpro.com/
 local=/clicktoearn.co/
 local=/clonecards.shop/
 local=/clonecardshop.com/
-local=/clonecardstore.com/
 local=/clonecardsvendor.com/
 local=/clonedcardshouse.com/
 local=/clonedscard.com/
@@ -464,7 +462,6 @@ local=/czfirearmstore.usa.com/
 local=/d4distributors.com/
 local=/dabstarspharma.com/
 local=/dachigolfcarts.com/
-local=/dachshundmalkane.com/
 local=/dachshundshomeaustralia.com/
 local=/daggerfirearms.com/
 local=/dailybonus.ltd/
@@ -475,7 +472,6 @@ local=/danitk.com/
 local=/dannerus.com/
 local=/dark-net-market.com/
 local=/darkmarketsales.com/
-local=/darlinsdachshunds.com/
 local=/daveamor.us/
 local=/davegermanshepherds.com/
 local=/davidmakovermd.com/
@@ -486,8 +482,6 @@ local=/dayzoom.com/
 local=/dazzlingdecorstore.com/
 local=/dazzlingwesthighlandterries.com/
 local=/dbsbk.com/
-local=/dcsgovpretoria.org/
-local=/dcsgovprocurements.org/
 local=/dealsgo.shop/
 local=/dehsid.com/
 local=/delightfuljackrussellterriers.com/
@@ -647,7 +641,6 @@ local=/favicase.com/
 local=/favormainecoonehome.com/
 local=/fazocy.com/
 local=/feior.com/
-local=/felicianes.com/
 local=/feliciia.com/
 local=/felineuniversemc.com/
 local=/femalefestimania.com/
@@ -674,17 +667,14 @@ local=/fluctuatek.com/
 local=/fluffyfelinepersiankitten.com/
 local=/fmacdi.com/
 local=/fnscar15p.com/
-local=/fogether.com/
 local=/forcedresettriggerusa.com/
 local=/foreseew.com/
 local=/forevergiftable.com/
 local=/forexhiexperts.com/
-local=/forexstocktrade247.com/
 local=/forums.sassnet.com/
 local=/fossilssale.us/
 local=/fotache.ro/
 local=/foxhilldogkennels.com/
-local=/fpmotc.vip/
 local=/framethewaves.com/
 local=/frankandoaks.us/
 local=/freedomboerboel.com/
@@ -1431,7 +1421,6 @@ local=/priyatrading.co.za/
 local=/pro-perfume.com/
 local=/proactivehpt.com/
 local=/proammunitions.com/
-local=/probity-services.com/
 local=/probmxbikes.com/
 local=/prochain.vip/
 local=/prochemislaboratory.weebly.com/
@@ -1451,7 +1440,6 @@ local=/ptesolutionquestionbank.com/
 local=/ptmcontainers.com/
 local=/pugpethouse.shop/
 local=/puldex.com/
-local=/puppiescentral.co.za/
 local=/puppy-us.com/
 local=/puppyrose.com/
 local=/puppyshepherdkennel.com/
@@ -1480,7 +1468,6 @@ local=/rarebreedtriggers.usa.com/
 local=/rarebreedtriggershop.com/
 local=/rarebreedtriggersusa.com/
 local=/rateglo.com/
-local=/rawsonkennelshome.co.za/
 local=/raymondstinypups.us/
 local=/razorscooterus.com/
 local=/rbsrecovery.com/
