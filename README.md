@@ -14,20 +14,20 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Run tests](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
 [![End-to-end build](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/e2e.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/e2e.yml)
 ```
-Total domains: 23151
+Total domains: 23121
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-   91 |         0 |       2% | Google Search
-    5 |         3 |       9% | aa419.org
-    2 |         4 |      51% | dfpi.ca.gov
-    0 |        45 |      12% | guntab.com
-    3 |        10 |       7% | petscams.com
-    0 |         0 |      10% | scam.directory
-    1 |         6 |      29% | scamadviser.com
+    0 |        91 |       2% | Google Search
+    9 |         5 |       9% | aa419.org
+    0 |         2 |      52% | dfpi.ca.gov
+    0 |         0 |      13% | guntab.com
+   11 |         3 |       7% | petscams.com
+    2 |         0 |      11% | scam.directory
+    0 |         1 |      30% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
-   10 |         0 |       0% | Manual Entries
-  112 |        68 |       9% | All sources
+    0 |        10 |       0% | Manual Entries
+   22 |       112 |       9% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead and whitelisted domains.
@@ -51,7 +51,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1962
+Total domains: 1979
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -70,8 +70,8 @@ To optimize the number of search queries made, each search term is frequently be
 #### Statistics
 ```
 Active search terms: 18
-Queries made today: 68
-Domains retrieved today: 91
+Queries made today: 0
+Domains retrieved today: 0
 ```
 
 #### Regarding other sources
