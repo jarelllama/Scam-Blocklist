@@ -24,11 +24,6 @@ function add_unparked_domains {
 
     # Split into 12 equal files
     split -d -l $(($(wc -l < "$parked_domains_file")/10)) "$parked_domains_file"
-
-    ls
-
-    sleep 1
-
     check_for_unparked "x00" "main" & check_for_unparked "x01" &
     check_for_unparked "x02" & check_for_unparked "x03" &
     check_for_unparked "x04" & check_for_unparked "x05" &
@@ -43,6 +38,8 @@ function add_unparked_domains {
     cat unparked_domains.tmp >> "$raw_file"  # Add unparked domains to raw file
     format_list "$raw_file"
     log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
+
+    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 }
 
 function remove_parked_domains {
@@ -123,7 +120,6 @@ function format_list {
 
 function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
-    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 }
 
 trap cleanup EXIT
