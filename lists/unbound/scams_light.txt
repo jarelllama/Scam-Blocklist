@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 09:56:32 UTC 2024
+! Last modified: Thu Mar 28 09:57:49 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1967
+! Total number of entries: 1968
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -390,6 +390,7 @@ local-zone: "classicalcourrier.com." always_nxdomain
 local-zone: "claudachshundpuppies.com." always_nxdomain
 local-zone: "clearance-bike.com." always_nxdomain
 local-zone: "clearancedecor.com." always_nxdomain
+local-zone: "clearancesales2023.com." always_nxdomain
 local-zone: "clearlyss.store." always_nxdomain
 local-zone: "clicktechpro.com." always_nxdomain
 local-zone: "clicktoearn.co." always_nxdomain
