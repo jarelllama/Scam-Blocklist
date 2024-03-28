@@ -293,8 +293,8 @@ function test_dead {
 
 function test_parked {
     # Requires at least 12 line to properly split
-    printf "%s\n" "$(head -n 12 "data/toplist.txt")" > "$raw_file"
-    printf "%s\n" "$(head -n 12 "data/toplist.txt")" > "$parked_domains_file"
+    printf "%s\n" "$(head -n 12 data/toplist.txt)" > "$raw_file"
+    printf "%s\n" "$(head -n 12 data/toplist.txt)" > "$parked_domains_file"
 
     # Test addition of unparked domains
     # Input
