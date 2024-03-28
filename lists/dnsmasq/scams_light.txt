@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 05:00:00 UTC 2024
+! Last modified: Thu Mar 28 05:21:58 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1968
+! Total number of entries: 1967
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -389,7 +389,6 @@ local=/classicalcourrier.com/
 local=/claudachshundpuppies.com/
 local=/clearance-bike.com/
 local=/clearancedecor.com/
-local=/clearancesales2023.com/
 local=/clearlyss.store/
 local=/clicktechpro.com/
 local=/clicktoearn.co/
