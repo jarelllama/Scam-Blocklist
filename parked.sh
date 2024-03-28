@@ -24,6 +24,9 @@ function add_unparked_domains {
 
     # Split into 12 equal files
     split -d -l $(($(wc -l < "$parked_domains_file")/12)) "$parked_domains_file"
+
+    ls
+
     check_for_unparked "x00" "main" & check_for_unparked "x01" &
     check_for_unparked "x02" & check_for_unparked "x03" &
     check_for_unparked "x04" & check_for_unparked "x05" &
