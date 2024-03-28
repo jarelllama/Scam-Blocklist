@@ -30,11 +30,12 @@ function check_for_alive {
     dead-domains-linter -i x00 --export x00.tmp & dead-domains-linter -i x01 --export x01.tmp &
     dead-domains-linter -i x02 --export x02.tmp & dead-domains-linter -i x03 --export x03.tmp &
     dead-domains-linter -i x04 --export x04.tmp & dead-domains-linter -i x05 --export x05.tmp
-    cat x*.tmp >> dead.tmp  # note dead domains file is unsorted
+    cat x*.tmp >> dead.tmp
 
     alive_domains=$(comm -23 <(sort "$dead_domains_file") <(sort dead.tmp))  # Find resurrected domains in the dead domains file
     [[ -z "$alive_domains" ]] && return  # Return if no resurrected domains found
-    cp dead.tmp "$dead_domains_file"  # Update dead domains file to exclude resurrected domains
+    # Update dead domains file to exclude resurrected domain
+    grep -Ff dead.tmp "$dead_domains_file" > dead_domains_file.tmp && mv dead_domains_file.tmp "$dead_domains_file"
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to raw file
     format_list "$dead_domains_file" && format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
