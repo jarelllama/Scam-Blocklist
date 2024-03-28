@@ -25,11 +25,10 @@ function main {
 function check_for_alive {
     sed 's/^/||/; s/$/^/' "$dead_domains_file" > formatted_dead_domains_file.tmp  # Format dead domains file
 
-    # Process in 6 parallel runs
+    # Process in 4 parallel runs
     split -n 6 -d formatted_dead_domains_file.tmp
     dead-domains-linter -i x00 --export x00.tmp & dead-domains-linter -i x01 --export x01.tmp &
-    dead-domains-linter -i x02 --export x02.tmp & dead-domains-linter -i x03 --export x03.tmp &
-    dead-domains-linter -i x04 --export x04.tmp & dead-domains-linter -i x05 --export x05.tmp
+    dead-domains-linter -i x02 --export x02.tmp & dead-domains-linter -i x03 --export x03.tmp
     cat x*.tmp >> dead.tmp
 
     alive_domains=$(comm -23 <(sort "$dead_domains_file") <(sort dead.tmp))  # Find resurrected domains in the dead domains file
