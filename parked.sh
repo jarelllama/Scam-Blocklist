@@ -27,7 +27,7 @@ function add_unparked_domains {
     check_for_unparked "x06" & check_for_unparked "x07" &
     check_for_unparked "x08" & check_for_unparked "x09"
 
-    sleep 5
+    wait
 
     [[ ! -f unparked_domains.tmp ]] && return
     format_list unparked_domains.tmp
@@ -53,7 +53,7 @@ function remove_parked_domains {
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09"
 
-    sleep 5
+    wait
 
     [[ ! -f parked_domains.tmp ]] && return
     format_list parked_domains.tmp
