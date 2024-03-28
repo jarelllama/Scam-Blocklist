@@ -49,7 +49,7 @@ function check_for_parked {
         fi
         if [[ "$2" == 'main' ]]; then
             percentage_count="$((count*100/total))"
-            ((percentage_count % 10 == 0)) && printf "%s%%\n" "$percentage_count"
+            ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
             ((count++))
         fi
     done < "$1"
