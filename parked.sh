@@ -75,6 +75,7 @@ function remove_parked_domains {
 }
 
 function check_for_unparked {
+    echo "File: $1"
     total=$(wc -l < "$1")
     count=1
     # Check for parked message in site's HTML
