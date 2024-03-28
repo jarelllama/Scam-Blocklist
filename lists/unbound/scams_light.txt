@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 10:25:53 UTC 2024
+! Last modified: Thu Mar 28 10:27:42 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1978
+! Total number of entries: 1979
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1430,6 +1430,7 @@ local-zone: "priyatrading.co.za." always_nxdomain
 local-zone: "pro-perfume.com." always_nxdomain
 local-zone: "proactivehpt.com." always_nxdomain
 local-zone: "proammunitions.com." always_nxdomain
+local-zone: "probity-services.com." always_nxdomain
 local-zone: "probmxbikes.com." always_nxdomain
 local-zone: "prochain.vip." always_nxdomain
 local-zone: "prochemislaboratory.weebly.com." always_nxdomain
