@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 10:35:15 UTC 2024
+! Last modified: Thu Mar 28 10:44:47 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 1976
+! Total number of entries: 1975
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -25,7 +25,6 @@ local-zone: "abundam.com." always_nxdomain
 local-zone: "abysshe.com." always_nxdomain
 local-zone: "abyssiniankitty.com." always_nxdomain
 local-zone: "acceptes.store." always_nxdomain
-local-zone: "accesstrades247.com." always_nxdomain
 local-zone: "acerelocationservice.com." always_nxdomain
 local-zone: "acethreeshop.com." always_nxdomain
 local-zone: "acidicmathz.com." always_nxdomain
@@ -398,6 +397,7 @@ local-zone: "clicktechpro.com." always_nxdomain
 local-zone: "clicktoearn.co." always_nxdomain
 local-zone: "clonecards.shop." always_nxdomain
 local-zone: "clonecardshop.com." always_nxdomain
+local-zone: "clonecardstore.com." always_nxdomain
 local-zone: "clonecardsvendor.com." always_nxdomain
 local-zone: "clonedcardshouse.com." always_nxdomain
 local-zone: "clonedscard.com." always_nxdomain
@@ -677,7 +677,6 @@ local-zone: "forcedresettriggerusa.com." always_nxdomain
 local-zone: "foreseew.com." always_nxdomain
 local-zone: "forevergiftable.com." always_nxdomain
 local-zone: "forexhiexperts.com." always_nxdomain
-local-zone: "forexstocktrade247.com." always_nxdomain
 local-zone: "forums.sassnet.com." always_nxdomain
 local-zone: "fossilssale.us." always_nxdomain
 local-zone: "fotache.ro." always_nxdomain

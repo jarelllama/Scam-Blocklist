@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Thu Mar 28 10:35:15 UTC 2024
+! Last modified: Thu Mar 28 10:44:47 UTC 2024
 ! Syntax: Dnsmasq
-! Total number of entries: 1976
+! Total number of entries: 1975
 !
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -24,7 +24,6 @@ local=/abundam.com/
 local=/abysshe.com/
 local=/abyssiniankitty.com/
 local=/acceptes.store/
-local=/accesstrades247.com/
 local=/acerelocationservice.com/
 local=/acethreeshop.com/
 local=/acidicmathz.com/
@@ -397,6 +396,7 @@ local=/clicktechpro.com/
 local=/clicktoearn.co/
 local=/clonecards.shop/
 local=/clonecardshop.com/
+local=/clonecardstore.com/
 local=/clonecardsvendor.com/
 local=/clonedcardshouse.com/
 local=/clonedscard.com/
@@ -676,7 +676,6 @@ local=/forcedresettriggerusa.com/
 local=/foreseew.com/
 local=/forevergiftable.com/
 local=/forexhiexperts.com/
-local=/forexstocktrade247.com/
 local=/forums.sassnet.com/
 local=/fossilssale.us/
 local=/fotache.ro/
