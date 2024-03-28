@@ -365,8 +365,7 @@ function check_parked {
         ! grep -qxF "$line" "$1" && { parked_error=true; break; }  # Break when error found
     done < "$2"
     [[ "$parked_error" != true ]] && return  # Return if no error found
-    printf "! %s file is not as expected:\n" "$3"
-    cat "$1"
+    printf "! %s file is not as expected." "$3"
     printf "\nTerms expected:\n"
     cat "$2"
     printf "\n"

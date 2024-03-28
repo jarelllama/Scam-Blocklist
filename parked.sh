@@ -40,6 +40,7 @@ function add_unparked_domains {
 }
 
 function remove_parked_domains {
+    touch parked_domains.tmp
     printf "\nChecking for parked domains.\n"
 
     # Split into 12 equal files
