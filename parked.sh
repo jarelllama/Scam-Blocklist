@@ -15,7 +15,7 @@ function main {
     done
     #add_unparked_domains
     remove_parked_domains
-    update_light_file
+    #update_light_file
 }
 
 function add_unparked_domains {
