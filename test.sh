@@ -294,8 +294,8 @@ function test_dead {
 }
 
 function test_parked {
-    unparked_placeholder=$(head -n 100 "$toplist_file")
-    parked_placeholder=$(head -n 100 "$parked_domains_file")
+    unparked_placeholder=$(head -n 50 "$toplist_file")
+    parked_placeholder=$(head -n 50 "$parked_domains_file")
     printf "%s\n" "$unparked_placeholder" > placeholders.txt
     printf "%s\n" "$parked_placeholder" >> placeholders.txt
     printf "%s\n" "$unparked_placeholder" > "$raw_file"
