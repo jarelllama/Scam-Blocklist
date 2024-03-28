@@ -27,6 +27,8 @@ function add_unparked_domains {
 
     ls
 
+    sleep 1
+
     check_for_unparked "x00" "main" & check_for_unparked "x01" &
     check_for_unparked "x02" & check_for_unparked "x03" &
     check_for_unparked "x04" & check_for_unparked "x05" &
