@@ -32,7 +32,10 @@ function remove_parked_domains {
     check_for_parked "x04" & check_for_parked "x05" &
     check_for_parked "x06" & check_for_parked "x07" &
     check_for_parked "x08" & check_for_parked "x09" &
-    check_for_parked "x10" & check_for_parked "x11"
+    check_for_parked "x10" & check_for_parked "x11" &
+    [[ -f x12 ]] && check_for_parked "x12"
+
+    find . -maxdepth 1 -type f -name "x??" -delete
 
     format "$parked_domains_file"
     comm -23 "$raw_file" "$parked_domains_file" > temp && mv temp "$raw_file"
@@ -49,13 +52,12 @@ function check_for_parked {
         fi
         if [[ "$2" == 'main' ]]; then
             percentage_count="$((count*100/total))"
-            ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
+            ((percentage_count % 10 == 0)) && printf "%s%%\n" "$percentage_count"
             ((count++))
         fi
     done < "$1"
     [[ -f "parked_domains_${1}.tmp" ]] && { cat "parked_domains_${1}.tmp" >> "$parked_domains_file";
         rm "parked_domains_${1}.tmp"; }
-    rm -f "$1"
 }
 
 [[ "$1" == 'format' ]] && format "$2"
