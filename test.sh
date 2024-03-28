@@ -322,7 +322,7 @@ function test_parked {
     cp "$raw_file" "$raw_light_file"
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt  # Unparked domains are not added back to light
 
-    prep_output # Prepare expected output files
+    prep_output  # Prepare expected output files
     bash parked.sh  # Run parked script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
     printf "%s\n" "------------------------------------------------------------------"

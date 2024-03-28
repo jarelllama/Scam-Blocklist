@@ -29,7 +29,7 @@ function add_unparked_domains {
     check_for_unparked "x10" & check_for_unparked "x11"
     wait
 
-    [[ ! -f unparked_domains.tmp ]] && return
+    [[ ! -s unparked_domains.tmp ]] && return
     format_list unparked_domains.tmp
 
     # Remove unparked domains from parked domains file
@@ -56,7 +56,7 @@ function remove_parked_domains {
     check_for_parked "x12" & check_for_parked "x13"
     wait
 
-    [[ ! -f parked_domains.tmp ]] && return
+    [[ ! -s parked_domains.tmp ]] && return
     format_list parked_domains.tmp
 
     # Remove parked domains from raw file
