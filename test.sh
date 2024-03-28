@@ -294,9 +294,12 @@ function test_dead {
 }
 
 function test_parked {
-    placeholder_lines=$(head -n 100 "$toplist_file")
-    printf "%s\n" "$placeholder_lines" > "$raw_file"
-    printf "%s\n" "$placeholder_lines" > "$parked_domains_file"
+    unparked_placeholder=$(head -n 100 "$toplist_file")
+    parked_placeholder=$(head -n 100 "$parked_domains_file")
+    printf "%s\n" "$unparked_placeholder" > placeholders.txt
+    printf "%s\n" "$parked_placeholder" >> placeholders.txt
+    printf "%s\n" "$unparked_placeholder" > "$raw_file"
+    printf "%s\n" "$parked_placeholder" > "$parked_domains_file"
 
     # Test addition of unparked domains
     printf "google.com\n" >> "$parked_domains_file"  # Input
@@ -328,9 +331,9 @@ function test_parked {
     [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
 
     # Remove placeholder lines
-    comm -23 "$raw_file" "$placeholder_lines" > raw.tmp && mv raw.tmp "$raw_file"
-    comm -23 "$raw_light_file" "$placeholder_lines" > raw_light.tmp && mv raw_light.tmp "$raw_light_file"
-    comm -23 "$parked_domains_file" "$placeholder_lines" > parked.tmp && mv parked.tmp "$parked_domains_file"
+    comm -23 "$raw_file" placeholders.txt > raw.tmp && mv raw.tmp "$raw_file"
+    comm -23 "$raw_light_file" placeholders.txt > raw_light.tmp && mv raw_light.tmp "$raw_light_file"
+    comm -23 "$parked_domains_file" placeholders.txt > parked.tmp && mv parked.tmp "$parked_domains_file"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
