@@ -30,6 +30,7 @@ function add_unparked_domains {
     [[ -f x12 ]] && check_for_unparked "x12"
 
     format_list unparked_domains.tmp
+    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 
     # Remove unparked domains from parked domains file
     comm -23 "$parked_domains_file" unparked_domains.tmp > parked.tmp && mv parked.tmp "$parked_domains_file"
@@ -52,6 +53,7 @@ function remove_parked_domains {
     [[ -f x12 ]] && check_for_parked "x12"
 
     format_list parked_domains.tmp
+    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 
     # Remove parked domains from raw file
     comm -23 "$raw_file" parked_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
@@ -111,7 +113,6 @@ function format_list {
 }
 
 function cleanup {
-    find . -maxdepth 1 -type f -name "x??" -delete
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 

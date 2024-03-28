@@ -292,9 +292,13 @@ function test_dead {
 }
 
 function test_parked {
+    # Requires at least 12 line to properly split
+    printf "%s\n" "$(head -n 12 "data/toplist.txt")" > "$raw_file"
+    printf "%s\n" "$(head -n 12 "data/toplist.txt")" > "$parked_domains_file"
+
     # Test addition of unparked domains
     # Input
-    printf "google.com\n" > "$parked_domains_file"
+    printf "google.com\n" >> "$parked_domains_file"
     printf "accesstrades247.comn" >> "$parked_domains_file"
     # Expected output
     printf "google.com\n" >> out_raw.txt
@@ -322,9 +326,11 @@ function test_parked {
     printf "%s\n" "------------------------------------------------------------------"
 
     [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
-    check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
-    check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
-    check_output "$parked_domains_file" "out_parked.txt" "Parked domains"
+
+    # Check raw file
+    check_parked "$raw_file" "out_raw.txt" "Raw"
+    # Check parked domains file
+    check_parked "$parked_domains_file" "out_parked.txt" "Parked domains"
     check_log  # Check log file
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
     check_error
@@ -350,6 +356,19 @@ function check_if_dead_present {
     ! grep -q '[[:alnum:]]' "$1" && return  # Return if file has no domains
     printf "! %s file still has dead domains:\n" "$2"
     cat "$1"
+    printf "\n"
+    error=true
+}
+
+function check_parked {
+    while read -r line; do
+        ! grep -qxF "$line" "$1" && { parked_error=true; break; }  # Break when error found
+    done < "$2"
+    [[ "$parked_error" != true ]] && return  # Return if no error found
+    printf "! %s file is not as expected:\n" "$3"
+    cat "$1"
+    printf "\nTerms expected:\n"
+    cat "$2"
     printf "\n"
     error=true
 }
