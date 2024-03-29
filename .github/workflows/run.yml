@@ -35,7 +35,7 @@ jobs:
           git push -q
 
   build:
-    needs: [test, update-toplist]
+    needs: [test-functions, update-toplist]
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
