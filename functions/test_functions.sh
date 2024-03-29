@@ -54,7 +54,7 @@ function shellcheck {
     fi
 
     printf "\nScripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
-    check_error
+    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
 function test_retrieval_validate {
@@ -206,7 +206,7 @@ function test_retrieval_validate {
 
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
-    check_error
+    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
 function test_toplist_check {
@@ -220,7 +220,7 @@ function test_toplist_check {
     [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; error=true; }  # Check pending directory
     check_log
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
-    check_error
+    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
 function test_dead_check {
@@ -292,7 +292,7 @@ function test_dead_check {
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n" ||
         printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
-    check_error
+    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
 function test_parked_check {
@@ -340,7 +340,7 @@ function test_parked_check {
     check_output "$parked_domains_file" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
-    check_error
+    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
 function prep_output {
@@ -377,10 +377,6 @@ function check_log {
     printf "\nTerms expected in log:\n"
     cat out_log.txt  # No need for additional new line since the log is not printed again
     error=true
-}
-
-function check_error {
-    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
 main "$1"

@@ -10,7 +10,7 @@ function main {
     build_wildcard_domains
 }
 
-function build_list {
+function build_lists {
     [[ -z "$comment" ]] && comment='#'  # Set default comment to '#'
     mkdir -p "lists/${directory}"  # Create directory if not present
 
@@ -43,27 +43,27 @@ function format_list {
 
 function build_adblock {
     syntax='Adblock Plus' && directory='adblock' && comment='!' && before='||' && after='^'
-    build_list
+    build_lists
 }
 
 function build_dnsmasq {
     syntax='Dnsmasq' && directory='dnsmasq' && comment='' && before='local=/' && after='/'
-    build_list
+    build_lists
 }
 
 function build_unbound {
     syntax='Unbound' && directory='unbound' && comment='' && before='local-zone: "' && after='." always_nxdomain'
-    build_list
+    build_lists
 }
 
 function build_wildcard_asterisk {
     syntax='Wildcard Asterisk' && directory='wildcard_asterisk' && comment='' && before='*.' && after=''
-    build_list
+    build_lists
 }
 
 function build_wildcard_domains {
     syntax='Wildcard Domains' && directory='wildcard_domains' && comment='' && before='' && after=''
-    build_list
+    build_lists
 }
 
 main

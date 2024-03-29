@@ -28,9 +28,8 @@ function main {
 }
 
 function source {
-    printf "\n"
     # Check for existing pending domains file
-    [[ -d data/pending ]] && { use_pending=true; printf "Using existing lists of retrieved domains.\n\n"; }
+    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n"; }
     [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419
@@ -196,6 +195,7 @@ function process_source {
     [[ -z "$rate_limited" ]] && rate_limited=false
     [[ -z "$ignore_from_light" ]] && ignore_from_light=false
 
+    printf "\n"
     [[ ! -f "$domains_file" ]] && return  # Return if domains file does not exist
     ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }  # Skip to next source if no results retrieved
 
@@ -285,7 +285,7 @@ function process_source {
     fi
 
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
-    filtered_count=$(tr -s '\n' <<< "$pending_domains" | wc -w)  # Count number of domains after filtering
+    filtered_count=$(printf "%s" "$pending_domains" | sed '/^$/d' | wc -w)  # Count number of domains after filtering
     printf "%s\n" "$pending_domains" >> retrieved_domains.tmp  # Collate filtered domains
     [[ "$ignore_from_light" != true ]] && printf "%s\n" "$pending_domains" >> retrieved_light_domains.tmp  # Collate filtered domains from light sources
     log_source
@@ -325,8 +325,7 @@ function build {
     format_list "$raw_file"
     log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
-    count_difference=$((count_after - count_before))
-    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$count_difference" "$count_after"
+    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
 
     # Mark sources as saved in the source log file
     rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file

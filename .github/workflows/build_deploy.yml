@@ -51,10 +51,10 @@ jobs:
 
   deploy:
     needs: validate
-    if: ${{ always() && needs.validate.result == 'success' }}  # Deploy only if validate passes
+    if: ${{ success() || failure() }}
     uses: ./.github/workflows/build_lists.yml
 
-  prune_logs:
+  prune-logs:
     needs: deploy
     if: ${{ success() || failure() }}
     runs-on: ubuntu-latest
@@ -77,3 +77,8 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Prune logs"
           git push -q
+
+  update-readme:
+    needs: prune-logs
+    uses: ./.github/workflows/update_readme.yml
+    if: ${{ always() && needs.deploy.result == 'success' }}  # Deploy only if deploy passes
