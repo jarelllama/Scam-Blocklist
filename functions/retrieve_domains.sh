@@ -231,7 +231,7 @@ function process_source {
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
 
     # Remove known parked domains
-    parked_domains=$(comm -12 <(printf "%s" "$pending_domains") "$parked_domains_file")
+    parked_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$parked_domains_file"))
     parked_count=$(wc -w <<< "$parked_domains")
     if [[ "$parked_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$parked_domains"))
