@@ -19,7 +19,7 @@ jobs:
         with:
           ref: main
 
-      - name: Retrieve domains
+      - name: retrieve_domains.sh
         env:
           google_search_id: ${{ secrets.SEARCH_ID }}
           google_search_id_2: ${{ secrets.SEARCH_ID2 }}

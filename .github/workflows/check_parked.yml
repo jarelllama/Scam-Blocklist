@@ -1,4 +1,4 @@
-name: Remove
+name: Remove parked domains
 run-name: Remove parked domains
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
         with:
           ref: main
 
-      - name: Run parked check
+      - name: check_parked.sh
         run: bash functions/check_parked.sh
 
       - name: Push
@@ -31,9 +31,3 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Remove parked domains"
           git push -q
-
-  build:
-    # Only trigger if not called from another workflow
-    if: ${{ ! inputs.called }}
-    needs: parked-check
-    uses: ./.github/workflows/build.yml

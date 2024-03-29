@@ -1,5 +1,5 @@
-name: End-to-end build
-run-name: End-to-end build
+name: Run
+run-name: Run
 on:
   workflow_dispatch:
   schedule:
@@ -36,26 +36,26 @@ jobs:
 
   build:
     needs: [test, update-toplist]
-    uses: ./.github/workflows/retrieve.yml
+    uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
   remove-dead:
-    needs: retrieve
+    needs: build
     if: ${{ success() || failure() }}
-    uses: ./.github/workflows/dead.yml
+    uses: ./.github/workflows/check_dead.yml
 
   validate:
     needs: remove-dead
-    if: ${{ success() || failure() }}
-    uses: ./.github/workflows/check.yml
+    if: ${{ success() || failure() }}  # Note failure is not job-specific
+    uses: ./.github/workflows/validate_entries.yml
 
   deploy:
     needs: validate
-    if: ${{ success() || failure() }}  # Note failure is not job-specific
-    uses: ./.github/workflows/build.yml
+    if: ${{ success() || failure() }}
+    uses: ./.github/workflows/build_lists.yml
 
   prune_logs:
-    needs: build
+    needs: deploy
     if: ${{ success() || failure() }}
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
         with:
           ref: main
 
-      - name: Tidy logs
+      - name: Prune logs
         run: |
           [[ $(wc -l < config/domain_log.csv) -gt 10000 ]] && sed -i '2,300d' config/domain_log.csv
           [[ $(wc -l < config/source_log.csv) -gt 1000 ]] && sed -i '2,100d' config/source_log.csv
@@ -75,5 +75,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "Tidy logs"
+          git diff-index --quiet HEAD || git commit -m "Prune logs"
           git push -q

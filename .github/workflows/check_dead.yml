@@ -19,7 +19,7 @@ jobs:
         with:
           ref: main
 
-      - name: Remove dead domains
+      - name: check_dead.sh
         run: bash functions/check_dead.sh
 
       - name: Push

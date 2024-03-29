@@ -4,11 +4,12 @@ on:
   workflow_call:
   workflow_run:
     workflows:
+      - Remove dead domains
+      - Remove parked domains
+      - Manually add domains
       - Retrieve domains
       - Remove dead domains
-      - Manually add domains
       - Validate entries
-      - Remove dead domains
     types:
       - completed
   push:
@@ -27,7 +28,7 @@ jobs:
         with:
           ref: main
 
-      - name: Build lists
+      - name: build_list.sh
         run: bash functions/build_lists.sh
 
       - name: Push
