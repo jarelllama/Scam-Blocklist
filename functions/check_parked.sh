@@ -12,7 +12,7 @@ function main {
     done
     remove_parked_domains
     add_unparked_domains
-    cat parked_domains.tmp >> "$parked_domains_file"  # Add parked domains to parked domains file (skip unparked check)
+    cat parked_domains.tmp >> "$parked_domains_file"  # Collate parked domains (skip unparked check)
     format_list "$parked_domains_file"
     update_light_file
 }
