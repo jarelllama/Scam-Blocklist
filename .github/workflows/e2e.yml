@@ -31,7 +31,6 @@ jobs:
 
   tidy_log:
     needs: build
-    if: ${{ success() || failure() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
