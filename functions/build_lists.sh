@@ -66,7 +66,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <li>Intended for collated blocklists cautious about size</li>
 <li>Does not use sources whose domains cannot be filtered by date added</li>
 <li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full blocklist includes domains added from 2 months back and onwards</li>
-<li>! Dead and parked domains that become alive/unparked are not added back to the blocklist (due to limitations in the way these domains are recorded)</li>
+<li>! Dead and parked domains that become resolving/unparked are not added back to the blocklist (due to limitations in the way these domains are recorded)</li>
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
