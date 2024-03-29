@@ -2,6 +2,7 @@ name: Validate entries
 run-name: Validate entries
 on:
   workflow_dispatch:
+  workflow_call:
   push:
     paths:
       - 'config/blacklist.txt'

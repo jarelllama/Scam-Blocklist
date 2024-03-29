@@ -3,10 +3,6 @@ run-name: Remove dead domains
 on:
   workflow_dispatch:
   workflow_call:
-    inputs:
-      called:
-        type: boolean
-        default: true
 permissions:
   contents: write
 
