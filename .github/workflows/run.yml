@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   test-functions:
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/test_functions.yml
 
   update-toplist:
     runs-on: ubuntu-latest
