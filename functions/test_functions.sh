@@ -187,7 +187,7 @@ function test_retrieval_validate {
     elif [[ "$script_to_test" == 'validate' ]]; then
         cp input.txt "$raw_file"  # Input
         mv input.txt "$raw_light_file"  # Input
-        bash functions/validate_domains.sh || true  # Run lists check script and ignore exit status
+        bash functions/validate_raw.sh || true  # Run lists check script and ignore exit status
     fi
     printf "%s\n" "------------------------------------------------------------------"
 

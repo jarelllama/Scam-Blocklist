@@ -360,7 +360,7 @@ function log_source {
 }
 
 function format_list {
-    bash data/tools.sh "format" "$1"
+    bash functions/tools.sh "format" "$1"
 }
 
 function cleanup {

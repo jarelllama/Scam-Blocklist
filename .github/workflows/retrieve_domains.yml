@@ -29,6 +29,7 @@ jobs:
         run: bash functions/retrieve_domains.sh
 
       - name: Push
+        if: ${{ success() || failure() }}
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
