@@ -9,8 +9,8 @@ on:
       - Manually add domains
       - Validate entries
       - Remove dead domains
-  types:
-    - completed
+    types:
+      - completed
   push:
     paths:
       - 'functions/build_lists.sh'  # Update readme template if changed

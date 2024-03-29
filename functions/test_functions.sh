@@ -18,11 +18,11 @@ parked_domains_file='data/parked_domains.txt'
 function main {
     : > "$raw_file"  # Initialize raw file
     sed -i '1q' "$domain_log"  # Initialize domain log file
-    [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_validate "$1"  # Do not run when there are existing domain files
-    [[ "$1" == 'toplist' ]] && test_toplist
+    [[ "$1" == 'retrieval' ]] && test_retrieval_validate "$1"
+    [[ "$1" == 'toplist' ]] && test_toplist_check
     [[ "$1" == 'validate' ]] && test_retrieval_validate "$1"
-    [[ "$1" == 'dead' ]] && test_dead
-    [[ "$1" == 'parked' ]] && test_parked
+    [[ "$1" == 'dead' ]] && test_dead_check
+    [[ "$1" == 'parked' ]] && test_parked_check
     [[ "$1" == 'shellcheck' ]] && shellcheck
     exit 0
 }
@@ -59,7 +59,7 @@ function shellcheck {
 
 function test_retrieval_validate {
     script_to_test="$1"
-    [[ "$script_to_test" == 'retrieval' ]] && mkdir data/pending
+    [[ -d data/pending ]] && rm -r data/pending  # Initialize pending directory
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Test removal of known dead domains
@@ -208,8 +208,8 @@ function test_retrieval_validate {
     check_error
 }
 
-function test_toplist {
-    mkdir data/pending
+function test_toplist_check {
+    mkdir -p data/pending && rm data/pending/*  # Initialize pending directory
     : > "$whitelist_file"  # Clear whitelist file
     printf "google.com\n" > data/pending/domains_google_search_toplist-test.tmp  # Input
     printf "toplist,google.com\n" > out_log.txt  # Expected output
@@ -221,7 +221,7 @@ function test_toplist {
     check_error
 }
 
-function test_dead {
+function test_dead_check {
     # Test addition of resurrected domains
     # Input
     printf "google.com\n" > "$dead_domains_file"
@@ -293,7 +293,7 @@ function test_dead {
     check_error
 }
 
-function test_parked {
+function test_parked_check {
     # Placeholders needed as sample data (split does not work well without enough records)
     not_parked_placeholder=$(head -n 50 "$toplist_file")
     parked_placeholder=$(head -n 50 "$parked_domains_file")
