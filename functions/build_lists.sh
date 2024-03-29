@@ -5,7 +5,7 @@ search_terms_file='config/search_terms.csv'
 source_log='config/source_log.csv'
 today=$(date -u +"%d-%m-%y")
 yesterday=$(date -ud "yesterday" +"%d-%m-%y")
- 
+
 function main {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     for file in config/* data/*; do  # Format files in the config and data directory
