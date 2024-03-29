@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Fri Mar 29 06:32:45 UTC 2024
+! Last modified: Fri Mar 29 07:50:34 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 2075
+! Total number of entries: 2051
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -86,7 +86,6 @@ local-zone: "altra.outlet.com." always_nxdomain
 local-zone: "aluminumfoilcloth.com." always_nxdomain
 local-zone: "alver.com." always_nxdomain
 local-zone: "am-shippingllc.com." always_nxdomain
-local-zone: "amalgamatedfinanceukltd.com." always_nxdomain
 local-zone: "amazee.store." always_nxdomain
 local-zone: "amazingbrusseslsgriffon.com." always_nxdomain
 local-zone: "amazingxoloitzcuintlepuppies.com." always_nxdomain
@@ -134,7 +133,6 @@ local-zone: "ashdachshundhome.com." always_nxdomain
 local-zone: "ashroots.shop." always_nxdomain
 local-zone: "asicstop.us." always_nxdomain
 local-zone: "askotrade.net." always_nxdomain
-local-zone: "asoosvip.com." always_nxdomain
 local-zone: "associazionechien.org." always_nxdomain
 local-zone: "astropneumatictools.com." always_nxdomain
 local-zone: "atalanticmailingline.com." always_nxdomain
@@ -178,14 +176,12 @@ local-zone: "babygirlsweetie.com." always_nxdomain
 local-zone: "bacfgh.com." always_nxdomain
 local-zone: "backpackboyzdisposable.com." always_nxdomain
 local-zone: "baioneparts.com." always_nxdomain
-local-zone: "bakktunt.com." always_nxdomain
 local-zone: "balzany.com." always_nxdomain
 local-zone: "bamboocrafts.com.au." always_nxdomain
 local-zone: "banamike.com." always_nxdomain
 local-zone: "bangmilfstoday.com." always_nxdomain
 local-zone: "baoxiaorulei.com." always_nxdomain
 local-zone: "barclaysforeigncurrency.com." always_nxdomain
-local-zone: "barklessbasenji.com." always_nxdomain
 local-zone: "barods.com." always_nxdomain
 local-zone: "barrymorgansamoyed.com." always_nxdomain
 local-zone: "batslyadams.com." always_nxdomain
@@ -387,7 +383,6 @@ local-zone: "chicyes.com." always_nxdomain
 local-zone: "chmens.com." always_nxdomain
 local-zone: "choumainecoon.com." always_nxdomain
 local-zone: "chowamein.com." always_nxdomain
-local-zone: "chowchowforsale.com." always_nxdomain
 local-zone: "chrismaltipoopuppies.com." always_nxdomain
 local-zone: "christmaspopular.com." always_nxdomain
 local-zone: "christmaspremier.com." always_nxdomain
@@ -490,7 +485,6 @@ local-zone: "czfirearmstore.usa.com." always_nxdomain
 local-zone: "d4distributors.com." always_nxdomain
 local-zone: "dabstarspharma.com." always_nxdomain
 local-zone: "dachigolfcarts.com." always_nxdomain
-local-zone: "dachshundshomeaustralia.com." always_nxdomain
 local-zone: "daggerfirearms.com." always_nxdomain
 local-zone: "dailybonus.ltd." always_nxdomain
 local-zone: "daineseride.com." always_nxdomain
@@ -500,7 +494,6 @@ local-zone: "danitk.com." always_nxdomain
 local-zone: "dannerus.com." always_nxdomain
 local-zone: "dark-net-market.com." always_nxdomain
 local-zone: "darkmarketsales.com." always_nxdomain
-local-zone: "darwave.com." always_nxdomain
 local-zone: "dash-bit.com." always_nxdomain
 local-zone: "datemeetsmart.link." always_nxdomain
 local-zone: "daveamor.us." always_nxdomain
@@ -531,7 +524,6 @@ local-zone: "desigualshow.shop." always_nxdomain
 local-zone: "destinydachshund.com." always_nxdomain
 local-zone: "deunow.com." always_nxdomain
 local-zone: "dexlac.com." always_nxdomain
-local-zone: "dezoabyssiniancattery.com." always_nxdomain
 local-zone: "dianeangllc.com." always_nxdomain
 local-zone: "diceprints.com." always_nxdomain
 local-zone: "dickelfloors.com." always_nxdomain
@@ -546,7 +538,6 @@ local-zone: "diyjojo.com." always_nxdomain
 local-zone: "dkj466.com." always_nxdomain
 local-zone: "dmtclubhouse.com." always_nxdomain
 local-zone: "dobermanpincherpuppies.com." always_nxdomain
-local-zone: "dobermanprudent.com." always_nxdomain
 local-zone: "doctorxskin.com." always_nxdomain
 local-zone: "documentscenterofficials.com." always_nxdomain
 local-zone: "dogbuddyz.com." always_nxdomain
@@ -581,8 +572,6 @@ local-zone: "dwnrod.com." always_nxdomain
 local-zone: "dynamitecaofficial.com." always_nxdomain
 local-zone: "dynastyfrenchie.com." always_nxdomain
 local-zone: "e-papuha.com." always_nxdomain
-local-zone: "e.fidelityopt.com." always_nxdomain
-local-zone: "eagleviewfirearmss.com." always_nxdomain
 local-zone: "earnglobal.co." always_nxdomain
 local-zone: "eastidahoent.com." always_nxdomain
 local-zone: "easy-earn.homes." always_nxdomain
@@ -747,7 +736,6 @@ local-zone: "gantcliver.com." always_nxdomain
 local-zone: "gaoxp1.shop." always_nxdomain
 local-zone: "gapstrading.com." always_nxdomain
 local-zone: "garageclothingca.shop." always_nxdomain
-local-zone: "garfieldragdollcattery.com." always_nxdomain
 local-zone: "geezerdecor.com." always_nxdomain
 local-zone: "geissele.usa.com." always_nxdomain
 local-zone: "gemstonerivers.com." always_nxdomain
@@ -804,7 +792,6 @@ local-zone: "goldenretrievers.rescue.com." always_nxdomain
 local-zone: "goldenvalleyanimalhospital.com." always_nxdomain
 local-zone: "golfapparelgear.com." always_nxdomain
 local-zone: "golfcartsshop.us." always_nxdomain
-local-zone: "good-bookingline.com." always_nxdomain
 local-zone: "goodteacherlife.com." always_nxdomain
 local-zone: "gorgeousshepherdpuppies.com." always_nxdomain
 local-zone: "goxmix.com." always_nxdomain
@@ -939,7 +926,6 @@ local-zone: "infantlover.com." always_nxdomain
 local-zone: "infiniteroyallimited.com." always_nxdomain
 local-zone: "influencek.com." always_nxdomain
 local-zone: "infocialisguides.com." always_nxdomain
-local-zone: "inlineskatestore.com." always_nxdomain
 local-zone: "innovativeallergy.com." always_nxdomain
 local-zone: "insdas.com." always_nxdomain
 local-zone: "instantaneou.com." always_nxdomain
@@ -1037,6 +1023,7 @@ local-zone: "kokokokids.ru." always_nxdomain
 local-zone: "kokokostore.net." always_nxdomain
 local-zone: "koowofficial.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
+local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kristaldentistry.com." always_nxdomain
 local-zone: "krminidachshunds.com." always_nxdomain
 local-zone: "krpethome.com." always_nxdomain
@@ -1113,7 +1100,6 @@ local-zone: "loktru.com." always_nxdomain
 local-zone: "lolelifeca.com." always_nxdomain
 local-zone: "lollovita.com." always_nxdomain
 local-zone: "longchampoutleteu.shop." always_nxdomain
-local-zone: "loomoptionsmarket.com." always_nxdomain
 local-zone: "lostmary-vape.com." always_nxdomain
 local-zone: "lottoeu.top." always_nxdomain
 local-zone: "louisluxury2.shop." always_nxdomain
@@ -1176,7 +1162,6 @@ local-zone: "maltergroups.com." always_nxdomain
 local-zone: "maltesepaws.com." always_nxdomain
 local-zone: "mandspsychedelicss.com." always_nxdomain
 local-zone: "manoircanninestluc.com." always_nxdomain
-local-zone: "mantao.network." always_nxdomain
 local-zone: "manykettle.com." always_nxdomain
 local-zone: "maraqueensclassic.com." always_nxdomain
 local-zone: "marinadecoration.com." always_nxdomain
@@ -1227,7 +1212,6 @@ local-zone: "metalcrushingchemicalsltd.com." always_nxdomain
 local-zone: "metrolinanephrology.com." always_nxdomain
 local-zone: "meyerscanary.com." always_nxdomain
 local-zone: "mfamilygifts.store." always_nxdomain
-local-zone: "micavhe.top." always_nxdomain
 local-zone: "michalor.com." always_nxdomain
 local-zone: "microminihighlandcow.com." always_nxdomain
 local-zone: "mideastfinanceco.com." always_nxdomain
@@ -1391,6 +1375,7 @@ local-zone: "onlineherbalincense.com." always_nxdomain
 local-zone: "onlinemlb.com." always_nxdomain
 local-zone: "onlinenba.net." always_nxdomain
 local-zone: "onlineobey.shop." always_nxdomain
+local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onpointshipppers.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
 local-zone: "opjus.com." always_nxdomain
@@ -1411,7 +1396,6 @@ local-zone: "outletgardener.com." always_nxdomain
 local-zone: "outletheaters.com." always_nxdomain
 local-zone: "outletstoves.com." always_nxdomain
 local-zone: "outletunit.com." always_nxdomain
-local-zone: "outpaceconsignmentcenter.com." always_nxdomain
 local-zone: "ownyva.com." always_nxdomain
 local-zone: "ozroyalcaninpuppiesforsale.com." always_nxdomain
 local-zone: "p80framekits.com." always_nxdomain
@@ -1439,7 +1423,6 @@ local-zone: "peachytoy.com." always_nxdomain
 local-zone: "peakperformancemall.com." always_nxdomain
 local-zone: "pefctiordent.com." always_nxdomain
 local-zone: "pemcorgis.com." always_nxdomain
-local-zone: "peneloper.shop." always_nxdomain
 local-zone: "perfect-t-shop.com." always_nxdomain
 local-zone: "perfectpuppiesonline.com." always_nxdomain
 local-zone: "perkylittlemaltese.com." always_nxdomain
@@ -1447,7 +1430,6 @@ local-zone: "perlatoshoe.com." always_nxdomain
 local-zone: "permanentdiscountstamp.com." always_nxdomain
 local-zone: "petbirdsfarm.com." always_nxdomain
 local-zone: "petflexpuppies.com." always_nxdomain
-local-zone: "petitepawchihuahua.com." always_nxdomain
 local-zone: "petjetlogistics.com." always_nxdomain
 local-zone: "petopiamarket.com." always_nxdomain
 local-zone: "petrichorlove.com." always_nxdomain
@@ -1608,7 +1590,6 @@ local-zone: "rwcohugesale.com." always_nxdomain
 local-zone: "rxnaturalsmarket.com." always_nxdomain
 local-zone: "sacustogolgcarts.co.za." always_nxdomain
 local-zone: "safaripawsemporium.com." always_nxdomain
-local-zone: "safepalesa.com." always_nxdomain
 local-zone: "sailnovo.shop." always_nxdomain
 local-zone: "sakingsautospares.com." always_nxdomain
 local-zone: "salandspuppies.co.za." always_nxdomain
@@ -1641,7 +1622,6 @@ local-zone: "senjiexmas.com." always_nxdomain
 local-zone: "serenewarm.com." always_nxdomain
 local-zone: "serengetidiscount.com." always_nxdomain
 local-zone: "serenitytoypoodles.com." always_nxdomain
-local-zone: "servicios-cargobull.com." always_nxdomain
 local-zone: "setietutline.com." always_nxdomain
 local-zone: "sewingiiseasy.com." always_nxdomain
 local-zone: "sext4bang.com." always_nxdomain
@@ -1844,7 +1824,6 @@ local-zone: "thepotspans.com." always_nxdomain
 local-zone: "thepupflixstore.com." always_nxdomain
 local-zone: "thepupparadise.com." always_nxdomain
 local-zone: "theresaschnauzerhome.com." always_nxdomain
-local-zone: "thesiberianhuskykennel.com." always_nxdomain
 local-zone: "thespaceoptmrt.com." always_nxdomain
 local-zone: "thetntlogistiics.com." always_nxdomain
 local-zone: "thewingedwheels.com." always_nxdomain
@@ -1871,7 +1850,6 @@ local-zone: "toksblog.com." always_nxdomain
 local-zone: "tollgr.com." always_nxdomain
 local-zone: "tommybahama.us.com." always_nxdomain
 local-zone: "tommybahamaonline.shop." always_nxdomain
-local-zone: "tommystoreus.com." always_nxdomain
 local-zone: "tomtailorvip.com." always_nxdomain
 local-zone: "toolmartin.com." always_nxdomain
 local-zone: "toolsale.us." always_nxdomain
@@ -1917,7 +1895,6 @@ local-zone: "turtlebeachusa.com." always_nxdomain
 local-zone: "tv-evolution.com." always_nxdomain
 local-zone: "twsdc.com." always_nxdomain
 local-zone: "txcryptotrade.com." always_nxdomain
-local-zone: "uba-ng.org." always_nxdomain
 local-zone: "ubertifirearmsusa.com." always_nxdomain
 local-zone: "ubiquocoffee.com." always_nxdomain
 local-zone: "uctttrading.com." always_nxdomain
@@ -2011,7 +1988,6 @@ local-zone: "wholesale.soccer.shirt.com." always_nxdomain
 local-zone: "wholesalekeep.com." always_nxdomain
 local-zone: "wild-animals.co.za." always_nxdomain
 local-zone: "williamspethome.com." always_nxdomain
-local-zone: "windtouchhair.com." always_nxdomain
 local-zone: "winiflia.com." always_nxdomain
 local-zone: "winxinbear.com." always_nxdomain
 local-zone: "wirenotice.com." always_nxdomain
