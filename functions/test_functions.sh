@@ -59,7 +59,7 @@ function shellcheck {
 
 function test_retrieval_validate {
     script_to_test="$1"
-    [[ -d data/pending ]] && rm -r data/pending  # Initialize pending directory
+    [[ "$script_to_test" == 'retrieval' ]] && { mkdir -p data/pending; rm data/pending/*; }  # Initialize pending directory
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Test removal of known dead domains
