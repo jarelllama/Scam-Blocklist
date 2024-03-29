@@ -10,9 +10,35 @@ function main {
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
-    add_unparked_domains
     remove_parked_domains
+    add_unparked_domains
+    cat parked_domains.tmp >> "$parked_domains_file"  # Add parked domains to parked domains file (skip unparked check)
+    format_list "$parked_domains_file"
     update_light_file
+}
+
+function remove_parked_domains {
+    touch parked_domains.tmp
+    printf "\nChecking for parked domains.\n"
+
+    # Split into 12 equal files
+    split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
+    check_for_parked "x00" & check_for_parked "x01" &
+    check_for_parked "x02" & check_for_parked "x03" &
+    check_for_parked "x04" & check_for_parked "x05" &
+    check_for_parked "x06" & check_for_parked "x07" &
+    check_for_parked "x08" & check_for_parked "x09" &
+    check_for_parked "x10" & check_for_parked "x11" &
+    check_for_parked "x12" & check_for_parked "x13"
+    wait
+
+    [[ ! -s parked_domains.tmp ]] && return
+    format_list parked_domains.tmp
+
+    # Remove parked domains from raw file
+    comm -23 "$raw_file" parked_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
+    log_event "$(<parked_domains.tmp)" "parked" "raw"
+    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
 }
 
 function add_unparked_domains {
@@ -38,53 +64,7 @@ function add_unparked_domains {
     cat unparked_domains.tmp >> "$raw_file"  # Add unparked domains to raw file
     format_list "$raw_file"
     log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
-
     find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files before next run
-}
-
-function remove_parked_domains {
-    touch parked_domains.tmp
-    printf "\nChecking for parked domains.\n"
-
-    # Split into 12 equal files
-    split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
-    check_for_parked "x00" & check_for_parked "x01" &
-    check_for_parked "x02" & check_for_parked "x03" &
-    check_for_parked "x04" & check_for_parked "x05" &
-    check_for_parked "x06" & check_for_parked "x07" &
-    check_for_parked "x08" & check_for_parked "x09" &
-    check_for_parked "x10" & check_for_parked "x11" &
-    check_for_parked "x12" & check_for_parked "x13"
-    wait
-
-    [[ ! -s parked_domains.tmp ]] && return
-    format_list parked_domains.tmp
-
-    # Remove parked domains from raw file
-    comm -23 "$raw_file" parked_domains.tmp > raw.tmp && mv raw.tmp "$raw_file"
-    cat parked_domains.tmp >> "$parked_domains_file"  # Add parked domains to parked domains file
-    format_list "$parked_domains_file"
-    log_event "$(<parked_domains.tmp)" "parked" "raw"
-
-    find . -maxdepth 1 -type f -name "x??" -delete  # Reset split files
-}
-
-function check_for_unparked {
-    [[ ! -f "$1" ]] && return  # Return if split file not found
-    [[ "$1" == 'x00' ]] && { track=true; count=0; } || track=false  # Track progress for first split file
-    while read -r domain; do
-        ((count++))
-        # Check for parked message in site's HTML
-        if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 5 "http://${domain}/" | tr -d '\0')"; then
-            printf "Unparked: %s\n" "$domain"
-            printf "%s\n" "$domain" >> "unparked_domains_${1}.tmp"
-        fi
-        [[ "$track" == false ]] && continue  # Skip progress tracking if not first split file
-        percentage_count="$((count * 100 / $(wc -l < "$1")))"
-        ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
-    done < "$1"
-    # Collate unparked domains
-    [[ -f "unparked_domains_${1}.tmp" ]] && cat "unparked_domains_${1}.tmp" >> unparked_domains.tmp
 }
 
 function check_for_parked {
@@ -103,6 +83,24 @@ function check_for_parked {
     done < "$1"
     # Collate parked domains
     [[ -f "parked_domains_${1}.tmp" ]] && cat "parked_domains_${1}.tmp" >> parked_domains.tmp
+}
+
+function check_for_unparked {
+    [[ ! -f "$1" ]] && return  # Return if split file not found
+    [[ "$1" == 'x00' ]] && { track=true; count=0; } || track=false  # Track progress for first split file
+    while read -r domain; do
+        ((count++))
+        # Check for parked message in site's HTML
+        if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 5 "http://${domain}/" | tr -d '\0')"; then
+            printf "Unparked: %s\n" "$domain"
+            printf "%s\n" "$domain" >> "unparked_domains_${1}.tmp"
+        fi
+        [[ "$track" == false ]] && continue  # Skip progress tracking if not first split file
+        percentage_count="$((count * 100 / $(wc -l < "$1")))"
+        ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
+    done < "$1"
+    # Collate unparked domains
+    [[ -f "unparked_domains_${1}.tmp" ]] && cat "unparked_domains_${1}.tmp" >> unparked_domains.tmp
 }
 
 function update_light_file {
