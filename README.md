@@ -9,12 +9,10 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 | [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/scams.txt) | scam.com |
 
 ## Statistics
-[![Retrieve domains](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/retrieve.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/retrieve.yml)
-[![Check lists](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/check.yml)
-[![Run tests](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test.yml)
-[![End-to-end build](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/e2e.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/e2e.yml)
+[![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
+[![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 20922
+Total domains: 20925
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -26,8 +24,8 @@ Today | Yesterday | Excluded | Source
     0 |         2 |      11% | scam.directory
     0 |         0 |      30% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
-    0 |         2 |       7% | Manual Entries
-  108 |        24 |       9% | All sources
+    1 |         2 |       7% | Manual Entries
+  109 |        24 |       9% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -45,12 +43,12 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <li>Intended for collated blocklists cautious about size</li>
 <li>Does not use sources whose domains cannot be filtered by date added</li>
 <li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full blocklist includes domains added from 2 months back and onwards</li>
-<li>! Dead and parked domains that become alive/unparked are not added back to the blocklist (due to limitations in the way these domains are recorded)</li>
+<li>! Dead and parked domains that become resolving/unparked are not added back to the blocklist (due to limitations in the way these domains are recorded)</li>
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2051
+Total domains: 2049
 </details>
 
 ## Retrieving scam domains from Google Search

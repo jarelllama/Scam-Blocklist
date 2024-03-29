@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Fri Mar 29 07:50:34 UTC 2024
+! Last modified: Fri Mar 29 08:47:02 UTC 2024
 ! Syntax: Unbound
-! Total number of entries: 2051
+! Total number of entries: 2049
 !
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -727,7 +727,6 @@ local-zone: "fxflzsale.shop." always_nxdomain
 local-zone: "fxrack.com." always_nxdomain
 local-zone: "fxxktardo.com." always_nxdomain
 local-zone: "gaalakart.com." always_nxdomain
-local-zone: "gadgetstoretoday.com." always_nxdomain
 local-zone: "gadgetwonderstore.com." always_nxdomain
 local-zone: "gamenookz.com." always_nxdomain
 local-zone: "gangabudsaustralia.com." always_nxdomain
@@ -874,7 +873,6 @@ local-zone: "homeafc.com." always_nxdomain
 local-zone: "homebyon.com." always_nxdomain
 local-zone: "homedbkd.com." always_nxdomain
 local-zone: "homedecors.top." always_nxdomain
-local-zone: "homeestore.net." always_nxdomain
 local-zone: "homeforalessi.com." always_nxdomain
 local-zone: "homefrenchbulldogpuppies.com." always_nxdomain
 local-zone: "homelandbordercollies.com." always_nxdomain
@@ -1031,6 +1029,7 @@ local-zone: "ksntpo.com." always_nxdomain
 local-zone: "kulishop.net." always_nxdomain
 local-zone: "kungfucrystal.com." always_nxdomain
 local-zone: "kwahzifarm.com." always_nxdomain
+local-zone: "kwtcoins.com." always_nxdomain
 local-zone: "ky.guns.com." always_nxdomain
 local-zone: "lablancasale.us." always_nxdomain
 local-zone: "laboutiquedacula.com." always_nxdomain
@@ -1823,7 +1822,6 @@ local-zone: "theplaceofhope.com." always_nxdomain
 local-zone: "thepotspans.com." always_nxdomain
 local-zone: "thepupflixstore.com." always_nxdomain
 local-zone: "thepupparadise.com." always_nxdomain
-local-zone: "theresaschnauzerhome.com." always_nxdomain
 local-zone: "thespaceoptmrt.com." always_nxdomain
 local-zone: "thetntlogistiics.com." always_nxdomain
 local-zone: "thewingedwheels.com." always_nxdomain
