@@ -8,7 +8,7 @@ permissions:
   issues: write
 
 jobs:
-  read-domains:
+  get-domains:
     if: ${{ github.event.label.name == 'add domains' && github.actor == github.repository_owner }}
     runs-on: ubuntu-latest
     steps:
@@ -17,7 +17,7 @@ jobs:
         with:
           ref: main
 
-      - name: Read domains
+      - name: Read domains from issue
         run: |
           mkdir -p data/pending
           printf "%s\n" "${{ github.event.issue.body }}" >> data/pending/domains_manual.tmp
@@ -35,10 +35,6 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Manually add domains"
           git push -q
 
-  add:
-    needs: read-domains
-    uses: ./.github/workflows/retrieve.yml
-
   build:
-    needs: add
-    uses: ./.github/workflows/build.yml
+    needs: get-domains
+    uses: ./.github/workflows/retrieve_domains.yml

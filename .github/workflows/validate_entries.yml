@@ -1,9 +1,7 @@
-name: Check lists
-run-name: Check lists
+name: Validate entries
+run-name: Validate entries
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 12 * * *'
   push:
     paths:
       - 'config/blacklist.txt'
@@ -13,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  check-lists:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,8 +19,8 @@ jobs:
         with:
           ref: main
 
-      - name: check.sh
-        run: bash check.sh
+      - name: Validate raw file
+        run: bash functions/validate_raw.sh
 
       - name: Push
         if: ${{ success() || failure() }}
@@ -30,9 +28,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "Check lists"
+          git diff-index --quiet HEAD || git commit -m "Validate entries"
           git push -q
-
-  build:
-    needs: check-lists
-    uses: ./.github/workflows/build.yml

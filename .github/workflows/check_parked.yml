@@ -1,17 +1,19 @@
-name: Dead check
-run-name: Dead check
+name: Remove
+run-name: Remove parked domains
 on:
   workflow_dispatch:
-  workflow_call:
-    inputs:
-      called:
-        type: boolean
-        default: true
+    workflow_call:
+      inputs:
+        called:
+          type: boolean
+          default: true
+  schedule:
+    - cron: '0 1 * * *'
 permissions:
   contents: write
 
 jobs:
-  dead-check:
+  check-parked-domains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,19 +21,19 @@ jobs:
         with:
           ref: main
 
-      - name: dead.sh
-        run: bash dead.sh
+      - name: Run parked check
+        run: bash functions/check_parked.sh
 
       - name: Push
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "Dead check"
+          git diff-index --quiet HEAD || git commit -m "Remove parked domains"
           git push -q
 
   build:
     # Only trigger if not called from another workflow
     if: ${{ ! inputs.called }}
-    needs: dead-check
+    needs: parked-check
     uses: ./.github/workflows/build.yml

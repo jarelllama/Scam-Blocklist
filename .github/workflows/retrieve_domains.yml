@@ -19,26 +19,19 @@ jobs:
         with:
           ref: main
 
-      - name: retrieve.sh
+      - name: Retrieve domains
         env:
           google_search_id: ${{ secrets.SEARCH_ID }}
           google_search_id_2: ${{ secrets.SEARCH_ID2 }}
           google_search_api_key: ${{ secrets.SEARCH_API_KEY }}
           google_search_api_key_2: ${{ secrets.SEARCH_API_KEY2 }}
           aa419_api_id: ${{ secrets.AA419_API_ID }}
-        run: bash retrieve.sh
+        run: bash functions/retrieve_domains.sh
 
       - name: Push
-        if: ${{ success() || failure() }}
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
           git diff-index --quiet HEAD || git commit -m "Retrieve domains"  # Note commit -am does not commit the pending directory
           git push -q
-
-  build:
-    # Only trigger if not called from another workflow
-    if: ${{ ! inputs.called }}
-    needs: retrieve-domains
-    uses: ./.github/workflows/build.yml

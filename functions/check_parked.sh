@@ -109,7 +109,7 @@ function update_light_file {
     comm -12 "$raw_file" "$raw_light_file" > light.tmp && mv light.tmp "$raw_light_file"  # Keep only domains found in full raw file
 }
 
-function clean_parked_domains_file {
+function prune_parked_domains_file {
     [[ $(wc -l < "$parked_domains_file") -gt 4000 ]] && sed -i '1,100d' "$parked_domains_file" || printf ""  # printf to negate exit status 1
 }
 
@@ -125,7 +125,7 @@ function format_list {
 function cleanup {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
     find . -maxdepth 1 -type f -name "x??" -delete
-    clean_parked_domains_file
+    prune_parked_domains_file
 }
 
 trap cleanup EXIT

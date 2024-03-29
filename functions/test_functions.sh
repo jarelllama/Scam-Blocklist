@@ -18,9 +18,9 @@ parked_domains_file='data/parked_domains.txt'
 function main {
     : > "$raw_file"  # Initialize raw file
     sed -i '1q' "$domain_log"  # Initialize domain log file
-    [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_check "$1"  # Do not run when there are existing domain files
+    [[ "$1" == 'retrieval' ]] && [[ ! -d data/pending ]] && test_retrieval_validate "$1"  # Do not run when there are existing domain files
     [[ "$1" == 'toplist' ]] && test_toplist
-    [[ "$1" == 'check' ]] && test_retrieval_check "$1"
+    [[ "$1" == 'validate' ]] && test_retrieval_validate "$1"
     [[ "$1" == 'dead' ]] && test_dead
     [[ "$1" == 'parked' ]] && test_parked
     [[ "$1" == 'shellcheck' ]] && shellcheck
@@ -57,7 +57,7 @@ function shellcheck {
     check_error
 }
 
-function test_retrieval_check {
+function test_retrieval_validate {
     script_to_test="$1"
     [[ "$script_to_test" == 'retrieval' ]] && mkdir data/pending
 
@@ -84,7 +84,7 @@ function test_retrieval_check {
         grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt  # Expected output
     done < "$subdomains_to_remove_file"
     # Expected output
-    [[ "$script_to_test" == 'check' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The Check script does not exclude 'www' subdomains
+    [[ "$script_to_test" == 'validate' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The Check script does not exclude 'www' subdomains
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
 
@@ -147,7 +147,7 @@ function test_retrieval_check {
         printf "redundant-test.com\n" >> out_wildcards.txt  # Wildcard should already be in expected wildcards file
         printf "domain.redundant-test.com\n" >> input.txt  # Input
         printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
-    elif [[ "$script_to_test" == 'check' ]]; then
+    elif [[ "$script_to_test" == 'validate' ]]; then
         # Test addition of new wildcard from wildcard file (manually adding a new wildcard to wildcards file)
         printf "domain.redundant-test.com\n" >> input.txt  # Sample data
         printf "redundant-test.com\n" > "$wildcards_file"  # Input
@@ -158,7 +158,7 @@ function test_retrieval_check {
         printf "redundant,domain.redundant-test.com\n" >> out_log.txt
     fi
 
-    if [[ "$script_to_test" == 'check' ]]; then
+    if [[ "$script_to_test" == 'validate' ]]; then
         # Test toplist check
         printf "google.com\n" >> input.txt  # Input
         printf "google.com\n" >> out_raw.txt  # Expected output
@@ -171,7 +171,7 @@ function test_retrieval_check {
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
         grep -vF "raw-light-test.com" out_raw.txt > out_raw_light.txt  # Expected output for light (source excluded from light)
-    elif [[ "$script_to_test" == 'check' ]]; then
+    elif [[ "$script_to_test" == 'validate' ]]; then
         cp out_raw.txt out_raw_light.txt  # Expected output for light
     fi
 
@@ -183,11 +183,11 @@ function test_retrieval_check {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
-        bash retrieve.sh || true  # Run retrieval script and ignore exit status
-    elif [[ "$script_to_test" == 'check' ]]; then
+        bash functions/retrieve.sh || true  # Run retrieval script and ignore exit status
+    elif [[ "$script_to_test" == 'validate' ]]; then
         cp input.txt "$raw_file"  # Input
         mv input.txt "$raw_light_file"  # Input
-        bash check.sh || true  # Run lists check script and ignore exit status
+        bash functions/validate_domains.sh || true  # Run lists check script and ignore exit status
     fi
     printf "%s\n" "------------------------------------------------------------------"
 
@@ -197,7 +197,7 @@ function test_retrieval_check {
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'retrieval' ]]; then
         [[ -d data/pending ]] && { printf "! Pending directory not removed.\n"; error=true; }  # Check pending directory
-    elif [[ "$script_to_test" == 'check' ]]; then
+    elif [[ "$script_to_test" == 'validate' ]]; then
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
         check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"  # Check wildcards file
     fi
@@ -213,7 +213,7 @@ function test_toplist {
     : > "$whitelist_file"  # Clear whitelist file
     printf "google.com\n" > data/pending/domains_google_search_toplist-test.tmp  # Input
     printf "toplist,google.com\n" > out_log.txt  # Expected output
-    bash retrieve.sh || true  # Run retrieval script and ignore exit status
+    bash functions/retrieve_domains.sh || true  # Run retrieval script and ignore exit status
     printf "%s\n" "------------------------------------------------------------------"
     [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; error=true; }  # Check pending directory
     check_log
@@ -273,7 +273,7 @@ function test_dead {
     grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output for light (resurrected domains are not added back to light)
 
     prep_output  # Prepare expected output files
-    bash dead.sh  # Run dead script
+    bash functions/check_dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
     printf "%s\n" "------------------------------------------------------------------"
 
@@ -322,7 +322,7 @@ function test_parked {
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt  # Unparked domains are not added back to light
 
     prep_output  # Prepare expected output files
-    bash parked.sh  # Run parked script
+    bash functions/check_parked.sh  # Run parked script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
     printf "%s\n" "------------------------------------------------------------------"
 

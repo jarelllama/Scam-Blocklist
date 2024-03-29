@@ -8,29 +8,55 @@ permissions:
   contents: write
 
 jobs:
-  test:
+  test-functions:
     uses: ./.github/workflows/test.yml
 
-  prep:
-    uses: ./.github/workflows/toplist.yml
+  update-toplist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
 
-  retrieve:
-    needs: [test, prep]
+      - name: Update toplist
+        run: |
+          wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
+          awk -F ',' '{print $2}' toplist.tmp > data/toplist.txt
+          bash data/tools.sh "format" "data/toplist.txt"
+          rm toplist.tmp
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Update toplist"
+          git push -q
+
+  build:
+    needs: [test, update-toplist]
     uses: ./.github/workflows/retrieve.yml
     secrets: inherit
 
-  dead-check:
+  remove-dead:
     needs: retrieve
-    #if: ${{ success() || failure() }}
+    if: ${{ success() || failure() }}
     uses: ./.github/workflows/dead.yml
 
-  build:
-    needs: dead-check
+  validate:
+    needs: remove-dead
     if: ${{ success() || failure() }}
+    uses: ./.github/workflows/check.yml
+
+  deploy:
+    needs: validate
+    if: ${{ success() || failure() }}  # Note failure is not job-specific
     uses: ./.github/workflows/build.yml
 
-  tidy_log:
+  prune_logs:
     needs: build
+    if: ${{ success() || failure() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

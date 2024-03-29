@@ -2,14 +2,24 @@ name: Build lists
 on:
   workflow_dispatch:
   workflow_call:
+  workflow_run:
+    workflows:
+      - Retrieve domains
+      - Remove dead domains
+      - Manually add domains
+      - Validate entries
+      - Remove dead domains
+  types:
+    - completed
   push:
     paths:
-      - 'build.sh'  # Update readme if changed in build.sh
+      - 'functions/build_lists.sh'  # Update readme template if changed
 permissions:
   contents: write
 
 jobs:
   build-lists:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,8 +27,8 @@ jobs:
         with:
           ref: main
 
-      - name: build.sh
-        run: bash build.sh
+      - name: Build lists
+        run: bash functions/build_lists.sh
 
       - name: Push
         run: |

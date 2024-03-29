@@ -1,5 +1,5 @@
-name: Run tests
-run-name: Run tests
+name: Test functions
+run-name: Test functions
 on:
   workflow_dispatch:
   workflow_call:
@@ -16,7 +16,7 @@ jobs:
         with:
           ref: main
       - name: Run ShellCheck
-        run: bash test.sh 'shellcheck'
+        run: bash functions/test_functions.sh 'shellcheck'
 
   test-retrieval:
     runs-on: ubuntu-latest
@@ -25,8 +25,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Test retrieve.sh
-        run: bash test.sh 'retrieval'
+      - name: Test retrieval
+        run: bash functions/test_functions.sh 'retrieval'
 
   test-toplist-check:
     runs-on: ubuntu-latest
@@ -36,34 +36,34 @@ jobs:
         with:
           ref: main
       - name: Test toplist check
-        run: bash test.sh 'toplist'
+        run: bash functions/test_functions.sh 'toplist'
 
-  test-lists-check:
+  test-dead-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Test check.sh
-        run: bash test.sh 'check'
+      - name: Test dead domains check
+        run: bash functions/test_functions.sh 'dead'
 
-  test-dead:
+  test-parked-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Test dead.sh
-        run: bash test.sh 'dead'
+      - name: Test parked domains check
+        run: bash functions/test_functions.sh 'parked'
 
-  test-parked:
+  test-validation-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Test parked.sh
-        run: bash test.sh 'parked'
+      - name: Test validation check
+        run: bash functions/test_functions.sh 'validate'
