@@ -183,7 +183,7 @@ function test_retrieval_validate {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
-        bash functions/retrieve.sh || true  # Run retrieval script and ignore exit status
+        bash functions/retrieve_domains.sh || true  # Run retrieval script and ignore exit status
     elif [[ "$script_to_test" == 'validate' ]]; then
         cp input.txt "$raw_file"  # Input
         mv input.txt "$raw_light_file"  # Input
