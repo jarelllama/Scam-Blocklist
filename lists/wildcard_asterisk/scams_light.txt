@@ -1,11 +1,11 @@
-! Title: Jarelllama's Scam Blocklist LIGHT VERSION
-! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
-! Homepage: https://github.com/jarelllama/Scam-Blocklist
-! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Fri Mar 29 08:48:38 UTC 2024
-! Syntax: Wildcard Asterisk
-! Total number of entries: 2049
-!
+# Title: Jarelllama's Scam Blocklist LIGHT VERSION
+# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
+# Homepage: https://github.com/jarelllama/Scam-Blocklist
+# License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
+# Last modified: Fri Mar 29 09:24:47 UTC 2024
+# Syntax: Wildcard Asterisk
+# Total number of entries: 2049
+#
 *.01edc.com
 *.1sttheworld.com
 *.2022factorysale.ru
