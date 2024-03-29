@@ -3,11 +3,6 @@ run-name: Validate entries
 on:
   workflow_dispatch:
   workflow_call:
-  push:
-    paths:
-      - 'config/blacklist.txt'
-      - 'config/subdomains.txt'
-      - 'config/whitelist.txt'
 permissions:
   contents: write
 
