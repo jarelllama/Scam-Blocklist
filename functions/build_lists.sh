@@ -213,7 +213,7 @@ function count {
 }
 
 function format_list {
-    bash data/tools.sh "format" "$1"
+    bash functions/tools.sh "format" "$1"
 }
 
 function build_adblock {
