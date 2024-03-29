@@ -59,7 +59,8 @@ function shellcheck {
 
 function test_retrieval_validate {
     script_to_test="$1"
-    [[ "$script_to_test" == 'retrieval' ]] && { mkdir -p data/pending; rm data/pending/*; }  # Initialize pending directory
+    [[ -d data/pending ]] && rm -r data/pending  # Initialize pending directory
+    [[ "$script_to_test" == 'retrieval' ]] && mkdir data/pending
 
     if [[ "$script_to_test" == 'retrieval' ]]; then
         # Test removal of known dead domains
@@ -209,7 +210,8 @@ function test_retrieval_validate {
 }
 
 function test_toplist_check {
-    mkdir -p data/pending && rm data/pending/*  # Initialize pending directory
+    [[ -d data/pending ]] && rm -r data/pending  # Initialize pending directory
+    mkdir data/pending
     : > "$whitelist_file"  # Clear whitelist file
     printf "google.com\n" > data/pending/domains_google_search_toplist-test.tmp  # Input
     printf "toplist,google.com\n" > out_log.txt  # Expected output
