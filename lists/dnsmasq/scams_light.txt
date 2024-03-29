@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Mar 29 09:24:47 UTC 2024
+# Last modified: Fri Mar 29 10:40:33 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 2049
+# Total number of entries: 2044
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -574,7 +574,6 @@ local=/e-papuha.com/
 local=/earnglobal.co/
 local=/eastidahoent.com/
 local=/easy-earn.homes/
-local=/easyfuck.me/
 local=/easys-tyle.com/
 local=/eazy-growth.com/
 local=/ebikeandchristmasdecor.com/
@@ -808,7 +807,6 @@ local=/gremenade.com/
 local=/grindhardhouse.com/
 local=/grystores.com/
 local=/gsil.org/
-local=/gsop.fr/
 local=/guarantyfx-trades.com/
 local=/guardianarmoryshop.com/
 local=/guesssale.us/
@@ -1020,7 +1018,6 @@ local=/kokokokids.ru/
 local=/kokokostore.net/
 local=/koowofficial.com/
 local=/kozmozinspire.com/
-local=/krdes.net.in/
 local=/kristaldentistry.com/
 local=/krminidachshunds.com/
 local=/krpethome.com/
@@ -1373,7 +1370,6 @@ local=/onlineherbalincense.com/
 local=/onlinemlb.com/
 local=/onlinenba.net/
 local=/onlineobey.shop/
-local=/onlinesale2022.ru/
 local=/onpointshipppers.com/
 local=/onwofe.com/
 local=/opjus.com/
@@ -1980,7 +1976,6 @@ local=/wekoin.com/
 local=/weopai.com/
 local=/wesstrbk.com/
 local=/weuap.com/
-local=/whatamyatetoday.com/
 local=/wholesale.soccer.shirt.com/
 local=/wholesalekeep.com/
 local=/wild-animals.co.za/

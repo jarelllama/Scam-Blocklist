@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Mar 29 09:24:47 UTC 2024
+# Last modified: Fri Mar 29 10:40:33 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 2049
+# Total number of entries: 2044
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -575,7 +575,6 @@ local-zone: "e-papuha.com." always_nxdomain
 local-zone: "earnglobal.co." always_nxdomain
 local-zone: "eastidahoent.com." always_nxdomain
 local-zone: "easy-earn.homes." always_nxdomain
-local-zone: "easyfuck.me." always_nxdomain
 local-zone: "easys-tyle.com." always_nxdomain
 local-zone: "eazy-growth.com." always_nxdomain
 local-zone: "ebikeandchristmasdecor.com." always_nxdomain
@@ -809,7 +808,6 @@ local-zone: "gremenade.com." always_nxdomain
 local-zone: "grindhardhouse.com." always_nxdomain
 local-zone: "grystores.com." always_nxdomain
 local-zone: "gsil.org." always_nxdomain
-local-zone: "gsop.fr." always_nxdomain
 local-zone: "guarantyfx-trades.com." always_nxdomain
 local-zone: "guardianarmoryshop.com." always_nxdomain
 local-zone: "guesssale.us." always_nxdomain
@@ -1021,7 +1019,6 @@ local-zone: "kokokokids.ru." always_nxdomain
 local-zone: "kokokostore.net." always_nxdomain
 local-zone: "koowofficial.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
-local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kristaldentistry.com." always_nxdomain
 local-zone: "krminidachshunds.com." always_nxdomain
 local-zone: "krpethome.com." always_nxdomain
@@ -1374,7 +1371,6 @@ local-zone: "onlineherbalincense.com." always_nxdomain
 local-zone: "onlinemlb.com." always_nxdomain
 local-zone: "onlinenba.net." always_nxdomain
 local-zone: "onlineobey.shop." always_nxdomain
-local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onpointshipppers.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
 local-zone: "opjus.com." always_nxdomain
@@ -1981,7 +1977,6 @@ local-zone: "wekoin.com." always_nxdomain
 local-zone: "weopai.com." always_nxdomain
 local-zone: "wesstrbk.com." always_nxdomain
 local-zone: "weuap.com." always_nxdomain
-local-zone: "whatamyatetoday.com." always_nxdomain
 local-zone: "wholesale.soccer.shirt.com." always_nxdomain
 local-zone: "wholesalekeep.com." always_nxdomain
 local-zone: "wild-animals.co.za." always_nxdomain
