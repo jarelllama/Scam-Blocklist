@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  validate-entries:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
         with:
           ref: main
 
-      - name: Validate raw file
+      - name: validate_raw.sh
         run: bash functions/validate_raw.sh
 
       - name: Push

@@ -23,7 +23,7 @@ jobs:
         run: |
           wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
           awk -F ',' '{print $2}' toplist.tmp > data/toplist.txt
-          bash data/tools.sh "format" "data/toplist.txt"
+          bash functions/tools.sh "format" "data/toplist.txt"
           rm toplist.tmp
 
       - name: Push
@@ -40,18 +40,18 @@ jobs:
     secrets: inherit
 
   remove-dead:
-    needs: build
-    if: ${{ success() || failure() }}
+    needs: [test-functions, build]
+    if: ${{ always() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
   validate:
-    needs: remove-dead
-    if: ${{ success() || failure() }}  # Note failure is not job-specific
+    needs: [test-functions, remove-dead]
+    if: ${{ always() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/validate_entries.yml
 
   deploy:
     needs: validate
-    if: ${{ success() || failure() }}
+    if: ${{ always() && needs.validate.result == 'success' }}  # Deploy only if validate passes
     uses: ./.github/workflows/build_lists.yml
 
   prune_logs:

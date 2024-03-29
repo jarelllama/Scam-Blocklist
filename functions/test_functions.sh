@@ -226,7 +226,7 @@ function test_toplist_check {
 function test_dead_check {
     # Test addition of resurrected domains
     # Input
-    printf "google.com\n" > "$dead_domains_file"
+    printf "www.google.com\n" > "$dead_domains_file"  # Subdomains should be stripped
     printf "584031dead-domain-test.com\n" >> "$dead_domains_file"
     # Expected output
     printf "google.com\n" >> out_raw.txt

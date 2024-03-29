@@ -28,6 +28,11 @@ function check_for_alive {
     alive_domains=$(comm -23 <(sort "$dead_domains_file") <(sort dead.tmp))  # Find resurrected domains in dead domains file (note dead domains file is unsorted)
     [[ -z "$alive_domains" ]] && return  # Return if no resurrected domains found
     cp dead.tmp "$dead_domains_file"  # Update dead domains file to exclude resurrected domains
+
+    # Strip away subdomains from alive domains since subdomains are not supposed to be in raw file
+    while read -r subdomain; do  # Loop through common subdomains
+        alive_domains=$(printf "%s" "$alive_domains" | sed "s/^${subdomain}\.//" | sort -u)
+    done < "$subdomains_to_remove_file"
     printf "%s\n" "$alive_domains" >> "$raw_file"  # Add resurrected domains to raw file
     format_list "$dead_domains_file" && format_list "$raw_file"
     log_event "$alive_domains" "resurrected" "dead_domains_file"
@@ -39,7 +44,7 @@ function check_subdomains {
     [[ ! -s dead.tmp ]] && return  # Return if no dead domains found
     # Remove dead subdomains from subdomains file
     comm -23 "$subdomains_file" dead.tmp > subdomains.tmp && mv subdomains.tmp "$subdomains_file"
-    cat dead.tmp >> "$dead_domains_file"  # Collate dead domains with subdomains to filter out from newly retrieved domains
+    cat dead.tmp >> "$dead_domains_file"  # Collate dead subdomains to filter out from newly retrieved domains
     format_list "$dead_domains_file"
 
     while read -r subdomain; do  # Loop through common subdomains
