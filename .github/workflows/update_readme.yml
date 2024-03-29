@@ -1,0 +1,34 @@
+name: Update readme
+run-name: Update readme
+on:
+  workflow_dispatch:
+  workflow_call:
+  workflow_run:
+    workflows: [Build and deploy, Build lists]
+    types:
+      - completed
+  push:
+    paths:
+      - 'functions/update_readme.sh'
+permissions:
+  contents: write
+
+jobs:
+  update_readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: update_readme.sh
+        run: bash functions/update_readme.sh
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Update readme"
+          git push -q

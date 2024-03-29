@@ -12,15 +12,12 @@ on:
       - Validate entries
     types:
       - completed
-  push:
-    paths:
-      - 'functions/build_lists.sh'  # Update readme template if changed
 permissions:
   contents: write
 
 jobs:
   build-lists:
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
