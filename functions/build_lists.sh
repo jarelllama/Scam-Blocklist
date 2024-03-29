@@ -12,13 +12,13 @@ function main {
 
 function build_list {
     [[ -z "$comment" ]] && comment='#'  # Set default comment to '#'
+    mkdir -p "lists/${directory}"  # Create directory if not present
 
     # Loop through the two blocklist versions
     for i in {1..2}; do
         [[ "$i" -eq 1 ]] && { list_name='scams.txt'; version=''; source_file="$raw_file"; }
         [[ "$i" -eq 2 ]] && { list_name='scams_light.txt'; version='LIGHT VERSION'; source_file="$raw_light_file"; }
         blocklist_path="lists/${directory}/${list_name}"
-        mkdir -p "$(dirname "$blocklist_path")"  # Create directory if not present
 
         cat << EOF > "$blocklist_path"  # Append header onto blocklist
 ${comment} Title: Jarelllama's Scam Blocklist ${version}
