@@ -68,7 +68,7 @@ To optimize the number of search queries made, each search term is frequently be
 
 #### Statistics for Google Search source
 ```
-Active search terms: 20
+Active search terms: 18
 Queries made today: 121
 Domains retrieved today: 0
 ```
