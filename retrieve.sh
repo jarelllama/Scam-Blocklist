@@ -153,7 +153,7 @@ function source_google_search {
     # Retrieve new domains
     while read -r search_term; do  # Loop through search terms
         # Return if rate limited
-        [[ "$rate_limited" == true ]] && { printf "! Both API keys are rate limited.\n"; return; }
+        [[ "$rate_limited" == true ]] && { printf "! Both Google Search API keys are rate limited.\n"; return; }
         search_google "$search_term"
     done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
@@ -174,7 +174,7 @@ function search_google {
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Break loop if second key is also rate limited
             [[ "$google_search_id" == "$google_search_id_2" ]] && { rate_limited=true; break; }
-            printf "! Rate limited. Switching API keys.\n"
+            printf "! Google Search rate limited. Switching API keys.\n"
             google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
             continue  # Continue to next page (current rate limited page is not repeated)
         fi

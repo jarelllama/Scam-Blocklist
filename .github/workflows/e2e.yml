@@ -21,14 +21,17 @@ jobs:
 
   dead-check:
     needs: retrieve
+    #if: ${{ success() || failure() }}
     uses: ./.github/workflows/dead.yml
 
   build:
     needs: dead-check
+    if: ${{ success() || failure() }}
     uses: ./.github/workflows/build.yml
 
   tidy_log:
     needs: build
+    if: ${{ success() || failure() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
