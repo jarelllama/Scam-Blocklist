@@ -301,12 +301,12 @@ function build {
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         cat in_toplist.tmp >> data/pending/domains_manual_review.tmp
-        awk '{print $0 " (\033[31mtoplist\033[0m)"}' in_toplist.tmp
+        awk '{print $0 " (\033[1;31mtoplist\033[0m)"}' in_toplist.tmp
     fi
     if [[ -f invalid_entries.tmp ]]; then
         format_list invalid_entries.tmp
         cat invalid_entries.tmp >> data/pending/domains_manual_review.tmp
-        awk '{print $0 " (\033[31minvalid\033[0m)"}' invalid_entries.tmp
+        awk '{print $0 " (\033[1;31minvalid\033[0m)"}' invalid_entries.tmp
     fi
     format_list data/pending/domains_manual_review.tmp
 
@@ -353,7 +353,7 @@ function log_source {
         'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","parked","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
     [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
     excluded_count=$((dead_count + redundant_count + parked_count))
-    printf "\n\e[1mSource: %s\e[0m\n" "$item"
+    printf "\n\e[1mSource:\e[0m %s\n" "$item"
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
     printf "%s\n" "----------------------------------------------------------------------"
 }
