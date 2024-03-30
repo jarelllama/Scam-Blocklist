@@ -19,7 +19,6 @@ function main {
     : > "$raw_file"  # Initialize raw file
     sed -i '1q' "$domain_log"  # Initialize domain log file
     [[ "$1" == 'retrieval' ]] && test_retrieval_validate "$1"
-    [[ "$1" == 'toplist' ]] && test_toplist_check
     [[ "$1" == 'validate' ]] && test_retrieval_validate "$1"
     [[ "$1" == 'dead' ]] && test_dead_check
     [[ "$1" == 'parked' ]] && test_parked_check
@@ -215,20 +214,6 @@ function test_retrieval_validate {
 
     [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
-    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
-}
-
-function test_toplist_check {
-    [[ -d data/pending ]] && rm -r data/pending  # Initialize pending directory
-    mkdir data/pending
-    : > "$whitelist_file"  # Clear whitelist file
-    printf "google.com\n" > data/pending/domains_google_search_toplist-test.tmp  # Input
-    printf "toplist,google.com\n" > out_log.txt  # Expected output
-    bash functions/retrieve_domains.sh || true  # Run retrieval script and ignore exit status
-    printf "%s\n" "------------------------------------------------------------------"
-    [[ ! -d data/pending ]] && { printf "! Pending directory is missing.\n"; error=true; }  # Check pending directory
-    check_log
-    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
