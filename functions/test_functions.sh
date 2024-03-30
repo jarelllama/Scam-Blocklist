@@ -133,6 +133,14 @@ function test_retrieval_validate {
         printf "invalid-test.1x\n"
     } >> input.txt  # Input
     printf "invalid-test.xn--903fds\n" >> out_raw.txt  # Expected output
+    [[ "$script_to_test" == 'retrieve' ]] &&
+        {
+            printf "invalid-test-com\n"
+            printf "100.100.100.100\n"
+            printf "invalid-test.x\n"
+            printf "invalid-test.100\n"
+            printf "invalid-test.1x\n"
+        } >> out_manual.txt  # Expected output
     {
         printf "invalid,invalid-test-com\n"
         printf "invalid,100.100.100.100\n"
@@ -159,12 +167,12 @@ function test_retrieval_validate {
         printf "redundant,domain.redundant-test.com\n" >> out_log.txt
     fi
 
-    if [[ "$script_to_test" == 'validate' ]]; then
-        # Test toplist check
-        printf "google.com\n" >> input.txt  # Input
-        printf "google.com\n" >> out_raw.txt  # Expected output
-        printf "toplist,google.com\n" >> out_log.txt  # Expected output
-    fi
+    # Test toplist check
+    printf "microsoft.com\n" >> input.txt  # Input
+    # Expected output
+    [[ "$script_to_test" == 'validate' ]] && printf "microsoft.com\n" >> out_raw.tx
+    [[ "$script_to_test" == 'retrieve' ]] && printf "microsoft.com\n" >> out_manual.txt
+    printf "toplist,microsoft.com\n" > out_log.txt
 
     # Test light raw file exclusion of specific sources
     if [[ "$script_to_test" == 'retrieval' ]]; then
@@ -194,6 +202,7 @@ function test_retrieval_validate {
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
+    check_output "data/pending/domains_manual_review.tmp" "out_manual.tmp" "Manual review"  # Check manual review file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'retrieval' ]]; then
