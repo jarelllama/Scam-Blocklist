@@ -183,8 +183,6 @@ function test_retrieve_validate {
         cp out_raw.txt out_raw_light.txt  # Expected output for light
     fi
 
-    prep_output  # Prepare expected output files
-
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Distribute the sample input into various sources
         split -n l/3 input.txt
@@ -331,11 +329,9 @@ function run_script {
     done
     printf "[start] %s\n" "$1"
     printf "%s\n" "----------------------------------------------------------------------"
-    [[ "$2" == "exit 0" ]] && bash "functions/${1}" || printf ""  # printf to negative exit status 1
-    [[ -z "$2" ]] && bash "functions/${1}"
-    [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
+    bash "functions/${1}" || errored=true
     printf "%s\n" "----------------------------------------------------------------------"
-    [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
+    [[ -z "$2" ]] && [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
 }
 
 function check_output {
