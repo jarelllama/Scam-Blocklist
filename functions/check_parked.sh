@@ -19,7 +19,7 @@ function main {
 
 function remove_parked_domains {
     touch parked_domains.tmp
-    printf "\n[start] Analyzing %s entries for parked domains.\n" "$(wc -l < "$raw_file")"
+    printf "\n[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$raw_file")"
 
     # Split into 12 equal files
     split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
@@ -43,7 +43,7 @@ function remove_parked_domains {
 
 function add_unparked_domains {
     touch unparked_domains.tmp
-    printf "\n[start] Analyzing %s entries for unparked domains.\n" "$(wc -l < "$raw_file")"
+    printf "\n[start] Analyzing %s entries for unparked domains\n" "$(wc -l < "$raw_file")"
 
     # Split into 12 equal files
     split -d -l $(($(wc -l < "$parked_domains_file")/12)) "$parked_domains_file"
@@ -91,7 +91,7 @@ function check_unparked {
         ((count++))
         # Check for parked message in site's HTML
         if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 5 "http://${domain}/" | tr -d '\0')"; then
-            printf "[info] Unparked: %s\n" "$domain"
+            printf "[info] Found unparked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "unparked_domains_${1}.tmp"
         fi
         [[ "$track" == false ]] && continue  # Skip progress tracking if not first split file
