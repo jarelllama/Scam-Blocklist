@@ -169,7 +169,7 @@ function test_retrieve_validate {
     # Test toplist check
     printf "microsoft.com\n" >> input.txt  # Input
     # Expected output
-    [[ "$script_to_test" == 'validate' ]] && printf "microsoft.com\n" >> out_raw.tx
+    [[ "$script_to_test" == 'validate' ]] && printf "microsoft.com\n" >> out_raw.txt
     [[ "$script_to_test" == 'retrieve' ]] && printf "microsoft.com\n" >> out_manual.txt
     printf "toplist,microsoft.com\n" >> out_log.txt
 
