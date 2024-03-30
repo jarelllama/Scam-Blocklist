@@ -50,8 +50,8 @@ jobs:
     uses: ./.github/workflows/validate_entries.yml
 
   deploy:
-    needs: validate
-    if: ${{ success() || failure() }}
+    needs: [test-functions, validate]
+    if: ${{ always() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 
   prune-logs:
@@ -79,6 +79,6 @@ jobs:
           git push -q
 
   update-readme:
-    needs: prune-logs
+    needs: [deploy, prune-logs]
+    if: ${{ always() && needs.deploy.result == 'success' }}
     uses: ./.github/workflows/update_readme.yml
-    if: ${{ always() && needs.deploy.result == 'success' }}  # Deploy only if deploy passes

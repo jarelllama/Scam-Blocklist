@@ -73,13 +73,12 @@ function check_parked {
     while read -r domain; do
         ((count++))
         # Check for parked message in site's HTML
-        if grep -qiaFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/")"; then
-            printf "Parked: %s\n" "$domain"
+        if grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 2 "http://${domain}/" | tr -d '\0')"; then
+            printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
         [[ "$track" == false ]] && continue  # Skip progress tracking if not first split file
-        percentage_count="$((count * 100 / $(wc -l < "$1")))"
-        ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
+        ((count % 100 == 0)) && printf "[info] Analyzed %s%% of domains\n" "$((count * 100 / $(wc -l < "$1")))"
     done < "$1"
     # Collate parked domains
     [[ -f "parked_domains_${1}.tmp" ]] && cat "parked_domains_${1}.tmp" >> parked_domains.tmp
@@ -91,13 +90,12 @@ function check_unparked {
     while read -r domain; do
         ((count++))
         # Check for parked message in site's HTML
-        if ! grep -qiaFf "$parked_terms_file" <<< "$(curl -sL --max-time 5 "http://${domain}/")"; then
-            printf "Unparked: %s\n" "$domain"
+        if ! grep -qiFf "$parked_terms_file" <<< "$(curl -sL --max-time 5 "http://${domain}/" | tr -d '\0')"; then
+            printf "[info] Unparked: %s\n" "$domain"
             printf "%s\n" "$domain" >> "unparked_domains_${1}.tmp"
         fi
         [[ "$track" == false ]] && continue  # Skip progress tracking if not first split file
-        percentage_count="$((count * 100 / $(wc -l < "$1")))"
-        ((percentage_count % 5 == 0)) && printf "%s%%\n" "$percentage_count"
+        ((count % 100 == 0)) && printf "[info] Analyzed %s%% of domains\n" "$((count * 100 / $(wc -l < "$1")))"
     done < "$1"
     # Collate unparked domains
     [[ -f "unparked_domains_${1}.tmp" ]] && cat "unparked_domains_${1}.tmp" >> unparked_domains.tmp

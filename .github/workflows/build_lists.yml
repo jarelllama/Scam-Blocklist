@@ -18,7 +18,8 @@ permissions:
 
 jobs:
   build-lists:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # Do not run if workflow_run failed/cancelled (still allows workflow_dispatch and workflow_call)
+    if: ${{ github.event.workflow_run.conclusion != 'failure' || github.event.workflow_run.conclusion != 'cancelled' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
