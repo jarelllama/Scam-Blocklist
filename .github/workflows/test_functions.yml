@@ -25,8 +25,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Test retrieval
-        run: bash functions/test_functions.sh 'retrieval'
+      - name: Test domain retrieval
+        run: bash functions/test_functions.sh 'retrieve'
 
   test-dead-check:
     runs-on: ubuntu-latest

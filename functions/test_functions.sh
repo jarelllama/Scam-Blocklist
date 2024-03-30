@@ -18,8 +18,8 @@ parked_domains_file='data/parked_domains.txt'
 function main {
     : > "$raw_file"  # Initialize raw file
     sed -i '1q' "$domain_log"  # Initialize domain log file
-    [[ "$1" == 'retrieval' ]] && test_retrieval_validate "$1"
-    [[ "$1" == 'validate' ]] && test_retrieval_validate "$1"
+    [[ "$1" == 'retrieve' ]] && test_retrieve_validate "$1"
+    [[ "$1" == 'validate' ]] && test_retrieve_validate "$1"
     [[ "$1" == 'dead' ]] && test_dead_check
     [[ "$1" == 'parked' ]] && test_parked_check
     [[ "$1" == 'shellcheck' ]] && shellcheck
@@ -56,12 +56,12 @@ function shellcheck {
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
-function test_retrieval_validate {
+function test_retrieve_validate {
     script_to_test="$1"
     [[ -d data/pending ]] && rm -r data/pending  # Initialize pending directory
-    [[ "$script_to_test" == 'retrieval' ]] && mkdir data/pending
+    [[ "$script_to_test" == 'retrieve' ]] && mkdir data/pending
 
-    if [[ "$script_to_test" == 'retrieval' ]]; then
+    if [[ "$script_to_test" == 'retrieve' ]]; then
         # Test removal of known dead domains
         {
             printf "dead-test.com\n"
@@ -70,7 +70,7 @@ function test_retrieval_validate {
         {
             printf "dead-test.com\n"
             printf "www.dead-test-2.com\n"
-        } > input.txt  # Input
+        } >> input.txt  # Input
         # No expected output (dead domains check does not log)
     fi
 
@@ -90,7 +90,7 @@ function test_retrieval_validate {
 
     # Removal of domains already in raw file is redundant to test
 
-    if [[ "$script_to_test" == 'retrieval' ]]; then
+    if [[ "$script_to_test" == 'retrieve' ]]; then
         # Test removal of known parked domains
         printf "parked-domains-test.com\n" > "$parked_domains_file"  # Sample data
         printf "parked-domains-test.com\n" >> input.txt  # Input
@@ -149,7 +149,7 @@ function test_retrieval_validate {
     } >> out_log.txt  # Expected output
 
     : > "$redundant_domains_file"  # Initialize redundant domains file
-    if [[ "$script_to_test" == 'retrieval' ]]; then
+    if [[ "$script_to_test" == 'retrieve' ]]; then
         # Test removal of new redundant domains
         printf "redundant-test.com\n" > "$wildcards_file"  # Sample data
         printf "redundant-test.com\n" >> out_wildcards.txt  # Wildcard should already be in expected wildcards file
@@ -171,10 +171,10 @@ function test_retrieval_validate {
     # Expected output
     [[ "$script_to_test" == 'validate' ]] && printf "microsoft.com\n" >> out_raw.tx
     [[ "$script_to_test" == 'retrieve' ]] && printf "microsoft.com\n" >> out_manual.txt
-    printf "toplist,microsoft.com\n" > out_log.txt
+    printf "toplist,microsoft.com\n" >> out_log.txt
 
     # Test light raw file exclusion of specific sources
-    if [[ "$script_to_test" == 'retrieval' ]]; then
+    if [[ "$script_to_test" == 'retrieve' ]]; then
         cp "$raw_file" "$raw_light_file"
         printf "raw-light-test.com\n" > data/pending/domains_guntab.com.tmp  # Input
         printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
@@ -185,7 +185,7 @@ function test_retrieval_validate {
 
     prep_output  # Prepare expected output files
 
-    if [[ "$script_to_test" == 'retrieval' ]]; then
+    if [[ "$script_to_test" == 'retrieve' ]]; then
         # Distribute the sample input into various sources
         split -n l/3 input.txt
         mv xaa data/pending/domains_aa419.org.tmp
@@ -203,7 +203,7 @@ function test_retrieval_validate {
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
-    if [[ "$script_to_test" == 'retrieval' ]]; then
+    if [[ "$script_to_test" == 'retrieve' ]]; then
         check_output "data/pending/domains_manual_review.tmp" "out_manual.txt" "Manual review"  # Check manual review file
     elif [[ "$script_to_test" == 'validate' ]]; then
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
