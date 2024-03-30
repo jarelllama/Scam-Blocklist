@@ -2,9 +2,9 @@
 ! Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-! Last modified: Fri Mar 29 10:40:33 UTC 2024
+! Last modified: Sat Mar 30 01:59:01 UTC 2024
 ! Syntax: Adblock Plus
-! Total number of entries: 2044
+! Total number of entries: 2085
 !
 ||01edc.com^
 ||1sttheworld.com^
@@ -101,6 +101,7 @@
 ||ammunitionyard.com^
 ||amreahome.com^
 ||anabolicsteroidspharmacyaustralia.com^
+||anabolicsteroidssupps.com^
 ||analystcase.com^
 ||andylabradorretrieverhome.com^
 ||anewscheng.com^
@@ -117,7 +118,6 @@
 ||apextradehouseminingservices.com^
 ||applevisionproworld.com^
 ||applyforunvacation.online^
-||archivesimf.org^
 ||arestreasures.com^
 ||armanipuppieshome.co.za^
 ||armlogisticsmaritime.co.za^
@@ -190,6 +190,7 @@
 ||beanspetsupply.com^
 ||beaticecryptos.com^
 ||beautifulteacupchihuahua.com^
+||beautythine.com^
 ||beemuscle.com^
 ||beetcymetric.com^
 ||belendan.com^
@@ -227,6 +228,7 @@
 ||bikesonline24.com^
 ||billionfollowers.com^
 ||binozy.com^
+||birainstore.com^
 ||birkenstocke.com^
 ||bishopdaycare.com^
 ||bisousa.nl^
@@ -309,6 +311,7 @@
 ||buymdmaindia.com^
 ||buymegadrugsonline.com^
 ||buynowshopp.com^
+||buyoxa.store^
 ||buyricksimpsonoils.com^
 ||buyshippingcontainers.co.uk^
 ||buyshroomsaustralia.com^
@@ -378,6 +381,7 @@
 ||chickenpoultryfarm.co.za^
 ||chickscharm.com^
 ||chicme.com^
+||chicwchic.com^
 ||chicyes.com^
 ||chmens.com^
 ||choumainecoon.com^
@@ -407,6 +411,7 @@
 ||clearlyss.store^
 ||clicktechpro.com^
 ||clicktoearn.co^
+||clonecardandfakebill.com^
 ||clonecards.shop^
 ||clonecardshop.com^
 ||clonecardsvendor.com^
@@ -427,6 +432,7 @@
 ||coinstarchemical.com^
 ||coinvesthub.com^
 ||cokqvn.com^
+||collectionbath.com^
 ||colorfulcustom.com^
 ||coloribbon.com^
 ||colorvybes.com^
@@ -486,13 +492,14 @@
 ||dachigolfcarts.com^
 ||daggerfirearms.com^
 ||dailybonus.ltd^
-||daineseride.com^
 ||daisuka.com^
 ||danielzdealz.com^
 ||danitk.com^
+||daniva.net^
 ||dannerus.com^
 ||dark-net-market.com^
 ||darkmarketsales.com^
+||darkworldenterprise.com^
 ||dash-bit.com^
 ||datemeetsmart.link^
 ||daveamor.us^
@@ -563,7 +570,6 @@
 ||dsteinmannkittens.co.za^
 ||dubarryhome.com^
 ||duholo.com^
-||duna.asia^
 ||duncanvillefbc.org^
 ||dvfofficial.com^
 ||dwa150.com^
@@ -606,6 +612,7 @@
 ||eloiseandlolo.com^
 ||elvira.top^
 ||emmetthub.com^
+||emporiumtool.com^
 ||empowerorphans.info^
 ||empowerorphans.online^
 ||enelongi.com^
@@ -697,6 +704,7 @@
 ||foreseew.com^
 ||forevergiftable.com^
 ||forexhiexperts.com^
+||forums.13x.com^
 ||forums.sassnet.com^
 ||fossilssale.us^
 ||fotache.ro^
@@ -704,8 +712,10 @@
 ||framethewaves.com^
 ||frankandoaks.us^
 ||freedomboerboel.com^
+||frenchiepuppiesforsaleinusa.com^
 ||freshdwet.com^
 ||fresheggsforsale.co.za^
+||freuqenci.com^
 ||friendlygoldenretrievers.us^
 ||friends-lounge.store^
 ||frontiertrustsavings.com^
@@ -751,6 +761,8 @@
 ||gewqas.com^
 ||gfarmhousesupply.com^
 ||gicibady.com^
+||gifteplus.com^
+||gifthutplus.com^
 ||giftypaws.com^
 ||giftzhouse.com^
 ||gikye.com^
@@ -778,6 +790,7 @@
 ||gloriousbassets.com^
 ||glowsart.com^
 ||glscargoexpress.com^
+||glsinternationallogistics.com^
 ||goetham.com^
 ||gofamilygift.com^
 ||gogogosport.com^
@@ -876,6 +889,7 @@
 ||homesdecoration.shop^
 ||homesharvests.com^
 ||homlays.com^
+||hondaoemparts1.com^
 ||hookedoff.com^
 ||hopkinsliquorcollection.com^
 ||horidex.com^
@@ -956,9 +970,12 @@
 ||jmcatholic.com^
 ||jmshopsus.com^
 ||joanspuppieshome.co.za^
+||johnstown-redevelopment.org^
+||johyson.com^
 ||jojofish.com^
 ||jolekaessentiels.com^
 ||jollyenglishbulldogs.com^
+||jolynew.com^
 ||jonescatteryhomes.com^
 ||jotexhome.shop^
 ||jotexse.shop^
@@ -977,6 +994,7 @@
 ||kavehomesale.shop^
 ||kbnet.shop^
 ||kcypacking.com^
+||kdidas.com^
 ||keepwellstore.com^
 ||kegaoog.com^
 ||keleas.store^
@@ -1066,6 +1084,7 @@
 ||lever.action.rifles.com^
 ||lewisfarmsa.com^
 ||lidcoin.vip^
+||lifeharmony.shop^
 ||lilacraftvn.com^
 ||lillianbassethoundbreeder.com^
 ||lilliancavoodlehome.com^
@@ -1256,7 +1275,6 @@
 ||morningstarfortmill.com^
 ||mosparklejewerly.com^
 ||motelrocks.us^
-||motios6.com^
 ||motizy.com^
 ||mountain-outdoors.com^
 ||mountaincanecorsoden.com^
@@ -1306,6 +1324,7 @@
 ||nbfareast.com^
 ||neerahomeofpets.com^
 ||neighborhoodsluts.com^
+||neilgrsse.quora.com^
 ||nenovic.com^
 ||neondiscoveries.com^
 ||neonsister.com^
@@ -1338,6 +1357,7 @@
 ||noahstuffs.com^
 ||nobleboxerpuppies.com^
 ||noirtease.com^
+||nojkx.com^
 ||normakamalis.us^
 ||norronasales.com^
 ||northernpettransport.com^
@@ -1357,6 +1377,7 @@
 ||olfaabout.com^
 ||olhsc.org^
 ||oliviachemstore.com^
+||olympiaplazapharmacy.com^
 ||omitages.com^
 ||oneclick2her.com^
 ||onedollarsale.shop^
@@ -1390,6 +1411,7 @@
 ||outletheaters.com^
 ||outletstoves.com^
 ||outletunit.com^
+||outwestschnauzers.com^
 ||ownyva.com^
 ||ozroyalcaninpuppiesforsale.com^
 ||p80framekits.com^
@@ -1423,22 +1445,27 @@
 ||perlatoshoe.com^
 ||permanentdiscountstamp.com^
 ||petbirdsfarm.com^
+||peteclub.com^
 ||petflexpuppies.com^
+||petineeds.com^
 ||petjetlogistics.com^
 ||petopiamarket.com^
 ||petrichorlove.com^
+||petsexpresslogistics.com^
 ||pettisrumseycpa.com^
 ||peuapu.com^
 ||pewof.com^
 ||pfconnolly.com^
 ||pgp-logistik.com^
 ||pharmacocaine.com^
+||pharmauniversel.com^
 ||picturefr.shop^
 ||piecespetiteshop.com^
 ||piexbtc.com^
 ||pills-store-online24.com^
 ||pinballclassic.com^
 ||pinetreegeneralstore.com^
+||pinhuoqun.com^
 ||pinko.eu.com^
 ||pinkonlines.com^
 ||pinkosales.top^
@@ -1483,6 +1510,7 @@
 ||prochain.vip^
 ||prochemislaboratory.weebly.com^
 ||productskitchen.com^
+||productstudio.store^
 ||prometriccert.com^
 ||promisedlanddonkeyfarm.com^
 ||prosoftwares.fr^
@@ -1556,6 +1584,7 @@
 ||robmondcavalierhome.com^
 ||rocknightstore.com^
 ||rootchemicals.com^
+||roriy.com^
 ||rosedreaming.com^
 ||rossiarmstore.com^
 ||rovertac.com^
@@ -1617,11 +1646,14 @@
 ||serengetidiscount.com^
 ||serenitytoypoodles.com^
 ||setietutline.com^
+||setyne.com^
 ||sewingiiseasy.com^
 ||sext4bang.com^
 ||sexylingerieca.shop^
 ||sgd498.com^
+||shaiyuzhou.com^
 ||share2pay.co^
+||shebliss.store^
 ||sheinza.com^
 ||shelterutilities.com^
 ||sheltiehaven.com^
@@ -1640,7 +1672,6 @@
 ||shorthairkittensforsale.com^
 ||shouldermd.com^
 ||siberianhuskydogsavailable.com^
-||sieverslabradorshome.com^
 ||sigsauerp228.com^
 ||sigsauerp229.com^
 ||sigsauerp320.xyz^
@@ -1663,6 +1694,7 @@
 ||slateandivoryco.com^
 ||sleekholder.com^
 ||smartesla.us^
+||smartnotes-online.com^
 ||smartshootersgunshop.online^
 ||smgbasic.com^
 ||smilefororphan.co.in^
@@ -1700,6 +1732,7 @@
 ||springfieldhellcat.xyz^
 ||springlackhomes.com^
 ||sprintextrust.com^
+||spuddily.com^
 ||srglobalenterprisepvtltd.in^
 ||srheumatology.com^
 ||ssd-chemical-solution-company-llc.business.site^
@@ -1758,12 +1791,14 @@
 ||suytdt.com^
 ||svcoin.space^
 ||svshoes.co.za^
+||sweetay.shop^
 ||sweetntie.com^
 ||sweetpuppysmiles.com^
 ||swiftcargotrack.com^
 ||swiftsend.au.com^
 ||swisswatchch.com^
 ||synbnk.com^
+||syncdecor.com^
 ||sytm9.com^
 ||tactical-gunshop.com^
 ||tacticoolammoshop.com^
@@ -1771,7 +1806,6 @@
 ||tangdress.com^
 ||tanjongpets.com^
 ||taphousebourbon.com^
-||tapnfuck.com^
 ||tasty-health.se^
 ||tatadress.com^
 ||taylorsfirearmsusa.com^
@@ -1808,6 +1842,7 @@
 ||thechemicalsworld.com^
 ||thecolorpickers.com^
 ||thedealscorner.com^
+||theexoticfruitsmarket.com^
 ||thehairmagnolia.com^
 ||thehomeofyorkies.com^
 ||thekittenoasis.com^
@@ -1849,6 +1884,7 @@
 ||toolssunex.com^
 ||toolsus.shop^
 ||toolswiha.com^
+||toparmsshop.com^
 ||topwellcore.com^
 ||tortoiseforsaleonline.com^
 ||townscap.store^
@@ -1900,6 +1936,7 @@
 ||uniquebluestore.com^
 ||uniquedobermannpuppies.com^
 ||uniqueshipper.com^
+||universal-bazaar.com^
 ||universityofgreatwood.education^
 ||uniwallex.com^
 ||unofficedesk.online^
@@ -1934,6 +1971,7 @@
 ||vegdex.com^
 ||veiledwhispers.com^
 ||vejaonline.shop^
+||velbazar.com^
 ||venkajapan.com^
 ||vetdefend77.com^
 ||veteranammoshop.com^
@@ -1961,7 +1999,6 @@
 ||wannadecor.com^
 ||wansut.com^
 ||warehouseoneca.shop^
-||warlyes.com^
 ||warrenbfansclub.com^
 ||watchassassin.store^
 ||watchlap.com^
@@ -1996,6 +2033,7 @@
 ||woodlandgiantschnauzer.com^
 ||woodllama.com^
 ||worldclasslogisticsexpressusps.com^
+||worldclonecards.com^
 ||worldcontainersgiant.com^
 ||worldwidessdchemicalsolutionandpowder.com^
 ||wowdogdeals.com^
@@ -2021,17 +2059,20 @@
 ||yaor-thramp-xaiosch.yolasite.com^
 ||yawanm.com^
 ||yeetcat.com^
+||yellowlove.site^
 ||yhaire.com^
 ||yitangsj.com^
 ||yorkiefamilysales.com^
 ||youkoll.com^
 ||youmobie.sg^
+||yourdobermann.com^
 ||ytmtb.com^
 ||yuanj.com.cn^
 ||yuannue.com^
 ||yummycrystal.com^
 ||yxkj.store^
 ||yxxx.homes^
+||yydsboutique.com^
 ||yztassel.com^
 ||zaraviphome.com^
 ||zarehomesale.com^
