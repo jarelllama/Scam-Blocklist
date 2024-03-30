@@ -10,12 +10,12 @@
     whitelist_file='config/whitelist.txt'
     blacklist_file='config/blacklist.txt'
     toplist_file='data/toplist.txt'
-    root_domains_file='data/root_domains.txt'
+    root_results_file='data/root_domains.txt'
     subdomains_file='data/subdomains.txt'
     subdomains_to_remove_file='config/subdomains.txt'
     wildcards_file='data/wildcards.txt'
-    dead_domains_file='data/dead_domains.txt'
-    parked_domains_file='data/parked_domains.txt'
+    dead_results_file='data/dead_domains.txt'
+    parked_results_file='data/parked_domains.txt'
     source_log='config/source_log.csv'
     domain_log='config/domain_log.csv'
     time_format=$(date -u +"%H:%M:%S %d-%m-%y")
@@ -69,7 +69,7 @@ source_google_search() {
         for results_file in data/pending/domains_google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
             # Remove header from file name
-            search_term=${domains_file#data/pending/domains_google_search_}
+            search_term=${results_file#data/pending/domains_google_search_}
             # Remove file extension from file name to get search term
             search_term=${search_term%.tmp}
             process_source
@@ -93,7 +93,7 @@ search_google() {
     query_count=0  # Initialize query count for each search term
     search_term="${1//\"/}"  # Remove quotes from search term before encoding
     encoded_search_term=$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')  # Replace non-alphanumeric characters with '%20'
-    domains_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
+    results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     touch "$results_file"  # Create results file if not present for proper logging later
 
     for start in {1..100..10}; do  # Loop through each page of results
@@ -136,7 +136,7 @@ process_source() {
     pending_domains=$(<"$results_file") && rm "$results_file" # Migrate results to a variable
 
     # Remove known dead domains (dead domains file contains subdomains and redundant domains)
-    dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_domains_file"))
+    dead_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$dead_results_file"))
     dead_count=$(wc -w <<< "$dead_domains")
     [[ "$dead_count" -gt 0 ]] && pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$dead_domains"))
     # Logging removed as it inflated log size by too much
@@ -161,7 +161,7 @@ process_source() {
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
 
     # Remove known parked domains
-    parked_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$parked_domains_file"))
+    parked_domains=$(comm -12 <(printf "%s" "$pending_domains") <(sort "$parked_results_file"))
     parked_count=$(wc -w <<< "$parked_domains")
     if [[ "$parked_count" -gt 0 ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$parked_domains"))
@@ -235,9 +235,9 @@ build() {
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         root_domains=$(comm -12 retrieved_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
-        printf "%s\n" "$root_domains" >> "$root_domains_file"  # Collate filtered root domains to exclude from dead check
+        printf "%s\n" "$root_domains" >> "$root_results_file"  # Collate filtered root domains to exclude from dead check
         grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Collate filtered subdomains for dead check
-        format_file "$root_domains_file" && format_file "$subdomains_file"
+        format_file "$root_results_file" && format_file "$subdomains_file"
     fi
 
     count_before=$(wc -l < "$raw_file")
@@ -296,7 +296,7 @@ cleanup() {
 #   ignore_from_light: if true, results from the source are not included in light version
 #     of the blocklist.
 #
-#   domains_file: file path to save retrieved results to be used in further processing.
+#   results_file: file path to save retrieved results to be used in further processing.
 #
 #   if use_existing is true, the retrieval process should be skipped and an existing
 #     retrieved results file should be used instead.
@@ -304,7 +304,7 @@ cleanup() {
 source_manual() {
     source='Manual'
     ignore_from_light=
-    domains_file='data/pending/domains_manual.tmp'
+    results_file='data/pending/domains_manual.tmp'
 
     # Return if file not found (source is the file itself)
     [[ ! -f data/pending/domains_manual.tmp ]] && return
@@ -318,7 +318,7 @@ source_manual() {
 source_aa419() {
     local source='aa419.org'
     ignore_from_light=
-    domains_file="data/pending/domains_${source}.tmp"
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$use_existing" == true ]] && { process_source; return; }
 
@@ -333,7 +333,7 @@ source_aa419() {
 source_guntab() {
     local source='guntab.com'
     ignore_from_light=true
-    domains_file="data/pending/domains_${source}.tmp"
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$use_existing" == true ]] && { process_source; return; }
 
@@ -349,7 +349,7 @@ source_guntab() {
 source_petscams() {
     local source='petscams.com'
     ignore_from_light=
-    domains_file="data/pending/domains_${source}.tmp"
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$use_existing" == true ]] && { process_source; return; }
 
@@ -368,7 +368,7 @@ source_petscams() {
 source_scamdirectory() {
     local source='scam.directory'
     ignore_from_light=
-    domains_file="data/pending/domains_${source}.tmp"
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$use_existing" == true ]] && { process_source; return; }
 
@@ -384,7 +384,7 @@ source_scamdirectory() {
 source_scamadviser() {
     local source='scamadviser.com'
     ignore_from_light=
-    domains_file="data/pending/domains_${source}.tmp"
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$use_existing" == true ]] && { process_source; return; }
 
@@ -401,7 +401,7 @@ source_scamadviser() {
 source_dfpi() {
     local source='dfpi.ca.gov'
     ignore_from_light=
-    domains_file="data/pending/domains_${source}.tmp"
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$use_existing" == true ]] && { process_source; return; }
 
@@ -417,7 +417,7 @@ source_dfpi() {
 source_stopgunscams() {
     local source='stopgunscams.com'
     ignore_from_light=
-    domains_file="data/pending/domains_${source}.tmp"
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$use_existing" == true ]] && { process_source; return; }
 
