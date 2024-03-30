@@ -262,8 +262,8 @@ function process_source {
     invalid_entries=$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$pending_domains")
     if [[ -n "$invalid_entries" ]]; then
         pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$invalid_entries"))
-        log_event "$invalid_entries" "invalid"
         printf "%s\n" "$invalid_entries" >> invalid_entries.tmp  # Collate invalid entries
+        log_event "$invalid_entries" "invalid"
     fi
 
     # Remove redundant domains
@@ -276,10 +276,11 @@ function process_source {
         log_event "$redundant_domains" "redundant"
     done < "$wildcards_file"
 
-    # Find matching domains in toplist, excluding blacklisted domains
+    # Remove domains in toplist, excluding blacklisted domains
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$pending_domains") "$toplist_file") "$blacklist_file")
     toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$toplist_count" -gt 0 ]]; then
+        pending_domains=$(comm -23 <(printf "%s" "$pending_domains") <(printf "%s" "$domains_in_toplist"))
         printf "%s\n" "$domains_in_toplist" >> in_toplist.tmp  # Collate domains found in toplist
         log_event "$domains_in_toplist" "toplist"
     fi
@@ -296,20 +297,18 @@ function build {
     ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
     format_list retrieved_domains.tmp && format_list "$raw_file"
 
-    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n"
-
+    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\n! Entries requiring manual review:\n"
     # Print invalid entries
     if [[ -f invalid_entries.tmp ]]; then
         format_list invalid_entries.tmp
+        cat invalid_entries.tmp >> data/pending/domains_manual_review.tmp  # Save invalid entries into pending file
         awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp
     fi
-
-    # If domains found in toplist, exit with error without saving to raw file
+    # Print domains found in toplist
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
+        cat in_toplist.tmp >> data/pending/domains_manual_review.tmp  # Save domains in toplist into pending file
         awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
-        printf "\nPending domains saved for rerun.\n\n"
-        exit 1
     fi
 
     # Collate filtered subdomains and root domains
@@ -338,7 +337,7 @@ function build {
         format_list "$raw_light_file"
     fi
 
-    [[ -f invalid_entries.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if invalid domains found
+    [[ -f data/pending/domains_manual_review.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if pending domains to be saved
 }
 
 function log_event {
@@ -364,7 +363,7 @@ function format_list {
 }
 
 function cleanup {
-    [[ ! -f in_toplist.tmp ]] && rm -r data/pending  # Initialize pending directory is no pending domains to be saved
+    [[ ! -f data/pending/domains_manual_review.tmp ]] && rm -r data/pending  # Initialize pending directory is no pending domains to be saved
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
