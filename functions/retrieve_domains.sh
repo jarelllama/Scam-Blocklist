@@ -323,7 +323,7 @@ function build {
     format_list "$raw_file"
     log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
-    printf "\n\e[1mAdded new domains to blocklist.\e[0m\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
+    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
 
     # Mark sources as saved in the source log file
     rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file
