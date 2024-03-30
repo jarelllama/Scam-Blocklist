@@ -20,6 +20,7 @@ time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 
 function main {
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
+    pip install -q --user colout  # Install colout
     for file in config/* data/*; do  # Format files in the config and data directory
         format_list "$file"
     done
@@ -29,7 +30,7 @@ function main {
 
 function source {
     # Check for existing pending domains file
-    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n"; }
+    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n" | colout . green; }
     [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419
@@ -152,7 +153,7 @@ function source_google_search {
     # Retrieve new domains
     while read -r search_term; do  # Loop through search terms
         # Return if rate limited
-        [[ "$rate_limited" == true ]] && { printf "⚠️ Both Google Search API keys are rate limited.\n"; return; }
+        [[ "$rate_limited" == true ]] && { printf "\nBoth Google Search API keys are rate limited.\n" | colout . red; return; }
         search_google "$search_term"
     done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
@@ -173,7 +174,7 @@ function search_google {
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Break loop if second key is also rate limited
             [[ "$google_search_id" == "$google_search_id_2" ]] && { rate_limited=true; break; }
-            printf "⚠️ Google Search rate limited. Switching API keys.\n"
+            printf "\nGoogle Search rate limited. Switching API keys.\n" | colout . white faint
             google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
             continue  # Continue to next page (current rate limited page is not repeated)
         fi
@@ -293,21 +294,21 @@ function process_source {
 
 function build {
     # Exit if no new domains to add (-s does not seem to work well here)
-    ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
+    ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\nNo new domains to add.\n" | calout . green; exit 0; }
     format_list retrieved_domains.tmp && format_list "$raw_file"
 
-    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\n\e[1;31mEntries requiring manual review:\e[0m\n"
-    # Print invalid entries
-    if [[ -f invalid_entries.tmp ]]; then
-        format_list invalid_entries.tmp
-        cat invalid_entries.tmp >> data/pending/domains_manual_review.tmp  # Save invalid entries into pending file
-        awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp
-    fi
+    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n" | colout . white
     # Print domains found in toplist
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         cat in_toplist.tmp >> data/pending/domains_manual_review.tmp  # Save domains in toplist into pending file
-        awk 'NF {print $0 " (toplist)"}' in_toplist.tmp
+        awk 'NF {print $0 " (toplist)"}' in_toplist.tmp | colout toplist red
+    fi
+    # Print invalid entries
+    if [[ -f invalid_entries.tmp ]]; then
+        format_list invalid_entries.tmp
+        cat invalid_entries.tmp >> data/pending/domains_manual_review.tmp  # Save invalid entries into pending file
+        awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp | colout invalid red
     fi
 
     # Collate filtered subdomains and root domains
@@ -323,7 +324,8 @@ function build {
     format_list "$raw_file"
     log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
-    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
+    printf "\nAdded new domains to blocklist.\n" | colout . green
+    printf "Before: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
 
     # Mark sources as saved in the source log file
     rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file
@@ -353,7 +355,8 @@ function log_source {
         'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","parked","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
     [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
     excluded_count=$((dead_count + redundant_count + parked_count))
-    printf "\nSource: %s\nRaw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
+    printf "\nSource: %s\n"  "$item" | colout . white
+    printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
