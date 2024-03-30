@@ -208,8 +208,8 @@ function test_retrieve_validate {
     fi
     check_log  # Check log file
 
-    [[ "$error" != true ]] && printf "[success] Test completed. No errors found.\n\n"
-    [[ "$log_error" != true ]] && printf "[info] Log:\n%s\n" "$(<$domain_log)"
+    [[ "$error" != true ]] && printf "[success] Test completed. No errors found\n\n"
+    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -274,9 +274,9 @@ function test_dead_check {
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
     check_log  # Check log file
 
-    [[ "$error" != true ]] && printf "[success] Test completed. No errors found.\n\n" ||
-        printf "[warn] The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
-    [[ "$log_error" != true ]] && printf "[info] Log:\n%s\n" "$(<$domain_log)"
+    [[ "$error" != true ]] && printf "[success] Test completed. No errors found\n\n" ||
+        printf "[warn] The dead-domains-linter may have false positives. Rerun the job to confirm\n\n"
+    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -319,7 +319,7 @@ function test_parked_check {
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$parked_domains_file" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
-    [[ "$error" != true ]] && printf "[success] Test completed. No errors found.\n\n"
+    [[ "$error" != true ]] && printf "[success] Test completed. No errors found\n\n"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -331,7 +331,7 @@ function run_script {
     printf "%s\n" "----------------------------------------------------------------------"
     bash "functions/${1}" || errored=true
     printf "%s\n" "----------------------------------------------------------------------"
-    [[ -z "$2" ]] && [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
+    [[ -z "$2" ]] && [[ "$errored" == true ]] && { printf "[warn] Script returned an error\n"; error=true; }  # Check exit status
 }
 
 function check_output {

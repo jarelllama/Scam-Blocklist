@@ -29,7 +29,7 @@ function main {
 
 function source {
     # Check for existing pending domains file
-    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n"; }
+    [[ -d data/pending ]] && { use_pending=true; printf "\n[start] Using existing lists of retrieved domains\n"; }
     [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419
@@ -152,7 +152,7 @@ function source_google_search {
     # Retrieve new domains
     while read -r search_term; do  # Loop through search terms
         # Return if rate limited
-        [[ "$rate_limited" == true ]] && { printf "! Both Google Search API keys are rate limited.\n"; return; }
+        [[ "$rate_limited" == true ]] && { printf "[warn] Both Google Search API keys are rate limited\n"; return; }
         search_google "$search_term"
     done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
@@ -173,7 +173,7 @@ function search_google {
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Break loop if second key is also rate limited
             [[ "$google_search_id" == "$google_search_id_2" ]] && { rate_limited=true; break; }
-            printf "! Google Search rate limited. Switching API keys.\n"
+            printf "[warn] Google Search rate limited. Switching API keys\n"
             google_search_api_key="$google_search_api_key_2" && google_search_id="$google_search_id_2"
             continue  # Continue to next page (current rate limited page is not repeated)
         fi
@@ -293,10 +293,10 @@ function process_source {
 
 function build {
     # Exit if no new domains to add (-s does not seem to work well here)
-    ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
+    ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\n[info] No new domains to add\n"; exit 0; }
     format_list retrieved_domains.tmp && format_list "$raw_file"
 
-    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\n! Entries requiring manual review:\n"
+    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\n[warn] Entries requiring manual review:\n"
     # Print invalid entries
     if [[ -f invalid_entries.tmp ]]; then
         format_list invalid_entries.tmp
@@ -323,7 +323,7 @@ function build {
     format_list "$raw_file"
     log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
-    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
+    printf "\n[info] Added new domains to blocklist.\n[info] Before: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
 
     # Mark sources as saved in the source log file
     rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file
@@ -353,7 +353,7 @@ function log_source {
         'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","parked","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
     [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
     excluded_count=$((dead_count + redundant_count + parked_count))
-    printf "\nSource: %s\nRaw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
+    printf "\n[info] Source: %s\n[info] Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
