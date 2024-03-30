@@ -62,20 +62,28 @@ source_google_search() {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
     source='Google Search'
     ignore_from_light=
+
     if [[ "$use_existing" == true ]]; then
         # Use existing retrieved results
-        for results_file in data/pending/domains_google_search_*.tmp; do  # Loop through the results from each search term
-            [[ ! -f "$results_file" ]] && return  # Return if no results found
-            search_term=${domains_file#data/pending/domains_google_search_}  # Remove header from file name
-            search_term=${search_term%.tmp}  # Remove file extension from file name to get search term
+        # Loop through the results from each search term
+        for results_file in data/pending/domains_google_search_*.tmp; do
+            [[ ! -f "$results_file" ]] && return
+            # Remove header from file name
+            search_term=${domains_file#data/pending/domains_google_search_}
+            # Remove file extension from file name to get search term
+            search_term=${search_term%.tmp}
             process_source
         done
         return
     fi
+
     # Retrieve new results
     while read -r search_term; do  # Loop through search terms
         # Stop loop if rate limited
-        [[ "$rate_limited" == true ]] && { printf "\n\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"; return; }
+        if [[ "$rate_limited" == true ]]; then
+            printf "\n\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
+            return
+        fi
         search_google "$search_term"
     done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
