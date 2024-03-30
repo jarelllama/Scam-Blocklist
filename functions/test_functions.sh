@@ -191,15 +191,12 @@ function test_retrieve_validate {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
-        printf "[start] retrieve_domains.sh\n"
-        bash functions/retrieve_domains.sh || true  # Run retrieval script and ignore exit status
+        run_script "retrieve_domains.sh" "exit 0"
     elif [[ "$script_to_test" == 'validate' ]]; then
         cp input.txt "$raw_file"  # Input
         mv input.txt "$raw_light_file"  # Input
-        printf "[start] validate_raw.sh\n"
-        bash functions/validate_raw.sh || true  # Run lists check script and ignore exit status
+        run_script "validate_raw.sh" "exit 0"
     fi
-    printf "%s\n" "----------------------------------------------------------------------"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
@@ -269,13 +266,7 @@ function test_dead_check {
     cp "$raw_file" "$raw_light_file"
     grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output for light (resurrected domains are not added back to light)
 
-    prep_output  # Prepare expected output files
-    printf "[start] check_dead.sh\n"
-    bash functions/check_dead.sh  # Run dead script
-    [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
-    printf "%s\n" "----------------------------------------------------------------------"
-
-    [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
+    run_script "check_dead.sh"
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
@@ -319,13 +310,7 @@ function test_parked_check {
     cp "$raw_file" "$raw_light_file"
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt  # Unparked domains are not added back to light
 
-    prep_output  # Prepare expected output files
-    printf "[start] check_parked.sh\n"
-    bash functions/check_parked.sh  # Run parked script
-    [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
-    printf "%s\n" "----------------------------------------------------------------------"
-
-    [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
+    run_script "check_parked.sh"
 
     # Remove placeholder lines
     comm -23 "$raw_file" placeholders.txt > raw.tmp && mv raw.tmp "$raw_file"
@@ -340,10 +325,17 @@ function test_parked_check {
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
-function prep_output {
-    for file in out_*; do
+function run_script {
+    for file in out_*; do  # Format expected output files
         [[ "$file" != out_dead.txt ]] && [[ "$file" != out_parked.txt ]] && sort "$file" -o "$file"
     done
+    printf "[start] %s\n" "$1"
+    printf "%s\n" "----------------------------------------------------------------------"
+    [[ "$2" == "exit 0" ]] && bash "functions/${1}" || printf ""  # printf to negative exit status 1
+    [[ -z "$2" ]] && bash "functions/${1}"
+    [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
+    printf "%s\n" "----------------------------------------------------------------------"
+    [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
 }
 
 function check_output {
