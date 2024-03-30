@@ -39,7 +39,7 @@ function shellcheck {
     # Check for carriage return characters
     problematic_files=$(grep -rl $'\r' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
-        printf "\nLines with carriage return characters:\n"
+        printf "\n[warn] Lines with carriage return characters:\n"
         printf "%s\n" "$problematic_files"
         error=true
     fi
@@ -47,12 +47,12 @@ function shellcheck {
     # Check for missing space before comments
     problematic_files=$(grep -rn '\S\s#' --exclude-dir={legacy,.git,shellcheck-stable} --exclude=*.csv .)
     if [[ -n "$problematic_files" ]]; then
-        printf "\nLines with missing space before comments:\n"
+        printf "\n[warn] Lines with missing space before comments:\n"
         printf "%s\n" "$problematic_files"
         error=true
     fi
 
-    printf "\nScripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
+    printf "\n[info] Scripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -191,13 +191,15 @@ function test_retrieve_validate {
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
+        printf "[start] retrieve_domains.sh\n"
         bash functions/retrieve_domains.sh || true  # Run retrieval script and ignore exit status
     elif [[ "$script_to_test" == 'validate' ]]; then
         cp input.txt "$raw_file"  # Input
         mv input.txt "$raw_light_file"  # Input
+        printf "[start] validate_raw.sh\n"
         bash functions/validate_raw.sh || true  # Run lists check script and ignore exit status
     fi
-    printf "%s\n" "------------------------------------------------------------------"
+    printf "%s\n" "----------------------------------------------------------------------"
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
@@ -211,8 +213,8 @@ function test_retrieve_validate {
     fi
     check_log  # Check log file
 
-    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
-    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
+    [[ "$error" != true ]] && printf "[success] Test completed. No errors found.\n\n"
+    [[ "$log_error" != true ]] && printf "[info] Log:\n%s\n" "$(<$domain_log)"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -268,11 +270,12 @@ function test_dead_check {
     grep -vF 'google.com' out_raw.txt > out_raw_light.txt  # Expected output for light (resurrected domains are not added back to light)
 
     prep_output  # Prepare expected output files
+    printf "[start] check_dead.sh\n"
     bash functions/check_dead.sh  # Run dead script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
-    printf "%s\n" "------------------------------------------------------------------"
+    printf "%s\n" "----------------------------------------------------------------------"
 
-    [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
+    [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$dead_domains_file" "out_dead.txt" "Dead domains"  # Check dead domains file
@@ -282,9 +285,9 @@ function test_dead_check {
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
     check_log  # Check log file
 
-    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n" ||
-        printf "The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
-    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
+    [[ "$error" != true ]] && printf "[success] Test completed. No errors found.\n\n" ||
+        printf "[warn] The dead-domains-linter may have false positives. Rerun the job to confirm.\n\n"
+    [[ "$log_error" != true ]] && printf "[info] Log:\n%s\n" "$(<$domain_log)"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -317,11 +320,12 @@ function test_parked_check {
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt  # Unparked domains are not added back to light
 
     prep_output  # Prepare expected output files
+    printf "[start] check_parked.sh\n"
     bash functions/check_parked.sh  # Run parked script
     [[ "$?" -eq 1 ]] && errored=true  # Check returned exit status
-    printf "%s\n" "------------------------------------------------------------------"
+    printf "%s\n" "----------------------------------------------------------------------"
 
-    [[ "$errored" == true ]] && { printf "! Script returned an error.\n"; error=true; }  # Check exit status
+    [[ "$errored" == true ]] && { printf "[warn] Script returned an error.\n"; error=true; }  # Check exit status
 
     # Remove placeholder lines
     comm -23 "$raw_file" placeholders.txt > raw.tmp && mv raw.tmp "$raw_file"
@@ -332,7 +336,7 @@ function test_parked_check {
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$parked_domains_file" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
-    [[ "$error" != true ]] && printf "Test completed. No errors found.\n\n"
+    [[ "$error" != true ]] && printf "[success] Test completed. No errors found.\n\n"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -344,9 +348,9 @@ function prep_output {
 
 function check_output {
     cmp -s "$1" "$2" && return  # Return if files are the same
-    printf "! %s file is not as expected:\n" "$3"
+    printf "[warn] %s file is not as expected:\n" "$3"
     cat "$1"
-    printf "\nExpected output:\n"
+    printf "\n[info] Expected output:\n"
     cat "$2"
     printf "\n"
     error=true
@@ -354,7 +358,7 @@ function check_output {
 
 function check_if_dead_present {
     ! grep -q '[[:alnum:]]' "$1" && return  # Return if file has no domains
-    printf "! %s file still has dead domains:\n" "$2"
+    printf "[warn] %s file still has dead domains:\n" "$2"
     cat "$1"
     printf "\n"
     error=true
@@ -365,9 +369,9 @@ function check_log {
         ! grep -qF "$log_term" "$domain_log" && { log_error=true; break; }  # Break when error found
     done < out_log.txt
     [[ "$log_error" != true ]] && return  # Return if no error found
-    printf "! Log file is not as expected:\n"
+    printf "[warn] Log file is not as expected:\n"
     cat "$domain_log"
-    printf "\nTerms expected in log:\n"
+    printf "\n[info] Terms expected in log:\n"
     cat out_log.txt  # No need for additional new line since the log is not printed again
     error=true
 }

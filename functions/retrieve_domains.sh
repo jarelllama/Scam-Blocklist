@@ -354,7 +354,7 @@ function log_source {
     [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
     excluded_count=$((dead_count + redundant_count + parked_count))
     printf "\nSource: %s\nRaw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
-    printf "%s\n" "------------------------------------------------------------------"
+    printf "%s\n" "----------------------------------------------------------------------"
 }
 
 function format_list {
