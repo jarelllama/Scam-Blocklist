@@ -19,7 +19,7 @@ function main {
 
 function remove_parked_domains {
     touch parked_domains.tmp
-    printf "\nChecking for parked domains.\n"
+    printf "\n[start] Analyzing %s entries for parked domains.\n" "$(wc -l < "$raw_file")"
 
     # Split into 12 equal files
     split -d -l $(($(wc -l < "$raw_file")/12)) "$raw_file"
@@ -43,7 +43,7 @@ function remove_parked_domains {
 
 function add_unparked_domains {
     touch unparked_domains.tmp
-    printf "\nChecking for domains that have been unparked.\n"
+    printf "\n[start] Analyzing %s entries for unparked domains.\n" "$(wc -l < "$raw_file")"
 
     # Split into 12 equal files
     split -d -l $(($(wc -l < "$parked_domains_file")/12)) "$parked_domains_file"
