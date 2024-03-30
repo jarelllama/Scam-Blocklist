@@ -30,7 +30,7 @@ function main {
 
 function source {
     # Check for existing pending domains file
-    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n" | colout . green faint; }
+    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n" | colout . green; }
     [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419
@@ -355,7 +355,7 @@ function log_source {
         'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","parked","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
     [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
     excluded_count=$((dead_count + redundant_count + parked_count))
-    printf "\nSource: %s\n"  "$item" | colout . white
+    printf "\nSource: %s\n"  "$item" | colout . white faint
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
     printf "%s\n" "----------------------------------------------------------------------"
 }
