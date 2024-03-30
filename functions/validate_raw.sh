@@ -100,7 +100,7 @@ function check_raw_file {
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$domains") "$toplist_file") "$blacklist_file")
     toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$toplist_count" -gt 0 ]]; then
-        awk 'NF {print "\033[0;31m" $0 " (toplist) - manual removal required\033[0m"}' <<< "$domains_in_toplist" >> filter_log.tmp
+        awk 'NF {print $0 " (toplist) - \033[0;31mmanual removal required\033[0m"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
     fi
 
