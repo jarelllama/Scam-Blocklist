@@ -60,7 +60,7 @@ source() {
 
 source_google_search() {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
-    source='Google Search'
+    local source='Google Search'
     ignore_from_light=
 
     if [[ "$use_existing" == true ]]; then
