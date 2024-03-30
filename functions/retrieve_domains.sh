@@ -2,8 +2,6 @@
 {  # Declare variables
     raw_file='data/raw.txt'
     raw_light_file='data/raw_light.txt'
-    source_log='config/source_log.csv'
-    domain_log='config/domain_log.csv'
     search_terms_file='config/search_terms.csv'
     whitelist_file='config/whitelist.txt'
     blacklist_file='config/blacklist.txt'
@@ -14,24 +12,33 @@
     wildcards_file='data/wildcards.txt'
     dead_domains_file='data/dead_domains.txt'
     parked_domains_file='data/parked_domains.txt'
+    source_log='config/source_log.csv'
+    domain_log='config/domain_log.csv'
     time_format=$(date -u +"%H:%M:%S %d-%m-%y")
 }
 
-# If running locally, use locally stored secrets instead of environment variables
-[[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; google_search_id_2=; google_search_api_key_2=;}
-
 main() {
-    command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
-    for file in config/* data/*; do  # Format files in the config and data directory
-        format_list "$file"
-    done
+    prepare
     source
     build
 }
 
+prepare() {
+    command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
+
+    # Format files in the config and data directory
+    for file in config/* data/*; do
+        format_file "$file"
+    done
+}
+
 source() {
     # Check for existing retrieved results
-    [[ -d data/pending ]] && { use_existing=true; printf "\nUsing existing lists of retrieved results.\n"; }
+    if [[ -d data/pending ]]; then
+        printf "\nUsing existing lists of retrieved results.\n"
+        use_existing=true
+    fi
+
     mkdir -p data/pending
     source_manual
     source_aa419
@@ -109,7 +116,7 @@ process_source() {
 
     # Remove https: or http:, remove slashes  and convert to lowercase
     sed 's/https\?://; s/\///g' "$results_file" | tr '[:upper:]' '[:lower:]' > domains.tmp && mv domains.tmp "$results_file"
-    format_list "$results_file"
+    format_file "$results_file"
     unfiltered_count=$(wc -l < "$results_file")  # Count number of unfiltered domains pending
     pending_domains=$(<"$results_file") && rm "$results_file" # Migrate results to a variable
 
@@ -133,7 +140,7 @@ process_source() {
         domains_with_subdomains=$(grep -v '^www\.' <<< "$domains_with_subdomains")
         [[ -n "$domains_with_subdomains" ]] && log_event "$domains_with_subdomains" "subdomain"
     done < "$subdomains_to_remove_file"
-    format_list subdomains.tmp && format_list root_domains.tmp
+    format_file subdomains.tmp && format_file root_domains.tmp
 
     # Remove domains already in raw file
     pending_domains=$(comm -23 <(printf "%s" "$pending_domains") "$raw_file")
@@ -205,7 +212,7 @@ process_source() {
 build() {
     # Exit if no new domains to add (-s does not seem to work well here)
     ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\n\e[1mNo new domains to add.\e[0m\n"; exit 0; }
-    format_list retrieved_domains.tmp && format_list "$raw_file"
+    format_file retrieved_domains.tmp && format_file "$raw_file"
 
     # Print domains requiring manual review
     [[ -f manual_review.tmp ]] && { printf "\n\e[1mEntries requiring manual review:\e[0m\n"; cat manual_review.tmp; }
@@ -215,12 +222,12 @@ build() {
         root_domains=$(comm -12 retrieved_domains.tmp root_domains.tmp)  # Retrieve filtered root domains
         printf "%s\n" "$root_domains" >> "$root_domains_file"  # Collate filtered root domains to exclude from dead check
         grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$subdomains_file"  # Collate filtered subdomains for dead check
-        format_list "$root_domains_file" && format_list "$subdomains_file"
+        format_file "$root_domains_file" && format_file "$subdomains_file"
     fi
 
     count_before=$(wc -l < "$raw_file")
     cat retrieved_domains.tmp >> "$raw_file"  # Add domains to raw file
-    format_list "$raw_file"
+    format_file "$raw_file"
     log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
@@ -233,7 +240,7 @@ build() {
     # Build raw light file
     if grep -q '[[:alnum:]]' retrieved_light_domains.tmp; then
         cat retrieved_light_domains.tmp >> "$raw_light_file"
-        format_list "$raw_light_file"
+        format_file "$raw_light_file"
     fi
 
     [[ -f manual_review.tmp ]] && { printf "\n"; exit 1; } || exit 0  # Exit with error if domains need to be manually reviewed
@@ -258,7 +265,7 @@ log_source() {
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
-format_list() {
+format_file() {
     bash functions/tools.sh "format" "$1"
 }
 
@@ -360,6 +367,9 @@ source_stopgunscams() {
     done
     process_source
 }
+
+# If running locally, use locally stored secrets instead of environment variables
+[[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; google_search_id_2=; google_search_api_key_2=;}
 
 trap cleanup EXIT
 main
