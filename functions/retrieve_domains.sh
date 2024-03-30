@@ -296,7 +296,7 @@ function build {
     ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\nNo new domains to add.\n"; exit 0; }
     format_list retrieved_domains.tmp && format_list "$raw_file"
 
-    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\n⚠️ Entries requiring manual review:\n"
+    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\n\e[1;31mEntries requiring manual review:\e[0m\n"
     # Print invalid entries
     if [[ -f invalid_entries.tmp ]]; then
         format_list invalid_entries.tmp
