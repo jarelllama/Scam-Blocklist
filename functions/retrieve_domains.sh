@@ -195,7 +195,6 @@ function process_source {
     [[ -z "$rate_limited" ]] && rate_limited=false
     [[ -z "$ignore_from_light" ]] && ignore_from_light=false
 
-    printf "\n"
     [[ ! -f "$domains_file" ]] && return  # Return if domains file does not exist
     ! grep -q '[[:alnum:]]' "$domains_file" && { log_source; return; }  # Skip to next source if no results retrieved
 
@@ -354,7 +353,7 @@ function log_source {
         'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","parked","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$source_log"
     [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
     excluded_count=$((dead_count + redundant_count + parked_count))
-    printf "Source: %s\nRaw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
+    printf "\nSource: %s\nRaw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$item" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
     printf "%s\n" "------------------------------------------------------------------"
 }
 

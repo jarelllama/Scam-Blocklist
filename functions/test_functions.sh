@@ -201,11 +201,10 @@ function test_retrieval_validate {
 
     check_output "$raw_file" "out_raw.txt" "Raw"  # Check raw file
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
-    check_output "data/pending/domains_manual_review.tmp" "out_manual.tmp" "Manual review"  # Check manual review file
     check_output "$subdomains_file" "out_subdomains.txt" "Subdomains"  # Check subdomains file
     check_output "$root_domains_file" "out_root_domains.txt" "Root domains"  # Check root domains file
     if [[ "$script_to_test" == 'retrieval' ]]; then
-        [[ -d data/pending ]] && { printf "! Pending directory not removed.\n"; error=true; }  # Check pending directory
+        check_output "data/pending/domains_manual_review.tmp" "out_manual.txt" "Manual review"  # Check manual review file
     elif [[ "$script_to_test" == 'validate' ]]; then
         check_output "$redundant_domains_file" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
         check_output "$wildcards_file" "out_wildcards.txt" "Wildcards"  # Check wildcards file
