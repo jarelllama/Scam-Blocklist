@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# retrieve_domains.sh retrieves domains from the various sources and outputs a
+# raw file that contains the cumulative domains from all sources over time.
+
 {  # Declare variables
     raw_file='data/raw.txt'
     raw_light_file='data/raw_light.txt'
@@ -18,12 +22,12 @@
 }
 
 main() {
-    prepare
+    set_up
     source
     build
 }
 
-prepare() {
+set_up() {
     command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
 
     # Format files in the config and data directory
@@ -32,6 +36,9 @@ prepare() {
     done
 }
 
+# Function 'source' calls on the respective functions for each source
+# to retrieve results. The results are processed and the output is a cumulative
+# filtered domains file containing all filtered domains from this run.
 source() {
     # Check for existing retrieved results
     if [[ -d data/pending ]]; then
@@ -274,12 +281,29 @@ cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
+# Source functions usage:
+# Inputs:
+#   source: name of the source to be used in the console and logs.
+#
+#   ignore_from_light: if true, results from the source are not included in light version
+#     of the blocklist.
+#
+#   domains_file: file path to save retrieved results to be used in further processing.
+#
+#   if use_existing is true, the retrieval process should be skipped and an existing
+#     retrieved results file should be used instead.
+
 source_manual() {
     source='Manual'
     ignore_from_light=
     domains_file='data/pending/domains_manual.tmp'
-    [[ ! -f data/pending/domains_manual.tmp ]] && return  # Return if file not found (source is the file itself)
-    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > domains.tmp && mv domains.tmp "$results_file"
+
+    # Return if file not found (source is the file itself)
+    [[ ! -f data/pending/domains_manual.tmp ]] && return
+
+    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > domains.tmp
+    mv domains.tmp "$results_file"
+
     process_source
 }
 
@@ -287,21 +311,30 @@ source_aa419() {
     source='aa419.org'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
+
     [[ "$use_existing" == true ]] && { process_source; return; }
+
     url='https://api.aa419.org/fakesites'
     query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
-    curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" | jq -r '.[].Domain' >> "$results_file"  # Note trailing slash breaks API call
+    curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" |
+        jq -r '.[].Domain' >> "$results_file"  # Trailing slash breaks API call
+
     process_source
 }
 
 source_guntab() {
     source='guntab.com'
-    ignore_from_light=true  # Do not use as a source for light version
+    ignore_from_light=true
     domains_file="data/pending/domains_${source}.tmp"
+
     [[ "$use_existing" == true ]] && { process_source; return; }
+
     url='https://www.guntab.com/scam-websites'
-    curl -s "${url}/" | grep -zoE '<table class="datatable-list table">.*</table>' |
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"  # Note results are not sorted by time added
+    curl -s "${url}/" |
+        grep -zoE '<table class="datatable-list table">.*</table>' |
+        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
+    # Note results are not sorted by time added
+
     process_source
 }
 
@@ -309,14 +342,18 @@ source_petscams() {
     source='petscams.com'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
+
     [[ "$use_existing" == true ]] && { process_source; return; }
+
     url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
-        curl -s "${url}/" | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+-[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
+        curl -s "${url}/" |
+            grep -oE '<a href="https://petscams.com/[[a-z]-]+-[[a-z]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
             sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
                 s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
+
     process_source
 }
 
@@ -324,10 +361,15 @@ source_scamdirectory() {
     source='scam.directory'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
+
     [[ "$use_existing" == true ]] && { process_source; return; }
+
     url='https://scam.directory/category'
-    curl -s "${url}/" | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
-        sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$results_file"  # Keep only newly added domains
+    curl -s "${url}/" |
+        grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
+        sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$results_file"
+        # Keep only first 300 results
+
     process_source
 }
 
@@ -335,23 +377,32 @@ source_scamadviser() {
     source='scamadviser.com'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
+
     [[ "$use_existing" == true ]] && { process_source; return; }
+
     url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
-        curl -s "${url}?p=${page}" | grep -oE '<div class="articles">.*<div>Read more</div>' |  # Isolate articles. Note trailing slash breaks curl
+        curl -s "${url}?p=${page}" |  # Trailing slash breaks curl
+            grep -oE '<div class="articles">.*<div>Read more</div>'
             grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$results_file"
     done
+
     process_source
 }
 
-functionsource_dfpi() {
+source_dfpi() {
     source='dfpi.ca.gov'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
+
     [[ "$use_existing" == true ]] && { process_source; return; }
+
     url='https://dfpi.ca.gov/crypto-scams'
-    curl -s "${url}/" | grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
-        sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$results_file"  # Keep only newly added domains
+    curl -s "${url}/" |
+        grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
+        sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$results_file"
+        # Keep only first 30 results
+
     process_source
 }
 
@@ -359,17 +410,27 @@ source_stopgunscams() {
     source='stopgunscams.com'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
+
     [[ "$use_existing" == true ]] && { process_source; return; }
+
     url='https://stopgunscams.com'
-    for page in {1..5}; do  # Loop through pages
-        curl -s "${url}/?page=${page}/" | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
+    for page in {1..5}; do
+        curl -s "${url}/?page=${page}/" |
+            grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
             sed 's/<h4 class="-ih"><a href="\///; s/-/./g' >> "$results_file"
     done
+
     process_source
 }
 
-# If running locally, use locally stored secrets instead of environment variables
-[[ "$CI" != true ]] && { google_search_id=; google_search_api_key=; aa419_api_id=; google_search_id_2=; google_search_api_key_2=;}
+# Declare secrets if the script is not running in a GitHub Workflow
+if [[ "$CI" != true ]]; then
+    google_search_id=
+    google_search_api_key=
+    aa419_api_id=
+    google_search_id_2=
+    google_search_api_key_2=
+fi
 
 trap cleanup EXIT
 main
