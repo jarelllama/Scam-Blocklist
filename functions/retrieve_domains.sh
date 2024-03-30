@@ -29,7 +29,7 @@ function main {
 
 function source {
     # Check for existing pending domains file
-    [[ -d data/pending ]] && { use_pending=true; printf "\n\e[1mUsing existing lists of retrieved domains.\e[0m\n"; }
+    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n"; }
     [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419

@@ -100,7 +100,7 @@ function check_raw_file {
     domains_in_toplist=$(comm -23 <(comm -12 <(printf "%s" "$domains") "$toplist_file") "$blacklist_file")
     toplist_count=$(wc -w <<< "$domains_in_toplist")
     if [[ "$toplist_count" -gt 0 ]]; then
-        awk 'NF {print "⚠️ " $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
+        awk 'NF {print $0 " (toplist) - manual removal required"}' <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" "toplist"
     fi
 
@@ -123,8 +123,8 @@ function check_raw_file {
         format_list "$root_domains_file" && format_list "$subdomains_file"
     fi
 
-    printf "\nProblematic domains (%s):\n" "$(wc -l < filter_log.tmp)"
-    cat filter_log.tmp
+    printf "\n\e[1m\nProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
+    sed 's/(toplist)/(\o033[0;31mtoplist\o033[0m)/' filter_log.tmp  # Print filter log and highlight toplisted
     printf "%s\n" "$domains" > "$raw_file"  # Save changes to blocklist
     format_list "$raw_file"
     total_whitelisted_count=$((whitelisted_count + whitelisted_tld_count))  # Calculate sum of whitelisted domains
