@@ -316,7 +316,7 @@ source_manual() {
 }
 
 source_aa419() {
-    source='aa419.org'
+    local source='aa419.org'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
 
@@ -331,7 +331,7 @@ source_aa419() {
 }
 
 source_guntab() {
-    source='guntab.com'
+    local source='guntab.com'
     ignore_from_light=true
     domains_file="data/pending/domains_${source}.tmp"
 
@@ -347,7 +347,7 @@ source_guntab() {
 }
 
 source_petscams() {
-    source='petscams.com'
+    local source='petscams.com'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
 
@@ -366,7 +366,7 @@ source_petscams() {
 }
 
 source_scamdirectory() {
-    source='scam.directory'
+    local source='scam.directory'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
 
@@ -382,7 +382,7 @@ source_scamdirectory() {
 }
 
 source_scamadviser() {
-    source='scamadviser.com'
+    local source='scamadviser.com'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
 
@@ -399,7 +399,7 @@ source_scamadviser() {
 }
 
 source_dfpi() {
-    source='dfpi.ca.gov'
+    local source='dfpi.ca.gov'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
 
@@ -415,7 +415,7 @@ source_dfpi() {
 }
 
 source_stopgunscams() {
-    source='stopgunscams.com'
+    local source='stopgunscams.com'
     ignore_from_light=
     domains_file="data/pending/domains_${source}.tmp"
 
