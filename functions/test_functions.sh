@@ -39,7 +39,7 @@ function shellcheck {
     # Check for carriage return characters
     problematic_files=$(grep -rl $'\r' --exclude-dir={legacy,.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
-        printf "\n[warn] Lines with carriage return characters:\n"
+        printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n"
         printf "%s\n" "$problematic_files"
         error=true
     fi
@@ -47,7 +47,7 @@ function shellcheck {
     # Check for missing space before comments
     problematic_files=$(grep -rn '\S\s#' --exclude-dir={legacy,.git,shellcheck-stable} --exclude=*.csv .)
     if [[ -n "$problematic_files" ]]; then
-        printf "\n[warn] Lines with missing space before comments:\n"
+        printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n"
         printf "%s\n" "$problematic_files"
         error=true
     fi
@@ -208,7 +208,7 @@ function test_retrieve_validate {
     fi
     check_log  # Check log file
 
-    [[ "$error" != true ]] && printf "[success] Test completed. No errors found\n\n"
+    [[ "$error" != true ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
@@ -274,8 +274,8 @@ function test_dead_check {
     check_if_dead_present "$wildcards_file" "Wildcards"  # Check wildcards file
     check_log  # Check log file
 
-    [[ "$error" != true ]] && printf "[success] Test completed. No errors found\n\n" ||
-        printf "[warn] The dead-domains-linter may have false positives. Rerun the job to confirm\n\n"
+    [[ "$error" != true ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n" ||
+        printf "\e[1m[warn] The dead-domains-linter may have false positives. Rerun the job to confirm\e[0m\n\n"
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$domain_log)"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
@@ -319,7 +319,7 @@ function test_parked_check {
     check_output "$raw_light_file" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$parked_domains_file" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
-    [[ "$error" != true ]] && printf "[success] Test completed. No errors found\n\n"
+    [[ "$error" != true ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
     [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
 }
 
@@ -327,16 +327,16 @@ function run_script {
     for file in out_*; do  # Format expected output files
         [[ "$file" != out_dead.txt ]] && [[ "$file" != out_parked.txt ]] && sort "$file" -o "$file"
     done
-    printf "[start] %s\n" "$1"
+    printf "\e[1m[start] %s\e[0m\n" "$1"
     printf "%s\n" "----------------------------------------------------------------------"
     bash "functions/${1}" || errored=true
     printf "%s\n" "----------------------------------------------------------------------"
-    [[ -z "$2" ]] && [[ "$errored" == true ]] && { printf "[warn] Script returned an error\n"; error=true; }  # Check exit status
+    [[ -z "$2" ]] && [[ "$errored" == true ]] && { printf "\e[1m[warn] Script returned an error\e[0m\n"; error=true; }  # Check exit status
 }
 
 function check_output {
     cmp -s "$1" "$2" && return  # Return if files are the same
-    printf "[warn] %s file is not as expected:\n" "$3"
+    printf "\e[1m[warn] %s file is not as expected:\e[0m\n" "$3"
     cat "$1"
     printf "\n[info] Expected output:\n"
     cat "$2"
@@ -346,7 +346,7 @@ function check_output {
 
 function check_if_dead_present {
     ! grep -q '[[:alnum:]]' "$1" && return  # Return if file has no domains
-    printf "[warn] %s file still has dead domains:\n" "$2"
+    printf "\e[1m[warn] %s file still has dead domains:\e[0m\n" "$2"
     cat "$1"
     printf "\n"
     error=true
@@ -357,7 +357,7 @@ function check_log {
         ! grep -qF "$log_term" "$domain_log" && { log_error=true; break; }  # Break when error found
     done < out_log.txt
     [[ "$log_error" != true ]] && return  # Return if no error found
-    printf "[warn] Log file is not as expected:\n"
+    printf "\e[1m[warn] Log file is not as expected:\e[0m\n"
     cat "$domain_log"
     printf "\n[info] Terms expected in log:\n"
     cat out_log.txt  # No need for additional new line since the log is not printed again
