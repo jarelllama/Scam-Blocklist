@@ -30,7 +30,7 @@ function main {
 
 function source {
     # Check for existing pending domains file
-    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n" | colout . green; }
+    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n" | colout . white faint; }
     [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419
@@ -153,7 +153,7 @@ function source_google_search {
     # Retrieve new domains
     while read -r search_term; do  # Loop through search terms
         # Return if rate limited
-        [[ "$rate_limited" == true ]] && { printf "\nBoth Google Search API keys are rate limited.\n" | colout . red; return; }
+        [[ "$rate_limited" == true ]] && { printf "\nBoth Google Search API keys are rate limited.\n" | colout . red faint; return; }
         search_google "$search_term"
     done < <(csvgrep -c 2 -m 'y' -i "$search_terms_file" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
 }
@@ -297,18 +297,18 @@ function build {
     ! grep -q '[[:alnum:]]' retrieved_domains.tmp && { printf "\nNo new domains to add.\n" | calout . green; exit 0; }
     format_list retrieved_domains.tmp && format_list "$raw_file"
 
-    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n" | colout . white
+    [[ -f in_toplist.tmp ]] || [[ -f invalid_entries.tmp ]] && printf "\nEntries requiring manual review:\n" | colout . white faint
     # Print domains found in toplist
     if [[ -f in_toplist.tmp ]]; then
         format_list in_toplist.tmp
         cat in_toplist.tmp >> data/pending/domains_manual_review.tmp  # Save domains in toplist into pending file
-        awk 'NF {print $0 " (toplist)"}' in_toplist.tmp | colout toplist red
+        awk 'NF {print $0 " (toplist)"}' in_toplist.tmp | colout toplist red faint
     fi
     # Print invalid entries
     if [[ -f invalid_entries.tmp ]]; then
         format_list invalid_entries.tmp
         cat invalid_entries.tmp >> data/pending/domains_manual_review.tmp  # Save invalid entries into pending file
-        awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp | colout invalid red
+        awk 'NF {print $0 " (invalid)"}' invalid_entries.tmp | colout invalid red faint
     fi
 
     # Collate filtered subdomains and root domains
@@ -324,8 +324,8 @@ function build {
     format_list "$raw_file"
     log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
-    printf "\nAdded new domains to blocklist.\n" | colout . green
-    printf "\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
+    printf "\nAdded new domains to blocklist.\n" | colout . white faint
+    printf "Before: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
 
     # Mark sources as saved in the source log file
     rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file
