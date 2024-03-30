@@ -30,7 +30,7 @@ function main {
 
 function source {
     # Check for existing pending domains file
-    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n" | colout . green; }
+    [[ -d data/pending ]] && { use_pending=true; printf "\nUsing existing lists of retrieved domains.\n" | colout . green faint; }
     [[ -f data/pending/domains_manual.tmp ]] && source_manual  # Retrieve manually added domains
     mkdir -p data/pending
     source_aa419
@@ -325,7 +325,7 @@ function build {
     log_event "$(<retrieved_domains.tmp)" "new_domain" "retrieval"
     count_after=$(wc -l < "$raw_file")
     printf "\nAdded new domains to blocklist.\n" | colout . green
-    printf "Before: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
+    printf "\nBefore: %s  Added: %s  After: %s\n" "$count_before" "$((count_after - count_before))" "$count_after"
 
     # Mark sources as saved in the source log file
     rows=$(sed 's/,no/,yes/' <(grep -F "$time_format" "$source_log"))  # Record that the domains were saved into the raw file
