@@ -169,7 +169,6 @@ format_file() {
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
-# Format files in the config and data directory
 for file in config/* data/*; do
     format_file "$file"
 done

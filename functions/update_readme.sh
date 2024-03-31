@@ -4,19 +4,11 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCE_LOG='config/SOURCE_LOG.csv'
 TODAY="$(date -u +"%d-%m-%y")"
-readonly TODAY
 YESTERDAY="$(date -ud "yesterday" +"%d-%m-%y")"
+readonly TODAY
 readonly YESTERDAY
 
-function main {
-    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
-    for file in config/* data/*; do  # Format files in the config and data directory
-        format_list "$file"
-    done
-    update_readme
-}
-
-function update_readme {
+update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval is done daily at 00:00 UTC.
@@ -32,19 +24,19 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 \`\`\`
-Total domains: "$(wc -l < "$RAW")"
+Total domains: $(wc -l < "$RAW")
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-$(print_stats "Google Search")
-$(print_stats "aa419.org")
-$(print_stats "dfpi.ca.gov")
-$(print_stats "guntab.com")
-$(print_stats "petscams.com")
-$(print_stats "scam.directory")
-$(print_stats "scamadviser.com")
-$(print_stats "stopgunscams.com")
-$(print_stats "Manual") Entries
+$(print_stats 'Google Search')
+$(print_stats 'aa419.org')
+$(print_stats 'dfpi.ca.gov')
+$(print_stats 'guntab.com')
+$(print_stats 'petscams.com')
+$(print_stats 'scam.directory')
+$(print_stats 'scamadviser.com')
+$(print_stats 'stopgunscams.com')
+$(print_stats 'Manual') Entries
 $(print_stats)
 
 *The Excluded % is of domains not included in the
@@ -68,7 +60,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: "$(wc -l < "$RAW_LIGHT")"
+Total domains: $(wc -l < "$RAW_LIGHT")
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -86,9 +78,9 @@ To optimize the number of search queries made, each search term is frequently be
 
 #### Statistics for Google Search source
 \`\`\`
-Active search terms: "$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)"
-Queries made TODAY: "$(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')"
-Domains retrieved TODAY: "$(count "$TODAY" "Google Search")"
+Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
+Queries made TODAY: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')
+Domains retrieved TODAY: $(count "$TODAY" 'Google Search')
 \`\`\`
 
 #### Regarding other sources
@@ -140,34 +132,53 @@ Thanks to the following people for the help, inspiration, and support!
 EOF
 }
 
-function print_stats {
-    [[ -n "$1" ]] && source="$1" || source="All sources"
-    printf "%5s |%10s |%8s%% | %s\n" "$(count "$TODAY" "$1")" "$(count "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "$source"
+# Function 'print_stats' prints the various statistics for each source
+# $1: source to process (leave blank to process all sources)
+print_stats() {
+    [[ -n "$1" ]] && source="$1" || source='All sources'
+    printf "%5s |%10s |%8s%% | %s\n" "$(sum "$TODAY" "$1")" \
+        "$(sum "$YESTERDAY" "$1")" "$(sum_excluded "$1" )" "$source"
 }
 
-function count {
-    # Sum up all domains retrieved by that source for that day
-    ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }  # Print dash if no runs for that day found
-    csvgrep -c 1 -m "$1" "$SOURCE_LOG" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m 'yes' | csvcut -c 5 | awk '{total += $1} END {print total}'
+# Function 'sum' is an echo wrapper that sums up the domains retrieved by that source for
+# that particular day
+# $1: source to count
+sum() {
+    # Print dash if no runs for that day found
+    ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
+    csvgrep -c 1 -m "$1" "$SOURCE_LOG" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m yes |
+        csvcut -c 5 | awk '{total += $1} END {print total}'
 }
 
-function count_excluded {
-    source="$1"
-    # Count % of excluded domains of raw count retrieved from each source
-    csvgrep -c 2 -m "$source" "$SOURCE_LOG" | csvgrep -c 14 -m 'yes' > source_rows.tmp
+# Function 'count_excluded' is an echo wrapper that counts the % of excluded domains
+# of raw count retrieved from each source
+# $1: source to count
+count_excluded() {
+    csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > source_rows.tmp
+
     raw_count="$(csvcut -c 4 source_rows.tmp | awk '{total += $1} END {print total}')"
-    [[ "$raw_count" -eq 0 ]] && { printf "0"; return; }  # Return if raw count is 0 to avoid divide by zero error
+    # Return if raw count is 0 to avoid divide by zero error
+    [[ "$raw_count" -eq 0 ]] && { printf "0"; return; }
     white_count="$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')"
     dead_count="$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')"
     redundant_count="$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')"
     parked_count="$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')"
     excluded_count="$((white_count + dead_count + redundant_count + parked_count))"
-    printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded
+    printf "%s" "$((excluded_count*100/raw_count))"
+
     rm source_rows.tmp
 }
 
-function format_list {
-    bash functions/tools.sh "format" "$1"
+# Function 'format_file' is a shell wrapper to standardize the format of a file
+# $1: file to format
+format_file() {
+    bash functions/tools.sh format "$1"
 }
 
-main
+command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
+
+for file in config/* data/*; do
+    format_list "$file"
+done
+
+update_readme
