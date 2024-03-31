@@ -38,15 +38,15 @@ check_subdomains() {
     dead-domains-linter -i formatted_subdomains.tmp --export dead.tmp
     [[ ! -s dead.tmp ]] && return
 
-    # Remove dead subdomains from subdomains file
+    # Remove domains from subdomains file
     comm -23 "$SUBDOMAINS" dead.tmp > subdomains.tmp
     mv subdomains.tmp "$SUBDOMAINS"
 
-    # Cache dead subdomains to filter out from newly retrieved domains
+    # Cache dead domains to filter out from newly retrieved domains
     cat dead.tmp >> "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
 
-    # Strip dead domains with subdomains to their root domains
+    # Strip dead domains to their root domains
     while read -r subdomain; do
         dead_root_domains="$(sed "s/^${subdomain}\.//" dead.tmp | sort -u)"
     done < "$SUBDOMAINS_TO_REMOVE"
@@ -67,22 +67,22 @@ check_redundant() {
     dead-domains-linter -i formatted_redundant_domains.tmp --export dead.tmp
     [[ ! -s dead.tmp ]] && return
 
-    # Remove dead redundant domains from redundant domains file
+    # Remove dead domains from redundant domains file
     comm -23 "$REDUNDANT_DOMAINS" dead.tmp > redundant.tmp
     mv redundant.tmp "$REDUNDANT_DOMAINS"
 
-    # Cache dead redundant domains to filter out from newly retrieved domains
+    # Cache dead domains to filter out from newly retrieved domains
     cat dead.tmp >> "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
 
     # Find unused wildcard
     while read -r wildcard; do
         # If no matches, consider wildcard as unused/dead
-        ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS" &&
+        if ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS"; then
             printf "%s\n" "$wildcard" >> collated_dead_wildcards.tmp
+        fi
     done < "$WILDCARDS"
     [[ ! -f collated_dead_wildcards.tmp ]] && return
-    sort -u collated_dead_wildcards.tmp -o collated_dead_wildcards.tmp
 
     # Remove unused wildcards from raw file and wildcards file
     comm -23 "$RAW" collated_dead_wildcards.tmp > raw.tmp
@@ -114,7 +114,7 @@ check_alive() {
     # Find and export dead domains
     dead-domains-linter -i formatted_dead_domains.tmp --export dead.tmp
 
-    # Find resurrected domains in dead domains file (note dead domains file is unsorted)
+    # Find resurrected domains in dead domains file (dead domains file is unsorted)
     alive_domains="$(comm -23 <(sort "$DEAD_DOMAINS") <(sort dead.tmp))"
     [[ -z "$alive_domains" ]] && return
 
@@ -146,7 +146,7 @@ prune_dead_domains_file() {
     true
 }
 
-# Function 'log_event' logs domain processing events into the domain log
+# Function 'log_event' logs domain processing events into the domain log.
 # $1: domains to log stored in a variable.
 # $2: event type (dead, whitelisted, etc.)
 # $3: source
@@ -167,4 +167,5 @@ cleanup() {
 }
 
 trap cleanup EXIT
+
 main
