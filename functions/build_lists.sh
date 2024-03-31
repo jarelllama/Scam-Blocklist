@@ -45,18 +45,18 @@ EOF
     done
 }
 
-# Function 'format_file' is a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
 }
 
 # The 'build_<format>'' functions are to specify the syntax of the various
-# lists for the 'build' function.
+# list formats to be used by the 'build' function.
 # Input:
 #   $syntax: name of list syntax
 #   $directory: directory to create list in
-#   $comment: character used for comments (blank defaults to '#')
+#   $comment: character used for comments (defaults is '#')
 #   $before: characters to append before each domain
 #   $after: characters to append after each domain
 

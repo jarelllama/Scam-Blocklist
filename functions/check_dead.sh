@@ -156,7 +156,7 @@ log_event() {
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
-# Function 'format_file' is a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
