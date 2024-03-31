@@ -155,14 +155,17 @@ process_source() {
     if (( "$toplist_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$domains_in_toplist"))"
         awk 'NF {print $0 " (\033[1;31mtoplist\033[0m)"}' <<< "$domains_in_toplist" >> manual_review.tmp
-        printf "%s\n" "$domains_in_toplist" >> "$results_file"  # Save domains in toplist for rerun
+        printf "%s\n" "$domains_in_toplist" >> "$results_file"
         log_event "$domains_in_toplist" "toplist"
     fi
 
+    # Collate filtered domains
+    printf "%s\n" "$domains" >> retrieved_domains.tmp
+    # Collate filtered domains from light sources
+    [[ "$ignore_from_light" != true ]] && printf "%s\n" "$domains" >> retrieved_light_domains.tmp
+
     total_whitelisted_count="$((whitelisted_count + whitelisted_tld_count))"
     filtered_count="$(printf "%s" "$domains" | sed '/^$/d' | wc -w)"
-    printf "%s\n" "$domains" >> retrieved_domains.tmp  # Collate filtered domains
-    [[ "$ignore_from_light" != true ]] && printf "%s\n" "$domains" >> retrieved_light_domains.tmp  # Collate filtered domains from light sources
     log_source
 }
 
@@ -201,6 +204,12 @@ build() {
     cat retrieved_domains.tmp >> "$RAW"
     format_file "$RAW"
 
+    # Add domains to raw light file
+    if grep -q '[[:alnum:]]' retrieved_light_domains.tmp; then
+        cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
+        format_file "$RAW_LIGHT"
+    fi
+
     log_event "$(<retrieved_domains.tmp)" new_domain retrieval
 
     count_after="$(wc -l < "$RAW")"
@@ -209,15 +218,10 @@ build() {
 
     # Mark sources as saved in the source log file
     rows="$(sed 's/,no/,yes/' <(grep -F "$TIME_FORMAT" "$SOURCE_LOG"))"
-    # Replace old rows with updated row
+    # Remove previous logs
     temp_SOURCE_LOG="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
+    # Add updated logs
     printf "%s\n%s\n" "$temp_SOURCE_LOG" "$rows" > "$SOURCE_LOG"
-
-    # Build raw light file
-    if grep -q '[[:alnum:]]' retrieved_light_domains.tmp; then
-        cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
-        format_file "$RAW_LIGHT"
-    fi
 
     # Exit with error if domains need to be manually reviewed
     [[ -f manual_review.tmp ]] && { printf "\n"; exit 1; } || exit 0
