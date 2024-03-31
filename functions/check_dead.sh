@@ -130,7 +130,7 @@ check_alive() {
     printf "%s\n" "$alive_domains" >> "$RAW"  # Add resurrected domains to raw file
     format_file "$RAW"
 
-    log_event "$alive_domains" resurrected dead_domains
+    log_event "$alive_domains" resurrected dead_domains_file
 }
 
 # Function 'update_light_file' removes any domains from the light raw file that
