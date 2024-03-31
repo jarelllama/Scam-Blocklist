@@ -12,20 +12,20 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: "21034"
+Total domains: 21034
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-    - |         - |       0% | Google Search
-    - |         - |       0% | aa419.org
-    - |         - |       0% | dfpi.ca.gov
-    - |         - |       0% | guntab.com
-    - |         - |       0% | petscams.com
-    - |         - |       0% | scam.directory
-    - |         - |       0% | scamadviser.com
-    - |         - |       0% | stopgunscams.com
-    - |         - |       0% | Manual Entries
-    - |         - |       0% | All sources
+    - |         - |        % | Google Search
+    - |         - |        % | aa419.org
+    - |         - |        % | dfpi.ca.gov
+    - |         - |        % | guntab.com
+    - |         - |        % | petscams.com
+    - |         - |        % | scam.directory
+    - |         - |        % | scamadviser.com
+    - |         - |        % | stopgunscams.com
+    - |         - |        % | Manual Entries
+    - |         - |        % | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -48,7 +48,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: "2082"
+Total domains: 2082
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -66,9 +66,9 @@ To optimize the number of search queries made, each search term is frequently be
 
 #### Statistics for Google Search source
 ```
-Active search terms: "14"
-Queries made TODAY: "0"
-Domains retrieved TODAY: "-"
+Active search terms: 14
+Queries made TODAY: 0
+Domains retrieved TODAY: 
 ```
 
 #### Regarding other sources
