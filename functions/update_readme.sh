@@ -138,8 +138,8 @@ EOF
 # $1: source to process (default is all sources)
 print_stats() {
     [[ -z "$1" ]] && source='All sources' || source="$1"
-    printf "%5s |%10s |%8s%% | %s\n" "$(sum "$TODAY" "$1")" \
-        "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "$source"
+    printf "%5s |%10s |%8s%% | %s\n" \
+        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "$source"
 }
 
 # Function 'sum' is an echo wrapper that returns the total sum of domains retrieved
@@ -166,7 +166,6 @@ count_excluded() {
     dead_count="$(csvcut -c 7 rows.tmp | awk '{total += $1} END {print total}')"
     redundant_count="$(csvcut -c 8 rows.tmp | awk '{total += $1} END {print total}')"
     parked_count="$(csvcut -c 9 rows.tmp | awk '{total += $1} END {print total}')"
-    rm rows.tmp
 
     excluded_count="$(( white_count + dead_count + redundant_count + parked_count ))"
     printf "%s" "$((excluded_count*100/raw_count))"
@@ -179,6 +178,8 @@ format_file() {
 }
 
 # Entry point
+
+trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
 
