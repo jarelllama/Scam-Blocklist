@@ -51,7 +51,7 @@ format_file() {
     bash functions/tools.sh format "$1"
 }
 
-# Build list functions are to specify the syntax of the list format.
+# Build list functions are to specify the syntax of the lists.
 # $syntax: name of list syntax
 # $directory: directory to create list in
 # $comment: character used for comments (default:#)
