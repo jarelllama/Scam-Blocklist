@@ -1,10 +1,12 @@
 #!/bin/bash
-raw_file='data/raw.txt'
-raw_light_file='data/raw_light.txt'
-search_terms_file='config/search_terms.csv'
-source_log='config/source_log.csv'
-today=$(date -u +"%d-%m-%y")
-yesterday=$(date -ud "yesterday" +"%d-%m-%y")
+readonly RAW='data/raw.txt'
+readonly RAW_LIGHT='data/raw_light.txt'
+readonly SEARCH_TERMS='config/search_terms.csv'
+readonly SOURCE_LOG='config/SOURCE_LOG.csv'
+TODAY="$(date -u +"%d-%m-%y")"
+readonly TODAY
+YESTERDAY="$(date -ud "yesterday" +"%d-%m-%y")"
+readonly YESTERDAY
 
 function main {
     command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
@@ -30,7 +32,7 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 \`\`\`
-Total domains: $(wc -l < "$raw_file")
+Total domains: "$(wc -l < "$RAW")"
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -66,7 +68,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: $(wc -l < "$raw_light_file")
+Total domains: "$(wc -l < "$RAW_LIGHT")"
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -80,13 +82,13 @@ The list of search terms is proactively updated and is mostly sourced from inves
 #### Limitations
 The Google Custom Search JSON API only provides 100 daily free search queries per API key (which is why this project uses two API keys).
 
-To optimize the number of search queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+To optimize the number of search queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [SOURCE_LOG.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/SOURCE_LOG.csv)
 
 #### Statistics for Google Search source
 \`\`\`
-Active search terms: $(csvgrep -c 2 -m 'y' -i "$search_terms_file" | tail -n +2 | wc -l)
-Queries made today: $(csvgrep -c 1 -m "$today" "$source_log" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')
-Domains retrieved today: $(count "$today" "Google Search")
+Active search terms: "$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)"
+Queries made TODAY: "$(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')"
+Domains retrieved TODAY: "$(count "$TODAY" "Google Search")"
 \`\`\`
 
 #### Regarding other sources
@@ -140,26 +142,26 @@ EOF
 
 function print_stats {
     [[ -n "$1" ]] && source="$1" || source="All sources"
-    printf "%5s |%10s |%8s%% | %s\n" "$(count "$today" "$1")" "$(count "$yesterday" "$1")" "$(count_excluded "$1" )" "$source"
+    printf "%5s |%10s |%8s%% | %s\n" "$(count "$TODAY" "$1")" "$(count "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "$source"
 }
 
 function count {
     # Sum up all domains retrieved by that source for that day
-    ! grep -qF "$1" "$source_log" && { printf "-"; return; }  # Print dash if no runs for that day found
-    csvgrep -c 1 -m "$1" "$source_log" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m 'yes' | csvcut -c 5 | awk '{total += $1} END {print total}'
+    ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }  # Print dash if no runs for that day found
+    csvgrep -c 1 -m "$1" "$SOURCE_LOG" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m 'yes' | csvcut -c 5 | awk '{total += $1} END {print total}'
 }
 
 function count_excluded {
     source="$1"
     # Count % of excluded domains of raw count retrieved from each source
-    csvgrep -c 2 -m "$source" "$source_log" | csvgrep -c 14 -m 'yes' > source_rows.tmp
-    raw_count=$(csvcut -c 4 source_rows.tmp | awk '{total += $1} END {print total}')
+    csvgrep -c 2 -m "$source" "$SOURCE_LOG" | csvgrep -c 14 -m 'yes' > source_rows.tmp
+    raw_count="$(csvcut -c 4 source_rows.tmp | awk '{total += $1} END {print total}')
     [[ "$raw_count" -eq 0 ]] && { printf "0"; return; }  # Return if raw count is 0 to avoid divide by zero error
-    white_count=$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')
-    dead_count=$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')
-    redundant_count=$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')
-    parked_count=$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')
-    excluded_count=$((white_count + dead_count + redundant_count + parked_count))
+    white_count="$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')
+    dead_count="$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')
+    redundant_count="$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')
+    parked_count="$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')
+    excluded_count="$((white_count + dead_count + redundant_count + parked_count))
     printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded
     rm source_rows.tmp
 }
