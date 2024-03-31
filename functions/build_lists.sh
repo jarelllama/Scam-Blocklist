@@ -12,11 +12,11 @@ build_lists() {
 
     # Loop through the full and light blocklist versions
     for i in {1..2}; do
-        if [[ "$i" -eq 1 ]]; then
+        if [[ "$i" == '1' ]]; then
             version=''
             list_name='scams.txt'
             source_file="$RAW"
-        elif [[ "$i" -eq 2 ]]; then
+        elif [[ "$i" == '2' ]]; then
             version='LIGHT VERSION'
             list_name='scams_light.txt'
             source_file="$RAW_LIGHT"
