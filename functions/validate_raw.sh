@@ -106,7 +106,6 @@ validate_raw() {
 
     # Exit if no filtering done
     [[ ! -f filter_log.tmp ]] && exit 0
-    sort -u filter_log.tmp -o filter_log.tmp
 
     # Collate filtered wildcards
     if [[ -f wildcards.tmp ]]; then
@@ -137,7 +136,7 @@ validate_raw() {
     fi
 
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
-    cat filter_log.tmp
+    sort -u filter_log.tmp
 
     printf "%s\n" "$domains" > "$RAW"
     format_file "$RAW"
