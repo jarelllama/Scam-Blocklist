@@ -1,14 +1,14 @@
 #!/bin/bash
-# This script updates README.md content and statistics
+# This script updates README.md content and statistics.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCE_LOG='config/SOURCE_LOG.csv'
-readonly TODAY
-readonly YESTERDAY
 TODAY="$(date -u +"%d-%m-%y")"
 YESTERDAY="$(date -ud "yesterday" +"%d-%m-%y")"
+readonly TODAY
+readonly YESTERDAY
 
 update_readme() {
     cat << EOF > README.md
@@ -135,15 +135,15 @@ EOF
 }
 
 # Function 'print_stats' prints the various statistics for each source
-# $1: source to process (leave blank to process all sources)
+# $1: source to process (leave blank to process all sources).
 print_stats() {
     [[ -n "$1" ]] && source="$1" || source='All sources'
     printf "%5s |%10s |%8s%% | %s\n" "$(sum "$TODAY" "$1")" \
         "$(sum "$YESTERDAY" "$1")" "$(sum_excluded "$1" )" "$source"
 }
 
-# Function 'sum' is an echo wrapper that sums up the domains retrieved by that source for
-# that particular day
+# Function 'sum' is an echo wrapper that sums up the domains retrieved by
+# that source for that particular day.
 # $1: day to process
 # $2: source to process
 sum() {
@@ -154,7 +154,7 @@ sum() {
 }
 
 # Function 'count_excluded' is an echo wrapper that counts the % of excluded domains
-# of raw count retrieved from each source
+# of raw count retrieved from each source.
 # $1: source to process
 count_excluded() {
     csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > source_rows.tmp
@@ -173,7 +173,7 @@ count_excluded() {
 }
 
 # Function 'format_file' is a shell wrapper to standardize the format of a file
-# $1: file to format
+# $1: file to format.
 format_file() {
     bash functions/tools.sh format "$1"
 }

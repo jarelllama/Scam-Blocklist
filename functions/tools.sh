@@ -1,11 +1,9 @@
 #!/bin/bash
-
 # Tools.sh is a shell wrapper intended to store commonly used functions.
 
-# 'format' is called to standardize the format of a file.
+# Function 'format' is called to standardize the format of a file.
 format() {
     local -r file="$1"
-
     [[ ! -f "$file" ]] && return
 
     # Applicable to all files:
@@ -21,8 +19,7 @@ format() {
             ;;
         ('config/parked_terms.txt')
             # Remove empty lines, convert to lowercase, sort and remove duplicates
-            sed '/^$/d' "$file" | tr '[:upper:]' '[:lower:]' |
-                sort -u -o "${file}.tmp"
+            sed '/^$/d' "$file" | tr '[:upper:]' '[:lower:]' | sort -u -o "${file}.tmp"
             mv "${file}.tmp" "$file"
             ;;
         (*.txt|*.tmp)

@@ -1,13 +1,13 @@
 #!/bin/bash
-# This script builds the various formats of list from the raw files
+# This script builds the various formats of list from the raw files.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 
-# Function 'build_lists' builds the two version of the blocklist in the various formats
-# called by the build list functions (see below)
 build_lists() {
-    [[ -z "$comment" ]] && comment='#'  # Set default comment character to '#'
+    # Set default comment character to '#'
+    [[ -z "$comment" ]] && comment='#'
+
     mkdir -p "lists/${directory}"
 
     # Loop through the full and light blocklist versions
@@ -21,6 +21,7 @@ build_lists() {
             list_name='scams_light.txt'
             source_file="$RAW_LIGHT"
         fi
+
         blocklist_path="lists/${directory}/${list_name}"
 
         cat << EOF > "$blocklist_path"  # Append header onto blocklist
@@ -36,19 +37,20 @@ EOF
 
         # Special case for Unbound format
         [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"
+
         # Append formatted domains onto blocklist
         printf "%s\n" "$(awk -v before="$before" -v after="$after" \
             '{print before $0 after}' "$source_file")" >> "$blocklist_path"
     done
 }
 
-# Function 'format_file' is a shell wrapper to standardize the format of a file
+# Function 'format_file' is a shell wrapper to standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
 }
 
-# Build list functions:
+# Build list functions are to specify the syntax of the list format.
 # $syntax: name of list syntax
 # $directory: directory to create list in
 # $comment: character used for comments (default:#)
