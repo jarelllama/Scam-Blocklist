@@ -4,7 +4,7 @@
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 
-build_lists() {
+build() {
     # Set default comment character to '#'
     [[ -z "$comment" ]] && comment='#'
 
@@ -51,12 +51,14 @@ format_file() {
     bash functions/tools.sh format "$1"
 }
 
-# Build list functions are to specify the syntax of the lists for the build function.
-# $syntax: name of list syntax
-# $directory: directory to create list in
-# $comment: character used for comments (blank defaults to '#')
-# $before: characters to append before each domain
-# $after: characters to append after each domain
+# The 'build_<format>'' functions are to specify the syntax of the various
+# lists for the 'build' function.
+# Input:
+#   $syntax: name of list syntax
+#   $directory: directory to create list in
+#   $comment: character used for comments (blank defaults to '#')
+#   $before: characters to append before each domain
+#   $after: characters to append after each domain
 
 build_adblock() {
     local syntax='Adblock Plus'
@@ -64,7 +66,7 @@ build_adblock() {
     local comment='!'
     local before='||'
     local after='^'
-    build_lists
+    build
 }
 
 build_dnsmasq() {
@@ -73,7 +75,7 @@ build_dnsmasq() {
     local comment=''
     local before='local=/'
     local after='/'
-    build_lists
+    build
 }
 
 build_unbound() {
@@ -82,7 +84,7 @@ build_unbound() {
     local comment=''
     local before='local-zone: "'
     local after='." always_nxdomain'
-    build_lists
+    build
 }
 
 build_wildcard_asterisk() {
@@ -91,7 +93,7 @@ build_wildcard_asterisk() {
     local comment=''
     local before='*.'
     local after=''
-    build_lists
+    build
 }
 
 build_wildcard_domains() {
@@ -100,7 +102,7 @@ build_wildcard_domains() {
     local comment=''
     local before=''
     local after=''
-    build_lists
+    build
 }
 
 # Entry point

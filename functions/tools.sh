@@ -4,7 +4,7 @@
 # Function 'format' is called to standardize the format of a file.
 # $1: file to be formatted
 format() {
-    local -r file="$1"
+    file="$1"
     [[ ! -f "$file" ]] && return
 
     # Applicable to all files:

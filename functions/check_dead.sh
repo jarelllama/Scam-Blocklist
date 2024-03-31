@@ -95,8 +95,8 @@ check_redundant() {
 
 check_dead() {
     # Exclude wildcards and root domains of subdomains
-    comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") |
-        sed 's/^/||/; s/$/^/' > formatted_raw.tmp
+    comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") \
+        | sed 's/^/||/; s/$/^/' > formatted_raw.tmp
 
     # Find and export dead domains
     dead-domains-linter -i formatted_raw.tmp --export dead_in_raw.tmp

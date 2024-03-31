@@ -57,7 +57,10 @@ process_source() {
     [[ ! -f "$results_file" ]] && return
 
     # Skip to next source if no results retrieved
-    ! grep -q '[[:alnum:]]' "$results_file" && { log_source; return; }
+    if ! grep -q '[[:alnum:]]' "$results_file"; then
+        log_source
+        return
+    fi
 
     # Remove https: or http:, remove slashes  and convert to lowercase
     sed 's/https\?://; s/\///g' "$results_file" | tr '[:upper:]' '[:lower:]' > domains.tmp
