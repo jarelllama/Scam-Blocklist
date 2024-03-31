@@ -16,7 +16,7 @@ main() {
     npm i -g @adguard/dead-domains-linter
 
     for file in config/* data/*; do
-        format_list "$file"
+        format_file "$file"
     done
 
     check_subdomains
@@ -27,7 +27,7 @@ main() {
 
     # Cache dead domains (skip processing dead domains through alive check)
     cat dead_in_raw.tmp >> "$DEAD_DOMAINS"
-    format_list "$DEAD_DOMAINS"
+    format_file "$DEAD_DOMAINS"
 }
 
 check_subdomains() {
@@ -43,7 +43,7 @@ check_subdomains() {
 
     # Cache dead subdomains to filter out from newly retrieved domains
     cat dead.tmp >> "$DEAD_DOMAINS"
-    format_list "$DEAD_DOMAINS"
+    format_file "$DEAD_DOMAINS"
 
     # Strip dead domains with subdomains to their root domains
     while read -r subdomain; do
@@ -72,7 +72,7 @@ check_redundant() {
 
     # Cache dead redundant domains to filter out from newly retrieved domains
     cat dead.tmp >> "$DEAD_DOMAINS"
-    format_list "$DEAD_DOMAINS"
+    format_file "$DEAD_DOMAINS"
 
     # Find unused wildcard
     while read -r wildcard; do
@@ -119,7 +119,7 @@ check_alive() {
 
     # Update dead domains file to only include dead domains
     cp dead.tmp "$DEAD_DOMAINS"
-    format_list "$DEAD_DOMAINS"
+    format_file "$DEAD_DOMAINS"
 
     # Strip away subdomains from alive domains as subdomains are not supposed to be in raw file
     while read -r subdomain; do
@@ -127,7 +127,7 @@ check_alive() {
     done < "$SUBDOMAINS_TO_REMOVE"
 
     printf "%s\n" "$alive_domains" >> "$RAW"  # Add resurrected domains to raw file
-    format_list "$RAW"
+    format_file "$RAW"
 
     log_event "$alive_domains" resurrected dead_domains
 }

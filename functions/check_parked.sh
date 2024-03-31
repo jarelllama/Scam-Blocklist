@@ -10,7 +10,7 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 
 main() {
     for file in config/* data/*; do
-        format_list "$file"
+        format_file "$file"
     done
 
     remove_parked_domains
@@ -19,7 +19,7 @@ main() {
 
     # Cache parked domains (skip processing parked domains through unparked check)
     cat parked_domains.tmp >> "$PARKED_DOMAINS"
-    format_list "$PARKED_DOMAINS"
+    format_file "$PARKED_DOMAINS"
 }
 
 remove_parked_domains() {
@@ -37,7 +37,7 @@ remove_parked_domains() {
     wait
     [[ ! -f parked_domains.tmp ]] && return
 
-    format_list parked_domains.tmp
+    format_file parked_domains.tmp
 
     # Remove parked domains from raw file
     comm -23 "$RAW" parked_domains.tmp > raw.tmp && mv raw.tmp "$RAW"
@@ -63,7 +63,7 @@ add_unparked_domains() {
     wait
     [[ ! -f unparked_domains.tmp ]] && return
 
-    format_list unparked_domains.tmp
+    format_file unparked_domains.tmp
 
     # Remove unparked domains from parked domains file (parked domains file is unsorted)
     grep -vxFf unparked_domains.tmp "$PARKED_DOMAINS" > parked.tmp
@@ -71,7 +71,7 @@ add_unparked_domains() {
 
     # Add unparked domains to raw file
     cat unparked_domains.tmp >> "$RAW"
-    format_list "$RAW"
+    format_file "$RAW"
 
     log_event "$(<unparked_domains.tmp)" "unparked" "PARKED_DOMAINS"
 
