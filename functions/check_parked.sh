@@ -57,7 +57,7 @@ add_unparked_domains() {
 #   exit status 1 if no parked domains were found
 retrieve_parked() {
     # Truncate temporary files between runs
-    : > parked_domains.tmp
+    : > parked_domains.tmp  # File needs to exist to avoid not found errors
     find . -maxdepth 1 -type f -name "x??" -delete
 
     printf "\n[info] Processing file %s\n" "$1"
