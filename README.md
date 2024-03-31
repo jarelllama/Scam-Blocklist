@@ -12,20 +12,20 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 21034
+Total domains: "21034"
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-    - |        33 |       3% | Google Search
-    - |        15 |       9% | aa419.org
-    - |         0 |      52% | dfpi.ca.gov
-    - |        10 |      14% | guntab.com
-    - |         2 |       7% | petscams.com
-    - |         0 |      12% | scam.directory
-    - |         0 |      31% | scamadviser.com
-    - |         0 |       5% | stopgunscams.com
-    - |         0 |       7% | Manual Entries
-    - |        60 |      10% | All sources
+    - |         - |        % | Google Search
+    - |         - |        % | aa419.org
+    - |         - |        % | dfpi.ca.gov
+    - |         - |        % | guntab.com
+    - |         - |        % | petscams.com
+    - |         - |        % | scam.directory
+    - |         - |        % | scamadviser.com
+    - |         - |        % | stopgunscams.com
+    - |         - |        % | Manual Entries
+    - |         - |        % | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -48,7 +48,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2082
+Total domains: "2082"
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -62,13 +62,13 @@ The list of search terms is proactively updated and is mostly sourced from inves
 #### Limitations
 The Google Custom Search JSON API only provides 100 daily free search queries per API key (which is why this project uses two API keys).
 
-To optimize the number of search queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [source_log.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/source_log.csv)
+To optimize the number of search queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled. The figures for each search term can be viewed here: [SOURCE_LOG.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/SOURCE_LOG.csv)
 
 #### Statistics for Google Search source
 ```
-Active search terms: 14
-Queries made today: 0
-Domains retrieved today: -
+Active search terms: "14"
+Queries made TODAY: "0"
+Domains retrieved TODAY: "-"
 ```
 
 #### Regarding other sources
