@@ -161,7 +161,7 @@ log_event() {
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
-# Function 'format_file' is a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
@@ -171,14 +171,12 @@ format_file() {
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
-for file in config/* data/*; do
-    format_file "$file"
-done
-
 # Add new wildcards to the raw files
 cat "$WILDCARDS" >> "$RAW"
 cat "$WILDCARDS" >> "$RAW_LIGHT"
-format_file "$RAW"
-format_file "$RAW_LIGHT"
+
+for file in config/* data/*; do
+    format_file "$file"
+done
 
 validate_raw
