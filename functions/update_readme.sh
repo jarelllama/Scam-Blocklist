@@ -81,8 +81,8 @@ To optimize the number of search queries made, each search term is frequently be
 #### Statistics for Google Search source
 \`\`\`
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-Queries made TODAY: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')
-Domains retrieved TODAY: $(count "$TODAY" 'Google Search')
+Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')
+Domains retrieved today: $(count "$TODAY" 'Google Search')
 \`\`\`
 
 #### Regarding other sources
