@@ -317,9 +317,12 @@ function test_parked_check {
     run_script "check_parked.sh"
 
     # Remove placeholder lines
-    comm -23 "$RAW" placeholders.txt > raw.tmp && mv raw.tmp "$RAW"
-    comm -23 "$RAW_LIGHT" placeholders.txt > raw_light.tmp && mv raw_light.tmp "$RAW_LIGHT"
-    grep -vxFf placeholders.txt "$PARKED_DOMAINS" > parked.tmp && mv parked.tmp "$PARKED_DOMAINS"
+    comm -23 "$RAW" placeholders.txt > raw.tmp
+    comm -23 "$RAW_LIGHT" placeholders.txt > raw_light.tmp
+    grep -vxFf placeholders.txt "$PARKED_DOMAINS" > parked.tmp
+    mv raw.tmp "$RAW"
+    mv raw_light.tmp "$RAW_LIGHT"
+    mv parked.tmp "$PARKED_DOMAINS"
 
     check_output "$RAW" "out_raw.txt" "Raw"  # Check raw file
     check_output "$RAW_LIGHT" "out_raw_light.txt" "Raw light"  # Check raw light file

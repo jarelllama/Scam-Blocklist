@@ -111,7 +111,7 @@ check_parked() {
         [[ "$track" != true ]] && continue
 
         if (( count % 100 == 0 )); then
-            printf "[info] Analyzed %s%% of domains\n" "$((count * 100 / $(wc -l < "$1")))"
+            printf "[info] Analyzed %s%% of domains\n" "$(( count * 100 / $(wc -l < "$1") ))"
         fi
 
         (( count++ ))
