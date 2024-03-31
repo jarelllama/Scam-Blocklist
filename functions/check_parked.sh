@@ -73,7 +73,7 @@ add_unparked_domains() {
     cat unparked_domains.tmp >> "$RAW"
     format_file "$RAW"
 
-    log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains"
+    log_event "$(<unparked_domains.tmp)" "unparked" "parked_domains_file"
 
     # Reset split files before next run
     find . -maxdepth 1 -type f -name "x??" -delete
