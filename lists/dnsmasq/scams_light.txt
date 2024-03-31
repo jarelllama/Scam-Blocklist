@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sat Mar 30 01:59:01 UTC 2024
+# Last modified: Sun Mar 31 02:06:34 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 2085
+# Total number of entries: 2082
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -448,7 +448,6 @@ local=/consolesnthings.com/
 local=/container-conversion.co.za/
 local=/containersalesjapan.com/
 local=/containershomeplan.com/
-local=/continentalbk.com/
 local=/coocarit.com/
 local=/coofandycommunity.com/
 local=/coolproductfinds.com/
@@ -604,7 +603,6 @@ local=/elegantgreatdanes.com/
 local=/elegantpomsky.com/
 local=/elenormaincooncattery.com/
 local=/elite-parcel.com/
-local=/elitecargoxpress.com/
 local=/elitefinancetrading.com/
 local=/elitepawshaven.co.za/
 local=/eliteprotrade.com/
@@ -910,7 +908,6 @@ local=/humminbirdus.shop/
 local=/huniity.com/
 local=/huntdekor.com/
 local=/hup498.com/
-local=/hwrlslogistics.com/
 local=/hybridenergyhome.co.za/
 local=/hyperazt.com/
 local=/hyperglim.com/

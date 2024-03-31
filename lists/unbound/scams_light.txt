@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sat Mar 30 01:59:01 UTC 2024
+# Last modified: Sun Mar 31 02:06:34 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 2085
+# Total number of entries: 2082
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -449,7 +449,6 @@ local-zone: "consolesnthings.com." always_nxdomain
 local-zone: "container-conversion.co.za." always_nxdomain
 local-zone: "containersalesjapan.com." always_nxdomain
 local-zone: "containershomeplan.com." always_nxdomain
-local-zone: "continentalbk.com." always_nxdomain
 local-zone: "coocarit.com." always_nxdomain
 local-zone: "coofandycommunity.com." always_nxdomain
 local-zone: "coolproductfinds.com." always_nxdomain
@@ -605,7 +604,6 @@ local-zone: "elegantgreatdanes.com." always_nxdomain
 local-zone: "elegantpomsky.com." always_nxdomain
 local-zone: "elenormaincooncattery.com." always_nxdomain
 local-zone: "elite-parcel.com." always_nxdomain
-local-zone: "elitecargoxpress.com." always_nxdomain
 local-zone: "elitefinancetrading.com." always_nxdomain
 local-zone: "elitepawshaven.co.za." always_nxdomain
 local-zone: "eliteprotrade.com." always_nxdomain
@@ -911,7 +909,6 @@ local-zone: "humminbirdus.shop." always_nxdomain
 local-zone: "huniity.com." always_nxdomain
 local-zone: "huntdekor.com." always_nxdomain
 local-zone: "hup498.com." always_nxdomain
-local-zone: "hwrlslogistics.com." always_nxdomain
 local-zone: "hybridenergyhome.co.za." always_nxdomain
 local-zone: "hyperazt.com." always_nxdomain
 local-zone: "hyperglim.com." always_nxdomain
