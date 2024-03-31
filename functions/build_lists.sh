@@ -45,12 +45,6 @@ EOF
     done
 }
 
-# Function 'format_file' calls a shell wrapper to standardize the format of a file.
-# $1: file to format
-format_file() {
-    bash functions/tools.sh format "$1"
-}
-
 # The 'build_<format>'' functions are to specify the syntax of the various
 # list formats to be used by the 'build' function.
 # Input:
@@ -108,7 +102,7 @@ build_wildcard_domains() {
 # Entry point
 
 for file in config/* data/*; do
-    format_file "$file"
+    bash functions/tools.sh format "$file"
 done
 
 build_adblock
