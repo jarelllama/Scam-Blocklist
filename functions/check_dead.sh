@@ -143,7 +143,7 @@ update_light_file() {
 # Function 'prune_dead_domains_file' removes old entries once the file reaches
 # a threshold of entries.
 prune_dead_domains_file() {
-    [[ $(wc -l < "$DEAD_DOMAINS") -gt 5000 ]] && sed -i '1,100d' "$DEAD_DOMAINS"
+    (( $(wc -l < "$DEAD_DOMAINS") > 5000 )) && sed -i '1,100d' "$DEAD_DOMAINS"
     true
 }
 

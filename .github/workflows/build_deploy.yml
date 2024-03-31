@@ -66,8 +66,8 @@ jobs:
 
       - name: Prune logs
         run: |
-          [[ $(wc -l < config/domain_log.csv) -gt 10000 ]] && sed -i '2,300d' config/domain_log.csv
-          [[ $(wc -l < config/source_log.csv) -gt 1000 ]] && sed -i '2,100d' config/source_log.csv
+          (( $(wc -l < config/domain_log.csv) > 10000 )) && sed -i '2,300d' config/domain_log.csv
+          (( $(wc -l < config/source_log.csv) > 1000 )) && sed -i '2,100d' config/source_log.csv
           true  # To negate exit status 1
 
       - name: Push

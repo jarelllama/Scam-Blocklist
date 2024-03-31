@@ -47,7 +47,7 @@ validate_raw() {
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
     whitelisted_count="$(wc -l <<< "$whitelisted_domains")"
-    if [[ "$whitelisted_count" -gt 0 ]]; then
+    if (( "$whitelisted_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
         awk '{print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
         log_event "$whitelisted_domains" whitelist raw
@@ -56,7 +56,7 @@ validate_raw() {
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
     whitelisted_tld_count="$(wc -l <<< "$whitelisted_tld_domains")"
-    if [[ "$whitelisted_tld_count" -gt 0 ]]; then
+    if (( "$whitelisted_tld_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
         awk '{print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
         log_event "$whitelisted_tld_domains" tld raw
@@ -65,7 +65,7 @@ validate_raw() {
     # Remove invalid entries including IP addresses. This excludes punycode TLDs (.xn--*)
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
     invalid_entries_count="$(wc -l <<< "$invalid_entries")"
-    if [[ "$invalid_entries_count" -gt 0 ]]; then
+    if (( "$invalid_entries_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))"
         awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> filter_log.tmp
         log_event "$invalid_entries" invalid raw
@@ -98,7 +98,7 @@ validate_raw() {
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
     toplist_count="$(wc -l <<< "$domains_in_toplist")"
-    if [[ "$toplist_count" -gt 0 ]]; then
+    if (( "$toplist_count" > 0 )); then
         awk '{print $0 " (toplist) - \033[1;31mmanual removal required\033[0m"}' \
             <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" toplist raw
@@ -136,7 +136,7 @@ validate_raw() {
     fi
 
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
-    sort -u filter_log.tmp
+    cat filter_log.tmp
 
     # Save changes to raw file and raw light file
     printf "%s\n" "$domains" > "$RAW"

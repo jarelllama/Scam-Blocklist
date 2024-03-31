@@ -61,8 +61,8 @@ retrieve_parked() {
     # Truncate split files before run
     find . -maxdepth 1 -type f -name "x??" -delete
 
-    printf "\n[info] Processing file %s\n
-        [start] Analyzing %s entries for parked domains\n" "$1" "$(wc -l < "$1")"
+    printf "\n[info] Processing file %s\n" "$1"
+    printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
     # Split file into 12 equal files
     split -d -l $(($(wc -l < "$1")/12)) "$1"
@@ -130,7 +130,7 @@ update_light_file() {
 # Function 'prune_parked_domains_file' removes old entries once the file reaches
 # a threshold of entries.
 prune_parked_domains_file() {
-    [[ $(wc -l < "$PARKED_DOMAINS") -gt 4000 ]] && sed -i '1,100d' "$PARKED_DOMAINS"
+    (( $(wc -l < "$PARKED_DOMAINS") > 4000 )) && sed -i '1,100d' "$PARKED_DOMAINS"
     true
 }
 
