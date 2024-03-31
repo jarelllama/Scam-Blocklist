@@ -161,7 +161,7 @@ count_excluded() {
 
     raw_count="$(csvcut -c 4 rows.tmp | awk '{total += $1} END {print total}')"
     # Return if raw count is 0 to avoid divide by zero error
-    [[ "$raw_count" -eq 0 ]] && { printf "0"; return; }
+    (( raw_count == 0 )) && { printf "0"; return; }
     white_count="$(csvcut -c 6 rows.tmp | awk '{total += $1} END {print total}')"
     dead_count="$(csvcut -c 7 rows.tmp | awk '{total += $1} END {print total}')"
     redundant_count="$(csvcut -c 8 rows.tmp | awk '{total += $1} END {print total}')"
