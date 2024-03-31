@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script checks for dead and resurrected domains and
+# This script checks for dead/resurrected domains and
 # removes/adds them accordingly.
 
 readonly RAW='data/raw.txt'
