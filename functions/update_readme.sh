@@ -149,8 +149,8 @@ print_stats() {
 sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
-    csvgrep -c 1 -m "$1" "$SOURCE_LOG" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m yes |
-        csvcut -c 5 | awk '{total += $1} END {print total}'
+    csvgrep -c 1 -m "$1" "$SOURCE_LOG" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m yes \
+        | csvcut -c 5 | awk '{total += $1} END {print total}'
 }
 
 # Function 'count_excluded' is an echo wrapper that returns the % of excluded domains
