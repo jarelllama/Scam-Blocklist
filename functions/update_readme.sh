@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script updates README.md content and statistics.
+# This script updates the README.md content and statistics.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
