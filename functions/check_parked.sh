@@ -1,6 +1,5 @@
 #!/bin/bash
-# This script checks for parked/unparked domains and
-# removes/adds them accordingly.
+# This script checks for parked/unparked domains and removes/adds them accordingly.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
