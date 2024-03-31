@@ -24,7 +24,8 @@ build_lists() {
 
         blocklist_path="lists/${directory}/${list_name}"
 
-        cat << EOF > "$blocklist_path"  # Append header onto blocklist
+        # Append header onto blocklist
+        cat << EOF > "$blocklist_path"
 ${comment} Title: Jarelllama's Scam Blocklist ${version}
 ${comment} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
