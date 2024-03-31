@@ -171,12 +171,6 @@ count_excluded() {
     printf "%s" "$((excluded_count*100/raw_count))"
 }
 
-# Function 'format_file' calls a shell wrapper to standardize the format of a file.
-# $1: file to format
-format_file() {
-    bash functions/tools.sh format "$1"
-}
-
 # Entry point
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
@@ -184,7 +178,7 @@ trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
 
 for file in config/* data/*; do
-    format_list "$file"
+    bash functions/tools.sh format "$file"
 done
 
 update_readme
