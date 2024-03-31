@@ -54,7 +54,7 @@ format_file() {
 # Build list functions are to specify the syntax of the lists.
 # $syntax: name of list syntax
 # $directory: directory to create list in
-# $comment: character used for comments (default:#)
+# $comment: character used for comments (blank defaults to #)
 # $before: characters to append before each domain
 # $after: characters to append after each domain
 
