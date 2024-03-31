@@ -155,13 +155,13 @@ function count_excluded {
     source="$1"
     # Count % of excluded domains of raw count retrieved from each source
     csvgrep -c 2 -m "$source" "$SOURCE_LOG" | csvgrep -c 14 -m 'yes' > source_rows.tmp
-    raw_count="$(csvcut -c 4 source_rows.tmp | awk '{total += $1} END {print total}')
+    raw_count="$(csvcut -c 4 source_rows.tmp | awk '{total += $1} END {print total}')"
     [[ "$raw_count" -eq 0 ]] && { printf "0"; return; }  # Return if raw count is 0 to avoid divide by zero error
-    white_count="$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')
-    dead_count="$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')
-    redundant_count="$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')
-    parked_count="$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')
-    excluded_count="$((white_count + dead_count + redundant_count + parked_count))
+    white_count="$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')"
+    dead_count="$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')"
+    redundant_count="$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')"
+    parked_count="$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')"
+    excluded_count="$((white_count + dead_count + redundant_count + parked_count))"
     printf "%s" "$((excluded_count*100/raw_count))"  # Print % excluded
     rm source_rows.tmp
 }
