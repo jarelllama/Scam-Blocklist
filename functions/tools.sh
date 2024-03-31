@@ -14,18 +14,22 @@ format() {
     # Applicable to specific files/extensions:
     case "$file" in
         ('data/dead_domains.txt'|'data/parked_domains.txt')
-            # Remove whitespaces, empty lines and duplicates
-            sed 's/ //g; /^$/d' "$file" | awk '!seen[$0]++' > "${file}.tmp"
+            # Remove whitespaces, empty lines, convert to lowercase, and duplicates
+            sed 's/ //g; /^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
+                | awk '!seen[$0]++' > "${file}.tmp"
             mv "${file}.tmp" "$file"
             ;;
         ('config/parked_terms.txt')
             # Remove empty lines, convert to lowercase, sort and remove duplicates
-            sed '/^$/d' "$file" | tr '[:upper:]' '[:lower:]' | sort -u -o "${file}.tmp"
+            sed '/^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
+                | sort -u -o "${file}.tmp"
             mv "${file}.tmp" "$file"
             ;;
         (*.txt|*.tmp)
-            # Remove whitespaces, empty lines, sort and remove duplicates
-            sed 's/ //g; /^$/d' "$file" | sort -u -o "$file"
+            # Remove whitespaces, empty lines, convert to lowercase, sort and remove duplicates
+            sed 's/ //g; /^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
+                | sort -u -o "${file}.tmp"
+            mv "${file}.tmp" "$file"
             ;;
     esac
 }

@@ -62,7 +62,7 @@ validate_raw() {
         log_event "$whitelisted_tld_domains" tld raw
     fi
 
-    # Remove invalid entries including IP addresses. This excludes punycode TLDs (.xn--*)
+    # Remove invalid entries and IP addresses. Punycode TLDs (.xn--*) are allowed
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
     invalid_entries_count="$(wc -l <<< "$invalid_entries")"
     if (( invalid_entries_count > 0 )); then

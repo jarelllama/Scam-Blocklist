@@ -328,8 +328,7 @@ function test_parked_check {
     check_output "$RAW_LIGHT" "out_raw_light.txt" "Raw light"  # Check raw light file
     check_output "$PARKED_DOMAINS" "out_parked.txt" "Parked domains"  # Check parked domains file
     check_log  # Check log file
-    [[ "$error" != true ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
-    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
+    pick_exit
 }
 
 function run_script {
@@ -341,6 +340,13 @@ function run_script {
     bash "functions/${1}" || errored=true
     printf "%s\n" "----------------------------------------------------------------------"
     [[ -z "$2" ]] && [[ "$errored" == true ]] && { printf "\e[1m[warn] Script returned an error\e[0m\n"; error=true; }  # Check exit status
+}
+
+pick_exit() {
+    [[ "$error" != true ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
+    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
+    # Exit with error if test failed
+    [[ "$error" == true ]] && { printf "\n"; exit 1; }
 }
 
 function check_output {
