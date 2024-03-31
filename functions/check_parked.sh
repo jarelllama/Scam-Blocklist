@@ -118,7 +118,7 @@ check_parked() {
     done < "$1"
 
     # Collate parked domains
-    if (( ${#parked[@]} == 0 )); then
+    if (( ${#parked[@]} > 0 )); then
         printf "%s\n" "${parked[@]}" >> parked_domains.tmp
     fi
 }
