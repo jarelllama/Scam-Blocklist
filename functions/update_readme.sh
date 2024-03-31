@@ -137,9 +137,9 @@ EOF
 # Function 'print_stats' is an echo wrapper that returns the statistics for each source.
 # $1: source to process (default is all sources)
 print_stats() {
-    [[ -n "$1" ]] && source="$1" || source='All sources'
+    [[ -z "$1" ]] && source='All sources' || source="$1"
     printf "%5s |%10s |%8s%% | %s\n" "$(sum "$TODAY" "$1")" \
-        "$(sum "$YESTERDAY" "$1")" "$(sum_excluded "$1" )" "$source"
+        "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "$source"
 }
 
 # Function 'sum' is an echo wrapper that returns the total sum of domains retrieved
@@ -157,18 +157,18 @@ sum() {
 # out of the raw count retrieved from each source.
 # $1: source to process (default is all sources)
 count_excluded() {
-    csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > source_rows.tmp
+    csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > rows.tmp
 
-    raw_count="$(csvcut -c 4 source_rows.tmp | awk '{total += $1} END {print total}')"
+    raw_count="$(csvcut -c 4 rows.tmp | awk '{total += $1} END {print total}')"
     # Return if raw count is 0 to avoid divide by zero error
     [[ "$raw_count" -eq 0 ]] && { printf "0"; return; }
-    white_count="$(csvcut -c 6 source_rows.tmp | awk '{total += $1} END {print total}')"
-    dead_count="$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')"
-    redundant_count="$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')"
-    parked_count="$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')"
-    rm source_rows.tmp
+    white_count="$(csvcut -c 6 rows.tmp | awk '{total += $1} END {print total}')"
+    dead_count="$(csvcut -c 7 rows.tmp | awk '{total += $1} END {print total}')"
+    redundant_count="$(csvcut -c 8 rows.tmp | awk '{total += $1} END {print total}')"
+    parked_count="$(csvcut -c 9 rows.tmp | awk '{total += $1} END {print total}')"
+    rm rows.tmp
 
-    excluded_count="$((white_count + dead_count + redundant_count + parked_count))"
+    excluded_count="$(( white_count + dead_count + redundant_count + parked_count ))"
     printf "%s" "$((excluded_count*100/raw_count))"
 }
 
