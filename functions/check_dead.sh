@@ -79,18 +79,18 @@ check_redundant() {
     while read -r wildcard; do
         # If no matches, consider wildcard as unused/dead
         if ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS"; then
-            printf "%s\n" "$wildcard" >> collated_dead_wildcards.tmp
+            printf "%s\n" "$wildcard" >> dead_wildcards.tmp
         fi
     done < "$WILDCARDS"
-    [[ ! -f collated_dead_wildcards.tmp ]] && return
+    [[ ! -f dead_wildcards.tmp ]] && return
 
     # Remove unused wildcards from raw file and wildcards file
-    comm -23 "$RAW" collated_dead_wildcards.tmp > raw.tmp
-    comm -23 "$WILDCARDS" collated_dead_wildcards.tmp > wildcards.tmp
+    comm -23 "$RAW" dead_wildcards.tmp > raw.tmp
+    comm -23 "$WILDCARDS" dead_wildcards.tmp > wildcards.tmp
     mv raw.tmp "$RAW"
     mv wildcards.tmp "$WILDCARDS"
 
-    log_event "$(<collated_dead_wildcards.tmp)" dead wildcard
+    log_event "$(<dead_wildcards.tmp)" dead wildcard
 }
 
 check_dead() {
