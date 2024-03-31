@@ -171,7 +171,7 @@ count_excluded() {
     printf "%s" "$((excluded_count*100/raw_count))"
 }
 
-# Function 'format_file' is a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
