@@ -91,8 +91,6 @@ retrieve_parked() {
 check_parked() {
     [[ ! -f "$1" ]] && return
 
-    local -a parked
-
     # Track progress only for first split file
     if [[ "$1" == 'x00' ]]; then
         local track=true
@@ -104,7 +102,7 @@ check_parked() {
         if grep -qiFf "$PARKED_TERMS" \
             <<< "$(curl -sL --max-time 5 "http://${domain}/" | tr -d '\0')"; then
             printf "[info] Found parked domain: %s\n" "$domain"
-            parked+=("$domain")
+            printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
 
         # Skip progress tracking if not first split file
@@ -118,8 +116,8 @@ check_parked() {
     done < "$1"
 
     # Collate parked domains
-    if (( ${#parked[@]} > 0 )); then
-        printf "%s\n" "${parked[@]}" >> parked_domains.tmp
+    if [[ -f "parked_domains_${1}.tmp" ]]; then
+        cat "parked_domains_${1}.tmp" >> parked_domains.tmp
     fi
 }
 
