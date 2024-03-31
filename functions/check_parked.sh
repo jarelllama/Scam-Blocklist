@@ -23,11 +23,6 @@ main() {
 }
 
 remove_parked_domains() {
-    # Reset split files before run
-    find . -maxdepth 1 -type f -name "x??" -delete
-
-    printf "\n[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$RAW")"
-
     # Retrieve parked domains and return if none found
     retrieve_parked "$RAW" || return
 
@@ -38,11 +33,6 @@ remove_parked_domains() {
 }
 
 add_unparked_domains() {
-    # Reset split files before run
-    find . -maxdepth 1 -type f -name "x??" -delete
-
-    printf "\n[start] Analyzing %s entries for unparked domains\n" "$(wc -l < "$PARKED_DOMAINS")"
-
     # Retrieve parked domains and return if none found
     retrieve_parked "$PARKED_DOMAINS" || return
 
@@ -66,7 +56,13 @@ add_unparked_domains() {
 # Output:
 #   exit status 1 if no parked domains were found
 retrieve_parked() {
-    : > parked_domains.tmp  # Truncate parked domains (prevents missing file error)
+    # Truncate parked domains (prevents missing file error)
+    : > parked_domains.tmp
+    # Truncate split files before run
+    find . -maxdepth 1 -type f -name "x??" -delete
+
+    printf "\n[info] Processing file %s\n
+        [start] Analyzing %s entries for parked domains\n" "$1" "$(wc -l < "$1")"
 
     # Split file into 12 equal files
     split -d -l $(($(wc -l < "$1")/12)) "$1"
@@ -160,4 +156,5 @@ cleanup() {
 }
 
 trap cleanup EXIT
+
 main

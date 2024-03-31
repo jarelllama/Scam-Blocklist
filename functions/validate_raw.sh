@@ -114,7 +114,7 @@ validate_raw() {
 
         # Collate filtered wildcards to exclude from dead check
         printf "%s\n" "$wildcards" >> "$WILDCARDS"
-         # Collate filtered redundant domains for dead check
+        # Collate filtered redundant domains for dead check
         grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp >> "$REDUNDANT_DOMAINS"
 
         format_file "$WILDCARDS"
@@ -138,10 +138,9 @@ validate_raw() {
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
     sort -u filter_log.tmp
 
+    # Save changes to raw file and raw light file
     printf "%s\n" "$domains" > "$RAW"
     format_file "$RAW"
-
-    # Remove filtered domains from light file
     comm -12 "$RAW" "$RAW_LIGHT" > light.tmp && mv light.tmp "$RAW_LIGHT"
 
     total_whitelisted_count="$((whitelisted_count + whitelisted_tld_count))"

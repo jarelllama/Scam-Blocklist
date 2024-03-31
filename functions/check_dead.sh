@@ -26,7 +26,7 @@ main() {
     check_alive
     update_light_file
 
-    # Cache dead domains (skip processing dead domains through alive check)
+    # Cache dead domains (done last to skip alive domains check)
     cat dead_in_raw.tmp >> "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
 }
@@ -53,8 +53,8 @@ check_subdomains() {
 
     # Remove dead root domains from raw file and root domains file
     comm -23 "$RAW" <(printf "%s" "$dead_root_domains") > raw.tmp
-    mv raw.tmp "$RAW"
     comm -23 "$ROOT_DOMAINS" <(printf "%s" "$dead_root_domains") > root.tmp
+    mv raw.tmp "$RAW"
     mv root.tmp "$ROOT_DOMAINS"
 
     log_event "$dead_root_domains" dead raw
@@ -86,8 +86,8 @@ check_redundant() {
 
     # Remove unused wildcards from raw file and wildcards file
     comm -23 "$RAW" collated_dead_wildcards.tmp > raw.tmp
-    mv raw.tmp "$RAW"
     comm -23 "$WILDCARDS" collated_dead_wildcards.tmp > wildcards.tmp
+    mv raw.tmp "$RAW"
     mv wildcards.tmp "$WILDCARDS"
 
     log_event "$(<collated_dead_wildcards.tmp)" dead wildcard
@@ -127,7 +127,8 @@ check_alive() {
         alive_domains="$(printf "%s" "$alive_domains" | sed "s/^${subdomain}\.//" | sort -u)"
     done < "$SUBDOMAINS_TO_REMOVE"
 
-    printf "%s\n" "$alive_domains" >> "$RAW"  # Add resurrected domains to raw file
+    # Add resurrected domains to raw file
+    printf "%s\n" "$alive_domains" >> "$RAW"
     format_file "$RAW"
 
     log_event "$alive_domains" resurrected dead_domains_file
