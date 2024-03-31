@@ -29,7 +29,7 @@ remove_parked_domains() {
     # Remove parked domains from raw file
     comm -23 "$RAW" parked_domains.tmp > raw.tmp && mv raw.tmp "$RAW"
 
-    log_event "$(<parked_domains.tmp)" "parked" "raw"
+    log_event "$(<parked_domains.tmp)" parked raw
 }
 
 add_unparked_domains() {
@@ -47,7 +47,7 @@ add_unparked_domains() {
     printf "%s\n" "$unparked_domains" >> "$RAW"
     format_file "$RAW"
 
-    log_event "$unparked_domains" "unparked" "parked_domains_file"
+    log_event "$unparked_domains" unparked parked_domains_file
 }
 
 # Function 'retrieve_parked' efficiently checks for parked domains.

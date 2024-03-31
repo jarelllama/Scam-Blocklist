@@ -227,7 +227,7 @@ function test_dead_check {
     # Expected output
     printf "google.com\n" >> out_raw.txt
     printf "584031dead-domain-test.com\n" >> out_dead.txt
-    printf "resurrected,google.com,DEAD_DOMAINS\n" >> out_log.txt
+    printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt
 
     # Test removal of dead domains with subdomains
     : > "$SUBDOMAINS"  # Initialize subdomains file
@@ -299,7 +299,7 @@ function test_parked_check {
     printf "google.com\n" >> "$PARKED_DOMAINS"  # Unparked domain as input
     # Expected output
     printf "google.com\n" >> out_raw.txt
-    printf "unparked,google.com,PARKED_DOMAINS\n" >> out_log.txt
+    printf "unparked,google.com,parked_domains\n" >> out_log.txt
 
     # Test removal of parked domains
     # Input
