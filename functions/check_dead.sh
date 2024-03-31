@@ -4,6 +4,7 @@
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
