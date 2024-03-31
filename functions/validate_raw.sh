@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Validates the domains in the raw file via a variety of checks
+# This script validates the domains in the raw file via a variety of checks
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -13,8 +12,8 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='data/wildcards.txt'
 readonly REDUNDANT_DOMAINS='data/redundant_domains.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
-TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIME_FORMAT
+TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 # Function 'validate_raw' stores the domains in the raw file in a variable and validates them
 # via a variety of checks
@@ -41,7 +40,7 @@ validate_raw() {
         printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
         awk '{print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
-        log_event "$domains_with_subdomains" "subdomain"
+        log_event "$domains_with_subdomains" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
     format_file subdomains.tmp
     format_file root_domains.tmp
@@ -52,7 +51,7 @@ validate_raw() {
     if [[ "$whitelisted_count" -gt 0 ]]; then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
         awk '{print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
-        log_event "$whitelisted_domains" "whitelist"
+        log_event "$whitelisted_domains" whitelist
     fi
 
     # Remove domains that have whitelisted TLDs
@@ -61,7 +60,7 @@ validate_raw() {
     if [[ "$whitelisted_tld_count" -gt 0 ]]; then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
         awk '{print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
-        log_event "$whitelisted_tld_domains" "tld"
+        log_event "$whitelisted_tld_domains" tld
     fi
 
     # Remove invalid entries including IP addresses. This excludes punycode TLDs (.xn--*)
@@ -70,7 +69,7 @@ validate_raw() {
     if [[ "$invalid_entries_count" -gt 0 ]]; then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))"
         awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> filter_log.tmp
-        log_event "$invalid_entries" "invalid"
+        log_event "$invalid_entries" invalid
     fi
 
     # Remove redundant domains
@@ -91,7 +90,7 @@ validate_raw() {
         printf "%s\n" "$domain" >> wildcards.tmp
 
         awk '{print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
-        log_event "$redundant_domains" "redundant"
+        log_event "$redundant_domains" redundant
     done <<< "$domains"
     format_file redundant_domains.tmp
     format_file wildcards.tmp
@@ -102,7 +101,7 @@ validate_raw() {
     if [[ "$toplist_count" -gt 0 ]]; then
         awk '{print $0 " (toplist) - \033[1;31mmanual removal required\033[0m"}' \
             <<< "$domains_in_toplist" >> filter_log.tmp
-        log_event "$domains_in_toplist" "toplist"
+        log_event "$domains_in_toplist" toplist
     fi
 
     # Exit if no filtering done
@@ -166,6 +165,8 @@ log_event() {
 format_file() {
     bash functions/tools.sh format "$1"
 }
+
+# Entry point
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 

@@ -1,12 +1,14 @@
 #!/bin/bash
+# This script updates README.md content and statistics
+
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCE_LOG='config/SOURCE_LOG.csv'
-TODAY="$(date -u +"%d-%m-%y")"
-YESTERDAY="$(date -ud "yesterday" +"%d-%m-%y")"
 readonly TODAY
 readonly YESTERDAY
+TODAY="$(date -u +"%d-%m-%y")"
+YESTERDAY="$(date -ud "yesterday" +"%d-%m-%y")"
 
 update_readme() {
     cat << EOF > README.md
@@ -142,7 +144,8 @@ print_stats() {
 
 # Function 'sum' is an echo wrapper that sums up the domains retrieved by that source for
 # that particular day
-# $1: source to count
+# $1: day to process
+# $2: source to process
 sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
@@ -152,7 +155,7 @@ sum() {
 
 # Function 'count_excluded' is an echo wrapper that counts the % of excluded domains
 # of raw count retrieved from each source
-# $1: source to count
+# $1: source to process
 count_excluded() {
     csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > source_rows.tmp
 
@@ -163,10 +166,10 @@ count_excluded() {
     dead_count="$(csvcut -c 7 source_rows.tmp | awk '{total += $1} END {print total}')"
     redundant_count="$(csvcut -c 8 source_rows.tmp | awk '{total += $1} END {print total}')"
     parked_count="$(csvcut -c 9 source_rows.tmp | awk '{total += $1} END {print total}')"
+    rm source_rows.tmp
+
     excluded_count="$((white_count + dead_count + redundant_count + parked_count))"
     printf "%s" "$((excluded_count*100/raw_count))"
-
-    rm source_rows.tmp
 }
 
 # Function 'format_file' is a shell wrapper to standardize the format of a file
@@ -174,6 +177,8 @@ count_excluded() {
 format_file() {
     bash functions/tools.sh format "$1"
 }
+
+# Entry point
 
 command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
 

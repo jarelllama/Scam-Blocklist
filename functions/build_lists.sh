@@ -1,23 +1,26 @@
 #!/bin/bash
-raw_file='data/raw.txt'
-raw_light_file='data/raw_light.txt'
+# This script builds the various formats of list from the raw files
 
-function main {
-    build_adblock
-    build_dnsmasq
-    build_unbound
-    build_wildcard_asterisk
-    build_wildcard_domains
-}
+readonly RAW='data/raw.txt'
+readonly RAW_LIGHT='data/raw_light.txt'
 
-function build_lists {
-    [[ -z "$comment" ]] && comment='#'  # Set default comment to '#'
-    mkdir -p "lists/${directory}"  # Create directory if not present
+# Function 'build_lists' builds the two version of the blocklist in the various formats
+# called by the build list functions (see below)
+build_lists() {
+    [[ -z "$comment" ]] && comment='#'  # Set default comment character to '#'
+    mkdir -p "lists/${directory}"
 
-    # Loop through the two blocklist versions
+    # Loop through the full and light blocklist versions
     for i in {1..2}; do
-        [[ "$i" -eq 1 ]] && { list_name='scams.txt'; version=''; source_file="$raw_file"; }
-        [[ "$i" -eq 2 ]] && { list_name='scams_light.txt'; version='LIGHT VERSION'; source_file="$raw_light_file"; }
+        if [[ "$i" -eq 1 ]]; then
+            version=''
+            list_name='scams.txt'
+            source_file="$RAW"
+        elif [[ "$i" -eq 2 ]]; then
+            version='LIGHT VERSION'
+            list_name='scams_light.txt'
+            source_file="$RAW_LIGHT"
+        fi
         blocklist_path="lists/${directory}/${list_name}"
 
         cat << EOF > "$blocklist_path"  # Append header onto blocklist
@@ -31,39 +34,80 @@ ${comment} Total number of entries: $(wc -l < "$source_file")
 ${comment}
 EOF
 
-        [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"  # Special case for Unbound format
+        # Special case for Unbound format
+        [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"
         # Append formatted domains onto blocklist
-        printf "%s\n" "$(awk -v before="$before" -v after="$after" '{print before $0 after}' "$source_file")" >> "$blocklist_path"
+        printf "%s\n" "$(awk -v before="$before" -v after="$after" \
+            '{print before $0 after}' "$source_file")" >> "$blocklist_path"
     done
 }
 
-function format_list {
-    bash functions/tools.sh "format" "$1"
+# Function 'format_file' is a shell wrapper to standardize the format of a file
+# $1: file to format
+format_file() {
+    bash functions/tools.sh format "$1"
 }
 
-function build_adblock {
-    syntax='Adblock Plus' && directory='adblock' && comment='!' && before='||' && after='^'
+# Build list functions:
+# $syntax: name of list syntax
+# $directory: directory to create list in
+# $comment: character used for comments (default:#)
+# $before: characters to append before each domain
+# $after: characters to append after each domain
+
+build_adblock() {
+    local syntax='Adblock Plus'
+    local directory='adblock'
+    local comment='!'
+    local before='||'
+    local after='^'
     build_lists
 }
 
-function build_dnsmasq {
-    syntax='Dnsmasq' && directory='dnsmasq' && comment='' && before='local=/' && after='/'
+build_dnsmasq() {
+    local syntax='Dnsmasq'
+    local directory='dnsmasq'
+    local comment=''
+    local before='local=/'
+    local after='/'
     build_lists
 }
 
-function build_unbound {
-    syntax='Unbound' && directory='unbound' && comment='' && before='local-zone: "' && after='." always_nxdomain'
+build_unbound() {
+    local syntax='Unbound'
+    local directory='unbound'
+    local comment=''
+    local before='local-zone: "'
+    local after='." always_nxdomain'
     build_lists
 }
 
-function build_wildcard_asterisk {
-    syntax='Wildcard Asterisk' && directory='wildcard_asterisk' && comment='' && before='*.' && after=''
+build_wildcard_asterisk() {
+    local syntax='Wildcard Asterisk'
+    local directory='wildcard_asterisk'
+    local comment=''
+    local before='*.'
+    local after=''
     build_lists
 }
 
-function build_wildcard_domains {
-    syntax='Wildcard Domains' && directory='wildcard_domains' && comment='' && before='' && after=''
+build_wildcard_domains() {
+    local syntax='Wildcard Domains'
+    local directory='wildcard_domains'
+    local comment=''
+    local before=''
+    local after=''
     build_lists
 }
 
-main
+# Entry point
+
+for file in config/* data/*; do
+    format_file "$file"
+done
+
+build_adblock
+build_dnsmasq
+build_unbound
+build_wildcard_asterisk
+build_wildcard_domains
