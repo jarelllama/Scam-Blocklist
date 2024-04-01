@@ -190,6 +190,12 @@ process_source() {
 # Function 'build' adds the filtered domains to the raw files and presents
 # some basic numbers to the user.
 build() {
+    # Print domains requiring manual review
+    if [[ -f manual_review.tmp ]]; then
+        printf "\n\e[1mEntries requiring manual review:\e[0m\n"
+        cat manual_review.tmp
+    fi
+
     # Exit if no new domains to add
     if ! grep -q '[a-z]' retrieved_domains.tmp; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
@@ -197,12 +203,6 @@ build() {
     fi
 
     format_file retrieved_domains.tmp
-
-    # Print domains requiring manual review
-    if [[ -f manual_review.tmp ]]; then
-        printf "\n\e[1mEntries requiring manual review:\e[0m\n"
-        cat manual_review.tmp
-    fi
 
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
