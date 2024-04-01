@@ -246,6 +246,7 @@ TEST_BUILD() {
     domain='build-test.com'
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
+    touch out.txt  # Placeholder
 
     run_script build_lists.sh
 
@@ -269,14 +270,14 @@ TEST_BUILD() {
 #   $2: name and directory of format
 check_list() {
     # Check regular version
-    if grep -qxF "$1" "lists/${2}/scams.txt"; then
+    if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
         grep -F "$domain" "lists/${2}/scams.txt"
         error=true
     fi
 
     # Check light version
-    if grep -qxF "$1" "lists/${2}/scams_light.txt"; then
+    if ! grep -qxF "$1" "lists/${2}/scams_light.txt"; then
         printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$2"
         grep -F "$domain" "lists/${2}/scams_light.txt"
         error=true
