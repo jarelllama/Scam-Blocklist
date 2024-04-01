@@ -6,7 +6,8 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 
 build() {
-    comment=${comment:-'#'}  # Set default comment character to '#'
+    # Set default comment character to '#'
+    comment=${comment:-'#'}
 
     mkdir -p "lists/${directory}"
 
