@@ -208,6 +208,8 @@ function TEST_PARKED_CHECK {
 
     test_parked_check
     test_unparked_check
+    test_dead_check
+    test_alive_check
 
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
