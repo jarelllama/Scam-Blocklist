@@ -85,16 +85,12 @@ SHELLCHECK() {
 
     printf "\n[info] Scripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
 
-    # Exit with error if test failed
-    if [[ "$error" == true ]]; then
-        printf "\n"
-        exit 1
-    fi
+    check_and_exit --no-log
 }
 
 # Function 'TEST_RETRIEVE_VALIDATE' can test both the retrieval process and the
 # validation process depending on which argument is passed to the function.
-# $1: script to test, can either be 'retrieve' or 'validate'
+#   $1: script to test, can either be 'retrieve' or 'validate'
 TEST_RETRIEVE_VALIDATE() {
     script_to_test="$1"
 
@@ -196,7 +192,7 @@ TEST_DEAD_CHECK() {
     check_and_exit
 }
 
-function TEST_PARKED_CHECK {
+TEST_PARKED_CHECK() {
     # Placeholders used as sample data
     # (split does not work well without enough records)
     not_parked_placeholder=$(head -n 50 "$TOPLIST")
@@ -215,7 +211,7 @@ function TEST_PARKED_CHECK {
     # (Unparked domains are not added back to light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
-    run_script "check_parked.sh"
+    run_script check_parked.sh
 
     # Remove placeholder lines
     comm -23 "$RAW" placeholders.txt > raw.tmp
@@ -235,6 +231,31 @@ function TEST_PARKED_CHECK {
     check_output "$PARKED_DOMAINS" out_parked.txt "Parked domains"
 
     check_and_exit
+}
+
+test_build() {
+    domain='build-test.com'
+    printf "%s\n" "$domain" >> "$RAW"
+    cp "$RAW" "$RAW_LIGHT"
+    run_script build_list.sh
+    check_list "||${domain}^" adblock
+    check_list "local=/${domain}/" dnsmasq
+    check_list "local-zone: \"${domain}.\" always_nxdomain" unbound
+    check_list "*.${domain}" wildcard_asterisk
+    check_list "${domain}" wildcard
+
+    check_and_exit --no-log
+}
+
+# Function 'check_list' verifies the syntax of the list format.
+#   $1: syntax to check for
+#   $2 name of format
+check_list() {
+    if grep -qxF "$1" "lists/${2}/scams.txt"; then
+        printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
+        grep -F 'build-test.com' "lists/$2"
+        error=true
+    fi
 }
 
 # The 'test_<function>' scripts are to test individual functions
@@ -569,7 +590,7 @@ check_and_exit() {
         # No need for additional new line since log is not printed again
         error=true
     else
-        printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
+        [[ "$1" != '--no-log' ]] && printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
     fi
 
     # Exit with error if test failed
