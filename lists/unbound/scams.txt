@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Apr  1 14:39:20 UTC 2024
+# Last modified: Mon Apr  1 14:45:49 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 21037
+# Total number of entries: 21038
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2544,6 +2544,7 @@ local-zone: "boldraiment.com." always_nxdomain
 local-zone: "bollygoo.com." always_nxdomain
 local-zone: "bolt-courier.com." always_nxdomain
 local-zone: "boltshipexpress.com." always_nxdomain
+local-zone: "bomedrop.io." always_nxdomain
 local-zone: "bon-belle.shop." always_nxdomain
 local-zone: "bonafidechems.com." always_nxdomain
 local-zone: "bonaloty.com." always_nxdomain

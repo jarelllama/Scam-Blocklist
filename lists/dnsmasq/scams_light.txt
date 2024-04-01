@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Apr  1 14:39:20 UTC 2024
+# Last modified: Mon Apr  1 14:45:49 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 2085
+# Total number of entries: 2086
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -252,6 +252,7 @@ local=/blueprintkennel.com/
 local=/bluewavecontainers.com/
 local=/bodygo.com/
 local=/bohoween.com/
+local=/bomedrop.io/
 local=/bondsclothes.com/
 local=/boniface.store/
 local=/bonnieranchdoodles.com/
