@@ -31,7 +31,8 @@ remove_parked_domains() {
     retrieve_parked "$RAW" || return
 
     # Remove parked domains from raw file
-    comm -23 "$RAW" parked_domains.tmp > raw.tmp && mv raw.tmp "$RAW"
+    comm -23 "$RAW" <(sort parked_domains.tmp) > raw.tmp
+    mv raw.tmp "$RAW"
 
     log_event "$(<parked_domains.tmp)" parked raw
 }
