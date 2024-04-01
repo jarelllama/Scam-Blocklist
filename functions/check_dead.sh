@@ -111,7 +111,7 @@ check_dead() {
 # Function 'check_alive' finds resurrected domains in the dead domains file
 # and adds them back into the raw file.
 check_alive() {
-    find_dead "$DEAD_DOMAINS" || return
+    find_dead "$DEAD_DOMAINS"  # No need to return if no dead found
 
     # Get resurrected domains in dead domains file
     # (dead domains file is unsorted)

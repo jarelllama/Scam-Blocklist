@@ -39,10 +39,11 @@ remove_parked_domains() {
 # Function 'add_unparked_domains' finds unparked domains in the parked domains
 # file and adds them back into the raw file.
 add_unparked_domains() {
-    retrieve_parked "$PARKED_DOMAINS" || return
+    retrieve_parked "$PARKED_DOMAINS"  # No need to return if no parked found
 
     # Get unparked domains
     unparked_domains="$(grep -vxFf parked_domains.tmp "$PARKED_DOMAINS")"
+    [[ -z "$unparked_domains" ]] && return
 
     # Keep only parked domains in parked domains file
     grep -xFF parked_domains.tmp "$PARKED_DOMAINS" > parked.tmp
