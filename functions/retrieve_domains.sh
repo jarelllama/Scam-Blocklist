@@ -38,6 +38,7 @@ source() {
     fi
 
     mkdir -p data/pending
+    
     source_manual
     source_aa419
     source_dfpi
