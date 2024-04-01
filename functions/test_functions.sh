@@ -180,7 +180,7 @@ TEST_DEAD_CHECK() {
     # (resurrected domains are not added back to light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
-    run_script check_dead.sh
+    run_script check_dead.sh || exit 1
 
     # Sort dead domains file for easy comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
@@ -246,9 +246,10 @@ TEST_BUILD() {
     domain='build-test.com'
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
-    touch out.txt  # Placeholder
 
     run_script build_lists.sh
+
+    # TODO: check exit status
 
     check_list "||${domain}^" adblock
     check_list "local=/${domain}/" dnsmasq
