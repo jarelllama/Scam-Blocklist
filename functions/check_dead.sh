@@ -34,6 +34,8 @@ main() {
     format_file "$DEAD_DOMAINS"
 }
 
+# Function 'check_subdomains' removes dead domains from the subdomains file
+# and raw file.
 check_subdomains() {
     find_dead "$SUBDOMAINS" || return
 
@@ -59,6 +61,8 @@ check_subdomains() {
     log_event "$dead_root_domains" dead raw
 }
 
+# Function 'check_redundant' removes dead domains from the redundant domains
+# file and raw file.
 check_redundant() {
     find_dead "$REDUNDANT_DOMAINS" || return
 
@@ -88,6 +92,7 @@ check_redundant() {
     log_event "$(<dead_wildcards.tmp)" dead wildcard
 }
 
+# Function 'check_dead' removes dead domains from the raw file.
 check_dead() {
     # Exclude wildcards and root domains of subdomains
     comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") > raw.tmp
@@ -103,6 +108,8 @@ check_dead() {
     log_event "$(<dead_in_raw.tmp)" dead raw
 }
 
+# Function 'check_alive' finds resurrected domains from the dead domains file
+# and adds them back into the raw file.
 check_alive() {
     find_dead "$DEAD_DOMAINS" || return
 
