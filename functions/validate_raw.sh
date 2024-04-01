@@ -100,6 +100,7 @@ validate_raw() {
     format_file wildcards.tmp
 
     # Find matching domains in toplist, excluding blacklisted domains
+    # Note domains found are not removed
     domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( toplist_count > 0 )); then
