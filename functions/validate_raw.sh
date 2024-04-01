@@ -145,7 +145,8 @@ validate_raw() {
     # Save changes to raw file and raw light file
     printf "%s\n" "$domains" > "$RAW"
     format_file "$RAW"
-    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp && mv light.tmp "$RAW_LIGHT"
+    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
+    mv light.tmp "$RAW_LIGHT"
 
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     after_count="$(wc -l < "$RAW")"

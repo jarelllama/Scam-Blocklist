@@ -103,7 +103,8 @@ check_dead() {
     mv dead.tmp dead_in_raw.tmp
 
     # Remove dead domains from raw file
-    comm -23 "$RAW" dead_in_raw.tmp > raw.tmp && mv raw.tmp "$RAW"
+    comm -23 "$RAW" dead_in_raw.tmp > raw.tmp
+    mv raw.tmp "$RAW"
 
     log_event "$(<dead_in_raw.tmp)" dead raw
 }

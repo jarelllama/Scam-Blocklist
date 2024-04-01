@@ -359,6 +359,15 @@ pick_exit() {
     [[ "$error" == true ]] && { printf "\n"; exit 1; }
 }
 
+check_temp() {
+    if ! ls x?? &> /dev/null && ! ls ./*.tmp &> /dev/null; then
+        return
+    fi
+    printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
+    ls x?? ./*.tmp 2> /dev/null
+    error=true
+}
+
 function check_output {
     cmp -s "$1" "$2" && return  # Return if files are the same
     printf "\e[1m[warn] %s file is not as expected:\e[0m\n" "$3"
