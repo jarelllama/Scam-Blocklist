@@ -140,7 +140,7 @@ EOF
 # $1: source to process (default is all sources)
 print_stats() {
     printf "%5s |%10s |%8s%% | %s\n" \
-        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "${3:-All sources}"
+        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "${2:-All sources}"
 }
 
 # Function 'sum' is an echo wrapper that returns the total sum of
