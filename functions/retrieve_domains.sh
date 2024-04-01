@@ -230,9 +230,9 @@ build() {
     # Mark sources as saved in the source log file
     rows="$(sed 's/,no/,yes/' <(grep -F "$TIME_FORMAT" "$SOURCE_LOG"))"
     # Remove previous logs
-    temp_SOURCE_LOG="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
+    temp_source_log="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
     # Add updated logs
-    printf "%s\n%s\n" "$temp_SOURCE_LOG" "$rows" > "$SOURCE_LOG"
+    printf "%s\n%s\n" "$temp_source_log" "$rows" > "$SOURCE_LOG"
 
     # Exit with error if domains need to be manually reviewed
     if [[ -f manual_review.tmp ]]; then
@@ -284,10 +284,10 @@ format_file() {
 }
 
 cleanup() {
-    # Initialize pending directory is no pending domains to be saved
+    # Initialize pending directory if no pending domains to be saved
     find data/pending -type d -empty -delete
 
-    find . -maxdepth 1 -type f -name "*.tmp" -delete
+    find . -maxdepth 1 -type f -name '*.tmp' -delete
 }
 
 # Source functions are to retrieve results from the respective sources.
@@ -303,7 +303,8 @@ cleanup() {
 #   $results_file (if results retrieved)
 
 source_google_search() {
-    command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
+    # Install csvkit
+    command -v csvgrep &> /dev/null || pip install -q csvkit
 
     local source='Google Search'
     local results_file
