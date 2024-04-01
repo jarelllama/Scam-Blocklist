@@ -270,6 +270,9 @@ TEST_BUILD() {
 #   $1: syntax to check for
 #   $2: name and directory of format
 check_list() {
+
+cat "lists/${2}/scams.txt"
+
     # Check regular version
     if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
