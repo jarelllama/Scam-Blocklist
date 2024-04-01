@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # This script is used to test the various functions.
 
 readonly RAW='data/raw.txt'
@@ -15,16 +16,23 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
 
-[[ "$CI" != true ]] && exit 1  # Do not allow running locally
-
 function main {
     : > "$RAW"  # Initialize raw file
     sed -i '1q' "$DOMAIN_LOG"  # Initialize domain log file
-    [[ "$1" == 'retrieve' ]] && test_retrieve_validate "$1"
-    [[ "$1" == 'validate' ]] && test_retrieve_validate "$1"
-    [[ "$1" == 'dead' ]] && test_dead_check
-    [[ "$1" == 'parked' ]] && test_parked_check
-    [[ "$1" == 'shellcheck' ]] && shellcheck
+
+    case "$1" in
+        ('retrieve')
+            test_retrieve_validate "$1" ;;
+        ('validate')
+            test_retrieve_validate "$1" ;;
+        ('dead')
+            test_dead_check ;;
+        ('parked')
+            test_parked_check ;;
+        ('shellcheck')
+            shellcheck ;;
+    esac
+
     exit 0
 }
 
@@ -34,8 +42,10 @@ function shellcheck {
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
 
     scripts=$(find . ! -path "./legacy/*" -type f -name "*.sh")  # Find scripts
-    while read -r script; do  # Loop through scripts
-        shellcheck-stable/shellcheck "$script" || error=true  # Run ShellCheck for each script
+
+    # Run ShellCheck for each script
+    while read -r script; do
+        shellcheck-stable/shellcheck "$script" || error=true
     done <<< "$scripts"
 
     # Check for carriage return characters
@@ -383,4 +393,4 @@ check_log() {
     error=true
 }
 
-main "$1"
+[[ "$CI" == true ]] && main "$1"  # Do not allow running locally
