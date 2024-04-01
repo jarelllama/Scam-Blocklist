@@ -32,7 +32,7 @@ main() {
         ('validate')
             TEST_RETRIEVE_VALIDATE "$1" ;;
         ('dead')
-            test_dead_check ;;
+            TEST_DEAD_CHECK ;;
         ('parked')
             test_parked_check ;;
         ('shellcheck')
@@ -91,9 +91,9 @@ SHELLCHECK() {
 # TEST: conversion from URLs to domains
 test_conversion() {
     # INPUT
-    printf "https://conversion-test.com/folder/" >> input.txt
+    printf "https://conversion-test.com/folder/\n" >> input.txt
     # EXPECTED OUTPUT
-    printf "conversion-test.com" >> out_raw.txt
+    printf "conversion-test.com\n" >> out_raw.txt
 }
 
 # TEST: removal of known dead domains
@@ -340,9 +340,9 @@ TEST_RETRIEVE_VALIDATE() {
     on_exit
 }
 
-# Function 'test_dead_check' tests the removal/addition of dead and resurrected
+# Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
 # domains respectively.
-test_dead_check() {
+TEST_DEAD_CHECK() {
     # Initialize files
     : > "$SUBDOMAINS"
     : > "$ROOT_DOMAINS"

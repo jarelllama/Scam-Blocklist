@@ -249,8 +249,6 @@ decide_exit() {
     if [[ -f manual_review.tmp ]]; then
         printf "\n"
         exit 1
-    else
-        exit 0
     fi
 }
 
