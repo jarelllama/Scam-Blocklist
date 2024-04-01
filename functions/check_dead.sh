@@ -106,7 +106,7 @@ check_dead() {
 check_alive() {
     find_dead "$DEAD_DOMAINS" || return
 
-    # Find resurrected domains in dead domains file
+    # Get resurrected domains in dead domains file
     # (dead domains file is unsorted)
     alive_domains="$(comm -23 <(sort "$DEAD_DOMAINS") <(sort dead.tmp))"
     [[ -z "$alive_domains" ]] && return
@@ -135,7 +135,7 @@ check_alive() {
 #   $1: file to process
 # Output:
 #   dead.tmp (if dead domains found)
-#   return 1 (if dead domains not found)
+#   exit status 1 (if dead domains not found)
 find_dead() {
     sed 's/^/||/; s/$/^/' "$1" > formatted_domains.tmp
     dead-domains-linter -i formatted_domains.tmp --export dead.tmp
@@ -162,11 +162,11 @@ cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 
     # Prune old entries from dead domains file
-    (( $(wc -l < "$DEAD_DOMAINS") > 5000 )) && sed -i '1,100d' "$DEAD_DOMAINS"
+    if (( $(wc -l < "$DEAD_DOMAINS") > 5000 )); then
+        sed -i '1,100d' "$DEAD_DOMAINS"
+    fi
 }
 
+trap cleanup EXIT
+
 main
-
-cleanup
-
-exit 0

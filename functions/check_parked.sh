@@ -1,5 +1,7 @@
 #!/bin/bash
-# This script checks for parked/unparked domains and removes/adds them accordingly.
+
+# This script checks for parked/unparked domains and
+# removes/adds them accordingly.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -14,7 +16,10 @@ main() {
 
     remove_parked_domains
     add_unparked_domains
-    update_light_file
+
+    # Remove domains from light raw file that are not found in full raw file
+    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
+    mv light.tmp "$RAW_LIGHT"
 
     # Cache parked domains (done last to skip unparked domains check)
     cat parked_domains.tmp >> "$PARKED_DOMAINS"
@@ -22,7 +27,6 @@ main() {
 }
 
 remove_parked_domains() {
-    # Retrieve parked domains and return if none found
     retrieve_parked "$RAW" || return
 
     # Remove parked domains from raw file
@@ -32,7 +36,6 @@ remove_parked_domains() {
 }
 
 add_unparked_domains() {
-    # Retrieve parked domains and return if none found
     retrieve_parked "$PARKED_DOMAINS" || return
 
     # Get unparked domains
@@ -49,11 +52,13 @@ add_unparked_domains() {
     log_event "$unparked_domains" unparked parked_domains_file
 }
 
-# Function 'retrieve_parked' efficiently checks for parked domains.
+# Function 'retrieve_parked' efficiently checks for parked domains from a
+# given file by running the checks in parallel.
 # Input:
-#   $1: list of domains to check
+#   $1: file to process
 # Output:
-#   exit status 1 if no parked domains were found
+#   parked_domains.tmp (if parked domains found)
+#   exit status 1 (if parked domains not found)
 retrieve_parked() {
     # Truncate temporary files between runs
     : > parked_domains.tmp  # File needs to exist to avoid not found errors
@@ -66,13 +71,13 @@ retrieve_parked() {
     split -d -l $(( $(wc -l < "$1") / 12 )) "$1"
 
     # Run checks in parallel
-    check_parked "x00" & check_parked "x01" &
-    check_parked "x02" & check_parked "x03" &
-    check_parked "x04" & check_parked "x05" &
-    check_parked "x06" & check_parked "x07" &
-    check_parked "x08" & check_parked "x09" &
-    check_parked "x10" & check_parked "x11" &
-    check_parked "x12" & check_parked "x13"
+    find_parked "x00" & find_parked "x01" &
+    find_parked "x02" & find_parked "x03" &
+    find_parked "x04" & find_parked "x05" &
+    find_parked "x06" & find_parked "x07" &
+    find_parked "x08" & find_parked "x09" &
+    find_parked "x10" & find_parked "x11" &
+    find_parked "x12" & find_parked "x13"
     wait
 
     # Return 1 if no parked domains were found
@@ -81,12 +86,13 @@ retrieve_parked() {
     format_file parked_domains.tmp
 }
 
-# Function 'check_parked' queries sites for parked messages in their HTML.
+# Function 'find_parked' queries sites from a given file for parked messages
+# in their HTML.
 # Input:
-#   $1: list of domains to check
+#   $1: file to process
 # Output:
-#   parked_domains.tmp (if parked domains were found)
-check_parked() {
+#   parked_domains.tmp (if parked domains found)
+find_parked() {
     [[ ! -f "$1" ]] && return
 
     # Track progress only for first split file
@@ -119,19 +125,6 @@ check_parked() {
     fi
 }
 
-# Function 'update_light_file' removes any domains from the light raw file that
-# are not found in the full raw file.
-update_light_file() {
-    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp && mv light.tmp "$RAW_LIGHT"
-}
-
-# Function 'prune_parked_domains_file' removes old entries once the file reaches
-# a threshold of entries.
-prune_parked_domains_file() {
-    (( $(wc -l < "$PARKED_DOMAINS") > 4000 )) && sed -i '1,100d' "$PARKED_DOMAINS"
-    true
-}
-
 # Function 'log_event' logs domain processing events into the domain log.
 # $1: domains to log stored in a variable
 # $2: event type (dead, whitelisted, etc.)
@@ -141,7 +134,8 @@ log_event() {
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
-# Function 'format_file' calls a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to
+# standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
@@ -150,7 +144,11 @@ format_file() {
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
     find . -maxdepth 1 -type f -name "x??" -delete
-    prune_parked_domains_file
+
+    # Prune old entries from parked domains file
+    if (( $(wc -l < "$PARKED_DOMAINS") > 4000 )); then
+        sed -i '1,100d' "$PARKED_DOMAINS"
+    fi
 }
 
 trap cleanup EXIT
