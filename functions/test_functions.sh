@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# This script is used to test the various functions.
+# This script is used to test the various functions/scripts of this project.
+# Each test consist of an input file which will be processed by
+# the called script, and an output file which is the expected results
+# from the processing. The input and output files are compared to determine
+# the success or failure of the test.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -16,32 +20,39 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
 
-function main {
-    : > "$RAW"  # Initialize raw file
-    sed -i '1q' "$DOMAIN_LOG"  # Initialize domain log file
+main() {
+    # Initialize
+    : > "$RAW"
+    sed -i '1q' "$DOMAIN_LOG"
+    error=false
 
     case "$1" in
         ('retrieve')
-            test_retrieve_validate "$1" ;;
+            TEST_RETRIEVE_VALIDATE "$1" ;;
         ('validate')
-            test_retrieve_validate "$1" ;;
+            TEST_RETRIEVE_VALIDATE "$1" ;;
         ('dead')
             test_dead_check ;;
         ('parked')
             test_parked_check ;;
         ('shellcheck')
-            shellcheck ;;
+            SHELLCHECK ;;
     esac
 
     exit 0
 }
 
-function shellcheck {
+# Function 'SHELLCHECK' runs ShellCheck for all scripts along with other checks
+# for common errors/mistakes.
+SHELLCHECK() {
+    # Download ShellCheck
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
-    wget -qO - "$url" | tar -xJ  # Download ShellCheck
+    wget -qO - "$url" | tar -xJ
+
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
 
-    scripts=$(find . ! -path "./legacy/*" -type f -name "*.sh")  # Find scripts
+    # Find scripts
+    scripts=$(find . ! -path "./legacy/*" -type f -name "*.sh")
 
     # Run ShellCheck for each script
     while read -r script; do
@@ -65,76 +76,106 @@ function shellcheck {
     fi
 
     printf "\n[info] Scripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
-    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
+
+    # Exit with error if test failed
+    if [[ "$error" == true ]]; then
+        printf "\n"
+        exit 1
+    fi
 }
 
-test_retrieve_validate() {
-    script_to_test="$1"
-    [[ -d data/pending ]] && rm -r data/pending  # Initialize pending directory
-    [[ "$script_to_test" == 'retrieve' ]] && mkdir data/pending
+# The 'test_<function>' scripts are to test individual functions within scripts
+# The input.txt file is to be processed by the called script. The out_raw.txt
+# file is the expected raw file after processing by the called script.
 
-    if [[ "$script_to_test" == 'retrieve' ]]; then
-        # Test removal of known dead domains
-        {
-            printf "dead-test.com\n"
-            printf "www.dead-test-2.com\n"
-        } > "$DEAD_DOMAINS"  # Sample data
-        {
-            printf "dead-test.com\n"
-            printf "www.dead-test-2.com\n"
-        } >> input.txt  # Input
-        # No expected output (dead domains check does not log)
-    fi
+# TEST: conversion from URLs to domains
+test_conversion() {
+    # INPUT
+    printf "https://conversion-test.com/folder/" >> input.txt
+    # EXPECTED OUTPUT
+    printf "conversion-test.com" >> out_raw.txt
+}
 
-    # Test removal of common subdomains
-    : > "$SUBDOMAINS"  # Initialize subdomains file
-    : > "$ROOT_DOMAINS"  # Initialize root domains file
+# TEST: removal of known dead domains
+test_known_dead_removal() {
+    {
+        printf "dead-test.com\n"
+        printf "www.dead-test-2.com\n"
+    } >> "$DEAD_DOMAINS"  # Known dead domains
+    {
+        printf "dead-test.com\n"
+        printf "www.dead-test-2.com\n"
+    } >> input.txt  # INPUTS
+
+    # No expected output (dead domains check does not log)
+}
+
+# TEST: removal of common subdomains
+test_subdomain_removal() {
     while read -r subdomain; do
         subdomain="${subdomain}.subdomain-test.com"
-        printf "%s\n" "$subdomain" >> input.txt  # Input
-        printf "%s\n" "$subdomain" >> out_subdomains.txt  # Expected output
-        grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt  # Expected output
+
+        # INPUT
+        printf "%s\n" "$subdomain" >> input.txt
+
+        # EXPECTED OUTPUTS
+        printf "%s\n" "$subdomain" >> out_subdomains.txt
+        grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt
     done < "$SUBDOMAINS_TO_REMOVE"
-    # Expected output
-    [[ "$script_to_test" == 'validate' ]] && printf "subdomain,www.subdomain-test.com\n" >> out_log.txt  # The Check script does not exclude 'www' subdomains
+
+    # EXPECTED OUTPUTS
+    if [[ "$script_to_test" == 'validate' ]]; then
+        # Only the retrieval script skips logging 'www.' subdomains
+        printf "subdomain,www.subdomain-test.com\n" >> out_log.txt
+    fi
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
+}
 
-    # Removal of domains already in raw file is redundant to test
+# TEST: removal of know parked domains
+test_known_parked_removal() {
+    # Known parked domain
+    printf "parked-domains-test.com\n" >> "$PARKED_DOMAINS"
+    # INPUT
+    printf "parked-domains-test.com\n" >> input.txt
+    # EXPECTED OUTPUT
+    printf "parked,parked-domains-test.com\n" >> out_log.txt
+}
 
-    if [[ "$script_to_test" == 'retrieve' ]]; then
-        # Test removal of known parked domains
-        printf "parked-domains-test.com\n" > "$PARKED_DOMAINS"  # Sample data
-        printf "parked-domains-test.com\n" >> input.txt  # Input
-        printf "parked,parked-domains-test.com\n" >> out_log.txt  # Expected output
-    fi
-
-    # Test removal of whitelisted domains and blacklist exclusion
-    # Sample data
-    printf "whitelist\n" > "$WHITELIST"
-    printf "whitelist-blacklisted-test.com\n" > "$BLACKLIST"
-    # Input
+# TEST: whitelisted domains removal
+test_whitelist_removal() {
+    # Sample whitelist term
+    printf "whitelist\n" >> "$WHITELIST"
+    # Sample blacklisted domain
+    printf "whitelist-blacklisted-test.com\n" >> "$BLACKLIST"
+    # INPUTS
     printf "whitelist-test.com\n" >> input.txt
     printf "whitelist-blacklisted-test.com\n" >> input.txt
-    # Expected output
+
+    # EXPECTED OUTPUTS
     printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
-    [[ "$script_to_test" == 'retrieve' ]] && printf "blacklist,whitelist-blacklisted-test.com\n" \
-        >> out_log.txt  # The check script does not log blacklisted domains
+    # The check script does not log blacklisted domains
+    [[ "$script_to_test" == 'check' ]] && return
+    printf "blacklist,whitelist-blacklisted-test.com\n" >> out_log.txt
+}
 
-    # Test removal of domains with whitelisted TLDs
+# TEST: removal of domains with whitelisted TLDs
+test_whitelisted_tld_removal() {
     {
         printf "white-tld-test.gov\n"
         printf "white-tld-test.edu\n"
         printf "white-tld-test.mil\n"
-    } >> input.txt  # Input
+    } >> input.txt  # INPUTS
     {
         printf "tld,white-tld-test.gov\n"
         printf "tld,white-tld-test.edu\n"
         printf "tld,white-tld-test.mil\n"
-    } >> out_log.txt  # Expected output
+    } >> out_log.txt  # EXPECTED OUTPUTS
+}
 
-    # Test removal of invalid entries and IP addresses
+# TEST: removal of invalid entries and IP addresses
+test_invalid_removal() {
     {
         printf "invalid-test-com\n"
         printf "100.100.100.100\n"
@@ -142,94 +183,170 @@ test_retrieve_validate() {
         printf "invalid-test.x\n"
         printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
-    } >> input.txt  # Input
-    printf "invalid-test.xn--903fds\n" >> out_raw.txt  # Expected output
-    [[ "$script_to_test" == 'retrieve' ]] &&
-        {
-            printf "invalid-test-com\n"
-            printf "100.100.100.100\n"
-            printf "invalid-test.x\n"
-            printf "invalid-test.100\n"
-            printf "invalid-test.1x\n"
-        } >> out_manual.txt  # Expected output
+    } >> input.txt  # INPUTS
+
+    # EXPECTED OUTPUTS
+    printf "invalid-test.xn--903fds\n" >> out_raw.txt
     {
         printf "invalid,invalid-test-com\n"
         printf "invalid,100.100.100.100\n"
         printf "invalid,invalid-test.x\n"
         printf "invalid,invalid-test.100\n"
         printf "invalid,invalid-test.1x\n"
-    } >> out_log.txt  # Expected output
+    } >> out_log.txt
 
-    : > "$REDUNDANT_DOMAINS"  # Initialize redundant domains file
+    # Check script does not save invalid domains to manual review file
+    [[ "$script_to_test" == 'check' ]] && return
+
+    {
+        printf "invalid-test-com\n"
+        printf "100.100.100.100\n"
+        printf "invalid-test.x\n"
+        printf "invalid-test.100\n"
+        printf "invalid-test.1x\n"
+    } >> out_manual.txt
+}
+
+test_redundant_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        # Test removal of new redundant domains
-        printf "redundant-test.com\n" > "$WILDCARDS"  # Sample data
-        printf "redundant-test.com\n" >> out_wildcards.txt  # Wildcard should already be in expected wildcards file
-        printf "domain.redundant-test.com\n" >> input.txt  # Input
-        printf "redundant,domain.redundant-test.com\n" >> out_log.txt  # Expected output
-    elif [[ "$script_to_test" == 'validate' ]]; then
-        # Test addition of new wildcard from wildcard file (manually adding a new wildcard to wildcards file)
-        printf "domain.redundant-test.com\n" >> input.txt  # Sample data
-        printf "redundant-test.com\n" > "$WILDCARDS"  # Input
-        # Expected output
-        printf "redundant-test.com\n" >> out_raw.txt
+        # Test removal of redundant domains during retrieval
+        printf "redundant-test.com\n" > "$WILDCARDS"
+         # Wildcard should already be in expected wildcards file
         printf "redundant-test.com\n" >> out_wildcards.txt
-        printf "domain.redundant-test.com\n" >> out_redundant.txt
+        # INPUT
+        printf "domain.redundant-test.com\n" >> input.txt
+        # EXPECTED OUTPUT
         printf "redundant,domain.redundant-test.com\n" >> out_log.txt
+        return
     fi
+    # Test addition of new wildcard from wildcard file
+    # (manually adding a new wildcard to wildcards file)
+    # Existing redundant domain in raw file
+    printf "domain.redundant-test.com\n" >> input.txt
+    # INPUT
+    printf "redundant-test.com\n" > "$WILDCARDS"
+    # EXPECTED OUTPUTS
+    printf "redundant-test.com\n" >> out_raw.txt
+    printf "redundant-test.com\n" >> out_wildcards.txt
+    printf "domain.redundant-test.com\n" >> out_redundant.txt
+    printf "redundant,domain.redundant-test.com\n" >> out_log.txt
+}
 
-    # Test toplist check
-    if [[ "$script_to_test" == 'validate' ]]; then
-        printf "microsoft.com\n" >> input.txt  # Input
-        printf "microsoft.com\n" >> out_raw.txt  # Expected output
-    elif [[ "$script_to_test" == 'retrieve' ]]; then
-        printf "microsoft.com\n" >> data/pending/domains_guntab.com.tmp  # Input
-        # Expected output
-        printf "microsoft.com\n" >> out_pending.txt
-        printf "toplist,microsoft.com\n" >> out_log.txt
-    fi
-
-    # Test light raw file exclusion of specific sources
+# TEST: removal of domains found in toplist
+test_toplist_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        cp "$RAW" "$RAW_LIGHT"
-        printf "raw-light-test.com\n" >> data/pending/domains_guntab.com.tmp  # Input
-        printf "raw-light-test.com\n" >> out_raw.txt  # Expected output
-        grep -vF "raw-light-test.com" out_raw.txt > out_raw_light.txt  # Expected output for light (source excluded from light)
-    elif [[ "$script_to_test" == 'validate' ]]; then
-        cp out_raw.txt out_raw_light.txt  # Expected output for light
+        # INPUT
+        printf "microsoft.com\n" >> data/pending/domains_manual.tmp
+        # EXPECTED OUTPUTS
+        printf "microsoft.com\n" >> out_manual.txt
+        printf "toplist,microsoft.com\n" >> out_log.txt
+        return
+    fi
+    # INPUT
+    printf "microsoft.com\n" >> input.txt
+    # EXPECTED OUTPUTS
+    printf "microsoft.com\n" >> out_raw.txt
+    printf "toplist,microsoft.com\n" >> out_log.txt
+}
+
+# TEST: test exclusion of specific sources from light version
+test_light_build() {
+    cp "$RAW" "$RAW_LIGHT"
+    # INPUT
+    printf "raw-light-test.com\n" >> data/pending/domains_guntab.com.tmp
+    # EXPECTED OUTPUT
+    printf "raw-light-test.com\n" >> out_raw.txt
+    # Domain from excluded source should not be in output
+    grep -vF "raw-light-test.com" out_raw.txt > out_raw_light.txt
+}
+
+# Function 'TEST_RETRIEVE_VALIDATE' can test both the retrieval process and the
+# validation process depending on which argument is passed to the function.
+# $1: script to test, can either be 'retrieve' or 'validate'
+TEST_RETRIEVE_VALIDATE() {
+    script_to_test="$1"
+
+    # Initialize files
+    : > "$DEAD_DOMAINS"
+    : > "$SUBDOMAINS"
+    : > "$ROOT_DOMAINS"
+    : > "$PARKED_DOMAINS"
+    : > "$WHITELIST"
+    : > "$BLACKLIST"
+    : > "$REDUNDANT_DOMAINS"
+
+    # Initialize pending directory
+    [[ -d data/pending ]] && rm -r data/pending
+    [[ "$script_to_test" == 'retrieve' ]] && mkdir data/pending
+
+    # Note removal of domains already in raw file is redundant to test
+
+    if [[ "$script_to_test" == 'retrieve' ]]; then
+        test_conversion
+        test_known_dead_removal
+        test_known_parked_removal
+        test_light_build
     fi
 
+    test_subdomain_removal
+    test_whitelist_removal
+    test_whitelisted_tld_removal
+    test_invalid_removal
+    test_redundant_removal
+    test_toplist_removal
+
+    # Prepare and run retrieval script
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Distribute the sample input into various sources
         split -n l/3 input.txt
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
-        run_script "retrieve_domains.sh" "exit 0"
-    elif [[ "$script_to_test" == 'validate' ]]; then
-        cp input.txt "$RAW"  # Input
-        mv input.txt "$RAW_LIGHT"  # Input
-        run_script "validate_raw.sh" "exit 0"
+
+        run_script retrieve_domains.sh
     fi
 
-    check_output "$RAW" "out_raw.txt" "Raw"  # Check raw file
-    check_output "$RAW_LIGHT" "out_raw_light.txt" "Raw light"  # Check raw light file
-    check_output "$SUBDOMAINS" "out_subdomains.txt" "Subdomains"  # Check subdomains file
-    check_output "$ROOT_DOMAINS" "out_root_domains.txt" "Root domains"  # Check root domains file
+    # Prepare and run check script
+    if [[ "$script_to_test" == 'validate' ]]; then
+        # Use input.txt as sample raw files to test
+        cp input.txt "$RAW"
+        cp input.txt "$RAW_LIGHT"
+
+        # Expected output for light version
+        cp out_raw.txt out_raw_light.txt
+
+        run_script validate_raw.sh
+    fi
+
+    # Check and verify outputs
+
+    check_output "$RAW" out_raw.txt Raw
+    check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
+    check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
+    check_output "$ROOT_DOMAINS" out_root_domains.txt "Root domains"
+
+    # Check entries saved for manual review
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        check_output "data/pending/domains_guntab.com.tmp" "out_pending.txt" "Manual review"  # Check manual review file
-    elif [[ "$script_to_test" == 'validate' ]]; then
-        check_output "$REDUNDANT_DOMAINS" "out_redundant.txt" "Redundant domains"  # Check redundant domains file
-        check_output "$WILDCARDS" "out_wildcards.txt" "Wildcards"  # Check wildcards file
+        check_output "data/pending/domains_guntab.com.tmp" "out_manual.txt" "Manual review"
     fi
-    check_log  # Check log file
 
-    [[ "$error" != true ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
-    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
-    [[ "$error" == true ]] && { printf "\n"; exit 1; }  # Exit with error if test failed
+    if [[ "$script_to_test" == 'validate' ]]; then
+        check_output "$REDUNDANT_DOMAINS" "out_redundant.txt" "Redundant domains"
+        check_output "$WILDCARDS" "out_wildcards.txt" "Wildcards"
+    fi
+
+    check_log
+
+    on_exit
 }
 
-function test_dead_check {
+# Function 'test_dead_check' tests the removal/addition of dead and resurrected
+# domains respectively.
+test_dead_check() {
+    # Initialize files
+    : > "$SUBDOMAINS"
+    : > "$ROOT_DOMAINS"
+
     # Test addition of resurrected domains
     # Input
     printf "www.google.com\n" > "$DEAD_DOMAINS"  # Subdomains should be stripped
@@ -239,16 +356,19 @@ function test_dead_check {
     printf "584031dead-domain-test.com\n" >> out_dead.txt
     printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt
 
-    # Test removal of dead domains with subdomains
-    : > "$SUBDOMAINS"  # Initialize subdomains file
-    printf "584308-dead-subdomain-test.com\n" >> "$RAW"  # Input
-    printf "584308-dead-subdomain-test.com\n" > "$ROOT_DOMAINS"  # Input
+    # TEST: removal of dead domains with subdomains
+    # Dead root domains
+    printf "584308-dead-subdomain-test.com\n" >> "$RAW"
+    printf "584308-dead-subdomain-test.com\n" >> "$ROOT_DOMAINS"
     while read -r subdomain; do
         subdomain="${subdomain}.584308-dead-subdomain-test.com"
-        printf "%s\n" "$subdomain" >> "$SUBDOMAINS"  # Input
-        printf "%s\n" "$subdomain" >> out_dead.txt  # Expected output
+        # INPUT
+        printf "%s\n" "$subdomain" >> "$SUBDOMAINS"
+        # EXPECTED OUTPUT
+        printf "%s\n" "$subdomain" >> out_dead.txt
     done < "$SUBDOMAINS_TO_REMOVE"
-    printf "%s\n" "dead,584308-dead-subdomain-test.com,raw" >> out_log.txt  # Expected output
+    # EXPECTED OUTPUT
+    printf "%s\n" "dead,584308-dead-subdomain-test.com,raw" >> out_log.txt
 
     # Test removal of dead redundant domains and wildcards
     : > "$REDUNDANT_DOMAINS"  # Initialize redundant domains file
@@ -341,20 +461,42 @@ function test_parked_check {
     pick_exit
 }
 
-function run_script {
-    for file in out_*; do  # Format expected output files
-        [[ "$file" != out_dead.txt ]] && [[ "$file" != out_parked.txt ]] && sort "$file" -o "$file"
+# Function 'run_script' executes the script passed by the caller.
+# Input:
+#   $1: scrip to execute
+# Output:
+#   return 1 if script has an exit status of 1
+run_script() {
+    # Format expected output files
+    for file in out_*; do
+        if [[ "$file" != out_dead.txt && "$file" != out_parked.txt ]]; then
+            sort "$file" -o "$file"
+        fi
     done
+
     printf "\e[1m[start] %s\e[0m\n" "$1"
     printf "%s\n" "----------------------------------------------------------------------"
+
+    # Run script
     bash "functions/${1}" || errored=true
+
     printf "%s\n" "----------------------------------------------------------------------"
-    [[ -z "$2" ]] && [[ "$errored" == true ]] && { printf "\e[1m[warn] Script returned an error\e[0m\n"; error=true; }  # Check exit status
+
+    # Return 1 if script has an exit status of 1
+    if [[ "$errored" == true ]]; then
+        return 1
+    fi
 }
 
-pick_exit() {
+# Function 'on_exit' checks if the script should exit with an
+# exit status of 1 or 0.
+on_exit() {
+    # Test completed successfully
     [[ "$error" != true ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
+
+    # Print log if not already printed by 'check_log' function
     [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
+
     # Exit with error if test failed
     [[ "$error" == true ]] && { printf "\n"; exit 1; }
 }
