@@ -82,7 +82,7 @@ To optimize the number of search queries made, each search term is frequently be
 #### Statistics for Google Search source
 \`\`\`
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{total += $1} END {print total}')
+Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{sum += $1} END {print sum}')
 Domains retrieved today: $(count "$TODAY" 'Google Search')
 \`\`\`
 
@@ -152,7 +152,7 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
     csvgrep -c 1 -m "$1" "$SOURCE_LOG" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m yes \
-        | csvcut -c 5 | awk '{total += $1} END {print total}'
+        | csvcut -c 5 | awk '{sum += $1} END {print sum}'
 }
 
 # Function 'count_excluded' is an echo wrapper that returns the % of
@@ -161,13 +161,13 @@ sum() {
 count_excluded() {
     csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > rows.tmp
 
-    raw_count="$(csvcut -c 4 rows.tmp | awk '{total += $1} END {print total}')"
+    raw_count="$(csvcut -c 4 rows.tmp | awk '{sum += $1} END {print sum}')"
     # Return if raw count is 0 to avoid divide by zero error
     (( raw_count == 0 )) && { printf "0"; return; }
-    white_count="$(csvcut -c 6 rows.tmp | awk '{total += $1} END {print total}')"
-    dead_count="$(csvcut -c 7 rows.tmp | awk '{total += $1} END {print total}')"
-    redundant_count="$(csvcut -c 8 rows.tmp | awk '{total += $1} END {print total}')"
-    parked_count="$(csvcut -c 9 rows.tmp | awk '{total += $1} END {print total}')"
+    white_count="$(csvcut -c 6 rows.tmp | awk '{sum += $1} END {print sum}')"
+    dead_count="$(csvcut -c 7 rows.tmp | awk '{sum += $1} END {print sum}')"
+    redundant_count="$(csvcut -c 8 rows.tmp | awk '{sum += $1} END {print sum}')"
+    parked_count="$(csvcut -c 9 rows.tmp | awk '{sum += $1} END {print sum}')"
 
     excluded_count="$(( white_count + dead_count + redundant_count + parked_count ))"
     printf "%s" "$(( excluded_count * 100 / raw_count ))"
