@@ -7,16 +7,16 @@ readonly RAW_LIGHT='data/raw_light.txt'
 
 build() {
     # Set default comment character to '#'
-    comment=${comment:-#}
+    local comment=${comment:-#}
 
     mkdir -p "lists/${directory}"
 
     # Loop through the full and light blocklist versions
     for i in {1..2}; do
         if [[ "$i" == '2' ]]; then
-            version='LIGHT VERSION'
-            list_name='scams_light.txt'
-            source_file="$RAW_LIGHT"
+            local version='LIGHT VERSION'
+            local list_name='scams_light.txt'
+            local source_file="$RAW_LIGHT"
         fi
 
         source_file="${source_file:-$RAW}"
