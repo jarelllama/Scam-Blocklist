@@ -175,7 +175,7 @@ format_file() {
 
 # Entry point
 
-trap 'find . -maxdepth 1 -type f -name '*.tmp' -delete' EXIT
+trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 # Add new wildcards to the raw files
 cat "$WILDCARDS" >> "$RAW"
