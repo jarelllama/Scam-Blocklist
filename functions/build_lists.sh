@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # This script builds the various formats of blocklists from the raw files.
 
 readonly RAW='data/raw.txt'
