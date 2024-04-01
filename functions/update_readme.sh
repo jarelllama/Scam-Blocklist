@@ -139,9 +139,8 @@ EOF
 # for each source.
 # $1: source to process (default is all sources)
 print_stats() {
-    source="${3:-All sources}"
     printf "%5s |%10s |%8s%% | %s\n" \
-        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "$source"
+        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "${3:-All sources}"
 }
 
 # Function 'sum' is an echo wrapper that returns the total sum of
@@ -168,8 +167,8 @@ count_excluded() {
     dead_count="$(csvcut -c 7 rows.tmp | awk '{sum += $1} END {print sum}')"
     redundant_count="$(csvcut -c 8 rows.tmp | awk '{sum += $1} END {print sum}')"
     parked_count="$(csvcut -c 9 rows.tmp | awk '{sum += $1} END {print sum}')"
-
     excluded_count="$(( white_count + dead_count + redundant_count + parked_count ))"
+
     printf "%s" "$(( excluded_count * 100 / raw_count ))"
 }
 
