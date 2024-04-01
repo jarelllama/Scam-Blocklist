@@ -122,10 +122,8 @@ test_known_dead_removal() {
 test_subdomain_removal() {
     while read -r subdomain; do
         subdomain="${subdomain}.subdomain-test.com"
-
         # INPUT
         printf "%s\n" "$subdomain" >> input.txt
-
         # EXPECTED OUTPUTS
         printf "%s\n" "$subdomain" >> out_subdomains.txt
         grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt
@@ -184,6 +182,10 @@ test_whitelisted_tld_removal() {
 
 # TEST: removal of invalid entries and IP addresses
 test_invalid_removal() {
+    if [[ "$script_to_test" == 'validate' ]]; then
+        local input=data/pending/domains_scamadviser.com.tmp
+    fi
+
     {
         printf "invalid-test-com\n"
         printf "100.100.100.100\n"
@@ -191,7 +193,7 @@ test_invalid_removal() {
         printf "invalid-test.x\n"
         printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
-    } >> data/pending/domains_scamadviser.tmp  # INPUTS
+    } >> "${input:-input.txt}"  # INPUTS
 
     # EXPECTED OUTPUTS
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
@@ -243,19 +245,19 @@ test_redundant_removal() {
 
 # TEST: removal of domains found in toplist
 test_toplist_removal() {
+    # EXPECTED OUTPUTS
+    # (expected output for retrieval and check scripts are the same)
+    printf "microsoft.com\n" >> out_manual.txt
+    printf "toplist,microsoft.com\n" >> out_log.txt
+
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # INPUT
         printf "microsoft.com\n" >> data/pending/domains_scamadviser.tmp
-        # EXPECTED OUTPUTS
-        printf "microsoft.com\n" >> out_manual.txt
-        printf "toplist,microsoft.com\n" >> out_log.txt
         return
     fi
+
     # INPUT
     printf "microsoft.com\n" >> input.txt
-    # EXPECTED OUTPUTS
-    printf "microsoft.com\n" >> out_raw.txt
-    printf "toplist,microsoft.com\n" >> out_log.txt
 }
 
 # TEST: test exclusion of specific sources from light version
@@ -364,7 +366,6 @@ test_dead_subdomain_check() {
     done < "$SUBDOMAINS_TO_REMOVE"
     # EXPECTED OUTPUT
     printf "%s\n" "dead,584308-dead-subdomain-test.com,raw" >> out_log.txt
-
 }
 
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
