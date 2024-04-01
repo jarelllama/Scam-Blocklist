@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script builds the various formats of blocklists from the raw files.
+# Builds the various formats of blocklists from the raw files.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
