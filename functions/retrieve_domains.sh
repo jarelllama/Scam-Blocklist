@@ -199,7 +199,7 @@ build() {
     # Exit if no new domains to add
     if ! grep -q '[a-z]' retrieved_domains.tmp; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
-        exit 0
+        decide_exit
     fi
 
     format_file retrieved_domains.tmp
@@ -239,10 +239,18 @@ build() {
     # Add updated logs
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$SOURCE_LOG"
 
+    decide_exit
+}
+
+# Function 'decide_error' checks if the script should exit with an
+# exit status of 1 or 0.
+decide_exit() {
     # Exit with error if domains need to be manually reviewed
     if [[ -f manual_review.tmp ]]; then
         printf "\n"
         exit 1
+    else
+        exit 0
     fi
 }
 
