@@ -327,10 +327,10 @@ source_google_search() {
         return
     fi
 
-    local rate_limited=false
     local url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
+    local rate_limited=false
 
     # Retrieve new results
     while read -r search_term; do  # Loop through search terms
