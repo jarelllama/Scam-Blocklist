@@ -130,7 +130,7 @@ check_alive() {
 }
 
 # Function 'find_dead' finds dead domains from a given file by first formatting
-# the file and processing it through AdGuard's Dead Domains Linter.
+# the file and then processing it through AdGuard's Dead Domains Linter.
 # Input:
 #   $1: file to process
 # Output:
