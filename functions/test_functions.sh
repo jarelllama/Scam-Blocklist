@@ -88,10 +88,18 @@ SHELLCHECK() {
 # The input.txt file is to be processed by the called script. The out_raw.txt
 # file is the expected raw file after processing by the called script.
 
+# TEST: manual addition of domains from repo issue
+test_manual_addition() {
+    # INPUT
+    printf "https://manual-addition-test.com/folder/\n" >> data/pending/domains_manual.tmp
+    # EXPECTED OUTPUT
+    printf "manual-addition-test.com\n" >> out_raw.txt
+}
+
 # TEST: conversion from URLs to domains
 test_conversion() {
     # INPUT
-    printf "https://conversion-test.com/folder/\n" >> input.txt
+    printf "https://conversion-test.com/\n" >> input.txt
     # EXPECTED OUTPUT
     printf "conversion-test.com\n" >> out_raw.txt
 }
@@ -143,7 +151,7 @@ test_known_parked_removal() {
 }
 
 # TEST: whitelisted domains removal
-test_whitelist_removal() {
+test_whitelist_blacklist() {
     # Sample whitelist term
     printf "whitelist\n" >> "$WHITELIST"
     # Sample blacklisted domain
@@ -156,7 +164,7 @@ test_whitelist_removal() {
     printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
     # The check script does not log blacklisted domains
-    [[ "$script_to_test" == 'check' ]] && return
+    [[ "$script_to_test" == 'validate' ]] && return
     printf "blacklist,whitelist-blacklisted-test.com\n" >> out_log.txt
 }
 
@@ -196,7 +204,7 @@ test_invalid_removal() {
     } >> out_log.txt
 
     # Check script does not save invalid domains to manual review file
-    [[ "$script_to_test" == 'check' ]] && return
+    [[ "$script_to_test" == 'validate' ]] && return
 
     {
         printf "invalid-test-com\n"
@@ -289,7 +297,7 @@ TEST_RETRIEVE_VALIDATE() {
     fi
 
     test_subdomain_removal
-    test_whitelist_removal
+    test_whitelist_blacklist
     test_whitelisted_tld_removal
     test_invalid_removal
     test_redundant_removal
