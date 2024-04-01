@@ -242,14 +242,15 @@ TEST_PARKED_CHECK() {
     check_and_exit
 }
 
+# Function 'TEST_BUILD' verifies that the various formats of blocklist
+# are correctly built with the right syntax.
 TEST_BUILD() {
     domain='build-test.com'
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
+    touch out_.txt  # Placeholder
 
-    bash functions/build_lists.sh
-
-    # TODO: check exit status
+    run_script build_lists.sh --no-output
 
     check_list "||${domain}^" adblock
     check_list "local=/${domain}/" dnsmasq
@@ -270,9 +271,6 @@ TEST_BUILD() {
 #   $1: syntax to check for
 #   $2: name and directory of format
 check_list() {
-
-head -n 50 "lists/${2}/scams.txt"
-
     # Check regular version
     if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
@@ -578,12 +576,12 @@ run_script() {
     done
 
     printf "\e[1m[start] %s\e[0m\n" "$1"
-    printf "%s\n" "----------------------------------------------------------------------"
+    [[ "$2" == '--no-output' ]] && printf "%s\n" "----------------------------------------------------------------------"
 
     # Run script
     bash "functions/${1}" || errored=true
 
-    printf "%s\n" "----------------------------------------------------------------------"
+    [[ "$2" == '--no-output' ]] && printf "%s\n" "----------------------------------------------------------------------"
 
     # Return 1 if script has an exit status of 1
     if [[ "$errored" == true ]]; then
