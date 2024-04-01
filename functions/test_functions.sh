@@ -250,13 +250,13 @@ TEST_BUILD() {
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
 
-    run_script build_lists.sh || exit 1
+    run_script build_lists.sh
 
     check_list "||${domain}^" adblock
     check_list "local=/${domain}/" dnsmasq
     check_list "local-zone: \"${domain}.\" always_nxdomain" unbound
     check_list "*.${domain}" wildcard_asterisk
-    check_list "${domain}" wildcard
+    check_list "${domain}" wildcard_domains
 
     if [[ "$error" == true ]]; then
         printf "\n"
@@ -274,7 +274,7 @@ check_list() {
     # Check regular version
     if grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
-        grep -F "$domain" "lists/${2}/scams_light.txt"
+        grep -F "$domain" "lists/${2}/scams.txt"
         error=true
     fi
 
