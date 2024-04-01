@@ -220,10 +220,8 @@ build() {
     format_file "$RAW"
 
     # Add domains to raw light file
-    if grep -q '[a-z]' retrieved_light_domains.tmp; then
-        cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
-        format_file "$RAW_LIGHT"
-    fi
+    cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
+    format_file "$RAW_LIGHT"
 
     log_event "$(<retrieved_domains.tmp)" new_domain retrieval
 
