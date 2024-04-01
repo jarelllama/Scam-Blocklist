@@ -247,7 +247,7 @@ TEST_BUILD() {
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
 
-    run_script build_lists.sh
+    bash build_lists.sh
 
     # TODO: check exit status
 
