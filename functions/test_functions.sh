@@ -6,6 +6,9 @@
 # from the processing. The input and output files are compared to determine
 # the success or failure of the test.
 
+# Fail as soon as there is an error
+set -e
+
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly WHITELIST='config/whitelist.txt'
@@ -247,7 +250,7 @@ TEST_BUILD() {
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
 
-    run_script build_list.sh
+    run_script build_lists.sh || exit 1
 
     check_list "||${domain}^" adblock
     check_list "local=/${domain}/" dnsmasq
