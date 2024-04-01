@@ -38,7 +38,7 @@ source() {
     fi
 
     mkdir -p data/pending
-    
+
     source_manual
     source_aa419
     source_dfpi
@@ -68,11 +68,13 @@ process_source() {
     rm "$results_file"
 
     # Count number of unfiltered domains pending
-    unfiltered_count="$(wc -l <<< "$domains")"
+    # Note wc -w is used here as wc -l for an empty variable seems to
+    # always output 1
+    unfiltered_count="$(wc -w <<< "$domains")"
 
     # Remove known dead domains (includes subdomains and redundant domains)
     dead_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$DEAD_DOMAINS"))"
-    dead_count="$(wc -l <<< "$dead_domains")"
+    dead_count="$(wc -w <<< "$dead_domains")"
     if (( "$dead_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$dead_domains"))"
     fi
@@ -105,7 +107,7 @@ process_source() {
 
     # Remove known parked domains
     parked_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$PARKED_DOMAINS"))"
-    parked_count="$(wc -l <<< "$parked_domains")"
+    parked_count="$(wc -w <<< "$parked_domains")"
     if (( "$parked_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$parked_domains"))"
         log_event "$parked_domains" parked
@@ -117,7 +119,7 @@ process_source() {
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
-    whitelisted_count="$(wc -l <<< "$whitelisted_domains")"
+    whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
     if (( "$whitelisted_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
         log_event "$whitelisted_domains" whitelist
@@ -125,7 +127,7 @@ process_source() {
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
-    whitelisted_tld_count="$(wc -l <<< "$whitelisted_tld_domains")"
+    whitelisted_tld_count="$(wc -w <<< "$whitelisted_tld_domains")"
     if (( "$whitelisted_tld_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
         log_event "$whitelisted_tld_domains" tld
@@ -151,7 +153,7 @@ process_source() {
             || continue
 
         # Count number of redundant domains
-        redundant_count="$((redundant_count + $(wc -l <<< "$redundant_domains")))"
+        redundant_count="$((redundant_count + $(wc -w <<< "$redundant_domains")))"
 
         # Remove redundant domains
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))"
@@ -161,7 +163,7 @@ process_source() {
 
     # Remove domains in toplist, excluding blacklisted domains
     domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
-    toplist_count="$(wc -l <<< "$domains_in_toplist")"
+    toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( "$toplist_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$domains_in_toplist"))"
         awk '{print $0 " (\033[1;31mtoplist\033[0m)"}' <<< "$domains_in_toplist" >> manual_review.tmp
@@ -178,7 +180,7 @@ process_source() {
         printf "%s\n" "$domains" >> retrieved_light_domains.tmp
     fi
 
-    filtered_count="$(printf "%s" "$domains" | sed '/^$/d' | wc -l)"
+    filtered_count="$(printf "%s" "$domains" | sed '/^$/d' | wc -w)"
     log_source
 }
 
@@ -270,7 +272,7 @@ ${filtered_count:-0},${total_whitelisted_count:-0},${dead_count:-0},${redundant_
 ${parked_count:-0},${toplist_count:-0},$(tr '\n' ' ' <<< "$domains_in_toplist"),
 ${query_count:-0},${rate_limited:-false}" >> "$SOURCE_LOG"
 
-    printf "\n\e[1mSource:\e[0m %s\n" "{$item:-$source}"
+    printf "\n\e[1mSource:\e[0m %s\n" "${item:-source}"
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
         "${unfiltered_count:-0}" "${filtered_count:-0}" \
         "${total_whitelisted_count:-0}" "$excluded_count" "${toplist_count:-0}"
@@ -386,7 +388,7 @@ search_google() {
         printf "%s\n" "$page_domains" >> "$results_file"
 
         # Stop search term if no more pages are required
-        (( $(wc -l <<< "$page_domains") < 10 )) && break
+        (( $(wc -w <<< "$page_domains") < 10 )) && break
     done
 
     process_source

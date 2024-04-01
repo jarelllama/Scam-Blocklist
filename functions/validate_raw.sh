@@ -26,8 +26,10 @@ validate_raw() {
             || continue
 
         # Count number of domains with common subdomains
+        # Note wc -w is used here as wc -l for an empty variable seems to
+        # always output 1
         domains_with_subdomains_count="$((
-            domains_with_subdomains_count + $(wc -l <<< "$domains_with_subdomains")
+            domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")
             ))"
 
         # Keep only root domains
@@ -48,7 +50,7 @@ validate_raw() {
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
-    whitelisted_count="$(wc -l <<< "$whitelisted_domains")"
+    whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
     if (( whitelisted_count > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
         awk '{print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
@@ -57,7 +59,7 @@ validate_raw() {
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
-    whitelisted_tld_count="$(wc -l <<< "$whitelisted_tld_domains")"
+    whitelisted_tld_count="$(wc -w <<< "$whitelisted_tld_domains")"
     if (( whitelisted_tld_count > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
         awk '{print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
@@ -66,7 +68,7 @@ validate_raw() {
 
     # Remove invalid entries and IP addresses. Punycode TLDs (.xn--*) are allowed
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
-    invalid_entries_count="$(wc -l <<< "$invalid_entries")"
+    invalid_entries_count="$(wc -w <<< "$invalid_entries")"
     if (( invalid_entries_count > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))"
         awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> filter_log.tmp
@@ -81,7 +83,7 @@ validate_raw() {
             || continue
 
         # Count number of redundant domains
-        redundant_count="$(( redundant_count + $(wc -l <<< "$redundant_domains") ))"
+        redundant_count="$(( redundant_count + $(wc -w <<< "$redundant_domains") ))"
 
         # Remove redundant domains
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))"
@@ -99,7 +101,7 @@ validate_raw() {
 
     # Find matching domains in toplist, excluding blacklisted domains
     domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
-    toplist_count="$(wc -l <<< "$domains_in_toplist")"
+    toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( toplist_count > 0 )); then
         awk '{print $0 " (toplist) - \033[1;31mmanual removal required\033[0m"}' \
             <<< "$domains_in_toplist" >> filter_log.tmp
