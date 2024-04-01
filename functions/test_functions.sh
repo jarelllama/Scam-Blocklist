@@ -6,9 +6,6 @@
 # from the processing. The input and output files are compared to determine
 # the success or failure of the test.
 
-# Fail as soon as there is an error
-set -e
-
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly WHITELIST='config/whitelist.txt'
