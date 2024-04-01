@@ -544,7 +544,7 @@ run_script() {
 # exit status of 1 or 0.
 check_and_exit() {
     # Check that all temporary files have been deleted after the run
-    if ! ls x?? &> /dev/null && ! ls ./*.tmp &> /dev/null; then
+    if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
         printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
         ls x?? ./*.tmp 2> /dev/null
         error=true
