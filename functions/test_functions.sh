@@ -179,6 +179,9 @@ TEST_DEAD_CHECK() {
 
     run_script check_dead.sh
 
+    # Sort dead domains file for easy comparison with expected output
+    sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
+
     # Check and verify outputs
 
     check_output "$RAW" out_raw.txt Raw
@@ -225,6 +228,9 @@ function TEST_PARKED_CHECK {
     mv raw.tmp "$RAW"
     mv raw_light.tmp "$RAW_LIGHT"
     mv parked.tmp "$PARKED_DOMAINS"
+
+    # Sort parked domains file for easy comparison with expected output
+    sort "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
 
     # Check and verify outputs
 
@@ -523,8 +529,6 @@ test_unparked_check() {
 run_script() {
     # Format expected output files
     for file in out_*; do
-        [[ "$file" == out_dead.txt ]] && continue
-        [[ "$file" == out_parked.txt ]] && continue
         sort "$file" -o "$file"
     done
 
