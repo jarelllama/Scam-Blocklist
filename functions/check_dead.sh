@@ -108,7 +108,7 @@ check_dead() {
     log_event "$(<dead_in_raw.tmp)" dead raw
 }
 
-# Function 'check_alive' finds resurrected domains from the dead domains file
+# Function 'check_alive' finds resurrected domains in the dead domains file
 # and adds them back into the raw file.
 check_alive() {
     find_dead "$DEAD_DOMAINS" || return

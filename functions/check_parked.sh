@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script checks for parked/unparked domains and
-# removes/adds them accordingly.
+# This script checks for parked/unparked domains and removes/adds
+# them accordingly.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -26,6 +26,7 @@ main() {
     format_file "$PARKED_DOMAINS"
 }
 
+# Function 'removed_parked_domains' removes parked domains from the raw file.
 remove_parked_domains() {
     retrieve_parked "$RAW" || return
 
@@ -35,6 +36,8 @@ remove_parked_domains() {
     log_event "$(<parked_domains.tmp)" parked raw
 }
 
+# Function 'add_unparked_domains' finds unparked domains in the parked domains
+# file and adds them back into the raw file.
 add_unparked_domains() {
     retrieve_parked "$PARKED_DOMAINS" || return
 
