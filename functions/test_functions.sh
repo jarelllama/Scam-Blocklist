@@ -43,6 +43,8 @@ main() {
             TEST_DEAD_CHECK ;;
         ('parked')
             TEST_PARKED_CHECK ;;
+        ('build')
+            TEST_BUILD ;;
         ('shellcheck')
             SHELLCHECK ;;
     esac
@@ -83,9 +85,16 @@ SHELLCHECK() {
         error=true
     fi
 
+    if [[ "$error" == false ]]; then
+        printf "\n\e[1m[success] Test completed. No errors found\e[0m\n"
+    fi
+
     printf "\n[info] Scripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
 
-    check_and_exit --no-log
+    if [[ "$error" == true ]]; then
+        printf "\n"
+        exit 1
+    fi
 }
 
 # Function 'TEST_RETRIEVE_VALIDATE' can test both the retrieval process and the
@@ -233,27 +242,43 @@ TEST_PARKED_CHECK() {
     check_and_exit
 }
 
-test_build() {
+TEST_BUILD() {
     domain='build-test.com'
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
+
     run_script build_list.sh
+
     check_list "||${domain}^" adblock
     check_list "local=/${domain}/" dnsmasq
     check_list "local-zone: \"${domain}.\" always_nxdomain" unbound
     check_list "*.${domain}" wildcard_asterisk
     check_list "${domain}" wildcard
 
-    check_and_exit --no-log
+    if [[ "$error" == true ]]; then
+        printf "\n"
+        exit 1
+    fi
+
+    printf "\e[1m[success] Test completed. No errors found\e[0m\n"
+    exit 0
 }
 
 # Function 'check_list' verifies the syntax of the list format.
 #   $1: syntax to check for
-#   $2 name of format
+#   $2: name and directory of format
 check_list() {
+    # Check regular version
     if grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
-        grep -F 'build-test.com' "lists/$2"
+        grep -F "$domain" "lists/${2}/scams_light.txt"
+        error=true
+    fi
+
+    # Check light version
+    if grep -qxF "$1" "lists/${2}/scams_light.txt"; then
+        printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$2"
+        grep -F "$domain" "lists/${2}/scams_light.txt"
         error=true
     fi
 }
@@ -590,7 +615,7 @@ check_and_exit() {
         # No need for additional new line since log is not printed again
         error=true
     else
-        [[ "$1" != '--no-log' ]] && printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
+        printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
     fi
 
     # Exit with error if test failed

@@ -57,3 +57,14 @@ jobs:
           ref: main
       - name: Test validation check
         run: bash functions/test_functions.sh validate
+
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Test build
+        run: bash functions/test_functions.sh build
+
