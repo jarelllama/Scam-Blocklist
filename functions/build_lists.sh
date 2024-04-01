@@ -6,16 +6,13 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 
 build() {
-    # Set default comment character to '#'
-    [[ -z "$comment" ]] && comment='#'
+    comment=${comment:-'#'}  # Set default comment character to '#'
 
     mkdir -p "lists/${directory}"
 
     # Loop through the full and light blocklist versions
     for i in {1..2}; do
         if [[ "$i" == '1' ]]; then
-            version=''
-            list_name='scams.txt'
             source_file="$RAW"
         elif [[ "$i" == '2' ]]; then
             version='LIGHT VERSION'
@@ -23,11 +20,11 @@ build() {
             source_file="$RAW_LIGHT"
         fi
 
-        blocklist_path="lists/${directory}/${list_name}"
+        blocklist_path="lists/${directory}/${list_name:-'scams.txt'}"
 
         # Append header onto blocklist
         cat << EOF > "$blocklist_path"
-${comment} Title: Jarelllama's Scam Blocklist ${version}
+${comment} Title: Jarelllama's Scam Blocklist ${version:-''}
 ${comment} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${comment} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
