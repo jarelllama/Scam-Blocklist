@@ -24,7 +24,11 @@ main() {
     check_redundant
     check_dead
     check_alive
-    update_light_file
+
+    # Remove domains from light raw file that are not found
+    # in full raw file
+    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
+    mv light.tmp "$RAW_LIGHT"
 
     # Cache dead domains (done last to skip alive domains check)
     cat dead_in_raw.tmp >> "$DEAD_DOMAINS"
@@ -134,19 +138,6 @@ check_alive() {
     log_event "$alive_domains" resurrected dead_domains_file
 }
 
-# Function 'update_light_file' removes any domains from the light raw file that
-# are not found in the full raw file.
-update_light_file() {
-    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp && mv light.tmp "$RAW_LIGHT"
-}
-
-# Function 'prune_dead_domains_file' removes old entries once the file reaches
-# a threshold of entries.
-prune_dead_domains_file() {
-    (( $(wc -l < "$DEAD_DOMAINS") > 5000 )) && sed -i '1,100d' "$DEAD_DOMAINS"
-    true
-}
-
 # Function 'log_event' logs domain processing events into the domain log.
 # $1: domains to log stored in a variable.
 # $2: event type (dead, whitelisted, etc.)
@@ -164,9 +155,13 @@ format_file() {
 
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
-    prune_dead_domains_file
+
+    # Prune old entries from dead domains file
+    (( $(wc -l < "$DEAD_DOMAINS") > 5000 )) && sed -i '1,100d' "$DEAD_DOMAINS"
 }
 
 trap cleanup EXIT
 
 main
+
+exit 0
