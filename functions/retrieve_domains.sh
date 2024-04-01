@@ -250,7 +250,8 @@ build() {
 # $2: event type (dead, whitelisted, etc.)
 # $3: source
 log_event() {
-    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$TIME_FORMAT" \
+    [[ -n "$3" ]] && local source="$3"
+    printf "%s\n" "$1" | awk -v type="$2" -v source="$source" -v time="$TIME_FORMAT" \
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
