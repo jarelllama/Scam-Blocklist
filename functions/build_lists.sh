@@ -19,12 +19,12 @@ build() {
             source_file="$RAW_LIGHT"
         fi
 
-        source_file=${source_file:-$RAW}
+        source_file="${source_file:-$RAW}"
         blocklist_path="lists/${directory}/${list_name:-'scams.txt'}"
 
         # Append header onto blocklist
         cat << EOF > "$blocklist_path"
-${comment} Title: Jarelllama's Scam Blocklist ${version:-''}
+${comment} Title: Jarelllama's Scam Blocklist ${version}
 ${comment} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${comment} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
@@ -38,8 +38,8 @@ EOF
         [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"
 
         # Append formatted domains onto blocklist
-        printf "%s\n" "$(awk -v before="$before" -v after="$after" \
-            '{print before $0 after}' "$source_file")" >> "$blocklist_path"
+        awk -v before="$before" -v after="$after" \
+            '{print before $0 after}' "$source_file" >> "$blocklist_path"
     done
 }
 
