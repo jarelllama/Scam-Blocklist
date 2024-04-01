@@ -290,6 +290,7 @@ format_file() {
 cleanup() {
     # Initialize pending directory is no pending domains to be saved
     find data/pending -type d -empty -delete
+
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
