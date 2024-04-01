@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Apr  1 01:38:55 UTC 2024
+# Last modified: Mon Apr  1 14:29:31 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 21034
+# Total number of entries: 21036
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -7432,6 +7432,7 @@ local=/gavincanecorso.com/
 local=/gavingreatdanepups.com/
 local=/gavinyorkieshome.com/
 local=/gawfs-om.com/
+local=/gbekat.ink/
 local=/gbhxe.site/
 local=/gblmagic.com/
 local=/gblwheelcleaner.company.site/
@@ -16622,6 +16623,7 @@ local=/shopdfurniture.com/
 local=/shopdima.com/
 local=/shopdremel.com/
 local=/shopeleganthome.com/
+local=/shopelyze.com/
 local=/shopfastnotes.com/
 local=/shopfootballna.com/
 local=/shopfyrex.com/
