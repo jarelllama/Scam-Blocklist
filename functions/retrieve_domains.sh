@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Retrieves domains from various sources and outputs a raw file that
-# contains the cumulative domains from all sources over time.
+# Retrieves domains from various sources, processes them and outputs
+# a raw file that contains the cumulative domains from all sources over time.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
