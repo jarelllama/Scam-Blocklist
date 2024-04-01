@@ -169,6 +169,8 @@ TEST_RETRIEVE_VALIDATE() {
 TEST_DEAD_CHECK() {
     test_dead_subdomain_check
     test_dead_redundant_check
+    test_dead_check
+    test_alive_check
 
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
@@ -208,8 +210,6 @@ function TEST_PARKED_CHECK {
 
     test_parked_check
     test_unparked_check
-    test_dead_check
-    test_alive_check
 
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
