@@ -28,8 +28,8 @@ readonly GOOGLE_SEARCH_ID_2
 readonly GOOGLE_SEARCH_API_KEY_2
 
 # Function 'source' calls on the respective functions for each source
-# to retrieve results. The results are processed and the output is a cumulative
-# filtered domains file containing all filtered domains from this run.
+# retrieve results. The results are then passed to the 'process_source'
+# function for further processing.
 source() {
     # Check whether to use existing retrieved result
     if [[ -d data/pending ]]; then
@@ -50,6 +50,9 @@ source() {
     source_google_search
 }
 
+# Function 'process_source' filters results retrieved from the a source.
+# The output is a cumulative filtered domains file containing all filtered
+# domains from all sources in this run.
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
@@ -184,6 +187,8 @@ process_source() {
     log_source
 }
 
+# Function 'build' adds the filtered domains to the raw files and presents
+# some basic numbers to the user.
 build() {
     # Exit if no new domains to add
     if ! grep -q '[a-z]' retrieved_domains.tmp; then
@@ -290,15 +295,16 @@ cleanup() {
     find . -maxdepth 1 -type f -name '*.tmp' -delete
 }
 
-# Source functions are to retrieve results from the respective sources.
+# The 'source_<source>' functions are to retrieve results from the
+# respective sources.
 # Input:
 #   $source: name of the source which is used in the console and logs
-#   $ignore_from_light: if true, the results from the source are not included
-#       in the light version (default is false)
+#   $ignore_from_light: if true, the results are not included in the
+#       light version (default is false)
 #   $results_file: file path to save retrieved results to be used for
 #       further processing
 #   $USE_EXISTING: if true, skip the retrieval process and use the
-#       existing results files
+#       existing results files (if found)
 # Output:
 #   $results_file (if results retrieved)
 
@@ -519,6 +525,7 @@ source_stopgunscams() {
 
 trap cleanup EXIT
 
+# Install jq
 command -v jq &> /dev/null || apt-get install -yqq jq
 
 for file in config/* data/*; do

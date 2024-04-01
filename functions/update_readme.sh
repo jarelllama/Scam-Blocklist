@@ -154,8 +154,8 @@ sum() {
         | csvcut -c 5 | awk '{sum += $1} END {print sum}'
 }
 
-# Function 'count_excluded' is an echo wrapper that returns the % of
-# excluded domains out of the raw count retrieved from each source.
+# Function 'count_excluded' is an echo wrapper that returns the percentage
+# of excluded domains out of the raw count retrieved from each source.
 # $1: source to process (default is all sources)
 count_excluded() {
     csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > rows.tmp
