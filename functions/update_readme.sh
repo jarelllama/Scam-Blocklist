@@ -169,7 +169,7 @@ count_excluded() {
     parked_count="$(csvcut -c 9 rows.tmp | awk '{total += $1} END {print total}')"
 
     excluded_count="$(( white_count + dead_count + redundant_count + parked_count ))"
-    printf "%s" "$((excluded_count*100/raw_count))"
+    printf "%s" "$(( excluded_count * 100 / raw_count ))"
 }
 
 # Entry point
