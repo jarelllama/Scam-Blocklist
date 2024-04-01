@@ -264,7 +264,7 @@ log_source() {
     excluded_count="$(( dead_count + redundant_count + parked_count ))"
 
     if [[ "$source" == 'Google Search' ]]; then
-        search_term="\"${search_term:0:100}...\"-:"
+        search_term="\"${search_term:0:100}...\""
         item="$search_term"
     fi
 
