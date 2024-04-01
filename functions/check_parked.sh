@@ -148,7 +148,7 @@ format_file() {
 }
 
 cleanup() {
-    find . -maxdepth 1 -type f -name '*.tmp' -delete
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
     find . -maxdepth 1 -type f -name 'x??' -delete
 
     # Prune old entries from parked domains file

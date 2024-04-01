@@ -168,7 +168,7 @@ format_file() {
 }
 
 cleanup() {
-    find . -maxdepth 1 -type f -name '*.tmp' -delete
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
 
     # Prune old entries from dead domains file
     if (( $(wc -l < "$DEAD_DOMAINS") > 5000 )); then

@@ -174,7 +174,7 @@ count_excluded() {
 
 # Entry point
 
-trap 'find . -maxdepth 1 -type f -name '*.tmp' -delete' EXIT
+trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 # Install csvkit
 command -v csvgrep &> /dev/null || pip install -q csvkit

@@ -298,7 +298,7 @@ cleanup() {
     # Initialize pending directory if no pending domains to be saved
     find data/pending -type d -empty -delete
 
-    find . -maxdepth 1 -type f -name '*.tmp' -delete
+    find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
 # The 'source_<source>' functions are to retrieve results from the

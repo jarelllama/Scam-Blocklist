@@ -215,7 +215,7 @@ test_invalid_removal() {
         printf "invalid-test.x\n"
         printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
-    } >> out_manual.txt
+    } >> out_manual_review.txt
 }
 
 test_redundant_removal() {
@@ -246,14 +246,18 @@ test_redundant_removal() {
 # TEST: removal of domains found in toplist
 test_toplist_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        local input=data/pending/domains_scamadviser.com.tmp
+        # INPUT
+        printf "microsoft.com\n" >> data/pending/domains_scamadviser.com.tmp
+        # EXPECTED OUTPUTS
+        printf "microsoft.com\n" >> out_manual_review.txt
+        printf "toplist,microsoft.com\n" >> out_log.txt
+        return
     fi
 
     # INPUT
-    printf "microsoft.com\n" >> "${input:-input.txt}"
-
+    printf "microsoft.com\n" >> input.txt
     # EXPECTED OUTPUTS
-    printf "microsoft.com\n" >> out_manual.txt
+    printf "microsoft.com\n" >> out_raw.txt
     printf "toplist,microsoft.com\n" >> out_log.txt
 }
 
@@ -336,7 +340,7 @@ TEST_RETRIEVE_VALIDATE() {
 
     # Check entries saved for manual review
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        check_output "data/pending/domains_scamadviser.com.tmp" "out_manual.txt" "Manual review"
+        check_output "data/pending/domains_scamadviser.com.tmp" "out_manual_review.txt" "Manual review"
     fi
 
     if [[ "$script_to_test" == 'validate' ]]; then
