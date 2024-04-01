@@ -247,7 +247,7 @@ TEST_BUILD() {
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
 
-    bash build_lists.sh
+    bash functions/build_lists.sh
 
     # TODO: check exit status
 
@@ -271,7 +271,7 @@ TEST_BUILD() {
 #   $2: name and directory of format
 check_list() {
 
-cat "lists/${2}/scams.txt"
+head -n 50 "lists/${2}/scams.txt"
 
     # Check regular version
     if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
