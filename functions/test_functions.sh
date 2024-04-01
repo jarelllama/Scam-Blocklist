@@ -265,7 +265,7 @@ test_light_build() {
     # EXPECTED OUTPUT
     printf "raw-light-test.com\n" >> out_raw.txt
     # Domain from excluded source should not be in output
-    grep -vF "raw-light-test.com" out_raw.txt > out_raw_light.txt
+    grep -vxF "raw-light-test.com" out_raw.txt > out_raw_light.txt
 }
 
 # Function 'TEST_RETRIEVE_VALIDATE' can test both the retrieval process and the
@@ -289,6 +289,13 @@ TEST_RETRIEVE_VALIDATE() {
 
     # Note removal of domains already in raw file is redundant to test
 
+    test_subdomain_removal
+    test_whitelist_blacklist
+    test_whitelisted_tld_removal
+    test_invalid_removal
+    test_redundant_removal
+    test_toplist_removal
+
     if [[ "$script_to_test" == 'retrieve' ]]; then
         test_manual_addition
         test_conversion
@@ -296,13 +303,6 @@ TEST_RETRIEVE_VALIDATE() {
         test_known_parked_removal
         test_light_build
     fi
-
-    test_subdomain_removal
-    test_whitelist_blacklist
-    test_whitelisted_tld_removal
-    test_invalid_removal
-    test_redundant_removal
-    test_toplist_removal
 
     # Prepare and run retrieval script
     if [[ "$script_to_test" == 'retrieve' ]]; then
