@@ -275,10 +275,11 @@ log_source() {
         item="$search_term"
     fi
 
-    echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count:-0},
+    row="${TIME_FORMAT},${source},${search_term},${unfiltered_count:-0},
 ${filtered_count:-0},${total_whitelisted_count},${dead_count:-0},${redundant_count},
 ${parked_count:-0},${toplist_count:-0},$(tr '\n' ' ' <<< "$domains_in_toplist"),
-${query_count:-0},${rate_limited:-false}" >> "$SOURCE_LOG"
+${query_count:-0},${rate_limited:-false}"
+    printf "%s/n" "$row" >> "$SOURCE_LOG"
 
     printf "\n\e[1mSource:\e[0m %s\n" "${item:-$source}"
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
