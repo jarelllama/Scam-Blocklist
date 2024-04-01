@@ -521,11 +521,12 @@ source_stopgunscams() {
 
 trap cleanup EXIT
 
-command -v jq &> /dev/null || apt-get install -yqq jq  # Install jq
+command -v jq &> /dev/null || apt-get install -yqq jq
 
 for file in config/* data/*; do
     format_file "$file"
 done
 
 source
+
 build
