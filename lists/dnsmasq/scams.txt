@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Apr  1 14:29:31 UTC 2024
+# Last modified: Mon Apr  1 14:39:20 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 21036
+# Total number of entries: 21037
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -5925,6 +5925,7 @@ local=/etchguer.com/
 local=/etefera.com/
 local=/etender.buzz/
 local=/eth-wintermute.net/
+local=/ethcrate.com/
 local=/ethereum-airdrops.com/
 local=/ethicminer.myshopify.com/
 local=/ethikadeutschland.com/

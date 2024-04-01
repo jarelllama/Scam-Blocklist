@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Apr  1 14:29:31 UTC 2024
+# Last modified: Mon Apr  1 14:39:20 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 2084
+# Total number of entries: 2085
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -623,6 +623,7 @@ local=/escrow-mgmt.com/
 local=/esiwok.com/
 local=/essaywritingacademic.net/
 local=/etender.buzz/
+local=/ethcrate.com/
 local=/eubesthome.shop/
 local=/evaeuiosn.com/
 local=/evanyorkies.com/

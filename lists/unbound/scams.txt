@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Apr  1 14:29:31 UTC 2024
+# Last modified: Mon Apr  1 14:39:20 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 21036
+# Total number of entries: 21037
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -5926,6 +5926,7 @@ local-zone: "etchguer.com." always_nxdomain
 local-zone: "etefera.com." always_nxdomain
 local-zone: "etender.buzz." always_nxdomain
 local-zone: "eth-wintermute.net." always_nxdomain
+local-zone: "ethcrate.com." always_nxdomain
 local-zone: "ethereum-airdrops.com." always_nxdomain
 local-zone: "ethicminer.myshopify.com." always_nxdomain
 local-zone: "ethikadeutschland.com." always_nxdomain
