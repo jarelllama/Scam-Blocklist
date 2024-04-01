@@ -177,7 +177,8 @@ count_excluded() {
 
 trap 'find . -maxdepth 1 -type f -name '*.tmp' -delete' EXIT
 
-command -v csvgrep &> /dev/null || pip install -q csvkit  # Install csvkit
+# Install csvkit
+command -v csvgrep &> /dev/null || pip install -q csvkit
 
 for file in config/* data/*; do
     bash functions/tools.sh format "$file"
