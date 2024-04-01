@@ -1,5 +1,7 @@
 #!/bin/bash
-# This script validates the domains in the raw file via a variety of checks.
+
+# Validates the entries in the raw file via a variety of checks and
+# flags entries that require attention.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -20,8 +22,8 @@ validate_raw() {
     # Remove common subdomains
     domains_with_subdomains_count=0
     while read -r subdomain; do  # Loop through common subdomains
-        domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")"
-        [[ -z "$domains_with_subdomains" ]] && continue
+        domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
+            || continue
 
         # Count number of domains with common subdomains
         domains_with_subdomains_count="$((
@@ -75,8 +77,8 @@ validate_raw() {
     redundant_count=0
     while read -r domain; do  # Loop through each domain in the blocklist
         # Find redundant domains via wildcard matching
-        redundant_domains="$(grep "\.${domain}$" <<< "$domains")"
-        [[ -z "$redundant_domains" ]] && continue
+        redundant_domains="$(grep "\.${domain}$" <<< "$domains")" \
+            || continue
 
         # Count number of redundant domains
         redundant_count="$(( redundant_count + $(wc -l <<< "$redundant_domains") ))"
@@ -161,7 +163,8 @@ log_event() {
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
-# Function 'format_file' calls a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to
+# standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"

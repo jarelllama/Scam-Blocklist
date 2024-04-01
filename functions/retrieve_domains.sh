@@ -1,5 +1,6 @@
 #!/bin/bash
-# This script retrieves domains from various sources and outputs a raw file that
+
+# Retrieves domains from various sources and outputs a raw file that
 # contains the cumulative domains from all sources over time.
 
 readonly RAW='data/raw.txt'
@@ -16,8 +17,14 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
-TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
-readonly TIME_FORMAT
+time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
+
+# Environment variables
+readonly AA419_API_ID
+readonly GOOGLE_SEARCH_ID
+readonly GOOGLE_SEARCH_API_KEY
+readonly GOOGLE_SEARCH_ID_2
+readonly GOOGLE_SEARCH_API_KEY_2
 
 # Function 'source' calls on the respective functions for each source
 # to retrieve results. The results are processed and the output is a cumulative
@@ -42,33 +49,20 @@ source() {
 }
 
 process_source() {
-    # Initialize variables
-    local unfiltered_count=0
-    local filtered_count=0
-    local total_whitelisted_count=0
-    local dead_count=0
-    local redundant_count=0
-    local toplist_count=0
-    local domains_in_toplist=''
-    [[ -z "$query_count" ]] && query_count=0
-    [[ -z "$rate_limited" ]] && rate_limited=false
-    [[ -z "$ignore_from_light" ]] && ignore_from_light=false
-
     [[ ! -f "$results_file" ]] && return
 
     # Skip to next source if no results retrieved
-    if ! grep -q '[[:alnum:]]' "$results_file"; then
+    if ! grep -q '[a-z]' "$results_file"; then
         log_source
         return
     fi
 
     format_file "$results_file"
 
-    # Migrate results to a variable
-    results="$(<"$results_file")" && rm "$results_file"
-
-    # Remove https:, http: and slashes to get domains
-    domains="$(printf "%s" "$results" | sed 's/https\?://; s/\///g' | sort -u)"
+    # Remove https:, http: and slashes to get domains,
+    # and migrate to a variable
+    domains="$(sed 's/https\?://; s/\///g' "$results_file" | sort -u)"
+    rm "$results_file"
 
     # Count number of unfiltered domains pending
     unfiltered_count="$(wc -l <<< "$domains")"
@@ -82,9 +76,11 @@ process_source() {
     # Logging removed as it inflated log size by too much
 
     # Remove common subdomains
+    local domains_with_subdomains
     while read -r subdomain; do  # Loop through common subdomains
-        domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")"
-        [[ -z "$domains_with_subdomains" ]] && continue
+        # Find domains and skip to next subdomain if none found
+        domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
+            || continue
 
         # Keep only root domains
         domains="$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
@@ -118,7 +114,7 @@ process_source() {
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
-    whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
+    whitelisted_count="$(wc -l <<< "$whitelisted_domains")"
     if (( "$whitelisted_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
         log_event "$whitelisted_domains" whitelist
@@ -126,7 +122,7 @@ process_source() {
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
-    whitelisted_tld_count="$(wc -w <<< "$whitelisted_tld_domains")"
+    whitelisted_tld_count="$(wc -l <<< "$whitelisted_tld_domains")"
     if (( "$whitelisted_tld_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
         log_event "$whitelisted_tld_domains" tld
@@ -136,24 +132,23 @@ process_source() {
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
     if [[ -n "$invalid_entries" ]]; then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))"
-
         awk '{print $0 " (\033[1;31minvalid\033[0m)"}' <<< "$invalid_entries" >> manual_review.tmp
-
         # Save invalid entries for rerun
         printf "%s\n" "$invalid_entries" >> "$results_file"
-
         log_event "$invalid_entries" invalid
     fi
 
     # Remove redundant domains
-    redundant_count=0
+    local redundant_domains
+    local redundant_count=0
     while read -r wildcard; do  # Loop through wildcards
-        # Find redundant domains via wildcard matching
-        redundant_domains="$(grep "\.${wildcard}$" <<< "$domains")"
-        [[ -z "$redundant_domains" ]] && continue
+        # Find redundant domains via wildcard matching and skip to
+        # next wildcard if none found
+        redundant_domains="$(grep "\.${wildcard}$" <<< "$domains")" \
+            || continue
 
         # Count number of redundant domains
-        redundant_count="$((redundant_count + $(wc -w <<< "$redundant_domains")))"
+        redundant_count="$((redundant_count + $(wc -l <<< "$redundant_domains")))"
 
         # Remove redundant domains
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))"
@@ -163,31 +158,30 @@ process_source() {
 
     # Remove domains in toplist, excluding blacklisted domains
     domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
-    toplist_count="$(wc -w <<< "$domains_in_toplist")"
+    toplist_count="$(wc -l <<< "$domains_in_toplist")"
     if (( "$toplist_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$domains_in_toplist"))"
-
         awk '{print $0 " (\033[1;31mtoplist\033[0m)"}' <<< "$domains_in_toplist" >> manual_review.tmp
-
         # Save invalid entries for rerun
         printf "%s\n" "$domains_in_toplist" >> "$results_file"
-
         log_event "$domains_in_toplist" "toplist"
     fi
 
     # Collate filtered domains
     printf "%s\n" "$domains" >> retrieved_domains.tmp
-    # Collate filtered domains from light sources
-    [[ "$ignore_from_light" != true ]] && printf "%s\n" "$domains" >> retrieved_light_domains.tmp
 
-    total_whitelisted_count="$((whitelisted_count + whitelisted_tld_count))"
-    filtered_count="$(printf "%s" "$domains" | sed '/^$/d' | wc -w)"
+    # Collate filtered domains from light sources
+    if [[ "$ignore_from_light" != true ]]; then
+        printf "%s\n" "$domains" >> retrieved_light_domains.tmp
+    fi
+
+    filtered_count="$(printf "%s" "$domains" | sed '/^$/d' | wc -l)"
     log_source
 }
 
 build() {
     # Exit if no new domains to add (-s does not seem to work well here)
-    if ! grep -q '[[:alnum:]]' retrieved_domains.tmp; then
+    if ! grep -q '[a-z]' retrieved_domains.tmp; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
         exit 0
     fi
@@ -221,7 +215,7 @@ build() {
     format_file "$RAW"
 
     # Add domains to raw light file
-    if grep -q '[[:alnum:]]' retrieved_light_domains.tmp; then
+    if grep -q '[a-z]' retrieved_light_domains.tmp; then
         cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
         format_file "$RAW_LIGHT"
     fi
@@ -230,17 +224,20 @@ build() {
 
     count_after="$(wc -l < "$RAW")"
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" \
-        "$count_before" "$((count_after - count_before))" "$count_after"
+        "$count_before" "$(( count_after - count_before ))" "$count_after"
 
     # Mark sources as saved in the source log file
-    rows="$(sed 's/,no/,yes/' <(grep -F "$TIME_FORMAT" "$SOURCE_LOG"))"
+    rows="$(sed 's/,no/,yes/' <(grep -F "$time_format" "$SOURCE_LOG"))"
     # Remove previous logs
-    temp_SOURCE_LOG="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
+    temp_SOURCE_LOG="$(grep -vF "$time_format" "$SOURCE_LOG")"
     # Add updated logs
     printf "%s\n%s\n" "$temp_SOURCE_LOG" "$rows" > "$SOURCE_LOG"
 
     # Exit with error if domains need to be manually reviewed
-    [[ -f manual_review.tmp ]] && { printf "\n"; exit 1; } || exit 0
+    if [[ -f manual_review.tmp ]]; then
+        printf "\n"
+        exit 1
+    fi
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
@@ -248,45 +245,57 @@ build() {
 # $2: event type (dead, whitelisted, etc.)
 # $3: source
 log_event() {
-    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
+    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" \
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
+# Function 'log_source' prints and logs statistics for each source.
+# The variables should be declared before running this function,
+# otherwise, the default values are used.
 log_source() {
-    # Print and log statistics for source used
-    [[ "$source" == 'Google Search' ]] && search_term="\"${search_term:0:100}...\"" || search_term=''
-    awk -v source="$source" -v search_term="$search_term" -v raw="$unfiltered_count" -v final="$filtered_count" -v whitelist="$total_whitelisted_count" -v dead="$dead_count" -v redundant="$redundant_count" \
-        -v parked="$parked_count" -v toplist_count="$toplist_count" -v toplist_domains="$(printf "%s" "$domains_in_toplist" | tr '\n' ' ')" -v queries="$query_count" -v rate_limited="$rate_limited" -v time="$TIME_FORMAT" \
-        'BEGIN {print time","source","search_term","raw","final","whitelist","dead","redundant","parked","toplist_count","toplist_domains","queries","rate_limited",no"}' >> "$SOURCE_LOG"
-    [[ "$source" == 'Google Search' ]] && item="$search_term" || item="$source"
-    excluded_count="$((dead_count + redundant_count + parked_count))"
-    printf "\n\e[1mSource:\e[0m %s\n" "$item"
-    printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" "$unfiltered_count" "$filtered_count" "$total_whitelisted_count" "$excluded_count" "$toplist_count"
+    local item
+    total_whitelisted_count="$((whitelisted_count + whitelisted_tld_count))"
+    excluded_count="$(( dead_count + redundant_count + parked_count ))"
+
+    if [[ "$source" == 'Google Search' ]]; then
+        search_term="\"${search_term:0:100}...\"-:"
+        item="$search_term"
+    fi
+
+    echo "${time_format},${source},${search_term},${unfiltered_count:-0},
+${filtered_count:-0},${total_whitelisted_count:-0},${dead_count:-0},${redundant_count:-0},
+${parked_count:-0},${toplist_count:-0},$(tr '\n' ' ' <<< "$domains_in_toplist"),
+${query_count:-0},${rate_limited:-false}" >> "$SOURCE_LOG"
+
+    printf "\n\e[1mSource:\e[0m %s\n" "{$item:-$source}"
+    printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
+        "${unfiltered_count:-0}" "${filtered_count:-0}" \
+        "${total_whitelisted_count:-0}" "$excluded_count" "${toplist_count:-0}"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
-# Function 'format_file' is a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to
+# standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
 }
 
 cleanup() {
-    find data/pending -type d -empty -delete  # Initialize pending directory is no pending domains to be saved
+    # Initialize pending directory is no pending domains to be saved
+    find data/pending -type d -empty -delete
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
 # Source functions are to retrieve results from the respective sources.
 # Input:
 #   $source: name of the source which is used in the console and logs
-#
-#   $ignore_from_light: if true, the results from the source are not included in the
-#       light version (default is false)
-#
-#   $results_file: file path to save retrieved results to be used for further processing
-#
-#   $USE_EXISTING: if true, skip the retrieval process and use the existing results files
-#
+#   $ignore_from_light: if true, the results from the source are not included
+#       in the light version (default is false)
+#   $results_file: file path to save retrieved results to be used for
+#       further processing
+#   $USE_EXISTING: if true, skip the retrieval process and use the
+#       existing results files
 # Output:
 #   $results_file (if results retrieved)
 
@@ -295,7 +304,7 @@ source_google_search() {
 
     local source='Google Search'
     local results_file
-    local rate_limited=false
+    local search_term
 
     if [[ "$USE_EXISTING" == true ]]; then
         # Use existing retrieved results
@@ -314,6 +323,11 @@ source_google_search() {
         return
     fi
 
+    local rate_limited=false
+    local url='https://customsearch.googleapis.com/customsearch/v1'
+    local search_id="$GOOGLE_SEARCH_ID"
+    local search_api_key="$GOOGLE_SEARCH_API_KEY"
+
     # Retrieve new results
     while read -r search_term; do  # Loop through search terms
         # Stop loop if rate limited
@@ -326,40 +340,40 @@ source_google_search() {
 }
 
 search_google() {
-    readonly URL='https://customsearch.googleapis.com/customsearch/v1'
-    local search_term="${1//\"/}"
-    encoded_search_term="$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
+    local search_term="${1//\"/}"  # Remove quotes before encoding
     local encoded_search_term
+    encoded_search_term="$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
     local results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     local query_params
     local page_results
+    local page_domains
     local query_count=0
 
     touch "$results_file"  # Create results file to ensure proper logging
 
     for start in {1..100..10}; do  # Loop through each page of results
-        query_params="cx=${google_search_id}&key=${google_search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-        page_results="$(curl -s "${URL}?${query_params}")"
+        query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
+        page_results="$(curl -s "${url}?${query_params}")"
 
         # Use next API key if first key is rate limited
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Stop all searches if second key is also rate limited
-            if [[ "$google_search_id" == "$google_search_id_2" ]]; then
-                readonly rate_limited=true
+            if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
+                local -r rate_limited=true
                 break
             fi
 
             printf "\n\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
 
             # Switch API keys
-            readonly google_search_api_key="$google_search_api_key_2"
-            readonly google_search_id="$google_search_id_2"
+            readonly search_api_key="$GOOGLE_SEARCH_API_KEY_2"
+            readonly search_id="$GOOGLE_SEARCH_ID_2"
 
             # Continue to next page (current rate limited page is not repeated)
             continue
         fi
 
-        (( query_count++ ))  # Increment query count
+        (( query_count++ ))
 
         # Stop search term if page has no results
         jq -e '.items' &> /dev/null <<< "$page_results" || break
@@ -369,7 +383,7 @@ search_google() {
         printf "%s\n" "$page_domains" >> "$results_file"
 
         # Stop search term if no more pages are required
-        (( $(wc -w <<< "$page_domains") < 10 )) && break
+        (( $(wc -l <<< "$page_domains") < 10 )) && break
     done
 
     process_source
@@ -379,8 +393,8 @@ source_manual() {
     local source='Manual'
     local results_file='data/pending/domains_manual.tmp'
 
-    # Return if file not found (source is the file itself)
-    [[ ! -f data/pending/domains_manual.tmp ]] && return
+    # Return if results file not found (source is the file itself)
+    [[ ! -f "$results_file" ]] && return
 
     grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > domains.tmp
     mv domains.tmp "$results_file"
@@ -394,9 +408,10 @@ source_aa419() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    url='https://api.aa419.org/fakesites'
+    local url='https://api.aa419.org/fakesites'
+    local query_params
     query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
-    curl -sH "Auth-API-Id:${aa419_api_id}" "${url}/${query_params}" |
+    curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/${query_params}" |
         jq -r '.[].Domain' >> "$results_file"  # Trailing slash breaks API call
 
     process_source
@@ -409,7 +424,7 @@ source_guntab() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    url='https://www.guntab.com/scam-websites'
+    local url='https://www.guntab.com/scam-websites'
     curl -s "${url}/" |
         grep -zoE '<table class="datatable-list table">.*</table>' |
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
@@ -424,7 +439,7 @@ source_petscams() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    url="https://petscams.com"
+    local url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
         curl -s "${url}/" |
             grep -oE '<a href="https://petscams.com/[[a-z]-]+-[[a-z]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
@@ -442,7 +457,7 @@ source_scamdirectory() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    url='https://scam.directory/category'
+    local url='https://scam.directory/category'
     curl -s "${url}/" |
         grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
         sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$results_file"
@@ -457,7 +472,7 @@ source_scamadviser() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    url='https://www.scamadviser.com/articles'
+    local url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
         curl -s "${url}?p=${page}" |  # Trailing slash breaks curl
             grep -oE '<div class="articles">.*<div>Read more</div>'
@@ -473,7 +488,7 @@ source_dfpi() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    url='https://dfpi.ca.gov/crypto-scams'
+    local url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" |
         grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
         sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$results_file"
@@ -488,7 +503,7 @@ source_stopgunscams() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    url='https://stopgunscams.com'
+    local url='https://stopgunscams.com'
     for page in {1..5}; do
         curl -s "${url}/?page=${page}/" |
             grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
@@ -497,15 +512,6 @@ source_stopgunscams() {
 
     process_source
 }
-
-# Use local secrets if the script is not running in a GitHub Workflow
-if [[ "$CI" != true ]]; then
-    google_search_id=
-    google_search_api_key=
-    aa419_api_id=
-    google_search_id_2=
-    google_search_api_key_2=
-fi
 
 trap cleanup EXIT
 
