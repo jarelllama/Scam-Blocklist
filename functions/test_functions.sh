@@ -182,7 +182,7 @@ test_whitelisted_tld_removal() {
 
 # TEST: removal of invalid entries and IP addresses
 test_invalid_removal() {
-    if [[ "$script_to_test" == 'validate' ]]; then
+    if [[ "$script_to_test" == 'retrieve' ]]; then
         local input=data/pending/domains_scamadviser.com.tmp
     fi
 
@@ -245,19 +245,16 @@ test_redundant_removal() {
 
 # TEST: removal of domains found in toplist
 test_toplist_removal() {
-    # EXPECTED OUTPUTS
-    # (expected output for retrieval and check scripts are the same)
-    printf "microsoft.com\n" >> out_manual.txt
-    printf "toplist,microsoft.com\n" >> out_log.txt
-
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        # INPUT
-        printf "microsoft.com\n" >> data/pending/domains_scamadviser.tmp
-        return
+        local input=data/pending/domains_scamadviser.com.tmp
     fi
 
     # INPUT
-    printf "microsoft.com\n" >> input.txt
+    printf "microsoft.com\n" >> "${input:-input.txt}"
+
+    # EXPECTED OUTPUTS
+    printf "microsoft.com\n" >> out_manual.txt
+    printf "toplist,microsoft.com\n" >> out_log.txt
 }
 
 # TEST: test exclusion of specific sources from light version
