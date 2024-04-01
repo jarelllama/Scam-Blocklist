@@ -159,9 +159,7 @@ TEST_RETRIEVE_VALIDATE() {
         check_output "$WILDCARDS" "out_wildcards.txt" "Wildcards"
     fi
 
-    check_temp_file
-    check_log
-    on_exit
+    check_and_exit
 }
 
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
@@ -195,9 +193,7 @@ TEST_DEAD_CHECK() {
     check_if_dead_present "$REDUNDANT_DOMAINS" "Redundant domains"
     check_if_dead_present "$WILDCARDS" Wildcards
 
-    check_temp_file
-    check_log
-    on_exit
+    check_and_exit
 }
 
 function TEST_PARKED_CHECK {
@@ -238,9 +234,7 @@ function TEST_PARKED_CHECK {
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
     check_output "$PARKED_DOMAINS" out_parked.txt "Parked domains"
 
-    check_temp_file
-    check_log
-    on_exit
+    check_and_exit
 }
 
 # The 'test_<function>' scripts are to test individual functions
@@ -546,28 +540,43 @@ run_script() {
     fi
 }
 
-# Function 'on_exit' checks if the script should exit with an
+# Function 'check_and_exit' checks if the script should exit with an
 # exit status of 1 or 0.
-on_exit() {
-    # Test completed successfully
-    [[ "$error" == false ]] && printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
+check_and_exit() {
+    # Check that all temporary files have been deleted after the run
+    if ! ls x?? &> /dev/null && ! ls ./*.tmp &> /dev/null; then
+        printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
+        ls x?? ./*.tmp 2> /dev/null
+        error=true
+    fi
 
-    # Print log if not already printed by 'check_log' function
-    [[ "$log_error" != true ]] && printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
+    # Check if tests were all completed successfully
+    if [[ "$error" == false ]]; then
+        printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
+    fi
+
+   # Check that events have been properly logged
+    while read -r log_term; do
+        ! grep -qF "$log_term" "$DOMAIN_LOG" && log_error=true
+        break
+    done < out_log.txt
+
+    if [[ "$log_error" == true ]]; then
+        printf "\e[1m[warn] Log file is not as expected:\e[0m\n"
+        cat "$DOMAIN_LOG"
+        printf "\n[info] Terms expected in log:\n"
+        cat out_log.txt
+        # No need for additional new line since log is not printed again
+        error=true
+    else
+        printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
+    fi
 
     # Exit with error if test failed
-    [[ "$error" == true ]] && { printf "\n"; exit 1; }
-}
-
-# Function 'check_temp_file' checks that all temporary files have been deleted
-# after the script's run.
-check_temp_file() {
-    if ! ls x?? &> /dev/null && ! ls ./*.tmp &> /dev/null; then
-        return
+    if [[ "$error" == true ]]; then
+        printf "\n"
+        exit 1
     fi
-    printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
-    ls x?? ./*.tmp 2> /dev/null
-    error=true
 }
 
 # Function 'check_output' compare the input file with the expected output file
@@ -594,26 +603,6 @@ check_if_dead_present() {
     printf "\e[1m[warn] %s file still has dead domains:\e[0m\n" "$2"
     cat "$1"
     printf "\n"
-    error=true
-}
-
-# Function 'check_log' checks that all required log terms are
-# found in the log file. This tests that events are properly logged.
-check_log() {
-    while read -r log_term; do
-        if ! grep -qF "$log_term" "$DOMAIN_LOG"; then
-            log_error=true
-            break
-        fi
-    done < out_log.txt
-
-    [[ "$log_error" != true ]] && return
-
-    printf "\e[1m[warn] Log file is not as expected:\e[0m\n"
-    cat "$DOMAIN_LOG"
-    printf "\n[info] Terms expected in log:\n"
-    cat out_log.txt
-    # No need for additional new line since the log is not printed again
     error=true
 }
 
