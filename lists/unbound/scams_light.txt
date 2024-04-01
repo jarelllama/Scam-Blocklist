@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Mon Apr  1 09:01:09 UTC 2024
+# Last modified: Mon Apr  1 09:02:09 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 2082
+# Total number of entries: 2083
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1661,6 +1661,7 @@ local-zone: "shoesforcrew.us." always_nxdomain
 local-zone: "shoesprints.com." always_nxdomain
 local-zone: "shoestamaris.com." always_nxdomain
 local-zone: "shopatsimplify.com." always_nxdomain
+local-zone: "shopelyze.com." always_nxdomain
 local-zone: "shopfootballna.com." always_nxdomain
 local-zone: "shophive.in." always_nxdomain
 local-zone: "shoppingsalewa.shop." always_nxdomain
