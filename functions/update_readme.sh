@@ -7,7 +7,7 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 TODAY="$(date -u +"%d-%m-%y")"
-YESTERDAY="$(date -ud "yesterday" +"%d-%m-%y")"
+YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
 readonly TODAY
 readonly YESTERDAY
 
