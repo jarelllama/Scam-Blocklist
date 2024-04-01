@@ -25,8 +25,7 @@ main() {
     check_dead
     check_alive
 
-    # Remove domains from light raw file that are not found
-    # in full raw file
+    # Remove domains from light raw file that are not found in full raw file
     comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
     mv light.tmp "$RAW_LIGHT"
 
@@ -36,11 +35,7 @@ main() {
 }
 
 check_subdomains() {
-    sed 's/^/||/; s/$/^/' "$SUBDOMAINS" > formatted_subdomains.tmp
-
-    # Find and export dead domains with subdomains
-    dead-domains-linter -i formatted_subdomains.tmp --export dead.tmp
-    [[ ! -s dead.tmp ]] && return
+    find_dead "$SUBDOMAINS" || return
 
     # Remove domains from subdomains file
     comm -23 "$SUBDOMAINS" dead.tmp > subdomains.tmp
@@ -65,11 +60,7 @@ check_subdomains() {
 }
 
 check_redundant() {
-    sed 's/^/||/; s/$/^/' "$REDUNDANT_DOMAINS" > formatted_redundant_domains.tmp
-
-    # Find and export dead redundant domains
-    dead-domains-linter -i formatted_redundant_domains.tmp --export dead.tmp
-    [[ ! -s dead.tmp ]] && return
+    find_dead "$REDUNDANT_DOMAINS" || return
 
     # Remove dead domains from redundant domains file
     comm -23 "$REDUNDANT_DOMAINS" dead.tmp > redundant.tmp
@@ -99,12 +90,12 @@ check_redundant() {
 
 check_dead() {
     # Exclude wildcards and root domains of subdomains
-    comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") \
-        | sed 's/^/||/; s/$/^/' > formatted_raw.tmp
+    comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") > raw.tmp
 
-    # Find and export dead domains
-    dead-domains-linter -i formatted_raw.tmp --export dead_in_raw.tmp
-    [[ ! -s dead_in_raw.tmp ]] && return
+    find_dead raw.tmp || return
+
+    # Rename temporary dead file to be added into dead cache later
+    mv dead.tmp dead_in_raw.tmp
 
     # Remove dead domains from raw file
     comm -23 "$RAW" dead_in_raw.tmp > raw.tmp && mv raw.tmp "$RAW"
@@ -113,12 +104,10 @@ check_dead() {
 }
 
 check_alive() {
-    sed 's/^/||/; s/$/^/' "$DEAD_DOMAINS" > formatted_dead_domains.tmp
+    find_dead "$DEAD_DOMAINS" || return
 
-    # Find and export dead domains
-    dead-domains-linter -i formatted_dead_domains.tmp --export dead.tmp
-
-    # Find resurrected domains in dead domains file (dead domains file is unsorted)
+    # Find resurrected domains in dead domains file
+    # (dead domains file is unsorted)
     alive_domains="$(comm -23 <(sort "$DEAD_DOMAINS") <(sort dead.tmp))"
     [[ -z "$alive_domains" ]] && return
 
@@ -126,9 +115,11 @@ check_alive() {
     cp dead.tmp "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
 
-    # Strip away subdomains from alive domains as subdomains are not supposed to be in raw file
+    # Strip away subdomains from alive domains as subdomains
+    # are not supposed to be in raw file
     while read -r subdomain; do
-        alive_domains="$(printf "%s" "$alive_domains" | sed "s/^${subdomain}\.//" | sort -u)"
+        alive_domains="$(printf "%s" "$alive_domains" \
+            | sed "s/^${subdomain}\.//" | sort -u)"
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Add resurrected domains to raw file
@@ -136,6 +127,19 @@ check_alive() {
     format_file "$RAW"
 
     log_event "$alive_domains" resurrected dead_domains_file
+}
+
+# Function 'find_dead' finds dead domains from a given file by first formatting
+# the file and processing it through AdGuard's Dead Domains Linter.
+# Input:
+#   $1: file to process
+# Output:
+#   dead.tmp (if dead domains found)
+#   return 1 (if dead domains not found)
+find_dead() {
+    sed 's/^/||/; s/$/^/' "$1" > formatted_domains.tmp
+    dead-domains-linter -i formatted_domains.tmp --export dead.tmp
+    [[ ! -s dead.tmp ]] && return 1
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
@@ -147,7 +151,8 @@ log_event() {
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
-# Function 'format_file' calls a shell wrapper to standardize the format of a file.
+# Function 'format_file' calls a shell wrapper to
+# standardize the format of a file.
 # $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
@@ -160,8 +165,8 @@ cleanup() {
     (( $(wc -l < "$DEAD_DOMAINS") > 5000 )) && sed -i '1,100d' "$DEAD_DOMAINS"
 }
 
-trap cleanup EXIT
-
 main
+
+cleanup
 
 exit 0
