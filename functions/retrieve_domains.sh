@@ -81,7 +81,7 @@ process_source() {
     # Logging removed as it inflated log size by too much
 
     # Remove common subdomains
-    local domains_with_subdomains
+    local domains_with_subdomains  # Declare local variable in case while loop does not run
     while read -r subdomain; do  # Loop through common subdomains
         # Find domains and skip to next subdomain if none found
         domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
@@ -144,7 +144,7 @@ process_source() {
     fi
 
     # Remove redundant domains
-    local redundant_domains
+    local redundant_domains  # Declare local variable in case while loop does not run
     local redundant_count=0
     while read -r wildcard; do  # Loop through wildcards
         # Find redundant domains via wildcard matching and skip to
