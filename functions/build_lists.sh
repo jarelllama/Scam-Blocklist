@@ -13,14 +13,13 @@ build() {
 
     # Loop through the full and light blocklist versions
     for i in {1..2}; do
-        if [[ "$i" == '1' ]]; then
-            source_file="$RAW"
-        elif [[ "$i" == '2' ]]; then
+        if [[ "$i" == '2' ]]; then
             version='LIGHT VERSION'
             list_name='scams_light.txt'
             source_file="$RAW_LIGHT"
         fi
 
+        source_file=${source_file:-$RAW}
         blocklist_path="lists/${directory}/${list_name:-'scams.txt'}"
 
         # Append header onto blocklist
