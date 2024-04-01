@@ -7,7 +7,7 @@ readonly RAW_LIGHT='data/raw_light.txt'
 
 build() {
     # Set default comment character to '#'
-    comment=${comment:-'#'}
+    comment=${comment:-#}
 
     mkdir -p "lists/${directory}"
 
@@ -20,7 +20,7 @@ build() {
         fi
 
         source_file="${source_file:-$RAW}"
-        blocklist_path="lists/${directory}/${list_name:-'scams.txt'}"
+        blocklist_path="lists/${directory}/${list_name:-scams.txt}"
 
         # Append header onto blocklist
         cat << EOF > "$blocklist_path"

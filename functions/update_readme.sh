@@ -139,7 +139,7 @@ EOF
 # for each source.
 # $1: source to process (default is all sources)
 print_stats() {
-    [[ -z "$1" ]] && source='All sources' || source="$1"
+    source="${3:-All sources}"
     printf "%5s |%10s |%8s%% | %s\n" \
         "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "$source"
 }
