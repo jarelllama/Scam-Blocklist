@@ -17,7 +17,8 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
-time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
+TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
+readonly TIME_FORMAT
 
 # Environment variables
 readonly AA419_API_ID
@@ -227,9 +228,9 @@ build() {
         "$count_before" "$(( count_after - count_before ))" "$count_after"
 
     # Mark sources as saved in the source log file
-    rows="$(sed 's/,no/,yes/' <(grep -F "$time_format" "$SOURCE_LOG"))"
+    rows="$(sed 's/,no/,yes/' <(grep -F "$TIME_FORMAT" "$SOURCE_LOG"))"
     # Remove previous logs
-    temp_SOURCE_LOG="$(grep -vF "$time_format" "$SOURCE_LOG")"
+    temp_SOURCE_LOG="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
     # Add updated logs
     printf "%s\n%s\n" "$temp_SOURCE_LOG" "$rows" > "$SOURCE_LOG"
 
@@ -245,7 +246,7 @@ build() {
 # $2: event type (dead, whitelisted, etc.)
 # $3: source
 log_event() {
-    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$time_format" \
+    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$TIME_FORMAT" \
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
@@ -262,7 +263,7 @@ log_source() {
         item="$search_term"
     fi
 
-    echo "${time_format},${source},${search_term},${unfiltered_count:-0},
+    echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count:-0},
 ${filtered_count:-0},${total_whitelisted_count:-0},${dead_count:-0},${redundant_count:-0},
 ${parked_count:-0},${toplist_count:-0},$(tr '\n' ' ' <<< "$domains_in_toplist"),
 ${query_count:-0},${rate_limited:-false}" >> "$SOURCE_LOG"
