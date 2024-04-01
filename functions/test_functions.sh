@@ -290,6 +290,7 @@ TEST_RETRIEVE_VALIDATE() {
     # Note removal of domains already in raw file is redundant to test
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
+        test_manual_addition
         test_conversion
         test_known_dead_removal
         test_known_parked_removal
@@ -348,6 +349,23 @@ TEST_RETRIEVE_VALIDATE() {
     on_exit
 }
 
+# TEST: removal of dead domains with subdomains
+test_dead_subdomain_check() {
+    # Dead root domains
+    printf "584308-dead-subdomain-test.com\n" >> "$RAW"
+    printf "584308-dead-subdomain-test.com\n" >> "$ROOT_DOMAINS"
+    while read -r subdomain; do
+        subdomain="${subdomain}.584308-dead-subdomain-test.com"
+        # INPUT
+        printf "%s\n" "$subdomain" >> "$SUBDOMAINS"
+        # EXPECTED OUTPUT
+        printf "%s\n" "$subdomain" >> out_dead.txt
+    done < "$SUBDOMAINS_TO_REMOVE"
+    # EXPECTED OUTPUT
+    printf "%s\n" "dead,584308-dead-subdomain-test.com,raw" >> out_log.txt
+
+}
+
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
 # domains respectively.
 TEST_DEAD_CHECK() {
@@ -363,20 +381,6 @@ TEST_DEAD_CHECK() {
     printf "google.com\n" >> out_raw.txt
     printf "584031dead-domain-test.com\n" >> out_dead.txt
     printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt
-
-    # TEST: removal of dead domains with subdomains
-    # Dead root domains
-    printf "584308-dead-subdomain-test.com\n" >> "$RAW"
-    printf "584308-dead-subdomain-test.com\n" >> "$ROOT_DOMAINS"
-    while read -r subdomain; do
-        subdomain="${subdomain}.584308-dead-subdomain-test.com"
-        # INPUT
-        printf "%s\n" "$subdomain" >> "$SUBDOMAINS"
-        # EXPECTED OUTPUT
-        printf "%s\n" "$subdomain" >> out_dead.txt
-    done < "$SUBDOMAINS_TO_REMOVE"
-    # EXPECTED OUTPUT
-    printf "%s\n" "dead,584308-dead-subdomain-test.com,raw" >> out_log.txt
 
     # Test removal of dead redundant domains and wildcards
     : > "$REDUNDANT_DOMAINS"  # Initialize redundant domains file
