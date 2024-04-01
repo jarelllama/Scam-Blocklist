@@ -81,7 +81,7 @@ retrieve_parked() {
     wait
 
     # Return 1 if no parked domains were found
-    [[ ! -s parked_domains.tmp ]] && return 1
+    [[ ! -s parked_domains.tmp ]] && return 1 || return 0
 
     format_file parked_domains.tmp
 }
