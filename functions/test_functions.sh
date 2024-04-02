@@ -582,6 +582,8 @@ test_unparked_check() {
     printf "unparked,google.com,parked_domains\n" >> out_log.txt
 }
 
+### END OF 'test_<process>' FUNCTIONS
+
 # Function 'on_exit' exits the script with exit status 1 if an error was found.
 on_exit() {
     if [[ "$error" == true ]]; then
@@ -590,9 +592,8 @@ on_exit() {
     fi
 }
 
-### END OF 'test_<process>' FUNCTIONS
-
-# Function 'run_script' executes the script passed by the caller.
+# Function 'run_script' executes the script passed by the caller and checks
+# the exit status of the script.
 # Input:
 #   $1: scrip to execute
 # Output:
@@ -666,11 +667,12 @@ check_terms() {
     cat "$2"
     printf "\n"
     error=true
+
     return 1
 }
 
-# Function 'check_output' compare the input file with the expected output file
-# and print a warning if they are not the same.
+# Function 'check_output' compares the input file with the expected output file
+# and prints a warning if they are not the same.
 #   $1: input file
 #   $2: expected output file
 #   $3: name of the file being checked
