@@ -118,8 +118,8 @@ TEST_RETRIEVE_VALIDATE() {
         test_conversion
         test_known_dead_removal
         test_known_parked_removal
-        test_light_build
         test_source_log
+        test_light_build
 
         # Prepare and run retrieval script
         # Distribute the sample input into various sources
@@ -259,7 +259,7 @@ TEST_BUILD() {
     printf "\e[1m[start] %s\e[0m\n" "build_lists.sh"
 
     # Run script and check exit status
-    if ! bash build_lists.sh; then
+    if ! bash functions/build_lists.sh; then
         printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
         error=true
     fi
@@ -477,6 +477,15 @@ test_toplist_removal() {
     printf "toplist,microsoft.com\n" >> out_log.txt
 }
 
+# TEST: correct logging in source log
+test_source_log() {
+    # INPUT
+    printf "source-log-test.com\n" >> data/pending/domains_petscams.com.tmp
+    # EXPECTED OUTPUT
+    printf "source-log-test.com\n" >> out_raw.txt
+    printf ",petscams.com,,1,1,0,0,0,0,0,,0,false,yes" >> out_source_log.txt
+}
+
 # TEST: exclusion of specific sources from light version
 test_light_build() {
     cp "$RAW" "$RAW_LIGHT"
@@ -486,15 +495,6 @@ test_light_build() {
     printf "raw-light-test.com\n" >> out_raw.txt
     # Domain from excluded source should not be in output
     grep -vxF "raw-light-test.com" out_raw.txt > out_raw_light.txt
-}
-
-# TEST: correct logging in source log
-test_source_log() {
-    # INPUT
-    printf "source-log-test.com\n" >> data/pending/domains_petscams.com.tmp
-    # EXPECTED OUTPUT
-    printf "source-log-test.com\n" >> out_raw.txt
-    printf ",petscams.com,,1,1,0,0,0,0,0,,0,false,yes" >> out_source_log.txt
 }
 
 ### DEAD CHECK TESTS
