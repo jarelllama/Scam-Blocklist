@@ -297,8 +297,8 @@ check_syntax() {
     fi
 }
 
-# The 'test_<function>' scripts are to test individual functions
-# within scripts. The input.txt file is to be processed by the called script.
+# The 'test_<process>' functions are to test individual processes within
+# scripts. The input.txt file is to be processed by the called script.
 # The out_<name>.txt file is the expected output after processing
 # by the called script.
 
@@ -589,6 +589,8 @@ on_exit() {
         exit 1
     fi
 }
+
+### END OF 'test_<process>' FUNCTIONS
 
 # Function 'run_script' executes the script passed by the caller.
 # Input:
