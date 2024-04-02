@@ -296,7 +296,7 @@ check_syntax() {
 
 # The 'test_<function>' scripts are to test individual functions
 # within scripts. The input.txt file is to be processed by the called script.
-# The out_<name>.txt file is the expected raw file after processing
+# The out_<name>.txt file is the expected output after processing
 # by the called script.
 
 ### RETRIEVAL/VALIDATION TESTS
@@ -401,7 +401,6 @@ test_invalid_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
         local input=data/pending/domains_scamadviser.com.tmp
     fi
-
     {
         printf "invalid-test-com\n"
         printf "100.100.100.100\n"
@@ -413,7 +412,6 @@ test_invalid_removal() {
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-
     {
         printf "invalid,invalid-test-com\n"
         printf "invalid,100.100.100.100\n"
