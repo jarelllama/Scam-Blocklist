@@ -582,6 +582,14 @@ test_unparked_check() {
     printf "unparked,google.com,parked_domains\n" >> out_log.txt
 }
 
+# Function 'on_exit' exits the script with exit status 1 if an error was found.
+on_exit() {
+    if [[ "$error" == true ]]; then
+        printf "\n"
+        exit 1
+    fi
+}
+
 # Function 'run_script' executes the script passed by the caller.
 # Input:
 #   $1: scrip to execute
@@ -629,14 +637,6 @@ check_and_exit() {
     fi
 
     on_exit
-}
-
-# Function 'on_exit' exits the script with exit status 1 if an error was found.
-on_exit() {
-    if [[ "$error" == true ]]; then
-        printf "\n"
-        exit 1
-    fi
 }
 
 # Function 'check_terms' checks that a file contains all the given terms.
