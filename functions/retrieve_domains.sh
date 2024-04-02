@@ -323,7 +323,6 @@ source_google_search() {
 
             # Remove header from file name
             search_term=${results_file#data/pending/domains_google_search_}
-
             # Remove file extension from file name to get search term
             search_term=${search_term%.tmp}
 
@@ -437,7 +436,7 @@ source_guntab() {
     curl -s "${url}/" |
         grep -zoE '<table class="datatable-list table">.*</table>' |
         grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
-    # Note results are not sorted by time added
+        # Note results are not sorted by time added
 
     process_source
 }
