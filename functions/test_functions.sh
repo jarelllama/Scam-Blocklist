@@ -143,7 +143,7 @@ TEST_RETRIEVE_VALIDATE() {
         run_script validate_raw.sh
     fi
 
-    # Check and verify outputs
+    ### Check and verify outputs
 
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
@@ -188,7 +188,7 @@ TEST_DEAD_CHECK() {
     # Sort dead domains file for easy comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
 
-    # Check and verify outputs
+    ### Check and verify outputs
 
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
@@ -240,7 +240,7 @@ TEST_PARKED_CHECK() {
     # Sort parked domains file for easy comparison with expected output
     sort "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
 
-    # Check and verify outputs
+    ### Check and verify outputs
 
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
