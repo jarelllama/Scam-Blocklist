@@ -521,6 +521,8 @@ source_stopgunscams() {
     process_source
 }
 
+# Entry point
+
 trap cleanup EXIT
 
 # Install jq
