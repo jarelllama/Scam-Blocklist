@@ -27,3 +27,7 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "Retrieve domains via openSquat"
           git push -q
+
+  build:
+    needs: run-opensquat
+    uses: ./.github/workflows/retrieve_domains.yml
