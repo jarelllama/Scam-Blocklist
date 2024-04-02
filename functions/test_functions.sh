@@ -152,15 +152,15 @@ TEST_RETRIEVE_VALIDATE() {
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Check entries saved for manual review
-        check_output "data/pending/domains_scamadviser.com.tmp" "out_manual_review.txt" "Manual review"
+        check_output data/pending/domains_scamadviser.com.tmp out_manual_review.txt "Manual review"
 
         # Check source log
         check_terms "$SOURCE_LOG" out_source_log.txt "Source log"
     fi
 
     if [[ "$script_to_test" == 'validate' ]]; then
-        check_output "$REDUNDANT_DOMAINS" "out_redundant.txt" "Redundant domains"
-        check_output "$WILDCARDS" "out_wildcards.txt" "Wildcards"
+        check_output "$REDUNDANT_DOMAINS" out_redundant.txt "Redundant domains"
+        check_output "$WILDCARDS" out_wildcards.txt Wildcards
     fi
 
     check_and_exit
