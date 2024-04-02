@@ -180,7 +180,7 @@ TEST_DEAD_CHECK() {
 
     # Run script and check exit status
     if ! run_script check_dead.sh; then
-        printf "\e[1m[warn] Script returned with an error\e[0m\n"
+        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
         error=true
     fi
 

@@ -32,8 +32,6 @@ main() {
     # Cache dead domains (done last to skip alive domains check)
     cat dead_in_raw.tmp >> "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
-
-    exit 1  # FOR TESTING
 }
 
 # Function 'check_subdomains' removes dead domains from the subdomains file
