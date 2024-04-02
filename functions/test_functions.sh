@@ -576,12 +576,12 @@ run_script() {
     done
 
     printf "\e[1m[start] %s\e[0m\n" "$1"
-    [[ "$2" == '--no-output' ]] && printf "%s\n" "----------------------------------------------------------------------"
+    [[ -z "$2" ]] && printf "%s\n" "----------------------------------------------------------------------"
 
     # Run script
     bash "functions/${1}" || errored=true
 
-    [[ "$2" == '--no-output' ]] && printf "%s\n" "----------------------------------------------------------------------"
+    [[ -z "$2" ]] && printf "%s\n" "----------------------------------------------------------------------"
 
     # Return 1 if script has an exit status of 1
     if [[ "$errored" == true ]]; then
@@ -606,8 +606,10 @@ check_and_exit() {
 
    # Check that events have been properly logged
     while read -r log_term; do
-        ! grep -qF "$log_term" "$DOMAIN_LOG" && log_error=true
-        break
+        if ! grep -qF "$log_term" "$DOMAIN_LOG"; then
+            log_error=true
+            break
+        fi
     done < out_log.txt
 
     if [[ "$log_error" == true ]]; then
@@ -655,4 +657,5 @@ check_if_dead_present() {
     error=true
 }
 
-[[ "$CI" == true ]] && main "$1"  # Do not allow running locally
+# Do not allow running locally
+[[ "$CI" == true ]] && main "$1"
