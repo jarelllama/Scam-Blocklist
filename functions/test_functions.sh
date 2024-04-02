@@ -422,7 +422,6 @@ test_invalid_removal() {
 
     # Check script does not save invalid domains to manual review file
     [[ "$script_to_test" == 'validate' ]] && return
-
     {
         printf "invalid-test-com\n"
         printf "100.100.100.100\n"
@@ -446,6 +445,7 @@ test_redundant_removal() {
     fi
     # Test addition of new wildcard from wildcard file
     # (manually adding a new wildcard to wildcards file)
+
     # Existing redundant domain in raw file
     printf "domain.redundant-test.com\n" >> input.txt
     # INPUT
