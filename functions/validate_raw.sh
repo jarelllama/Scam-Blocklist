@@ -22,6 +22,7 @@ validate_raw() {
     # Remove common subdomains
     domains_with_subdomains_count=0
     while read -r subdomain; do  # Loop through common subdomains
+        # Find domains and skip to next subdomain if none found
         domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
             || continue
 
@@ -78,7 +79,8 @@ validate_raw() {
     # Remove redundant domains
     redundant_count=0
     while read -r domain; do  # Loop through each domain in the blocklist
-        # Find redundant domains via wildcard matching
+        # Find redundant domains via wildcard matching and skip to
+        # next wildcard if none found
         redundant_domains="$(grep "\.${domain}$" <<< "$domains")" \
             || continue
 

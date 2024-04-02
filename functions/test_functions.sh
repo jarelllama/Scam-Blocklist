@@ -657,9 +657,8 @@ check_terms() {
         fi
     done < "$2"
 
-    if [[ "$term_error" != true ]]; then
-        return 0
-    fi
+    # Return if all terms found
+    [[ "$term_error" != true ]] && return
 
     printf "\e[1m[warn] %s is not as expected:\e[0m\n" "$3"
     cat "$1"
