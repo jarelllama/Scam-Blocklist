@@ -377,7 +377,7 @@ test_whitelist_blacklist() {
     # EXPECTED OUTPUT
     printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
-    # The check script does not log blacklisted domains
+    # The validate script does not log blacklisted domains
     [[ "$script_to_test" == 'validate' ]] && return
     printf "blacklist,whitelist-blacklisted-test.com\n" >> out_log.txt
 }
@@ -420,7 +420,7 @@ test_invalid_removal() {
         printf "invalid,invalid-test.1x\n"
     } >> out_log.txt
 
-    # Check script does not save invalid domains to manual review file
+    # The validate script does not save invalid domains to manual review file
     [[ "$script_to_test" == 'validate' ]] && return
     {
         printf "invalid-test-com\n"
@@ -463,6 +463,7 @@ test_toplist_removal() {
         # INPUT
         printf "microsoft.com\n" >> data/pending/domains_scamadviser.com.tmp
         # EXPECTED OUTPUT
+        # The validate script does not save invalid domains to manual review file
         printf "microsoft.com\n" >> out_manual_review.txt
         printf "toplist,microsoft.com\n" >> out_log.txt
         return
