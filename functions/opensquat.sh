@@ -10,11 +10,11 @@ readonly NRD='list/wildcard_domains/nrd.txt'
 
 opensquat() {
     # Install openSquat
-    git clone https://github.com/atenreiro/opensquat
-    pip install -r opensquat/requirements.txt
+    git clone -q https://github.com/atenreiro/opensquat
+    pip install -qr opensquat/requirements.txt
 
     # Save previous NRD list for comparison
-    mv "$NRD" old_nrd.tmp
+    touch "$NRD" && mv "$NRD" old_nrd.tmp
 
     # Collate fresh NRD list and exit with status 1 if any link is broken
     {
