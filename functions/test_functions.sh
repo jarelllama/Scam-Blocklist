@@ -96,7 +96,7 @@ SHELLCHECK() {
 
 # Function 'TEST_RETRIEVE_VALIDATE' can test both the retrieval process and the
 # validation process depending on which argument is passed to the function.
-#   $1: script to test, can either be 'retrieve' or 'validate'
+#   $1: script to test ('retrieve' or 'validate')
 TEST_RETRIEVE_VALIDATE() {
     script_to_test="$1"
 
@@ -121,13 +121,13 @@ TEST_RETRIEVE_VALIDATE() {
         test_source_log
         test_light_build
 
-        # Prepare and run retrieval script
         # Distribute the sample input into various sources
         split -n l/3 input.txt
         mv xaa data/pending/domains_aa419.org.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
 
+        # Run retrieval script
         run_script retrieve_domains.sh
     fi
 
