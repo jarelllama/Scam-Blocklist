@@ -104,8 +104,8 @@ TEST_RETRIEVE_VALIDATE() {
     script_to_test="$1"
 
     # Initialize pending directory
-    [[ -d data/pending ]] && rm -r data/pending
-    [[ "$script_to_test" == 'retrieve' ]] && mkdir data/pending
+    rm -r data/pending 2> /dev/null
+    mkdir -p data/pending
 
     # Note removal of domains already in raw file is redundant to test
 
@@ -122,10 +122,8 @@ TEST_RETRIEVE_VALIDATE() {
         test_known_dead_removal
         test_known_parked_removal
         test_light_build
-    fi
 
-    # Prepare and run retrieval script
-    if [[ "$script_to_test" == 'retrieve' ]]; then
+        # Prepare and run retrieval script
         # Distribute the sample input into various sources
         split -n l/3 input.txt
         mv xaa data/pending/domains_aa419.org.tmp
