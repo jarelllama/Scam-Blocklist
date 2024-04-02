@@ -163,6 +163,7 @@ validate_raw() {
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
+    [[ -z "$1" ]] && return  # Return if no domains in variable
     printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
