@@ -49,9 +49,9 @@ main() {
             TEST_BUILD ;;
         ('shellcheck')
             SHELLCHECK ;;
+        (*)
+            exit 1 ;;
     esac
-
-    exit 0
 }
 
 # Function 'SHELLCHECK' runs ShellCheck for all scripts along with other checks

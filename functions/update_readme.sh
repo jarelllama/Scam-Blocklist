@@ -136,17 +136,17 @@ EOF
 }
 
 # Function 'print_stats' is an echo wrapper that returns the statistics
-# for each source.
-# $1: source to process (default is all sources)
+# for the given source.
+#   $1: source to process (default is all sources)
 print_stats() {
     printf "%5s |%10s |%8s%% | %s\n" \
         "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "${1:-All sources}"
 }
 
 # Function 'sum' is an echo wrapper that returns the total sum of
-# domains retrieved by that source for that particular day.
-# $1: day to process
-# $2: source to process (default is all sources)
+# domains retrieved by the given source for that particular day.
+#   $1: day to process
+#   $2: source to process (default is all sources)
 sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
@@ -155,8 +155,8 @@ sum() {
 }
 
 # Function 'count_excluded' is an echo wrapper that returns the percentage
-# of excluded domains out of the raw count retrieved from each source.
-# $1: source to process (default is all sources)
+# of excluded domains out of the raw count retrieved from the given source.
+#   $1: source to process (default is all sources)
 count_excluded() {
     csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > rows.tmp
 
