@@ -1,0 +1,29 @@
+name: Run openSquat
+run-name: Run openSquat
+on:
+  workflow_dispatch:
+  workflow_call:
+  #schedule:
+  #  - cron: '0 1 * * *'
+permissions:
+  contents: write
+
+jobs:
+  run-opensquat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: opensquat.sh
+        run: bash functions/opensquat.sh
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Retrieve domains via openSquat"
+          git push -q

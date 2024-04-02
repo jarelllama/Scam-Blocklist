@@ -48,6 +48,7 @@ source() {
     source_scamadviser
     source_stopgunscams
     source_google_search
+    source_opensquat
 }
 
 # Function 'process_source' filters results retrieved from a source.
@@ -393,6 +394,17 @@ search_google() {
         # Stop search term if no more pages are required
         (( $(wc -w <<< "$page_domains") < 10 )) && break
     done
+
+    process_source
+}
+
+source_opensquat() {
+    local source='openSquat'
+    local ignore_from_light=true
+    local results_file='data/pending/domains_opensquat.tmp'
+
+    # Return if results file not found (source is the file itself)
+    [[ ! -f "$results_file" ]] && return
 
     process_source
 }
