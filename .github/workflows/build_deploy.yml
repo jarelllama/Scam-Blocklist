@@ -56,7 +56,7 @@ jobs:
 
   prune-logs:
     needs: deploy
-    if: ${{ success() || failure() }}
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
