@@ -175,6 +175,7 @@ process_source() {
         printf "%s\n" "$domains" >> retrieved_light_domains.tmp
     fi
 
+    # Remove empty lines and count number of filtered domains
     filtered_count="$(printf "%s" "$domains" | sed '/^$/d' | wc -w)"
     log_source
 }
@@ -234,7 +235,7 @@ build() {
     decide_exit
 }
 
-# Function 'decide_error' checks if the script should exit with an
+# Function 'decide_exit' checks if the script should exit with an
 # exit status of 1 or 0.
 decide_exit() {
     # Exit with error if domains need to be manually reviewed
@@ -260,7 +261,7 @@ log_source() {
     echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count:-0},\
 ${filtered_count:-0},${total_whitelisted_count},${dead_count:-0},${redundant_count},\
 ${parked_count:-0},${toplist_count:-0},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
-${query_count:-0},${rate_limited:-false}",no >> "$SOURCE_LOG"
+${query_count:-0},${rate_limited:-false},no" >> "$SOURCE_LOG"
 
     printf "\n\e[1mSource:\e[0m %s\n" "${item:-$source}"
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \

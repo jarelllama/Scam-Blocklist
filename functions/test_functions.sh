@@ -155,7 +155,7 @@ TEST_RETRIEVE_VALIDATE() {
         check_output "data/pending/domains_scamadviser.com.tmp" "out_manual_review.txt" "Manual review"
 
         # Check source log
-        check_terms "$SOURCE_LOG" out_source_log.txt "Source log" || error=true
+        check_terms "$SOURCE_LOG" out_source_log.txt "Source log"
     fi
 
     if [[ "$script_to_test" == 'validate' ]]; then
