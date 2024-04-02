@@ -27,11 +27,11 @@ readonly GOOGLE_SEARCH_API_KEY
 readonly GOOGLE_SEARCH_ID_2
 readonly GOOGLE_SEARCH_API_KEY_2
 
-# Function 'source' calls on the respective functions for each source
+# Function 'source' calls on the respective functions for each source to
 # retrieve results. The results are then passed to the 'process_source'
 # function for further processing.
 source() {
-    # Check whether to use existing retrieved result
+    # Check whether to use existing retrieved results
     if [[ -d data/pending ]]; then
         printf "\nUsing existing lists of retrieved results.\n"
         readonly USE_EXISTING=true
@@ -50,7 +50,7 @@ source() {
     source_google_search
 }
 
-# Function 'process_source' filters results retrieved from the a source.
+# Function 'process_source' filters results retrieved from a source.
 # The output is a cumulative filtered domains file containing all filtered
 # domains from all sources in this run.
 process_source() {
@@ -72,16 +72,14 @@ process_source() {
 
     # Count number of unfiltered domains pending
     # Note wc -w is used here as wc -l for an empty variable seems to
-    # always output 1
+    # always output 1.
     unfiltered_count="$(wc -w <<< "$domains")"
 
     # Remove known dead domains (includes subdomains and redundant domains)
     dead_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$DEAD_DOMAINS"))"
     dead_count="$(wc -w <<< "$dead_domains")"
-    if (( "$dead_count" > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$dead_domains"))"
-    fi
-    # Logging removed as it inflated log size by too much
+    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$dead_domains"))"
+    # Logging removed as it inflated log size
 
     # Remove common subdomains
     local domains_with_subdomains  # Declare local variable in case while loop does not run
@@ -111,30 +109,24 @@ process_source() {
     # Remove known parked domains
     parked_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$PARKED_DOMAINS"))"
     parked_count="$(wc -w <<< "$parked_domains")"
-    if (( "$parked_count" > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$parked_domains"))"
-        log_event "$parked_domains" parked
-    fi
+    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$parked_domains"))"
+    log_event "$parked_domains" parked
 
     # Log blacklisted domains
     blacklisted_domains="$(comm -12 <(printf "%s" "$domains") "$BLACKLIST")"
-    [[ -n "$blacklisted_domains" ]] && log_event "$blacklisted_domains" blacklist
+    log_event "$blacklisted_domains" blacklist
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
     whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
-    if (( "$whitelisted_count" > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
-        log_event "$whitelisted_domains" whitelist
-    fi
+    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
+    log_event "$whitelisted_domains" whitelist
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
     whitelisted_tld_count="$(wc -w <<< "$whitelisted_tld_domains")"
-    if (( "$whitelisted_tld_count" > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
-        log_event "$whitelisted_tld_domains" tld
-    fi
+    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
+    log_event "$whitelisted_tld_domains" tld
 
     # Remove invalid entries and IP addresses. Punycode TLDs (.xn--*) are allowed
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
@@ -282,6 +274,7 @@ ${query_count:-0},${rate_limited:-false}",no >> "$SOURCE_LOG"
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
+    [[ -z "$1" ]] && return  # Return if no domains in variable
     printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
