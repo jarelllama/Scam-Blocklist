@@ -57,7 +57,7 @@ process_source() {
     [[ ! -f "$results_file" ]] && return
 
     # Skip to next source if no results retrieved
-    # [[ -s ]] does not seem to work well here
+    # [ -s ] does not seem to work well here
     if ! grep -q '[a-z]' "$results_file"; then
         log_source
         return

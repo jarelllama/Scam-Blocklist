@@ -19,6 +19,7 @@ readonly REDUNDANT_DOMAINS='data/redundant_domains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
+readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
     # Initialize
@@ -32,6 +33,7 @@ main() {
     : > "$REDUNDANT_DOMAINS"
     : > "$WILDCARDS"
     sed -i '1q' "$DOMAIN_LOG"
+    sed -i '1q' "$SOURCE_LOG"
     error=false
 
     case "$1" in
@@ -85,16 +87,11 @@ SHELLCHECK() {
         error=true
     fi
 
-    if [[ "$error" == false ]]; then
-        printf "\n\e[1m[success] Test completed. No errors found\e[0m\n"
-    fi
-
     printf "\n[info] Scripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
 
-    if [[ "$error" == true ]]; then
-        printf "\n"
-        exit 1
-    fi
+    on_exit
+
+    printf "\n\e[1m[success] Test completed. No errors found\e[0m\n"
 }
 
 # Function 'TEST_RETRIEVE_VALIDATE' can test both the retrieval process and the
@@ -122,6 +119,7 @@ TEST_RETRIEVE_VALIDATE() {
         test_known_dead_removal
         test_known_parked_removal
         test_light_build
+        test_source_log
 
         # Prepare and run retrieval script
         # Distribute the sample input into various sources
@@ -152,9 +150,12 @@ TEST_RETRIEVE_VALIDATE() {
     check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
     check_output "$ROOT_DOMAINS" out_root_domains.txt "Root domains"
 
-    # Check entries saved for manual review
     if [[ "$script_to_test" == 'retrieve' ]]; then
+        # Check entries saved for manual review
         check_output "data/pending/domains_scamadviser.com.tmp" "out_manual_review.txt" "Manual review"
+
+        # Check source log
+        check_terms "$SOURCE_LOG" out_source_log.txt "Source log" || error=true
     fi
 
     if [[ "$script_to_test" == 'validate' ]]; then
@@ -222,7 +223,11 @@ TEST_PARKED_CHECK() {
     # (Unparked domains are not added back to light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
-    run_script check_parked.sh
+    # Run script and check exit status
+    if ! run_script check_parked.sh; then
+        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
+        error=true
+    fi
 
     # Remove placeholder lines
     comm -23 "$RAW" placeholders.txt > raw.tmp
@@ -250,29 +255,30 @@ TEST_BUILD() {
     domain='build-test.com'
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
-    touch out_.txt  # Placeholder
 
-    run_script build_lists.sh --no-output
+    printf "\e[1m[start] %s\e[0m\n" "build_lists.sh"
 
-    check_list "||${domain}^" adblock
-    check_list "local=/${domain}/" dnsmasq
-    check_list "local-zone: \"${domain}.\" always_nxdomain" unbound
-    check_list "*.${domain}" wildcard_asterisk
-    check_list "${domain}" wildcard_domains
-
-    if [[ "$error" == true ]]; then
-        printf "\n"
-        exit 1
+    # Run script and check exit status
+    if ! bash build_lists.sh; then
+        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
+        error=true
     fi
 
+    check_syntax "||${domain}^" adblock
+    check_syntax "local=/${domain}/" dnsmasq
+    check_syntax "local-zone: \"${domain}.\" always_nxdomain" unbound
+    check_syntax "*.${domain}" wildcard_asterisk
+    check_syntax "${domain}" wildcard_domains
+
+    on_exit
+
     printf "\e[1m[success] Test completed. No errors found\e[0m\n"
-    exit 0
 }
 
-# Function 'check_list' verifies the syntax of the list format.
+# Function 'check_syntax' verifies the syntax of the list format.
 #   $1: syntax to check for
 #   $2: name and directory of format
-check_list() {
+check_syntax() {
     # Check regular version
     if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
@@ -471,7 +477,7 @@ test_toplist_removal() {
     printf "toplist,microsoft.com\n" >> out_log.txt
 }
 
-# TEST: test exclusion of specific sources from light version
+# TEST: exclusion of specific sources from light version
 test_light_build() {
     cp "$RAW" "$RAW_LIGHT"
     # INPUT
@@ -480,6 +486,15 @@ test_light_build() {
     printf "raw-light-test.com\n" >> out_raw.txt
     # Domain from excluded source should not be in output
     grep -vxF "raw-light-test.com" out_raw.txt > out_raw_light.txt
+}
+
+# TEST: correct logging in source log
+test_source_log() {
+    # INPUT
+    printf "source-log-test.com\n" >> data/pending/domains_petscams.com.tmp
+    # EXPECTED OUTPUT
+    printf "source-log-test.com\n" >> out_raw.txt
+    printf ",petscams.com,,1,1,0,0,0,0,0,,0,false,yes" >> out_source_log.txt
 }
 
 ### DEAD CHECK TESTS
@@ -578,12 +593,12 @@ run_script() {
     done
 
     printf "\e[1m[start] %s\e[0m\n" "$1"
-    [[ -z "$2" ]] && printf "%s\n" "----------------------------------------------------------------------"
+    printf "%s\n" "----------------------------------------------------------------------"
 
     # Run script
     bash "functions/${1}" || errored=true
 
-    [[ -z "$2" ]] && printf "%s\n" "----------------------------------------------------------------------"
+    printf "%s\n" "----------------------------------------------------------------------"
 
     # Return 1 if script has an exit status of 1
     if [[ "$errored" == true ]]; then
@@ -591,8 +606,8 @@ run_script() {
     fi
 }
 
-# Function 'check_and_exit' checks if the script should exit with an
-# exit status of 1 or 0.
+# Function 'check_and_exit' is a shell wrapper that checks if the script
+# should exit with an exit status of 1 or 0.
 check_and_exit() {
     # Check that all temporary files have been deleted after the run
     if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
@@ -601,35 +616,57 @@ check_and_exit() {
         error=true
     fi
 
+    # Check domain log
+    check_terms "$DOMAIN_LOG" out_log.txt "Domain log" || log_error=true
+
     # Check if tests were all completed successfully
     if [[ "$error" == false ]]; then
         printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
     fi
 
-   # Check that events have been properly logged
-    while read -r log_term; do
-        if ! grep -qF "$log_term" "$DOMAIN_LOG"; then
-            log_error=true
-            break
-        fi
-    done < out_log.txt
-
-    if [[ "$log_error" == true ]]; then
-        printf "\e[1m[warn] Log file is not as expected:\e[0m\n"
-        cat "$DOMAIN_LOG"
-        printf "\n[info] Terms expected in log:\n"
-        cat out_log.txt
-        # No need for additional new line since log is not printed again
-        error=true
-    else
+    # Print domain log if not already printed by domain log check
+    if [[ "$log_error" != true ]]; then
         printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
     fi
 
-    # Exit with error if test failed
+    on_exit
+}
+
+# Function 'on_exit' is a shell wrapper to exit with exit status 1
+# if an error was found.
+on_exit() {
     if [[ "$error" == true ]]; then
         printf "\n"
         exit 1
     fi
+}
+
+# Function 'check_terms' checks that a file contains all the given terms.
+# Input:
+#   $1: file to check
+#   $2: file with terms to check for
+#   $3: name of file to check
+# Output:
+#   return 1 (if one or more terms not found)
+check_terms() {
+    while read -r term; do
+        if ! grep -qF "$term" "$1"; then
+            term_error=true
+            break
+        fi
+    done < "$2"
+
+    if [[ "$term_error" != true ]]; then
+        return 0
+    fi
+
+    printf "\e[1m[warn] %s is not as expected:\e[0m\n" "$3"
+    cat "$1"
+    printf "\n[info] Terms expected:\n"
+    cat "$2"
+    printf "\n"
+    error=true
+    return 1
 }
 
 # Function 'check_output' compare the input file with the expected output file
