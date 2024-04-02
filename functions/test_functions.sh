@@ -133,7 +133,7 @@ TEST_RETRIEVE_VALIDATE() {
         run_script retrieve_domains.sh
     fi
 
-    # Prepare and run check script
+    # Prepare and run validate script
     if [[ "$script_to_test" == 'validate' ]]; then
         # Use input.txt as sample raw files to test
         cp input.txt "$RAW"
@@ -178,7 +178,11 @@ TEST_DEAD_CHECK() {
     # (resurrected domains are not added back to light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
-    run_script check_dead.sh || exit 1
+    # Run script and check exit status
+    if ! run_script check_dead.sh; then
+        printf "\e[1m[warn] Script returned with an error\e[0m\n"
+        error=true
+    fi
 
     # Sort dead domains file for easy comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
