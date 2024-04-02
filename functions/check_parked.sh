@@ -31,7 +31,7 @@ remove_parked_domains() {
     retrieve_parked "$RAW" || return
 
     # Remove parked domains from raw file
-    # parked_domains.tmp occasionally is not in sorted order
+    # (parked_domains.tmp occasionally is not in sorted order)
     comm -23 "$RAW" <(sort parked_domains.tmp) > raw.tmp
     mv raw.tmp "$RAW"
 
