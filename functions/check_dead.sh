@@ -152,17 +152,17 @@ find_dead() {
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
-# $1: domains to log stored in a variable.
-# $2: event type (dead, whitelisted, etc.)
-# $3: source
+#   $1: domains to log stored in a variable.
+#   $2: event type (dead, whitelisted, etc.)
+#   $3: source
 log_event() {
     printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
-# Function 'format_file' calls a shell wrapper to
-# standardize the format of a file.
-# $1: file to format
+# Function 'format_file' calls a shell wrapper to standardize the format
+# of a file.
+#   $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
 }
