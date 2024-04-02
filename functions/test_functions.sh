@@ -127,6 +127,9 @@ TEST_RETRIEVE_VALIDATE() {
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
 
+        # Prepare sample raw light file
+        cp "$RAW" "$RAW_LIGHT"
+
         # Run retrieval script
         run_script retrieve_domains.sh
     fi
@@ -135,7 +138,7 @@ TEST_RETRIEVE_VALIDATE() {
     if [[ "$script_to_test" == 'validate' ]]; then
         # Use input.txt as sample raw files to test
         cp input.txt "$RAW"
-        cp input.txt "$RAW_LIGHT"
+        cp "$RAW" "$RAW_LIGHT"
 
         # Expected output for light version
         cp out_raw.txt out_raw_light.txt
@@ -487,7 +490,6 @@ test_source_log() {
 
 # TEST: exclusion of specific sources from light version
 test_light_build() {
-    cp "$RAW" "$RAW_LIGHT"
     # INPUT
     printf "raw-light-test.com\n" >> data/pending/domains_guntab.com.tmp
     # EXPECTED OUTPUT
@@ -600,9 +602,7 @@ run_script() {
     printf "%s\n" "----------------------------------------------------------------------"
 
     # Return 1 if script has an exit status of 1
-    if [[ "$errored" == true ]]; then
-        return 1
-    fi
+    [[ "$errored" == true ]] && return 1 || return 0
 }
 
 # Function 'check_and_exit' is a shell wrapper that checks if the script

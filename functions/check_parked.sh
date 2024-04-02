@@ -64,7 +64,6 @@ add_unparked_domains() {
 #   $1: file to process
 # Output:
 #   parked_domains.tmp
-#   exit status 0 (if parked domains found)
 #   exit status 1 (if parked domains not found)
 retrieve_parked() {
     # Truncate temporary files between runs

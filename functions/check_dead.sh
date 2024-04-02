@@ -143,7 +143,6 @@ check_alive() {
 #   $1: file to process
 # Output:
 #   dead.tmp
-#   exit status 0 (if dead domains found)
 #   exit status 1 (if dead domains not found)
 find_dead() {
     sed 's/^/||/; s/$/^/' "$1" > formatted_domains.tmp
