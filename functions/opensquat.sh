@@ -6,7 +6,7 @@
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly KEYWORDS='config/opensquat_keywords.txt'
-readonly NRD='list/wildcard_domains/nrd.txt'
+readonly NRD='lists/wildcard_domains/nrd.txt'
 
 opensquat() {
     # Install openSquat
