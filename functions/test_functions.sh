@@ -605,8 +605,8 @@ run_script() {
     [[ "$errored" == true ]] && return 1 || return 0
 }
 
-# Function 'check_and_exit' is a shell wrapper that checks if the script
-# should exit with an exit status of 1 or 0.
+# Function 'check_and_exit' checks if the script should exit with an
+# exit status of 1 or 0.
 check_and_exit() {
     # Check that all temporary files have been deleted after the run
     if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
@@ -631,8 +631,7 @@ check_and_exit() {
     on_exit
 }
 
-# Function 'on_exit' is a shell wrapper to exit with exit status 1
-# if an error was found.
+# Function 'on_exit' exits the script with exit status 1 if an error was found.
 on_exit() {
     if [[ "$error" == true ]]; then
         printf "\n"
