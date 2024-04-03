@@ -138,9 +138,6 @@ If these parked sites no longer contain any of the parked messages, they are ass
 ## Why the Hosts format is not supported
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
-## Sources
-Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
-
 ## Resources
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
 - [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
