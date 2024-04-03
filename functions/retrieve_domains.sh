@@ -416,10 +416,6 @@ source_opensquat() {
     local source='openSquat'
     local ignore_from_light=true
     local results_file='data/pending/domains_opensquat.tmp'
-
-    # Return if results file not found (source is the file itself)
-    [[ ! -f "$results_file" ]] && return
-
     process_source
 }
 
