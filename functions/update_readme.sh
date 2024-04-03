@@ -89,7 +89,7 @@ Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m '
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
-## openSquat
+### openSquat
 [openSquat](https://github.com/atenreiro/opensquat) is an open-source tool for detecting cybersquatting domains. The detection algorithm takes a list of keywords as input and checks for common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack).
 
 The keywords are handpicked and include common targets of phishing campaigns such as Google, Amazon, USPS, etc. while also taking into consideration potential false positives. The list of keywords can be viewed here: [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
