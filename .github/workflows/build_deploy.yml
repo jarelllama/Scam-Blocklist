@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  test-functions:
+  test:
     uses: ./.github/workflows/test_functions.yml
 
   update-toplist:
