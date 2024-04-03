@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 11:59:55 UTC 2024
+# Last modified: Wed Apr  3 12:29:54 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 1970
+# Total number of entries: 1978
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -24,6 +24,7 @@ local=/abundam.com/
 local=/abysshe.com/
 local=/abyssiniankitty.com/
 local=/acceptes.store/
+local=/acckings.com/
 local=/accuhealthwellness.com/
 local=/acerelocationservice.com/
 local=/acethreeshop.com/
@@ -317,6 +318,7 @@ local=/buyshroomsaustralia.com/
 local=/buzzingbuds.com/
 local=/bxhgk.com/
 local=/bxmshop.com/
+local=/bycterxk.myshopify.com/
 local=/cadbrd.com/
 local=/cadimanshops.com/
 local=/cainiw.com/
@@ -643,6 +645,7 @@ local=/familypetshome.org/
 local=/familyraiseditaliangreyhound.com/
 local=/familyteacupyorkies.com/
 local=/familyteacupyorkshirepuppies.com/
+local=/famuget.org/
 local=/fandoras.com/
 local=/fankay.com/
 local=/fantanic.com/
@@ -876,6 +879,7 @@ local=/huniity.com/
 local=/huntdekor.com/
 local=/hup498.com/
 local=/hybridenergyhome.co.za/
+local=/hydraexchange.com/
 local=/hyperazt.com/
 local=/hyperglim.com/
 local=/iceymed.com/
@@ -893,6 +897,7 @@ local=/impactofficesupplies.co.za/
 local=/impactpapersupplies.co.za/
 local=/inaniconsa.co.za/
 local=/indeedassessmets.com/
+local=/index.php/
 local=/indoorsarmory.net/
 local=/infantlover.com/
 local=/infectolab-americas.com/
@@ -1396,6 +1401,7 @@ local=/pjheightboxllc.com/
 local=/plandow.com/
 local=/plantsinterior.com/
 local=/playprocase.com/
+local=/playset-gear.com/
 local=/pochipet.net/
 local=/pocsportss.us/
 local=/podicomfort.com/
@@ -1904,6 +1910,7 @@ local=/wedontsellshirts.com/
 local=/weedhuis.com/
 local=/weedmapswear.com/
 local=/weedonlinestore.net/
+local=/weillond.shop/
 local=/wekoin.com/
 local=/weopai.com/
 local=/wesstrbk.com/
@@ -1931,6 +1938,7 @@ local=/worldclasslogisticsexpressusps.com/
 local=/worldclonecards.com/
 local=/worldcontainersgiant.com/
 local=/worldwidessdchemicalsolutionandpowder.com/
+local=/wow-market.wixsite.com/
 local=/wrapagifts.com/
 local=/wupdex.com/
 local=/wuptex.com/

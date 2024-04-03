@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 11:59:55 UTC 2024
+# Last modified: Wed Apr  3 12:29:54 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1970
+# Total number of entries: 1978
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -25,6 +25,7 @@ local-zone: "abundam.com." always_nxdomain
 local-zone: "abysshe.com." always_nxdomain
 local-zone: "abyssiniankitty.com." always_nxdomain
 local-zone: "acceptes.store." always_nxdomain
+local-zone: "acckings.com." always_nxdomain
 local-zone: "accuhealthwellness.com." always_nxdomain
 local-zone: "acerelocationservice.com." always_nxdomain
 local-zone: "acethreeshop.com." always_nxdomain
@@ -318,6 +319,7 @@ local-zone: "buyshroomsaustralia.com." always_nxdomain
 local-zone: "buzzingbuds.com." always_nxdomain
 local-zone: "bxhgk.com." always_nxdomain
 local-zone: "bxmshop.com." always_nxdomain
+local-zone: "bycterxk.myshopify.com." always_nxdomain
 local-zone: "cadbrd.com." always_nxdomain
 local-zone: "cadimanshops.com." always_nxdomain
 local-zone: "cainiw.com." always_nxdomain
@@ -644,6 +646,7 @@ local-zone: "familypetshome.org." always_nxdomain
 local-zone: "familyraiseditaliangreyhound.com." always_nxdomain
 local-zone: "familyteacupyorkies.com." always_nxdomain
 local-zone: "familyteacupyorkshirepuppies.com." always_nxdomain
+local-zone: "famuget.org." always_nxdomain
 local-zone: "fandoras.com." always_nxdomain
 local-zone: "fankay.com." always_nxdomain
 local-zone: "fantanic.com." always_nxdomain
@@ -877,6 +880,7 @@ local-zone: "huniity.com." always_nxdomain
 local-zone: "huntdekor.com." always_nxdomain
 local-zone: "hup498.com." always_nxdomain
 local-zone: "hybridenergyhome.co.za." always_nxdomain
+local-zone: "hydraexchange.com." always_nxdomain
 local-zone: "hyperazt.com." always_nxdomain
 local-zone: "hyperglim.com." always_nxdomain
 local-zone: "iceymed.com." always_nxdomain
@@ -894,6 +898,7 @@ local-zone: "impactofficesupplies.co.za." always_nxdomain
 local-zone: "impactpapersupplies.co.za." always_nxdomain
 local-zone: "inaniconsa.co.za." always_nxdomain
 local-zone: "indeedassessmets.com." always_nxdomain
+local-zone: "index.php." always_nxdomain
 local-zone: "indoorsarmory.net." always_nxdomain
 local-zone: "infantlover.com." always_nxdomain
 local-zone: "infectolab-americas.com." always_nxdomain
@@ -1397,6 +1402,7 @@ local-zone: "pjheightboxllc.com." always_nxdomain
 local-zone: "plandow.com." always_nxdomain
 local-zone: "plantsinterior.com." always_nxdomain
 local-zone: "playprocase.com." always_nxdomain
+local-zone: "playset-gear.com." always_nxdomain
 local-zone: "pochipet.net." always_nxdomain
 local-zone: "pocsportss.us." always_nxdomain
 local-zone: "podicomfort.com." always_nxdomain
@@ -1905,6 +1911,7 @@ local-zone: "wedontsellshirts.com." always_nxdomain
 local-zone: "weedhuis.com." always_nxdomain
 local-zone: "weedmapswear.com." always_nxdomain
 local-zone: "weedonlinestore.net." always_nxdomain
+local-zone: "weillond.shop." always_nxdomain
 local-zone: "wekoin.com." always_nxdomain
 local-zone: "weopai.com." always_nxdomain
 local-zone: "wesstrbk.com." always_nxdomain
@@ -1932,6 +1939,7 @@ local-zone: "worldclasslogisticsexpressusps.com." always_nxdomain
 local-zone: "worldclonecards.com." always_nxdomain
 local-zone: "worldcontainersgiant.com." always_nxdomain
 local-zone: "worldwidessdchemicalsolutionandpowder.com." always_nxdomain
+local-zone: "wow-market.wixsite.com." always_nxdomain
 local-zone: "wrapagifts.com." always_nxdomain
 local-zone: "wupdex.com." always_nxdomain
 local-zone: "wuptex.com." always_nxdomain

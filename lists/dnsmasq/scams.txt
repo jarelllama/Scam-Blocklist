@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 11:59:55 UTC 2024
+# Last modified: Wed Apr  3 12:29:54 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 25646
+# Total number of entries: 25654
 #
 local=/01edc.com/
 local=/09qunapk.com/
@@ -275,6 +275,7 @@ local=/accessory-series.com/
 local=/accessorynew.com/
 local=/accessworldcargo.com/
 local=/accidentaln.com/
+local=/acckings.com/
 local=/accordcds.com/
 local=/account-bmo-personal-bankings.com/
 local=/account-cibc-personalbanking.com/
@@ -3719,6 +3720,7 @@ local=/bwjamesongunshop.com/
 local=/bxhgk.com/
 local=/bxmshop.com/
 local=/byclothes.com/
+local=/bycterxk.myshopify.com/
 local=/bygoodthing.com/
 local=/byoungsneu.com/
 local=/byrdgear.shop/
@@ -7780,6 +7782,7 @@ local=/famousattools.com/
 local=/famouslamps.com/
 local=/famousswim.com/
 local=/famozdealz.de/
+local=/famuget.org/
 local=/fanamnet.page.tl/
 local=/fanaticgarment.com/
 local=/fanaticgeneralstore.com/
@@ -11342,6 +11345,7 @@ local=/hybridenergywarehouse.co.za/
 local=/hybridfahrrader.com/
 local=/hycolakepropertyforsale.com/
 local=/hycoworldwide.info/
+local=/hydraexchange.com/
 local=/hydrationoutdoor.com/
 local=/hydraulicshearingmachineforsalemexi010352.life/
 local=/hydraulicshearingmachineforsalemexi247428.life/
@@ -11545,6 +11549,7 @@ local=/incommony.com/
 local=/indeedassessmets.com/
 local=/independentmedicalcourierjobsfindnow.today/
 local=/index-courierservices.xyz/
+local=/index.php/
 local=/indexcapitaltradelive.com/
 local=/indexgencies.com/
 local=/indiana-gunshop.com/
@@ -17415,6 +17420,7 @@ local=/playmatepuppyhome.com/
 local=/playmateshihtzufarm.com/
 local=/playprocase.com/
 local=/playsdelivery.com/
+local=/playset-gear.com/
 local=/playstation-boomer.myshopify.com/
 local=/playstation-de.com/
 local=/playtennistoo.com/
@@ -24768,6 +24774,7 @@ local=/wegovymexicopharmacy.com/
 local=/weidner-reifen.com/
 local=/weidner-shop.de/
 local=/weightofficial.com/
+local=/weillond.shop/
 local=/weimann-handel.de/
 local=/weimaranerpuppyspot.shop/
 local=/weinemotionen.de/
@@ -25243,6 +25250,7 @@ local=/worthstart-trading.com/
 local=/wottrigger.com/
 local=/wotzka-dahlen.de/
 local=/woutermeijering.com/
+local=/wow-market.wixsite.com/
 local=/wow888official.com/
 local=/wowbicycleover.com/
 local=/wowbvdiscount.com/

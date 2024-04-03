@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 11:59:55 UTC 2024
+# Last modified: Wed Apr  3 12:29:54 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 25646
+# Total number of entries: 25654
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -276,6 +276,7 @@ local-zone: "accessory-series.com." always_nxdomain
 local-zone: "accessorynew.com." always_nxdomain
 local-zone: "accessworldcargo.com." always_nxdomain
 local-zone: "accidentaln.com." always_nxdomain
+local-zone: "acckings.com." always_nxdomain
 local-zone: "accordcds.com." always_nxdomain
 local-zone: "account-bmo-personal-bankings.com." always_nxdomain
 local-zone: "account-cibc-personalbanking.com." always_nxdomain
@@ -3720,6 +3721,7 @@ local-zone: "bwjamesongunshop.com." always_nxdomain
 local-zone: "bxhgk.com." always_nxdomain
 local-zone: "bxmshop.com." always_nxdomain
 local-zone: "byclothes.com." always_nxdomain
+local-zone: "bycterxk.myshopify.com." always_nxdomain
 local-zone: "bygoodthing.com." always_nxdomain
 local-zone: "byoungsneu.com." always_nxdomain
 local-zone: "byrdgear.shop." always_nxdomain
@@ -7781,6 +7783,7 @@ local-zone: "famousattools.com." always_nxdomain
 local-zone: "famouslamps.com." always_nxdomain
 local-zone: "famousswim.com." always_nxdomain
 local-zone: "famozdealz.de." always_nxdomain
+local-zone: "famuget.org." always_nxdomain
 local-zone: "fanamnet.page.tl." always_nxdomain
 local-zone: "fanaticgarment.com." always_nxdomain
 local-zone: "fanaticgeneralstore.com." always_nxdomain
@@ -11343,6 +11346,7 @@ local-zone: "hybridenergywarehouse.co.za." always_nxdomain
 local-zone: "hybridfahrrader.com." always_nxdomain
 local-zone: "hycolakepropertyforsale.com." always_nxdomain
 local-zone: "hycoworldwide.info." always_nxdomain
+local-zone: "hydraexchange.com." always_nxdomain
 local-zone: "hydrationoutdoor.com." always_nxdomain
 local-zone: "hydraulicshearingmachineforsalemexi010352.life." always_nxdomain
 local-zone: "hydraulicshearingmachineforsalemexi247428.life." always_nxdomain
@@ -11546,6 +11550,7 @@ local-zone: "incommony.com." always_nxdomain
 local-zone: "indeedassessmets.com." always_nxdomain
 local-zone: "independentmedicalcourierjobsfindnow.today." always_nxdomain
 local-zone: "index-courierservices.xyz." always_nxdomain
+local-zone: "index.php." always_nxdomain
 local-zone: "indexcapitaltradelive.com." always_nxdomain
 local-zone: "indexgencies.com." always_nxdomain
 local-zone: "indiana-gunshop.com." always_nxdomain
@@ -17416,6 +17421,7 @@ local-zone: "playmatepuppyhome.com." always_nxdomain
 local-zone: "playmateshihtzufarm.com." always_nxdomain
 local-zone: "playprocase.com." always_nxdomain
 local-zone: "playsdelivery.com." always_nxdomain
+local-zone: "playset-gear.com." always_nxdomain
 local-zone: "playstation-boomer.myshopify.com." always_nxdomain
 local-zone: "playstation-de.com." always_nxdomain
 local-zone: "playtennistoo.com." always_nxdomain
@@ -24769,6 +24775,7 @@ local-zone: "wegovymexicopharmacy.com." always_nxdomain
 local-zone: "weidner-reifen.com." always_nxdomain
 local-zone: "weidner-shop.de." always_nxdomain
 local-zone: "weightofficial.com." always_nxdomain
+local-zone: "weillond.shop." always_nxdomain
 local-zone: "weimann-handel.de." always_nxdomain
 local-zone: "weimaranerpuppyspot.shop." always_nxdomain
 local-zone: "weinemotionen.de." always_nxdomain
@@ -25244,6 +25251,7 @@ local-zone: "worthstart-trading.com." always_nxdomain
 local-zone: "wottrigger.com." always_nxdomain
 local-zone: "wotzka-dahlen.de." always_nxdomain
 local-zone: "woutermeijering.com." always_nxdomain
+local-zone: "wow-market.wixsite.com." always_nxdomain
 local-zone: "wow888official.com." always_nxdomain
 local-zone: "wowbicycleover.com." always_nxdomain
 local-zone: "wowbvdiscount.com." always_nxdomain
