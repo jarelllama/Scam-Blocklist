@@ -97,7 +97,7 @@ The keywords are handpicked and include common targets of phishing campaigns suc
 To further minimize false positives, the automated detection is intentionally limited to Newly Registered Domains (NRD) comprising domains registered within the last 10 days.
 
 #### Rationale
-New phishing domains are created daily, and unlike other sources that require manual reporting, openSquat can effectively detect new phishing domains within days of the registration date. This is aided by an actively updated NRD feed provided here: [nrd.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/lists/wildcard_domains/nrd.txt)
+New phishing domains are created daily, and unlike other sources that require manual reporting, openSquat can effectively detect new phishing domains within days of the registration date. This is aided by an actively updated NRD feed that is fed into openSquat for processing. The NRD feed can be viewed here: [nrd.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/lists/wildcard_domains/nrd.txt).
 
 #### Limitations
 Because the detection is fully automated, false positives may slip through despite the intensive effort put into handpicking and testing the list of keywords.
