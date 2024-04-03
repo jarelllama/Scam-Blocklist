@@ -9,9 +9,11 @@ readonly KEYWORDS='config/opensquat_keywords.txt'
 readonly NRD='lists/wildcard_domains/nrd.txt'
 
 opensquat() {
+    results_file='data/pending/domains_opensquat.txt'
+
     mkdir -p data/pending
     # Create results file for proper logging
-    touch data/pending/domains_opensquat.txt
+    touch "$results_file"
 
     # Install openSquat
     git clone -q https://github.com/atenreiro/opensquat
@@ -52,15 +54,29 @@ opensquat() {
     rm x??
 
     # Collate domains
-    cat results_x??.tmp > data/pending/domains_opensquat.tmp 2> /dev/null
+    cat results_x??.tmp > "$results_file" 2> /dev/null
     rm results_x??.tmp 2> /dev/null
 
-    format_file data/pending/domains_opensquat.tmp
+    # Exit if no domains retrieved
+    [[ ! -s "$results_file" ]] && exit
+
+    format_file "$results_file"
+
+    while read -r keyword; do
+        printf "[*] Verifying keyword: %s [ %s / %s ]\n" "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
+        awk '{print "[+] Found" $0}' <<< "$(grep -F "$keyword" "$results_file")"
+        printf "\n\n"
+    done < "$KEYWORDS"
 }
 
 run_opensquat() {
     [[ ! -f "$1" ]] && return
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp"
+    if [[ "$1" == 'x00' ]]; then
+        python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp"
+    else
+        # WHAT ABOUT THE FINAL LOGS AT THE END?
+        python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp" &> /dev/null
+    fi
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format
