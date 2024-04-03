@@ -243,9 +243,8 @@ decide_exit() {
     fi
 }
 
-# Function 'log_source' prints and logs statistics for each source.
-# The variables should be declared before running this function,
-# otherwise, the default values are used.
+# Function 'log_source' prints and logs statistics for each source
+# using the variables declared in the 'process_source' function.
 log_source() {
     local item
     local error

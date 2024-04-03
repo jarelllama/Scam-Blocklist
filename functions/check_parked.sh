@@ -66,7 +66,7 @@ add_unparked_domains() {
 #   $1: file to process
 # Output:
 #   parked_domains.tmp
-#   exit status 1 (if parked domains not found)
+#   return 1 (if parked domains not found)
 retrieve_parked() {
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"

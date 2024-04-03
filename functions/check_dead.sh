@@ -143,7 +143,7 @@ check_alive() {
 #   $1: file to process
 # Output:
 #   dead.tmp
-#   exit status 1 (if dead domains not found)
+#   return 1 (if dead domains not found)
 find_dead() {
     sed 's/^/||/; s/$/^/' "$1" > formatted_domains.tmp
     dead-domains-linter -i formatted_domains.tmp --export dead.tmp
