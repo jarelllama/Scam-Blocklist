@@ -22,7 +22,7 @@ main() {
     mv light.tmp "$RAW_LIGHT"
 
     # Cache parked domains (done last to skip unparked domains check)
-    cat parked_domains.tmp >> "$PARKED_DOMAINS"
+    cat parked_in_raw.tmp >> "$PARKED_DOMAINS"
     format_file "$PARKED_DOMAINS"
 }
 
@@ -30,11 +30,14 @@ main() {
 remove_parked_domains() {
     retrieve_parked "$RAW" || return
 
+    # Rename temporary parked file to be added into parked cache later
+    mv parked_domains.tmp parked_in_raw.tmp
+
     # Remove parked domains from raw file
-    comm -23 "$RAW" parked_domains.tmp > raw.tmp
+    comm -23 "$RAW" parked_in_raw.tmp > raw.tmp
     mv raw.tmp "$RAW"
 
-    log_event "$(<parked_domains.tmp)" parked raw
+    log_event "$(<parked_in_raw.tmp)" parked raw
 }
 
 # Function 'add_unparked_domains' finds unparked domains in the parked domains
@@ -47,7 +50,7 @@ add_unparked_domains() {
     [[ -z "$unparked_domains" ]] && return
 
     # Keep only parked domains in parked domains file
-    grep -xFF parked_domains.tmp "$PARKED_DOMAINS" > parked.tmp
+    grep -xFf parked_domains.tmp "$PARKED_DOMAINS" > parked.tmp
     mv parked.tmp "$PARKED_DOMAINS"
 
     # Add unparked domains to raw file
