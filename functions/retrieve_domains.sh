@@ -57,9 +57,10 @@ source() {
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
-    # Skip to next source if no results retrieved
+    # Check if any results were retrieved
     # [ -s ] does not seem to work well here
     if ! grep -q '[a-z]' "$results_file"; then
+        local empty=true
         log_source
         rm "$results_file"
         return
@@ -252,20 +253,34 @@ decide_exit() {
 # otherwise, the default values are used.
 log_source() {
     local item
-    total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
-    excluded_count="$(( dead_count + redundant_count + parked_count ))"
+    local error
 
     if [[ "$source" == 'Google Search' ]]; then
         search_term="\"${search_term:0:100}...\""
         item="$search_term"
     fi
 
+    if [[ "$rate_limited" == true ]]; then
+        error='rate_limited'
+    elif [[ "$empty" == true ]]; then
+        error='empty'
+    fi
+
+    total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
+    excluded_count="$(( dead_count + redundant_count + parked_count ))"
+
     echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count:-0},\
 ${filtered_count:-0},${total_whitelisted_count},${dead_count:-0},${redundant_count},\
 ${parked_count:-0},${toplist_count:-0},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
-${query_count:-0},${rate_limited:-false},no" >> "$SOURCE_LOG"
+${query_count:-0},${error},no" >> "$SOURCE_LOG"
 
     printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
+
+    if [[ "$empty" == true ]]; then
+        printf "\e[1m;31No results retrieved. Potential error occurred.\e[0m\n"
+        return
+    fi
+
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
         "${unfiltered_count:-0}" "${filtered_count:-0}" \
         "$total_whitelisted_count" "$excluded_count" "${toplist_count:-0}"
@@ -495,15 +510,14 @@ source_scamadviser() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
+    touch "$results_file"  # Create results file to ensure proper logging
+
     local url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
         page_results="$(curl -s "${url}?p=${page}")"  # Trailing slash breaks curl
 
         # Stop if page has an error
-        if ! grep -qiF 'article' <<< "$page_results"; then
-            printf "\e[1mError retrieving results for scamadviser.com.\e[0m\n"
-            break
-        fi
+        ! grep -qiF 'article' <<< "$page_results" && break
 
         grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
             | grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$results_file"
