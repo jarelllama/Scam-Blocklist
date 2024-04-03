@@ -18,15 +18,15 @@ Statistics for each source:
 Today | Yesterday | Excluded | Source
    49 |         - |       3% | Google Search
    24 |         - |      10% | aa419.org
-    1 |         - |      55% | dfpi.ca.gov
+    1 |         - |      56% | dfpi.ca.gov
     7 |         - |      16% | guntab.com
     0 |         - |       0% | openSquat
    15 |         - |      10% | petscams.com
-    0 |         - |      24% | scam.directory
-    0 |         - |      36% | scamadviser.com
+    0 |         - |      26% | scam.directory
+    0 |         - |      37% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
     0 |         - |       7% | Manual Entries
-   99 |         - |      12% | All sources
+   99 |         - |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
