@@ -272,7 +272,7 @@ log_source() {
     echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count:-0},\
 ${filtered_count:-0},${total_whitelisted_count},${dead_count:-0},${redundant_count},\
 ${parked_count:-0},${toplist_count:-0},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
-${query_count:-0},${error},no" >> "$SOURCE_LOG"
+${query_count},${error},no" >> "$SOURCE_LOG"
 
     printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
 
