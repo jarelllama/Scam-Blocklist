@@ -12,7 +12,7 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 26537
+Total domains: 27489
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -20,13 +20,13 @@ Today | Yesterday | Excluded | Source
    24 |         - |      10% | aa419.org
     1 |         - |      56% | dfpi.ca.gov
     7 |         - |      16% | guntab.com
- 7120 |         - |       0% | openSquat
+ 8072 |         - |       0% | openSquat
    15 |         - |      10% | petscams.com
     0 |         - |      29% | scam.directory
     0 |         - |      38% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
     0 |         - |       7% | Manual Entries
- 7219 |         - |      12% | All sources
+ 8171 |         - |      12% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
