@@ -19,10 +19,10 @@ Today | Yesterday | Excluded | Source
    49 |         - |       3% | Google Search
    24 |         - |      10% | aa419.org
     1 |         - |      55% | dfpi.ca.gov
-    7 |         - |      15% | guntab.com
+    7 |         - |      16% | guntab.com
     0 |         - |       0% | openSquat
    15 |         - |      10% | petscams.com
-    0 |         - |      22% | scam.directory
+    0 |         - |      24% | scam.directory
     0 |         - |      36% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
     0 |         - |       7% | Manual Entries
