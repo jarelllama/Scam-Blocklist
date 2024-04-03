@@ -486,7 +486,7 @@ test_source_log() {
     printf "source-log-test.com\n" >> data/pending/domains_petscams.com.tmp
     # EXPECTED OUTPUT
     printf "source-log-test.com\n" >> out_raw.txt
-    printf ",petscams.com,,1,1,0,0,0,0,0,,0,false,yes" >> out_source_log.txt
+    printf ",petscams.com,,1,1,0,0,0,0,0,,,,yes" >> out_source_log.txt
 }
 
 # TEST: exclusion of specific sources from light version
