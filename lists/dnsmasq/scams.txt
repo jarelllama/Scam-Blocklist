@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Apr  2 01:35:50 UTC 2024
+# Last modified: Wed Apr  3 00:26:36 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 21038
+# Total number of entries: 21040
 #
 local=/01edc.com/
 local=/101luadalmatians.com/
@@ -10356,6 +10356,7 @@ local=/kozmozinspire.com/
 local=/kraft-reifen.com/
 local=/kranz-autoreifen.shop/
 local=/kraus-autoreifen.shop/
+local=/krdes.net.in/
 local=/kreamlenpuppies.com/
 local=/kreamluxurypuppies.com/
 local=/kreativtravel.de/
@@ -13225,6 +13226,7 @@ local=/onlinepotenz.com/
 local=/onlinepurch.de/
 local=/onlineravipharmacy.com/
 local=/onlinereorg.com/
+local=/onlinesale2022.ru/
 local=/onlineskitchen.com/
 local=/onlinestandardtrust.com/
 local=/onlinestarreviews.org/

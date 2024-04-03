@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Apr  2 01:35:50 UTC 2024
+# Last modified: Wed Apr  3 00:26:36 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 2086
+# Total number of entries: 2088
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -1036,6 +1036,7 @@ local=/kokokokids.ru/
 local=/kokokostore.net/
 local=/koowofficial.com/
 local=/kozmozinspire.com/
+local=/krdes.net.in/
 local=/kristaldentistry.com/
 local=/krminidachshunds.com/
 local=/krpethome.com/
@@ -1391,6 +1392,7 @@ local=/onlineherbalincense.com/
 local=/onlinemlb.com/
 local=/onlinenba.net/
 local=/onlineobey.shop/
+local=/onlinesale2022.ru/
 local=/onpointshipppers.com/
 local=/onwofe.com/
 local=/opjus.com/

@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Tue Apr  2 01:35:50 UTC 2024
+# Last modified: Wed Apr  3 00:26:36 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 21038
+# Total number of entries: 21040
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -10357,6 +10357,7 @@ local-zone: "kozmozinspire.com." always_nxdomain
 local-zone: "kraft-reifen.com." always_nxdomain
 local-zone: "kranz-autoreifen.shop." always_nxdomain
 local-zone: "kraus-autoreifen.shop." always_nxdomain
+local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kreamlenpuppies.com." always_nxdomain
 local-zone: "kreamluxurypuppies.com." always_nxdomain
 local-zone: "kreativtravel.de." always_nxdomain
@@ -13226,6 +13227,7 @@ local-zone: "onlinepotenz.com." always_nxdomain
 local-zone: "onlinepurch.de." always_nxdomain
 local-zone: "onlineravipharmacy.com." always_nxdomain
 local-zone: "onlinereorg.com." always_nxdomain
+local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onlineskitchen.com." always_nxdomain
 local-zone: "onlinestandardtrust.com." always_nxdomain
 local-zone: "onlinestarreviews.org." always_nxdomain
