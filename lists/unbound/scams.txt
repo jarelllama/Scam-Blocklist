@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 12:29:54 UTC 2024
+# Last modified: Wed Apr  3 13:51:42 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 25654
+# Total number of entries: 25656
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -4920,6 +4920,7 @@ local-zone: "company-polls.com." always_nxdomain
 local-zone: "comparetoye.com." always_nxdomain
 local-zone: "compassionat4you.com." always_nxdomain
 local-zone: "competitiveoutside.com." always_nxdomain
+local-zone: "compile-remixide.com." always_nxdomain
 local-zone: "completelamps.com." always_nxdomain
 local-zone: "completepropertyclearance.com." always_nxdomain
 local-zone: "complexpsychedelics.com." always_nxdomain
@@ -11550,7 +11551,6 @@ local-zone: "incommony.com." always_nxdomain
 local-zone: "indeedassessmets.com." always_nxdomain
 local-zone: "independentmedicalcourierjobsfindnow.today." always_nxdomain
 local-zone: "index-courierservices.xyz." always_nxdomain
-local-zone: "index.php." always_nxdomain
 local-zone: "indexcapitaltradelive.com." always_nxdomain
 local-zone: "indexgencies.com." always_nxdomain
 local-zone: "indiana-gunshop.com." always_nxdomain
@@ -16082,6 +16082,7 @@ local-zone: "omnibau.de." always_nxdomain
 local-zone: "omniebau.de." always_nxdomain
 local-zone: "omnistees.com." always_nxdomain
 local-zone: "omnitranslogistics.com." always_nxdomain
+local-zone: "omochaa.com." always_nxdomain
 local-zone: "omtogelapk.com." always_nxdomain
 local-zone: "on-banking.services." always_nxdomain
 local-zone: "on-cloudoutletfactory.com." always_nxdomain
@@ -18535,6 +18536,7 @@ local-zone: "rebatevehicle.com." always_nxdomain
 local-zone: "rechtslosungen.com." always_nxdomain
 local-zone: "reclaming-telegramads.top." always_nxdomain
 local-zone: "reclearance.com." always_nxdomain
+local-zone: "reconpath.com." always_nxdomain
 local-zone: "recovery-whatsapp.com." always_nxdomain
 local-zone: "recreationit.com." always_nxdomain
 local-zone: "recuirud.com." always_nxdomain

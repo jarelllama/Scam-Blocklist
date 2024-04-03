@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 12:29:54 UTC 2024
+# Last modified: Wed Apr  3 13:51:42 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 1978
+# Total number of entries: 1980
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -434,6 +434,7 @@ local=/combatfirearmsusa.com/
 local=/commercialbankky.bank/
 local=/communityhfc.org/
 local=/compassionat4you.com/
+local=/compile-remixide.com/
 local=/complexpsychedelics.com/
 local=/conexwestshippingcontainers.com/
 local=/consolesnthings.com/
@@ -897,7 +898,6 @@ local=/impactofficesupplies.co.za/
 local=/impactpapersupplies.co.za/
 local=/inaniconsa.co.za/
 local=/indeedassessmets.com/
-local=/index.php/
 local=/indoorsarmory.net/
 local=/infantlover.com/
 local=/infectolab-americas.com/
@@ -1310,6 +1310,7 @@ local=/olhsc.org/
 local=/oliviachemstore.com/
 local=/olympiaplazapharmacy.com/
 local=/omitages.com/
+local=/omochaa.com/
 local=/oneclick2her.com/
 local=/oneminimals.com/
 local=/onexlogisticsservices.com/
@@ -1487,6 +1488,7 @@ local=/rcduratrax.com/
 local=/rchbracing.com/
 local=/rcseagull.com/
 local=/readlessca.com/
+local=/reconpath.com/
 local=/redlightradiance.com/
 local=/redwingshoe.us/
 local=/reejoinwell.com/

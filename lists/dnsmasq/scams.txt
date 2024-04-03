@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 12:29:54 UTC 2024
+# Last modified: Wed Apr  3 13:51:42 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 25654
+# Total number of entries: 25656
 #
 local=/01edc.com/
 local=/09qunapk.com/
@@ -4919,6 +4919,7 @@ local=/company-polls.com/
 local=/comparetoye.com/
 local=/compassionat4you.com/
 local=/competitiveoutside.com/
+local=/compile-remixide.com/
 local=/completelamps.com/
 local=/completepropertyclearance.com/
 local=/complexpsychedelics.com/
@@ -11549,7 +11550,6 @@ local=/incommony.com/
 local=/indeedassessmets.com/
 local=/independentmedicalcourierjobsfindnow.today/
 local=/index-courierservices.xyz/
-local=/index.php/
 local=/indexcapitaltradelive.com/
 local=/indexgencies.com/
 local=/indiana-gunshop.com/
@@ -16081,6 +16081,7 @@ local=/omnibau.de/
 local=/omniebau.de/
 local=/omnistees.com/
 local=/omnitranslogistics.com/
+local=/omochaa.com/
 local=/omtogelapk.com/
 local=/on-banking.services/
 local=/on-cloudoutletfactory.com/
@@ -18534,6 +18535,7 @@ local=/rebatevehicle.com/
 local=/rechtslosungen.com/
 local=/reclaming-telegramads.top/
 local=/reclearance.com/
+local=/reconpath.com/
 local=/recovery-whatsapp.com/
 local=/recreationit.com/
 local=/recuirud.com/

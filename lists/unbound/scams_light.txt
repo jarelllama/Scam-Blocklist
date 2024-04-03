@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 12:29:54 UTC 2024
+# Last modified: Wed Apr  3 13:51:42 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1978
+# Total number of entries: 1980
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -435,6 +435,7 @@ local-zone: "combatfirearmsusa.com." always_nxdomain
 local-zone: "commercialbankky.bank." always_nxdomain
 local-zone: "communityhfc.org." always_nxdomain
 local-zone: "compassionat4you.com." always_nxdomain
+local-zone: "compile-remixide.com." always_nxdomain
 local-zone: "complexpsychedelics.com." always_nxdomain
 local-zone: "conexwestshippingcontainers.com." always_nxdomain
 local-zone: "consolesnthings.com." always_nxdomain
@@ -898,7 +899,6 @@ local-zone: "impactofficesupplies.co.za." always_nxdomain
 local-zone: "impactpapersupplies.co.za." always_nxdomain
 local-zone: "inaniconsa.co.za." always_nxdomain
 local-zone: "indeedassessmets.com." always_nxdomain
-local-zone: "index.php." always_nxdomain
 local-zone: "indoorsarmory.net." always_nxdomain
 local-zone: "infantlover.com." always_nxdomain
 local-zone: "infectolab-americas.com." always_nxdomain
@@ -1311,6 +1311,7 @@ local-zone: "olhsc.org." always_nxdomain
 local-zone: "oliviachemstore.com." always_nxdomain
 local-zone: "olympiaplazapharmacy.com." always_nxdomain
 local-zone: "omitages.com." always_nxdomain
+local-zone: "omochaa.com." always_nxdomain
 local-zone: "oneclick2her.com." always_nxdomain
 local-zone: "oneminimals.com." always_nxdomain
 local-zone: "onexlogisticsservices.com." always_nxdomain
@@ -1488,6 +1489,7 @@ local-zone: "rcduratrax.com." always_nxdomain
 local-zone: "rchbracing.com." always_nxdomain
 local-zone: "rcseagull.com." always_nxdomain
 local-zone: "readlessca.com." always_nxdomain
+local-zone: "reconpath.com." always_nxdomain
 local-zone: "redlightradiance.com." always_nxdomain
 local-zone: "redwingshoe.us." always_nxdomain
 local-zone: "reejoinwell.com." always_nxdomain
