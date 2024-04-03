@@ -12,21 +12,21 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 20376
+Total domains: 20396
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-   46 |         - |       3% | Google Search
+   49 |         - |       3% | Google Search
    24 |         - |       9% | aa419.org
-    0 |         - |      53% | dfpi.ca.gov
-    3 |         - |      14% | guntab.com
+    1 |         - |      53% | dfpi.ca.gov
+    7 |         - |      14% | guntab.com
     0 |         - |       0% | openSquat
-    3 |         - |      10% | petscams.com
-    0 |         - |      13% | scam.directory
+   15 |         - |      10% | petscams.com
+    0 |         - |      15% | scam.directory
     0 |         - |      29% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
     0 |         - |       7% | Manual Entries
-   79 |         - |      10% | All sources
+   99 |         - |      11% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -49,7 +49,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1956
+Total domains: 1972
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -68,8 +68,8 @@ To optimize the number of search queries made, each search term is frequently be
 #### Statistics for Google Search source
 ```
 Active search terms: 14
-Queries made today: 105
-Domains retrieved today: 46
+Queries made today: 208
+Domains retrieved today: 49
 ```
 
 #### Regarding other sources
