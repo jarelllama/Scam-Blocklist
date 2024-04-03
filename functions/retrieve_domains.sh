@@ -60,7 +60,7 @@ process_source() {
     # Check if any results were retrieved
     # [ -s ] does not seem to work well here
     if ! grep -q '[a-z]' "$results_file"; then
-        local empty=true
+        local -r empty=true
         log_source
         rm "$results_file"
         return
@@ -276,7 +276,7 @@ ${query_count:-0},${error},no" >> "$SOURCE_LOG"
 
     printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
 
-    if [[ "$empty" == true ]]; then
+    if [[ "$error" == 'empty' ]]; then
         printf "\e[1m;31No results retrieved. Potential error occurred.\e[0m\n"
         return
     fi
