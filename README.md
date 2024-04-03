@@ -12,7 +12,7 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 25646
+Total domains: 25654
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -25,8 +25,8 @@ Today | Yesterday | Excluded | Source
     0 |         - |      31% | scam.directory
     1 |         - |      38% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
-    0 |         - |       7% | Manual Entries
- 8185 |         - |      13% | All sources
+    8 |         - |       4% | Manual Entries
+ 8193 |         - |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -49,7 +49,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1970
+Total domains: 1978
 </details>
 
 ## Sources
@@ -91,7 +91,7 @@ For this reason, the openSquat source is not included in the light version of th
 
 #### Statistics for openSquat source
 ```
-Active keywords: 75
+Active keywords: 77
 Domains retrieved today: 8072
 Domains in NRD feed: 1.16M
 ```
