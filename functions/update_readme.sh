@@ -44,7 +44,7 @@ $(print_stats 'Manual') Entries
 $(print_stats)
 
 *The Excluded % is of domains not included in the
- blocklist. Mostly dead, whitelisted and parked domains.
+ blocklist. Mostly dead, whitelisted, and parked domains.
 *Only active sources are shown. See the full list of
  sources in SOURCES.md.
 \`\`\`
