@@ -35,6 +35,7 @@ $(print_stats 'Google Search')
 $(print_stats 'aa419.org')
 $(print_stats 'dfpi.ca.gov')
 $(print_stats 'guntab.com')
+$(print_stats 'openSquat')
 $(print_stats 'petscams.com')
 $(print_stats 'scam.directory')
 $(print_stats 'scamadviser.com')
@@ -83,7 +84,7 @@ To optimize the number of search queries made, each search term is frequently be
 \`\`\`
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
 Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{sum += $1} END {print sum}')
-Domains retrieved today: $(count "$TODAY" 'Google Search')
+Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
 #### Regarding other sources

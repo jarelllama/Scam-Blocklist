@@ -41,22 +41,22 @@ jobs:
 
   remove-dead:
     needs: [test-functions, build]
-    if: ${{ always() && needs.test-functions.result == 'success' }}
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
   validate:
     needs: [test-functions, remove-dead]
-    if: ${{ always() && needs.test-functions.result == 'success' }}
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/validate_entries.yml
 
   deploy:
     needs: [test-functions, validate]
-    if: ${{ always() && needs.test-functions.result == 'success' }}
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 
   prune-logs:
     needs: deploy
-    if: always()
+    if: ${{ ! cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -80,5 +80,5 @@ jobs:
 
   update-readme:
     needs: [deploy, prune-logs]
-    if: ${{ always() && needs.deploy.result == 'success' }}
+    if: ${{ ! cancelled() && needs.deploy.result == 'success' }}
     uses: ./.github/workflows/update_readme.yml

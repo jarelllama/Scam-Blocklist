@@ -16,5 +16,6 @@ Source | Type | Inactive | Excluded from light
 [ScamAdvisor](https://www.scamadviser.com/) | Any | |
 [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | Any | Yes | -
 [StopGunScams.com](https://stopgunscams.com/) | Firearm | |
+[openSquat](https://github.com/atenreiro/opensquat) | Phishing | | Yes
 [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/) | Crypto | Yes | -
 [r/Scams](https://www.reddit.com/r/Scams/) | Any | Yes | -

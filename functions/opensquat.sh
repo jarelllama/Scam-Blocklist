@@ -18,7 +18,7 @@ opensquat() {
 
     # Collate fresh NRD list and exit with status 1 if any link is broken
     {
-        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
+        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1w.csv' \
             || exit 1
         wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
             | grep -vF '#' || exit 1
@@ -34,8 +34,8 @@ opensquat() {
     mkdir -p data/pending
 
     # Run openSquat and collect results
-    python3 opensquat/opensquat.py -k "$KEYWORDS" \
-        -o data/pending/domains_opensquat.tmp -d new_nrd.tmp
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 \
+        -d new_nrd.tmp -o data/pending/domains_opensquat.tmp
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format

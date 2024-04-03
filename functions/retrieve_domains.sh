@@ -85,9 +85,9 @@ process_source() {
     # Remove common subdomains
     local domains_with_subdomains  # Declare local variable in case while loop does not run
     while read -r subdomain; do  # Loop through common subdomains
-        # Find domains and skip to next subdomain if none found
-        domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
-            || continue
+        # Find domains with subdomains and skip to next subdomain if none found
+        domains_with_subdomains="$(grep '\..*\.' <<< "$domains" \
+            | grep "^${subdomain}\." )" || continue
 
         # Keep only root domains
         domains="$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
@@ -431,8 +431,8 @@ source_aa419() {
     local url='https://api.aa419.org/fakesites'
     local query_params
     query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
-    curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/${query_params}" |
-        jq -r '.[].Domain' >> "$results_file"  # Trailing slash breaks API call
+    curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/${query_params}" \
+        | jq -r '.[].Domain' >> "$results_file"  # Trailing slash breaks API call
 
     process_source
 }
@@ -445,9 +445,9 @@ source_guntab() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.guntab.com/scam-websites'
-    curl -s "${url}/" |
-        grep -zoE '<table class="datatable-list table">.*</table>' |
-        grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
+    curl -s "${url}/" \
+        | grep -zoE '<table class="datatable-list table">.*</table>' \
+        | grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
         # Note results are not sorted by time added
 
     process_source
@@ -461,9 +461,9 @@ source_petscams() {
 
     local url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
-        curl -s "${url}/" |
-            grep -oE '<a href="https://petscams.com/[[a-z]-]+-[[a-z]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' |
-            sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
+        curl -s "${url}/" \
+            | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
+            | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
                 s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
@@ -478,9 +478,9 @@ source_scamdirectory() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://scam.directory/category'
-    curl -s "${url}/" |
-        grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' |
-        sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$results_file"
+    curl -s "${url}/" \
+        | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
+        | sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$results_file"
         # Keep only first 300 results
 
     process_source
@@ -494,9 +494,10 @@ source_scamadviser() {
 
     local url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
-        curl -s "${url}?p=${page}" |  # Trailing slash breaks curl
-            grep -oE '<div class="articles">.*<div>Read more</div>'
-            grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$results_file"
+        # Trailing slash breaks curl
+        curl -s "${url}?p=${page}" \
+            | grep -oE '<div class="articles">.*<div>Read more</div>' \
+            | grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$results_file"
     done
 
     process_source
@@ -509,9 +510,9 @@ source_dfpi() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://dfpi.ca.gov/crypto-scams'
-    curl -s "${url}/" |
-        grep -oE '<td class="column-5">(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' |
-        sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$results_file"
+    curl -s "${url}/" \
+        | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
+        | sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$results_file"
         # Keep only first 30 results
 
     process_source
@@ -525,9 +526,9 @@ source_stopgunscams() {
 
     local url='https://stopgunscams.com'
     for page in {1..5}; do
-        curl -s "${url}/?page=${page}/" |
-            grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' |
-            sed 's/<h4 class="-ih"><a href="\///; s/-/./g' >> "$results_file"
+        curl -s "${url}/?page=${page}/" \
+            | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
+            | sed 's/<h4 class="-ih"><a href="\///; s/-/./g' >> "$results_file"
     done
 
     process_source
