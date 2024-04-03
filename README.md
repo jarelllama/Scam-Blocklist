@@ -52,8 +52,6 @@ Sources excluded from the light version are marked in SOURCES.md.
 Total domains: 1970
 </details>
 
-## Sources
-
 ### Google Search API
 Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
@@ -91,9 +89,9 @@ For this reason, the openSquat source is not included in the light version of th
 
 #### Statistics for openSquat source
 ```
-Active keywords:
-Domains retrieved today:
-Domains in NRD feed:
+Active keywords: 75
+Domains retrieved today: 8072
+Domains in NRD feed: 
 ```
 
 ### Other sources
@@ -122,6 +120,9 @@ From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/8
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back to the blocklist.
 ## Why the Hosts format is not supported
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
+
+## Sources
+Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 ## Resources
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
