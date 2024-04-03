@@ -367,11 +367,11 @@ search_google() {
         page_results="$(curl -s "${url}?${query_params}")"
 
         # Use next API key if first key is rate limited
-        if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
+        if grep -qiF 'rateLimitExceeded' <<< "$page_results"; then
             # Stop all searches if second key is also rate limited
             if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
                 readonly rate_limited=true
-                return
+                break
             fi
 
             printf "\n\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
@@ -500,7 +500,7 @@ source_scamadviser() {
         page_results="$(curl -s "${url}?p=${page}")"  # Trailing slash breaks curl
 
         # Stop if page has an error
-        if grep -qF '301 Moved Permanently' <<< "$page_results"; then
+        if ! grep -qiF 'article' <<< "$page_results"; then
             printf "\e[1mError retrieving results for scamadviser.com.\e[0m\n"
             break
         fi
