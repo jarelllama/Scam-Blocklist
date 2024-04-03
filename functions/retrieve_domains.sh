@@ -265,7 +265,7 @@ ${filtered_count:-0},${total_whitelisted_count},${dead_count:-0},${redundant_cou
 ${parked_count:-0},${toplist_count:-0},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
 ${query_count:-0},${rate_limited:-false},no" >> "$SOURCE_LOG"
 
-    printf "\n\e[1mSource:\e[0m %s\n" "${item:-$source}"
+    printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
         "${unfiltered_count:-0}" "${filtered_count:-0}" \
         "$total_whitelisted_count" "$excluded_count" "${toplist_count:-0}"
