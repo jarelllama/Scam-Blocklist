@@ -491,14 +491,21 @@ source_scamdirectory() {
 source_scamadviser() {
     local source='scamadviser.com'
     local results_file="data/pending/domains_${source}.tmp"
+    local page_results
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
-        # Trailing slash breaks curl
-        curl -s "${url}?p=${page}" \
-            | grep -oE '<div class="articles">.*<div>Read more</div>' \
+        page_results="$(curl -s "${url}?p=${page}")"  # Trailing slash breaks curl
+
+        # Stop if page has an error
+        if grep -qF '301 Moved Permanently' <<< "$page_results"; then
+            printf "\e[1mError retrieving results for scamadviser.com.\e[0m\n"
+            break
+        fi
+
+        grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
             | grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$results_file"
     done
 
