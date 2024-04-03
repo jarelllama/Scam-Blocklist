@@ -35,20 +35,20 @@ opensquat() {
     split -d -l $(( $(wc -l < new_nrd.tmp) / 12 )) new_nrd.tmp
 
     # Run checks in parallel
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x00 -o results_x00.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x01 -o results_x01.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x02 -o results_x02.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x03 -o results_x03.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x04 -o results_x04.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x05 -o results_x05.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x06 -o results_x06.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x07 -o results_x07.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x08 -o results_x08.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x09 -o results_x09.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x10 -o results_x10.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x11 -o results_x11.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x12 -o results_x12.tmp &
-    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x13 -o results_x13.tmp
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x00 -o results_x00.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x01 -o results_x01.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x02 -o results_x02.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x03 -o results_x03.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x04 -o results_x04.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x05 -o results_x05.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x06 -o results_x06.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x07 -o results_x07.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x08 -o results_x08.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x09 -o results_x09.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x10 -o results_x10.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x11 -o results_x11.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x12 -o results_x12.tmp &
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x13 -o results_x13.tmp
     wait
     rm x??
 
