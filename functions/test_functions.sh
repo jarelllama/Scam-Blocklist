@@ -416,11 +416,11 @@ test_invalid_removal() {
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
     {
-        printf "invalid,invalid-test-com\n"
-        printf "invalid,100.100.100.100\n"
-        printf "invalid,invalid-test.x\n"
-        printf "invalid,invalid-test.100\n"
-        printf "invalid,invalid-test.1x\n"
+        printf "invalid,invalid-test-com,scamadviser.com\n"
+        printf "invalid,100.100.100.100,scamadviser.com\n"
+        printf "invalid,invalid-test.x,scamadviser.com\n"
+        printf "invalid,invalid-test.100,scamadviser.com\n"
+        printf "invalid,invalid-test.1x,scamadviser.com\n"
     } >> out_log.txt
 
     # The validate script does not save invalid domains to manual review file
@@ -468,7 +468,7 @@ test_toplist_removal() {
         # EXPECTED OUTPUT
         # The validate script does not save invalid domains to manual review file
         printf "microsoft.com\n" >> out_manual_review.txt
-        printf "toplist,microsoft.com\n" >> out_log.txt
+        printf "toplist,microsoft.com,scamadviser.com\n" >> out_log.txt
         return
     fi
 
