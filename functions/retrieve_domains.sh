@@ -207,11 +207,15 @@ build() {
 
     count_before="$(wc -l < "$RAW")"
 
-    # Add domains to raw file and raw light file
+    # Add domains to raw file
     cat retrieved_domains.tmp >> "$RAW"
-    cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
     format_file "$RAW"
-    format_file "$RAW_LIGHT"
+
+    # Add domains to raw light file
+    if [[ -f retrieved_light_domains.tmp ]]; then
+        cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
+        format_file "$RAW_LIGHT"
+    fi
 
     log_event "$(<retrieved_domains.tmp)" new_domain retrieval
 
