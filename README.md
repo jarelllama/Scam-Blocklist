@@ -12,7 +12,7 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 25653
+Total domains: 25656
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -25,11 +25,11 @@ Today | Yesterday | Excluded | Source
     0 |         - |      31% | scam.directory
     1 |         - |      38% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
-    8 |         - |       4% | Manual Entries
- 8193 |         - |      13% | All sources
+   11 |         - |       4% | Manual Entries
+ 8196 |         - |      13% | All sources
 
 *The Excluded % is of domains not included in the
- blocklist. Mostly dead, whitelisted and parked domains.
+ blocklist. Mostly dead, whitelisted, and parked domains.
 *Only active sources are shown. See the full list of
  sources in SOURCES.md.
 ```
@@ -49,7 +49,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1977
+Total domains: 1980
 </details>
 
 ## Sources
@@ -69,7 +69,7 @@ To optimize the number of search queries made, each search term is frequently be
 
 #### Statistics for Google Search source
 ```
-Active search terms: 13
+Active search terms: 14
 Queries made today: 317
 Domains retrieved today: 51
 ```
@@ -91,7 +91,7 @@ For this reason, the openSquat source is not included in the light version of th
 
 #### Statistics for openSquat source
 ```
-Active keywords: 77
+Active keywords: 78
 Domains retrieved today: 8072
 Domains in NRD feed: 1.16M
 ```
