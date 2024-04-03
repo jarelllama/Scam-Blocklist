@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 08:17:13 UTC 2024
+# Last modified: Wed Apr  3 08:47:24 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 1965
+# Total number of entries: 1970
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -95,6 +95,7 @@ local=/ammodepotwi.com/
 local=/ammoforsale.com/
 local=/ammonationonline.shop/
 local=/ammovalleydepot.com/
+local=/ammunitiononline.com/
 local=/ammunitionsales.shop/
 local=/ammunitionyard.com/
 local=/amreahome.com/
@@ -461,6 +462,7 @@ local=/crm.balitteknologikaret.co.id/
 local=/crown-honey.com/
 local=/crownedretrieverpuppies.com/
 local=/crshct.com/
+local=/crvnashop.com/
 local=/cryptexexchangeoptions.com/
 local=/cryptohubperfect.com/
 local=/crystalmjy.com/
@@ -518,7 +520,6 @@ local=/desharonsjewelry.com/
 local=/desi.es.com/
 local=/destinydachshund.com/
 local=/deunow.com/
-local=/deutscherfuhrerscheins.com/
 local=/dexlac.com/
 local=/diceprints.com/
 local=/dickelfloors.com/
@@ -996,6 +997,7 @@ local=/kokokokids.ru/
 local=/kokokostore.net/
 local=/koowofficial.com/
 local=/kozmozinspire.com/
+local=/krdes.net.in/
 local=/kristaldentistry.com/
 local=/krminidachshunds.com/
 local=/krpethome.com/
@@ -1239,6 +1241,7 @@ local=/mygoldenretrieverpuppies.com/
 local=/mylifetimedachshund.com/
 local=/mynamejewelry.shop/
 local=/mynextpuppy.co.za/
+local=/myshoplaza.com/
 local=/mzm816.com/
 local=/naertinon.com/
 local=/nailsmith.co/
@@ -1310,6 +1313,7 @@ local=/onligg.com/
 local=/onlineammo-store.com/
 local=/onlinedoctornearme.com/
 local=/onlineherbalincense.com/
+local=/onlinesale2022.ru/
 local=/onpointshipppers.com/
 local=/onwofe.com/
 local=/opjus.com/
@@ -1535,6 +1539,7 @@ local=/salwasserwelpen.de/
 local=/samibags.shop/
 local=/sanexer.com/
 local=/sangastinly.com/
+local=/santasycandle.com/
 local=/savoryahome.com/
 local=/sccdream.com/
 local=/schimmelpeter.cz/
