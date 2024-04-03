@@ -22,11 +22,11 @@ Today | Yesterday | Excluded | Source
     7 |         - |      15% | guntab.com
     0 |         - |       0% | openSquat
    15 |         - |      10% | petscams.com
-    0 |         - |      18% | scam.directory
-    0 |         - |      29% | scamadviser.com
+    0 |         - |      20% | scam.directory
+    0 |         - |      36% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
     0 |         - |       7% | Manual Entries
-   99 |         - |      11% | All sources
+   99 |         - |      12% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
