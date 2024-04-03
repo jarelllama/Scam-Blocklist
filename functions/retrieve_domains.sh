@@ -260,10 +260,12 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + redundant_count + parked_count ))"
 
-    echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count:-0},\
-${filtered_count:-0},${total_whitelisted_count},${dead_count:-0},${redundant_count},\
-${parked_count:-0},${toplist_count:-0},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
+    echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count},\
+${filtered_count},${total_whitelisted_count},${dead_count},${redundant_count},\
+${parked_count},${toplist_count},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
 ${query_count},${error},no" >> "$SOURCE_LOG"
+
+    [[ "$rate_limited" == true ]] && return
 
     printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
 
@@ -273,8 +275,8 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
     fi
 
     printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
-        "${unfiltered_count:-0}" "${filtered_count:-0}" \
-        "$total_whitelisted_count" "$excluded_count" "${toplist_count:-0}"
+        "${unfiltered_count}" "${filtered_count}" \
+        "$total_whitelisted_count" "$excluded_count" "${toplist_count}"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
