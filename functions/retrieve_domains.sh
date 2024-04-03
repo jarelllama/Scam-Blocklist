@@ -370,8 +370,8 @@ search_google() {
         if grep -qF 'rateLimitExceeded' <<< "$page_results"; then
             # Stop all searches if second key is also rate limited
             if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
-                local -r rate_limited=true
-                break
+                readonly rate_limited=true
+                return
             fi
 
             printf "\n\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
