@@ -363,8 +363,7 @@ test_known_parked_removal() {
     printf "parked-domains-test.com\n" >> "$PARKED_DOMAINS"
     # INPUT
     printf "parked-domains-test.com\n" >> input.txt
-    # EXPECTED OUTPUT
-    printf "parked,parked-domains-test.com\n" >> out_log.txt
+    # No expected output (parked domains check does not log)
 }
 
 # TEST: whitelisted domains removal
