@@ -403,6 +403,7 @@ test_whitelisted_tld_removal() {
 test_invalid_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
         local input=data/pending/domains_scamadviser.com.tmp
+        local source='scamadviser.com'
     fi
     {
         printf "invalid-test-com\n"
@@ -416,11 +417,11 @@ test_invalid_removal() {
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
     {
-        printf "invalid,invalid-test-com,scamadviser.com\n"
-        printf "invalid,100.100.100.100,scamadviser.com\n"
-        printf "invalid,invalid-test.x,scamadviser.com\n"
-        printf "invalid,invalid-test.100,scamadviser.com\n"
-        printf "invalid,invalid-test.1x,scamadviser.com\n"
+        printf "invalid,invalid-test-com,%s\n" "$source"
+        printf "invalid,100.100.100.100,%s\n" "$source"
+        printf "invalid,invalid-test.x,%s\n" "$source"
+        printf "invalid,invalid-test.100,%s\n" "$source"
+        printf "invalid,invalid-test.1x,%s\n" "$source"
     } >> out_log.txt
 
     # The validate script does not save invalid domains to manual review file
