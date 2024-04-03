@@ -8,6 +8,7 @@ on:
       - Remove dead domains
       - Remove parked domains
       - Manually add domains
+      - Run openSquat
       - Retrieve domains
       - Validate entries
     types:

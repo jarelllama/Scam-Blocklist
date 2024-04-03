@@ -26,7 +26,7 @@ opensquat() {
             || exit 1
     } >> "$NRD"
 
-    sort -u "$NRD" -o "$NRD"
+    bash functions/tools.sh format "$NRD"
 
     # Filter out previously processed domains and known dead or parked domains
     comm -23 "$NRD" <(sort old_nrd.tmp "$DEAD_DOMAINS" "$PARKED_DOMAINS") > new_nrd.tmp
