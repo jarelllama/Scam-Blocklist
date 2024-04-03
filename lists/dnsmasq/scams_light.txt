@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 06:05:35 UTC 2024
+# Last modified: Wed Apr  3 06:39:47 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 1972
+# Total number of entries: 1967
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -278,7 +278,6 @@ local=/brightonsale.us/
 local=/brightstarkittens.com/
 local=/bringhurstfamilydentistry.com/
 local=/britaxus.com/
-local=/britishshorthair4home.com/
 local=/britishshorthairkittenaustralia.com/
 local=/britishshorthairpalace.com/
 local=/brittanysdalmatianpuppies.com/
@@ -1192,7 +1191,6 @@ local=/modern-dove.com/
 local=/modernattirellc.com/
 local=/modernmealmakers.com/
 local=/moespupfamily.online/
-local=/mollyminidachshundpuppies.com/
 local=/momnfancy.com/
 local=/momondoexpress.com/
 local=/monarchlibertygroup.cc/
@@ -1416,7 +1414,6 @@ local=/pretoriatradingplatform.com/
 local=/prhtbbs.com/
 local=/primeextreme.link/
 local=/primegoldebretrivers.com/
-local=/primegroup.global/
 local=/primeirochicken.com/
 local=/primetimepinballs.com/
 local=/prioca.com/
@@ -1729,7 +1726,6 @@ local=/teeforfamily.com/
 local=/teemartplus.us/
 local=/teeviral.store/
 local=/telfars.us/
-local=/telfarsale.us/
 local=/temfashionhub.com/
 local=/teraise.com/
 local=/terkultura.com/
@@ -1956,7 +1952,6 @@ local=/yeetcat.com/
 local=/yellowlove.site/
 local=/yhaire.com/
 local=/yitangsj.com/
-local=/yorkiefamilysales.com/
 local=/youkoll.com/
 local=/youmobie.sg/
 local=/yourdobermann.com/

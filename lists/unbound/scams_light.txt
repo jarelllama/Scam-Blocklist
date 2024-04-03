@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 06:05:35 UTC 2024
+# Last modified: Wed Apr  3 06:39:47 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1972
+# Total number of entries: 1967
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -279,7 +279,6 @@ local-zone: "brightonsale.us." always_nxdomain
 local-zone: "brightstarkittens.com." always_nxdomain
 local-zone: "bringhurstfamilydentistry.com." always_nxdomain
 local-zone: "britaxus.com." always_nxdomain
-local-zone: "britishshorthair4home.com." always_nxdomain
 local-zone: "britishshorthairkittenaustralia.com." always_nxdomain
 local-zone: "britishshorthairpalace.com." always_nxdomain
 local-zone: "brittanysdalmatianpuppies.com." always_nxdomain
@@ -1193,7 +1192,6 @@ local-zone: "modern-dove.com." always_nxdomain
 local-zone: "modernattirellc.com." always_nxdomain
 local-zone: "modernmealmakers.com." always_nxdomain
 local-zone: "moespupfamily.online." always_nxdomain
-local-zone: "mollyminidachshundpuppies.com." always_nxdomain
 local-zone: "momnfancy.com." always_nxdomain
 local-zone: "momondoexpress.com." always_nxdomain
 local-zone: "monarchlibertygroup.cc." always_nxdomain
@@ -1417,7 +1415,6 @@ local-zone: "pretoriatradingplatform.com." always_nxdomain
 local-zone: "prhtbbs.com." always_nxdomain
 local-zone: "primeextreme.link." always_nxdomain
 local-zone: "primegoldebretrivers.com." always_nxdomain
-local-zone: "primegroup.global." always_nxdomain
 local-zone: "primeirochicken.com." always_nxdomain
 local-zone: "primetimepinballs.com." always_nxdomain
 local-zone: "prioca.com." always_nxdomain
@@ -1730,7 +1727,6 @@ local-zone: "teeforfamily.com." always_nxdomain
 local-zone: "teemartplus.us." always_nxdomain
 local-zone: "teeviral.store." always_nxdomain
 local-zone: "telfars.us." always_nxdomain
-local-zone: "telfarsale.us." always_nxdomain
 local-zone: "temfashionhub.com." always_nxdomain
 local-zone: "teraise.com." always_nxdomain
 local-zone: "terkultura.com." always_nxdomain
@@ -1957,7 +1953,6 @@ local-zone: "yeetcat.com." always_nxdomain
 local-zone: "yellowlove.site." always_nxdomain
 local-zone: "yhaire.com." always_nxdomain
 local-zone: "yitangsj.com." always_nxdomain
-local-zone: "yorkiefamilysales.com." always_nxdomain
 local-zone: "youkoll.com." always_nxdomain
 local-zone: "youmobie.sg." always_nxdomain
 local-zone: "yourdobermann.com." always_nxdomain
