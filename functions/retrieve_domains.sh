@@ -61,6 +61,7 @@ process_source() {
     # [ -s ] does not seem to work well here
     if ! grep -q '[a-z]' "$results_file"; then
         log_source
+        rm "$results_file"
         return
     fi
 
@@ -69,6 +70,7 @@ process_source() {
     # Remove https:, http: and slashes to get domains, and
     # migrate to a variable
     domains="$(sed 's/https\?://; s/\///g' "$results_file" | sort -u)"
+    rm "$results_file"
 
     # Count number of unfiltered domains pending
     # Note wc -w is used here as wc -l for an empty variable seems to
@@ -268,9 +270,6 @@ ${query_count:-0},${rate_limited:-false},no" >> "$SOURCE_LOG"
         "${unfiltered_count:-0}" "${filtered_count:-0}" \
         "$total_whitelisted_count" "$excluded_count" "${toplist_count:-0}"
     printf "%s\n" "----------------------------------------------------------------------"
-
-    # Remove results file since it is no longer needed
-    rm "$results_file"
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
