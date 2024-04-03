@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 07:05:08 UTC 2024
+# Last modified: Wed Apr  3 08:17:13 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1967
+# Total number of entries: 1965
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -96,7 +96,6 @@ local-zone: "ammodepotwi.com." always_nxdomain
 local-zone: "ammoforsale.com." always_nxdomain
 local-zone: "ammonationonline.shop." always_nxdomain
 local-zone: "ammovalleydepot.com." always_nxdomain
-local-zone: "ammunitiononline.com." always_nxdomain
 local-zone: "ammunitionsales.shop." always_nxdomain
 local-zone: "ammunitionyard.com." always_nxdomain
 local-zone: "amreahome.com." always_nxdomain
@@ -1326,7 +1325,6 @@ local-zone: "outboardsxm.com." always_nxdomain
 local-zone: "outdoorcookgear.com." always_nxdomain
 local-zone: "outdoorloungefurnitures.com." always_nxdomain
 local-zone: "outdoorsgunsandammo.com." always_nxdomain
-local-zone: "outfitler.com." always_nxdomain
 local-zone: "outfitmark.shop." always_nxdomain
 local-zone: "outlet-nutrition.com." always_nxdomain
 local-zone: "outletgardener.com." always_nxdomain

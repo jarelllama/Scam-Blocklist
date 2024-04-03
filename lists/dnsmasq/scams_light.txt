@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 07:05:08 UTC 2024
+# Last modified: Wed Apr  3 08:17:13 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 1967
+# Total number of entries: 1965
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -95,7 +95,6 @@ local=/ammodepotwi.com/
 local=/ammoforsale.com/
 local=/ammonationonline.shop/
 local=/ammovalleydepot.com/
-local=/ammunitiononline.com/
 local=/ammunitionsales.shop/
 local=/ammunitionyard.com/
 local=/amreahome.com/
@@ -1325,7 +1324,6 @@ local=/outboardsxm.com/
 local=/outdoorcookgear.com/
 local=/outdoorloungefurnitures.com/
 local=/outdoorsgunsandammo.com/
-local=/outfitler.com/
 local=/outfitmark.shop/
 local=/outlet-nutrition.com/
 local=/outletgardener.com/
