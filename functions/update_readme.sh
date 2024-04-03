@@ -113,7 +113,7 @@ Domains in NRD feed: $(awk "BEGIN { printf \"%.2fM\", (( $(wc -l < lists/wildcar
 
 ### Other sources
 
-All sources used are recorded here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
+All sources used presently or in the past are recorded here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 The domain retrieval process for all sources can be viewed in the repository's code.
 
