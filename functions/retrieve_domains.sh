@@ -278,7 +278,8 @@ ${query_count:-0},${rate_limited:-false},no" >> "$SOURCE_LOG"
 #   $3: source
 log_event() {
     [[ -z "$1" ]] && return  # Return if no domains in variable
-    printf "%s\n" "$1" | awk -v type="$2" -v source="$3" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
+    [[ -n "$3" ]] && local source="$3"  # Use specific source if passed
+    printf "%s\n" "$1" | awk -v type="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
         '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
