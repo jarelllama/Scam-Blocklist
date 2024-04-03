@@ -22,7 +22,7 @@ Today | Yesterday | Excluded | Source
     7 |         - |      16% | guntab.com
     0 |         - |       0% | openSquat
    15 |         - |      10% | petscams.com
-    0 |         - |      26% | scam.directory
+    0 |         - |      28% | scam.directory
     0 |         - |      37% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
     0 |         - |       7% | Manual Entries
