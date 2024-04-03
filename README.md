@@ -12,21 +12,21 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 25753
+Total domains: 25646
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-   49 |         - |       3% | Google Search
+   51 |         - |       3% | Google Search
    24 |         - |      10% | aa419.org
-    1 |         - |      56% | dfpi.ca.gov
-    7 |         - |      16% | guntab.com
+    1 |         - |      57% | dfpi.ca.gov
+   17 |         - |      16% | guntab.com
  8072 |         - |       0% | openSquat
-   15 |         - |      10% | petscams.com
-    0 |         - |      29% | scam.directory
-    0 |         - |      38% | scamadviser.com
+   16 |         - |      10% | petscams.com
+    0 |         - |      31% | scam.directory
+    1 |         - |      38% | scamadviser.com
     3 |         - |       5% | stopgunscams.com
     0 |         - |       7% | Manual Entries
- 8171 |         - |      12% | All sources
+ 8185 |         - |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -49,7 +49,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1965
+Total domains: 1970
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -68,8 +68,8 @@ To optimize the number of search queries made, each search term is frequently be
 #### Statistics for Google Search source
 ```
 Active search terms: 13
-Queries made today: 215
-Domains retrieved today: 49
+Queries made today: 317
+Domains retrieved today: 51
 ```
 
 #### Regarding other sources
