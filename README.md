@@ -12,20 +12,20 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 21038
+Total domains: 21040
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-    - |         - |       3% | Google Search
-    - |         - |       9% | aa419.org
-    - |         - |      52% | dfpi.ca.gov
-    - |         - |      14% | guntab.com
-    - |         - |       7% | petscams.com
-    - |         - |      12% | scam.directory
-    - |         - |      31% | scamadviser.com
-    - |         - |       5% | stopgunscams.com
-    - |         - |       7% | Manual Entries
-    - |         - |      10% | All sources
+    0 |         0 |       3% | Google Search
+    0 |         0 |       9% | aa419.org
+    0 |         0 |      52% | dfpi.ca.gov
+    0 |         0 |      14% | guntab.com
+    0 |         0 |       7% | petscams.com
+    0 |         0 |      12% | scam.directory
+    0 |         0 |      31% | scamadviser.com
+    0 |         0 |       5% | stopgunscams.com
+    0 |         0 |       7% | Manual Entries
+    0 |      8826 |       9% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -48,7 +48,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2086
+Total domains: 2088
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -66,7 +66,7 @@ To optimize the number of search queries made, each search term is frequently be
 
 #### Statistics for Google Search source
 ```
-Active search terms: 14
+Active search terms: 15
 Queries made today: 0
 Domains retrieved today: 
 ```
