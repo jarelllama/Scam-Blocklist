@@ -3,8 +3,8 @@ run-name: Run openSquat
 on:
   workflow_dispatch:
   workflow_call:
-  #schedule:
-  #  - cron: '0 1 * * *'
+  schedule:
+    - cron: '0 0 * * *'
 permissions:
   contents: write
 

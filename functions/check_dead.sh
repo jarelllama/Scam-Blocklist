@@ -172,8 +172,9 @@ cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 
     # Prune old entries from dead domains file
-    if (( $(wc -l < "$DEAD_DOMAINS") > 5000 )); then
-        sed -i '1,100d' "$DEAD_DOMAINS"
+    lines="$(wc -l < "$DEAD_DOMAINS")"
+    if (( lines > 6000 )); then
+        sed -i "1,$(( lines - 6000 ))d" "$DEAD_DOMAINS"
     fi
 }
 

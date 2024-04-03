@@ -3,7 +3,7 @@ run-name: Build and deploy
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 23 * * *'
 permissions:
   contents: write
 
@@ -66,9 +66,15 @@ jobs:
 
       - name: Prune logs
         run: |
-          (( $(wc -l < config/domain_log.csv) > 10000 )) && sed -i '2,300d' config/domain_log.csv
-          (( $(wc -l < config/source_log.csv) > 1000 )) && sed -i '2,100d' config/source_log.csv
-          true  # To negate exit status 1
+          lines="$(wc -l < config/domain_log.csv)"
+          if (( lines > 10000 )); then
+              sed -i "1,$(( lines - 10000 ))d" config/domain_log.csv
+          fi
+
+          lines="$(wc -l < config/source_log.csv)"
+          if (( lines > 1000 )); then
+              sed -i "1,$(( lines - 1000 ))d" config/source_log.csv
+          fi
 
       - name: Push
         run: |

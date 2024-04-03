@@ -31,8 +31,7 @@ remove_parked_domains() {
     retrieve_parked "$RAW" || return
 
     # Remove parked domains from raw file
-    # (parked_domains.tmp occasionally is not in sorted order)
-    comm -23 "$RAW" <(sort parked_domains.tmp) > raw.tmp
+    comm -23 "$RAW" parked_domains.tmp > raw.tmp
     mv raw.tmp "$RAW"
 
     log_event "$(<parked_domains.tmp)" parked raw
@@ -66,10 +65,6 @@ add_unparked_domains() {
 #   parked_domains.tmp
 #   exit status 1 (if parked domains not found)
 retrieve_parked() {
-    # Truncate temporary files between runs
-    : > parked_domains.tmp  # File needs to exist to avoid not found errors
-    find . -maxdepth 1 -type f -name "x??" -delete
-
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
@@ -85,6 +80,11 @@ retrieve_parked() {
     find_parked "x10" & find_parked "x11" &
     find_parked "x12" & find_parked "x13"
     wait
+    rm x??
+
+    # Collate parked domains (ignore not found errors)
+    cat parked_domains_x??.tmp > parked_domains.tmp 2> /dev/null
+    rm parked_domains_x??.tmp 2> /dev/null
 
     # Return 1 if no parked domains were found
     [[ ! -s parked_domains.tmp ]] && return 1 || return 0
@@ -97,7 +97,7 @@ retrieve_parked() {
 # Input:
 #   $1: file to process
 # Output:
-#   parked_domains.tmp (if parked domains found)
+#   parked_domains_x--.tmp (if parked domains found)
 find_parked() {
     [[ ! -f "$1" ]] && return
 
@@ -124,11 +124,6 @@ find_parked() {
 
         (( count++ ))
     done < "$1"
-
-    # Collate parked domains
-    if [[ -f "parked_domains_${1}.tmp" ]]; then
-        cat "parked_domains_${1}.tmp" >> parked_domains.tmp
-    fi
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
@@ -154,8 +149,9 @@ cleanup() {
     find . -maxdepth 1 -type f -name 'x??' -delete
 
     # Prune old entries from parked domains file
-    if (( $(wc -l < "$PARKED_DOMAINS") > 4000 )); then
-        sed -i '1,100d' "$PARKED_DOMAINS"
+    lines="$(wc -l < "$PARKED_DOMAINS")"
+    if (( lines > 5000 )); then
+        sed -i "1,$(( lines - 5000 ))d" "$PARKED_DOMAINS"
     fi
 }
 
