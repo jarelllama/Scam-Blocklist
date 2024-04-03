@@ -179,7 +179,7 @@ TEST_DEAD_CHECK() {
 
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
-    # (resurrected domains are not added back to light)
+    # (resurrected domains are not added back into light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
     # Run script and check exit status
@@ -223,7 +223,7 @@ TEST_PARKED_CHECK() {
 
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
-    # (Unparked domains are not added back to light)
+    # (Unparked domains are not added back into light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
     # Run script and check exit status

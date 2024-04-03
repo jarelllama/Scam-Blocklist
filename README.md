@@ -43,8 +43,8 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <ul>
 <li>Intended for collated blocklists cautious about size</li>
 <li>Does not use sources whose domains cannot be filtered by date added</li>
-<li>Only retrieves domains added in the last month by their respective sources (this is not the same as the domain registration date), whereas the full blocklist includes domains added from 2 months back and onwards</li>
-<li>! Dead and parked domains that become resolving/unparked are not added back to the blocklist (due to limitations in the way these domains are recorded)</li>
+<li>Does not use sources that have an above average false positive rate</li?>
+<li>Note that dead and parked domains that become alive/unparked are not added back into the blocklist (due to limitations in the way these domains are recorded)</li>
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
@@ -52,7 +52,9 @@ Sources excluded from the light version are marked in SOURCES.md.
 Total domains: 1970
 </details>
 
-## Retrieving scam domains from Google Search
+## Sources
+
+### Google Search API
 Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
 #### Rationale
@@ -72,7 +74,32 @@ Queries made today: 317
 Domains retrieved today: 51
 ```
 
-#### Regarding other sources
+## openSquat
+[openSquat](https://github.com/atenreiro/opensquat) is an open-source tool for detecting malicious domains. The tool takes a list of keywords as input for its detection algorithm which checks for common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack).
+
+The keywords are handpicked and include common targets of phishing campaigns such as Google, WhatsApp, USPS, etc. while also taking into consideration potential false positives. The list of keywords can be viewed here: [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
+
+To further minimize false positives, the automated detection is intentionally limited to Newly Registered Domains (NRD) comprising domains registered within the last 10 days.
+
+#### Rationale
+New phishing domains are created daily, and unlike other sources that require manual reporting, openSquat can effectively detect new phishing domains within days of the registration date. This is aided by an actively updated NRD feed provided here: [nrd.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/lists/wildcard_domains/nrd.txt)
+
+#### Limitations
+Because the detection is fully automated, false positives may slip through despite the intensive effort put into handpicking and testing the list of keywords.
+
+For this reason, the openSquat source is not included in the light version of the blocklist.
+
+#### Statistics for openSquat source
+```
+Active keywords:
+Domains retrieved today:
+Domains in NRD feed:
+```
+
+### Other sources
+
+The other sources, active or inactive, can be viewed here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
+
 The full domain retrieval process for all sources can be viewed in the repository's code.
 
 ## Filtering process
@@ -96,12 +123,9 @@ If these parked sites no longer contain any of the parked messages, they are ass
 ## Why the Hosts format is not supported
 Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
-## Sources
-Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
-
 ## Resources
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
-- [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): shell script style guide
+- [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
 - [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
 - [who.is](https://who.is/): WHOIS and DNS lookup tool
