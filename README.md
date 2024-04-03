@@ -91,14 +91,14 @@ For this reason, the openSquat source is not included in the light version of th
 
 #### Statistics for openSquat source
 ```
-Active keywords: 78
+Active keywords: 80
 Domains retrieved today: 8072
 Domains in NRD feed: 1.16M
 ```
 
 ### Other sources
 
-All sources used presently or in the past are recorded here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
+All sources used presently or in the past are recorded here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
 The domain retrieval process for all sources can be viewed in the repository's code.
 
