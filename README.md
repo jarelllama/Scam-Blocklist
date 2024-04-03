@@ -12,20 +12,20 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 21040
+Total domains: 20953
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-    0 |         0 |       3% | Google Search
-    0 |         0 |       9% | aa419.org
-    0 |         0 |      52% | dfpi.ca.gov
-    0 |         0 |      14% | guntab.com
-    0 |         0 |       7% | petscams.com
-    0 |         0 |      12% | scam.directory
-    0 |         0 |      31% | scamadviser.com
-    0 |         0 |       5% | stopgunscams.com
+   46 |         0 |       3% | Google Search
+   24 |         0 |       9% | aa419.org
+    0 |         0 |      53% | dfpi.ca.gov
+    3 |         0 |      14% | guntab.com
+    3 |         0 |      10% | petscams.com
+    0 |         0 |      13% | scam.directory
+    0 |         0 |      29% | scamadviser.com
+    3 |         0 |       5% | stopgunscams.com
     0 |         0 |       7% | Manual Entries
-    0 |      8826 |       9% | All sources
+   79 |      8826 |       9% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted and parked domains.
@@ -48,7 +48,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2088
+Total domains: 2140
 </details>
 
 ## Retrieving scam domains from Google Search
@@ -67,7 +67,7 @@ To optimize the number of search queries made, each search term is frequently be
 #### Statistics for Google Search source
 ```
 Active search terms: 15
-Queries made today: 0
+Queries made today: 105
 Domains retrieved today: 
 ```
 
