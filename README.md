@@ -98,9 +98,9 @@ Domains in NRD feed: 1.16M
 
 ### Other sources
 
-The other sources, active or inactive, can be viewed here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
+All sources used are recorded here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
-The full domain retrieval process for all sources can be viewed in the repository's code.
+The domain retrieval process for all sources can be viewed in the repository's code.
 
 ## Filtering process
 - The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted stores, etc.)
