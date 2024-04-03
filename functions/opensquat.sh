@@ -9,6 +9,10 @@ readonly KEYWORDS='config/opensquat_keywords.txt'
 readonly NRD='lists/wildcard_domains/nrd.txt'
 
 opensquat() {
+    mkdir -p data/pending
+    # Create results file for proper logging
+    touch data/pending/domains_opensquat.txt
+
     # Install openSquat
     git clone -q https://github.com/atenreiro/opensquat
     pip install -qr opensquat/requirements.txt
@@ -31,33 +35,31 @@ opensquat() {
     # Filter out previously processed domains and known dead or parked domains
     comm -23 "$NRD" <(sort old_nrd.tmp "$DEAD_DOMAINS" "$PARKED_DOMAINS") > new_nrd.tmp
 
+    # Exit if no domains to process
+    [[ ! -s new_nrd.tmp ]] && exit
+
     # Split file into 12 equal files
     split -d -l $(( $(wc -l < new_nrd.tmp) / 12 )) new_nrd.tmp
 
-    # Run checks in parallel
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x00 -o results_x00.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x01 -o results_x01.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x02 -o results_x02.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x03 -o results_x03.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x04 -o results_x04.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x05 -o results_x05.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x06 -o results_x06.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x07 -o results_x07.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x08 -o results_x08.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x09 -o results_x09.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x10 -o results_x10.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x11 -o results_x11.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x12 -o results_x12.tmp &
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d x13 -o results_x13.tmp
+    # Run retrieval in parallel
+    run_opensquat x00 & run_opensquat x01 & run_opensquat x02 &
+    run_opensquat x03 & run_opensquat x04 & run_opensquat x05 &
+    run_opensquat x06 & run_opensquat x07 & run_opensquat x08 &
+    run_opensquat x09 & run_opensquat x10 & run_opensquat x11 &
+    run_opensquat x12 & run_opensquat x13
     wait
     rm x??
 
-    mkdir -p data/pending
-
+    # Collate domains
     cat results_x??.tmp > data/pending/domains_opensquat.tmp 2> /dev/null
     rm results_x??.tmp 2> /dev/null
 
     format_file data/pending/domains_opensquat.tmp
+}
+
+run_opensquat() {
+    [[ ! -f "$1" ]] && return
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp"
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format

@@ -75,13 +75,10 @@ retrieve_parked() {
     split -d -l $(( $(wc -l < "$1") / 12 )) "$1"
 
     # Run checks in parallel
-    find_parked "x00" & find_parked "x01" &
-    find_parked "x02" & find_parked "x03" &
-    find_parked "x04" & find_parked "x05" &
-    find_parked "x06" & find_parked "x07" &
-    find_parked "x08" & find_parked "x09" &
-    find_parked "x10" & find_parked "x11" &
-    find_parked "x12" & find_parked "x13"
+    find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
+    find_parked x04 & find_parked x05 & find_parked x06 & find_parked x07 &
+    find_parked x08 & find_parked x09 & find_parked x10 & find_parked x11 &
+    find_parked x12 & find_parked x13
     wait
     rm x??
 
