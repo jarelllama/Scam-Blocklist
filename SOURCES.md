@@ -10,12 +10,15 @@ Source | Type | Inactive | Excluded from light
 [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | | Yes
 [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Google Search | |
 [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes
+[Hagezi's NRD List](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#nrd) | NRD | - | -
 [PetScams.com](https://petscams.com/) | Pet | |
 [Scam Directory](https://scam.directory/) | Any | |
 [Scam.Delivery](https://scam.delivery/) | Non-delivery | Yes | -
 [ScamAdvisor](https://www.scamadviser.com/) | Any | |
+[Shreshta's NRD List](https://github.com/shreshta-labs/newly-registered-domains) | NRD | - | -
 [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | Any | Yes | -
 [StopGunScams.com](https://stopgunscams.com/) | Firearm | |
+[Tranco List](https://tranco-list.eu/) | 1M Toplist | - | -
 [openSquat](https://github.com/atenreiro/opensquat) | Phishing | | Yes
 [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/) | Crypto | Yes | -
 [r/Scams](https://www.reddit.com/r/Scams/) | Any | Yes | -

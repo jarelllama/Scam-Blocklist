@@ -119,7 +119,6 @@ Moved to [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOU
 - [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): shell script style guide
 - [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
-- [Tranco List](https://tranco-list.eu/): ranking of the top 1 million domains
 - [who.is](https://who.is/): WHOIS and DNS lookup tool
 
 ## See also
