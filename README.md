@@ -20,6 +20,7 @@ Today | Yesterday | Excluded | Source
    24 |         0 |       9% | aa419.org
     0 |         0 |      53% | dfpi.ca.gov
     3 |         0 |      14% | guntab.com
+    0 |      8826 |       0% | openSquat
     3 |         0 |      10% | petscams.com
     0 |         0 |      13% | scam.directory
     0 |         0 |      29% | scamadviser.com
@@ -66,9 +67,9 @@ To optimize the number of search queries made, each search term is frequently be
 
 #### Statistics for Google Search source
 ```
-Active search terms: 15
+Active search terms: 14
 Queries made today: 105
-Domains retrieved today: 
+Domains retrieved today: 46
 ```
 
 #### Regarding other sources
