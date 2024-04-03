@@ -31,11 +31,33 @@ opensquat() {
     # Filter out previously processed domains and known dead or parked domains
     comm -23 "$NRD" <(sort old_nrd.tmp "$DEAD_DOMAINS" "$PARKED_DOMAINS") > new_nrd.tmp
 
+     # Split file into 12 equal files
+    split -d -l $(( $(wc -l < new_nrd.txt) / 12 )) new_nrd.txt
+
+    # Run checks in parallel
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x00 -o results_x00.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x01 -o results_x01.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x02 -o results_x02.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x03 -o results_x03.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x04 -o results_x04.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x05 -o results_x05.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x06 -o results_x06.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x07 -o results_x07.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x08 -o results_x08.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x09 -o results_x09.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x10 -o results_x10.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x11 -o results_x11.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x12 -o results_x12.txt &
+    python3 opensquat.py -k "$KEYWORDS" -c 0 -d x13 -o results_x13.txt
+    wait
+    rm x??
+
     mkdir -p data/pending
 
-    # Run openSquat and collect results
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 \
-        -d new_nrd.tmp -o data/pending/domains_opensquat.tmp
+    cat results_x??.txt > data/pending/domains_opensquat.tmp 2> /dev/null
+    rm results_x??.txt 2> /dev/null
+
+    format_file data/pending/domains_opensquat.tmp
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format
