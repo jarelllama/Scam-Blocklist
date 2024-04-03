@@ -57,15 +57,6 @@ source() {
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
-    # Check if any results were retrieved
-    # [ -s ] does not seem to work well here
-    if ! grep -q '[a-z]' "$results_file"; then
-        local -r empty=true
-        log_source
-        rm "$results_file"
-        return
-    fi
-
     format_file "$results_file"
 
     # Remove https:, http: and slashes to get domains, and
@@ -113,7 +104,7 @@ process_source() {
     parked_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$PARKED_DOMAINS"))"
     parked_count="$(wc -w <<< "$parked_domains")"
     domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$parked_domains"))"
-    log_event "$parked_domains" parked
+    # Logging removed as it inflated log size
 
     # Log blacklisted domains
     blacklisted_domains="$(comm -12 <(printf "%s" "$domains") "$BLACKLIST")"
@@ -262,7 +253,7 @@ log_source() {
 
     if [[ "$rate_limited" == true ]]; then
         error='rate_limited'
-    elif [[ "$empty" == true ]]; then
+    elif (( unfiltered_count == 0 )); then
         error='empty'
     fi
 
@@ -277,7 +268,7 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
     printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
 
     if [[ "$error" == 'empty' ]]; then
-        printf "\e[1m;31No results retrieved. Potential error occurred.\e[0m\n"
+        printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
         return
     fi
 
@@ -528,6 +519,7 @@ source_scamadviser() {
 
 source_dfpi() {
     local source='dfpi.ca.gov'
+    local ignore_from_light=true
     local results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
