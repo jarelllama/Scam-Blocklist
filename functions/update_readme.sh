@@ -72,7 +72,7 @@ Total domains: $(wc -l < "$RAW_LIGHT")
 ### Google Search API
 Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
-#### Rationale
+#### Effectiveness
 Scam sites often do not have a long lifespan; malicious domains may be replaced before they can be manually reported. By programmatically searching Google using paragraphs from real-world scam sites, new domains can be added as soon as Google crawls the site. This requires no manual reporting.
 
 The list of search terms is proactively updated and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
@@ -96,7 +96,7 @@ The keywords are handpicked and include common targets of phishing campaigns suc
 
 To further minimize false positives, the automated detection is intentionally limited to Newly Registered Domains (NRD) comprising domains registered within the last 10 days.
 
-#### Rationale
+#### Effectiveness
 New phishing domains are created daily, and unlike other sources that require manual reporting, openSquat can effectively detect new phishing domains within days of their registration date. This is aided by an actively updated NRD feed that is fed into openSquat for processing. The NRD feed can be viewed here: [nrd.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/lists/wildcard_domains/nrd.txt).
 
 #### Limitations
