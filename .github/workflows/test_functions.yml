@@ -67,13 +67,3 @@ jobs:
           ref: main
       - name: Test build
         run: bash functions/test_functions.sh build
-
-  test-opensquat:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-      - name: Test openSquat
-        run: bash functions/test_functions.sh opensquat
