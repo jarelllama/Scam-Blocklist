@@ -172,11 +172,6 @@ TEST_RETRIEVE_VALIDATE() {
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
 # domains respectively.
 TEST_DEAD_CHECK() {
-
-    # FOR DEBUGGING
-    head -n 50 "$TOPLIST" > placeholders.txt
-    cat placeholders.txt >> "$RAW"
-
     test_dead_subdomain_check
     test_dead_redundant_check
     test_dead_check
@@ -195,14 +190,6 @@ TEST_DEAD_CHECK() {
 
     # Sort dead domains file for easy comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
-
-    # FOR DEBUGGING
-    comm -23 "$RAW" placeholders.txt > raw.tmp
-    comm -23 "$RAW_LIGHT" placeholders.txt > raw_light.tmp
-    comm -12 "$DEAD_DOMAINS" placeholders.txt > dead.tmp
-    mv raw.tmp "$RAW"
-    mv raw_light.tmp "$RAW_LIGHT"
-    mv dead.tmp "$DEAD_DOMAINS"
 
     ### Check and verify outputs
 
