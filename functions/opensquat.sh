@@ -10,7 +10,7 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 
 opensquat() {
-    results_file='data/pending/domains_opensquat.txt'
+    results_file='data/pending/domains_opensquat.tmp'
 
     # Create results file for proper logging
     mkdir -p data/pending
@@ -19,9 +19,6 @@ opensquat() {
     # Install openSquat
     git clone -q https://github.com/atenreiro/opensquat
     pip install -qr opensquat/requirements.txt
-
-    # Save previous NRD list for comparison
-    touch "$NRD" && mv "$NRD" old_nrd.tmp
 
     # Collate fresh NRD list and exit if any link is broken
     {
@@ -36,11 +33,11 @@ opensquat() {
     bash functions/tools.sh format "$NRD"
 
     # Filter out previously processed domains and known dead/parked domains
-    comm -23 "$NRD" <(sort old_nrd.tmp "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
-        > new_nrd.tmp
+    comm -23 "$NRD" <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
+        > nrd.tmp
 
     # Exit if no domains to process
-    if [[ ! -s new_nrd.tmp ]]; then
+    if [[ ! -s nrd.tmp ]]; then
         printf "No new domains to process.\n"
         exit
     fi
@@ -48,7 +45,7 @@ opensquat() {
     print_splashcreen
 
     # Split file into 12 equal files
-    split -d -l $(( $(wc -l < new_nrd.tmp) / 12 )) new_nrd.tmp
+    split -d -l $(( $(wc -l < nrd.tmp) / 12 )) nrd.tmp
 
     # Run retrieval in parallel
     run_opensquat x00 & run_opensquat x01 & run_opensquat x02 &
@@ -68,7 +65,7 @@ opensquat() {
         printf "\n[*] Verifying keyword: %s [ %s / %s ]\n" \
             "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
 
-        results="$(grep -qF -- "$keyword" "$results_file")" \
+        results="$(grep -F -- "$keyword" "$results_file")" \
             && awk '{print "[+] Found " $0}' <<< "$results"
         printf "\n"
     done < "$KEYWORDS"
@@ -100,7 +97,7 @@ https://github.com/atenreiro/opensquat
 [*] Total domains: %s
 [*] Threshold: very high confidence\n\n" \
     "$KEYWORDS" "$(wc -l < "$KEYWORDS")" \
-    "$(wc -l < new_nrd.tmp | rev | sed 's/\(...\)/\1,/g' | sed 's/,$//' | rev)"
+    "$(wc -l < nrd.tmp | rev | sed 's/\(...\)/\1,/g' | sed 's/,$//' | rev)"
 
     # Record start time
     execution_time="$(date +%s)"
