@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Wed Apr  3 16:25:38 UTC 2024
+# Last modified: Thu Apr  4 02:34:35 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1980
+# Total number of entries: 1971
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -97,7 +97,6 @@ local-zone: "ammodepotwi.com." always_nxdomain
 local-zone: "ammoforsale.com." always_nxdomain
 local-zone: "ammonationonline.shop." always_nxdomain
 local-zone: "ammovalleydepot.com." always_nxdomain
-local-zone: "ammunitiononline.com." always_nxdomain
 local-zone: "ammunitionsales.shop." always_nxdomain
 local-zone: "ammunitionyard.com." always_nxdomain
 local-zone: "amreahome.com." always_nxdomain
@@ -187,7 +186,6 @@ local-zone: "baoxiaorulei.com." always_nxdomain
 local-zone: "barclaysforeigncurrency.com." always_nxdomain
 local-zone: "barods.com." always_nxdomain
 local-zone: "barrymorgansamoyed.com." always_nxdomain
-local-zone: "basketsafari.com." always_nxdomain
 local-zone: "batslyadams.com." always_nxdomain
 local-zone: "bayareainjury.com." always_nxdomain
 local-zone: "baza-wrq.com." always_nxdomain
@@ -784,7 +782,6 @@ local-zone: "goldenvalleyanimalhospital.com." always_nxdomain
 local-zone: "golfapparelgear.com." always_nxdomain
 local-zone: "golfcartsshop.us." always_nxdomain
 local-zone: "goodteacherlife.com." always_nxdomain
-local-zone: "gorgeousshepherdpuppies.com." always_nxdomain
 local-zone: "goxmix.com." always_nxdomain
 local-zone: "grabgalaxy.com." always_nxdomain
 local-zone: "gracebritishshorthairkitten.com." always_nxdomain
@@ -858,7 +855,6 @@ local-zone: "homebyon.com." always_nxdomain
 local-zone: "homedbkd.com." always_nxdomain
 local-zone: "homeforalessi.com." always_nxdomain
 local-zone: "homefrenchbulldogpuppies.com." always_nxdomain
-local-zone: "homelandbordercollies.com." always_nxdomain
 local-zone: "homesharvests.com." always_nxdomain
 local-zone: "homlays.com." always_nxdomain
 local-zone: "hondaoemparts1.com." always_nxdomain
@@ -1003,7 +999,6 @@ local-zone: "kokokokids.ru." always_nxdomain
 local-zone: "kokokostore.net." always_nxdomain
 local-zone: "koowofficial.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
-local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kristaldentistry.com." always_nxdomain
 local-zone: "krminidachshunds.com." always_nxdomain
 local-zone: "krpethome.com." always_nxdomain
@@ -1247,7 +1242,6 @@ local-zone: "mygoldenretrieverpuppies.com." always_nxdomain
 local-zone: "mylifetimedachshund.com." always_nxdomain
 local-zone: "mynamejewelry.shop." always_nxdomain
 local-zone: "mynextpuppy.co.za." always_nxdomain
-local-zone: "myshoplaza.com." always_nxdomain
 local-zone: "mzm816.com." always_nxdomain
 local-zone: "naertinon.com." always_nxdomain
 local-zone: "nailsmith.co." always_nxdomain
@@ -1320,7 +1314,6 @@ local-zone: "onligg.com." always_nxdomain
 local-zone: "onlineammo-store.com." always_nxdomain
 local-zone: "onlinedoctornearme.com." always_nxdomain
 local-zone: "onlineherbalincense.com." always_nxdomain
-local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onpointshipppers.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
 local-zone: "opjus.com." always_nxdomain
@@ -1586,7 +1579,6 @@ local-zone: "shopelyze.com." always_nxdomain
 local-zone: "shopfootballna.com." always_nxdomain
 local-zone: "shophive.in." always_nxdomain
 local-zone: "shoppremiumoutlet.us." always_nxdomain
-local-zone: "shopshrine.in." always_nxdomain
 local-zone: "shopvernon.com." always_nxdomain
 local-zone: "shorthairkittensforsale.com." always_nxdomain
 local-zone: "shouldermd.com." always_nxdomain
@@ -1682,7 +1674,6 @@ local-zone: "streamptz.com." always_nxdomain
 local-zone: "stunningpoodlepuppies.com." always_nxdomain
 local-zone: "stylesoutdoors.com." always_nxdomain
 local-zone: "substantialn.com." always_nxdomain
-local-zone: "suibl.com." always_nxdomain
 local-zone: "sukissy.com." always_nxdomain
 local-zone: "summerbikesstore.com." always_nxdomain
 local-zone: "sundaicex.com." always_nxdomain
