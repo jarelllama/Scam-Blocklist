@@ -108,7 +108,7 @@ For this reason, the openSquat source is not included in the light version of th
 \`\`\`
 Active keywords: $(wc -l < config/opensquat_keywords.txt)
 Domains retrieved today: $(sum "$TODAY" 'openSquat')
-Domains in NRD feed: $(awk "BEGIN { printf \"%.2fM\", (( $(wc -l < lists/wildcard_domains/nrd.txt) / 1000000 )) }")
+Domains in NRD feed: $(wc -l < lists/wildcard_domains/nrd.txt | rev | sed 's/\(...\)/\1,/g' | sed 's/,$//' | rev)
 \`\`\`
 
 ### Other sources

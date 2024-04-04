@@ -3,6 +3,7 @@
 # Uses openSquat to find phishing domains from a list of newly
 # registered domains.
 
+readonly RAW='data/raw.txt'
 readonly KEYWORDS='config/opensquat_keywords.txt'
 readonly NRD='lists/wildcard_domains/nrd.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
@@ -35,7 +36,8 @@ opensquat() {
     bash functions/tools.sh format "$NRD"
 
     # Filter out previously processed domains and known dead/parked domains
-    comm -23 "$NRD" <(sort old_nrd.tmp "$DEAD_DOMAINS" "$PARKED_DOMAINS") > new_nrd.tmp
+    comm -23 "$NRD" <(sort old_nrd.tmp "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
+        > new_nrd.tmp
 
     # Exit if no domains to process
     if [[ ! -s new_nrd.tmp ]]; then
@@ -61,17 +63,17 @@ opensquat() {
     cat results_x??.tmp > "$results_file" 2> /dev/null
     rm results_x??.tmp 2> /dev/null
 
-    print_summary
-
     # Print results
     while read -r keyword; do
         printf "\n[*] Verifying keyword: %s [ %s / %s ]\n" \
             "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
 
-        results="$(grep -qF "$keyword" "$results_file")" \
+        results="$(grep -qF -- "$keyword" "$results_file")" \
             && awk '{print "[+] Found " $0}' <<< "$results"
         printf "\n"
     done < "$KEYWORDS"
+
+    print_summary
 
     format_file "$results_file"
 }
@@ -84,7 +86,7 @@ opensquat() {
 run_opensquat() {
     [[ ! -f "$1" ]] && return
     python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" \
-        -o "results_${1}.tmp" #&> /dev/null
+        -o "results_${1}.tmp" &> /dev/null
 }
 
 # Function 'print_splashscreen' prints the modified openSquat splashscreen.
@@ -96,9 +98,9 @@ https://github.com/atenreiro/opensquat
 [*] keywords: %s
 [*] keywords total: %s
 [*] Total domains: %s
-[*] Threshold: very high confidence\n" \
+[*] Threshold: very high confidence\n\n" \
     "$KEYWORDS" "$(wc -l < "$KEYWORDS")" \
-    "$(awk "BEGIN { printf \"%.2fM\", (( $(wc -l < "$NRD") / 1000000 )) }")"
+    "$(wc -l < new_nrd.tmp | rev | sed 's/\(...\)/\1,/g' | sed 's/,$//' | rev)"
 
     # Record start time
     execution_time="$(date +%s)"
@@ -109,7 +111,7 @@ print_summary() {
     # Record end time
     end_time="$(date +%s)"
 
-    printf "\n\n+---------- Summary Squatting ----------+
+    printf "\n+---------- Summary Squatting ----------+
 [*] Domains flagged: %s
 [*] Domains result: %s
 [*] Running time: %s seconds\n\n" \
