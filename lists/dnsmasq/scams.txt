@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 15:42:33 UTC 2024
+# Last modified: Thu Apr  4 16:52:01 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 26417
+# Total number of entries: 26419
 #
 local=/01edc.com/
 local=/09qunapk.com/
@@ -7623,6 +7623,7 @@ local=/excellentgreyhounds.com/
 local=/excellentlogistics.net/
 local=/excellentussite.com/
 local=/excelparceldelivery.com/
+local=/exchange.dydx.cm/
 local=/exchangestatebnonline.com/
 local=/excitedcatsandkittens.com/
 local=/excitedsphynxkittens.com/
@@ -8330,6 +8331,7 @@ local=/filous-shop.de/
 local=/finaclefx.org/
 local=/finalfantasyhentai.com/
 local=/finalstoppuppies.com/
+local=/finance.pinksale.cm/
 local=/financeat.net/
 local=/financeloansltd.com/
 local=/financetradingcapital.com/

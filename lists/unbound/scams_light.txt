@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 15:42:33 UTC 2024
+# Last modified: Thu Apr  4 16:52:01 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1985
+# Total number of entries: 1987
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -631,6 +631,7 @@ local-zone: "evenoddshop.com." always_nxdomain
 local-zone: "evorar.com." always_nxdomain
 local-zone: "ewighair.com." always_nxdomain
 local-zone: "ewrgu.com." always_nxdomain
+local-zone: "exchange.dydx.cm." always_nxdomain
 local-zone: "excitedwagsenglishcockerspanielpups.com." always_nxdomain
 local-zone: "exodushashhub.com." always_nxdomain
 local-zone: "exoticgentlegiantshome.com." always_nxdomain
@@ -680,6 +681,7 @@ local-zone: "feogi.com." always_nxdomain
 local-zone: "festiart.com." always_nxdomain
 local-zone: "fexpresslogisticservice.com." always_nxdomain
 local-zone: "fey656.com." always_nxdomain
+local-zone: "finance.pinksale.cm." always_nxdomain
 local-zone: "financialoptionstrade.com." always_nxdomain
 local-zone: "firearmammunition.com." always_nxdomain
 local-zone: "firearms.avenue.com." always_nxdomain
