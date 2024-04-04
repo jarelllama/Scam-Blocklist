@@ -56,7 +56,7 @@ opensquat() {
     wait
     rm x??
 
-    # Collate results
+    # Collate results (ignore not found errors)
     cat results_x??.tmp > "$results_file" 2> /dev/null
     rm results_x??.tmp 2> /dev/null
 
