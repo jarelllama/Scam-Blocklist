@@ -129,7 +129,7 @@ process_source() {
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
     if [[ -n "$invalid_entries" ]]; then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))"
-        awk '{print $0 " (\033[1;31minvalid\033[0m)"}' <<< "$invalid_entries" >> manual_review.tmp
+        awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> manual_review.tmp
         # Save invalid entries for rerun
         printf "%s\n" "$invalid_entries" >> "$results_file"
         log_event "$invalid_entries" invalid
@@ -158,7 +158,7 @@ process_source() {
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( "$toplist_count" > 0 )); then
         domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$domains_in_toplist"))"
-        awk '{print $0 " (\033[1;31mtoplist\033[0m)"}' <<< "$domains_in_toplist" >> manual_review.tmp
+        awk '{print $0 " (toplist)"}' <<< "$domains_in_toplist" >> manual_review.tmp
         # Save invalid entries for rerun
         printf "%s\n" "$domains_in_toplist" >> "$results_file"
         log_event "$domains_in_toplist" "toplist"
@@ -183,9 +183,9 @@ build() {
     # Print domains requiring manual review
     if [[ -f manual_review.tmp ]]; then
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
-        cat manual_review.tmp
-        send_telegram "$(printf "Entries requiring manual review:\n%s" \
-            "$(sed 's/\\033[1\;31m//; s/\\033[0m//' manual_review.tmp)")"
+        sed 's/(/(\o033[31m/; s/)/\o033[0m)/' manual_review.tmp
+
+        send_telegram "Entries requiring manual review:\n%s" "$(<manual_review.tmp)"
     fi
 
     # Exit if no new domains to add
@@ -315,7 +315,8 @@ send_telegram() {
     curl -sX POST \
     -H 'Content-Type: application/json' \
     -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
-    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
+    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    -o /dev/null
 }
 
 cleanup() {
