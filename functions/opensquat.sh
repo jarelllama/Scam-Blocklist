@@ -3,7 +3,7 @@
 # Uses openSquat to find phishing domains from a list of newly
 # registered domains.
 
-readonly KEYWORDS='config/keywords.txt'
+readonly KEYWORDS='config/opensquat_keywords.txt'
 readonly NRD='lists/wildcard_domains/nrd.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
