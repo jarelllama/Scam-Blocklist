@@ -65,8 +65,12 @@ opensquat() {
 
     # Print results
     while read -r keyword; do
-        printf "\n[*] Verifying keyword: %s [ %s / %s ]\n" "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
-        awk '{print "[+] Found " $0}' <<< "$(grep -F "$keyword" "$results_file")"
+        printf "\n[*] Verifying keyword: %s [ %s / %s ]\n" \
+            "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
+
+        results="$(grep -qF "$keyword" "$results_file")" \
+            && awk '{print "[+] Found " $0}' <<< "$results"
+        printf "\n"
     done < "$KEYWORDS"
 
     format_file "$results_file"
@@ -79,7 +83,8 @@ opensquat() {
 #   results_x??.tmp
 run_opensquat() {
     [[ ! -f "$1" ]] && return
-    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp" &> /dev/null
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" \
+        -o "results_${1}.tmp" #&> /dev/null
 }
 
 # Function 'print_splashscreen' prints the modified openSquat splashscreen.
@@ -101,7 +106,7 @@ https://github.com/atenreiro/opensquat
 
 # Function 'print_summary' prints the modified openSquat summary.
 print_summary() {
-    # Record end time``
+    # Record end time
     end_time="$(date +%s)"
 
     printf "\n\n+---------- Summary Squatting ----------+
