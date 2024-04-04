@@ -22,8 +22,20 @@ build() {
         source_file="${source_file:-$RAW}"
         blocklist_path="lists/${directory}/${list_name:-scams.txt}"
 
-        # Append header onto blocklist
-        cat << EOF > "$blocklist_path"
+        append_header
+
+        # Special case for Unbound format
+        [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"
+
+        # Append formatted domains onto blocklist
+        awk -v before="$before" -v after="$after" \
+            '{print before $0 after}' "$source_file" >> "$blocklist_path"
+    done
+}
+
+# Function 'append_header' appends the header onto the blocklist.
+append_header() {
+    cat << EOF > "$blocklist_path"
 ${comment} Title: Jarelllama's Scam Blocklist ${version}
 ${comment} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
@@ -33,14 +45,6 @@ ${comment} Syntax: ${syntax}
 ${comment} Total number of entries: $(wc -l < "$source_file")
 ${comment}
 EOF
-
-        # Special case for Unbound format
-        [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"
-
-        # Append formatted domains onto blocklist
-        awk -v before="$before" -v after="$after" \
-            '{print before $0 after}' "$source_file" >> "$blocklist_path"
-    done
 }
 
 # The 'build_<format>' functions are to specify the syntax of the various
