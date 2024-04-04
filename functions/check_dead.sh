@@ -74,12 +74,11 @@ check_redundant() {
     cat dead.tmp >> "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
 
-    # Find unused wildcard
+    # Find unused wildcards
     while read -r wildcard; do
         # If no matches, consider wildcard as unused/dead
-        if ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS"; then
-            printf "%s\n" "$wildcard" >> dead_wildcards.tmp
-        fi
+        ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS" \
+            && printf "%s\n" "$wildcard" >> dead_wildcards.tmp
     done < "$WILDCARDS"
     [[ ! -f dead_wildcards.tmp ]] && return
 
