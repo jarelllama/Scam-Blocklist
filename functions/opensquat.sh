@@ -66,7 +66,6 @@ opensquat() {
     while read -r keyword; do
         printf "\n[*] Verifying keyword: %s [ %s / %s ]\n" \
             "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
-
         results="$(grep -F -- "$keyword" "$results_file")" \
             && awk '{print "[+] Found " $0}' <<< "$results"
         printf "\n"
