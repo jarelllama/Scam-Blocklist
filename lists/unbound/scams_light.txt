@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 13:55:23 UTC 2024
+# Last modified: Thu Apr  4 14:12:12 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1992
+# Total number of entries: 1996
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -192,6 +192,7 @@ local-zone: "batslyadams.com." always_nxdomain
 local-zone: "bayareainjury.com." always_nxdomain
 local-zone: "baza-wrq.com." always_nxdomain
 local-zone: "bbsintheworld.quora.com." always_nxdomain
+local-zone: "beachcitiescommercialbank.com." always_nxdomain
 local-zone: "beaticecryptos.com." always_nxdomain
 local-zone: "beautifulteacupchihuahua.com." always_nxdomain
 local-zone: "beautythine.com." always_nxdomain
@@ -343,6 +344,7 @@ local-zone: "cargolordsexpress.com." always_nxdomain
 local-zone: "cargopostlogistic.com." always_nxdomain
 local-zone: "cargosandanimalslogistics.com." always_nxdomain
 local-zone: "cargovanddispatchsvc.com." always_nxdomain
+local-zone: "carolpasollewis.com." always_nxdomain
 local-zone: "cartist01.com." always_nxdomain
 local-zone: "cashtask.info." always_nxdomain
 local-zone: "cathysragdollkittensforsale.com." always_nxdomain
@@ -800,6 +802,7 @@ local-zone: "goxmix.com." always_nxdomain
 local-zone: "grabgalaxy.com." always_nxdomain
 local-zone: "gracebritishshorthairkitten.com." always_nxdomain
 local-zone: "grailgg.com." always_nxdomain
+local-zone: "grandvacap.com." always_nxdomain
 local-zone: "grasslandmall.com." always_nxdomain
 local-zone: "greatdanepuppyhome.com." always_nxdomain
 local-zone: "greeksister.com." always_nxdomain
@@ -942,6 +945,7 @@ local-zone: "jaynewfoundlandpups.com." always_nxdomain
 local-zone: "jdmboonyalukattacheep.com." always_nxdomain
 local-zone: "jeanragdollkittenshome.com." always_nxdomain
 local-zone: "jecric.com." always_nxdomain
+local-zone: "jenniferlilibethtibbs.com." always_nxdomain
 local-zone: "jessicaclaypolefoundation.com." always_nxdomain
 local-zone: "jetpetstransportation.com." always_nxdomain
 local-zone: "jhs345.com." always_nxdomain

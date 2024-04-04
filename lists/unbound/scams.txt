@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 13:55:23 UTC 2024
+# Last modified: Thu Apr  4 14:12:12 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 26539
+# Total number of entries: 26543
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2273,6 +2273,7 @@ local-zone: "bcoffroadofficial.ca." always_nxdomain
 local-zone: "bdazul.com." always_nxdomain
 local-zone: "bdnewsofficial.online." always_nxdomain
 local-zone: "beachbunnyoutlet.shop." always_nxdomain
+local-zone: "beachcitiescommercialbank.com." always_nxdomain
 local-zone: "beachrugbyworldwide.com." always_nxdomain
 local-zone: "beacontrustsavings.com." always_nxdomain
 local-zone: "beadrackx.com." always_nxdomain
@@ -4111,6 +4112,7 @@ local-zone: "carnivalladies.com." always_nxdomain
 local-zone: "carnivalstylish.com." always_nxdomain
 local-zone: "caroline-hentai.com." always_nxdomain
 local-zone: "carolinecake.shop." always_nxdomain
+local-zone: "carolpasollewis.com." always_nxdomain
 local-zone: "caromalife.com." always_nxdomain
 local-zone: "carpetusworld.com." always_nxdomain
 local-zone: "carpetvogue.com." always_nxdomain
@@ -10412,6 +10414,7 @@ local-zone: "grandexpresslogistics.com." always_nxdomain
 local-zone: "grandmasterofwealthilluminati.com." always_nxdomain
 local-zone: "grandstrandpremiumpergolas.com." always_nxdomain
 local-zone: "grandtrustbk.com." always_nxdomain
+local-zone: "grandvacap.com." always_nxdomain
 local-zone: "grangebichons.com." always_nxdomain
 local-zone: "grangemaltipoos.com." always_nxdomain
 local-zone: "grangeshibainu.com." always_nxdomain
@@ -12261,6 +12264,7 @@ local-zone: "jehovahmonkeyshome.com." always_nxdomain
 local-zone: "jekinsteacuppomeranianpuppies.com." always_nxdomain
 local-zone: "jenins-acit4850-group21-uwes1-google-cloud.com." always_nxdomain
 local-zone: "jenneyrottweilerkennel.com." always_nxdomain
+local-zone: "jenniferlilibethtibbs.com." always_nxdomain
 local-zone: "jennysuesideris.net." always_nxdomain
 local-zone: "jepsen-vries.de." always_nxdomain
 local-zone: "jereconditionne.fr." always_nxdomain
