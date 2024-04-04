@@ -38,7 +38,10 @@ opensquat() {
     comm -23 "$NRD" <(sort old_nrd.tmp "$DEAD_DOMAINS" "$PARKED_DOMAINS") > new_nrd.tmp
 
     # Exit if no domains to process
-    [[ ! -s new_nrd.tmp ]] && exit
+    if [[ ! -s new_nrd.tmp ]]; then
+        printf "No new domains to process.\n"
+        exit
+    fi
 
     print_splashcreen
 
