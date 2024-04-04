@@ -21,6 +21,7 @@ TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIME_FORMAT
 readonly TELEGRAM_CHAT_ID
 readonly TELEGRAM_BOT_TOKEN
+readonly DISABLE_TELEGRAM=false
 
 # Environment variables
 readonly AA419_API_ID
@@ -183,6 +184,7 @@ build() {
     if [[ -f manual_review.tmp ]]; then
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
         cat manual_review.tmp
+        send_telegram "Entries requiring manual review:\n$(<manual_review.tmp)"
     fi
 
     # Exit if no new domains to add
@@ -276,7 +278,8 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
 
     if [[ "$error" == 'empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
-        send_telegram "Retrieved no results using $source. Potential error occurred."
+        printf "%s\n" "----------------------------------------------------------------------"
+        send_telegram "Source $source retrieved no results. Potential error occurred."
         return
     fi
 
@@ -307,7 +310,8 @@ format_file() {
 # Function 'send_telegram' sends a telegram message with the given message.
 #   $1: message body
 send_telegram() {
-    curl -X POST \
+    [[ "$DISABLE_TELEGRAM" == true ]] && return
+    curl -sX POST \
     -H 'Content-Type: application/json' \
     -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
     "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
