@@ -19,7 +19,6 @@ readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIME_FORMAT
-readonly DISABLE_TELEGRAM=false
 
 # Function 'source' calls on the respective functions for each source to
 # retrieve results. The results are then passed to the 'process_source'
