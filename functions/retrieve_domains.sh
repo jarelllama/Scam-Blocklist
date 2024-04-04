@@ -184,7 +184,8 @@ build() {
     if [[ -f manual_review.tmp ]]; then
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
         cat manual_review.tmp
-        send_telegram "Entries requiring manual review:\n$(<manual_review.tmp)"
+        send_telegram "$(printf "Entries requiring manual review:\n%s" \
+            "$(sed 's/\\033[1\;31m//; s/\\033[0m//' manual_review.tmp)")"
     fi
 
     # Exit if no new domains to add
