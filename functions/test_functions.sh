@@ -18,6 +18,8 @@ readonly WILDCARDS='data/wildcards.txt'
 readonly REDUNDANT_DOMAINS='data/redundant_domains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly KEYWORDS='config/opensquat_keywords.txt'
+readonly NRD='lists/wildcard_domains/nrd.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
@@ -32,6 +34,8 @@ main() {
     : > "$BLACKLIST"
     : > "$REDUNDANT_DOMAINS"
     : > "$WILDCARDS"
+    : > "$KEYWORDS"
+    : > "$NRD"
     sed -i '1q' "$DOMAIN_LOG"
     sed -i '1q' "$SOURCE_LOG"
     error=false
@@ -49,6 +53,8 @@ main() {
             TEST_BUILD ;;
         ('shellcheck')
             SHELLCHECK ;;
+        ('opensquat')
+            TEST_OPENSQUAT ;;
         (*)
             exit 1 ;;
     esac
@@ -297,6 +303,27 @@ check_syntax() {
     fi
 }
 
+TEST_OPENSQUAT() {
+    # INPUT
+    printf "opensquat\n" >> "$KEYWORDS"
+    printf "test-opensquat.com\n" >> "$NRD"
+    printf "google.com\n" >> "$NRD"
+    # OUTPUT
+    printf "test-opensquat.com\n" >> out_opensquat.txt
+
+    # Run script and check exit status
+    if ! bash functions/opensquat.sh; then
+        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
+        error=true
+    fi
+
+    check_output data/pending/domains_opensquat.tmp out_opensquat.txt
+
+    on_exit
+
+    printf "\e[1m[success] Test completed. No errors found\e[0m\n"
+}
+
 # The 'test_<process>' functions are to test individual processes within
 # scripts. The input.txt file is to be processed by the called script.
 # The out_<name>.txt file is the expected output after processing
@@ -437,7 +464,7 @@ test_invalid_removal() {
 # TEST: removal of redundant domains
 test_redundant_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        printf "redundant-test.com\n" > "$WILDCARDS"
+        printf "redundant-test.com\n" >> "$WILDCARDS"
          # Wildcard should already be in expected wildcards file
         printf "redundant-test.com\n" >> out_wildcards.txt
         # INPUT
@@ -452,7 +479,7 @@ test_redundant_removal() {
     # Existing redundant domain in raw file
     printf "domain.redundant-test.com\n" >> input.txt
     # INPUT
-    printf "redundant-test.com\n" > "$WILDCARDS"
+    printf "redundant-test.com\n" >> "$WILDCARDS"
     # EXPECTED OUTPUT
     printf "redundant-test.com\n" >> out_raw.txt
     printf "redundant-test.com\n" >> out_wildcards.txt
