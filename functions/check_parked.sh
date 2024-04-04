@@ -97,7 +97,7 @@ retrieve_parked() {
 # Input:
 #   $1: file to process
 # Output:
-#   parked_domains_x--.tmp (if parked domains found)
+#   parked_domains_x??.tmp (if parked domains found)
 find_parked() {
     [[ ! -f "$1" ]] && return
 

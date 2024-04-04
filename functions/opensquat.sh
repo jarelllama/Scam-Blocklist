@@ -3,16 +3,16 @@
 # Uses openSquat to find phishing domains from a list of newly
 # registered domains.
 
+readonly KEYWORDS='config/keywords.txt'
+readonly NRD='lists/wildcard_domains/nrd.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly KEYWORDS='config/opensquat_keywords.txt'
-readonly NRD='lists/wildcard_domains/nrd.txt'
 
 opensquat() {
     results_file='data/pending/domains_opensquat.txt'
 
-    mkdir -p data/pending
     # Create results file for proper logging
+    mkdir -p data/pending
     touch "$results_file"
 
     # Install openSquat
@@ -22,7 +22,7 @@ opensquat() {
     # Save previous NRD list for comparison
     touch "$NRD" && mv "$NRD" old_nrd.tmp
 
-    # Collate fresh NRD list and exit with status 1 if any link is broken
+    # Collate fresh NRD list and exit if any link is broken
     {
         wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1w.csv' \
             || exit 1
@@ -34,12 +34,13 @@ opensquat() {
 
     bash functions/tools.sh format "$NRD"
 
-    # Filter out previously processed domains and known dead or parked domains
-    #comm -23 "$NRD" <(sort old_nrd.tmp "$DEAD_DOMAINS" "$PARKED_DOMAINS") > new_nrd.tmp
-    mv "$NRD" new_nrd.tmp  # FOR DEBUGGING
+    # Filter out previously processed domains and known dead/parked domains
+    comm -23 "$NRD" <(sort old_nrd.tmp "$DEAD_DOMAINS" "$PARKED_DOMAINS") > new_nrd.tmp
 
     # Exit if no domains to process
     [[ ! -s new_nrd.tmp ]] && exit
+
+    print_splashcreen
 
     # Split file into 12 equal files
     split -d -l $(( $(wc -l < new_nrd.tmp) / 12 )) new_nrd.tmp
@@ -53,30 +54,58 @@ opensquat() {
     wait
     rm x??
 
-    # Collate domains
+    # Collate results
     cat results_x??.tmp > "$results_file" 2> /dev/null
     rm results_x??.tmp 2> /dev/null
 
-    # Exit if no domains retrieved
-    [[ ! -s "$results_file" ]] && exit
+    print_summary
+
+    # Print results
+    while read -r keyword; do
+        printf "\n[*] Verifying keyword: %s [ %s / %s ]\n" "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
+        awk '{print "[+] Found " $0}' <<< "$(grep -F "$keyword" "$results_file")"
+    done < "$KEYWORDS"
 
     format_file "$results_file"
-
-    while read -r keyword; do
-        printf "[*] Verifying keyword: %s [ %s / %s ]\n" "$keyword" "$((++i))" "$(wc -l < "$KEYWORDS")"
-        awk '{print "[+] Found" $0}' <<< "$(grep -F "$keyword" "$results_file")"
-        printf "\n\n"
-    done < "$KEYWORDS"
 }
 
+# Function 'run_opensquat' runs openSquat for the given file.
+# Input:
+#   $1: file to process
+# Output:
+#   results_x??.tmp
 run_opensquat() {
     [[ ! -f "$1" ]] && return
-    if [[ "$1" == 'x00' ]]; then
-        python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp"
-    else
-        # WHAT ABOUT THE FINAL LOGS AT THE END?
-        python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp" &> /dev/null
-    fi
+    python3 opensquat/opensquat.py -k "$KEYWORDS" -c 0 -d "$1" -o "results_${1}.tmp" &> /dev/null
+}
+
+# Function 'print_splashscreen' prints the modified openSquat splashscreen.
+print_splashcreen() {
+    printf "\n\e[1mopenSquat\e[0m
+https://github.com/atenreiro/opensquat
+(c) Andre Tenreiro under the GNU GPLv3 license\n
++---------- Checking Domain Squatting ----------+
+[*] keywords: %s
+[*] keywords total: %s
+[*] Total domains: %s
+[*] Threshold: very high confidence\n" \
+    "$KEYWORDS" "$(wc -l < "$KEYWORDS")" \
+    "$(awk "BEGIN { printf \"%.2fM\", (( $(wc -l < "$NRD") / 1000000 )) }")"
+
+    # Record start time
+    execution_time="$(date +%s)"
+}
+
+# Function 'print_summary' prints the modified openSquat summary.
+print_summary() {
+    # Record end time``
+    end_time="$(date +%s)"
+
+    printf "\n\n+---------- Summary Squatting ----------+
+[*] Domains flagged: %s
+[*] Domains result: %s
+[*] Running time: %s seconds\n\n" \
+    "$(wc -l < "$results_file")" "$results_file" "$(( end_time - execution_time ))"
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format
@@ -88,7 +117,7 @@ format_file() {
 
 cleanup() {
     # Delete openSquat
-    rm -r opensquat
+    rm -rf opensquat
 
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
