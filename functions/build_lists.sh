@@ -13,7 +13,7 @@ build() {
 
     # Loop through the full and light blocklist versions
     for i in {1..2}; do
-        if [[ "$i" == '2' ]]; then
+        if (( i == 2 )); then
             local version='LIGHT VERSION'
             local list_name='scams_light.txt'
             local source_file="$RAW_LIGHT"
