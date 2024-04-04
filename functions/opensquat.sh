@@ -60,6 +60,8 @@ opensquat() {
     cat results_x??.tmp > "$results_file" 2> /dev/null
     rm results_x??.tmp 2> /dev/null
 
+    format_file "$results_file"
+
     # Print results
     while read -r keyword; do
         printf "\n[*] Verifying keyword: %s [ %s / %s ]\n" \
@@ -71,8 +73,6 @@ opensquat() {
     done < "$KEYWORDS"
 
     print_summary
-
-    format_file "$results_file"
 }
 
 # Function 'run_opensquat' runs openSquat for the given file.
