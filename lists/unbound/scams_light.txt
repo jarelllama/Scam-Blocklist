@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 15:15:08 UTC 2024
+# Last modified: Thu Apr  4 15:42:33 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1993
+# Total number of entries: 1985
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -700,7 +700,6 @@ local-zone: "forcedresettriggerusa.com." always_nxdomain
 local-zone: "foreseew.com." always_nxdomain
 local-zone: "forevergiftable.com." always_nxdomain
 local-zone: "forexhiexperts.com." always_nxdomain
-local-zone: "fortnerdachshundpuppies.com." always_nxdomain
 local-zone: "forums.13x.com." always_nxdomain
 local-zone: "forums.sassnet.com." always_nxdomain
 local-zone: "fossilssale.us." always_nxdomain
@@ -714,7 +713,6 @@ local-zone: "fresheggsforsale.co.za." always_nxdomain
 local-zone: "freuqenci.com." always_nxdomain
 local-zone: "friendlygoldenretrievers.us." always_nxdomain
 local-zone: "friends-lounge.store." always_nxdomain
-local-zone: "fritual.com." always_nxdomain
 local-zone: "frozenmeatproducer.com." always_nxdomain
 local-zone: "frozenmeatsolutions.com." always_nxdomain
 local-zone: "frtyen.com." always_nxdomain
@@ -738,10 +736,8 @@ local-zone: "gapstrading.com." always_nxdomain
 local-zone: "gbekat.ink." always_nxdomain
 local-zone: "geezerdecor.com." always_nxdomain
 local-zone: "geissele.usa.com." always_nxdomain
-local-zone: "geisseleusa.com." always_nxdomain
 local-zone: "genbitc.com." always_nxdomain
 local-zone: "genuzy.com." always_nxdomain
-local-zone: "geodra.com." always_nxdomain
 local-zone: "gesegnetewelpenheim.com." always_nxdomain
 local-zone: "gesundeswelpenhaus.de." always_nxdomain
 local-zone: "getbiocultura.com." always_nxdomain
@@ -801,7 +797,6 @@ local-zone: "goxmix.com." always_nxdomain
 local-zone: "grabgalaxy.com." always_nxdomain
 local-zone: "gracebritishshorthairkitten.com." always_nxdomain
 local-zone: "grailgg.com." always_nxdomain
-local-zone: "grandvacap.com." always_nxdomain
 local-zone: "grasslandmall.com." always_nxdomain
 local-zone: "greatdanepuppyhome.com." always_nxdomain
 local-zone: "greeksister.com." always_nxdomain
@@ -823,7 +818,6 @@ local-zone: "gyostol.de." always_nxdomain
 local-zone: "gzozi.com." always_nxdomain
 local-zone: "haghout.com." always_nxdomain
 local-zone: "hakeemstrapsgunstore.com." always_nxdomain
-local-zone: "haliqs.shop." always_nxdomain
 local-zone: "halisave.com." always_nxdomain
 local-zone: "halivy.com." always_nxdomain
 local-zone: "hamdinfazzafansclub.com." always_nxdomain
@@ -944,7 +938,6 @@ local-zone: "jaynewfoundlandpups.com." always_nxdomain
 local-zone: "jdmboonyalukattacheep.com." always_nxdomain
 local-zone: "jeanragdollkittenshome.com." always_nxdomain
 local-zone: "jecric.com." always_nxdomain
-local-zone: "jenniferlilibethtibbs.com." always_nxdomain
 local-zone: "jessicaclaypolefoundation.com." always_nxdomain
 local-zone: "jetpetstransportation.com." always_nxdomain
 local-zone: "jhs345.com." always_nxdomain
@@ -1628,7 +1621,6 @@ local-zone: "slateandivoryco.com." always_nxdomain
 local-zone: "sleekholder.com." always_nxdomain
 local-zone: "smartesla.us." always_nxdomain
 local-zone: "smartnotes-online.com." always_nxdomain
-local-zone: "smartshootersgunshop.online." always_nxdomain
 local-zone: "smgbasic.com." always_nxdomain
 local-zone: "smilefororphan.co.in." always_nxdomain
 local-zone: "smithbernesemountaindogs.com." always_nxdomain

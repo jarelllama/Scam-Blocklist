@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 15:15:08 UTC 2024
+# Last modified: Thu Apr  4 15:42:33 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 1993
+# Total number of entries: 1985
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -699,7 +699,6 @@ local=/forcedresettriggerusa.com/
 local=/foreseew.com/
 local=/forevergiftable.com/
 local=/forexhiexperts.com/
-local=/fortnerdachshundpuppies.com/
 local=/forums.13x.com/
 local=/forums.sassnet.com/
 local=/fossilssale.us/
@@ -713,7 +712,6 @@ local=/fresheggsforsale.co.za/
 local=/freuqenci.com/
 local=/friendlygoldenretrievers.us/
 local=/friends-lounge.store/
-local=/fritual.com/
 local=/frozenmeatproducer.com/
 local=/frozenmeatsolutions.com/
 local=/frtyen.com/
@@ -737,10 +735,8 @@ local=/gapstrading.com/
 local=/gbekat.ink/
 local=/geezerdecor.com/
 local=/geissele.usa.com/
-local=/geisseleusa.com/
 local=/genbitc.com/
 local=/genuzy.com/
-local=/geodra.com/
 local=/gesegnetewelpenheim.com/
 local=/gesundeswelpenhaus.de/
 local=/getbiocultura.com/
@@ -800,7 +796,6 @@ local=/goxmix.com/
 local=/grabgalaxy.com/
 local=/gracebritishshorthairkitten.com/
 local=/grailgg.com/
-local=/grandvacap.com/
 local=/grasslandmall.com/
 local=/greatdanepuppyhome.com/
 local=/greeksister.com/
@@ -822,7 +817,6 @@ local=/gyostol.de/
 local=/gzozi.com/
 local=/haghout.com/
 local=/hakeemstrapsgunstore.com/
-local=/haliqs.shop/
 local=/halisave.com/
 local=/halivy.com/
 local=/hamdinfazzafansclub.com/
@@ -943,7 +937,6 @@ local=/jaynewfoundlandpups.com/
 local=/jdmboonyalukattacheep.com/
 local=/jeanragdollkittenshome.com/
 local=/jecric.com/
-local=/jenniferlilibethtibbs.com/
 local=/jessicaclaypolefoundation.com/
 local=/jetpetstransportation.com/
 local=/jhs345.com/
@@ -1627,7 +1620,6 @@ local=/slateandivoryco.com/
 local=/sleekholder.com/
 local=/smartesla.us/
 local=/smartnotes-online.com/
-local=/smartshootersgunshop.online/
 local=/smgbasic.com/
 local=/smilefororphan.co.in/
 local=/smithbernesemountaindogs.com/
