@@ -106,13 +106,13 @@ validate_raw() {
     domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( toplist_count > 0 )); then
-        awk '{print $0 " (toplist) - \033[1;31mmanual removal required\033[0m"}' \
+        awk '{print $0 " (toplist) - manual removal required"}' \
             <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" toplist
     fi
 
     # Exit if no filtering done
-    [[ ! -f filter_log.tmp ]] && exit 0
+    [[ ! -f filter_log.tmp ]] && exit
 
     # Collate filtered wildcards
     if [[ -f wildcards.tmp ]]; then
@@ -142,8 +142,12 @@ validate_raw() {
         format_file "$SUBDOMAINS"
     fi
 
+    # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
-    cat filter_log.tmp
+    sed 's/manual removal required/\o033[31m&\o033[0m/' filter_log.tmp
+
+    # Send telegram notification
+    send_telegram "Problematic domains detected during validation check:\n$(<filter_log.tmp)"
 
     # Save changes to raw file and raw light file
     printf "%s\n" "$domains" > "$RAW"
@@ -156,8 +160,18 @@ validate_raw() {
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Redundant: %s  Toplist: %s\n\n" \
         "$before_count" "$after_count" "$domains_with_subdomains_count" "$total_whitelisted_count" \
         "$invalid_entries_count" "$redundant_count" "$toplist_count"
+}
 
-    exit 1
+# Function 'send_telegram' sends a telegram notification with the given message.
+#   $DISABLE_TELEGRAM: set to true to not send telegram notifications
+#   $1: message body
+send_telegram() {
+    [[ "$DISABLE_TELEGRAM" == true ]] && return
+    curl -sX POST \
+    -H 'Content-Type: application/json' \
+    -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
+    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    -o /dev/null
 }
 
 # Function 'log_event' logs domain processing events into the domain log.

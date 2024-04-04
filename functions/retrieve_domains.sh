@@ -19,16 +19,7 @@ readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIME_FORMAT
-readonly TELEGRAM_CHAT_ID
-readonly TELEGRAM_BOT_TOKEN
 readonly DISABLE_TELEGRAM=false
-
-# Environment variables
-readonly AA419_API_ID
-readonly GOOGLE_SEARCH_ID
-readonly GOOGLE_SEARCH_API_KEY
-readonly GOOGLE_SEARCH_ID_2
-readonly GOOGLE_SEARCH_API_KEY_2
 
 # Function 'source' calls on the respective functions for each source to
 # retrieve results. The results are then passed to the 'process_source'
@@ -180,18 +171,19 @@ process_source() {
 # Function 'build' adds the filtered domains to the raw files and presents
 # some basic numbers to the user.
 build() {
-    # Print domains requiring manual review
     if [[ -f manual_review.tmp ]]; then
+        # Print domains requiring manual review
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
         sed 's/(/(\o033[31m/; s/)/\o033[0m)/' manual_review.tmp
 
+        # Send telegram notification
         send_telegram "Entries requiring manual review:\n$(<manual_review.tmp)"
     fi
 
     # Exit if no new domains to add
     if ! grep -q '[a-z]' retrieved_domains.tmp; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
-        decide_exit
+        exit
     fi
 
     format_file retrieved_domains.tmp
@@ -234,18 +226,6 @@ build() {
     temp_source_log="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
     # Add updated logs
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$SOURCE_LOG"
-
-    decide_exit
-}
-
-# Function 'decide_exit' checks if the script should exit with an
-# exit status of 1 or 0.
-decide_exit() {
-    # Exit with error if domains need to be manually reviewed
-    if [[ -f manual_review.tmp ]]; then
-        printf "\n"
-        exit 1
-    fi
 }
 
 # Function 'log_source' prints and logs statistics for each source
@@ -280,6 +260,8 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
     if [[ "$error" == 'empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
         printf "%s\n" "----------------------------------------------------------------------"
+
+        # Send telegram notification
         send_telegram "Source $source retrieved no results. Potential error occurred."
         return
     fi
@@ -288,6 +270,18 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
         "${unfiltered_count}" "${filtered_count}" \
         "$total_whitelisted_count" "$excluded_count" "${toplist_count}"
     printf "%s\n" "----------------------------------------------------------------------"
+}
+
+# Function 'send_telegram' sends a telegram notification with the given message.
+#   $DISABLE_TELEGRAM: set to true to not send telegram notifications
+#   $1: message body
+send_telegram() {
+    [[ "$DISABLE_TELEGRAM" == true ]] && return
+    curl -sX POST \
+    -H 'Content-Type: application/json' \
+    -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
+    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    -o /dev/null
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
@@ -306,17 +300,6 @@ log_event() {
 #   $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
-}
-
-# Function 'send_telegram' sends a telegram message with the given message.
-#   $1: message body
-send_telegram() {
-    [[ "$DISABLE_TELEGRAM" == true ]] && return
-    curl -sX POST \
-    -H 'Content-Type: application/json' \
-    -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
-    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-    -o /dev/null
 }
 
 cleanup() {
