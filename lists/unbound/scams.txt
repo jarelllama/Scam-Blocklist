@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 16:52:01 UTC 2024
+# Last modified: Thu Apr  4 17:13:43 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 26419
+# Total number of entries: 26422
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2038,6 +2038,7 @@ local-zone: "badezimmershopde.com." always_nxdomain
 local-zone: "badmintonenjoy.com." always_nxdomain
 local-zone: "baedc.net." always_nxdomain
 local-zone: "baethefantasy.com." always_nxdomain
+local-zone: "baetylby.bio." always_nxdomain
 local-zone: "bagbuckets.com." always_nxdomain
 local-zone: "bagclearancecenter.top." always_nxdomain
 local-zone: "bagdiscounts.top." always_nxdomain
@@ -6949,6 +6950,7 @@ local-zone: "ebinalo.com." always_nxdomain
 local-zone: "eblattholz.com." always_nxdomain
 local-zone: "ebookinstapremium.shop." always_nxdomain
 local-zone: "eburpat.com." always_nxdomain
+local-zone: "ebzabk.shop." always_nxdomain
 local-zone: "ecannamed.com." always_nxdomain
 local-zone: "ecashtradeinvestment.com." always_nxdomain
 local-zone: "ecbdae.com." always_nxdomain
@@ -14152,6 +14154,7 @@ local-zone: "markodocuments.com." always_nxdomain
 local-zone: "markoshandel.de." always_nxdomain
 local-zone: "markschnauzerhome.com." always_nxdomain
 local-zone: "marksshoesoutlet.com." always_nxdomain
+local-zone: "marktemusik.shop." always_nxdomain
 local-zone: "marktplatz-apo.com." always_nxdomain
 local-zone: "markwellpinballs.com." always_nxdomain
 local-zone: "marlborowrap.com." always_nxdomain

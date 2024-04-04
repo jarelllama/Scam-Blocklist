@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 16:52:01 UTC 2024
+# Last modified: Thu Apr  4 17:13:43 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 1987
+# Total number of entries: 1990
 #
 local=/01edc.com/
 local=/1sttheworld.com/
@@ -177,6 +177,7 @@ local=/babfeae.dateflng.com/
 local=/babygirlsweetie.com/
 local=/bacfgh.com/
 local=/backpackboyzdisposable.com/
+local=/baetylby.bio/
 local=/baioneparts.com/
 local=/balzany.com/
 local=/bamboocrafts.com.au/
@@ -582,6 +583,7 @@ local=/easygoingpets.com/
 local=/easys-tyle.com/
 local=/eazy-growth.com/
 local=/ebikeandchristmasdecor.com/
+local=/ebzabk.shop/
 local=/echoangle.com/
 local=/echtsex.net/
 local=/ecn195.com/
@@ -1137,6 +1139,7 @@ local=/maraqueensclassic.com/
 local=/marinadecoration.com/
 local=/marincentral.com/
 local=/markethillltd.com/
+local=/marktemusik.shop/
 local=/marleysbostons.com/
 local=/marlinaustralianshepherds.com/
 local=/marlinguns.usa.com/

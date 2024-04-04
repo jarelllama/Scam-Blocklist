@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 16:52:01 UTC 2024
+# Last modified: Thu Apr  4 17:13:43 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 26419
+# Total number of entries: 26422
 #
 local=/01edc.com/
 local=/09qunapk.com/
@@ -2037,6 +2037,7 @@ local=/badezimmershopde.com/
 local=/badmintonenjoy.com/
 local=/baedc.net/
 local=/baethefantasy.com/
+local=/baetylby.bio/
 local=/bagbuckets.com/
 local=/bagclearancecenter.top/
 local=/bagdiscounts.top/
@@ -6948,6 +6949,7 @@ local=/ebinalo.com/
 local=/eblattholz.com/
 local=/ebookinstapremium.shop/
 local=/eburpat.com/
+local=/ebzabk.shop/
 local=/ecannamed.com/
 local=/ecashtradeinvestment.com/
 local=/ecbdae.com/
@@ -14151,6 +14153,7 @@ local=/markodocuments.com/
 local=/markoshandel.de/
 local=/markschnauzerhome.com/
 local=/marksshoesoutlet.com/
+local=/marktemusik.shop/
 local=/marktplatz-apo.com/
 local=/markwellpinballs.com/
 local=/marlborowrap.com/

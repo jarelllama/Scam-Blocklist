@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 16:52:01 UTC 2024
+# Last modified: Thu Apr  4 17:13:43 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1987
+# Total number of entries: 1990
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -178,6 +178,7 @@ local-zone: "babfeae.dateflng.com." always_nxdomain
 local-zone: "babygirlsweetie.com." always_nxdomain
 local-zone: "bacfgh.com." always_nxdomain
 local-zone: "backpackboyzdisposable.com." always_nxdomain
+local-zone: "baetylby.bio." always_nxdomain
 local-zone: "baioneparts.com." always_nxdomain
 local-zone: "balzany.com." always_nxdomain
 local-zone: "bamboocrafts.com.au." always_nxdomain
@@ -583,6 +584,7 @@ local-zone: "easygoingpets.com." always_nxdomain
 local-zone: "easys-tyle.com." always_nxdomain
 local-zone: "eazy-growth.com." always_nxdomain
 local-zone: "ebikeandchristmasdecor.com." always_nxdomain
+local-zone: "ebzabk.shop." always_nxdomain
 local-zone: "echoangle.com." always_nxdomain
 local-zone: "echtsex.net." always_nxdomain
 local-zone: "ecn195.com." always_nxdomain
@@ -1138,6 +1140,7 @@ local-zone: "maraqueensclassic.com." always_nxdomain
 local-zone: "marinadecoration.com." always_nxdomain
 local-zone: "marincentral.com." always_nxdomain
 local-zone: "markethillltd.com." always_nxdomain
+local-zone: "marktemusik.shop." always_nxdomain
 local-zone: "marleysbostons.com." always_nxdomain
 local-zone: "marlinaustralianshepherds.com." always_nxdomain
 local-zone: "marlinguns.usa.com." always_nxdomain
