@@ -18,8 +18,6 @@ readonly WILDCARDS='data/wildcards.txt'
 readonly REDUNDANT_DOMAINS='data/redundant_domains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly KEYWORDS='config/opensquat_keywords.txt'
-readonly NRD='lists/wildcard_domains/nrd.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
@@ -53,8 +51,6 @@ main() {
             TEST_BUILD ;;
         ('shellcheck')
             SHELLCHECK ;;
-        ('opensquat')
-            TEST_OPENSQUAT ;;
         (*)
             exit 1 ;;
     esac
@@ -301,27 +297,6 @@ check_syntax() {
         grep -F "$domain" "lists/${2}/scams_light.txt"
         error=true
     fi
-}
-
-TEST_OPENSQUAT() {
-    # INPUT
-    printf "opensquat\n" >> "$KEYWORDS"
-    printf "test-opensquat.com\n" >> "$NRD"
-    printf "google.com\n" >> "$NRD"
-    # OUTPUT
-    printf "test-opensquat.com\n" >> out_opensquat.txt
-
-    # Run script and check exit status
-    if ! bash functions/opensquat.sh; then
-        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
-        error=true
-    fi
-
-    check_output data/pending/domains_opensquat.tmp out_opensquat.txt
-
-    on_exit
-
-    printf "\e[1m[success] Test completed. No errors found\e[0m\n"
 }
 
 # The 'test_<process>' functions are to test individual processes within
