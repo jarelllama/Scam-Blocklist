@@ -19,6 +19,8 @@ readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIME_FORMAT
+readonly TELEGRAM_CHAT_ID
+readonly TELEGRAM_BOT_TOKEN
 
 # Environment variables
 readonly AA419_API_ID
@@ -274,6 +276,7 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
 
     if [[ "$error" == 'empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
+        send_telegram "Retrieved no results using $source. Potential error occurred."
         return
     fi
 
@@ -299,6 +302,15 @@ log_event() {
 #   $1: file to format
 format_file() {
     bash functions/tools.sh format "$1"
+}
+
+# Function 'send_telegram' sends a telegram message with the given message.
+#   $1: message body
+send_telegram() {
+    curl -X POST \
+    -H 'Content-Type: application/json' \
+    -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
+    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
 }
 
 cleanup() {
