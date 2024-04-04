@@ -93,7 +93,7 @@ For this reason, the openSquat source is not included in the light version of th
 ```
 Active keywords: 80
 Domains retrieved today: -
-Domains in NRD feed: 1.12M
+Domains in NRD feed: 1,116,977
 ```
 
 ### Other sources
