@@ -146,19 +146,7 @@ check_alive() {
 #   return 1 (if dead domains not found)
 find_dead() {
     sed 's/^/||/; s/$/^/' "$1" > formatted_domains.tmp
-    split -d -l $(( $(wc -l < formatted_domains.tmp) / 2 )) formatted_domains.tmp
-
-    # Run checks in parallel
-    dead-domains-linter -i x00 --export dead_x00.tmp &
-    dead-domains-linter -i x01 --export dead_x01.tmp
-    wait
-    rm x??
-
-    # Collate dead domains
-    cat dead_x??.tmp > dead.tmp 2> /dev/null
-    rm dead_x??.tmp 2> /dev/null
-
-    # Return 1 if no dead domains found
+    dead-domains-linter -i formatted_domains.tmp --export dead.tmp
     [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
