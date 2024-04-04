@@ -262,7 +262,7 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
         printf "%s\n" "----------------------------------------------------------------------"
 
         # Send telegram notification
-        send_telegram "Source $source retrieved no results. Potential error occurred."
+        send_telegram "Source '$source' retrieved no results. Potential error occurred."
         return
     fi
 
