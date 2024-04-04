@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 14:12:12 UTC 2024
+# Last modified: Thu Apr  4 15:15:08 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 1996
+# Total number of entries: 1993
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -75,7 +75,6 @@ local-zone: "aliraike.com." always_nxdomain
 local-zone: "alisosshoredentist.com." always_nxdomain
 local-zone: "all-smart.uk." always_nxdomain
 local-zone: "allbirdssale.us." always_nxdomain
-local-zone: "allcour.shop." always_nxdomain
 local-zone: "allegiancetrustsave.com." always_nxdomain
 local-zone: "allgreenherbs.com." always_nxdomain
 local-zone: "allmarinemotorsavenue.com." always_nxdomain
@@ -1155,7 +1154,6 @@ local-zone: "marushippingintl.online." always_nxdomain
 local-zone: "masupilami.com." always_nxdomain
 local-zone: "mauijimusale.com." always_nxdomain
 local-zone: "mavearmy.com." always_nxdomain
-local-zone: "maventechdeals.com." always_nxdomain
 local-zone: "mavericksfavorite.com." always_nxdomain
 local-zone: "maxsonpharmacy.com." always_nxdomain
 local-zone: "maxsoulshoes.co." always_nxdomain
@@ -1190,7 +1188,6 @@ local-zone: "michalor.com." always_nxdomain
 local-zone: "microminihighlandcow.com." always_nxdomain
 local-zone: "mideastfinanceco.com." always_nxdomain
 local-zone: "midikaraoke-hennyfadilla.blogspot.com." always_nxdomain
-local-zone: "miellepuppieshome.co.za." always_nxdomain
 local-zone: "mikecannabisdispensary.com." always_nxdomain
 local-zone: "milaemall.com." always_nxdomain
 local-zone: "milestone-suppliers.com." always_nxdomain
