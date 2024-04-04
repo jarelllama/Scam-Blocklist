@@ -32,8 +32,6 @@ main() {
     : > "$BLACKLIST"
     : > "$REDUNDANT_DOMAINS"
     : > "$WILDCARDS"
-    : > "$KEYWORDS"
-    : > "$NRD"
     sed -i '1q' "$DOMAIN_LOG"
     sed -i '1q' "$SOURCE_LOG"
     error=false

@@ -185,7 +185,7 @@ build() {
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
         sed 's/(/(\o033[31m/; s/)/\o033[0m)/' manual_review.tmp
 
-        send_telegram "Entries requiring manual review:\n%s" "$(<manual_review.tmp)"
+        send_telegram "Entries requiring manual review:\n$(<manual_review.tmp)"
     fi
 
     # Exit if no new domains to add
