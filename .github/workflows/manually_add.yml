@@ -47,7 +47,7 @@ jobs:
       - name: Read seach terms from issue
         run: |
           # Remove quotes
-          search_terms="$(sed 's/"//' <<< "${{ github.event.issue.body }}")"
+          search_terms="$(printf "%s" "${{ github.event.issue.body }}" | sed 's/"//')"
           # Append search terms to search terms file
           printf "\"%s\",,\n" "$search_terms" >> config/search_terms.csv
 
