@@ -1,10 +1,10 @@
 # Title: Jarelllama's Scam Blocklist 
-# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public sources.
+# Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Apr  5 04:38:54 UTC 2024
+# Last modified: Fri Apr  5 06:26:24 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 31427
+# Total number of entries: 31439
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -6585,6 +6585,8 @@ local-zone: "data-analysis-digital-marketing.xyz." always_nxdomain
 local-zone: "data-analysis-in-digital-marketing.xyz." always_nxdomain
 local-zone: "datein.shop." always_nxdomain
 local-zone: "datemeetsmart.link." always_nxdomain
+local-zone: "datingf.com." always_nxdomain
+local-zone: "datingl.com." always_nxdomain
 local-zone: "datjprints.com." always_nxdomain
 local-zone: "datook-de.com." always_nxdomain
 local-zone: "datuminvestment.com." always_nxdomain
@@ -8251,6 +8253,7 @@ local-zone: "ebikeandchristmasdecor.com." always_nxdomain
 local-zone: "ebikesgeschaft.com." always_nxdomain
 local-zone: "ebinalo.com." always_nxdomain
 local-zone: "eblattholz.com." always_nxdomain
+local-zone: "eblock.org." always_nxdomain
 local-zone: "ebookinstapremium.shop." always_nxdomain
 local-zone: "eburpat.com." always_nxdomain
 local-zone: "ebzabk.shop." always_nxdomain
@@ -19836,6 +19839,7 @@ local-zone: "ojetlogistics.com." always_nxdomain
 local-zone: "ojipaperltd.com." always_nxdomain
 local-zone: "okaybostonterrier.com." always_nxdomain
 local-zone: "okayschnauzers.com." always_nxdomain
+local-zone: "okcuipd.com." always_nxdomain
 local-zone: "oklahor.com." always_nxdomain
 local-zone: "okpremiump.online." always_nxdomain
 local-zone: "okumaforsale.com." always_nxdomain
@@ -20828,6 +20832,7 @@ local-zone: "oversurfing.com." always_nxdomain
 local-zone: "overthecounterstore.com." always_nxdomain
 local-zone: "overtimelogistics.com." always_nxdomain
 local-zone: "overtoolbase.com." always_nxdomain
+local-zone: "ovffice.com." always_nxdomain
 local-zone: "owkshop.shop." always_nxdomain
 local-zone: "owlkaminholz.de." always_nxdomain
 local-zone: "owlsand.com." always_nxdomain
@@ -25095,6 +25100,7 @@ local-zone: "shopee-aliexpres19.com." always_nxdomain
 local-zone: "shopee-official.top." always_nxdomain
 local-zone: "shopee.site." always_nxdomain
 local-zone: "shopee.store." always_nxdomain
+local-zone: "shopee.today." always_nxdomain
 local-zone: "shopee123.vip." always_nxdomain
 local-zone: "shopee24jam.click." always_nxdomain
 local-zone: "shopee24jam.fun." always_nxdomain
@@ -28058,8 +28064,12 @@ local-zone: "timm-reifen.com." always_nxdomain
 local-zone: "timneytriggersusa.com." always_nxdomain
 local-zone: "timzin.de." always_nxdomain
 local-zone: "tinagarten.de." always_nxdomain
+local-zone: "tinder5.com." always_nxdomain
+local-zone: "tinderf.com." always_nxdomain
+local-zone: "tinderg.com." always_nxdomain
 local-zone: "tinderhookups.com." always_nxdomain
 local-zone: "tindertiktok.life." always_nxdomain
+local-zone: "tineder.com." always_nxdomain
 local-zone: "tinglidewapk.org." always_nxdomain
 local-zone: "tinniease.com." always_nxdomain
 local-zone: "tinybreedsavailable.com." always_nxdomain
@@ -30295,6 +30305,7 @@ local-zone: "wayxbe.com." always_nxdomain
 local-zone: "wazzaworldwide.com." always_nxdomain
 local-zone: "wbeseae.com." always_nxdomain
 local-zone: "wbgroups.org." always_nxdomain
+local-zone: "wblock.org." always_nxdomain
 local-zone: "wbnzpdiscount.shop." always_nxdomain
 local-zone: "wbrandplus.shop." always_nxdomain
 local-zone: "wcamcourier-warehousing.com." always_nxdomain
@@ -31130,6 +31141,7 @@ local-zone: "yarindalogistics.com." always_nxdomain
 local-zone: "yarnoutletshop.com." always_nxdomain
 local-zone: "yashasdigitalmarketing.xyz." always_nxdomain
 local-zone: "yawanm.com." always_nxdomain
+local-zone: "yblock.org." always_nxdomain
 local-zone: "ydgjd.com." always_nxdomain
 local-zone: "ydnmarketing.com." always_nxdomain
 local-zone: "year-supply-of-popeyes.com." always_nxdomain

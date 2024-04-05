@@ -1,10 +1,10 @@
 # Title: Jarelllama's Scam Blocklist LIGHT VERSION
-# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public sources.
+# Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Apr  5 04:38:54 UTC 2024
+# Last modified: Fri Apr  5 06:26:24 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 2074
+# Total number of entries: 2086
 #
 local=/01edc.com/
 local=/0onlyfans.com/
@@ -522,6 +522,8 @@ local=/darkmarketsales.com/
 local=/darkworldenterprise.com/
 local=/dash-bit.com/
 local=/datemeetsmart.link/
+local=/datingf.com/
+local=/datingl.com/
 local=/daveamor.us/
 local=/davegermanshepherds.com/
 local=/davidmakovermd.com/
@@ -600,6 +602,7 @@ local=/easygoingpets.com/
 local=/easys-tyle.com/
 local=/eazy-growth.com/
 local=/ebikeandchristmasdecor.com/
+local=/eblock.org/
 local=/ebzabk.shop/
 local=/echoangle.com/
 local=/echtsex.net/
@@ -1357,6 +1360,7 @@ local=/occ-gov-us.com/
 local=/off-hunting.com/
 local=/ohspotlight.com/
 local=/oikeau.com/
+local=/okcuipd.com/
 local=/oklahor.com/
 local=/olfaabout.com/
 local=/olhsc.org/
@@ -1395,6 +1399,7 @@ local=/outletheaters.com/
 local=/outletstoves.com/
 local=/outletunit.com/
 local=/outwestschnauzers.com/
+local=/ovffice.com/
 local=/ownyva.com/
 local=/ozroyalcaninpuppiesforsale.com/
 local=/p80framekits.com/
@@ -1647,6 +1652,7 @@ local=/shoestamaris.com/
 local=/shopatsimplify.com/
 local=/shopee.site/
 local=/shopee.store/
+local=/shopee.today/
 local=/shopeeb.com/
 local=/shopeef.com/
 local=/shopelyze.com/
@@ -1849,6 +1855,10 @@ local=/tiktok2.com/
 local=/tikzok.com/
 local=/timbermatspzoo.com/
 local=/timelessartistry.shop/
+local=/tinder5.com/
+local=/tinderf.com/
+local=/tinderg.com/
+local=/tineder.com/
 local=/tinniease.com/
 local=/tinypawspoodlehaven.com/
 local=/tixmoo.com/
@@ -1979,6 +1989,7 @@ local=/wansut.com/
 local=/warrenbfansclub.com/
 local=/watchlap.com/
 local=/wayxbe.com/
+local=/wblock.org/
 local=/weatherguardtool.com/
 local=/wedontsellshirts.com/
 local=/weedhuis.com/
@@ -2055,6 +2066,7 @@ local=/yamahabansheeandelectricbikeshop.com/
 local=/yamahafourwheeler.com/
 local=/yaor-thramp-xaiosch.yolasite.com/
 local=/yawanm.com/
+local=/yblock.org/
 local=/yeetcat.com/
 local=/yellowlove.site/
 local=/yhaire.com/

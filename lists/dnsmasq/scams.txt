@@ -1,10 +1,10 @@
 # Title: Jarelllama's Scam Blocklist 
-# Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public sources.
+# Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Apr  5 04:38:54 UTC 2024
+# Last modified: Fri Apr  5 06:26:24 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 31427
+# Total number of entries: 31439
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -6584,6 +6584,8 @@ local=/data-analysis-digital-marketing.xyz/
 local=/data-analysis-in-digital-marketing.xyz/
 local=/datein.shop/
 local=/datemeetsmart.link/
+local=/datingf.com/
+local=/datingl.com/
 local=/datjprints.com/
 local=/datook-de.com/
 local=/datuminvestment.com/
@@ -8250,6 +8252,7 @@ local=/ebikeandchristmasdecor.com/
 local=/ebikesgeschaft.com/
 local=/ebinalo.com/
 local=/eblattholz.com/
+local=/eblock.org/
 local=/ebookinstapremium.shop/
 local=/eburpat.com/
 local=/ebzabk.shop/
@@ -19835,6 +19838,7 @@ local=/ojetlogistics.com/
 local=/ojipaperltd.com/
 local=/okaybostonterrier.com/
 local=/okayschnauzers.com/
+local=/okcuipd.com/
 local=/oklahor.com/
 local=/okpremiump.online/
 local=/okumaforsale.com/
@@ -20827,6 +20831,7 @@ local=/oversurfing.com/
 local=/overthecounterstore.com/
 local=/overtimelogistics.com/
 local=/overtoolbase.com/
+local=/ovffice.com/
 local=/owkshop.shop/
 local=/owlkaminholz.de/
 local=/owlsand.com/
@@ -25094,6 +25099,7 @@ local=/shopee-aliexpres19.com/
 local=/shopee-official.top/
 local=/shopee.site/
 local=/shopee.store/
+local=/shopee.today/
 local=/shopee123.vip/
 local=/shopee24jam.click/
 local=/shopee24jam.fun/
@@ -28057,8 +28063,12 @@ local=/timm-reifen.com/
 local=/timneytriggersusa.com/
 local=/timzin.de/
 local=/tinagarten.de/
+local=/tinder5.com/
+local=/tinderf.com/
+local=/tinderg.com/
 local=/tinderhookups.com/
 local=/tindertiktok.life/
+local=/tineder.com/
 local=/tinglidewapk.org/
 local=/tinniease.com/
 local=/tinybreedsavailable.com/
@@ -30294,6 +30304,7 @@ local=/wayxbe.com/
 local=/wazzaworldwide.com/
 local=/wbeseae.com/
 local=/wbgroups.org/
+local=/wblock.org/
 local=/wbnzpdiscount.shop/
 local=/wbrandplus.shop/
 local=/wcamcourier-warehousing.com/
@@ -31129,6 +31140,7 @@ local=/yarindalogistics.com/
 local=/yarnoutletshop.com/
 local=/yashasdigitalmarketing.xyz/
 local=/yawanm.com/
+local=/yblock.org/
 local=/ydgjd.com/
 local=/ydnmarketing.com/
 local=/year-supply-of-popeyes.com/
