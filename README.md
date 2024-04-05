@@ -148,6 +148,7 @@ Malicious domains often have [wildcard DNS records](https://developers.cloudflar
 
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
 - [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
+- [Grammarly](https://grammarly.com/): spelling and grammar checker
 - [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
 - [who.is](https://who.is/): WHOIS and DNS lookup tool
