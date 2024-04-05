@@ -48,6 +48,7 @@ jobs:
     needs: [test-functions, remove-dead]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/validate_entries.yml
+    secrets: inherit
 
   deploy:
     needs: [test-functions, validate]
