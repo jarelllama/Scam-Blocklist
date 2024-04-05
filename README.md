@@ -62,7 +62,7 @@ Total domains: 2074
 
 ## Sources
 
-### Retrieving scam domains from Google Search
+### Retrieving scam domains using Google Search API
 
 Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
