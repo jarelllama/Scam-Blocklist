@@ -12,9 +12,8 @@ build() {
     mkdir -p "lists/${directory}"
 
     # Loop through the full and light blocklist versions
-    for i in {1..2}; do
-        if (( i == 2 )); then
-            local version='LIGHT VERSION'
+    for version in '' 'LIGHT VERSION'; do
+        if [[ "$version" == 'LIGHT VERSION' ]]; then
             local list_name='scams_light.txt'
             local source_file="$RAW_LIGHT"
         fi
