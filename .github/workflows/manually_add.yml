@@ -36,7 +36,7 @@ jobs:
           git push -q
 
   get-search-terms:
-    if: ${{ github.event.label.name == 'add seach terms' && github.actor == github.repository_owner }}
+    if: ${{ github.event.label.name == 'add search terms' && github.actor == github.repository_owner }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
