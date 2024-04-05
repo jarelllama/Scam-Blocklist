@@ -79,7 +79,7 @@ The Google Custom Search JSON API allows a limited number of search queries per 
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 14
+Active search terms: 16
 Queries made today: 124
 Domains retrieved today: 58
 ```
