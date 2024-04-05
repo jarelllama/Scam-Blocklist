@@ -34,17 +34,17 @@ source() {
 
     mkdir -p data/pending
 
-    #source_manual
-    #source_aa419
+    source_manual
+    source_aa419
     #source_dfpi  # Deactivated
     source_dnstwist
-    #source_guntab
-    #source_opensquat
-    #source_petscams
-    #source_scamdirectory
-    #source_scamadviser
-    #source_stopgunscams
-    #source_google_search
+    source_guntab
+    source_opensquat
+    source_petscams
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 }
 
 # Function 'process_source' filters results retrieved from a source.
@@ -94,7 +94,7 @@ process_source() {
     format_file root_domains.tmp
 
     # Remove domains already in raw file
-    #domains="$(comm -23 <(printf "%s" "$domains") "$RAW")"
+    domains="$(comm -23 <(printf "%s" "$domains") "$RAW")"
 
     # Remove known parked domains
     parked_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$PARKED_DOMAINS"))"

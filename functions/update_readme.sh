@@ -15,7 +15,7 @@ update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 
-Blocklist for scam site domains automatically retrieved daily from Google Search and public sources. Automated retrieval is done daily at 00:00 UTC.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public sources. Automated retrieval is done at 00:00 UTC.
 
 | Format | Syntax |
 | --- | --- |
@@ -75,7 +75,7 @@ Total domains: $(wc -l < "$RAW_LIGHT")
 
 ## Sources
 
-### Google Search API
+### Retrieving scam domains from Google Search
 
 Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
@@ -99,35 +99,37 @@ Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m '
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
-### openSquat
+### Retrieving malicious newly registered domains
 
-[openSquat](https://github.com/atenreiro/opensquat) is an open-source tool for detecting cybersquatting domains. The detection algorithm takes a list of keywords as input and checks for common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack).
+New phishing domains are created daily, and unlike other sources that depend on manual reporting, [openSquat](https://github.com/atenreiro/opensquat) and [dnstwist](https://github.com/elceef/dnstwist) can effectively retrieve new phishing domains within days of their registration date.
 
-The keywords are handpicked and include common targets of phishing campaigns such as Google, Amazon, USPS, etc. while also taking into consideration potential false positives. The list of keywords can be viewed here: [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
+openSquat and dnstwist are both open-source tools for detecting common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack). By feeding these tools an actively updated newly registered domains (NRD) feed, they can programmatically retrieve new phishing domains with marginal false positives.
 
-To further minimize false positives, the automated detection is intentionally limited to Newly Registered Domains (NRD) comprising domains registered within the last 10 days.
+#### Process
 
-#### Effectiveness
+For input, openSquat uses keywords while dnstwist uses domains for their respective detection algorithms which generate domain permutations of the input keywords/domains. Both inputs are a carefully handpicked set of common phishing targets such as cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives.
 
-New phishing domains are created daily, and unlike other sources that depend on manual reporting, openSquat can effectively detect new phishing domains within days of their registration date. This is aided by an actively updated NRD feed for openSquat to process. The NRD feed can be viewed here: [nrd.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/lists/wildcard_domains/nrd.txt)
+The input datasets can be viewed here:
+
+- [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
+- [dnstwist_targets.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/dnstwist_targets.txt)
+- [tlds.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/tlds.txt) (top-level domains to aid dnstwist in generating permutations)
+
+The generated permutations are checked for matches in an NRD feed comprising domains registered within the last 10 days for openSquat, and 30 days for dnstwist. Matches are then collated into the blocklist after filtering.
 
 #### Limitations
 
-Because the detection is fully automated, false positives may slip through despite the intensive effort put into handpicking and testing the list of keywords.
+As the retrieval process requires no manual intervention, false positives may slip through despite the intensive effort put into testing the sets of input. This is a concern particularly for openSquat because of its use of keywords to feed its detection algorithm.
 
-For this reason, the openSquat source is not included in the light version of the blocklist.
+For this reason, the openSquat source is excluded from the light version of the blocklist. Regardless, great care is taken to reduce false positives via these actions:
 
-#### Statistics for openSquat source
+- Frequent monitoring of the retrieved domains from openSquat and auditing of the list of keywords
+- Automated detection and Telegram notifications of potential false positives
+- Active maintenance of a whitelist that uses term-based matching which can be viewed here: [whitelist.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
 
-\`\`\` text
-Active keywords: $(wc -l < config/opensquat_keywords.txt)
-Domains retrieved today: $(sum "$TODAY" 'openSquat')
-Domains in NRD feed: $(wc -l < lists/wildcard_domains/nrd.txt | rev | sed 's/\(...\)/\1,/g' | sed 's/,$//' | rev)
-\`\`\`
+### Regarding other sources
 
-### Other sources
-
-All sources used presently or in the past are recorded here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
+All sources used presently or in the past are credited here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
 The domain retrieval process for all sources can be viewed in the repository's code.
 
