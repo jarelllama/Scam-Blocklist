@@ -426,8 +426,8 @@ source_dnstwist() {
     local ignore_from_light=true
     local results_file="data/pending/domains_${source}.tmp"
 
-    # Install dnstwist
-    apt-get install -yqq dnstwist
+    # Install dnstwist (requires root)
+    sudo apt-get install -yqq dnstwist
 
     # Collate NRD list and exit if any link is broken
     # NRDs feeds are limited to domains registered in the 30 days
