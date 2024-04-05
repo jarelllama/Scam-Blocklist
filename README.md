@@ -18,7 +18,6 @@ Statistics for each source:
 Today | Yesterday | Excluded | Source
     0 |        12 |       3% | Google Search
     1 |        11 |      10% | aa419.org
-    0 |         0 |      59% | dfpi.ca.gov
     8 |        26 |      16% | guntab.com
     0 |      6793 |       0% | openSquat
    19 |        13 |      10% | petscams.com
@@ -93,7 +92,7 @@ For this reason, the openSquat source is not included in the light version of th
 ```
 Active keywords: 85
 Domains retrieved today: 0
-Domains in NRD feed: 1,342,031
+Domains in NRD feed: 
 ```
 
 ### Other sources
