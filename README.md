@@ -12,21 +12,21 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 31337
+Total domains: 31370
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
     0 |        12 |       3% | Google Search
-    0 |        11 |      10% | aa419.org
-    0 |         0 |      58% | dfpi.ca.gov
-    0 |        26 |      16% | guntab.com
+    1 |        11 |      10% | aa419.org
+    0 |         0 |      59% | dfpi.ca.gov
+    8 |        26 |      16% | guntab.com
     0 |      6793 |       0% | openSquat
-    0 |        13 |      10% | petscams.com
-    0 |         0 |      34% | scam.directory
-    0 |         3 |      39% | scamadviser.com
-    0 |         1 |       5% | stopgunscams.com
+   19 |        13 |      10% | petscams.com
+    0 |         0 |      36% | scam.directory
+    3 |         3 |      39% | scamadviser.com
+    2 |         1 |       5% | stopgunscams.com
     0 |         9 |       2% | Manual Entries
-    0 |      6868 |      12% | All sources
+   33 |      6868 |      12% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -49,7 +49,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 1990
+Total domains: 2015
 </details>
 
 ## Sources
