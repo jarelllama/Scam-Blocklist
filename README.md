@@ -18,7 +18,7 @@ This blocklist is meant to be an alternative to blocking all newly registered do
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 31504
+Total domains: 31404
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -57,7 +57,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2151
+Total domains: 2131
 </details>
 
 ## Sources
@@ -79,7 +79,7 @@ The Google Custom Search JSON API allows a limited number of search queries per 
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 17
+Active search terms: 14
 Queries made today: 124
 Domains retrieved today: 58
 ```
