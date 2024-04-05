@@ -173,6 +173,7 @@ Malicious domains often have [wildcard DNS records](https://developers.cloudflar
 - [Elliotwutingfeng's Global Anti-Scam Organization Blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
 - [Elliotwutingfeng's Inversion DNSBL Blocklist](https://github.com/elliotwutingfeng/Inversion-DNSBL-Blocklists)
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
+- [oisd blocklist](https://oisd.nl/) (uses this blocklist as a source)
 
 ## Appreciation
 
@@ -181,6 +182,7 @@ Thanks to the following people for the help, inspiration, and support!
 - [@bongochong](https://github.com/bongochong)
 - [@hagezi](https://github.com/hagezi)
 - [@iam-py-test](https://github.com/iam-py-test)
+- [@sjhgvr](https://github.com/sjhgvr)
 EOF
 }
 
