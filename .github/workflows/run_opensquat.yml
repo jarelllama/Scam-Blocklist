@@ -17,8 +17,8 @@ jobs:
         with:
           ref: main
 
-      - name: opensquat.sh
-        run: bash functions/opensquat.sh
+      - name: run_opensquat.sh
+        run: bash functions/run_opensquat.sh
 
       - name: Push
         run: |
