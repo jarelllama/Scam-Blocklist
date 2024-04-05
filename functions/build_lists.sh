@@ -22,6 +22,9 @@ build() {
         source_file="${source_file:-$RAW}"
         blocklist_path="lists/${directory}/${list_name:-scams.txt}"
 
+        # Truncate blocklist
+        : > "$blocklist_path"
+
         # Special case for Adblock Plus format
         [[ "$syntax" == 'Adblock Plus' ]] && printf "[Adblock Plus]\n" >> "$blocklist_path"
 
