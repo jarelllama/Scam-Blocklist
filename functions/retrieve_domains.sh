@@ -38,13 +38,13 @@ source() {
     source_aa419
     #source_dfpi  # Deactivated
     source_dnstwist
-    source_google_search
     source_guntab
     source_opensquat
     source_petscams
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
+    source_google_search
 }
 
 # Function 'process_source' filters results retrieved from a source.
@@ -427,7 +427,7 @@ source_dnstwist() {
     local results_file="data/pending/domains_${source}.tmp"
 
     # Install dnstwist
-    apt install -yqq dnstwist
+    apt-get install -yqq dnstwist
 
     # Collate NRD list and exit if any link is broken
     # NRDs feeds are limited to domains registered in the 30 days
@@ -440,14 +440,14 @@ source_dnstwist() {
             || exit 1
     } > nrd.tmp
 
-    format_list nrd.tmp
+    format_file nrd.tmp
 
     # Collate results
     while read -r domain; do
         dnstwist -f list -r "$domain" --tld "$TLDS" >> results.tmp
     done < "$DNSTWIST_TARGETS"
 
-    format_list results.tmp
+    format_file results.tmp
 
     # Find matching NRD
     comm -12 results.tmp nrd.tmp > "$results_file"
@@ -592,7 +592,7 @@ source_stopgunscams() {
 trap cleanup EXIT
 
 # Install jq
-command -v jq &> /dev/null || apt install -yqq jq
+command -v jq &> /dev/null || apt-get install -yqq jq
 
 for file in config/* data/*; do
     format_file "$file"
