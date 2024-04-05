@@ -5,7 +5,6 @@
 
 readonly RAW='data/raw.txt'
 readonly KEYWORDS='config/opensquat_keywords.txt'
-readonly NRD='lists/wildcard_domains/nrd.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 
@@ -20,7 +19,8 @@ opensquat() {
     git clone -q https://github.com/atenreiro/opensquat
     pip install -qr opensquat/requirements.txt
 
-    # Collate fresh NRD list and exit if any link is broken
+    # Collate NRD list and exit if any link is broken
+    # NRDs feeds are limited to domains registered in the last 10 days
     {
         wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1w.csv' \
             || exit 1
@@ -28,13 +28,13 @@ opensquat() {
             | grep -vF '#' || exit 1
         curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names.txt' \
             || exit 1
-    } >> "$NRD"
+    } > nrd.tmp
 
-    bash functions/tools.sh format "$NRD"
+    bash functions/tools.sh format nrd.tmp
 
     # Filter out previously processed domains and known dead/parked domains
-    comm -23 "$NRD" <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
-        > nrd.tmp
+    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
+        > temp && mv temp nrd.tmp
 
     # Exit if no domains to process
     if [[ ! -s nrd.tmp ]]; then

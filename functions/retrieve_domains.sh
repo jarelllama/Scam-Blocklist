@@ -15,6 +15,8 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='data/wildcards.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly DNSTWIST_TARGETS='config/dnstwist_targets.txt'
+readonly TLDS='data/tlds.txt'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
@@ -34,14 +36,15 @@ source() {
 
     source_manual
     source_aa419
-    source_dfpi
+    #source_dfpi  # Deactivated
+    source_dnstwist
+    source_google_search
     source_guntab
+    source_opensquat
     source_petscams
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    source_google_search
-    source_opensquat
 }
 
 # Function 'process_source' filters results retrieved from a source.
@@ -418,6 +421,40 @@ source_opensquat() {
     process_source
 }
 
+source_dnstwist() {
+    local source='dnstwist'
+    local ignore_from_light=true
+    local results_file="data/pending/domains_${source}.tmp"
+
+    # Install dnstwist
+    apt install -yqq dnstwist
+
+    # Collate NRD list and exit if any link is broken
+    # NRDs feeds are limited to domains registered in the 30 days
+    {
+        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
+            || exit 1
+        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+            | grep -vF '#' || exit 1
+        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
+            || exit 1
+    } > nrd.tmp
+
+    format_list nrd.tmp
+
+    # Collate results
+    while read -r domain; do
+        dnstwist -f list -r "$domain" --tld "$TLDS" >> results.tmp
+    done < "$DNSTWIST_TARGETS"
+
+    format_list results.tmp
+
+    # Find matching NRD
+    comm -12 results.tmp nrd.tmp > "$results_file"
+
+    process_source
+}
+
 source_manual() {
     local source='Manual'
     local results_file='data/pending/domains_manual.tmp'
@@ -555,7 +592,7 @@ source_stopgunscams() {
 trap cleanup EXIT
 
 # Install jq
-command -v jq &> /dev/null || apt-get install -yqq jq
+command -v jq &> /dev/null || apt install -yqq jq
 
 for file in config/* data/*; do
     format_file "$file"

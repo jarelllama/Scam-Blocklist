@@ -7,7 +7,7 @@ Source | Type | Inactive | Excluded from light
 :--- |:--- |:--- |:---
 [ANFRAS](https://anfras.com/fakeshops/) | Fake | Yes | -
 [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Advance-fee | |
-[DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | | Yes
+[DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | Yes | -
 [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Google Search | |
 [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes
 [Hagezi's NRD List](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#nrd) | NRD | - | -

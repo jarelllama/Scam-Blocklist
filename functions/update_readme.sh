@@ -33,7 +33,6 @@ Statistics for each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
 $(print_stats 'aa419.org')
-$(print_stats 'dfpi.ca.gov')
 $(print_stats 'guntab.com')
 $(print_stats 'openSquat')
 $(print_stats 'petscams.com')

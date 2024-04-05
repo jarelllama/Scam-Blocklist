@@ -31,3 +31,4 @@ jobs:
   build:
     needs: run-opensquat
     uses: ./.github/workflows/retrieve_domains.yml
+    secrets: inherit

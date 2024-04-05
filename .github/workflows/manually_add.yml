@@ -38,3 +38,4 @@ jobs:
   build:
     needs: get-domains
     uses: ./.github/workflows/retrieve_domains.yml
+    secrets: inherit
