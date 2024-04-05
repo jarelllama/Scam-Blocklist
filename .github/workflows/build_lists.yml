@@ -29,6 +29,8 @@ jobs:
 
       - name: build_list.sh
         run: bash functions/build_lists.sh
+        env:
+          BLOCKLIST_DESCRIPTION: ${{ vars.BLOCKLIST_DESCRIPTION }}
 
       - name: Push
         run: |

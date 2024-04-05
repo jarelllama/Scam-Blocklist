@@ -26,6 +26,8 @@ jobs:
 
       - name: update_readme.sh
         run: bash functions/update_readme.sh
+        env:
+          BLOCKLIST_DESCRIPTION: ${{ vars.BLOCKLIST_DESCRIPTION }}
 
       - name: Push
         run: |

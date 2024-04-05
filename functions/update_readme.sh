@@ -15,7 +15,7 @@ update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 
-Blocklist for newly created/reported scam site domains automatically retrieved daily using Google Search API and other public sources. Automated retrieval is done at 00:00 UTC.
+${BLOCKLIST_DESCRIPTION} Automated retrieval is done at 00:00 UTC.
 
 This blocklist is meant to be an alternative to blocking all newly registered domains (NRD) seeing how many, but not all, NRDs are malicious.
 
