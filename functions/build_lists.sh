@@ -37,7 +37,7 @@ build() {
 append_header() {
     cat << EOF > "$blocklist_path"
 ${comment} Title: Jarelllama's Scam Blocklist ${version}
-${comment} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
+${comment} Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public sources.
 ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${comment} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${comment} Last modified: $(date -u)

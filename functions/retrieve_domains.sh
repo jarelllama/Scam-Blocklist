@@ -426,6 +426,8 @@ source_dnstwist() {
     local ignore_from_light=true
     local results_file="data/pending/domains_${source}.tmp"
 
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
     # Install dnstwist
     pip install -q dnstwist
 
