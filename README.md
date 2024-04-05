@@ -91,7 +91,7 @@ For this reason, the openSquat source is not included in the light version of th
 
 #### Statistics for openSquat source
 ```
-Active keywords: 87
+Active keywords: 85
 Domains retrieved today: 0
 Domains in NRD feed: 1,342,031
 ```
