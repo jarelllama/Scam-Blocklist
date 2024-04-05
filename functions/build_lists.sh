@@ -38,7 +38,7 @@ build() {
 
 # Function 'append_header' appends the header onto the blocklist.
 append_header() {
-    cat << EOF > "$blocklist_path"
+    cat << EOF >> "$blocklist_path"
 ${comment} Title: Jarelllama's Scam Blocklist ${version}
 ${comment} Description: ${BLOCKLIST_DESCRIPTION}
 ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
