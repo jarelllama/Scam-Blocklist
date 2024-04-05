@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Apr  5 04:24:45 UTC 2024
+# Last modified: Fri Apr  5 04:38:54 UTC 2024
 # Syntax: Dnsmasq
-# Total number of entries: 2073
+# Total number of entries: 2074
 #
 local=/01edc.com/
 local=/0onlyfans.com/
@@ -200,6 +200,7 @@ local=/beachcitiescommercialbank.com/
 local=/beaticecryptos.com/
 local=/beautifulteacupchihuahua.com/
 local=/beautythine.com/
+local=/beeinghope.io/
 local=/beemuscle.com/
 local=/beetcymetric.com/
 local=/belendan.com/

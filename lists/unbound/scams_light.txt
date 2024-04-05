@@ -2,9 +2,9 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Fri Apr  5 04:24:45 UTC 2024
+# Last modified: Fri Apr  5 04:38:54 UTC 2024
 # Syntax: Unbound
-# Total number of entries: 2073
+# Total number of entries: 2074
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -201,6 +201,7 @@ local-zone: "beachcitiescommercialbank.com." always_nxdomain
 local-zone: "beaticecryptos.com." always_nxdomain
 local-zone: "beautifulteacupchihuahua.com." always_nxdomain
 local-zone: "beautythine.com." always_nxdomain
+local-zone: "beeinghope.io." always_nxdomain
 local-zone: "beemuscle.com." always_nxdomain
 local-zone: "beetcymetric.com." always_nxdomain
 local-zone: "belendan.com." always_nxdomain
