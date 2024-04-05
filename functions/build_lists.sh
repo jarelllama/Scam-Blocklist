@@ -48,7 +48,7 @@ ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${comment} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
 ${comment} Last modified: $(date -u)
 ${comment} Syntax: ${syntax}
-${comment} Total number of entries: $(wc -l < "$source_file")
+${comment} Number of entries: $(wc -l < "$source_file")
 ${comment}
 EOF
 }
