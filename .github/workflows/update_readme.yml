@@ -16,7 +16,7 @@ permissions:
 jobs:
   update-readme:
     # Do not run if workflow_run failed/cancelled (still allows workflow_dispatch and workflow_call)
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion = 'success' }}
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
