@@ -2,7 +2,7 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 23:49:49 UTC 2024
+# Last modified: Fri Apr  5 01:01:03 UTC 2024
 # Syntax: Dnsmasq
 # Total number of entries: 1990
 #
@@ -97,6 +97,7 @@ local=/ammodepotwi.com/
 local=/ammoforsale.com/
 local=/ammonationonline.shop/
 local=/ammovalleydepot.com/
+local=/ammunitiononline.com/
 local=/ammunitionsales.shop/
 local=/ammunitionyard.com/
 local=/amreahome.com/
@@ -177,7 +178,6 @@ local=/babfeae.dateflng.com/
 local=/babygirlsweetie.com/
 local=/bacfgh.com/
 local=/backpackboyzdisposable.com/
-local=/baetylby.bio/
 local=/baioneparts.com/
 local=/balzany.com/
 local=/bamboocrafts.com.au/
@@ -912,7 +912,6 @@ local=/indeedassessmets.com/
 local=/indoorsarmory.net/
 local=/infantlover.com/
 local=/infectolab-americas.com/
-local=/infiniteroyallimited.com/
 local=/influencek.com/
 local=/infocialisguides.com/
 local=/innovativeallergy.com/
@@ -1015,6 +1014,7 @@ local=/kokokokids.ru/
 local=/kokokostore.net/
 local=/koowofficial.com/
 local=/kozmozinspire.com/
+local=/krdes.net.in/
 local=/kristaldentistry.com/
 local=/krminidachshunds.com/
 local=/krpethome.com/
@@ -1141,7 +1141,6 @@ local=/marincentral.com/
 local=/markethillltd.com/
 local=/marktemusik.shop/
 local=/marleysbostons.com/
-local=/marlinaustralianshepherds.com/
 local=/marlinguns.usa.com/
 local=/marlingunstoreusa.com/
 local=/marlinriflesusa.com/
@@ -1259,6 +1258,7 @@ local=/mygoldenretrieverpuppies.com/
 local=/mylifetimedachshund.com/
 local=/mynamejewelry.shop/
 local=/mynextpuppy.co.za/
+local=/myshoplaza.com/
 local=/mzm816.com/
 local=/naertinon.com/
 local=/nailsmith.co/
@@ -1330,6 +1330,7 @@ local=/onligg.com/
 local=/onlineammo-store.com/
 local=/onlinedoctornearme.com/
 local=/onlineherbalincense.com/
+local=/onlinesale2022.ru/
 local=/onpointshipppers.com/
 local=/onwofe.com/
 local=/opjus.com/
@@ -1607,7 +1608,6 @@ local=/shouldermd.com/
 local=/siberianhuskydogsavailable.com/
 local=/sigsauerp228.com/
 local=/sigsauerp229.com/
-local=/sigsauerp320.xyz/
 local=/sikdex.com/
 local=/sin-cityexotics.com/
 local=/sinas.store/

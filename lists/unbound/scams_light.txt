@@ -2,7 +2,7 @@
 # Description: Blocklist for scam site domains automatically retrieved daily from Google Search and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Thu Apr  4 23:49:49 UTC 2024
+# Last modified: Fri Apr  5 01:01:03 UTC 2024
 # Syntax: Unbound
 # Total number of entries: 1990
 #
@@ -98,6 +98,7 @@ local-zone: "ammodepotwi.com." always_nxdomain
 local-zone: "ammoforsale.com." always_nxdomain
 local-zone: "ammonationonline.shop." always_nxdomain
 local-zone: "ammovalleydepot.com." always_nxdomain
+local-zone: "ammunitiononline.com." always_nxdomain
 local-zone: "ammunitionsales.shop." always_nxdomain
 local-zone: "ammunitionyard.com." always_nxdomain
 local-zone: "amreahome.com." always_nxdomain
@@ -178,7 +179,6 @@ local-zone: "babfeae.dateflng.com." always_nxdomain
 local-zone: "babygirlsweetie.com." always_nxdomain
 local-zone: "bacfgh.com." always_nxdomain
 local-zone: "backpackboyzdisposable.com." always_nxdomain
-local-zone: "baetylby.bio." always_nxdomain
 local-zone: "baioneparts.com." always_nxdomain
 local-zone: "balzany.com." always_nxdomain
 local-zone: "bamboocrafts.com.au." always_nxdomain
@@ -913,7 +913,6 @@ local-zone: "indeedassessmets.com." always_nxdomain
 local-zone: "indoorsarmory.net." always_nxdomain
 local-zone: "infantlover.com." always_nxdomain
 local-zone: "infectolab-americas.com." always_nxdomain
-local-zone: "infiniteroyallimited.com." always_nxdomain
 local-zone: "influencek.com." always_nxdomain
 local-zone: "infocialisguides.com." always_nxdomain
 local-zone: "innovativeallergy.com." always_nxdomain
@@ -1016,6 +1015,7 @@ local-zone: "kokokokids.ru." always_nxdomain
 local-zone: "kokokostore.net." always_nxdomain
 local-zone: "koowofficial.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
+local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kristaldentistry.com." always_nxdomain
 local-zone: "krminidachshunds.com." always_nxdomain
 local-zone: "krpethome.com." always_nxdomain
@@ -1142,7 +1142,6 @@ local-zone: "marincentral.com." always_nxdomain
 local-zone: "markethillltd.com." always_nxdomain
 local-zone: "marktemusik.shop." always_nxdomain
 local-zone: "marleysbostons.com." always_nxdomain
-local-zone: "marlinaustralianshepherds.com." always_nxdomain
 local-zone: "marlinguns.usa.com." always_nxdomain
 local-zone: "marlingunstoreusa.com." always_nxdomain
 local-zone: "marlinriflesusa.com." always_nxdomain
@@ -1260,6 +1259,7 @@ local-zone: "mygoldenretrieverpuppies.com." always_nxdomain
 local-zone: "mylifetimedachshund.com." always_nxdomain
 local-zone: "mynamejewelry.shop." always_nxdomain
 local-zone: "mynextpuppy.co.za." always_nxdomain
+local-zone: "myshoplaza.com." always_nxdomain
 local-zone: "mzm816.com." always_nxdomain
 local-zone: "naertinon.com." always_nxdomain
 local-zone: "nailsmith.co." always_nxdomain
@@ -1331,6 +1331,7 @@ local-zone: "onligg.com." always_nxdomain
 local-zone: "onlineammo-store.com." always_nxdomain
 local-zone: "onlinedoctornearme.com." always_nxdomain
 local-zone: "onlineherbalincense.com." always_nxdomain
+local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onpointshipppers.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
 local-zone: "opjus.com." always_nxdomain
@@ -1608,7 +1609,6 @@ local-zone: "shouldermd.com." always_nxdomain
 local-zone: "siberianhuskydogsavailable.com." always_nxdomain
 local-zone: "sigsauerp228.com." always_nxdomain
 local-zone: "sigsauerp229.com." always_nxdomain
-local-zone: "sigsauerp320.xyz." always_nxdomain
 local-zone: "sikdex.com." always_nxdomain
 local-zone: "sin-cityexotics.com." always_nxdomain
 local-zone: "sinas.store." always_nxdomain
