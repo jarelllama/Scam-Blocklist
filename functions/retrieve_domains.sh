@@ -443,7 +443,7 @@ source_dnstwist() {
 
     format_file nrd.tmp
 
-    # Collate results
+    # Run dnstwist and collate results
     while read -r domain; do
         dnstwist "$domain" -f list --tld "$TLDS" >> results.tmp
     done < "$DNSTWIST_TARGETS"
