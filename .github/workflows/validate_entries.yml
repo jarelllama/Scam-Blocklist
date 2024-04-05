@@ -17,6 +17,9 @@ jobs:
 
       - name: validate_raw.sh
         run: bash functions/validate_raw.sh
+        env:
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
       - name: Push
         run: |
