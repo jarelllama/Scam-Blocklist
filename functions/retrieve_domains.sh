@@ -426,8 +426,8 @@ source_dnstwist() {
     local ignore_from_light=true
     local results_file="data/pending/domains_${source}.tmp"
 
-    # Install dnstwist (requires root)
-    sudo apt-get install -yqq dnstwist
+    # Install dnstwist
+    pip install -q dnstwist
 
     # Collate NRD list and exit if any link is broken
     # NRDs feeds are limited to domains registered in the 30 days
@@ -444,7 +444,7 @@ source_dnstwist() {
 
     # Collate results
     while read -r domain; do
-        dnstwist -f list -r "$domain" --tld "$TLDS" >> results.tmp
+        dnstwist "$domain" -f list -r --tld "$TLDS" >> results.tmp
     done < "$DNSTWIST_TARGETS"
 
     format_file results.tmp
