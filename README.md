@@ -18,6 +18,7 @@ Statistics for each source:
 Today | Yesterday | Excluded | Source
     0 |        12 |       3% | Google Search
     1 |        11 |      11% | aa419.org
+   56 |         0 |       1% | dnstwist
     8 |        26 |      17% | guntab.com
     0 |      6793 |       0% | openSquat
    19 |        13 |      10% | petscams.com
