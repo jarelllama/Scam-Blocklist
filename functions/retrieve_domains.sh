@@ -16,6 +16,7 @@ readonly WILDCARDS='data/wildcards.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly DNSTWIST_TARGETS='config/dnstwist_targets.txt'
+readonly DNSTWIST_DICT='config/dnstwist_dict.txt'
 readonly TLDS='data/tlds.txt'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
@@ -445,7 +446,7 @@ source_dnstwist() {
 
     # Run dnstwist and collate results
     while read -r domain; do
-        dnstwist "$domain" -f list --tld "$TLDS" >> results.tmp
+        dnstwist "$domain" -d "$DNSTWIST_DICT" -f list --tld "$TLDS" >> results.tmp
     done < "$DNSTWIST_TARGETS"
 
     format_file results.tmp
