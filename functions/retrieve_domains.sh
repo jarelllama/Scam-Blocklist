@@ -444,7 +444,7 @@ source_dnstwist() {
 
     # Collate results
     while read -r domain; do
-        dnstwist "$domain" -f list -r --tld "$TLDS" >> results.tmp
+        dnstwist "$domain" -f list --tld "$TLDS" >> results.tmp
     done < "$DNSTWIST_TARGETS"
 
     format_file results.tmp
