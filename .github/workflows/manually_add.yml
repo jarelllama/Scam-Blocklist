@@ -8,7 +8,7 @@ permissions:
   issues: write
 
 jobs:
-  get-domains:
+  add-domains:
     if: ${{ github.event.label.name == 'add domains' && github.actor == github.repository_owner }}
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +35,12 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Manually add domains"
           git push -q
 
-  get-search-terms:
+  build:
+    needs: add-domains
+    uses: ./.github/workflows/retrieve_domains.yml
+    secrets: inherit          
+
+  add-search-terms:
     if: ${{ github.event.label.name == 'add search terms' && github.actor == github.repository_owner }}
     runs-on: ubuntu-latest
     steps:
