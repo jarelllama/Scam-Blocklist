@@ -72,7 +72,7 @@ The list of search terms is proactively updated and is mostly sourced from inves
 
 #### Limitations
 
-The Google Custom Search JSON API allows a limited number of search queries per day. To optimize the number of search queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled.
+The Google Custom Search JSON API allows a limited number of search queries per day. To optimize the number of queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled.
 
 #### Statistics for Google Search source
 
