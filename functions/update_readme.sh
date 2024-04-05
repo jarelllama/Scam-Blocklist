@@ -122,7 +122,7 @@ As the retrieval process requires no manual intervention, false positives may sl
 For this reason, the openSquat source is excluded from the light version of the blocklist. Regardless, great care is taken to reduce false positives via these actions:
 
 - Frequent monitoring of the retrieved domains from openSquat and auditing of the list of keywords
-- Automated detection and Telegram notifications of potential false positives
+- Automated detection and Telegram notifications for potential false positives
 - Active maintenance of a whitelist that uses term-based matching which can be viewed here: [whitelist.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
 
 ### Regarding other sources
