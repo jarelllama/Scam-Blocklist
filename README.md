@@ -16,7 +16,7 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 31426
+Total domains: 31427
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -29,8 +29,8 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      38% | scam.directory
     3 |         3 |      39% | scamadviser.com
     2 |         1 |       5% | stopgunscams.com
-    0 |         9 |       2% | Manual Entries
-  147 |      6868 |      13% | All sources
+    1 |         9 |       2% | Manual Entries
+  148 |      6868 |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -55,7 +55,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2073
+Total domains: 2074
 </details>
 
 ## Sources
