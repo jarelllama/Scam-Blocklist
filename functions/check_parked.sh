@@ -86,10 +86,12 @@ retrieve_parked() {
     cat parked_domains_x??.tmp > parked_domains.tmp 2> /dev/null
     rm parked_domains_x??.tmp 2> /dev/null
 
+    format_file parked_domains.tmp
+
+    printf "[success] Found %s parked domains\n" "$(wc -l < parked_domains.tmp)"
+
     # Return 1 if no parked domains were found
     [[ ! -s parked_domains.tmp ]] && return 1 || return 0
-
-    format_file parked_domains.tmp
 }
 
 # Function 'find_parked' queries sites from a given file for parked messages
