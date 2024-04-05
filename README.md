@@ -22,7 +22,7 @@ Statistics for each source:
 Today | Yesterday | Excluded | Source
     0 |        12 |       3% | Google Search
     1 |        11 |      11% | aa419.org
-   56 |         0 |       1% | dnstwist
+  114 |         0 |       1% | dnstwist
     8 |        26 |      17% | guntab.com
     0 |      6793 |       0% | openSquat
    19 |        13 |      10% | petscams.com
@@ -30,7 +30,7 @@ Today | Yesterday | Excluded | Source
     3 |         3 |      39% | scamadviser.com
     2 |         1 |       5% | stopgunscams.com
     0 |         9 |       2% | Manual Entries
-   89 |      6868 |      13% | All sources
+  147 |      6868 |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -55,12 +55,12 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2015
+Total domains: 2073
 </details>
 
 ## Sources
 
-### Retrieving scam domains from Google Search
+### Google Search API
 
 Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
@@ -84,13 +84,9 @@ Queries made today: 0
 Domains retrieved today: 0
 ```
 
-### Retrieving malicious newly registered domains
-
-New phishing domains are created daily, and unlike other sources that depend on manual reporting, [openSquat](https://github.com/atenreiro/opensquat) and [dnstwist](https://github.com/elceef/dnstwist) can effectively detect new phishing domains within days of their registration date.
-
-openSquat and dnstwist are both open-source tools for detecting common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack). By feeding these tools an actively updated NRD feed, they are able to programmatically retrieve newly created phishing domains with marginal false positives.
-
 ### openSquat
+
+[openSquat](https://github.com/atenreiro/opensquat) is an open-source tool for detecting cybersquatting domains. The detection algorithm takes a list of keywords as input and checks for common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack).
 
 The keywords are handpicked and include common targets of phishing campaigns such as Google, Amazon, USPS, etc. while also taking into consideration potential false positives. The list of keywords can be viewed here: [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
 
@@ -98,7 +94,7 @@ To further minimize false positives, the automated detection is intentionally li
 
 #### Effectiveness
 
-New phishing domains are created daily, and unlike other sources that depend on manual reporting, openSquat can effectively detect new phishing domains within days of their registration date. This is aided by an actively updated NRD feed for openSquat to process.
+New phishing domains are created daily, and unlike other sources that depend on manual reporting, openSquat can effectively detect new phishing domains within days of their registration date. This is aided by an actively updated NRD feed for openSquat to process. The NRD feed can be viewed here: [nrd.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/lists/wildcard_domains/nrd.txt)
 
 #### Limitations
 
@@ -111,7 +107,7 @@ For this reason, the openSquat source is not included in the light version of th
 ``` text
 Active keywords: 85
 Domains retrieved today: 0
-Domains in NRD feed:
+Domains in NRD feed: 
 ```
 
 ### Other sources
