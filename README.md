@@ -1,6 +1,7 @@
 # Jarelllama's Scam Blocklist
 
-Blocklist for scam site domains automatically retrieved daily from Google Search and public databases. Automated retrieval is done daily at 00:00 UTC.
+Blocklist for scam site domains automatically retrieved daily from Google Search and public sources. Automated retrieval is done daily at 00:00 UTC.
+
 | Format | Syntax |
 | --- | --- |
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
@@ -106,7 +107,7 @@ For this reason, the openSquat source is not included in the light version of th
 ``` text
 Active keywords: 85
 Domains retrieved today: 0
-Domains in NRD feed:
+Domains in NRD feed: 
 ```
 
 ### Other sources
