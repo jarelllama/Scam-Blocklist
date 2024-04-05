@@ -12,21 +12,21 @@ Blocklist for scam site domains automatically retrieved daily from Google Search
 [![Build and deploy](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml)
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 ```
-Total domains: 32030
+Total domains: 31337
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-   12 |        51 |       3% | Google Search
-   11 |        24 |      10% | aa419.org
-    0 |         1 |      58% | dfpi.ca.gov
-   26 |        17 |      16% | guntab.com
- 6793 |      8072 |       0% | openSquat
-   13 |        16 |      10% | petscams.com
+    0 |        12 |       3% | Google Search
+    0 |        11 |      10% | aa419.org
+    0 |         0 |      58% | dfpi.ca.gov
+    0 |        26 |      16% | guntab.com
+    0 |      6793 |       0% | openSquat
+    0 |        13 |      10% | petscams.com
     0 |         0 |      34% | scam.directory
-    3 |         1 |      39% | scamadviser.com
-    1 |         3 |       5% | stopgunscams.com
-    9 |        11 |       2% | Manual Entries
- 6868 |      8196 |      12% | All sources
+    0 |         3 |      39% | scamadviser.com
+    0 |         1 |       5% | stopgunscams.com
+    0 |         9 |       2% | Manual Entries
+    0 |      6868 |      12% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -70,8 +70,8 @@ To optimize the number of search queries made, each search term is frequently be
 #### Statistics for Google Search source
 ```
 Active search terms: 17
-Queries made today: 212
-Domains retrieved today: 12
+Queries made today: 0
+Domains retrieved today: 0
 ```
 
 ### openSquat
@@ -92,7 +92,7 @@ For this reason, the openSquat source is not included in the light version of th
 #### Statistics for openSquat source
 ```
 Active keywords: 87
-Domains retrieved today: 6793
+Domains retrieved today: 0
 Domains in NRD feed: 1,342,031
 ```
 
