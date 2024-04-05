@@ -60,7 +60,7 @@ Total domains: 2015
 
 ## Sources
 
-### Google Search API
+### Retrieving scam domains from Google Search
 
 Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. The script uses a list of search terms almost exclusively used in scam sites to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
 
@@ -84,9 +84,13 @@ Queries made today: 0
 Domains retrieved today: 0
 ```
 
-### openSquat
+### Retrieving malicious newly registered domains
 
-[openSquat](https://github.com/atenreiro/opensquat) is an open-source tool for detecting cybersquatting domains. The detection algorithm takes a list of keywords as input and checks for common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack).
+New phishing domains are created daily, and unlike other sources that depend on manual reporting, [openSquat](https://github.com/atenreiro/opensquat) and [dnstwist](https://github.com/elceef/dnstwist) can effectively detect new phishing domains within days of their registration date.
+
+openSquat and dnstwist are both open-source tools for detecting common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack). By feeding these tools an actively updated NRD feed, they are able to programmatically retrieve newly created phishing domains with marginal false positives.
+
+### openSquat
 
 The keywords are handpicked and include common targets of phishing campaigns such as Google, Amazon, USPS, etc. while also taking into consideration potential false positives. The list of keywords can be viewed here: [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
 
@@ -94,7 +98,7 @@ To further minimize false positives, the automated detection is intentionally li
 
 #### Effectiveness
 
-New phishing domains are created daily, and unlike other sources that depend on manual reporting, openSquat can effectively detect new phishing domains within days of their registration date. This is aided by an actively updated NRD feed for openSquat to process. The NRD feed can be viewed here: [nrd.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/lists/wildcard_domains/nrd.txt)
+New phishing domains are created daily, and unlike other sources that depend on manual reporting, openSquat can effectively detect new phishing domains within days of their registration date. This is aided by an actively updated NRD feed for openSquat to process.
 
 #### Limitations
 
@@ -107,7 +111,7 @@ For this reason, the openSquat source is not included in the light version of th
 ``` text
 Active keywords: 85
 Domains retrieved today: 0
-Domains in NRD feed: 
+Domains in NRD feed:
 ```
 
 ### Other sources
