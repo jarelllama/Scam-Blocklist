@@ -110,7 +110,7 @@ For this reason, the openSquat source is excluded from the light version of the 
 
 - Frequent monitoring of the retrieved domains from openSquat and auditing of the list of keywords
 - Automated detection and Telegram notifications for potential false positives
-- Active maintenance of a whitelist that uses term-based matching which can be viewed here: [whitelist.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
+- Active maintenance of a whitelist that uses keyword matching which can be viewed here: [whitelist.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
 
 ### Regarding other sources
 
