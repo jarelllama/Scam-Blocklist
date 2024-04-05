@@ -1,6 +1,8 @@
 # Jarelllama's Scam Blocklist
 
-Blocklist for scam site domains automatically retrieved daily from Google Search and public sources. Automated retrieval is done at 00:00 UTC.
+Blocklist for newly created/reported scam site domains automatically retrieved daily using Google Search API and other public sources. Automated retrieval is done at 00:00 UTC.
+
+This blocklist is meant to be an alternative to blocking all newly registered domains (NRD) seeing how many, but not all, NRDs are malicious.
 
 | Format | Syntax |
 | --- | --- |
@@ -82,7 +84,7 @@ Queries made today: 0
 Domains retrieved today: 0
 ```
 
-### Retrieving malicious newly registered domains
+### Retrieving malicious NRDs using automated detection
 
 New phishing domains are created daily, and unlike other sources that depend on manual reporting, [openSquat](https://github.com/atenreiro/opensquat) and [dnstwist](https://github.com/elceef/dnstwist) can effectively retrieve new phishing domains within days of their registration date.
 

@@ -15,7 +15,9 @@ update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 
-Blocklist for scam site domains automatically retrieved daily from Google Search and public sources. Automated retrieval is done at 00:00 UTC.
+Blocklist for newly created/reported scam site domains automatically retrieved daily using Google Search API and other public sources. Automated retrieval is done at 00:00 UTC.
+
+This blocklist is meant to be an alternative to blocking all newly registered domains (NRD) seeing how many, but not all, NRDs are malicious.
 
 | Format | Syntax |
 | --- | --- |
@@ -97,7 +99,7 @@ Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m '
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
-### Retrieving malicious newly registered domains
+### Retrieving malicious NRDs using automated detection
 
 New phishing domains are created daily, and unlike other sources that depend on manual reporting, [openSquat](https://github.com/atenreiro/opensquat) and [dnstwist](https://github.com/elceef/dnstwist) can effectively retrieve new phishing domains within days of their registration date.
 
@@ -161,6 +163,7 @@ Malicious domains often have [wildcard DNS records](https://developers.cloudflar
 
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
 - [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
+- [Grammarly](https://grammarly.com/): spelling and grammar checker
 - [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 - [ShellCheck](https://github.com/koalaman/shellcheck): shell script static analysis tool
 - [who.is](https://who.is/): WHOIS and DNS lookup tool
