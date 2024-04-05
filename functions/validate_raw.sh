@@ -106,7 +106,7 @@ validate_raw() {
     domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( toplist_count > 0 )); then
-        awk '{print $0 " (toplist) - manual removal required"}' \
+        awk '{print $0 " (toplist)"}' \
             <<< "$domains_in_toplist" >> filter_log.tmp
         log_event "$domains_in_toplist" toplist
     fi
@@ -144,7 +144,7 @@ validate_raw() {
 
     # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
-    sed 's/manual removal required/\o033[31m&\o033[0m/' filter_log.tmp
+    sed 's/(toplist)/(toplist) - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
 
     # Send telegram notification
     send_telegram "Problematic domains detected during validation check:\n$(<filter_log.tmp)"
