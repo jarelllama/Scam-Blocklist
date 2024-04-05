@@ -49,7 +49,7 @@ jobs:
           # Remove quotes
           search_terms="$(sed 's/"//' <<< "${{ github.event.issue.body }}")"
           # Append search terms to search terms file
-          printf "\"%s\"\n" "$search_terms" >> config/search_terms.csv
+          printf "\"%s\",,\n" "$search_terms" >> config/search_terms.csv
 
       - name: Close issue
         run: gh issue close ${{ github.event.issue.number }}
