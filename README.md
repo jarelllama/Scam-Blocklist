@@ -98,7 +98,6 @@ The input datasets can be viewed here:
 
 - [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
 - [dnstwist_targets.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/dnstwist_targets.txt)
-- [tlds.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/tlds.txt) (top-level domains to aid dnstwist in generating permutations)
 
 The generated permutations are checked for matches in an NRD feed comprising domains registered within the last 10 days for openSquat, and 30 days for dnstwist. Matched domains are collated into the blocklist after filtering.
 
