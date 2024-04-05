@@ -289,14 +289,26 @@ check_syntax() {
     # Check regular version
     if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
-        grep -F "$domain" "lists/${2}/scams.txt"
+
+        if grep -qF "$domain" <<< "$1"; then
+            grep -F "$domain" "lists/${2}/scams.txt"
+        else
+            printf "Missing '%s'\n" "$1"
+        fi
+
         error=true
     fi
 
     # Check light version
     if ! grep -qxF "$1" "lists/${2}/scams_light.txt"; then
         printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$2"
-        grep -F "$domain" "lists/${2}/scams_light.txt"
+
+        if grep -qF "$domain" <<< "$1"; then
+            grep -F "$domain" "lists/${2}/scams_light.txt"
+        else
+            printf "Missing '%s'\n" "$1"
+        fi
+
         error=true
     fi
 }
