@@ -221,7 +221,7 @@ format_file() {
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
-# Add new wildcards to the raw files
+# Add manually added wildcards to the raw files
 cat "$WILDCARDS" >> "$RAW"
 cat "$WILDCARDS" >> "$RAW_LIGHT"
 
