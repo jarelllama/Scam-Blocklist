@@ -231,7 +231,13 @@ build() {
 # Function 'log_source' prints and logs statistics for each source
 # using the variables declared in the 'process_source' function.
 log_source() {
+    local item
     local error
+
+    if [[ "$source" == 'Google Search' ]]; then
+        search_term="\"${search_term:0:100}...\""
+        item="$search_term"
+    fi
 
     if [[ "$rate_limited" == true ]]; then
         error='rate_limited'
@@ -248,6 +254,8 @@ ${parked_count},${toplist_count},$(printf "%s" "$domains_in_toplist" | tr '\n' '
 ${query_count},${error},no" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
+
+    printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
 
     if [[ "$error" == 'empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
@@ -367,8 +375,6 @@ search_google() {
     local page_domains
     local query_count=0
 
-    printf "\n\e[1mSource: %s\e[0m\n" "\"${search_term:0:100}...\""
-
     touch "$results_file"  # Create results file to ensure proper logging
 
     for start in {1..100..10}; do  # Loop through each page of results
@@ -383,7 +389,7 @@ search_google() {
                 break
             fi
 
-            printf "\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
+            printf "\n\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
 
             # Switch API keys
             readonly search_api_key="$GOOGLE_SEARCH_API_KEY_2"
@@ -414,8 +420,6 @@ source_dnstwist() {
     local results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
 
     # Install dnstwist
     pip install -q dnstwist
@@ -469,8 +473,6 @@ source_manual() {
     # Return if results file not found (source is the file itself)
     [[ ! -f "$results_file" ]] && return
 
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
-
     grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > domains.tmp
     mv domains.tmp "$results_file"
 
@@ -485,8 +487,6 @@ source_aa419() {
     local results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
 
     local url='https://api.aa419.org/fakesites'
     local query_params
@@ -504,8 +504,6 @@ source_guntab() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
-
     local url='https://www.guntab.com/scam-websites'
     curl -s "${url}/" \
         | grep -zoE '<table class="datatable-list table">.*</table>' \
@@ -520,8 +518,6 @@ source_petscams() {
     local results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
 
     local url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
@@ -541,8 +537,6 @@ source_scamdirectory() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
-
     local url='https://scam.directory/category'
     curl -s "${url}/" \
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
@@ -558,8 +552,6 @@ source_scamadviser() {
     local page_results
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
 
     touch "$results_file"  # Create results file to ensure proper logging
 
@@ -584,8 +576,6 @@ source_dfpi() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
-
     local url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" \
         | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
@@ -600,8 +590,6 @@ source_stopgunscams() {
     local results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    printf "\n\e[1mSource: %s\e[0m\n" "$source"
 
     local url='https://stopgunscams.com'
     for page in {1..5}; do
