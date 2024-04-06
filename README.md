@@ -2,7 +2,7 @@
 
 Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources. Automated retrieval is done at 00:00 UTC.
 
-This blocklist is meant to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious.
+This blocklist is meant to be an alternative to blocking all newly registered domains (NRD) seeing how many, but not all, NRDs are malicious.
 
 | Format | Syntax |
 | --- | --- |
@@ -26,7 +26,6 @@ Today | Yesterday | Excluded | Source
    41 |         1 |      11% | aa419.org
   419 |       133 |       4% | dnstwist
    75 |         8 |      17% | guntab.com
- 4665 |         0 |       0% | openSquat
    21 |        19 |      10% | petscams.com
   145 |         0 |      36% | scam.directory
     7 |         3 |      39% | scamadviser.com
