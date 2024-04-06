@@ -23,5 +23,4 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Tranco List](https://tranco-list.eu/) | Toplist | - | - |
 | [dnstwist](https://github.com/elceef/dnstwist) | Phishing | | |
 | [openSquat](https://github.com/atenreiro/opensquat) | Phishing | Yes | - |
-| [r/CryptoScamBlacklist](https://www.reddit.com/r/CryptoScamBlacklist/) | Crypto | Yes | - |
 | [r/Scams](https://www.reddit.com/r/Scams/) | Any | Yes | - |
