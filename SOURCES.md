@@ -12,6 +12,7 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Elliotwutingfeng's Inversion DNSBL Blocklist](https://github.com/elliotwutingfeng/Inversion-DNSBL-Blocklists) | Google Safe Browsing | - | - |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
+| [Hagezi's Most Abused TLDs list](https://github.com/hagezi/dns-blocklists#crystal_ball-most-abused-tlds---protects-against-known-malicious-top-level-domains-) | TLD | - | - |
 | [Hagezi's NRD List](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#nrd) | NRD | - | - |
 | [PetScams.com](https://petscams.com/) | Pet | | |
 | [Scam Directory](https://scam.directory/) | Any | | |
