@@ -16,8 +16,6 @@ readonly WILDCARDS='data/wildcards.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.txt'
-readonly KEYWORDS='config/keywords.txt'
-readonly REGEX='config/regex.txt'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
@@ -36,16 +34,16 @@ source() {
     mkdir -p data/pending
 
     source_manual
-    #source_keywords
-    #source_aa419
+    source_keywords
+    source_aa419
     #source_dfpi  # Deactivated
     source_dnstwist
-    #source_guntab
-    #source_petscams
-    #source_scamdirectory
-    #source_scamadviser
-    #source_stopgunscams
-    #source_google_search
+    source_guntab
+    source_petscams
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 }
 
 # Function 'process_source' filters results retrieved from a source.
@@ -329,6 +327,8 @@ cleanup() {
 source_google_search() {
     # Install csvkit
     command -v csvgrep &> /dev/null || pip install -q csvkit
+    # Install jq
+    command -v jq &> /dev/null || apt-get install -yqq jq
 
     local source='Google Search'
     local results_file
@@ -416,24 +416,6 @@ search_google() {
     process_source
 }
 
-source_keywords() {
-    local source='Keyword Matching'
-    local ignore_from_light=true
-    local results_file='data/pending/domains_keywords.tmp'
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    download_nrd_feed
-
-    # Find keyword matches in NRD feed
-    grep -Ff "$KEYWORDS" nrd.tmp >> "$results_file"
-
-    # Find regex matches in NRD feed
-    grep -Ef "$REGEX" -- nrd.tmp >> "$results_file"
-
-    process_source
-}
-
 source_dnstwist() {
     local source='dnstwist'
     local results_file="data/pending/domains_${source}.tmp"
@@ -499,6 +481,9 @@ source_manual() {
 }
 
 source_aa419() {
+    # Install jq
+    command -v jq &> /dev/null || apt-get install -yqq jq
+
     local source='aa419.org'
     local results_file="data/pending/domains_${source}.tmp"
 
@@ -620,9 +605,6 @@ source_stopgunscams() {
 # Entry point
 
 trap cleanup EXIT
-
-# Install jq
-command -v jq &> /dev/null || apt-get install -yqq jq
 
 for file in config/* data/*; do
     format_file "$file"
