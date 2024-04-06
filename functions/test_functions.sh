@@ -605,8 +605,6 @@ on_exit() {
 # the exit status of the script.
 # Input:
 #   $1: scrip to execute
-# Output:
-#   return 1 if script has an exit status of 1
 run_script() {
     # Format expected output files
     for file in out_*; do
