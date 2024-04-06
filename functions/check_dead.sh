@@ -29,8 +29,13 @@ main() {
     comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
     mv light.tmp "$RAW_LIGHT"
 
-    # Cache dead domains (done last to skip alive domains check)
-    cat dead_in_raw.tmp >> "$DEAD_DOMAINS"
+    # Cache dead domains to filter out from newly retrieved domains
+    # (done last to skip alive domains check)
+    {
+        cat dead_raw.tmp
+        cat dead_subdomains.tmp
+        cat dead_redundant.tmp
+    } >> "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
 }
 
@@ -43,9 +48,8 @@ check_subdomains() {
     comm -23 "$SUBDOMAINS" dead.tmp > subdomains.tmp
     mv subdomains.tmp "$SUBDOMAINS"
 
-    # Cache dead domains to filter out from newly retrieved domains
-    cat dead.tmp >> "$DEAD_DOMAINS"
-    format_file "$DEAD_DOMAINS"
+    # Rename temporary dead file to be added into dead cache later
+    mv dead.tmp dead_subdomains.tmp
 
     # Strip dead domains to their root domains
     while read -r subdomain; do
@@ -70,9 +74,8 @@ check_redundant() {
     comm -23 "$REDUNDANT_DOMAINS" dead.tmp > redundant.tmp
     mv redundant.tmp "$REDUNDANT_DOMAINS"
 
-    # Cache dead domains to filter out from newly retrieved domains
-    cat dead.tmp >> "$DEAD_DOMAINS"
-    format_file "$DEAD_DOMAINS"
+    # Rename temporary dead file to be added into dead cache later
+    mv dead.tmp dead_redundant.tmp
 
     # Find unused wildcards
     while read -r wildcard; do
@@ -99,13 +102,13 @@ check_dead() {
     find_dead raw.tmp || return
 
     # Rename temporary dead file to be added into dead cache later
-    mv dead.tmp dead_in_raw.tmp
+    mv dead.tmp dead_raw.tmp
 
     # Remove dead domains from raw file
-    comm -23 "$RAW" dead_in_raw.tmp > raw.tmp
+    comm -23 "$RAW" dead.tmp > raw.tmp
     mv raw.tmp "$RAW"
 
-    log_event "$(<dead_in_raw.tmp)" dead raw
+    log_event "$(<dead.tmp)" dead raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file

@@ -576,7 +576,7 @@ source_scamadviser() {
     for page in {1..20}; do  # Loop through pages
         page_results="$(curl -s "${url}?p=${page}")"  # Trailing slash breaks curl
 
-        # Stop if page has an error
+        # Stop if page has an error (scamadviser occasionally has broken pages)
         ! grep -qiF 'article' <<< "$page_results" && break
 
         grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \

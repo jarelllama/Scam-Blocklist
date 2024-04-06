@@ -8,39 +8,39 @@ permissions:
   contents: write
 
 jobs:
-  test-functions:
+  test:
     uses: ./.github/workflows/test_functions.yml
 
   # This condition lets the job run even if any of the previous jobs failed
   # ${{ ! cancelled() }}
 
-  # This condition prevents the job from running if the test-functions job failed
-  # ${{ needs.test-functions.result == 'success' }}
+  # This condition prevents the job from running if the test job failed
+  # ${{ needs.test.result == 'success' }}
 
   retrieve:
-    needs: [test-functions]
+    needs: [test]
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
   remove-dead:
-    needs: [test-functions, retrieve]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    needs: [test, retrieve]
+    if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
   remove-parked:
-    needs: [test-functions, remove-dead]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    needs: [test, remove-dead]
+    if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/check_parked.yml
 
   validate:
-    needs: [test-functions, remove-parked]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    needs: [test, remove-parked]
+    if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/validate_entries.yml
     secrets: inherit
 
   deploy:
-    needs: [test-functions, validate]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    needs: [test, validate]
+    if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 
   prune-logs:

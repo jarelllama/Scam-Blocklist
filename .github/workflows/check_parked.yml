@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  check-parked-domains:
+  remove-parked-domains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

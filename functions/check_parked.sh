@@ -23,8 +23,9 @@ main() {
     comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
     mv light.tmp "$RAW_LIGHT"
 
-    # Cache parked domains (done last to skip unparked domains check)
-    cat parked_in_raw.tmp >> "$PARKED_DOMAINS"
+    # Cache parked domains to filter out from newly retrieved domains
+    # (done last to skip unparked domains check)
+    cat parked_raw.tmp >> "$PARKED_DOMAINS"
     format_file "$PARKED_DOMAINS"
 }
 
@@ -36,13 +37,13 @@ remove_parked_domains() {
     retrieve_parked raw.tmp || return
 
     # Rename temporary parked file to be added into parked cache later
-    mv parked_domains.tmp parked_in_raw.tmp
+    mv parked_domains.tmp parked_raw.tmp
 
     # Remove parked domains from raw file
-    comm -23 "$RAW" parked_in_raw.tmp > raw.tmp
+    comm -23 "$RAW" parked_domains.tmp > raw.tmp
     mv raw.tmp "$RAW"
 
-    log_event "$(<parked_in_raw.tmp)" parked raw
+    log_event "$(<parked_domains.tmp)" parked raw
 }
 
 # Function 'add_unparked_domains' finds unparked domains in the parked domains
@@ -50,11 +51,13 @@ remove_parked_domains() {
 add_unparked_domains() {
     retrieve_parked "$PARKED_DOMAINS"  # No need to return if no parked found
 
-    # Get unparked domains
-    unparked_domains="$(grep -vxFf parked_domains.tmp "$PARKED_DOMAINS")"
+    # Get unparked domains (parked domains file is unsorted)
+    unparked_domains="$(comm -23 <(sort "$PARKED_DOMAINS") <(sort parked_domains.tmp))"
     [[ -z "$unparked_domains" ]] && return
 
     # Keep only parked domains in parked domains file
+    # grep is used here because the 'retrieve_parked' function messes with
+    # the order of the entries
     grep -xFf parked_domains.tmp "$PARKED_DOMAINS" > parked.tmp
     mv parked.tmp "$PARKED_DOMAINS"
 
