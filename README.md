@@ -26,13 +26,13 @@ Today | Yesterday | Excluded | Source
    20 |         1 |      11% | aa419.org
    36 |       133 |       7% | dnstwist
    24 |         8 |      17% | guntab.com
-    0 |      4665 |       0% | openSquat
+ 4665 |         0 |       0% | openSquat
    15 |        19 |      10% | petscams.com
    86 |         0 |      40% | scam.directory
     3 |         3 |      39% | scamadviser.com
     9 |         2 |       5% | stopgunscams.com
     0 |         3 |       2% | Manual Entries
-  212 |      4892 |      13% | All sources
+ 4877 |       227 |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
