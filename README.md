@@ -2,7 +2,7 @@
 
 Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources. Automated retrieval is done at 00:00 UTC.
 
-This blocklist is meant to be an alternative to blocking all newly registered domains (NRD) seeing how many, but not all, NRDs are malicious.
+This blocklist is meant to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. To reach this goal, a variety of sources are integrated to aid in detecting and recording new malicious domains close to their registration date before they can cause extended harm.
 
 | Format | Syntax |
 | --- | --- |
