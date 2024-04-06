@@ -91,8 +91,8 @@ validate_raw() {
         printf "%s\n" "$wildcard_domains" >> wildcards.tmp
         format_file wildcards.tmp
 
+        # Remove redundant domains
         redundant_count=0
-        # Get redundant domains
         while read -r wildcard; do  # Loop through wildcards
             # Find redundant domains via wildcard matching and skip to
             # next wildcard if none found
