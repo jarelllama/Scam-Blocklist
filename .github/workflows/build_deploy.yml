@@ -34,10 +34,6 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update toplist"
           git push -q
 
-  run-opensquat:
-    needs: [test-functions, update-toplist]
-    uses: ./.github/workflows/run_opensquat.yml
-
   # This condition lets the job run even if any of the previous jobs failed
   # ${{ ! cancelled() }}
 
@@ -45,8 +41,7 @@ jobs:
   # ${{ needs.test-functions.result == 'success' }}
 
   retrieve:
-    needs: [test-functions, run-opensquat]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    needs: [test-functions, update-toplist]
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
