@@ -182,10 +182,10 @@ validate_raw() {
 send_telegram() {
     [[ "$DISABLE_TELEGRAM" == true ]] && return
     curl -sX POST \
-    -H 'Content-Type: application/json' \
-    -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
-    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-    -o /dev/null
+        -H 'Content-Type: application/json' \
+        -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
+        "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+        -o /dev/null
 }
 
 # Function 'download_toplist' downloads the toplist and formats it.
