@@ -476,7 +476,7 @@ source_dnstwist() {
     # Run dnstwist and collate results
     while read -r domain; do
         dnstwist "$domain" -d "$DNSTWIST_DICT" -f list >> results.tmp
-    done < target.tmp
+    done < targets.tmp
 
     format_file results.tmp
 
