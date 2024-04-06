@@ -17,6 +17,7 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.txt'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
+TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 # Function 'source' calls on the respective functions for each source to
 # retrieve results. The results are then passed to the 'process_source'
@@ -219,10 +220,9 @@ build() {
         "$count_before" "$(( count_after - count_before ))" "$count_after"
 
     # Mark sources as saved in the source log file
-    time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
-    rows="$(sed 's/,no/,yes/' <(grep -F "$time_format" "$SOURCE_LOG"))"
+    rows="$(sed 's/,no/,yes/' <(grep -F "$TIME_FORMAT" "$SOURCE_LOG"))"
     # Remove previous logs
-    temp_source_log="$(grep -vF "$time_format" "$SOURCE_LOG")"
+    temp_source_log="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
     # Add updated logs
     printf "%s\n%s\n" "$temp_source_log" "$rows" > "$SOURCE_LOG"
 }
@@ -247,7 +247,7 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + redundant_count + parked_count ))"
 
-    echo "${time_format},${source},${search_term},${unfiltered_count},\
+    echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count},\
 ${filtered_count},${total_whitelisted_count},${dead_count},${redundant_count},\
 ${parked_count},${toplist_count},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
 ${query_count},${error},no" >> "$SOURCE_LOG"
