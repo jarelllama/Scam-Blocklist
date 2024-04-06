@@ -296,7 +296,9 @@ download_toplist() {
 }
 
 # Function 'download_nrd' downloads, collates the NRD feeds,
-# and send notifications if any link is broken
+# and send notifications if any link is broken.
+# Output:
+#   nrd.tmp
 download_nrd() {
     # NRDs feeds are limited to domains registered in the last 30 days
     {
