@@ -67,9 +67,9 @@ process_source() {
     unfiltered_count="$(wc -w <<< "$domains")"
 
     # Remove known dead domains (includes subdomains and redundant domains)
-    dead_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$DEAD_DOMAINS"))"
+    dead_domains="$(comm -12 <(echo "$domains") <(sort "$DEAD_DOMAINS"))"
     dead_count="$(wc -w <<< "$dead_domains")"
-    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$dead_domains"))"
+    domains="$(comm -23 <(echo "$domains") <(echo "$dead_domains"))"
     # Logging removed as it inflated log size
 
     # Remove common subdomains
@@ -80,7 +80,7 @@ process_source() {
             || continue
 
         # Keep only root domains
-        domains="$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
+        domains="$(echo "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
 
         # Collate subdomains for dead check
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
@@ -95,34 +95,34 @@ process_source() {
     format_file root_domains.tmp
 
     # Remove domains already in raw file
-    domains="$(comm -23 <(printf "%s" "$domains") "$RAW")"
+    domains="$(comm -23 <(echo "$domains") "$RAW")"
 
     # Remove known parked domains
-    parked_domains="$(comm -12 <(printf "%s" "$domains") <(sort "$PARKED_DOMAINS"))"
+    parked_domains="$(comm -12 <(echo "$domains") <(sort "$PARKED_DOMAINS"))"
     parked_count="$(wc -w <<< "$parked_domains")"
-    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$parked_domains"))"
+    domains="$(comm -23 <(echo "$domains") <(echo "$parked_domains"))"
     # Logging removed as it inflated log size
 
     # Log blacklisted domains
-    blacklisted_domains="$(comm -12 <(printf "%s" "$domains") "$BLACKLIST")"
+    blacklisted_domains="$(comm -12 <(echo "$domains") "$BLACKLIST")"
     log_event "$blacklisted_domains" blacklist
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
     whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
-    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
+    domains="$(comm -23 <(echo "$domains") <(echo "$whitelisted_domains"))"
     log_event "$whitelisted_domains" whitelist
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
     whitelisted_tld_count="$(wc -w <<< "$whitelisted_tld_domains")"
-    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
+    domains="$(comm -23 <(echo "$domains") <(echo "$whitelisted_tld_domains"))"
     log_event "$whitelisted_tld_domains" tld
 
     # Remove invalid entries and IP addresses. Punycode TLDs (.xn--*) are allowed
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
     if [[ -n "$invalid_entries" ]]; then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))"
+        domains="$(comm -23 <(echo "$domains") <(echo "$invalid_entries"))"
         awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> manual_review.tmp
         # Save invalid entries for rerun
         printf "%s\n" "$invalid_entries" >> "$results_file"
@@ -142,16 +142,16 @@ process_source() {
         redundant_count="$((redundant_count + $(wc -w <<< "$redundant_domains")))"
 
         # Remove redundant domains
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))"
+        domains="$(comm -23 <(echo "$domains") <(echo "$redundant_domains"))"
 
         log_event "$redundant_domains" redundant
     done < "$WILDCARDS"
 
     # Remove domains in toplist, excluding blacklisted domains
-    domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
+    domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") "$TOPLIST") "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( "$toplist_count" > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$domains_in_toplist"))"
+        domains="$(comm -23 <(echo "$domains") <(echo "$domains_in_toplist"))"
         awk '{print $0 " (toplist)"}' <<< "$domains_in_toplist" >> manual_review.tmp
         # Save invalid entries for rerun
         printf "%s\n" "$domains_in_toplist" >> "$results_file"
@@ -167,7 +167,7 @@ process_source() {
     fi
 
     # Remove empty lines and count number of filtered domains
-    filtered_count="$(printf "%s" "$domains" | sed '/^$/d' | wc -w)"
+    filtered_count="$(echo "$domains" | sed '/^$/d' | wc -w)"
     log_source
 }
 
@@ -199,7 +199,7 @@ build() {
         # Collate filtered root domains to exclude from dead check
         printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
         # Collate filtered subdomains for dead check
-        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$SUBDOMAINS"
+        grep -Ff <(echo "$root_domains") subdomains.tmp >> "$SUBDOMAINS"
 
         format_file "$ROOT_DOMAINS"
         format_file "$SUBDOMAINS"
@@ -253,7 +253,7 @@ log_source() {
 
     echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count},\
 ${filtered_count},${total_whitelisted_count},${dead_count},${redundant_count},\
-${parked_count},${toplist_count},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
+${parked_count},${toplist_count},$(echo "$domains_in_toplist" | tr '\n' ' '),\
 ${query_count},${error},no" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return

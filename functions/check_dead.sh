@@ -53,8 +53,8 @@ check_subdomains() {
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Remove dead root domains from raw file and root domains file
-    comm -23 "$RAW" <(printf "%s" "$dead_root_domains") > raw.tmp
-    comm -23 "$ROOT_DOMAINS" <(printf "%s" "$dead_root_domains") > root.tmp
+    comm -23 "$RAW" <(echo "$dead_root_domains") > raw.tmp
+    comm -23 "$ROOT_DOMAINS" <(echo "$dead_root_domains") > root.tmp
     mv raw.tmp "$RAW"
     mv root.tmp "$ROOT_DOMAINS"
 
@@ -125,7 +125,7 @@ check_alive() {
     # Strip away subdomains from alive domains as subdomains
     # are not supposed to be in raw file
     while read -r subdomain; do
-        alive_domains="$(printf "%s" "$alive_domains" \
+        alive_domains="$(echo "$alive_domains" \
             | sed "s/^${subdomain}\.//" | sort -u)"
     done < "$SUBDOMAINS_TO_REMOVE"
 
