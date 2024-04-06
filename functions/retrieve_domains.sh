@@ -396,7 +396,7 @@ source_google_search() {
 search_google() {
     local search_term="${1//\"/}"  # Remove quotes before encoding
     local encoded_search_term
-    encoded_search_term="$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
+    encoded_search_term="$(echo "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
     local results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     local query_params
     local page_results
