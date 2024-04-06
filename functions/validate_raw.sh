@@ -34,7 +34,7 @@ validate_raw() {
             ))"
 
         # Keep only root domains
-        domains="$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
+        domains="$(echo "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
         sed "s/^${subdomain}\.//" "$RAW_LIGHT" | sort -u -o "$RAW_LIGHT"
         format_file "$RAW_LIGHT"
 
@@ -53,7 +53,7 @@ validate_raw() {
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
     whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
     if (( whitelisted_count > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_domains"))"
+        domains="$(comm -23 <(echo "$domains") <(echo "$whitelisted_domains"))"
         awk '{print $0 " (whitelisted)"}' <<< "$whitelisted_domains" >> filter_log.tmp
         log_event "$whitelisted_domains" whitelist
     fi
@@ -62,7 +62,7 @@ validate_raw() {
     whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
     whitelisted_tld_count="$(wc -w <<< "$whitelisted_tld_domains")"
     if (( whitelisted_tld_count > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$whitelisted_tld_domains"))"
+        domains="$(comm -23 <(echo "$domains") <(echo "$whitelisted_tld_domains"))"
         awk '{print $0 " (whitelisted TLD)"}' <<< "$whitelisted_tld_domains" >> filter_log.tmp
         log_event "$whitelisted_tld_domains" tld
     fi
@@ -71,39 +71,53 @@ validate_raw() {
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
     invalid_entries_count="$(wc -w <<< "$invalid_entries")"
     if (( invalid_entries_count > 0 )); then
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$invalid_entries"))"
+        domains="$(comm -23 <(echo "$domains") <(echo "$invalid_entries"))"
         awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> filter_log.tmp
         log_event "$invalid_entries" invalid
     fi
 
-    # Remove redundant domains
-    redundant_count=0
-    while read -r domain; do  # Loop through each domain in the blocklist
-        # Find redundant domains via wildcard matching and skip to
-        # next wildcard if none found
-        redundant_domains="$(grep "\.${domain}$" <<< "$domains")" \
-            || continue
+    # Find potential redundant domains (domains with more than 1 period)
+    # This is to prevent root domains from being false positive wildcards
+    potential_redundant="$(grep '\..*\.' <<< "$domains")"
 
-        # Count number of redundant domains
-        redundant_count="$(( redundant_count + $(wc -w <<< "$redundant_domains") ))"
+    # Strip potential redundant domains down to their root domains
+    stripped_redundant="$(echo "$potential_redundant" \
+        rev | awk -F '.' '{print $1 "." $2}' | rev | sort -u)"
 
-        # Remove redundant domains
-        domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$redundant_domains"))"
+    # Find wildcard domains by finding root domains already in the blocklist
+    wildcard_domains="$(comm -12 <(echo "$domains") <(echo "$stripped_redundant"))"
 
-        # Collate redundant domains for dead check
-        printf "%s\n" "$redundant_domains" >> redundant_domains.tmp
+    if [[ -n "$wildcard_domains" ]]; then
         # Collate wildcard domains to exclude from dead check
-        printf "%s\n" "$domain" >> wildcards.tmp
+        printf "%s\n" "$wildcard_domains" >> wildcards.tmp
+        format_file wildcards.tmp
 
-        awk '{print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
-        log_event "$redundant_domains" redundant
-    done <<< "$domains"
+        redundant_count=0
+        # Get redundant domains
+        while read -r wildcard; do  # Loop through wildcards
+            # Find redundant domains via wildcard matching and skip to
+            # next wildcard if none found
+            redundant_domains="$(grep "\.${wildcard}$" <<< "$domains")" \
+                || continue
+
+            # Count number of redundant domains
+            redundant_count="$((redundant_count + $(wc -w <<< "$redundant_domains")))"
+
+            # Remove redundant domains
+            domains="$(comm -23 <(echo "$domains") <(echo "$redundant_domains"))"
+
+            # Collate redundant domains for dead check
+            printf "%s\n" "$redundant_domains" >> redundant_domains.tmp
+
+            awk '{print $0 " (redundant)"}' <<< "$redundant_domains" >> filter_log.tmp
+            log_event "$redundant_domains" redundant
+        done <<< "$wildcard_domains"
+    fi
     format_file redundant_domains.tmp
-    format_file wildcards.tmp
 
     # Find matching domains in toplist, excluding blacklisted domains
     # Note domains found are not removed
-    domains_in_toplist="$(comm -23 <(comm -12 <(printf "%s" "$domains") "$TOPLIST") "$BLACKLIST")"
+    domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") "$TOPLIST") "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( toplist_count > 0 )); then
         awk '{print $0 " (toplist)"}' \
@@ -117,12 +131,12 @@ validate_raw() {
     # Collate filtered wildcards
     if [[ -f wildcards.tmp ]]; then
         # Find wildcard domains in the filtered domains
-        wildcards="$(comm -12 wildcards.tmp <(printf "%s" "$domains"))"
+        wildcards="$(comm -12 wildcards.tmp <(echo "$domains"))"
 
         # Collate filtered wildcards to exclude from dead check
         printf "%s\n" "$wildcards" >> "$WILDCARDS"
         # Collate filtered redundant domains for dead check
-        grep -Ff <(printf "%s" "$wildcards") redundant_domains.tmp >> "$REDUNDANT_DOMAINS"
+        grep -Ff <(echo "$wildcards") redundant_domains.tmp >> "$REDUNDANT_DOMAINS"
 
         format_file "$WILDCARDS"
         format_file "$REDUNDANT_DOMAINS"
@@ -131,12 +145,12 @@ validate_raw() {
     # Collate filtered subdomains and root domains
     if [[ -f root_domains.tmp ]]; then
         # Find root domains (subdomains stripped off) in the filtered domains
-        root_domains="$(comm -12 root_domains.tmp <(printf "%s" "$domains"))"
+        root_domains="$(comm -12 root_domains.tmp <(echo "$domains"))"
 
         # Collate filtered root domains to exclude from dead check
         printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
         # Collate filtered subdomains for dead check
-        grep -Ff <(printf "%s" "$root_domains") subdomains.tmp >> "$SUBDOMAINS"
+        grep -Ff <(echo "$root_domains") subdomains.tmp >> "$SUBDOMAINS"
 
         format_file "$ROOT_DOMAINS"
         format_file "$SUBDOMAINS"
