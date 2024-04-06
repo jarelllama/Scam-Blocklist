@@ -31,11 +31,7 @@ main() {
 
     # Cache dead domains to filter out from newly retrieved domains
     # (done last to skip alive domains check)
-    {
-        cat dead_raw.tmp
-        cat dead_subdomains.tmp
-        cat dead_redundant.tmp
-    } >> "$DEAD_DOMAINS"
+    cat dead_raw.tmp dead_subdomains.tmp dead_redundant.tmp >> "$DEAD_DOMAINS"
     format_file "$DEAD_DOMAINS"
 }
 
