@@ -10,8 +10,6 @@ permissions:
 jobs:
   test-functions:
     uses: ./.github/workflows/test_functions.yml
-
-  update-toplist:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,19 +17,39 @@ jobs:
         with:
           ref: main
 
-      - name: Update toplist
+      - name: Download toplist
         run: |
           wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
-          awk -F ',' '{print $2}' toplist.tmp > data/toplist.txt
-          bash functions/tools.sh format data/toplist.txt
-          rm toplist.tmp
+          awk -F ',' '{print $2}' toplist.tmp > temp && mv temp toplist.tmp
+          bash functions/tools.sh format toplist.tmp
+
+      - name: Download NRD feed
+        run: |
+          # NRDs feeds are limited to domains registered in the last 30 days
+          {
+            wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
+            wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+                | grep -vF '#'
+            curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt'
+          } > nrd.tmp
+          bash functions/tools.sh format nrd.tmp
+
+      - name: Check if feeds were downloaded
+        run: |
+          if [[ -f toplist.tmp ]] && [[ -f nrd.tmp ]]; then
+            exit
+          fi
+
+          [[ ! -f toplist.tmp ]] && printf "Error downloading toplist.\n"
+          [[ ! -f nrd.tmp ]] && printf "Error downloading NRD feed.\n"
+          exit 1
 
       - name: Push
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "Update toplist"
+          git diff-index --quiet HEAD || git commit -m "Download feeds"
           git push -q
 
   # This condition lets the job run even if any of the previous jobs failed
@@ -41,7 +59,7 @@ jobs:
   # ${{ needs.test-functions.result == 'success' }}
 
   retrieve:
-    needs: [test-functions, update-toplist]
+    needs: [test-functions]
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 

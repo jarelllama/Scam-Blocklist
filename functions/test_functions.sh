@@ -10,7 +10,6 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
-readonly TOPLIST='data/toplist.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
@@ -208,15 +207,13 @@ TEST_DEAD_CHECK() {
 }
 
 TEST_PARKED_CHECK() {
-    # Placeholders used as sample data
+    # Generate placeholders
     # (split does not work well without enough records)
-    not_parked_placeholder=$(head -n 40 "$TOPLIST")
-    parked_placeholder=$(tail -n 40 "$TOPLIST")
-    printf "%s\n" "$not_parked_placeholder" >> "$RAW"
-    printf "%s\n" "$parked_placeholder" >> "$PARKED_DOMAINS"
-    # Collate placeholders to be removed later
-    printf "%s\n" "$not_parked_placeholder" >> placeholders.txt
-    printf "%s\n" "$parked_placeholder" >> placeholders.txt
+    for i in {1..40};do
+        printf "placeholder%s.com\n" "$i" >> placeholders.txt
+    done
+    cat placeholders.txt >> "$RAW"
+    cat placeholders.txt >> "$PARKED_DOMAINS"
 
     test_parked_check
     test_unparked_check

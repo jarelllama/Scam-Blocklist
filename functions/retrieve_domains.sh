@@ -8,7 +8,6 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
-readonly TOPLIST='data/toplist.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
@@ -145,6 +144,7 @@ process_source() {
     done < "$WILDCARDS"
 
     # Remove domains in toplist, excluding blacklisted domains
+    download_toplist
     domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") "$TOPLIST") "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( "$toplist_count" > 0 )); then
@@ -283,6 +283,31 @@ send_telegram() {
     -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
     "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
     -o /dev/null
+}
+
+# Function 'download_toplist' downloads the toplist and formats it.
+# Output:
+#   toplist.tmp
+download_toplist() {
+    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
+    awk -F ',' '{print $2}' toplist.tmp > temp && mv temp toplist.tmp
+    format_file toplist.tmp
+    [[ ! -f toplist.tmp ]] && send_telegram "Error downloading toplist."
+}
+
+# Function 'download_nrd' downloads, collates the NRD feeds,
+# and send notifications if any link is broken
+download_nrd() {
+    # NRDs feeds are limited to domains registered in the last 30 days
+    {
+        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
+            || send_telegram "Shreshta's NRD list URL is broken."
+        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+            | grep -vF '#' || send_telegram "Hagezi's NRD list URL is broken."
+        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
+            || send_telegram "openSquat's NRD list URL is broken."
+    } > nrd.tmp
+    format_file nrd.tmp
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
@@ -424,18 +449,8 @@ source_dnstwist() {
     # Install dnstwist
     pip install -q dnstwist
 
-    # Download, collate NRD feeds and send notifications if any link is broken
-    # NRDs feeds are limited to domains registered in the 30 days
-    {
-        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
-            || send_telegram "Shreshta's NRD list URL is broken."
-        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
-            | grep -vF '#' || send_telegram "Hagezi's NRD list URL is broken."
-        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
-            || send_telegram "openSquat's NRD list URL is broken."
-    } > nrd.tmp
-
-    format_file nrd.tmp
+    # Download NRD feed
+    download_nrd
 
     # Download top abused TLDs feed
     wget -qO tld.tmp 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/spam-tlds-adblock-aggressive.txt' \
