@@ -201,7 +201,7 @@ print_stats() {
 sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
-    csvgrep -c 1 -m "$1" "$SOURCE_LOG" | csvgrep -c 2 -m "$2" | csvgrep -c 14 -m yes \
+    grep -F "$1" "$SOURCE_LOG" | grep -xF "$2" | csvgrep -c 14 -m yes \
         | csvcut -c 5 | awk '{sum += $1} END {print sum}'
 }
 
@@ -209,7 +209,7 @@ sum() {
 # of excluded domains out of the raw count retrieved from the given source.
 #   $1: source to process (default is all sources)
 count_excluded() {
-    csvgrep -c 2 -m "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > rows.tmp
+    grep -xF "$1" "$SOURCE_LOG" | csvgrep -c 14 -m yes > rows.tmp
 
     raw_count="$(csvcut -c 4 rows.tmp | awk '{sum += $1} END {print sum}')"
     # Return if raw count is 0 to avoid divide by zero error

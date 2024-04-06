@@ -76,8 +76,8 @@ process_source() {
     local domains_with_subdomains  # Declare local variable in case while loop does not run
     while read -r subdomain; do  # Loop through common subdomains
         # Find domains with subdomains and skip to next subdomain if none found
-        domains_with_subdomains="$(grep '\..*\.' <<< "$domains" \
-            | grep "^${subdomain}\." )" || continue
+        domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
+            || continue
 
         # Keep only root domains
         domains="$(printf "%s" "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
