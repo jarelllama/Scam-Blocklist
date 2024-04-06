@@ -18,8 +18,6 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.txt'
 readonly KEYWORDS='config/keywords.txt'
 readonly REGEX='config/regex.txt'
-readonly DNSTWIST_DICT='config/dnstwist_dict.txt'
-readonly TLDS='data/tlds.txt'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
@@ -290,27 +288,6 @@ send_telegram() {
     -o /dev/null
 }
 
-# Function 'download_nrd_feed' downloads and collates the NRD feeds.
-# Output:
-#   nrd.tmp
-#   exit status 1 if any link is broken
-download_nrd_feed() {
-    [[ -f nrd.tmp ]] && return
-
-    # Collate NRD list and exit if any link is broken
-    # NRDs feeds are limited to domains registered in the 30 days
-    {
-        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
-            || exit 1
-        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
-            | grep -vF '#' || exit 1
-        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
-            || exit 1
-    } > nrd.tmp
-
-    format_file nrd.tmp
-}
-
 # Function 'log_event' logs domain processing events into the domain log.
 #   $1: domains to log stored in a variable.
 #   $2: event type (dead, whitelisted, etc.)
@@ -466,22 +443,44 @@ source_dnstwist() {
     # Install dnstwist
     pip install -q dnstwist
 
-    download_nrd_feed
+    # Download, collate NRD feeds and send notifications if any link is broken
+    # NRDs feeds are limited to domains registered in the 30 days
+    {
+        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
+            || send_telegram "Shreshta's NRD list URL is broken."
+        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+            | grep -vF '#' || send_telegram "Hagezi's NRD list URL is broken."
+        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
+            || send_telegram "openSquat's NRD list URL is broken."
+    } > nrd.tmp
 
-    # Append common TLDs to phishing targets list
-    while read -r tld; do
-        awk -v tld="$tld" '{print $0 "." tld}' "$PHISHING_TARGETS" >> targets.tmp
-    done < "$TLDS"
+    format_file nrd.tmp
+
+    # Download top abused TLDs feed
+    wget -qO tld.tmp 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/spam-tlds-adblock-aggressive.txt' \
+        || send_telegram "Hagezi's TLD list URL is broken."
+
+    # Format the TLD feed
+    grep -P '^\|\|(?!xn)' tld.tmp | sed 's/||//; s/\^//' > temp \
+        && mv temp tld.tmp
+
+    # Append '.com' TLD onto targets as placeholder
+    sed 's/$/.com/' "$PHISHING_TARGETS" > targets.tmp
 
     # Run dnstwist and collate results
     while read -r domain; do
-        dnstwist "$domain" -d "$DNSTWIST_DICT" -f list >> results.tmp
+        dnstwist "$domain" -f list >> results.tmp
     done < targets.tmp
 
-    format_file results.tmp
+    # Append top abused TLDs
+    while read -r tld; do
+        sed "s/.com/.${tld}/" results.tmp >> results_with_tlds.tmp
+    done < tld.tmp
 
-    # Find matching NRD
-    comm -12 results.tmp nrd.tmp > "$results_file"
+    format_file results_with_tlds.tmp
+
+    # Find matching NRDs
+    comm -12 results_with_tlds.tmp nrd.tmp > "$results_file"
 
     process_source
 }
