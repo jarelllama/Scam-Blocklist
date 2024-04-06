@@ -7,6 +7,8 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly PARKED_TERMS='config/parked_terms.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly ROOT_DOMAINS='data/root_domains.txt'
+readonly WILDCARDS='data/wildcards.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
 
 main() {
@@ -28,7 +30,10 @@ main() {
 
 # Function 'removed_parked_domains' removes parked domains from the raw file.
 remove_parked_domains() {
-    retrieve_parked "$RAW" || return
+    # Exclude wildcards and root domains of subdomains
+    comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") > raw.tmp
+
+    retrieve_parked raw.tmp || return
 
     # Rename temporary parked file to be added into parked cache later
     mv parked_domains.tmp parked_in_raw.tmp
@@ -71,14 +76,14 @@ retrieve_parked() {
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
-    # Split file into 12 equal files
-    split -d -l $(( $(wc -l < "$1") / 12 )) "$1"
+    # Split file into 14 equal files
+    split -d -l $(( $(wc -l < "$1") / 14 )) "$1"
 
     # Run checks in parallel
     find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
     find_parked x04 & find_parked x05 & find_parked x06 & find_parked x07 &
     find_parked x08 & find_parked x09 & find_parked x10 & find_parked x11 &
-    find_parked x12 & find_parked x13
+    find_parked x12 & find_parked x13 & find_parked x14 & find_parked x15
     wait
     rm x??
 
@@ -112,7 +117,7 @@ find_parked() {
     while read -r domain; do
         # Check for parked message in site's HTML
         if grep -qiFf "$PARKED_TERMS" \
-            <<< "$(curl -sL --max-time 5 "http://${domain}/" | tr -d '\0')"; then
+            <<< "$(curl -sL --max-time 3 "http://${domain}/" | tr -d '\0')"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi

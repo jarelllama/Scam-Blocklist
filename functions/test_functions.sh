@@ -210,8 +210,8 @@ TEST_DEAD_CHECK() {
 TEST_PARKED_CHECK() {
     # Placeholders used as sample data
     # (split does not work well without enough records)
-    not_parked_placeholder=$(head -n 50 "$TOPLIST")
-    parked_placeholder=$(tail -n 50 "$TOPLIST")
+    not_parked_placeholder=$(head -n 40 "$TOPLIST")
+    parked_placeholder=$(tail -n 40 "$TOPLIST")
     printf "%s\n" "$not_parked_placeholder" >> "$RAW"
     printf "%s\n" "$parked_placeholder" >> "$PARKED_DOMAINS"
     # Collate placeholders to be removed later

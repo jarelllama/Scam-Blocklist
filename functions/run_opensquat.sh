@@ -32,8 +32,12 @@ opensquat() {
 
     bash functions/tools.sh format nrd.tmp
 
-    # Filter out previously processed domains and known dead/parked domains
-    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
+    # Download Google Safe Browsing domains
+    wget -qO safe_browsing.tmp 'https://raw.githubusercontent.com/elliotwutingfeng/Inversion-DNSBL-Blocklists/main/Google_hostnames.txt'
+
+    # Filter out previously processed domains, known dead/parked domains,
+    # and domains already flagged by Google Safe Browsing
+    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS" safe_browsing.tmp) \
         > temp && mv temp nrd.tmp
 
     # Exit if no domains to process
@@ -44,15 +48,16 @@ opensquat() {
 
     print_splashcreen
 
-    # Split file into 12 equal files
-    split -d -l $(( $(wc -l < nrd.tmp) / 12 )) nrd.tmp
+    # Split file into 14 equal files
+    split -d -l $(( $(wc -l < nrd.tmp) / 14 )) nrd.tmp
 
     # Run retrieval in parallel
     run_opensquat x00 & run_opensquat x01 & run_opensquat x02 &
     run_opensquat x03 & run_opensquat x04 & run_opensquat x05 &
     run_opensquat x06 & run_opensquat x07 & run_opensquat x08 &
     run_opensquat x09 & run_opensquat x10 & run_opensquat x11 &
-    run_opensquat x12 & run_opensquat x13
+    run_opensquat x12 & run_opensquat x13 & run_opensquat x14 &
+    run_opensquat x15
     wait
     rm x??
 
