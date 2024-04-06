@@ -2,9 +2,9 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sat Apr  6 02:45:44 UTC 2024
+# Last modified: Sat Apr  6 03:59:47 UTC 2024
 # Syntax: Unbound
-# Number of entries: 33599
+# Number of entries: 33603
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -1439,6 +1439,7 @@ local-zone: "ammunitionforsaleonline.com." always_nxdomain
 local-zone: "ammunitiongunbroker.com." always_nxdomain
 local-zone: "ammunitiongunstore.com." always_nxdomain
 local-zone: "ammunitiononline-shop.com." always_nxdomain
+local-zone: "ammunitiononline.com." always_nxdomain
 local-zone: "ammunitiononline.shop.com." always_nxdomain
 local-zone: "ammunitiononlineshop.com." always_nxdomain
 local-zone: "ammunitionreloadcenter.com." always_nxdomain
@@ -16721,6 +16722,7 @@ local-zone: "kranz-autoreifen.shop." always_nxdomain
 local-zone: "kratomexotic.com." always_nxdomain
 local-zone: "kraus-autoreifen.shop." always_nxdomain
 local-zone: "krdelivery.info." always_nxdomain
+local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kreamlenpuppies.com." always_nxdomain
 local-zone: "kreativtravel.de." always_nxdomain
 local-zone: "kreditsicher.com." always_nxdomain
@@ -20175,6 +20177,7 @@ local-zone: "mysamoyedpuppy.com." always_nxdomain
 local-zone: "myscinsuranceagent.com." always_nxdomain
 local-zone: "myshihtzuparadise.com." always_nxdomain
 local-zone: "myshippingnetwork.com." always_nxdomain
+local-zone: "myshoplaza.com." always_nxdomain
 local-zone: "mysodastream.shop." always_nxdomain
 local-zone: "myspanielkingdom.com." always_nxdomain
 local-zone: "myspotifygifts.com.au." always_nxdomain
@@ -21782,6 +21785,7 @@ local-zone: "onlineproductdiscount.shop." always_nxdomain
 local-zone: "onlinepurch.de." always_nxdomain
 local-zone: "onlineravipharmacy.com." always_nxdomain
 local-zone: "onlinereorg.com." always_nxdomain
+local-zone: "onlinesale2022.ru." always_nxdomain
 local-zone: "onlineskitchen.com." always_nxdomain
 local-zone: "onlinespecialdiscount.com." always_nxdomain
 local-zone: "onlinestandardtrust.com." always_nxdomain

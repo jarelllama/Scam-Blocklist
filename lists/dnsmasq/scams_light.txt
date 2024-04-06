@@ -2,9 +2,9 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
-# Last modified: Sat Apr  6 02:45:44 UTC 2024
+# Last modified: Sat Apr  6 03:59:47 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 2171
+# Number of entries: 2175
 #
 local=/01edc.com/
 local=/0onlyfans.com/
@@ -105,6 +105,7 @@ local=/ammodepotwi.com/
 local=/ammoforsale.com/
 local=/ammonationonline.shop/
 local=/ammovalleydepot.com/
+local=/ammunitiononline.com/
 local=/ammunitionsales.shop/
 local=/ammunitionyard.com/
 local=/amreahome.com/
@@ -1100,6 +1101,7 @@ local=/koowofficial.com/
 local=/kozeka.com/
 local=/kozmozinspire.com/
 local=/krakzen.com/
+local=/krdes.net.in/
 local=/kristaldentistry.com/
 local=/krminidachshunds.com/
 local=/krpethome.com/
@@ -1365,6 +1367,7 @@ local=/mygoldenretrieverpuppies.com/
 local=/mylifetimedachshund.com/
 local=/mynamejewelry.shop/
 local=/mynextpuppy.co.za/
+local=/myshoplaza.com/
 local=/mzm816.com/
 local=/naertinon.com/
 local=/nailsmith.co/
@@ -1441,6 +1444,7 @@ local=/onligg.com/
 local=/onlineammo-store.com/
 local=/onlinedoctornearme.com/
 local=/onlineherbalincense.com/
+local=/onlinesale2022.ru/
 local=/onlyfansk.com/
 local=/onpointshipppers.com/
 local=/onwofe.com/
