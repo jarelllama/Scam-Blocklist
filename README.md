@@ -80,7 +80,7 @@ The Google Custom Search JSON API allows a limited number of search queries per 
 
 ``` text
 Active search terms: 16
-Queries made today: 93
+Queries made today: 0
 Domains retrieved today: 0
 ```
 
