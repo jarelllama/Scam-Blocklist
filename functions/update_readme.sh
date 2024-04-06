@@ -95,7 +95,7 @@ The Google Custom Search JSON API allows a limited number of search queries per 
 
 \`\`\` text
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-Queries made today: $(csvgrep -c 1 -m "$TODAY" "$SOURCE_LOG" | csvgrep -c 2 -m 'Google Search' | csvcut -c 12 | awk '{sum += $1} END {print sum}')
+Queries made today: $(grep -F "$TODAY" "$SOURCE_LOG" | grep -xF 'Google Search' | csvcut -c 12 | awk '{sum += $1} END {print sum}')
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
