@@ -15,7 +15,9 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='data/wildcards.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly DNSTWIST_TARGETS='config/dnstwist_targets.txt'
+readonly PHISHING_TARGETS='config/phishing_targets.txt'
+readonly KEYWORDS='config/keywords.txt'
+readonly REGEX='config/regex.txt'
 readonly DNSTWIST_DICT='config/dnstwist_dict.txt'
 readonly TLDS='data/tlds.txt'
 readonly SOURCE_LOG='config/source_log.csv'
@@ -36,11 +38,11 @@ source() {
     mkdir -p data/pending
 
     source_manual
+    source_keywords
     source_aa419
     #source_dfpi  # Deactivated
     source_dnstwist
     source_guntab
-    source_opensquat
     source_petscams
     source_scamdirectory
     source_scamadviser
@@ -288,6 +290,26 @@ send_telegram() {
     -o /dev/null
 }
 
+# Function 'download_nrd_feed' downloads the collates the NRD feeds.
+# Output:
+#   nrd.tmp
+download_nrd_feed() {
+    [[ -f nrd.tmp ]] && return
+
+    # Collate NRD list and exit if any link is broken
+    # NRDs feeds are limited to domains registered in the 30 days
+    {
+        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
+            || exit 1
+        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+            | grep -vF '#' || exit 1
+        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
+            || exit 1
+    } > nrd.tmp
+
+    format_file nrd.tmp
+}
+
 # Function 'log_event' logs domain processing events into the domain log.
 #   $1: domains to log stored in a variable.
 #   $2: event type (dead, whitelisted, etc.)
@@ -416,10 +438,21 @@ search_google() {
     process_source
 }
 
-source_opensquat() {
-    local source='openSquat'
+source_keywords() {
+    local source='Keyword Matching'
     local ignore_from_light=true
-    local results_file='data/pending/domains_opensquat.tmp'
+    local results_file='data/pending/domains_keywords.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    download_nrd_feed
+
+    # Find keyword matches in NRD feed
+    grep -Ff "$KEYWORDS" nrd.tmp >> "$results_file"
+
+    # Find regex matches in NRD feed
+    grep -Ef "$REGEX" -- nrd.tmp >> "$results_file"
+
     process_source
 }
 
@@ -432,23 +465,17 @@ source_dnstwist() {
     # Install dnstwist
     pip install -q dnstwist
 
-    # Collate NRD list and exit if any link is broken
-    # NRDs feeds are limited to domains registered in the 30 days
-    {
-        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
-            || exit 1
-        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
-            | grep -vF '#' || exit 1
-        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
-            || exit 1
-    } > nrd.tmp
+    download_nrd_feed
 
-    format_file nrd.tmp
+    # Append common TLDs to phishing targets list
+    while read -r tld; do
+        awk -v tld="$tld" '{print $0 "." tld}' "$PHISHING_TARGETS" > targets.tmp
+    done < "$TLDS"
 
     # Run dnstwist and collate results
     while read -r domain; do
-        dnstwist "$domain" -d "$DNSTWIST_DICT" -f list --tld "$TLDS" >> results.tmp
-    done < "$DNSTWIST_TARGETS"
+        dnstwist "$domain" -d "$DNSTWIST_DICT" -f list >> results.tmp
+    done < target.tmp
 
     format_file results.tmp
 
