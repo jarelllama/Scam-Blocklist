@@ -286,6 +286,7 @@ check_syntax() {
     if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
 
+        # Check if rule syntax is wrong or missing element
         if grep -qF "$domain" <<< "$1"; then
             grep -F "$domain" "lists/${2}/scams.txt"
         else
@@ -299,6 +300,7 @@ check_syntax() {
     if ! grep -qxF "$1" "lists/${2}/scams_light.txt"; then
         printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$2"
 
+        # Check if rule syntax is wrong or missing element
         if grep -qF "$domain" <<< "$1"; then
             grep -F "$domain" "lists/${2}/scams_light.txt"
         else
