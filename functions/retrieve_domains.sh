@@ -38,7 +38,7 @@ source() {
     mkdir -p data/pending
 
     source_manual
-    source_keywords
+    #source_keywords
     source_aa419
     #source_dfpi  # Deactivated
     source_dnstwist
