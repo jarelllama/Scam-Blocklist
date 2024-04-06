@@ -9,7 +9,6 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [ANFRAS](https://anfras.com/fakeshops/) | Fake | Yes | - |
 | [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Advance-fee | | |
 | [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | Yes | - |
-| [Elliotwutingfeng's Inversion DNSBL Blocklist](https://github.com/elliotwutingfeng/Inversion-DNSBL-Blocklists) | Google Safe Browsing | - | - |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
 | [Hagezi's Most Abused TLDs list](https://github.com/hagezi/dns-blocklists#crystal_ball-most-abused-tlds---protects-against-known-malicious-top-level-domains-) | TLD | - | - |
