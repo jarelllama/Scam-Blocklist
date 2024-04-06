@@ -41,7 +41,6 @@ $(print_stats 'Google Search')
 $(print_stats 'aa419.org')
 $(print_stats 'dnstwist')
 $(print_stats 'guntab.com')
-$(print_stats 'openSquat')
 $(print_stats 'petscams.com')
 $(print_stats 'scam.directory')
 $(print_stats 'scamadviser.com')
@@ -99,32 +98,17 @@ Queries made today: $(grep -F "$TODAY" "$SOURCE_LOG" | grep -F 'Google Search' |
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
-### Retrieving malicious NRDs using automated detection
+### Retrieving phishing NRDs using dnstwist
 
-New phishing domains are created daily, and unlike other sources that depend on manual reporting, [openSquat](https://github.com/atenreiro/opensquat) and [dnstwist](https://github.com/elceef/dnstwist) can effectively retrieve new phishing domains within days of their registration date.
+New phishing domains are created daily, and unlike other sources that rely on manual reporting, [dnstwist](https://github.com/elceef/dnstwist) can automatically detect new phishing domains within days of their registration date.
 
-openSquat and dnstwist are open-source tools for detecting common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack). By feeding these tools an actively updated newly registered domains (NRD) feed, they can programmatically retrieve new phishing domains with marginal false positives.
+dnstwist is an open-source detection tool for common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack).
 
-#### Process
+#### Effectiveness
 
-For input, openSquat uses keywords while dnstwist uses domains for their respective detection algorithms which generate domain permutations of the input keywords/domains. Both inputs are a carefully handpicked set of common phishing targets such as cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives.
+On a daily basis, dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked collection of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.txt)
 
-The input datasets can be viewed here:
-
-- [opensquat_keywords.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/opensquat_keywords.txt)
-- [dnstwist_targets.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/dnstwist_targets.txt)
-
-The generated permutations are checked for matches in an NRD feed comprising domains registered within the last 10 days for openSquat, and 30 days for dnstwist. Matched domains are collated into the blocklist after filtering.
-
-#### Limitations
-
-As the retrieval process requires no manual intervention, false positives may slip through despite the intensive effort put into testing the sets of input. This is a concern particularly for openSquat because of its use of keywords to feed its detection algorithm.
-
-For this reason, the openSquat source is excluded from the light version of the blocklist. Regardless, great care is taken to reduce false positives via these actions:
-
-- Frequent monitoring of the retrieved domains from openSquat and auditing of the list of keywords
-- Automated detection and Telegram notifications for potential false positives
-- Active maintenance of a whitelist that uses keyword matching which can be viewed here: [whitelist.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
+The generated domain permutations are appended with commonly abused top-level domains (TLDs) sourced from [Hagezi's Most Abused TLDs feed](https://github.com/hagezi/dns-blocklists#crystal_ball-most-abused-tlds---protects-against-known-malicious-top-level-domains-). The domains are then checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishing domains with marginal false positives.
 
 ### Regarding other sources
 
@@ -132,13 +116,14 @@ All sources used presently or in the past are credited here: [SOURCES.md](https:
 
 The domain retrieval process for all sources can be viewed in the repository's code.
 
-## Filtering process
+## Automated filtering process
 
-- The domains collated from all sources are filtered against a whitelist (scam reporting sites, forums, vetted stores, etc.)
+- The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
 - The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
 - Common subdomains like 'www' are removed to make use of wildcard matching for all other subdomains
 - Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
 - Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
+- Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations
 
 The full filtering process can be viewed in the repository's code.
 
