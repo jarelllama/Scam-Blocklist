@@ -36,8 +36,8 @@ remove_parked_domains() {
 
     retrieve_parked raw.tmp || return
 
-    # Rename temporary parked file to be added into parked cache later
-    mv parked_domains.tmp parked_raw.tmp
+    # Copy temporary parked file to be added into parked cache later
+    cp parked_domains.tmp parked_raw.tmp
 
     # Remove parked domains from raw file
     comm -23 "$RAW" parked_domains.tmp > raw.tmp

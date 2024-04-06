@@ -48,8 +48,8 @@ check_subdomains() {
     comm -23 "$SUBDOMAINS" dead.tmp > subdomains.tmp
     mv subdomains.tmp "$SUBDOMAINS"
 
-    # Rename temporary dead file to be added into dead cache later
-    mv dead.tmp dead_subdomains.tmp
+    # Copy temporary dead file to be added into dead cache later
+    cp dead.tmp dead_subdomains.tmp
 
     # Strip dead domains to their root domains
     while read -r subdomain; do
@@ -74,8 +74,8 @@ check_redundant() {
     comm -23 "$REDUNDANT_DOMAINS" dead.tmp > redundant.tmp
     mv redundant.tmp "$REDUNDANT_DOMAINS"
 
-    # Rename temporary dead file to be added into dead cache later
-    mv dead.tmp dead_redundant.tmp
+    # Copy temporary dead file to be added into dead cache later
+    cp dead.tmp dead_redundant.tmp
 
     # Find unused wildcards
     while read -r wildcard; do
@@ -101,8 +101,8 @@ check_dead() {
 
     find_dead raw.tmp || return
 
-    # Rename temporary dead file to be added into dead cache later
-    mv dead.tmp dead_raw.tmp
+    # Copy temporary dead file to be added into dead cache later
+    cp dead.tmp dead_raw.tmp
 
     # Remove dead domains from raw file
     comm -23 "$RAW" dead.tmp > raw.tmp
