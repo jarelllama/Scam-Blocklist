@@ -147,7 +147,7 @@ find_dead() {
     dead-domains-linter -i formatted_domains.tmp --export dead.tmp
     [[ ! -s dead.tmp ]] && return 1
 
-    # The Dead Domains Linter ouputs without an ending new line
+    # The Dead Domains Linter exports without an ending new line
     printf "\n" >> dead.tmp
     return
 }
