@@ -525,7 +525,7 @@ test_dead_subdomain_check() {
         printf "%s\n" "$subdomain" >> out_dead.txt
     done < "$SUBDOMAINS_TO_REMOVE"
     # EXPECTED OUTPUT
-    printf "%s\n" "dead,584308-dead-subdomain-test.com,raw" >> out_log.txt
+    printf "dead,584308-dead-subdomain-test.com,raw\n" >> out_log.txt
 }
 
 # TEST: removal of dead redundant domains and unused wildcards
