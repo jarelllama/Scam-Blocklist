@@ -186,6 +186,7 @@ print_stats() {
 sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
+
     grep -F "$1" "$SOURCE_LOG" | grep -F "$2" | csvgrep -c 14 -m yes \
         | csvcut -c 5 | awk '{sum += $1} END {print sum}'
 }
