@@ -146,6 +146,9 @@ find_dead() {
     sed 's/^/||/; s/$/^/' "$1" > formatted_domains.tmp
     dead-domains-linter -i formatted_domains.tmp --export dead.tmp
     [[ ! -s dead.tmp ]] && return 1 || return 0
+
+    # The Dead Domains Linter ouputs without an ending new line
+    printf "\n" >> dead.tmp
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
