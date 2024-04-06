@@ -180,6 +180,7 @@ build() {
     fi
 
     # Exit if no new domains to add
+    # [ ! -s ] does not seem to work well here
     if ! grep -q '[a-z]' retrieved_domains.tmp; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
         exit
