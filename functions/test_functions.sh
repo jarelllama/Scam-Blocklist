@@ -181,11 +181,8 @@ TEST_DEAD_CHECK() {
     # (resurrected domains are not added back into light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
-    # Run script and check exit status
-    if ! run_script check_dead.sh; then
-        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
-        error=true
-    fi
+    # Run script
+    run_script check_dead.sh
 
     # Sort dead domains file for easy comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
@@ -224,11 +221,8 @@ TEST_PARKED_CHECK() {
     # (Unparked domains are not added back into light)
     grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
 
-    # Run script and check exit status
-    if ! run_script check_parked.sh; then
-        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
-        error=true
-    fi
+    # Run script
+    run_script check_parked.sh
 
     # Remove placeholder lines
     comm -23 "$RAW" placeholders.txt > raw.tmp
@@ -260,6 +254,7 @@ TEST_BUILD() {
     printf "\e[1m[start] %s\e[0m\n" "build_lists.sh"
 
     # Run script and check exit status
+    # (function 'run_script' is not needed here)
     if ! bash functions/build_lists.sh; then
         printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
         error=true
@@ -626,8 +621,11 @@ run_script() {
 
     printf "%s\n" "----------------------------------------------------------------------"
 
-    # Return 1 if script has an exit status of 1
-    [[ "$errored" == true ]] && return 1 || return 0
+    # Check exit status
+    if [[ "$errored" == true ]]; then
+        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
+        error=true
+    fi
 }
 
 # Function 'check_and_exit' checks if the script should exit with an
