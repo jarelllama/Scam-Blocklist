@@ -253,7 +253,7 @@ log_source() {
 
     echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count},\
 ${filtered_count},${total_whitelisted_count},${dead_count},${redundant_count},\
-${parked_count},${toplist_count},$(echo "$domains_in_toplist" | tr '\n' ' '),\
+${parked_count},${toplist_count},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
 ${query_count},${error},no" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
