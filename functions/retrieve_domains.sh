@@ -470,7 +470,7 @@ source_dnstwist() {
 
     # Append common TLDs to phishing targets list
     while read -r tld; do
-        awk -v tld="$tld" '{print $0 "." tld}' "$PHISHING_TARGETS" > targets.tmp
+        awk -v tld="$tld" '{print $0 "." tld}' "$PHISHING_TARGETS" >> targets.tmp
     done < "$TLDS"
 
     # Run dnstwist and collate results
