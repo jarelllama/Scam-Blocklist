@@ -91,7 +91,7 @@ dnstwist is an open-source detection tool for common cybersquatting techniques l
 
 #### Effectiveness
 
-On a daily basis, dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked collection of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.txt)
+dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked collection of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.txt)
 
 The generated domain permutations are appended with commonly abused top-level domains (TLDs) sourced from [Hagezi's Most Abused TLDs feed](https://github.com/hagezi/dns-blocklists#crystal_ball-most-abused-tlds---protects-against-known-malicious-top-level-domains-). The domains are then checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishing domains with marginal false positives.
 
