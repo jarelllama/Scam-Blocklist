@@ -289,6 +289,7 @@ send_telegram() {
 # Output:
 #   toplist.tmp
 download_toplist() {
+    [[ -f toplist.tmp ]] && return
     wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
     awk -F ',' '{print $2}' toplist.tmp > temp && mv temp toplist.tmp
     format_file toplist.tmp
