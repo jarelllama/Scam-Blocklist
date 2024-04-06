@@ -212,6 +212,7 @@ TEST_PARKED_CHECK() {
     for i in {1..40};do
         printf "placeholder%s.com\n" "$i" >> placeholders.txt
     done
+    sort -u placeholders.txt -o placeholders.txt
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$PARKED_DOMAINS"
 

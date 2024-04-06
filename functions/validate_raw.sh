@@ -117,7 +117,7 @@ validate_raw() {
     # Find matching domains in toplist, excluding blacklisted domains
     # Note domains found are not removed
     download_toplist
-    domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") "$TOPLIST") "$BLACKLIST")"
+    domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") toplist.tmp) "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( toplist_count > 0 )); then
         awk '{print $0 " (toplist)"}' \

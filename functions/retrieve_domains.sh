@@ -145,7 +145,7 @@ process_source() {
 
     # Remove domains in toplist, excluding blacklisted domains
     download_toplist
-    domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") "$TOPLIST") "$BLACKLIST")"
+    domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") toplist.tmp) "$BLACKLIST")"
     toplist_count="$(wc -w <<< "$domains_in_toplist")"
     if (( "$toplist_count" > 0 )); then
         domains="$(comm -23 <(echo "$domains") <(echo "$domains_in_toplist"))"
