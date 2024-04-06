@@ -290,9 +290,10 @@ send_telegram() {
     -o /dev/null
 }
 
-# Function 'download_nrd_feed' downloads the collates the NRD feeds.
+# Function 'download_nrd_feed' downloads and collates the NRD feeds.
 # Output:
 #   nrd.tmp
+#   exit status 1 if any link is broken
 download_nrd_feed() {
     [[ -f nrd.tmp ]] && return
 
