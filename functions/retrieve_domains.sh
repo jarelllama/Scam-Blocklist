@@ -450,6 +450,10 @@ source_dnstwist() {
 
     format_file nrd.tmp
 
+    # Remove aleady processed domains to save processing time
+    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
+    mv temp nrd.tmp
+
     # Get the top 15 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above
