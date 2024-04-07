@@ -19,7 +19,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 
 ``` text
 Total domains: 34782
-Total domains (light version): 3270
+Light version: 3270
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
