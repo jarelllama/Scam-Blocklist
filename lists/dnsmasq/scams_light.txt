@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.125308.2024
+# Version: 04.07.225421.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 12:53:08 UTC 2024
+# Last modified: Sun Apr  7 22:54:21 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 3270
+# Number of entries: 3264
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -1088,7 +1088,6 @@ local=/gikye.com/
 local=/girafer.shop/
 local=/giraffetools.ca/
 local=/giraffetools.uk/
-local=/gitcoin.shop/
 local=/gitigroup.ru/
 local=/glacierbayshop.com/
 local=/glambags.co/
@@ -1419,8 +1418,6 @@ local=/kraken.wtf/
 local=/krakena.net/
 local=/krakens.org/
 local=/krakenv.shop/
-local=/krakn.store/
-local=/krakon.xyz/
 local=/krakzen.com/
 local=/krdes.net.in/
 local=/kristaldentistry.com/
@@ -1661,7 +1658,6 @@ local=/micosoft365.online/
 local=/microminihighlandcow.com/
 local=/microsoft-365.ru/
 local=/microsofts.info/
-local=/microsoftt.net/
 local=/microsoftu.net/
 local=/microsoift.net/
 local=/micrsoft.org/
@@ -2312,7 +2308,6 @@ local=/smokecigarss.com/
 local=/smokeydispensary.com/
 local=/smokeyschems.com/
 local=/smoothlyk.com/
-local=/snapcat.biz/
 local=/snapcat.xyz/
 local=/snapchat.guru/
 local=/snapchat.life/
@@ -2974,7 +2969,6 @@ local=/uspsso.top/
 local=/uspssq.xyz/
 local=/uspsss.com/
 local=/uspsst.top/
-local=/uspsstamppromotion.com/
 local=/uspssubsidiary.com/
 local=/uspsswp.top/
 local=/uspst.club/

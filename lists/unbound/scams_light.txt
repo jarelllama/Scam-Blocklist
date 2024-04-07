@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.125308.2024
+# Version: 04.07.225421.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 12:53:08 UTC 2024
+# Last modified: Sun Apr  7 22:54:21 UTC 2024
 # Syntax: Unbound
-# Number of entries: 3270
+# Number of entries: 3264
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1089,7 +1089,6 @@ local-zone: "gikye.com." always_nxdomain
 local-zone: "girafer.shop." always_nxdomain
 local-zone: "giraffetools.ca." always_nxdomain
 local-zone: "giraffetools.uk." always_nxdomain
-local-zone: "gitcoin.shop." always_nxdomain
 local-zone: "gitigroup.ru." always_nxdomain
 local-zone: "glacierbayshop.com." always_nxdomain
 local-zone: "glambags.co." always_nxdomain
@@ -1420,8 +1419,6 @@ local-zone: "kraken.wtf." always_nxdomain
 local-zone: "krakena.net." always_nxdomain
 local-zone: "krakens.org." always_nxdomain
 local-zone: "krakenv.shop." always_nxdomain
-local-zone: "krakn.store." always_nxdomain
-local-zone: "krakon.xyz." always_nxdomain
 local-zone: "krakzen.com." always_nxdomain
 local-zone: "krdes.net.in." always_nxdomain
 local-zone: "kristaldentistry.com." always_nxdomain
@@ -1662,7 +1659,6 @@ local-zone: "micosoft365.online." always_nxdomain
 local-zone: "microminihighlandcow.com." always_nxdomain
 local-zone: "microsoft-365.ru." always_nxdomain
 local-zone: "microsofts.info." always_nxdomain
-local-zone: "microsoftt.net." always_nxdomain
 local-zone: "microsoftu.net." always_nxdomain
 local-zone: "microsoift.net." always_nxdomain
 local-zone: "micrsoft.org." always_nxdomain
@@ -2313,7 +2309,6 @@ local-zone: "smokecigarss.com." always_nxdomain
 local-zone: "smokeydispensary.com." always_nxdomain
 local-zone: "smokeyschems.com." always_nxdomain
 local-zone: "smoothlyk.com." always_nxdomain
-local-zone: "snapcat.biz." always_nxdomain
 local-zone: "snapcat.xyz." always_nxdomain
 local-zone: "snapchat.guru." always_nxdomain
 local-zone: "snapchat.life." always_nxdomain
@@ -2975,7 +2970,6 @@ local-zone: "uspsso.top." always_nxdomain
 local-zone: "uspssq.xyz." always_nxdomain
 local-zone: "uspsss.com." always_nxdomain
 local-zone: "uspsst.top." always_nxdomain
-local-zone: "uspsstamppromotion.com." always_nxdomain
 local-zone: "uspssubsidiary.com." always_nxdomain
 local-zone: "uspsswp.top." always_nxdomain
 local-zone: "uspst.club." always_nxdomain
