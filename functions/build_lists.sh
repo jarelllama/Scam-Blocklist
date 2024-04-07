@@ -58,7 +58,7 @@ EOF
 # list formats to be referenced by the 'build' function.
 #   $syntax: name of list syntax
 #   $directory: directory to create list in
-#   $comment: character used for comments (defaults is '#')
+#   $comment: character used for comments (default is '#')
 #   $before: characters to append before each domain
 #   $after: characters to append after each domain
 

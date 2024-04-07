@@ -324,7 +324,7 @@ cleanup() {
 # The 'source_<source>' functions are to retrieve results from the
 # respective sources.
 # Input:
-#   $source: name of the source which is used in the console and logs
+#   $source: name of the source that is used in the console and logs
 #   $ignore_from_light: if true, the results are not included in the
 #       light version (default is false)
 #   $results_file: file path to save retrieved results to be used for

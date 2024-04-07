@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script is used to test the various functions/scripts of this project.
-# Each test consist of an input file which will be processed by
+# Each test consists of an input file which will be processed by
 # the called script, and an output file which is the expected results
 # from the processing. The input and output files are compared to determine
 # the success or failure of the test.
