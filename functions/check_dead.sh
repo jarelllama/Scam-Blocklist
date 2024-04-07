@@ -49,16 +49,18 @@ check_subdomains() {
 
     # Strip dead domains to their root domains
     while read -r subdomain; do
-        dead_root_domains="$(sed "s/^${subdomain}\.//" dead.tmp | sort -u)"
+        sed -i "s/^${subdomain}\.//" dead.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
+    format_file dead.tmp
+
     # Remove dead root domains from raw file and root domains file
-    comm -23 "$RAW" <(echo "$dead_root_domains") > raw.tmp
-    comm -23 "$ROOT_DOMAINS" <(echo "$dead_root_domains") > root.tmp
+    comm -23 "$RAW" dead.tmp > raw.tmp
+    comm -23 "$ROOT_DOMAINS" dead.tmp > root.tmp
     mv raw.tmp "$RAW"
     mv root.tmp "$ROOT_DOMAINS"
 
-    log_event "$dead_root_domains" dead raw
+    log_event "$(<dead.tmp)" dead raw
 }
 
 # Function 'check_redundant' removes dead domains from the redundant domains
@@ -143,8 +145,8 @@ check_alive() {
 #   dead.tmp
 #   return 1 if dead domains not found
 find_dead() {
-    sed 's/^/||/; s/$/^/' "$1" > formatted_domains.tmp
-    dead-domains-linter -i formatted_domains.tmp --export dead.tmp
+    sed 's/^/||/; s/$/^/' "$1" > "${1}.tmp"
+    dead-domains-linter -i "${1}.tmp" --export dead.tmp
     [[ ! -s dead.tmp ]] && return 1
 
     # The Dead Domains Linter exports without an ending new line
