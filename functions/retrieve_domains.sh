@@ -463,6 +463,9 @@ source_dnstwist() {
     grep -P '^\|\|(?!xn)' tld.tmp | sed 's/||//; s/\^//' > temp \
         && mv temp tld.tmp
 
+    # Add common TLDs to the TLD feed
+    printf "com\norg\nnet\n" >> tld.tmp
+
     # Append '.com' TLD onto targets as placeholder
     sed 's/$/.com/' "$PHISHING_TARGETS" > targets.tmp
 
@@ -471,7 +474,7 @@ source_dnstwist() {
         dnstwist "$domain" -f list >> results.tmp
     done < targets.tmp
 
-    # Append top abused TLDs
+    # Append TLDs
     while read -r tld; do
         sed "s/.com/.${tld}/" results.tmp >> results_with_tlds.tmp
     done < tld.tmp
