@@ -268,7 +268,7 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
             "$total_whitelisted_count" "$excluded_count" "${toplist_count}"
     fi
 
-    printf "Processing time: %ss\n" "$(( "$(date +%s)" - execution_time ))"
+    printf "Processing time: %s seconds\n" "$(( "$(date +%s)" - execution_time ))"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
@@ -342,12 +342,15 @@ source_google_search() {
     local source='Google Search'
     local results_file
     local search_term
+    local execution_time
 
     if [[ "$USE_EXISTING" == true ]]; then
         # Use existing retrieved results
         # Loop through the results from each search term
         for results_file in data/pending/domains_google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
+
+            execution_time="$(date +%s)"
 
             # Remove header from file name
             search_term=${results_file#data/pending/domains_google_search_}
