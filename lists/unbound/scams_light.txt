@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.054952.2024
+# Version: 04.07.101657.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 05:49:52 UTC 2024
+# Last modified: Sun Apr  7 10:16:57 UTC 2024
 # Syntax: Unbound
-# Number of entries: 2425
+# Number of entries: 2427
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -372,6 +372,7 @@ local-zone: "buycoinstry.com." always_nxdomain
 local-zone: "buycounterfietnote.com." always_nxdomain
 local-zone: "buyghostgunscanada.com." always_nxdomain
 local-zone: "buyghostgunskit.com." always_nxdomain
+local-zone: "buygoodgift.com." always_nxdomain
 local-zone: "buyketaminecrystals.com." always_nxdomain
 local-zone: "buymdmaindia.com." always_nxdomain
 local-zone: "buymegadrugsonline.com." always_nxdomain
@@ -1466,6 +1467,7 @@ local-zone: "mphglobaltrading.co.za." always_nxdomain
 local-zone: "mqbestdeals.com." always_nxdomain
 local-zone: "mrsbensonbirds.com." always_nxdomain
 local-zone: "msnhandcraft.com." always_nxdomain
+local-zone: "mttracoin.com." always_nxdomain
 local-zone: "mulexzone.com." always_nxdomain
 local-zone: "multinus.com." always_nxdomain
 local-zone: "multitacticgears.co.za." always_nxdomain

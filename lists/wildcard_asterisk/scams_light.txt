@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.054952.2024
+# Version: 04.07.101657.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 05:49:52 UTC 2024
+# Last modified: Sun Apr  7 10:16:57 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 2425
+# Number of entries: 2427
 #
 *.01edc.com
 *.1sttheworld.com
@@ -371,6 +371,7 @@
 *.buycounterfietnote.com
 *.buyghostgunscanada.com
 *.buyghostgunskit.com
+*.buygoodgift.com
 *.buyketaminecrystals.com
 *.buymdmaindia.com
 *.buymegadrugsonline.com
@@ -1465,6 +1466,7 @@
 *.mqbestdeals.com
 *.mrsbensonbirds.com
 *.msnhandcraft.com
+*.mttracoin.com
 *.mulexzone.com
 *.multinus.com
 *.multitacticgears.co.za

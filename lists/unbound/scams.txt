@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.054952.2024
+# Version: 04.07.101657.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 05:49:52 UTC 2024
+# Last modified: Sun Apr  7 10:16:57 UTC 2024
 # Syntax: Unbound
-# Number of entries: 33792
+# Number of entries: 33794
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -4533,6 +4533,7 @@ local-zone: "buyglockonline.com." always_nxdomain
 local-zone: "buyglockonline.net." always_nxdomain
 local-zone: "buygoldbars.africa." always_nxdomain
 local-zone: "buygoldcoinsforsaleus.com." always_nxdomain
+local-zone: "buygoodgift.com." always_nxdomain
 local-zone: "buyguns-online.com." always_nxdomain
 local-zone: "buyguns-usa.com." always_nxdomain
 local-zone: "buyguns.online.com." always_nxdomain
@@ -20057,6 +20058,7 @@ local-zone: "mtd-garden.de." always_nxdomain
 local-zone: "mtfxtrader.com." always_nxdomain
 local-zone: "mtgfreightdispatching.com." always_nxdomain
 local-zone: "mtrexc.com." always_nxdomain
+local-zone: "mttracoin.com." always_nxdomain
 local-zone: "muangchangsugarmill.com." always_nxdomain
 local-zone: "muaythaisite.com." always_nxdomain
 local-zone: "mubyspotify.com." always_nxdomain

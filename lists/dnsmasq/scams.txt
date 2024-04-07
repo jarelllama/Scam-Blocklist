@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.054952.2024
+# Version: 04.07.101657.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 05:49:52 UTC 2024
+# Last modified: Sun Apr  7 10:16:57 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 33792
+# Number of entries: 33794
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -4532,6 +4532,7 @@ local=/buyglockonline.com/
 local=/buyglockonline.net/
 local=/buygoldbars.africa/
 local=/buygoldcoinsforsaleus.com/
+local=/buygoodgift.com/
 local=/buyguns-online.com/
 local=/buyguns-usa.com/
 local=/buyguns.online.com/
@@ -20056,6 +20057,7 @@ local=/mtd-garden.de/
 local=/mtfxtrader.com/
 local=/mtgfreightdispatching.com/
 local=/mtrexc.com/
+local=/mttracoin.com/
 local=/muangchangsugarmill.com/
 local=/muaythaisite.com/
 local=/mubyspotify.com/
