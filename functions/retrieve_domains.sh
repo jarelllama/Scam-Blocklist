@@ -51,8 +51,9 @@ process_source() {
 
     format_file "$results_file"
 
-    # Remove https:, http: and slashes to get domains, and
-    # migrate to a variable
+    # Remove http(s): and slashes to get domains. Then migrate to a variable
+    # (some of the results are in URL form so this is done here once instead of
+    # multiple times in the source functions)
     domains="$(sed 's/https\?://; s/\///g' "$results_file" | sort -u)"
     rm "$results_file"
 
