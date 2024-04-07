@@ -18,7 +18,7 @@ This blocklist is meant to be an alternative to blocking all newly registered do
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 33793
+Total domains: 33792
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -56,7 +56,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2424
+Total domains: 2425
 </details>
 
 ## Sources
