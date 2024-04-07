@@ -500,10 +500,11 @@ source_manual() {
     local source='Manual'
     local results_file='data/pending/domains_manual.tmp'
     local execution_time
-    execution_time="$(date +%s)"
 
     # Return if results file not found (source is the file itself)
     [[ ! -f "$results_file" ]] && return
+
+    execution_time="$(date +%s)"
 
     grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > domains.tmp
     mv domains.tmp "$results_file"
