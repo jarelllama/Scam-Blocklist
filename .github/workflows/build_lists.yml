@@ -7,7 +7,7 @@ on:
     workflows:
       - Remove dead domains
       - Remove parked domains
-      - Manually add entries
+      - Manually add domains
       - Retrieve domains
       - Validate entries
     types:
