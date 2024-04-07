@@ -259,17 +259,16 @@ ${query_count},${error},no" >> "$SOURCE_LOG"
 
     if [[ "$error" == 'empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
-        printf "%s\n" "----------------------------------------------------------------------"
 
         # Send telegram notification
         send_telegram "Source '$source' retrieved no results. Potential error occurred."
-
-        return
+    else
+        printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
+            "${unfiltered_count}" "${filtered_count}" \
+            "$total_whitelisted_count" "$excluded_count" "${toplist_count}"
     fi
 
-    printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
-        "${unfiltered_count}" "${filtered_count}" \
-        "$total_whitelisted_count" "$excluded_count" "${toplist_count}"
+    printf "Processing time: %ss\n" "$(( "$(date +%s)" - execution_time ))"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
@@ -385,6 +384,8 @@ search_google() {
     local page_results
     local page_domains
     local query_count=0
+    local execution_time
+    execution_time="$(date +%s)"
 
     touch "$results_file"  # Create results file to ensure proper logging
 
@@ -430,6 +431,8 @@ search_google() {
 source_dnstwist() {
     local source='dnstwist'
     local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -493,6 +496,8 @@ source_dnstwist() {
 source_manual() {
     local source='Manual'
     local results_file='data/pending/domains_manual.tmp'
+    local execution_time
+    execution_time="$(date +%s)"
 
     # Return if results file not found (source is the file itself)
     [[ ! -f "$results_file" ]] && return
@@ -509,6 +514,8 @@ source_aa419() {
 
     local source='aa419.org'
     local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -525,6 +532,8 @@ source_guntab() {
     local source='guntab.com'
     local ignore_from_light=true
     local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -540,6 +549,8 @@ source_guntab() {
 source_petscams() {
     local source='petscams.com'
     local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -558,6 +569,8 @@ source_petscams() {
 source_scamdirectory() {
     local source='scam.directory'
     local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -574,6 +587,8 @@ source_scamadviser() {
     local source='scamadviser.com'
     local results_file="data/pending/domains_${source}.tmp"
     local page_results
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -597,6 +612,8 @@ source_dfpi() {
     local source='dfpi.ca.gov'
     local ignore_from_light=true
     local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -612,6 +629,8 @@ source_dfpi() {
 source_stopgunscams() {
     local source='stopgunscams.com'
     local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
