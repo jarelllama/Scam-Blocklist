@@ -84,11 +84,7 @@ Google provides a [Search API](https://developers.google.com/custom-search/v1/ov
 
 Scam sites often do not have long lifespans; malicious domains may be replaced before they can be manually reported. By programmatically searching Google using paragraphs from real-world scam sites, new domains can be added as soon as Google crawls the site. This requires no manual reporting.
 
-The list of search terms is proactively updated and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
-
-#### Limitations
-
-The Google Custom Search JSON API allows a limited number of search queries per day. To optimize the number of queries made, each search term is frequently benchmarked on its number of new domains and false positives. Underperforming search terms are flagged and disabled.
+The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 #### Statistics for Google Search source
 
