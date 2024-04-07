@@ -81,7 +81,7 @@ validate_raw() {
 
     # Strip potential redundant domains down to their root domains
     stripped_redundant="$(echo "$potential_redundant" \
-        | rev | awk -F '.' '{print $1 "." $2}' | rev | sort -u)"
+        | awk -F '.' '{print $(NF-1) "." $NF}' | sort -u)"
 
     # Find wildcard domains by finding root domains already in the blocklist
     wildcard_domains="$(comm -12 <(echo "$domains") <(echo "$stripped_redundant"))"

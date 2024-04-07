@@ -296,23 +296,6 @@ download_toplist() {
     [[ ! -f toplist.tmp ]] && send_telegram "Error downloading toplist."
 }
 
-# Function 'download_nrd' downloads, collates the NRD feeds,
-# and send notifications if any link is broken.
-# Output:
-#   nrd.tmp
-download_nrd() {
-    # NRDs feeds are limited to domains registered in the last 30 days
-    {
-        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
-            || send_telegram "Shreshta's NRD list URL is broken."
-        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
-            | grep -vF '#' || send_telegram "Hagezi's NRD list URL is broken."
-        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
-            || send_telegram "openSquat's NRD list URL is broken."
-    } > nrd.tmp
-    format_file nrd.tmp
-}
-
 # Function 'log_event' logs domain processing events into the domain log.
 #   $1: domains to log stored in a variable.
 #   $2: event type (dead, whitelisted, etc.)
@@ -433,7 +416,8 @@ search_google() {
         jq -e '.items' &> /dev/null <<< "$page_results" || break
 
         # Get domains from each page
-        page_domains="$(jq -r '.items[].link' <<< "$page_results" | awk -F/ '{print $3}')"
+        page_domains="$(jq -r '.items[].link' <<< "$page_results" \
+            | awk -F '/' '{print $3}')"
         printf "%s\n" "$page_domains" >> "$results_file"
 
         # Stop search term if no more pages are required
@@ -452,19 +436,25 @@ source_dnstwist() {
     # Install dnstwist
     pip install -q dnstwist
 
-    # Download NRD feed
-    download_nrd
+    # Download and collate NRD feeds
+    # (limited to domains registered in the last 30 days)
+    # A notification is sent if any link is broken
+    {
+        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
+            || send_telegram "Shreshta's NRD list URL is broken."
+        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+            | grep -vF '#' || send_telegram "Hagezi's NRD list URL is broken."
+        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
+            || send_telegram "openSquat's NRD list URL is broken."
+    } > nrd.tmp
 
-    # Download top abused TLDs feed
-    wget -qO tld.tmp 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/spam-tlds-adblock-aggressive.txt' \
-        || send_telegram "Hagezi's TLD list URL is broken."
+    format_file nrd.tmp
 
-    # Format the TLD feed
-    grep -P '^\|\|(?!xn)' tld.tmp | sed 's/||//; s/\^//' > temp \
-        && mv temp tld.tmp
-
-    # Add common TLDs to the TLD feed
-    printf "com\norg\nnet\n" >> tld.tmp
+    # Get the top 15 TLDs from the NRD feed
+    # Only 10,000 entries are sampled to save time while providing the same
+    # ranking as 100,000 entries and above
+    shuf -n 10000 nrd.tmp | awk -F '.' '{print $NF}' | sort | uniq -c \
+        | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+' > tld.tmp
 
     # Append '.com' TLD onto targets as placeholder
     sed 's/$/.com/' "$PHISHING_TARGETS" > targets.tmp
