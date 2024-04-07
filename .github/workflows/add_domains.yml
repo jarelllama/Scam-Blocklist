@@ -1,0 +1,41 @@
+name: Manually add domains
+on:
+  issues:
+    types:
+      - labeled
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  add-domains:
+    if: ${{ github.event.label.name == 'add domains' && github.actor == github.repository_owner }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Read domains from issue
+        run: |
+          mkdir -p data/pending
+          printf "%s\n" "${{ github.event.issue.body }}" >> data/pending/domains_manual.tmp
+
+      - name: Close issue
+        run: gh issue close ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Manually add domains"
+          git push -q
+
+  build:
+    needs: add-domains
+    uses: ./.github/workflows/retrieve_domains.yml
+    secrets: inherit
