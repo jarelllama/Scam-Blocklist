@@ -456,8 +456,8 @@ source_dnstwist() {
     shuf -n 10000 nrd.tmp | awk -F '.' '{print $NF}' | sort | uniq -c \
         | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+' > tld.tmp
 
-    # Append '.com' TLD onto targets as placeholder
-    sed 's/$/.com/' "$PHISHING_TARGETS" > targets.tmp
+    # Append '.com' TLD onto targets as placeholder, ignoring commented lines
+    grep -vF '#' "$PHISHING_TARGETS" | sed 's/$/.com/'  > targets.tmp
 
     # Run dnstwist and collate results
     while read -r domain; do
