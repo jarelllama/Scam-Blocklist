@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.125228.2024
+# Version: 04.07.125308.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 12:52:28 UTC 2024
+# Last modified: Sun Apr  7 12:53:08 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 3269
+# Number of entries: 3270
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -1172,6 +1172,7 @@ local=/guarantyfx-trades.com/
 local=/guardianarmoryshop.com/
 local=/guesssale.us/
 local=/gumida.com/
+local=/gunai.store/
 local=/gunshop.site/
 local=/gupreme.com/
 local=/gyostol.de/
