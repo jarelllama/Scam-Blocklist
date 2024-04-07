@@ -44,7 +44,9 @@ append_header() {
 ${comment} Title: Jarelllama's Scam Blocklist ${version}
 ${comment} Description: ${BLOCKLIST_DESCRIPTION}
 ${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
-${comment} License: GNU GPLv3 (https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md)
+${comment} License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
+${comment} Version: $(date -u +"%m.%d.%H%M%S.%Y")
+${comment} Expires: 1 day
 ${comment} Last modified: $(date -u)
 ${comment} Syntax: ${syntax}
 ${comment} Number of entries: $(wc -l < "$source_file")
