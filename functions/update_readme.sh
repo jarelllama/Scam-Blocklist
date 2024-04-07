@@ -65,7 +65,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <summary>Details about the light version</summary>
 <ul>
 <li>Intended for collated blocklists cautious about size</li>
-<li>Does not use sources whose domains cannot be filtered by date added</li>
+<li>Only includes sources whose domains can be filtered by date registered/reported</li>
 <li>Only includes domains retrieved/reported from February 2024 onwards, whereas the full list goes back further historically</li>
 <li>Note that dead and parked domains that become alive/unparked are not added back into the light version (due to limitations in the way these domains are recorded)</li>
 </ul>
