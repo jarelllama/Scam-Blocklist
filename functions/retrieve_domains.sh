@@ -51,10 +51,9 @@ process_source() {
 
     format_file "$results_file"
 
-    # Convert any URLs to domains, and migrate all domains to a variable
-    # Note this regex still allows IP addresses through since those are
-    # filtered out and recorded at a later stage
-    domains="$(grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" | sort -u)"
+    # Remove https:, http: and slashes to get domains, and
+    # migrate to a variable
+    domains="$(sed 's/https\?://; s/\///g' "$results_file" | sort -u)"
     rm "$results_file"
 
     # Count number of unfiltered domains pending
@@ -334,7 +333,7 @@ cleanup() {
 # Output:
 #   $results_file (if results retrieved)
 #
-# Note the output results can be in URL format, not just domains.
+# Note the output results can be in URL form without subfolders.
 
 source_google_search() {
     # Install csvkit
@@ -508,6 +507,9 @@ source_manual() {
     [[ ! -f "$results_file" ]] && return
 
     execution_time="$(date +%s)"
+
+    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > domains.tmp
+    mv domains.tmp "$results_file"
 
     process_source
 }
