@@ -34,7 +34,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 
 \`\`\` text
 Total domains: $(wc -l < "$RAW")
-Total domains (light version): $(wc -l < "$RAW_LIGHT")
+Light version: $(wc -l < "$RAW_LIGHT")
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
