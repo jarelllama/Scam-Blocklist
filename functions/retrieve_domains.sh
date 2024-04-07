@@ -474,6 +474,15 @@ source_dnstwist() {
     # Find matching NRDs
     comm -12 results_with_tlds.tmp nrd.tmp > "$results_file"
 
+    # Include common regex matches for phishing domains since there is no
+    # permanent place to implement yet
+    # (also because dnstwist has a higher chance of false positives for
+    # domains less than 4 letters)
+    : > regex.tmp  # Truncate regex file to prevent unintentional matches
+    printf -- "(^|-)usps|usps-\n" >> regex.tmp  # USPS phishing
+    printf -- "-evri|evri-\n" >> regex.tmp  # Evri UK phishing
+    grep -Ef regex.tmp -- nrd.tmp >> $results_file
+
     process_source
 }
 
