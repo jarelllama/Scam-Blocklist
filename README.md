@@ -18,20 +18,20 @@ This blocklist is meant to be an alternative to blocking all newly registered do
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 33756
+Total domains: 33793
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-   57 |        58 |       4% | Google Search
-   41 |         1 |      11% | aa419.org
-  419 |       133 |       3% | dnstwist
-   81 |         8 |      17% | guntab.com
-   24 |        19 |      10% | petscams.com
-  155 |         0 |      37% | scam.directory
-    8 |         3 |      39% | scamadviser.com
-    9 |         2 |       5% | stopgunscams.com
-    0 |         3 |       5% | Manual Entries
- 5459 |       227 |      13% | All sources
+    0 |        57 |       4% | Google Search
+    3 |        41 |      11% | aa419.org
+    0 |       419 |      12% | dnstwist
+    7 |        81 |      17% | guntab.com
+    3 |        24 |      10% | petscams.com
+   11 |       155 |      37% | scam.directory
+    3 |         8 |      40% | scamadviser.com
+    0 |         9 |       5% | stopgunscams.com
+    0 |         0 |       5% | Manual Entries
+   27 |      5459 |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -56,7 +56,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-Total domains: 2426
+Total domains: 2424
 </details>
 
 ## Sources
@@ -79,8 +79,8 @@ The Google Custom Search JSON API allows a limited number of search queries per 
 
 ``` text
 Active search terms: 17
-Queries made today: 310
-Domains retrieved today: 57
+Queries made today: 0
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
