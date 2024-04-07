@@ -40,7 +40,7 @@ Statistics for each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
 $(print_stats 'aa419.org')
-$(print_stats 'dnstwist')
+$(print_stats 'dnstwist') (NRDs)
 $(print_stats 'guntab.com')
 $(print_stats 'petscams.com')
 $(print_stats 'scam.directory')
@@ -72,7 +72,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-The full version should be used instead of the light version where possible.
+The full version should be used where possible as it fully contains the light version.
 </details>
 
 ## Sources

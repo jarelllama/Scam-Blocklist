@@ -494,10 +494,13 @@ source_dnstwist() {
     # Include common regex matches for phishing domains since there is no
     # permanent place to implement yet
     # (also because dnstwist has a higher chance of false positives for
-    # domains less than 4 letters)
-    : > regex.tmp  # Truncate regex file to prevent unintentional matches
-    printf -- "(^|-)usps|usps-\n" >> regex.tmp  # USPS phishing
-    printf -- "-evri|evri-\n" >> regex.tmp  # Evri UK phishing
+    # domains less than 5 letters)
+    {
+        printf -- "(^|-)usps|usps-\n"  # USPS
+        printf -- "-evri|evri-\n"  # Evri
+        printf -- "(^|-)fedex|fedex(-|\.)\n"  # FedEx
+    } > regex.tmp
+
     grep -Ef regex.tmp -- nrd.tmp >> $results_file
 
     process_source

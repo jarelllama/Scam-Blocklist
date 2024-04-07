@@ -25,7 +25,7 @@ Statistics for each source:
 Today | Yesterday | Excluded | Source
    34 |        57 |       4% | Google Search
     5 |        41 |      11% | aa419.org
- 1723 |       419 |      10% | dnstwist
+ 1723 |       419 |      10% | dnstwist (NRDs)
    11 |        81 |      17% | guntab.com
     4 |        24 |      10% | petscams.com
    11 |       155 |      38% | scam.directory
@@ -57,7 +57,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-The full version should be used instead of the light version where possible.
+The full version should be used where possible as it fully contains the light version.
 </details>
 
 ## Sources
