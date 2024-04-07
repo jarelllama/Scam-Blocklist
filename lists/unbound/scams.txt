@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.101657.2024
+# Version: 04.07.102520.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 10:16:57 UTC 2024
+# Last modified: Sun Apr  7 10:25:20 UTC 2024
 # Syntax: Unbound
-# Number of entries: 33794
+# Number of entries: 33795
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -33306,6 +33306,7 @@ local-zone: "xbet-apk-en.com." always_nxdomain
 local-zone: "xbet-apk-fr.com." always_nxdomain
 local-zone: "xbraininfotech.com." always_nxdomain
 local-zone: "xcellence-marketing.com." always_nxdomain
+local-zone: "xcorepips.com." always_nxdomain
 local-zone: "xekrwforsale.shop." always_nxdomain
 local-zone: "xeqnrdiscount.com." always_nxdomain
 local-zone: "xeqnrdiscount.shop." always_nxdomain

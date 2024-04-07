@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.101657.2024
+# Version: 04.07.102521.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 10:16:57 UTC 2024
+# Last modified: Sun Apr  7 10:25:21 UTC 2024
 # Syntax: Unbound
-# Number of entries: 2427
+# Number of entries: 2428
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2355,6 +2355,7 @@ local-zone: "wuxihat.us." always_nxdomain
 local-zone: "wyliegunstore.com." always_nxdomain
 local-zone: "x.only-chats.com." always_nxdomain
 local-zone: "xackdeliveryservice.com." always_nxdomain
+local-zone: "xcorepips.com." always_nxdomain
 local-zone: "xflyrc.com." always_nxdomain
 local-zone: "xgrlsx.com." always_nxdomain
 local-zone: "xhamster2.mom." always_nxdomain
