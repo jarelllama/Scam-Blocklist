@@ -158,7 +158,7 @@ validate_raw() {
 
     # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
-    sed 's/(toplist)/(toplist) - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
+    sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
 
     # Send telegram notification
     send_telegram "Problematic domains detected during validation check:\n$(<filter_log.tmp)"

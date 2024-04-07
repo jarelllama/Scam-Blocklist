@@ -163,8 +163,8 @@ process_source() {
         printf "%s\n" "$domains" >> retrieved_light_domains.tmp
     fi
 
-    # Remove empty lines and count number of filtered domains
-    filtered_count="$(echo "$domains" | sed '/^$/d' | wc -w)"
+    # Count number of filtered domains
+    filtered_count="$(wc -w <<< "$domains")"
     log_source
 }
 
@@ -370,6 +370,10 @@ source_google_search() {
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
     local rate_limited=false
 
+    # Get active search times and quote them
+    search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
+        | tail -n +2 | sed 's/.*/"&"/')"
+
     # Retrieve new results
     while read -r search_term; do  # Loop through search terms
         # Stop loop if rate limited
@@ -378,7 +382,7 @@ source_google_search() {
             return
         fi
         search_google "$search_term"
-    done < <(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 | csvformat -U 1 | tail -n +2)
+    done <<< "$search_terms"
 }
 
 search_google() {
