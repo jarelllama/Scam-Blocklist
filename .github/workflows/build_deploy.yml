@@ -22,18 +22,18 @@ jobs:
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
-  remove-dead:
+  prune-dead:
     needs: [test, build]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
-  remove-parked:
-    needs: [test, remove-dead]
+  prune-parked:
+    needs: [test, prune-dead]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/check_parked.yml
 
   validate:
-    needs: [test, remove-parked]
+    needs: [test, prune-parked]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/validate_entries.yml
     secrets: inherit
