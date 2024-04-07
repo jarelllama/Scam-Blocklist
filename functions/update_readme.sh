@@ -34,6 +34,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 
 \`\`\` text
 Total domains: $(wc -l < "$RAW")
+Total domains (light version): $(wc -l < "$RAW_LIGHT")
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -69,9 +70,6 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <li>Note that dead and parked domains that become alive/unparked are not added back into the light version (due to limitations in the way these domains are recorded)</li>
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
-<br>
-<br>
-Total domains: $(wc -l < "$RAW_LIGHT")
 </details>
 
 ## Sources
