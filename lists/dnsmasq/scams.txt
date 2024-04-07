@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.035948.2024
+# Version: 04.07.054952.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 03:59:48 UTC 2024
+# Last modified: Sun Apr  7 05:49:52 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 33793
+# Number of entries: 33792
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -5334,7 +5334,6 @@ local=/cghnwiprivate.com/
 local=/cgoutlet.co.uk/
 local=/cgoutlet.net/
 local=/cgs-secs.com/
-local=/cgu.snknk.cz/
 local=/ch.gluconv.com/
 local=/chacodeutschland.de/
 local=/chadchowpuppies.com/
@@ -27653,6 +27652,7 @@ local=/sneakershopswien.com/
 local=/snidel-outlet.com/
 local=/snkidstore.com/
 local=/snkndl.com/
+local=/snknk.cz/
 local=/snlog.nl/
 local=/snobbofficial.store/
 local=/snorprevent.de/
@@ -33800,4 +33800,3 @@ local=/zyjpzx.com/
 local=/zymuno-official.id/
 local=/zynergymarketing.com/
 local=/zystfree-heaven.com/
-local=/zyz.snknk.cz/

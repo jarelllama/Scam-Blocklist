@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.07.035948.2024
+# Version: 04.07.054952.2024
 # Expires: 1 day
-# Last modified: Sun Apr  7 03:59:48 UTC 2024
+# Last modified: Sun Apr  7 05:49:52 UTC 2024
 # Syntax: Unbound
-# Number of entries: 33793
+# Number of entries: 33792
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -5335,7 +5335,6 @@ local-zone: "cghnwiprivate.com." always_nxdomain
 local-zone: "cgoutlet.co.uk." always_nxdomain
 local-zone: "cgoutlet.net." always_nxdomain
 local-zone: "cgs-secs.com." always_nxdomain
-local-zone: "cgu.snknk.cz." always_nxdomain
 local-zone: "ch.gluconv.com." always_nxdomain
 local-zone: "chacodeutschland.de." always_nxdomain
 local-zone: "chadchowpuppies.com." always_nxdomain
@@ -27654,6 +27653,7 @@ local-zone: "sneakershopswien.com." always_nxdomain
 local-zone: "snidel-outlet.com." always_nxdomain
 local-zone: "snkidstore.com." always_nxdomain
 local-zone: "snkndl.com." always_nxdomain
+local-zone: "snknk.cz." always_nxdomain
 local-zone: "snlog.nl." always_nxdomain
 local-zone: "snobbofficial.store." always_nxdomain
 local-zone: "snorprevent.de." always_nxdomain
@@ -33801,4 +33801,3 @@ local-zone: "zyjpzx.com." always_nxdomain
 local-zone: "zymuno-official.id." always_nxdomain
 local-zone: "zynergymarketing.com." always_nxdomain
 local-zone: "zystfree-heaven.com." always_nxdomain
-local-zone: "zyz.snknk.cz." always_nxdomain
