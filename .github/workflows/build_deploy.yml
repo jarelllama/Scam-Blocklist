@@ -17,13 +17,13 @@ jobs:
   # This condition prevents the job from running if the test job failed
   # ${{ needs.test.result == 'success' }}
 
-  retrieve:
+  build:
     needs: [test]
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
   remove-dead:
-    needs: [test, retrieve]
+    needs: [test, build]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
