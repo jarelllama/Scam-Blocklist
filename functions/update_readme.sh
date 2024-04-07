@@ -66,7 +66,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 <ul>
 <li>Intended for collated blocklists cautious about size</li>
 <li>Does not use sources whose domains cannot be filtered by date added</li>
-<li>Does not use sources that have an above average false positive rate</li?>
+<li>Only includes domains retrieved/reported from February 2024 onwards, whereas the full list goes back further historically</li>
 <li>Note that dead and parked domains that become alive/unparked are not added back into the light version (due to limitations in the way these domains are recorded)</li>
 </ul>
 Sources excluded from the light version are marked in SOURCES.md.
