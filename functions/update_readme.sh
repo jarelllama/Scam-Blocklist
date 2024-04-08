@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Updates the README.md content and statistics.
+# Last code review: 8 April 2024
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -8,8 +9,6 @@ readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 TODAY="$(date -u +"%d-%m-%y")"
 YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
-readonly TODAY
-readonly YESTERDAY
 
 update_readme() {
     cat << EOF > README.md
@@ -39,14 +38,14 @@ Light version: $(wc -l < "$RAW_LIGHT")
 Statistics for each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
-$(print_stats 'aa419.org')
-$(print_stats 'dnstwist') (NRDs)
-$(print_stats 'guntab.com')
-$(print_stats 'petscams.com')
-$(print_stats 'scam.directory')
-$(print_stats 'scamadviser.com')
-$(print_stats 'stopgunscams.com')
-$(print_stats 'Manual') Entries
+$(print_stats aa419.org)
+$(print_stats dnstwist) (NRDs)
+$(print_stats guntab.com)
+$(print_stats petscams.com)
+$(print_stats scam.directory)
+$(print_stats scamadviser.com)
+$(print_stats stopgunscams.com)
+$(print_stats Manual) Entries
 $(print_stats)
 
 *The Excluded % is of domains not included in the
@@ -172,12 +171,13 @@ Thanks to the following people for the help, inspiration, and support!
 EOF
 }
 
-# Function 'print_stats' is an echo wrapper that returns the statistics
-# for the given source.
+# Function 'print_stats' is an echo wrapper that returns the formatted
+# statistics for the given source.
 #   $1: source to process (default is all sources)
 print_stats() {
     printf "%5s |%10s |%8s%% | %s\n" \
-        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" "$(count_excluded "$1" )" "${1:-All sources}"
+        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" \
+        "$(count_excluded "$1" )" "${1:-All sources}"
 }
 
 # Function 'sum' is an echo wrapper that returns the total sum of
@@ -193,7 +193,7 @@ sum() {
 }
 
 # Function 'count_excluded' is an echo wrapper that returns the percentage
-# of excluded domains out of the raw count retrieved from the given source.
+# of excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 count_excluded() {
     grep -F "$1" "$SOURCE_LOG" | csvgrep -c 12 -m saved > rows.tmp
