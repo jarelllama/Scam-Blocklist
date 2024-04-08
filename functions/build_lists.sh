@@ -116,6 +116,7 @@ build_wildcard_domains() {
 
 # Entry point
 
+# Format files
 for file in config/* data/*; do
     bash functions/tools.sh format "$file"
 done

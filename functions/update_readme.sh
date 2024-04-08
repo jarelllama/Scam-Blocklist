@@ -218,6 +218,7 @@ trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 # Install csvkit
 command -v csvgrep &> /dev/null || pip install -q csvkit
 
+# Format files
 for file in config/* data/*; do
     bash functions/tools.sh format "$file"
 done
