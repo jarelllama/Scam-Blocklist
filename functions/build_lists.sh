@@ -45,7 +45,6 @@ build() {
     done
 }
 
-# Function 'append_header' appends the header onto the blocklist.
 append_header() {
     cat << EOF >> "$blocklist_path"
 ${comment} Title: Jarelllama's Scam Blocklist ${version}
