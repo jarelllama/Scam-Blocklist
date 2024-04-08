@@ -4,7 +4,7 @@
 
 # Function 'format' is called to standardize the format of a file.
 #   $1: file to be formatted
-# Last code review: 8 April 2024
+# Latest code review: 8 April 2024
 format() {
     file="$1"
 
@@ -47,7 +47,7 @@ format() {
 #   $1: domains to log stored in a variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
-# Last code review: 8 April 2024
+# Latest code review: 8 April 2024
 log_event() {
     timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
 
