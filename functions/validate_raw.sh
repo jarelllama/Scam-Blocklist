@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Validates the entries in the raw file via a variety of checks and
-# flags entries that require attention.
+# Validates the entries in the raw file via a variety of checks and flags
+# entries that require attention.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -20,8 +20,10 @@ validate_raw() {
     before_count="$(wc -l < "$RAW")"
 
     # Remove common subdomains
+
     domains_with_subdomains_count=0
     while read -r subdomain; do  # Loop through common subdomains
+
         # Find domains and skip to next subdomain if none found
         domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
             || continue
@@ -29,11 +31,10 @@ validate_raw() {
         # Count number of domains with common subdomains
         # Note wc -w is used here as wc -l for an empty variable seems to
         # always output 1
-        domains_with_subdomains_count="$((
-            domains_with_subdomains_count + $(wc -w <<< "$domains_with_subdomains")
-            ))"
+        domains_with_subdomains_count="$(( domains_with_subdomains_count \
+            + $(wc -w <<< "$domains_with_subdomains") ))"
 
-        # Keep only root domains
+        # Keep only root domains in the raw file and raw light file
         domains="$(echo "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
         sed "s/^${subdomain}\.//" "$RAW_LIGHT" | sort -u -o "$RAW_LIGHT"
         format_file "$RAW_LIGHT"
@@ -41,16 +42,21 @@ validate_raw() {
         # Collate subdomains for dead check
         printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
         # Collate root domains to exclude from dead check
-        printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
+        printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" \
+            >> root_domains.tmp
 
-        awk '{print $0 " (subdomain)"}' <<< "$domains_with_subdomains" >> filter_log.tmp
+        awk '{print $0 " (subdomain)"}' <<< "$domains_with_subdomains" \
+            >> filter_log.tmp
+
         log_event "$domains_with_subdomains" subdomain
+
     done < "$SUBDOMAINS_TO_REMOVE"
     format_file subdomains.tmp
     format_file root_domains.tmp
 
     # Remove whitelisted domains, excluding blacklisted domains
-    whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
+    whitelisted_domains="$(grep -Ff "$WHITELIST" <<< "$domains" \
+        | grep -vxFf "$BLACKLIST")"
     whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
     if (( whitelisted_count > 0 )); then
         domains="$(comm -23 <(echo "$domains") <(echo "$whitelisted_domains"))"

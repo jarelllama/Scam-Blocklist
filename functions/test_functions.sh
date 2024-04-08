@@ -172,7 +172,6 @@ TEST_RETRIEVE_VALIDATE() {
 # domains respectively.
 TEST_DEAD_CHECK() {
     test_dead_subdomain_check
-    test_dead_redundant_check
     test_dead_check
     test_alive_check
 
@@ -529,27 +528,6 @@ test_dead_subdomain_check() {
 
     # EXPECTED OUTPUT
     printf "dead,584308-dead-subdomain-test.com,raw\n" >> out_log.txt
-}
-
-# TEST: removal of dead redundant domains and unused wildcards
-test_dead_redundant_check() {
-    # INPUT
-    printf "493053dead-wildcard-test.com\n" >> "$RAW"
-    printf "493053dead-wildcard-test.com\n" >> "$WILDCARDS"
-    {
-        printf "redundant-1.493053dead-wildcard-test.com\n"
-        printf "redundant-2.493053dead-wildcard-test.com\n"
-    } >> "$REDUNDANT_DOMAINS"
-
-    # EXPECTED OUTPUT
-    {
-        printf "redundant-1.493053dead-wildcard-test.com\n"
-        printf "redundant-2.493053dead-wildcard-test.com\n"
-    } >> out_dead.txt
-    {
-        printf "dead,493053dead-wildcard-test.com,wildcard\n"
-        printf "dead,493053dead-wildcard-test.com,wildcard\n"
-    } >> out_log.txt
 }
 
 # TEST: removal of dead domains

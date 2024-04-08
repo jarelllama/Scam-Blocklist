@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script checks for parked/unparked domains and removes/adds
-# them accordingly.
+# This script checks for parked/unparked domains and removes/adds them
+# accordingly.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -32,7 +32,8 @@ main() {
 
 # Function 'removed_parked_domains' removes parked domains from the raw file.
 remove_parked_domains() {
-    # Exclude wildcards and root domains of subdomains
+    # Exclude wildcards and root domains of subdomains since it is the
+    # redundant domains and subdomains added on domain retrieval
     comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") > raw.tmp
 
     retrieve_parked raw.tmp || return
@@ -121,8 +122,8 @@ find_parked() {
     while read -r domain; do
         # Check for parked message in site's HTML
         # Note <(curl... | tr...) outputs a broken pipe error
-        if grep -qiFf "$PARKED_TERMS" \
-            <<< "$(curl -sL --max-time 3 "http://${domain}/" | tr -d '\0')"; then
+        if grep -qiFf "$PARKED_TERMS" <<< "$(curl -sL --max-time 3 "http://${domain}/" \
+            | tr -d '\0')"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
@@ -131,7 +132,8 @@ find_parked() {
         [[ "$track" != true ]] && continue
 
         if (( count % 100 == 0 )); then
-            printf "[info] Analyzed %s%% of domains\n" "$(( count * 100 / $(wc -l < "$1") ))"
+            printf "[info] Analyzed %s%% of domains\n" \
+                "$(( count * 100 / $(wc -l < "$1") ))"
         fi
 
         (( count++ ))
