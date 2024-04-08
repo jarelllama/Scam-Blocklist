@@ -218,8 +218,8 @@ build() {
         "$count_before" "$(( count_after - count_before ))" "$count_after"
 
     # Mark sources/events as saved in the source log file
-    sed -i "/$TIME_FORMAT/s/,pending/,saved/" "$SOURCE_LOG"
-    sed -i "/$TIME_FORMAT/s/,pending/,saved/" "$DOMAIN_LOG"
+    sed -i "/${TIME_FORMAT}/s/,pending/,saved/" "$SOURCE_LOG"
+    sed -i "/${TIME_FORMAT}/s/,pending/,saved/" "$DOMAIN_LOG"
 }
 
 # Function 'log_source' prints and logs statistics for each source
@@ -469,8 +469,8 @@ source_dnstwist() {
         | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+')"
 
     # Remove duplicate targets from targets file
-    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" \
-        > temp && mv temp "$PHISHING_TARGETS"
+    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
+    mv temp "$PHISHING_TARGETS"
 
     # Get targets, ignoring disabled ones
     targets="$(csvgrep -c 5 -m 'y' -i "$PHISHING_TARGETS" | tail -n +2 \
@@ -492,22 +492,17 @@ source_dnstwist() {
             printf "%s\n" "$results" | sed "s/.com/.${tld}/" >> results.tmp
         done <<< "$tlds"
 
-        new_count="$(( "$(wc -w <<< "$results")" + count ))"
+        format_file results.tmp
+
+        # Find matching NRDs
+        comm -12 results.tmp nrd.tmp >> "$results_file"
+
+        new_count="$(( "$(wc -w < results.tmp)" + count ))"
         new_runs="$(( runs + 1 ))"
         new_counts_run="$(( new_count / new_runs ))"
 
-        sed -i "s/${domain},${counts_run},${count},${runs}/${domain},${new_counts_run},${new_count},${new_runs}/" "$TARGETS"
+        sed -i "/${domain}/s/${counts_run},${count},${runs}/${new_counts_run},${new_count},${new_runs}/" "$PHISHING_TARGETS"
     done <<< "$targets"
-
-    # Append TLDs
-    while read -r tld; do
-        sed "s/.com/.${tld}/" results.tmp >> results_with_tlds.tmp
-    done < tld.tmp
-
-    format_file results_with_tlds.tmp
-
-    # Find matching NRDs
-    comm -12 results_with_tlds.tmp nrd.tmp > "$results_file"
 
     # Include common regex matches for phishing domains since there is no
     # permanent place to implement yet
