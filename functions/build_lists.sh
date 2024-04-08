@@ -81,6 +81,7 @@ build_adblock() {
 build_dnsmasq() {
     local syntax='Dnsmasq'
     local directory='dnsmasq'
+    local comment=''
     local before='local=/'
     local after='/'
     build
@@ -89,6 +90,7 @@ build_dnsmasq() {
 build_unbound() {
     local syntax='Unbound'
     local directory='unbound'
+    local comment=''
     local before='local-zone: "'
     local after='." always_nxdomain'
     build
@@ -97,13 +99,18 @@ build_unbound() {
 build_wildcard_asterisk() {
     local syntax='Wildcard Asterisk'
     local directory='wildcard_asterisk'
+    local comment=''
     local before='*.'
+    local after=''
     build
 }
 
 build_wildcard_domains() {
     local syntax='Wildcard Domains'
     local directory='wildcard_domains'
+    local comment=''
+    local before=''
+    local after=''
     build
 }
 
