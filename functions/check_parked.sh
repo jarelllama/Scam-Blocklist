@@ -144,7 +144,7 @@ find_parked() {
 #   $3: source
 log_event() {
     [[ -z "$1" ]] && return  # Return if no domains passed
-    local source="$3"
+    local source="${source:-$3}"
     printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$TIME_FORMAT" \
         '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
 }
