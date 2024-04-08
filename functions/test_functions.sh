@@ -322,9 +322,9 @@ test_manual_addition() {
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
 
-    # Test for 'new_retrieval' in domain log. This test is only done once
+    # Test proper logging in domain log. This test is only done once
     # since is applied to all newly added domains to the raw file.
-    printf "new_domain,manual-addition-test.com,retrieval\n" >> out_log.txt
+    printf "saved,manual-addition-test.com,Manual\n" >> out_log.txt
 }
 
 # TEST: conversion from URLs to domains
@@ -496,7 +496,7 @@ test_source_log() {
     printf "source-log-test.com\n" >> data/pending/domains_petscams.com.tmp
     # EXPECTED OUTPUT
     printf "source-log-test.com\n" >> out_raw.txt
-    printf ",petscams.com,,1,1,0,0,0,0,0,,,,yes" >> out_source_log.txt
+    printf ",petscams.com,,1,1,0,0,0,0,0,,saved" >> out_source_log.txt
 }
 
 # TEST: exclusion of specific sources from light version
