@@ -203,6 +203,8 @@ TEST_DEAD_CHECK() {
     check_and_exit
 }
 
+# Function 'TEST_PARKED_CHECK' tests the removal/addition of parked and unparked
+# domains respectively.
 TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough records)
