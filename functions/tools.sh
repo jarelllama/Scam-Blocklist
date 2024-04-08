@@ -68,7 +68,7 @@ case "$function" in
         log_event "$2" "$3" "$4"
         ;;
     *)
-        printf "Invalid function passed.\n"
+        printf "\nInvalid function passed.\n"
         exit 1
         ;;
 esac
