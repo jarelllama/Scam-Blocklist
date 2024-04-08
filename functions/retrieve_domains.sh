@@ -40,7 +40,7 @@ source() {
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    #source_google_search
+    source_google_search
 }
 
 # Function 'process_source' filters results retrieved from a source.
