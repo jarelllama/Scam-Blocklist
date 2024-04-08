@@ -28,12 +28,16 @@ build() {
         : > "$blocklist_path"
 
         # Special case for Adblock Plus syntax
-        [[ "$syntax" == 'Adblock Plus' ]] && printf "[Adblock Plus]\n" >> "$blocklist_path"
+        if [[ "$syntax" == 'Adblock Plus' ]]; then
+            printf "[Adblock Plus]\n" >> "$blocklist_path"
+        fi
 
         append_header
 
         # Special case for Unbound syntax
-        [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"
+        if [[ "$syntax" == 'Unbound' ]]; then
+            printf "server:\n" >> "$blocklist_path"
+        fi
 
         # Append formatted domains onto blocklist
         awk -v before="$before" -v after="$after" \
