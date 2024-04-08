@@ -7,18 +7,16 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly PARKED_TERMS='config/parked_terms.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly ROOT_DOMAINS='data/root_domains.txt'
-readonly WILDCARDS='data/wildcards.txt'
-readonly DOMAIN_LOG='config/domain_log.csv'
-TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
+#readonly ROOT_DOMAINS='data/root_domains.txt'
 
 main() {
+    # Format files
     for file in config/* data/*; do
         format_file "$file"
     done
 
-    remove_parked_domains
-    add_unparked_domains
+    check_parked
+    check_unparked
 
     # Remove domains from light raw file that are not found in full raw file
     comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
@@ -26,31 +24,32 @@ main() {
 
     # Cache parked domains to filter out from newly retrieved domains
     # (done last to skip unparked domains check)
-    cat parked_raw.tmp >> "$PARKED_DOMAINS"
+    cat parked_cache.tmp >> "$PARKED_DOMAINS"
     format_file "$PARKED_DOMAINS"
 }
 
-# Function 'removed_parked_domains' removes parked domains from the raw file.
-remove_parked_domains() {
-    # Exclude wildcards and root domains of subdomains since it is the
-    # redundant domains and subdomains added on domain retrieval
-    comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") > raw.tmp
-
-    retrieve_parked raw.tmp || return
+# Function 'check_parked' removes parked domains from the raw file and
+# subdomains file.
+check_parked() {
+    # Note that subdomains are not included in this check since typically if
+    # the root domain is parked, so are any subdomains
+    retrieve_parked "$RAW" || return
 
     # Copy temporary parked file to be added into parked cache later
-    cp parked_domains.tmp parked_raw.tmp
+    cp parked_domains.tmp parked_cache.tmp
 
     # Remove parked domains from raw file
     comm -23 "$RAW" parked_domains.tmp > raw.tmp
     mv raw.tmp "$RAW"
 
+    # Remove parked domains from subdomains file
+
     log_event "$(<parked_domains.tmp)" parked raw
 }
 
-# Function 'add_unparked_domains' finds unparked domains in the parked domains
+# Function 'check_unparked' finds unparked domains in the parked domains
 # file and adds them back into the raw file.
-add_unparked_domains() {
+check_unparked() {
     retrieve_parked "$PARKED_DOMAINS"  # No need to return if no parked found
 
     # Get unparked domains (parked domains file is unsorted)
