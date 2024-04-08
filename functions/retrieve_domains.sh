@@ -14,7 +14,7 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='data/wildcards.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly PHISHING_TARGETS='config/phishing_targets.txt'
+readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
@@ -34,7 +34,7 @@ source() {
     source_manual
     source_aa419
     #source_dfpi  # Deactivated
-    source_dnstwist
+    #source_dnstwist  #TODO
     source_guntab
     source_petscams
     source_scamdirectory
@@ -60,7 +60,7 @@ process_source() {
     # Count number of unfiltered domains pending
     # Note wc -w is used here as wc -l for an empty variable seems to
     # always output 1.
-    unfiltered_count="$(wc -w <<< "$domains")"
+    raw_count="$(wc -w <<< "$domains")"
 
     # Remove known dead domains (includes subdomains and redundant domains)
     dead_domains="$(comm -12 <(echo "$domains") <(sort "$DEAD_DOMAINS"))"
@@ -84,8 +84,7 @@ process_source() {
         printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
         # Log domains with common subdomains excluding 'www' (too many of them)
-        domains_with_subdomains="$(grep -v '^www\.' <<< "$domains_with_subdomains")" \
-            && log_event "$domains_with_subdomains" subdomain
+        log_event "$(grep -v '^www\.' <<< "$domains_with_subdomains")" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
     format_file subdomains.tmp
     format_file root_domains.tmp
@@ -100,8 +99,7 @@ process_source() {
     # Logging removed as it inflated log size
 
     # Log blacklisted domains
-    blacklisted_domains="$(comm -12 <(echo "$domains") "$BLACKLIST")"
-    log_event "$blacklisted_domains" blacklist
+    log_event "$(comm -12 <(echo "$domains") "$BLACKLIST")" blacklist
 
     # Remove whitelisted domains, excluding blacklisted domains
     whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
@@ -152,7 +150,7 @@ process_source() {
         awk '{print $0 " (toplist)"}' <<< "$domains_in_toplist" >> manual_review.tmp
         # Save invalid entries for rerun
         printf "%s\n" "$domains_in_toplist" >> "$results_file"
-        log_event "$domains_in_toplist" "toplist"
+        log_event "$domains_in_toplist" toplist
     fi
 
     # Collate filtered domains
@@ -163,8 +161,8 @@ process_source() {
         printf "%s\n" "$domains" >> retrieved_light_domains.tmp
     fi
 
-    # Count number of filtered domains
-    filtered_count="$(wc -w <<< "$domains")"
+    log_event "$domains" pending
+
     log_source
 }
 
@@ -215,58 +213,52 @@ build() {
         format_file "$RAW_LIGHT"
     fi
 
-    log_event "$(<retrieved_domains.tmp)" new_domain retrieval
-
     count_after="$(wc -l < "$RAW")"
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$(( count_after - count_before ))" "$count_after"
 
-    # Mark sources as saved in the source log file
-    rows="$(sed 's/,no/,yes/' <(grep -F "$TIME_FORMAT" "$SOURCE_LOG"))"
-    # Remove previous logs
-    temp_source_log="$(grep -vF "$TIME_FORMAT" "$SOURCE_LOG")"
-    # Add updated logs
-    printf "%s\n%s\n" "$temp_source_log" "$rows" > "$SOURCE_LOG"
+    # Mark sources/events as saved in the source log file
+    sed -i "/$TIME_FORMAT/s/,pending/,saved/" "$SOURCE_LOG"
+    sed -i "/$TIME_FORMAT/s/,pending/,saved/" "$DOMAIN_LOG"
 }
 
 # Function 'log_source' prints and logs statistics for each source
 # using the variables declared in the 'process_source' function.
 log_source() {
     local item
-    local error
+    local status='pending'
 
     if [[ "$source" == 'Google Search' ]]; then
-        search_term="\"${search_term:0:100}...\""
-        item="$search_term"
+        item="\"${search_term:0:100}...\""
     fi
 
     if [[ "$rate_limited" == true ]]; then
-        error='rate_limited'
-    elif (( unfiltered_count == 0 )); then
-        error='empty'
+        status='eror: rate_limited'
+    elif (( raw_count == 0 )); then
+        status='error: empty'
     fi
 
+    final_count="$(wc -w <<< "$domains")"
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + redundant_count + parked_count ))"
 
-    echo "${TIME_FORMAT},${source},${search_term},${unfiltered_count},\
-${filtered_count},${total_whitelisted_count},${dead_count},${redundant_count},\
-${parked_count},${toplist_count},$(printf "%s" "$domains_in_toplist" | tr '\n' ' '),\
-${query_count},${error},no" >> "$SOURCE_LOG"
+    echo "${TIME_FORMAT},${source},${item},${raw_count},\
+${final_count},${total_whitelisted_count},${dead_count},${redundant_count},\
+${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
 
     printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
 
-    if [[ "$error" == 'empty' ]]; then
+    if [[ "$status" == 'error: empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
 
         # Send telegram notification
         send_telegram "Source '$source' retrieved no results. Potential error occurred."
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
-            "${unfiltered_count}" "${filtered_count}" \
-            "$total_whitelisted_count" "$excluded_count" "${toplist_count}"
+            "$raw_count" "$final_count" "$total_whitelisted_count" \
+            "$excluded_count" "$toplist_count"
     fi
 
     printf "Processing time: %s seconds\n" "$(( "$(date +%s)" - execution_time ))"
@@ -290,10 +282,10 @@ send_telegram() {
 #   toplist.tmp
 download_toplist() {
     [[ -f toplist.tmp ]] && return
-    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
+    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp \
+        || send_telegram "Error downloading toplist."
     awk -F ',' '{print $2}' toplist.tmp > temp && mv temp toplist.tmp
     format_file toplist.tmp
-    [[ ! -f toplist.tmp ]] && send_telegram "Error downloading toplist."
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
@@ -301,10 +293,10 @@ download_toplist() {
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
-    [[ -z "$1" ]] && return  # Return if no domains in variable
-    [[ -n "$3" ]] && local source="$3"  # Use specific source if passed
-    printf "%s\n" "$1" | awk -v type="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
-        '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
+    [[ -z "$1" ]] && return  # Return if no domains passed
+    local source="$3"
+    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
+        '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format
@@ -343,9 +335,9 @@ source_google_search() {
     local execution_time
 
     if [[ "$USE_EXISTING" == true ]]; then
-    
+
         # Use existing retrieved results
-        
+
         # Loop through the results from each search term
         for results_file in data/pending/domains_google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
@@ -407,7 +399,7 @@ search_google() {
         page_results="$(curl -s "${url}?${query_params}")"
 
         # Use next API key if first key is rate limited
-        if grep -qiF 'rateLimitExceeded' <<< "$page_results"; then
+        if [[ "$page_results" == *rateLimitExceeded* ]]; then
             # Stop all searches if second key is also rate limited
             if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
                 readonly rate_limited=true
@@ -473,16 +465,39 @@ source_dnstwist() {
     # Get the top 15 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above
-    shuf -n 10000 nrd.tmp | awk -F '.' '{print $NF}' | sort | uniq -c \
-        | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+' > tld.tmp
+    tlds="$(shuf -n 10000 nrd.tmp | awk -F '.' '{print $NF}' | sort | uniq -c \
+        | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+')"
 
-    # Append '.com' TLD onto targets as placeholder, ignoring commented lines
-    grep -vF '#' "$PHISHING_TARGETS" | sed 's/$/.com/'  > targets.tmp
+    # Remove duplicate targets from targets file
+    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" \
+        > temp && mv temp "$PHISHING_TARGETS"
+
+    # Get targets, ignoring disabled ones
+    targets="$(csvgrep -c 5 -m 'y' -i "$PHISHING_TARGETS" | tail -n +2 \
+        | awk -F ',' '{print $1}')"
 
     # Run dnstwist and collate results
     while read -r domain; do
-        dnstwist "$domain" -f list >> results.tmp
-    done < targets.tmp
+        # Get existing counts
+        row="$(awk -v domain="$domain" -F ',' '$1 == domain' "$PHISHING_TARGETS")"
+        count="$(awk -F ',' '{print $3}' <<< "$row" || printf "0")"
+        runs="$(awk -F ',' '{print $4}' <<< "$row" || printf "0")"
+        counts_run="$(awk -F ',' '{print $2}' <<< "$row" || printf "0")"
+
+        # Run dnstwist
+        results="$(dnstwist "${domain}.com" -f list)"
+
+        # Append TLDs to results
+        while read -r tld; do
+            printf "%s\n" "$results" | sed "s/.com/.${tld}/" >> results.tmp
+        done <<< "$tlds"
+
+        new_count="$(( "$(wc -w <<< "$results")" + count ))"
+        new_runs="$(( runs + 1 ))"
+        new_counts_run="$(( new_count / new_runs ))"
+
+        sed -i "s/${domain},${counts_run},${count},${runs}/${domain},${new_counts_run},${new_count},${new_runs}/" "$TARGETS"
+    done <<< "$targets"
 
     # Append TLDs
     while read -r tld; do
@@ -539,7 +554,7 @@ source_aa419() {
 
     # Install jq
     command -v jq &> /dev/null || apt-get install -yqq jq
-    
+
     curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/${query_params}" \
         | jq -r '.[].Domain' >> "$results_file"  # Trailing slash breaks API call
 
@@ -617,7 +632,7 @@ source_scamadviser() {
         page_results="$(curl -s "${url}?p=${page}")"  # Trailing slash breaks curl
 
         # Stop if page has an error (scamadviser occasionally has broken pages)
-        ! grep -qiF 'article' <<< "$page_results" && break
+        [[ ! "$page_results" == *article* ]] && break
 
         grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
             | grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$results_file"

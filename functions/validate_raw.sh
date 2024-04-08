@@ -193,10 +193,10 @@ send_telegram() {
 #   toplist.tmp
 download_toplist() {
     [[ -f toplist.tmp ]] && return
-    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp
+    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp \
+        || send_telegram "Error downloading toplist."
     awk -F ',' '{print $2}' toplist.tmp > temp && mv temp toplist.tmp
     format_file toplist.tmp
-    [[ ! -f toplist.tmp ]] && send_telegram "Error downloading toplist."
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
@@ -204,10 +204,10 @@ download_toplist() {
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
-    [[ -z "$1" ]] && return  # Return if no domains in variable
+    [[ -z "$1" ]] && return  # Return if no domains passed
     local source='raw'
-    printf "%s\n" "$1" | awk -v type="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
-        '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
+    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
+        '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format

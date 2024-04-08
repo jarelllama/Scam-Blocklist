@@ -142,10 +142,10 @@ find_parked() {
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
-    [[ -z "$1" ]] && return  # Return if no domains in variable
+    [[ -z "$1" ]] && return  # Return if no domains passed
     local source="$3"
-    printf "%s\n" "$1" | awk -v type="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
-        '{print time "," type "," $0 "," source}' >> "$DOMAIN_LOG"
+    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
+        '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format

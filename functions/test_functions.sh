@@ -36,19 +36,19 @@ main() {
     error=false
 
     case "$1" in
-        ('retrieve')
+        'retrieve')
             TEST_RETRIEVE_VALIDATE "$1" ;;
-        ('validate')
+        'validate')
             TEST_RETRIEVE_VALIDATE "$1" ;;
-        ('dead')
+        'dead')
             TEST_DEAD_CHECK ;;
-        ('parked')
+        'parked')
             TEST_PARKED_CHECK ;;
-        ('build')
+        'build')
             TEST_BUILD ;;
-        ('shellcheck')
+        'shellcheck')
             SHELLCHECK ;;
-        (*)
+        *)
             exit 1 ;;
     esac
 }
