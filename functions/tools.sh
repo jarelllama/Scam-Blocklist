@@ -64,12 +64,13 @@ function="$1"
 
 case "$function" in
     format)
-        format "$2"  # Pass the file from the caller
+        format "$2"
         ;;
     log_event)
         log_event "$2" "$3" "$4"
         ;;
     *)
+        printf "Invalid function passed.\n"
         exit 1
         ;;
 esac
