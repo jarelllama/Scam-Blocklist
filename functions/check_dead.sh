@@ -16,7 +16,7 @@ TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 main() {
     # Install AdGuard's Dead Domains Linter
-    npm install -qg @adguard/dead-domains-linter
+    npm install -g --quiet @adguard/dead-domains-linter
 
     for file in config/* data/*; do
         format_file "$file"
