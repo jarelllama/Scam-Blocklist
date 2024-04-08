@@ -147,7 +147,7 @@ check_alive() {
 find_dead() {
     sed 's/.*/||&^/' "$1" > "${1}.tmp"
     dead-domains-linter -i "${1}.tmp" --export dead.tmp
-    print "\n"
+    printf "\n"
     [[ ! -s dead.tmp ]] && return 1
 
     # The Dead Domains Linter exports without an ending new line
