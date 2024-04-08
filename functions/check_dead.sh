@@ -42,7 +42,7 @@ check_dead() {
 
     remove_dead_from "$SUBDOMAINS"
 
-    # Strip subdomains from dead domains
+    # Strip subdomains down to their root domains
     while read -r subdomain; do
         sed "s/^${subdomain}\.//" dead.tmp | sort -u -o dead.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
@@ -71,12 +71,9 @@ check_alive() {
     # Update dead domains file to only include dead domains
     cp dead.tmp "$DEAD_DOMAINS"
 
-    # Strip subdomains since raw file should not have subdomains
-    while read -r subdomain; do
-        sed "s/^${subdomain}\.//" alive.tmp | sort -u -o alive.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-
     # Add resurrected domains to raw file
+    # Note resurrected subdomains are added back too and will be processed by
+    # the validation check outside of this script
     sort -u alive.tmp "$RAW" -o "$RAW"
 
     log_event "$(<alive.tmp)" resurrected dead_domains_file
@@ -94,7 +91,7 @@ find_dead_in() {
 
     # Format to Adblock Plus syntax
     sed 's/.*/||&^/' "$1" > "$temp"
-    
+
     dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
 
