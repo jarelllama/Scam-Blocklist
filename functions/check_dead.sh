@@ -44,7 +44,7 @@ check_dead() {
 
     # Strip subdomains from dead domains
     while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" dead.tmp | sort -u -o dead.tmp
+        sed "s/^${subdomain}\.//" dead.tmp | sort -u -o dead.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
     remove_dead_from "$RAW"
@@ -73,7 +73,7 @@ check_alive() {
 
     # Strip subdomains since raw file should not have subdomains
     while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" alive.tmp | sort -u -o alive.tmp
+        sed "s/^${subdomain}\.//" alive.tmp | sort -u -o alive.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Add resurrected domains to raw file
