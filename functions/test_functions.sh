@@ -652,7 +652,11 @@ check_and_exit() {
 
     # Print domain log if not already printed by domain log check
     if [[ "$log_error" != true ]]; then
-        printf "Log:\n%s\n" "$(<$DOMAIN_LOG)"
+        printf "Domain log:\n%s\n" "$(<"$DOMAIN_LOG")"
+    fi
+
+    if [[ "$script_to_test" == 'retrieve' ]]; then
+        printf "Source log:\n%s\n" "$(<"$SOURCE_LOG")"
     fi
 
     on_exit
