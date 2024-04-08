@@ -80,9 +80,11 @@ check_redundant() {
     # Find unused wildcards
     while read -r wildcard; do
         # If no matches, consider wildcard as unused/dead
-        ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS" \
-            && printf "%s\n" "$wildcard" >> dead_wildcards.tmp
+        if ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS"; then
+            printf "%s\n" "$wildcard" >> dead_wildcards.tmp
+        fi
     done < "$WILDCARDS"
+
     [[ ! -f dead_wildcards.tmp ]] && return
 
     # Remove unused wildcards from raw file and wildcards file
@@ -119,6 +121,7 @@ check_alive() {
     # Get resurrected domains in dead domains file
     # (dead domains file is unsorted)
     alive_domains="$(comm -23 <(sort "$DEAD_DOMAINS") <(sort dead.tmp))"
+
     [[ -z "$alive_domains" ]] && return
 
     # Update dead domains file to only include dead domains
@@ -128,8 +131,8 @@ check_alive() {
     # Strip away subdomains from alive domains as subdomains
     # are not supposed to be in raw file
     while read -r subdomain; do
-        alive_domains="$(echo "$alive_domains" \
-            | sed "s/^${subdomain}\.//" | sort -u)"
+        alive_domains="$(echo "$alive_domains" | sed "s/^${subdomain}\.//" \
+            | sort -u)"
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Add resurrected domains to raw file
@@ -147,14 +150,18 @@ check_alive() {
 #   dead.tmp
 #   return 1 if dead domains not found
 find_dead() {
-    temp_file="$(basename "$1").tmp"
-    sed 's/.*/||&^/' "$1" > "$temp_file"
-    dead-domains-linter -i "$temp_file" --export dead.tmp
+    temp="$(basename "$1").tmp"
+
+    sed 's/.*/||&^/' "$1" > "$temp"
+
+    dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
+
     [[ ! -s dead.tmp ]] && return 1
 
     # The Dead Domains Linter exports without an ending new line
     printf "\n" >> dead.tmp
+
     return
 }
 
