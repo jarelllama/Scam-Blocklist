@@ -56,13 +56,13 @@ jobs:
       - name: Prune logs
         run: |
           lines="$(wc -l < config/domain_log.csv)"
-          if (( lines > 10000 )); then
-              sed -i "2,$(( lines - 10000 ))d" config/domain_log.csv
+          if (( lines > 20000 )); then
+              sed -i "2,$(( lines - 20000 ))d" config/domain_log.csv
           fi
 
           lines="$(wc -l < config/source_log.csv)"
-          if (( lines > 1000 )); then
-              sed -i "2,$(( lines - 1000 ))d" config/source_log.csv
+          if (( lines > 10000 )); then
+              sed -i "2,$(( lines - 10000 ))d" config/source_log.csv
           fi
 
       - name: Push
