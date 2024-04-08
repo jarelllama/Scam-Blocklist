@@ -66,8 +66,8 @@ EOF
 #   $syntax: name of list syntax
 #   $directory: directory to create list in
 #   $comment: character used for comments (default is '#')
-#   $before: characters to append before each domain
-#   $after: characters to append after each domain
+#   $before: characters to append before each domain (default is none)
+#   $after: characters to append after each domain (default is none)
 
 build_adblock() {
     local syntax='Adblock Plus'
