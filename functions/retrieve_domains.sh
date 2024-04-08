@@ -261,7 +261,7 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
             "$excluded_count" "$toplist_count"
     fi
 
-    printf "Processing time: %s seconds\n" "$(( "$(date +%s)" - execution_time ))"
+    printf "Processing time: %s second(s)\n" "$(( "$(date +%s)" - execution_time ))"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
