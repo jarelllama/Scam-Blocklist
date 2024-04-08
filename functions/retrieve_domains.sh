@@ -337,18 +337,15 @@ cleanup() {
 # Note the output results can be in URL form without subfolders.
 
 source_google_search() {
-    # Install csvkit
-    command -v csvgrep &> /dev/null || pip install -q csvkit
-    # Install jq
-    command -v jq &> /dev/null || apt-get install -yqq jq
-
     local source='Google Search'
     local results_file
     local search_term
     local execution_time
 
     if [[ "$USE_EXISTING" == true ]]; then
+    
         # Use existing retrieved results
+        
         # Loop through the results from each search term
         for results_file in data/pending/domains_google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
@@ -365,16 +362,22 @@ source_google_search() {
         return
     fi
 
+    # Retrieve new results
+
     local url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
     local rate_limited=false
 
+    # Install csvkit
+    command -v csvgrep &> /dev/null || pip install -q csvkit
+    # Install jq
+    command -v jq &> /dev/null || apt-get install -yqq jq
+
     # Get active search times and quote them
     search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
         | tail -n +2 | sed 's/.*/"&"/')"
 
-    # Retrieve new results
     while read -r search_term; do  # Loop through search terms
         # Stop loop if rate limited
         if [[ "$rate_limited" == true ]]; then
@@ -523,9 +526,6 @@ source_manual() {
 }
 
 source_aa419() {
-    # Install jq
-    command -v jq &> /dev/null || apt-get install -yqq jq
-
     local source='aa419.org'
     local results_file="data/pending/domains_${source}.tmp"
     local execution_time
@@ -536,6 +536,10 @@ source_aa419() {
     local url='https://api.aa419.org/fakesites'
     local query_params
     query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
+
+    # Install jq
+    command -v jq &> /dev/null || apt-get install -yqq jq
+    
     curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/${query_params}" \
         | jq -r '.[].Domain' >> "$results_file"  # Trailing slash breaks API call
 
