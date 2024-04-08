@@ -119,8 +119,9 @@ find_parked() {
 
     while read -r domain; do
         # Check for parked message in site's HTML
+        # Note <(curl... | tr...) outputs a broken pipe error
         if grep -qiFf "$PARKED_TERMS" \
-            <(curl -sL --max-time 3 "http://${domain}/" | tr -d '\0'); then
+            <<< "$(curl -sL --max-time 3 "http://${domain}/" | tr -d '\0')"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
