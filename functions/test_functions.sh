@@ -550,7 +550,7 @@ test_alive_check() {
     # EXPECTED OUTPUT
     printf "www.google.com\n" >> out_raw.txt
     printf "584031dead-domain-test.com\n" >> out_dead.txt
-    printf "resurrected,google.com,dead_domains_file\n" >> out_log.txt
+    printf "resurrected,www.google.com,dead_domains_file\n" >> out_log.txt
 }
 
 ### PARKED CHECK TESTS

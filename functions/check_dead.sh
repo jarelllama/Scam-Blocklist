@@ -42,7 +42,7 @@ check_dead() {
 
     remove_dead_from "$SUBDOMAINS"
 
-    # Strip subdomains down to their root domains
+    # Strip subdomains from dead domains
     while read -r subdomain; do
         sed "s/^${subdomain}\.//" dead.tmp | sort -u -o dead.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
