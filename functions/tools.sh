@@ -51,12 +51,12 @@ format() {
 #   $3: source
 # Last code review: 8 April 2024
 log_event() {
-    time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
+    timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
 
     # Return if no domains passed
     [[ -z "$1" ]] && return
 
-    echo "$1" | awk -v event="$2" -v source="$3" -v time="$time_format" \
+    echo "$1" | awk -v event="$2" -v source="$3" -v time="$timestamp" \
         '{print time "," event "," $0 "," source}' >> config/domain_log.csv
 }
 
