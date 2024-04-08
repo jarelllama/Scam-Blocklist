@@ -18,8 +18,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 34700
-Light version: 3281
+Total domains: 34530
+Light version: 3257
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
