@@ -22,14 +22,12 @@ format() {
             sed 's/[[:space:]]//g; /^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
                 | awk '!seen[$0]++' > "${file}.tmp"
             ;;
-
         'config/parked_terms.txt')
             # Remove empty lines, convert to lowercase, sort, and remove
             # duplicates
             sed '/^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
                 | sort -u -o "${file}.tmp"
             ;;
-
         *.txt|*.tmp)
             # Remove whitespaces, empty lines, convert to lowercase, sort, and
             # remove duplicates
