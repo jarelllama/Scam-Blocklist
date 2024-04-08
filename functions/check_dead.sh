@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Checks for dead/resurrected domains and removes/adds them accordingly.
+# Last code review: 8 April 2024
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -15,7 +16,7 @@ TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 main() {
     # Install AdGuard's Dead Domains Linter
-    npm i -g @adguard/dead-domains-linter
+    npm install -q @adguard/dead-domains-linter
 
     for file in config/* data/*; do
         format_file "$file"
