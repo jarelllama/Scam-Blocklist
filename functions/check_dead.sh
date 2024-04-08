@@ -11,6 +11,7 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='data/wildcards.txt'
 readonly REDUNDANT_DOMAINS='data/redundant_domains.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
+TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 main() {
     # Install AdGuard's Dead Domains Linter
@@ -163,7 +164,7 @@ find_dead() {
 log_event() {
     [[ -z "$1" ]] && return  # Return if no domains passed
     local source="$3"
-    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
+    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$TIME_FORMAT" \
         '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 

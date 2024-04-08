@@ -10,6 +10,7 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly WILDCARDS='data/wildcards.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
+TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 main() {
     for file in config/* data/*; do
@@ -144,7 +145,7 @@ find_parked() {
 log_event() {
     [[ -z "$1" ]] && return  # Return if no domains passed
     local source="$3"
-    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$(date -u +"%H:%M:%S %d-%m-%y")" \
+    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$TIME_FORMAT" \
         '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
 }
 
