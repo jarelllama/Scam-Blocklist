@@ -655,6 +655,7 @@ check_and_exit() {
         printf "Domain log:\n%s\n" "$(<"$DOMAIN_LOG")"
     fi
 
+    # Print source log for retrieval test
     if [[ "$script_to_test" == 'retrieve' ]]; then
         printf "\nSource log:\n%s\n" "$(<"$SOURCE_LOG")"
     fi
