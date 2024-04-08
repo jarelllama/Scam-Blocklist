@@ -230,9 +230,11 @@ TEST_PARKED_CHECK() {
     comm -23 "$RAW" placeholders.txt > raw.tmp
     comm -23 "$RAW_LIGHT" placeholders.txt > raw_light.tmp
     grep -vxFf placeholders.txt "$PARKED_DOMAINS" > parked.tmp
+    grep -vFf placeholders.txt "$DOMAIN_LOG" > domain_log.tmp
     mv raw.tmp "$RAW"
     mv raw_light.tmp "$RAW_LIGHT"
     mv parked.tmp "$PARKED_DOMAINS"
+    mv domain_log.tmp "$DOMAIN_LOG"
 
     # Sort parked domains file for easy comparison with expected output
     sort "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
