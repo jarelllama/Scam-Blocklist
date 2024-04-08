@@ -656,7 +656,7 @@ check_and_exit() {
     fi
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        printf "Source log:\n%s\n" "$(<"$SOURCE_LOG")"
+        printf "\nSource log:\n%s\n" "$(<"$SOURCE_LOG")"
     fi
 
     on_exit
