@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Checks for dead/resurrected domains and removes/adds them accordingly.
-# Last code review: 8 April 2024
+# Latest code review: 8 April 2024
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
