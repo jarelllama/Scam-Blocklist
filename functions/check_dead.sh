@@ -145,8 +145,9 @@ check_alive() {
 #   dead.tmp
 #   return 1 if dead domains not found
 find_dead() {
-    sed 's/.*/||&^/' "$1" > "${1}.tmp"
-    dead-domains-linter -i "${1}.tmp" --export dead.tmp
+    temp_file="$(basename "$1").tmp"
+    sed 's/.*/||&^/' "$1" > "$temp_file"
+    dead-domains-linter -i "$temp_file" --export dead.tmp
     printf "\n"
     [[ ! -s dead.tmp ]] && return 1
 
