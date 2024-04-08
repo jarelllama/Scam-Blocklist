@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.08.085917.2024
+# Version: 04.08.102031.2024
 # Expires: 1 day
-# Last modified: Mon Apr  8 08:59:17 UTC 2024
+# Last modified: Mon Apr  8 10:20:31 UTC 2024
 # Syntax: Unbound
-# Number of entries: 3281
+# Number of entries: 3257
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -26,7 +26,6 @@ local-zone: "4vri.website." always_nxdomain
 local-zone: "5577mx.com." always_nxdomain
 local-zone: "5starjersey.com." always_nxdomain
 local-zone: "77unishop.com." always_nxdomain
-local-zone: "9onlyfans.com." always_nxdomain
 local-zone: "aaaneuropsych.com." always_nxdomain
 local-zone: "aamazon.top." always_nxdomain
 local-zone: "aamzon.shop." always_nxdomain
@@ -424,7 +423,6 @@ local-zone: "browningfirearmshop.com." always_nxdomain
 local-zone: "browningguns.com." always_nxdomain
 local-zone: "brtyrd.com." always_nxdomain
 local-zone: "bryanlesleyteapups.com." always_nxdomain
-local-zone: "bsetbuy.online." always_nxdomain
 local-zone: "btcoin.homes." always_nxdomain
 local-zone: "bticoin.top." always_nxdomain
 local-zone: "btrmixer.com." always_nxdomain
@@ -873,10 +871,8 @@ local-zone: "evorar.com." always_nxdomain
 local-zone: "evr-i.skin." always_nxdomain
 local-zone: "evri-app.com." always_nxdomain
 local-zone: "evri-buy.top." always_nxdomain
-local-zone: "evri-cc.bond." always_nxdomain
 local-zone: "evri-cc.sbs." always_nxdomain
 local-zone: "evri-cc.top." always_nxdomain
-local-zone: "evri-client.xyz." always_nxdomain
 local-zone: "evri-deli.com." always_nxdomain
 local-zone: "evri-delivery.info." always_nxdomain
 local-zone: "evri-department.com." always_nxdomain
@@ -898,7 +894,6 @@ local-zone: "evri-redeliveryapp.com." always_nxdomain
 local-zone: "evri-repay-uk.com." always_nxdomain
 local-zone: "evri-resche.com." always_nxdomain
 local-zone: "evri-serve.xyz." always_nxdomain
-local-zone: "evri-serveyou.xyz." always_nxdomain
 local-zone: "evri-t.com." always_nxdomain
 local-zone: "evri-trackmypost.top." always_nxdomain
 local-zone: "evri-traking.com." always_nxdomain
@@ -994,7 +989,6 @@ local-zone: "finance.pinksale.cm." always_nxdomain
 local-zone: "financialoptionstrade.com." always_nxdomain
 local-zone: "firearmammunition.com." always_nxdomain
 local-zone: "firearms.avenue.com." always_nxdomain
-local-zone: "firearmsammunitiondepot.com." always_nxdomain
 local-zone: "firearmshopusa.com." always_nxdomain
 local-zone: "firearmspawnshop.com." always_nxdomain
 local-zone: "fitnesssuperdeals.com." always_nxdomain
@@ -1317,7 +1311,6 @@ local-zone: "ios-evri.com." always_nxdomain
 local-zone: "iowafamilyacupuncture.com." always_nxdomain
 local-zone: "iptvsmarterservices.com." always_nxdomain
 local-zone: "irinasteacupyorkies.com." always_nxdomain
-local-zone: "irockstudio.com." always_nxdomain
 local-zone: "islandhobbynut.com." always_nxdomain
 local-zone: "itallgo.com." always_nxdomain
 local-zone: "itamizy.com." always_nxdomain
@@ -1456,7 +1449,6 @@ local-zone: "landscapk.com." always_nxdomain
 local-zone: "lapislazuli1945.com." always_nxdomain
 local-zone: "laportechiropractic.com." always_nxdomain
 local-zone: "larada.shop." always_nxdomain
-local-zone: "laradachshund.com." always_nxdomain
 local-zone: "laredoutefr.com." always_nxdomain
 local-zone: "laredoutesale.com." always_nxdomain
 local-zone: "laredoutesale.shop." always_nxdomain
@@ -1737,7 +1729,6 @@ local-zone: "mqbestdeals.com." always_nxdomain
 local-zone: "mrsbensonbirds.com." always_nxdomain
 local-zone: "msnhandcraft.com." always_nxdomain
 local-zone: "mttracoin.com." always_nxdomain
-local-zone: "mulexcorner.com." always_nxdomain
 local-zone: "mulexzone.com." always_nxdomain
 local-zone: "multinus.com." always_nxdomain
 local-zone: "multitacticgears.co.za." always_nxdomain
@@ -1928,7 +1919,6 @@ local-zone: "outdoorloungefurnitures.com." always_nxdomain
 local-zone: "outdoorsgunsandammo.com." always_nxdomain
 local-zone: "outfitmark.shop." always_nxdomain
 local-zone: "outlet-nutrition.com." always_nxdomain
-local-zone: "outlet-uk.com." always_nxdomain
 local-zone: "outletgardener.com." always_nxdomain
 local-zone: "outletheaters.com." always_nxdomain
 local-zone: "outletstoves.com." always_nxdomain
@@ -2464,7 +2454,6 @@ local-zone: "taylorsfirearmsusa.com." always_nxdomain
 local-zone: "taziti.com." always_nxdomain
 local-zone: "tcgguard.com." always_nxdomain
 local-zone: "tdxsz.com." always_nxdomain
-local-zone: "te-legram.site." always_nxdomain
 local-zone: "teacupmaltipooforsale.com." always_nxdomain
 local-zone: "teala.tokyo." always_nxdomain
 local-zone: "teddybearchowspal.com." always_nxdomain
@@ -2575,8 +2564,6 @@ local-zone: "tikzok.com." always_nxdomain
 local-zone: "timbermatspzoo.com." always_nxdomain
 local-zone: "timelessartistry.shop." always_nxdomain
 local-zone: "tinde.net." always_nxdomain
-local-zone: "tinderf.com." always_nxdomain
-local-zone: "tinderg.com." always_nxdomain
 local-zone: "tinderz.online." always_nxdomain
 local-zone: "tindir.net." always_nxdomain
 local-zone: "tineder.com." always_nxdomain
@@ -2651,7 +2638,6 @@ local-zone: "twiitter.ru." always_nxdomain
 local-zone: "twitchl.com." always_nxdomain
 local-zone: "twitter.surf." always_nxdomain
 local-zone: "twitter5.cyou." always_nxdomain
-local-zone: "twitterg.com." always_nxdomain
 local-zone: "twsdc.com." always_nxdomain
 local-zone: "twtter.net." always_nxdomain
 local-zone: "twutch.xyz." always_nxdomain
@@ -2704,12 +2690,8 @@ local-zone: "usps-aid.top." always_nxdomain
 local-zone: "usps-app.net." always_nxdomain
 local-zone: "usps-app.top." always_nxdomain
 local-zone: "usps-as.top." always_nxdomain
-local-zone: "usps-cc.beauty." always_nxdomain
-local-zone: "usps-cc.boats." always_nxdomain
 local-zone: "usps-cc.cyou." always_nxdomain
-local-zone: "usps-cc.makeup." always_nxdomain
 local-zone: "usps-cc.xyz." always_nxdomain
-local-zone: "usps-cc.yachts." always_nxdomain
 local-zone: "usps-center.live." always_nxdomain
 local-zone: "usps-cfs.shop." always_nxdomain
 local-zone: "usps-check.info." always_nxdomain
@@ -2762,7 +2744,6 @@ local-zone: "usps-myparcel.com." always_nxdomain
 local-zone: "usps-myparcel.top." always_nxdomain
 local-zone: "usps-mypost.com." always_nxdomain
 local-zone: "usps-nn.xyz." always_nxdomain
-local-zone: "usps-nyk.icu." always_nxdomain
 local-zone: "usps-online-safe.com." always_nxdomain
 local-zone: "usps-online.com." always_nxdomain
 local-zone: "usps-onlinemall.com." always_nxdomain
@@ -2965,7 +2946,6 @@ local-zone: "uspsr.vip." always_nxdomain
 local-zone: "uspsries.com." always_nxdomain
 local-zone: "uspsrty.top." always_nxdomain
 local-zone: "uspss.bond." always_nxdomain
-local-zone: "uspss.icu." always_nxdomain
 local-zone: "uspssavs.top." always_nxdomain
 local-zone: "uspsscv.top." always_nxdomain
 local-zone: "uspssearch.com." always_nxdomain
@@ -2979,7 +2959,6 @@ local-zone: "uspsshipcheck.top." always_nxdomain
 local-zone: "uspsshipchecka.com." always_nxdomain
 local-zone: "uspsshipexpress.com." always_nxdomain
 local-zone: "uspsshipquery.top." always_nxdomain
-local-zone: "uspsshops.top." always_nxdomain
 local-zone: "uspssi.top." always_nxdomain
 local-zone: "uspssk.xyz." always_nxdomain
 local-zone: "uspsso.top." always_nxdomain
@@ -3164,8 +3143,6 @@ local-zone: "wuchat.xyz." always_nxdomain
 local-zone: "wupdex.com." always_nxdomain
 local-zone: "wuptex.com." always_nxdomain
 local-zone: "wuxihat.us." always_nxdomain
-local-zone: "www-evri-com.sbs." always_nxdomain
-local-zone: "www-evri-uk.buzz." always_nxdomain
 local-zone: "www-usps-com.art." always_nxdomain
 local-zone: "wyliegunstore.com." always_nxdomain
 local-zone: "x.only-chats.com." always_nxdomain
@@ -3279,7 +3256,6 @@ local-zone: "zoem.top." always_nxdomain
 local-zone: "zom.homes." always_nxdomain
 local-zone: "zoogle.store." always_nxdomain
 local-zone: "zooma.skin." always_nxdomain
-local-zone: "zoomi.website." always_nxdomain
 local-zone: "zooo.lol." always_nxdomain
 local-zone: "zooo.ooo." always_nxdomain
 local-zone: "zoop.quest." always_nxdomain
