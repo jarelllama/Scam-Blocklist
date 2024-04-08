@@ -44,6 +44,34 @@ format() {
     [[ -f "${file}.tmp" ]] && mv "${file}.tmp" "$file"
 }
 
-[[ "$1" == 'format' ]] && format "$2"  # Pass the file from the caller
+# Function 'log_event' is called to log domain processing events into the
+# domain log.
+#   $1: domains to log stored in a variable
+#   $2: event type (dead, whitelisted, etc.)
+#   $3: source
+# Last code review: 8 April 2024
+log_event() {
+    time_format="$(date -u +"%H:%M:%S %d-%m-%y")"
+
+    # Return if no domains passed
+    [[ -z "$1" ]] && return
+
+    echo "$1" | awk -v event="$2" -v source="$3" -v time="$time_format" \
+        '{print time "," event "," $0 "," source}' >> config/domain_log.csv
+}
+
+function="$1"
+
+case "$function" in
+    format)
+        format "$2"  # Pass the file from the caller
+        ;;
+    log_event)
+        log_event "$2" "$3" "$4"
+        ;;
+    *)
+        exit 1
+        ;;
+esac
 
 exit 0
