@@ -41,7 +41,7 @@ format() {
             ;;
     esac
 
-    mv "${file}.tmp" "$file" 2> /dev/null
+    [[ -f "${file}.tmp" ]] && mv "${file}.tmp" "$file"
 }
 
 [[ "$1" == 'format' ]] && format "$2"  # Pass the file from the caller
