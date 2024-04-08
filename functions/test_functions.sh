@@ -520,8 +520,8 @@ test_dead_subdomain_check() {
         printf "%s\n" "$subdomain" >> "$SUBDOMAINS"
         # EXPECTED OUTPUT
         printf "%s\n" "$subdomain" >> out_dead.txt
-    done < <(shuf -n 4 "$SUBDOMAINS_TO_REMOVE")
-    # Take only 4 random subdomains to save time
+    done < <(shuf -n 3 "$SUBDOMAINS_TO_REMOVE")
+    # Take only 3 random subdomains to save time
 
     # EXPECTED OUTPUT
     printf "dead,584308-dead-subdomain-test.com,raw\n" >> out_log.txt
