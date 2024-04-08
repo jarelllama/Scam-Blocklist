@@ -9,150 +9,90 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
-readonly WILDCARDS='data/wildcards.txt'
-readonly REDUNDANT_DOMAINS='data/redundant_domains.txt'
-readonly DOMAIN_LOG='config/domain_log.csv'
-TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
 
 main() {
     # Install AdGuard's Dead Domains Linter
     npm install -g @adguard/dead-domains-linter > /dev/null
 
+    # Format files
     for file in config/* data/*; do
-        format_file "$file"
+        bash functions/tools.sh format "$file"
     done
 
-    check_subdomains
-    check_redundant
     check_dead
     check_alive
 
-    # Remove domains from light raw file that are not found in full raw file
-    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
-    mv light.tmp "$RAW_LIGHT"
-
-    # Cache dead domains to filter out from newly retrieved domains
-    # (done last to skip alive domains check)
-    cat dead_raw.tmp dead_subdomains.tmp dead_redundant.tmp >> "$DEAD_DOMAINS"
-    format_file "$DEAD_DOMAINS"
+    # Cache dead domains to be used as a filter for newly retrieved domains
+    # (done last to skip alive check)
+    sort -u dead_cache.tmp "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
 }
 
-# Function 'check_subdomains' removes dead domains from the subdomains file
-# and raw file.
-check_subdomains() {
-    find_dead "$SUBDOMAINS" || return
+# Function 'check_dead' removes dead domains from the raw file, raw light file,
+# and subdomains file.
+check_dead() {
+    # Include domains with subdomains in dead check. Exclude the root domains
+    # since the subdomains were what was retrieved during domain retrieval
+    comm -23 <(sort "$RAW" "$SUBDOMAINS") "$ROOT_DOMAINS" > domains.tmp
 
-    # Remove domains from subdomains file
-    comm -23 "$SUBDOMAINS" dead.tmp > subdomains.tmp
-    mv subdomains.tmp "$SUBDOMAINS"
+    find_dead_in domains.tmp || return
 
     # Copy temporary dead file to be added into dead cache later
-    cp dead.tmp dead_subdomains.tmp
+    # This dead cache includes subdomains
+    cp dead.tmp dead_cache.tmp
 
-    # Strip dead domains to their root domains
+    remove_dead_from "$SUBDOMAINS"
+
+    # Strip subdomains from dead domains
     while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" dead.tmp
+        sed -i "s/^${subdomain}\.//" dead.tmp | sort -u -o dead.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
-    format_file dead.tmp
-
-    # Remove dead root domains from raw file and root domains file
-    comm -23 "$RAW" dead.tmp > raw.tmp
-    comm -23 "$ROOT_DOMAINS" dead.tmp > root.tmp
-    mv raw.tmp "$RAW"
-    mv root.tmp "$ROOT_DOMAINS"
-
-    log_event "$(<dead.tmp)" dead raw
-}
-
-# Function 'check_redundant' removes dead domains from the redundant domains
-# file and raw file.
-check_redundant() {
-    find_dead "$REDUNDANT_DOMAINS" || return
-
-    # Remove dead domains from redundant domains file
-    comm -23 "$REDUNDANT_DOMAINS" dead.tmp > redundant.tmp
-    mv redundant.tmp "$REDUNDANT_DOMAINS"
-
-    # Copy temporary dead file to be added into dead cache later
-    cp dead.tmp dead_redundant.tmp
-
-    # Find unused wildcards
-    while read -r wildcard; do
-        # If no matches, consider wildcard as unused/dead
-        if ! grep -q "\.${wildcard}$" "$REDUNDANT_DOMAINS"; then
-            printf "%s\n" "$wildcard" >> dead_wildcards.tmp
-        fi
-    done < "$WILDCARDS"
-
-    [[ ! -f dead_wildcards.tmp ]] && return
-
-    # Remove unused wildcards from raw file and wildcards file
-    comm -23 "$RAW" dead_wildcards.tmp > raw.tmp
-    comm -23 "$WILDCARDS" dead_wildcards.tmp > wildcards.tmp
-    mv raw.tmp "$RAW"
-    mv wildcards.tmp "$WILDCARDS"
-
-    log_event "$(<dead_wildcards.tmp)" dead wildcard
-}
-
-# Function 'check_dead' removes dead domains from the raw file.
-check_dead() {
-    # Exclude wildcards and root domains of subdomains
-    comm -23 "$RAW" <(sort "$ROOT_DOMAINS" "$WILDCARDS") > raw.tmp
-
-    find_dead raw.tmp || return
-
-    # Copy temporary dead file to be added into dead cache later
-    cp dead.tmp dead_raw.tmp
-
-    # Remove dead domains from raw file
-    comm -23 "$RAW" dead.tmp > raw.tmp
-    mv raw.tmp "$RAW"
+    remove_dead_from "$RAW"
+    remove_dead_from "$RAW_LIGHT"
+    remove_dead_from "$ROOT_DOMAINS"
 
     log_event "$(<dead.tmp)" dead raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
-# and adds them back into the raw file.
+# (also called the dead domains cache) and adds them back into the raw file.
+#
+# Note that resurrected domains are not added back into the raw light file due
+# to limitations in the way the dead domains are recorded.
 check_alive() {
-    find_dead "$DEAD_DOMAINS"  # No need to return if no dead found
+    find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
 
     # Get resurrected domains in dead domains file
-    # (dead domains file is unsorted)
-    alive_domains="$(comm -23 <(sort "$DEAD_DOMAINS") <(sort dead.tmp))"
+    # (dead domain files need to be sorted here)
+    comm -23 <(sort "$DEAD_DOMAINS") <(sort dead.tmp) > alive.tmp
 
-    [[ -z "$alive_domains" ]] && return
+    [[ ! -s alive.tmp ]] && return
 
     # Update dead domains file to only include dead domains
     cp dead.tmp "$DEAD_DOMAINS"
-    format_file "$DEAD_DOMAINS"
 
-    # Strip away subdomains from alive domains as subdomains
-    # are not supposed to be in raw file
+    # Strip subdomains since raw file should not have subdomains
     while read -r subdomain; do
-        alive_domains="$(echo "$alive_domains" | sed "s/^${subdomain}\.//" \
-            | sort -u)"
+        sed -i "s/^${subdomain}\.//" alive.tmp | sort -u -o alive.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Add resurrected domains to raw file
-    printf "%s\n" "$alive_domains" >> "$RAW"
-    format_file "$RAW"
+    sort -u alive.tmp "$RAW" -o "$RAW"
 
-    log_event "$alive_domains" resurrected dead_domains_file
+    log_event "$(<alive.tmp)" resurrected dead_domains_file
 }
 
-# Function 'find_dead' finds dead domains from a given file by first formatting
+# Function 'find_dead_in' finds dead domains in a given file by first formatting
 # the file and then processing it through AdGuard's Dead Domains Linter.
 # Input:
 #   $1: file to process
 # Output:
 #   dead.tmp
-#   return 1 if dead domains not found
-find_dead() {
+#   return 1 (if dead domains not found)
+find_dead_in() {
     temp="$(basename "$1").tmp"
 
-    sed 's/.*/||&^/' "$1" > "$temp"
+    sed 's/.*/||&^/' "$1" > "$temp"  # Format to Adblock Plus syntax
 
     dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
@@ -165,22 +105,21 @@ find_dead() {
     return
 }
 
-# Function 'log_event' logs domain processing events into the domain log.
-#   $1: domains to log stored in a variable.
+# Function 'remove_dead_from' removes dead domains from the given file
+# Input:
+#   $1: file to remove dead domains from
+remove_dead_from() {
+    comm -23 <(sort "$1") dead.tmp > temp
+    mv temp "$1"
+}
+
+# Function 'log_event' calls a shell wrapper to log domain processing events
+# into the domain log.
+#   $1: domains to log stored in a variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
-    [[ -z "$1" ]] && return  # Return if no domains passed
-    local source="${source:-$3}"
-    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$TIME_FORMAT" \
-        '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
-}
-
-# Function 'format_file' calls a shell wrapper to standardize the format
-# of a file.
-#   $1: file to format
-format_file() {
-    bash functions/tools.sh format "$1"
+    bash functions/tools.sh log_event "$1" "$2" "$3"
 }
 
 cleanup() {
@@ -188,8 +127,9 @@ cleanup() {
 
     # Prune old entries from dead domains file
     lines="$(wc -l < "$DEAD_DOMAINS")"
-    if (( lines > 6000 )); then
-        sed -i "1,$(( lines - 6000 ))d" "$DEAD_DOMAINS"
+    max=6000
+    if (( lines > max )); then
+        sed -i "1,$(( lines - max ))d" "$DEAD_DOMAINS"
     fi
 }
 
