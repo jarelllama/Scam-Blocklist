@@ -92,8 +92,9 @@ check_alive() {
 find_dead_in() {
     temp="$(basename "$1").tmp"
 
-    sed 's/.*/||&^/' "$1" > "$temp"  # Format to Adblock Plus syntax
-
+    # Format to Adblock Plus syntax
+    sed 's/.*/||&^/' "$1" > "$temp"
+    
     dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
 
