@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Builds the various formats of blocklists from the raw files.
+# Last code review: 8 April 2024
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -13,23 +14,25 @@ build() {
 
     # Loop through the full and light blocklist versions
     for version in '' 'LIGHT VERSION'; do
+
         if [[ "$version" == 'LIGHT VERSION' ]]; then
-            local list_name='scams_light.txt'
-            local source_file="$RAW_LIGHT"
+            list_name='scams_light.txt'
+            source_file="$RAW_LIGHT"
+        else
+            list_name='scams.txt'
+            source_file="$RAW"
         fi
 
-        source_file="${source_file:-$RAW}"
-        blocklist_path="lists/${directory}/${list_name:-scams.txt}"
+        blocklist_path="lists/${directory}/${list_name}"
 
-        # Truncate blocklist
         : > "$blocklist_path"
 
-        # Special case for Adblock Plus format
+        # Special case for Adblock Plus syntax
         [[ "$syntax" == 'Adblock Plus' ]] && printf "[Adblock Plus]\n" >> "$blocklist_path"
 
         append_header
 
-        # Special case for Unbound format
+        # Special case for Unbound syntax
         [[ "$syntax" == 'Unbound' ]] && printf "server:\n" >> "$blocklist_path"
 
         # Append formatted domains onto blocklist
@@ -74,7 +77,6 @@ build_adblock() {
 build_dnsmasq() {
     local syntax='Dnsmasq'
     local directory='dnsmasq'
-    local comment=''
     local before='local=/'
     local after='/'
     build
@@ -83,7 +85,6 @@ build_dnsmasq() {
 build_unbound() {
     local syntax='Unbound'
     local directory='unbound'
-    local comment=''
     local before='local-zone: "'
     local after='." always_nxdomain'
     build
@@ -92,18 +93,13 @@ build_unbound() {
 build_wildcard_asterisk() {
     local syntax='Wildcard Asterisk'
     local directory='wildcard_asterisk'
-    local comment=''
     local before='*.'
-    local after=''
     build
 }
 
 build_wildcard_domains() {
     local syntax='Wildcard Domains'
     local directory='wildcard_domains'
-    local comment=''
-    local before=''
-    local after=''
     build
 }
 
