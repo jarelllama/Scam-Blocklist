@@ -45,9 +45,8 @@ check_parked() {
 
     # Strip subdomains from parked domains
     while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" parked.tmp
+        sed "s/^${subdomain}\.//" parked.tmp | sort -u -o parked.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u parked.tmp -o parked.tmp
 
     remove_parked_from "$RAW"
     remove_parked_from "$RAW_LIGHT"
@@ -160,7 +159,7 @@ find_parked() {
 # Input:
 #   $1: file to remove parked domains from
 remove_parked_from() {
-    comm -23 <(sort "$1") <(sort parked.tmp) > temp
+    comm -23 <(sort "$1") parked.tmp > temp
     mv temp "$1"
 }
 
