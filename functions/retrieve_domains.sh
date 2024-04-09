@@ -195,7 +195,7 @@ build() {
     # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
-        # Find root domains (subdomains stripped off) in the filtered raw file
+        # Find root domains (subdomains stripped off) in the filtered ddomains
         root_domains="$(comm -12 <(sort root_domains.tmp) retrieved_domains.tmp)"
 
         # Collate filtered root domains to exclude from dead check
@@ -281,7 +281,7 @@ log_domains() {
 }
 
 cleanup() {
-    # Initialize pending directory if no pending domains to be saved
+    # Initialize pending directory if no domains to be saved for rerun
     find data/pending -type d -empty -delete
 
     find . -maxdepth 1 -type f -name "*.tmp" -delete
@@ -309,9 +309,7 @@ source_google_search() {
     local execution_time
 
     if [[ "$USE_EXISTING" == true ]]; then
-
         # Use existing retrieved results
-
         # Loop through the results from each search term
         for results_file in data/pending/domains_google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
@@ -329,7 +327,6 @@ source_google_search() {
     fi
 
     # Retrieve new results
-
     local url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
