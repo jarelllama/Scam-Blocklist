@@ -49,9 +49,11 @@ check_parked() {
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u parked.tmp -o parked.tmp
 
-    remove_parked_from "$RAW"
-    remove_parked_from "$RAW_LIGHT"
-    remove_parked_from "$ROOT_DOMAINS"
+    # Remove parked domains from the various files
+    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
+        comm -23 "$file" dead.tmp > temp
+        mv temp "$file"
+    done
 
     log_event "$(<parked.tmp)" parked raw
 }
@@ -153,14 +155,6 @@ find_parked() {
 
         (( count++ ))
     done < "$1"
-}
-
-# Function 'remove_parked_from' removes parked domains from the given file.
-# The parked.tmp file should be present before running.
-#   $1: file to remove parked domains from
-remove_parked_from() {
-    comm -23 "$1" parked.tmp > temp
-    mv temp "$1"
 }
 
 # Function 'log_event' calls a shell wrapper to log domain processing events

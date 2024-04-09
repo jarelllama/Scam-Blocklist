@@ -50,9 +50,11 @@ check_dead() {
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u dead.tmp -o dead.tmp
 
-    remove_dead_from "$RAW"
-    remove_dead_from "$RAW_LIGHT"
-    remove_dead_from "$ROOT_DOMAINS"
+    # Remove dead domains from the various files
+    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
+        comm -23 "$file" dead.tmp > temp
+        mv temp "$file"
+    done
 
     log_event "$(<dead.tmp)" dead raw
 }
@@ -105,14 +107,6 @@ find_dead_in() {
 
     # Return 1 if no dead domains were found
     [[ ! -s dead.tmp ]] && return 1 || return 0
-}
-
-# Function 'remove_dead_from' removes dead domains from the given file.
-# The dead.tmp file should be present before running.
-#   $1: file to remove dead domains from
-remove_dead_from() {
-    comm -23 "$1" dead.tmp > temp
-    mv temp "$1"
 }
 
 # Function 'log_event' calls a shell wrapper to log domain processing events
