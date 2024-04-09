@@ -63,7 +63,7 @@ process_source() {
     # Remove known dead domains (includes subdomains)
     # Logging disabled as it inflated log size
     dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
-    dead_count="$(filter "$dead_domains")"
+    dead_count="$(filter "$dead_domains" dead --no-log)"
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -89,7 +89,7 @@ process_source() {
     # Remove known parked domains
     # Logging disabled as it inflated log size
     parked_domains="$(comm -12 <(sort "$PARKED_DOMAINS") "$results_file")"
-    parked_count="$(filter "$parked_domains")"
+    parked_count="$(filter "$parked_domains" parked --no-log)"
 
     # Log blacklisted domains
     log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
@@ -97,28 +97,26 @@ process_source() {
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist matching uses keywords
     whitelisted="$(grep -Ff "$WHITELIST" "$results_file" | grep -vxFf "$BLACKLIST")"
-    whitelisted_count="$(filter "$whitelisted")"
-    log_domains "$whitelisted" whitelist
+    whitelisted_count="$(filter "$whitelisted" whitelist)"
 
     # Remove domains with whitelisted TLDs
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$results_file")"
-    whitelisted_tld_count="$(filter "$whitelisted_tld")"
-    log_domains "$whitelisted_tld" tld
+    whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
     # Remove non-domain entries including IP addresses excluding punycode
+    invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$results_file")"
     # Note invalid entries are not counted
-    invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$results_file")"
-    filter "$invalid_entries" &> /dev/null
+    filter "$invalid" invalid &> /dev/null
     # Save entries for manual review and rerun
-    awk 'NF {print $0 " (invalid)"}' <<< "$invalid_entries" >> manual_review.tmp
-    printf "%s\n" "$invalid_entries" >> "${results_file}.tmp"
+    awk 'NF {print $0 " (invalid)"}' <<< "$invalid" >> manual_review.tmp
+    printf "%s\n" "$invalid" >> "${results_file}.tmp"
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist
     # Remove domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     in_toplist="$(comm -12 toplist.tmp "$results_file" | grep -vxFf "$BLACKLIST")"
-    toplist_count="$(filter "$in_toplist")"
+    toplist_count="$(filter "$in_toplist" toplist)"
     # Save entries for manual review and rerun
     awk 'NF {print $0 " (toplist)"}' <<< "$in_toplist" >> manual_review.tmp
     printf "%s\n" "$in_toplist" >> "${results_file}.tmp"
@@ -144,18 +142,26 @@ process_source() {
     fi
 }
 
-# Function 'filter' removes the passed entries from the results file.
+# Function 'filter' logs the given entries and removes them from the results
+# file.
 # Input:
 #   $1: entries to remove passed in a variable
+#   $2: tag given to entries
+#   --no-log: do not log entries into the domain log
 # Output:
 #   Number of entries that were passed
 filter() {
     local entries="$1"
+    local tag="$2"
 
     [[ -z "$entries" ]] && { printf "0"; return; }
 
     comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
     mv results.tmp "$results_file"
+
+    if [[ "$3" != '--no-log' ]]; then
+        $FUNCTION --log-domains "$entries" "$tag" "$source"
+    fi
 
     # Return number of entries
     wc -w <<< "$entries"

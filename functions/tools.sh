@@ -49,7 +49,7 @@ format_all() {
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
-#   $4: timestamp
+#   $4: timestamp (optional)
 log_domains() {
     # Check if a file or variable was passed
     # Return if no domains were passed
