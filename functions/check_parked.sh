@@ -45,7 +45,7 @@ check_parked() {
 
     # Strip subdomains from parked domains
     while read -r subdomain; do
-        sed "s/^${subdomain}\.//" parked.tmp | sort -u -o parked.tmp
+        sed "s/^${subdomain}\.//" parked.tmp | sort -u > parked.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
     remove_parked_from "$RAW"
@@ -78,7 +78,7 @@ check_unparked() {
     # Add unparked domains to raw file
     # Note unparked subdomains are added back too and will be processed by the
     # validation check outside of this script
-    sort -u unparked.tmp "$RAW" -o "$RAW"
+    sort -u unparked.tmp "$RAW" -o "    $RAW"
 
     log_event "$(<unparked.tmp)" unparked parked_domains_file
 }
