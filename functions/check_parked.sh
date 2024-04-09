@@ -22,7 +22,9 @@ main() {
 
     # Cache parked domains to be used as a filter for newly retrieved domains
     # (done last to skip unparked check)
-    sort -u parked_cache.tmp "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
+    if [[ -f parked_cache.tmp ]]; then
+        sort -u parked_cache.tmp "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
+    fi
 }
 
 # Function 'check_parked' removes parked domains from the raw file, raw light
