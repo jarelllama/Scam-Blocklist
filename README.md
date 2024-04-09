@@ -23,16 +23,16 @@ Light version: 3285
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-    0 |         - |       0% | Google Search
-    8 |         - |      11% | aa419.org
-    0 |         - |       0% | dnstwist (NRDs)
-   39 |         - |      17% | guntab.com
-    6 |         - |       7% | petscams.com
-    2 |         - |      72% | scam.directory
-    1 |         - |      23% | scamadviser.com
-    0 |         - |       1% | stopgunscams.com
-    0 |         - |       0% | Manual Entries
-   56 |         - |      20% | All sources
+    - |         0 |       0% | Google Search
+    - |         8 |      11% | aa419.org
+    - |         0 |       0% | dnstwist (NRDs)
+    - |        39 |      17% | guntab.com
+    - |         6 |       6% | petscams.com
+    - |         2 |      72% | scam.directory
+    - |         1 |      23% | scamadviser.com
+    - |         0 |       1% | stopgunscams.com
+    - |         0 |       0% | Manual Entries
+    - |        56 |      20% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -77,7 +77,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 ``` text
 Active search terms: 19
 Queries made today: 0
-Domains retrieved today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
