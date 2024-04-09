@@ -43,7 +43,9 @@ check_dead() {
     # This dead cache includes subdomains
     cp dead.tmp dead_cache.tmp
 
-    remove_dead_from "$SUBDOMAINS"
+    # Remove dead domains from the subdomains file
+    comm -23 "$SUBDOMAINS" dead.tmp > temp
+    mv temp "$SUBDOMAINS"
 
     # Strip subdomains from dead domains
     while read -r subdomain; do

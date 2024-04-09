@@ -17,7 +17,7 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 # Input:
 #   $1: entries to process
 #   $2: tag given to entries
-#   --preserve: set flag to keep entries in the raw file
+#   --preserve: pass argument to keep entries in the raw file
 # Output:
 #   Number of entries that were passed
 filter() {
