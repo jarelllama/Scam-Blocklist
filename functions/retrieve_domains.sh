@@ -160,7 +160,7 @@ filter() {
     mv results.tmp "$results_file"
 
     if [[ "$3" != '--no-log' ]]; then
-        $FUNCTION --log-domains "$entries" "$tag" "$source"
+       log_domains "$entries" "$tag"
     fi
 
     # Return number of entries
