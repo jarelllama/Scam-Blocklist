@@ -36,7 +36,7 @@ validate_raw() {
     sort -u "$RAW" -o "$RAW"
     sort -u "$RAW_LIGHT" -o "$RAW_LIGHT"
 
-    # Remove whitelisted domains, excluding blacklisted domains
+    # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist matching uses keywords
     whitelisted="$(grep -Ff "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
     whitelisted_count="$(filter "$whitelisted" whitelist)"
@@ -50,7 +50,7 @@ validate_raw() {
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$RAW")"
     invalid_count="$(filter "$invalid" invalid)"
 
-    # Find matching domains in toplist, excluding blacklisted domains
+    # Find matching domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     download_toplist
     in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
