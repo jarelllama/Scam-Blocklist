@@ -95,6 +95,7 @@ find_dead_in() {
     dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
 
+    # Return 1 if no dead domains were found
     [[ ! -s dead.tmp ]] && return 1
 
     # The Dead Domains Linter exports without an ending new line
