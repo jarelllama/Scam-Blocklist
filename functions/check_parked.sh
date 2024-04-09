@@ -13,11 +13,6 @@ readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 
 main() {
-    # Call shell wrapper to format files
-    for file in config/* data/*; do
-        $FUNCTION --format "$file"
-    done
-
     check_parked
     check_unparked
 
@@ -42,6 +37,7 @@ check_parked() {
     # This parked cache includes subdomains
     cp parked.tmp parked_cache.tmp
 
+    # Remove parked domains from subdomains file
     comm -23 "$SUBDOMAINS" parked.tmp > temp
     mv temp "$SUBDOMAINS"
 
@@ -58,7 +54,7 @@ check_parked() {
     done
 
     # Call shell wrapper to log parked domains into domain log
-    $FUNCTION --log-event parked.tmp parked raw
+    $FUNCTION --log-domains parked.tmp parked raw
 }
 
 # Function 'check_unparked' finds unparked domains in the parked domains file
@@ -71,7 +67,7 @@ check_unparked() {
     # No need to return if no parked domains found
 
     # Get unparked domains
-    # (parked domains file need to be sorted here)
+    # (parked domains file is unsorted)
     comm -23 <(sort "$PARKED_DOMAINS") parked.tmp > unparked.tmp
 
     [[ ! -s unparked.tmp ]] && return
@@ -82,12 +78,12 @@ check_unparked() {
     mv temp "$PARKED_DOMAINS"
 
     # Add unparked domains to raw file
-    # Note unparked subdomains are added back too and will be processed by the
-    # validation check outside of this script
+    # Note that unparked subdomains are added back too and will be processed by
+    # the validation check outside of this script.
     sort -u unparked.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log unparked domains into domain log
-    $FUNCTION --log-event unparked.tmp unparked parked_domains_file
+    $FUNCTION --log-domains unparked.tmp unparked parked_domains_file
 }
 
 # Function 'find_parked_in' efficiently checks for parked domains from a given
@@ -172,5 +168,7 @@ cleanup() {
 # Entry point
 
 trap cleanup EXIT
+
+$FUNCTION --format-all
 
 main
