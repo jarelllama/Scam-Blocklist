@@ -8,6 +8,7 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly PARKED_TERMS='config/parked_terms.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
+readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 
 main() {
