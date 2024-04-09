@@ -99,13 +99,10 @@ find_dead_in() {
     dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
 
-    sort -u dead.tmp -o dead.tmp
-
     # Return 1 if no dead domains were found
     [[ ! -s dead.tmp ]] && return 1
 
-    # The Dead Domains Linter exports without an ending new line
-    printf "\n" >> dead.tmp
+    sort -u dead.tmp -o dead.tmp
 
     return
 }
