@@ -52,7 +52,7 @@ log_event() {
     # Return if no domains passed
     [[ -z "$1" ]] && return
 
-    echo "$1" | awk -v event="$2" -v source="$3" -v time="$timestamp" \
+    printf "%s\n" "$1" | awk -v event="$2" -v source="$3" -v time="$timestamp" \
         '{print time "," event "," $0 "," source}' >> config/domain_log.csv
 }
 
