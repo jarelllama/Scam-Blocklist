@@ -67,6 +67,13 @@ filter() {
        log_domains "$entries" "$tag"
     fi
 
+    if [[ "$3" == '--preserve' ]]; then
+        # Save entries for manual review and rerun
+        awk -v tag="$2" '{print $0 " (" tag ")"}' <<< "$entries" \
+            >> manual_review.tmp
+        printf "%s\n" "$entries" >> "${results_file}.tmp"
+    fi
+
     # Return number of entries
     wc -w <<< "$entries"
 }
@@ -133,20 +140,14 @@ process_source() {
     # Remove non-domain entries including IP addresses excluding punycode
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$results_file")"
     # Note invalid entries are not counted
-    filter "$invalid" invalid &> /dev/null
-    # Save entries for manual review and rerun
-    awk 'NF {print $0 " (invalid)"}' <<< "$invalid" >> manual_review.tmp
-    printf "%s\n" "$invalid" >> "${results_file}.tmp"
+    filter "$invalid" invalid --preserve &> /dev/null
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist
     # Remove domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     in_toplist="$(comm -12 toplist.tmp "$results_file" | grep -vxFf "$BLACKLIST")"
-    toplist_count="$(filter "$in_toplist" toplist)"
-    # Save entries for manual review and rerun
-    awk 'NF {print $0 " (toplist)"}' <<< "$in_toplist" >> manual_review.tmp
-    printf "%s\n" "$in_toplist" >> "${results_file}.tmp"
+    toplist_count="$(filter "$in_toplist" toplist --preserve)"
 
     # Collate filtered domains
     cat "$results_file" >> retrieved_domains.tmp
