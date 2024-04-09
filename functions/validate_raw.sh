@@ -16,7 +16,7 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 # Input:
 #   $1: entries to process
 #   $2: tag given to entries
-#   --preserve: pass argument to keep entries in the raw file
+#   --preserve: pass the argument to keep entries in the raw file
 # Output:
 #   Number of entries that were passed
 filter() {
@@ -26,7 +26,7 @@ filter() {
     # Return if no entries passed
     [[ -s "$entries" ]] && return
 
-    # Record entries in the filter log
+    # Record entries into filter log
     awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" >> filter_log.tmp
 
     # Call shell wrapper to log entries into domain log
