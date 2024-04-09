@@ -52,14 +52,14 @@ format_all() {
 log_domains() {
     timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
 
-    if [[ -f "$1" ]]; then
+    # Check if a file or variable was passed
+    if [[ -s "$1" ]]; then
         domains="$(<"$1")"
-    else
+    elif [[ -n "$1" ]]; then
         domains="$1"
+    else
+        return
     fi
-
-    # Return if no domains to log
-    [[ -z "$domains" ]] && return
 
     printf "%s\n" "$domains" \
         | awk -v event="$2" -v source="$3" -v time="$timestamp" \
@@ -72,10 +72,9 @@ log_domains() {
 #   $2: maximum number of lines to keep
 prune_lines() {
     lines="$(wc -l < "$1")"
-    max_lines="$2"
 
-    if (( lines > max_lines )); then
-        sed -i "1,$(( lines - max_lines ))d" "$1"
+    if (( lines > "$2" )); then
+        sed -i "1,$(( lines - "$2" ))d" "$1"
     fi
 }
 
@@ -107,9 +106,7 @@ send_telegram() {
 
 # Entry point
 
-flag="$1"
-
-case "$flag" in
+case "$1" in
     --format)
         format_file "$2"
         ;;
