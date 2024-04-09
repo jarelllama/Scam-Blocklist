@@ -14,7 +14,7 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 main() {
     # Format files
     for file in config/* data/*; do
-        format_file "$file"
+        bash functions/tools.sh format "$file"
     done
 
     check_parked
@@ -22,9 +22,7 @@ main() {
 
     # Cache parked domains to be used as a filter for newly retrieved domains
     # (done last to skip unparked check)
-    if [[ -f parked_cache.tmp ]]; then
-        sort -u parked_cache.tmp "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
-    fi
+    sort -u parked_cache.tmp "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
 }
 
 # Function 'check_parked' removes parked domains from the raw file, raw light
@@ -110,7 +108,7 @@ find_parked_in() {
     cat parked_domains_x??.tmp > parked.tmp 2> /dev/null
     rm parked_domains_x??.tmp 2> /dev/null
 
-    format_file parked.tmp
+    sort -u parked.tmp -o parked.tmp
 
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
 
@@ -160,7 +158,7 @@ find_parked() {
 # Input:
 #   $1: file to remove parked domains from
 remove_parked_from() {
-    comm -23 <(sort "$1") parked.tmp > temp
+    comm -23 "$1" parked.tmp > temp
     mv temp "$1"
 }
 
@@ -171,13 +169,6 @@ remove_parked_from() {
 #   $3: source
 log_event() {
     bash functions/tools.sh log_event "$1" "$2" "$3"
-}
-
-# Function 'format_file' calls a shell wrapper to standardize the format
-# of a file.
-#   $1: file to format
-format_file() {
-    bash functions/tools.sh format "$1"
 }
 
 cleanup() {

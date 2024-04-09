@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Checks for dead/resurrected domains and removes/adds them accordingly.
-# Latest code review: 8 April 2024
+# Latest code review: 9 April 2024
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -98,12 +98,10 @@ find_dead_in() {
     dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
 
-    # Return 1 if no dead domains were found
-    [[ ! -s dead.tmp ]] && return 1
-
     sort -u dead.tmp -o dead.tmp
 
-    return
+    # Return 1 if no dead domains were found
+    [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
 # Function 'remove_dead_from' removes dead domains from the given file.
@@ -111,7 +109,7 @@ find_dead_in() {
 # Input:
 #   $1: file to remove dead domains from
 remove_dead_from() {
-    comm -23 <(sort "$1") dead.tmp > temp
+    comm -23 "$1" dead.tmp > temp
     mv temp "$1"
 }
 
