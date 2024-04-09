@@ -46,9 +46,8 @@ check_dead() {
 
     # Strip subdomains from dead domains
     while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" dead.tmp
+        sed "s/^${subdomain}\.//" dead.tmp | sort -u -o dead.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u dead.tmp -o dead.tmp
 
     remove_dead_from "$RAW"
     remove_dead_from "$RAW_LIGHT"
@@ -103,7 +102,12 @@ find_dead_in() {
     sort -u dead.tmp -o dead.tmp
 
     # Return 1 if no dead domains were found
-    [[ ! -s dead.tmp ]] && return 1 || return
+    [[ ! -s dead.tmp ]] && return 1
+
+    # The Dead Domains Linter exports without an ending new line
+    printf "\n" >> dead.tmp
+
+    return
 }
 
 # Function 'remove_dead_from' removes dead domains from the given file.
