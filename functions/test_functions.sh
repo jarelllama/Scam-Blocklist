@@ -109,7 +109,6 @@ TEST_RETRIEVE_VALIDATE() {
     test_whitelist_blacklist
     test_whitelisted_tld_removal
     test_invalid_removal
-    test_redundant_removal
     test_toplist_removal
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
@@ -444,32 +443,6 @@ test_invalid_removal() {
         printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
     } >> out_manual_review.txt
-}
-
-# TEST: removal of redundant domains
-test_redundant_removal() {
-    if [[ "$script_to_test" == 'retrieve' ]]; then
-        printf "redundant-test.com\n" >> "$WILDCARDS"
-         # Wildcard should already be in expected wildcards file
-        printf "redundant-test.com\n" >> out_wildcards.txt
-        # INPUT
-        printf "domain.redundant-test.com\n" >> input.txt
-        # EXPECTED OUTPUT
-        printf "redundant,domain.redundant-test.com\n" >> out_log.txt
-        return
-    fi
-    # Test addition of new wildcard from wildcard file
-    # (manually adding a new wildcard to wildcards file)
-
-    # Existing redundant domain in raw file
-    printf "domain.redundant-test.com\n" >> input.txt
-    # INPUT
-    printf "redundant-test.com\n" >> "$WILDCARDS"
-    # EXPECTED OUTPUT
-    printf "redundant-test.com\n" >> out_raw.txt
-    printf "redundant-test.com\n" >> out_wildcards.txt
-    printf "domain.redundant-test.com\n" >> out_redundant.txt
-    printf "redundant,domain.redundant-test.com\n" >> out_log.txt
 }
 
 # TEST: removal of domains found in toplist

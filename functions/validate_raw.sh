@@ -49,6 +49,7 @@ validate_raw() {
     invalid_count="$(filter "$invalid" invalid)"
 
     # Find matching domains in toplist, excluding blacklisted domains
+    # Note the toplist does not include subdomains
     download_toplist
     in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
     toplist_count="$(filter "$in_toplist" toplist --preserve)"
@@ -56,7 +57,8 @@ validate_raw() {
     # Exit if no filtering done
     [[ ! -f filter_log.tmp ]] && exit
 
-    # Collate filtered subdomains and root domains
+    # Collate only filtered subdomains and root domains into the subdomains
+    # file and root domains file
     if [[ -f root_domains.tmp ]]; then
         # Find root domains (subdomains stripped off) in the filtered domains
         root_domains="$(comm -12 <(sort root_domains.tmp) "$RAW")"
