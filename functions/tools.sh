@@ -23,7 +23,7 @@ format() {
             ;;
         'config/parked_terms.txt')
             # Convert to lowercase, sort, and remove duplicates
-            tr '[:upper:]' '[:lower:]' "$file" | sort -u -o "${file}.tmp"
+            tr '[:upper:]' '[:lower:]' < "$file" | sort -u -o "${file}.tmp"
             ;;
         *.txt|*.tmp)
             # Remove whitespaces, convert to lowercase, sort, and remove
