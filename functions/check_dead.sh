@@ -92,6 +92,7 @@ check_alive() {
 #   dead.tmp
 #   return 1 (if dead domains not found)
 find_dead_in() {
+    local temp
     temp="$(basename "$1").tmp"
 
     # Format to Adblock Plus syntax
