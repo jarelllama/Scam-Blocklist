@@ -26,16 +26,18 @@ validate_raw() {
         sed -i "s/^${subdomain}\.//" "$RAW"
         sed -i "s/^${subdomain}\.//" "$RAW_LIGHT"
 
-        # Collate subdomains for dead check
+        # Save subdomains to be filtered later
         printf "%s\n" "$subdomains" >> subdomains.tmp
 
-        # Collate root domains to exclude from dead check
+        # Save root domains to be filtered later
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
+
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$RAW" -o "$RAW"
     sort -u "$RAW_LIGHT" -o "$RAW_LIGHT"
 
     # Remove whitelisted domains, excluding blacklisted domains
+    # Note whitelist matching uses keywords
     whitelisted="$(grep -Ff "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
     whitelisted_count="$(filter "$whitelisted" whitelisted)"
 
@@ -60,7 +62,7 @@ validate_raw() {
     # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
-        # Find root domains (subdomains stripped off) in the filtered domains
+        # Find root domains (subdomains stripped off) in the filtered raw file
         root_domains="$(comm -12 <(sort root_domains.tmp) "$RAW")"
 
         # Collate filtered root domains to exclude from dead check
