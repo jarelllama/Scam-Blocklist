@@ -17,8 +17,6 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 #   $1: entries to process passed in a variable
 #   $2: tag given to entries
 #   --preserve: keep entries in the raw file
-# Output:
-#   Number of entries that were passed
 filter() {
     local entries="$1"
     local tag="$2"
@@ -37,10 +35,6 @@ filter() {
 
     # Call shell wrapper to log entries into domain log
     $FUNCTION --log-domains "$entries" "$tag" raw
-
-    # Return the number of entries
-    # wc -w is used here because wc -l still counts an empty variable as 1 line
-    wc -w <<< "$entries"
 }
 
 validate_raw() {
@@ -69,23 +63,23 @@ validate_raw() {
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist matching uses keywords
     whitelisted="$(grep -Ff "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
-    whitelisted_count="$(filter "$whitelisted" whitelist)"
+    filter "$whitelisted" whitelist
 
     # Remove domains with whitelisted TLDs
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")"
-    whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
+    filter "$whitelisted_tld" tld
 
     # Remove non-domain entries including IP addresses
     # Punycode TLDs (.xn--*) are allowed
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$RAW")"
-    invalid_count="$(filter "$invalid" invalid)"
+    filter "$invalid" invalid
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist
     # Find domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
-    toplist_count="$(filter "$in_toplist" toplist --preserve)"
+    filter "$in_toplist" toplist --preserve
 
     # Exit if no filtering done
     [[ ! -f filter_log.tmp ]] && exit
@@ -117,12 +111,9 @@ validate_raw() {
     comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
     mv light.tmp "$RAW_LIGHT"
 
-    total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     after_count="$(wc -l < "$RAW")"
 
-    printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Toplist: %s\n\n" \
-        "$before_count" "$after_count" "$subdomains_count" \
-        "$total_whitelisted_count" "$invalid_count" "$toplist_count"
+    printf "\nBefore: %s  After: %s\n\n" "$before_count" "$after_count"
 }
 
 # Entry point

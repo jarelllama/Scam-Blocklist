@@ -53,6 +53,7 @@ log_domains() {
     timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
 
     # Check if a file or variable was passed
+    # Return if no domains were passed
     if [[ -s "$1" ]]; then
         domains="$(<"$1")"
     elif [[ -n "$1" ]]; then
