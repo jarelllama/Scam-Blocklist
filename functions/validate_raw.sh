@@ -61,7 +61,6 @@ validate_raw() {
 
         # Save root domains to be filtered later
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
-
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$RAW" -o "$RAW"
     sort -u "$RAW_LIGHT" -o "$RAW_LIGHT"
