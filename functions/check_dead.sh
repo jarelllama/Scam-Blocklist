@@ -65,13 +65,15 @@ check_alive() {
     find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
 
     # Get resurrected domains in dead domains file
-    # (dead domain files need to be sorted here)
-    comm -23 <(sort "$DEAD_DOMAINS") <(sort dead.tmp) > alive.tmp
+    # (dead domain file is unsorted)
+    comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive.tmp
 
     [[ ! -s alive.tmp ]] && return
 
     # Update dead domains file to only include dead domains
-    cp dead.tmp "$DEAD_DOMAINS"
+    # grep is used here because the dead domains file is unsorted
+    grep -xFf dead.tmp "$DEAD_DOMAINS" > temp
+    mv temp "$DEAD_DOMAINS"
 
     # Add resurrected domains to raw file
     # Note resurrected subdomains are added back too and will be processed by
@@ -97,13 +99,10 @@ find_dead_in() {
     dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
 
+    sort -u dead.tmp -o dead.tmp
+
     # Return 1 if no dead domains were found
-    [[ ! -s dead.tmp ]] && return 1
-
-    # The Dead Domains Linter exports without an ending new line
-    printf "\n" >> dead.tmp
-
-    return
+    [[ ! -s dead.tmp ]] && return 1 || return
 }
 
 # Function 'remove_dead_from' removes dead domains from the given file.

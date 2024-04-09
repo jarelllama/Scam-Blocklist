@@ -43,7 +43,7 @@ check_parked() {
 
     remove_parked_from "$SUBDOMAINS"
 
-   # Strip subdomains from parked domains
+    # Strip subdomains from parked domains
     while read -r subdomain; do
         sed "s/^${subdomain}\.//" parked.tmp | sort -u -o parked.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
@@ -65,14 +65,13 @@ check_unparked() {
     # No need to return if no parked domains found
 
     # Get unparked domains
-    # (parked domains files need to be sorted here)
-    comm -23 <(sort "$PARKED_DOMAINS") <(sort parked.tmp) > unparked.tmp
+    # (parked domains file need to be sorted here)
+    comm -23 <(sort "$PARKED_DOMAINS") parked.tmp > unparked.tmp
 
     [[ ! -s unparked.tmp ]] && return
 
     # Include only parked domains in parked domains file
-    # grep is used here because the 'find_parked_in' function messes with the
-    # order of the entries
+    # grep is used here because the parked domains file is unsorted
     grep -xFf parked.tmp "$PARKED_DOMAINS" > temp
     mv temp "$PARKED_DOMAINS"
 
@@ -112,7 +111,7 @@ find_parked_in() {
 
     format_file parked.tmp
 
-    printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
+    printf "[success] Found %s parked domains\n" "$(wc -w < parked.tmp)"
 
     # Return 1 if no parked domains were found
     [[ ! -s parked.tmp ]] && return 1 || return
@@ -160,7 +159,7 @@ find_parked() {
 # Input:
 #   $1: file to remove parked domains from
 remove_parked_from() {
-    comm -23 <(sort "$1") parked.tmp > temp
+    comm -23 <(sort "$1") <(sort parked.tmp) > temp
     mv temp "$1"
 }
 
