@@ -15,11 +15,6 @@ main() {
     # Install AdGuard's Dead Domains Linter
     npm install -g @adguard/dead-domains-linter > /dev/null
 
-    # Call shell wrapper to format files
-    for file in config/* data/*; do
-        $FUNCTION --format "$file"
-    done
-
     check_dead
     check_alive
 
@@ -60,7 +55,7 @@ check_dead() {
     done
 
     # Call shell wrapper to log dead domains into domain log
-    $FUNCTION --log-event dead.tmp dead raw
+    $FUNCTION --log-domain dead.tmp dead raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -88,7 +83,7 @@ check_alive() {
     sort -u alive.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log resurrected domains into domain log
-    $FUNCTION --log-event alive.tmp resurrected dead_domains_file
+    $FUNCTION --log-domains alive.tmp resurrected dead_domains_file
 }
 
 # Function 'find_dead_in' finds dead domains in a given file by first formatting
@@ -124,5 +119,7 @@ cleanup() {
 # Entry point
 
 trap cleanup EXIT
+
+$FUNCTION --format-all
 
 main
