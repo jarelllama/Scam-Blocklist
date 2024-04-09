@@ -99,8 +99,8 @@ find_dead_in() {
     # Format to Adblock Plus syntax for Dead Domains Linter
     sed 's/.*/||&^/' "$1" > "$temp"
 
-    dead-domains-linter -i "$temp" --export dead.tmp
     printf "\n"
+    dead-domains-linter -i "$temp" --export dead.tmp
 
     sort -u dead.tmp -o dead.tmp
 

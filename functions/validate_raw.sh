@@ -120,8 +120,8 @@ validate_raw() {
     after_count="$(wc -l < "$RAW")"
 
     printf "\nBefore: %s  After: %s  Subdomains: %s  Whitelisted: %s  Invalid %s  Toplist: %s\n\n" \
-        "$before_count" "$after_count" "$subdomains_count" "$total_whitelisted_count" \
-        "$invalid_count" "$toplist_count"
+        "$before_count" "$after_count" "$subdomains_count" \
+        "$total_whitelisted_count" "$invalid_count" "$toplist_count"
 }
 
 # Entry point
