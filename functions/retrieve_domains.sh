@@ -59,10 +59,15 @@ process_source() {
     # Count number of unfiltered domains pending
     raw_count="$(wc -l < "$results_file")"
 
+    # Migrate domains to a variable
+    domains="$(<"$results_file")"
+    rm "$results_file"
+
     # Remove known dead domains (includes subdomains)
+    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") <(printf "%s" "$domains"))"
+    dead_count="$(wc -w <<< "$dead_domains")"
+    domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$dead_domains"))
     # Logging disabled as it inflated log size
-    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
-    dead_count="$(filter "$dead_domains")"
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -130,17 +135,17 @@ process_source() {
         cat "$results_file" >> retrieved_light_domains.tmp
     fi
 
-    # Save entries that are pending manual review for rerun
-    if [[ -f "${results_file}.tmp" ]]; then
-        mv "${results_file}.tmp" "$results_file"
-        $FUNCTION --format "$results_file"
-    fi
-
     log_domains "$results_file" pending "$source"
 
     log_source
 
     rm "$results_file"
+
+    # Save entries that are pending manual review for rerun
+    if [[ -f "${results_file}.tmp" ]]; then
+        mv "${results_file}.tmp" "$results_file"
+        $FUNCTION --format "$results_file"
+    fi
 }
 
 # Function 'filter' removes the passed entries from the results file.
@@ -153,8 +158,7 @@ filter() {
 
     [[ -z "$entries" ]] && { printf "0"; return; }
 
-    comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
-    mv results.tmp "$results_file"
+    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$entries"))"
 
     # Return number of entries
     wc -w <<< "$entries"

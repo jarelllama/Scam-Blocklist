@@ -84,6 +84,8 @@ prune_lines() {
 #   toplist.tmp
 #   Telegram notification if an error occured while downloading the toplist
 download_toplist() {
+    [[ -f toplist.tmp ]] && return
+
     wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
         > toplist.tmp || send_telegram "Error downloading toplist."
 
