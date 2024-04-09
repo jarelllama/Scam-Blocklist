@@ -129,7 +129,7 @@ process_source() {
         cat "$results_file" >> retrieved_light_domains.tmp
     fi
 
-    log_domains "$results_file" pending "$source"
+    log_domains "$results_file" pending
 
     log_source
 
