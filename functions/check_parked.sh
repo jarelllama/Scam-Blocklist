@@ -110,7 +110,7 @@ find_parked_in() {
     cat parked_domains_x??.tmp > parked.tmp 2> /dev/null
     rm parked_domains_x??.tmp 2> /dev/null
 
-    #sort -u parked.tmp -o parked.tmp
+    bash functions/tools.sh format parked.tmp
 
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
 
