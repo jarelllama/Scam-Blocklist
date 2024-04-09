@@ -265,7 +265,7 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_domains() {
-    $FUNCTION --log-domains "$1" "$2" "$source"
+    $FUNCTION --log-domains "$1" "$2" "$source" "$TIME_FORMAT"
 }
 
 # Function 'send_telegram' calls a shell wrapper to send a Telegram

@@ -49,9 +49,8 @@ format_all() {
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
+#   $4: timestamp
 log_domains() {
-    timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
-
     # Check if a file or variable was passed
     # Return if no domains were passed
     if [[ -s "$1" ]]; then
@@ -61,6 +60,9 @@ log_domains() {
     else
         return
     fi
+
+    timestamp="$4"
+    timestamp="${timestamp:-$(date -u +"%H:%M:%S %d-%m-%y")}"
 
     printf "%s\n" "$domains" \
         | awk -v event="$2" -v source="$3" -v time="$timestamp" \
