@@ -2,7 +2,6 @@
 
 # Validates the entries in the raw file via a variety of checks and flags
 # entries that require attention.
-# Latest code review: 9 April 2024
 
 readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
@@ -31,7 +30,7 @@ filter() {
     awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" >> filter_log.tmp
 
     # Call shell wrapper to log entries into domain log
-    $FUNCTION --log-event "$entries" "$tag" raw
+    $FUNCTION --log-domains "$entries" "$tag" raw
 
     if [[ "$3" != '--preserve' ]]; then
         # Remove entries from raw file
@@ -130,9 +129,6 @@ validate_raw() {
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
-# Call shell wrapper to format files
-for file in config/* data/*; do
-    $FUNCTION format "$file"
-done
+$FUNCTION --format-all
 
 validate_raw
