@@ -153,7 +153,8 @@ filter() {
 
     [[ -z "$entries" ]] && { printf "0"; return; }
 
-    domains="$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$entries"))"
+    comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
+    mv results.tmp "$results_file"
 
     # Return number of entries
     wc -w <<< "$entries"
