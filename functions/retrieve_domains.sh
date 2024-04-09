@@ -97,8 +97,8 @@ process_source() {
 
     # Remove known dead domains (includes subdomains)
     # Logging disabled as it inflated log size
-    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
-    dead_count="$(filter "$dead_domains" dead --no-log)"
+    dead="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
+    dead_count="$(filter "$dead" dead --no-log)"
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -123,8 +123,8 @@ process_source() {
 
     # Remove known parked domains
     # Logging disabled as it inflated log size
-    parked_domains="$(comm -12 <(sort "$PARKED_DOMAINS") "$results_file")"
-    parked_count="$(filter "$parked_domains" parked --no-log)"
+    parked="$(comm -12 <(sort "$PARKED_DOMAINS") "$results_file")"
+    parked_count="$(filter "$parked" parked --no-log)"
 
     # Log blacklisted domains
     log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
@@ -148,7 +148,7 @@ process_source() {
     # Remove domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     in_toplist="$(comm -12 toplist.tmp "$results_file" | grep -vxFf "$BLACKLIST")"
-    toplist_count="$(filter "$in_toplist" toplist --preserve)"
+    in_toplist_count="$(filter "$in_toplist" toplist --preserve)"
 
     # Collate filtered domains
     cat "$results_file" >> retrieved_domains.tmp
@@ -223,13 +223,13 @@ build() {
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$(( count_after - count_before ))" "$count_after"
 
-    # Mark sources/events as saved in the source log file
+    # Mark sources/events as saved in the log files
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$SOURCE_LOG"
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$DOMAIN_LOG"
 }
 
-# Function 'log_source' prints and logs statistics for each source
-# using the variables declared in the 'process_source' function.
+# Function 'log_source' prints and logs statistics for each source using the
+# variables declared in the 'process_source' function.
 log_source() {
     local item
     local status='pending'
@@ -250,7 +250,7 @@ log_source() {
 
     echo "${TIMESTAMP},${source},${item},${raw_count},\
 ${final_count},${total_whitelisted_count},${dead_count},\
-${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
+${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
 
@@ -265,7 +265,7 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
             "$raw_count" "$final_count" "$total_whitelisted_count" \
-            "$excluded_count" "$toplist_count"
+            "$excluded_count" "$in_toplist_count"
     fi
 
     printf "Processing time: %s second(s)\n" "$(( "$(date +%s)" - execution_time ))"
