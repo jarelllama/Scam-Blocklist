@@ -25,9 +25,9 @@ main() {
 # Function 'check_parked' removes parked domains from the raw file, raw light
 # file, and subdomains file.
 check_parked() {
-    # Include domains with subdomains in parked check. It is assumed that if
-    # the subdomain is parked, so is the root domain. For this reason, the
-    # root domains are excluded to not waste processing time
+    # Include subdomains in the parked check. It is assumed that if the
+    # subdomain is parked, so is the root domain. For this reason, the root
+    # domains are excluded to not waste processing time.
     comm -23 <(sort "$RAW" "$SUBDOMAINS") "$ROOT_DOMAINS" > domains.tmp
 
     find_parked_in domains.tmp || return
