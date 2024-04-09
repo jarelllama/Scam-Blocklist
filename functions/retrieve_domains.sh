@@ -56,8 +56,10 @@ filter() {
     local entries="$1"
     local tag="$2"
 
+    # Return with 0 entries if no entries passed
     [[ -z "$entries" ]] && { printf "0"; return; }
 
+    # Remove entries from results file
     comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
     mv results.tmp "$results_file"
 
