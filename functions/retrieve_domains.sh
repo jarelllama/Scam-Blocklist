@@ -78,7 +78,7 @@ process_source() {
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
         # Log subdomains excluding 'www' (too many of them)
-        $FUNCTION --log-domains "$(grep -v '^www\.' <<< "$subdomains")" subdomain
+        log_domains "$(grep -v '^www\.' <<< "$subdomains")" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$results_file" -o "$results_file"
 
@@ -91,18 +91,18 @@ process_source() {
     parked_count="$(filter "$parked_domains")"
 
     # Log blacklisted domains
-    $FUNCTION --log-domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
+    log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist matching uses keywords
     whitelisted="$(grep -Ff "$WHITELIST" "$results_file" | grep -vxFf "$BLACKLIST")"
     whitelisted_count="$(filter "$whitelisted")"
-    $FUNCTION --log-domains "$whitelisted" whitelist
+    log_domains "$whitelisted" whitelist
 
     # Remove domains with whitelisted TLDs
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$results_file")"
     whitelisted_tld_count="$(filter "$whitelisted_tld")"
-    $FUNCTION --log-domains "$whitelisted_tld" tld
+    log_domains "$whitelisted_tld" tld
 
     # Remove non-domain entries including IP addresses excluding punycode
     # Note invalid entries are not counted
@@ -136,7 +136,7 @@ process_source() {
         $FUNCTION --format "$results_file"
     fi
 
-    $FUNCTION --log-domains "$results_file" pending "$source"
+    log_domains "$results_file" pending "$source"
 
     log_source
 
@@ -257,6 +257,15 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 
     printf "Processing time: %s second(s)\n" "$(( "$(date +%s)" - execution_time ))"
     printf "%s\n" "----------------------------------------------------------------------"
+}
+
+# Function 'log_domains' calls a shell wrapper to log domain processing events
+# into the domain log.
+#   $1: domains to log either in a file or variable
+#   $2: event type (dead, whitelisted, etc.)
+#   $3: source
+log_domains() {
+    $FUNCTION --log-domains "$1" "$2" "source"
 }
 
 # Function 'send_telegram' calls a shell wrapper to send a Telegram
