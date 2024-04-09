@@ -84,7 +84,7 @@ process_source() {
     sort -u "$results_file" -o "$results_file"
 
     # Remove domains already in raw file
-    filter "$RAW" &> /dev/null
+    filter "$RAW" duplicate --no-log &> /dev/null
 
     # Remove known parked domains
     # Logging disabled as it inflated log size
