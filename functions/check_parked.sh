@@ -110,9 +110,9 @@ find_parked_in() {
     cat parked_domains_x??.tmp > parked.tmp 2> /dev/null
     rm parked_domains_x??.tmp 2> /dev/null
 
-    format_file parked.tmp
+    #format_file parked.tmp
 
-    printf "[success] Found %s parked domains\n" "$(wc -w < parked.tmp)"
+    printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
 
     # Return 1 if no parked domains were found
     [[ ! -s parked.tmp ]] && return 1 || return

@@ -24,9 +24,7 @@ main() {
 
     # Cache dead domains to be used as a filter for newly retrieved domains
     # (done last to skip alive check)
-    if [[ -f dead_cache.tmp ]]; then
-        sort -u dead_cache.tmp "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
-    fi
+    sort -u dead_cache.tmp "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
 }
 
 # Function 'check_dead' removes dead domains from the raw file, raw light file,
