@@ -15,7 +15,7 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 validate_raw() {
     before_count="$(wc -l < "$RAW")"
 
-    # Remove common subdomains
+    # Strip away subdomains
     subdomains_count=0
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(grep "^${subdomain}\." "$RAW")" || continue
