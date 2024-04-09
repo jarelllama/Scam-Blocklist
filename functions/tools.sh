@@ -129,7 +129,7 @@ case "$flag" in
         send_telegram "$1"
         ;;
     *)
-        printf "\nInvalid argument passed.\n"
+        printf "\n\e[1;31mInvalid argument passed.\e[0m\n\n"
         exit 1
         ;;
 esac

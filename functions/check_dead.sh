@@ -54,7 +54,7 @@ check_dead() {
     done
 
     # Call shell wrapper to log dead domains into domain log
-    $FUNCTION --log-domain dead.tmp dead raw
+    $FUNCTION --log-domains dead.tmp dead raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
