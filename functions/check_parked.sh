@@ -3,6 +3,7 @@
 # Checks for parked/unparked domains and removes/adds them accordingly.
 # Latest code review: 9 April 2024
 
+readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly PARKED_TERMS='config/parked_terms.txt'
@@ -12,9 +13,9 @@ readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 
 main() {
-    # Format files
+    # Call shell wrapper to format files
     for file in config/* data/*; do
-        bash functions/tools.sh format "$file"
+        $FUNCTION --format "$file"
     done
 
     check_parked
@@ -41,7 +42,8 @@ check_parked() {
     # This parked cache includes subdomains
     cp parked.tmp parked_cache.tmp
 
-    remove_parked_from "$SUBDOMAINS"
+    comm -23 "$SUBDOMAINS" parked.tmp > temp
+    mv temp "$SUBDOMAINS"
 
     # Strip subdomains from parked domains
     while read -r subdomain; do
@@ -55,7 +57,8 @@ check_parked() {
         mv temp "$file"
     done
 
-    log_event "$(<parked.tmp)" parked raw
+    # Call shell wrapper to log parked domains into domain log
+    $FUNCTION --log-event parked.tmp parked raw
 }
 
 # Function 'check_unparked' finds unparked domains in the parked domains file
@@ -83,7 +86,8 @@ check_unparked() {
     # validation check outside of this script
     sort -u unparked.tmp "$RAW" -o "$RAW"
 
-    log_event "$(<unparked.tmp)" unparked parked_domains_file
+    # Call shell wrapper to log unparked domains into domain log
+    $FUNCTION --log-event unparked.tmp unparked parked_domains_file
 }
 
 # Function 'find_parked_in' efficiently checks for parked domains from a given
@@ -157,21 +161,12 @@ find_parked() {
     done < "$1"
 }
 
-# Function 'log_event' calls a shell wrapper to log domain processing events
-# into the domain log.
-#   $1: domains to log stored in a variable
-#   $2: event type (dead, whitelisted, etc.)
-#   $3: source
-log_event() {
-    bash functions/tools.sh log_event "$1" "$2" "$3"
-}
-
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
     find . -maxdepth 1 -type f -name "x??" -delete
 
-    # Prune old entries from parked domains file
-    bash functions/tools.sh prune_lines "$PARKED_DOMAINS" 5000
+    # Call shell wrapper to prune old entries from parked domains file
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" 5000
 }
 
 # Entry point

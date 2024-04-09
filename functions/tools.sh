@@ -40,16 +40,23 @@ format_file() {
 }
 
 # Function 'log_event' logs domain processing events into the domain log.
-#   $1: domains to log stored in a variable
+#   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
     timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
 
-    # Return if no domains passed
-    [[ -z "$1" ]] && return
+    if [[ -f "$1" ]]; then
+        domains="$(<"$1")"
+    else
+        domains="$1"
+    fi
 
-    printf "%s\n" "$1" | awk -v event="$2" -v source="$3" -v time="$timestamp" \
+    # Return if no domains to log
+    [[ -z "$domains" ]] && return
+
+    printf "%s\n" "$domains" \
+        | awk -v event="$2" -v source="$3" -v time="$timestamp" \
         '{print time "," event "," $0 "," source}' >> config/domain_log.csv
 }
 
@@ -94,22 +101,22 @@ send_telegram() {
 
 # Entry point
 
-function="$1"
+flag="$1"
 
-case "$function" in
-    format)
+case "$flag" in
+    --format)
         format_file "$2"
         ;;
-    log_event)
+    --log-event)
         log_event "$2" "$3" "$4"
         ;;
-    prune_lines)
+    --prune-lines)
         prune_lines "$2" "$3"
         ;;
-    download_toplist)
+    --download-toplist)
         download_toplist
         ;;
-    send_telegram)
+    --send-telegram)
         send_telegram "$1"
         ;;
     *)

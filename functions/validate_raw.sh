@@ -4,6 +4,7 @@
 # entries that require attention.
 # Latest code review: 9 April 2024
 
+readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly WHITELIST='config/whitelist.txt'
@@ -12,7 +13,37 @@ readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 
-main() {
+# Function 'filter' logs the given entries and removes them from the raw file.
+# Input:
+#   $1: entries to process
+#   $2: tag given to entries
+#   --preserve: set flag to keep entries in the raw file
+# Output:
+#   Number of entries that were passed
+filter() {
+    local entries="$1"
+    local tag="$2"
+
+    # Return if no entries passed
+    [[ -s "$entries" ]] && return
+
+    # Record entries in the filter log
+    awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" >> filter_log.tmp
+
+    # Call shell wrapper to log entries into domain log
+    $FUNCTION --log-event "$entries" "$tag" raw
+
+    if [[ "$3" != '--preserve' ]]; then
+        # Remove entries from raw file
+        comm -23 "$RAW" <(printf "%s" "$entries") > raw.tmp
+        mv raw.tmp "$RAW"
+    fi
+
+    # Return the number of entries
+    wc -l <<< "$entries"
+}
+
+validate_raw() {
     before_count="$(wc -l < "$RAW")"
 
     # Strip away subdomains
@@ -50,9 +81,10 @@ main() {
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$RAW")"
     invalid_count="$(filter "$invalid" invalid)"
 
+    # Call shell wrapper to download toplist
+    $FUNCTION --download-toplist
     # Find matching domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
-    download_toplist
     in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
     toplist_count="$(filter "$in_toplist" toplist --preserve)"
 
@@ -78,8 +110,9 @@ main() {
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
     sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
 
-    # Send telegram notification
-    send_telegram "Problematic domains detected during validation check:\n$(<filter_log.tmp)"
+    # Call shell wrapper to send telegram notification
+    $FUNCTION --send-telegram \
+        "Problematic domains detected during validation check:\n$(<filter_log.tmp)"
 
     # Save changes to raw light file
     comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
@@ -93,70 +126,13 @@ main() {
         "$invalid_count" "$toplist_count"
 }
 
-# Function 'filter' logs the given entries and removes them from the raw file.
-# Input:
-#   $1: entries to process
-#   $2: tag given to entries
-#   --preserve: set flag to keep entries in the raw file
-# Output:
-#   Number of entries that were passed
-filter() {
-    local entries="$1"
-    local tag="$2"
-
-    # Return if no entries passed
-    [[ -s "$entries" ]] && return
-
-    # Record entries in the filter log
-    awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" >> filter_log.tmp
-
-    log_event "$entries" "$tag"
-
-    if [[ "$3" != '--preserve' ]]; then
-        # Remove entries from raw file
-        comm -23 "$RAW" <(printf "%s" "$entries") > raw.tmp
-        mv raw.tmp "$RAW"
-    fi
-
-    # Return the number of entries
-    wc -l <<< "$entries"
-}
-
-# Function 'download_toplist' calls a shell wrapper to download and format the
-# toplist.
-# Output:
-#   toplist.tmp
-#   Telegram notification if an error occured while downloading the toplist
-download_toplist() {
-    [[ -f toplist.tmp ]] && return
-    bash functions/tools.sh download_toplist
-}
-
-# Function 'send_telegram' calls a shell wrapper to send a Telegram
-# notification with the given message.
-#   $DISABLE_TELEGRAM: set to true to not send telegram notifications
-#   $1: message body
-send_telegram() {
-    [[ "$DISABLE_TELEGRAM" == true ]] && return
-    bash functions/tools.sh send_telegram "$1"
-}
-
-# Function 'log_event' calls a shell wrapper to log domain processing events
-# into the domain log.
-#   $1: domains to log stored in a variable
-#   $2: event type (dead, whitelisted, etc.)
-#   $3: source
-log_event() {
-    bash functions/tools.sh log_event "$1" "$2" raw
-}
-
 # Entry point
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
-# Format files
+# Call shell wrapper to format files
 for file in config/* data/*; do
-    bash functions/tools.sh format "$file"
+    $FUNCTION format "$file"
 done
 
-main
+validate_raw

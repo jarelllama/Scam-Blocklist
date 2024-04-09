@@ -3,6 +3,7 @@
 # Checks for dead/resurrected domains and removes/adds them accordingly.
 # Latest code review: 9 April 2024
 
+readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
@@ -14,9 +15,9 @@ main() {
     # Install AdGuard's Dead Domains Linter
     npm install -g @adguard/dead-domains-linter > /dev/null
 
-    # Format files
+    # Call shell wrapper to format files
     for file in config/* data/*; do
-        bash functions/tools.sh format "$file"
+        $FUNCTION --format "$file"
     done
 
     check_dead
@@ -56,7 +57,8 @@ check_dead() {
         mv temp "$file"
     done
 
-    log_event "$(<dead.tmp)" dead raw
+    # Call shell wrapper to log dead domains into domain log
+    $FUNCTION --log-event dead.tmp dead raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -83,7 +85,8 @@ check_alive() {
     # the validation check outside of this script
     sort -u alive.tmp "$RAW" -o "$RAW"
 
-    log_event "$(<alive.tmp)" resurrected dead_domains_file
+    # Call shell wrapper to log resurrected domains into domain log
+    $FUNCTION --log-event alive.tmp resurrected dead_domains_file
 }
 
 # Function 'find_dead_in' finds dead domains in a given file by first formatting
@@ -109,20 +112,11 @@ find_dead_in() {
     [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
-# Function 'log_event' calls a shell wrapper to log domain processing events
-# into the domain log.
-#   $1: domains to log stored in a variable
-#   $2: event type (dead, whitelisted, etc.)
-#   $3: source
-log_event() {
-    bash functions/tools.sh log_event "$1" "$2" "$3"
-}
-
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 
-    # Prune old entries from dead domains file
-    bash functions/tools.sh prune_lines "$DEAD_DOMAINS" 6000
+    # Call shell wrapper to prune old entries from dead domains file
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" 6000
 }
 
 # Entry point
