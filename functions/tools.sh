@@ -11,27 +11,25 @@ format() {
     [[ ! -f "$file" ]] && return
 
     # Applicable to all files:
-    # Remove carriage return characters and trailing whitespaces
-    sed -i 's/\r//g; s/[[:space:]]*$//' "$file"
+    # Remove carriage return characters, empty lines, and trailing whitespaces
+    sed -i 's/\r//g; /^$/d; s/[[:space:]]*$//' "$file"
 
     # Applicable to specific files/extensions:
     case "$file" in
         'data/dead_domains.txt'|'data/parked_domains.txt')
-            # Remove whitespaces, empty lines, convert to lowercase, and
-            # remove duplicates
-            sed 's/[[:space:]]//g; /^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
+            # Remove whitespaces, convert to lowercase, and remove duplicates
+            sed 's/[[:space:]]//g' "$file" | tr '[:upper:]' '[:lower:]' \
                 | awk '!seen[$0]++' > "${file}.tmp"
             ;;
         'config/parked_terms.txt')
-            # Remove empty lines, convert to lowercase, sort, and remove
-            # duplicates
-            sed '/^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
+            # Convert to lowercase, sort, and remove duplicates
+            tr '[:upper:]' '[:lower:]' "$file" \
                 | sort -u -o "${file}.tmp"
             ;;
         *.txt|*.tmp)
-            # Remove whitespaces, empty lines, convert to lowercase, sort, and
-            # remove duplicates
-            sed 's/[[:space:]]//g; /^$/d' "$file" | tr '[:upper:]' '[:lower:]' \
+            # Remove whitespaces, convert to lowercase, sort, and remove
+            # duplicates
+            sed 's/[[:space:]]//g' "$file" | tr '[:upper:]' '[:lower:]' \
                 | sort -u -o "${file}.tmp"
             ;;
         *)
