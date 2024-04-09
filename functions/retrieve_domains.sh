@@ -44,6 +44,31 @@ source() {
     source_google_search
 }
 
+# Function 'filter' logs the given entries and removes them from the results
+# file.
+# Input:
+#   $1: entries to remove passed in a variable
+#   $2: tag given to entries
+#   --no-log: do not log entries into the domain log
+# Output:
+#   Number of entries that were passed
+filter() {
+    local entries="$1"
+    local tag="$2"
+
+    [[ -z "$entries" ]] && { printf "0"; return; }
+
+    comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
+    mv results.tmp "$results_file"
+
+    if [[ "$3" != '--no-log' ]]; then
+       log_domains "$entries" "$tag"
+    fi
+
+    # Return number of entries
+    wc -w <<< "$entries"
+}
+
 # Function 'process_source' filters the results retrieved from the caller
 # source. The output is a cumulative filtered domains file of all filtered
 # domains from all sources in this run.
@@ -140,31 +165,6 @@ process_source() {
         mv "${results_file}.tmp" "$results_file"
         $FUNCTION --format "$results_file"
     fi
-}
-
-# Function 'filter' logs the given entries and removes them from the results
-# file.
-# Input:
-#   $1: entries to remove passed in a variable
-#   $2: tag given to entries
-#   --no-log: do not log entries into the domain log
-# Output:
-#   Number of entries that were passed
-filter() {
-    local entries="$1"
-    local tag="$2"
-
-    [[ -z "$entries" ]] && { printf "0"; return; }
-
-    comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
-    mv results.tmp "$results_file"
-
-    if [[ "$3" != '--no-log' ]]; then
-       log_domains "$entries" "$tag"
-    fi
-
-    # Return number of entries
-    wc -w <<< "$entries"
 }
 
 # Function 'build' adds the filtered domains to the raw files and presents
@@ -270,7 +270,6 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 # into the domain log.
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
-#   $3: source
 log_domains() {
     $FUNCTION --log-domains "$1" "$2" "$source" "$TIMESTAMP"
 }
