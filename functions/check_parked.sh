@@ -107,7 +107,7 @@ find_parked_in() {
     rm x??
 
     # Collate parked domains (ignore not found errors)
-    cat parked_domains_x??.tmp >> parked.tmp 2> /dev/null
+    cat parked_domains_x??.tmp > parked.tmp 2> /dev/null
     rm parked_domains_x??.tmp 2> /dev/null
 
     format_file parked.tmp
