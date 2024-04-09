@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Checks for parked/unparked domains and removes/adds them accordingly.
-# Latest code review: 9 April 2024
 
 readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'

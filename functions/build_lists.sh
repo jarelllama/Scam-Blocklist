@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Builds the various formats of blocklists from the raw files.
-# Latest code review: 8 April 2024
 
 readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
