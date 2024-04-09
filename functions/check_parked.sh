@@ -85,7 +85,7 @@ check_unparked() {
     $FUNCTION --log-domains unparked.tmp unparked parked_domains_file
 }
 
-# Function 'find_parked_in' efficiently checks for parked domains from a given
+# Function 'find_parked_in' efficiently checks for parked domains in a given
 # file by running the checks in parallel.
 # Input:
 #   $1: file to process
@@ -119,8 +119,8 @@ find_parked_in() {
     [[ ! -s parked.tmp ]] && return 1 || return 0
 }
 
-# Function 'find_parked' queries sites from a given file for parked messages
-# in their HTML.
+# Function 'find_parked' queries sites in a given file for parked messages in
+# their HTML.
 # Input:
 #   $1: file to process
 # Output:
