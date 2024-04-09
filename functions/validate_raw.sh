@@ -17,6 +17,8 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 #   $1: entries to process passed in a variable
 #   $2: tag given to entries
 #   --preserve: keep entries in the raw file
+# Output:
+#   filter_log.tmp (if filtered domains found)
 filter() {
     local entries="$1"
     local tag="$2"
