@@ -128,7 +128,8 @@ filter() {
 #   toplist.tmp
 #   Telegram notification if an error occured while downloading the toplist
 download_toplist() {
-    [[ ! -f toplist.tmp ]] && bash functions/tools.sh download_toplist
+    [[ -f toplist.tmp ]] && return
+    bash functions/tools.sh download_toplist
 }
 
 # Function 'send_telegram' calls a shell wrapper to send a Telegram
@@ -136,7 +137,8 @@ download_toplist() {
 #   $DISABLE_TELEGRAM: set to true to not send telegram notifications
 #   $1: message body
 send_telegram() {
-    [[ "$DISABLE_TELEGRAM" != true ]] && bash functions/tools.sh telegram "$1"
+    [[ "$DISABLE_TELEGRAM" == true ]] && return
+    bash functions/tools.sh send_telegram "$1"
 }
 
 # Function 'log_event' calls a shell wrapper to log domain processing events

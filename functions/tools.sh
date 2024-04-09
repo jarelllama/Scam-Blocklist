@@ -72,19 +72,19 @@ prune_lines() {
 #   Telegram notification if an error occured while downloading the toplist
 download_toplist() {
     wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
-        > toplist.tmp || send_telegram_message "Error downloading toplist."
+        > toplist.tmp || send_telegram "Error downloading toplist."
 
     awk -F ',' '{print $2}' toplist.tmp > temp
     mv temp toplist.tmp
     format_file toplist.tmp
 }
 
-# Function 'send_telegram_message' sends a Telegram notification with the given
+# Function 'send_telegram' sends a Telegram notification with the given
 # message.
 #   $TELEGRAM_CHAT_ID: Telegram user Chat ID
 #   $TELEGRAM_BOT_TOKEN: Telegram Bot Token
 #   $1: message body
-send_telegram_message() {
+send_telegram() {
     curl -sX POST \
         -H 'Content-Type: application/json' \
         -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
@@ -109,8 +109,8 @@ case "$function" in
     download_toplist)
         download_toplist
         ;;
-    telegram)
-        send_telegram_message "$1"
+    send_telegram)
+        send_telegram "$1"
         ;;
     *)
         printf "\nInvalid function passed.\n"
