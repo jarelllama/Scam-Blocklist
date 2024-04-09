@@ -12,7 +12,7 @@ readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 
-validate_raw() {
+main() {
     before_count="$(wc -l < "$RAW")"
 
     # Strip away subdomains
@@ -157,4 +157,4 @@ for file in config/* data/*; do
     bash functions/tools.sh format "$file"
 done
 
-validate_raw
+main

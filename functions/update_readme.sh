@@ -10,7 +10,7 @@ readonly SOURCE_LOG='config/source_log.csv'
 TODAY="$(date -u +"%d-%m-%y")"
 YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
 
-update_readme() {
+main() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 
@@ -222,4 +222,4 @@ for file in config/* data/*; do
     bash functions/tools.sh format "$file"
 done
 
-update_readme
+main
