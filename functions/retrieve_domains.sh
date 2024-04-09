@@ -131,11 +131,12 @@ process_source() {
     fi
 
     # Save entries that are pending manual review for rerun
-    if [[ -f  "${results_file}.tmp" ]]; then
+    if [[ -f "${results_file}.tmp" ]]; then
         mv "${results_file}.tmp" "$results_file"
+        $FUNCTION --format "$results_file"
     fi
 
-    $FUNCTION --log-domains "$results_file" pending
+    $FUNCTION --log-domains "$results_file" pending "$source"
 
     log_source
 

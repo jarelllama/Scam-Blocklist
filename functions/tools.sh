@@ -51,6 +51,9 @@ format_all() {
 #   $3: source
 log_domains() {
     timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
+    source="$3"
+    # Use the variable "$source" if no variable passed
+    source=${source:-"$source"}
 
     # Check if a file or variable was passed
     # Return if no domains were passed
@@ -63,7 +66,7 @@ log_domains() {
     fi
 
     printf "%s\n" "$domains" \
-        | awk -v event="$2" -v source="$3" -v time="$timestamp" \
+        | awk -v event="$2" -v source="$source" -v time="$timestamp" \
         '{print time "," event "," $0 "," source}' >> config/domain_log.csv
 }
 
