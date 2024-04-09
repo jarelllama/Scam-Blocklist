@@ -17,7 +17,8 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
-TIME_FORMAT="$(date -u +"%H:%M:%S %d-%m-%y")"
+TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
+readonly TIMESTAMP
 
 # Function 'source' calls on the respective functions for each source to
 # retrieve results. The results are then passed to the 'process_source'
@@ -212,8 +213,8 @@ build() {
         "$count_before" "$(( count_after - count_before ))" "$count_after"
 
     # Mark sources/events as saved in the source log file
-    sed -i "/${TIME_FORMAT}/s/,pending/,saved/" "$SOURCE_LOG"
-    sed -i "/${TIME_FORMAT}/s/,pending/,saved/" "$DOMAIN_LOG"
+    sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$SOURCE_LOG"
+    sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$DOMAIN_LOG"
 }
 
 # Function 'log_source' prints and logs statistics for each source
@@ -236,7 +237,7 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
-    echo "${TIME_FORMAT},${source},${item},${raw_count},\
+    echo "${TIMESTAMP},${source},${item},${raw_count},\
 ${final_count},${total_whitelisted_count},${dead_count},\
 ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 
@@ -265,7 +266,7 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_domains() {
-    $FUNCTION --log-domains "$1" "$2" "$source" "$TIME_FORMAT"
+    $FUNCTION --log-domains "$1" "$2" "$source" "$TIMESTAMP"
 }
 
 # Function 'send_telegram' calls a shell wrapper to send a Telegram
