@@ -157,7 +157,6 @@ find_parked() {
 
 # Function 'remove_parked_from' removes parked domains from the given file.
 # The parked.tmp file should be present before running.
-# Input:
 #   $1: file to remove parked domains from
 remove_parked_from() {
     comm -23 "$1" parked.tmp > temp
@@ -178,11 +177,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Prune old entries from parked domains file
-    lines="$(wc -l < "$PARKED_DOMAINS")"
-    max=5000
-    if (( lines > max )); then
-        sed -i "1,$(( lines - max ))d" "$PARKED_DOMAINS"
-    fi
+    bash functions/tools.sh prune_lines "$PARKED_DOMAINS" 5000
 }
 
 trap cleanup EXIT

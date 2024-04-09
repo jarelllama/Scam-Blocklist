@@ -55,6 +55,20 @@ log_event() {
         '{print time "," event "," $0 "," source}' >> config/domain_log.csv
 }
 
+# Function 'prune_lines' is called to prune a file to keep its number of lines
+# within the given threshold.
+#   $1: file to be pruned
+#   $2: maximum number of lines to keep
+# Latest code review: 9 April 2024
+prune_lines() {
+    lines="$(wc -l < "$1")"
+    max_lines="$2"
+
+    if (( lines > max_lines )); then
+        sed -i "1,$(( lines - max_lines ))d" "$1"
+    fi
+}
+
 function="$1"
 
 case "$function" in
@@ -63,6 +77,9 @@ case "$function" in
         ;;
     log_event)
         log_event "$2" "$3" "$4"
+        ;;
+    prune_lines)
+        prune_lines "$2" "$3"
         ;;
     *)
         printf "\nInvalid function passed.\n"

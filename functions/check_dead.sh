@@ -108,7 +108,6 @@ find_dead_in() {
 
 # Function 'remove_dead_from' removes dead domains from the given file.
 # The dead.tmp file should be present before running.
-# Input:
 #   $1: file to remove dead domains from
 remove_dead_from() {
     comm -23 "$1" dead.tmp > temp
@@ -128,11 +127,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 
     # Prune old entries from dead domains file
-    lines="$(wc -l < "$DEAD_DOMAINS")"
-    max=6000
-    if (( lines > max )); then
-        sed -i "1,$(( lines - max ))d" "$DEAD_DOMAINS"
-    fi
+    bash functions/tools.sh prune_lines "$DEAD_DOMAINS" 6000
 }
 
 trap cleanup EXIT
