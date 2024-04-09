@@ -62,7 +62,7 @@ log_domains() {
     fi
 
     timestamp="$4"
-    timestamp="${timestamp:-$(date -u +"%H:%M:%S %d-%m-%y")}"
+    #timestamp="${timestamp:-$(date -u +"%H:%M:%S %d-%m-%y")}"
 
     printf "%s\n" "$domains" \
         | awk -v event="$2" -v source="$3" -v time="$timestamp" \
