@@ -50,6 +50,7 @@ source() {
 #   $1: entries to remove passed in a variable
 #   $2: tag given to entries
 #   --no-log: do not log entries into the domain log
+#   --preserve: save entries for manual review and rerun
 # Output:
 #   Number of entries that were passed
 filter() {
@@ -170,7 +171,7 @@ process_source() {
     fi
 }
 
-# Function 'build' adds the filtered domains to the raw files and presents
+# Function 'build' appends the filtered domains into the raw files and presents
 # some basic numbers to the user.
 build() {
     if [[ -f manual_review.tmp ]]; then
@@ -179,7 +180,8 @@ build() {
         sed 's/(/(\o033[31m/; s/)/\o033[0m)/' manual_review.tmp
 
         # Send telegram notification
-        send_telegram "Entries requiring manual review:\n$(<manual_review.tmp)"
+        $FUNCTION --send-telegram \
+            "Entries requiring manual review:\n$(<manual_review.tmp)"
     fi
 
     $FUNCTION --format retrieved_domains.tmp
@@ -190,7 +192,7 @@ build() {
         exit
     fi
 
-  # Collate only filtered subdomains and root domains into the subdomains
+    # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
         # Find root domains (subdomains stripped off) in the filtered raw file
@@ -258,7 +260,8 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
 
         # Send telegram notification
-        send_telegram "Source '$source' retrieved no results. Potential error occurred."
+        $FUNCTION --send-telegram \
+            "Source '$source' retrieved no results. Potential error occurred."
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
             "$raw_count" "$final_count" "$total_whitelisted_count" \
@@ -275,13 +278,6 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 #   $2: event type (dead, whitelisted, etc.)
 log_domains() {
     $FUNCTION --log-domains "$1" "$2" "$source" "$TIMESTAMP"
-}
-
-# Function 'send_telegram' calls a shell wrapper to send a Telegram
-# notification with the given message.
-#   $1: message body
-send_telegram() {
-    $FUNCTION --send-telegram "$1"
 }
 
 cleanup() {
@@ -427,11 +423,11 @@ source_dnstwist() {
     # A notification is sent if any link is broken
     {
         wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
-            || send_telegram "Shreshta's NRD list URL is broken."
+            || $FUNCTION --send-telegram  "Shreshta's NRD list URL is broken."
         wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
-            | grep -vF '#' || send_telegram "Hagezi's NRD list URL is broken."
+            | grep -vF '#' || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
         curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
-            || send_telegram "openSquat's NRD list URL is broken."
+            || $FUNCTION --send-telegram  "openSquat's NRD list URL is broken."
     } > nrd.tmp
 
     format_file nrd.tmp
