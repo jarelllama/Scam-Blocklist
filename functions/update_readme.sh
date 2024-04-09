@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Updates the README.md content and statistics.
-# Latest code review: 8 April 2024
 
 readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
@@ -218,9 +217,6 @@ trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 # Install csvkit
 command -v csvgrep &> /dev/null || pip install -q csvkit
 
-# Call shell wrapper to format files
-for file in config/* data/*; do
-    $FUNCTION --format "$file"
-done
+$FUNCTION --format-all
 
 main
