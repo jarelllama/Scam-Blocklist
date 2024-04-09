@@ -148,9 +148,11 @@ process_source() {
 # Output:
 #   Number of entries that were passed
 filter() {
+    local entries="$1"
+
     [[ -z "$entries" ]] && { printf "0"; return; }
 
-    comm -23 "$results_file" <(printf "%s" "$1") > results.tmp
+    comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
     mv results.tmp "$results_file"
 
     # Return number of entries
