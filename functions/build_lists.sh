@@ -3,11 +3,12 @@
 # Builds the various formats of blocklists from the raw files.
 # Latest code review: 8 April 2024
 
+readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 
 build() {
-    # Set default comment character to '#'
+    # Set the default comment character to '#'
     local comment=${comment:-#}
 
     mkdir -p "lists/${directory}"
@@ -115,10 +116,7 @@ build_wildcard_domains() {
 
 # Entry point
 
-# Format files
-for file in config/* data/*; do
-    bash functions/tools.sh format "$file"
-done
+$FUNCTION --format-all
 
 build_adblock
 build_dnsmasq
