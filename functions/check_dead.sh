@@ -105,6 +105,7 @@ find_dead_in() {
 
 # Function 'remove_dead_from' removes dead domains from the given file
 # Input:
+#   dead.tmp
 #   $1: file to remove dead domains from
 remove_dead_from() {
     comm -23 <(sort "$1") dead.tmp > temp
