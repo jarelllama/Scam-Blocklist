@@ -66,7 +66,6 @@ check_unparked() {
     # No need to return if no parked domains found
 
     # Get unparked domains
-    # (parked domains file is unsorted)
     comm -23 <(sort "$PARKED_DOMAINS") parked.tmp > unparked.tmp
 
     [[ ! -s unparked.tmp ]] && return

@@ -66,7 +66,6 @@ check_alive() {
     find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
 
     # Get resurrected domains in dead domains file
-    # (dead domain file is unsorted)
     comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive.tmp
 
     [[ ! -s alive.tmp ]] && return

@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Retrieves domains from various sources, processes them and outputs
-# a raw file that contains the cumulative domains from all sources over time.
+# Retrieves domains from various sources, processes them and outputs a raw file
+# that contains the cumulative domains from all sources over time.
 
+readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
@@ -11,7 +12,6 @@ readonly BLACKLIST='config/blacklist.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
-readonly WILDCARDS='data/wildcards.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
@@ -43,127 +43,131 @@ source() {
     source_google_search
 }
 
-# Function 'process_source' filters results retrieved from a source.
-# The output is a cumulative filtered domains file containing all filtered
+# Function 'process_source' filters the results retrieved from the caller
+# source. The output is a cumulative filtered domains file of all filtered
 # domains from all sources in this run.
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
-    format_file "$results_file"
-
-    # Remove http(s): and slashes to get domains. Then migrate to a variable
+    # Remove http(s): and slashes to get domains
     # (some of the results are in URL form so this is done here once instead of
     # multiple times in the source functions)
-    domains="$(sed 's/https\?://; s/\///g' "$results_file" | sort -u)"
-    rm "$results_file"
+    sed -i 's/https\?://; s/\///g' "$results_file"
+
+    $FUNCTION --format "$results_file"
 
     # Count number of unfiltered domains pending
-    # Note wc -w is used here as wc -l for an empty variable seems to
-    # always output 1.
-    raw_count="$(wc -w <<< "$domains")"
+    raw_count="$(wc -l < "$results_file")"
 
-    # Remove known dead domains (includes subdomains and redundant domains)
-    dead_domains="$(comm -12 <(echo "$domains") <(sort "$DEAD_DOMAINS"))"
-    dead_count="$(wc -w <<< "$dead_domains")"
-    domains="$(comm -23 <(echo "$domains") <(echo "$dead_domains"))"
-    # Logging removed as it inflated log size
+    # Remove known dead domains (includes subdomains)
+    # Logging disabled as it inflated log size
+    dead_domains="$(comm -12 "$results_file" <(sort "$DEAD_DOMAINS"))"
+    dead_count="$(filter "$dead_domains" dead --no-log)"
 
-    # Remove common subdomains
-    local domains_with_subdomains  # Declare local variable in case while loop does not run
+    # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
-        # Find domains with subdomains and skip to next subdomain if none found
-        domains_with_subdomains="$(grep "^${subdomain}\." <<< "$domains")" \
-            || continue
+        subdomains="$(grep "^${subdomain}\." "$results_file")" || continue
 
-        # Keep only root domains
-        domains="$(echo "$domains" | sed "s/^${subdomain}\.//" | sort -u)"
+        # Strip subdomains down to their root domains
+        sed -i "s/^${subdomain}\.//" "$results_file"
 
-        # Collate subdomains for dead check
-        printf "%s\n" "$domains_with_subdomains" >> subdomains.tmp
-        # Collate root domains to exclude from dead check
-        printf "%s\n" "$domains_with_subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
+        # Save subdomains to be filtered later
+        printf "%s\n" "$subdomains" >> subdomains.tmp
 
-        # Log domains with common subdomains excluding 'www' (too many of them)
-        log_event "$(grep -v '^www\.' <<< "$domains_with_subdomains")" subdomain
+        # Save root domains to be filtered later
+        printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
+
+        # Log subdomains excluding 'www' (too many of them)
+        log_domains "$(grep -v '^www\.' <<< "$subdomains")" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
-    format_file subdomains.tmp
-    format_file root_domains.tmp
+    sort -u "$results_file" -o "$results_file"
 
     # Remove domains already in raw file
-    domains="$(comm -23 <(echo "$domains") "$RAW")"
+    comm -23 "$results_file" "$RAW" > results.tmp
+    mv results.tmp "$results_file"
 
     # Remove known parked domains
-    parked_domains="$(comm -12 <(echo "$domains") <(sort "$PARKED_DOMAINS"))"
-    parked_count="$(wc -w <<< "$parked_domains")"
-    domains="$(comm -23 <(echo "$domains") <(echo "$parked_domains"))"
-    # Logging removed as it inflated log size
+    # Logging disabled as it inflated log size
+    parked_domains="$(comm -12 "$results_file" <(sort "$PARKED_DOMAINS"))"
+    parked_count="$(filter "$parked_domains" parked --no-log)"
 
     # Log blacklisted domains
-    log_event "$(comm -12 <(echo "$domains") "$BLACKLIST")" blacklist
+    log_domains "$(comm -12 "$results_file" "$BLACKLIST")" blacklist
 
-    # Remove whitelisted domains, excluding blacklisted domains
-    whitelisted_domains="$(comm -23 <(grep -Ff "$WHITELIST" <<< "$domains") "$BLACKLIST")"
-    whitelisted_count="$(wc -w <<< "$whitelisted_domains")"
-    domains="$(comm -23 <(echo "$domains") <(echo "$whitelisted_domains"))"
-    log_event "$whitelisted_domains" whitelist
+    # Remove whitelisted domains excluding blacklisted domains
+    # Note whitelist matching uses keywords
+    whitelisted="$(grep -Ff "$WHITELIST" "$results_file" | grep -vxFf "$BLACKLIST")"
+    whitelisted_count="$(filter "$whitelisted" whitelist)"
 
-    # Remove domains that have whitelisted TLDs
-    whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' <<< "$domains")"
-    whitelisted_tld_count="$(wc -w <<< "$whitelisted_tld_domains")"
-    domains="$(comm -23 <(echo "$domains") <(echo "$whitelisted_tld_domains"))"
-    log_event "$whitelisted_tld_domains" tld
+    # Remove domains with whitelisted TLDs
+    whitelisted_tld_domains="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$results_file")"
+    whitelisted_tld_count="$(filter "$whitelisted_tld_domains" tld)"
 
-    # Remove invalid entries and IP addresses. Punycode TLDs (.xn--*) are allowed
-    invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' <<< "$domains")"
-    if [[ -n "$invalid_entries" ]]; then
-        domains="$(comm -23 <(echo "$domains") <(echo "$invalid_entries"))"
-        awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> manual_review.tmp
-        # Save invalid entries for rerun
-        printf "%s\n" "$invalid_entries" >> "$results_file"
-        log_event "$invalid_entries" invalid
-    fi
+    # Remove non-domain entries including IP addresses
+    # Punycode TLDs (.xn--*) are allowed
+    invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$results_file")"
+    filter "$invalid_entries" invalid --preserve &> /dev/null
 
-    # Remove redundant domains
-    local redundant_domains  # Declare local variable in case while loop does not run
-    local redundant_count=0
-    while read -r wildcard; do  # Loop through wildcards
-        # Find redundant domains via wildcard matching and skip to
-        # next wildcard if none found
-        redundant_domains="$(grep "\.${wildcard}$" <<< "$domains")" \
-            || continue
-
-        # Count number of redundant domains
-        redundant_count="$((redundant_count + $(wc -w <<< "$redundant_domains")))"
-
-        # Remove redundant domains
-        domains="$(comm -23 <(echo "$domains") <(echo "$redundant_domains"))"
-
-        log_event "$redundant_domains" redundant
-    done < "$WILDCARDS"
-
-    # Remove domains in toplist, excluding blacklisted domains
-    download_toplist
-    domains_in_toplist="$(comm -23 <(comm -12 <(echo "$domains") toplist.tmp) "$BLACKLIST")"
-    toplist_count="$(wc -w <<< "$domains_in_toplist")"
-    if (( "$toplist_count" > 0 )); then
-        domains="$(comm -23 <(echo "$domains") <(echo "$domains_in_toplist"))"
-        awk '{print $0 " (toplist)"}' <<< "$domains_in_toplist" >> manual_review.tmp
-        # Save invalid entries for rerun
-        printf "%s\n" "$domains_in_toplist" >> "$results_file"
-        log_event "$domains_in_toplist" toplist
-    fi
+    # Call shell wrapper to download toplist
+    $FUNCTION --download-toplist
+    # Remove domains in toplist excluding blacklisted domains
+    # Note the toplist does not include subdomains
+    in_toplist="$(comm -12 toplist.tmp "$results_file" | grep -vxFf "$BLACKLIST")"
+    toplist_count="$(filter "$in_toplist" toplist --preserve)"
 
     # Collate filtered domains
-    printf "%s\n" "$domains" >> retrieved_domains.tmp
+    cat "$results_file" >> retrieved_domains.tmp
 
     # Collate filtered domains from light sources
     if [[ "$ignore_from_light" != true ]]; then
-        printf "%s\n" "$domains" >> retrieved_light_domains.tmp
+        cat "$results_file" >> retrieved_light_domains.tmp
     fi
 
-    log_event "$domains" pending
+    # Save entries that are pending manual review for rerun
+    if [[ -f  "${results_file}.tmp" ]]; then
+        mv "${results_file}.tmp" "$results_file"
+    fi
+
+    log_domains "$results_file" pending
 
     log_source
+
+    rm "$results_file"
+}
+
+# Function 'filter' logs the given entries and removes them from the results.
+# Input:
+#   $1: entries to process passed in a variable
+#   $2: tag given to entries
+#   --preserve: save entries for manual review and rerun
+#   --no-log: do not log the entries in the domain log
+# Output:
+#   Number of entries that were passed
+filter() {
+    local entries="$1"
+    local tag="$2"
+
+    # Return if no entries passed
+    [[ -z "$entries" ]] && return
+
+    # Remove entries from results
+    comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
+    mv results.tmp "$results_file"
+
+    if [[ "$3" == '--preserve' ]]; then
+        # Save entries for manual review and rerun
+        awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
+            >> manual_review.tmp
+        printf "%s\n" "$entries" >> "${results_file}.tmp"
+    fi
+
+    if [[ "$3" != '--no-log' ]]; then
+        log_domains "$entries" "$tag"
+    fi
+
+    # Return the number of entries
+    # wc -w is used here because wc -l still counts an empty variable as 1 line
+    wc -w <<< "$entries"
 }
 
 # Function 'build' adds the filtered domains to the raw files and presents
@@ -178,42 +182,41 @@ build() {
         send_telegram "Entries requiring manual review:\n$(<manual_review.tmp)"
     fi
 
+    $FUNCTION --format retrieved_domains.tmp
+
     # Exit if no new domains to add
-    # [ ! -s ] does not seem to work well here
-    if ! grep -q '[a-z]' retrieved_domains.tmp; then
+    if [[ ! -s retrieved_domains.tmp ]]; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
         exit
     fi
 
-    format_file retrieved_domains.tmp
-
-    # Collate filtered subdomains and root domains
+    # Collate only filtered subdomains and root domains into the subdomains
+    # file and root domains file
     if [[ -f root_domains.tmp ]]; then
         # Find root domains (subdomains stripped off) in the filtered domains
         root_domains="$(comm -12 retrieved_domains.tmp root_domains.tmp)"
 
         # Collate filtered root domains to exclude from dead check
         printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
-        # Collate filtered subdomains for dead check
-        grep -Ff <(echo "$root_domains") subdomains.tmp >> "$SUBDOMAINS"
+        sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
-        format_file "$ROOT_DOMAINS"
-        format_file "$SUBDOMAINS"
+        # Collate filtered subdomains for dead check
+        grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
+        sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 
     count_before="$(wc -l < "$RAW")"
 
     # Add domains to raw file
-    cat retrieved_domains.tmp >> "$RAW"
-    format_file "$RAW"
+    sort -u retrieved_domains.tmp "$RAW" -o "$RAW"
 
     # Add domains to raw light file
     if [[ -f retrieved_light_domains.tmp ]]; then
-        cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
-        format_file "$RAW_LIGHT"
+        sort -u retrieved_light_domains.tmp "$RAW_LIGHT" -o "$RAW_LIGHT"
     fi
 
     count_after="$(wc -l < "$RAW")"
+
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$(( count_after - count_before ))" "$count_after"
 
@@ -238,12 +241,12 @@ log_source() {
         status='error: empty'
     fi
 
-    final_count="$(wc -w <<< "$domains")"
+    final_count="$(wc -l < "$results_file")"
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
-    excluded_count="$(( dead_count + redundant_count + parked_count ))"
+    excluded_count="$(( dead_count + parked_count ))"
 
     echo "${TIME_FORMAT},${source},${item},${raw_count},\
-${final_count},${total_whitelisted_count},${dead_count},${redundant_count},\
+${final_count},${total_whitelisted_count},${dead_count},\
 ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
@@ -265,45 +268,20 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
     printf "%s\n" "----------------------------------------------------------------------"
 }
 
-# Function 'send_telegram' sends a telegram notification with the given message.
-#   $DISABLE_TELEGRAM: set to true to not send telegram notifications
+# Function 'send_telegram' calls a shell wrapper to send a Telegram
+# notification with the given message.
 #   $1: message body
 send_telegram() {
-    [[ "$DISABLE_TELEGRAM" == true ]] && return
-    curl -sX POST \
-        -H 'Content-Type: application/json' \
-        -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
-        "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-        -o /dev/null
+    $FUNCTION --send-telegram "$1"
 }
 
-# Function 'download_toplist' downloads the toplist and formats it.
-# Output:
-#   toplist.tmp
-download_toplist() {
-    [[ -f toplist.tmp ]] && return
-    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp \
-        || send_telegram "Error downloading toplist."
-    awk -F ',' '{print $2}' toplist.tmp > temp && mv temp toplist.tmp
-    format_file toplist.tmp
-}
-
-# Function 'log_event' logs domain processing events into the domain log.
-#   $1: domains to log stored in a variable.
+# Function 'log_domains' calls a shell wrapper to log domain processing events
+# into the domain log.
+#   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
-log_event() {
-    [[ -z "$1" ]] && return  # Return if no domains passed
-    local source="${source:-$3}"
-    printf "%s\n" "$1" | awk -v event="$2" -v source="$source" -v time="$TIME_FORMAT" \
-        '{print time "," event "," $0 "," source}' >> "$DOMAIN_LOG"
-}
-
-# Function 'format_file' calls a shell wrapper to standardize the format
-# of a file.
-#   $1: file to format
-format_file() {
-    bash functions/tools.sh format "$1"
+log_domains() {
+    $FUNCTION --log-domain "$1" "$2" "$source"
 }
 
 cleanup() {
@@ -676,9 +654,7 @@ source_stopgunscams() {
 
 trap cleanup EXIT
 
-for file in config/* data/*; do
-    format_file "$file"
-done
+$FUNCTION --format-all
 
 source
 

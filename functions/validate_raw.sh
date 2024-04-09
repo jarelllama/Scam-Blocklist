@@ -14,9 +14,9 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 
 # Function 'filter' logs the given entries and removes them from the raw file.
 # Input:
-#   $1: entries to process
+#   $1: entries to process passed in a variable
 #   $2: tag given to entries
-#   --preserve: pass the argument to keep entries in the raw file
+#   --preserve: keep entries in the raw file
 # Output:
 #   Number of entries that were passed
 filter() {
@@ -24,7 +24,7 @@ filter() {
     local tag="$2"
 
     # Return if no entries passed
-    [[ -s "$entries" ]] && return
+    [[ -z "$entries" ]] && return
 
     if [[ "$3" != '--preserve' ]]; then
         # Remove entries from raw file
@@ -39,7 +39,8 @@ filter() {
     $FUNCTION --log-domains "$entries" "$tag" raw
 
     # Return the number of entries
-    wc -l <<< "$entries"
+    # wc -w is used here because wc -l still counts an empty variable as 1 line
+    wc -w <<< "$entries"
 }
 
 validate_raw() {
@@ -70,7 +71,7 @@ validate_raw() {
     whitelisted="$(grep -Ff "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
     whitelisted_count="$(filter "$whitelisted" whitelist)"
 
-    # Remove domains that have whitelisted TLDs
+    # Remove domains with whitelisted TLDs
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")"
     whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
@@ -81,7 +82,7 @@ validate_raw() {
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist
-    # Find matching domains in toplist excluding blacklisted domains
+    # Find domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
     toplist_count="$(filter "$in_toplist" toplist --preserve)"
