@@ -342,7 +342,7 @@ source_google_search() {
         | tail -n +2 | sed 's/.*/"&"/')"
 
     while read -r search_term; do  # Loop through search terms
-        # Stop loop if rate limited
+        # Stop if rate limited
         if [[ "$rate_limited" == true ]]; then
             printf "\n\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
             return
@@ -369,10 +369,10 @@ search_google() {
         query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results="$(curl -s "${url}?${query_params}")"
 
-        # Use next API key if first key is rate limited
         if [[ "$page_results" == *rateLimitExceeded* ]]; then
-            # Stop all searches if second key is also rate limited
+            # Use next API key if first key is rate limited
             if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
+                # Stop all searches if second key is also rate limited
                 readonly rate_limited=true
                 break
             fi
