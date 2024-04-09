@@ -113,7 +113,7 @@ filter() {
     log_event "$entries" "$tag"
 
     if [[ "$3" != '--preserve' ]]; then
-        # Remove entries
+        # Remove entries from raw file
         comm -23 "$RAW" <(printf "%s" "$entries") > raw.tmp
         mv raw.tmp "$RAW"
     fi
@@ -122,32 +122,21 @@ filter() {
     wc -l <<< "$entries"
 }
 
-# Function 'send_telegram' sends a Telegram notification with the given
-# message.
+# Function 'send_telegram' calls a shell wrapper to send a Telegram
+# notification with the given message.
 #   $DISABLE_TELEGRAM: set to true to not send telegram notifications
 #   $1: message body
 send_telegram() {
-    [[ "$DISABLE_TELEGRAM" == true ]] && return
-
-    curl -sX POST \
-        -H 'Content-Type: application/json' \
-        -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
-        "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-        -o /dev/null
+    [[ "$DISABLE_TELEGRAM" != true ]] && bash functions/tools.sh telegram "$1"
 }
 
-# Function 'download_toplist' downloads and formats the toplist.
+# Function 'download_toplist' calls a shell wrapper to download and format the
+# toplist.
 # Output:
 #   toplist.tmp
+#   Telegram notification if an error occured while downloading the toplist
 download_toplist() {
-    [[ -f toplist.tmp ]] && return
-
-    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
-        > toplist.tmp || send_telegram "Error downloading toplist."
-
-    awk -F ',' '{print $2}' toplist.tmp > temp
-    mv temp toplist.tmp
-    format_file toplist.tmp
+    [[ ! -f toplist.tmp ]] && bash functions/tools.sh download_toplist
 }
 
 # Function 'log_event' calls a shell wrapper to log domain processing events
@@ -159,20 +148,13 @@ log_event() {
     bash functions/tools.sh log_event "$1" "$2" raw
 }
 
-# Function 'format_file' calls a shell wrapper to standardize the format
-# of a file.
-#   $1: file to format
-format_file() {
-    bash functions/tools.sh format "$1"
-}
-
 # Entry point
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 # Format files
 for file in config/* data/*; do
-    format_file "$file"
+    bash functions/tools.sh format "$file"
 done
 
 validate_raw
