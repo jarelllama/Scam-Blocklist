@@ -153,8 +153,8 @@ process_source() {
     # Collate filtered domains
     cat "$results_file" >> retrieved_domains.tmp
 
-    # Collate filtered domains from light sources
     if [[ "$ignore_from_light" != true ]]; then
+        # Collate filtered domains from light sources
         cat "$results_file" >> retrieved_light_domains.tmp
     fi
 
@@ -212,8 +212,8 @@ build() {
     # Add domains to raw file
     sort -u retrieved_domains.tmp "$RAW" -o "$RAW"
 
-    # Add domains to raw light file
     if [[ -f retrieved_light_domains.tmp ]]; then
+        # Add domains to raw light file
         cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
         $FUNCTION --format "$RAW_LIGHT"
     fi
@@ -369,10 +369,10 @@ search_google() {
         query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results="$(curl -s "${url}?${query_params}")"
 
+        # Use next API key if first key is rate limited
         if [[ "$page_results" == *rateLimitExceeded* ]]; then
-            # Use next API key if first key is rate limited
+            # Stop all searches if second key is also rate limited
             if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
-                # Stop all searches if second key is also rate limited
                 readonly rate_limited=true
                 break
             fi
