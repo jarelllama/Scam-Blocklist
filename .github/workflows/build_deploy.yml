@@ -55,8 +55,8 @@ jobs:
 
       - name: Prune logs
         run: |
-          bash functions/tools.sh prune_lines config/domain_log.csv 20000
-          bash functions/tools.sh prune_lines config/source_log.csv 10000
+          bash functions/tools.sh --prune-lines config/domain_log.csv 20000
+          bash functions/tools.sh --prune-lines config/source_log.csv 10000
 
       - name: Push
         run: |
