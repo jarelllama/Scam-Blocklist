@@ -109,7 +109,7 @@ process_source() {
     invalid_entries="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$results_file")"
     filter "$invalid_entries" &> /dev/null
     # Save entries for manual review and rerun
-    awk '{print $0 " (invalid)"}' <<< "$invalid_entries" >> manual_review.tmp
+    awk 'NF {print $0 " (invalid)"}' <<< "$invalid_entries" >> manual_review.tmp
     printf "%s\n" "$invalid_entries" >> "${results_file}.tmp"
 
     # Call shell wrapper to download toplist
@@ -119,7 +119,7 @@ process_source() {
     in_toplist="$(comm -12 toplist.tmp "$results_file" | grep -vxFf "$BLACKLIST")"
     toplist_count="$(filter "$in_toplist")"
     # Save entries for manual review and rerun
-    awk '{print $0 " (toplist)"}' <<< "$in_toplist" >> manual_review.tmp
+    awk 'NF {print $0 " (toplist)"}' <<< "$in_toplist" >> manual_review.tmp
     printf "%s\n" "$in_toplist" >> "${results_file}.tmp"
 
     # Collate filtered domains
@@ -142,7 +142,7 @@ process_source() {
     rm "$results_file"
 }
 
-# Function 'filter' removes the passed entries from the results.
+# Function 'filter' removes the passed entries from the results file.
 # Input:
 #   $1: entries to remove passed in a variable
 # Output:
@@ -177,11 +177,11 @@ build() {
         exit
     fi
 
-    # Collate only filtered subdomains and root domains into the subdomains
+  # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
-        # Find root domains (subdomains stripped off) in the filtered domains
-        root_domains="$(comm -12 retrieved_domains.tmp root_domains.tmp)"
+        # Find root domains (subdomains stripped off) in the filtered raw file
+        root_domains="$(comm -12 <(sort root_domains.tmp) retrieved.tmp)"
 
         # Collate filtered root domains to exclude from dead check
         printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"

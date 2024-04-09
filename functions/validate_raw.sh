@@ -41,11 +41,8 @@ validate_raw() {
     before_count="$(wc -l < "$RAW")"
 
     # Strip away subdomains
-    subdomains_count=0
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(grep "^${subdomain}\." "$RAW")" || continue
-        subdomains_count="$(( subdomains_count \
-            + "$(filter "$subdomains" subdomain --preserve)" ))"
 
         # Strip subdomains from raw file and raw light file
         sed -i "s/^${subdomain}\.//" "$RAW"
