@@ -39,7 +39,7 @@ validate_raw() {
     # Remove whitelisted domains, excluding blacklisted domains
     # Note whitelist matching uses keywords
     whitelisted="$(grep -Ff "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
-    whitelisted_count="$(filter "$whitelisted" whitelisted)"
+    whitelisted_count="$(filter "$whitelisted" whitelist)"
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")"
