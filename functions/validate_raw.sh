@@ -67,11 +67,11 @@ validate_raw() {
 
         # Collate filtered root domains to exclude from dead check
         printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
-        sort -u "$ROOT_DOMAINS" -u "$ROOT_DOMAINS"
+        sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
         # Collate filtered subdomains for dead check
         grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
-        sort -u "$SUBDOMAINS" -u "$SUBDOMAINS"
+        sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 
     # Print filter log
