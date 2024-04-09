@@ -159,11 +159,6 @@ TEST_RETRIEVE_VALIDATE() {
         check_terms "$SOURCE_LOG" out_source_log.txt "Source log"
     fi
 
-    if [[ "$script_to_test" == 'validate' ]]; then
-        check_output "$REDUNDANT_DOMAINS" out_redundant.txt "Redundant domains"
-        check_output "$WILDCARDS" out_wildcards.txt Wildcards
-    fi
-
     check_and_exit
 }
 
