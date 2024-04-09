@@ -15,9 +15,9 @@ main() {
     check_parked
     check_unparked
 
-    # Cache parked domains to be used as a filter for newly retrieved domains
-    # (done last to skip unparked check)
     if [[ -f parked_cache.tmp ]]; then
+        # Cache parked domains to be used as a filter for newly retrieved domains
+        # (done last to skip unparked check)
         sort -u parked_cache.tmp "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
     fi
 }

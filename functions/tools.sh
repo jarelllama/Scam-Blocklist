@@ -52,12 +52,12 @@ format_all() {
 #   $4: timestamp (optional)
 log_domains() {
     # Check if a file or variable was passed
-    # Return if no domains were passed
     if [[ -s "$1" ]]; then
         domains="$(<"$1")"
     elif [[ -n "$1" ]]; then
         domains="$1"
     else
+        # Return if no domains were passed
         return
     fi
 
