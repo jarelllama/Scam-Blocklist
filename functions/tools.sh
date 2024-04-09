@@ -92,6 +92,8 @@ send_telegram_message() {
         -o /dev/null
 }
 
+# Entry point
+
 function="$1"
 
 case "$function" in
@@ -115,5 +117,3 @@ case "$function" in
         exit 1
         ;;
 esac
-
-exit 0

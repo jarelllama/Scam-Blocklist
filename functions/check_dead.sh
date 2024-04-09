@@ -131,6 +131,8 @@ cleanup() {
     bash functions/tools.sh prune_lines "$DEAD_DOMAINS" 6000
 }
 
+# Entry point
+
 trap cleanup EXIT
 
 main

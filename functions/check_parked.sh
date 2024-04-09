@@ -180,6 +180,8 @@ cleanup() {
     bash functions/tools.sh prune_lines "$PARKED_DOMAINS" 5000
 }
 
+# Entry point
+
 trap cleanup EXIT
 
 main
