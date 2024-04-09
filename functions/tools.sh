@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # tools.sh is a shell wrapper intended to store commonly used functions.
-# Latest code review: 9 April 2024
 
 # Function 'format_file' standardizes the format of the given file.
 #   $1: file to be formatted
@@ -39,11 +38,18 @@ format_file() {
     [[ -f "${file}.tmp" ]] && mv "${file}.tmp" "$file"
 }
 
-# Function 'log_event' logs domain processing events into the domain log.
+# Function 'format_all' formats all files in the config and data directories.
+format_all() {
+    for file in config/* data/*; do
+        format_file "$file"
+    done
+}
+
+# Function 'log_domains' logs domain processing events into the domain log.
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
-log_event() {
+log_domains() {
     timestamp="$(date -u +"%H:%M:%S %d-%m-%y")"
 
     if [[ -f "$1" ]]; then
@@ -107,8 +113,11 @@ case "$flag" in
     --format)
         format_file "$2"
         ;;
-    --log-event)
-        log_event "$2" "$3" "$4"
+    --format-all)
+        format_all
+        ;;
+    --log-domains)
+        log_domains "$2" "$3" "$4"
         ;;
     --prune-lines)
         prune_lines "$2" "$3"
