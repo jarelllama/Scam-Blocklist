@@ -72,7 +72,7 @@ check_unparked() {
     # grep is used here because the 'find_parked_in' function messes with the
     # order of the entries
     grep -xFf parked.tmp "$PARKED_DOMAINS" > temp
-    mv temp.tmp "$PARKED_DOMAINS"
+    mv temp "$PARKED_DOMAINS"
 
     # Add unparked domains to raw file
     # Note unparked subdomains are added back too and will be processed by the
