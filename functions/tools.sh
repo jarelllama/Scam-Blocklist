@@ -2,10 +2,10 @@
 
 # tools.sh is a shell wrapper intended to store commonly used functions.
 
-# Function 'format' is called to standardize the format of a file.
+# Function 'format_file' is called to standardize the format of a file.
 #   $1: file to be formatted
 # Latest code review: 9 April 2024
-format() {
+format_file() {
     file="$1"
 
     [[ ! -f "$file" ]] && return
@@ -73,7 +73,7 @@ function="$1"
 
 case "$function" in
     format)
-        format "$2"
+        format_file "$2"
         ;;
     log_event)
         log_event "$2" "$3" "$4"
