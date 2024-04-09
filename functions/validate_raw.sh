@@ -53,6 +53,8 @@ validate_raw() {
 
         # Save root domains to be filtered later
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
+
+        filter "$subdomains" subdomain --preserve
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$RAW" -o "$RAW"
     sort -u "$RAW_LIGHT" -o "$RAW_LIGHT"
@@ -105,7 +107,7 @@ validate_raw() {
         "Problematic domains detected during validation check:\n$(<filter_log.tmp)"
 
     # Save changes to raw light file
-    comm -12 "$RAW" "$RAW_LIGHT" > light.tmp
+    comm -12 "$RAW_LIGHT" "$RAW"> light.tmp
     mv light.tmp "$RAW_LIGHT"
 
     after_count="$(wc -l < "$RAW")"

@@ -61,7 +61,7 @@ process_source() {
 
     # Remove known dead domains (includes subdomains)
     # Logging disabled as it inflated log size
-    dead_domains="$(comm -12 "$results_file" <(sort "$DEAD_DOMAINS"))"
+    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
     dead_count="$(filter "$dead_domains")"
 
     # Strip away subdomains
@@ -87,11 +87,11 @@ process_source() {
 
     # Remove known parked domains
     # Logging disabled as it inflated log size
-    parked_domains="$(comm -12 "$results_file" <(sort "$PARKED_DOMAINS"))"
+    parked_domains="$(comm -12 <(sort "$PARKED_DOMAINS") "$results_file")"
     parked_count="$(filter "$parked_domains")"
 
     # Log blacklisted domains
-    $FUNCTION --log-domains "$(comm -12 "$results_file" "$BLACKLIST")" blacklist
+    $FUNCTION --log-domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist matching uses keywords
