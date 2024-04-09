@@ -156,7 +156,7 @@ download_toplist() {
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_event() {
-    bash functions/tools.sh log_event "$1" "$2" "$3"
+    bash functions/tools.sh log_event "$1" "$2" raw
 }
 
 # Function 'format_file' calls a shell wrapper to standardize the format
