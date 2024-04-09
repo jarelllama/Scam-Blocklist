@@ -126,7 +126,7 @@ case "$1" in
         send_telegram "$1"
         ;;
     *)
-        printf "\n\e[1;31mInvalid argument passed.\e[0m\n\n"
+        printf "\n\e[1;31mInvalid argument: %s \e[0m\n\n" "$1"
         exit 1
         ;;
 esac

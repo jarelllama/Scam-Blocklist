@@ -78,7 +78,7 @@ process_source() {
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
         # Log subdomains excluding 'www' (too many of them)
-        log_domains "$(grep -v '^www\.' <<< "$subdomains")" subdomain
+        $FUNCTION --log-domains "$(grep -v '^www\.' <<< "$subdomains")" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$results_file" -o "$results_file"
 
@@ -92,7 +92,7 @@ process_source() {
     parked_count="$(filter "$parked_domains" parked --no-log)"
 
     # Log blacklisted domains
-    log_domains "$(comm -12 "$results_file" "$BLACKLIST")" blacklist
+    $FUNCTION --log-domains "$(comm -12 "$results_file" "$BLACKLIST")" blacklist
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist matching uses keywords
@@ -128,7 +128,7 @@ process_source() {
         mv "${results_file}.tmp" "$results_file"
     fi
 
-    log_domains "$results_file" pending
+    $FUNCTION --log-domains "$results_file" pending
 
     log_source
 
@@ -162,7 +162,7 @@ filter() {
     fi
 
     if [[ "$3" != '--no-log' ]]; then
-        log_domains "$entries" "$tag"
+        $FUNCTION --log-domains "$entries" "$tag"
     fi
 
     # Return the number of entries
@@ -273,15 +273,6 @@ ${parked_count},${toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 #   $1: message body
 send_telegram() {
     $FUNCTION --send-telegram "$1"
-}
-
-# Function 'log_domains' calls a shell wrapper to log domain processing events
-# into the domain log.
-#   $1: domains to log either in a file or variable
-#   $2: event type (dead, whitelisted, etc.)
-#   $3: source
-log_domains() {
-    $FUNCTION --log-domain "$1" "$2" "$source"
 }
 
 cleanup() {
