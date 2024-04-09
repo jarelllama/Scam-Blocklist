@@ -28,8 +28,8 @@ main() {
 # Function 'check_dead' removes dead domains from the raw file, raw light file,
 # and subdomains file.
 check_dead() {
-    # Include domains with subdomains in dead check. Exclude the root domains
-    # since the subdomains were what was retrieved during domain retrieval
+    # Include subdomains in the dead check. Exclude the root domains since the
+    # subdomains were what was retrieved during domain retrieval.
     comm -23 <(sort "$RAW" "$SUBDOMAINS") "$ROOT_DOMAINS" > domains.tmp
 
     find_dead_in domains.tmp || return
@@ -38,7 +38,7 @@ check_dead() {
     # This dead cache includes subdomains
     cp dead.tmp dead_cache.tmp
 
-    # Remove dead domains from the subdomains file
+    # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" dead.tmp > temp
     mv temp "$SUBDOMAINS"
 
@@ -78,8 +78,8 @@ check_alive() {
     mv temp "$DEAD_DOMAINS"
 
     # Add resurrected domains to raw file
-    # Note resurrected subdomains are added back too and will be processed by
-    # the validation check outside of this script
+    # Note that resurrected subdomains are added back too and will be processed
+    # by the validation check outside of this script.
     sort -u alive.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log resurrected domains into domain log
@@ -97,7 +97,7 @@ find_dead_in() {
     local temp
     temp="$(basename "$1").tmp"
 
-    # Format to Adblock Plus syntax
+    # Format to Adblock Plus syntax for Dead Domains Linter
     sed 's/.*/||&^/' "$1" > "$temp"
 
     dead-domains-linter -i "$temp" --export dead.tmp
