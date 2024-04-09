@@ -26,17 +26,17 @@ filter() {
     # Return if no entries passed
     [[ -s "$entries" ]] && return
 
-    # Record entries into filter log
-    awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" >> filter_log.tmp
-
-    # Call shell wrapper to log entries into domain log
-    $FUNCTION --log-domains "$entries" "$tag" raw
-
     if [[ "$3" != '--preserve' ]]; then
         # Remove entries from raw file
         comm -23 "$RAW" <(printf "%s" "$entries") > raw.tmp
         mv raw.tmp "$RAW"
     fi
+
+    # Record entries into filter log
+    awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" >> filter_log.tmp
+
+    # Call shell wrapper to log entries into domain log
+    $FUNCTION --log-domains "$entries" "$tag" raw
 
     # Return the number of entries
     wc -l <<< "$entries"
