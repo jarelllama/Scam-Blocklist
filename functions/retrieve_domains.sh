@@ -59,15 +59,10 @@ process_source() {
     # Count number of unfiltered domains pending
     raw_count="$(wc -l < "$results_file")"
 
-    # Migrate domains to a variable
-    domains="$(<"$results_file")"
-    rm "$results_file"
-
     # Remove known dead domains (includes subdomains)
-    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") <(printf "%s" "$domains"))"
-    dead_count="$(wc -w <<< "$dead_domains")"
-    domains=$(comm -23 <(printf "%s" "$domains") <(printf "%s" "$dead_domains"))
     # Logging disabled as it inflated log size
+    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
+    dead_count="$(filter "$dead_domains")"
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
