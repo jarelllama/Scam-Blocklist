@@ -51,7 +51,7 @@ check_parked() {
 
     # Remove parked domains from the various files
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        comm -23 "$file" dead.tmp > temp
+        comm -23 "$file" parked.tmp > temp
         mv temp "$file"
     done
 
