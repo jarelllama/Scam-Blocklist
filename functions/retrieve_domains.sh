@@ -181,7 +181,7 @@ build() {
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
         # Find root domains (subdomains stripped off) in the filtered raw file
-        root_domains="$(comm -12 <(sort root_domains.tmp) retrieved.tmp)"
+        root_domains="$(comm -12 <(sort root_domains.tmp) retrieved_domains.tmp)"
 
         # Collate filtered root domains to exclude from dead check
         printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
