@@ -43,7 +43,7 @@ validate_raw() {
 
     # Remove domains that have whitelisted TLDs
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")"
-    whitelisted_tld_count="$(filter "$whitelisted_tld" whitelisted_tld)"
+    whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
     # Remove non-domain entries including IP addresses
     # Punycode TLDs (.xn--*) are allowed
