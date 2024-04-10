@@ -84,7 +84,7 @@ prune_lines() {
 # Function 'download_toplist' downloads and formats the Tranco toplist.
 # Output:
 #   toplist.tmp
-#   Telegram notification if an error occured while downloading the toplist
+#   Telegram notification if an error occurred while downloading the toplist
 download_toplist() {
     [[ -f toplist.tmp ]] && return
 

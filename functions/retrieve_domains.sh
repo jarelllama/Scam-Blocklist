@@ -203,7 +203,7 @@ build() {
     # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
-        # Find root domains (subdomains stripped off) in the filtered ddomains
+        # Find root domains (subdomains stripped off) in the filtered domains
         root_domains="$(comm -12 <(sort root_domains.tmp) retrieved_domains.tmp)"
 
         # Collate filtered root domains to exclude from dead check
@@ -440,7 +440,7 @@ source_dnstwist() {
 
     $FUNCTION --format nrd.tmp
 
-    # Remove aleady processed domains to save processing time
+    # Remove already processed domains to save processing time
     comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
     mv temp nrd.tmp
 

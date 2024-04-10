@@ -68,7 +68,7 @@ validate_raw() {
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")"
     filter "$whitelisted_tld" tld
 
-    # Remove non-domain entries including IP addresses exlucind punycode
+    # Remove non-domain entries including IP addresses excluding punycode
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$RAW")"
     filter "$invalid" invalid
 
