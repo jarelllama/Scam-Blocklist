@@ -3,19 +3,22 @@
 ! Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.10.162710.2024
+! Version: 04.10.165953.2024
 ! Expires: 1 day
-! Last modified: Wed Apr 10 16:27:10 UTC 2024
+! Last modified: Wed Apr 10 16:59:53 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 3356
+! Number of entries: 3492
 !
 ||01edc.com^
 ||0penai.xyz^
 ||1bestbuy.com^
+||1klearbeauty.com^
 ||1sttheworld.com^
 ||2022factorysale.ru^
 ||247vesselcapsulehomes.com^
 ||2daysdeco.com^
+||33store.net^
+||3ezzy.finance^
 ||3potify.shop^
 ||3rdhillcu.com^
 ||420budstorenearme.com^
@@ -29,6 +32,7 @@
 ||5starjersey.com^
 ||674985034.myshoplaza.com^
 ||77unishop.com^
+||7cedb2-08.myshopify.com^
 ||898.com^
 ||9mm.ammoforsale.com^
 ||aaaneuropsych.com^
@@ -100,6 +104,7 @@
 ||albaladglobalinvestment.com^
 ||aleixpress.ru^
 ||alexanderrobot.com^
+||algrind.com^
 ||ali-baba.xyz^
 ||ali-trading.com^
 ||alibaba8.com^
@@ -166,6 +171,7 @@
 ||ample.skin^
 ||amqzon.work^
 ||amreahome.com^
+||amuni.co.uk^
 ||amzzon.uk^
 ||anabolicsteroidspharmacyaustralia.com^
 ||anabolicsteroidssupps.com^
@@ -178,6 +184,7 @@
 ||ankovo.com^
 ||annasmexicangrill.com^
 ||annekleinfashion.com^
+||anothertopshop.com^
 ||ansten.net^
 ||antifreezesnow.com^
 ||antiprejudicead.net^
@@ -279,11 +286,13 @@
 ||barclaysforeigncurrency.com^
 ||barods.com^
 ||barrymorgansamoyed.com^
+||barymanes.store^
 ||bastine.com^
 ||basurtoranchoftexas.com^
 ||batcoin.site^
 ||batslyadams.com^
 ||bayareainjury.com^
+||baylee.shop^
 ||baza-wrq.com^
 ||bbsintheworld.quora.com^
 ||beachcitiescommercialbank.com^
@@ -293,6 +302,7 @@
 ||beautypay.store^
 ||beautythine.com^
 ||bedbathandofficial.shop^
+||bedtodream.com^
 ||beeinghope.io^
 ||beemuscle.com^
 ||beestbuy.shop^
@@ -302,6 +312,7 @@
 ||belibili.com^
 ||bellewholesale.com^
 ||bellinghamarthritis.com^
+||bellyshoeshop.com^
 ||belscattery.com^
 ||benchwheel.com^
 ||bengjin.com^
@@ -316,12 +327,15 @@
 ||bestbay.store^
 ||bestblueeyesfrenchies.su^
 ||bestbuyc.shop^
+||bestbuysmall.com^
 ||bestestheticonlinesupply.com^
 ||bestibogaineonline.com^
 ||bestmobilehomemovers.com^
 ||bestsbuy.shop^
 ||bestsglidersandhedgehogsstore.com^
 ||bestsilencershop.com^
+||bestsneakers-c.shop^
+||bestsneakers-f.shop^
 ||besttbuy.lol^
 ||bestukmeds.co.uk^
 ||betflix.cfd^
@@ -330,6 +344,7 @@
 ||betsimaltipoodogs.com^
 ||betterprices.store^
 ||beverlyemarykittens.co.za^
+||bggcdje.datesrud.com^
 ||bgihgcf.datedat.com^
 ||bgmail.cyou^
 ||bgmail.info^
@@ -348,6 +363,7 @@
 ||bikesonline24.com^
 ||bilebili.com^
 ||bilibili2.com^
+||biliw.com^
 ||billionfollowers.com^
 ||bina-nce.com^
 ||binan-ce.net^
@@ -373,6 +389,7 @@
 ||bitocrown.com^
 ||bitpay4x4.com^
 ||bitsscoin.com^
+||bitstape.com^
 ||bitups.com^
 ||bitwardeen.com^
 ||bitwarfen.com^
@@ -404,6 +421,7 @@
 ||bondsclothes.com^
 ||boniface.store^
 ||bonnieranchdoodles.com^
+||bonoch.top^
 ||bookseey.com^
 ||borhng.com^
 ||bosskennel.com^
@@ -426,6 +444,7 @@
 ||brideteacupyorkies.com^
 ||bridgeskybullies.com^
 ||brightclothing.shop^
+||brightergloin.live^
 ||brightonsale.us^
 ||brightstarkittens.com^
 ||bringhurstfamilydentistry.com^
@@ -467,9 +486,11 @@
 ||buyghostguns.us^
 ||buyghostgunscanada.com^
 ||buyghostgunskit.com^
+||buyherecod.shop^
 ||buyketaminecrystals.com^
 ||buymdmaindia.com^
 ||buymegadrugsonline.com^
+||buymoredone.com^
 ||buynowshopp.com^
 ||buyoxa.store^
 ||buypagescript.com^
@@ -501,6 +522,7 @@
 ||capitalunitedfinance.com^
 ||capitawlone.com^
 ||carbonbypablo.com^
+||card1globinv.com^
 ||cardersbay.com^
 ||cardingstore.com^
 ||cargocontinental.com^
@@ -510,7 +532,9 @@
 ||cargosandanimalslogistics.com^
 ||cargovanddispatchsvc.com^
 ||carolpasollewis.com^
+||carspartsfor.com^
 ||cartist01.com^
+||cartply.com^
 ||cashout-empire.net^
 ||cashtask.info^
 ||castillotigo.com^
@@ -522,6 +546,7 @@
 ||ccy-space.com^
 ||cecilfansvip.com^
 ||cedarridgefamilymedicine.com^
+||cellihok.com^
 ||centerforhealthimreno.com^
 ||centralparkpuppies.co.za^
 ||centuryguaranteecourier.com^
@@ -627,10 +652,21 @@
 ||clonedcreditcard.com^
 ||clonedmaster.com^
 ||clonedscard.com^
+||clothbrojy.com^
+||clothcutetop.com^
+||clothcutevogue.com^
+||clotheshopp.com^
+||clothfkkd.com^
+||clothgoodshop.com^
+||clothlovelytop.com^
+||clothmallshop.com^
+||clothsgood.com^
+||clothshopmall.com^
 ||cloudc.com.hk^
 ||clouddiy.shop^
 ||clubllondons.us^
 ||cnbiochemicals.com^
+||cofinn.com^
 ||coiinbase.net^
 ||coin-base.top^
 ||coinbasse.xyz^
@@ -673,8 +709,11 @@
 ||corgibreeds.com^
 ||corgipuppybreederfarm.com^
 ||corianderjournal.com^
+||corteizcrtz.fr^
+||cosmeticeu.com^
 ||cotondetulearpupsforsale.com^
 ||cottonfashion.store^
+||cottonfau.com^
 ||counterfeitsolutionlab.com^
 ||counterfeitzone.com^
 ||couverture-lamotte.com^
@@ -692,6 +731,7 @@
 ||crown-honey.com^
 ||crownedretrieverpuppies.com^
 ||crshct.com^
+||crtzcorteiz.fr^
 ||crvnashop.com^
 ||cry-pto.biz^
 ||crypot.top^
@@ -708,6 +748,8 @@
 ||culeki.com^
 ||cupcakeactivist.com^
 ||cupkiki.com^
+||currentbed.com^
+||currentgoodshoes.com^
 ||cutblajat.com^
 ||cutedobermans.com^
 ||cutehuskypuppies.com^
@@ -734,6 +776,7 @@
 ||daniva.net^
 ||dankofamerica.net^
 ||dannerus.com^
+||dapemo.com^
 ||dark-net-market.com^
 ||darkmarketsales.com^
 ||darkworldenterprise.com^
@@ -753,6 +796,7 @@
 ||dcapitalone.com^
 ||de.pills-store-online24.com^
 ||de.prosoftwares.fr^
+||dealnewsale.com^
 ||deals4pets.com^
 ||dealsgo.shop^
 ||dehsid.com^
@@ -765,11 +809,13 @@
 ||denvorequipmentsuppliers.co.za^
 ||depanten-gel.site^
 ||deportesberja.com^
+||deraj.shop^
 ||dermabuzz.com^
 ||desagga.com^
 ||desaihealth.com^
 ||desi.es.com^
 ||destinyitaliangreyhoundforsale.com^
+||desyglopt.com^
 ||deunow.com^
 ||deusdebsell.shop^
 ||dexlac.com^
@@ -804,6 +850,7 @@
 ||dolcetom.com^
 ||dom-evrika.ru^
 ||domain10453748.com^
+||domayed.com^
 ||donalawater.org^
 ||donitop.com^
 ||donnasharpbed.com^
@@ -860,6 +907,8 @@
 ||eleanorfrenchiestore.com^
 ||electricskateboard.com^
 ||electromaxshop.com^
+||electron-malls.com^
+||electronmalls.com^
 ||elegance-express.com^
 ||eleganciacourier.com^
 ||elegantamericanbully.com^
@@ -894,6 +943,7 @@
 ||etay.top^
 ||etender.buzz^
 ||ethcrate.com^
+||ethelstudio.com^
 ||ethosrevive.com^
 ||etsye.top^
 ||evaeuiosn.com^
@@ -959,6 +1009,7 @@
 ||exoticgentlegiantshome.com^
 ||exoticretrieverskennel.com^
 ||exoticroyalfamily.com^
+||experienciapublica.org^
 ||expireextra.com^
 ||expoworldchem.com^
 ||exquisitekittenshome.com^
@@ -984,6 +1035,7 @@
 ||familyteacupyorkies.com^
 ||familyteacupyorkshirepuppies.com^
 ||famuget.org^
+||fanaticsmalls.com^
 ||fandoras.com^
 ||fankay.com^
 ||fansly.site^
@@ -1007,6 +1059,7 @@
 ||fedesx.life^
 ||fedex.marketing^
 ||fedex.uk^
+||fednex.com^
 ||feedex.top^
 ||feior.com^
 ||feliciia.com^
@@ -1052,10 +1105,12 @@
 ||forums.13x.com^
 ||forums.sassnet.com^
 ||fossilssale.us^
+||fournestore.com^
 ||foxhilldogkennels.com^
 ||foyakm.com^
 ||framethewaves.com^
 ||franchiusastore.com^
+||francxumall.com^
 ||frankandoaks.us^
 ||freedomboerboel.com^
 ||frenchiepuppiesforsaleinusa.com^
@@ -1064,6 +1119,7 @@
 ||freuqenci.com^
 ||friendlyfrenchbulldogbreeders.com^
 ||friendlygoldenretrievers.us^
+||friendlymobiles.com^
 ||friends-lounge.store^
 ||frozenmeatproducer.com^
 ||frozenmeatsolutions.com^
@@ -1083,6 +1139,7 @@
 ||fxxktardo.com^
 ||gadgetwonderstore.com^
 ||gail.top^
+||gainersoptgloin.live^
 ||gamenookz.com^
 ||gamingrackets.com^
 ||gamini.xyz^
@@ -1093,7 +1150,9 @@
 ||gb-evri.vip^
 ||gbekat.ink^
 ||geemini.top^
+||geemoom.com^
 ||geezerdecor.com^
+||geheated.com^
 ||geissele.usa.com^
 ||gemani.shop^
 ||gemani.store^
@@ -1105,6 +1164,7 @@
 ||gentlecareteacupchihuahuas.com^
 ||genuzy.com^
 ||gesegnetewelpenheim.com^
+||geshstore.com^
 ||gesundeswelpenhaus.de^
 ||getbiocultura.com^
 ||getcashfor.co^
@@ -1150,6 +1210,7 @@
 ||globaltradingsltd.com^
 ||globalwealthplanner.com^
 ||globcoff.com^
+||globcomats.com^
 ||globelinkstarshipping.com^
 ||glockswitchhub.com^
 ||glockuprise.com^
@@ -1157,6 +1218,7 @@
 ||gloriousbassets.com^
 ||glosfly.com^
 ||glowsart.com^
+||glowtoskin.co.uk^
 ||glscargoexpress.com^
 ||glsdiscreetdelivery.com^
 ||glsinternationallogistics.com^
@@ -1200,6 +1262,7 @@
 ||grail.site^
 ||grailgg.com^
 ||grasslandmall.com^
+||greatautnagency.com^
 ||greatdanepuppyhome.com^
 ||greatschnauzer.top^
 ||greeksister.com^
@@ -1211,6 +1274,7 @@
 ||groomersgearzone.com^
 ||grystores.com^
 ||gsil.org^
+||gsop.fr^
 ||guaranteelogisticscarriers.com^
 ||guarantyfx-trades.com^
 ||guardianarmoryshop.com^
@@ -1229,6 +1293,7 @@
 ||hamster.homes^
 ||hamster.market^
 ||handmadeproducts.store^
+||handytopbag.com^
 ||hanielstore.com^
 ||hanoversuppliers.co.za^
 ||happybeastmainecoons.com^
@@ -1267,6 +1332,7 @@
 ||highcreekbullies.com^
 ||highmarketspace.com^
 ||highsupplies.co^
+||hilgraph.com^
 ||hillscattery.com^
 ||hilxfunds.com^
 ||hingehalve.com^
@@ -1291,6 +1357,7 @@
 ||homesharvests.com^
 ||homlays.com^
 ||hondaoemparts1.com^
+||hoodlc.com^
 ||hookedoff.com^
 ||hopkinsliquorcollection.com^
 ||horidex.com^
@@ -1309,6 +1376,7 @@
 ||hugopetshome.co.uk^
 ||hugopetshome.com^
 ||hulushoping.com^
+||humpshop.com^
 ||huniity.com^
 ||huntdekor.com^
 ||hup498.com^
@@ -1316,6 +1384,8 @@
 ||hybridenergyhome.co.za^
 ||hydraexchange.com^
 ||hyperglim.com^
+||ibeautyfoot.com^
+||iceosn.com^
 ||iceymed.com^
 ||ico.shibx.net^
 ||ida-vip.com^
@@ -1323,6 +1393,7 @@
 ||ielts-ptebureau.com^
 ||ieltsandpteofficialbureau.com^
 ||ieltsptefreedom.com^
+||ieveryshop.com^
 ||ifanze.net^
 ||ifoxdex.com^
 ||ift170.com^
@@ -1355,11 +1426,14 @@
 ||int456.com^
 ||integralz.com^
 ||interierovystylista.cz^
+||intimacyloves.com^
 ||ios-evri.com^
 ||iowafamilyacupuncture.com^
 ||iptvsmarterservices.com^
+||iqgloin.com^
 ||irinasteacupyorkies.com^
 ||islandhobbynut.com^
+||it-optionsl.com^
 ||itallgo.com^
 ||itamizy.com^
 ||itsy.life^
@@ -1386,6 +1460,7 @@
 ||jimbelushionlinepurchases.com^
 ||jingba-support.com^
 ||jkbui.com^
+||jmadultere.lat^
 ||jmcatholic.com^
 ||joanspuppieshome.co.za^
 ||johnstown-redevelopment.org^
@@ -1403,6 +1478,7 @@
 ||jotexse.shop^
 ||joyceebassethoundpuppies.com^
 ||joyfulgreatdanes.com^
+||joygootech.com^
 ||jpmorganchasex.top^
 ||jstarsgifts.com^
 ||juahar.com^
@@ -1418,6 +1494,7 @@
 ||karleykahlo.com^
 ||katherinefeeney.net^
 ||kavehomesale.shop^
+||kayeestore.com^
 ||kbnet.shop^
 ||kcypacking.com^
 ||kdidas.com^
@@ -1426,6 +1503,7 @@
 ||kenbpups.com^
 ||kerstenautomotive.com^
 ||kesm.online^
+||ketbit.com^
 ||kexcet.com^
 ||keyesden.com^
 ||keykobo.com^
@@ -1485,6 +1563,7 @@
 ||kwahzifarm.com^
 ||kwtcoins.com^
 ||ky.guns.com^
+||l6.datingeo.com^
 ||lablancasale.us^
 ||laboutiquedacula.com^
 ||labradorretrieverforsale.com^
@@ -1496,6 +1575,7 @@
 ||lakeviewbritishshorthaircats.com^
 ||lalpui.com^
 ||lamodor.com^
+||lanaido.com^
 ||landscapk.com^
 ||lannywitch.com^
 ||lapislazuli1945.com^
@@ -1516,6 +1596,7 @@
 ||lazaad.com^
 ||lazada.quest^
 ||lazadas.shop^
+||lazapee.shop^
 ||laziee.com^
 ||lazzada.top^
 ||leafysociety.com^
@@ -1544,6 +1625,7 @@
 ||lisakittycoons.com^
 ||lisaragdollscattery.com^
 ||lisneyplus.com^
+||lissonshop.com^
 ||littledinodeals.com^
 ||littleluxeloft.com^
 ||littlepawspetdeals.com^
@@ -1595,7 +1677,9 @@
 ||lusidfounders.com^
 ||lutpx.com^
 ||luvez.co^
+||luxcod.shop^
 ||luxgemgalore.com^
+||luxlightingdecor.com^
 ||luxpoll.com^
 ||lyeecyee.com^
 ||m-grill.com^
@@ -1604,6 +1688,7 @@
 ||maazon.uk^
 ||macdo.site^
 ||macwalveslogistics.com^
+||macy-playgroundkids.com^
 ||madetee.com^
 ||madroop.com^
 ||maesdoodles.online^
@@ -1627,7 +1712,10 @@
 ||malelion-plan.com^
 ||malinoisparadise.com^
 ||mall888mall.com^
+||mallautomobile.com^
 ||malleb.com^
+||malloffcial.com^
+||mallsretails.com^
 ||malltoonvip.com^
 ||maltergroups.com^
 ||maltesepaws.com^
@@ -1649,6 +1737,7 @@
 ||marlinriflesusa.com^
 ||marspetcarepuppy.com^
 ||marthaharperolteanufoundation.com^
+||martssuper.com^
 ||marushippingintl.online^
 ||mastfercard.com^
 ||masturcard.com^
@@ -1675,8 +1764,10 @@
 ||mcqueenus.com^
 ||mcycleshop.com^
 ||mdmaonlineshop.com^
+||mebata.shop^
 ||medicatedmedsandvapes.com^
 ||mediikitchen.com^
+||meettshoe.com^
 ||meeyd.com^
 ||mega-mall-of-america.com^
 ||megacannabisshop.com^
@@ -1691,6 +1782,7 @@
 ||meomeogift.com^
 ||merasaghar.com^
 ||merchandiseprotrading.com^
+||merchaverse.io^
 ||merchidea.com^
 ||merchspirit.com^
 ||meseenger.online^
@@ -1710,6 +1802,7 @@
 ||metasmask.top^
 ||metflix.org^
 ||metflix.site^
+||metrocallproinvesent.com^
 ||metrolinanephrology.com^
 ||meyerscanary.com^
 ||meyoclinic.com^
@@ -1824,12 +1917,15 @@
 ||naertinon.com^
 ||nailsmith.co^
 ||nailswag.shop^
+||nakedforsex.com^
 ||naneug.com^
 ||napturalstore.com^
 ||narsem.com^
 ||naucah.com^
 ||navaccorporation.co.za^
 ||nbfareast.com^
+||nchristina.lattehub.com^
+||ndqhfe.top^
 ||neerahomeofpets.com^
 ||neighborhoodsluts.com^
 ||neilgrsse.quora.com^
@@ -1895,6 +1991,7 @@
 ||oikeau.com^
 ||oinedrive.com^
 ||okcuipd.com^
+||okktoshop.com^
 ||oklahor.com^
 ||olexdistribution.com^
 ||olfaabout.com^
@@ -1949,6 +2046,7 @@
 ||onlinesale2022.ru^
 ||onllyfans.xyz^
 ||only-fans.website^
+||onlyably.com^
 ||onlycans.online^
 ||onlyfabs.net^
 ||onlyfansk.com^
@@ -1958,6 +2056,7 @@
 ||onpointshipppers.com^
 ||onredrive.com^
 ||onsdrive.com^
+||onseleey.com^
 ||onwofe.com^
 ||op3nai.ru^
 ||opefai.com^
@@ -1969,6 +2068,7 @@
 ||openair.tokyo^
 ||openais.shop^
 ||opjus.com^
+||optgloin.live^
 ||optimalsdirect.com^
 ||orchestramall.shop^
 ||orderelkhome.com^
@@ -1986,7 +2086,9 @@
 ||outlet-nutrition.com^
 ||outletgardener.com^
 ||outletheaters.com^
+||outlets-asia.shop^
 ||outletstoves.com^
+||outletszone.online^
 ||outletunit.com^
 ||outloo-k.com^
 ||outlook4.com^
@@ -2029,6 +2131,7 @@
 ||peachytoy.com^
 ||pearlclam.com^
 ||pefctiordent.com^
+||pelcafe.com^
 ||pemcorgis.com^
 ||penai.top^
 ||perfect-t-shop.com^
@@ -2063,6 +2166,8 @@
 ||piffbarofficials.com^
 ||pihksaie.finance^
 ||piinksales.deals^
+||pikaeletech.com^
+||pikasoso.com^
 ||pikonspzoo.com^
 ||pills-store-online24.com^
 ||pinballclassic.com^
@@ -2161,6 +2266,8 @@
 ||purrfectdevonrex.com^
 ||purrfectsiamese.com^
 ||purrfectsphynxandmainecoon.com^
+||pussrshop.com^
+||pussydates.com^
 ||qaerai.com^
 ||qdlashfairy.com^
 ||qianjing.us^
@@ -2288,6 +2395,7 @@
 ||santasycandle.com^
 ||sargunsusa.com^
 ||savoryahome.com^
+||sayemotori.store^
 ||sbank.center^
 ||sccdream.com^
 ||sccy.usa.com^
@@ -2314,6 +2422,7 @@
 ||shaiyuzhou.com^
 ||share2pay.co^
 ||shareadeals.com^
+||sharpills.com^
 ||shebliss.store^
 ||shehanizon.com^
 ||sheingivesback.com^
@@ -2325,8 +2434,12 @@
 ||shoefrancosarto.com^
 ||shoesagl.com^
 ||shoesforcrew.us^
+||shoeshopes.com^
+||shoeshouses.com^
+||shoesmalltop.com^
 ||shoesprints.com^
 ||shoestamaris.com^
+||shoestopmall.com^
 ||shop15630.associazionechien.org^
 ||shop16330.associazionechien.org^
 ||shop6.onlinesale2022.ru^
@@ -2340,6 +2453,7 @@
 ||shopeo.org^
 ||shopes.store^
 ||shopese.org^
+||shopfantesi.com^
 ||shopfootballna.com^
 ||shophive.in^
 ||shopindiancart.in^
@@ -2370,6 +2484,7 @@
 ||sipcafenashville.com^
 ||sirinote.com^
 ||sistersbeautyworld-lhs.de^
+||sixfeetboot.com^
 ||siyoteam.net^
 ||skillfuli.com^
 ||skivalleyb.com^
@@ -2395,6 +2510,7 @@
 ||smithbernesemountaindogs.com^
 ||smithsongunshop.shop^
 ||smokecigarss.com^
+||smokedowwt.com^
 ||smokeydispensary.com^
 ||smokeyschems.com^
 ||smoothlyk.com^
@@ -2407,12 +2523,15 @@
 ||snapdekor.com^
 ||snkidstore.com^
 ||snknk.cz^
+||snkstockx.com^
 ||snowb.co.za^
 ||snowwp.com^
 ||snupchat.xyz^
 ||soccerarmor.com^
 ||socoolyoo.com^
+||solanapad.in^
 ||solanapad.io^
+||solanapod.io^
 ||solidarityk.com^
 ||soluckin.com^
 ||somuchbutter.com^
@@ -2467,6 +2586,7 @@
 ||stearncornmunity.ru^
 ||steelite-au.com^
 ||stefunton.com^
+||steinsgood.com^
 ||stiffcranks.com^
 ||stockyfarms.com^
 ||stonebengalscattery.com^
@@ -2501,6 +2621,8 @@
 ||superbwigs.com^
 ||superdry.vip.com^
 ||superiorsharpei.com^
+||superlivetra.com^
+||supermarketf.shop^
 ||superxb.com^
 ||supremecatsnkittens.co.za^
 ||supsnh.com^
@@ -2519,6 +2641,7 @@
 ||synbnk.com^
 ||syncdecor.com^
 ||sytm9.com^
+||szqxmall.com^
 ||tacking-usps-vip.com^
 ||tactical-gunshop.com^
 ||tacticoolammoshop.com^
@@ -2620,6 +2743,7 @@
 ||theroyalepuppies.com^
 ||thespaceoptmrt.com^
 ||thesphynx.co^
+||thevortec.xyz^
 ||thewinsomegarden.com^
 ||theworldwidesecurityagency.com^
 ||thinlineshirt.com^
@@ -2669,6 +2793,7 @@
 ||toksblog.com^
 ||toktok.lol^
 ||tollgr.com^
+||tomatovintage.com^
 ||tomidachijapanesespitz.com^
 ||tommybahama.us.com^
 ||toobao.top^
@@ -2679,6 +2804,7 @@
 ||toolsus.shop^
 ||toolswiha.com^
 ||toparmsshop.com^
+||topsvipclothes.com^
 ||topwellcore.com^
 ||tortoiseforsaleonline.com^
 ||townscap.store^
@@ -2741,6 +2867,7 @@
 ||ukevenodd.com^
 ||ukjellyfish.co.uk^
 ||ulltrademiners.com^
+||ultimate-jets.net^
 ||ultimategunsammunition.com^
 ||unafragolaalgiorno.it^
 ||underthehighchair.com^
@@ -3096,6 +3223,7 @@
 ||valhadex.com^
 ||valorsharpei.com^
 ||vancases.com^
+||variedbedvogue.com^
 ||variohair.com^
 ||vbier.buzz^
 ||vblabschemicals.com^
@@ -3119,12 +3247,15 @@
 ||vislily.com^
 ||visualpaw.com^
 ||vivaraisehome.com^
+||viviguru.com^
 ||vivulla68.com^
 ||viymy.com^
 ||vlabradorpups.com^
 ||vocife.com^
+||voguetopdress.com^
 ||voguetote.store^
 ||volfdex.com^
+||voskogloin.live^
 ||votremaisoninterieure.fr^
 ||vsr645.com^
 ||vtechtoyshop.com^
@@ -3134,6 +3265,7 @@
 ||vvocase.com^
 ||vylspa.com^
 ||vystarcreditunionbk.com^
+||wagnerlights.com^
 ||wahmart.site^
 ||waimart.shop^
 ||walhallacorp.com^
@@ -3205,6 +3337,7 @@
 ||wholesalesflasks.com^
 ||whsatsapp.top^
 ||wild-animals.co.za^
+||wildhearteddates.com^
 ||williamspethome.com^
 ||winiflia.com^
 ||winomify.com^
@@ -3226,6 +3359,7 @@
 ||wondrousdecor.com^
 ||woodlandgiantschnauzer.com^
 ||woodllama.com^
+||workerast.com^
 ||worldclasslogisticsexpressusps.com^
 ||worldclonecards.com^
 ||worldcontainersgiant.com^
@@ -3307,6 +3441,7 @@
 ||yhaire.com^
 ||yitangsj.com^
 ||yojqb.pettisrumseycpa.com^
+||yoofuel.com^
 ||yoqtube.com^
 ||you-tube.top^
 ||youkoll.com^
@@ -3348,6 +3483,7 @@
 ||zinstyles.com^
 ||zirdecor.com^
 ||zivyastore.com^
+||zjenerq.com^
 ||zoam.wiki^
 ||zoem.top^
 ||zom.homes^
