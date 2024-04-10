@@ -574,7 +574,7 @@ source_petscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url="https://petscams.com"
-    for page in {2..16}; do  # Loop through 16 pages
+    for page in {2..16}; do  # Loop through 15 pages
         # Indentation intentionally lacking here
         curl -s "${url}/" \
         | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
