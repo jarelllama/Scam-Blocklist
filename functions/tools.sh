@@ -91,8 +91,7 @@ download_toplist() {
     wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
         > toplist.tmp || send_telegram "Error downloading toplist."
 
-    awk -F ',' '{print $2}' toplist.tmp > temp
-    mv temp toplist.tmp
+    sed -i 's/^.*,//' toplist.tmp
     format_file toplist.tmp
 }
 
