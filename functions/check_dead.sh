@@ -96,6 +96,8 @@ check_alive() {
 find_dead_in() {
     local temp
     temp="$(basename "$1").tmp"
+    local execution_time
+    execution_time="$(date +%s)"
 
     # Format to Adblock Plus syntax for Dead Domains Linter
     sed 's/.*/||&^/' "$1" > "$temp"
@@ -104,6 +106,8 @@ find_dead_in() {
     dead-domains-linter -i "$temp" --export dead.tmp
 
     sort -u dead.tmp -o dead.tmp
+
+    printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 
     # Return 1 if no dead domains were found
     [[ ! -s dead.tmp ]] && return 1 || return 0
