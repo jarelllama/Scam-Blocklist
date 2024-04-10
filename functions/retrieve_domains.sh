@@ -41,7 +41,7 @@ source() {
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    #source_google_search
+    source_google_search
 }
 
 # Function 'filter' logs the given entries and removes them from the results
@@ -636,7 +636,7 @@ source_scamadviser() {
     touch "$results_file"  # Create results file to ensure proper logging
 
     local url='https://www.scamadviser.com/articles'
-    for page in {1..50}; do  # Loop through pages
+    for page in {1..15}; do  # Loop through pages
         page_results="$(curl -s "${url}?p=${page}")"
         # Note trailing slash breaks curl
 
