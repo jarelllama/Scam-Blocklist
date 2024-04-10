@@ -128,7 +128,6 @@ TEST_RETRIEVE_VALIDATE() {
         run_script retrieve_domains.sh
     fi
 
-    # Prepare and run validate script
     if [[ "$script_to_test" == 'validate' ]]; then
         # Use input.txt as sample raw files to test
         cp input.txt "$RAW"
@@ -137,6 +136,7 @@ TEST_RETRIEVE_VALIDATE() {
         # Expected output for light version
         cp out_raw.txt out_raw_light.txt
 
+        # Run validation script
         run_script validate_raw.sh
     fi
 
@@ -165,6 +165,7 @@ TEST_DEAD_CHECK() {
     test_dead_check
     test_alive_check
 
+    # Prepare sample raw light file
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
     # (resurrected domains are not added back into light)
@@ -173,7 +174,7 @@ TEST_DEAD_CHECK() {
     # Run script
     run_script check_dead.sh
 
-    # Sort dead domains file for easy comparison with expected output
+    # Sort dead domains file for easier comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
 
     ### Check and verify outputs
@@ -181,13 +182,8 @@ TEST_DEAD_CHECK() {
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
     check_output "$DEAD_DOMAINS" out_dead.txt "Dead domains"
-
-    # Check that all dead domains were removed
-
-    check_if_dead_present "$SUBDOMAINS" Subdomains
-    check_if_dead_present "$ROOT_DOMAINS" "Root domains"
-    check_if_dead_present "$REDUNDANT_DOMAINS" "Redundant domains"
-    check_if_dead_present "$WILDCARDS" Wildcards
+    check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
+    check_output "$ROOT_DOMAINS" out_root_domains.txt "Root domains"
 
     check_and_exit
 }
@@ -484,6 +480,9 @@ test_dead_subdomain_check() {
 
     # EXPECTED OUTPUT
     printf "dead,584308-dead-subdomain-test.com,raw\n" >> out_log.txt
+    # Both files should be empty (all dead)
+    : > out_subdomains.txt
+    : > out_root_domains.txt
 }
 
 # TEST: removal of dead domains
@@ -629,18 +628,6 @@ check_output() {
     cat "$1"
     printf "\n[info] Expected output:\n"
     cat "$2"
-    printf "\n"
-    error=true
-}
-
-# Function 'check_if_dead_present' checks if a given file is empty.
-# This is to test that dead domains were correctly removed from the file.
-#   $1: file to check
-#   $2: name of the file being checked
-check_if_dead_present() {
-    [[ ! -s "$1" ]] && return  # Return if file has no domains
-    printf "\e[1m[warn] %s file still has dead domains:\e[0m\n" "$2"
-    cat "$1"
     printf "\n"
     error=true
 }
