@@ -125,7 +125,7 @@ case "$1" in
         download_toplist
         ;;
     --send-telegram)
-        send_telegram "$1"
+        send_telegram "$2"
         ;;
     *)
         printf "\n\e[1;31mInvalid argument: %s\e[0m\n\n" "$1"
