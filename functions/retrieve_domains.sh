@@ -145,8 +145,6 @@ process_source() {
     # Note invalid entries are not counted
     filter "$invalid" invalid --preserve &> /dev/null
 
-    # Call shell wrapper to download toplist
-    $FUNCTION --download-toplist
     # Remove domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     in_toplist="$(comm -12 toplist.tmp "$results_file" | grep -vxFf "$BLACKLIST")"
@@ -656,6 +654,10 @@ source_stopgunscams() {
 trap cleanup EXIT
 
 $FUNCTION --format-all
+
+# Call shell wrapper to download toplist
+# Downloaded here to ensure the first source's processing time is fair.
+$FUNCTION --download-toplist
 
 source
 
