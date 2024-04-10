@@ -58,7 +58,6 @@ SHELLCHECK() {
 
     # Check that ShellCheck was successfuly installed
     shellcheck-stable/shellcheck --version || exit 1
-    printf "\n"
 
     # Find scripts
     scripts=$(find . -type f -name "*.sh")
