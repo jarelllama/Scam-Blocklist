@@ -20,7 +20,7 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
-# Function 'source' calls on the respective functions for each source to
+# Function 'source' calls on the respective functions of each source to
 # retrieve results. The results are then passed to the 'process_source'
 # function for further processing.
 source() {
@@ -126,7 +126,7 @@ process_source() {
     sort -u "$results_file" -o "$results_file"
 
     # Remove domains already in raw file
-    filter "$RAW" duplicate --no-log &> /dev/null
+    filter "$RAW" duplicate --no-log > /dev/null
 
     # Log blacklisted domains
     log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
@@ -143,7 +143,7 @@ process_source() {
     # Remove non-domain entries including IP addresses excluding punycode
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$results_file")"
     # Note invalid entries are not counted
-    filter "$invalid" invalid --preserve &> /dev/null
+    filter "$invalid" invalid --preserve > /dev/null
 
     # Remove domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
