@@ -86,9 +86,10 @@ filter() {
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
-    # Remove http(s): and slashes to get domains
-    # (some of the results are in URL form so this is done here once instead of
-    # multiple times in the source functions)
+    # Remove http(s): and slashes (some of the results are in URL form so this
+    # is done here once instead of multiple times in the source functions)
+    # Note that this still allows invalid entries to get through so they can be
+    # flagged later on.
     sed -i 's/https\?://; s/\///g' "$results_file"
 
     $FUNCTION --format "$results_file"
