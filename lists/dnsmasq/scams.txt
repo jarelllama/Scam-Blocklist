@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.10.154152.2024
+# Version: 04.10.160455.2024
 # Expires: 1 day
-# Last modified: Wed Apr 10 15:41:52 UTC 2024
+# Last modified: Wed Apr 10 16:04:55 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 34633
+# Number of entries: 34632
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -247,7 +247,6 @@ local=/80142-coinbase.top/
 local=/86012-coinbase.com/
 local=/8787ebaycircleforsale.com/
 local=/8787ebaycirforsale.com/
-local=/898.com/
 local=/8kitten.xyz/
 local=/8starbank.com/
 local=/8yd-discount-internet-ui8.lat/
