@@ -194,7 +194,9 @@ build() {
     if [[ ! -s retrieved_domains.tmp ]]; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
 
-        # Send Telegram update
+        [[ "$USE_EXISTING" == true ]] && exit
+
+        # Send Telegram update if not using existing results
         $FUNCTION --send-telegram \
             "Run completed. No new domains added.\n${workflow_url}"
 
@@ -237,9 +239,11 @@ build() {
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$SOURCE_LOG"
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$DOMAIN_LOG"
 
-    # Send Telegram update
-    $FUNCTION --send-telegram \
-        "Run completed. Added $count_added new domains.\n${workflow_url}"
+    if [[ "$USE_EXISTING" != true ]]; then
+        # Send Telegram update
+        $FUNCTION --send-telegram \
+            "Run completed. Added $count_added new domains.\n${workflow_url}"
+    fi
 }
 
 # Function 'log_source' prints and logs statistics for each source using the
