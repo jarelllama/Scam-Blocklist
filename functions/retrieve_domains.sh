@@ -159,7 +159,7 @@ process_source() {
         cat "$results_file" >> retrieved_light_domains.tmp
     fi
 
-    log_domains "$results_file" pending
+    log_domains "$results_file" unsaved
 
     log_source
 
@@ -246,7 +246,7 @@ build() {
 # variables declared in the 'process_source' function.
 log_source() {
     local item
-    local status='pending'
+    local status='unsaved'
 
     if [[ "$source" == 'Google Search' ]]; then
         item="\"${search_term:0:100}...\""
@@ -621,7 +621,8 @@ source_scamadviser() {
         [[ ! "$page_results" == *article* ]] && break
 
         grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
-            | grep -oE '[A-Z][[:alnum:].-]+\.[[:alnum:]-]{2,}' >> "$results_file"
+            | grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
+            | grep -vF 'scamadviser' >> "$results_file"
     done
 
     process_source
