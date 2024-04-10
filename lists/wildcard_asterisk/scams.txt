@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.10.171727.2024
+# Version: 04.10.172440.2024
 # Expires: 1 day
-# Last modified: Wed Apr 10 17:17:27 UTC 2024
+# Last modified: Wed Apr 10 17:24:40 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 34820
+# Number of entries: 34821
 #
 *.01107904-coinbase.com
 *.01edc.com
@@ -20126,6 +20126,7 @@
 *.mochamarketing.online
 *.mocilopft.com
 *.mocowestpaper.co.za
+*.mod-lighting.com
 *.modapklite.com
 *.modara.de
 *.modebaldessarini.de
