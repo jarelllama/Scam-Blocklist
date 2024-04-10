@@ -40,8 +40,6 @@ filter() {
 }
 
 validate_raw() {
-    before_count="$(wc -l < "$RAW")"
-
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(grep "^${subdomain}\." "$RAW")" || continue
@@ -110,10 +108,6 @@ validate_raw() {
     # Save changes to raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > light.tmp
     mv light.tmp "$RAW_LIGHT"
-
-    after_count="$(wc -l < "$RAW")"
-
-    printf "\nBefore: %s  After: %s\n" "$before_count" "$after_count"
 }
 
 # Entry point
