@@ -374,8 +374,9 @@ search_google() {
     touch "$results_file"  # Create results file to ensure proper logging
 
     for start in {1..100..10}; do  # Loop through each page of results
-        query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-        page_results="$(curl -s "${url}?${query_params}")"
+    # Indentation intentionally lacking here
+    params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
+        page_results="$(curl -s "${url}?${params}")"
 
         (( query_count++ ))
 
@@ -423,17 +424,17 @@ source_dnstwist() {
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
-    # Download and collate NRD feeds
+    # Download and collate NRD feeds and send a notification for broken links
     # (limited to domains registered in the last 30 days)
-    # A notification is sent if any link is broken
     {
-        wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
-            || $FUNCTION --send-telegram  "Shreshta's NRD list URL is broken."
-        wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
-            | grep -vF '#' \
-            || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
-        curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
-            || $FUNCTION --send-telegram  "openSquat's NRD list URL is broken."
+    # Indentation intentionally lacking here
+    wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
+        || $FUNCTION --send-telegram  "Shreshta's NRD list URL is broken."
+    wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+        | grep -vF '#' \
+        || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
+    curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
+        || $FUNCTION --send-telegram  "openSquat's NRD list URL is broken."
     } > nrd.tmp
 
     $FUNCTION --format nrd.tmp
@@ -565,11 +566,12 @@ source_petscams() {
 
     local url="https://petscams.com"
     for page in {2..21}; do  # Loop through 20 pages
+        # Indentation intentionally lacking here
         curl -s "${url}/" \
-            | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
-            | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
-                s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
-            # Note [a-z] does not seem to work in these expression
+        | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
+        | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
+            s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
+        # Note [a-z] does not seem to work in these expression
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
 
@@ -607,7 +609,8 @@ source_scamadviser() {
 
     local url='https://www.scamadviser.com/articles'
     for page in {1..20}; do  # Loop through pages
-        page_results="$(curl -s "${url}?p=${page}")"  # Trailing slash breaks curl
+        page_results="$(curl -s "${url}?p=${page}")"
+        # Note trailing slash breaks curl
 
         # Stop if page has an error (scamadviser occasionally has broken pages)
         [[ ! "$page_results" == *article* ]] && break
@@ -629,10 +632,11 @@ source_dfpi() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://dfpi.ca.gov/crypto-scams'
+    # Indentation intentionally lacking here
     curl -s "${url}/" \
-        | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-        | grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-        | sed '31,$d' > "$results_file"  # Keep only first 30 results
+    | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
+    | grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
+    | sed '31,$d' > "$results_file"  # Keep only first 30 results
 
     process_source
 }
