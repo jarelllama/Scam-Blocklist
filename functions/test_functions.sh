@@ -274,7 +274,7 @@ check_syntax() {
     if ! grep -qxF "$syntax" "lists/${name}/scams.txt"; then
         printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$name"
 
-        # Check if rule syntax is wrong or missing element
+        # Check if rule syntax is wrong or element is missing
         if grep -qF "$domain" <<< "$syntax"; then
             grep -F "$domain" "lists/${name}/scams.txt"
         else
@@ -471,7 +471,7 @@ test_light_build() {
 
 ### DEAD CHECK TESTS
 
-# TEST: removal of dead domains with subdomains
+# TEST: removal of dead subdomains
 test_dead_subdomain_check() {
     # INPUT
     printf "584308-dead-subdomain-test.com\n" >> "$RAW"

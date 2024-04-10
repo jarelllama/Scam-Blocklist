@@ -174,6 +174,7 @@ process_source() {
 # Function 'build' appends the filtered domains into the raw files and presents
 # some basic numbers to the user.
 build() {
+    # For telegram message
     workflow_url='https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml'
 
     if [[ -f manual_review.tmp ]]; then
