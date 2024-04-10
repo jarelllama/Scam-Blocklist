@@ -547,6 +547,25 @@ source_aa419() {
     process_source
 }
 
+source_dfpi() {
+    local source='dfpi.ca.gov'
+    local ignore_from_light=true
+    local results_file="data/pending/domains_${source}.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://dfpi.ca.gov/crypto-scams'
+    # Indentation intentionally lacking here
+    curl -s "${url}/" \
+    | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
+    | grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
+    | sed '31,$d' > "$results_file"  # Keep only first 30 results
+
+    process_source
+}
+
 source_guntab() {
     local source='guntab.com'
     local ignore_from_light=true
@@ -626,27 +645,8 @@ source_scamadviser() {
 
         grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
             | grep -oE '(\s|^)([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-            | sed 's/[//; s/]//' >> "$results_file"
+            | sed 's/\[//; s/\]//' >> "$results_file"
     done
-
-    process_source
-}
-
-source_dfpi() {
-    local source='dfpi.ca.gov'
-    local ignore_from_light=true
-    local results_file="data/pending/domains_${source}.tmp"
-    local execution_time
-    execution_time="$(date +%s)"
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local url='https://dfpi.ca.gov/crypto-scams'
-    # Indentation intentionally lacking here
-    curl -s "${url}/" \
-    | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-    | grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-    | sed '31,$d' > "$results_file"  # Keep only first 30 results
 
     process_source
 }
