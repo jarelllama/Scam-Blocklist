@@ -108,7 +108,7 @@ validate_raw() {
         "Problematic domains detected during validation check:\n$(<filter_log.tmp)"
 
     # Save changes to raw light file
-    comm -12 "$RAW_LIGHT" "$RAW"> light.tmp
+    comm -12 "$RAW_LIGHT" "$RAW" > light.tmp
     mv light.tmp "$RAW_LIGHT"
 
     after_count="$(wc -l < "$RAW")"
