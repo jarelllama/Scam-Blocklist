@@ -415,7 +415,7 @@ source_dnstwist() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     # Install dnstwist
-    pip install -q dnstwist
+    command -v dnstwist > /dev/null || pip install -q dnstwist
 
     # Download and collate NRD feeds
     # (limited to domains registered in the last 30 days)
@@ -424,12 +424,13 @@ source_dnstwist() {
         wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
             || $FUNCTION --send-telegram  "Shreshta's NRD list URL is broken."
         wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
-            | grep -vF '#' || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
+            | grep -vF '#' \
+            || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
         curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
             || $FUNCTION --send-telegram  "openSquat's NRD list URL is broken."
     } > nrd.tmp
 
-    format_file nrd.tmp
+    $FUNCTION --format nrd.tmp
 
     # Remove aleady processed domains to save processing time
     comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
@@ -453,9 +454,9 @@ source_dnstwist() {
     while read -r domain; do
         # Get existing counts
         row="$(awk -v domain="$domain" -F ',' '$1 == domain' "$PHISHING_TARGETS")"
-        count="$(awk -F ',' '{print $3}' <<< "$row" || printf "0")"
-        runs="$(awk -F ',' '{print $4}' <<< "$row" || printf "0")"
-        counts_run="$(awk -F ',' '{print $2}' <<< "$row" || printf "0")"
+        count="$(awk -F ',' '{print $3}' <<< "$row")"
+        runs="$(awk -F ',' '{print $4}' <<< "$row")"
+        counts_run="$(awk -F ',' '{print $2}' <<< "$row")"
 
         # Run dnstwist
         results="$(dnstwist "${domain}.com" -f list)"
@@ -464,8 +465,7 @@ source_dnstwist() {
         while read -r tld; do
             printf "%s\n" "$results" | sed "s/.com/.${tld}/" >> results.tmp
         done <<< "$tlds"
-
-        format_file results.tmp
+        sort -u results.tmp -o results.tmp
 
         # Find matching NRDs
         comm -12 results.tmp nrd.tmp >> "$results_file"
