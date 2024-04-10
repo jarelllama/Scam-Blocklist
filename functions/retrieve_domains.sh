@@ -195,7 +195,6 @@ build() {
         printf "\n\e[1mNo new domains to add.\e[0m\n"
 
         [[ "$USE_EXISTING" == true ]] && exit
-
         # Send Telegram update if not using existing results
         $FUNCTION --send-telegram \
             "Run completed. No new domains added.\n${workflow_url}"
@@ -240,7 +239,6 @@ build() {
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$DOMAIN_LOG"
 
     [[ "$USE_EXISTING" == true ]] && return
-
     # Send Telegram update if not using existing results
     $FUNCTION --send-telegram \
         "Run completed. Added $count_added new domains.\n${workflow_url}"
