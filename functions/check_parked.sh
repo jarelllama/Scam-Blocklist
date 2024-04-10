@@ -92,6 +92,9 @@ check_unparked() {
 #   parked.tmp
 #   return 1 (if parked domains not found)
 find_parked_in() {
+    local execution_time
+    execution_time="$(date +%s)"
+
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
@@ -113,6 +116,7 @@ find_parked_in() {
     sort -u parked.tmp -o parked.tmp
 
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
+    printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 
     # Return 1 if no parked domains were found
     [[ ! -s parked.tmp ]] && return 1 || return 0
