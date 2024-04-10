@@ -126,7 +126,8 @@ process_source() {
     sort -u "$results_file" -o "$results_file"
 
     # Remove domains already in raw file
-    filter "$RAW" duplicate --no-log > /dev/null
+    comm -23 "$results_file" "$RAW" > results.tmp
+    mv results.tmp "$results_file"
 
     # Log blacklisted domains
     log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
