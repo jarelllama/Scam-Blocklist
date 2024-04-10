@@ -86,8 +86,8 @@ check_alive() {
     $FUNCTION --log-domains alive.tmp resurrected dead_domains_file
 }
 
-# Function 'find_dead_in' finds dead domains in a given file by first formatting
-# the file and then processing it through AdGuard's Dead Domains Linter.
+# Function 'find_dead_in' finds dead domains in a given file by formatting the
+# file and then processing it through AdGuard's Dead Domains Linter.
 # Input:
 #   $1: file to process
 # Output:
