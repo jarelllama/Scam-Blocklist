@@ -178,7 +178,6 @@ TEST_DEAD_CHECK() {
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
 
     ### Check and verify outputs
-
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
     check_output "$DEAD_DOMAINS" out_dead.txt "Dead domains"
@@ -188,44 +187,44 @@ TEST_DEAD_CHECK() {
     check_and_exit
 }
 
-# Function 'TEST_PARKED_CHECK' tests the removal/addition of parked and unparked
-# domains respectively.
+# Function 'TEST_PARKED_CHECK' tests the removal/addition of parked and
+# unparked domains respectively.
 TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough records)
     for i in {1..40};do
         printf "placeholder%s.com\n" "$i" >> placeholders.txt
     done
-    sort -u placeholders.txt -o placeholders.txt
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$PARKED_DOMAINS"
 
     test_parked_check
     test_unparked_check
 
+    # Prepare sample raw light file
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
     # (Unparked domains are not added back into light)
-    grep -vxF 'google.com' out_raw.txt > out_raw_light.txt
+    grep -vxF 'www.google.com' out_raw.txt > out_raw_light.txt
 
     # Run script
     run_script check_parked.sh
 
     # Remove placeholder lines
-    comm -23 "$RAW" placeholders.txt > raw.tmp
-    comm -23 "$RAW_LIGHT" placeholders.txt > raw_light.tmp
-    grep -vxFf placeholders.txt "$PARKED_DOMAINS" > parked.tmp
-    grep -vFf placeholders.txt "$DOMAIN_LOG" > domain_log.tmp
+    grep -vxFf placeholders.txt "$RAW" > raw.tmp
     mv raw.tmp "$RAW"
+    grep -vxFf placeholders.txt "$RAW_LIGHT" > raw_light.tmp
     mv raw_light.tmp "$RAW_LIGHT"
+    grep -vxFf placeholders.txt "$PARKED_DOMAINS" > parked.tmp
     mv parked.tmp "$PARKED_DOMAINS"
+    # Not exact match in domain log
+    grep -vFf placeholders.txt "$DOMAIN_LOG" > domain_log.tmp
     mv domain_log.tmp "$DOMAIN_LOG"
 
-    # Sort parked domains file for easy comparison with expected output
+    # Sort parked domains file for easier comparison with expected output
     sort "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
 
     ### Check and verify outputs
-
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
     check_output "$PARKED_DOMAINS" out_parked.txt "Parked domains"
@@ -266,56 +265,57 @@ TEST_BUILD() {
 #   $1: syntax to check for
 #   $2: name and directory of format
 check_syntax() {
+    local syntax="$1"
+    local name="$2"
+
     # Check regular version
-    if ! grep -qxF "$1" "lists/${2}/scams.txt"; then
-        printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$2"
+    if ! grep -qxF "$syntax" "lists/${name}/scams.txt"; then
+        printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$name"
 
         # Check if rule syntax is wrong or missing element
-        if grep -qF "$domain" <<< "$1"; then
-            grep -F "$domain" "lists/${2}/scams.txt"
+        if grep -qF "$domain" <<< "$syntax"; then
+            grep -F "$domain" "lists/${name}/scams.txt"
         else
-            printf "Missing '%s'\n" "$1"
+            printf "Missing '%s'\n" "$syntax"
         fi
 
         error=true
     fi
 
     # Check light version
-    if ! grep -qxF "$1" "lists/${2}/scams_light.txt"; then
-        printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$2"
-
-        # Check if rule syntax is wrong or missing element
-        if grep -qF "$domain" <<< "$1"; then
-            grep -F "$domain" "lists/${2}/scams_light.txt"
+    if ! grep -qxF "$syntax" "lists/${name}/scams_light.txt"; then
+        printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$name"
+        if grep -qF "$domain" <<< "$syntax"; then
+            grep -F "$domain" "lists/${name}/scams_light.txt"
         else
-            printf "Missing '%s'\n" "$1"
+            printf "Missing '%s'\n" "$syntax"
         fi
-
         error=true
     fi
 }
 
 # The 'test_<process>' functions are to test individual processes within
-# scripts. The input.txt file is to be processed by the called script.
-# The out_<name>.txt file is the expected output after processing
-# by the called script.
+# scripts. The input.txt file is to be processed by the called script. The
+# out_<name>.txt file is the expected output after processing by the called
+# script.
 
 ### RETRIEVAL/VALIDATION TESTS
 
 # TEST: manual addition of domains from repo issue
 test_manual_addition() {
     # INPUT
-    printf "https://manual-addition-test.com/folder/\n" >> data/pending/domains_manual.tmp
+    printf "https://manual-addition-test.com/folder/\n" \
+        >> data/pending/domains_manual.tmp
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
 
     # Test proper logging in the logs. This test is only done once here since
     # it applies to all newly added domains to the raw file.
     printf "saved,manual-addition-test.com,Manual\n" >> out_log.txt
-    printf ",Manual,,1,1,0,0,0,0,,saved" >> out_source_log.txt
+    printf ",Manual,,1,1,0,0,0,0,,saved\n" >> out_source_log.txt
 }
 
-# TEST: conversion from URLs to domains
+# TEST: conversion of URLs to domains
 test_conversion() {
     # INPUT
     printf "https://conversion-test.com/\n" >> input.txt
@@ -333,16 +333,22 @@ test_known_dead_removal() {
         printf "dead-test.com\n"
         printf "www.dead-test-2.com\n"
     } >> input.txt  # INPUT
-    # No expected output (dead domains check does not log)
+
+    # Expected output: domains not in raw file/raw light file
 }
 
-# TEST: removal of know parked domains
+# TEST: removal of known parked domains
 test_known_parked_removal() {
-    # Known parked domain
-    printf "parked-domains-test.com\n" >> "$PARKED_DOMAINS"
-    # INPUT
-    printf "parked-domains-test.com\n" >> input.txt
-    # No expected output (parked domains check does not log)
+    {
+        printf "parked-test.com\n"
+        printf "www.parked-test-2.com\n"
+    } >> "$PARKED_DOMAINS"  # Known parked domains
+    {
+        printf "parked-test.com\n"
+        printf "www.parked-test-2.com\n"
+    } >> input.txt  # INPUT
+
+   # Expected output: domains not in raw file/raw light file
 }
 
 # TEST: removal of common subdomains
@@ -357,15 +363,14 @@ test_subdomain_removal() {
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # EXPECTED OUTPUT
-    if [[ "$script_to_test" == 'validate' ]]; then
-        # Only the retrieval script skips logging 'www.' subdomains
-        printf "subdomain,www.subdomain-test.com\n" >> out_log.txt
-    fi
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
+    # The retrieval script does not log 'www.' subdomains
+    [[ "$script_to_test" == 'retrieve' ]] && return
+    printf "subdomain,www.subdomain-test.com\n" >> out_log.txt
 }
 
-# TEST: whitelisted domains removal and blacklist loggin
+# TEST: whitelisted domains removal and blacklist logging
 test_whitelist_blacklist() {
     # Sample whitelist term
     printf "whitelist\n" >> "$WHITELIST"
@@ -524,16 +529,17 @@ test_parked_check() {
 # TEST: addition of unparked domains
 test_unparked_check() {
     # INPUT
-    printf "google.com\n" >> "$PARKED_DOMAINS"
+    printf "www.google.com\n" >> "$PARKED_DOMAINS"
     # EXPECTED OUTPUT
-    printf "google.com\n" >> out_raw.txt
+    # Subdomains should be kept to be processed by the validation check
+    printf "www.google.com\n" >> out_raw.txt
     printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
 }
 
-### END OF 'test_<process>' FUNCTIONS
+### END OF 'test_<process>' functions
 
-# Function 'run_script' executes the script passed by the caller and checks
-# the exit status of the script.
+# Function 'run_script' executes the script passed by the caller and checks the
+# exit status of the script.
 # Input:
 #   $1: script to execute
 run_script() {
@@ -557,8 +563,8 @@ run_script() {
     fi
 }
 
-# Function 'check_and_exit' checks if the script should exit with an
-# exit status of 1 or 0.
+# Function 'check_and_exit' checks if the script should exit with an exit
+# status of 1 or 0.
 check_and_exit() {
     # Check that all temporary files have been deleted after the run
     if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
