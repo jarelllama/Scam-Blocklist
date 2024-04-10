@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # This script is used to test the various functions/scripts of this project.
-# Each test consists of an input file which will be processed by
-# the called script, and an output file which is the expected results
-# from the processing. The input and output files are compared to determine
-# the success or failure of the test.
+# Each test consists of an input file which will be processed by the called
+# script, and an output file which is the expected results from the processing.
+# The input and output files are compared to determine the success or failure
+# of the test.
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
@@ -13,8 +13,6 @@ readonly BLACKLIST='config/blacklist.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
-readonly WILDCARDS='data/wildcards.txt'
-readonly REDUNDANT_DOMAINS='data/redundant_domains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
@@ -29,8 +27,6 @@ main() {
     : > "$PARKED_DOMAINS"
     : > "$WHITELIST"
     : > "$BLACKLIST"
-    : > "$REDUNDANT_DOMAINS"
-    : > "$WILDCARDS"
     sed -i '1q' "$DOMAIN_LOG"
     sed -i '1q' "$SOURCE_LOG"
     error=false
@@ -63,7 +59,7 @@ SHELLCHECK() {
     printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
 
     # Find scripts
-    scripts=$(find . ! -path "./legacy/*" -type f -name "*.sh")
+    scripts=$(find . -type f -name "*.sh")
 
     # Run ShellCheck for each script
     while read -r script; do
@@ -71,7 +67,7 @@ SHELLCHECK() {
     done <<< "$scripts"
 
     # Check for carriage return characters
-    problematic_files=$(grep -rl $'\r' --exclude-dir={legacy,.git,shellcheck-stable} .)
+    problematic_files=$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)
     if [[ -n "$problematic_files" ]]; then
         printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n"
         printf "%s\n" "$problematic_files"
@@ -79,7 +75,7 @@ SHELLCHECK() {
     fi
 
     # Check for missing space before comments
-    problematic_files=$(grep -rn '\S\s#' --exclude-dir={legacy,.git,shellcheck-stable} --exclude=*.csv .)
+    problematic_files=$(grep -rn '\S\s#' --exclude-dir={.git,shellcheck-stable} --exclude=*.csv .)
     if [[ -n "$problematic_files" ]]; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n"
         printf "%s\n" "$problematic_files"
@@ -116,7 +112,6 @@ TEST_RETRIEVE_VALIDATE() {
         test_conversion
         test_known_dead_removal
         test_known_parked_removal
-        test_source_log
         test_light_build
 
         # Distribute the sample input into various sources
@@ -317,9 +312,10 @@ test_manual_addition() {
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
 
-    # Test proper logging in domain log. This test is only done once
-    # since is applied to all newly added domains to the raw file.
+    # Test proper logging in the logs. This test is only done once here since
+    # it applies to all newly added domains to the raw file.
     printf "saved,manual-addition-test.com,Manual\n" >> out_log.txt
+    printf ",'Manual',,1,1,0,0,0,0,,saved" >> out_source_log.txt
 }
 
 # TEST: conversion from URLs to domains
@@ -343,6 +339,15 @@ test_known_dead_removal() {
     # No expected output (dead domains check does not log)
 }
 
+# TEST: removal of know parked domains
+test_known_parked_removal() {
+    # Known parked domain
+    printf "parked-domains-test.com\n" >> "$PARKED_DOMAINS"
+    # INPUT
+    printf "parked-domains-test.com\n" >> input.txt
+    # No expected output (parked domains check does not log)
+}
+
 # TEST: removal of common subdomains
 test_subdomain_removal() {
     while read -r subdomain; do
@@ -351,7 +356,7 @@ test_subdomain_removal() {
         printf "%s\n" "$subdomain" >> input.txt
         # EXPECTED OUTPUT
         printf "%s\n" "$subdomain" >> out_subdomains.txt
-        grep -v 'www.' <(printf "subdomain,%s" "$subdomain") >> out_log.txt
+        printf "subdomain,%s" "$subdomain" | grep -v 'www\.' >> out_log.txt
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # EXPECTED OUTPUT
@@ -363,16 +368,7 @@ test_subdomain_removal() {
     printf "subdomain-test.com\n" >> out_root_domains.txt
 }
 
-# TEST: removal of know parked domains
-test_known_parked_removal() {
-    # Known parked domain
-    printf "parked-domains-test.com\n" >> "$PARKED_DOMAINS"
-    # INPUT
-    printf "parked-domains-test.com\n" >> input.txt
-    # No expected output (parked domains check does not log)
-}
-
-# TEST: whitelisted domains removal
+# TEST: whitelisted domains removal and blacklist loggin
 test_whitelist_blacklist() {
     # Sample whitelist term
     printf "whitelist\n" >> "$WHITELIST"
@@ -404,10 +400,10 @@ test_whitelisted_tld_removal() {
     } >> out_log.txt  # EXPECTED OUTPUT
 }
 
-# TEST: removal of invalid entries and IP addresses
+# TEST: removal of non-domain entries
 test_invalid_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        local input=data/pending/domains_scamadviser.com.tmp
+        local input='data/pending/domains_scamadviser.com.tmp'
         local source='scamadviser.com'
     fi
     {
@@ -446,7 +442,6 @@ test_toplist_removal() {
         # INPUT
         printf "microsoft.com\n" >> data/pending/domains_scamadviser.com.tmp
         # EXPECTED OUTPUT
-        # The validate script does not save invalid domains to manual review file
         printf "microsoft.com\n" >> out_manual_review.txt
         printf "toplist,microsoft.com,scamadviser.com\n" >> out_log.txt
         return
@@ -455,17 +450,9 @@ test_toplist_removal() {
     # INPUT
     printf "microsoft.com\n" >> input.txt
     # EXPECTED OUTPUT
+    # The validate script does not save invalid domains to manual review file
     printf "microsoft.com\n" >> out_raw.txt
     printf "toplist,microsoft.com\n" >> out_log.txt
-}
-
-# TEST: correct logging in source log
-test_source_log() {
-    # INPUT
-    printf "source-log-test.com\n" >> data/pending/domains_petscams.com.tmp
-    # EXPECTED OUTPUT
-    printf "source-log-test.com\n" >> out_raw.txt
-    printf ",petscams.com,,1,1,0,0,0,0,,saved" >> out_source_log.txt
 }
 
 # TEST: exclusion of specific sources from light version
@@ -540,7 +527,7 @@ test_unparked_check() {
     printf "google.com\n" >> "$PARKED_DOMAINS"
     # EXPECTED OUTPUT
     printf "google.com\n" >> out_raw.txt
-    printf "unparked,google.com,parked_domains\n" >> out_log.txt
+    printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
 }
 
 ### END OF 'test_<process>' FUNCTIONS
