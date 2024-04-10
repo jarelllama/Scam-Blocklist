@@ -221,13 +221,17 @@ build() {
     fi
 
     count_after="$(wc -l < "$RAW")"
+    count_added="$(( count_after - count_before ))"
 
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" \
-        "$count_before" "$(( count_after - count_before ))" "$count_after"
+        "$count_before" "$count_added" "$count_after"
 
     # Mark sources/events as saved in the log files
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$SOURCE_LOG"
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$DOMAIN_LOG"
+
+    # Send Telegram update
+    $FUNCTION --send-telegram "Run completed. Added $count_added new domains."
 }
 
 # Function 'log_source' prints and logs statistics for each source using the
