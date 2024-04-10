@@ -52,6 +52,8 @@ main() {
 # Function 'SHELLCHECK' runs ShellCheck for all scripts along with other checks
 # for common errors/mistakes.
 SHELLCHECK() {
+    printf "\e[1m[start] ShellCheck\e[0m\n"
+
     # Install ShellCheck
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     wget -qO - "$url" | tar -xJ
@@ -239,7 +241,7 @@ TEST_BUILD() {
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
 
-    printf "\e[1m[start] %s\e[0m\n" "build_lists.sh"
+    printf "\e[1m[start] build_lists.sh\e[0m\n"
 
     # Run script and check exit status
     # (function 'run_script' is not needed here)
