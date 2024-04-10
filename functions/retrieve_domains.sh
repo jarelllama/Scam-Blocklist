@@ -86,11 +86,10 @@ filter() {
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
-    # Remove http(s): and slashes (some of the results are in URL form so this
-    # is done here once instead of multiple times in the source functions)
+    # Strip away common elements from the results to get domains
     # Note that this still allows invalid entries to get through so they can be
     # flagged later on.
-    sed -i 's/https\?://; s/\///g' "$results_file"
+    sed -i 's/https\?://; s/\///g; s/-/./g' "$results_file"
 
     $FUNCTION --format "$results_file"
 
@@ -560,7 +559,7 @@ source_petscams() {
         curl -s "${url}/" \
             | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
             | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
-                s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
+                s/-\?[0-9]\?\/">//' >> "$results_file"
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
 
@@ -578,7 +577,7 @@ source_scamdirectory() {
     local url='https://scam.directory/category'
     curl -s "${url}/" \
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
-        | sed 's/href="\///; s/" title//; s/-/./g; 301,$d' > "$results_file"
+        | grep '[[:alnum:].-]+-[[:alnum:]-]{2,}' | sed '301,$d' > "$results_file"
         # Keep only first 300 results
 
     process_source
@@ -621,7 +620,7 @@ source_dfpi() {
     local url='https://dfpi.ca.gov/crypto-scams'
     curl -s "${url}/" \
         | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-        | sed 's/<td class="column-5">//; s/<a href="//; 31,$d' > "$results_file"
+        | grep '[[:alnum:].-]+\.[[:alnum:]-]{2,}' | sed '31,$d' > "$results_file"
         # Keep only first 30 results
 
     process_source
@@ -639,7 +638,7 @@ source_stopgunscams() {
     for page in {1..5}; do
         curl -s "${url}/?page=${page}/" \
             | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-            | sed 's/<h4 class="-ih"><a href="\///; s/-/./g' >> "$results_file"
+            | grep '[[:alnum:].-]+-[[:alnum:]-]{2,}' >> "$results_file"
     done
 
     process_source
