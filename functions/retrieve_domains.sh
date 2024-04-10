@@ -460,11 +460,11 @@ source_dnstwist() {
 
     # Run dnstwist and collate results
     while read -r domain; do
-        # Get existing counts
-        row="$(awk -v domain="$domain" -F ',' '$1 == domain' "$PHISHING_TARGETS")"
+        # Get row and counts for the domain
+        row="$(awk -F ',' -v domain="$domain" \
+            '$1 == domain {printf $1","$2","$3","$4}' <<< "$targets")"
         count="$(awk -F ',' '{print $3}' <<< "$row")"
         runs="$(awk -F ',' '{print $4}' <<< "$row")"
-        counts_run="$(awk -F ',' '{print $2}' <<< "$row")"
 
         # Run dnstwist
         results="$(dnstwist "${domain}.com" -f list)"
@@ -476,13 +476,16 @@ source_dnstwist() {
         sort -u results.tmp -o results.tmp
 
         # Find matching NRDs
-        comm -12 results.tmp nrd.tmp >> "$results_file"
+        comm -12 results.tmp nrd.tmp > temp
+        mv temp results.tmp
 
-        new_count="$(( "$(wc -w < results.tmp)" + count ))"
-        new_runs="$(( runs + 1 ))"
-        new_counts_run="$(( new_count / new_runs ))"
+        cat results.tmp >> "$results_file"
 
-        sed -i "/${domain}/s/${counts_run},${count},${runs}/${new_counts_run},${new_count},${new_runs}/" \
+        count="$(( count + "$(wc -w < results.tmp)" ))"
+        (( runs++ ))
+        counts_run="$(( count / runs ))"
+
+        sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
     done <<< "$targets"
 
