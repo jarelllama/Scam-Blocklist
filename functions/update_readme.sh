@@ -90,7 +90,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 \`\`\` text
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-Queries made today: $(grep "${TODAY}.*Google Search" "$SOURCE_LOG" | csvcut -c 10 | awk '{sum += $1} END {print sum}')
+Queries made today: $(grep "${TODAY},Google Search" "$SOURCE_LOG" | csvcut -c 10 | awk '{sum += $1} END {print sum}')
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
@@ -119,7 +119,6 @@ The domain retrieval process for all sources can be viewed in the repository's c
 - The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
 - The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
 - Common subdomains like 'www' are removed to make use of wildcard matching for all other subdomains
-- Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
 - Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
 - Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations
 
@@ -127,7 +126,7 @@ The full filtering process can be viewed in the repository's code.
 
 ## Dead domains
 
-Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter). Note that domains acting as wildcards are excluded from this process.
+Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter).
 
 Dead domains that are resolving again are included back into the blocklist.
 
@@ -138,10 +137,6 @@ From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/8
 A list of common parked domain messages is used to automatically detect these domains. The list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt)
 
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
-
-## Why the Hosts format is not supported
-
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
 ## Resources
 
@@ -180,23 +175,23 @@ print_stats() {
         "$(count_excluded "$1" )" "${1:-All sources}"
 }
 
-# Function 'sum' is an echo wrapper that returns the total sum of
-# domains retrieved by the given source for that particular day.
+# Function 'sum' is an echo wrapper that returns the total sum of domains
+# retrieved by the given source for that particular day.
 #   $1: day to process
 #   $2: source to process (default is all sources)
 sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    grep "${1}.*${2}" "$SOURCE_LOG" | csvgrep -c 11 -m saved \
-        | csvcut -c 5 | awk '{sum += $1} END {print sum}'
+    grep "${1},${2}" "$SOURCE_LOG" | grep ',saved$' | csvcut -c 5 \
+        | awk '{sum += $1} END {print sum}'
 }
 
-# Function 'count_excluded' is an echo wrapper that returns the percentage
-# of excluded domains out of the raw count retrieved by the given source.
+# Function 'count_excluded' is an echo wrapper that returns the percentage of
+# excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 count_excluded() {
-    grep -F "$1" "$SOURCE_LOG" | csvgrep -c 11 -m saved > rows.tmp
+    grep -F "$1" "$SOURCE_LOG" | grep ',saved$' > rows.tmp
 
     raw_count="$(csvcut -c 4 rows.tmp | awk '{sum += $1} END {print sum}')"
     # Return if raw count is 0 to avoid divide by zero error
