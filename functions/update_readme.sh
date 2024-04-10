@@ -90,7 +90,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 \`\`\` text
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-Queries made today: $(grep "${TODAY},Google Search" "$SOURCE_LOG" | csvcut -c 10 | awk '{sum += $1} END {print sum}')
+Queries made today: $(grep -F "${TODAY},Google Search" "$SOURCE_LOG" | csvcut -c 10 | awk '{sum += $1} END {print sum}')
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
@@ -183,7 +183,7 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    grep "${1},${2}" "$SOURCE_LOG" | grep ',saved$' | csvcut -c 5 \
+    grep -F "${1},${2}" "$SOURCE_LOG" | grep ',saved$' | csvcut -c 5 \
         | awk '{sum += $1} END {print sum}'
 }
 
