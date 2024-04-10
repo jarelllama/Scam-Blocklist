@@ -41,7 +41,7 @@ source() {
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    source_google_search
+    #source_google_search
 }
 
 # Function 'filter' logs the given entries and removes them from the results
