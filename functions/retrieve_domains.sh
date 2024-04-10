@@ -97,6 +97,8 @@ process_source() {
     # Count number of unfiltered domains pending
     raw_count="$(wc -l < "$results_file")"
 
+    # Start of filtering. Filters are in order of most entries removed.
+
     # Remove known dead domains (includes subdomains)
     # Logging disabled as it inflated log size
     dead="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
