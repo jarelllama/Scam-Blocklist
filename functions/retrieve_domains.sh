@@ -97,12 +97,15 @@ process_source() {
     # Count number of unfiltered domains pending
     raw_count="$(wc -l < "$results_file")"
 
-    # Start of filtering. Filters are in order of most entries removed.
-
     # Remove known dead domains (includes subdomains)
-    # Logging disabled as it inflated log size
     dead="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
     dead_count="$(filter "$dead" dead --no-log)"
+    # Logging disabled as it inflated log size
+
+    # Remove known parked domains (includes subdomains)
+    parked="$(comm -12 <(sort "$PARKED_DOMAINS") "$results_file")"
+    parked_count="$(filter "$parked" parked --no-log)"
+    # Logging disabled as it inflated log size
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -124,11 +127,6 @@ process_source() {
 
     # Remove domains already in raw file
     filter "$RAW" duplicate --no-log &> /dev/null
-
-    # Remove known parked domains
-    # Logging disabled as it inflated log size
-    parked="$(comm -12 <(sort "$PARKED_DOMAINS") "$results_file")"
-    parked_count="$(filter "$parked" parked --no-log)"
 
     # Log blacklisted domains
     log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
