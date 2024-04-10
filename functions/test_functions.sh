@@ -82,11 +82,11 @@ SHELLCHECK() {
         error=true
     fi
 
-    printf "\n[info] Scripts checked (%s):\n%s\n" "$(wc -l <<< "$scripts")" "$scripts"
+    printf "\n[info] Scripts checked (%s):\n%s\n\n" "$(wc -l <<< "$scripts")" "$scripts"
 
-    on_exit
+    [[ "$error" == true ]] && exit 1
 
-    printf "\n\e[1m[success] Test completed. No errors found\e[0m\n"
+    printf "\e[1m[success] Test completed. No errors found\e[0m\n"
 }
 
 # Function 'TEST_RETRIEVE_VALIDATE' can test both the retrieval process and the
@@ -260,7 +260,7 @@ TEST_BUILD() {
     check_syntax "*.${domain}" wildcard_asterisk
     check_syntax "${domain}" wildcard_domains
 
-    on_exit
+    [[ "$error" == true ]] && exit 1
 
     printf "\e[1m[success] Test completed. No errors found\e[0m\n"
 }
@@ -532,18 +532,10 @@ test_unparked_check() {
 
 ### END OF 'test_<process>' FUNCTIONS
 
-# Function 'on_exit' exits the script with exit status 1 if an error was found.
-on_exit() {
-    if [[ "$error" == true ]]; then
-        printf "\n"
-        exit 1
-    fi
-}
-
 # Function 'run_script' executes the script passed by the caller and checks
 # the exit status of the script.
 # Input:
-#   $1: scrip to execute
+#   $1: script to execute
 run_script() {
     # Format expected output files
     for file in out_*; do
@@ -551,12 +543,12 @@ run_script() {
     done
 
     printf "\e[1m[start] %s\e[0m\n" "$1"
-    printf "%s\n" "----------------------------------------------------------------------"
+    echo "----------------------------------------------------------------------"
 
     # Run script
     bash "functions/${1}" || errored=true
 
-    printf "%s\n" "----------------------------------------------------------------------"
+    echo "----------------------------------------------------------------------"
 
     # Check exit status
     if [[ "$errored" == true ]]; then
@@ -572,6 +564,7 @@ check_and_exit() {
     if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
         printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
         ls x?? ./*.tmp 2> /dev/null
+        printf "\n"
         error=true
     fi
 
@@ -585,15 +578,15 @@ check_and_exit() {
 
     # Print domain log if not already printed by domain log check
     if [[ "$log_error" != true ]]; then
-        printf "Domain log:\n%s\n" "$(<"$DOMAIN_LOG")"
+        printf "Domain log:\n%s\n\n" "$(<"$DOMAIN_LOG")"
     fi
 
     # Print source log for retrieval test
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        printf "\nSource log:\n%s\n" "$(<"$SOURCE_LOG")"
+        printf "Source log:\n%s\n\n" "$(<"$SOURCE_LOG")"
     fi
 
-    on_exit
+    [[ "$error" == true ]] && exit 1 || exit 0
 }
 
 # Function 'check_terms' checks that a file contains all the given terms.
