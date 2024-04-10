@@ -315,7 +315,7 @@ test_manual_addition() {
     # Test proper logging in the logs. This test is only done once here since
     # it applies to all newly added domains to the raw file.
     printf "saved,manual-addition-test.com,Manual\n" >> out_log.txt
-    printf ",'Manual',,1,1,0,0,0,0,,saved" >> out_source_log.txt
+    printf ",Manual,,1,1,0,0,0,0,,saved" >> out_source_log.txt
 }
 
 # TEST: conversion from URLs to domains
