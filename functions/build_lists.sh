@@ -62,11 +62,11 @@ EOF
 
 # The 'build_<format>' functions are to specify the syntax of the various list
 # formats to be referenced by the 'build' function.
-#   $syntax: name of list syntax
+#   $syntax:    name of list syntax
 #   $directory: directory to create list in
-#   $comment: character used for comments (default is '#')
-#   $before: characters to append before each domain (default is none)
-#   $after: characters to append after each domain (default is none)
+#   $comment:   character used for comments (default is '#')
+#   $before:    characters to append before each domain (default is none)
+#   $after:     characters to append after each domain (default is none)
 
 build_adblock() {
     local syntax='Adblock Plus'

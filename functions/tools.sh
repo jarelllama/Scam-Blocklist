@@ -97,7 +97,7 @@ download_toplist() {
 
 # Function 'send_telegram' sends a Telegram notification with the given
 # message.
-#   $TELEGRAM_CHAT_ID: Telegram user Chat ID
+#   $TELEGRAM_CHAT_ID:   Telegram user Chat ID
 #   $TELEGRAM_BOT_TOKEN: Telegram Bot Token
 #   $1: message body
 send_telegram() {

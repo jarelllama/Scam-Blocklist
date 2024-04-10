@@ -49,7 +49,7 @@ source() {
 # Input:
 #   $1: entries to remove passed in a variable
 #   $2: tag given to entries
-#   --no-log: do not log entries into the domain log
+#   --no-log:   do not log entries into the domain log
 #   --preserve: save entries for manual review and rerun
 # Output:
 #   Number of entries that were passed
@@ -303,7 +303,7 @@ cleanup() {
 #   $USE_EXISTING:      if true, skip the retrieval process and use the
 #                       existing results files (if found)
 # Output:
-#   $results_file       (if results retrieved)
+#   $results_file (if results retrieved)
 #
 # Note the output results can be in URL form without subfolders.
 
