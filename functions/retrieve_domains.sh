@@ -235,8 +235,8 @@ build() {
         "$count_before" "$count_added" "$count_after"
 
     # Mark sources/events as saved in the log files
-    sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$SOURCE_LOG"
-    sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$DOMAIN_LOG"
+    sed -i "/${TIMESTAMP}/s/,unsaved/,saved/" "$SOURCE_LOG"
+    sed -i "/${TIMESTAMP}/s/,unsaved/,saved/" "$DOMAIN_LOG"
 
     [[ "$USE_EXISTING" == true ]] && return
     # Send Telegram update if not using existing results
@@ -572,7 +572,7 @@ source_petscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url="https://petscams.com"
-    for page in {2..21}; do  # Loop through 20 pages
+    for page in {2..16}; do  # Loop through 16 pages
         # Indentation intentionally lacking here
         curl -s "${url}/" \
         | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
@@ -623,8 +623,8 @@ source_scamadviser() {
         [[ ! "$page_results" == *'div class="articles"'* ]] && break
 
         grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
-            | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-            >> "$results_file"
+            | grep -oE '(\s|^)([0-9]|[A-Z])[[:alnum:].-]+[?\.]?[[:alnum:]-]{2,}' \
+            | sed 's/[//; s/]//' >> "$results_file"
     done
 
     process_source
