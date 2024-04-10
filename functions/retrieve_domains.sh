@@ -70,7 +70,7 @@ filter() {
 
     if [[ "$3" == '--preserve' ]]; then
         # Save entries for manual review and rerun
-        awk -v tag="$2" '{print $0 " (" tag ")"}' <<< "$entries" \
+        awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> manual_review.tmp
         printf "%s\n" "$entries" >> "${results_file}.tmp"
     fi
