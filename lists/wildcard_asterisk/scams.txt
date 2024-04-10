@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.10.144958.2024
+# Version: 04.10.145338.2024
 # Expires: 1 day
-# Last modified: Wed Apr 10 14:49:58 UTC 2024
+# Last modified: Wed Apr 10 14:53:38 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 34612
+# Number of entries: 34613
 #
 *.01107904-coinbase.com
 *.01edc.com
@@ -25101,6 +25101,7 @@
 *.rarebreedtriggers.usa.com
 *.rarebreedtriggershop.com
 *.rarebreedtriggersusa.com
+*.rarebreedtriggerusa.com
 *.rashidhos.com
 *.rasillogistics.com
 *.rasossidi.com
