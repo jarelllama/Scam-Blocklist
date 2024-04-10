@@ -10,7 +10,7 @@ readonly SOURCE_LOG='config/source_log.csv'
 TODAY="$(date -u +"%d-%m-%y")"
 YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
 
-main() {
+update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
 
@@ -214,4 +214,4 @@ command -v csvgrep &> /dev/null || pip install -q csvkit
 
 $FUNCTION --format-all
 
-main
+update_readme
