@@ -618,8 +618,8 @@ source_scamdirectory() {
     curl -s "${url}/" \
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-        | sed 's/-/./g; 301,$d' > "$results_file"
-        # Keep only first 300 results
+        | sed 's/-/./g; 101,$d' > "$results_file"
+        # Keep only first 100 results
 
     process_source
 }
