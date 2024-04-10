@@ -231,7 +231,8 @@ build() {
     sed -i "/${TIMESTAMP}/s/,pending/,saved/" "$DOMAIN_LOG"
 
     # Send Telegram update
-    $FUNCTION --send-telegram "Run completed. Added $count_added new domains."
+    $FUNCTION --send-telegram "Run completed. Added $count_added new domains.
+https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml"
 }
 
 # Function 'log_source' prints and logs statistics for each source using the
