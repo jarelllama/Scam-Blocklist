@@ -276,7 +276,7 @@ ${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
     fi
 
     printf "Processing time: %s second(s)\n" "$(( "$(date +%s)" - execution_time ))"
-    printf "%s\n" "----------------------------------------------------------------------"
+    echo "----------------------------------------------------------------------"
 }
 
 # Function 'log_domains' calls a shell wrapper to log domain processing events
@@ -294,18 +294,18 @@ cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
-# The 'source_<source>' functions are to retrieve results from the
-# respective sources.
+# The 'source_<source>' functions are to retrieve results from the respective
+# sources.
 # Input:
-#   $source: name of the source that is used in the console and logs
-#   $ignore_from_light: if true, the results are not included in the
-#       light version (default is false)
-#   $results_file: file path to save retrieved results to be used for
-#       further processing
-#   $USE_EXISTING: if true, skip the retrieval process and use the
-#       existing results files (if found)
+#   $source:            name of the source to use in the console and logs
+#   $ignore_from_light: if true, the results are not included in the light
+#                       version (default is false)
+#   $results_file:      file path to save retrieved results to be used for
+#                       further processing
+#   $USE_EXISTING:      if true, skip the retrieval process and use the
+#                       existing results files (if found)
 # Output:
-#   $results_file (if results retrieved)
+#   $results_file       (if results retrieved)
 #
 # Note the output results can be in URL form without subfolders.
 
@@ -475,7 +475,8 @@ source_dnstwist() {
         new_runs="$(( runs + 1 ))"
         new_counts_run="$(( new_count / new_runs ))"
 
-        sed -i "/${domain}/s/${counts_run},${count},${runs}/${new_counts_run},${new_count},${new_runs}/" "$PHISHING_TARGETS"
+        sed -i "/${domain}/s/${counts_run},${count},${runs}/${new_counts_run},${new_count},${new_runs}/" \
+            "$PHISHING_TARGETS"
     done <<< "$targets"
 
     # Include common regex matches for phishing domains since there is no
@@ -525,7 +526,8 @@ source_aa419() {
     command -v jq &> /dev/null || apt-get install -yqq jq
 
     curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/${query_params}" \
-        | jq -r '.[].Domain' >> "$results_file"  # Trailing slash breaks API call
+        | jq -r '.[].Domain' >> "$results_file"
+        # Note trailing slash breaks API call
 
     process_source
 }
@@ -562,6 +564,7 @@ source_petscams() {
             | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
             | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
                 s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
+            # Note [a-z] does not seem to work in these expression
         url="https://petscams.com/page/${page}"  # Add '/page' after first run
     done
 
@@ -624,8 +627,7 @@ source_dfpi() {
     curl -s "${url}/" \
         | grep -oE '<td class="column-5">\s*(<a href=")?(https?://)?[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
         | grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-        | sed '31,$d' > "$results_file"
-        # Keep only first 30 results
+        | sed '31,$d' > "$results_file"  # Keep only first 30 results
 
     process_source
 }
