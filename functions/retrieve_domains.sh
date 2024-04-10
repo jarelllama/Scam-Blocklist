@@ -355,12 +355,8 @@ source_google_search() {
 
 search_google() {
     local search_term="${1//\"/}"  # Remove quotes before encoding
-    local encoded_search_term
     encoded_search_term="$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
     local results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
-    local query_params
-    local page_results
-    local page_domains
     local query_count=0
     local execution_time
     execution_time="$(date +%s)"
@@ -370,6 +366,8 @@ search_google() {
     for start in {1..100..10}; do  # Loop through each page of results
         query_params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
         page_results="$(curl -s "${url}?${query_params}")"
+
+        (( query_count++ ))
 
         # Use next API key if first key is rate limited
         if [[ "$page_results" == *rateLimitExceeded* ]]; then
@@ -388,8 +386,6 @@ search_google() {
             # Continue to next page (current rate limited page is not repeated)
             continue
         fi
-
-        (( query_count++ ))
 
         # Stop search term if page has no results
         jq -e '.items' &> /dev/null <<< "$page_results" || break
