@@ -113,7 +113,7 @@ validate_raw() {
 
     after_count="$(wc -l < "$RAW")"
 
-    printf "\nBefore: %s  After: %s\n\n" "$before_count" "$after_count"
+    printf "\nBefore: %s  After: %s\n" "$before_count" "$after_count"
 }
 
 # Entry point
