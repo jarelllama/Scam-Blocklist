@@ -18,21 +18,21 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 34773
-Light version: 3492
+Total domains: 34820
+Light version: 3539
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-  136 |         - |       4% | Google Search
+  183 |         - |       2% | Google Search
    25 |         - |      11% | aa419.org
     0 |         - |       0% | dnstwist (NRDs)
    14 |         - |      18% | guntab.com
    12 |         - |       6% | petscams.com
     0 |         - |      72% | scam.directory
-    8 |         - |      38% | scamadviser.com
+    8 |         - |      39% | scamadviser.com
     6 |         - |       2% | stopgunscams.com
     0 |         - |       0% | Manual Entries
-  201 |         - |      21% | All sources
+  248 |         - |      20% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -76,8 +76,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 19
-Queries made today: 61
-Domains retrieved today: 136
+Queries made today: 193
+Domains retrieved today: 183
 ```
 
 ### Retrieving phishing NRDs using dnstwist
