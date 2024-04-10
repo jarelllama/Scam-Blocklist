@@ -482,7 +482,9 @@ source_dnstwist() {
         comm -12 results.tmp nrd.tmp > temp
         mv temp results.tmp
 
+        # Collate results
         cat results.tmp >> "$results_file"
+        rm results.tmp
 
         count="$(( count + "$(wc -w < results.tmp)" ))"
         (( runs++ ))
@@ -623,7 +625,7 @@ source_scamadviser() {
         [[ ! "$page_results" == *'div class="articles"'* ]] && break
 
         grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
-            | grep -oE '(\s|^)([0-9]|[A-Z])[[:alnum:].-]+[?\.]?[[:alnum:]-]{2,}' \
+            | grep -oE '(\s|^)([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
             | sed 's/[//; s/]//' >> "$results_file"
     done
 

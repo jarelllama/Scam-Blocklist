@@ -52,14 +52,15 @@ format_all() {
 #   $4: timestamp (optional)
 log_domains() {
     # Check if a file or variable was passed
-    if [[ -s "$1" ]]; then
+    # Note [[ -s ]] causes unintended behavior when the file is empty
+    if [[ -f "$1" ]]; then
         domains="$(<"$1")"
-    elif [[ -n "$1" ]]; then
-        domains="$1"
     else
-        # Return if no domains were passed
-        return
+        domains="$1"
     fi
+
+    # Return if no domains were passed
+    [[ -z "$domains" ]] && return
 
     timestamp="$4"
     timestamp="${timestamp:-$(date -u +"%H:%M:%S %d-%m-%y")}"
