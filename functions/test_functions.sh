@@ -533,7 +533,7 @@ test_unparked_check() {
     # EXPECTED OUTPUT
     # Subdomains should be kept to be processed by the validation check
     printf "www.google.com\n" >> out_raw.txt
-    printf "unparked,google.com,parked_domains_file\n" >> out_log.txt
+    printf "unparked,www.google.com,parked_domains_file\n" >> out_log.txt
 }
 
 ### END OF 'test_<process>' functions
