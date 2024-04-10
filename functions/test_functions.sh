@@ -52,11 +52,13 @@ main() {
 # Function 'SHELLCHECK' runs ShellCheck for all scripts along with other checks
 # for common errors/mistakes.
 SHELLCHECK() {
-    # Download ShellCheck
+    # Install ShellCheck
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     wget -qO - "$url" | tar -xJ
 
-    printf "%s\n" "$(shellcheck-stable/shellcheck --version)"
+    # Check that ShellCheck was successfuly installed
+    shellcheck-stable/shellcheck --version || exit 1
+    printf "\n"
 
     # Find scripts
     scripts=$(find . -type f -name "*.sh")
