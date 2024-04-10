@@ -12,7 +12,9 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 
 main() {
     # Install AdGuard's Dead Domains Linter
-    npm install -g @adguard/dead-domains-linter > /dev/null
+    if ! command -v dead-domains-linter &> /dev/null; then
+        npm install -g @adguard/dead-domains-linter > /dev/null
+    fi
 
     check_dead
     check_alive
