@@ -50,7 +50,7 @@ source() {
 #   $1: entries to remove passed in a variable
 #   $2: tag given to entries
 #   --no-log:   do not log entries into the domain log
-#   --preserve: save entries for manual review and rerun
+#   --preserve: save entries for manual review and for rerun
 # Output:
 #   Number of entries that were passed
 filter() {
@@ -69,7 +69,7 @@ filter() {
     fi
 
     if [[ "$3" == '--preserve' ]]; then
-        # Save entries for manual review and rerun
+        # Save entries for manual review and for rerun
         awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> manual_review.tmp
         printf "%s\n" "$entries" >> "${results_file}.tmp"
