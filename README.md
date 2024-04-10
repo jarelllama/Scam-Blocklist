@@ -23,16 +23,16 @@ Light version: 3285
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-    - |         0 |       0% | Google Search
-    - |         8 |      11% | aa419.org
-    - |         0 |       0% | dnstwist (NRDs)
-    - |        39 |      17% | guntab.com
-    - |         6 |       6% | petscams.com
-    - |         2 |      72% | scam.directory
-    - |         1 |      23% | scamadviser.com
-    - |         0 |       1% | stopgunscams.com
-    - |         0 |       0% | Manual Entries
-    - |        56 |      20% | All sources
+    - |         - |       0% | Google Search
+    - |         - |      11% | aa419.org
+    - |         - |       0% | dnstwist (NRDs)
+    - |         - |      17% | guntab.com
+    - |         - |       6% | petscams.com
+    - |         - |      72% | scam.directory
+    - |         - |      23% | scamadviser.com
+    - |         - |       1% | stopgunscams.com
+    - |         - |       0% | Manual Entries
+    - |         - |      20% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -105,7 +105,6 @@ The domain retrieval process for all sources can be viewed in the repository's c
 - The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
 - The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
 - Common subdomains like 'www' are removed to make use of wildcard matching for all other subdomains
-- Redundant entries are removed via wildcard matching. For example, 'sub.spam.com' is a wildcard match of 'spam.com' and is, therefore, redundant and is removed. Many of these wildcard domains also happen to be malicious hosting sites
 - Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
 - Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations
 
@@ -113,7 +112,7 @@ The full filtering process can be viewed in the repository's code.
 
 ## Dead domains
 
-Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter). Note that domains acting as wildcards are excluded from this process.
+Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter).
 
 Dead domains that are resolving again are included back into the blocklist.
 
@@ -124,10 +123,6 @@ From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/8
 A list of common parked domain messages is used to automatically detect these domains. The list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt)
 
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
-
-## Why the Hosts format is not supported
-
-Malicious domains often have [wildcard DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/wildcard-dns-records/) that allow scammers to create large amounts of subdomain records, such as 'random-subdomain.scam.com'. Each subdomain can point to a separate scam site and collating them all would inflate the blocklist size. Therefore, only formats supporting wildcard matching are built.
 
 ## Resources
 
