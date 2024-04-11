@@ -79,7 +79,7 @@ validate_raw() {
     grep -vxFf <<< "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
     mv dead.tmp "$DEAD_DOMAINS"
     awk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
-    $FUNCTION --log-domains "$invalid_dead" dead dead_domains_file
+    $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist
