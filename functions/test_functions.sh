@@ -409,7 +409,8 @@ test_invalid_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # INPUT
         {
-            printf "invalid-test-com\n"
+            # Invalid subdomains should not make it into raw file
+            printf "www.invalid-test-com\n"
             printf "100.100.100.100\n"
             printf "invalid-test.xn--903fds\n"
             printf "invalid-test.x\n"
@@ -441,7 +442,8 @@ test_invalid_removal() {
 
     # INPUT
     {
-        printf "invalid-test-com\n"
+        # Invalid subdomains should not make it into raw file
+        printf "www.invalid-test-com\n"
         printf "100.100.100.100\n"
         printf "invalid-test.xn--903fds\n"
         printf "invalid-test.x\n"
