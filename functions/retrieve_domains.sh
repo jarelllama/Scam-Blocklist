@@ -466,7 +466,7 @@ source_dnstwist() {
     while read -r domain; do
         # Get row and counts for the domain
         row="$(awk -F ',' -v domain="$domain" \
-            '$1 == domain {printf $1","$2","$3","$4}' <<< "$targets")"
+            '$1 == domain {printf $1","$2","$3","$4}' < "$PHISHING_TARGETS")"
         count="$(awk -F ',' '{print $3}' <<< "$row")"
         runs="$(awk -F ',' '{print $4}' <<< "$row")"
 
@@ -485,7 +485,6 @@ source_dnstwist() {
 
         # Collate results
         cat results.tmp >> "$results_file"
-        rm results.tmp
 
         count="$(( count + "$(wc -w < results.tmp)" ))"
         (( runs++ ))
@@ -493,6 +492,8 @@ source_dnstwist() {
 
         sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
+
+        rm results.tmp
     done <<< "$targets"
 
     # Include common regex matches for phishing domains since there is no
