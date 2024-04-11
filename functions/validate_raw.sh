@@ -76,7 +76,7 @@ validate_raw() {
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' "$RAW")"
     filter "$invalid" invalid
     # Remove dead domains again
-    comm -23 "$RAW" "$DEAD_DOMAINS" > raw.tmp
+    comm -23 "$RAW" <(sort "$DEAD_DOMAINS") > raw.tmp
     mv raw.tmp "$RAW"
 
     # Call shell wrapper to download toplist
