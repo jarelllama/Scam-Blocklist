@@ -442,7 +442,7 @@ test_invalid_removal() {
         {
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
-        } >> "$DEAD_DOMAINS_FILE"
+        } >> "$DEAD_DOMAINS"
     fi
 
     # EXPECTED OUTPUT
