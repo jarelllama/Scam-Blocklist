@@ -528,7 +528,7 @@ source_aa419() {
 
     local url='https://api.aa419.org/fakesites'
     local query_params
-    query_params="1/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
+    query_params="1/250?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
 
     # Install jq
     command -v jq &> /dev/null || apt-get install -yqq jq
