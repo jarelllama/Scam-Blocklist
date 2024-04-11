@@ -407,17 +407,43 @@ test_whitelisted_tld_removal() {
 # TEST: removal of non-domain entries
 test_invalid_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        local input='data/pending/domains_scamadviser.com.tmp'
         local source='scamadviser.com'
+
+        # INPUT
+        {
+            printf "invalid-test-com\n"
+            printf "100.100.100.100\n"
+            printf "invalid-test.xn--903fds\n"
+            printf "invalid-test.x\n"
+            printf "invalid-test.100\n"
+            printf "invalid-test.1x\n"
+        } >> data/pending/domains_scamadviser.com.tmp
+
+        # EXPECTED OUTPUT
+        # The retrieval script saves invalid entries to the manual review file
+        {
+            printf "invalid-test-com\n"
+            printf "100.100.100.100\n"
+            printf "invalid-test.x\n"
+            printf "invalid-test.100\n"
+            printf "invalid-test.1x\n"
+        } >> out_manual_review.txt
+    else
+        local source='raw'
+
+        # INPUT
+        {
+            printf "invalid-test-com\n"
+            printf "100.100.100.100\n"
+            printf "invalid-test.xn--903fds\n"
+            printf "invalid-test.x\n"
+        } >> input.txt
+        # Validation check checks for invalid entries in the dead domains file
+        {
+            printf "invalid-test.100\n"
+            printf "invalid-test.1x\n"
+        } >> "$DEAD_DOMAINS_FILE"
     fi
-    {
-        printf "invalid-test-com\n"
-        printf "100.100.100.100\n"
-        printf "invalid-test.xn--903fds\n"
-        printf "invalid-test.x\n"
-        printf "invalid-test.100\n"
-        printf "invalid-test.1x\n"
-    } >> "${input:-input.txt}"  # INPUT
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
@@ -428,16 +454,6 @@ test_invalid_removal() {
         printf "invalid,invalid-test.100,%s\n" "$source"
         printf "invalid,invalid-test.1x,%s\n" "$source"
     } >> out_log.txt
-
-    # The validate script does not save invalid domains to manual review file
-    [[ "$script_to_test" == 'validate' ]] && return
-    {
-        printf "invalid-test-com\n"
-        printf "100.100.100.100\n"
-        printf "invalid-test.x\n"
-        printf "invalid-test.100\n"
-        printf "invalid-test.1x\n"
-    } >> out_manual_review.txt
 }
 
 # TEST: removal of domains found in toplist

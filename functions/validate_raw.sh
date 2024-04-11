@@ -6,6 +6,7 @@
 readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
@@ -69,8 +70,14 @@ validate_raw() {
     filter "$whitelisted_tld" tld
 
     # Remove non-domain entries including IP addresses excluding punycode
-    invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$RAW")"
+    # The dead domains file is also checked here as invalid entries typically
+    # get picked up by the dead check and get saved in the dead cache.
+    sort "$DEAD_DOMAINS" "$RAW" -o "$RAW"
+    invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' "$RAW")"
     filter "$invalid" invalid
+    # Remove dead domains again
+    comm -23 "$RAW" "$DEAD_DOMAINS" > raw.tmp
+    mv raw.tmp "$RAW"
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist
