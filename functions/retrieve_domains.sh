@@ -32,16 +32,16 @@ source() {
 
     mkdir -p data/pending
 
-    source_manual
+    #source_manual
     source_aa419
     #source_dfpi  # Deactivated
-    source_dnstwist
-    source_guntab
-    source_petscams
-    source_scamdirectory
-    source_scamadviser
-    source_stopgunscams
-    source_google_search
+    #source_dnstwist
+    #source_guntab
+    #source_petscams
+    #source_scamdirectory
+    #source_scamadviser
+    #source_stopgunscams
+    #source_google_search
 }
 
 # Function 'filter' logs the given entries and removes them from the results
@@ -528,7 +528,7 @@ source_aa419() {
 
     local url='https://api.aa419.org/fakesites'
     local query_params
-    query_params="1/250?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
+    query_params="0/500?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
 
     # Install jq
     command -v jq &> /dev/null || apt-get install -yqq jq
