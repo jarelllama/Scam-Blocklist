@@ -407,8 +407,6 @@ test_whitelisted_tld_removal() {
 # TEST: removal of non-domain entries
 test_invalid_removal() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        local source='scamadviser.com'
-
         # INPUT
         {
             printf "invalid-test-com\n"
@@ -428,31 +426,38 @@ test_invalid_removal() {
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
         } >> out_manual_review.txt
-    else
-        local source='raw'
 
-        # INPUT
+        printf "invalid-test.xn--903fds\n" >> out_raw.txt
         {
-            printf "invalid-test-com\n"
-            printf "100.100.100.100\n"
-            printf "invalid-test.xn--903fds\n"
-            printf "invalid-test.x\n"
-        } >> input.txt
-        # Validation script checks for invalid entries in the dead domains file
-        {
-            printf "invalid-test.100\n"
-            printf "invalid-test.1x\n"
-        } >> "$DEAD_DOMAINS"
+            printf "invalid,invalid-test-com,scamadviser.com\n"
+            printf "invalid,100.100.100.100,scamadviser.com\n"
+            printf "invalid,invalid-test.x,scamadviser.com\n"
+            printf "invalid,invalid-test.100,scamadviser.com\n"
+            printf "invalid,invalid-test.1x,scamadviser.com\n"
+        } >> out_log.txt
     fi
+
+    # INPUT
+    {
+        printf "invalid-test-com\n"
+        printf "100.100.100.100\n"
+        printf "invalid-test.xn--903fds\n"
+        printf "invalid-test.x\n"
+    } >> input.txt
+    # Validation script checks for invalid entries in the dead domains file
+    {
+        printf "invalid-test.100\n"
+        printf "invalid-test.1x\n"
+    } >> "$DEAD_DOMAINS"
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
     {
-        printf "invalid,invalid-test-com,%s\n" "$source"
-        printf "invalid,100.100.100.100,%s\n" "$source"
-        printf "invalid,invalid-test.x,%s\n" "$source"
-        printf "invalid,invalid-test.100,%s\n" "$source"
-        printf "invalid,invalid-test.1x,%s\n" "$source"
+        printf "invalid,invalid-test-com,raw\n"
+        printf "invalid,100.100.100.100,raw\n"
+        printf "invalid,invalid-test.x,raw\n"
+        printf "invalid,invalid-test.100,dead_domains_file\n"
+        printf "invalid,invalid-test.1x,dead_domains_file\n"
     } >> out_log.txt
 }
 

@@ -70,14 +70,16 @@ validate_raw() {
     filter "$whitelisted_tld" tld
 
     # Remove non-domain entries including IP addresses excluding punycode
-    # The dead domains file is also checked here as invalid entries typically
-    # get picked up by the dead check and get saved in the dead cache.
-    sort "$DEAD_DOMAINS" "$RAW" -o "$RAW"
     invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' "$RAW")"
     filter "$invalid" invalid
-    # Remove dead domains again
-    comm -23 "$RAW" <(sort "$DEAD_DOMAINS") > raw.tmp
-    mv raw.tmp "$RAW"
+    # The dead domains file is also checked here as invalid entries may get
+    # picked up by the dead check and get saved in the dead cache.
+    invalid_dead="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
+        "$DEAD_DOMAINS")"
+    grep -vxFf <<< "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
+    mv dead.tmp "$DEAD_DOMAINS"
+    awk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
+    $FUNCTION --log-domains "$invalid_dead" dead dead_domains_file
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist

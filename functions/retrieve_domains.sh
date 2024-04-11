@@ -142,7 +142,7 @@ process_source() {
     whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
     # Remove non-domain entries including IP addresses excluding punycode
-    invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z][[:alnum:]-]{1,}$' "$results_file")"
+    invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' "$results_file")"
     # Note invalid entries are not counted
     filter "$invalid" invalid --preserve > /dev/null
 
