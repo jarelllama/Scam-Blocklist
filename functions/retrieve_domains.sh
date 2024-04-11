@@ -438,12 +438,12 @@ source_dnstwist() {
     # Indentation intentionally lacking here
     wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
         || $FUNCTION --send-telegram  "Shreshta's NRD list URL is broken."
-    wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.10-onlydomains.txt' \
+    wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt' \
         | grep -vF '#' \
         || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
     curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
         || $FUNCTION --send-telegram  "openSquat's NRD list URL is broken."
-        # Error notification for openSquat feed not working.
+        # Error notification for openSquat feed is not working.
     } > nrd.tmp
 
     $FUNCTION --format nrd.tmp
