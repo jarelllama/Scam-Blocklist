@@ -435,6 +435,8 @@ test_invalid_removal() {
             printf "invalid,invalid-test.100,scamadviser.com\n"
             printf "invalid,invalid-test.1x,scamadviser.com\n"
         } >> out_log.txt
+
+        return
     fi
 
     # INPUT
