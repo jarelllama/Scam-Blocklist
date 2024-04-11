@@ -190,16 +190,16 @@ build() {
 
     $FUNCTION --format retrieved_domains.tmp
 
-    # Exit if no new domains to add
+    # Return if no new domains to add
     if [[ ! -s retrieved_domains.tmp ]]; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
 
-        [[ "$USE_EXISTING" == true ]] && exit
+        [[ "$USE_EXISTING" == true ]] && return
         # Send Telegram update if not using existing results
         $FUNCTION --send-telegram \
             "Run completed. No new domains added.\n${workflow_url}"
 
-        exit
+        return
     fi
 
     # Collate only filtered subdomains and root domains into the subdomains
