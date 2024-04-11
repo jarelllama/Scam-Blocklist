@@ -438,7 +438,7 @@ test_invalid_removal() {
             printf "invalid-test.xn--903fds\n"
             printf "invalid-test.x\n"
         } >> input.txt
-        # Validation check checks for invalid entries in the dead domains file
+        # Validation script checks for invalid entries in the dead domains file
         {
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
