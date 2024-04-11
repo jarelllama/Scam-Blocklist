@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.135333.2024
+# Version: 04.11.163046.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 13:53:33 UTC 2024
+# Last modified: Thu Apr 11 16:30:46 UTC 2024
 # Syntax: Unbound
-# Number of entries: 35936
+# Number of entries: 35958
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -269,6 +269,8 @@ local-zone: "987235-coinbase.com." always_nxdomain
 local-zone: "99exoticporn.com." always_nxdomain
 local-zone: "99pornhubmovies.com." always_nxdomain
 local-zone: "9mm.ammoforsale.com." always_nxdomain
+local-zone: "9openai.com." always_nxdomain
+local-zone: "9penai.com." always_nxdomain
 local-zone: "a-jlogistics.com." always_nxdomain
 local-zone: "a-mtactical.com." always_nxdomain
 local-zone: "a-strikefirearmstraining.com." always_nxdomain
@@ -6415,6 +6417,7 @@ local-zone: "coinbase-march.com." always_nxdomain
 local-zone: "coinbase-promo.gifts." always_nxdomain
 local-zone: "coinbase-wallet.app." always_nxdomain
 local-zone: "coinbase.feedback." always_nxdomain
+local-zone: "coinbase.shop." always_nxdomain
 local-zone: "coinbase12.top." always_nxdomain
 local-zone: "coinbasecrips.site." always_nxdomain
 local-zone: "coinbasecryptocoin.com." always_nxdomain
@@ -13363,6 +13366,7 @@ local-zone: "gomoltomarketingmedia.com." always_nxdomain
 local-zone: "goncordchemical.com." always_nxdomain
 local-zone: "gonnasrtoutlet.shop." always_nxdomain
 local-zone: "gonzalobelgianmalinoishome.com." always_nxdomain
+local-zone: "gooble.xyz." always_nxdomain
 local-zone: "good-motorcycle.com." always_nxdomain
 local-zone: "gooddaybitcoin.com." always_nxdomain
 local-zone: "goodelivery.co.il." always_nxdomain
@@ -17682,6 +17686,7 @@ local-zone: "koukal-marketing.com." always_nxdomain
 local-zone: "kourtismarketing.com." always_nxdomain
 local-zone: "kozeka.com." always_nxdomain
 local-zone: "kozmozinspire.com." always_nxdomain
+local-zone: "kpenai.com." always_nxdomain
 local-zone: "kraaken.net." always_nxdomain
 local-zone: "kraft-reifen.com." always_nxdomain
 local-zone: "kragermastercard.com." always_nxdomain
@@ -22120,8 +22125,10 @@ local-zone: "nykscargoline.com." always_nxdomain
 local-zone: "nz-onlyfans.com." always_nxdomain
 local-zone: "nz-roadtransport.com." always_nxdomain
 local-zone: "o-outdoor.com." always_nxdomain
+local-zone: "o0enai.com." always_nxdomain
 local-zone: "o21secureliteoption.com." always_nxdomain
 local-zone: "o2discount.info." always_nxdomain
+local-zone: "o9penai.com." always_nxdomain
 local-zone: "oacurrier.online." always_nxdomain
 local-zone: "oadkb.endorthc.pl." always_nxdomain
 local-zone: "oaiv-freiburg.de." always_nxdomain
@@ -23170,11 +23177,21 @@ local-zone: "ontopinvestment.com." always_nxdomain
 local-zone: "onwofe.com." always_nxdomain
 local-zone: "onwrtu.com." always_nxdomain
 local-zone: "oopitucy.com." always_nxdomain
+local-zone: "op0enai.com." always_nxdomain
+local-zone: "op3enai.com." always_nxdomain
 local-zone: "op3nai.ru." always_nxdomain
+local-zone: "op4enai.com." always_nxdomain
+local-zone: "op4nai.com." always_nxdomain
+local-zone: "opdenai.com." always_nxdomain
+local-zone: "ope3nai.com." always_nxdomain
+local-zone: "ope4nai.com." always_nxdomain
+local-zone: "opednai.com." always_nxdomain
 local-zone: "opefai.com." always_nxdomain
+local-zone: "opejnai.com." always_nxdomain
 local-zone: "open-ai.bio." always_nxdomain
 local-zone: "open-airambulancediscount2024.space." always_nxdomain
 local-zone: "open-airroom.com." always_nxdomain
+local-zone: "opena9.com." always_nxdomain
 local-zone: "openai.boats." always_nxdomain
 local-zone: "openai.yachts." always_nxdomain
 local-zone: "openai4.ru." always_nxdomain
@@ -23188,6 +23205,9 @@ local-zone: "openairjackwolfskin.com." always_nxdomain
 local-zone: "openairtop.com." always_nxdomain
 local-zone: "openairtrade.com." always_nxdomain
 local-zone: "openais.shop." always_nxdomain
+local-zone: "openal.lol." always_nxdomain
+local-zone: "openawi.com." always_nxdomain
+local-zone: "openazi.com." always_nxdomain
 local-zone: "openlivingroom.com." always_nxdomain
 local-zone: "openmicrosoftexcel.com." always_nxdomain
 local-zone: "openmoltomarketing.biz." always_nxdomain
@@ -23196,6 +23216,7 @@ local-zone: "openmoltomarketingstudio.com." always_nxdomain
 local-zone: "openseaprivatemint.com." always_nxdomain
 local-zone: "openspotify.space." always_nxdomain
 local-zone: "openvalleyinvestments.com." always_nxdomain
+local-zone: "opesnai.com." always_nxdomain
 local-zone: "opewnai.com." always_nxdomain
 local-zone: "ophirrefinery.com." always_nxdomain
 local-zone: "ophixialcoin.com." always_nxdomain
@@ -35702,6 +35723,7 @@ local-zone: "youtbe.lol." always_nxdomain
 local-zone: "youtigr.com." always_nxdomain
 local-zone: "youtu-be.top." always_nxdomain
 local-zone: "youtube0.ru." always_nxdomain
+local-zone: "youtube5.ru." always_nxdomain
 local-zone: "youtubeb.xyz." always_nxdomain
 local-zone: "youtubee.fit." always_nxdomain
 local-zone: "youtubee.store." always_nxdomain

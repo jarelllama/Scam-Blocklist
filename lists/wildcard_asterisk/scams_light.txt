@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.135333.2024
+# Version: 04.11.163046.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 13:53:33 UTC 2024
+# Last modified: Thu Apr 11 16:30:46 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 3862
+# Number of entries: 3884
 #
 *.01edc.com
 *.0penai.xyz
@@ -32,6 +32,8 @@
 *.77unishop.com
 *.7cedb2-08.myshopify.com
 *.9mm.ammoforsale.com
+*.9openai.com
+*.9penai.com
 *.aaaneuropsych.com
 *.aamazon.top
 *.aamzon.shop
@@ -746,6 +748,7 @@
 *.cogcapbk.com
 *.coiinbase.net
 *.coin-base.top
+*.coinbase.shop
 *.coinbasse.xyz
 *.coinfine.top
 *.coinlbase.bond
@@ -1419,6 +1422,7 @@
 *.golfapparelgear.com
 *.golfcartsforsales.com
 *.golfcartsshop.us
+*.gooble.xyz
 *.goodhoperagdollkittens.com
 *.goodteacherlife.com
 *.goog1e.asia
@@ -1771,6 +1775,7 @@
 *.koowofficial.com
 *.kozeka.com
 *.kozmozinspire.com
+*.kpenai.com
 *.kraaken.net
 *.krakden.xyz
 *.kraken.wtf
@@ -2244,6 +2249,8 @@
 *.nursinglicenseprogram.com
 *.nushoe.com
 *.nuttines.store
+*.o0enai.com
+*.o9penai.com
 *.occ-gov-us.com
 *.oceanconsultant.co.uk
 *.off-hunting.com
@@ -2321,14 +2328,28 @@
 *.onsdrive.com
 *.onseleey.com
 *.onwofe.com
+*.op0enai.com
+*.op3enai.com
 *.op3nai.ru
+*.op4enai.com
+*.op4nai.com
+*.opdenai.com
+*.ope3nai.com
+*.ope4nai.com
+*.opednai.com
 *.opefai.com
+*.opejnai.com
 *.open-ai.bio
+*.opena9.com
 *.openai.boats
 *.openai.yachts
 *.openai4.ru
 *.openair.tokyo
 *.openais.shop
+*.openal.lol
+*.openawi.com
+*.openazi.com
+*.opesnai.com
 *.opjus.com
 *.opmnai.com
 *.optgloin.live
@@ -3822,6 +3843,7 @@
 *.youtbe.lol
 *.youtu-be.top
 *.youtube0.ru
+*.youtube5.ru
 *.youtubeb.xyz
 *.youtubee.fit
 *.youtubee.store

@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.135333.2024
+# Version: 04.11.163046.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 13:53:33 UTC 2024
+# Last modified: Thu Apr 11 16:30:46 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 3862
+# Number of entries: 3884
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -32,6 +32,8 @@ local=/5starjersey.com/
 local=/77unishop.com/
 local=/7cedb2-08.myshopify.com/
 local=/9mm.ammoforsale.com/
+local=/9openai.com/
+local=/9penai.com/
 local=/aaaneuropsych.com/
 local=/aamazon.top/
 local=/aamzon.shop/
@@ -746,6 +748,7 @@ local=/cofinn.com/
 local=/cogcapbk.com/
 local=/coiinbase.net/
 local=/coin-base.top/
+local=/coinbase.shop/
 local=/coinbasse.xyz/
 local=/coinfine.top/
 local=/coinlbase.bond/
@@ -1419,6 +1422,7 @@ local=/goldenvalleyanimalhospital.com/
 local=/golfapparelgear.com/
 local=/golfcartsforsales.com/
 local=/golfcartsshop.us/
+local=/gooble.xyz/
 local=/goodhoperagdollkittens.com/
 local=/goodteacherlife.com/
 local=/goog1e.asia/
@@ -1771,6 +1775,7 @@ local=/kokokostore.net/
 local=/koowofficial.com/
 local=/kozeka.com/
 local=/kozmozinspire.com/
+local=/kpenai.com/
 local=/kraaken.net/
 local=/krakden.xyz/
 local=/kraken.wtf/
@@ -2244,6 +2249,8 @@ local=/nuggetes-word.com/
 local=/nursinglicenseprogram.com/
 local=/nushoe.com/
 local=/nuttines.store/
+local=/o0enai.com/
+local=/o9penai.com/
 local=/occ-gov-us.com/
 local=/oceanconsultant.co.uk/
 local=/off-hunting.com/
@@ -2321,14 +2328,28 @@ local=/onredrive.com/
 local=/onsdrive.com/
 local=/onseleey.com/
 local=/onwofe.com/
+local=/op0enai.com/
+local=/op3enai.com/
 local=/op3nai.ru/
+local=/op4enai.com/
+local=/op4nai.com/
+local=/opdenai.com/
+local=/ope3nai.com/
+local=/ope4nai.com/
+local=/opednai.com/
 local=/opefai.com/
+local=/opejnai.com/
 local=/open-ai.bio/
+local=/opena9.com/
 local=/openai.boats/
 local=/openai.yachts/
 local=/openai4.ru/
 local=/openair.tokyo/
 local=/openais.shop/
+local=/openal.lol/
+local=/openawi.com/
+local=/openazi.com/
+local=/opesnai.com/
 local=/opjus.com/
 local=/opmnai.com/
 local=/optgloin.live/
@@ -3822,6 +3843,7 @@ local=/yourtube.xyz/
 local=/youtbe.lol/
 local=/youtu-be.top/
 local=/youtube0.ru/
+local=/youtube5.ru/
 local=/youtubeb.xyz/
 local=/youtubee.fit/
 local=/youtubee.store/

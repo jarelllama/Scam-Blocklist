@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.135333.2024
+# Version: 04.11.163046.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 13:53:33 UTC 2024
+# Last modified: Thu Apr 11 16:30:46 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 35936
+# Number of entries: 35958
 #
 *.01107904-coinbase.com
 *.01edc.com
@@ -268,6 +268,8 @@
 *.99exoticporn.com
 *.99pornhubmovies.com
 *.9mm.ammoforsale.com
+*.9openai.com
+*.9penai.com
 *.a-jlogistics.com
 *.a-mtactical.com
 *.a-strikefirearmstraining.com
@@ -6414,6 +6416,7 @@
 *.coinbase-promo.gifts
 *.coinbase-wallet.app
 *.coinbase.feedback
+*.coinbase.shop
 *.coinbase12.top
 *.coinbasecrips.site
 *.coinbasecryptocoin.com
@@ -13362,6 +13365,7 @@
 *.goncordchemical.com
 *.gonnasrtoutlet.shop
 *.gonzalobelgianmalinoishome.com
+*.gooble.xyz
 *.good-motorcycle.com
 *.gooddaybitcoin.com
 *.goodelivery.co.il
@@ -17681,6 +17685,7 @@
 *.kourtismarketing.com
 *.kozeka.com
 *.kozmozinspire.com
+*.kpenai.com
 *.kraaken.net
 *.kraft-reifen.com
 *.kragermastercard.com
@@ -22119,8 +22124,10 @@
 *.nz-onlyfans.com
 *.nz-roadtransport.com
 *.o-outdoor.com
+*.o0enai.com
 *.o21secureliteoption.com
 *.o2discount.info
+*.o9penai.com
 *.oacurrier.online
 *.oadkb.endorthc.pl
 *.oaiv-freiburg.de
@@ -23169,11 +23176,21 @@
 *.onwofe.com
 *.onwrtu.com
 *.oopitucy.com
+*.op0enai.com
+*.op3enai.com
 *.op3nai.ru
+*.op4enai.com
+*.op4nai.com
+*.opdenai.com
+*.ope3nai.com
+*.ope4nai.com
+*.opednai.com
 *.opefai.com
+*.opejnai.com
 *.open-ai.bio
 *.open-airambulancediscount2024.space
 *.open-airroom.com
+*.opena9.com
 *.openai.boats
 *.openai.yachts
 *.openai4.ru
@@ -23187,6 +23204,9 @@
 *.openairtop.com
 *.openairtrade.com
 *.openais.shop
+*.openal.lol
+*.openawi.com
+*.openazi.com
 *.openlivingroom.com
 *.openmicrosoftexcel.com
 *.openmoltomarketing.biz
@@ -23195,6 +23215,7 @@
 *.openseaprivatemint.com
 *.openspotify.space
 *.openvalleyinvestments.com
+*.opesnai.com
 *.opewnai.com
 *.ophirrefinery.com
 *.ophixialcoin.com
@@ -35701,6 +35722,7 @@
 *.youtigr.com
 *.youtu-be.top
 *.youtube0.ru
+*.youtube5.ru
 *.youtubeb.xyz
 *.youtubee.fit
 *.youtubee.store

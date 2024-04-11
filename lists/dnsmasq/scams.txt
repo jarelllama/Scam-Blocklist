@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.135333.2024
+# Version: 04.11.163046.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 13:53:33 UTC 2024
+# Last modified: Thu Apr 11 16:30:46 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 35936
+# Number of entries: 35958
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -268,6 +268,8 @@ local=/987235-coinbase.com/
 local=/99exoticporn.com/
 local=/99pornhubmovies.com/
 local=/9mm.ammoforsale.com/
+local=/9openai.com/
+local=/9penai.com/
 local=/a-jlogistics.com/
 local=/a-mtactical.com/
 local=/a-strikefirearmstraining.com/
@@ -6414,6 +6416,7 @@ local=/coinbase-march.com/
 local=/coinbase-promo.gifts/
 local=/coinbase-wallet.app/
 local=/coinbase.feedback/
+local=/coinbase.shop/
 local=/coinbase12.top/
 local=/coinbasecrips.site/
 local=/coinbasecryptocoin.com/
@@ -13362,6 +13365,7 @@ local=/gomoltomarketingmedia.com/
 local=/goncordchemical.com/
 local=/gonnasrtoutlet.shop/
 local=/gonzalobelgianmalinoishome.com/
+local=/gooble.xyz/
 local=/good-motorcycle.com/
 local=/gooddaybitcoin.com/
 local=/goodelivery.co.il/
@@ -17681,6 +17685,7 @@ local=/koukal-marketing.com/
 local=/kourtismarketing.com/
 local=/kozeka.com/
 local=/kozmozinspire.com/
+local=/kpenai.com/
 local=/kraaken.net/
 local=/kraft-reifen.com/
 local=/kragermastercard.com/
@@ -22119,8 +22124,10 @@ local=/nykscargoline.com/
 local=/nz-onlyfans.com/
 local=/nz-roadtransport.com/
 local=/o-outdoor.com/
+local=/o0enai.com/
 local=/o21secureliteoption.com/
 local=/o2discount.info/
+local=/o9penai.com/
 local=/oacurrier.online/
 local=/oadkb.endorthc.pl/
 local=/oaiv-freiburg.de/
@@ -23169,11 +23176,21 @@ local=/ontopinvestment.com/
 local=/onwofe.com/
 local=/onwrtu.com/
 local=/oopitucy.com/
+local=/op0enai.com/
+local=/op3enai.com/
 local=/op3nai.ru/
+local=/op4enai.com/
+local=/op4nai.com/
+local=/opdenai.com/
+local=/ope3nai.com/
+local=/ope4nai.com/
+local=/opednai.com/
 local=/opefai.com/
+local=/opejnai.com/
 local=/open-ai.bio/
 local=/open-airambulancediscount2024.space/
 local=/open-airroom.com/
+local=/opena9.com/
 local=/openai.boats/
 local=/openai.yachts/
 local=/openai4.ru/
@@ -23187,6 +23204,9 @@ local=/openairjackwolfskin.com/
 local=/openairtop.com/
 local=/openairtrade.com/
 local=/openais.shop/
+local=/openal.lol/
+local=/openawi.com/
+local=/openazi.com/
 local=/openlivingroom.com/
 local=/openmicrosoftexcel.com/
 local=/openmoltomarketing.biz/
@@ -23195,6 +23215,7 @@ local=/openmoltomarketingstudio.com/
 local=/openseaprivatemint.com/
 local=/openspotify.space/
 local=/openvalleyinvestments.com/
+local=/opesnai.com/
 local=/opewnai.com/
 local=/ophirrefinery.com/
 local=/ophixialcoin.com/
@@ -35701,6 +35722,7 @@ local=/youtbe.lol/
 local=/youtigr.com/
 local=/youtu-be.top/
 local=/youtube0.ru/
+local=/youtube5.ru/
 local=/youtubeb.xyz/
 local=/youtubee.fit/
 local=/youtubee.store/
