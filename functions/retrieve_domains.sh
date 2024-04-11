@@ -35,7 +35,7 @@ source() {
     source_manual
     source_aa419
     #source_dfpi  # Deactivated
-    #source_dnstwist  #TODO
+    source_dnstwist
     source_guntab
     source_petscams
     source_scamdirectory
@@ -359,7 +359,8 @@ source_google_search() {
     search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
         | tail -n +2 | sed 's/.*/"&"/')"
 
-    while read -r search_term; do  # Loop through search terms
+    # Loop through search terms
+    while read -r search_term; do
         # Stop if rate limited
         if [[ "$rate_limited" == true ]]; then
             printf "\n\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
@@ -432,6 +433,7 @@ source_dnstwist() {
 
     # Download and collate NRD feeds and send a notification for broken links
     # (limited to domains registered in the last 30 days)
+    # Note that the NRD feed does not seem to have subdomains.
     {
     # Indentation intentionally lacking here
     wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
@@ -451,7 +453,7 @@ source_dnstwist() {
 
     # Get the top 15 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
-    # ranking as 100,000 entries and above
+    # ranking as 100,000 entries and above.
     tlds="$(shuf -n 10000 nrd.tmp | awk -F '.' '{print $NF}' | sort | uniq -c \
         | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+')"
 
@@ -462,9 +464,9 @@ source_dnstwist() {
     # Get targets, ignoring disabled ones
     targets="$(awk -F ',' '$5 !~ /y/ {print $1}' "$PHISHING_TARGETS")"
 
-    # Run dnstwist and collate results
+    # Loop through the targets
     while read -r domain; do
-        # Get row and counts for the domain
+        # Get row and counts for the target domain
         row="$(awk -F ',' -v domain="$domain" \
             '$1 == domain {printf $1","$2","$3","$4}' < "$PHISHING_TARGETS")"
         count="$(awk -F ',' '{print $3}' <<< "$row")"
@@ -486,27 +488,15 @@ source_dnstwist() {
         # Collate results
         cat results.tmp >> "$results_file"
 
+        # Update counts for the target domain
         count="$(( count + "$(wc -w < results.tmp)" ))"
         (( runs++ ))
         counts_run="$(( count / runs ))"
-
         sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
 
-        rm results.tmp
+        rm results.tmp  # Reset results file for the next target domain
     done <<< "$targets"
-
-    # Include common regex matches for phishing domains since there is no
-    # permanent place to implement yet
-    # (also because dnstwist has a higher chance of false positives for
-    # domains less than 5 letters)
-    {
-        printf -- "(^|-)usps|usps-\n"  # USPS
-        printf -- "-evri|evri-\n"  # Evri
-        printf -- "(^|-)fedex|fedex(-|\.)\n"  # FedEx
-    } > regex.tmp
-
-    grep -Ef regex.tmp -- nrd.tmp >> $results_file
 
     process_source
 }
