@@ -95,8 +95,7 @@ validate_raw() {
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
         # Find root domains (subdomains stripped off) in the filtered raw file
-        #root_domains="$(comm -12 <(sort root_domains.tmp) "$RAW")"
-        root_domains="$(sort root_domains.tmp)"
+        root_domains="$(comm -12 <(sort root_domains.tmp) "$RAW")"
 
         # Collate filtered root domains to exclude from dead check
         printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
