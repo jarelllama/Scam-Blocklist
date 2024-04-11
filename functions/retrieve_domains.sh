@@ -354,6 +354,8 @@ source_google_search() {
     command -v jq &> /dev/null || apt-get install -yqq jq
 
     # Get active search times and quote them
+    # csvkit has to be used here as the search terms may contain commas which
+    # makes using awk complicated.
     search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
         | tail -n +2 | sed 's/.*/"&"/')"
 
@@ -458,8 +460,7 @@ source_dnstwist() {
     mv temp "$PHISHING_TARGETS"
 
     # Get targets, ignoring disabled ones
-    targets="$(csvgrep -c 5 -m 'y' -i "$PHISHING_TARGETS" | tail -n +2 \
-        | awk -F ',' '{print $1}')"
+    targets="$(awk -F ',' '$5 !~ /y/ {print $1}' "$PHISHING_TARGETS")"
 
     # Run dnstwist and collate results
     while read -r domain; do

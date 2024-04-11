@@ -175,6 +175,9 @@ print_stats() {
         "$(count_excluded "$1" )" "${1:-All sources}"
 }
 
+# Note that csvkit is used in the following functions as the Google Search
+# search terms may contain commas which makes using awk complicated.
+
 # Function 'sum' is an echo wrapper that returns the total sum of domains
 # retrieved by the given source for that particular day.
 #   $1: day to process
