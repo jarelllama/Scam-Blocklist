@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.10.184913.2024
+# Version: 04.11.012113.2024
 # Expires: 1 day
-# Last modified: Wed Apr 10 18:49:13 UTC 2024
+# Last modified: Thu Apr 11 01:21:13 UTC 2024
 # Syntax: Unbound
-# Number of entries: 34648
+# Number of entries: 34647
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -8163,7 +8163,6 @@ local-zone: "disco4d.site." always_nxdomain
 local-zone: "discord.uk." always_nxdomain
 local-zone: "discorrd.online." always_nxdomain
 local-zone: "discosaving.com." always_nxdomain
-local-zone: "discount." always_nxdomain
 local-zone: "discount-baustoff.de." always_nxdomain
 local-zone: "discount-bridaldress.com." always_nxdomain
 local-zone: "discount-code.coupons." always_nxdomain

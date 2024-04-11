@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.10.184913.2024
+# Version: 04.11.012113.2024
 # Expires: 1 day
-# Last modified: Wed Apr 10 18:49:13 UTC 2024
+# Last modified: Thu Apr 11 01:21:13 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 3465
+# Number of entries: 3464
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -31,7 +31,6 @@ local=/5adsday.com/
 local=/5starjersey.com/
 local=/77unishop.com/
 local=/7cedb2-08.myshopify.com/
-local=/898.com/
 local=/9mm.ammoforsale.com/
 local=/aaaneuropsych.com/
 local=/aamazon.top/
