@@ -155,6 +155,8 @@ TEST_RETRIEVE_VALIDATE() {
 
         # Check source log
         check_terms "$SOURCE_LOG" out_source_log.txt "Source log"
+    else
+        check_output "$DEAD_DOMAINS" out_dead.txt "Dead domains"
     fi
 
     check_and_exit
@@ -321,33 +323,33 @@ test_manual_addition() {
 test_conversion() {
     # INPUT
     printf "https://conversion-test.com/\n" >> input.txt
+    printf "http://conversion-test-2.com/\n" >> input.txt
     # EXPECTED OUTPUT
     printf "conversion-test.com\n" >> out_raw.txt
+    printf "conversion-test.com-2\n" >> out_raw.txt
 }
 
 # TEST: removal of known dead domains
 test_known_dead_removal() {
     {
-        printf "dead-test.com\n"
-        printf "www.dead-test-2.com\n"
+        printf "www.dead-test.com\n"
     } >> "$DEAD_DOMAINS"  # Known dead domains
+    # Dead subdomains should be matched
     {
-        printf "dead-test.com\n"
-        printf "www.dead-test-2.com\n"
+        printf "www.dead-test.com\n"
     } >> input.txt  # INPUT
 
-    # Expected output: domains not in raw file/raw light file
+    # Expected output: domain not in raw file/raw light file
 }
 
 # TEST: removal of known parked domains
 test_known_parked_removal() {
     {
-        printf "parked-test.com\n"
-        printf "www.parked-test-2.com\n"
+        printf "www.parked-test.com\n"
     } >> "$PARKED_DOMAINS"  # Known parked domains
+    # Parked subdomains should be matched
     {
-        printf "parked-test.com\n"
-        printf "www.parked-test-2.com\n"
+        printf "www.parked-test.com\n"
     } >> input.txt  # INPUT
 
    # Expected output: domains not in raw file/raw light file
@@ -454,10 +456,12 @@ test_invalid_removal() {
     {
         printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
+        printf "dead-domain.com\n"
     } >> "$DEAD_DOMAINS"
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
+    printf "dead-domain.com\n" >> out_dead.tmp
     {
         printf "invalid,invalid-test-com,raw\n"
         printf "invalid,100.100.100.100,raw\n"
