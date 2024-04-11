@@ -79,8 +79,8 @@ validate_raw() {
     in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
     filter "$in_toplist" toplist --preserve
 
-    # Exit if no filtering done
-    [[ ! -f filter_log.tmp ]] && exit
+    # Return if no filtering done
+    [[ ! -f filter_log.tmp ]] && return
 
     # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
