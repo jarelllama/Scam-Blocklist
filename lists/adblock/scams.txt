@@ -3,15 +3,18 @@
 ! Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.11.022830.2024
+! Version: 04.11.044126.2024
 ! Expires: 1 day
-! Last modified: Thu Apr 11 02:28:30 UTC 2024
+! Last modified: Thu Apr 11 04:41:26 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 34645
+! Number of entries: 34710
 !
 ||01107904-coinbase.com^
 ||01edc.com^
 ||09qunapk.com^
+||0penai.info^
+||0penai.online^
+||0penai.shop^
 ||0penai.xyz^
 ||1-car-insurance-gb.bond^
 ||1-travelinsurances.online^
@@ -44,6 +47,7 @@
 ||1aziendalelogistic.com^
 ||1bestbuy.com^
 ||1billonennetworkmarketing.com^
+||1bitcoin.online^
 ||1bitcoins.net^
 ||1insurance.lat^
 ||1klearbeauty.com^
@@ -1032,6 +1036,7 @@
 ||aliexpress888.shop^
 ||aliexpress888.xyz^
 ||aliexpressd66.vip^
+||aliexpresse.top^
 ||aliexpressglobal.com^
 ||aliexpressh68.vip^
 ||aliexpressin-thailand.com^
@@ -1355,6 +1360,7 @@
 ||amazonc.top^
 ||amazondiscounts50.com^
 ||amazondiscountt.shop^
+||amazonf.cn^
 ||amazongardenchihuahua.com^
 ||amazoni.top^
 ||amazonlogisticsdevice.icu^
@@ -1522,6 +1528,7 @@
 ||amspettransport.webnode.com^
 ||amstglobalshippingco.com^
 ||amstramgrammes.fr^
+||amsung.org^
 ||amuni.co.uk^
 ||amunlabradorpuppies.com^
 ||amusementfunstore.com^
@@ -3469,6 +3476,7 @@
 ||bimeritas-deutschland.de^
 ||bimitee.com^
 ||bina-nce.com^
+||binace.bond^
 ||binan-ce.net^
 ||binance-2.cyou^
 ||binance-defi.top^
@@ -4929,6 +4937,7 @@
 ||capitalloanllc.com^
 ||capitalohne.com^
 ||capitalokne.com^
+||capitalon.online^
 ||capitalplusasset.com^
 ||capitalshippingdelivery.com^
 ||capitalstonebnk.com^
@@ -5559,6 +5568,7 @@
 ||chatgptsaidso.com^
 ||chatgptseo.cn^
 ||chatgptstaging.com^
+||chatgptx.net^
 ||chatgrt.com^
 ||chatgt.shop^
 ||chatgtp.bar^
@@ -6222,6 +6232,7 @@
 ||coinbase12.top^
 ||coinbasecrips.site^
 ||coinbasecryptocoin.com^
+||coinbased.org^
 ||coinbasehelpdesk.online^
 ||coinbasen.top^
 ||coinbaseservices.support^
@@ -6388,6 +6399,7 @@
 ||computersalenew.com^
 ||comrademarketing.com^
 ||comtechoutlet.com^
+||conbase.ru^
 ||conbase.xyz^
 ||concealedhandguninsurance.com^
 ||concealers.shop^
@@ -11354,6 +11366,7 @@
 ||foodixs.com^
 ||foodqadelivery.xyz^
 ||foodtech.marketing^
+||foogle.cn^
 ||foonapk.net^
 ||football-perfect.com^
 ||football.perfect.com^
@@ -12921,6 +12934,7 @@
 ||goog1e.life^
 ||goog1e.org^
 ||googel.top^
+||googie.site^
 ||googl.today^
 ||googlc.store^
 ||google-apps.shop^
@@ -12980,6 +12994,7 @@
 ||googlefcip.xyz^
 ||googleg77.com^
 ||googlegole.com^
+||googleh.cn^
 ||googleh36.com^
 ||googleiio.com^
 ||googlejdmu.xyz^
@@ -13006,6 +13021,7 @@
 ||googlenegociospro.com^
 ||googleogo.com^
 ||googleokpl.com^
+||googlep.cn^
 ||googlep08.com^
 ||googlep1ay.vip^
 ||googlepalystorerr.com^
@@ -13023,6 +13039,7 @@
 ||googlepluy.com^
 ||googleplzy.com^
 ||googlepwa.app^
+||googleq.cn^
 ||googler92.com^
 ||googlerankrr.com^
 ||googlereviewmd.com^
@@ -13044,6 +13061,7 @@
 ||googleu67.com^
 ||googleubn.com^
 ||googleupdate.top^
+||googlev.cn^
 ||googlevto.com^
 ||googlew.xyz^
 ||googlew16.com^
@@ -13055,6 +13073,7 @@
 ||googls.online^
 ||googls.website^
 ||googlu.lol^
+||googme.cn^
 ||googytadblocker.net^
 ||gooogle.sbs^
 ||gooplaygoogle0jb1.com^
@@ -13589,6 +13608,7 @@
 ||gunvisorestore.com^
 ||gunvor-nederland.nl^
 ||gunzstore.com^
+||guogle.cn^
 ||gupreme.com^
 ||guridft.store^
 ||gurupy.com^
@@ -15071,6 +15091,7 @@
 ||iconrabatt.com^
 ||iconwavemarketing.com^
 ||icresearchchemicals.com^
+||icrosoft.cn^
 ||ics-worldwide.info^
 ||ictactical.online^
 ||ictoria.shop^
@@ -15508,6 +15529,7 @@
 ||instagra.info^
 ||instagrams.shop^
 ||instagrams.top^
+||instagrm.shop^
 ||instanderapk.app^
 ||instantaneou.com^
 ||instantcargodelivery.com^
@@ -18214,6 +18236,7 @@
 ||m-und-s-marketing.online^
 ||m10marketing.com^
 ||m15marketingagency.com^
+||m1crosoft.site^
 ||m3acontactofficial.fr^
 ||m4capitals.com^
 ||ma-worldwide.com^
@@ -18969,6 +18992,7 @@
 ||maydollybaby.com^
 ||mayioclinic.com^
 ||mayoclimnic.com^
+||mayoclinic.top^
 ||mayoclinick.com^
 ||mayocliniuc.com^
 ||mayoclinjic.com^
@@ -19563,6 +19587,7 @@
 ||metamaskapp.org^
 ||metamaskinf.com^
 ||metamaskm.wtf^
+||metamaskx.xyz^
 ||metamassk.trade^
 ||metamesk.xyz^
 ||metanailofficialsite.shop^
@@ -19688,6 +19713,8 @@
 ||microsoftu.net^
 ||microsoftwindows-tech.com^
 ||microsoift.net^
+||microsotf.cn^
+||microsqoft.com^
 ||microteacuppoodlesforsale.info^
 ||midas-miningdapp.com^
 ||midasmarketings.com^
@@ -22319,6 +22346,7 @@
 ||openairtop.com^
 ||openairtrade.com^
 ||openais.shop^
+||openaiw.com^
 ||openlivingroom.com^
 ||openmicrosoftexcel.com^
 ||openmoltomarketing.biz^
@@ -22333,6 +22361,7 @@
 ||opitz-reifenhandel.shop^
 ||opjus.com^
 ||opkjobsmcqs.shop^
+||opmnai.com^
 ||oppermann-versand.de^
 ||opportunityl.com^
 ||opportunitywatch.marketing^
@@ -24863,6 +24892,7 @@
 ||qlepy.com^
 ||qljlogistics.com^
 ||qmazon.work^
+||qnapchat.com^
 ||qnpm-qa.com^
 ||qoeotyj.cn^
 ||qoogle.life^
@@ -26526,6 +26556,7 @@
 ||samsong.wtf^
 ||samsun-g.online^
 ||samsun.online^
+||samsun.site^
 ||samsung.trade^
 ||samsungs.site^
 ||samsuno.com^
@@ -28008,6 +28039,7 @@
 ||smarty-shop24.de^
 ||smasyssafe.com^
 ||smatnet.com^
+||smazon.shop^
 ||smcrea-web-marketing.fr^
 ||smgbasic.com^
 ||smiffyscostume.com^
@@ -28052,13 +28084,23 @@
 ||smteacuppuppies.com^
 ||smtrdc.com^
 ||snaklenest.com^
+||snampchat.com^
 ||snapcat.xyz^
 ||snapchat.guru^
 ||snapchat.life^
+||snapchatc.com^
+||snapchatd.com^
+||snapchatl.com^
+||snapchatm.com^
+||snapchatp.com^
 ||snapchatproapk.net^
 ||snapchats.site^
 ||snapchats.support^
+||snapchau.com^
+||snapchav.com^
 ||snapcht.online^
+||snapchyt.com^
+||snapcnat.org^
 ||snapdekor.com^
 ||snapinks.com^
 ||snapsh.shop^
@@ -29590,6 +29632,8 @@
 ||tansantels-equipment.com^
 ||tanyadachshund.com^
 ||tanyascattery.wixsite.com^
+||tao-bao.cn^
+||taoao.tokyo^
 ||taobao.bid^
 ||taobao.cyou^
 ||taobao1.net^
@@ -29597,8 +29641,10 @@
 ||taobao2.net^
 ||taobao2.top^
 ||taobao4.top^
+||taobaol.cn^
 ||taobaos.top^
 ||taobqao.com^
+||taoda0.com^
 ||taomining783.ru^
 ||taosfootwearoutlet.com^
 ||taosshoesoutlet.com^
@@ -29764,6 +29810,7 @@
 ||teko.marketing^
 ||tekstnet.com^
 ||tela.skin^
+||telagram.online^
 ||telagram.top^
 ||tele-mag.de^
 ||teleghram.org^
@@ -29872,6 +29919,7 @@
 ||terkultura.com^
 ||terla.info^
 ||terla.xyz^
+||terlegram.com^
 ||termink.com^
 ||terpifyofficial.com^
 ||terraboost.marketing^
@@ -30448,6 +30496,7 @@
 ||tik-tok.life^
 ||tik-tok.website^
 ||tikafastcargo.com^
+||tikdok.cn^
 ||tikdok.xyz^
 ||tikkafirearms-usa.com^
 ||tikkafirearms.com^
@@ -30461,6 +30510,7 @@
 ||tikok.org^
 ||tikstok.shop^
 ||tikstok.store^
+||tikt0k.cn^
 ||tiktak.online^
 ||tiktoe.top^
 ||tiktok-adult.site^
@@ -30487,6 +30537,7 @@
 ||tiktok339.com^
 ||tiktok559.com^
 ||tiktok686.com^
+||tiktok7.top^
 ||tiktok71.shop^
 ||tiktok821.com^
 ||tiktok88.homes^
@@ -30546,6 +30597,7 @@
 ||tiktokmall.work^
 ||tiktokmarketlebanon.com^
 ||tiktokmax.us^
+||tiktokn.shop^
 ||tiktoko.shop^
 ||tiktokofficialusbd.top^
 ||tiktokonline.live^
@@ -32737,6 +32789,7 @@
 ||vbmarketing.mobi^
 ||vcexotics.com^
 ||vclothesus.com^
+||vcoinbase.com^
 ||vd-marketing.com^
 ||vdhovenretrievers.com^
 ||vdqgndiscount.shop^
@@ -33203,6 +33256,7 @@
 ||wallet-transfer-coinbase.com^
 ||wallmirrorwithshelf.com^
 ||wallpaperfinest.com^
+||walmaart.shop^
 ||walmart-cialis.net^
 ||walmart-online.net^
 ||walmart-online.online^
@@ -33211,6 +33265,7 @@
 ||walmart-smeg.shop^
 ||walmart-vip.cn^
 ||walmart002.com^
+||walmart6.shop^
 ||walmartachecks.com^
 ||walmartbag.xyz^
 ||walmartchacks.com^
@@ -33581,8 +33636,10 @@
 ||whansurfsale.com^
 ||wharsapp.top^
 ||wharsapp.xyz^
+||whastapp.bond^
 ||whatamyatetoday.com^
 ||whatrsapp.top^
+||whatsaapp.top^
 ||whatsaop.online^
 ||whatsaop.ru^
 ||whatsap.net^
@@ -33618,6 +33675,7 @@
 ||whatsapp2.vip^
 ||whatsapp24.app^
 ||whatsapp24.mobi^
+||whatsapp6.site^
 ||whatsappa.top^
 ||whatsappchat.in^
 ||whatsappdfh.top^
@@ -33631,7 +33689,11 @@
 ||whatsapptoplugonder.com^
 ||whatsappweb.org^
 ||whatsaqpp.cyou^
+||whatsepp.xyz^
 ||whatsinapk.com^
+||whatspp.cn^
+||whatspp.store^
+||whatsspp.org^
 ||whattiktokapp.com^
 ||whaysapp.top^
 ||whaysapp.xyz^
@@ -33728,6 +33790,7 @@
 ||willowtonsuppliersptyltd.com^
 ||willowtreeclearance.com^
 ||wilmaroutlet.com^
+||wilmart.shop^
 ||wilsoncombat-usa.com^
 ||wilsoncombat.usa.com^
 ||wiltedofficials.com^
@@ -34160,6 +34223,7 @@
 ||xn--appl-opa.com^
 ||xn--binanc-nva.com^
 ||xn--binane-f1a.com^
+||xn--bnance-3va.org^
 ||xn--conbase-sfb.net^
 ||xn--conbase-sfb.xyz^
 ||xn--disneypus-msb.com^
@@ -34179,6 +34243,7 @@
 ||xn--legalerdeutscherfhrerschein-y3c.com^
 ||xn--marketing-russir-lqb.fr^
 ||xn--mcrosoft-tkb.net^
+||xn--metamas-bhb.com^
 ||xn--mhendisyentelegram-m6b.com^
 ||xn--nstagram-skb.net^
 ||xn--offce-p4a.net^
