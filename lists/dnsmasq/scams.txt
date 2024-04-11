@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.012113.2024
+# Version: 04.11.013526.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 01:21:13 UTC 2024
+# Last modified: Thu Apr 11 01:35:26 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 34647
+# Number of entries: 34645
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -14203,7 +14203,6 @@ local=/hentai.cyou/
 local=/hentai.feedback/
 local=/hentai.photography/
 local=/hentai18.cloud/
-local=/hentai18vnz.net/
 local=/hentai24.net/
 local=/hentai24h.live/
 local=/hentai24h.xyz/
@@ -14228,7 +14227,6 @@ local=/hentaisolana.com/
 local=/hentaitale.com/
 local=/hentaitecq.net/
 local=/hentaithai.online/
-local=/hentaivn.bid/
 local=/hentaixxx.one/
 local=/hentaiyaoj.net/
 local=/hentaiyapu.net/

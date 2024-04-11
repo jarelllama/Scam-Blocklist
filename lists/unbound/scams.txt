@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.012113.2024
+# Version: 04.11.013526.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 01:21:13 UTC 2024
+# Last modified: Thu Apr 11 01:35:26 UTC 2024
 # Syntax: Unbound
-# Number of entries: 34647
+# Number of entries: 34645
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -14204,7 +14204,6 @@ local-zone: "hentai.cyou." always_nxdomain
 local-zone: "hentai.feedback." always_nxdomain
 local-zone: "hentai.photography." always_nxdomain
 local-zone: "hentai18.cloud." always_nxdomain
-local-zone: "hentai18vnz.net." always_nxdomain
 local-zone: "hentai24.net." always_nxdomain
 local-zone: "hentai24h.live." always_nxdomain
 local-zone: "hentai24h.xyz." always_nxdomain
@@ -14229,7 +14228,6 @@ local-zone: "hentaisolana.com." always_nxdomain
 local-zone: "hentaitale.com." always_nxdomain
 local-zone: "hentaitecq.net." always_nxdomain
 local-zone: "hentaithai.online." always_nxdomain
-local-zone: "hentaivn.bid." always_nxdomain
 local-zone: "hentaixxx.one." always_nxdomain
 local-zone: "hentaiyaoj.net." always_nxdomain
 local-zone: "hentaiyapu.net." always_nxdomain
