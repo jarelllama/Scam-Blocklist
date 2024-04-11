@@ -443,6 +443,7 @@ source_dnstwist() {
         || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
     curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
         || $FUNCTION --send-telegram  "openSquat's NRD list URL is broken."
+        # Error notification for openSquat feed not working.
     } > nrd.tmp
 
     $FUNCTION --format nrd.tmp
