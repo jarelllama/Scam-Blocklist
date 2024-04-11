@@ -326,7 +326,7 @@ test_conversion() {
     printf "http://conversion-test-2.com/\n" >> input.txt
     # EXPECTED OUTPUT
     printf "conversion-test.com\n" >> out_raw.txt
-    printf "conversion-test.com-2\n" >> out_raw.txt
+    printf "conversion-test-2.com\n" >> out_raw.txt
 }
 
 # TEST: removal of known dead domains
@@ -461,7 +461,7 @@ test_invalid_removal() {
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-    printf "dead-domain.com\n" >> out_dead.tmp
+    printf "dead-domain.com\n" >> out_dead.txt
     {
         printf "invalid,invalid-test-com,raw\n"
         printf "invalid,100.100.100.100,raw\n"
