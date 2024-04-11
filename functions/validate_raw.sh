@@ -76,7 +76,7 @@ validate_raw() {
     # picked up by the dead check and get saved in the dead cache.
     invalid_dead="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
         "$DEAD_DOMAINS")"
-    grep -vxFf <<< "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
+    grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
     mv dead.tmp "$DEAD_DOMAINS"
     awk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
     $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
