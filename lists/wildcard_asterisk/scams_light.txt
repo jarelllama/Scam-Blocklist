@@ -2,14 +2,15 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.12.075442.2024
+# Version: 04.12.160230.2024
 # Expires: 1 day
-# Last modified: Fri Apr 12 07:54:42 UTC 2024
+# Last modified: Fri Apr 12 16:02:30 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 3885
+# Number of entries: 4001
 #
 *.01edc.com
 *.0penai.xyz
+*.1alibaba.com
 *.1bestbuy.com
 *.1sttheworld.com
 *.2022factorysale.ru
@@ -28,6 +29,7 @@
 *.4vri.website
 *.5577mx.com
 *.5adsday.com
+*.5block.net
 *.5starjersey.com
 *.77unishop.com
 *.7cedb2-08.myshopify.com
@@ -73,6 +75,7 @@
 *.adorablesmartpuppies4home.com
 *.adorablesphynxhome.com
 *.adrianstoybox.com
+*.adsblock.net
 *.advancedssdsolutionlab.com
 *.adventurenestle.com
 *.aerbnb.xyz
@@ -95,7 +98,11 @@
 *.agrosupplies.co.ke
 *.aicolifetreasure.com
 *.air-bnb.online
+*.airbn.site
+*.airbnbb.org
 *.airbnbh.com
+*.airbnbk.com
+*.airbnbs.xyz
 *.airbnbsex.com
 *.airhbnb.com
 *.airseatransport.com
@@ -119,6 +126,7 @@
 *.alexanderrobot.com
 *.algrind.com
 *.ali-baba.xyz
+*.alibaba.bond
 *.alibaba8.com
 *.alibabaa.net
 *.alibafa.com
@@ -168,6 +176,7 @@
 *.amazinghomedeals.com
 *.amazingxoloitzcuintlepuppies.com
 *.amazion.online
+*.amazno.site
 *.amazo.online
 *.amazom.site
 *.amazon-usps.com
@@ -175,8 +184,12 @@
 *.amazon-usps.world
 *.amazonc.shop
 *.amazonc.top
+*.amazoncom.xyz
+*.amazone.online
 *.amazonf.cn
 *.amazoni.top
+*.amazont.shop
+*.amazonz.shop
 *.american-bully-breeders.com
 *.americanbullybreeder.us
 *.americasfirstnationalbank.com
@@ -365,7 +378,10 @@
 *.bestb2kresearch.com
 *.bestbay.store
 *.bestblueeyesfrenchies.su
+*.bestbuya.shop
+*.bestbuyb.shop
 *.bestbuyc.shop
+*.bestbuyo.shop
 *.bestibogaineonline.com
 *.bestmobilehomemovers.com
 *.bestsbuy.shop
@@ -401,6 +417,7 @@
 *.bikesonline24.com
 *.bilebili.com
 *.bilibili2.com
+*.biliboli.com
 *.biliw.com
 *.billionfollowers.com
 *.billsdoc.com
@@ -661,9 +678,11 @@
 *.chatgpt4.site
 *.chatgpt6.org
 *.chatgptc.com
+*.chatgptg.com
 *.chatgpti.com
 *.chatgpti.info
 *.chatgpts.top
+*.chatgqt.com
 *.chatgrt.com
 *.chatgt.shop
 *.chatgtp.bar
@@ -707,6 +726,7 @@
 *.cipherfinancebankplc.com
 *.circecares.com
 *.circlesofcare.org
+*.citigroip.com
 *.citigroupcanary.com
 *.citizencrt.cc
 *.cityarmories.com
@@ -755,6 +775,7 @@
 *.cogcapbk.com
 *.coiinbase.net
 *.coin-base.top
+*.coinbasecom.org
 *.coinbasse.xyz
 *.coinfine.top
 *.coinlbase.bond
@@ -841,6 +862,7 @@
 *.cryptexexchangeoptions.com
 *.crypto2.site
 *.crypto6.top
+*.cryptocom.site
 *.cryptohubperfect.com
 *.cryptop.store
 *.cryptor.top
@@ -945,6 +967,11 @@
 *.disccord.online
 *.disco4d.site
 *.discord.uk
+*.discordb.xyz
+*.discordc.xyz
+*.discordd.xyz
+*.discorde.xyz
+*.discordf.xyz
 *.discorrd.online
 *.discountonline.clearancesales2023.com
 *.discountsliquidator.com
@@ -1000,6 +1027,7 @@
 *.dtscfinance.com
 *.dubaibnk.com
 *.dubarryhome.com
+*.duckduckgos.shop
 *.duholo.com
 *.duncanvillefbc.org
 *.dwa150.com
@@ -1170,6 +1198,7 @@
 *.extremehonor.com
 *.ezredtool.com
 *.f1acebook.com
+*.facebooke.site
 *.faceboook.org
 *.faceebook.buzz
 *.facetlogistics.net
@@ -1440,6 +1469,7 @@
 *.googel.top
 *.googl.today
 *.googlc.store
+*.google-play.shop
 *.googlee.top
 *.googleh.cn
 *.googlep.cn
@@ -1516,6 +1546,7 @@
 *.hawkeye-detectives.com
 *.haxitradings.com
 *.hay-home.com
+*.hblock.net
 *.healthproject.co.za
 *.healthy-cavoodlepuppies.com
 *.healthyenglishbulldogpuppies.com
@@ -1860,6 +1891,14 @@
 *.lilacraftvn.com
 *.lillianbassethoundbreeder.com
 *.lilliancavoodlehome.com
+*.linedin.net
+*.linkeblin.online
+*.linkeden.xyz
+*.linkediin.online
+*.linkedinm.com
+*.linkedjn.com
+*.linkedln.online
+*.linkein.net
 *.liquiddiamonddisposable.com
 *.liquiddiamondsliveresin.com
 *.liquidk2spraystore.com
@@ -1881,6 +1920,7 @@
 *.lkjfinancial.com
 *.lkstransport.eu
 *.lnbarct.com
+*.lnkedin.net
 *.load-andgotruckingllc.com
 *.loadandgotruckingllc.com
 *.local-meets.com
@@ -1890,9 +1930,12 @@
 *.logistektransportation.com
 *.logisticcargolinelp.com
 *.lojed.com
+*.lokcupid.com
 *.loktru.com
 *.lollovita.com
 *.longchampoutleteu.shop
+*.lonkedin.net
+*.lonkedin.xyz
 *.lostpackages-usps.com
 *.love4dogs.shop
 *.lovecardinals.com
@@ -1993,6 +2036,7 @@
 *.marthaharperolteanufoundation.com
 *.martssuper.com
 *.marushippingintl.online
+*.mastercerd.top
 *.mastfercard.com
 *.masturcard.com
 *.masupilami.com
@@ -2142,6 +2186,7 @@
 *.mpfcust.com
 *.mphepetshyhill.co.za
 *.mphglobaltrading.co.za
+*.mprimevideo.com
 *.mqbestdeals.com
 *.mrsbensonbirds.com
 *.msnhandcraft.com
@@ -2231,6 +2276,7 @@
 *.ngcoboeggfarm.com
 *.ngh921.com
 *.ngtwfd.com
+*.nicehush.com
 *.nickssaugus.com
 *.nicoleonardluxurywatches.com
 *.nightvisionspecialist.com
@@ -2261,14 +2307,24 @@
 *.occ-gov-us.com
 *.oceanconsultant.co.uk
 *.off-hunting.com
+*.office-365.xyz
 *.officedepmt.org
 *.officeh.online
+*.offices365.xyz
 *.ohspotlight.com
 *.oikeau.com
 *.oinedrive.com
+*.okaupid.com
+*.okchpid.com
+*.okcjpid.com
 *.okcuipd.com
+*.okcuopid.com
+*.okcupid.store
+*.okcupix.com
+*.okfupid.com
 *.okktoshop.com
 *.oklahor.com
+*.oklcupid.com
 *.olhsc.org
 *.oliviachemstore.com
 *.olympiaplazapharmacy.com
@@ -2416,7 +2472,9 @@
 *.pay-usps.com
 *.pay-usps.shop
 *.pay-usps.xyz
+*.payal.shop
 *.paypall.org
+*.paypol.shop
 *.payypal.info
 *.pazhang.com
 *.pbksgroup.com
@@ -2468,12 +2526,17 @@
 *.pinko.eu.com
 *.pinnarts.com
 *.pinspark.com
+*.pinteredst.com
+*.pinteresp.com
+*.pinterewt.uk
+*.pintrest.net
 *.pirause.com
 *.pirfectotools.com
 *.pitiarian.com
 *.pixisid.com
 *.pjheightboxllc.com
 *.pk-usps.top
+*.pknterest.com
 *.plandow.com
 *.planetbullypuppies.com
 *.plantsinterior.com
@@ -2524,8 +2587,10 @@
 *.primegoldebretrivers.com
 *.primeirochicken.com
 *.primetimepinballs.com
+*.primevideo.sbs
 *.primevideos.store
 *.primhayfarm.com
+*.primveideo.com
 *.prioca.com
 *.priyatrading.co.za
 *.pro-perfume.com
@@ -2749,6 +2814,7 @@
 *.sext4bang.com
 *.sgd498.com
 *.shaiyuzhou.com
+*.shardepoint.com
 *.share2pay.co
 *.sharksculpt.com
 *.sharpills.com
@@ -2905,14 +2971,17 @@
 *.sportify.market
 *.sportingify.com
 *.sportyprintz.com
+*.spotif.org
 *.spotiffy.top
 *.spotifi.top
+*.spotify.cn
 *.springammoshop.com
 *.springfield-gold.com
 *.springfieldhellcat.xyz
 *.springlackhomes.com
 *.sprintextrust.com
 *.spuddily.com
+*.sreamcommunity.ru
 *.srglobalenterprisepvtltd.in
 *.srheumatology.com
 *.ssd-chemical-solution-company-llc.business.site
@@ -2929,10 +2998,37 @@
 *.statelinetack.shop
 *.statesanabolicstore.com
 *.statetreasury.org
+*.steaamcommunity.com
+*.steamckommunity.com
+*.steamcmmunity.com
+*.steamcommonity.com
+*.steamcommunifty.com
+*.steamcommunijty.ru
+*.steamcommunisty.com
+*.steamcommunityi.com
+*.steamcommunityk.ru
+*.steamcommunityl.com
+*.steamcommunityy.net
+*.steamcommunityy.org
+*.steamcommunivy.com
+*.steamcommunivy.shop
+*.steamcommuniy.com
+*.steamcommunlty.store
+*.steamcommunmity.com
+*.steamcommunuity.com
+*.steamcomnnunity.xyz
+*.steamcomumnity.com
+*.steamcomumnity.ru
+*.steamkommunity.com
 *.steampowered.bond
+*.steancomrnunity.com
 *.steanconnmunity.ru
+*.steanncomnunity.ru
+*.stearmcommunity.online
+*.stearmcommunity.ru
 *.stearncornmunity.ru
 *.steelite-au.com
+*.steemcommunity.org
 *.stefunton.com
 *.steinsgood.com
 *.stiffcranks.com
@@ -2950,6 +3046,8 @@
 *.storkandbub.com
 *.stpaulamecleveland.com
 *.streamptz.com
+*.stteamcommunity.net
+*.stteamcommunity.org
 *.stunningpoodlepuppies.com
 *.stylesoutdoors.com
 *.styloflip.com
@@ -3042,6 +3140,7 @@
 *.telegral.com
 *.telegram.cyou
 *.telegram.discount
+*.telegramcom.site
 *.telegramf.shop
 *.telegramh.com
 *.telegramm.loan
@@ -3238,8 +3337,11 @@
 *.ubaatmcardgroup.com
 *.ubertifirearmsusa.com
 *.ubiquocoffee.com
+*.ubloc.ru
+*.ublok.ru
 *.ubuntumachinery.co.za
 *.uctttrading.com
+*.udckduckgo.com
 *.uffice.info
 *.ujbtn.votremaisoninterieure.fr
 *.ukcategorybdrivinglicence.com
@@ -3659,6 +3761,7 @@
 *.warrenbfansclub.com
 *.watchwaveau.com
 *.wayxbe.com
+*.wblock.net
 *.wcedonline.com
 *.weaponsammoreloaded.com
 *.weatherguardtool.com
@@ -3685,6 +3788,7 @@
 *.wellsfargo.wiki
 *.wellsfargof.com
 *.wellsfargoj.com
+*.wellsfargok.com
 *.wellsfargoq.com
 *.wellsfargox.com
 *.wellsyfargo.com
@@ -3702,6 +3806,7 @@
 *.whatsaop.online
 *.whatsaop.ru
 *.whatsap.net
+*.whatsapp1.com
 *.whatsapp2.top
 *.whatsapp6.site
 *.whatsapp9.top
@@ -3773,6 +3878,8 @@
 *.xhamster2.mom
 *.xhamster3.mom
 *.xhamsterz.autos
+*.xhamter.top
+*.xhanster.cn
 *.xhmaster.xyz
 *.xiangxinyingshi.com
 *.xn--amzon-nra.com
@@ -3783,6 +3890,7 @@
 *.xn--binanc-nva.com
 *.xn--conbase-sfb.net
 *.xn--conbase-sfb.xyz
+*.xn--dicord-xjb.com
 *.xn--disneypus-msb.com
 *.xn--fdex-5oa.com
 *.xn--ggle-lqax.com
@@ -3793,11 +3901,16 @@
 *.xn--mcrosoft-tkb.net
 *.xn--nstagram-skb.net
 *.xn--offce-p4a.net
+*.xn--offce365-e2a.com
+*.xn--office36-0lc.com
+*.xn--offie365-38a.com
+*.xn--offie365-49a.com
 *.xn--raken-n5a.org
 *.xn--razen-usa.com
 *.xn--registrerasvensktkrkort-plc.com
 *.xn--samsug-0wa.com
 *.xn--sptify-xxa.com
+*.xn--steamcommunty-6ib.com
 *.xn--wamart-jcb.com
 *.xn--youtue-txc.com
 *.xoncex.com
@@ -3822,9 +3935,12 @@
 *.yahooo.info
 *.yamahabansheeandelectricbikeshop.com
 *.yamahafourwheeler.com
+*.yande.shop
 *.yandext.com
 *.yandexx.net
+*.yantex.cn
 *.yaor-thramp-xaiosch.yolasite.com
+*.yarrdex.ru
 *.yawanm.com
 *.yaxude.com
 *.yeardourshop.store
