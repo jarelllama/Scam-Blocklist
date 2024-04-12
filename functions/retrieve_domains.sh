@@ -517,8 +517,8 @@ source_manual() {
 
     execution_time="$(date +%s)"
 
-    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > domains.tmp
-    mv domains.tmp "$results_file"
+    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > results.tmp
+    mv results.tmp "$results_file"
 
     process_source
 }
@@ -588,15 +588,19 @@ source_petscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url="https://petscams.com"
-    for page in {2..16}; do  # Loop through 15 pages
-        # Indentation intentionally lacking here
-        curl -s "${url}/" \
-        | grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
-        | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
-            s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
-        # Note [a-z] does not seem to work in these expression
-        url="https://petscams.com/page/${page}"  # Add '/page' after first run
+    for page in {1..15}; do  # Loop through 15 pages
+        # Add '/page' after first run
+        (( page == 2 )) && url="https://petscams.com/page/${page}"
+
+        curl -s "${url}/" >> results.tmp
     done
+
+    # Note [a-z] does not seem to work in these expression
+    grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
+        results.tmp | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
+        s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
+
+    rm results.tmp
 
     process_source
 }
@@ -628,20 +632,20 @@ source_scamadviser() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    touch "$results_file"  # Create results file to ensure proper logging
-
     local url='https://www.scamadviser.com/articles'
     for page in {1..15}; do  # Loop through pages
-        page_results="$(curl -s "${url}?p=${page}")"
+        curl -s "${url}?p=${page}" >> results.tmp
         # Note trailing slash breaks curl
 
         # Stop if page has an error (scamadviser occasionally has broken pages)
-        [[ ! "$page_results" == *'div class="articles"'* ]] && break
-
-        grep -oE '<div class="articles">.*<div>Read more</div>' <<< "$page_results" \
-            | grep -oE '(\s|^)([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-            | sed 's/\[//; s/\]//' >> "$results_file"
+        grep -qF 'div class="articles"' results.tmp && break
     done
+
+    grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
+        | grep -oE '(\s|^)([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
+        | sed 's/\[//; s/\]//' >> "$results_file"
+
+    rm results.tmp
 
     process_source
 }
@@ -656,11 +660,14 @@ source_stopgunscams() {
 
     local url='https://stopgunscams.com'
     for page in {1..5}; do
-        curl -s "${url}/?page=${page}/" \
-            | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-            | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-            | sed 's/-/./g' >> "$results_file"
+        curl -s "${url}/?page=${page}/" >> results.tmp
     done
+
+    grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' results.tmp \
+        | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
+        | sed 's/-/./g' >> "$results_file"
+
+    rm results.tmp
 
     process_source
 }
