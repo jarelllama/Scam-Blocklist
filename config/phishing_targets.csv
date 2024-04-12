@@ -54,7 +54,7 @@ netflix,0,0,2,,(^|-)&|&(-|\.),100,200,2,n,regex: verified
 nicehash,0,1,2,,(^|-)&-,,,,,
 office365,3,7,2,,(^|-)&|&(-|\.),19,39,2,n,regex: verified
 okcupid,4,9,2,,(^|-)&-,,,,,
-onedrive,0,0,2,,(^|-)&|&(-|\.),66,132,2,n,regex: verified
+onedrive,0,0,2,,-&|&(-|\.),66,132,2,n,Made less aggressive for 'onedriver' domains
 onlyfans,0,1,2,,(^|-)&|&(-|\.),53,106,2,n,regex: verified
 openai,0,0,2,,(^|-)&|&(-|\.),95,190,2,n,regex: verified
 outlook,0,0,2,,(^|-)&-,,,,,Too many FPs
