@@ -23,16 +23,16 @@ Light version: 3884
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-   23 |       184 |       3% | Google Search
-  400 |        25 |       9% | aa419.org
-   88 |         0 |       0% | dnstwist (NRDs)
-    7 |        14 |      19% | guntab.com
-    6 |        12 |       6% | petscams.com
-    2 |         0 |      72% | scam.directory
-    0 |         8 |      39% | scamadviser.com
-    0 |         6 |       2% | stopgunscams.com
-    0 |         0 |       0% | Manual Entries
-  526 |       249 |      18% | All sources
+    - |        23 |       3% | Google Search
+    - |       400 |       9% | aa419.org
+    - |        88 |       0% | dnstwist (NRDs)
+    - |         7 |      19% | guntab.com
+    - |         6 |       6% | petscams.com
+    - |         2 |      72% | scam.directory
+    - |         0 |      39% | scamadviser.com
+    - |         0 |       2% | stopgunscams.com
+    - |         0 |       0% | Manual Entries
+    - |       526 |      18% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -76,8 +76,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 15
-Queries made today: 122
-Domains retrieved today: 23
+Queries made today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -136,9 +136,9 @@ If these parked sites no longer contain any of the parked messages, they are ass
 ## See also
 
 - [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
-- [Elliotwutingfeng's Global Anti-Scam Organization Blocklist](https://github.com/elliotwutingfeng/GlobalAntiScamOrg-blocklist)
-- [Elliotwutingfeng's Inversion DNSBL Blocklist](https://github.com/elliotwutingfeng/Inversion-DNSBL-Blocklists)
+- [Elliotwutingfeng's various blocklists](https://github.com/elliotwutingfeng?tab=repositories)
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
+- [iam-py-test's various blocklists](https://github.com/iam-py-test/my_filters_001) (uses parts of this blocklist as a source)
 - [oisd blocklist](https://oisd.nl/) (uses this blocklist as a source)
 
 ## Appreciation
