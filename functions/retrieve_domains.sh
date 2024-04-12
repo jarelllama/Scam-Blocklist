@@ -35,7 +35,7 @@ source() {
     source_manual
     source_aa419
     #source_dfpi  # Deactivated
-    source_dnstwist
+    #source_dnstwist
     source_guntab
     source_petscams
     source_scamdirectory
