@@ -537,10 +537,10 @@ test_dead_check() {
 # TEST: addition of resurrected domains
 test_alive_check() {
     # INPUT
-    # Subdomains should be kept to be processed by the validation check
     printf "www.google.com\n" >> "$DEAD_DOMAINS"
     printf "584031dead-domain-test.com\n" >> "$DEAD_DOMAINS"
     # EXPECTED OUTPUT
+    # Subdomains should be kept to be processed by the validation check
     printf "www.google.com\n" >> out_raw.txt
     printf "584031dead-domain-test.com\n" >> out_dead.txt
     printf "resurrected,www.google.com,dead_domains_file\n" >> out_log.txt
