@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.163046.2024
+# Version: 04.12.060454.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 16:30:46 UTC 2024
+# Last modified: Fri Apr 12 06:04:54 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 35958
+# Number of entries: 35980
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -1058,6 +1058,7 @@ local=/aliexprese.xyz/
 local=/aliexpress-ph.com/
 local=/aliexpress-vietnam.com/
 local=/aliexpress.ooo/
+local=/aliexpress.top/
 local=/aliexpress2024.com/
 local=/aliexpress888.shop/
 local=/aliexpress888.xyz/
@@ -3636,6 +3637,8 @@ local=/bit-creditunion.com/
 local=/bitbazaaroutlet.com/
 local=/bitbinaryfxtrade.com/
 local=/bitbulltrade.com/
+local=/bitc0in.online/
+local=/bitc0in.top/
 local=/bitcmining.com/
 local=/bitcoin-aargau.ch/
 local=/bitcoin-box.com/
@@ -5638,6 +5641,7 @@ local=/chanel-official.com/
 local=/changocontainer.co.za/
 local=/chaosshippingsolution.com/
 local=/chapaipremiumfoods.com/
+local=/chapgpt.site/
 local=/chapmansllp.com/
 local=/characterfulhome.com/
 local=/characterizm.com/
@@ -6996,6 +7000,8 @@ local=/crvnashop.com/
 local=/crwdmarketing.com/
 local=/cry-pto.biz/
 local=/crypot.top/
+local=/crypt0.online/
+local=/crypt0.top/
 local=/cryptcoinminer-shop.com/
 local=/cryptcoinminer.shop.com/
 local=/cryptexexchangeoptions.com/
@@ -13556,6 +13562,7 @@ local=/googls.online/
 local=/googls.website/
 local=/googlu.lol/
 local=/googme.cn/
+local=/googole.xyz/
 local=/googytadblocker.net/
 local=/gooogle.sbs/
 local=/gooplaygoogle0jb1.com/
@@ -21573,6 +21580,7 @@ local=/nestmining.com/
 local=/netelar.shop/
 local=/neteliteoptions.com/
 local=/netf1ix.com/
+local=/netfiix.fr/
 local=/netfiix.org/
 local=/netflixq.com/
 local=/netflixw.com/
@@ -23404,6 +23412,9 @@ local=/ouritemsforsale.com/
 local=/ourtiktokvip.com/
 local=/ourworldwide.site/
 local=/oustandingminidaschundpuppies.com/
+local=/out1ook.online/
+local=/out1ook.store/
+local=/out1ook.top/
 local=/outboard-autotrading.com/
 local=/outboardautos.com/
 local=/outboardmotorsengine.com/
@@ -23769,11 +23780,19 @@ local=/outletzimmermann.com/
 local=/outliermarketing.biz/
 local=/outloo-k.com/
 local=/outlook.wiki/
+local=/outlook1.site/
+local=/outlook2.site/
+local=/outlook3.site/
 local=/outlook4.com/
+local=/outlook4.site/
+local=/outlook5.site/
+local=/outlook7.site/
+local=/outlook8.site/
 local=/outlookp.com/
 local=/outmana.com/
 local=/outsportequip.com/
 local=/outstandingyorkie.wixsite.com/
+local=/outtlook.online/
 local=/outwestschnauzers.com/
 local=/ouzod.uk/
 local=/ouzodbooks.com/
@@ -24836,6 +24855,7 @@ local=/pomskypridepets.com/
 local=/pomskypuppiesspot.com/
 local=/pomskyspot.com/
 local=/ponderosapeds.com/
+local=/ponhub.xyz/
 local=/ponsetionsale.com/
 local=/pontentflowerlab.com/
 local=/poochonfarm.com/
@@ -31738,6 +31758,7 @@ local=/tiktokoutreachbot.com/
 local=/tiktokpro.click/
 local=/tiktokproductsco.com/
 local=/tiktokprofileviewer.com/
+local=/tiktokr.shop/
 local=/tiktokrise.com/
 local=/tiktokrizzparty.life/
 local=/tiktokrizzparty.shop/
@@ -34886,6 +34907,7 @@ local=/whatsapp2.vip/
 local=/whatsapp24.app/
 local=/whatsapp24.mobi/
 local=/whatsapp6.site/
+local=/whatsapp9.top/
 local=/whatsappchat.in/
 local=/whatsappdfh.top/
 local=/whatsappdooif.top/

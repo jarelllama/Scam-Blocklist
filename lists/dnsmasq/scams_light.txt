@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.163046.2024
+# Version: 04.12.060454.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 16:30:46 UTC 2024
+# Last modified: Fri Apr 12 06:04:54 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 3884
+# Number of entries: 3906
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -120,6 +120,7 @@ local=/alibaba8.com/
 local=/alibabaa.net/
 local=/alibafa.com/
 local=/aliexprese.xyz/
+local=/aliexpress.top/
 local=/aliexpressn.net/
 local=/aliexpross.com/
 local=/aliexrpess.ru/
@@ -413,6 +414,8 @@ local=/biscord.site/
 local=/bisousa.nl/
 local=/bit-coin.site/
 local=/bit-coin.top/
+local=/bitc0in.online/
+local=/bitc0in.top/
 local=/bitcoin1.net/
 local=/bitcoinemx.com/
 local=/bitcoinified.com/
@@ -635,6 +638,7 @@ local=/cgu.snknk.cz/
 local=/chaatgpt.com/
 local=/championbloodlinecooncattery.com/
 local=/championpuppieskennel.co.za/
+local=/chapgpt.site/
 local=/charmingchihuahuapuppies.com/
 local=/charmschoice.com/
 local=/charmymaltese.com/
@@ -828,6 +832,8 @@ local=/crtzcorteiz.fr/
 local=/crvnashop.com/
 local=/cry-pto.biz/
 local=/crypot.top/
+local=/crypt0.online/
+local=/crypt0.top/
 local=/cryptexexchangeoptions.com/
 local=/crypto2.site/
 local=/crypto6.top/
@@ -1441,6 +1447,7 @@ local=/googls.online/
 local=/googls.website/
 local=/googlu.lol/
 local=/googme.cn/
+local=/googole.xyz/
 local=/gooogle.sbs/
 local=/gorgeouspomeranianpuppies.com/
 local=/gougle.org/
@@ -2195,6 +2202,7 @@ local=/nenovic.com/
 local=/neonsister.com/
 local=/neptuneselectronics.com/
 local=/netf1ix.com/
+local=/netfiix.fr/
 local=/netfiix.org/
 local=/netflixq.com/
 local=/netflixw.com/
@@ -2361,6 +2369,9 @@ local=/orrisas.com/
 local=/osnowsports.com/
 local=/otakuversion.com/
 local=/oundly.shop/
+local=/out1ook.online/
+local=/out1ook.store/
+local=/out1ook.top/
 local=/outboardautos.com/
 local=/outboardsxm.com/
 local=/outdoorcookgear.com/
@@ -2376,8 +2387,16 @@ local=/outletstoves.com/
 local=/outletszone.online/
 local=/outletunit.com/
 local=/outloo-k.com/
+local=/outlook1.site/
+local=/outlook2.site/
+local=/outlook3.site/
 local=/outlook4.com/
+local=/outlook4.site/
+local=/outlook5.site/
+local=/outlook7.site/
+local=/outlook8.site/
 local=/outlookp.com/
+local=/outtlook.online/
 local=/outwestschnauzers.com/
 local=/ovxh.schimmelpeter.cz/
 local=/ownyva.com/
@@ -2482,6 +2501,7 @@ local=/pomeraniangiovan.com/
 local=/pomskykennels.com/
 local=/pomskypridepets.com/
 local=/ponderosapeds.com/
+local=/ponhub.xyz/
 local=/popularmoney.to/
 local=/porn-hub.monster/
 local=/porn-hub.top/
@@ -3128,6 +3148,7 @@ local=/tiktoka.org/
 local=/tiktoki.net/
 local=/tiktokk.fit/
 local=/tiktokk.top/
+local=/tiktokr.shop/
 local=/tiktokz.net/
 local=/tiktuk.wtf/
 local=/tikzok.com/
@@ -3704,6 +3725,7 @@ local=/whatsaop.ru/
 local=/whatsap.net/
 local=/whatsapp2.top/
 local=/whatsapp6.site/
+local=/whatsapp9.top/
 local=/whatsappg.com/
 local=/whatsapph.com/
 local=/whatsaqpp.cyou/

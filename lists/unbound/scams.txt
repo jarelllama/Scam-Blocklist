@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.11.163046.2024
+# Version: 04.12.060454.2024
 # Expires: 1 day
-# Last modified: Thu Apr 11 16:30:46 UTC 2024
+# Last modified: Fri Apr 12 06:04:54 UTC 2024
 # Syntax: Unbound
-# Number of entries: 35958
+# Number of entries: 35980
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -1059,6 +1059,7 @@ local-zone: "aliexprese.xyz." always_nxdomain
 local-zone: "aliexpress-ph.com." always_nxdomain
 local-zone: "aliexpress-vietnam.com." always_nxdomain
 local-zone: "aliexpress.ooo." always_nxdomain
+local-zone: "aliexpress.top." always_nxdomain
 local-zone: "aliexpress2024.com." always_nxdomain
 local-zone: "aliexpress888.shop." always_nxdomain
 local-zone: "aliexpress888.xyz." always_nxdomain
@@ -3637,6 +3638,8 @@ local-zone: "bit-creditunion.com." always_nxdomain
 local-zone: "bitbazaaroutlet.com." always_nxdomain
 local-zone: "bitbinaryfxtrade.com." always_nxdomain
 local-zone: "bitbulltrade.com." always_nxdomain
+local-zone: "bitc0in.online." always_nxdomain
+local-zone: "bitc0in.top." always_nxdomain
 local-zone: "bitcmining.com." always_nxdomain
 local-zone: "bitcoin-aargau.ch." always_nxdomain
 local-zone: "bitcoin-box.com." always_nxdomain
@@ -5639,6 +5642,7 @@ local-zone: "chanel-official.com." always_nxdomain
 local-zone: "changocontainer.co.za." always_nxdomain
 local-zone: "chaosshippingsolution.com." always_nxdomain
 local-zone: "chapaipremiumfoods.com." always_nxdomain
+local-zone: "chapgpt.site." always_nxdomain
 local-zone: "chapmansllp.com." always_nxdomain
 local-zone: "characterfulhome.com." always_nxdomain
 local-zone: "characterizm.com." always_nxdomain
@@ -6997,6 +7001,8 @@ local-zone: "crvnashop.com." always_nxdomain
 local-zone: "crwdmarketing.com." always_nxdomain
 local-zone: "cry-pto.biz." always_nxdomain
 local-zone: "crypot.top." always_nxdomain
+local-zone: "crypt0.online." always_nxdomain
+local-zone: "crypt0.top." always_nxdomain
 local-zone: "cryptcoinminer-shop.com." always_nxdomain
 local-zone: "cryptcoinminer.shop.com." always_nxdomain
 local-zone: "cryptexexchangeoptions.com." always_nxdomain
@@ -13557,6 +13563,7 @@ local-zone: "googls.online." always_nxdomain
 local-zone: "googls.website." always_nxdomain
 local-zone: "googlu.lol." always_nxdomain
 local-zone: "googme.cn." always_nxdomain
+local-zone: "googole.xyz." always_nxdomain
 local-zone: "googytadblocker.net." always_nxdomain
 local-zone: "gooogle.sbs." always_nxdomain
 local-zone: "gooplaygoogle0jb1.com." always_nxdomain
@@ -21574,6 +21581,7 @@ local-zone: "nestmining.com." always_nxdomain
 local-zone: "netelar.shop." always_nxdomain
 local-zone: "neteliteoptions.com." always_nxdomain
 local-zone: "netf1ix.com." always_nxdomain
+local-zone: "netfiix.fr." always_nxdomain
 local-zone: "netfiix.org." always_nxdomain
 local-zone: "netflixq.com." always_nxdomain
 local-zone: "netflixw.com." always_nxdomain
@@ -23405,6 +23413,9 @@ local-zone: "ouritemsforsale.com." always_nxdomain
 local-zone: "ourtiktokvip.com." always_nxdomain
 local-zone: "ourworldwide.site." always_nxdomain
 local-zone: "oustandingminidaschundpuppies.com." always_nxdomain
+local-zone: "out1ook.online." always_nxdomain
+local-zone: "out1ook.store." always_nxdomain
+local-zone: "out1ook.top." always_nxdomain
 local-zone: "outboard-autotrading.com." always_nxdomain
 local-zone: "outboardautos.com." always_nxdomain
 local-zone: "outboardmotorsengine.com." always_nxdomain
@@ -23770,11 +23781,19 @@ local-zone: "outletzimmermann.com." always_nxdomain
 local-zone: "outliermarketing.biz." always_nxdomain
 local-zone: "outloo-k.com." always_nxdomain
 local-zone: "outlook.wiki." always_nxdomain
+local-zone: "outlook1.site." always_nxdomain
+local-zone: "outlook2.site." always_nxdomain
+local-zone: "outlook3.site." always_nxdomain
 local-zone: "outlook4.com." always_nxdomain
+local-zone: "outlook4.site." always_nxdomain
+local-zone: "outlook5.site." always_nxdomain
+local-zone: "outlook7.site." always_nxdomain
+local-zone: "outlook8.site." always_nxdomain
 local-zone: "outlookp.com." always_nxdomain
 local-zone: "outmana.com." always_nxdomain
 local-zone: "outsportequip.com." always_nxdomain
 local-zone: "outstandingyorkie.wixsite.com." always_nxdomain
+local-zone: "outtlook.online." always_nxdomain
 local-zone: "outwestschnauzers.com." always_nxdomain
 local-zone: "ouzod.uk." always_nxdomain
 local-zone: "ouzodbooks.com." always_nxdomain
@@ -24837,6 +24856,7 @@ local-zone: "pomskypridepets.com." always_nxdomain
 local-zone: "pomskypuppiesspot.com." always_nxdomain
 local-zone: "pomskyspot.com." always_nxdomain
 local-zone: "ponderosapeds.com." always_nxdomain
+local-zone: "ponhub.xyz." always_nxdomain
 local-zone: "ponsetionsale.com." always_nxdomain
 local-zone: "pontentflowerlab.com." always_nxdomain
 local-zone: "poochonfarm.com." always_nxdomain
@@ -31739,6 +31759,7 @@ local-zone: "tiktokoutreachbot.com." always_nxdomain
 local-zone: "tiktokpro.click." always_nxdomain
 local-zone: "tiktokproductsco.com." always_nxdomain
 local-zone: "tiktokprofileviewer.com." always_nxdomain
+local-zone: "tiktokr.shop." always_nxdomain
 local-zone: "tiktokrise.com." always_nxdomain
 local-zone: "tiktokrizzparty.life." always_nxdomain
 local-zone: "tiktokrizzparty.shop." always_nxdomain
@@ -34887,6 +34908,7 @@ local-zone: "whatsapp2.vip." always_nxdomain
 local-zone: "whatsapp24.app." always_nxdomain
 local-zone: "whatsapp24.mobi." always_nxdomain
 local-zone: "whatsapp6.site." always_nxdomain
+local-zone: "whatsapp9.top." always_nxdomain
 local-zone: "whatsappchat.in." always_nxdomain
 local-zone: "whatsappdfh.top." always_nxdomain
 local-zone: "whatsappdooif.top." always_nxdomain
