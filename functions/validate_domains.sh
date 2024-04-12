@@ -75,11 +75,12 @@ validate() {
     filter "$invalid" invalid
     # The dead domains file is also checked here as invalid entries may get
     # picked up by the dead check and get saved in the dead cache.
-    invalid_dead="$(grep -vE "$regex" "$DEAD_DOMAINS")"
-    grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
-    mv dead.tmp "$DEAD_DOMAINS"
-    awk 'NF {print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
-    $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
+    if invalid_dead="$(grep -vE "$regex" "$DEAD_DOMAINS")"; then
+        grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
+        mv dead.tmp "$DEAD_DOMAINS"
+        awk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
+        $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
+    fi
 
     # Call shell wrapper to download toplist
     $FUNCTION --download-toplist
