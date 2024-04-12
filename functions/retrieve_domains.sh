@@ -526,14 +526,11 @@ source_aa419() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://api.aa419.org/fakesites'
-    local query_params
-    query_params="0/250?fromadd=$(date +'%Y')-01-01&Status=active&fields=Domain"
-
     # Install jq
     command -v jq &> /dev/null || apt-get install -yqq jq
 
-    curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/${query_params}" \
+    local url='https://api.aa419.org/fakesites'
+    curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
         | jq -r '.[].Domain' >> "$results_file"
         # Note trailing slash breaks API call
 
