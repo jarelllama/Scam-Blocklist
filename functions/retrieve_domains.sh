@@ -497,7 +497,7 @@ source_dnstwist() {
 
         # Append TLDs to results
         while read -r tld; do
-            printf "%s\n" "$results" | sed "s/.com/.${tld}/" >> results.tmp
+            printf "%s\n" "$results" | sed "s/\.com/.${tld}/" >> results.tmp
         done <<< "$tlds"
         sort -u results.tmp -o results.tmp
 
