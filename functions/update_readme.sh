@@ -102,7 +102,7 @@ dnstwist is an open-source detection tool for common cybersquatting techniques l
 
 #### Effectiveness
 
-dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked compilation of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.txt)
+dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked compilation of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv)
 
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is also tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
 
@@ -150,9 +150,9 @@ If these parked sites no longer contain any of the parked messages, they are ass
 ## See also
 
 - [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
-- [Elliotwutingfeng's various blocklists](https://github.com/elliotwutingfeng?tab=repositories)
+- [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
-- [iam-py-test's various blocklists](https://github.com/iam-py-test/my_filters_001) (uses parts of this blocklist as a source)
+- [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) (uses parts of this blocklist as a source)
 - [oisd blocklist](https://oisd.nl/) (uses this blocklist as a source)
 
 ## Appreciation
