@@ -38,6 +38,7 @@ Light version: $(wc -l < "$RAW_LIGHT")
 Statistics for each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
+$(print_stats 'Regex') Matching
 $(print_stats aa419.org)
 $(print_stats dnstwist) (NRDs)
 $(print_stats guntab.com)
