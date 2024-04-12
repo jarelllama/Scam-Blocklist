@@ -536,7 +536,7 @@ source_regex() {
     awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
-    # Get targets, ignoring disabled ones
+    # Get targets ignoring disabled ones
     targets="$(awk -F ',' '$10 == "n" {print $1}' "$PHISHING_TARGETS")"
 
     # Loop through the targets
