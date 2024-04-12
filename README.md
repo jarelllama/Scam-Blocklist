@@ -24,7 +24,8 @@ Light version: 3941
 Statistics for each source:
 Today | Yesterday | Excluded | Source
    17 |        23 |       2% | Google Search
- 8083 |         0 |       2% | Regex Matching
+    0 |         0 |       0% | Manual Entries
+ 8083 |         0 |       2% | Regex Matching (NRDs)
    23 |       400 |       8% | aa419.org
   144 |        88 |       0% | dnstwist (NRDs)
    17 |         7 |      19% | guntab.com
@@ -32,7 +33,6 @@ Today | Yesterday | Excluded | Source
     2 |         2 |      66% | scam.directory
     4 |         0 |      37% | scamadviser.com
     1 |         0 |       4% | stopgunscams.com
-    0 |         0 |       0% | Manual Entries
  8294 |       526 |      14% | All sources
 
 *The Excluded % is of domains not included in the
@@ -76,7 +76,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 15
+Active search terms: 14
 Queries made today: 124
 Domains retrieved today: 17
 ```
