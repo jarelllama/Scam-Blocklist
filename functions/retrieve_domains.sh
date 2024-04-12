@@ -467,14 +467,14 @@ source_dnstwist() {
     awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
-    # Get targets, ignoring disabled ones
+    # Get targets ignoring disabled ones
     targets="$(awk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
 
     # Loop through the targets
     while read -r domain; do
         # Get row and counts for the target domain
         row="$(awk -F ',' -v domain="$domain" \
-            '$1 == domain {printf $1","$2","$3","$4}' < "$PHISHING_TARGETS")"
+            '$1 == domain {printf $1","$2","$3","$4}' "$PHISHING_TARGETS")"
         count="$(awk -F ',' '{print $3}' <<< "$row")"
         runs="$(awk -F ',' '{print $4}' <<< "$row")"
 
@@ -487,7 +487,7 @@ source_dnstwist() {
         done <<< "$tlds"
         sort -u results.tmp -o results.tmp
 
-        # Find matching NRDs
+        # Get matching NRDs
         comm -12 results.tmp nrd.tmp > temp
         mv temp results.tmp
 
@@ -501,7 +501,8 @@ source_dnstwist() {
         sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
 
-        rm results.tmp  # Reset results file for the next target domain
+        # Reset results file for the next target domain
+        rm results.tmp
     done <<< "$targets"
 
     process_source
