@@ -548,8 +548,7 @@ source_regex() {
         runs="$(awk -F ',' '{print $4}' <<< "$row")"
 
         # Get regex of target
-        pattern="$(awk -F ',' -v domain="$domain" '$1 == domain {printf $6}' \
-            "$PHISHING_TARGETS")"
+        pattern="$(awk -F ',' '{printf $1}' <<< "$row")"
         regex="$(printf "%s" "$pattern" | sed "s/&/${domain}/")"
 
         # Get matches in NRD feed
