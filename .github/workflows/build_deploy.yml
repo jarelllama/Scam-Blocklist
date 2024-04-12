@@ -35,7 +35,7 @@ jobs:
   validate:
     needs: [test, prune-parked]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
-    uses: ./.github/workflows/validate_entries.yml
+    uses: ./.github/workflows/validate_domains.yml
     secrets: inherit
 
   deploy:

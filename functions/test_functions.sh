@@ -139,7 +139,7 @@ TEST_RETRIEVE_VALIDATE() {
         cp out_raw.txt out_raw_light.txt
 
         # Run validation script
-        run_script validate_raw.sh
+        run_script validate_domains.sh
     fi
 
     ### Check and verify outputs

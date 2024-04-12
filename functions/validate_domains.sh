@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Validates the entries in the raw file via a variety of checks and flags
-# entries that require attention.
+# Validates the collated domains via a variety of checks and flags entries that
+# require attention.
 
 readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
@@ -40,7 +40,7 @@ filter() {
     $FUNCTION --log-domains "$entries" "$tag" raw
 }
 
-validate_raw() {
+validate() {
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(grep "^${subdomain}\." "$RAW")" || continue
@@ -125,4 +125,4 @@ trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 $FUNCTION --format-all
 
-validate_raw
+validate

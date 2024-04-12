@@ -1,5 +1,5 @@
-name: Validate entries
-run-name: Validate entries
+name: Validate domains
+run-name: Validate domains
 on:
   workflow_dispatch:
   workflow_call:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  validate-entries:
+  validate-domains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,8 +15,8 @@ jobs:
         with:
           ref: main
 
-      - name: validate_raw.sh
-        run: bash functions/validate_raw.sh
+      - name: validate_domains.sh
+        run: bash functions/validate_domains.sh
         env:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -26,5 +26,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "Validate entries"
+          git diff-index --quiet HEAD || git commit -m "Validate domains"
           git push -q

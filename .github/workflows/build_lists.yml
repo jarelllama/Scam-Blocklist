@@ -9,7 +9,7 @@ on:
       - Remove parked domains
       - Manually add domains
       - Retrieve domains
-      - Validate entries
+      - Validate domains
     types:
       - completed
 permissions:
