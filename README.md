@@ -24,6 +24,7 @@ Light version: 3885
 Statistics for each source:
 Today | Yesterday | Excluded | Source
     0 |        23 |       3% | Google Search
+    0 |         0 |       0% | Regex Matching
    20 |       400 |       9% | aa419.org
    23 |        88 |       0% | dnstwist (NRDs)
     0 |         7 |      19% | guntab.com
