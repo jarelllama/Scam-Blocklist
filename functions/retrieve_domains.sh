@@ -524,6 +524,7 @@ source_dnstwist() {
 
 source_regex() {
     local source='Regex'
+    local ignore_from_light=true  # TODO
     local results_file="data/pending/domains_regex.tmp"
     local execution_time
     execution_time="$(date +%s)"
