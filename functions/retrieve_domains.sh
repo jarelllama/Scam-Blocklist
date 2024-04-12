@@ -750,7 +750,7 @@ $FUNCTION --format-all
 $FUNCTION --download-toplist
 
 # Download NRD feed
-download_nrd_feed
+[[ "$USE_EXISTING" != true ]] && download_nrd_feed
 
 source
 
