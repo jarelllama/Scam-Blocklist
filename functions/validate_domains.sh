@@ -70,12 +70,12 @@ validate() {
     filter "$whitelisted_tld" tld
 
     # Remove non-domain entries including IP addresses excluding punycode
-    invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' "$RAW")"
+    regex='^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$'
+    invalid="$(grep -vE "$regex" "$RAW")"
     filter "$invalid" invalid
     # The dead domains file is also checked here as invalid entries may get
     # picked up by the dead check and get saved in the dead cache.
-    invalid_dead="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
-        "$DEAD_DOMAINS")"
+    invalid_dead="$(grep -vE "$regex" "$DEAD_DOMAINS")"
     grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
     mv dead.tmp "$DEAD_DOMAINS"
     awk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp

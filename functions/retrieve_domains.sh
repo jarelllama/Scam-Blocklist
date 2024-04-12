@@ -142,7 +142,8 @@ process_source() {
     whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
     # Remove non-domain entries including IP addresses excluding punycode
-    invalid="$(grep -vE '^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' "$results_file")"
+    regex='^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$'
+    invalid="$(grep -vE "$regex" "$results_file")"
     # Note invalid entries are not counted
     filter "$invalid" invalid --preserve > /dev/null
 
@@ -383,7 +384,7 @@ search_google() {
     for start in {1..100..10}; do  # Loop through each page of results
     # Indentation intentionally lacking here
     params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-        page_results="$(curl -s "${url}?${params}")"
+    page_results="$(curl -s "${url}?${params}")"
 
         (( query_count++ ))
 
@@ -436,14 +437,18 @@ source_dnstwist() {
     # Note that the NRD feed does not seem to have subdomains.
     {
     # Indentation intentionally lacking here
-    wget -qO - 'https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' \
-        || $FUNCTION --send-telegram  "Shreshta's NRD list URL is broken."
-    wget -qO - 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt' \
-        | grep -vF '#' \
-        || $FUNCTION --send-telegram  "Hagezi's NRD list URL is broken."
-    curl -sH 'User-Agent: openSquat-2.1.0' 'https://feeds.opensquat.com/domain-names-month.txt' \
-        || $FUNCTION --send-telegram  "openSquat's NRD list URL is broken."
-        # Error notification for openSquat feed is not working.
+    local url
+
+    url='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
+    wget -qO - "$url" || $FUNCTION --send-telegram "Shreshta's NRD list URL is broken."
+
+    url='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
+    wget -qO - "$url" | grep -vF '#' || $FUNCTION --send-telegram "Hagezi's NRD list URL is broken."
+
+    url='https://feeds.opensquat.com/domain-names-month.txt'
+    local user_agent='User-Agent: openSquat-2.1.0'
+    curl -sH "$user_agent" "$url" || $FUNCTION --send-telegram "openSquat's NRD list URL is broken."
+    # Error notification for openSquat feed is not working.
     } > nrd.tmp
 
     $FUNCTION --format nrd.tmp
@@ -463,7 +468,7 @@ source_dnstwist() {
     mv temp "$PHISHING_TARGETS"
 
     # Get targets, ignoring disabled ones
-    targets="$(awk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS")"
+    targets="$(awk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
 
     # Loop through the targets
     while read -r domain; do

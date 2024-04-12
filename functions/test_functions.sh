@@ -78,7 +78,8 @@ SHELLCHECK() {
     fi
 
     # Check for missing space before comments
-    problematic_files=$(grep -rn '\S\s#' --exclude-dir={.git,shellcheck-stable} --exclude=*.csv .)
+    problematic_files=$(grep -rn '\S\s#' --exclude-dir={.git,shellcheck-stable} \
+        --exclude=*.csv .)
     if [[ -n "$problematic_files" ]]; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n"
         printf "%s\n" "$problematic_files"
@@ -151,7 +152,8 @@ TEST_RETRIEVE_VALIDATE() {
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Check entries saved for manual review
-        check_output data/pending/domains_scamadviser.com.tmp out_manual_review.txt "Manual review"
+        check_output data/pending/domains_scamadviser.com.tmp \
+            out_manual_review.txt "Manual review"
 
         # Check source log
         check_terms "$SOURCE_LOG" out_source_log.txt "Source log"
@@ -217,11 +219,11 @@ TEST_PARKED_CHECK() {
 
     # Remove placeholder lines
     grep -vxFf placeholders.txt "$RAW" > raw.tmp
-    mv raw.tmp "$RAW"
     grep -vxFf placeholders.txt "$RAW_LIGHT" > raw_light.tmp
-    mv raw_light.tmp "$RAW_LIGHT"
     grep -vxFf placeholders.txt "$PARKED_DOMAINS" > parked.tmp
     mv parked.tmp "$PARKED_DOMAINS"
+    mv raw.tmp "$RAW"
+    mv raw_light.tmp "$RAW_LIGHT"
     # Not exact match in domain log
     grep -vFf placeholders.txt "$DOMAIN_LOG" > domain_log.tmp
     mv domain_log.tmp "$DOMAIN_LOG"
@@ -239,8 +241,8 @@ TEST_PARKED_CHECK() {
     check_and_exit
 }
 
-# Function 'TEST_BUILD' verifies that the various formats of blocklist
-# are correctly built with the right syntax.
+# Function 'TEST_BUILD' verifies that the various formats of blocklist are
+# correctly built with the right syntax.
 TEST_BUILD() {
     domain='build-test.com'
     printf "%s\n" "$domain" >> "$RAW"
