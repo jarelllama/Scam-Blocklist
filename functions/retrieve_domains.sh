@@ -32,17 +32,17 @@ source() {
 
     mkdir -p data/pending
 
-    #source_manual
-    #source_aa419
+    source_manual
+    source_aa419
     #source_dfpi  # Deactivated
     source_dnstwist
-    #source_guntab
-    #source_petscams
+    source_guntab
+    source_petscams
     source_regex
-    #source_scamdirectory
-    #source_scamadviser
-    #source_stopgunscams
-    #source_google_search
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 }
 
 # Function 'filter' logs the given entries and removes them from the results
@@ -747,9 +747,13 @@ trap cleanup EXIT
 
 $FUNCTION --format-all
 
+# The various feeds are downloaded here to not bias the processing time of the
+# sources.
+
 # Call shell wrapper to download toplist
-# Downloaded here to ensure the first source's processing time is fair.
 $FUNCTION --download-toplist
+
+# Download NRD feed
 
 source
 
