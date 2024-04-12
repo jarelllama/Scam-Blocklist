@@ -560,9 +560,10 @@ source_regex() {
         # Collate results
         cat results.tmp >> "$results_file"
 
-        # Escape special characters
-        pattern="$(printf "%s" "$pattern" | sed 's/[]\[^$.*/&]/\\&/g')"
-        row="$(printf "%s" "$row" | sed 's/[]\[^$.*/&]/\\&/g')"
+        # Escape periods and backslashes
+        row="$(printf "%s" "$row" | sed 's/[.\]/\\&/g')"
+        # Escape &, periods and backslashes
+        pattern="$(printf "%s" "$pattern" | sed 's/[&.\]/\\&/g')"
 
         # Update counts for the target domain
         count="$(( count + "$(wc -w < results.tmp)" ))"
