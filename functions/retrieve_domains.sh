@@ -469,8 +469,6 @@ source_dnstwist() {
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
-    download_nrd_feed
-
     # Get the top 15 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above.
@@ -530,8 +528,6 @@ source_regex() {
     execution_time="$(date +%s)"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    download_nrd_feed
 
     # Remove duplicate targets from targets file
     awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
@@ -754,6 +750,7 @@ $FUNCTION --format-all
 $FUNCTION --download-toplist
 
 # Download NRD feed
+download_nrd_feed
 
 source
 
