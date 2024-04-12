@@ -18,7 +18,8 @@ main() {
     if [[ -f parked_cache.tmp ]]; then
         # Cache parked domains to be used as a filter for newly retrieved
         # domains (done last to skip unparked check)
-        sort -u parked_cache.tmp "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
+        # Note the parked domains file should remain unsorted
+        cat parked_cache.tmp >> "$PARKED_DOMAINS"
     fi
 }
 

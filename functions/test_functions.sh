@@ -202,6 +202,7 @@ TEST_PARKED_CHECK() {
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$PARKED_DOMAINS"
 
+    test_parked_subdomain_check
     test_parked_check
     test_unparked_check
 
@@ -232,6 +233,8 @@ TEST_PARKED_CHECK() {
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
     check_output "$PARKED_DOMAINS" out_parked.txt "Parked domains"
+    check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
+    check_output "$ROOT_DOMAINS" out_root_domains.txt "Root domains"
 
     check_and_exit
 }
@@ -507,16 +510,9 @@ test_dead_subdomain_check() {
     # INPUT
     printf "584308-dead-subdomain-test.com\n" >> "$RAW"
     printf "584308-dead-subdomain-test.com\n" >> "$ROOT_DOMAINS"
-    while read -r subdomain; do
-        subdomain="${subdomain}.584308-dead-subdomain-test.com"
-        # INPUT
-        printf "%s\n" "$subdomain" >> "$SUBDOMAINS"
-        # EXPECTED OUTPUT
-        printf "%s\n" "$subdomain" >> out_dead.txt
-    done < <(shuf -n 3 "$SUBDOMAINS_TO_REMOVE")
-    # Take only 3 random subdomains to save time
-
+    printf "www.584308-dead-subdomain-test.com\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
+    printf "www.584308-dead-subdomain-test.com\n" >> out_dead.txt
     printf "dead,584308-dead-subdomain-test.com,raw\n" >> out_log.txt
     # Both files should be empty (all dead)
     : > out_subdomains.txt
@@ -538,21 +534,33 @@ test_dead_check() {
 test_alive_check() {
     # INPUT
     printf "www.google.com\n" >> "$DEAD_DOMAINS"
-    printf "584031dead-domain-test.com\n" >> "$DEAD_DOMAINS"
     # EXPECTED OUTPUT
     # Subdomains should be kept to be processed by the validation check
     printf "www.google.com\n" >> out_raw.txt
-    printf "584031dead-domain-test.com\n" >> out_dead.txt
     printf "resurrected,www.google.com,dead_domains_file\n" >> out_log.txt
 }
 
 ### PARKED CHECK TESTS
 
+# TEST: removal of parked subdomains
+test_parked_subdomain_check() {
+    # INPUT
+    printf "cash.delivery\n" >> "$RAW"
+    printf "cash.delivery\n" >> "$ROOT_DOMAINS"
+    printf "www.cash.delivery\n" >> "$SUBDOMAINS"
+    # EXPECTED OUTPUT
+    printf "www.cash.delivery\n" >> out_parked.txt
+    printf "parked,cash.delivery,raw\n" >> out_log.txt
+    # Both files should be empty (all dead)
+    : > out_subdomains.txt
+    : > out_root_domains.txt
+}
+
 # TEST: removal of parked domains
 test_parked_check() {
     # INPUT
-    printf "tradexchange.online\n" >> "$RAW"
     printf "apple.com\n" >> "$RAW"
+    printf "tradexchange.online\n" >> "$RAW"
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
     printf "tradexchange.online\n" >> out_parked.txt

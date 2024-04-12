@@ -22,7 +22,8 @@ main() {
     if [[ -f dead_cache.tmp ]]; then
         # Cache dead domains to be used as a filter for newly retrieved domains
         # (done last to skip alive check)
-        sort -u dead_cache.tmp "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
+        # Note the dead domains file should remain unsorted
+        cat dead_cache.tmp >> "$DEAD_DOMAINS"
     fi
 }
 
