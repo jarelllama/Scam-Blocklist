@@ -38,6 +38,7 @@ source() {
     source_dnstwist
     source_guntab
     source_petscams
+    #source_regex  # TODO
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
@@ -297,6 +298,42 @@ log_domains() {
     $FUNCTION --log-domains "$1" "$2" "$source" "$TIMESTAMP"
 }
 
+# Function 'download_nrd_feed' downloads and collates NRD feeds consisting domains
+# registered in the last 30 days. A notification is sent for any broken links.
+# Note that the NRD feeds do not seem to have subdomains.
+# Output:
+#   nrd.tmp
+download_nrd_feed() {
+    local url
+
+    [[ -f nrd.tmp ]] && return
+
+    {
+    # Indentation intentionally lacking here
+
+    url='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
+    wget -qO - "$url" \
+        || $FUNCTION --send-telegram "Shreshta's NRD list URL is broken."
+
+    url='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
+    wget -qO - "$url" \
+        || $FUNCTION --send-telegram "Hagezi's NRD list URL is broken."
+
+    url='https://feeds.opensquat.com/domain-names-month.txt'
+    local user_agent='User-Agent: openSquat-2.1.0'
+    curl -sH "$user_agent" "$url" \
+        || $FUNCTION --send-telegram "openSquat's NRD list URL is broken."
+        # Error notification for openSquat feed is not working.
+
+    } | grep -vF '#' > nrd.tmp
+
+    $FUNCTION --format nrd.tmp
+
+    # Remove already processed domains to save processing time
+    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
+    mv temp nrd.tmp
+}
+
 cleanup() {
     # Initialize pending directory if no domains to be saved for rerun
     find data/pending -type d -empty -delete
@@ -432,30 +469,7 @@ source_dnstwist() {
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
-    # Download and collate NRD feeds and send a notification for broken links
-    # (limited to domains registered in the last 30 days)
-    # Note that the NRD feed does not seem to have subdomains.
-    {
-    # Indentation intentionally lacking here
-    local url
-
-    url='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
-    wget -qO - "$url" || $FUNCTION --send-telegram "Shreshta's NRD list URL is broken."
-
-    url='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
-    wget -qO - "$url" | grep -vF '#' || $FUNCTION --send-telegram "Hagezi's NRD list URL is broken."
-
-    url='https://feeds.opensquat.com/domain-names-month.txt'
-    local user_agent='User-Agent: openSquat-2.1.0'
-    curl -sH "$user_agent" "$url" || $FUNCTION --send-telegram "openSquat's NRD list URL is broken."
-    # Error notification for openSquat feed is not working.
-    } > nrd.tmp
-
-    $FUNCTION --format nrd.tmp
-
-    # Remove already processed domains to save processing time
-    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
-    mv temp nrd.tmp
+    download_nrd_feed
 
     # Get the top 15 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
@@ -499,6 +513,61 @@ source_dnstwist() {
         (( runs++ ))
         counts_run="$(( count / runs ))"
         sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
+            "$PHISHING_TARGETS"
+
+        # Reset results file for the next target domain
+        rm results.tmp
+    done <<< "$targets"
+
+    process_source
+}
+
+source_regex() {
+    local source='Regex'
+    local results_file="data/pending/domains_regex.tmp"
+    local execution_time
+    execution_time="$(date +%s)"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    download_nrd_feed
+
+    # Remove duplicate targets from targets file
+    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
+    mv temp "$PHISHING_TARGETS"
+
+    # Get targets, ignoring disabled ones
+    targets="$(awk -F ',' '$10 == "n" {print $1}' "$PHISHING_TARGETS")"
+
+    # Loop through the targets
+    while read -r domain; do
+        # Get row and counts for the target domain
+        row="$(awk -F ',' -v domain="$domain" \
+            '$1 == domain {printf $6","$7","$8","$9}' "$PHISHING_TARGETS")"
+        count="$(awk -F ',' '{print $3}' <<< "$row")"
+        runs="$(awk -F ',' '{print $4}' <<< "$row")"
+
+        # Get regex of target
+        pattern="$(awk -F ',' -v domain="$domain" '$1 == domain {printf $6}' \
+            "$PHISHING_TARGETS")"
+        regex="$(printf "%s" "$pattern" | sed "s/&/${domain}/")"
+
+        # Get matches in NRD feed
+        grep -E -- "$regex" nrd.tmp >> results.tmp
+        sort -u results.tmp -o results.tmp
+
+        # Collate results
+        cat results.tmp >> "$results_file"
+
+        # Escape special characters
+        pattern="$(printf "%s" "$pattern" | sed 's/[]\[^$.*/&]/\\&/g')"
+        row="$(printf "%s" "$row" | sed 's/[]\[^$.*/&]/\\&/g')"
+
+        # Update counts for the target domain
+        count="$(( count + "$(wc -w < results.tmp)" ))"
+        (( runs++ ))
+        counts_run="$(( count / runs ))"
+        sed -i "/${domain}/s/${row}/${pattern},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
 
         # Reset results file for the next target domain
