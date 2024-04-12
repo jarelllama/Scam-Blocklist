@@ -35,13 +35,13 @@ source() {
     source_manual
     source_aa419
     #source_dfpi  # Deactivated
-    #source_dnstwist
+    source_dnstwist
     source_guntab
     source_petscams
     source_scamdirectory
     source_scamadviser
     source_stopgunscams
-    #source_google_search
+    source_google_search
 }
 
 # Function 'filter' logs the given entries and removes them from the results
@@ -588,7 +588,7 @@ source_petscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url="https://petscams.com"
-    for page in {1..15}; do
+    for page in {1..15}; do  # Loop through pages
         (( page == 1 )) && { curl -s "${url}/" >> results.tmp; continue; }
 
         # Add '/page' after first run
@@ -636,13 +636,10 @@ source_scamadviser() {
     for page in {1..15}; do  # Loop through pages
         curl -s "${url}?p=${page}" >> results.tmp
         # Note trailing slash breaks curl
-
-        # Stop if page has an error (scamadviser occasionally has broken pages)
-        ! grep -qF 'div class="articles"' results.tmp && break
     done
 
     grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
-        | grep -oE '(\s|^)([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
+        | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
         | sed 's/\[//; s/\]//' >> "$results_file"
 
     rm results.tmp
@@ -659,7 +656,7 @@ source_stopgunscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://stopgunscams.com'
-    for page in {1..5}; do
+    for page in {1..5}; do  # Loop through pages
         curl -s "${url}/?page=${page}/" >> results.tmp
     done
 
