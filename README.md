@@ -135,7 +135,6 @@ If these parked sites no longer contain any of the parked messages, they are ass
 
 ## See also
 
-- [Durablenapkin's Scam Blocklist](https://github.com/durablenapkin/scamblocklist)
 - [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
 - [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) (uses parts of this blocklist as a source)
