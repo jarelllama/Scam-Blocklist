@@ -32,6 +32,13 @@ source() {
 
     mkdir -p data/pending
 
+    # The various feeds are downloaded here to not bias the processing time of
+    # the sources.
+    # Call shell wrapper to download toplist
+    $FUNCTION --download-toplist
+    # Download NRD feed
+    [[ "$USE_EXISTING" != true ]] && download_nrd_feed
+
     source_manual
     source_aa419
     #source_dfpi  # Deactivated
@@ -742,15 +749,6 @@ source_stopgunscams() {
 trap cleanup EXIT
 
 $FUNCTION --format-all
-
-# The various feeds are downloaded here to not bias the processing time of the
-# sources.
-
-# Call shell wrapper to download toplist
-$FUNCTION --download-toplist
-
-# Download NRD feed
-[[ "$USE_EXISTING" != true ]] && download_nrd_feed
 
 source
 
