@@ -550,7 +550,8 @@ source_regex() {
 
         # Get regex of target
         pattern="$(awk -F ',' '{printf $1}' <<< "$row")"
-        regex="$(printf "%s" "$pattern" | sed "s/&/${domain}/")"
+        escaped_domain="$(printf "%s" "$domain" | sed 's/\./\\./g')"
+        regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
 
         # Get matches in NRD feed
         grep -E -- "$regex" nrd.tmp >> results.tmp
