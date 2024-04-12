@@ -165,7 +165,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from parked domains file
-    $FUNCTION --prune-lines "$PARKED_DOMAINS" 5000
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" 7000
 }
 
 # Entry point

@@ -2,14 +2,6 @@
 
 # Updates the README.md content and statistics.
 
-readonly FUNCTION='bash functions/tools.sh'
-readonly RAW='data/raw.txt'
-readonly RAW_LIGHT='data/raw_light.txt'
-readonly SEARCH_TERMS='config/search_terms.csv'
-readonly SOURCE_LOG='config/source_log.csv'
-TODAY="$(date -u +"%d-%m-%y")"
-YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
-
 update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
@@ -38,7 +30,8 @@ Light version: $(wc -l < "$RAW_LIGHT")
 Statistics for each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
-$(print_stats 'Regex') Matching
+$(print_stats Manual) Entries
+$(print_stats 'Regex') Matching (NRDs)
 $(print_stats aa419.org)
 $(print_stats dnstwist) (NRDs)
 $(print_stats guntab.com)
@@ -46,7 +39,6 @@ $(print_stats petscams.com)
 $(print_stats scam.directory)
 $(print_stats scamadviser.com)
 $(print_stats stopgunscams.com)
-$(print_stats Manual) Entries
 $(print_stats)
 
 *The Excluded % is of domains not included in the
@@ -165,6 +157,14 @@ Thanks to the following people for the help, inspiration, and support!
 - [@sjhgvr](https://github.com/sjhgvr)
 EOF
 }
+
+readonly FUNCTION='bash functions/tools.sh'
+readonly RAW='data/raw.txt'
+readonly RAW_LIGHT='data/raw_light.txt'
+readonly SEARCH_TERMS='config/search_terms.csv'
+readonly SOURCE_LOG='config/source_log.csv'
+TODAY="$(date -u +"%d-%m-%y")"
+YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
 
 # Function 'print_stats' is an echo wrapper that returns the formatted
 # statistics for the given source.

@@ -118,7 +118,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
-    $FUNCTION --prune-lines "$DEAD_DOMAINS" 6000
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" 8000
 }
 
 # Entry point
