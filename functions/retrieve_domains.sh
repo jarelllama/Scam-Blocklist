@@ -588,11 +588,11 @@ source_petscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url="https://petscams.com"
-    for page in {1..15}; do  # Loop through 15 pages
-        # Add '/page' after first run
-        (( page == 2 )) && url="https://petscams.com/page/${page}"
+    for page in {1..15}; do
+        (( page == 1 )) && { curl -s "${url}/" >> results.tmp; continue; }
 
-        curl -s "${url}/" >> results.tmp
+        # Add '/page' after first run
+        curl -s "${url}/page/${page}/" >> results.tmp
     done
 
     # Note [a-z] does not seem to work in these expression
@@ -638,7 +638,7 @@ source_scamadviser() {
         # Note trailing slash breaks curl
 
         # Stop if page has an error (scamadviser occasionally has broken pages)
-        grep -qF 'div class="articles"' results.tmp && break
+        ! grep -qF 'div class="articles"' results.tmp && break
     done
 
     grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
