@@ -463,7 +463,7 @@ source_dnstwist() {
     mv temp "$PHISHING_TARGETS"
 
     # Get targets, ignoring disabled ones
-    targets="$(awk -F ',' '$5 !~ /y/ {print $1}' "$PHISHING_TARGETS")"
+    targets="$(awk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS")"
 
     # Loop through the targets
     while read -r domain; do
