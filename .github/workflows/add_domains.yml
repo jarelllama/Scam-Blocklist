@@ -17,7 +17,7 @@ jobs:
         with:
           ref: main
 
-      - name: Read domains from issue
+      - name: Get domains from issue
         run: |
           mkdir -p data/pending
           printf "%s\n" "${{ github.event.issue.body }}" >> data/pending/domains_manual.tmp
