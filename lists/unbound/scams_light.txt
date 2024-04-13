@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.014829.2024
+# Version: 04.13.052627.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 01:48:29 UTC 2024
+# Last modified: Sat Apr 13 05:26:27 UTC 2024
 # Syntax: Unbound
-# Number of entries: 3941
+# Number of entries: 3950
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -51,6 +51,7 @@ local-zone: "accuhealthwellness.com." always_nxdomain
 local-zone: "acerelocationservice.com." always_nxdomain
 local-zone: "acethreeshop.com." always_nxdomain
 local-zone: "acidicmathz.com." always_nxdomain
+local-zone: "acmemm.com." always_nxdomain
 local-zone: "acmetopshop.com." always_nxdomain
 local-zone: "actionpower.org." always_nxdomain
 local-zone: "adairsvipau.shop." always_nxdomain
@@ -510,6 +511,7 @@ local-zone: "britaxus.com." always_nxdomain
 local-zone: "britishshorthairkittenaustralia.com." always_nxdomain
 local-zone: "britishshorthairpalace.com." always_nxdomain
 local-zone: "brittanysdalmatianpuppies.com." always_nxdomain
+local-zone: "brokerbase.live." always_nxdomain
 local-zone: "brokersammopack.com." always_nxdomain
 local-zone: "brownenglishbulldogpuppy.com." always_nxdomain
 local-zone: "browningammousa.com." always_nxdomain
@@ -570,6 +572,8 @@ local-zone: "buzzingbuds.com." always_nxdomain
 local-zone: "bxhgk.com." always_nxdomain
 local-zone: "bxmegahub.com." always_nxdomain
 local-zone: "bxmshop.com." always_nxdomain
+local-zone: "bybitft.com." always_nxdomain
+local-zone: "bybitft.top." always_nxdomain
 local-zone: "bycterxk.myshopify.com." always_nxdomain
 local-zone: "bytcoin.info." always_nxdomain
 local-zone: "caballero-logistics.com." always_nxdomain
@@ -927,6 +931,7 @@ local-zone: "destinyitaliangreyhoundforsale.com." always_nxdomain
 local-zone: "desyglopt.com." always_nxdomain
 local-zone: "deunow.com." always_nxdomain
 local-zone: "deusdebsell.shop." always_nxdomain
+local-zone: "dexinzy.com." always_nxdomain
 local-zone: "dexlac.com." always_nxdomain
 local-zone: "diacorgps.com." always_nxdomain
 local-zone: "diamondsshipping.org." always_nxdomain
@@ -1076,6 +1081,7 @@ local-zone: "engsolk.com." always_nxdomain
 local-zone: "enhancehomesupply.com." always_nxdomain
 local-zone: "enjoylifevibes.com." always_nxdomain
 local-zone: "enrollchemicalssd.co.za." always_nxdomain
+local-zone: "enrollforinsurancenow.com." always_nxdomain
 local-zone: "eoutlet.2022factorysale.ru." always_nxdomain
 local-zone: "equivalentz.com." always_nxdomain
 local-zone: "eri.lol." always_nxdomain
@@ -1736,6 +1742,7 @@ local-zone: "katherinefeeney.net." always_nxdomain
 local-zone: "kavehomesale.shop." always_nxdomain
 local-zone: "kayeestore.com." always_nxdomain
 local-zone: "kbnet.shop." always_nxdomain
+local-zone: "kcbtex.net." always_nxdomain
 local-zone: "kcypacking.com." always_nxdomain
 local-zone: "kdidas.com." always_nxdomain
 local-zone: "kediboneannshillstone.co.za." always_nxdomain
@@ -3198,6 +3205,7 @@ local-zone: "tineder.com." always_nxdomain
 local-zone: "tinniease.com." always_nxdomain
 local-zone: "tinypawspoodlehaven.com." always_nxdomain
 local-zone: "tixmoo.com." always_nxdomain
+local-zone: "tmatesinc.com." always_nxdomain
 local-zone: "tmnwrt.com." always_nxdomain
 local-zone: "tmoreautomachinery.com." always_nxdomain
 local-zone: "tnisecuritysupplies.co.za." always_nxdomain
@@ -3469,6 +3477,7 @@ local-zone: "usps-zip.pics." always_nxdomain
 local-zone: "usps-zz.xyz." always_nxdomain
 local-zone: "usps.bid." always_nxdomain
 local-zone: "usps.llc." always_nxdomain
+local-zone: "usps.upsupost.com." always_nxdomain
 local-zone: "usps1-info.com." always_nxdomain
 local-zone: "usps1-update.com." always_nxdomain
 local-zone: "usps11.top." always_nxdomain
