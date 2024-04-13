@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.055242.2024
+# Version: 04.13.060204.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:52:42 UTC 2024
+# Last modified: Sat Apr 13 06:02:04 UTC 2024
 # Syntax: Unbound
-# Number of entries: 3954
+# Number of entries: 3959
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -584,6 +584,7 @@ local-zone: "cachorrosdelvallediamante.com." always_nxdomain
 local-zone: "cadbrd.com." always_nxdomain
 local-zone: "cadimanshops.com." always_nxdomain
 local-zone: "cainiw.com." always_nxdomain
+local-zone: "callouting.com." always_nxdomain
 local-zone: "callown.com." always_nxdomain
 local-zone: "camelxpressdelivery.online." always_nxdomain
 local-zone: "camiests.com." always_nxdomain
@@ -1207,6 +1208,7 @@ local-zone: "familyteacupyorkshirepuppies.com." always_nxdomain
 local-zone: "famuget.org." always_nxdomain
 local-zone: "fanaticsmalls.com." always_nxdomain
 local-zone: "fancypassportandcurrencies.com." always_nxdomain
+local-zone: "fancyuoi.com." always_nxdomain
 local-zone: "fandoras.com." always_nxdomain
 local-zone: "fankay.com." always_nxdomain
 local-zone: "fansly.site." always_nxdomain
@@ -1683,6 +1685,7 @@ local-zone: "iuh861.com." always_nxdomain
 local-zone: "ivorlink.com." always_nxdomain
 local-zone: "ivrose.com." always_nxdomain
 local-zone: "iwantdiy.com." always_nxdomain
+local-zone: "jackpoply.com." always_nxdomain
 local-zone: "jackrussellterrierkennel.com." always_nxdomain
 local-zone: "jadepierce.com." always_nxdomain
 local-zone: "jaestudiosonline.com." always_nxdomain
@@ -1847,6 +1850,7 @@ local-zone: "laurencechico.com." always_nxdomain
 local-zone: "laurentinasjewelers.com." always_nxdomain
 local-zone: "lavendersshop.com." always_nxdomain
 local-zone: "lawrencemedicalcenter.net." always_nxdomain
+local-zone: "layiess.com." always_nxdomain
 local-zone: "layyw.shop." always_nxdomain
 local-zone: "lazaad.com." always_nxdomain
 local-zone: "lazada.quest." always_nxdomain
@@ -3671,6 +3675,7 @@ local-zone: "veteranammoshop.com." always_nxdomain
 local-zone: "vetmontkennelsparadise.co.za." always_nxdomain
 local-zone: "vgk047.com." always_nxdomain
 local-zone: "vicilo.com." always_nxdomain
+local-zone: "vilionly.com." always_nxdomain
 local-zone: "vinance.trade." always_nxdomain
 local-zone: "vinexexpress.com." always_nxdomain
 local-zone: "vipship.co.uk." always_nxdomain

@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.055242.2024
+# Version: 04.13.060204.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:52:42 UTC 2024
+# Last modified: Sat Apr 13 06:02:04 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 3954
+# Number of entries: 3959
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -583,6 +583,7 @@ local=/cachorrosdelvallediamante.com/
 local=/cadbrd.com/
 local=/cadimanshops.com/
 local=/cainiw.com/
+local=/callouting.com/
 local=/callown.com/
 local=/camelxpressdelivery.online/
 local=/camiests.com/
@@ -1206,6 +1207,7 @@ local=/familyteacupyorkshirepuppies.com/
 local=/famuget.org/
 local=/fanaticsmalls.com/
 local=/fancypassportandcurrencies.com/
+local=/fancyuoi.com/
 local=/fandoras.com/
 local=/fankay.com/
 local=/fansly.site/
@@ -1682,6 +1684,7 @@ local=/iuh861.com/
 local=/ivorlink.com/
 local=/ivrose.com/
 local=/iwantdiy.com/
+local=/jackpoply.com/
 local=/jackrussellterrierkennel.com/
 local=/jadepierce.com/
 local=/jaestudiosonline.com/
@@ -1846,6 +1849,7 @@ local=/laurencechico.com/
 local=/laurentinasjewelers.com/
 local=/lavendersshop.com/
 local=/lawrencemedicalcenter.net/
+local=/layiess.com/
 local=/layyw.shop/
 local=/lazaad.com/
 local=/lazada.quest/
@@ -3670,6 +3674,7 @@ local=/veteranammoshop.com/
 local=/vetmontkennelsparadise.co.za/
 local=/vgk047.com/
 local=/vicilo.com/
+local=/vilionly.com/
 local=/vinance.trade/
 local=/vinexexpress.com/
 local=/vipship.co.uk/

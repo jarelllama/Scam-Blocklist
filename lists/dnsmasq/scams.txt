@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.055242.2024
+# Version: 04.13.060204.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:52:42 UTC 2024
+# Last modified: Sat Apr 13 06:02:04 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 40504
+# Number of entries: 40509
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -5418,6 +5418,7 @@ local=/callamondo.de/
 local=/callawayfactoryoutlet.com/
 local=/callbreakofficial.com/
 local=/callitspringshoe.com/
+local=/callouting.com/
 local=/callown.com/
 local=/callshopeepinjam.id/
 local=/calmaraofficial.com/
@@ -11756,6 +11757,7 @@ local=/fancydachshundpuppyhomeusa.com/
 local=/fancygrab.com/
 local=/fancypassportandcurrencies.com/
 local=/fancypresacanario.com/
+local=/fancyuoi.com/
 local=/fandoras.com/
 local=/fangearus.com/
 local=/fankay.com/
@@ -18037,6 +18039,7 @@ local=/jackdaltonsgunshop.com/
 local=/jackdiscount.shop/
 local=/jackenpascher.com/
 local=/jackflinginsurance.net/
+local=/jackpoply.com/
 local=/jackrussellhomes.com/
 local=/jackrussellpuppiesfarm.com/
 local=/jackrussellpupps.com/
@@ -19503,6 +19506,7 @@ local=/lawsonwoodshaysupply.com/
 local=/laxmiinvestment.com/
 local=/layercages.co.za/
 local=/layerzero-crypto.xyz/
+local=/layiess.com/
 local=/layoutwedding.com/
 local=/layyw.shop/
 local=/lazaad.com/
@@ -38013,6 +38017,7 @@ local=/vigilance-medicament.cm/
 local=/vigorcreditbk.com/
 local=/vihtavuoripowdersusa.com/
 local=/vikingsofficiallockerroom.com/
+local=/vilionly.com/
 local=/villacrestpuppies.com/
 local=/villagelocalminers.com/
 local=/villageminers.com/

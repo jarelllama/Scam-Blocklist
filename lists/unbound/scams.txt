@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.055242.2024
+# Version: 04.13.060204.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:52:42 UTC 2024
+# Last modified: Sat Apr 13 06:02:04 UTC 2024
 # Syntax: Unbound
-# Number of entries: 40504
+# Number of entries: 40509
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -5419,6 +5419,7 @@ local-zone: "callamondo.de." always_nxdomain
 local-zone: "callawayfactoryoutlet.com." always_nxdomain
 local-zone: "callbreakofficial.com." always_nxdomain
 local-zone: "callitspringshoe.com." always_nxdomain
+local-zone: "callouting.com." always_nxdomain
 local-zone: "callown.com." always_nxdomain
 local-zone: "callshopeepinjam.id." always_nxdomain
 local-zone: "calmaraofficial.com." always_nxdomain
@@ -11757,6 +11758,7 @@ local-zone: "fancydachshundpuppyhomeusa.com." always_nxdomain
 local-zone: "fancygrab.com." always_nxdomain
 local-zone: "fancypassportandcurrencies.com." always_nxdomain
 local-zone: "fancypresacanario.com." always_nxdomain
+local-zone: "fancyuoi.com." always_nxdomain
 local-zone: "fandoras.com." always_nxdomain
 local-zone: "fangearus.com." always_nxdomain
 local-zone: "fankay.com." always_nxdomain
@@ -18038,6 +18040,7 @@ local-zone: "jackdaltonsgunshop.com." always_nxdomain
 local-zone: "jackdiscount.shop." always_nxdomain
 local-zone: "jackenpascher.com." always_nxdomain
 local-zone: "jackflinginsurance.net." always_nxdomain
+local-zone: "jackpoply.com." always_nxdomain
 local-zone: "jackrussellhomes.com." always_nxdomain
 local-zone: "jackrussellpuppiesfarm.com." always_nxdomain
 local-zone: "jackrussellpupps.com." always_nxdomain
@@ -19504,6 +19507,7 @@ local-zone: "lawsonwoodshaysupply.com." always_nxdomain
 local-zone: "laxmiinvestment.com." always_nxdomain
 local-zone: "layercages.co.za." always_nxdomain
 local-zone: "layerzero-crypto.xyz." always_nxdomain
+local-zone: "layiess.com." always_nxdomain
 local-zone: "layoutwedding.com." always_nxdomain
 local-zone: "layyw.shop." always_nxdomain
 local-zone: "lazaad.com." always_nxdomain
@@ -38014,6 +38018,7 @@ local-zone: "vigilance-medicament.cm." always_nxdomain
 local-zone: "vigorcreditbk.com." always_nxdomain
 local-zone: "vihtavuoripowdersusa.com." always_nxdomain
 local-zone: "vikingsofficiallockerroom.com." always_nxdomain
+local-zone: "vilionly.com." always_nxdomain
 local-zone: "villacrestpuppies.com." always_nxdomain
 local-zone: "villagelocalminers.com." always_nxdomain
 local-zone: "villageminers.com." always_nxdomain
