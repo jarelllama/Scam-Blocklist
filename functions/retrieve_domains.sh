@@ -643,7 +643,7 @@ source_petscams() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url="https://petscams.com"
+    local url='https://petscams.com'
     for page in {1..15}; do  # Loop through pages
         (( page == 1 )) && { curl -s "${url}/" >> results.tmp; continue; }
 
