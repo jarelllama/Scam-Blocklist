@@ -18,13 +18,13 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 40503
-Light version: 3953
+Total domains: 40504
+Light version: 3954
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
     0 |        17 |       2% | Google Search
-   12 |         0 |       0% | Manual Entries
+   13 |         0 |       0% | Manual Entries
     0 |      8083 |       2% | Regex Matching (NRDs)
     0 |        23 |       8% | aa419.org
     0 |       144 |       0% | dnstwist (NRDs)
@@ -33,7 +33,7 @@ Today | Yesterday | Excluded | Source
     0 |         2 |      66% | scam.directory
     0 |         4 |      37% | scamadviser.com
     0 |         1 |       4% | stopgunscams.com
-   12 |      8294 |      14% | All sources
+   13 |      8294 |      14% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
