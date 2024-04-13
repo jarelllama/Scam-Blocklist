@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.052627.2024
+# Version: 04.13.053514.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:26:27 UTC 2024
+# Last modified: Sat Apr 13 05:35:14 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 3950
+# Number of entries: 3953
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -223,8 +223,10 @@ local=/apexchemicalslab.com/
 local=/apexdrinksworld.com/
 local=/apexkittens.com/
 local=/apextradehouseminingservices.com/
+local=/apkallpure.com/
 local=/aple.wtf/
 local=/aplotesto.top/
+local=/apmody.graphicsmarket.net/
 local=/apole.xyz/
 local=/app0le.site/
 local=/appie.best/
@@ -2126,6 +2128,7 @@ local=/mlhihq.akademiaszefakuchni.pl/
 local=/mmaswicorporate.co.za/
 local=/mmbdynamics.co.za/
 local=/mod-lighting.com/
+local=/modapkcorner.com/
 local=/modern-dove.com/
 local=/modernattirellc.com/
 local=/modernfavellc.com/

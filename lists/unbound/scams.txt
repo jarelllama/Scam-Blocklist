@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.052627.2024
+# Version: 04.13.053514.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:26:27 UTC 2024
+# Last modified: Sat Apr 13 05:35:14 UTC 2024
 # Syntax: Unbound
-# Number of entries: 40500
+# Number of entries: 40503
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -2126,6 +2126,7 @@ local-zone: "apibnk.com." always_nxdomain
 local-zone: "apicestructuredinvestments.com." always_nxdomain
 local-zone: "apicestructuredinvestments.online." always_nxdomain
 local-zone: "apk-shopee.online." always_nxdomain
+local-zone: "apkallpure.com." always_nxdomain
 local-zone: "apkapk.org." always_nxdomain
 local-zone: "apkbiapk.com." always_nxdomain
 local-zone: "apkwell.com." always_nxdomain
@@ -2133,6 +2134,7 @@ local-zone: "aple.wtf." always_nxdomain
 local-zone: "aplle.shop." always_nxdomain
 local-zone: "aplomey.com." always_nxdomain
 local-zone: "aplotesto.top." always_nxdomain
+local-zone: "apmody.graphicsmarket.net." always_nxdomain
 local-zone: "apnidokannmarketing.online." always_nxdomain
 local-zone: "apo-rezeptfrei.com." always_nxdomain
 local-zone: "apole.top." always_nxdomain
@@ -22458,6 +22460,7 @@ local-zone: "mochamarketing.online." always_nxdomain
 local-zone: "mocilopft.com." always_nxdomain
 local-zone: "mocowestpaper.co.za." always_nxdomain
 local-zone: "mod-lighting.com." always_nxdomain
+local-zone: "modapkcorner.com." always_nxdomain
 local-zone: "modapklite.com." always_nxdomain
 local-zone: "modara.de." always_nxdomain
 local-zone: "modebaldessarini.de." always_nxdomain

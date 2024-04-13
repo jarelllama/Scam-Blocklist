@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.052627.2024
+# Version: 04.13.053514.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:26:27 UTC 2024
+# Last modified: Sat Apr 13 05:35:14 UTC 2024
 # Syntax: Unbound
-# Number of entries: 3950
+# Number of entries: 3953
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -224,8 +224,10 @@ local-zone: "apexchemicalslab.com." always_nxdomain
 local-zone: "apexdrinksworld.com." always_nxdomain
 local-zone: "apexkittens.com." always_nxdomain
 local-zone: "apextradehouseminingservices.com." always_nxdomain
+local-zone: "apkallpure.com." always_nxdomain
 local-zone: "aple.wtf." always_nxdomain
 local-zone: "aplotesto.top." always_nxdomain
+local-zone: "apmody.graphicsmarket.net." always_nxdomain
 local-zone: "apole.xyz." always_nxdomain
 local-zone: "app0le.site." always_nxdomain
 local-zone: "appie.best." always_nxdomain
@@ -2127,6 +2129,7 @@ local-zone: "mlhihq.akademiaszefakuchni.pl." always_nxdomain
 local-zone: "mmaswicorporate.co.za." always_nxdomain
 local-zone: "mmbdynamics.co.za." always_nxdomain
 local-zone: "mod-lighting.com." always_nxdomain
+local-zone: "modapkcorner.com." always_nxdomain
 local-zone: "modern-dove.com." always_nxdomain
 local-zone: "modernattirellc.com." always_nxdomain
 local-zone: "modernfavellc.com." always_nxdomain
