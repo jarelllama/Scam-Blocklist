@@ -76,7 +76,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 18
+Active search terms: 17
 Queries made today: 139
 Domains retrieved today: 136
 ```
