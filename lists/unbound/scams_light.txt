@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.053514.2024
+# Version: 04.13.055242.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 05:35:14 UTC 2024
+# Last modified: Sat Apr 13 05:52:42 UTC 2024
 # Syntax: Unbound
-# Number of entries: 3953
+# Number of entries: 3954
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -1764,6 +1764,7 @@ local-zone: "khaipoultryfarming.co.za." always_nxdomain
 local-zone: "kidsavecharityorphanagehome.com." always_nxdomain
 local-zone: "killinglyeyecare.com." always_nxdomain
 local-zone: "kimi-home.com." always_nxdomain
+local-zone: "kimilibly.com." always_nxdomain
 local-zone: "kimssphynxkittens.com." always_nxdomain
 local-zone: "kincorybeauty.com." always_nxdomain
 local-zone: "kingammunitions.com." always_nxdomain

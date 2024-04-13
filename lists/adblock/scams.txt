@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.13.053514.2024
+! Version: 04.13.055242.2024
 ! Expires: 1 day
-! Last modified: Sat Apr 13 05:35:14 UTC 2024
+! Last modified: Sat Apr 13 05:52:42 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 40503
+! Number of entries: 40504
 !
 ||01107904-coinbase.com^
 ||01edc.com^
@@ -18844,6 +18844,7 @@
 ||kimbergunsusa.com^
 ||kimberlyteacup.com^
 ||kimi-home.com^
+||kimilibly.com^
 ||kimlostlovespells.com^
 ||kimssphynxkittens.com^
 ||kimteacuppoodle.com^
