@@ -324,7 +324,7 @@ download_nrd_feed() {
     {
         # Download NRD feels in parallel
         curl -sH 'User-Agent: openSquat-2.1.0' "$url3" \
-        & { wget -i nrd_urls.tmp -qO -; }
+        & wget -i nrd_urls.tmp -qO -
     } | grep -vF '#' > nrd.tmp
 
     # Appears to be the best way of checking if the feeds downloaded properly
