@@ -251,7 +251,7 @@ build() {
     [[ "$USE_EXISTING" == true ]] && return
     # Send Telegram update if not using existing results
     $FUNCTION --send-telegram \
-        "Run completed. Added $count_added new domains.\n${workflow_url}"
+        "Run completed. Retrieved ${count_added} domains.\n${workflow_url}"
 }
 
 # Function 'log_source' prints and logs statistics for each source using the
@@ -316,21 +316,23 @@ download_nrd_feed() {
     [[ -f nrd.tmp ]] && return
 
     url1='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
-    url2='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
-    url3='https://feeds.opensquat.com/domain-names-month.txt'
-
-    printf "%s\n%s\n" "$url1" "$url2" > nrd_urls.tmp
+    url2='https://feeds.opensquat.com/domain-names-month.txt'
+    url3='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
 
     {
-        # Download NRD feels in parallel
-        curl -sH 'User-Agent: openSquat-2.1.0' "$url3" \
-        & wget -i nrd_urls.tmp -qO -
+        wget -qO - "$url1" || $FUNCTION --send-telegram \
+            "Error occurred while downloading NRD feeds."
+
+        # Download the bigger feeds in parallel
+        curl -sH 'User-Agent: openSquat-2.1.0' "$url2" \
+        & wget -qO - "$url3"
+
     } | grep -vF '#' > nrd.tmp
 
-    # Appears to be the best way of checking if the feeds downloaded properly
-    # since the openSquat feed has different error messages than the others.
-    # Also notifies the user if any of the feeds change drastically in size.
-    if (( $(wc -l < nrd.tmp) < 10010000 )); then
+    # Appears to be the best way of checking if the bigger feeds downloaded
+    # properly without checking each feed individually and losing
+    # parallelization.
+    if (( $(wc -l < nrd.tmp) < 9000000 )); then
         $FUNCTION --send-telegram "Error occurred while downloading NRD feeds."
     fi
 
