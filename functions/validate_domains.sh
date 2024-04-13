@@ -115,6 +115,8 @@ validate() {
     $FUNCTION --send-telegram \
         "Problematic domains found during validation check:\n$(<filter_log.tmp)"
 
+    printf "Telegram notification sent.\n"
+
     # Save changes to raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > light.tmp
     mv light.tmp "$RAW_LIGHT"
