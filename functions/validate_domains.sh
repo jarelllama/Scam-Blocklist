@@ -113,7 +113,7 @@ validate() {
 
     # Call shell wrapper to send telegram notification
     $FUNCTION --send-telegram \
-        "Problematic domains detected during validation check:\n$(<filter_log.tmp)"
+        "Problematic domains found during validation check:\n$(<filter_log.tmp)"
 
     # Save changes to raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > light.tmp
