@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.060204.2024
+# Version: 04.13.060449.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 06:02:04 UTC 2024
+# Last modified: Sat Apr 13 06:04:49 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 40509
+# Number of entries: 40510
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -27717,6 +27717,7 @@ local=/prestinelogistics.net/
 local=/prestodentalmarketing.com/
 local=/prestoprimelogistics.com/
 local=/pretconcontainerterminal.co.za/
+local=/preteater.com/
 local=/pretoriatradingplatform.com/
 local=/prettyelfs.com/
 local=/prettylaray.com/

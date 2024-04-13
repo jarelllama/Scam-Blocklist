@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.13.060204.2024
+# Version: 04.13.060449.2024
 # Expires: 1 day
-# Last modified: Sat Apr 13 06:02:04 UTC 2024
+# Last modified: Sat Apr 13 06:04:49 UTC 2024
 # Syntax: Unbound
-# Number of entries: 40509
+# Number of entries: 40510
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -27718,6 +27718,7 @@ local-zone: "prestinelogistics.net." always_nxdomain
 local-zone: "prestodentalmarketing.com." always_nxdomain
 local-zone: "prestoprimelogistics.com." always_nxdomain
 local-zone: "pretconcontainerterminal.co.za." always_nxdomain
+local-zone: "preteater.com." always_nxdomain
 local-zone: "pretoriatradingplatform.com." always_nxdomain
 local-zone: "prettyelfs.com." always_nxdomain
 local-zone: "prettylaray.com." always_nxdomain
