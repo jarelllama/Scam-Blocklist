@@ -1,6 +1,6 @@
 # Jarelllama's Scam Blocklist
 
-Blocklist for newly created scam site domains automatically retrieved daily using Google Search API, automated detection, and other public sources. Automated retrieval is done at 10:00 AM UTC.
+Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources. Automated retrieval is done at 10:00 AM UTC.
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. To reach this goal, a variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
@@ -23,17 +23,17 @@ Light version: 3941
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-   17 |        23 |       2% | Google Search
-    0 |         0 |       0% | Manual Entries
- 8083 |         0 |       2% | Regex Matching (NRDs)
-   23 |       400 |       8% | aa419.org
-  144 |        88 |       0% | dnstwist (NRDs)
-   17 |         7 |      19% | guntab.com
-    3 |         6 |       7% | petscams.com
-    2 |         2 |      66% | scam.directory
-    4 |         0 |      37% | scamadviser.com
-    1 |         0 |       4% | stopgunscams.com
- 8294 |       526 |      14% | All sources
+    - |        17 |       2% | Google Search
+    - |         0 |       0% | Manual Entries
+    - |      8083 |       2% | Regex Matching (NRDs)
+    - |        23 |       8% | aa419.org
+    - |       144 |       0% | dnstwist (NRDs)
+    - |        17 |      19% | guntab.com
+    - |         3 |       7% | petscams.com
+    - |         2 |      66% | scam.directory
+    - |         4 |      37% | scamadviser.com
+    - |         1 |       4% | stopgunscams.com
+    - |      8294 |      14% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -77,8 +77,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 14
-Queries made today: 124
-Domains retrieved today: 17
+Queries made today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
