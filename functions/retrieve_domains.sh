@@ -194,6 +194,8 @@ build() {
         # Send telegram notification
         $FUNCTION --send-telegram \
             "Entries requiring manual review:\n$(<manual_review.tmp)"
+
+        printf "Telegram notification sent.\n"
     fi
 
     $FUNCTION --format retrieved_domains.tmp
