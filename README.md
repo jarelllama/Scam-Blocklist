@@ -137,7 +137,7 @@ If these parked sites no longer contain any of the parked messages, they are ass
 ## See also
 
 - [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
-- [Fabriziosalmi's blocklist](https://github.com/fabriziosalmi/blacklists) (uses this blocklist as a source)
+- [Fabriziosalmi's hourly updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists) (uses this blocklist as a source)
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
 - [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) (uses parts of this blocklist as a source)
 - [oisd blocklist](https://oisd.nl/) (uses this blocklist as a source)
