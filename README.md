@@ -21,7 +21,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 Total domains: 40080
 Light version: 4064
 
-Statistics for each source:
+Retrieval count for each source:
 Today | Yesterday | Excluded | Source
    17 |       136 |       2% | Google Search
     0 |        19 |       0% | Manual Entries
@@ -118,7 +118,11 @@ The domain retrieval process for all sources can be viewed in the repository's c
 
 Example Telegram notification:
 
-
+``` text
+Entries requiring manual review:
+ovsfashion.com (toplist)
+pearson.com (toplist)
+```
 
 The full filtering process can be viewed in the repository's code.
 
