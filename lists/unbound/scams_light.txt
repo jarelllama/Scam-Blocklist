@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.14.124143.2024
+# Version: 04.14.132654.2024
 # Expires: 1 day
-# Last modified: Sun Apr 14 12:41:43 UTC 2024
+# Last modified: Sun Apr 14 13:26:54 UTC 2024
 # Syntax: Unbound
-# Number of entries: 4109
+# Number of entries: 4108
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -478,7 +478,6 @@ local-zone: "blissfulpugpuppies.com." always_nxdomain
 local-zone: "blissfunool.shop." always_nxdomain
 local-zone: "blnance.org." always_nxdomain
 local-zone: "blocketqasa.lease." always_nxdomain
-local-zone: "blog.qualitypower.co.id." always_nxdomain
 local-zone: "blondeinthiscity.com." always_nxdomain
 local-zone: "blossomscoonscattery.com." always_nxdomain
 local-zone: "blueheelerpupsfarm.com." always_nxdomain
@@ -2065,7 +2064,6 @@ local-zone: "mahoclinic.com." always_nxdomain
 local-zone: "mahoneypeds.com." always_nxdomain
 local-zone: "maiapu.com." always_nxdomain
 local-zone: "maibrightsmiles.com." always_nxdomain
-local-zone: "mail.directory." always_nxdomain
 local-zone: "mainecooncatforsale.net." always_nxdomain
 local-zone: "mainecooncatsforsale.wixsite.com." always_nxdomain
 local-zone: "mainecoonkittyworld.com." always_nxdomain
@@ -2740,6 +2738,7 @@ local-zone: "qowix.com." always_nxdomain
 local-zone: "qssion.com." always_nxdomain
 local-zone: "qualitygradebanknotes.com." always_nxdomain
 local-zone: "qualityhayandfeedllc.us." always_nxdomain
+local-zone: "qualitypower.co.id." always_nxdomain
 local-zone: "queencontainers.org." always_nxdomain
 local-zone: "queenstreetbears.com." always_nxdomain
 local-zone: "quirkleaf.com." always_nxdomain
@@ -2787,6 +2786,7 @@ local-zone: "refullyracing.com." always_nxdomain
 local-zone: "registereddocumentseu.com." always_nxdomain
 local-zone: "registerform1.com." always_nxdomain
 local-zone: "regpuppieskernel.co.za." always_nxdomain
+local-zone: "reloadingsupplies.com." always_nxdomain
 local-zone: "repeatingarmsusa.com." always_nxdomain
 local-zone: "reptileloversmorphmarket.com." always_nxdomain
 local-zone: "reptilesandexoticslogisticsservices.com." always_nxdomain
@@ -3484,7 +3484,6 @@ local-zone: "urbantechglobal.com." always_nxdomain
 local-zone: "urdotx.com." always_nxdomain
 local-zone: "uridealshop.com." always_nxdomain
 local-zone: "url6652.creators.gumroad.com." always_nxdomain
-local-zone: "us.reloadingsupplies.com." always_nxdomain
 local-zone: "usdc-wallet.world." always_nxdomain
 local-zone: "usdcai.live." always_nxdomain
 local-zone: "usedoutboardmotorsonline.com." always_nxdomain

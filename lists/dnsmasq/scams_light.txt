@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.14.124143.2024
+# Version: 04.14.132654.2024
 # Expires: 1 day
-# Last modified: Sun Apr 14 12:41:43 UTC 2024
+# Last modified: Sun Apr 14 13:26:54 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 4109
+# Number of entries: 4108
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -477,7 +477,6 @@ local=/blissfulpugpuppies.com/
 local=/blissfunool.shop/
 local=/blnance.org/
 local=/blocketqasa.lease/
-local=/blog.qualitypower.co.id/
 local=/blondeinthiscity.com/
 local=/blossomscoonscattery.com/
 local=/blueheelerpupsfarm.com/
@@ -2064,7 +2063,6 @@ local=/mahoclinic.com/
 local=/mahoneypeds.com/
 local=/maiapu.com/
 local=/maibrightsmiles.com/
-local=/mail.directory/
 local=/mainecooncatforsale.net/
 local=/mainecooncatsforsale.wixsite.com/
 local=/mainecoonkittyworld.com/
@@ -2739,6 +2737,7 @@ local=/qowix.com/
 local=/qssion.com/
 local=/qualitygradebanknotes.com/
 local=/qualityhayandfeedllc.us/
+local=/qualitypower.co.id/
 local=/queencontainers.org/
 local=/queenstreetbears.com/
 local=/quirkleaf.com/
@@ -2786,6 +2785,7 @@ local=/refullyracing.com/
 local=/registereddocumentseu.com/
 local=/registerform1.com/
 local=/regpuppieskernel.co.za/
+local=/reloadingsupplies.com/
 local=/repeatingarmsusa.com/
 local=/reptileloversmorphmarket.com/
 local=/reptilesandexoticslogisticsservices.com/
@@ -3483,7 +3483,6 @@ local=/urbantechglobal.com/
 local=/urdotx.com/
 local=/uridealshop.com/
 local=/url6652.creators.gumroad.com/
-local=/us.reloadingsupplies.com/
 local=/usdc-wallet.world/
 local=/usdcai.live/
 local=/usedoutboardmotorsonline.com/
