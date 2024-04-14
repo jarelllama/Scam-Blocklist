@@ -547,12 +547,12 @@ test_alive_check() {
 # TEST: removal of parked subdomains
 test_parked_subdomain_check() {
     # INPUT
-    printf "cash.delivery\n" >> "$RAW"
-    printf "cash.delivery\n" >> "$ROOT_DOMAINS"
-    printf "www.cash.delivery\n" >> "$SUBDOMAINS"
+    printf "delivery-orders.com\n" >> "$RAW"
+    printf "delivery-orders.com\n" >> "$ROOT_DOMAINS"
+    printf "www.delivery-orders.com\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
-    printf "www.cash.delivery\n" >> out_parked.txt
-    printf "parked,cash.delivery,raw\n" >> out_log.txt
+    printf "www.delivery-orders.com\n" >> out_parked.txt
+    printf "parked,delivery-orders.com,raw\n" >> out_log.txt
     # Both files should be empty (all dead)
     : > out_subdomains.txt
     : > out_root_domains.txt
