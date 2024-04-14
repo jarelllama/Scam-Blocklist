@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Test validation check
+      - name: Test domain validation
         run: bash functions/test_functions.sh validate
 
   test-build:
