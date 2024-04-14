@@ -23,7 +23,7 @@ crypto,2,8,3,,-&|&-,100,300,3,n,Made less agressive for false positives
 deezer,0,2,3,y,(^|-)&-,,,,,
 discord,3,9,3,,(^|-)&|&(-|\.),48,144,3,n,regex: verified
 disney,5,17,3,y,(^|-)&-,,,,,
-disneyplus,0,0,3,,(^|-)&-,,,,,regex: verified
+disneyplus,0,0,3,,(^|-)&|&(-|\.),,,,n,regex: verified
 duckduckgo,0,2,3,,(^|-)&-,,,,,
 evri,35,35,1,y,-&|&(-|\.),1,5,3,n,regex: verified
 facebook,0,1,3,,(^|-)&|&(-|\.),42,127,3,n,regex: verified
@@ -59,7 +59,7 @@ onlyfans,0,1,3,,(^|-)&|&(-|\.),36,108,3,n,regex: verified
 openai,1,3,3,,(^|-)&|&(-|\.),63,191,3,n,regex: verified
 outlook,0,1,3,,(^|-)&-,,,,,Too many FPs
 paypal,1,4,3,,(^|-)&|&(-|\.),35,107,3,n,regex: verified
-pinterest,3,9,3,,(^|-)&-,,,,,regex: verified
+pinterest,3,9,3,,(^|-)&|&(-|\.),,,,n,regex: verified
 pornhub,0,0,3,,(^|-)&|&(-|\.),9,29,3,n,regex: verified
 primevideo,1,3,3,,(^|-)&-,,,,,
 reddit,7,28,4,y,(^|-)&|&(-|\.),25,76,3,n,regex: verified
