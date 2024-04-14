@@ -27,7 +27,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 Total domains: $(wc -l < "$RAW")
 Light version: $(wc -l < "$RAW_LIGHT")
 
-Statistics for each source:
+Retrieval count for each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
 $(print_stats Manual) Entries
@@ -124,11 +124,11 @@ The domain retrieval process for all sources can be viewed in the repository's c
 
 Example Telegram notification:
 
-``` text
+\`\`\` text
 Entries requiring manual review:
 ovsfashion.com (toplist)
 pearson.com (toplist)
-```
+\`\`\`
 
 The full filtering process can be viewed in the repository's code.
 
