@@ -41,6 +41,12 @@ filter() {
 }
 
 validate() {
+    # Install idn
+    # Convert to punycode
+    command -v idn &> /dev/null || apt-get install -yqq idn
+    idn < "$RAW" | sort > raw.tmp
+    mv raw.tmp "$RAW"
+
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(grep "^${subdomain}\." "$RAW")" || continue
@@ -112,8 +118,10 @@ validate() {
     sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
 
     # Call shell wrapper to send telegram notification
+    # (excluding subdomains because the notifications got annoying)
     $FUNCTION --send-telegram \
-        "Problematic domains found during validation check:\n$(<filter_log.tmp)"
+        "Problematic domains found during validation check:\n$(grep -vF \
+        'subdomain' filter_log.tmp)"
 
     printf "\nTelegram notification sent.\n"
 

@@ -99,6 +99,12 @@ process_source() {
     # flagged later on.
     sed -i 's/https\?://; s/\///g' "$results_file"
 
+    # Install idn
+    # Convert to punycode
+    command -v idn &> /dev/null || apt-get install -yqq idn
+    idn < "$results_file" > results.tmp
+    mv raw.tmp "$results_file"
+
     $FUNCTION --format "$results_file"
 
     # Count number of unfiltered domains pending

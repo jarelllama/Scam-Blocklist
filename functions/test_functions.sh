@@ -105,6 +105,7 @@ TEST_RETRIEVE_VALIDATE() {
 
     # Note removal of domains already in raw file is redundant to test
 
+    test_punycode_conversion
     test_subdomain_removal
     test_whitelist_blacklist
     test_whitelisted_tld_removal
@@ -113,7 +114,7 @@ TEST_RETRIEVE_VALIDATE() {
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         test_manual_addition
-        test_conversion
+        test_url_conversion
         test_known_dead_removal
         test_known_parked_removal
         test_light_build
@@ -324,8 +325,16 @@ test_manual_addition() {
     printf ",Manual,,1,1,0,0,0,0,,saved\n" >> out_source_log.txt
 }
 
+# TEST: conversion to punycode
+test_punycode_conversion() {
+    # INPUT
+    printf "punycodé-test.cöm\n" >> input.txt
+    # EXPECTED OUTPUT
+    printf "xn--punycod-test-heb.xn--cm-fka\n" >> out_raw.txt
+}
+
 # TEST: conversion of URLs to domains
-test_conversion() {
+test_url_conversion() {
     # INPUT
     printf "https://conversion-test.com/\n" >> input.txt
     printf "http://conversion-test-2.com/\n" >> input.txt
