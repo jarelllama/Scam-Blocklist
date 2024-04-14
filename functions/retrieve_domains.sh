@@ -516,7 +516,7 @@ source_dnstwist() {
         cat results.tmp >> "$results_file"
 
         # Update counts for the target domain
-        count="$(( count + "$(wc -w < results.tmp)" ))"
+        count="$(( count + $(wc -w < results.tmp) ))"
         (( runs++ ))
         counts_run="$(( count / runs ))"
         sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
@@ -559,11 +559,10 @@ source_regex() {
         regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
 
         # Get matches in NRD feed
-        grep -E -- "$regex" nrd.tmp >> results.tmp
-        sort -u results.tmp -o results.tmp
+        results="$(grep -E -- "$regex" nrd.tmp | sort -u)"
 
         # Collate results
-        cat results.tmp >> "$results_file"
+        printf "%s\n" "$results" >> "$results_file"
 
         # Escape periods and backslashes
         row="$(printf "%s" "$row" | sed 's/[.\]/\\&/g')"
@@ -571,7 +570,7 @@ source_regex() {
         pattern="$(printf "%s" "$pattern" | sed 's/[&.\]/\\&/g')"
 
         # Update counts for the target domain
-        count="$(( count + "$(wc -w < results.tmp)" ))"
+        count="$(( count + $(wc -w <<< "$results") ))"
         (( runs++ ))
         counts_run="$(( count / runs ))"
         sed -i "/${domain}/s/${row}/${pattern},${counts_run},${count},${runs}/" \
