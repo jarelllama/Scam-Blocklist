@@ -99,12 +99,11 @@ process_source() {
     # flagged later on.
     sed -i 's/https\?://; s/\///g' "$results_file"
 
-    # Install idn
-    # Requires sudo for some reason
-    command -v idn &> /dev/null || sudo apt-get install -yqq idn
-    # Convert to punycode
+    # Install idn (requires sudo for some reason)
+    command -v idn &> /dev/null || sudo apt-get install idn > /dev/null
+    # Convert Unicode to Punycode
     idn < "$results_file" > results.tmp
-    mv raw.tmp "$results_file"
+    mv results.tmp "$results_file"
 
     $FUNCTION --format "$results_file"
 

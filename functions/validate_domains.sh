@@ -41,12 +41,13 @@ filter() {
 }
 
 validate() {
-    # Install idn
-    # Requires sudo for some reason
-    command -v idn &> /dev/null || sudo apt-get install -yqq idn
-    # Convert to punycode
-    idn < "$RAW" | sort > raw.tmp
-    mv raw.tmp "$RAW"
+    # Install idn (requires sudo for some reason)
+    command -v idn &> /dev/null || sudo apt-get install idn > /dev/null
+    # Convert Unicode to Punycode in raw file and raw light file
+    for file in "$RAW" "$RAW_LIGHT"; do
+        idn < "$file" | sort > temp
+        mv temp "$file"
+    done
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
