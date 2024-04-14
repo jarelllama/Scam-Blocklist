@@ -77,7 +77,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 16
-API calls today: 138
+API calls made today: 138
 Domains retrieved today: 17
 ```
 
