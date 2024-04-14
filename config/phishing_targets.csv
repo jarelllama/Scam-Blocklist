@@ -4,8 +4,8 @@ adblockplus,0,0,3,y,(^|-)&-,,,,,
 airbnb,1,4,3,,(^|-)&|&(-|\.),56,170,3,n,regex: verified
 alibaba,0,2,3,,(^|-)&|&(-|\.),56,168,3,n,regex: verified
 aliexpress,0,0,3,,(^|-)&|&(-|\.),24,73,3,n,regex: verified
-amazon,4,12,3,,-&|&-,65,196,3,n,Less aggressive for sites related to the place
-apple,14,59,4,y,-&,78,235,3,n,Less aggressive for sites related to the fruit
+amazon,4,12,3,,-&|&-,65,196,3,n,Made less aggressive for sites related to the place
+apple,14,59,4,y,-&,78,235,3,n,Made less aggressive for sites related to the fruit
 bankofamerica,2,7,3,,(^|-)&-,,,,,
 bestbuy,2,6,3,,(^|-)&-,,,,,Too many FPs
 bilibili,0,1,3,,(^|-)&-,,,,,
