@@ -1,98 +1,99 @@
 ﻿target,dnstwist_count/run,dnstwist_count,dnstwist_runs,dnstwist_disable (y\N),regex,regex_count/run,regex_count,regex_runs,regex_disable (Y\n),comments
 adblock,0,1,4,,(^|-)&-,,,,,
 adblockplus,0,0,3,y,(^|-)&-,,,,,
-airbnb,1,6,4,,(^|-)&|&(-|\.),43,174,4,n,regex: verified
-alibaba,0,2,4,,(^|-)&|&(-|\.),42,170,4,n,regex: verified
-aliexpress,0,0,4,,(^|-)&|&(-|\.),18,74,4,n,regex: verified
-amazon,3,12,4,,-&|&-,49,196,4,n,Made less aggressive for sites related to the place
-apple,14,59,4,y,-&,60,243,4,n,Made less aggressive for sites related to the fruit
+airbnb,1,6,4,,(^|-)&|&(-|\.),43,174,4,n,
+alibaba,0,2,4,,(^|-)&|&(-|\.),42,170,4,n,
+aliexpress,0,0,4,,(^|-)&|&(-|\.),18,74,4,n,
+amazon,3,12,4,,-&|&-,49,196,4,n,regex: Made less aggressive for sites related to the place
+apple,14,59,4,y,-&,60,243,4,n,regex: Made less aggressive for sites related to the fruit
 bankofamerica,2,8,4,,(^|-)&-,,,,,
-bestbuy,1,6,4,,(^|-)&-,,,,,Too many FPs
+bestbuy,1,6,4,,(^|-)&-,,,,,regex: Too many FPs
 bilibili,0,1,4,,(^|-)&-,,,,,
-binance,1,5,4,,(^|-)&|&(-|\.),61,247,4,n,regex: verified
-bing,17,70,4,y,(^|-)&-,,,,,Less than 5 characters
-bitcoin,1,4,4,,-&|&(-|\.),10,41,4,n,regex: verified
+binance,1,5,4,,(^|-)&|&(-|\.),61,247,4,n,
+bing,17,70,4,y,(^|-)&-,,,,,
+bitcoin,1,4,4,,-&|&(-|\.),10,41,4,n,
 bitwarden,0,1,4,,(^|-)&-,,,,,
 canva,3,11,3,y,(^|-)&-,,,,,
-capitalone,1,5,4,,(^|-)&|&(-|\.),6,27,4,n,regex: verified
+capitalone,1,5,4,,(^|-)&|&(-|\.),6,27,4,n,
 chat.openai,0,1,4,,(^|-)&-,,,,,
-chatgpt,5,23,4,,(^|-)&|&(-|\.),85,340,4,n,regex: verified
+chatgpt,5,23,4,,(^|-)&|&(-|\.),85,340,4,n,
 citigroup,0,2,4,,(^|-)&-,,,,,
-coinbase,1,6,4,,(^|-)&|&(-|\.),87,349,4,n,regex: verified
-crypto,2,8,4,,-&|&-,78,313,4,n,Made less agressive for false positives
+coinbase,1,6,4,,(^|-)&|&(-|\.),87,349,4,n,
+crypto,2,8,4,,-&|&-,78,313,4,n,regex: Made less agressive for FPs
 deezer,0,2,3,y,(^|-)&-,,,,,
-discord,2,9,4,,(^|-)&|&(-|\.),36,145,4,n,regex: verified
+discord,2,9,4,,(^|-)&|&(-|\.),36,145,4,n,
 disney,5,17,3,y,(^|-)&-,,,,,
-disneyplus,0,0,4,,(^|-)&|&(-|\.),18,18,1,n,regex: verified
+disneyplus,0,0,4,,(^|-)&|&(-|\.),18,18,1,n,
 duckduckgo,0,2,4,,(^|-)&-,,,,,
-evri,35,35,1,y,-&|&(-|\.),2,8,4,n,regex: verified
-facebook,0,1,4,,(^|-)&|&(-|\.),32,129,4,n,regex: verified
+evri,35,35,1,y,-&|&(-|\.),2,8,4,n,
+facebook,0,1,4,,(^|-)&|&(-|\.),32,129,4,n,
 fansly,0,0,4,,(^|-)&-,,,,,
-fedex,10,40,4,y,(^|-)&|&(-|\.),20,80,4,n,regex: verified
+fedex,10,40,4,y,(^|-)&|&(-|\.),20,80,4,n,
 forever21,0,0,4,,(^|-)&-,,,,,
 gemini,10,43,4,y,(^|-)&-,,,,,
-gmail,16,64,4,y,(^|-)&|&-,22,91,4,n,regex: verified
+gmail,16,64,4,y,(^|-)&|&-,22,91,4,n,
 goldmansachs,0,2,4,,(^|-)&-,,,,,
-google,2,11,4,,(^|-)&|&(-|\.),314,1259,4,n,regex: verified
+google,2,11,4,,(^|-)&|&(-|\.),314,1259,4,n,
 googlepay,0,0,1,,(^|-)&-,,,,,
+grapheneos,,,,,(^|-)&-,,,,,
 hentai,7,45,6,y,(^|-)&-,,,,,
 homedepot,0,1,4,,(^|-)&-,,,,,
-instagram,1,5,4,,(^|-)&|&(-|\.),22,90,4,n,regex: verified
+instagram,1,5,4,,(^|-)&|&(-|\.),22,90,4,n,
 jpmorganchase,0,0,4,,(^|-)&-,,,,,
-kraken,10,84,8,y,(^|-)&-,,,,,Too many FPs
+kraken,10,84,8,y,(^|-)&-,,,,,regex: Too many FPs
 kuaishou,2,7,3,y,(^|-)&-,,,,,
-lazada,5,20,4,y,(^|-)&-,,,,,Too few true positives
-linkedin,2,11,4,,(^|-)&|&(-|\.),57,230,4,n,regex: verified
+lazada,5,20,4,y,(^|-)&-,,,,,regex: Too few TPs
+linkedin,2,11,4,,(^|-)&|&(-|\.),57,230,4,n,
 mail.ru,0,0,3,y,(^|-)&-,,,,,
-mastercard,0,1,4,,(^|-)&|&(-|\.),4,17,4,n,regex: verified
+mastercard,0,1,4,,(^|-)&|&(-|\.),4,17,4,n,
 mayoclinic,0,0,4,,(^|-)&-,,,,,
-messenger,0,0,4,,(^|-)&-,,,,,Too few true positives
-metamask,0,0,4,,(^|-)&|&(-|\.),16,64,4,n,regex: verified
-microsoft,0,2,4,,(^|-)&|&(-|\.),43,173,4,n,regex: verified
-microsoft365,0,0,4,,(^|-)&|&(-|\.),32,164,5,n,regex: verified
-netflix,0,2,4,,(^|-)&|&(-|\.),52,209,4,n,regex: verified
+messenger,0,0,4,,(^|-)&-,,,,,regex: Too few TPs
+metamask,0,0,4,,(^|-)&|&(-|\.),16,64,4,n,
+microsoft,0,2,4,,(^|-)&|&(-|\.),43,173,4,n,
+microsoft365,0,0,4,,(^|-)&|&(-|\.),32,164,5,n,
+netflix,0,2,4,,(^|-)&|&(-|\.),52,209,4,n,
 nicehash,0,1,4,,(^|-)&-,,,,,
-office365,2,8,4,,(^|-)&|&(-|\.),10,40,4,n,regex: verified
+office365,2,8,4,,(^|-)&|&(-|\.),10,40,4,n,
 okcupid,2,9,4,,(^|-)&-,,,,,
-onedrive,0,0,4,,-&|&(-|\.),33,132,4,n,Made less aggressive for 'onedriver' domains
-onlyfans,0,2,4,,(^|-)&|&(-|\.),28,113,4,n,regex: verified
-openai,0,3,4,,(^|-)&|&(-|\.),49,199,4,n,regex: verified
-outlook,0,1,4,,(^|-)&-,,,,,Too many FPs
-paypal,1,4,4,,(^|-)&|&(-|\.),27,109,4,n,regex: verified
-pinterest,2,10,4,,(^|-)&|&(-|\.),28,28,1,n,regex: verified
-pornhub,0,0,4,,(^|-)&|&(-|\.),7,30,4,n,regex: verified
+onedrive,0,0,4,,-&|&(-|\.),33,132,4,n,regex: Made less aggressive for 'onedriver' domains
+onlyfans,0,2,4,,(^|-)&|&(-|\.),28,113,4,n,
+openai,0,3,4,,(^|-)&|&(-|\.),49,199,4,n,
+outlook,0,1,4,,(^|-)&-,,,,,regex: Too many FPs
+paypal,1,4,4,,(^|-)&|&(-|\.),27,109,4,n,
+pinterest,2,10,4,,(^|-)&|&(-|\.),28,28,1,n,
+pornhub,0,0,4,,(^|-)&|&(-|\.),7,30,4,n,
 primevideo,0,3,4,,(^|-)&-,,,,,
-reddit,7,28,4,y,(^|-)&|&(-|\.),19,79,4,n,regex: verified
-roblox,0,0,4,,(^|-)&|&(-|\.),33,135,4,n,regex: verified
-samsung,0,0,4,,(^|-)&|&(-|\.),67,268,4,n,regex: verified
-sharepoint,0,1,4,,(^|-)&|&(-|\.),20,80,4,n,regex: verified
-shopee,18,74,4,y,(^|-)&|&-,63,252,4,n,regex: verified
+reddit,7,28,4,y,(^|-)&|&(-|\.),19,79,4,n,
+roblox,0,0,4,,(^|-)&|&(-|\.),33,135,4,n,
+samsung,0,0,4,,(^|-)&|&(-|\.),67,268,4,n,
+sharepoint,0,1,4,,(^|-)&|&(-|\.),20,80,4,n,
+shopee,18,74,4,y,(^|-)&|&-,63,252,4,n,
 signal,4,19,4,y,(^|-)&-,,,,,
-snapchat,0,2,4,,(^|-)&|&(-|\.),7,30,4,n,regex: verified
+snapchat,0,2,4,,(^|-)&|&(-|\.),7,30,4,n,
 spankbang,0,0,4,,(^|-)&-,,,,,
-spotify,0,2,4,,(^|-)&|&(-|\.),19,79,4,n,regex: verified
+spotify,0,2,4,,(^|-)&|&(-|\.),19,79,4,n,
 steamcommunity,7,31,4,,(^|-)&-,,,,,
 steampowered,0,0,4,,(^|-)&-,,,,,
-taobao,0,0,4,,(^|-)&|&(-|\.),37,150,4,n,regex: verified
-telegram,0,3,4,,(^|-)&|&(-|\.),70,282,4,n,regex: verified
-tesla,12,50,4,y,-&|&-,,,,,Too few true positives
-tiktok,1,4,4,,(^|-)&|&(-|\.),206,826,4,n,regex: verified
-tinder,11,33,3,y,(^|-)&-,,,,,Too many FPs
+taobao,0,0,4,,(^|-)&|&(-|\.),37,150,4,n,
+telegram,0,3,4,,(^|-)&|&(-|\.),70,282,4,n,
+tesla,12,50,4,y,-&|&-,,,,,regex: Too few TPs
+tiktok,1,4,4,,(^|-)&|&(-|\.),206,826,4,n,
+tinder,11,33,3,y,(^|-)&-,,,,,regex: Too many FPs
 tumblr,0,0,3,y,(^|-)&-,,,,,
-twitch,3,10,3,y,(^|-)&|&-,17,71,4,n,regex: verified
-twitter,0,0,4,,(^|-)&|&(-|\.),22,91,4,n,regex: verified
+twitch,3,10,3,y,(^|-)&|&-,17,71,4,n,
+twitter,0,0,4,,(^|-)&|&(-|\.),22,91,4,n,
 ublock,1,5,4,,(^|-)&-,,,,,
 ublockorigin,0,0,3,y,(^|-)&-,,,,,
-usbank,3,10,3,y,(^|-)&|&-,24,96,4,n,regex: verified
-usps,40,40,1,y,-&|&(-|\.),7,29,4,n,regex: verified
-walmart,0,3,4,,(^|-)&|&(-|\.),29,117,4,n,regex: verified
-wechat,7,42,6,y,(^|-)&|&(-|\.),13,55,4,n,regex: verified
+usbank,3,10,3,y,(^|-)&|&-,24,96,4,n,
+usps,40,40,1,y,-&|&(-|\.),7,29,4,n,
+walmart,0,3,4,,(^|-)&|&(-|\.),29,117,4,n,
+wechat,7,42,6,y,(^|-)&|&(-|\.),13,55,4,n,
 weibo,4,18,4,y,(^|-)&-,,,,,
-wellsfargo,0,2,4,,(^|-)&|&(-|\.),13,54,4,n,regex: verified
-whatsapp,0,2,4,,(^|-)&|&(-|\.),88,352,4,n,regex: verified
+wellsfargo,0,2,4,,(^|-)&|&(-|\.),13,54,4,n,
+whatsapp,0,2,4,,(^|-)&|&(-|\.),88,352,4,n,
 wikipedia,10,81,8,y,(^|-)&-,,,,,
-xhamster,0,3,4,,(^|-)&|&(-|\.),9,36,4,n,regex: verified
-xvideos,6,36,6,y,(^|-)&|&-,19,78,4,n,regex: verified
-yahoo,5,35,6,y,(^|-)&-,,,,,Too few true positives
-yandex,0,3,4,,(^|-)&|&(-|\.),59,237,4,n,regex: verified
-youtube,0,2,4,,(^|-)&|&(-|\.),76,304,4,n,regex: verified
+xhamster,0,3,4,,(^|-)&|&(-|\.),9,36,4,n,
+xvideos,6,36,6,y,(^|-)&|&-,19,78,4,n,
+yahoo,5,35,6,y,(^|-)&-,,,,,regex: Too few TPs
+yandex,0,3,4,,(^|-)&|&(-|\.),59,237,4,n,
+youtube,0,2,4,,(^|-)&|&(-|\.),76,304,4,n,
