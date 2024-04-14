@@ -35,9 +35,9 @@ Today | Yesterday | Excluded | Source
     - |         3 |       3% | stopgunscams.com
     - |       849 |      13% | All sources
 
-*The Excluded % is of domains not included in the
+* The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
-*Only active sources are shown. See the full list of
+* Only active sources are shown. See the full list of
  sources in SOURCES.md.
 ```
 
