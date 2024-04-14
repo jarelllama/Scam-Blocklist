@@ -117,9 +117,7 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 
 Dead domains that are resolving again are included back into the blocklist.
 
-For list maintainers interested in integrating the dead domains as a source, the list of dead domains can be found here:
-
-[dead_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/dead_domains.txt) (capped at 8000 entries)
+For list maintainers interested in integrating the dead domains as a source, the list of daily-updated dead domains can be found here: [dead_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/dead_domains.txt) (capped at 8000 entries)
 
 ## Parked domains
 
@@ -129,9 +127,7 @@ A list of common parked domain messages is used to automatically detect these do
 
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
 
-For list maintainers interested in integrating the parked domains as a source, the list of parked domains can be found here:
-
-[parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped at 7000 entries)
+For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped at 7000 entries)
 
 ## Resources
 
@@ -145,7 +141,7 @@ For list maintainers interested in integrating the parked domains as a source, t
 ## See also
 
 - [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
-- [Fabriziosalmi's hourly updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists) *
+- [Fabriziosalmi's hourly-updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists) *
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) *
 - [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) *
 - [oisd blocklist](https://oisd.nl/) *
