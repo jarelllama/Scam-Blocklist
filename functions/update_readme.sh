@@ -101,6 +101,13 @@ The generated domain permutations are checked for matches in a newly registered 
 
 Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishing domains with marginal false positives.
 
+#### Statistics for dnstwist source
+
+\`\`\` text
+Active targets: $(awk -F ',' '$5 != "y"' "$PHISHING_TARGETS" | tail -n +2 | wc -l)
+Domains retrieved today: $(sum "$TODAY" dnstwist)
+\`\`\`
+
 ### Regarding other sources
 
 All sources used presently or in the past are credited here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
@@ -169,6 +176,7 @@ readonly FUNCTION='bash functions/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
+readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 TODAY="$(date -u +"%d-%m-%y")"
 YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
