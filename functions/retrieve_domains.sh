@@ -575,9 +575,6 @@ source_regex() {
         counts_run="$(( count / runs ))"
         sed -i "/${domain}/s/${row}/${pattern},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
-
-        # Reset results file for the next target domain
-        rm results.tmp
     done <<< "$targets"
 
     process_source
