@@ -116,6 +116,14 @@ The domain retrieval process for all sources can be viewed in the repository's c
 - Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
 - Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations
 
+  Example Telegram notification:
+
+  ``` text
+  Entries requiring manual review:
+  ovsfashion.com (toplist)
+  pearson.com (toplist)
+  ```
+
 The full filtering process can be viewed in the repository's code.
 
 ## Dead domains
