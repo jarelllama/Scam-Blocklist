@@ -8,19 +8,7 @@ on:
       - '**.sh'
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        test: [shellcheck, retrieve, dead, parked, validate, build]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-      - name: Run ${{ matrix.test }} test
-        run: bash functions/test_functions.sh ${{ matrix.test }}
-
+  # A matrix strategy is not used for better readability in the Actions summary 
   shellcheck:
     runs-on: ubuntu-latest
     steps:
