@@ -18,8 +18,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 40726
-Light version: 4109
+Total domains: 40080
+Light version: 4064
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
@@ -146,8 +146,8 @@ For list maintainers interested in integrating the parked domains as a source, t
 ### Statistics for parked domains
 
 ``` text
-Parked domains removed today: 413
-Unparked domains added today: 483
+Parked domains removed today: 1453
+Unparked domains added today: 877
 ```
 
 ## Resources
