@@ -23,17 +23,17 @@ Light version: 4077
 
 Statistics for each source:
 Today | Yesterday | Excluded | Source
-  136 |        17 |       2% | Google Search
-   19 |         0 |       0% | Manual Entries
-  394 |      8083 |       2% | Regex Matching (NRDs)
-    4 |        23 |       8% | aa419.org
-   98 |       144 |       0% | dnstwist (NRDs)
-  170 |        17 |      18% | guntab.com
-    9 |         3 |       6% | petscams.com
-    8 |         2 |      63% | scam.directory
-    8 |         4 |      35% | scamadviser.com
-    3 |         1 |       3% | stopgunscams.com
-  849 |      8294 |      13% | All sources
+    - |       136 |       2% | Google Search
+    - |        19 |       0% | Manual Entries
+    - |       394 |       2% | Regex Matching (NRDs)
+    - |         4 |       8% | aa419.org
+    - |        98 |       0% | dnstwist (NRDs)
+    - |       170 |      18% | guntab.com
+    - |         9 |       6% | petscams.com
+    - |         8 |      63% | scam.directory
+    - |         8 |      35% | scamadviser.com
+    - |         3 |       3% | stopgunscams.com
+    - |       849 |      13% | All sources
 
 *The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -77,8 +77,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 17
-Queries made today: 139
-Domains retrieved today: 136
+Queries made today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -137,6 +137,7 @@ If these parked sites no longer contain any of the parked messages, they are ass
 ## See also
 
 - [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
+- [Fabriziosalmi's blocklist](https://github.com/fabriziosalmi/blacklists) (uses this blocklist as a source)
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) (uses this blocklist as a source)
 - [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) (uses parts of this blocklist as a source)
 - [oisd blocklist](https://oisd.nl/) (uses this blocklist as a source)
