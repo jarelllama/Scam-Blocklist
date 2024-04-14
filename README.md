@@ -142,7 +142,7 @@ If these parked sites no longer contain any of the parked messages, they are ass
 - [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) *
 - [oisd blocklist](https://oisd.nl/) *
 
-\* uses this blocklist as a source
+\* Uses this blocklist as a source
 
 ## Appreciation
 
