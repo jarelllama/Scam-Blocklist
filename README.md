@@ -104,7 +104,7 @@ Domains retrieved today: 22
 
 ### Regarding other sources
 
-All sources used presently or in the past are credited here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
+All sources used presently or formerly are credited here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
 The domain retrieval process for all sources can be viewed in the repository's code.
 
