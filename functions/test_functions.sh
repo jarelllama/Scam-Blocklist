@@ -600,10 +600,10 @@ run_script() {
     echo "----------------------------------------------------------------------"
 
     # Check exit status
-    if [[ "$errored" == true ]]; then
-        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
-        error=true
-    fi
+    [[ "$errored" != true ]] && return
+
+    printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
+    error=true
 }
 
 # Function 'check_and_exit' checks if the script should exit with an exit
