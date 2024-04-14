@@ -122,6 +122,14 @@ The domain retrieval process for all sources can be viewed in the repository's c
 - Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
 - Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations
 
+Example Telegram notification:
+
+``` text
+Entries requiring manual review:
+ovsfashion.com (toplist)
+pearson.com (toplist)
+```
+
 The full filtering process can be viewed in the repository's code.
 
 ## Dead domains
@@ -129,8 +137,6 @@ The full filtering process can be viewed in the repository's code.
 Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter).
 
 Dead domains that are resolving again are included back into the blocklist.
-
-For list maintainers interested in integrating the dead domains as a source, the list of daily-updated dead domains can be found here: [dead_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/dead_domains.txt) (capped to newest 8000 entries)
 
 ### Statistics for dead domains
 
