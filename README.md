@@ -126,6 +126,8 @@ Dead domains that are resolving again are included back into the blocklist.
 
 For list maintainers interested in integrating the dead domains as a source, the list of daily-updated dead domains can be found here: [dead_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/dead_domains.txt) (capped to newest 8000 entries)
 
+### Statistics for dead domains
+
 ``` text
 Dead domains removed today: 387
 Resurrected domains added today: 148
@@ -140,6 +142,8 @@ A list of common parked domain messages is used to automatically detect these do
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
 
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 7000 entries)
+
+### Statistics for parked domains
 
 ``` text
 Parked domains removed today: 413
