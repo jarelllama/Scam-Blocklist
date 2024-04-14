@@ -123,6 +123,10 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 
 Dead domains that are resolving again are included back into the blocklist.
 
+For list maintainers interested in integrating the dead domains as a source, the list of dead domains can be found here:
+
+[dead_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/dead_domains.txt) (capped at 8000 entries)
+
 ## Parked domains
 
 From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/84e682fea95866670dd99f5c98f350bc7377011a) of the blocklist consisted of [parked domains](https://www.godaddy.com/resources/ae/skills/parked-domain) that inflated the number of entries. Because these domains pose no real threat (besides the obnoxious advertising), they are removed from the blocklist daily.
@@ -130,6 +134,10 @@ From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/8
 A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt)
 
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
+
+For list maintainers interested in integrating the parked domains as a source, the list of parked domains can be found here:
+
+[parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped at 7000 entries)
 
 ## Resources
 
