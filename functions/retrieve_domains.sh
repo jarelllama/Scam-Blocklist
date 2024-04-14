@@ -516,7 +516,7 @@ source_dnstwist() {
         cat results.tmp >> "$results_file"
 
         # Update counts for the target domain
-        count="$(( count + $(wc -w < results.tmp) ))"
+        count="$(( count + $(wc -l < results.tmp) ))"
         (( runs++ ))
         counts_run="$(( count / runs ))"
         sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
