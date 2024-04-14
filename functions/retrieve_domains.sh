@@ -100,8 +100,9 @@ process_source() {
     sed -i 's/https\?://; s/\///g' "$results_file"
 
     # Install idn
+    # Requires sudo for some reason
+    command -v idn &> /dev/null || sudo apt-get install -yqq idn
     # Convert to punycode
-    command -v idn &> /dev/null || apt-get install -yqq idn
     idn < "$results_file" > results.tmp
     mv raw.tmp "$results_file"
 

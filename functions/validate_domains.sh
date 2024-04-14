@@ -42,8 +42,9 @@ filter() {
 
 validate() {
     # Install idn
+    # Requires sudo for some reason
+    command -v idn &> /dev/null || sudo apt-get install -yqq idn
     # Convert to punycode
-    command -v idn &> /dev/null || apt-get install -yqq idn
     idn < "$RAW" | sort > raw.tmp
     mv raw.tmp "$RAW"
 
