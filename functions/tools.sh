@@ -77,8 +77,8 @@ log_domains() {
 prune_lines() {
     lines="$(wc -l < "$1")"
 
-    if (( lines > "$2" )); then
-        sed -i "1,$(( lines - "$2" ))d" "$1"
+    if (( lines > $2 )); then
+        sed -i "1,$(( lines - $2 ))d" "$1"
     fi
 }
 
