@@ -95,6 +95,13 @@ The generated domain permutations are checked for matches in a newly registered 
 
 Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishing domains with marginal false positives.
 
+#### Statistics for dnstwist source
+
+``` text
+Active targets: 68
+Domains retrieved today: 22
+```
+
 ### Regarding other sources
 
 All sources used presently or in the past are credited here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
