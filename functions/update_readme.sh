@@ -83,7 +83,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 \`\`\` text
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-Queries made today: $(grep -F "${TODAY},Google Search" "$SOURCE_LOG" | csvcut -c 10 | awk '{sum += $1} END {print sum}')
+API calls today: $(grep -F "${TODAY},Google Search" "$SOURCE_LOG" | csvcut -c 10 | awk '{sum += $1} END {print sum}')
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
