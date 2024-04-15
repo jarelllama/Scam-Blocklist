@@ -18,22 +18,22 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 40085
-Light version: 4069
+Total domains: 39987
+Light version: 4138
 
 Retrieval count for each source:
 Today | Yesterday | Excluded | Source
-    0 |        17 |       2% | Google Search
+   78 |        17 |       3% | Google Search
     5 |         0 |       0% | Manual Entries
-    0 |       327 |       2% | Regex Matching (NRDs)
-    0 |        10 |       8% | aa419.org
-    0 |        22 |       0% | dnstwist (NRDs)
+   74 |       327 |       2% | Regex Matching (NRDs)
+   20 |        10 |       8% | aa419.org
+   28 |        22 |       0% | dnstwist (NRDs)
     0 |         0 |      18% | guntab.com
     0 |        26 |       6% | petscams.com
-    0 |        12 |      61% | scam.directory
+    0 |        12 |      62% | scam.directory
     0 |         0 |      35% | scamadviser.com
     0 |         0 |       3% | stopgunscams.com
-    5 |       414 |      13% | All sources
+  205 |       414 |      13% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -77,8 +77,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 19
-API calls made today: 0
-Domains retrieved today: 0
+API calls made today: 147
+Domains retrieved today: 78
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -99,7 +99,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 
 ``` text
 Active targets: 68
-Domains retrieved today: 0
+Domains retrieved today: 28
 ```
 
 ### Regarding other sources
@@ -133,8 +133,8 @@ Dead domains that are resolving again are included back into the blocklist.
 ### Statistics for dead domains
 
 ``` text
-Dead domains removed today: 0
-Resurrected domains added today: 0
+Dead domains removed today: 559
+Resurrected domains added today: 199
 ```
 
 ## Parked domains
@@ -150,8 +150,8 @@ For list maintainers interested in integrating the parked domains as a source, t
 ### Statistics for parked domains
 
 ``` text
-Parked domains removed today: 0
-Unparked domains added today: 0
+Parked domains removed today: 417
+Unparked domains added today: 479
 ```
 
 ## Resources / see also
