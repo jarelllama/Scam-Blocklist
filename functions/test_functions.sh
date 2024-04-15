@@ -70,23 +70,24 @@ SHELLCHECK() {
     done <<< "$scripts"
 
     # Check for carriage return characters
-    problematic_files=$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)
-    if [[ -n "$problematic_files" ]]; then
+    files=$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)
+    if [[ -n "$files" ]]; then
         printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n"
-        printf "%s\n" "$problematic_files"
+        printf "%s\n" "$files"
         error=true
     fi
 
     # Check for missing space before comments
-    problematic_files=$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
+    files=$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
         --exclude=*.csv .)
-    if [[ -n "$problematic_files" ]]; then
+    if [[ -n "$files" ]]; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n"
-        printf "%s\n" "$problematic_files"
+        printf "%s\n" "$files"
         error=true
     fi
 
-    printf "\n[info] Scripts checked (%s):\n%s\n\n" "$(wc -w <<< "$scripts")" "$scripts"
+    printf "\n[info] Scripts checked (%s):\n%s\n\n" \
+        "$(wc -w <<< "$scripts")" "$scripts"
 
     [[ "$error" == true ]] && exit 1
 

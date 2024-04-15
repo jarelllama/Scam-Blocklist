@@ -142,8 +142,8 @@ find_parked() {
         # Check for parked message in site's HTML
         # Note <(curl... | tr...) outputs a broken pipe error
         # tr used here to remove null characters which some sites seem to have
-        if grep -qiFf "$PARKED_TERMS" <<< "$(curl -sL --max-time 3 "http://${domain}/" \
-            | tr -d '\0')"; then
+        if grep -qiFf "$PARKED_TERMS" <<< "$(curl -sL --max-time 3 \
+            "http://${domain}/" | tr -d '\0')"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi

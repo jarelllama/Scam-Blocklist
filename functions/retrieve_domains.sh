@@ -281,9 +281,9 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
-    echo "${TIMESTAMP},${source},${item},${raw_count},\
-${final_count},${total_whitelisted_count},${dead_count},\
-${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
+    echo "${TIMESTAMP},${source},${item},${raw_count},${final_count},\
+${total_whitelisted_count},${dead_count},${parked_count},${in_toplist_count},\
+${query_count},${status}" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
 
@@ -331,8 +331,7 @@ download_nrd_feed() {
             "Error occurred while downloading NRD feeds."
 
         # Download the bigger feeds in parallel
-        curl -sH 'User-Agent: openSquat-2.1.0' "$url2" \
-        & wget -qO - "$url3"
+        curl -sH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
 
     } | grep -vF '#' > nrd.tmp
 
