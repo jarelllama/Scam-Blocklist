@@ -118,9 +118,9 @@ The domain retrieval process for all sources can be viewed in the repository's c
 Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations.
 
 Example message body:
-> Entries requiring manual review:
-> ovsfashion.com (toplist)
-> aprilcash2023[.]com (invalid)
+\> Entries requiring manual review:
+\> ovsfashion.com (toplist)
+\> aprilcash2023[.]com (invalid)
 
 The full filtering process can be viewed in the repository's code.
 
