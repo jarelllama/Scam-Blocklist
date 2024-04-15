@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.14.183959.2024
+# Version: 04.15.000734.2024
 # Expires: 1 day
-# Last modified: Sun Apr 14 18:39:59 UTC 2024
+# Last modified: Mon Apr 15 00:07:34 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 4064
+# Number of entries: 4067
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -1066,6 +1066,7 @@ local=/ecn195.com/
 local=/ecobeautesupplierau.com/
 local=/ecoflair.org/
 local=/ecoilartion.com/
+local=/ecom-appdev.com/
 local=/ecroxlaunchpad.com/
 local=/edelridstore.com/
 local=/eggsforsale.co.za/
@@ -1447,6 +1448,7 @@ local=/globalgenuinedocuments.com/
 local=/globallegitdocument.com/
 local=/globallinelogistics.online/
 local=/globallogisticsairlines.com/
+local=/globallogisticsmail.com/
 local=/globalmedschemicals.com/
 local=/globalmetalsagroltd.com/
 local=/globalmoversdelivery.co.com/
@@ -2337,6 +2339,7 @@ local=/nikasfashion.com/
 local=/nikloso.com/
 local=/nilibili.com/
 local=/nkjha.com/
+local=/nld573181.com/
 local=/nnicrosoft.online/
 local=/noahstuffs.com/
 local=/nobleboxerpuppies.com/

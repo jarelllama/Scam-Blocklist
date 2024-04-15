@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.14.183959.2024
+# Version: 04.15.000734.2024
 # Expires: 1 day
-# Last modified: Sun Apr 14 18:39:59 UTC 2024
+# Last modified: Mon Apr 15 00:07:34 UTC 2024
 # Syntax: Unbound
-# Number of entries: 40080
+# Number of entries: 40083
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -10065,6 +10065,7 @@ local-zone: "ecogreeninvestments.xyz." always_nxdomain
 local-zone: "ecoheizung.com." always_nxdomain
 local-zone: "ecoilartion.com." always_nxdomain
 local-zone: "ecoinvestmentsdelawarellc.com." always_nxdomain
+local-zone: "ecom-appdev.com." always_nxdomain
 local-zone: "ecomdeliveryfranchise.com." always_nxdomain
 local-zone: "ecommerce-shipping-software-mx-11-id.today." always_nxdomain
 local-zone: "ecommercemarketingcourseinsanganerjaipur.in." always_nxdomain
@@ -13622,6 +13623,7 @@ local-zone: "globallogisticlimited.com." always_nxdomain
 local-zone: "globallogistics-cargo.com." always_nxdomain
 local-zone: "globallogisticsairlines.com." always_nxdomain
 local-zone: "globallogisticscouriers.com." always_nxdomain
+local-zone: "globallogisticsmail.com." always_nxdomain
 local-zone: "globallogisticsservice.online." always_nxdomain
 local-zone: "globallogisticsshippingcompany.com." always_nxdomain
 local-zone: "globallycryptoexchangeandmarketing.com." always_nxdomain
@@ -23358,6 +23360,7 @@ local-zone: "nkosipoultryfarming.co.za." always_nxdomain
 local-zone: "nlchemical.com." always_nxdomain
 local-zone: "nlclogistic.net." always_nxdomain
 local-zone: "nlcu.education." always_nxdomain
+local-zone: "nld573181.com." always_nxdomain
 local-zone: "nlexch.ltd." always_nxdomain
 local-zone: "nltmarketingllc.com." always_nxdomain
 local-zone: "nlynelly.com." always_nxdomain

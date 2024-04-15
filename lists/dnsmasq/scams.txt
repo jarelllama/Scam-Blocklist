@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.14.183959.2024
+# Version: 04.15.000734.2024
 # Expires: 1 day
-# Last modified: Sun Apr 14 18:39:59 UTC 2024
+# Last modified: Mon Apr 15 00:07:34 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 40080
+# Number of entries: 40083
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -10064,6 +10064,7 @@ local=/ecogreeninvestments.xyz/
 local=/ecoheizung.com/
 local=/ecoilartion.com/
 local=/ecoinvestmentsdelawarellc.com/
+local=/ecom-appdev.com/
 local=/ecomdeliveryfranchise.com/
 local=/ecommerce-shipping-software-mx-11-id.today/
 local=/ecommercemarketingcourseinsanganerjaipur.in/
@@ -13621,6 +13622,7 @@ local=/globallogisticlimited.com/
 local=/globallogistics-cargo.com/
 local=/globallogisticsairlines.com/
 local=/globallogisticscouriers.com/
+local=/globallogisticsmail.com/
 local=/globallogisticsservice.online/
 local=/globallogisticsshippingcompany.com/
 local=/globallycryptoexchangeandmarketing.com/
@@ -23357,6 +23359,7 @@ local=/nkosipoultryfarming.co.za/
 local=/nlchemical.com/
 local=/nlclogistic.net/
 local=/nlcu.education/
+local=/nld573181.com/
 local=/nlexch.ltd/
 local=/nltmarketingllc.com/
 local=/nlynelly.com/
