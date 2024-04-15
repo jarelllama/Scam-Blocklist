@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.15.161843.2024
+# Version: 04.15.180729.2024
 # Expires: 1 day
-# Last modified: Mon Apr 15 16:18:43 UTC 2024
+# Last modified: Mon Apr 15 18:07:29 UTC 2024
 # Syntax: Unbound
-# Number of entries: 4117
+# Number of entries: 4112
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -343,7 +343,6 @@ local-zone: "barrymorgansamoyed.com." always_nxdomain
 local-zone: "barymanes.store." always_nxdomain
 local-zone: "bastine.com." always_nxdomain
 local-zone: "basurtoranchoftexas.com." always_nxdomain
-local-zone: "batcoin.site." always_nxdomain
 local-zone: "batslyadams.com." always_nxdomain
 local-zone: "bayareainjury.com." always_nxdomain
 local-zone: "baza-wrq.com." always_nxdomain
@@ -746,7 +745,6 @@ local-zone: "circecares.com." always_nxdomain
 local-zone: "circlesofcare.org." always_nxdomain
 local-zone: "citigroup.store." always_nxdomain
 local-zone: "citigroupcanary.com." always_nxdomain
-local-zone: "citizencrt.cc." always_nxdomain
 local-zone: "cityarmories.com." always_nxdomain
 local-zone: "citybusinesscreditunion.com." always_nxdomain
 local-zone: "cityhillschnauzers.com." always_nxdomain
@@ -1334,7 +1332,6 @@ local-zone: "flybtes.com." always_nxdomain
 local-zone: "fmacdi.com." always_nxdomain
 local-zone: "fnscar15p.com." always_nxdomain
 local-zone: "focalitems.com." always_nxdomain
-local-zone: "fofice365.com." always_nxdomain
 local-zone: "foogle.cn." always_nxdomain
 local-zone: "forcedresettriggerusa.com." always_nxdomain
 local-zone: "foreseew.com." always_nxdomain
@@ -1399,7 +1396,6 @@ local-zone: "gantcliver.com." always_nxdomain
 local-zone: "gapstrading.com." always_nxdomain
 local-zone: "garantibbvaa.com." always_nxdomain
 local-zone: "garantibbvatr.com." always_nxdomain
-local-zone: "gatorpsei.com." always_nxdomain
 local-zone: "gb-evri.vip." always_nxdomain
 local-zone: "gearshiftgalore.com." always_nxdomain
 local-zone: "geemini.top." always_nxdomain
@@ -2005,7 +2001,6 @@ local-zone: "local-meets.com." always_nxdomain
 local-zone: "localkennel.co.za." always_nxdomain
 local-zone: "localnetld.com." always_nxdomain
 local-zone: "locoeous.com." always_nxdomain
-local-zone: "locoraea.com." always_nxdomain
 local-zone: "logistektransportation.com." always_nxdomain
 local-zone: "logisticcargolinelp.com." always_nxdomain
 local-zone: "logisticsfreights.com." always_nxdomain

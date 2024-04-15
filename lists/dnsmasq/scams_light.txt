@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.15.161843.2024
+# Version: 04.15.180729.2024
 # Expires: 1 day
-# Last modified: Mon Apr 15 16:18:43 UTC 2024
+# Last modified: Mon Apr 15 18:07:29 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 4117
+# Number of entries: 4112
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -342,7 +342,6 @@ local=/barrymorgansamoyed.com/
 local=/barymanes.store/
 local=/bastine.com/
 local=/basurtoranchoftexas.com/
-local=/batcoin.site/
 local=/batslyadams.com/
 local=/bayareainjury.com/
 local=/baza-wrq.com/
@@ -745,7 +744,6 @@ local=/circecares.com/
 local=/circlesofcare.org/
 local=/citigroup.store/
 local=/citigroupcanary.com/
-local=/citizencrt.cc/
 local=/cityarmories.com/
 local=/citybusinesscreditunion.com/
 local=/cityhillschnauzers.com/
@@ -1333,7 +1331,6 @@ local=/flybtes.com/
 local=/fmacdi.com/
 local=/fnscar15p.com/
 local=/focalitems.com/
-local=/fofice365.com/
 local=/foogle.cn/
 local=/forcedresettriggerusa.com/
 local=/foreseew.com/
@@ -1398,7 +1395,6 @@ local=/gantcliver.com/
 local=/gapstrading.com/
 local=/garantibbvaa.com/
 local=/garantibbvatr.com/
-local=/gatorpsei.com/
 local=/gb-evri.vip/
 local=/gearshiftgalore.com/
 local=/geemini.top/
@@ -2004,7 +2000,6 @@ local=/local-meets.com/
 local=/localkennel.co.za/
 local=/localnetld.com/
 local=/locoeous.com/
-local=/locoraea.com/
 local=/logistektransportation.com/
 local=/logisticcargolinelp.com/
 local=/logisticsfreights.com/
