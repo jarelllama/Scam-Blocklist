@@ -3,15 +3,14 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.15.122445.2024
+! Version: 04.15.161843.2024
 ! Expires: 1 day
-! Last modified: Mon Apr 15 12:24:45 UTC 2024
+! Last modified: Mon Apr 15 16:18:43 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 4138
+! Number of entries: 4117
 !
 ||01edc.com^
 ||0penai.xyz^
-||1airbnb.com^
 ||1bestbuy.com^
 ||1sttheworld.com^
 ||2022factorysale.ru^
@@ -291,8 +290,6 @@
 ||augustcash2023.com^
 ||auiman.com^
 ||ausdispensary.net^
-||ausmedical-world.com^
-||aussafemeds.com^
 ||aussiechemsupply.com^
 ||aussietopoffers.fun^
 ||austeroids.is^
@@ -440,7 +437,6 @@
 ||binace.bond^
 ||binan-ce.net^
 ||binance.ooo^
-||binances.best^
 ||binances.life^
 ||binancs.xyz^
 ||binozy.com^
@@ -762,7 +758,6 @@
 ||clean-documents.com^
 ||clearance-bike.com^
 ||clearancedecor.com^
-||clearancesales2023.com^
 ||clearlyss.store^
 ||clicktechpro.com^
 ||clicktoearn.co^
@@ -863,7 +858,6 @@
 ||cpdm-nppa.com^
 ||craigsmaltipoopuppies.com^
 ||craken.monster^
-||craker.org^
 ||craneautoparts.com^
 ||crazyeyelash.com^
 ||credibledocumentsonline.com^
@@ -881,7 +875,6 @@
 ||crypot.top^
 ||cryptexexchangeoptions.com^
 ||crypto2.site^
-||crypto6.top^
 ||cryptohubperfect.com^
 ||cryptop.store^
 ||cryptor.top^
@@ -1823,7 +1816,6 @@
 ||joyceebassethoundpuppies.com^
 ||joyfulgreatdanes.com^
 ||joygootech.com^
-||jpmorganchasex.top^
 ||jstarsgifts.com^
 ||juahar.com^
 ||junever.com^
@@ -1982,7 +1974,6 @@
 ||lillianbassethoundbreeder.com^
 ||lilliancavoodlehome.com^
 ||linkeblin.online^
-||linked-in.store^
 ||linkeden.xyz^
 ||linkedinm.com^
 ||linkedln.online^
@@ -2032,7 +2023,6 @@
 ||loveeming.com^
 ||lovegoldsale.com^
 ||lovegspkennels.com^
-||lovelygoldendoodlebreeders.com^
 ||lovelyhomespaniels.com^
 ||lovelyyorkiepuppies.com^
 ||lovemyfamilyforever.com^
@@ -2044,7 +2034,6 @@
 ||loyisopuppieshome.online^
 ||lpinterest.com^
 ||lrsalesfr.shop^
-||lubamining.com^
 ||luckygunnerarmory.com^
 ||luckypawz.us^
 ||luizeva.com^
@@ -2214,7 +2203,6 @@
 ||microsoftu.net^
 ||microsoift.net^
 ||microsotf.cn^
-||microsqoft.com^
 ||mideastfinanceco.com^
 ||midikaraoke-hennyfadilla.blogspot.com^
 ||mikaylacorgis.com^
@@ -2422,7 +2410,6 @@
 ||officeh.online^
 ||offices365.fr^
 ||offices365.org^
-||ogfice365.com^
 ||ohspotlight.com^
 ||oikeau.com^
 ||oinedrive.com^
@@ -2581,7 +2568,6 @@
 ||pawsompuppieshome.com^
 ||pawsomshihtzupups.com^
 ||pawsylove.com^
-||pay-usps.com^
 ||pay-usps.shop^
 ||pay-usps.xyz^
 ||payback-ltd.com^
@@ -2912,7 +2898,6 @@
 ||samsun-g.online^
 ||samsun.online^
 ||samsun.site^
-||samsung.trade^
 ||samsungs.site^
 ||samsuno.com^
 ||samswng.com^
@@ -3273,7 +3258,6 @@
 ||telegram.cyou^
 ||telegram.discount^
 ||telegramcom.site^
-||telegramf.shop^
 ||telegramh.com^
 ||telegramm.loan^
 ||telegramr.xyz^
@@ -3284,7 +3268,6 @@
 ||telegrma.fit^
 ||telegrqm.com^
 ||telegrram.net^
-||telegrsam.top^
 ||telegsam.bond^
 ||teleoram.com^
 ||telfars.us^
@@ -3415,7 +3398,6 @@
 ||toys-holiday.com^
 ||track-usps.top^
 ||tracking-usps.com^
-||tracking-usps.online^
 ||trade-fxinvestment.com^
 ||tradecryptofuse.com^
 ||tradefxprofit.com^
@@ -3433,7 +3415,6 @@
 ||trendgram.io^
 ||trendinguniform.com^
 ||trendyygift.com^
-||trezoro.com.au^
 ||trglobaltd.com^
 ||tricitychildrensdentistry.com^
 ||trident-cargo.com^
@@ -3775,9 +3756,7 @@
 ||uspsservices.life^
 ||uspsses.com^
 ||uspssh.xyz^
-||uspsshipcheck.com^
 ||uspsshipcheck.top^
-||uspsshipchecka.com^
 ||uspsshipexpress.com^
 ||uspsshipquery.top^
 ||uspssi.top^
