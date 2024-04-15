@@ -2,14 +2,15 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.15.033127.2024
+# Version: 04.15.114859.2024
 # Expires: 1 day
-# Last modified: Mon Apr 15 03:31:27 UTC 2024
+# Last modified: Mon Apr 15 11:48:59 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 4069
+# Number of entries: 4138
 #
 *.01edc.com
 *.0penai.xyz
+*.1airbnb.com
 *.1bestbuy.com
 *.1sttheworld.com
 *.2022factorysale.ru
@@ -36,7 +37,9 @@
 *.aamzon.shop
 *.aboutbeautyus.com
 *.abovejie.com
+*.absolutegenix.com
 *.absolutekittens.com
+*.absolutelegalstudio.uk
 *.abundam.com
 *.abysshe.com
 *.abyssiniankitty.com
@@ -122,6 +125,7 @@
 *.alibaba8.com
 *.alibabaa.net
 *.alibafa.com
+*.aliexopress.com
 *.aliexprese.xyz
 *.aliexpressn.net
 *.aliexpross.com
@@ -141,6 +145,7 @@
 *.allgreenherbs.com
 *.alliancepb.com
 *.allibaba.online
+*.alliedmerchantcredit.com
 *.alliedvinofinance.com
 *.alliexpress.top
 *.allizcrfinance.com
@@ -219,6 +224,7 @@
 *.ansten.net
 *.antifreezesnow.com
 *.antiprejudicead.net
+*.antiscamagency.net
 *.anyfooduniverse.com
 *.aopdsnl.com
 *.ap-ple.net
@@ -227,7 +233,6 @@
 *.apexkittens.com
 *.apextradehouseminingservices.com
 *.apkallpure.com
-*.aple.wtf
 *.apleulou.com
 *.aplotesto.top
 *.apmody.graphicsmarket.net
@@ -246,6 +251,7 @@
 *.arbitrageurstablecoins.com
 *.arcn.org.in
 *.arestreasures.com
+*.aristizo.com
 *.armamentcr.com
 *.armanipuppieshome.co.za
 *.armlogisticsmaritime.co.za
@@ -254,6 +260,7 @@
 *.arnazon.top
 *.aromaticpuredolls.com
 *.arshiner.com
+*.arsorail.com
 *.artisticluxuries.com
 *.arwibon.com
 *.arwibon.us
@@ -272,6 +279,7 @@
 *.atikisoi.com
 *.atlanticargoshipper.com
 *.atlanticcouriersexpress.com
+*.atlanticshippingservices.com
 *.atlantictrustfl.net
 *.atlaxunion.com
 *.atmtee.com
@@ -316,10 +324,10 @@
 *.azzlee.com
 *.b2kmjunit.com
 *.babacats.com
+*.babehaoo.com
 *.babfeae.dateflng.com
 *.babygirlsweetie.com
 *.bacfgh.com
-*.backpackboyzdisposable.com
 *.badefi.com
 *.badixmarine.com
 *.baioneparts.com
@@ -333,7 +341,6 @@
 *.baoxiaorulei.com
 *.barchin.store
 *.barclaysforeigncurrency.com
-*.barods.com
 *.barrymorgansamoyed.com
 *.barymanes.store
 *.bastine.com
@@ -382,12 +389,14 @@
 *.bestaussiecanine.com
 *.bestb2kresearch.com
 *.bestbay.store
+*.bestbitcoinsoftware.com
 *.bestblueeyesfrenchies.su
 *.bestbuy4.net
 *.bestbuya.shop
 *.bestbuyb.shop
 *.bestbuyc.shop
 *.bestbuyo.shop
+*.bestexpcargo.com
 *.bestibogaineonline.com
 *.bestmobilehomemovers.com
 *.bestsbuy.shop
@@ -434,7 +443,9 @@
 *.binances.life
 *.binancs.xyz
 *.binozy.com
+*.bionixcorpp.com
 *.birainstore.com
+*.birdmanspetsources.com
 *.biscord.site
 *.bisousa.nl
 *.bit-coin.site
@@ -445,6 +456,7 @@
 *.bitcoinw.xyz
 *.bitfreds.pro
 *.bitkoin.online
+*.bitkoin.site
 *.bitocrown.com
 *.bitpay4x4.com
 *.bitsgapmis.com
@@ -531,7 +543,6 @@
 *.brownenglishbulldogpuppy.com
 *.browningammousa.com
 *.browningfirearmshop.com
-*.browningguns.com
 *.brtyrd.com
 *.bryanlesleyteapups.com
 *.btccvs.com
@@ -601,7 +612,6 @@
 *.cadimanshops.com
 *.cainiw.com
 *.callouting.com
-*.callown.com
 *.camiests.com
 *.canecorsocompanions.com
 *.canichesesponjosos.com
@@ -629,6 +639,7 @@
 *.cardingstore.com
 *.cargocontinental.com
 *.cargologisticshippers.com
+*.cargologisticsmail.com
 *.cargolordsexpress.com
 *.cargopostlogistic.com
 *.cargosandanimalslogistics.com
@@ -667,6 +678,8 @@
 *.championbloodlinecooncattery.com
 *.championpuppieskennel.co.za
 *.chapgpt.site
+*.chargebackmetro.com
+*.chargebacksecured.com
 *.charmingchihuahuapuppies.com
 *.charmschoice.com
 *.charmymaltese.com
@@ -734,6 +747,7 @@
 *.cipherfinancebankplc.com
 *.circecares.com
 *.circlesofcare.org
+*.citigroup.store
 *.citigroupcanary.com
 *.citizencrt.cc
 *.cityarmories.com
@@ -761,7 +775,6 @@
 *.clonedcreditcard.com
 *.clonedmaster.com
 *.clonedscard.com
-*.cloth-clearance.com
 *.clothbrojy.com
 *.clothcutetop.com
 *.clothcutevogue.com
@@ -775,6 +788,7 @@
 *.cloudc.com.hk
 *.clouddiy.shop
 *.clubllondons.us
+*.cmelarsy.com
 *.cnbiochemicals.com
 *.coastaloasistrust.online
 *.cobaltlima.com
@@ -1011,8 +1025,8 @@
 *.donalynn.com
 *.donitop.com
 *.donnasharpbed.com
+*.dop3merch.com
 *.dopaminana.it
-*.doptika.com
 *.doretris.com
 *.doubletapfirearmstx.com
 *.doufulao.com
@@ -1041,6 +1055,7 @@
 *.duckduckgos.shop
 *.duholo.com
 *.duncanvillefbc.org
+*.dvlaonlinelicences.com
 *.dwa150.com
 *.dwnrod.com
 *.dynamicbreeders.co.za
@@ -1052,7 +1067,9 @@
 *.eastidahoent.com
 *.easy-earn.homes
 *.easy-shop-collection.com
+*.easydeliverymailing.com
 *.easygoingpets.com
+*.easyrefund-ltd.com
 *.easys-tyle.com
 *.eazy-growth.com
 *.ebikeandchristmasdecor.com
@@ -1067,6 +1084,8 @@
 *.ecoflair.org
 *.ecoilartion.com
 *.ecom-appdev.com
+*.ecom-group.co
+*.ecomltd.co
 *.ecroxlaunchpad.com
 *.edelridstore.com
 *.eggsforsale.co.za
@@ -1101,8 +1120,6 @@
 *.emmetthub.com
 *.emnspost.com
 *.emporiumtool.com
-*.empowerorphans.info
-*.empowerorphans.online
 *.encryption.bet
 *.enedrive.com
 *.enelongi.com
@@ -1135,6 +1152,7 @@
 *.etsye.top
 *.eubusinessregister.net
 *.eubusinessregister.org
+*.eurleeches.com
 *.euromax-transporte.eu
 *.european-centralbank.com
 *.evaeuiosn.com
@@ -1191,6 +1209,7 @@
 *.evti.top
 *.ewighair.com
 *.ewrgu.com
+*.excelliumltd.com
 *.excitedwagsenglishcockerspanielpups.com
 *.exdocumentation.com
 *.exodushashhub.com
@@ -1200,8 +1219,10 @@
 *.experienciapublica.org
 *.expireextra.com
 *.explicit-documents.com
+*.expo5ecapital.com
 *.exporteradynamicsealtd.com
 *.expoworldchem.com
+*.expresslogisticz.com
 *.expresspassportsonline.com
 *.expresspetsafeairways.com
 *.expressrushrunnersdelivery.com
@@ -1213,6 +1234,7 @@
 *.extremehonor.com
 *.ezredtool.com
 *.f1acebook.com
+*.facebogk.com
 *.faceboook.org
 *.faceebook.buzz
 *.facetlogistics.net
@@ -1259,6 +1281,7 @@
 *.fashnestaccessories.com
 *.fastcharydelivery.com
 *.fastest-collection.com
+*.fastgoservices.com
 *.fasthaulway.com
 *.fastperformancetriggers.com
 *.fasttrackingagency.com
@@ -1297,6 +1320,7 @@
 *.firearmshopusa.com
 *.firearmspawnshop.com
 *.firstdocumentsonline.com
+*.firstunitybank.com
 *.fitnesssuperdeals.com
 *.fjallravenus.com
 *.flagrette.com
@@ -1316,6 +1340,7 @@
 *.fmacdi.com
 *.fnscar15p.com
 *.focalitems.com
+*.fofice365.com
 *.foogle.cn
 *.forcedresettriggerusa.com
 *.foreseew.com
@@ -1340,6 +1365,7 @@
 *.francxumall.com
 *.frankandoaks.us
 *.fraterniteilluminati.org
+*.fraud-recuperation.org
 *.freedomboerboel.com
 *.frenchiepuppiesforsaleinusa.com
 *.freshdwet.com
@@ -1359,10 +1385,12 @@
 *.funny-mart.com
 *.furdekor.com
 *.furnituressale.com
+*.furrydogshop.com
 *.furrylandnfriends.com
 *.fwitter.info
 *.fwitter.website
 *.fxrack.com
+*.fxrecover.com
 *.fxxktardo.com
 *.g0ogle.shop
 *.gadgetwonderstore.com
@@ -1421,6 +1449,7 @@
 *.gifteplus.com
 *.gifthutplus.com
 *.giftitalk.com
+*.giftizoon.com
 *.giftscheer.com
 *.giftssign.com
 *.giftypaws.com
@@ -1442,9 +1471,11 @@
 *.global-kryptosphere.com
 *.globalcapitalfunding.org
 *.globalcounterfeits.com
+*.globaldeliverycourier.com
 *.globaldocsolution.com
 *.globaldocumentsservices.com
 *.globalgenuinedocuments.com
+*.globalinsuranceltd.com
 *.globallegitdocument.com
 *.globallinelogistics.online
 *.globallogisticsairlines.com
@@ -1453,7 +1484,13 @@
 *.globalmetalsagroltd.com
 *.globalmoversdelivery.co.com
 *.globalnotesonline.com
+*.globalpremiertrans.com
+*.globalprioritycargo.com
+*.globalpriorityservice.com
+*.globalpuppiesspot.co.za
 *.globalrealdocumentsonline.com
+*.globalshippingfreight.com
+*.globalshippingmail.com
 *.globalsupplypsilocybin.com
 *.globaltradingsltd.com
 *.globaluklicence.com
@@ -1469,6 +1506,7 @@
 *.gloriousbassets.com
 *.gloriouspaws.co.za
 *.glosfly.com
+*.glowries.com
 *.glowsart.com
 *.glscargoexpress.com
 *.glsdiscreetdelivery.com
@@ -1477,6 +1515,7 @@
 *.gmall.today
 *.gmaoil.ru
 *.gmexz.com
+*.gocourierman.net
 *.goegle.bond
 *.goegle.shop
 *.goetham.com
@@ -1490,6 +1529,7 @@
 *.goldenretrieverfanatic.com
 *.goldenretrievers.rescue.com
 *.goldenvalleyanimalhospital.com
+*.goldmanfinancial.org
 *.goldmansachus.com
 *.golfapparelgear.com
 *.golfcartsforsales.com
@@ -1507,7 +1547,6 @@
 *.googleh.cn
 *.googlep.cn
 *.googleq.cn
-*.googles.autos
 *.googlev.cn
 *.googlle.info
 *.googls.online
@@ -1521,7 +1560,6 @@
 *.goxmix.com
 *.grabgalaxy.com
 *.gracebritishshorthairkitten.com
-*.grail.site
 *.grailgg.com
 *.grasslandmall.com
 *.greatautnagency.com
@@ -1556,7 +1594,6 @@
 *.haghout.com
 *.halivy.com
 *.hamdinfazzafansclub.com
-*.hamster.homes
 *.hamster.market
 *.handmadeproducts.store
 *.handytopbag.com
@@ -1605,7 +1642,6 @@
 *.hgshopee.com
 *.hgugw.com
 *.hhentai.shop
-*.highcreekbullies.com
 *.highgradeprop.com
 *.highmarketspace.com
 *.highqualitydocument.com
@@ -1664,6 +1700,7 @@
 *.hup498.com
 *.hybridenergyhome.co.za
 *.hydraexchange.com
+*.hypercapitalltd.com
 *.hyperglim.com
 *.i-consultants.online
 *.ibeautyfoot.com
@@ -1684,6 +1721,7 @@
 *.ift170.com
 *.ignitemedicalco.com
 *.igymbuy.com
+*.ii-service.com
 *.ikeynr.com
 *.illuminatiline.org
 *.immediatem.com
@@ -1699,6 +1737,7 @@
 *.indoorsarmory.net
 *.infantlover.com
 *.infectolab-americas.com
+*.infinexconsulting.com
 *.infinixshop.com
 *.influencek.com
 *.info-usps.com
@@ -1719,13 +1758,16 @@
 *.interglobaltraveldocuments.org
 *.interierovystylista.cz
 *.internationalcourierpost.com
+*.internationalfinancesource.com
 *.internationalgrouptrading.com
 *.intimacyloves.com
+*.investmentpayback.co.uk
 *.ios-evri.com
 *.iowafamilyacupuncture.com
 *.iptvsmarterservices.com
 *.iqgloin.com
 *.irinasteacupyorkies.com
+*.iscoibeom.com
 *.islandhobbynut.com
 *.it-optionsl.com
 *.itallgo.com
@@ -1736,6 +1778,7 @@
 *.ivorlink.com
 *.ivrose.com
 *.iwantdiy.com
+*.jackcourierline.com
 *.jackpoply.com
 *.jackrussellterrierkennel.com
 *.jadepierce.com
@@ -1785,6 +1828,7 @@
 *.junever.com
 *.jungleboysweedofficial.com
 *.justgrabthis.com
+*.justicerefund.com
 *.k2spicesprayshop.com
 *.kacilliagreatdanespuppies.com
 *.kahrfirearms.com
@@ -1886,7 +1930,6 @@
 *.laetiskittens.online
 *.lah2o.com
 *.laiexpress.ru
-*.laihair.com
 *.lakeviewbritishshorthaircats.com
 *.lalpui.com
 *.lamodor.com
@@ -1900,6 +1943,7 @@
 *.laredoutesale.shop
 *.larjacksinternationallawfirm.com
 *.lascassaseyecare.com
+*.lasertransportlogistics.com
 *.latestoutdoors.com
 *.launchpad.ploobit.com
 *.laurencechico.com
@@ -1937,6 +1981,7 @@
 *.lillianbassethoundbreeder.com
 *.lilliancavoodlehome.com
 *.linkeblin.online
+*.linked-in.store
 *.linkeden.xyz
 *.linkedinm.com
 *.linkedln.online
@@ -1971,6 +2016,7 @@
 *.locoraea.com
 *.logistektransportation.com
 *.logisticcargolinelp.com
+*.logisticsfreights.com
 *.lojed.com
 *.lokcupid.com
 *.loktru.com
@@ -1978,6 +2024,7 @@
 *.longchampoutleteu.shop
 *.lonkedin.net
 *.lonkedin.xyz
+*.lornamentum.com
 *.lostpackages-usps.com
 *.love4dogs.shop
 *.lovecardinals.com
@@ -2027,7 +2074,6 @@
 *.macdo.site
 *.macwalveslogistics.com
 *.madetee.com
-*.madroop.com
 *.maesdoodles.online
 *.maesive.com
 *.magiment.com
@@ -2077,6 +2123,7 @@
 *.marlinguns.usa.com
 *.marlingunstoreusa.com
 *.marlinriflesusa.com
+*.marshall-recovery.com
 *.marspetcarepuppy.com
 *.marthaharperolteanufoundation.com
 *.martssuper.com
@@ -2138,6 +2185,7 @@
 *.mesenger.xyz
 *.messengert.com
 *.mestyu.com
+*.metabolicriodstore.com
 *.metalcraze.com
 *.metalcrushingchemicalsltd.com
 *.metamaks.net
@@ -2155,6 +2203,7 @@
 *.meyoclinic.com
 *.meyoclinic.xyz
 *.mfamilygifts.store
+*.mgroupcargo.com
 *.miarosoft.com
 *.micartsy.com
 *.michalor.com
@@ -2207,6 +2256,7 @@
 *.momobyla.co
 *.momondoexpress.com
 *.mondayslotto.com
+*.moneyback-ltd.co.uk
 *.moneyserviceltd.com
 *.moneytransferhacker.com
 *.monkeysober.com
@@ -2250,7 +2300,6 @@
 *.munzistore.com
 *.murphyteacuppups.com
 *.mushroomdoseland.com
-*.mushroomspsychedelics.com
 *.muwix.com
 *.mwfuniversity.com
 *.my-evri.biz
@@ -2289,6 +2338,7 @@
 *.navaccorporation.co.za
 *.nbfareast.com
 *.nchristina.lattehub.com
+*.ndlsdocuments.info
 *.ndqhfe.top
 *.neerahomeofpets.com
 *.neighborhoodsluts.com
@@ -2308,6 +2358,7 @@
 *.netirisi.com
 *.neuroservicesoftexas.com
 *.neutralpuppieshome.co.za
+*.newalliancecredit.com
 *.newavoincolorlife.com
 *.newbeeoo.com
 *.newbloomingville.com
@@ -2324,7 +2375,6 @@
 *.newparksfarms.co.uk
 *.newplanetragdoll.com
 *.newpodmerch.com
-*.newsvips.com
 *.nexfy.co
 *.nflhandbag.co
 *.ngcoboeggfarm.com
@@ -2340,10 +2390,10 @@
 *.nilibili.com
 *.nkjha.com
 *.nld573181.com
-*.nnicrosoft.online
 *.noahstuffs.com
 *.nobleboxerpuppies.com
 *.noduy.com
+*.nodwest.com
 *.noirtease.com
 *.nojkx.com
 *.normakamalis.us
@@ -2365,11 +2415,13 @@
 *.o9penai.com
 *.occ-gov-us.com
 *.oceanconsultant.co.uk
+*.odfice365.com
 *.off-hunting.com
 *.officedepmt.org
 *.officeh.online
 *.offices365.fr
 *.offices365.org
+*.ogfice365.com
 *.ohspotlight.com
 *.oikeau.com
 *.oinedrive.com
@@ -2430,6 +2482,7 @@
 *.onligg.com
 *.online-christmas.com
 *.onlineammo-store.com
+*.onlinedocumentspass.com
 *.onlinegenuinedocuments.com
 *.onlineherbalincense.com
 *.onlinelegitdocuments.com
@@ -2478,6 +2531,7 @@
 *.orrisas.com
 *.osnowsports.com
 *.otakuversion.com
+*.ototshoes.com
 *.oundly.shop
 *.outaook.com
 *.outboardautos.com
@@ -2496,7 +2550,6 @@
 *.outletunit.com
 *.outloo-k.com
 *.outlook4.com
-*.outlook4.site
 *.outlookp.com
 *.outwestschnauzers.com
 *.ownyva.com
@@ -2519,7 +2572,6 @@
 *.partnergadget.com
 *.patchboye.com
 *.pathwaysputnam.org
-*.pawfecthouse.com
 *.pawfecthouseu.com
 *.pawfectpuppyheaven.co.za
 *.pawloversgift.com
@@ -2527,15 +2579,19 @@
 *.pawsomedanes.com
 *.pawsompuppieshome.com
 *.pawsomshihtzupups.com
+*.pawsylove.com
 *.pay-usps.com
 *.pay-usps.shop
 *.pay-usps.xyz
+*.payback-ltd.com
+*.payback-ltd.expert
+*.payback-ltd.org
+*.paybackeasy.com
 *.paypall.org
 *.payypal.info
 *.pazhang.com
 *.pbksgroup.com
 *.pchlotterywinner.com
-*.pchlts.com
 *.peachytoy.com
 *.pearlclam.com
 *.pefctiordent.com
@@ -2557,6 +2613,7 @@
 *.petrichorlove.com
 *.petskingdom.co.za
 *.petsperspective.shop
+*.petsyhub.com
 *.pettisrumseycpa.com
 *.pettypetstore.com
 *.peuapu.com
@@ -2591,7 +2648,6 @@
 *.pirfectotools.com
 *.pitiarian.com
 *.pityfx.com
-*.pixisid.com
 *.pjheightboxllc.com
 *.plandow.com
 *.planetbullypuppies.com
@@ -2609,6 +2665,7 @@
 *.pomskykennels.com
 *.pomskypridepets.com
 *.ponderosapeds.com
+*.ponhub.online
 *.ponhub.xyz
 *.popularmoney.to
 *.porcyum.com
@@ -2671,10 +2728,12 @@
 *.propmoneyndocs.com
 *.prosoftwares.fr
 *.prosperitylivestock.co.za
+*.prospersdepot.com
 *.prostargift.com
 *.protectivemastiff.com
 *.proximityk.com
 *.proximoresearchs.com
+*.prudentialmerchantcredit.com
 *.psychedelicfarm.net
 *.psychedelicretailoutlet.co.uk
 *.psychonauts-home.com
@@ -2707,7 +2766,7 @@
 *.qianjing.us
 *.qmazon.work
 *.qnapchat.com
-*.qoogle.life
+*.qotfd.com
 *.qowix.com
 *.qssion.com
 *.qualitygradebanknotes.com
@@ -2715,6 +2774,7 @@
 *.qualitypower.co.id
 *.queencontainers.org
 *.queenstreetbears.com
+*.quintelintelligenceltd.com
 *.quirkleaf.com
 *.r0bl0x.ru
 *.racegippsland.com
@@ -2745,9 +2805,12 @@
 *.rdljewels.com
 *.re-ddit.com
 *.readlessca.com
+*.realitypawskennel.co.za
 *.reblox.lol
 *.rebornbabydollsmarket.com
 *.reconpath.com
+*.recoverscam.com
+*.recoveryandtraces.com
 *.redeliveryapp-evri.net
 *.redit.online
 *.redlightradiance.com
@@ -2755,11 +2818,15 @@
 *.reejoinwell.com
 *.reenjohlimited.com
 *.refullyracing.com
+*.regal-resolve.com
 *.registereddocumentseu.com
 *.registerform1.com
 *.regpuppieskernel.co.za
+*.reimbursementshark.com
+*.reimbursementshark.email
 *.reloadingsupplies.com
 *.repeatingarmsusa.com
+*.reportscambroker.com
 *.reptileloversmorphmarket.com
 *.reptilesandexoticslogisticsservices.com
 *.resger.com
@@ -2771,6 +2838,7 @@
 *.richcity99.com
 *.ricksimpsonoils.us
 *.riffle.parts.com
+*.rijschoolsbelgie-nederland.com
 *.ristur.online
 *.riverwoodsurgentcare.com
 *.rivseamall.com
@@ -2856,6 +2924,7 @@
 *.savoryahome.com
 *.sayemotori.store
 *.sbank.center
+*.scamwarners.com
 *.sccdream.com
 *.sccy.usa.com
 *.scgong.com
@@ -2884,6 +2953,7 @@
 *.sewingiiseasy.com
 *.sext4bang.com
 *.sgd498.com
+*.sgscourier.net
 *.shaiyuzhou.com
 *.share2pay.co
 *.sharksculpt.com
@@ -2894,6 +2964,7 @@
 *.sheinza.com
 *.shelterutilities.com
 *.sheltiehaven.com
+*.shieldforensics.net
 *.shippingcontainersource.com
 *.shippinglineservices.com
 *.shoee.sbs
@@ -2916,7 +2987,6 @@
 *.shopes.store
 *.shopese.org
 *.shopfootballna.com
-*.shophive.in
 *.shopindiancart.in
 *.shoplalai.com
 *.shoplfy.co.com
@@ -3022,7 +3092,6 @@
 *.somuchbutter.com
 *.sonagifts.com
 *.soundpeatsg.com
-*.southernuc.com
 *.southsmartpuppies.com
 *.spacekeeper.com
 *.spanielikingcharle.wixsite.com
@@ -3032,6 +3101,7 @@
 *.spargth.com
 *.sparklandpaper.com
 *.sparklogistic.com
+*.spartanforensics.tech
 *.specialcareanimallogistics.com
 *.specialtradefx.com
 *.spectaculartollers.com
@@ -3047,6 +3117,7 @@
 *.spotiffy.top
 *.spotifi.top
 *.spotify.cn
+*.spotiufy.com
 *.springammoshop.com
 *.springfield-gold.com
 *.springfieldhellcat.xyz
@@ -3056,7 +3127,6 @@
 *.srglobalenterprisepvtltd.in
 *.srheumatology.com
 *.ssd-chemical-solution-company-llc.business.site
-*.ssdendurelab.co.za
 *.ssialists.com
 *.st0cksx.com
 *.stacyvosisgue.com
@@ -3066,6 +3136,7 @@
 *.stanluck.com
 *.stapless.us
 *.stappage.com
+*.starnetexpressdelivery.com
 *.starstartree.com
 *.statelinetack.shop
 *.statesanabolicstore.com
@@ -3264,6 +3335,7 @@
 *.thepupflixstore.com
 *.thequeensparkles.com
 *.theroyalepuppies.com
+*.thesoftballmitts.com
 *.thespaceoptmrt.com
 *.thesphynx.co
 *.thestrikemaster.com
@@ -3284,6 +3356,7 @@
 *.tik-tok.website
 *.tikdok.cn
 *.tikdok.xyz
+*.tikktok.top
 *.tikstok.shop
 *.tikstok.store
 *.tikt0k.cn
@@ -3319,7 +3392,6 @@
 *.tokarevusastore.com
 *.toksblog.com
 *.toktok.lol
-*.tollgr.com
 *.tomidachijapanesespitz.com
 *.tommybahama.us.com
 *.tomobeom.com
@@ -3364,17 +3436,18 @@
 *.trglobaltd.com
 *.tricitychildrensdentistry.com
 *.trident-cargo.com
-*.triippyhair.com
 *.trinitycargoagency.com
 *.trisunshine.com
 *.tro346.com
 *.trucarewellness.com
 *.truckeng.com
+*.truemarkfin.com
 *.trustedstations.com
 *.trustinternationaluk.com
 *.trustpilots.uk
 *.trustpitbullusa.com
 *.trustplusfxinvestment.com
+*.trustpointbank.com
 *.trustspilots.com
 *.trxtron.bet
 *.trypurejit.com
@@ -3414,7 +3487,6 @@
 *.ukraindefence.com
 *.ulltrademiners.com
 *.ultimategunsammunition.com
-*.unafragolaalgiorno.it
 *.unarwild.com
 *.uncurved.org
 *.undersimply.com
@@ -3431,10 +3503,10 @@
 *.uniquekittens.co.za
 *.uniqueshipper.com
 *.unitedairjetpetsairline.com
+*.unitedcargoshippings.com
 *.unitedcbonline.com
 *.universal-bazaar.com
 *.universalmonkeyfarm.com
-*.uniwallex.com
 *.unofficedesk.online
 *.unvacationcenter.com
 *.unvacationdepts.com
@@ -3462,7 +3534,6 @@
 *.usps-aid.top
 *.usps-app.net
 *.usps-app.top
-*.usps-as.top
 *.usps-cc.cyou
 *.usps-cc.xyz
 *.usps-center.live
@@ -3648,6 +3719,7 @@
 *.uspsflorida.top
 *.uspsg.top
 *.uspsgcvs.top
+*.uspsgl.com
 *.uspsgs.xyz
 *.uspshelp.wtf
 *.uspshelps.top
@@ -3670,7 +3742,6 @@
 *.uspsmxpost.life
 *.uspsn.bond
 *.uspsnvans.top
-*.uspso.cfd
 *.uspsoiu.top
 *.uspsonline-safe.com
 *.uspsonlineshipment.com
@@ -3776,7 +3847,6 @@
 *.vicilo.com
 *.vikonay.com
 *.vilionly.com
-*.vinance.trade
 *.vinexexpress.com
 *.vipship.co.uk
 *.vislily.com
@@ -3824,7 +3894,6 @@
 *.walmort.shop
 *.walmort.top
 *.walmort.xyz
-*.wannadecor.com
 *.wansut.com
 *.wapmart.ru
 *.warrenbfansclub.com
@@ -3882,11 +3951,14 @@
 *.whatsappg.com
 *.whatsapph.com
 *.whatsaqpp.cyou
+*.whatsaspp.online
+*.whatsaspp.ru
 *.whatsepp.xyz
 *.whatspp.cn
 *.whaysapp.top
 *.whaysapp.xyz
 *.whitelionstore.com
+*.whiteswitch.tech
 *.wholemelt-extracts.com
 *.wholesale.soccer.shirt.com
 *.wholesalekeep.com
@@ -3926,6 +3998,7 @@
 *.woofydogdeals.com
 *.workerast.com
 *.worldclasslogisticsexpressusps.com
+*.worldclassshippingcompany.com
 *.worldclonecards.com
 *.worldcontainersgiant.com
 *.worlddocumentt.com
@@ -3969,11 +4042,9 @@
 *.xn--googl-lsa.com
 *.xn--hatsapp-h41c.com
 *.xn--hatsapp-h41c.net
-*.xn--kraen-q5a.org
 *.xn--mcrosoft-tkb.net
 *.xn--nstagram-skb.net
 *.xn--offce-p4a.net
-*.xn--raken-n5a.org
 *.xn--razen-usa.com
 *.xn--registrerasvensktkrkort-plc.com
 *.xn--samsug-0wa.com
@@ -4011,7 +4082,6 @@
 *.yawanm.com
 *.yaxude.com
 *.yeardourshop.store
-*.yeetcat.com
 *.yellowlove.site
 *.yesnotch.com
 *.yetxes.com
@@ -4021,7 +4091,6 @@
 *.yoofuel.com
 *.yoqtube.com
 *.you-tube.top
-*.youkoll.com
 *.youmobie.sg
 *.yourdobermann.com
 *.yourtube.xyz
@@ -4066,12 +4135,12 @@
 *.zoem.top
 *.zom.homes
 *.zoogle.store
+*.zoom-xpress.com
 *.zooma.skin
 *.zooo.lol
 *.zooo.ooo
 *.zoop.quest
 *.zoum.top
-*.ztesla.com
 *.zuoped.com
 *.zupapasports.com
 *.zwitch.net
