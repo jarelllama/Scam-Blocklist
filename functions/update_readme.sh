@@ -49,6 +49,13 @@ $(print_stats)
 
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
+<details>
+<summary>Domains over time</summary>
+
+![Graph](https://raw.githubusercontent.com/iam-py-test/blocklist_stats/main/stats/Jarelllamas_Scam_Blocklist.png)
+Courtesy of iam-py-test/blocklist_stats.
+</details>
+
 ## Light version
 
 Targeted at list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
