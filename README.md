@@ -21,7 +21,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 Total domains: 39987
 Light version: 4138
 
-Retrieval count for each source:
+New domains for each source:
 Today | Yesterday | Excluded | Source
    78 |        17 |       3% | Google Search
     5 |         0 |       0% | Manual Entries
