@@ -138,25 +138,17 @@ find_parked() {
         local count=1
     fi
 
-    # Loop through the domains
+    # Loop through domains
     while read -r domain; do
-        # Check for parked messages in the site's HTML
-        # Retries a max of 1 time if a reply is not found
-        for i in {1..2}; do
-            # Get the HTML of the site
-            # tr is used here to remove null characters found in some sites
-            html="$(curl -sL --max-time 3 "http://${domain}/" | tr -d '\0')"
-
-            if grep -qF 'Empty reply from server' <<< "$html"; then
-                (( i == 2 )) && printf "[warn] %s had no response\n" "$domain"
-                sleep 0.3  # Give the network some rest
-                continue
-            elif grep -qiFf "$PARKED_TERMS" <<< "$html"; then
-                printf "[info] Found parked domain: %s\n" "$domain"
-                printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
-            fi
-            break
-        done
+        # Check for parked messaged in the site's HTML
+        # tr is used here to remove null characters found in some sites.
+        if grep -qiFf "$PARKED_TERMS" \
+            <<< "$(curl -sSL --max-time 3 --retry 1 --retry-all-errors \
+            "http://${domain}/" | tr -d '\0')"
+            then
+            printf "[info] Found parked domain: %s\n" "$domain"
+            printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
+        fi
 
         # Skip progress tracking if not first split file
         [[ "$track" != true ]] && continue
@@ -166,8 +158,8 @@ find_parked() {
                 "$(( count * 100 / $(wc -l < "$1") ))"
         fi
 
-        (( count++ ))
-    done < "$1"
+        (( count++ )
+    done
 }
 
 cleanup() {
