@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.15.000734.2024
+# Version: 04.15.033127.2024
 # Expires: 1 day
-# Last modified: Mon Apr 15 00:07:34 UTC 2024
+# Last modified: Mon Apr 15 03:31:27 UTC 2024
 # Syntax: Unbound
-# Number of entries: 4067
+# Number of entries: 4069
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -2769,6 +2769,7 @@ local-zone: "retflix.ru." always_nxdomain
 local-zone: "reydachshundbreed.com." always_nxdomain
 local-zone: "rhapsodybikeparts.com." always_nxdomain
 local-zone: "rheumcenter.com." always_nxdomain
+local-zone: "richcity99.com." always_nxdomain
 local-zone: "ricksimpsonoils.us." always_nxdomain
 local-zone: "riffle.parts.com." always_nxdomain
 local-zone: "ristur.online." always_nxdomain
@@ -3154,6 +3155,7 @@ local-zone: "syncdecor.com." always_nxdomain
 local-zone: "syntheticresearchchemicals.com." always_nxdomain
 local-zone: "sytm9.com." always_nxdomain
 local-zone: "szqxmall.com." always_nxdomain
+local-zone: "t7myr.com." always_nxdomain
 local-zone: "taattootee.com." always_nxdomain
 local-zone: "tacking-usps-vip.com." always_nxdomain
 local-zone: "tactical-gunshop.com." always_nxdomain

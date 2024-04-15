@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.15.000734.2024
+# Version: 04.15.033127.2024
 # Expires: 1 day
-# Last modified: Mon Apr 15 00:07:34 UTC 2024
+# Last modified: Mon Apr 15 03:31:27 UTC 2024
 # Syntax: Unbound
-# Number of entries: 40083
+# Number of entries: 40085
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -28875,6 +28875,7 @@ local-zone: "ricarellioutlet.com." always_nxdomain
 local-zone: "ricasrucksack.com." always_nxdomain
 local-zone: "richardaspenconstruction.com." always_nxdomain
 local-zone: "richardkhatun.com." always_nxdomain
+local-zone: "richcity99.com." always_nxdomain
 local-zone: "richmond-magazine.net." always_nxdomain
 local-zone: "richmond-news.blog." always_nxdomain
 local-zone: "richoffshipping.com." always_nxdomain
@@ -33170,6 +33171,7 @@ local-zone: "t-me-telegram.online." always_nxdomain
 local-zone: "t-me-telegram.ru." always_nxdomain
 local-zone: "t-premiumtea.com." always_nxdomain
 local-zone: "t-shirtssalede.com." always_nxdomain
+local-zone: "t7myr.com." always_nxdomain
 local-zone: "ta2bc.com." always_nxdomain
 local-zone: "taattootee.com." always_nxdomain
 local-zone: "tabathapoodlepuppies.online." always_nxdomain
