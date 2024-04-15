@@ -24,13 +24,11 @@ jobs:
 
       - name: Close issue
         run: |
-          gh issue comment ${{ github.event.issue.number }} -b \
+          gh issue close ${{ github.event.issue.number }} -c \
           "Sending the following domains for processing:
           \`\`\`
           $(grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' data/pending/domains_manual.tmp)
           \`\`\`"
-
-          gh issue close ${{ github.event.issue.number }}
         env:
           GH_TOKEN: ${{ github.token }}
 
