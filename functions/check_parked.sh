@@ -140,8 +140,7 @@ find_parked() {
 
     # Loop through the domains
     while read -r domain; do
-
-        # Check for parked message in the site's HTML
+        # Check for parked messages in the site's HTML
         # Retries a max of 1 time if a reply is not found
         for i in {1..2}; do
             # Get the HTML of the site
