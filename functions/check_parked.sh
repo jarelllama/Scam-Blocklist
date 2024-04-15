@@ -159,7 +159,7 @@ find_parked() {
         fi
 
         (( count++ )
-    done
+    done < "$1"
 }
 
 cleanup() {
