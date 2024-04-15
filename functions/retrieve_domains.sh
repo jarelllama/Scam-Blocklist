@@ -102,7 +102,8 @@ process_source() {
     # Install idn (requires sudo for some reason)
     command -v idn &> /dev/null || sudo apt-get install idn > /dev/null
     # Convert Unicode to Punycode
-    idn < "$results_file" > results.tmp
+    # '--no-tld' in an attempt to fix 'idn: tld_check_4z: Missing input' error
+    idn --no-tld < "$results_file" > results.tmp
     mv results.tmp "$results_file"
 
     $FUNCTION --format "$results_file"

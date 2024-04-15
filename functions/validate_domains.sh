@@ -45,7 +45,9 @@ validate() {
     command -v idn &> /dev/null || sudo apt-get install idn > /dev/null
     # Convert Unicode to Punycode in raw file and raw light file
     for file in "$RAW" "$RAW_LIGHT"; do
-        idn < "$file" | sort > temp
+        # '--no-tld' in an attempt to fix
+        # 'idn: tld_check_4z: Missing input' error
+        idn --no-tld < "$file" | sort > temp
         mv temp "$file"
     done
 
