@@ -158,7 +158,7 @@ find_parked() {
                 "$(( count * 100 / $(wc -l < "$1") ))"
         fi
 
-        (( count++ )
+        (( count++ ))
     done < "$1"
 }
 
