@@ -76,7 +76,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 19
+Active search terms: 18
 API calls made today: 147
 Domains retrieved today: 78
 ```
@@ -98,7 +98,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 #### Statistics for dnstwist source
 
 ``` text
-Active targets: 68
+Active targets: 69
 Domains retrieved today: 28
 ```
 
