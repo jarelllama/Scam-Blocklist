@@ -154,24 +154,24 @@ Parked domains removed today: 0
 Unparked domains added today: 0
 ```
 
-## Resources
+## Resources / see also
 
 * [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
+* [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
 * [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
 * [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 * [ShellCheck](https://github.com/koalaman/shellcheck): Shell script static analysis tool
 * [who.is](https://who.is/): WHOIS and DNS lookup tool
 
-## See also
+## As seen in
 
-* [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
-* [Fabriziosalmi's hourly-updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists) *
-* [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) *
-* [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) *
-* [oisd blocklist](https://oisd.nl/) *
-
-\* Uses this blocklist as a source
+* [Collinbarrett's FilterLists directory](https://filterlists.com/)
+* [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
+* [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
+* [The oisd blocklist](https://oisd.nl/)
+* [file-git.trli.club](https://file-git.trli.club/)
+* [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
 
 ## Appreciation
 
