@@ -433,7 +433,8 @@ search_google() {
 
     touch "$results_file"  # Create results file to ensure proper logging
 
-    for start in {1..100..10}; do  # Loop through each page of results
+    # Loop through each page of results
+    for start in {1..100..10}; do
     # Indentation intentionally lacking here
     params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
     page_results="$(curl -s "${url}?${params}")"
