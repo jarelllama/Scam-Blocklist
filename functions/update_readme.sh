@@ -27,7 +27,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 Total domains: $(wc -l < "$RAW")
 Light version: $(wc -l < "$RAW_LIGHT")
 
-Retrieval count for each source:
+New domains for each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
 $(print_stats Manual) Entries
