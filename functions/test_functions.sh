@@ -74,11 +74,11 @@ SHELLCHECK() {
     if [[ -n "$problematic_files" ]]; then
         printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n"
         printf "%s\n" "$problematic_files"
-        error=true
+        error=true # Test
     fi
 
     # Check for missing space before comments
-    problematic_files=$(grep -rn '\S\s#' --exclude-dir={.git,shellcheck-stable} \
+    problematic_files=$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
         --exclude=*.csv .)
     if [[ -n "$problematic_files" ]]; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n"
