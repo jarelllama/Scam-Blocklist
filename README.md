@@ -181,3 +181,7 @@ Thanks to the following people for the help, inspiration, and support!
 - [@hagezi](https://github.com/hagezi)
 - [@iam-py-test](https://github.com/iam-py-test)
 - [@sjhgvr](https://github.com/sjhgvr)
+
+## Sponsorship
+
+<https://github.com/sponsors/jarelllama>
