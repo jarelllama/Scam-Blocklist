@@ -18,22 +18,22 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 40080
-Light version: 4064
+Total domains: 40083
+Light version: 4067
 
 Retrieval count for each source:
 Today | Yesterday | Excluded | Source
-   17 |       136 |       2% | Google Search
-    0 |        19 |       0% | Manual Entries
-  327 |       394 |       2% | Regex Matching (NRDs)
-   10 |         4 |       8% | aa419.org
-   22 |        98 |       0% | dnstwist (NRDs)
-    0 |       170 |      18% | guntab.com
-   26 |         9 |       6% | petscams.com
-   12 |         8 |      61% | scam.directory
-    0 |         8 |      35% | scamadviser.com
-    0 |         3 |       3% | stopgunscams.com
-  414 |       849 |      13% | All sources
+    0 |        17 |       2% | Google Search
+    3 |         0 |       0% | Manual Entries
+    0 |       327 |       2% | Regex Matching (NRDs)
+    0 |        10 |       8% | aa419.org
+    0 |        22 |       0% | dnstwist (NRDs)
+    0 |         0 |      18% | guntab.com
+    0 |        26 |       6% | petscams.com
+    0 |        12 |      61% | scam.directory
+    0 |         0 |      35% | scamadviser.com
+    0 |         0 |       3% | stopgunscams.com
+    3 |       414 |      13% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -76,9 +76,9 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 16
-API calls made today: 138
-Domains retrieved today: 17
+Active search terms: 19
+API calls made today: 0
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -99,7 +99,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 
 ``` text
 Active targets: 68
-Domains retrieved today: 22
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
@@ -135,8 +135,8 @@ Dead domains that are resolving again are included back into the blocklist.
 ### Statistics for dead domains
 
 ``` text
-Dead domains removed today: 387
-Resurrected domains added today: 148
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -152,8 +152,8 @@ For list maintainers interested in integrating the parked domains as a source, t
 ### Statistics for parked domains
 
 ``` text
-Parked domains removed today: 1453
-Unparked domains added today: 877
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## Resources
