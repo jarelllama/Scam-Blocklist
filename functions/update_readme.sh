@@ -50,9 +50,10 @@ $(print_stats)
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
 
 <details>
-<summary>Domains over time</summary>
+<summary>Domains over time (days)</summary>
 
-![Graph](https://raw.githubusercontent.com/iam-py-test/blocklist_stats/main/stats/Jarelllamas_Scam_Blocklist.png)
+![Domains over time](https://raw.githubusercontent.com/iam-py-test/blocklist_stats/main/stats/Jarelllamas_Scam_Blocklist.png)
+
 Courtesy of iam-py-test/blocklist_stats.
 </details>
 
