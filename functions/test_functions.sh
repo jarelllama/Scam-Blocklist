@@ -74,7 +74,7 @@ SHELLCHECK() {
     if [[ -n "$problematic_files" ]]; then
         printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n"
         printf "%s\n" "$problematic_files"
-        error=true # Test
+        error=true
     fi
 
     # Check for missing space before comments
