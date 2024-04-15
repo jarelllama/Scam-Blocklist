@@ -25,7 +25,7 @@ jobs:
       - name: Close issue
         run: |
           gh issue close ${{ github.event.issue.number }} -c \
-          "Sending the following domains for processing:
+          "Sent the following domains for processing:
           \`\`\`
           $(grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' data/pending/domains_manual.tmp)
           \`\`\`"
