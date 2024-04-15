@@ -116,10 +116,10 @@ The domain retrieval process for all sources can be viewed in the repository's c
 
 ## Automated filtering process
 
-- The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
-- The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
-- Common subdomains like 'www' are stripped to make use of wildcard matching for all other subdomains. The list of subdomains checked for can be viewed here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
-- Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
+* The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
+* The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
+* Common subdomains like 'www' are stripped to make use of wildcard matching for all other subdomains. The list of subdomains checked for can be viewed here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
+* Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
 
 Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations.
 
@@ -162,20 +162,20 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 
 ## Resources
 
-- [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
-- [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
-- [Grammarly](https://grammarly.com/): spelling and grammar checker
-- [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
-- [ShellCheck](https://github.com/koalaman/shellcheck): Shell script static analysis tool
-- [who.is](https://who.is/): WHOIS and DNS lookup tool
+* [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
+* [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
+* [Grammarly](https://grammarly.com/): spelling and grammar checker
+* [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
+* [ShellCheck](https://github.com/koalaman/shellcheck): Shell script static analysis tool
+* [who.is](https://who.is/): WHOIS and DNS lookup tool
 
 ## See also
 
-- [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
-- [Fabriziosalmi's hourly-updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists) *
-- [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) *
-- [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) *
-- [oisd blocklist](https://oisd.nl/) *
+* [Elliotwutingfeng's blocklists](https://github.com/elliotwutingfeng?tab=repositories)
+* [Fabriziosalmi's hourly-updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists) *
+* [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists) *
+* [iam-py-test's blocklists](https://github.com/iam-py-test/my_filters_001) *
+* [oisd blocklist](https://oisd.nl/) *
 
 \* Uses this blocklist as a source
 
@@ -183,10 +183,10 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 
 Thanks to the following people for the help, inspiration, and support!
 
-- [@bongochong](https://github.com/bongochong)
-- [@hagezi](https://github.com/hagezi)
-- [@iam-py-test](https://github.com/iam-py-test)
-- [@sjhgvr](https://github.com/sjhgvr)
+* [@bongochong](https://github.com/bongochong)
+* [@hagezi](https://github.com/hagezi)
+* [@iam-py-test](https://github.com/iam-py-test)
+* [@sjhgvr](https://github.com/sjhgvr)
 
 ## Sponsorship
 
