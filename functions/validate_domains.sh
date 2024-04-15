@@ -117,21 +117,26 @@ validate() {
         sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 
+    # Save changes to raw light file
+    comm -12 "$RAW_LIGHT" "$RAW" > light.tmp
+    mv light.tmp "$RAW_LIGHT"
+
     # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
     sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
 
+    # Remove subdomains because the notifications got annoying
+    grep -vF 'subdomain' filter_log.tmp > temp
+    mv temp filter_log.tmp
+
+    [[ ! -s filter_log.tmp ]] && return
+
     # Call shell wrapper to send telegram notification
     # (excluding subdomains because the notifications got annoying)
     $FUNCTION --send-telegram \
-        "Problematic domains found during validation check:\n$(grep -vF \
-        'subdomain' filter_log.tmp)"
+        "Problematic domains found during validation check:\n$(<filter_log.tmp)"
 
     printf "\nTelegram notification sent.\n"
-
-    # Save changes to raw light file
-    comm -12 "$RAW_LIGHT" "$RAW" > light.tmp
-    mv light.tmp "$RAW_LIGHT"
 }
 
 # Entry point
