@@ -149,7 +149,7 @@ find_parked() {
             html="$(curl -sL --max-time 3 "http://${domain}/" | tr -d '\0')"
 
             if grep -qF 'Empty reply from server' <<< "$html"; then
-                (( i == 2)) && printf "[info] %s had no response\n" "$domain"
+                (( i == 2)) && printf "[warn] %s had no response\n" "$domain"
                 sleep 0.3  # Give the network some rest
                 continue
             elif grep -qiFf "$PARKED_TERMS" <<< "$html"; then
