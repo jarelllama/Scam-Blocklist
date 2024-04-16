@@ -150,12 +150,16 @@ find_parked() {
             (( count++ ))
         fi
 
-        # Get the site's HTML and skip to the next domain if an error occurs.
+        # Get the site's HTML
+        # tr is used here to remove null characters found in some sites
+        html="$(curl -sSLk --max-time 3 "http://${domain}/" | tr -d '\0')"
+
+        # Check for errors output by curl and skip to the next domain if found
         # This assumes that parked domains that errored during the unparked
         # check are still parked.
-        html="$(curl -sLk --max-time 3 "http://${domain}/")" || continue
-        # Remove null characters found in some sites
-        html="$(tr -d '\0' <<< "$html")"
+        if grep -qFf 'curl:' <<< "$html"; then
+            continue
+        fi
 
         # Check for parked messages in the site's HTML
         if grep -qiFf "$PARKED_TERMS" <<< "$html"; then
