@@ -1,6 +1,6 @@
 # Jarelllama's Scam Blocklist
 
-Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources. Automated retrieval is done at 10:00 AM UTC.
+Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources. [Automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml) is done at 10:00 AM UTC.
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
