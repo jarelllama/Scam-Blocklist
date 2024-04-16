@@ -141,7 +141,15 @@ find_parked() {
 
     # Loop through domains
     while read -r domain; do
-         [[ "$track" == true ]] && (( count++ ))
+        # Track progress only for the first split file
+        if [[ "$track" == true ]]; then
+            (( count++ ))
+
+            if (( count % 100 == 0 )); then
+                printf "[info] Analyzed %s%% of domains\n" \
+                    "$(( count * 100 / $(wc -l < "$1") ))"
+            fi
+        fi
 
         # Get the site's HTML and skip to the next domain if an error occurs.
         # This assumes that parked domains that errored during the unparked
@@ -154,12 +162,6 @@ find_parked() {
         if grep -qiFf "$PARKED_TERMS" <<< "$html"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
-        fi
-
-        # Track progress only for the first split file
-        if [[ "$track" != true ]] && (( count % 100 == 0 )); then
-            printf "[info] Analyzed %s%% of domains\n" \
-                "$(( count * 100 / $(wc -l < "$1") ))"
         fi
     done < "$1"
 }
