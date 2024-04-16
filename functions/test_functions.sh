@@ -571,9 +571,12 @@ test_parked_check() {
 test_unparked_check() {
     # INPUT
     printf "www.google.com\n" >> "$PARKED_DOMAINS"
+    printf "parked-errored-test.com\n" >> "$PARKED_DOMAINS"
     # EXPECTED OUTPUT
     # Subdomains should be kept to be processed by the validation check
     printf "www.google.com\n" >> out_raw.txt
+    # Domains that errored during curl should be assumed still parked
+    printf "parked-errored-test.com\n" >> out_parked.txt
     printf "unparked,www.google.com,parked_domains_file\n" >> out_log.txt
 }
 

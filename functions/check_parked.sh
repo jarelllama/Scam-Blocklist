@@ -71,6 +71,9 @@ check_unparked() {
 
     [[ ! -s unparked.tmp ]] && return
 
+    # Assume that domains that errored out during the check are still parked
+    sort -u errored.tmp parked.tmp -o parked.tmp
+
     # Include only parked domains in parked domains file
     # grep is used here because the parked domains file is unsorted
     grep -xFf parked.tmp "$PARKED_DOMAINS" > temp
@@ -91,6 +94,7 @@ check_unparked() {
 #   $1: file to process
 # Output:
 #   parked.tmp
+#   errored.tmp (consists of domains that errored during curl)
 #   return 1 (if parked domains not found)
 find_parked_in() {
     local execution_time
@@ -111,11 +115,10 @@ find_parked_in() {
     wait
     rm x??
 
-    # Collate parked domains (ignore not found errors)
-    cat parked_domains_x??.tmp > parked.tmp 2> /dev/null
-    rm parked_domains_x??.tmp 2> /dev/null
-
-    sort -u parked.tmp -o parked.tmp
+    # Collate parked domains and errored domains (ignore not found errors)
+    sort -u parked_domains_x??.tmp -o parked.tmp 2> /dev/null
+    sort -u errored_domains_x??.tmp -o errored.tmp 2> /dev/null
+    rm ./*_x??.tmp 2> /dev/null
 
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
@@ -130,6 +133,7 @@ find_parked_in() {
 #   $1: file to process
 # Output:
 #   parked_domains_x??.tmp (if parked domains found)
+#   errored_domains_x??.tmp (if any domains errored during curl)
 find_parked() {
     [[ ! -f "$1" ]] && return
 
@@ -155,10 +159,12 @@ find_parked() {
         # tr is used here to remove null characters found in some sites
         html="$(curl -sSLk --max-time 3 "http://${domain}/" 2>&1 | tr -d '\0')"
 
-        # Check for errors output by curl and skip to the next domain if found
-        # This assumes that parked domains that errored during the unparked
-        # check are still parked.
-        grep -qF 'curl:' <<< "$html" && continue
+        # Collate domains that errored so they can be dealt with later
+        # accordingly
+        if grep -qF 'curl:' <<< "$html"; then
+            printf "%s\n" "$domain" >> "errored_domains_${1}.tmp"
+            continue
+        fi
 
         # Check for parked messages in the site's HTML
         if grep -qiFf "$PARKED_TERMS" <<< "$html"; then
