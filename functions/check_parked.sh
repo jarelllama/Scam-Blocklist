@@ -66,13 +66,13 @@ check_unparked() {
     find_parked_in "$PARKED_DOMAINS"
     # No need to return if no parked domains found
 
+    # Assume that domains that errored out during the check are still parked
+    sort -u errored.tmp parked.tmp -o parked.tmp
+
     # Get unparked domains
     comm -23 <(sort "$PARKED_DOMAINS") parked.tmp > unparked.tmp
 
     [[ ! -s unparked.tmp ]] && return
-
-    # Assume that domains that errored out during the check are still parked
-    sort -u errored.tmp parked.tmp -o parked.tmp
 
     # Include only parked domains in parked domains file
     # grep is used here because the parked domains file is unsorted
