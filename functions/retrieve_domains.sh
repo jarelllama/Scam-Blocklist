@@ -693,7 +693,8 @@ source_scamadviser() {
     done
 
     # The Scamadviser source is rather slow so parallelization is used
-    curl -sZ --retry 2 --retry-all-errors "${urls[@]}" -o results.tmp
+    # -o still prints to stdout so > is used
+    curl -sZ --retry 2 --retry-all-errors "${urls[@]}" > results.tmp
 
     grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
