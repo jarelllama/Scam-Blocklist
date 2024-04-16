@@ -136,19 +136,18 @@ find_parked() {
     # Track progress only for first split file
     if [[ "$1" == 'x00' ]]; then
         local track=true
-        local count=0
+        local count=1
     fi
 
     # Loop through domains
     while read -r domain; do
-        # Track progress only for the first split file
         if [[ "$track" == true ]]; then
-            (( count++ ))
-
             if (( count % 100 == 0 )); then
                 printf "[info] Analyzed %s%% of domains\n" \
                     "$(( count * 100 / $(wc -l < "$1") ))"
             fi
+
+            (( count++ ))
         fi
 
         # Get the site's HTML and skip to the next domain if an error occurs.
