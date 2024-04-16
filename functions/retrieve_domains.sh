@@ -32,12 +32,12 @@ source() {
 
     mkdir -p data/pending
 
-    # Download dependencies here in parallel to not bias the processing time of
-    # the sources.
-    # Install idn (requires sudo for some reason)
+    # Download dependencies here to not bias the processing time of
+    # the sources (done in parallel):
+    # Install idn (requires sudo) (note -qq does not seem to work here)
     # Call shell wrapper to download toplist
     # Download NRD feed
-    { command -v idn &> /dev/null || apt-get install -yqq idn; } \
+    { command -v idn &> /dev/null || sudo apt-get install idn > /dev/null; } \
     & $FUNCTION --download-toplist \
     & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
     wait
@@ -405,7 +405,7 @@ source_google_search() {
     # Install csvkit
     command -v csvgrep &> /dev/null || pip install -q csvkit
     # Install jq
-    command -v jq &> /dev/null || apt-get install -yqq jq
+    command -v jq &> /dev/null || apt-get install -qq jq
 
     # Get active search times and quote them
     # csvkit has to be used here as the search terms may contain commas which
@@ -613,7 +613,7 @@ source_aa419() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     # Install jq
-    command -v jq &> /dev/null || apt-get install -yqq jq
+    command -v jq &> /dev/null || apt-get install -qq jq
 
     local url='https://api.aa419.org/fakesites'
     curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \

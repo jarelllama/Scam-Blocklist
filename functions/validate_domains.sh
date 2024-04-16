@@ -41,8 +41,6 @@ filter() {
 }
 
 validate() {
-    # Install idn (requires sudo for some reason)
-    command -v idn &> /dev/null || sudo apt-get install idn > /dev/null
     # Convert Unicode to Punycode in raw file and raw light file
     for file in "$RAW" "$RAW_LIGHT"; do
         # '--no-tld' in an attempt to fix
@@ -92,8 +90,6 @@ validate() {
         $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
     fi
 
-    # Call shell wrapper to download toplist
-    $FUNCTION --download-toplist
     # Find domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
     in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
@@ -143,5 +139,12 @@ validate() {
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 $FUNCTION --format-all
+
+# Download dependencies (done in parallel):
+# Install idn (requires sudo) (note -qq does not seem to work here)
+# Call shell wrapper to download toplist
+{ command -v idn &> /dev/null || sudo apt-get install idn > /dev/null; } \
+& $FUNCTION --download-toplist
+wait
 
 validate
