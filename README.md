@@ -28,12 +28,12 @@ Today | Yesterday | Excluded | Source
     0 |        74 |       2% | Regex Matching (NRDs)
     0 |        20 |       8% | aa419.org
     0 |        28 |       0% | dnstwist (NRDs)
-    0 |         0 |      18% | guntab.com
+    0 |         0 |      19% | guntab.com
     0 |         0 |       6% | petscams.com
-    0 |         0 |      62% | scam.directory
+    0 |         0 |      63% | scam.directory
     0 |         0 |      35% | scamadviser.com
     0 |         0 |       3% | stopgunscams.com
-    0 |       205 |      13% | All sources
+    0 |       205 |      15% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
