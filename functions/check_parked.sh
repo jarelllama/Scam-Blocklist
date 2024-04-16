@@ -144,8 +144,8 @@ find_parked() {
          [[ "$track" == true ]] && (( count++ ))
 
         # Get the site's HTML and skip to the next domain if an error occurs.
-        # This prevents parked domains from being falsely added back during the
-        # unparked check.
+        # This assumes that parked domains that errored during the unparked
+        # check are still parked.
         html="$(curl -sLk --max-time 3 "http://${domain}/")" || continue
         # Remove null characters found in some sites
         html="$(tr -d '\0' <<< "$html")"
