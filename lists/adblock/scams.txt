@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.16.141811.2024
+! Version: 04.16.141925.2024
 ! Expires: 1 day
-! Last modified: Tue Apr 16 14:18:11 UTC 2024
+! Last modified: Tue Apr 16 14:19:25 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 40049
+! Number of entries: 40050
 !
 ||01107904-coinbase.com^
 ||01edc.com^
@@ -31149,6 +31149,7 @@
 ||singapore-onlyfans.com^
 ||singaporediscounts.com^
 ||singeruss.com^
+||singingfiles.com^
 ||singsale.com.sg^
 ||sinrongs.com^
 ||sinsakurai.com^
