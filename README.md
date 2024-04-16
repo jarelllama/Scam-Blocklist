@@ -86,7 +86,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 18
+Active search terms: 20
 API calls made today: 147
 Domains retrieved today: 24
 ```
@@ -108,7 +108,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 #### Statistics for dnstwist source
 
 ``` text
-Active targets: 69
+Active targets: 70
 Domains retrieved today: 34
 ```
 
@@ -179,6 +179,7 @@ Unparked domains added today: 90
 * [Collinbarrett's FilterLists directory](https://filterlists.com/)
 * [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
 * [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
+* [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
 * [The oisd blocklist](https://oisd.nl/)
 * [file-git.trli.club](https://file-git.trli.club/)
 * [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
@@ -190,6 +191,7 @@ Thanks to the following people for the help, inspiration, and support!
 * [@bongochong](https://github.com/bongochong)
 * [@hagezi](https://github.com/hagezi)
 * [@iam-py-test](https://github.com/iam-py-test)
+* [@sefinek24](https://github.com/sefinek24)
 * [@sjhgvr](https://github.com/sjhgvr)
 
 ## Sponsorship
