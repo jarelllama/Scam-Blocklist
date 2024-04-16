@@ -220,7 +220,7 @@ TEST_PARKED_CHECK() {
     run_script check_parked.sh
 
     # Remove placeholder line
-    for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" do
+    for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS"; do
         grep -vxFf placeholders.txt "$file" > temp
         mv temp "$file"
     done
