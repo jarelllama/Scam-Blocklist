@@ -19,6 +19,9 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
+    # Get placeholder domains needed for parked check
+    shuf -n 30 "$RAW" > placeholders.txt
+
     # Initialize
     : > "$RAW"
     : > "$DEAD_DOMAINS"
@@ -198,11 +201,8 @@ TEST_DEAD_CHECK() {
 # Function 'TEST_PARKED_CHECK' tests the removal/addition of parked and
 # unparked domains respectively.
 TEST_PARKED_CHECK() {
-    # Generate placeholders
+    # Use placeholders
     # (split does not work well without enough records)
-    for i in {1..40};do
-        printf "placeholder%s.com\n" "$i" >> placeholders.txt
-    done
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$PARKED_DOMAINS"
 
@@ -219,16 +219,14 @@ TEST_PARKED_CHECK() {
     # Run script
     run_script check_parked.sh
 
-    # Remove placeholder lines
-    grep -vxFf placeholders.txt "$RAW" > raw.tmp
-    grep -vxFf placeholders.txt "$RAW_LIGHT" > raw_light.tmp
-    grep -vxFf placeholders.txt "$PARKED_DOMAINS" > parked.tmp
-    mv parked.tmp "$PARKED_DOMAINS"
-    mv raw.tmp "$RAW"
-    mv raw_light.tmp "$RAW_LIGHT"
+    # Remove placeholder line
+    for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" do
+        grep -vxFf placeholders.txt "$file" > temp
+        mv temp "$file"
+    done
     # Not exact match in domain log
-    grep -vFf placeholders.txt "$DOMAIN_LOG" > domain_log.tmp
-    mv domain_log.tmp "$DOMAIN_LOG"
+    grep -vFf placeholders.txt "$DOMAIN_LOG" > temp
+    mv temp "$DOMAIN_LOG"
 
     # Sort parked domains file for easier comparison with expected output
     sort "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
