@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.135453.2024
+# Version: 04.16.141811.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 13:54:53 UTC 2024
+# Last modified: Tue Apr 16 14:18:11 UTC 2024
 # Syntax: Unbound
-# Number of entries: 4133
+# Number of entries: 4138
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -238,6 +238,7 @@ local-zone: "apleulou.com." always_nxdomain
 local-zone: "aplotesto.top." always_nxdomain
 local-zone: "apmody.graphicsmarket.net." always_nxdomain
 local-zone: "apole.xyz." always_nxdomain
+local-zone: "app-ios-apk.weebly.com." always_nxdomain
 local-zone: "app0le.site." always_nxdomain
 local-zone: "appie.best." always_nxdomain
 local-zone: "appie.site." always_nxdomain
@@ -1417,11 +1418,13 @@ local-zone: "genuzy.com." always_nxdomain
 local-zone: "gesegnetewelpenheim.com." always_nxdomain
 local-zone: "geshstore.com." always_nxdomain
 local-zone: "gesundeswelpenhaus.de." always_nxdomain
+local-zone: "get-itfree.wixsite.com." always_nxdomain
 local-zone: "getbiocultura.com." always_nxdomain
 local-zone: "getcashfor.co." always_nxdomain
 local-zone: "getcocaineonline.com." always_nxdomain
 local-zone: "getcounternotes.com." always_nxdomain
 local-zone: "getgreatdiscount.com." always_nxdomain
+local-zone: "getintosoft8.blogspot.com." always_nxdomain
 local-zone: "getitnowexpress.me." always_nxdomain
 local-zone: "getphotogifts.com." always_nxdomain
 local-zone: "getwowband.com." always_nxdomain
@@ -1737,6 +1740,7 @@ local-zone: "infinixshop.com." always_nxdomain
 local-zone: "influencek.com." always_nxdomain
 local-zone: "info-usps.com." always_nxdomain
 local-zone: "infocialisguides.com." always_nxdomain
+local-zone: "ingilizce-turkce.cevirsozluk.com." always_nxdomain
 local-zone: "innovativeallergy.com." always_nxdomain
 local-zone: "ins5agram.com." always_nxdomain
 local-zone: "insdas.com." always_nxdomain
@@ -3882,6 +3886,7 @@ local-zone: "wansut.com." always_nxdomain
 local-zone: "wapmart.ru." always_nxdomain
 local-zone: "warrenbfansclub.com." always_nxdomain
 local-zone: "watchwaveau.com." always_nxdomain
+local-zone: "waytosurvey.blogspot.com." always_nxdomain
 local-zone: "wayxbe.com." always_nxdomain
 local-zone: "wcedonline.com." always_nxdomain
 local-zone: "weaponsammoreloaded.com." always_nxdomain

@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.135453.2024
+# Version: 04.16.141811.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 13:54:53 UTC 2024
+# Last modified: Tue Apr 16 14:18:11 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 4133
+# Number of entries: 4138
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -237,6 +237,7 @@ local=/apleulou.com/
 local=/aplotesto.top/
 local=/apmody.graphicsmarket.net/
 local=/apole.xyz/
+local=/app-ios-apk.weebly.com/
 local=/app0le.site/
 local=/appie.best/
 local=/appie.site/
@@ -1416,11 +1417,13 @@ local=/genuzy.com/
 local=/gesegnetewelpenheim.com/
 local=/geshstore.com/
 local=/gesundeswelpenhaus.de/
+local=/get-itfree.wixsite.com/
 local=/getbiocultura.com/
 local=/getcashfor.co/
 local=/getcocaineonline.com/
 local=/getcounternotes.com/
 local=/getgreatdiscount.com/
+local=/getintosoft8.blogspot.com/
 local=/getitnowexpress.me/
 local=/getphotogifts.com/
 local=/getwowband.com/
@@ -1736,6 +1739,7 @@ local=/infinixshop.com/
 local=/influencek.com/
 local=/info-usps.com/
 local=/infocialisguides.com/
+local=/ingilizce-turkce.cevirsozluk.com/
 local=/innovativeallergy.com/
 local=/ins5agram.com/
 local=/insdas.com/
@@ -3881,6 +3885,7 @@ local=/wansut.com/
 local=/wapmart.ru/
 local=/warrenbfansclub.com/
 local=/watchwaveau.com/
+local=/waytosurvey.blogspot.com/
 local=/wayxbe.com/
 local=/wcedonline.com/
 local=/weaponsammoreloaded.com/

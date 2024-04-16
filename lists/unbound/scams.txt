@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.135453.2024
+# Version: 04.16.141811.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 13:54:53 UTC 2024
+# Last modified: Tue Apr 16 14:18:11 UTC 2024
 # Syntax: Unbound
-# Number of entries: 40044
+# Number of entries: 40049
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -2129,6 +2129,7 @@ local-zone: "app-alibaba.com." always_nxdomain
 local-zone: "app-coinbase-trust.com." always_nxdomain
 local-zone: "app-cryptobot.com." always_nxdomain
 local-zone: "app-fmbcc.com." always_nxdomain
+local-zone: "app-ios-apk.weebly.com." always_nxdomain
 local-zone: "app-metamask.com." always_nxdomain
 local-zone: "app-onlione-banking-cib.com." always_nxdomain
 local-zone: "app-samsung.com." always_nxdomain
@@ -13201,6 +13202,7 @@ local-zone: "get-car-insurance-now.xyz." always_nxdomain
 local-zone: "get-carts.com." always_nxdomain
 local-zone: "get-crypto.today." always_nxdomain
 local-zone: "get-insurance-in-israel.today." always_nxdomain
+local-zone: "get-itfree.wixsite.com." always_nxdomain
 local-zone: "get-link-amazon2.com." always_nxdomain
 local-zone: "get-male-meds.net." always_nxdomain
 local-zone: "get-mens-meds.com." always_nxdomain
@@ -13231,6 +13233,7 @@ local-zone: "gethardmarketingco.com." always_nxdomain
 local-zone: "gethealthinsurancequote.net." always_nxdomain
 local-zone: "gethymarketing.com." always_nxdomain
 local-zone: "getibogaine.com." always_nxdomain
+local-zone: "getintosoft8.blogspot.com." always_nxdomain
 local-zone: "getiphonemrbeast.xyz." always_nxdomain
 local-zone: "getit4freeoutlet.com." always_nxdomain
 local-zone: "getitnowexpress.me." always_nxdomain
@@ -17205,6 +17208,7 @@ local-zone: "infohsbc.net." always_nxdomain
 local-zone: "infomp-coinbase.com." always_nxdomain
 local-zone: "infopavepathmarketing.com." always_nxdomain
 local-zone: "ingaugeinvestments.com." always_nxdomain
+local-zone: "ingilizce-turkce.cevirsozluk.com." always_nxdomain
 local-zone: "iniciandonomarketing.com." always_nxdomain
 local-zone: "injaz-dz.com." always_nxdomain
 local-zone: "injectorapk.org." always_nxdomain
@@ -37979,6 +37983,7 @@ local-zone: "waynejennyminilabradoodlehome.com." always_nxdomain
 local-zone: "wayneparkuniversity.com." always_nxdomain
 local-zone: "wayofhome.com." always_nxdomain
 local-zone: "waypointlogistic.com." always_nxdomain
+local-zone: "waytosurvey.blogspot.com." always_nxdomain
 local-zone: "wayxbe.com." always_nxdomain
 local-zone: "wazzaworldwide.com." always_nxdomain
 local-zone: "wb-official.com." always_nxdomain

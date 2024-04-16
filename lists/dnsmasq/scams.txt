@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.135453.2024
+# Version: 04.16.141811.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 13:54:53 UTC 2024
+# Last modified: Tue Apr 16 14:18:11 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 40044
+# Number of entries: 40049
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -2128,6 +2128,7 @@ local=/app-alibaba.com/
 local=/app-coinbase-trust.com/
 local=/app-cryptobot.com/
 local=/app-fmbcc.com/
+local=/app-ios-apk.weebly.com/
 local=/app-metamask.com/
 local=/app-onlione-banking-cib.com/
 local=/app-samsung.com/
@@ -13200,6 +13201,7 @@ local=/get-car-insurance-now.xyz/
 local=/get-carts.com/
 local=/get-crypto.today/
 local=/get-insurance-in-israel.today/
+local=/get-itfree.wixsite.com/
 local=/get-link-amazon2.com/
 local=/get-male-meds.net/
 local=/get-mens-meds.com/
@@ -13230,6 +13232,7 @@ local=/gethardmarketingco.com/
 local=/gethealthinsurancequote.net/
 local=/gethymarketing.com/
 local=/getibogaine.com/
+local=/getintosoft8.blogspot.com/
 local=/getiphonemrbeast.xyz/
 local=/getit4freeoutlet.com/
 local=/getitnowexpress.me/
@@ -17204,6 +17207,7 @@ local=/infohsbc.net/
 local=/infomp-coinbase.com/
 local=/infopavepathmarketing.com/
 local=/ingaugeinvestments.com/
+local=/ingilizce-turkce.cevirsozluk.com/
 local=/iniciandonomarketing.com/
 local=/injaz-dz.com/
 local=/injectorapk.org/
@@ -37978,6 +37982,7 @@ local=/waynejennyminilabradoodlehome.com/
 local=/wayneparkuniversity.com/
 local=/wayofhome.com/
 local=/waypointlogistic.com/
+local=/waytosurvey.blogspot.com/
 local=/wayxbe.com/
 local=/wazzaworldwide.com/
 local=/wb-official.com/
