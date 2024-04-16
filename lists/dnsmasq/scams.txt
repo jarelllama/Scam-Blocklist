@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.070714.2024
+# Version: 04.16.094451.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 07:07:14 UTC 2024
+# Last modified: Tue Apr 16 09:44:51 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 39538
+# Number of entries: 39547
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -1862,6 +1862,7 @@ local=/amzing.grace.puppies.com/
 local=/amzprintify.com/
 local=/amzzon.uk/
 local=/an-creditunion.com/
+local=/an1.is/
 local=/anabolicgearpharms.info/
 local=/anabolicsteroidsoutlet.com/
 local=/anabolicsteroidspharmacyaustralia.com/
@@ -4405,6 +4406,7 @@ local=/bmoore-logistics.com/
 local=/bmpharmacy-official.com/
 local=/bmrmarketing.net/
 local=/bmtcoin.com/
+local=/bnidigital.com/
 local=/bnkalio.com/
 local=/bnkofhw.com/
 local=/bnlexpresslogistics.com/
@@ -10525,6 +10527,7 @@ local=/epiccourierexpress.com/
 local=/epicdealsoutlet.shop/
 local=/epiclootexotics.shop/
 local=/epicoinvestments.com/
+local=/epicplayloft.com/
 local=/epicsavingsoutlet.shop/
 local=/epicyorkies.com/
 local=/epiphanymorkiepuppies.com/
@@ -21837,6 +21840,7 @@ local=/mod-lighting.com/
 local=/modapkcorner.com/
 local=/modapklite.com/
 local=/modara.de/
+local=/moddetail.com/
 local=/modebaldessarini.de/
 local=/modebasket.com/
 local=/modebogner.de/
@@ -22910,6 +22914,7 @@ local=/nextfieldammunition.com/
 local=/nextgensolar.co.za/
 local=/nextime-outletstore.com/
 local=/nextlevelalliancemarketing.xyz/
+local=/nextmrolympia.com/
 local=/nextstoprelocation.com/
 local=/nexusglobaltransport.com/
 local=/nexusgrafikkarte.com/
@@ -34548,6 +34553,7 @@ local=/timelinegamefarm.com/
 local=/timelycourierdiplomats.com/
 local=/timeood.com/
 local=/timesends.com/
+local=/timesofeuropnews.com/
 local=/timixsmart.com/
 local=/timlinexpress.com/
 local=/timm-reifen.com/
@@ -34643,6 +34649,7 @@ local=/tobuyy.com/
 local=/today-amazon.com/
 local=/today-premium.com/
 local=/today-realestate-investments.bond/
+local=/today.free.nf/
 local=/todaybitcoinnews.com/
 local=/todaydiscountoffers.shop/
 local=/todayisadiscountday.com/
@@ -36756,6 +36763,7 @@ local=/valbonapornhub.com/
 local=/valdelivery.com/
 local=/valdemarmaltipoo.com/
 local=/valentila.com/
+local=/valeofoodsgroup.com/
 local=/valhadex.com/
 local=/valhallamediaandmarketing.com/
 local=/validshooting.com/
@@ -39453,6 +39461,7 @@ local=/zhentaivn.net/
 local=/zhxz-alibaba-cloud.com/
 local=/zicologistics.buzz/
 local=/zigber.com/
+local=/zillify.cfd/
 local=/zimuzhijia.com/
 local=/zinaxkomiwoautos.com/
 local=/zinelogistics.com/

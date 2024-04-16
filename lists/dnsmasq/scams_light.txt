@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.070714.2024
+# Version: 04.16.094451.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 07:07:14 UTC 2024
+# Last modified: Tue Apr 16 09:44:51 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 4112
+# Number of entries: 4121
 #
 local=/01edc.com/
 local=/0penai.xyz/
@@ -205,6 +205,7 @@ local=/amqzon.work/
 local=/amreahome.com/
 local=/amsung.org/
 local=/amzzon.uk/
+local=/an1.is/
 local=/anabolicsteroidspharmacyaustralia.com/
 local=/anabolicsteroidssupps.com/
 local=/analystcase.com/
@@ -483,6 +484,7 @@ local=/blueprintkennel.com/
 local=/bluewavecontainers.com/
 local=/bluseshoreunion.com/
 local=/bmtcoin.com/
+local=/bnidigital.com/
 local=/bnkalio.com/
 local=/bnkofhw.com/
 local=/bns4u.store/
@@ -1122,6 +1124,7 @@ local=/enhancehomesupply.com/
 local=/enjoylifevibes.com/
 local=/enrollchemicalssd.co.za/
 local=/enrollforinsurancenow.com/
+local=/epicplayloft.com/
 local=/equivalentz.com/
 local=/eri.lol/
 local=/eriqlukasik.com/
@@ -2230,6 +2233,7 @@ local=/mmaswicorporate.co.za/
 local=/mmbdynamics.co.za/
 local=/mod-lighting.com/
 local=/modapkcorner.com/
+local=/moddetail.com/
 local=/modern-dove.com/
 local=/modernattirellc.com/
 local=/modernfavellc.com/
@@ -2359,6 +2363,7 @@ local=/newparksfarms.co.uk/
 local=/newplanetragdoll.com/
 local=/newpodmerch.com/
 local=/nexfy.co/
+local=/nextmrolympia.com/
 local=/nflhandbag.co/
 local=/ngcoboeggfarm.com/
 local=/ngh921.com/
@@ -3355,6 +3360,7 @@ local=/tiktuk.wtf/
 local=/tikzok.com/
 local=/timelessgoldenretrievers.com/
 local=/timeood.com/
+local=/timesofeuropnews.com/
 local=/tinde.net/
 local=/tindir.net/
 local=/tineder.com/
@@ -3366,6 +3372,7 @@ local=/tmnwrt.com/
 local=/tmoreautomachinery.com/
 local=/tnisecuritysupplies.co.za/
 local=/toadsforsaleonline.com/
+local=/today.free.nf/
 local=/tog24outdoor.com/
 local=/tokarevusastore.com/
 local=/toksblog.com/
@@ -3793,6 +3800,7 @@ local=/uspszxc.top/
 local=/uvaldefamilypractice.com/
 local=/uwerose.com/
 local=/uzzia.com/
+local=/valeofoodsgroup.com/
 local=/valhadex.com/
 local=/valorsharpei.com/
 local=/valuedeath.com/
@@ -4099,6 +4107,7 @@ local=/zencontainers.co.za/
 local=/zenitzephyr.com/
 local=/zentai.asia/
 local=/zewcx.com/
+local=/zillify.cfd/
 local=/zimuzhijia.com/
 local=/ziniaofotec.com/
 local=/zinstyles.com/

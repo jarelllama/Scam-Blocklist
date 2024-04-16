@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.070714.2024
+# Version: 04.16.094451.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 07:07:14 UTC 2024
+# Last modified: Tue Apr 16 09:44:51 UTC 2024
 # Syntax: Unbound
-# Number of entries: 4112
+# Number of entries: 4121
 #
 server:
 local-zone: "01edc.com." always_nxdomain
@@ -206,6 +206,7 @@ local-zone: "amqzon.work." always_nxdomain
 local-zone: "amreahome.com." always_nxdomain
 local-zone: "amsung.org." always_nxdomain
 local-zone: "amzzon.uk." always_nxdomain
+local-zone: "an1.is." always_nxdomain
 local-zone: "anabolicsteroidspharmacyaustralia.com." always_nxdomain
 local-zone: "anabolicsteroidssupps.com." always_nxdomain
 local-zone: "analystcase.com." always_nxdomain
@@ -484,6 +485,7 @@ local-zone: "blueprintkennel.com." always_nxdomain
 local-zone: "bluewavecontainers.com." always_nxdomain
 local-zone: "bluseshoreunion.com." always_nxdomain
 local-zone: "bmtcoin.com." always_nxdomain
+local-zone: "bnidigital.com." always_nxdomain
 local-zone: "bnkalio.com." always_nxdomain
 local-zone: "bnkofhw.com." always_nxdomain
 local-zone: "bns4u.store." always_nxdomain
@@ -1123,6 +1125,7 @@ local-zone: "enhancehomesupply.com." always_nxdomain
 local-zone: "enjoylifevibes.com." always_nxdomain
 local-zone: "enrollchemicalssd.co.za." always_nxdomain
 local-zone: "enrollforinsurancenow.com." always_nxdomain
+local-zone: "epicplayloft.com." always_nxdomain
 local-zone: "equivalentz.com." always_nxdomain
 local-zone: "eri.lol." always_nxdomain
 local-zone: "eriqlukasik.com." always_nxdomain
@@ -2231,6 +2234,7 @@ local-zone: "mmaswicorporate.co.za." always_nxdomain
 local-zone: "mmbdynamics.co.za." always_nxdomain
 local-zone: "mod-lighting.com." always_nxdomain
 local-zone: "modapkcorner.com." always_nxdomain
+local-zone: "moddetail.com." always_nxdomain
 local-zone: "modern-dove.com." always_nxdomain
 local-zone: "modernattirellc.com." always_nxdomain
 local-zone: "modernfavellc.com." always_nxdomain
@@ -2360,6 +2364,7 @@ local-zone: "newparksfarms.co.uk." always_nxdomain
 local-zone: "newplanetragdoll.com." always_nxdomain
 local-zone: "newpodmerch.com." always_nxdomain
 local-zone: "nexfy.co." always_nxdomain
+local-zone: "nextmrolympia.com." always_nxdomain
 local-zone: "nflhandbag.co." always_nxdomain
 local-zone: "ngcoboeggfarm.com." always_nxdomain
 local-zone: "ngh921.com." always_nxdomain
@@ -3356,6 +3361,7 @@ local-zone: "tiktuk.wtf." always_nxdomain
 local-zone: "tikzok.com." always_nxdomain
 local-zone: "timelessgoldenretrievers.com." always_nxdomain
 local-zone: "timeood.com." always_nxdomain
+local-zone: "timesofeuropnews.com." always_nxdomain
 local-zone: "tinde.net." always_nxdomain
 local-zone: "tindir.net." always_nxdomain
 local-zone: "tineder.com." always_nxdomain
@@ -3367,6 +3373,7 @@ local-zone: "tmnwrt.com." always_nxdomain
 local-zone: "tmoreautomachinery.com." always_nxdomain
 local-zone: "tnisecuritysupplies.co.za." always_nxdomain
 local-zone: "toadsforsaleonline.com." always_nxdomain
+local-zone: "today.free.nf." always_nxdomain
 local-zone: "tog24outdoor.com." always_nxdomain
 local-zone: "tokarevusastore.com." always_nxdomain
 local-zone: "toksblog.com." always_nxdomain
@@ -3794,6 +3801,7 @@ local-zone: "uspszxc.top." always_nxdomain
 local-zone: "uvaldefamilypractice.com." always_nxdomain
 local-zone: "uwerose.com." always_nxdomain
 local-zone: "uzzia.com." always_nxdomain
+local-zone: "valeofoodsgroup.com." always_nxdomain
 local-zone: "valhadex.com." always_nxdomain
 local-zone: "valorsharpei.com." always_nxdomain
 local-zone: "valuedeath.com." always_nxdomain
@@ -4100,6 +4108,7 @@ local-zone: "zencontainers.co.za." always_nxdomain
 local-zone: "zenitzephyr.com." always_nxdomain
 local-zone: "zentai.asia." always_nxdomain
 local-zone: "zewcx.com." always_nxdomain
+local-zone: "zillify.cfd." always_nxdomain
 local-zone: "zimuzhijia.com." always_nxdomain
 local-zone: "ziniaofotec.com." always_nxdomain
 local-zone: "zinstyles.com." always_nxdomain

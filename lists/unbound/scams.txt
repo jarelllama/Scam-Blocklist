@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.16.070714.2024
+# Version: 04.16.094451.2024
 # Expires: 1 day
-# Last modified: Tue Apr 16 07:07:14 UTC 2024
+# Last modified: Tue Apr 16 09:44:51 UTC 2024
 # Syntax: Unbound
-# Number of entries: 39538
+# Number of entries: 39547
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -1863,6 +1863,7 @@ local-zone: "amzing.grace.puppies.com." always_nxdomain
 local-zone: "amzprintify.com." always_nxdomain
 local-zone: "amzzon.uk." always_nxdomain
 local-zone: "an-creditunion.com." always_nxdomain
+local-zone: "an1.is." always_nxdomain
 local-zone: "anabolicgearpharms.info." always_nxdomain
 local-zone: "anabolicsteroidsoutlet.com." always_nxdomain
 local-zone: "anabolicsteroidspharmacyaustralia.com." always_nxdomain
@@ -4406,6 +4407,7 @@ local-zone: "bmoore-logistics.com." always_nxdomain
 local-zone: "bmpharmacy-official.com." always_nxdomain
 local-zone: "bmrmarketing.net." always_nxdomain
 local-zone: "bmtcoin.com." always_nxdomain
+local-zone: "bnidigital.com." always_nxdomain
 local-zone: "bnkalio.com." always_nxdomain
 local-zone: "bnkofhw.com." always_nxdomain
 local-zone: "bnlexpresslogistics.com." always_nxdomain
@@ -10526,6 +10528,7 @@ local-zone: "epiccourierexpress.com." always_nxdomain
 local-zone: "epicdealsoutlet.shop." always_nxdomain
 local-zone: "epiclootexotics.shop." always_nxdomain
 local-zone: "epicoinvestments.com." always_nxdomain
+local-zone: "epicplayloft.com." always_nxdomain
 local-zone: "epicsavingsoutlet.shop." always_nxdomain
 local-zone: "epicyorkies.com." always_nxdomain
 local-zone: "epiphanymorkiepuppies.com." always_nxdomain
@@ -21838,6 +21841,7 @@ local-zone: "mod-lighting.com." always_nxdomain
 local-zone: "modapkcorner.com." always_nxdomain
 local-zone: "modapklite.com." always_nxdomain
 local-zone: "modara.de." always_nxdomain
+local-zone: "moddetail.com." always_nxdomain
 local-zone: "modebaldessarini.de." always_nxdomain
 local-zone: "modebasket.com." always_nxdomain
 local-zone: "modebogner.de." always_nxdomain
@@ -22911,6 +22915,7 @@ local-zone: "nextfieldammunition.com." always_nxdomain
 local-zone: "nextgensolar.co.za." always_nxdomain
 local-zone: "nextime-outletstore.com." always_nxdomain
 local-zone: "nextlevelalliancemarketing.xyz." always_nxdomain
+local-zone: "nextmrolympia.com." always_nxdomain
 local-zone: "nextstoprelocation.com." always_nxdomain
 local-zone: "nexusglobaltransport.com." always_nxdomain
 local-zone: "nexusgrafikkarte.com." always_nxdomain
@@ -34549,6 +34554,7 @@ local-zone: "timelinegamefarm.com." always_nxdomain
 local-zone: "timelycourierdiplomats.com." always_nxdomain
 local-zone: "timeood.com." always_nxdomain
 local-zone: "timesends.com." always_nxdomain
+local-zone: "timesofeuropnews.com." always_nxdomain
 local-zone: "timixsmart.com." always_nxdomain
 local-zone: "timlinexpress.com." always_nxdomain
 local-zone: "timm-reifen.com." always_nxdomain
@@ -34644,6 +34650,7 @@ local-zone: "tobuyy.com." always_nxdomain
 local-zone: "today-amazon.com." always_nxdomain
 local-zone: "today-premium.com." always_nxdomain
 local-zone: "today-realestate-investments.bond." always_nxdomain
+local-zone: "today.free.nf." always_nxdomain
 local-zone: "todaybitcoinnews.com." always_nxdomain
 local-zone: "todaydiscountoffers.shop." always_nxdomain
 local-zone: "todayisadiscountday.com." always_nxdomain
@@ -36757,6 +36764,7 @@ local-zone: "valbonapornhub.com." always_nxdomain
 local-zone: "valdelivery.com." always_nxdomain
 local-zone: "valdemarmaltipoo.com." always_nxdomain
 local-zone: "valentila.com." always_nxdomain
+local-zone: "valeofoodsgroup.com." always_nxdomain
 local-zone: "valhadex.com." always_nxdomain
 local-zone: "valhallamediaandmarketing.com." always_nxdomain
 local-zone: "validshooting.com." always_nxdomain
@@ -39454,6 +39462,7 @@ local-zone: "zhentaivn.net." always_nxdomain
 local-zone: "zhxz-alibaba-cloud.com." always_nxdomain
 local-zone: "zicologistics.buzz." always_nxdomain
 local-zone: "zigber.com." always_nxdomain
+local-zone: "zillify.cfd." always_nxdomain
 local-zone: "zimuzhijia.com." always_nxdomain
 local-zone: "zinaxkomiwoautos.com." always_nxdomain
 local-zone: "zinelogistics.com." always_nxdomain
