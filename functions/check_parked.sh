@@ -99,14 +99,15 @@ find_parked_in() {
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
-    # Split file into 14 equal files
-    split -d -l $(( $(wc -l < "$1") / 14 )) "$1"
+    # Split file into 16 equal files
+    split -d -l $(( $(wc -l < "$1") / 16 )) "$1"
 
     # Run checks in parallel
     find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
     find_parked x04 & find_parked x05 & find_parked x06 & find_parked x07 &
     find_parked x08 & find_parked x09 & find_parked x10 & find_parked x11 &
-    find_parked x12 & find_parked x13 & find_parked x14 & find_parked x15
+    find_parked x12 & find_parked x13 & find_parked x14 & find_parked x15 &
+    find_parked x16 & find_parked x17
     wait
     rm x??
 
@@ -135,30 +136,31 @@ find_parked() {
     # Track progress only for first split file
     if [[ "$1" == 'x00' ]]; then
         local track=true
-        local count=1
+        local count=0
     fi
 
     # Loop through domains
     while read -r domain; do
-        # Check for parked messaged in the site's HTML (retry a max of 1 time)
-        if grep -qiFf "$PARKED_TERMS" \
-            <<< "$(curl -sL --max-time 3 --retry 1 --retry-all-errors \
-            "http://${domain}/" | tr -d '\0')"
-            # tr is used here to remove null characters found in some sites.
-            then
+         [[ "$track" == true ]] && (( count++ ))
+
+        # Get the site's HTML and skip to the next domain if an error occurs.
+        # This prevents parked domains from being falsely added back during the
+        # unparked check.
+        html="$(curl -sLk --max-time 3 "http://${domain}/")" || continue
+        # Remove null characters found in some sites
+        html="$(tr -d '\0' <<< "$html")"
+
+        # Check for parked messages in the site's HTML
+        if grep -qiFf "$PARKED_TERMS" <<< "$html"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
 
-        # Skip progress tracking if not first split file
-        [[ "$track" != true ]] && continue
-
-        if (( count % 100 == 0 )); then
+        # Track progress only for the first split file
+        if [[ "$track" != true ]] && (( count % 100 == 0 )); then
             printf "[info] Analyzed %s%% of domains\n" \
                 "$(( count * 100 / $(wc -l < "$1") ))"
         fi
-
-        (( count++ ))
     done < "$1"
 }
 
