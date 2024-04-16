@@ -20,7 +20,7 @@ readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
     # Get placeholder domains needed for parked check
-    # 30 seems to be the bare minimum required
+    # 30 lines seems to be the bare minimum required
     shuf -n 30 "$RAW" > placeholders.txt
 
     # Initialize
@@ -204,6 +204,10 @@ TEST_DEAD_CHECK() {
 TEST_PARKED_CHECK() {
     # Use placeholders
     # (split does not work well without enough records)
+    : > placeholders.txt
+    for i in {1..40};do
+        printf "placeholder%s.com\n" "$i" >> placeholders.txt
+    done
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$PARKED_DOMAINS"
 
