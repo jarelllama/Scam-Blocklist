@@ -37,7 +37,7 @@ source() {
     # Install idn (requires sudo for some reason)
     # Call shell wrapper to download toplist
     # Download NRD feed
-    { command -v idn &> /dev/null || sudo apt-get install -y idn > /dev/null; } \
+    { command -v idn &> /dev/null || sudo apt-get install -y idn; } \
     & $FUNCTION --download-toplist \
     & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
 
