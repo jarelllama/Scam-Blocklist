@@ -66,7 +66,7 @@ check_unparked() {
     find_parked_in "$PARKED_DOMAINS"
     # No need to return if no parked domains found
 
-    # Assume that domains that errored out during the check are still parked
+    # Assume domains that errored out during the check are still parked
     sort -u errored.tmp parked.tmp -o parked.tmp
 
     # Get unparked domains
