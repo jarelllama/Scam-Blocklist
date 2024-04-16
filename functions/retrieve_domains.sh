@@ -695,10 +695,14 @@ source_scamadviser() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.scamadviser.com/articles'
-    for page in {1..15}; do  # Loop through pages
-        curl -s "${url}?p=${page}" >> results.tmp
-        # Note trailing slash breaks curl
+    # Collate URLs to curl into an array
+    # Note trailing slash is intentionally omitted
+    for page in {1..15}; do
+        urls+=("${url}?p=${page}")
     done
+
+    # The Scamadviser source is rather slow so parallelization is used
+    curl -sZ --retry 2 --retry-all-errors "${urls[@]}" -o results.tmp
 
     grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
