@@ -23,17 +23,17 @@ Light version: 4112
 
 New domains for each source:
 Today | Yesterday | Excluded | Source
-   78 |        17 |       3% | Google Search
-    5 |         0 |       0% | Manual Entries
-   74 |       327 |       2% | Regex Matching (NRDs)
-   20 |        10 |       8% | aa419.org
-   28 |        22 |       0% | dnstwist (NRDs)
+    0 |        78 |       3% | Google Search
+    0 |         5 |       0% | Manual Entries
+    0 |        74 |       2% | Regex Matching (NRDs)
+    0 |        20 |       8% | aa419.org
+    0 |        28 |       0% | dnstwist (NRDs)
     0 |         0 |      18% | guntab.com
-    0 |        26 |       6% | petscams.com
-    0 |        12 |      62% | scam.directory
+    0 |         0 |       6% | petscams.com
+    0 |         0 |      62% | scam.directory
     0 |         0 |      35% | scamadviser.com
     0 |         0 |       3% | stopgunscams.com
-  205 |       414 |      13% | All sources
+    0 |       205 |      13% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -84,8 +84,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 18
-API calls made today: 147
-Domains retrieved today: 78
+API calls made today: 0
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -106,7 +106,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 
 ``` text
 Active targets: 69
-Domains retrieved today: 28
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
@@ -140,8 +140,8 @@ Dead domains that are resolving again are included back into the blocklist.
 ### Statistics for dead domains
 
 ``` text
-Dead domains removed today: 559
-Resurrected domains added today: 199
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -157,8 +157,8 @@ For list maintainers interested in integrating the parked domains as a source, t
 ### Statistics for parked domains
 
 ``` text
-Parked domains removed today: 1622
-Unparked domains added today: 1235
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## Resources / see also
