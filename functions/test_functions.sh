@@ -206,7 +206,6 @@ TEST_PARKED_CHECK() {
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$PARKED_DOMAINS"
 
-    test_parked_subdomain_check
     test_parked_check
     test_unparked_check
 
@@ -552,29 +551,20 @@ test_alive_check() {
 
 ### PARKED CHECK TESTS
 
-# TEST: removal of parked subdomains
-test_parked_subdomain_check() {
-    # INPUT
-    printf "delivery-orders.com\n" >> "$RAW"
-    printf "delivery-orders.com\n" >> "$ROOT_DOMAINS"
-    printf "www.delivery-orders.com\n" >> "$SUBDOMAINS"
-    # EXPECTED OUTPUT
-    printf "www.delivery-orders.com\n" >> out_parked.txt
-    printf "parked,delivery-orders.com,raw\n" >> out_log.txt
-    # Both files should be empty (all dead)
-    : > out_subdomains.txt
-    : > out_root_domains.txt
-}
-
-# TEST: removal of parked domains
+# TEST: removal of parked domains (with subdomain)
 test_parked_check() {
     # INPUT
     printf "apple.com\n" >> "$RAW"
     printf "tradexchange.online\n" >> "$RAW"
+    printf "tradexchange.online\n" >> "$ROOT_DOMAINS"
+    printf "www.tradexchange.online\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
-    printf "tradexchange.online\n" >> out_parked.txt
+    printf "www.tradexchange.online\n" >> out_parked.txt
     printf "parked,tradexchange.online,raw\n" >> out_log.txt
+    # Both files should be empty (all dead)
+    : > out_subdomains.txt
+    : > out_root_domains.txt
 }
 
 # TEST: addition of unparked domains
