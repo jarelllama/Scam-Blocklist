@@ -19,10 +19,6 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
-    # Get placeholder domains needed for parked check
-    # 30 lines seems to be the bare minimum required
-    shuf -n 30 "$RAW" > placeholders.txt
-
     # Initialize
     : > "$RAW"
     : > "$DEAD_DOMAINS"
@@ -202,10 +198,9 @@ TEST_DEAD_CHECK() {
 # Function 'TEST_PARKED_CHECK' tests the removal/addition of parked and
 # unparked domains respectively.
 TEST_PARKED_CHECK() {
-    # Use placeholders
+    # Generate placeholders
     # (split does not work well without enough records)
-    : > placeholders.txt
-    for i in {1..40};do
+    for i in {1..30};do
         printf "placeholder%s.com\n" "$i" >> placeholders.txt
     done
     cat placeholders.txt >> "$RAW"
