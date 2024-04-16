@@ -157,9 +157,7 @@ find_parked() {
         # Check for errors output by curl and skip to the next domain if found
         # This assumes that parked domains that errored during the unparked
         # check are still parked.
-        if grep -qF 'curl:' <<< "$html"; then
-            continue
-        fi
+        grep -qF 'curl:' <<< "$html" && continue
 
         # Check for parked messages in the site's HTML
         if grep -qiFf "$PARKED_TERMS" <<< "$html"; then
