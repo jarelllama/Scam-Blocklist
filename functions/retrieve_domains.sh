@@ -37,9 +37,10 @@ source() {
     # Install idn (requires sudo for some reason)
     # Call shell wrapper to download toplist
     # Download NRD feed
-    { command -v idn &> /dev/null || sudo apt-get install -y idn; } \
+    { command -v idn &> /dev/null || sudo apt-get install -yqq idn; } \
     & $FUNCTION --download-toplist \
     & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
+    wait
 
     source_manual
     source_aa419
@@ -332,7 +333,7 @@ download_nrd_feed() {
 
         # Download the bigger feeds in parallel
         curl -sH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
-
+        wait
     } | grep -vF '#' > nrd.tmp
 
     # Appears to be the best way of checking if the bigger feeds downloaded
