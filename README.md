@@ -194,6 +194,15 @@ Thanks to the following people for the help, inspiration, and support!
 * [@sefinek24](https://github.com/sefinek24)
 * [@sjhgvr](https://github.com/sjhgvr)
 
-## Sponsorship
+## Contributing
 
-<https://github.com/sponsors/jarelllama>
+You can contribute to this project via the following ways:
+
+* [Sponsorship](https://github.com/sponsors/jarelllama)
+* [Code](https://github.com/jarelllama/Scam-Blocklist/blob/main/functions) reviews
+* Report false positives
+* Report false negatives in the [whitelist](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
+* Suggest [search terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) for the Google Search source
+* Suggest [phishing targets](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) for the dnstwist and Regex Matching sources
+* Suggest new sources
+* Suggest [parked terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt) for the parked domains detection
