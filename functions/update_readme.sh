@@ -239,7 +239,7 @@ sum() {
 # excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 count_excluded() {
-    grep -F "$1" "$SOURCE_LOG" | grep ',saved$' > rows.tmp
+    grep -F "$1" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
 
     raw_count="$(csvcut -c 4 rows.tmp | awk '{sum += $1} END {print sum}')"
     # Return if raw count is 0 to avoid divide by zero error

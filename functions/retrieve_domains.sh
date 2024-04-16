@@ -42,7 +42,16 @@ source() {
     & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
     wait
 
+    source_manual
+    source_aa419
+    source_dnstwist
+    source_guntab
+    source_petscams
+    source_regex
+    source_scamdirectory
     source_scamadviser
+    source_stopgunscams
+    source_google_search
 }
 
 # Function 'filter' logs the given entries and removes them from the results
@@ -640,6 +649,9 @@ source_petscams() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
+    # Parallelization could be used here but it does not seem worth the time
+    # saved compared to Scamadviser's 60 seconds saved by curl -Z.
+
     local url='https://petscams.com'
     for page in {1..15}; do  # Loop through pages
         (( page == 1 )) && { curl -s "${url}/" >> results.tmp; continue; }
@@ -692,8 +704,8 @@ source_scamadviser() {
         urls+=("${url}?p=${page}")
     done
 
-    # The Scamadviser source is rather slow so parallelization is used
-    # -o still prints to stdout so > is used
+    # The Scamadviser source is rather slow so parallelization is used.
+    # -o still prints to stdout here so > is used
     curl -sZ --retry 2 --retry-all-errors "${urls[@]}" > results.tmp
 
     grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \

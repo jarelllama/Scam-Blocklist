@@ -140,11 +140,11 @@ find_parked() {
 
     # Loop through domains
     while read -r domain; do
-        # Check for parked messaged in the site's HTML
-        # tr is used here to remove null characters found in some sites.
+        # Check for parked messaged in the site's HTML (retry a max of 1 time)
         if grep -qiFf "$PARKED_TERMS" \
             <<< "$(curl -sL --max-time 3 --retry 1 --retry-all-errors \
             "http://${domain}/" | tr -d '\0')"
+            # tr is used here to remove null characters found in some sites.
             then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
