@@ -20,7 +20,7 @@ readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
     # Get placeholder domains needed for parked check
-    shuf -n 20 "$RAW" > placeholders.txt
+    shuf -n 25 "$RAW" > placeholders.txt
 
     # Initialize
     : > "$RAW"
