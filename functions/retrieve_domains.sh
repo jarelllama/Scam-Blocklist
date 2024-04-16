@@ -32,12 +32,14 @@ source() {
 
     mkdir -p data/pending
 
-    # The various feeds are downloaded here to not bias the processing time of
+    # Download dependencies here in parallel to not bias the processing time of
     # the sources.
+    # Install idn (requires sudo for some reason)
     # Call shell wrapper to download toplist
-    $FUNCTION --download-toplist
     # Download NRD feed
-    [[ "$USE_EXISTING" != true ]] && download_nrd_feed
+    { command -v idn &> /dev/null || sudo apt-get install idn > /dev/null } \
+    & $FUNCTION --download-toplist \
+    & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed }
 
     source_manual
     source_aa419
@@ -99,8 +101,6 @@ process_source() {
     # flagged later on.
     sed -i 's/https\?://; s/\///g' "$results_file"
 
-    # Install idn (requires sudo for some reason)
-    command -v idn &> /dev/null || sudo apt-get install idn > /dev/null
     # Convert Unicode to Punycode
     # '--no-tld' in an attempt to fix 'idn: tld_check_4z: Missing input' error
     idn --no-tld < "$results_file" > results.tmp
