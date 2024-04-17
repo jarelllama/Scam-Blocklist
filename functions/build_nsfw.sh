@@ -19,6 +19,17 @@ build() {
         onlyfans
         fansly
         hentai
+        redtube
+        internetchicks
+        masterfap
+        thothub
+        onlyleaks
+        thumbzilla
+        fapello
+        thenudebay
+        gonewild
+        erome.com
+        thothd
     )
 
     # Format raw file
@@ -68,8 +79,6 @@ EOF
 # Entry point
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
-
-$FUNCTION --format-all
 
 # Install AdGuard's Dead Domains Linter
 if ! command -v dead-domains-linter &> /dev/null; then

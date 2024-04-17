@@ -77,6 +77,22 @@ Sources excluded from the light version are marked in SOURCES.md.
 The full version should be used where possible as it fully contains the light version.
 </details>
 
+## NSFW Blocklist
+
+Created from requests, a blocklist for NSFW sites is available in Adblock Plus format here:
+[nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt)
+
+<details>
+<summary>Details about the NSFW Blocklist</summary>
+<ul>
+<li>Domains are automatically retrieved from the Tranco Top Sites Ranking daily</li>
+<li>Dead domains are removed daily</li>
+<li>Note that resurrected domains are not added back into the blocklist</li>
+<li>Note that parked domains are not checked for in this blocklist</li>
+</ul>
+Total domains: $(wc -l <<< "$(grep -vF '!' lists/adblock/nsfw.txt)")
+</details>
+
 ## Sources
 
 ### Retrieving scam domains using Google Search API

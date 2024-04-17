@@ -22,6 +22,10 @@ jobs:
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
+  build-nsfw:
+    if: ${{ ! cancelled() }}
+    uses: ./.github/workflows/build_nsfw.yml
+
   prune-dead:
     needs: [test, build]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}

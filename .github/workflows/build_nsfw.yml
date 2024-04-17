@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  build-nsfw-blocklist:
+  build-nsfw:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

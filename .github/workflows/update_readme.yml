@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
   workflow_call:
   workflow_run:
-    workflows: Build lists
+    workflows:
+      - Build lists
+      - Build NSFW Blocklist
     types:
       - completed
   push:
