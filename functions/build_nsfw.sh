@@ -44,7 +44,7 @@ build() {
     sed -i 's/.*/||&^/' raw.tmp
 
     # Remove dead domains
-    dead-domains-linter -a -i raw.tmp > /dev/null
+    dead-domains-linter -a -i raw.tmp
 }
 
 # Function 'deploy' builds the blocklist in Adblock Plus syntax.
