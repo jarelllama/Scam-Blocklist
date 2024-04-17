@@ -35,6 +35,7 @@ build() {
         ^sex
         \\.sex$
         escorts
+        rule34
     )
 
     # Whitelisted domains
