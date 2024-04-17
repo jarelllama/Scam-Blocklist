@@ -30,6 +30,7 @@ build() {
         gonewild
         erome.com
         thothd
+        camwhores
     )
 
     # Format raw file
@@ -40,9 +41,10 @@ build() {
     for term in "${terms[@]}"; do
         grep "$term" toplist.tmp >> domains.tmp
     done
+    sort -u domains.tmp -o domains.tmp
 
     # Remove domains already in raw file
-    comm -23 <(sort domains.tmp) raw.tmp > temp
+    comm -23 domains.tmp raw.tmp > temp
     mv temp domains.tmp
 
     # Log new domains
