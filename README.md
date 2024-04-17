@@ -182,12 +182,13 @@ Unparked domains added today: 1270
 
 ## Resources / see also
 
-* [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): tool for checking Adblock rules for dead domains
+* [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
 * [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
 * [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
 * [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
-* [ShellCheck](https://github.com/koalaman/shellcheck): Shell script static analysis tool
+* [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
+* [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
 * [who.is](https://who.is/): WHOIS and DNS lookup tool
 
 ## As seen in
