@@ -34,11 +34,6 @@ build() {
 
         append_header
 
-        # Special case for Unbound syntax
-        if [[ "$syntax" == 'Unbound' ]]; then
-            printf "server:\n" >> "$blocklist_path"
-        fi
-
         # Append formatted domains onto blocklist
         awk -v before="$before" -v after="$after" \
             '{print before $0 after}' "$source_file" >> "$blocklist_path"
@@ -74,24 +69,6 @@ build_adblock() {
     local comment='!'
     local before='||'
     local after='^'
-    build
-}
-
-build_dnsmasq() {
-    local syntax='Dnsmasq'
-    local directory='dnsmasq'
-    local comment=''
-    local before='local=/'
-    local after='/'
-    build
-}
-
-build_unbound() {
-    local syntax='Unbound'
-    local directory='unbound'
-    local comment=''
-    local before='local-zone: "'
-    local after='." always_nxdomain'
     build
 }
 
