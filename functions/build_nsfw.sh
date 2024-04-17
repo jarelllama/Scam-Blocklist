@@ -40,15 +40,15 @@ build() {
     grep '||' "$BLOCKLIST" > raw.tmp
     sed -i 's/||//; s/\^//' raw.tmp
 
+    # Remove already processed domains
+    comm -23 toplist.tmp raw.tmp > temp
+    mv temp toplist.tmp
+
     # Get new domains from toplist
     for term in "${terms[@]}"; do
         grep -E "$term" toplist.tmp >> domains.tmp
     done
     sort -u domains.tmp -o domains.tmp
-
-    # Remove domains already in raw file
-    comm -23 domains.tmp raw.tmp > temp
-    mv temp domains.tmp
 
     # Log new domains
     $FUNCTION --log-domains domains.tmp nsfw toplist
