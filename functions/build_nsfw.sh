@@ -33,7 +33,7 @@ build() {
     )
 
     # Format raw file
-    grep -vF '!' "$BLOCKLIST" > raw.tmp
+    grep -vE '!|\[' "$BLOCKLIST" > raw.tmp
     sed -i 's/||//; s/\^//' raw.tmp
 
     # Get new domains from toplist
