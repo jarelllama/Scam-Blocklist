@@ -84,7 +84,7 @@ Created from requests, a blocklist for NSFW sites is available in Adblock Plus f
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 6732
+Total domains: 6731
 </details>
 
 ## Sources
