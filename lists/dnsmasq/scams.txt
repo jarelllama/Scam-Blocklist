@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.17.132333.2024
+# Version: 04.17.132539.2024
 # Expires: 1 day
-# Last modified: Wed Apr 17 13:23:33 UTC 2024
+# Last modified: Wed Apr 17 13:25:39 UTC 2024
 # Syntax: Dnsmasq
-# Number of entries: 41213
+# Number of entries: 41219
 #
 local=/01107904-coinbase.com/
 local=/01edc.com/
@@ -4237,6 +4237,7 @@ local=/bitcoinw.xyz/
 local=/bitcoinwriters.com/
 local=/bitcoinx.exchange/
 local=/bitcoinzenix.org/
+local=/bitctsot.vip/
 local=/bitdexbond.com/
 local=/bitfarmclub.com/
 local=/bitfinexct.com/
@@ -7083,6 +7084,7 @@ local=/coinbase8.icu/
 local=/coinbaseacadbf.xyz/
 local=/coinbaseacadge.top/
 local=/coinbaseasupport.biz/
+local=/coinbasebit128.com/
 local=/coinbasecamp.com/
 local=/coinbasecashout.com/
 local=/coinbaseclientsdemandingjustice.com/
@@ -21164,6 +21166,8 @@ local=/martinvilleuniversity.com/
 local=/martonlogistics.com/
 local=/martssuper.com/
 local=/marushippingintl.online/
+local=/marvelcoinuniverse.io/
+local=/marvelcoinuniverse.org/
 local=/marvelousboxerpuppies.com/
 local=/marvelousgratedanepups.com/
 local=/marviexpresslogistics.com/
@@ -36600,6 +36604,7 @@ local=/trust-moon.com/
 local=/trust-plc.com/
 local=/trust2buy.co.uk/
 local=/trustabudhabibank.com/
+local=/trustaffiliatepilotcoinvest.com/
 local=/trustapp-coinbase.com/
 local=/trustbitcoinmining.com/
 local=/trustchems.com/
@@ -38088,6 +38093,7 @@ local=/utrechtcunion.com/
 local=/uttermostsale.com/
 local=/uu4marketing.com/
 local=/uuniqueo.com/
+local=/uuu1122.xyz/
 local=/uvaldefamilypractice.com/
 local=/uvh-apotheke.de/
 local=/uvialogistics.com/

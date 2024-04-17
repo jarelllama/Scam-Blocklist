@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.17.132333.2024
+# Version: 04.17.132539.2024
 # Expires: 1 day
-# Last modified: Wed Apr 17 13:23:33 UTC 2024
+# Last modified: Wed Apr 17 13:25:39 UTC 2024
 # Syntax: Unbound
-# Number of entries: 41213
+# Number of entries: 41219
 #
 server:
 local-zone: "01107904-coinbase.com." always_nxdomain
@@ -4238,6 +4238,7 @@ local-zone: "bitcoinw.xyz." always_nxdomain
 local-zone: "bitcoinwriters.com." always_nxdomain
 local-zone: "bitcoinx.exchange." always_nxdomain
 local-zone: "bitcoinzenix.org." always_nxdomain
+local-zone: "bitctsot.vip." always_nxdomain
 local-zone: "bitdexbond.com." always_nxdomain
 local-zone: "bitfarmclub.com." always_nxdomain
 local-zone: "bitfinexct.com." always_nxdomain
@@ -7084,6 +7085,7 @@ local-zone: "coinbase8.icu." always_nxdomain
 local-zone: "coinbaseacadbf.xyz." always_nxdomain
 local-zone: "coinbaseacadge.top." always_nxdomain
 local-zone: "coinbaseasupport.biz." always_nxdomain
+local-zone: "coinbasebit128.com." always_nxdomain
 local-zone: "coinbasecamp.com." always_nxdomain
 local-zone: "coinbasecashout.com." always_nxdomain
 local-zone: "coinbaseclientsdemandingjustice.com." always_nxdomain
@@ -21165,6 +21167,8 @@ local-zone: "martinvilleuniversity.com." always_nxdomain
 local-zone: "martonlogistics.com." always_nxdomain
 local-zone: "martssuper.com." always_nxdomain
 local-zone: "marushippingintl.online." always_nxdomain
+local-zone: "marvelcoinuniverse.io." always_nxdomain
+local-zone: "marvelcoinuniverse.org." always_nxdomain
 local-zone: "marvelousboxerpuppies.com." always_nxdomain
 local-zone: "marvelousgratedanepups.com." always_nxdomain
 local-zone: "marviexpresslogistics.com." always_nxdomain
@@ -36601,6 +36605,7 @@ local-zone: "trust-moon.com." always_nxdomain
 local-zone: "trust-plc.com." always_nxdomain
 local-zone: "trust2buy.co.uk." always_nxdomain
 local-zone: "trustabudhabibank.com." always_nxdomain
+local-zone: "trustaffiliatepilotcoinvest.com." always_nxdomain
 local-zone: "trustapp-coinbase.com." always_nxdomain
 local-zone: "trustbitcoinmining.com." always_nxdomain
 local-zone: "trustchems.com." always_nxdomain
@@ -38089,6 +38094,7 @@ local-zone: "utrechtcunion.com." always_nxdomain
 local-zone: "uttermostsale.com." always_nxdomain
 local-zone: "uu4marketing.com." always_nxdomain
 local-zone: "uuniqueo.com." always_nxdomain
+local-zone: "uuu1122.xyz." always_nxdomain
 local-zone: "uvaldefamilypractice.com." always_nxdomain
 local-zone: "uvh-apotheke.de." always_nxdomain
 local-zone: "uvialogistics.com." always_nxdomain
