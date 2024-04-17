@@ -33,7 +33,7 @@ build() {
         brazzers
         hookup
         ^sex
-        \\.sex
+        \\.sex$
     )
 
     # Format raw file
