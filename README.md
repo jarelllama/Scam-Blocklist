@@ -176,6 +176,16 @@ Parked domains removed today: 610
 Unparked domains added today: 1270
 ```
 
+## As seen in
+
+* [Collinbarrett's FilterLists directory](https://filterlists.com/)
+* [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
+* [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
+* [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
+* [The oisd blocklist](https://oisd.nl/)
+* [file-git.trli.club](https://file-git.trli.club/)
+* [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
+
 ## Resources / see also
 
 * [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
@@ -186,16 +196,6 @@ Unparked domains added today: 1270
 * [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
 * [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
 * [who.is](https://who.is/): WHOIS and DNS lookup tool
-
-## As seen in
-
-* [Collinbarrett's FilterLists directory](https://filterlists.com/)
-* [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
-* [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
-* [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
-* [The oisd blocklist](https://oisd.nl/)
-* [file-git.trli.club](https://file-git.trli.club/)
-* [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
 
 ## Appreciation
 
