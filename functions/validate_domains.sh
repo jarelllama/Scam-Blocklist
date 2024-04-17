@@ -144,7 +144,7 @@ $FUNCTION --format-all
 # Install idn (requires sudo) (note -qq does not seem to work here)
 # Call shell wrapper to download toplist
 { command -v idn &> /dev/null || sudo apt-get install idn > /dev/null; } \
-& $FUNCTION --download-toplist
+    & $FUNCTION --download-toplist
 wait
 
 validate
