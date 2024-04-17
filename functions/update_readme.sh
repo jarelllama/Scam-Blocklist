@@ -145,7 +145,7 @@ The domain retrieval process for all sources can be viewed in the repository's c
 * The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
 * The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
 * Common subdomains like 'www' are stripped to make use of wildcard matching for all other subdomains. The list of subdomains checked for can be viewed here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
-* Only domains are included in the blocklist; IP addresses are manually checked for resolving DNS records and URLs are stripped down to their domains
+* Only domains are included in the blocklist; URLs are stripped down to their domains and IP addresses are manually checked for resolving DNS records
 
 Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations.
 
