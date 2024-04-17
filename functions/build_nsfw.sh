@@ -54,10 +54,6 @@ build() {
     for term in "${terms[@]}"; do
         grep -E "$term" toplist.tmp >> domains.tmp
     done
-    sort -u domains.tmp -o domains.tmp
-
-    # Log new domains
-    $FUNCTION --log-domains domains.tmp nsfw toplist
 
     # Add new domains to raw file
     sort -u domains.tmp raw.tmp -o raw.tmp
