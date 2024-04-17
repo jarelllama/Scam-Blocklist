@@ -83,6 +83,9 @@ Created from requests, a blocklist for NSFW domains is available in Adblock Plus
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
 Total domains: 8440
+<br>
+<br>
+This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
 </details>
 
 ## Sources
