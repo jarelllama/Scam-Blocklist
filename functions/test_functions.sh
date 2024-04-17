@@ -407,12 +407,12 @@ test_whitelist_blacklist() {
 # TEST: removal of domains with whitelisted TLDs
 test_whitelisted_tld_removal() {
     {
-        printf "white-tld-test.gov\n"
+        printf "white-tld-test.gov.us\n"
         printf "white-tld-test.edu\n"
         printf "white-tld-test.mil\n"
     } >> input.txt  # INPUT
     {
-        printf "tld,white-tld-test.gov\n"
+        printf "tld,white-tld-test.gov.us\n"
         printf "tld,white-tld-test.edu\n"
         printf "tld,white-tld-test.mil\n"
     } >> out_log.txt  # EXPECTED OUTPUT
