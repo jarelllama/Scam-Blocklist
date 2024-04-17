@@ -146,7 +146,7 @@ Entries that require manual verification/intervention are sent in a Telegram not
 Example message body:
 > Entries requiring manual review:<br>
 > ovsfashion.com (toplist)<br>
-> aprilcash2023[.]com (invalid)
+> 18.116.21.103 (invalid)
 
 The full filtering process can be viewed in the repository's code.
 
