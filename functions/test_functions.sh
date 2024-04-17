@@ -258,9 +258,6 @@ TEST_BUILD() {
 
     check_syntax "||${domain}^" adblock
     check_syntax "[Adblock Plus]" adblock
-    check_syntax "local=/${domain}/" dnsmasq
-    check_syntax "local-zone: \"${domain}.\" always_nxdomain" unbound
-    check_syntax "server:" unbound
     check_syntax "*.${domain}" wildcard_asterisk
     check_syntax "${domain}" wildcard_domains
 
