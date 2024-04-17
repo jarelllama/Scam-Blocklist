@@ -23,6 +23,7 @@ jobs:
     secrets: inherit
 
   build-nsfw:
+    needs: [build]
     if: ${{ ! cancelled() }}
     uses: ./.github/workflows/build_nsfw.yml
 
