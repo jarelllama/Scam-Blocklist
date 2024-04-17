@@ -73,7 +73,7 @@ The full version should be used where possible as it fully contains the light ve
 
 ## NSFW Blocklist
 
-Created from requests, a blocklist for NSFW sites is available in Adblock Plus format here:
+Created from requests, a blocklist for NSFW domains is available in Adblock Plus format here:
 [nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt)
 
 <details>
