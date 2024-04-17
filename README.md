@@ -20,7 +20,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 41375
+Total domains: 41373
 Light version: 4204
 
 New domains from each source:
@@ -102,7 +102,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 20
+Active search terms: 19
 API calls made today: 153
 Domains retrieved today: 66
 ```
