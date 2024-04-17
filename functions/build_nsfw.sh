@@ -32,7 +32,8 @@ build() {
         camwhores
         brazzers
         hookup
-        (^|\.)sex
+        ^sex
+        \.sex
     )
 
     # Format raw file
