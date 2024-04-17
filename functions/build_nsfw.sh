@@ -31,7 +31,7 @@ build() {
     done
 
     # Remove domains already in raw file
-    comm -23 domains.tmp raw.tmp > temp
+    comm -23 <(sort domains.tmp) raw.tmp > temp
     mv temp domains.tmp
 
     # Log new domains
