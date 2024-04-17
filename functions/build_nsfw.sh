@@ -34,6 +34,7 @@ build() {
         hookup
         ^sex
         \\.sex$
+        escorts
     )
 
     # Whitelisted domains
