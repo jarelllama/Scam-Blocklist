@@ -90,7 +90,7 @@ Created from requests, a blocklist for NSFW sites is available in Adblock Plus f
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: $(wc -l <<< "$(grep -vF '!' lists/adblock/nsfw.txt)")
+Total domains: $(wc -l <<< "$(grep -vE '!|\[' lists/adblock/nsfw.txt)")
 </details>
 
 ## Sources
