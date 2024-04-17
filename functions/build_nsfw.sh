@@ -64,7 +64,7 @@ deploy() {
 [Adblock Plus]
 ! Title: Jarelllama's NSFW Blocklist
 ! Description: Blocklist for NSFW content automatically retrieved daily.
-! Homepage: https://github.com/jarelllama/Scam-Blocklist
+! Homepage: https://github.com/jarelllama/Scam-Blocklist#nsfw-blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
 ! Version: $(date -u +"%m.%d.%H%M%S.%Y")
 ! Expires: 1 day
