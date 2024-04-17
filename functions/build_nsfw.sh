@@ -36,6 +36,12 @@ build() {
         \\.sex$
     )
 
+    # Whitelisted domains
+    whitelist=(
+        batteryhookup.com
+        sexpistolsofficial.com
+    )
+
     # Format raw file
     grep '||' "$BLOCKLIST" > raw.tmp
     sed -i 's/||//; s/\^//' raw.tmp
@@ -55,6 +61,11 @@ build() {
 
     # Add new domains to raw file
     sort -u domains.tmp raw.tmp -o raw.tmp
+
+    # Remove whitelisted domains
+    for white in "${whitelist[@]}"; do
+        sed -i "/$white/d" raw.tmp
+    done
 
     # Format to Adblock Plus syntax
     sed -i 's/.*/||&^/' raw.tmp
