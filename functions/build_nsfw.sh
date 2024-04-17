@@ -31,6 +31,7 @@ build() {
         erome.com
         thothd
         camwhores
+        brazzers 
     )
 
     # Format raw file
