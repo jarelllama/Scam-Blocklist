@@ -28,10 +28,11 @@ build() {
         fapello
         thenudebay
         gonewild
-        erome.com
         thothd
         camwhores
-        brazzers 
+        brazzers
+        hookup
+        (^|\.)sex
     )
 
     # Format raw file
@@ -40,7 +41,7 @@ build() {
 
     # Get new domains from toplist
     for term in "${terms[@]}"; do
-        grep "$term" toplist.tmp >> domains.tmp
+        grep -E "$term" toplist.tmp >> domains.tmp
     done
     sort -u domains.tmp -o domains.tmp
 
