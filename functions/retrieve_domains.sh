@@ -38,8 +38,8 @@ source() {
     # Call shell wrapper to download toplist
     # Download NRD feed
     { command -v idn &> /dev/null || sudo apt-get install idn > /dev/null; } \
-    & $FUNCTION --download-toplist \
-    & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
+        & $FUNCTION --download-toplist \
+        & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
     wait
 
     source_manual
