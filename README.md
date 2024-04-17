@@ -25,17 +25,17 @@ Light version: 4140
 
 New domains for each source:
 Today | Yesterday | Excluded | Source
-   24 |        78 |       3% | Google Search
-   16 |         5 |       0% | Manual Entries
-  671 |        74 |       2% | Regex Matching (NRDs)
-    4 |        20 |       8% | aa419.org
-   34 |        28 |       0% | dnstwist (NRDs)
-    1 |         0 |      19% | guntab.com
-    9 |         0 |       6% | petscams.com
-   25 |         0 |      63% | scam.directory
-    0 |         0 |      36% | scamadviser.com
-    1 |         0 |       3% | stopgunscams.com
-  785 |       205 |      15% | All sources
+    - |        24 |       3% | Google Search
+    - |        16 |       0% | Manual Entries
+    - |       671 |       2% | Regex Matching (NRDs)
+    - |         4 |       8% | aa419.org
+    - |        34 |       0% | dnstwist (NRDs)
+    - |         1 |      19% | guntab.com
+    - |         9 |       6% | petscams.com
+    - |        25 |      63% | scam.directory
+    - |         0 |      36% | scamadviser.com
+    - |         1 |       3% | stopgunscams.com
+    - |       785 |      15% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -71,6 +71,22 @@ Sources excluded from the light version are marked in SOURCES.md.
 The full version should be used where possible as it fully contains the light version.
 </details>
 
+## NSFW Blocklist
+
+Created from requests, a blocklist for NSFW sites is available in Adblock Plus format here:
+[nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt)
+
+<details>
+<summary>Details about the NSFW Blocklist</summary>
+<ul>
+<li>Domains are automatically retrieved from the Tranco Top Sites Ranking daily</li>
+<li>Dead domains are removed daily</li>
+<li>Note that resurrected domains are not added back into the blocklist</li>
+<li>Note that parked domains are not checked for in this blocklist</li>
+</ul>
+Total domains: 6732
+</details>
+
 ## Sources
 
 ### Retrieving scam domains using Google Search API
@@ -87,8 +103,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 20
-API calls made today: 147
-Domains retrieved today: 24
+API calls made today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -109,7 +125,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 
 ``` text
 Active targets: 70
-Domains retrieved today: 34
+Domains retrieved today: -
 ```
 
 ### Regarding other sources
@@ -143,8 +159,8 @@ Dead domains that are resolving again are included back into the blocklist.
 ### Statistics for dead domains
 
 ``` text
-Dead domains removed today: 475
-Resurrected domains added today: 457
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -160,8 +176,8 @@ For list maintainers interested in integrating the parked domains as a source, t
 ### Statistics for parked domains
 
 ``` text
-Parked domains removed today: 325
-Unparked domains added today: 90
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## Resources / see also
