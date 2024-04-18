@@ -5,6 +5,7 @@ body:
   - type: textarea
     attributes:
       label: What domains should be blocked?
+      description: Feel free to report dead sites as they will be recorded and added if they become resolving.
       placeholder: |
         example.com
         https://www.example.com
