@@ -10,4 +10,5 @@ assignees: ''
 
 Please append the domain(s) below **without code blocks** (URLs are accepted):
 
+<br>
 Please append any additional information, reasons for blocking, etc., below (optional):
