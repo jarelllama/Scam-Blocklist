@@ -688,16 +688,12 @@ source_petscams() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    # Parallelization could be used here but it does not seem worth the time
-    # saved compared to Scamadviser's 60 seconds saved by curl -Z.
-
     local url='https://petscams.com'
-    for page in {1..15}; do  # Loop through pages
-        (( page == 1 )) && { curl -s "${url}/" >> results.tmp; continue; }
 
-        # Add '/page' after first run
-        curl -s "${url}/page/${page}/" >> results.tmp
-    done
+    # First page must not have '/page'
+    curl -s "${url}/" >> results.tmp
+    # URL globbing made implementing parallelization easier
+    curl -sZ "${url}/page/[2-15]/" >> results.tmp
 
     # Note [a-z] does not seem to work in these expression
     grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
@@ -762,9 +758,7 @@ source_stopgunscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://stopgunscams.com'
-    for page in {1..5}; do  # Loop through pages
-        curl -s "${url}/?page=${page}/" >> results.tmp
-    done
+    curl -sZ "${url}/?page=[1-5]/" > results.tmp
 
     grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' results.tmp \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
