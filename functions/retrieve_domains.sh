@@ -692,7 +692,6 @@ source_petscams() {
 
     # First page must not have '/page'
     curl -s "${url}/" >> results.tmp
-    # URL globbing made implementing parallelization easier
     curl -sZ "${url}/page/[2-15]/" >> results.tmp
 
     # Note [a-z] does not seem to work in these expression
@@ -733,18 +732,12 @@ source_scamadviser() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.scamadviser.com/articles'
-
-    # The Scamadviser source is rather slow so parallelization is used.
-    # -o still prints to stdout here so > is used
     # URL globbing added after https://github.com/T145/black-mirror/issues/179
-    # Note trailing slash is intentionally omitted
-    curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" > results.tmp
-
-    grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
+    # Trailing slash is intentionally omitted
+    curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
+        | grep -oE '<div class="articles">.*<div>Read more</div>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
         | sed 's/\[//; s/\]//' >> "$results_file"
-
-    rm results.tmp
 
     process_source
 }
@@ -758,13 +751,10 @@ source_stopgunscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://stopgunscams.com'
-    curl -sZ "${url}/?page=[1-5]/" > results.tmp
-
-    grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' results.tmp \
+    curl -sZ "${url}/?page=[1-5]/" \
+        | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | sed 's/-/./g' >> "$results_file"
-
-    rm results.tmp
 
     process_source
 }
