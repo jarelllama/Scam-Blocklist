@@ -18,22 +18,24 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 41219
-Light version: 4209
+Total domains: 58746
+Light version: 5743
 
 New domains from each source:
 Today | Yesterday | Excluded | Source
-    - |        66 |       4% | Google Search
-    - |         6 |       0% | Manual Entries
-    - |       484 |       2% | Regex Matching (NRDs)
-    - |         3 |       8% | aa419.org
-    - |        38 |       0% | dnstwist (NRDs)
-    - |         0 |      19% | guntab.com
-    - |         2 |       6% | petscams.com
-    - |         0 |      63% | scam.directory
-    - |         2 |      36% | scamadviser.com
-    - |         0 |       3% | stopgunscams.com
-    - |       601 |      15% | All sources
+    0 |        66 |       4% | Google Search
+    0 |         6 |       0% | Manual Entries
+19061 |         0 |       0% | PhishStats
+ 1534 |         0 |       0% | PhishStats (NRDs)
+    0 |       484 |       2% | Regex Matching (NRDs)
+    0 |         3 |       8% | aa419.org
+    0 |        38 |       0% | dnstwist (NRDs)
+    0 |         0 |      19% | guntab.com
+    0 |         2 |       6% | petscams.com
+    0 |         0 |      63% | scam.directory
+    0 |         2 |      36% | scamadviser.com
+    0 |         0 |       3% | stopgunscams.com
+19061 |       601 |      12% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -105,7 +107,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 ``` text
 Active search terms: 21
 API calls made today: 0
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -126,7 +128,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 
 ``` text
 Active targets: 70
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
