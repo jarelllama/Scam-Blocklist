@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-# Version: 04.18.142445.2024
+# Version: 04.18.142916.2024
 # Expires: 1 day
-# Last modified: Thu Apr 18 14:24:45 UTC 2024
+# Last modified: Thu Apr 18 14:29:16 UTC 2024
 # Syntax: Wildcard Asterisk
-# Number of entries: 4786
+# Number of entries: 4787
 #
 *.01edc.com
 *.10bet938.com
@@ -2741,6 +2741,7 @@
 *.nurturedschnauzerpups.com
 *.nushoe.com
 *.nuttines.store
+*.o2-dienst.net
 *.occ-gov-us.com
 *.oceanconsultant.co.uk
 *.off-hunting.com
