@@ -24,7 +24,7 @@ Light version: 4788
 New domains from each source:
 Today | Yesterday | Excluded | Source
   226 |        66 |       4% | Google Search
-    3 |         6 |       3% | Manual Entries
+    3 |         6 |       4% | Manual Entries
 19115 |         0 |       8% | PhishStats
  1549 |         0 |       0% | PhishStats (NRDs)
   493 |       484 |       2% | Regex Matching (NRDs)
