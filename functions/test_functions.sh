@@ -256,20 +256,20 @@ TEST_BUILD() {
         error=true
     fi
 
-    check_syntax "||${domain}^" adblock
-    check_syntax "[Adblock Plus]" adblock
-    check_syntax "*.${domain}" wildcard_asterisk
-    check_syntax "${domain}" wildcard_domains
+    test_syntax "||${domain}^" adblock
+    test_syntax "[Adblock Plus]" adblock
+    test_syntax "*.${domain}" wildcard_asterisk
+    test_syntax "${domain}" wildcard_domains
 
     [[ "$error" == true ]] && exit 1
 
     printf "\e[1m[success] Test completed. No errors found\e[0m\n"
 }
 
-# Function 'check_syntax' verifies the syntax of the list format.
+# Function 'test_syntax' verifies the syntax of the list format.
 #   $1: syntax to check for
 #   $2: name and directory of format
-check_syntax() {
+test_syntax() {
     local syntax="$1"
     local name="$2"
 
