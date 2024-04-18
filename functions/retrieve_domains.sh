@@ -623,8 +623,7 @@ source_phishstats_nrd() {
     download_nrd_feed
 
     # Strip URLs to domains
-    awk -F '/' '{print $3}' phishstats.tmp > results.tmp
-    sort -u results.tmp -o results.tmp
+    awk -F '/' '{print $3}' phishstats.tmp | sort -u -o results.tmp
 
     # Get matching NRDs (Unicode ignored)
     comm -12 results.tmp nrd.tmp > "$results_file"
