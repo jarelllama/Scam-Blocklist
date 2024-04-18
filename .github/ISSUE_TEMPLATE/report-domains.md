@@ -1,6 +1,6 @@
 ---
 name: Report domain(s)
-description: Please use this template to report domains so they can be properly incorporated with the workflows.
+about: Please use this template to report domains so they can be properly incorporated with the workflows.
 body:
   - type: textarea
     attributes:
