@@ -23,17 +23,17 @@ Light version: 4209
 
 New domains from each source:
 Today | Yesterday | Excluded | Source
-   66 |        24 |       4% | Google Search
-    6 |        16 |       0% | Manual Entries
-  484 |       671 |       2% | Regex Matching (NRDs)
-    3 |         4 |       8% | aa419.org
-   38 |        34 |       0% | dnstwist (NRDs)
-    0 |         1 |      19% | guntab.com
-    2 |         9 |       6% | petscams.com
-    0 |        25 |      63% | scam.directory
-    2 |         0 |      36% | scamadviser.com
-    0 |         1 |       3% | stopgunscams.com
-  601 |       785 |      15% | All sources
+    - |        66 |       4% | Google Search
+    - |         6 |       0% | Manual Entries
+    - |       484 |       2% | Regex Matching (NRDs)
+    - |         3 |       8% | aa419.org
+    - |        38 |       0% | dnstwist (NRDs)
+    - |         0 |      19% | guntab.com
+    - |         2 |       6% | petscams.com
+    - |         0 |      63% | scam.directory
+    - |         2 |      36% | scamadviser.com
+    - |         0 |       3% | stopgunscams.com
+    - |       601 |      15% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -104,8 +104,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 21
-API calls made today: 153
-Domains retrieved today: 66
+API calls made today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -126,7 +126,7 @@ Paired with the NRD feed, dnstwist can effectively retrieve newly-created phishi
 
 ``` text
 Active targets: 70
-Domains retrieved today: 38
+Domains retrieved today: -
 ```
 
 ### Regarding other sources
@@ -158,8 +158,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 363
-Resurrected domains added today: 281
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -173,8 +173,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 7000 entries)
 
 ``` text
-Parked domains removed today: 610
-Unparked domains added today: 1270
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## As seen in
@@ -184,6 +184,7 @@ Unparked domains added today: 1270
 * [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
 * [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
 * [The oisd blocklist](https://oisd.nl/)
+* [dnswarden](https://dnswarden.com/)
 * [file-git.trli.club](https://file-git.trli.club/)
 * [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
 
