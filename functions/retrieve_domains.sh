@@ -656,7 +656,7 @@ source_aa419() {
 
     local url='https://api.aa419.org/fakesites'
     curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
-        | jq -r '.[].Domain' >> "$results_file"
+        | jq -r '.[].Domain' > "$results_file"
         # Note trailing slash breaks API call
 
     process_source
@@ -697,7 +697,7 @@ source_petscams() {
     # Note [a-z] does not seem to work in these expression
     grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
         results.tmp | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
-        s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
+        s/-\?[0-9]\?\/">//; s/-/./g' > "$results_file"
 
     rm results.tmp
 
@@ -737,7 +737,7 @@ source_scamadviser() {
     curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<div class="articles">.*<div>Read more</div>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-        | sed 's/\[//; s/\]//' >> "$results_file"
+        | sed 's/\[//; s/\]//' > "$results_file"
 
     process_source
 }
@@ -754,7 +754,7 @@ source_stopgunscams() {
     curl -sZ "${url}/?page=[1-5]/" \
         | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-        | sed 's/-/./g' >> "$results_file"
+        | sed 's/-/./g' > "$results_file"
 
     process_source
 }
