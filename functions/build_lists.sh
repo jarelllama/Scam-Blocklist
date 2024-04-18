@@ -95,7 +95,5 @@ build_wildcard_domains() {
 $FUNCTION --format-all
 
 build_adblock
-build_dnsmasq
-build_unbound
 build_wildcard_asterisk
 build_wildcard_domains
