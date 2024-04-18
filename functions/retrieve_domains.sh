@@ -600,12 +600,14 @@ source_phishstats() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://phishstats.info/phish_score.csv'
-    # Get only URLs with no subdirectories and exclude IP addresses
+    # Get only URLs with no subdirectories, exclude IP addresses and extract
+    # domains
     wget -qO - "$url" | awk -F ',' '{print $3}' \
         | grep -E '^"?https?://[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*."?$' \
-        | sed 's/"//g' > phishstats.tmp  # Save results for the NRD version
+        | sed 's/"//g' | awk -F '/' '{print $3}' | sort -u -o "$results_file"
 
-    cp phishstats.tmp "$results_file"
+    # Get matching NRDs for light version (Unicode ignored)
+    comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
 
     process_source
 }
@@ -620,13 +622,7 @@ source_phishstats_nrd() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    download_nrd_feed
-
-    # Strip URLs to domains
-    awk -F '/' '{print $3}' phishstats.tmp | sort -u -o results.tmp
-
-    # Get matching NRDs (Unicode ignored)
-    comm -12 results.tmp nrd.tmp > "$results_file"
+    mv phishstats_nrds.tmp "$results_file"
 
     process_source
 }
