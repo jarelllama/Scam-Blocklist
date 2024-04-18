@@ -729,10 +729,10 @@ source_scamadviser() {
     local url='https://www.scamadviser.com/articles'
 
     # The Scamadviser source is rather slow so parallelization is used.
+    # -o still prints to stdout here so > is used
     # URL globbing added after https://github.com/T145/black-mirror/issues/179
-    # URL globing also seems to fix curl -o
     # Note trailing slash is intentionally omitted
-    curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" -o results.tmp
+    curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" > results.tmp
 
     grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
