@@ -107,7 +107,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 21
+Active search terms: 20
 API calls made today: 171
 Domains retrieved today: 226
 ```
@@ -162,8 +162,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 0
-Resurrected domains added today: 0
+Dead domains removed today: 3759
+Resurrected domains added today: 284
 ```
 
 ## Parked domains
@@ -178,7 +178,7 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 7000 entries)
 
 ``` text
-Parked domains removed today: 767
+Parked domains removed today: 1007
 Unparked domains added today: 454
 ```
 
