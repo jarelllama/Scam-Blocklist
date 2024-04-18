@@ -222,8 +222,9 @@ Thanks to the following people for the help, inspiration, and support!
 You can contribute to this project via the following ways:
 
 * [Sponsorship](https://github.com/sponsors/jarelllama)
+* Star this repository
 * [Code](https://github.com/jarelllama/Scam-Blocklist/blob/main/functions) reviews
-* Report false positives
+* Report domains and false positives
 * Report false negatives in the [whitelist](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
 * Suggest [search terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) for the Google Search source
 * Suggest [phishing targets](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) for the dnstwist and Regex Matching sources
