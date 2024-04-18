@@ -79,9 +79,12 @@ prune_lines() {
 
     if (( lines > $2 )); then
         # Do not delete the header in CSVs
-        [[ "$1" == *.csv ]] && sed -i "2,$(( lines - $2 ))d" "$1"
+        if [[ "$1" == *.csv ]]; then
+            sed -i "2,$(( lines - $2 + 2 ))d" "$1"
+            return
+        fi
 
-        sed -i "1,$(( lines - $2 ))d" "$1"
+        sed -i "1,$(( lines - $2 + 1 ))d" "$1"
     fi
 }
 
