@@ -1,6 +1,8 @@
 # Sources
 
-All data retrieved from the following sources are publicly available.
+> [!IMPORTANT]
+All data retrieved from the following sources are publicly available.<br>
+Any data hidden behind account creation/commercial licenses is never used.
 
 Sources marked as inactive are not being automatically employed to retrieve domains.
 

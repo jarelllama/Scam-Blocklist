@@ -43,7 +43,9 @@ Today | Yesterday | Excluded | Source
  sources in SOURCES.md.
 ```
 
-All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).
+> [!IMPORTANT]
+All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).<br>
+Any data that is not publicly available (behind account creation/commercial licenses) is never used.
 
 <details>
 <summary>Domains over time (days)</summary>
@@ -172,6 +174,7 @@ A list of common parked domain messages is used to automatically detect these do
 
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
 
+> [!TIP]
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 7000 entries)
 
 ``` text
