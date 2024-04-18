@@ -20,7 +20,7 @@ jobs:
       - name: Read domains from issue
         run: |
           mkdir -p data/pending
-          grep -zo 'Please append.*Please append' <<< "${{ github.event.issue.body }}" \
+          grep -zo 'What domain.*Why should' <<< "${{ github.event.issue.body }}" \
             | grep -aoE '^(https?://)?[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
             > data/pending/domains_manual.tmp  # Note this overrides any previous files
 
