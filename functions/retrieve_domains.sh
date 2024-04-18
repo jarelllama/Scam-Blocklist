@@ -42,18 +42,8 @@ source() {
         & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
     wait
 
-    source_manual
-    source_aa419
-    source_dnstwist
-    source_guntab
-    source_petscams
-    source_phishstats
-    source_phishstats_nrd
-    source_regex
-    source_scamdirectory
     source_scamadviser
-    source_stopgunscams
-    source_google_search
+
 }
 
 # Function 'filter' logs the given entries and removes them from the results
