@@ -181,7 +181,7 @@ A list of common parked domain messages is used to automatically detect these do
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
 
 > [!TIP]
-For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 7000 entries)
+For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 \`\`\` text
 Parked domains removed today: $(grep -cF "${TODAY},parked" "$DOMAIN_LOG")
