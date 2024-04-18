@@ -18,8 +18,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 58746
-Light version: 5743
+Total domains: 55614
+Light version: 4660
 
 New domains from each source:
 Today | Yesterday | Excluded | Source
@@ -160,8 +160,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 0
-Resurrected domains added today: 0
+Dead domains removed today: 3315
+Resurrected domains added today: 183
 ```
 
 ## Parked domains
