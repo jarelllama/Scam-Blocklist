@@ -1,9 +1,10 @@
-name: Report domain(s)
+name: Report domains
 description: Please use this template to report domains so they can be properly incorporated with the workflows.
+title: Report domains
 body:
   - type: textarea
     attributes:
-      label: What domain(s) should be blocked?
+      label: What domains should be blocked?
       placeholder: |
         example.com
         https://www.example.com
