@@ -190,7 +190,7 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 * [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
 * [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
 * [The oisd blocklist](https://oisd.nl/)
-* [dnswarden](https://dnswarden.com/)
+* [dnswarden privacy-focused DNS](https://dnswarden.com/)
 * [file-git.trli.club](https://file-git.trli.club/)
 * [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
 
