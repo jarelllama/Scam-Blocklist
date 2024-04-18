@@ -20,14 +20,16 @@ jobs:
       - name: Read domains from issue
         run: |
           mkdir -p data/pending
-          printf "%s\n" "${{ github.event.issue.body }}" >> data/pending/domains_manual.tmp
+          grep -zo 'Please append.*Please append' <<< "${{ github.event.issue.body }}" \
+            | grep -aoE '^(https?://)?[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+            > data/pending/domains_manual.tmp  # Note this overrides any previous files
 
       - name: Close issue
         run: |
           gh issue close ${{ github.event.issue.number }} -c \
           "Sent the following domains for processing:
           \`\`\`
-          $(grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' data/pending/domains_manual.tmp)
+          cat data/pending/domains_manual.tmp
           \`\`\`"
         env:
           GH_TOKEN: ${{ github.token }}
