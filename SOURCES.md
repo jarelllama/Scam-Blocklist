@@ -13,6 +13,7 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
 | [Hagezi's NRD List](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#nrd) | NRD | - | - |
 | [PetScams.com](https://petscams.com/) | Pet | | |
+| [PhishStats](https://phishstats.info/) | Phishing | | |
 | [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) | Phishing | | Yes |
 | [Scam Directory](https://scam.directory/) | Any | | |
 | [Scam.Delivery](https://scam.delivery/) | Non-delivery | Yes | - |
