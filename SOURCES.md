@@ -23,7 +23,6 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Shreshta's NRD List](https://github.com/shreshta-labs/newly-registered-domains) | NRD | - | - |
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | Any | Yes | - |
 | [StopGunScams.com](https://stopgunscams.com/) | Firearm | | |
-| [Tranco List](https://tranco-list.eu/) | Toplist | - | - |
 | [dnstwist](https://github.com/elceef/dnstwist) | Phishing | | |
 | [openSquat](https://github.com/atenreiro/opensquat) | Phishing | Yes | - |
 | [r/Scams](https://www.reddit.com/r/Scams/) | Any | Yes | - |

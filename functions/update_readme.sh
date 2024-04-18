@@ -207,6 +207,7 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
 * [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 * [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
+* [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
 * [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
 * [who.is](https://who.is/): WHOIS and DNS lookup tool
 
@@ -214,11 +215,7 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 
 Thanks to the following people for the help, inspiration, and support!
 
-* [@bongochong](https://github.com/bongochong)
-* [@hagezi](https://github.com/hagezi)
-* [@iam-py-test](https://github.com/iam-py-test)
-* [@sefinek24](https://github.com/sefinek24)
-* [@sjhgvr](https://github.com/sjhgvr)
+[@bongochong](https://github.com/bongochong) - [@hagezi](https://github.com/hagezi) - [@iam-py-test](https://github.com/iam-py-test) - [@sefinek24](https://github.com/sefinek24) - [@sjhgvr](https://github.com/sjhgvr)
 
 ## Contributing
 
@@ -252,7 +249,7 @@ YESTERDAY="$(date -ud yesterday +"%d-%m-%y")"
 print_stats() {
     printf "%5s |%10s |%8s%% | %s" \
         "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" \
-        "$(count_excluded "$1" )" "${1:-All sources}"
+        "$(sum_excluded "$1" )" "${1:-All sources}"
 }
 
 # Note that csvkit is used in the following functions as the Google Search
@@ -270,10 +267,10 @@ sum() {
         | awk '{sum += $1} END {print sum}'
 }
 
-# Function 'count_excluded' is an echo wrapper that returns the percentage of
+# Function 'sum_excluded' is an echo wrapper that returns the percentage of
 # excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
-count_excluded() {
+sum_excluded() {
     grep -F "$1" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
 
     raw_count="$(csvcut -c 4 rows.tmp | awk '{sum += $1} END {print sum}')"

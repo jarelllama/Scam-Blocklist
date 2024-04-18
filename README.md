@@ -201,6 +201,7 @@ Unparked domains added today: 0
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
 * [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 * [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
+* [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
 * [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
 * [who.is](https://who.is/): WHOIS and DNS lookup tool
 
@@ -208,11 +209,7 @@ Unparked domains added today: 0
 
 Thanks to the following people for the help, inspiration, and support!
 
-* [@bongochong](https://github.com/bongochong)
-* [@hagezi](https://github.com/hagezi)
-* [@iam-py-test](https://github.com/iam-py-test)
-* [@sefinek24](https://github.com/sefinek24)
-* [@sjhgvr](https://github.com/sjhgvr)
+[@bongochong](https://github.com/bongochong) - [@hagezi](https://github.com/hagezi) - [@iam-py-test](https://github.com/iam-py-test) - [@sefinek24](https://github.com/sefinek24) - [@sjhgvr](https://github.com/sjhgvr)
 
 ## Contributing
 
