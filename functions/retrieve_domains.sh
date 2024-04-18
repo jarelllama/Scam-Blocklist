@@ -47,6 +47,8 @@ source() {
     source_dnstwist
     source_guntab
     source_petscams
+    source_phishstats
+    source_phishstats_nrd
     source_regex
     source_scamdirectory
     source_scamadviser
@@ -584,6 +586,47 @@ source_regex() {
         sed -i "/${domain}/s/${row}/${pattern},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
     done <<< "$targets"
+
+    process_source
+}
+
+source_phishstats() {
+    local source='PhishStats'
+    local ignore_from_light=true
+    local results_file='data/pending/domains_phishstats.tmp'
+    local execution_time
+    execution_time="$(date +%s)"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://phishstats.info/phish_score.csv'
+    # Get only URLs with no subdirectories and exclude IP addresses
+    wget -qO - "$url" | awk -F ',' '{print $3}' \
+        | grep -E '^"?https?://[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*."?$' \
+        | sed 's/"//g' > phishstats.tmp  # Save results for the NRD version
+
+    cp phishstats.tmp "$results_file"
+
+    process_source
+}
+
+source_phishstats_nrd() {
+    # For the light version
+    # Only includes domains found in the NRD feed
+    local source='PhishStats (NRDs)'
+    local results_file='data/pending/domains_phishstats_nrd.tmp'
+    local execution_time
+    execution_time="$(date +%s)"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    download_nrd_feed
+
+    # Strip URLs to domains
+    awk -F '/' '{print $3}' phishstats.tmp | sort -u -o results.tmp
+
+    # Get matching NRDs (Unicode ignored)
+    comm -12 results.tmp nrd.tmp > "$results_file"
 
     process_source
 }

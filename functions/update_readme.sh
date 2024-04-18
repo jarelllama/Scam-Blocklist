@@ -31,7 +31,9 @@ New domains from each source:
 Today | Yesterday | Excluded | Source
 $(print_stats 'Google Search')
 $(print_stats Manual) Entries
-$(print_stats 'Regex') Matching (NRDs)
+$(print_stats PhishStats)
+$(print_stats 'PhishStats (NRDs)')
+$(print_stats Regex) Matching (NRDs)
 $(print_stats aa419.org)
 $(print_stats dnstwist) (NRDs)
 $(print_stats guntab.com)
