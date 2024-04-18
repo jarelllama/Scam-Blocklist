@@ -737,15 +737,12 @@ source_scamadviser() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.scamadviser.com/articles'
-    # Collate URLs to curl into an array
-    # Note trailing slash is intentionally omitted
-    for page in {1..15}; do
-        urls+=("${url}?p=${page}")
-    done
 
     # The Scamadviser source is rather slow so parallelization is used.
     # -o still prints to stdout here so > is used
-    curl -sZ --retry 2 --retry-all-errors "${urls[@]}" > results.tmp
+    # URL globbing added after https://github.com/T145/black-mirror/issues/179
+    # Note trailing slash is intentionally omitted
+    curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" > results.tmp
 
     grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
