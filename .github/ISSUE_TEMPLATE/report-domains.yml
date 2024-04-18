@@ -1,4 +1,3 @@
----
 name: Report domain(s)
 description: Please use this template to report domains so they can be properly incorporated with the workflows.
 body:
@@ -7,10 +6,16 @@ body:
       label: What domain(s) should be blocked?
       placeholder: |
         example.com
+        https://www.example.com
         http://example.com/index.php
     validations:
       required: true
   - type: textarea
     attributes:
-      label: Please provide any additional information like reasons for blocking, etc. (optional)
----
+      label: Why should they be blocked?
+      placeholder: |
+        Phishing domains reported here https://example.com/.
+        Delivery scam. See https://example.com/.
+        URL in phishing SMS.
+    validations:
+      required: true
