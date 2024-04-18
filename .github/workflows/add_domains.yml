@@ -27,7 +27,7 @@ jobs:
       - name: Close issue
         run: |
           gh issue close ${{ github.event.issue.number }} -c \
-          "Sent the following domain(s) for processing:
+          "Sent the following entries for processing:
           \`\`\`
           $(cat data/pending/domains_manual.tmp)
           \`\`\`"
