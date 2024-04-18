@@ -17,15 +17,15 @@ jobs:
   # This condition prevents the job from running if the test job failed
   # ${{ needs.test.result == 'success' }}
 
-  build:
-    needs: [test]
-    uses: ./.github/workflows/retrieve_domains.yml
-    secrets: inherit
-
   build-nsfw:
-    needs: [build]
     if: ${{ ! cancelled() }}
     uses: ./.github/workflows/build_nsfw.yml
+
+  build:
+    needs: [test, build-nsfw]
+    if: ${{ ! cancelled() && needs.test.result == 'success' }}
+    uses: ./.github/workflows/retrieve_domains.yml
+    secrets: inherit
 
   prune-dead:
     needs: [test, build]
