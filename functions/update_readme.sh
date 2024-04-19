@@ -118,7 +118,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 \`\`\` text
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-API calls made today: $(grep -F "${TODAY},Google Search" "$SOURCE_LOG" | csvcut -c 10 | mawk '{sum += $1} END {print sum}')
+API calls made today: $(mawk "/${TODAY},Google Search/" "$SOURCE_LOG" | csvcut -c 10 | mawk '{sum += $1} END {print sum}')
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
@@ -264,7 +264,7 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    grep -F "${1},${2}" "$SOURCE_LOG" | grep ',saved$' | csvcut -c 5 \
+    mawk "/${1},${2}/" "$SOURCE_LOG" | mawk '/,saved$/' | csvcut -c 5 \
         | mawk '{sum += $1} END {print sum}'
 }
 
@@ -272,7 +272,7 @@ sum() {
 # excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 sum_excluded() {
-    grep -F "$1" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
+    mawk "/$1/" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
 
     raw_count="$(csvcut -c 4 rows.tmp | mawk '{sum += $1} END {print sum}')"
     # Return if raw count is 0 to avoid divide by zero error
