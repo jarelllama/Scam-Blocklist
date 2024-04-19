@@ -42,6 +42,7 @@ build() {
     whitelist=(
         batteryhookup.com
         sexpistolsofficial.com
+        1337xxx.to
     )
 
     # Format raw file
