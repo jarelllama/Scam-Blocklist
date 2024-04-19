@@ -32,7 +32,7 @@ Today | Yesterday | Excluded | Source
    26 |       226 |       4% | Google Search
    29 |         4 |       5% | Manual Entries
   611 |     19115 |      11% | PhishStats
-   20 |      1549 |       0% | PhishStats (NRDs)
+    0 |         0 |       0% | PhishStats (NRDs)
   328 |       493 |       2% | Regex Matching (NRDs)
     2 |         7 |       8% | aa419.org
    19 |        75 |       0% | dnstwist (NRDs)
