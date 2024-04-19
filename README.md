@@ -10,7 +10,7 @@ In the last 30 days, more than 12153[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
-<br>
+## Download
 
 | Format | Syntax |
 | --- | --- |
@@ -110,8 +110,6 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
-#### Statistics for Google Search source
-
 ``` text
 Active search terms: 20
 API calls made today: 166
@@ -129,8 +127,6 @@ dnstwist is an open-source detection tool for common cybersquatting techniques l
 dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked compilation of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv)
 
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is also tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
-
-#### Statistics for dnstwist source
 
 ``` text
 Active targets: 70
