@@ -1,5 +1,5 @@
 ﻿target,dnstwist_count/run,dnstwist_count,dnstwist_runs,dnstwist_disable (y\N),regex,regex_count/run,regex_count,regex_runs,regex_disable (Y\n),comments
-adblock,0,3,9,,(^|-)&-,,,,,
+adblock,0,3,9,y,(^|-)&-,,,,,
 adblockplus,0,0,3,y,(^|-)&-,,,,,
 airbnb,1,11,9,,(^|-)&|&(-|\.),23,208,9,n,
 alibaba,0,3,9,,(^|-)&|&(-|\.),26,241,9,n,
