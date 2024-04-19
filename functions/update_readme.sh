@@ -98,7 +98,7 @@ Created from requests, a blocklist for NSFW domains is available in Adblock Plus
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: $(wc -l <<< "$(grep '||' lists/adblock/nsfw.txt)")
+Total domains: $(grep -c '||' lists/adblock/nsfw.txt)
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
@@ -291,7 +291,7 @@ sum_excluded() {
 sum_nrds() {
     # Only Hagezi's NRD feed is downloaded to save processing time
     wget -qO nrd.tmp 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
-    grep -xFcf "$RAW" nrd.tmp
+    grep -xcFf "$RAW" nrd.tmp
 }
 
 # Entry point
