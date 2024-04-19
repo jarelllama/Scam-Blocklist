@@ -695,6 +695,9 @@ source_petscams() {
     curl -sZ "${url}/page/[2-15]/" >> results.tmp
 
     # Note [a-z] does not seem to work in these expression
+    # Each page in theory should return 15 domains, but the regex also matches
+    # domains under 'Latest Articles' at the bottom of the page, so the number
+    # of domains returned per page may be >15.
     grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
         results.tmp | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
         s/-\?[0-9]\?\/">//; s/-/./g' > "$results_file"
@@ -735,7 +738,7 @@ source_scamadviser() {
     # URL globbing added after https://github.com/T145/black-mirror/issues/179
     # Trailing slash is intentionally omitted
     curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
-        | grep -oE '<div class="articles">.*<div>Read more</div>' \
+        | grep -oE '<h2 class="mb-0">.*</h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
         | sed 's/\[//; s/\]//' > "$results_file"
 
