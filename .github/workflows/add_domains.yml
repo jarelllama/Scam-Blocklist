@@ -23,7 +23,7 @@ jobs:
 
           # Note this overrides any previous entries
           # IP addresses are excluded
-          grep -zo 'What domain.*Why should' <<< "${{ github.event.issue.body }}" \
+          grep -zo 'What domain.*Why should' <<< '${{ github.event.issue.body }}' \
             | grep -aoE '^(https?://)?[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
             | sed 's/https\?:\/\///' > data/pending/domains_manual.tmp
 
