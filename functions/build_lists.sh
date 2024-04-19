@@ -35,7 +35,7 @@ build() {
         append_header
 
         # Append formatted domains onto blocklist
-        awk -v before="$before" -v after="$after" \
+        mawk -v before="$before" -v after="$after" \
             '{print before $0 after}' "$source_file" >> "$blocklist_path"
     done
 }
