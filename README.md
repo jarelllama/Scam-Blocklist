@@ -107,7 +107,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 20
+Active search terms: 21
 API calls made today: 0
 Domains retrieved today: 0
 ```
