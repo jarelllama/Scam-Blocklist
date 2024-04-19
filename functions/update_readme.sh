@@ -291,8 +291,7 @@ sum_excluded() {
 sum_nrds() {
     # Only Hagezi's NRD feed is downloaded to save processing time
     wget -qO nrd.tmp 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
-    sort -u nrd.tmp -o nrd.tmp
-    comm -12 "$RAW" nrd.tmp | wc -l
+    grep -xFcf "$RAW" nrd.tmp
 }
 
 # Entry point
