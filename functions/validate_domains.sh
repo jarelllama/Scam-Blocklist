@@ -34,7 +34,8 @@ filter() {
     fi
 
     # Record entries into filter log
-    awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" >> filter_log.tmp
+    mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
+        >> filter_log.tmp
 
     # Call shell wrapper to log entries into domain log
     $FUNCTION --log-domains "$entries" "$tag" raw
@@ -86,7 +87,7 @@ validate() {
     if invalid_dead="$(grep -vE "$regex" "$DEAD_DOMAINS")"; then
         grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
         mv dead.tmp "$DEAD_DOMAINS"
-        awk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
+        mawk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
         $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
     fi
 
