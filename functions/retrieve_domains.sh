@@ -43,7 +43,7 @@ source() {
     wait
 
     source_manual
-    #source_aa419
+    source_aa419
     #source_dnstwist
     source_guntab
     source_petscams
@@ -334,7 +334,7 @@ download_nrd_feed() {
             "Error occurred while downloading NRD feeds."
 
         # Download the bigger feeds in parallel
-        curl -sH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
+        curl -sSH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
         wait
     } | grep -vF '#' > nrd.tmp
 
@@ -440,7 +440,7 @@ search_google() {
     for start in {1..100..10}; do
     # Indentation intentionally lacking here
     params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-    page_results="$(curl -s "${url}?${params}")"
+    page_results="$(curl -sS "${url}?${params}")"
 
         (( query_count++ ))
 
@@ -655,7 +655,8 @@ source_aa419() {
     command -v jq &> /dev/null || apt-get install -qq jq
 
     local url='https://api.aa419.org/fakesites'
-    curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
+    curl -sSH "Auth-API-Id:${AA419_API_ID}" --retry 2 --retry-all-errors \
+        "${url}/0/250?Status=active" \
         | jq -r '.[].Domain' > "$results_file"
         # Note trailing slash breaks API call
 
@@ -672,7 +673,7 @@ source_guntab() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.guntab.com/scam-websites'
-    curl -s "${url}/" \
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -zoE '<table class="datatable-list table">.*</table>' \
         | grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
         # Note results are not sorted by time added
@@ -691,8 +692,8 @@ source_petscams() {
     local url='https://petscams.com'
 
     # First page must not have '/page'
-    curl -s "${url}/" >> results.tmp
-    curl -sZ "${url}/page/[2-15]/" >> results.tmp
+    curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
+    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
 
     # Note [a-z] does not seem to work in these expression
     # Each page in theory should return 15 domains, but the regex also matches
@@ -716,7 +717,7 @@ source_scamdirectory() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://scam.directory/category'
-    curl -s "${url}/" \
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | sed 's/-/./g; 101,$d' > "$results_file"
@@ -737,7 +738,7 @@ source_scamadviser() {
     local url='https://www.scamadviser.com/articles'
     # URL globbing added after https://github.com/T145/black-mirror/issues/179
     # Trailing slash is intentionally omitted
-    curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
+    curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<h2 class="mb-0">.*</h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
         | sed 's/\[//; s/\]//' > "$results_file"
@@ -754,7 +755,7 @@ source_stopgunscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://stopgunscams.com'
-    curl -sZ "${url}/?page=[1-5]/" \
+    curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-5]/" \
         | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | sed 's/-/./g' > "$results_file"
