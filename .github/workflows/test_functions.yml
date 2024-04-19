@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev
-      - name: Test dodev retrieval
+      - name: Test domain retrieval
         run: bash functions/test_functions.sh retrieve
 
   test-dead-check:
@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev
-      - name: Test dead dodevs check
+      - name: Test dead domains check
         run: bash functions/test_functions.sh dead
 
   test-parked-check:
@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev
-      - name: Test parked dodevs check
+      - name: Test parked domains check
         run: bash functions/test_functions.sh parked
 
   test-validation-check:
@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev
-      - name: Test dodev validation
+      - name: Test domain validation
         run: bash functions/test_functions.sh validate
 
   test-build:
