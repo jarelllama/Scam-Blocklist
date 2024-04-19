@@ -82,7 +82,7 @@ filter() {
 
     if [[ "$3" == '--preserve' ]]; then
         # Save entries for manual review and for rerun
-        awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
+        mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> manual_review.tmp
         printf "%s\n" "$entries" >> "${results_file}.tmp"
     fi
@@ -411,7 +411,7 @@ source_google_search() {
 
     # Get active search times and quote them
     # csvkit has to be used here as the search terms may contain commas which
-    # makes using awk complicated.
+    # makes using mawk complicated.
     search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
         | tail -n +2 | sed 's/.*/"&"/')"
 
@@ -467,7 +467,7 @@ search_google() {
 
         # Get domains from each page
         page_domains="$(jq -r '.items[].link' <<< "$page_results" \
-            | awk -F '/' '{print $3}')"
+            | mawk -F '/' '{print $3}')"
         printf "%s\n" "$page_domains" >> "$results_file"
 
         # Stop search term if no more pages are required
@@ -491,23 +491,23 @@ source_dnstwist() {
     # Get the top 15 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above.
-    tlds="$(shuf -n 10000 nrd.tmp | awk -F '.' '{print $NF}' | sort | uniq -c \
+    tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
         | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+')"
 
     # Remove duplicate targets from targets file
-    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
+    mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones
-    targets="$(awk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
+    targets="$(mawk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
 
     # Loop through the targets
     while read -r domain; do
         # Get row and counts for the target domain
-        row="$(awk -F ',' -v domain="$domain" \
+        row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $1","$2","$3","$4}' "$PHISHING_TARGETS")"
-        count="$(awk -F ',' '{print $3}' <<< "$row")"
-        runs="$(awk -F ',' '{print $4}' <<< "$row")"
+        count="$(mawk -F ',' '{print $3}' <<< "$row")"
+        runs="$(mawk -F ',' '{print $4}' <<< "$row")"
 
         # Run dnstwist
         results="$(dnstwist "${domain}.com" -f list)"
@@ -549,22 +549,22 @@ source_regex() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     # Remove duplicate targets from targets file
-    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
+    mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones
-    targets="$(awk -F ',' '$10 == "n" {print $1}' "$PHISHING_TARGETS")"
+    targets="$(mawk -F ',' '$10 == "n" {print $1}' "$PHISHING_TARGETS")"
 
     # Loop through the targets
     while read -r domain; do
         # Get row and counts for the target domain
-        row="$(awk -F ',' -v domain="$domain" \
+        row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $6","$7","$8","$9}' "$PHISHING_TARGETS")"
-        count="$(awk -F ',' '{print $3}' <<< "$row")"
-        runs="$(awk -F ',' '{print $4}' <<< "$row")"
+        count="$(mawk -F ',' '{print $3}' <<< "$row")"
+        runs="$(mawk -F ',' '{print $4}' <<< "$row")"
 
         # Get regex of target
-        pattern="$(awk -F ',' '{printf $1}' <<< "$row")"
+        pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
         escaped_domain="$(printf "%s" "$domain" | sed 's/\./\\./g')"
         regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
 
@@ -603,9 +603,9 @@ source_phishstats() {
     # Get only URLs with no subdirectories, exclude IP addresses and extract
     # domains
     # -o for grep can be omitted since each entry is on its own line
-    wget -qO - "$url" | awk -F ',' '{print $3}' \
+    wget -qO - "$url" | mawk -F ',' '{print $3}' \
         | grep -E '^"?https?://[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*."?$' \
-        | sed 's/"//g' | awk -F '/' '{print $3}' | sort -u -o "$results_file"
+        | sed 's/"//g' | mawk -F '/' '{print $3}' | sort -u -o "$results_file"
 
     # Get matching NRDs for light version (Unicode ignored)
     comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
@@ -755,7 +755,7 @@ source_stopgunscams() {
     # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
         | grep -oE 'class="rank-math-html-sitemap__link">[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-        | awk -F '>' '{print $2}' | sed '101,$d' > "$results_file"
+        | mawk -F '>' '{print $2}' | sed '101,$d' > "$results_file"
         # Keep only first 100 results
 
     process_source
