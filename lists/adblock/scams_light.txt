@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.19.124016.2024
+! Version: 04.19.125441.2024
 ! Expires: 1 day
-! Last modified: Fri Apr 19 12:40:16 UTC 2024
+! Last modified: Fri Apr 19 12:54:41 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 4811
+! Number of entries: 4827
 !
 ||01edc.com^
 ||10bet938.com^
@@ -273,6 +273,7 @@
 ||apexdrinksworld.com^
 ||apexkittens.com^
 ||apextradehouseminingservices.com^
+||api.localadswidget.com^
 ||apkallpure.com^
 ||apleulou.com^
 ||aplotesto.top^
@@ -290,6 +291,7 @@
 ||applevisionproworld.com^
 ||applew.xyz^
 ||applyforunvacation.online^
+||apps.marketing-counter.com^
 ||aprilcash2023.com^
 ||aproudtee.com^
 ||aquaaccent.com^
@@ -320,6 +322,7 @@
 ||ashroots.shop^
 ||asicstop.us^
 ||askotrade.net^
+||assets.watchasync.com^
 ||assetsprovide.com^
 ||associazionechien.org^
 ||asstwosi.com^
@@ -738,6 +741,8 @@
 ||ccsssurvivalusa.com^
 ||ccy-space.com^
 ||cd-license.org^
+||cdn.jsdevlvr.info^
+||cdn.wt-api.top^
 ||cecilfansvip.com^
 ||cedarridgefamilymedicine.com^
 ||cellihok.com^
@@ -2089,6 +2094,9 @@
 ||joyceebassethoundpuppies.com^
 ||joyfulgreatdanes.com^
 ||joygootech.com^
+||js.abc-cdn.online^
+||js.opttracker.online^
+||js.schema-forms.org^
 ||jstarsgifts.com^
 ||juahar.com^
 ||junever.com^
@@ -2201,6 +2209,7 @@
 ||kyhgmks.com^
 ||kyhgplw.com^
 ||kyhgyhf.com^
+||l.js-assets.cloud^
 ||l3or1.shop^
 ||l6.datingeo.com^
 ||lablancasale.us^
@@ -2301,6 +2310,7 @@
 ||lnbarct.com^
 ||lnienars.com^
 ||load-andgotruckingllc.com^
+||load.365analytics.xyz^
 ||loadandgotruckingllc.com^
 ||local-meets.com^
 ||localkennel.co.za^
@@ -2899,6 +2909,7 @@
 ||paaypal.org^
 ||pacisystrading.com^
 ||pack-usps.shop^
+||page.24supportkit.com^
 ||pagosingdirect.com^
 ||palmettosurplusammo.com^
 ||palopintlimited.com^
@@ -3557,6 +3568,7 @@
 ||specialtradefx.com^
 ||spectaculartollers.com^
 ||speedtimeexpresslimited.com^
+||spf.js-min.site^
 ||sphynxmomplace.com^
 ||spinfluencepartners.com^
 ||spk-fortfahren.com^
@@ -3593,6 +3605,7 @@
 ||stappage.com^
 ||starnetexpressdelivery.com^
 ||starstartree.com^
+||stat.counter247.live^
 ||statelinetack.shop^
 ||statesanabolicstore.com^
 ||statetreasury.org^
@@ -3635,8 +3648,10 @@
 ||storestoic.com^
 ||storkandbub.com^
 ||stpaulamecleveland.com^
+||streaming.jsonmediapacks.com^
 ||streamptz.com^
 ||stunningpoodlepuppies.com^
+||stylesheet.webstaticcdn.com^
 ||stylesoutdoors.com^
 ||styloflip.com^
 ||substantialn.com^
@@ -3706,6 +3721,7 @@
 ||tacking-usps-vip.com^
 ||tactical-gunshop.com^
 ||tacticoolammoshop.com^
+||tags.stickloader.info^
 ||talegram.online^
 ||tamardaustralianshepherd.com^
 ||tangdress.com^
