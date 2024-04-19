@@ -690,7 +690,6 @@ source_petscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://petscams.com'
-
     # First page must not have '/page'
     curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
     curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
