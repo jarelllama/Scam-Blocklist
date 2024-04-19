@@ -16,18 +16,18 @@ format_file() {
     # Applicable to specific files/extensions:
     case "$file" in
         'data/dead_domains.txt'|'data/parked_domains.txt')
-            # Remove whitespaces, convert to lowercase, and remove duplicates
-            sed 's/[[:space:]]//g' "$file" | tr '[:upper:]' '[:lower:]' \
-                | awk '!seen[$0]++' > "${file}.tmp"
+            # Remove duplicates, whitespaces, and convert to lowercase
+            mawk '!seen[$0]++ {gsub(/ /, "", $0); print tolower($0)}' "$file" \
+                > "${file}.tmp"
             ;;
         'config/parked_terms.txt')
             # Convert to lowercase, sort, and remove duplicates
-            tr '[:upper:]' '[:lower:]' < "$file" | sort -u -o "${file}.tmp"
+            mawk '{print tolower($0)}' "$file" | sort -u -o "${file}.tmp"
             ;;
         *.txt|*.tmp)
             # Remove whitespaces, convert to lowercase, sort, and remove
             # duplicates
-            sed 's/[[:space:]]//g' "$file" | tr '[:upper:]' '[:lower:]' \
+            mawk '{gsub(/ /, "", $0); print tolower($0)}' "$file" \
                 | sort -u -o "${file}.tmp"
             ;;
         *)
@@ -66,7 +66,7 @@ log_domains() {
     timestamp="${timestamp:-$(date -u +"%H:%M:%S %d-%m-%y")}"
 
     printf "%s\n" "$domains" \
-        | awk -v event="$2" -v source="$3" -v time="$timestamp" \
+        | mawk -v event="$2" -v source="$3" -v time="$timestamp" \
         '{print time "," event "," $0 "," source}' >> config/domain_log.csv
 }
 

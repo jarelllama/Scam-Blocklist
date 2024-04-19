@@ -82,7 +82,7 @@ filter() {
 
     if [[ "$3" == '--preserve' ]]; then
         # Save entries for manual review and for rerun
-        awk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
+        mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> manual_review.tmp
         printf "%s\n" "$entries" >> "${results_file}.tmp"
     fi
@@ -126,7 +126,7 @@ process_source() {
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
-        subdomains="$(grep "^${subdomain}\." "$results_file")" || continue
+        subdomains="$(mawk "/^${subdomain}\./" "$results_file")" || continue
 
         # Strip subdomains down to their root domains
         sed -i "s/^${subdomain}\.//" "$results_file"
@@ -138,7 +138,7 @@ process_source() {
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
         # Log subdomains excluding 'www' (too many of them)
-        log_domains "$(grep -v '^www\.' <<< "$subdomains")" subdomain
+        log_domains "$(mawk '!/^www\./' <<< "$subdomains")" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$results_file" -o "$results_file"
 
@@ -155,6 +155,8 @@ process_source() {
     whitelisted_count="$(filter "$whitelisted" whitelist)"
 
     # Remove domains with whitelisted TLDs
+    # mawk does not work with this expression so grep is intentionally chosen
+    # over awk. The same applies for the invalid check below.
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$results_file")"
     whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
@@ -233,7 +235,7 @@ build() {
         sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
         # Collate filtered subdomains for dead check
-        grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
+        mawk "/\.${root_domains}$/" subdomains.tmp >> "$SUBDOMAINS"
         sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 
@@ -336,7 +338,7 @@ download_nrd_feed() {
         # Download the bigger feeds in parallel
         curl -sSH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
         wait
-    } | grep -vF '#' > nrd.tmp
+    } | mawk '!/#/' > nrd.tmp
 
     # Appears to be the best way of checking if the bigger feeds downloaded
     # properly without checking each feed individually and losing
@@ -411,7 +413,7 @@ source_google_search() {
 
     # Get active search times and quote them
     # csvkit has to be used here as the search terms may contain commas which
-    # makes using awk complicated.
+    # makes using mawk complicated.
     search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
         | tail -n +2 | sed 's/.*/"&"/')"
 
@@ -467,7 +469,7 @@ search_google() {
 
         # Get domains from each page
         page_domains="$(jq -r '.items[].link' <<< "$page_results" \
-            | awk -F '/' '{print $3}')"
+            | mawk -F '/' '{print $3}')"
         printf "%s\n" "$page_domains" >> "$results_file"
 
         # Stop search term if no more pages are required
@@ -491,23 +493,23 @@ source_dnstwist() {
     # Get the top 15 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above.
-    tlds="$(shuf -n 10000 nrd.tmp | awk -F '.' '{print $NF}' | sort | uniq -c \
+    tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
         | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+')"
 
     # Remove duplicate targets from targets file
-    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
+    mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones
-    targets="$(awk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
+    targets="$(mawk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
 
     # Loop through the targets
     while read -r domain; do
         # Get row and counts for the target domain
-        row="$(awk -F ',' -v domain="$domain" \
+        row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $1","$2","$3","$4}' "$PHISHING_TARGETS")"
-        count="$(awk -F ',' '{print $3}' <<< "$row")"
-        runs="$(awk -F ',' '{print $4}' <<< "$row")"
+        count="$(mawk -F ',' '{print $3}' <<< "$row")"
+        runs="$(mawk -F ',' '{print $4}' <<< "$row")"
 
         # Run dnstwist
         results="$(dnstwist "${domain}.com" -f list)"
@@ -549,22 +551,22 @@ source_regex() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     # Remove duplicate targets from targets file
-    awk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
+    mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones
-    targets="$(awk -F ',' '$10 == "n" {print $1}' "$PHISHING_TARGETS")"
+    targets="$(mawk -F ',' '$10 == "n" {print $1}' "$PHISHING_TARGETS")"
 
     # Loop through the targets
     while read -r domain; do
         # Get row and counts for the target domain
-        row="$(awk -F ',' -v domain="$domain" \
+        row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $6","$7","$8","$9}' "$PHISHING_TARGETS")"
-        count="$(awk -F ',' '{print $3}' <<< "$row")"
-        runs="$(awk -F ',' '{print $4}' <<< "$row")"
+        count="$(mawk -F ',' '{print $3}' <<< "$row")"
+        runs="$(mawk -F ',' '{print $4}' <<< "$row")"
 
         # Get regex of target
-        pattern="$(awk -F ',' '{printf $1}' <<< "$row")"
+        pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
         escaped_domain="$(printf "%s" "$domain" | sed 's/\./\\./g')"
         regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
 
@@ -602,10 +604,12 @@ source_phishstats() {
     local url='https://phishstats.info/phish_score.csv'
     # Get only URLs with no subdirectories, exclude IP addresses and extract
     # domains
-    # -o for grep can be omitted since each entry is on its own line
-    wget -qO - "$url" | awk -F ',' '{print $3}' \
+    # -o for grep can be omitted since each entry is on its own line.
+    # Once again, mawk does not work well with such regex expressions.
+    wget -qO - "$url" | mawk -F ',' '{print $3}' \
         | grep -E '^"?https?://[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*."?$' \
-        | sed 's/"//g' | awk -F '/' '{print $3}' | sort -u -o "$results_file"
+        | mawk -F '/' '{gsub(/"/, "", $3); print $3}' \
+        | sort -u -o "$results_file"
 
     # Get matching NRDs for light version (Unicode ignored)
     comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
@@ -654,9 +658,8 @@ source_aa419() {
 
     local url='https://api.aa419.org/fakesites'
     # Trailing slash intentionally omitted
-    curl -sSH "Auth-API-Id:${AA419_API_ID}" --retry 2 --retry-all-errors \
-        "${url}/0/250?Status=active" \
-        | jq -r '.[].Domain' > "$results_file"
+    curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
+        --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
 
     process_source
 }
@@ -692,13 +695,13 @@ source_petscams() {
     curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
     curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
 
-    # Note [a-z] does not seem to work in these expression
     # Each page in theory should return 15 domains, but the regex also matches
     # domains under 'Latest Articles' at the bottom of the page, so the number
     # of domains returned per page may be >15.
+    # Note [a-z] does not seem to work in this regex expression
     grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
-        results.tmp | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
-        | sed 's/-\?[0-9]\?\/">//; s/-/./g' > "$results_file"
+        results.tmp | mawk -F '/' '{sub(/-[0-9]$/, "", $5);
+        gsub(/-/, ".", $5); print $5}' > "$results_file"
 
     rm results.tmp
 
@@ -716,9 +719,8 @@ source_scamdirectory() {
     local url='https://scam.directory/category'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
-        | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-        | sed 's/-/./g; 101,$d' > "$results_file"
-        # Keep only first 100 results
+        | mawk -F '"/|"' 'NR<=100 {gsub(/-/, ".", $2); print $2}' \
+        > "$results_file"  # Keep only newest 100 results
 
     process_source
 }
@@ -755,8 +757,8 @@ source_stopgunscams() {
     # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
         | grep -oE 'class="rank-math-html-sitemap__link">[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-        | awk -F '>' '{print $2}' | sed '101,$d' > "$results_file"
-        # Keep only first 100 results
+        | mawk -F '>' 'NR<=100 {print $2}' > "$results_file"
+        # Keep only newest 100 results
 
     process_source
 }

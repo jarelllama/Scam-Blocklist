@@ -118,7 +118,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 \`\`\` text
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-API calls made today: $(grep -F "${TODAY},Google Search" "$SOURCE_LOG" | csvcut -c 10 | awk '{sum += $1} END {print sum}')
+API calls made today: $(mawk "/${TODAY},Google Search/" "$SOURCE_LOG" | csvcut -c 10 | mawk '{sum += $1} END {print sum}')
 Domains retrieved today: $(sum "$TODAY" 'Google Search')
 \`\`\`
 
@@ -135,7 +135,7 @@ dnstwist uses a list of common phishing targets to find permutations of the targ
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
 
 \`\`\` text
-Active targets: $(awk -F ',' '$5 != "y"' "$PHISHING_TARGETS" | tail -n +2 | wc -l)
+Active targets: $(mawk -F ',' '$5 != "y"' "$PHISHING_TARGETS" | tail -n +2 | wc -l)
 Domains retrieved today: $(sum "$TODAY" dnstwist)
 \`\`\`
 
@@ -254,7 +254,7 @@ print_stats() {
 }
 
 # Note that csvkit is used in the following functions as the Google Search
-# search terms may contain commas which makes using awk complicated.
+# search terms may contain commas which makes using mawk complicated.
 
 # Function 'sum' is an echo wrapper that returns the total sum of domains
 # retrieved by the given source for that particular day.
@@ -264,23 +264,23 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    grep -F "${1},${2}" "$SOURCE_LOG" | grep ',saved$' | csvcut -c 5 \
-        | awk '{sum += $1} END {print sum}'
+    mawk "/${1},${2}/" "$SOURCE_LOG" | mawk '/,saved$/' | csvcut -c 5 \
+        | mawk '{sum += $1} END {print sum}'
 }
 
 # Function 'sum_excluded' is an echo wrapper that returns the percentage of
 # excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 sum_excluded() {
-    grep -F "$1" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
+    mawk "/$1/" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
 
-    raw_count="$(csvcut -c 4 rows.tmp | awk '{sum += $1} END {print sum}')"
+    raw_count="$(csvcut -c 4 rows.tmp | mawk '{sum += $1} END {print sum}')"
     # Return if raw count is 0 to avoid divide by zero error
     (( raw_count == 0 )) && { printf "0"; return; }
 
-    white_count="$(csvcut -c 6 rows.tmp | awk '{sum += $1} END {print sum}')"
-    dead_count="$(csvcut -c 7 rows.tmp | awk '{sum += $1} END {print sum}')"
-    parked_count="$(csvcut -c 8 rows.tmp | awk '{sum += $1} END {print sum}')"
+    white_count="$(csvcut -c 6 rows.tmp | mawk '{sum += $1} END {print sum}')"
+    dead_count="$(csvcut -c 7 rows.tmp | mawk '{sum += $1} END {print sum}')"
+    parked_count="$(csvcut -c 8 rows.tmp | mawk '{sum += $1} END {print sum}')"
     excluded_count="$(( white_count + dead_count + parked_count ))"
 
     printf "%s" "$(( excluded_count * 100 / raw_count ))"
@@ -291,7 +291,7 @@ sum_excluded() {
 sum_nrds() {
     # Only Hagezi's NRD feed is downloaded to save processing time
     wget -qO nrd.tmp 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
-    grep -xcFf "$RAW" nrd.tmp
+    grep -cxFf "$RAW" nrd.tmp
 }
 
 # Entry point

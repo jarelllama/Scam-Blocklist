@@ -46,7 +46,7 @@ build() {
     )
 
     # Format raw file
-    grep '||' "$BLOCKLIST" > raw.tmp
+    mawk '/||/' "$BLOCKLIST" > raw.tmp
     sed -i 's/||//; s/\^//' raw.tmp
 
     # Remove already processed domains
@@ -55,7 +55,7 @@ build() {
 
     # Get new domains from toplist
     for term in "${terms[@]}"; do
-        grep -E "$term" toplist.tmp >> domains.tmp
+        mawk "/$term/" toplist.tmp >> domains.tmp
     done
 
     # Add new domains to raw file

@@ -279,7 +279,7 @@ test_syntax() {
 
         # Check if rule syntax is wrong or element is missing
         if grep -qF "$domain" <<< "$syntax"; then
-            grep -F "$domain" "lists/${name}/scams.txt"
+            mawk "/$domain/" "lists/${name}/scams.txt"
         else
             printf "Missing '%s'\n" "$syntax"
         fi
@@ -291,7 +291,7 @@ test_syntax() {
     if ! grep -qxF "$syntax" "lists/${name}/scams_light.txt"; then
         printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$name"
         if grep -qF "$domain" <<< "$syntax"; then
-            grep -F "$domain" "lists/${name}/scams_light.txt"
+            mawk "/$domain/" "lists/${name}/scams_light.txt"
         else
             printf "Missing '%s'\n" "$syntax"
         fi
@@ -372,7 +372,7 @@ test_subdomain_removal() {
         printf "%s\n" "$subdomain" >> input.txt
         # EXPECTED OUTPUT
         printf "%s\n" "$subdomain" >> out_subdomains.txt
-        printf "subdomain,%s" "$subdomain" | grep -v 'www\.' >> out_log.txt
+        printf "subdomain,%s" "$subdomain" | mawk '!/www\./' >> out_log.txt
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # EXPECTED OUTPUT

@@ -9,7 +9,7 @@ on:
 
 jobs:
   # A matrix strategy is not used here for better readability in the Actions summary.
-  
+
   shellcheck:
     runs-on: ubuntu-latest
     steps:
