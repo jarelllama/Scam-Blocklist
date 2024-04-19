@@ -19,13 +19,13 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 
 ``` text
 Total domains: 55874
-Light version: 4812
+Light version: 4811
 
 New domains from each source:
 Today | Yesterday | Excluded | Source
    26 |       226 |       4% | Google Search
     1 |         4 |       7% | Manual Entries
-  610 |     19115 |      11% | PhishStats
+  611 |     19115 |      11% | PhishStats
    20 |      1549 |       0% | PhishStats (NRDs)
   328 |       493 |       2% | Regex Matching (NRDs)
     2 |         7 |       8% | aa419.org
@@ -35,7 +35,7 @@ Today | Yesterday | Excluded | Source
     0 |        37 |      66% | scam.directory
     5 |         7 |      37% | scamadviser.com
     0 |         0 |       4% | stopgunscams.com
-  991 |     20074 |      14% | All sources
+  992 |     20074 |      14% | All sources
 
 * The Excluded % is of domains not included in the
  blocklist. Mostly dead, whitelisted, and parked domains.
@@ -107,7 +107,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 #### Statistics for Google Search source
 
 ``` text
-Active search terms: 21
+Active search terms: 20
 API calls made today: 166
 Domains retrieved today: 26
 ```
