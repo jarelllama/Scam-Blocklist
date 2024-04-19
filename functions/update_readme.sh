@@ -264,7 +264,8 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    mawk "/${1},${2}/" "$SOURCE_LOG" | mawk '/,saved$/' | csvcut -c 5 \
+    # grep used here as mawk requires brackets to be escaped
+    grep -F "${1},${2}" "$SOURCE_LOG" | mawk '/,saved$/' | csvcut -c 5 \
         | mawk '{sum += $1} END {print sum}'
 }
 
@@ -272,7 +273,7 @@ sum() {
 # excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 sum_excluded() {
-    mawk "/$1/" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
+    grep -F "$1" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
 
     raw_count="$(csvcut -c 4 rows.tmp | mawk '{sum += $1} END {print sum}')"
     # Return if raw count is 0 to avoid divide by zero error
