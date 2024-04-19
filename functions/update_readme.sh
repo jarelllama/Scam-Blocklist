@@ -57,7 +57,7 @@ $(print_stats)
 
 > [!IMPORTANT]
 All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).<br>
-Any data that is not publicly available (behind account creation/commercial licenses) is never used.
+Any data hidden behind account creation/commercial licenses is never used.
 
 <details>
 <summary>Domains over time (days)</summary>
