@@ -108,7 +108,7 @@ download_toplist() {
 #   $TELEGRAM_BOT_TOKEN: Telegram Bot Token
 #   $1: message body
 send_telegram() {
-    curl -sX POST \
+    curl -sSX POST \
         -H 'Content-Type: application/json' \
         -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
         "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \

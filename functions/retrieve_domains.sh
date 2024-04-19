@@ -334,7 +334,7 @@ download_nrd_feed() {
             "Error occurred while downloading NRD feeds."
 
         # Download the bigger feeds in parallel
-        curl -sH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
+        curl -sSH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
         wait
     } | grep -vF '#' > nrd.tmp
 
@@ -440,7 +440,7 @@ search_google() {
     for start in {1..100..10}; do
     # Indentation intentionally lacking here
     params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
-    page_results="$(curl -s "${url}?${params}")"
+    page_results="$(curl -sS "${url}?${params}")"
 
         (( query_count++ ))
 
@@ -655,8 +655,9 @@ source_aa419() {
     command -v jq &> /dev/null || apt-get install -qq jq
 
     local url='https://api.aa419.org/fakesites'
-    curl -sH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
-        | jq -r '.[].Domain' >> "$results_file"
+    curl -sSH "Auth-API-Id:${AA419_API_ID}" --retry 2 --retry-all-errors \
+        "${url}/0/250?Status=active" \
+        | jq -r '.[].Domain' > "$results_file"
         # Note trailing slash breaks API call
 
     process_source
@@ -672,7 +673,7 @@ source_guntab() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.guntab.com/scam-websites'
-    curl -s "${url}/" \
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -zoE '<table class="datatable-list table">.*</table>' \
         | grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
         # Note results are not sorted by time added
@@ -688,21 +689,19 @@ source_petscams() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    # Parallelization could be used here but it does not seem worth the time
-    # saved compared to Scamadviser's 60 seconds saved by curl -Z.
-
     local url='https://petscams.com'
-    for page in {1..15}; do  # Loop through pages
-        (( page == 1 )) && { curl -s "${url}/" >> results.tmp; continue; }
 
-        # Add '/page' after first run
-        curl -s "${url}/page/${page}/" >> results.tmp
-    done
+    # First page must not have '/page'
+    curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
+    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
 
     # Note [a-z] does not seem to work in these expression
+    # Each page in theory should return 15 domains, but the regex also matches
+    # domains under 'Latest Articles' at the bottom of the page, so the number
+    # of domains returned per page may be >15.
     grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
         results.tmp | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
-        s/-\?[0-9]\?\/">//; s/-/./g' >> "$results_file"
+        s/-\?[0-9]\?\/">//; s/-/./g' > "$results_file"
 
     rm results.tmp
 
@@ -718,7 +717,7 @@ source_scamdirectory() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://scam.directory/category'
-    curl -s "${url}/" \
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | sed 's/-/./g; 101,$d' > "$results_file"
@@ -737,18 +736,12 @@ source_scamadviser() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.scamadviser.com/articles'
-
-    # The Scamadviser source is rather slow so parallelization is used.
-    # -o still prints to stdout here so > is used
     # URL globbing added after https://github.com/T145/black-mirror/issues/179
-    # Note trailing slash is intentionally omitted
-    curl -sZ --retry 2 --retry-all-errors "${url}?p=[1-15]" > results.tmp
-
-    grep -oE '<div class="articles">.*<div>Read more</div>' results.tmp \
+    # Trailing slash is intentionally omitted
+    curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
+        | grep -oE '<h2 class="mb-0">.*</h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-        | sed 's/\[//; s/\]//' >> "$results_file"
-
-    rm results.tmp
+        | sed 's/\[//; s/\]//' > "$results_file"
 
     process_source
 }
@@ -762,15 +755,10 @@ source_stopgunscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://stopgunscams.com'
-    for page in {1..5}; do  # Loop through pages
-        curl -s "${url}/?page=${page}/" >> results.tmp
-    done
-
-    grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' results.tmp \
+    curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-5]/" \
+        | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
         | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-        | sed 's/-/./g' >> "$results_file"
-
-    rm results.tmp
+        | sed 's/-/./g' > "$results_file"
 
     process_source
 }
