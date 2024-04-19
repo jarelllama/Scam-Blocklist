@@ -9,14 +9,14 @@ on:
 
 jobs:
   # A matrix strategy is not used here for better readability in the Actions summary.
-  
+
   shellcheck:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: dev
       - name: Run ShellCheck
         run: bash functions/test_functions.sh shellcheck
 
@@ -26,8 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
-      - name: Test domain retrieval
+          ref: dev
+      - name: Test dodev retrieval
         run: bash functions/test_functions.sh retrieve
 
   test-dead-check:
@@ -36,8 +36,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
-      - name: Test dead domains check
+          ref: dev
+      - name: Test dead dodevs check
         run: bash functions/test_functions.sh dead
 
   test-parked-check:
@@ -46,8 +46,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
-      - name: Test parked domains check
+          ref: dev
+      - name: Test parked dodevs check
         run: bash functions/test_functions.sh parked
 
   test-validation-check:
@@ -56,8 +56,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
-      - name: Test domain validation
+          ref: dev
+      - name: Test dodev validation
         run: bash functions/test_functions.sh validate
 
   test-build:
@@ -66,6 +66,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: dev
       - name: Test build
         run: bash functions/test_functions.sh build
