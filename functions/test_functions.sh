@@ -309,8 +309,8 @@ test_syntax() {
 # TEST: manual addition of domains from repo issue
 test_manual_addition() {
     # INPUT
-    printf "https://manual-addition-test.com/folder/\n" \
-        >> data/pending/domains_manual.tmp
+    # Note URL conversion is done in the workflow now
+    printf "manual-addition-test.com\n" >> data/pending/domains_manual.tmp
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
 
