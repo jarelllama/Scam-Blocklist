@@ -720,7 +720,7 @@ source_scamdirectory() {
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
         | mawk -F '"/|"' 'NR<=100 {gsub(/-/, ".", $2); print $2}' \
-        > "$results_file"  # Keep only first 100 results
+        > "$results_file"  # Keep only newest 100 results
 
     process_source
 }
@@ -758,7 +758,7 @@ source_stopgunscams() {
     curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
         | grep -oE 'class="rank-math-html-sitemap__link">[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
         | mawk -F '>' 'NR<=100 {print $2}' > "$results_file"
-        # Keep only first 100 results
+        # Keep only newest 100 results
 
     process_source
 }
