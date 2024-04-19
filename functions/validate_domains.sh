@@ -52,7 +52,7 @@ validate() {
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
-        subdomains="$(grep "^${subdomain}\." "$RAW")" || continue
+        subdomains="$(mawk "/^${subdomain}\./" "$RAW")" || continue
 
         # Strip subdomains from raw file and raw light file
         sed -i "s/^${subdomain}\.//" "$RAW"
@@ -110,7 +110,7 @@ validate() {
         sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
         # Collate filtered subdomains for dead check
-        grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
+        mawk "/\.${root_domains}$/" subdomains.tmp >> "$SUBDOMAINS"
         sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 
@@ -123,7 +123,7 @@ validate() {
     sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
 
     # Do not notify for subdomains (the notifications got annoying)
-    grep -vF 'subdomain' filter_log.tmp > temp
+    mawk '!/subdomain/' filter_log.tmp > temp
     mv temp filter_log.tmp
 
     [[ ! -s filter_log.tmp ]] && return
