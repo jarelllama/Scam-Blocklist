@@ -264,7 +264,7 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    # grep used here as mawk requires brackets to be escaped
+    # grep used here as mawk has issues with brackets after whitespaces
     grep -F "${1},${2}" "$SOURCE_LOG" | mawk '/,saved$/' | csvcut -c 5 \
         | mawk '{sum += $1} END {print sum}'
 }
