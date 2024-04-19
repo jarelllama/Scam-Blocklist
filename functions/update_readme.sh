@@ -12,7 +12,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, 20246 malicious NRDs were found.
+In the last 30 days, $(sum_nrds) malicious NRDs were found.
 
 <br>
 
@@ -288,10 +288,13 @@ sum_excluded() {
     printf "%s" "$(( excluded_count * 100 / raw_count ))"
 }
 
-# Function 'sum_nrds' is an echo wrapper that returns the number of domains in the
-# blocklist found in the NRD feed.
+# Function 'sum_nrds' is an echo wrapper that returns the number of domains in
+# the blocklist found in the NRD feed.
 sum_nrds() {
- :
+    # Only Hagezi's NRD feed is downloaded to save processing time
+    wget -qO nrd.tmp 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
+    sort -u nrd.tmp -o nrd.tmp
+    comm -12 raw.tmp nrd.tmp | wc -l
 }
 
 # Entry point

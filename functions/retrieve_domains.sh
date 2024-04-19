@@ -602,6 +602,7 @@ source_phishstats() {
     local url='https://phishstats.info/phish_score.csv'
     # Get only URLs with no subdirectories, exclude IP addresses and extract
     # domains
+    # We can omit the -o argument for grep since each entry is on its own line.
     wget -qO - "$url" | awk -F ',' '{print $3}' \
         | grep -E '^"?https?://[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*."?$' \
         | sed 's/"//g' | awk -F '/' '{print $3}' | sort -u -o "$results_file"
@@ -636,9 +637,6 @@ source_manual() {
     [[ ! -f "$results_file" ]] && return
 
     execution_time="$(date +%s)"
-
-    grep -oE '[[:alnum:].-]+\.[[:alnum:]-]{2,}' "$results_file" > results.tmp
-    mv results.tmp "$results_file"
 
     process_source
 }
