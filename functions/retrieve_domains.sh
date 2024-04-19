@@ -655,10 +655,10 @@ source_aa419() {
     command -v jq &> /dev/null || apt-get install -qq jq
 
     local url='https://api.aa419.org/fakesites'
+    # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" --retry 2 --retry-all-errors \
         "${url}/0/250?Status=active" \
         | jq -r '.[].Domain' > "$results_file"
-        # Note trailing slash breaks API call
 
     process_source
 }
@@ -700,8 +700,8 @@ source_petscams() {
     # domains under 'Latest Articles' at the bottom of the page, so the number
     # of domains returned per page may be >15.
     grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
-        results.tmp | sed 's/<a href="https:\/\/petscams.com\/[[:alpha:]-]\+\///;
-        s/-\?[0-9]\?\/">//; s/-/./g' > "$results_file"
+        results.tmp | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
+        | sed 's/-\?[0-9]\?\/">//; s/-/./g' > "$results_file"
 
     rm results.tmp
 
@@ -737,7 +737,7 @@ source_scamadviser() {
 
     local url='https://www.scamadviser.com/articles'
     # URL globbing added after https://github.com/T145/black-mirror/issues/179
-    # Trailing slash is intentionally omitted
+    # Trailing slash intentionally omitted
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<h2 class="mb-0">.*</h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
@@ -755,10 +755,11 @@ source_stopgunscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://stopgunscams.com'
-    curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-5]/" \
-        | grep -oE '<h4 class="-ih"><a href="/[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-        | grep -oE '[[:alnum:].-]+-[[:alnum:]-]{2,}' \
-        | sed 's/-/./g' > "$results_file"
+    # Trailing slash intentionally omitted
+    curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
+        | grep -oE 'class="rank-math-html-sitemap__link">[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
+        | awk -F '>' '{print $2}' | sed '101,$d' > "$results_file"
+        # Keep only first 100 results
 
     process_source
 }
