@@ -104,13 +104,17 @@ validate() {
         # Find root domains (subdomains stripped off) in the filtered raw file
         root_domains="$(comm -12 <(sort root_domains.tmp) "$RAW")"
 
-        # Collate filtered root domains to exclude from dead check
-        printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
-        sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
+        # Check if any filtered root domains are found to avoid appending an
+        # empty line
+        if [[ -n "$root_domains" ]]; then
+            # Collate filtered root domains to exclude from dead check
+            printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
+            sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
-        # Collate filtered subdomains for dead check
-        grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
-        sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
+            # Collate filtered subdomains for dead check
+            grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
+            sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
+        fi
     fi
 
     # Save changes to raw light file

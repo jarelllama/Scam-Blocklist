@@ -59,6 +59,9 @@ source() {
 
     # Declare default values and run each source function
     for SOURCE in "${SOURCES[@]}"; do
+        # Skip commented out sources
+        [[ "$SOURCE" == \#* ]] && continue
+
         local ignore_from_light=false
         local rate_limited=false
         local query_count=''
@@ -246,15 +249,19 @@ build() {
         # Find root domains (subdomains stripped off) in the filtered domains
         root_domains="$(comm -12 <(sort root_domains.tmp) retrieved_domains.tmp)"
 
-        # Collate filtered root domains to exclude from dead check
-        printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
-        sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
+        # Check if any filtered root domains are found to avoid appending an
+        # empty line
+        if [[ -n "$root_domains" ]]; then
+            # Collate filtered root domains to exclude from dead check
+            printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
+            sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
-        # Collate filtered subdomains for dead check
-        # grep is used here as mawk does not interpret variables with multiple
-        # lines well when matching.
-        grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
-        sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
+            # Collate filtered subdomains for dead check
+            # grep is used here as mawk does not interpret variables with
+            # multiple lines well when matching.
+            grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
+            sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
+        fi
     fi
 
     count_before="$(wc -l < "$RAW")"
