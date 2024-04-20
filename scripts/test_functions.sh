@@ -107,7 +107,6 @@ TEST_RETRIEVE_VALIDATE() {
     # Note removal of domains already in raw file is redundant to test
 
     test_punycode_conversion
-    test_url_conversion
     test_subdomain_removal
     test_whitelist_blacklist
     test_whitelisted_tld_removal
@@ -116,6 +115,7 @@ TEST_RETRIEVE_VALIDATE() {
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         test_manual_addition
+        test_url_conversion
         test_known_dead_removal
         test_known_parked_removal
         test_light_build
