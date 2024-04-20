@@ -16,7 +16,7 @@ jobs:
           ref: main
 
       - name: check_parked.sh
-        run: bash functions/check_parked.sh
+        run: bash scripts/check_parked.sh
 
       - name: Push
         run: |

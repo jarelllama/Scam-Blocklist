@@ -235,7 +235,7 @@ You can contribute to this project via the following ways:
 EOF
 }
 
-readonly FUNCTION='bash functions/tools.sh'
+readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'

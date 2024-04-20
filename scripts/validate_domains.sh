@@ -3,7 +3,7 @@
 # Validates the collated domains via a variety of checks and flags entries that
 # require attention.
 
-readonly FUNCTION='bash functions/tools.sh'
+readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'

@@ -2,7 +2,7 @@
 
 # Builds the various formats of blocklists from the raw files.
 
-readonly FUNCTION='bash functions/tools.sh'
+readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 

@@ -16,7 +16,7 @@ jobs:
           ref: main
 
       - name: build_nsfw.sh
-        run: bash functions/build_nsfw.sh
+        run: bash scripts/build_nsfw.sh
 
       - name: Push
         run: |

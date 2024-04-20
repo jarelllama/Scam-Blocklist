@@ -24,7 +24,7 @@ jobs:
           AA419_API_ID: ${{ secrets.AA419_API_ID }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: bash functions/retrieve_domains.sh
+        run: bash scripts/retrieve_domains.sh
 
       - name: Push
         run: |

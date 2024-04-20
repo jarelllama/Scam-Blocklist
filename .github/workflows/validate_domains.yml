@@ -16,7 +16,7 @@ jobs:
           ref: main
 
       - name: validate_domains.sh
-        run: bash functions/validate_domains.sh
+        run: bash scripts/validate_domains.sh
         env:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

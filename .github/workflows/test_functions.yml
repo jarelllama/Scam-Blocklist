@@ -18,7 +18,7 @@ jobs:
         with:
           ref: main
       - name: Run ShellCheck
-        run: bash functions/test_functions.sh shellcheck
+        run: bash scripts/test_functions.sh shellcheck
 
   test-retrieval:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
         with:
           ref: main
       - name: Test domain retrieval
-        run: bash functions/test_functions.sh retrieve
+        run: bash scripts/test_functions.sh retrieve
 
   test-dead-check:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
         with:
           ref: main
       - name: Test dead domains check
-        run: bash functions/test_functions.sh dead
+        run: bash scripts/test_functions.sh dead
 
   test-parked-check:
     runs-on: ubuntu-latest
@@ -48,7 +48,7 @@ jobs:
         with:
           ref: main
       - name: Test parked domains check
-        run: bash functions/test_functions.sh parked
+        run: bash scripts/test_functions.sh parked
 
   test-validation-check:
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
         with:
           ref: main
       - name: Test domain validation
-        run: bash functions/test_functions.sh validate
+        run: bash scripts/test_functions.sh validate
 
   test-build:
     runs-on: ubuntu-latest
@@ -68,4 +68,4 @@ jobs:
         with:
           ref: main
       - name: Test build
-        run: bash functions/test_functions.sh build
+        run: bash scripts/test_functions.sh build

@@ -3,7 +3,7 @@
 # Checks for parked/unparked domains and removes/adds them accordingly.
 # Current calculations put the processing speed at 12-15 entries/second.
 
-readonly FUNCTION='bash functions/tools.sh'
+readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly PARKED_TERMS='config/parked_terms.txt'

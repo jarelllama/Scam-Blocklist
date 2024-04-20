@@ -11,7 +11,7 @@ on:
       - completed
   push:
     paths:
-      - 'functions/update_readme.sh'
+      - 'scripts/update_readme.sh'
 permissions:
   contents: write
 
@@ -27,7 +27,7 @@ jobs:
           ref: main
 
       - name: update_readme.sh
-        run: bash functions/update_readme.sh
+        run: bash scripts/update_readme.sh
         env:
           BLOCKLIST_DESCRIPTION: ${{ vars.BLOCKLIST_DESCRIPTION }}
 

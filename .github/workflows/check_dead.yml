@@ -16,7 +16,7 @@ jobs:
           ref: main
 
       - name: check_dead.sh
-        run: bash functions/check_dead.sh
+        run: bash scripts/check_dead.sh
 
       - name: Push
         run: |

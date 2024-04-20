@@ -3,7 +3,7 @@
 # Retrieves domains from various sources, processes them and outputs a raw file
 # that contains the cumulative domains from all sources over time.
 
-readonly FUNCTION='bash functions/tools.sh'
+readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
@@ -629,8 +629,8 @@ source_manual() {
     source='Manual'
     results_file='data/pending/domains_manual.tmp'
 
-    # Return if results file not found (source is the file itself)
-    [[ ! -f "$results_file" ]] && return
+    # Process only if file is found (source is the file itself)
+    [[ -f "$results_file" ]] && process_source
 }
 
 source_aa419() {

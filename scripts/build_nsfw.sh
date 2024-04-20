@@ -3,7 +3,7 @@
 # Builds the NSFW blocklist. The build process is entirely self-contained in
 # this script.
 
-readonly FUNCTION='bash functions/tools.sh'
+readonly FUNCTION='bash scripts/tools.sh'
 readonly BLOCKLIST='lists/adblock/nsfw.txt'
 
 # Patterns to match for

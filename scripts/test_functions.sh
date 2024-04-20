@@ -251,7 +251,7 @@ TEST_BUILD() {
 
     # Run script and check exit status
     # (function 'run_script' is not needed here)
-    if ! bash functions/build_lists.sh; then
+    if ! bash scripts/build_lists.sh; then
         printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
         error=true
     fi
@@ -593,7 +593,7 @@ run_script() {
     echo "----------------------------------------------------------------------"
 
     # Run script
-    bash "functions/${1}" || errored=true
+    bash "scripts/${1}" || errored=true
 
     echo "----------------------------------------------------------------------"
 
