@@ -219,7 +219,7 @@ You can contribute to this project via the following ways:
 
 * [Sponsorship](https://github.com/sponsors/jarelllama)
 * Star this repository
-* [Code](https://github.com/jarelllama/Scam-Blocklist/blob/main/functions) reviews
+* [Code](https://github.com/jarelllama/Scam-Blocklist/blob/main/scripts) reviews
 * Report domains and false positives
 * Report false negatives in the [whitelist](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
 * Suggest [search terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) for the Google Search source
