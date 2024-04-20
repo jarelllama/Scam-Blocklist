@@ -32,5 +32,5 @@ jobs:
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
           # Note commit -am does not commit the pending directory
-          git diff-index --quiet HEAD || git commit -m "Retrieve domains"
+          git diff-index --quiet HEAD || git commit -m "CI: Retrieve domains"
           git push -q

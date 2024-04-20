@@ -26,5 +26,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "Validate domains"
+          git diff-index --quiet HEAD || git commit -m "CI: Validate domains"
           git push -q
