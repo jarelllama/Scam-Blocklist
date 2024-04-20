@@ -57,10 +57,8 @@ validate() {
         sed -i "s/^${subdomain}\.//" "$RAW"
         sed -i "s/^${subdomain}\.//" "$RAW_LIGHT"
 
-        # Save subdomains to be filtered later
+        # Save subdomains and root domains to be filtered later
         printf "%s\n" "$subdomains" >> subdomains.tmp
-
-        # Save root domains to be filtered later
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
         filter "$subdomains" subdomain --preserve

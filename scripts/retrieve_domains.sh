@@ -150,10 +150,8 @@ process_source() {
         # Strip subdomains down to their root domains
         sed -i "s/^${subdomain}\.//" "$results_file"
 
-        # Save subdomains to be filtered later
+        # Save subdomains and root domains to be filtered later
         printf "%s\n" "$subdomains" >> subdomains.tmp
-
-        # Save root domains to be filtered later
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
         # Log subdomains excluding 'www' (too many of them)
