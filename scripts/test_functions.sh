@@ -106,7 +106,8 @@ TEST_RETRIEVE_VALIDATE() {
 
     # Note removal of domains already in raw file is redundant to test
 
-    test_conversion
+    test_punycode_conversion
+    test_url_conversion
     test_subdomain_removal
     test_whitelist_blacklist
     test_whitelisted_tld_removal
@@ -318,14 +319,22 @@ test_manual_addition() {
     printf ",Manual,,1,1,0,0,0,0,,saved\n" >> out_source_log.txt
 }
 
-# TEST: conversion of Unicode and URLs
-test_conversion() {
+# TEST: conversion to punycode
+test_punycode_conversion() {
     # INPUT
-    printf "https://punycodé-test.cöm/\n" >> input.txt
-    printf "http://punycodé-test.cöm-2/\n" >> input.txt
+    printf "punycodé-test.cöm\n" >> input.txt
     # EXPECTED OUTPUT
     printf "xn--punycod-test-heb.xn--cm-fka\n" >> out_raw.txt
-    printf "xn--punycod-test-heb.xn--cm-2-5qa\n" >> out_raw.txt
+}
+
+# TEST: conversion of URLs to domains
+test_url_conversion() {
+    # INPUT
+    printf "https://conversion-test.com/\n" >> input.txt
+    printf "http://conversion-test-2.com/\n" >> input.txt
+    # EXPECTED OUTPUT
+    printf "conversion-test.com\n" >> out_raw.txt
+    printf "conversion-test-2.com\n" >> out_raw.txt
 }
 
 # TEST: removal of known dead domains
