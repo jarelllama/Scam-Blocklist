@@ -24,14 +24,14 @@ In the last 30 days, more than 12062[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 56646
+Total domains: 56650
 Light version: 4963
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
   126 |        26 |       4% | Google Search
     0 |        29 |       5% | Manual Entries
-  686 |       611 |      13% | PhishStats
+  690 |       611 |      13% | PhishStats
    26 |        20 |       0% | PhishStats (NRDs)
   315 |       328 |       2% | Regex Matching (NRDs)
     5 |         2 |       8% | aa419.org
@@ -41,7 +41,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      66% | scam.directory
     0 |         5 |      37% | scamadviser.com
     0 |         0 |       4% | stopgunscams.com
- 1158 |      1020 |      14% | All sources
+ 1162 |      1020 |      14% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
