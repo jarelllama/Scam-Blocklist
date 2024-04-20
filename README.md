@@ -23,8 +23,8 @@ In the last 30 days, more than 12062[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 56650
-Light version: 4963
+Total domains: 56565
+Light version: 4960
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -196,6 +196,7 @@ Unparked domains added today: 450
 ## Resources / see also
 
 * [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
+* [AdGuard's Hostlist Compiler](https://github.com/AdguardTeam/HostlistCompiler): simple tool that compiles hosts blocklists and removes redundant rules
 * [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
 * [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
