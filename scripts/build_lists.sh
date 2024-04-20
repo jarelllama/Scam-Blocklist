@@ -31,7 +31,7 @@ main() {
 # Function 'build' removes redundant entries from the raw files and compiles
 # them into the various blocklist formats.
 build() {
-    # Compile list. See the list of transformations here:
+    # Compile blocklist. See the list of transformations here:
     # https://github.com/AdguardTeam/HostlistCompiler
     printf "\n"
     hostlist-compiler -i "$source" -o compiled.tmp
