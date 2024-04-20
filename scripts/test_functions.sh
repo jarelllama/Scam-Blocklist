@@ -246,18 +246,11 @@ TEST_BUILD() {
     printf "%s\n" "$domain" >> "$RAW"
     cp "$RAW" "$RAW_LIGHT"
 
-    printf "\e[1m[start] build_lists.sh\e[0m\n"
-
-    # Run script and check exit status
-    # (function 'run_script' is not needed here)
-    if ! bash scripts/build_lists.sh; then
-        printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
-        error=true
-    fi
+    # Run script
+    run_script
 
     test_syntax "||${domain}^" adblock
     test_syntax "[Adblock Plus]" adblock
-    test_syntax "*.${domain}" wildcard_asterisk
     test_syntax "${domain}" wildcard_domains
 
     [[ "$error" == true ]] && exit 1
@@ -576,9 +569,9 @@ test_unparked_check() {
 # Input:
 #   $1: script to execute
 run_script() {
-    # Format expected output files
+    # Format expected output files (ignore not found error)
     for file in out_*; do
-        sort "$file" -o "$file"
+        sort "$file" -o "$file" 2> /dev/null
     done
 
     printf "\e[1m[start] %s\e[0m\n" "$1"
