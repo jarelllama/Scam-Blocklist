@@ -106,7 +106,7 @@ TEST_RETRIEVE_VALIDATE() {
 
     # Note removal of domains already in raw file is redundant to test
 
-    test_punycode_conversion
+    test_conversion
     test_subdomain_removal
     test_whitelist_blacklist
     test_whitelisted_tld_removal
@@ -115,7 +115,6 @@ TEST_RETRIEVE_VALIDATE() {
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         test_manual_addition
-        test_url_conversion
         test_known_dead_removal
         test_known_parked_removal
         test_light_build
@@ -169,7 +168,6 @@ TEST_RETRIEVE_VALIDATE() {
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
 # domains respectively.
 TEST_DEAD_CHECK() {
-    test_dead_subdomain_check
     test_dead_check
     test_alive_check
 
@@ -320,22 +318,14 @@ test_manual_addition() {
     printf ",Manual,,1,1,0,0,0,0,,saved\n" >> out_source_log.txt
 }
 
-# TEST: conversion to punycode
-test_punycode_conversion() {
+# TEST: conversion of Unicode and URLs
+test_conversion() {
     # INPUT
-    printf "punycodé-test.cöm\n" >> input.txt
+    printf "https://punycodé-test.cöm/\n" >> input.txt
+    printf "http://punycodé-test.cöm-2/\n" >> input.txt
     # EXPECTED OUTPUT
     printf "xn--punycod-test-heb.xn--cm-fka\n" >> out_raw.txt
-}
-
-# TEST: conversion of URLs to domains
-test_url_conversion() {
-    # INPUT
-    printf "https://conversion-test.com/\n" >> input.txt
-    printf "http://conversion-test-2.com/\n" >> input.txt
-    # EXPECTED OUTPUT
-    printf "conversion-test.com\n" >> out_raw.txt
-    printf "conversion-test-2.com\n" >> out_raw.txt
+    printf "xn--punycod-test-heb.xn--cm-2-5qa\n" >> out_raw.txt
 }
 
 # TEST: removal of known dead domains
@@ -511,29 +501,21 @@ test_light_build() {
 
 ### DEAD CHECK TESTS
 
-# TEST: removal of dead subdomains
-test_dead_subdomain_check() {
-    # INPUT
-    printf "584308-dead-subdomain-test.com\n" >> "$RAW"
-    printf "584308-dead-subdomain-test.com\n" >> "$ROOT_DOMAINS"
-    printf "www.584308-dead-subdomain-test.com\n" >> "$SUBDOMAINS"
-    # EXPECTED OUTPUT
-    printf "www.584308-dead-subdomain-test.com\n" >> out_dead.txt
-    printf "dead,584308-dead-subdomain-test.com,raw\n" >> out_log.txt
-    # Both files should be empty (all dead)
-    : > out_subdomains.txt
-    : > out_root_domains.txt
-}
-
 # TEST: removal of dead domains
 test_dead_check() {
     # INPUT
     printf "apple.com\n" >> "$RAW"
     printf "49532dead-domain-test.com\n" >> "$RAW"
+    printf "49532dead-domain-test.com\n" >> "$ROOT_DOMAINS"
+    printf "www.49532dead-domain-test.com\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
-    printf "49532dead-domain-test.com\n" >> out_dead.txt
+    # Subdomains should be kept to be processed by the validation check
+    printf "www.49532dead-domain-test.com\n" >> out_dead.txt
     printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt
+    # Both files should be empty (all dead)
+    : > out_subdomains.txt
+    : > out_root_domains.txt
 }
 
 # TEST: addition of resurrected domains
@@ -548,7 +530,7 @@ test_alive_check() {
 
 ### PARKED CHECK TESTS
 
-# TEST: removal of parked domains (with subdomain)
+# TEST: removal of parked domains
 test_parked_check() {
     # INPUT
     printf "apple.com\n" >> "$RAW"
@@ -557,6 +539,7 @@ test_parked_check() {
     printf "www.tradexchange.online\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
+    # Subdomains should be kept to be processed by the validation check
     printf "www.tradexchange.online\n" >> out_parked.txt
     printf "parked,tradexchange.online,raw\n" >> out_log.txt
     # Both files should be empty (all dead)
