@@ -63,7 +63,7 @@ ${1} Description: ${BLOCKLIST_DESCRIPTION}
 ${1} Homepage: https://github.com/jarelllama/Scam-Blocklist
 ${1} License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
 ${1} Version: $(date -u +"%m.%d.%H%M%S.%Y")
-${1} Expires: 1 day
+${1} Expires: 12 hours
 ${1} Last modified: $(date -u)
 ${1} Syntax: ${3}
 ${1} Number of entries: $(wc -l < compiled.tmp)
