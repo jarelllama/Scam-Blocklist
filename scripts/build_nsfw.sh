@@ -46,8 +46,8 @@ readonly -a WHITELIST=(
 # raw file, formats it, and removes dead domains.
 build() {
     # Format raw file
-    grep '||' "$BLOCKLIST" > raw.tmp
-    sed -i 's/||//; s/\^//' raw.tmp
+    grep -F '||' "$BLOCKLIST" > raw.tmp
+    sed -i 's/[\|^]//g' raw.tmp
 
     # Remove already processed domains
     comm -23 toplist.tmp raw.tmp > temp
@@ -66,11 +66,16 @@ build() {
         sed -i "/$white/d" raw.tmp
     done
 
-    # Format to Adblock Plus syntax
-    sed -i 's/.*/||&^/' raw.tmp
+    # Compile list. See the list of transformations here:
+    # https://github.com/AdguardTeam/HostlistCompiler
+    hostlist-compiler -i raw.tmp -o compiled.tmp
+
+    # Get entries, ignoring comments
+    grep -F '||' compiled.tmp > temp
+    mv temp compiled.tmp
 
     # Remove dead domains
-    dead-domains-linter -a -i raw.tmp
+    dead-domains-linter -a -i compiled.tmp
 }
 
 # Function 'deploy' builds the blocklist in Adblock Plus syntax.
@@ -85,10 +90,10 @@ deploy() {
 ! Expires: 1 day
 ! Last modified: $(date -u)
 ! Syntax: Adblock Plus
-! Number of entries: $(wc -l < raw.tmp)
+! Number of entries: $(wc -l < compiled.tmp)
 !
 EOF
-    cat raw.tmp >> "$BLOCKLIST"
+    cat compiled.tmp >> "$BLOCKLIST"
 }
 
 # Entry point
@@ -98,6 +103,11 @@ trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 # Install AdGuard's Dead Domains Linter
 if ! command -v dead-domains-linter &> /dev/null; then
     npm install -g @adguard/dead-domains-linter > /dev/null
+fi
+
+# Install AdGuard's Hostlist Compiler
+if ! command -v hostlist-compiler &> /dev/null; then
+    npm install -g @adguard/hostlist-compiler > /dev/null
 fi
 
 # Download the Tranco toplist

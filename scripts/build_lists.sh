@@ -5,95 +5,73 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly ADBLOCK='lists/adblock'
+readonly DOMAINS='lists/wildcard_domains'
 
-build() {
-    # Set the default comment character to '#'
-    local comment=${comment:-#}
-
-    mkdir -p "lists/${directory}"
-
+main() {
     # Loop through the full and light blocklist versions
-    for version in '' 'LIGHT VERSION'; do
-
-        if [[ "$version" == 'LIGHT VERSION' ]]; then
-            list_name='scams_light.txt'
-            source_file="$RAW_LIGHT"
+    for VERSION in '' 'LIGHT VERSION'; do
+        if [[ "$VERSION" == '' ]]; then
+            list='scams.txt'
+            source="$RAW"
         else
-            list_name='scams.txt'
-            source_file="$RAW"
+            list='scams_light.txt'
+            source="$RAW_LIGHT"
         fi
 
-        blocklist_path="lists/${directory}/${list_name}"
-
-        : > "$blocklist_path"
-
-        # Special case for Adblock Plus syntax
-        if [[ "$syntax" == 'Adblock Plus' ]]; then
-            printf "[Adblock Plus]\n" >> "$blocklist_path"
-        fi
-
-        append_header
-
-        # Append formatted domains onto blocklist
-        mawk -v before="$before" -v after="$after" \
-            '{print before $0 after}' "$source_file" >> "$blocklist_path"
+        build
     done
 }
 
+build() {
+    # Install AdGuard's Hostlist Compiler
+    if ! command -v hostlist-compiler &> /dev/null; then
+        npm install -g @adguard/hostlist-compiler > /dev/null
+    fi
+
+    # Compile list. See the list of transformations here:
+    # https://github.com/AdguardTeam/HostlistCompiler
+    hostlist-compiler -i "$source" -o compiled.tmp
+
+    # Get entries, ignoring comments
+    grep -F '||' compiled.tmp > temp
+    mv temp compiled.tmp
+
+    # Build Adblock Plus format
+    printf "[Adblock Plus]\n" > "${ADBLOCK}/${list}"
+    append_header '!' "$ADBLOCK" "Adblock Plus"
+    cat compiled.tmp >> "${ADBLOCK}/${list}"
+
+    # Build Wildcard Domains format
+    : > "${DOMAINS}/${list}"
+    append_header '#' "$DOMAINS" "Wildcard domains"
+    sed 's/[\|^]//g' compiled.tmp >> "${DOMAINS}/${list}"
+}
+
+# Function 'append_header' appends the header onto the blocklist.
+# Input:
+#   $1: comment character to use
+#   $2: directory of the blocklist to append to
+#   $3: syntax of the blocklist
 append_header() {
-    cat << EOF >> "$blocklist_path"
-${comment} Title: Jarelllama's Scam Blocklist ${version}
-${comment} Description: ${BLOCKLIST_DESCRIPTION}
-${comment} Homepage: https://github.com/jarelllama/Scam-Blocklist
-${comment} License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-${comment} Version: $(date -u +"%m.%d.%H%M%S.%Y")
-${comment} Expires: 1 day
-${comment} Last modified: $(date -u)
-${comment} Syntax: ${syntax}
-${comment} Number of entries: $(wc -l < "$source_file")
-${comment}
+    cat << EOF >> "$2/${list}"
+${1} Title: Jarelllama's Scam Blocklist ${VERSION}
+${1} Description: ${BLOCKLIST_DESCRIPTION}
+${1} Homepage: https://github.com/jarelllama/Scam-Blocklist
+${1} License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
+${1} Version: $(date -u +"%m.%d.%H%M%S.%Y")
+${1} Expires: 1 day
+${1} Last modified: $(date -u)
+${1} Syntax: ${3}
+${1} Number of entries: $(wc -l < compiled.tmp)
+${1}
 EOF
-}
-
-# The 'build_<format>' functions are to specify the syntax of the various list
-# formats to be referenced by the 'build' function.
-#   $syntax:    name of list syntax
-#   $directory: directory to create list in
-#   $comment:   character used for comments (default is '#')
-#   $before:    characters to append before each domain (default is none)
-#   $after:     characters to append after each domain (default is none)
-
-build_adblock() {
-    local syntax='Adblock Plus'
-    local directory='adblock'
-    local comment='!'
-    local before='||'
-    local after='^'
-    build
-}
-
-build_wildcard_asterisk() {
-    local syntax='Wildcard Asterisk'
-    local directory='wildcard_asterisk'
-    local comment=''
-    local before='*.'
-    local after=''
-    build
-}
-
-build_wildcard_domains() {
-    local syntax='Wildcard Domains'
-    local directory='wildcard_domains'
-    local comment=''
-    local before=''
-    local after=''
-    build
 }
 
 # Entry point
 
+trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
+
 $FUNCTION --format-all
 
-build_adblock
-build_wildcard_asterisk
-build_wildcard_domains
+main

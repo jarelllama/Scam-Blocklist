@@ -247,7 +247,7 @@ TEST_BUILD() {
     cp "$RAW" "$RAW_LIGHT"
 
     # Run script
-    run_script
+    run_script build_lists.sh
 
     test_syntax "||${domain}^" adblock
     test_syntax "[Adblock Plus]" adblock
