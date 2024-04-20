@@ -29,8 +29,8 @@ In the last 30 days, more than $(sum_nrds)[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 \`\`\` text
-Total domains: $(wc -l < "$RAW")
-Light version: $(wc -l < "$RAW_LIGHT")
+Total domains: $(grep -cF '||' lists/adblock/scams.txt)
+Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -202,6 +202,7 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 ## Resources / see also
 
 * [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
+* [AdGuard's Hostlist Compiler](https://github.com/AdguardTeam/HostlistCompiler): simple tool that compiles hosts blocklists and removes redundant rules
 * [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
 * [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
@@ -236,7 +237,6 @@ EOF
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
-readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
