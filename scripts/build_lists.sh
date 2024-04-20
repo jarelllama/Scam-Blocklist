@@ -9,6 +9,11 @@ readonly ADBLOCK='lists/adblock'
 readonly DOMAINS='lists/wildcard_domains'
 
 main() {
+    # Install AdGuard's Hostlist Compiler
+    if ! command -v hostlist-compiler &> /dev/null; then
+        npm install -g @adguard/hostlist-compiler > /dev/null
+    fi
+
     # Loop through the full and light blocklist versions
     for VERSION in '' 'LIGHT VERSION'; do
         if [[ "$VERSION" == '' ]]; then
@@ -24,11 +29,6 @@ main() {
 }
 
 build() {
-    # Install AdGuard's Hostlist Compiler
-    if ! command -v hostlist-compiler &> /dev/null; then
-        npm install -g @adguard/hostlist-compiler > /dev/null
-    fi
-
     # Compile list. See the list of transformations here:
     # https://github.com/AdguardTeam/HostlistCompiler
     hostlist-compiler -i "$source" -o compiled.tmp
