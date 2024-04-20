@@ -89,7 +89,7 @@ deploy() {
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist#nsfw-blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
 ! Version: $(date -u +"%m.%d.%H%M%S.%Y")
-! Expires: 1 day
+! Expires: 12 hours
 ! Last modified: $(date -u)
 ! Syntax: Adblock Plus
 ! Number of entries: $(wc -l < compiled.tmp)
