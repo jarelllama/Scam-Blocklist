@@ -190,11 +190,11 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 
 ## As seen in
 
-* [T145's Black Mirror](https://github.com/T145/black-mirror)
 * [Collinbarrett's FilterLists directory](https://filterlists.com/)
 * [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
 * [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
 * [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
+* [T145's Black Mirror](https://github.com/T145/black-mirror)
 * [The oisd blocklist](https://oisd.nl/)
 * [dnswarden privacy-focused DNS](https://dnswarden.com/)
 * [file-git.trli.club](https://file-git.trli.club/)
