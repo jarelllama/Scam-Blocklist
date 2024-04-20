@@ -44,7 +44,7 @@ build() {
 
     # Build Wildcard Domains format
     : > "${DOMAINS}/${list}"
-    append_header '#' "$DOMAINS" "Wildcard domains"
+    append_header '#' "$DOMAINS" "Wildcard Domains"
     sed 's/[\|^]//g' compiled.tmp >> "${DOMAINS}/${list}"
 }
 
