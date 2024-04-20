@@ -43,7 +43,7 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: Process domains from #${{ github.event.issue.number }}"
+          git diff-index --quiet HEAD || git commit -m "CI: process domains from #${{ github.event.issue.number }}"
           git push -q
 
   build:
