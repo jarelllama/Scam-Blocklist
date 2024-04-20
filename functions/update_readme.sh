@@ -190,6 +190,7 @@ Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
 
 ## As seen in
 
+* [T145's Black Mirror](https://github.com/T145/black-mirror)
 * [Collinbarrett's FilterLists directory](https://filterlists.com/)
 * [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
 * [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
