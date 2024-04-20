@@ -15,6 +15,8 @@ readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly ADBLOCK='lists/adblock'
+readonly DOMAINS='lists/wildcard_domains'
 readonly DOMAIN_LOG='config/domain_log.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
@@ -259,11 +261,17 @@ TEST_BUILD() {
     # Run script
     run_script build_lists.sh
 
+    # Remove the header from the blocklists
+    for file in lists/*/*.txt; do
+        mawk '!/#|!/' "$file" > temp
+        mv temp "$file"
+    done
+
     ### Check and verify outputs
-    check_output lists/adblock/scams.txt out_adblock.txt
-    check_output lists/wildcard_domains/scams.txt out_domains.txt
-    check_output lists/adblock/scams_light.txt out_adblock_light.txt
-    check_output lists/wildcard_domains/scams_light.txt out_domains_light.txt
+    check_output "${ADBLOCK}/scams.txt" out_adblock.txt Adblock
+    check_output "${DOMAINS}/scams.txt" out_domains.txt "Wildcard Domains"
+    check_output "${ADBLOCK}/scams_light.txt" out_adblock_light.txt "Adblock light"
+    check_output "${DOMAINS}/scams_light.txt" out_domains_light.txt "Wildcard Domains light"
 
     [[ "$error" == true ]] && exit 1
 
