@@ -31,6 +31,7 @@ main() {
 build() {
     # Compile list. See the list of transformations here:
     # https://github.com/AdguardTeam/HostlistCompiler
+    printf "\n"
     hostlist-compiler -i "$source" -o compiled.tmp
 
     # Get entries, ignoring comments

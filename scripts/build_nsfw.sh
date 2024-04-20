@@ -68,14 +68,16 @@ build() {
 
     # Compile list. See the list of transformations here:
     # https://github.com/AdguardTeam/HostlistCompiler
+    printf "\n"
     hostlist-compiler -i raw.tmp -o compiled.tmp
+
+    # Remove dead domains
+    printf "\n"
+    dead-domains-linter -a -i compiled.tmp
 
     # Get entries, ignoring comments
     grep -F '||' compiled.tmp > temp
     mv temp compiled.tmp
-
-    # Remove dead domains
-    dead-domains-linter -a -i compiled.tmp
 }
 
 # Function 'deploy' builds the blocklist in Adblock Plus syntax.
