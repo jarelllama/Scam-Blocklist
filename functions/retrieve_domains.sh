@@ -571,7 +571,7 @@ source_regex() {
         regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
 
         # Get matches in NRD feed
-        results="$(grep -E -- "$regex" nrd.tmp | sort -u)"
+        results="$(mawk "/$regex/" nrd.tmp | sort -u)"
 
         # Collate results
         printf "%s\n" "$results" >> "$results_file"
