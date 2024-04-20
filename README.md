@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 12062[^1] malicious NRDs were found.
+In the last 30 days, more than 12063[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -23,13 +23,13 @@ In the last 30 days, more than 12062[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 56566
-Light version: 4961
+Total domains: 56569
+Light version: 4964
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
   126 |        26 |       4% | Google Search
-    1 |        29 |       5% | Manual Entries
+    4 |        29 |       5% | Manual Entries
   690 |       611 |      13% | PhishStats
    26 |        20 |       0% | PhishStats (NRDs)
   315 |       328 |       2% | Regex Matching (NRDs)
@@ -40,7 +40,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      66% | scam.directory
     0 |         5 |      37% | scamadviser.com
     0 |         0 |       4% | stopgunscams.com
- 1163 |      1020 |      14% | All sources
+ 1166 |      1020 |      14% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -110,7 +110,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 21
+Active search terms: 22
 API calls made today: 176
 Domains retrieved today: 126
 ```
