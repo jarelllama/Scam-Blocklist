@@ -20,6 +20,21 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
+readonly -a SOURCES=(
+    source_manual
+    source_aa419
+    source_dnstwist
+    source_guntab
+    source_petscams
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
+)
+
 # Function 'source' calls on the respective functions of each source to
 # retrieve results. The results are then passed to the 'process_source'
 # function for further processing.
@@ -42,18 +57,19 @@ source() {
         & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
     wait
 
-    source_manual
-    source_aa419
-    source_dnstwist
-    source_guntab
-    source_petscams
-    source_phishstats
-    source_phishstats_nrd
-    source_regex
-    source_scamdirectory
-    source_scamadviser
-    source_stopgunscams
-    source_google_search
+    # Declare default values and run each source function
+    for SOURCE in "${SOURCES[@]}"; do
+        local ignore_from_light=false
+        local rate_limited=false
+        local query_count=''
+        local execution_time
+
+        execution_time="$(date +%s)"
+
+        $SOURCE
+
+        [[ "$USE_EXISTING" != true ]] && process_source
+    done
 }
 
 # Function 'filter' logs the given entries and removes them from the results
@@ -105,7 +121,7 @@ process_source() {
     sed -i 's/https\?://; s/\///g' "$results_file"
 
     # Convert Unicode to Punycode
-    # '--no-tld' in an attempt to fix 'idn: tld_check_4z: Missing input' error
+    # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
     idn --no-tld < "$results_file" > results.tmp
     mv results.tmp "$results_file"
 
@@ -185,8 +201,8 @@ process_source() {
 
     rm "$results_file"
 
-    # Save entries that are pending manual review for rerun
     if [[ -f "${results_file}.tmp" ]]; then
+        # Save entries that are pending manual review for rerun
         mv "${results_file}.tmp" "$results_file"
         $FUNCTION --format "$results_file"
     fi
@@ -235,7 +251,9 @@ build() {
         sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
         # Collate filtered subdomains for dead check
-        mawk "/\.${root_domains}$/" subdomains.tmp >> "$SUBDOMAINS"
+        # grep is used here as mawk does not interpret variables with multiple
+        # lines well when matching.
+        grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
         sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 
@@ -276,6 +294,7 @@ log_source() {
         item="\"${search_term:0:100}...\""
     fi
 
+    # Check for errors to log
     if [[ "$rate_limited" == true ]]; then
         status='eror: rate_limited'
     elif (( raw_count == 0 )); then
@@ -377,18 +396,13 @@ cleanup() {
 # Note the output results can be in URL form without subfolders.
 
 source_google_search() {
-    local source='Google Search'
-    local results_file
-    local search_term
-    local execution_time
+    source='Google Search'
 
     if [[ "$USE_EXISTING" == true ]]; then
         # Use existing retrieved results
         # Loop through the results from each search term
         for results_file in data/pending/domains_google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
-
-            execution_time="$(date +%s)"
 
             # Remove header from file name
             search_term=${results_file#data/pending/domains_google_search_}
@@ -404,7 +418,6 @@ source_google_search() {
     local url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
-    local rate_limited=false
 
     # Install csvkit
     command -v csvgrep &> /dev/null || pip install -q csvkit
@@ -429,12 +442,10 @@ source_google_search() {
 }
 
 search_google() {
-    local search_term="${1//\"/}"  # Remove quotes before encoding
+    search_term="${1//\"/}"  # Remove quotes before encoding
     encoded_search_term="$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
-    local results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
-    local query_count=0
-    local execution_time
-    execution_time="$(date +%s)"
+    results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
+    query_count=0
 
     touch "$results_file"  # Create results file to ensure proper logging
 
@@ -450,7 +461,7 @@ search_google() {
         if [[ "$page_results" == *rateLimitExceeded* ]]; then
             # Stop all searches if second key is also rate limited
             if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
-                readonly rate_limited=true
+                rate_limited=true
                 break
             fi
 
@@ -475,15 +486,11 @@ search_google() {
         # Stop search term if no more pages are required
         (( $(wc -w <<< "$page_domains") < 10 )) && break
     done
-
-    process_source
 }
 
 source_dnstwist() {
-    local source='dnstwist'
-    local results_file="data/pending/domains_${source}.tmp"
-    local execution_time
-    execution_time="$(date +%s)"
+    source='dnstwist'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -537,16 +544,12 @@ source_dnstwist() {
         # Reset results file for the next target domain
         rm results.tmp
     done <<< "$targets"
-
-    process_source
 }
 
 source_regex() {
-    local source='Regex'
-    local ignore_from_light=true
-    local results_file='data/pending/domains_regex.tmp'
-    local execution_time
-    execution_time="$(date +%s)"
+    source='Regex'
+    ignore_from_light=true
+    results_file='data/pending/domains_regex.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -588,16 +591,12 @@ source_regex() {
         sed -i "/${domain}/s/${row}/${pattern},${counts_run},${count},${runs}/" \
             "$PHISHING_TARGETS"
     done <<< "$targets"
-
-    process_source
 }
 
 source_phishstats() {
-    local source='PhishStats'
-    local ignore_from_light=true
-    local results_file='data/pending/domains_phishstats.tmp'
-    local execution_time
-    execution_time="$(date +%s)"
+    source='PhishStats'
+    ignore_from_light=true
+    results_file='data/pending/domains_phishstats.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -613,43 +612,30 @@ source_phishstats() {
 
     # Get matching NRDs for light version (Unicode ignored)
     comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
-
-    process_source
 }
 
 source_phishstats_nrd() {
     # For the light version
     # Only includes domains found in the NRD feed
-    local source='PhishStats (NRDs)'
-    local results_file='data/pending/domains_phishstats_nrd.tmp'
-    local execution_time
-    execution_time="$(date +%s)"
+    source='PhishStats (NRDs)'
+    results_file='data/pending/domains_phishstats_nrd.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     mv phishstats_nrds.tmp "$results_file"
-
-    process_source
 }
 
 source_manual() {
-    local source='Manual'
-    local results_file='data/pending/domains_manual.tmp'
-    local execution_time
+    source='Manual'
+    results_file='data/pending/domains_manual.tmp'
 
     # Return if results file not found (source is the file itself)
     [[ ! -f "$results_file" ]] && return
-
-    execution_time="$(date +%s)"
-
-    process_source
 }
 
 source_aa419() {
-    local source='aa419.org'
-    local results_file="data/pending/domains_${source}.tmp"
-    local execution_time
-    execution_time="$(date +%s)"
+    source='aa419.org'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -660,16 +646,12 @@ source_aa419() {
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
-
-    process_source
 }
 
 source_guntab() {
-    local source='guntab.com'
-    local ignore_from_light=true
-    local results_file="data/pending/domains_${source}.tmp"
-    local execution_time
-    execution_time="$(date +%s)"
+    source='guntab.com'
+    ignore_from_light=true
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -678,15 +660,11 @@ source_guntab() {
         | grep -zoE '<table class="datatable-list table">.*</table>' \
         | grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
         # Note results are not sorted by time added
-
-    process_source
 }
 
 source_petscams() {
-    local source='petscams.com'
-    local results_file="data/pending/domains_${source}.tmp"
-    local execution_time
-    execution_time="$(date +%s)"
+    source='petscams.com'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -704,15 +682,11 @@ source_petscams() {
         gsub(/-/, ".", $5); print $5}' > "$results_file"
 
     rm results.tmp
-
-    process_source
 }
 
 source_scamdirectory() {
-    local source='scam.directory'
-    local results_file="data/pending/domains_${source}.tmp"
-    local execution_time
-    execution_time="$(date +%s)"
+    source='scam.directory'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -721,16 +695,11 @@ source_scamdirectory() {
         | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
         | mawk -F '"/|"' 'NR<=100 {gsub(/-/, ".", $2); print $2}' \
         > "$results_file"  # Keep only newest 100 results
-
-    process_source
 }
 
 source_scamadviser() {
-    local source='scamadviser.com'
-    local results_file="data/pending/domains_${source}.tmp"
-    local page_results
-    local execution_time
-    execution_time="$(date +%s)"
+    source='scamadviser.com'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -741,15 +710,11 @@ source_scamadviser() {
         | grep -oE '<h2 class="mb-0">.*</h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
         | sed 's/\[//; s/\]//' > "$results_file"
-
-    process_source
 }
 
 source_stopgunscams() {
-    local source='stopgunscams.com'
-    local results_file="data/pending/domains_${source}.tmp"
-    local execution_time
-    execution_time="$(date +%s)"
+    source='stopgunscams.com'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -759,8 +724,6 @@ source_stopgunscams() {
         | grep -oE 'class="rank-math-html-sitemap__link">[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
         | mawk -F '>' 'NR<=100 {print $2}' > "$results_file"
         # Keep only newest 100 results
-
-    process_source
 }
 
 # Entry point
