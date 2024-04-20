@@ -6,55 +6,55 @@
 readonly FUNCTION='bash functions/tools.sh'
 readonly BLOCKLIST='lists/adblock/nsfw.txt'
 
+# Patterns to match for
+readonly -a TERMS=(
+    porn
+    xxx
+    spankbang
+    xhamster
+    xvideos
+    onlyfans
+    fansly
+    hentai
+    redtube
+    internetchicks
+    masterfap
+    thothub
+    onlyleaks
+    thumbzilla
+    fapello
+    thenudebay
+    gonewild
+    thothd
+    camwhores
+    brazzers
+    hookup
+    ^sex
+    \\.sex$
+    escorts
+    rule34
+)
+
+# Whitelisted domains
+readonly -a WHITELIST=(
+    batteryhookup.com
+    sexpistolsofficial.com
+    1337xxx.to
+)
+
 # Function 'build' retrieves domains from the Tranco toplist, adds them to the
 # raw file, formats it, and removes dead domains.
 build() {
-    # Patterns to match for
-    terms=(
-        porn
-        xxx
-        spankbang
-        xhamster
-        xvideos
-        onlyfans
-        fansly
-        hentai
-        redtube
-        internetchicks
-        masterfap
-        thothub
-        onlyleaks
-        thumbzilla
-        fapello
-        thenudebay
-        gonewild
-        thothd
-        camwhores
-        brazzers
-        hookup
-        ^sex
-        \\.sex$
-        escorts
-        rule34
-    )
-
-    # Whitelisted domains
-    whitelist=(
-        batteryhookup.com
-        sexpistolsofficial.com
-        1337xxx.to
-    )
-
     # Format raw file
-    mawk '/||/' "$BLOCKLIST" > raw.tmp
+    grep '||' "$BLOCKLIST" > raw.tmp
     sed -i 's/||//; s/\^//' raw.tmp
 
     # Remove already processed domains
     comm -23 toplist.tmp raw.tmp > temp
     mv temp toplist.tmp
 
-    # Get new domains from toplist
-    for term in "${terms[@]}"; do
+    # Get matching domains in toplist
+    for term in "${TERMS[@]}"; do
         mawk "/$term/" toplist.tmp >> domains.tmp
     done
 
@@ -62,7 +62,7 @@ build() {
     sort -u domains.tmp raw.tmp -o raw.tmp
 
     # Remove whitelisted domains
-    for white in "${whitelist[@]}"; do
+    for white in "${WHITELIST[@]}"; do
         sed -i "/$white/d" raw.tmp
     done
 

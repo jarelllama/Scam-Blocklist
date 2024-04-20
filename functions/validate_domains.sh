@@ -44,8 +44,7 @@ filter() {
 validate() {
     # Convert Unicode to Punycode in raw file and raw light file
     for file in "$RAW" "$RAW_LIGHT"; do
-        # '--no-tld' in an attempt to fix
-        # 'idn: tld_check_4z: Missing input' error
+        # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
         idn --no-tld < "$file" | sort > temp
         mv temp "$file"
     done
@@ -110,7 +109,7 @@ validate() {
         sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
 
         # Collate filtered subdomains for dead check
-        mawk "/\.${root_domains}$/" subdomains.tmp >> "$SUBDOMAINS"
+        grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
         sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 

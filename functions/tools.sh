@@ -62,8 +62,7 @@ log_domains() {
     # Return if no domains were passed
     [[ -z "$domains" ]] && return
 
-    timestamp="$4"
-    timestamp="${timestamp:-$(date -u +"%H:%M:%S %d-%m-%y")}"
+    timestamp="${4:-$(date -u +"%H:%M:%S %d-%m-%y")}"
 
     printf "%s\n" "$domains" \
         | mawk -v event="$2" -v source="$3" -v time="$timestamp" \
