@@ -242,53 +242,32 @@ TEST_PARKED_CHECK() {
 # Function 'TEST_BUILD' verifies that the various formats of blocklist are
 # correctly built with the right syntax.
 TEST_BUILD() {
-    domain='build-test.com'
-    printf "%s\n" "$domain" >> "$RAW"
+    # INPUT
+    printf "build-test.com\n" >> "$RAW"
+    printf "redundant.build-test.com\n" >> "$RAW"
+
+    # EXPECTED OUTPUT
+    printf "[Adblock Plus]\n" >> out_adblock.txt
+    printf "||build-test.com^\n" >> out_adblock.txt
+    printf "build-test.com\n" >> out_domains.txt
+    cp out_adblock.txt out_adblock_light.txt
+    cp out_domains.txt out_domains_light.txt
+
+    # Prepare sample raw light file
     cp "$RAW" "$RAW_LIGHT"
 
     # Run script
     run_script build_lists.sh
 
-    test_syntax "||${domain}^" adblock
-    test_syntax "[Adblock Plus]" adblock
-    test_syntax "${domain}" wildcard_domains
+    ### Check and verify outputs
+    check_output lists/adblock/scams.txt out_adblock.txt
+    check_output lists/wildcard_domains/scams.txt out_domains.txt
+    check_output lists/adblock/scams_light.txt out_adblock_light.txt
+    check_output lists/wildcard_domains/scams_light.txt out_domains_light.txt
 
     [[ "$error" == true ]] && exit 1
 
     printf "\e[1m[success] Test completed. No errors found\e[0m\n"
-}
-
-# Function 'test_syntax' verifies the syntax of the list format.
-#   $1: syntax to check for
-#   $2: name and directory of format
-test_syntax() {
-    local syntax="$1"
-    local name="$2"
-
-    # Check regular version
-    if ! grep -qxF "$syntax" "lists/${name}/scams.txt"; then
-        printf "\e[1m[warn] %s format is not as expected:\e[0m\n" "$name"
-
-        # Check if rule syntax is wrong or element is missing
-        if grep -qF "$domain" <<< "$syntax"; then
-            mawk "/$domain/" "lists/${name}/scams.txt"
-        else
-            printf "Missing '%s'\n" "$syntax"
-        fi
-
-        error=true
-    fi
-
-    # Check light version
-    if ! grep -qxF "$syntax" "lists/${name}/scams_light.txt"; then
-        printf "\e[1m[warn] %s light format is not as expected:\e[0m\n" "$name"
-        if grep -qF "$domain" <<< "$syntax"; then
-            mawk "/$domain/" "lists/${name}/scams_light.txt"
-        else
-            printf "Missing '%s'\n" "$syntax"
-        fi
-        error=true
-    fi
 }
 
 # The 'test_<process>' functions are to test individual processes within
