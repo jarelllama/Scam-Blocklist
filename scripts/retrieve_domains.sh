@@ -667,7 +667,7 @@ source_emerging_threats() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://raw.githubusercontent.com/jarelllama/emerging-threats-pihole/main/data/phishing.txt'
+    local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/data/phishing.txt'
     curl -sSL --retry 2 --retry-all-errors "$url" -o "$results_file"
 }
 
