@@ -205,6 +205,7 @@ Unparked domains added today: 448
 * [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 * [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
 * [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
+* [VirusTotal](https://www.virustotal.com/): analyse suspicious files, domains, IPs and URLs to detect malware
 * [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
 * [who.is](https://who.is/): WHOIS and DNS lookup tool
 
