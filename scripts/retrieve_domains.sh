@@ -72,7 +72,13 @@ source() {
 
         $SOURCE
 
-        [[ "$USE_EXISTING" != true ]] && process_source
+        [[ "$USE_EXISTING" == true ]] && continue
+
+        # The Google Search source is processed by individual search terms, not
+        # as one source
+        [[ "$source" == 'Google Search' ]] && continue
+
+        process_source
     done
 }
 
@@ -491,6 +497,8 @@ search_google() {
         # Stop search term if no more pages are required
         (( $(wc -w <<< "$page_domains") < 10 )) && break
     done
+
+    process_source
 }
 
 source_dnstwist() {
