@@ -28,6 +28,7 @@ Light version: 4966
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
+    - |         0 |       0% | Emerging Threats
     - |       126 |       4% | Google Search
     - |         6 |       4% | Manual Entries
     - |       690 |      13% | PhishStats
