@@ -34,6 +34,7 @@ Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
+$(print_stats 'Emerging Threats')
 $(print_stats 'Google Search')
 $(print_stats Manual) Entries
 $(print_stats PhishStats)

@@ -23,6 +23,7 @@ readonly TIMESTAMP
 readonly -a SOURCES=(
     source_manual
     source_aa419
+    source_emerging_threats
     source_dnstwist
     source_guntab
     source_petscams
@@ -650,6 +651,16 @@ source_aa419() {
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
+}
+
+source_emerging_threats() {
+    source='Emerging Threats'
+    results_file='data/pending/domains_emerging_threats.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://raw.githubusercontent.com/jarelllama/emerging-threats-pihole/main/data/phishing.txt'
+    curl -sSL --retry 2 --retry-all-errors "$url" -o "$results_file"
 }
 
 source_guntab() {

@@ -10,6 +10,7 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 |:--- |:--- |:--- |:--- |
 | [ANFRAS](https://anfras.com/fakeshops/) | Fake | Yes | - |
 | [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Advance-fee | | |
+| [Emerging Threats Phishing Rules](https://rules.emergingthreats.net/) | Phishing | | |
 | [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | Yes | - |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
