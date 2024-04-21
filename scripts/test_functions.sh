@@ -58,7 +58,7 @@ SHELLCHECK() {
 
     # Install ShellCheck
     url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
-    wget -qO - "$url" | tar -xJ
+    curl -sSL "$url" | tar -xJ
 
     # Check that ShellCheck was successfully installed
     shellcheck-stable/shellcheck --version || exit 1

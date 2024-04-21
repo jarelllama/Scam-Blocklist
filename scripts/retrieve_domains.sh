@@ -356,12 +356,11 @@ download_nrd_feed() {
     url3='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
 
     {
-        wget -qO - "$url1" || $FUNCTION --send-telegram \
+        curl -sSL "$url1" || $FUNCTION --send-telegram \
             "Error occurred while downloading NRD feeds."
 
         # Download the bigger feeds in parallel
-        curl -sSH 'User-Agent: openSquat-2.1.0' "$url2" & wget -qO - "$url3"
-        wait
+        curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url2" "$url3"
     } | mawk '!/#/' > nrd.tmp
 
     # Appears to be the best way of checking if the bigger feeds downloaded
@@ -610,7 +609,7 @@ source_phishstats() {
     # domains
     # -o for grep can be omitted since each entry is on its own line.
     # Once again, mawk does not work well with such regex expressions.
-    wget -qO - "$url" | mawk -F ',' '{print $3}' \
+    curl -sSL "$url" | mawk -F ',' '{print $3}' \
         | grep -E '^"?https?://[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*."?$' \
         | mawk -F '/' '{gsub(/"/, "", $3); print $3}' \
         | sort -u -o "$results_file"

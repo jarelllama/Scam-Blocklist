@@ -94,7 +94,7 @@ prune_lines() {
 download_toplist() {
     [[ -f toplist.tmp ]] && return
 
-    wget -qO - 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
+    curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
         > toplist.tmp || send_telegram "Error downloading toplist."
 
     sed -i 's/^.*,//' toplist.tmp
