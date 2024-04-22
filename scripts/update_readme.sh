@@ -85,7 +85,9 @@ Sources excluded from the light version are marked in SOURCES.md.
 The full version should be used where possible as it fully contains the light version.
 </details>
 
-## NSFW Blocklist
+## Other blocklists
+
+### NSFW Blocklist
 
 Created from requests, a blocklist for NSFW domains is available in Adblock Plus format here:
 [nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt)
@@ -103,6 +105,10 @@ Total domains: $(grep -cF '||' lists/adblock/nsfw.txt)
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
 </details>
+
+### Malware Blocklist
+
+A blocklist of malicious domains extract from Proofpoint's [Emerging Threats rulsets](https://rules.emergingthreats.net/) can be found here: [jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)
 
 ## Sources
 
