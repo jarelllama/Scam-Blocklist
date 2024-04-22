@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.22.165154.2024
+! Version: 04.22.165343.2024
 ! Expires: 12 hours
-! Last modified: Mon Apr 22 16:51:54 UTC 2024
+! Last modified: Mon Apr 22 16:53:43 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 57464
+! Number of entries: 57465
 !
 ||0.0.0fileserver.cryptonight.net^
 ||0008940.webflow.io^
@@ -24904,6 +24904,7 @@
 ||instagrm.shop^
 ||instagrm.vercel.app^
 ||instanderapk.app^
+||instant-eulicense.com^
 ||instantaneou.com^
 ||instantcargodelivery.com^
 ||instanthomedeliveryexpress.com^
