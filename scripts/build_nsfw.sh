@@ -33,6 +33,7 @@ readonly -a TERMS=(
     \\.sex$
     escorts
     rule34
+    hookers
 )
 
 # Whitelisted domains
