@@ -34,14 +34,14 @@ Today | Yesterday | Excluded | Source
   371 |       476 |      15% | PhishStats
    12 |        20 |       0% | PhishStats (NRDs)
   422 |       234 |       2% | Regex Matching (NRDs)
-    8 |         6 |       9% | aa419.org
+    9 |         6 |       9% | aa419.org
    18 |        19 |       0% | dnstwist (NRDs)
     0 |         0 |      20% | guntab.com
     9 |         0 |       8% | petscams.com
     0 |         0 |      67% | scam.directory
     1 |         0 |      38% | scamadviser.com
     0 |         0 |       4% | stopgunscams.com
-  917 |      1408 |      15% | All sources
+  918 |      1408 |      15% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
