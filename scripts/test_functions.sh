@@ -261,10 +261,9 @@ TEST_BUILD() {
     # Run script
     run_script build_lists.sh
 
-    # Remove the header from the blocklists
+    # Remove comments from the blocklists (keeps Adblock Plus header)
     for file in lists/*/*.txt; do
-        mawk '!/#|!/' "$file" > temp
-        mv temp "$file"
+        sed -i '/[#!]/d' "$file"
     done
 
     ### Check and verify outputs
