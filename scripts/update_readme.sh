@@ -108,7 +108,7 @@ This blocklist does not just include adult videos, but also NSFW content of the 
 
 ### Malware Blocklist
 
-A blocklist of malicious domains extract from Proofpoint's [Emerging Threats rulsets](https://rules.emergingthreats.net/) can be found here: [jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)
+A blocklist of malicious domains extract from Proofpoint's [Emerging Threats](https://rules.emergingthreats.net/) rulsets can be found here: [jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)
 
 ## Sources
 
