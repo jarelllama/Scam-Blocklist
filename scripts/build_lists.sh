@@ -48,7 +48,7 @@ build() {
     # Build Wildcard Domains format
     : > "${DOMAINS}/${list}"
     append_header '#' "$DOMAINS" "Wildcard Domains"
-    sed 's/[\|^]//g' compiled.tmp >> "${DOMAINS}/${list}"
+    sed 's/[|\^]//g' compiled.tmp >> "${DOMAINS}/${list}"
 }
 
 # Function 'append_header' appends the header onto the blocklist.
