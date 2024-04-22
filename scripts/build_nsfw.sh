@@ -48,7 +48,7 @@ readonly -a WHITELIST=(
 build() {
     # Format raw file
     grep -F '||' "$BLOCKLIST" > raw.tmp
-    sed -i 's/[\|^]//g' raw.tmp
+    sed -i 's/[|\^]//g' raw.tmp
 
     # Remove already processed domains
     comm -23 toplist.tmp raw.tmp > temp
