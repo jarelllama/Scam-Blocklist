@@ -21,9 +21,20 @@ TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
 readonly -a SOURCES=(
-
+    source_manual
+    source_aa419
+    source_emerging_threats
     source_fakewebsitebuster
-
+    source_dnstwist
+    source_guntab
+    source_petscams
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -155,6 +166,10 @@ process_source() {
         log_domains "$(mawk '!/^www\./' <<< "$subdomains")" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$results_file" -o "$results_file"
+
+    # Remove domains already in raw file
+    comm -23 "$results_file" "$RAW" > results.tmp
+    mv results.tmp "$results_file"
 
     # Log blacklisted domains
     log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
