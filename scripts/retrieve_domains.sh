@@ -663,7 +663,6 @@ source_emerging_threats() {
 
 source_fakewebsitebuster() {
     source='fakewebsitebuster.com'
-    ignore_from_light=true  # FOR NOW
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
@@ -672,8 +671,8 @@ source_fakewebsitebuster() {
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'rel="bookmark">.*</a></h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-        > "$results_file"
-        # TODO: keep only latest entries
+        | head -n 50 > "$results_file"
+        # Keep only newest 50 results
 }
 
 source_guntab() {
