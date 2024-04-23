@@ -21,9 +21,20 @@ TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
 readonly -a SOURCES=(
-
+    source_manual
+    source_aa419
+    source_emerging_threats
     source_fakewebsitebuster
-
+    source_dnstwist
+    source_guntab
+    source_petscams
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
