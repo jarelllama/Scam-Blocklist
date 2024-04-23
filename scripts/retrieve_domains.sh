@@ -24,6 +24,7 @@ readonly -a SOURCES=(
     source_manual
     source_aa419
     source_emerging_threats
+    source_fakewebsitebuster
     source_dnstwist
     source_guntab
     source_petscams
@@ -669,6 +670,20 @@ source_emerging_threats() {
 
     local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/data/phishing.txt'
     curl -sSL --retry 2 --retry-all-errors "$url" -o "$results_file"
+}
+
+source_fakewebsitebuster() {
+    source='fakewebsitebuster.com'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://fakewebsitebuster.com/category/website-reviews'
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
+        | grep -oE 'rel="bookmark">.*</a></h2>' \
+        | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
+        | head -n 50 > "$results_file"
+        # Keep only newest 50 results
 }
 
 source_guntab() {
