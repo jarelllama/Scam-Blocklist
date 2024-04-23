@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 11628[^1] malicious NRDs were found.
+In the last 30 days, more than 11629[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -23,7 +23,7 @@ In the last 30 days, more than 11628[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 57784
+Total domains: 57786
 Light version: 5303
 
 New domains from each source: *
@@ -31,9 +31,9 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      37% | Emerging Threats
    15 |        23 |       5% | Google Search
     0 |        65 |       2% | Manual Entries
-  296 |       371 |      16% | PhishStats
+  297 |       371 |      16% | PhishStats
    24 |        12 |       0% | PhishStats (NRDs)
-  266 |       422 |       3% | Regex Matching (NRDs)
+  267 |       422 |       3% | Regex Matching (NRDs)
    28 |         9 |       8% | aa419.org
    14 |        18 |       0% | dnstwist (NRDs)
   391 |         0 |       0% | fakewebsitebuster.com
@@ -42,7 +42,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      67% | scam.directory
     1 |         1 |      38% | scamadviser.com
     0 |         0 |       4% | stopgunscams.com
- 1012 |       918 |      16% | All sources
+ 1014 |       918 |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
