@@ -668,7 +668,7 @@ source_fakewebsitebuster() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://fakewebsitebuster.com/category/website-reviews/'
+    local url='https://fakewebsitebuster.com/category/website-reviews'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'rel="bookmark">.*</a></h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
