@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 12053[^1] malicious NRDs were found.
+In the last 30 days, more than 12056[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -28,20 +28,21 @@ Light version: 5240
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    - |         0 |      25% | Emerging Threats
-    - |        23 |       5% | Google Search
-    - |        65 |       2% | Manual Entries
-    - |       371 |      15% | PhishStats
-    - |        12 |       0% | PhishStats (NRDs)
-    - |       422 |       2% | Regex Matching (NRDs)
-    - |         9 |       9% | aa419.org
-    - |        18 |       0% | dnstwist (NRDs)
-    - |         0 |      20% | guntab.com
-    - |         9 |       8% | petscams.com
-    - |         0 |      67% | scam.directory
-    - |         1 |      38% | scamadviser.com
-    - |         0 |       4% | stopgunscams.com
-    - |       918 |      15% | All sources
+    0 |         0 |      25% | Emerging Threats
+    0 |        23 |       5% | Google Search
+    0 |        65 |       2% | Manual Entries
+    0 |       371 |      15% | PhishStats
+    0 |        12 |       0% | PhishStats (NRDs)
+    0 |       422 |       2% | Regex Matching (NRDs)
+    0 |         9 |       9% | aa419.org
+    0 |        18 |       0% | dnstwist (NRDs)
+  333 |         0 |       0% | fakewebsitebuster.com
+    0 |         0 |      20% | guntab.com
+    0 |         9 |       8% | petscams.com
+    0 |         0 |      67% | scam.directory
+    0 |         1 |      38% | scamadviser.com
+    0 |         0 |       4% | stopgunscams.com
+  333 |       918 |      15% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -119,9 +120,9 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 21
+Active search terms: 22
 API calls made today: 0
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -138,7 +139,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 65
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
