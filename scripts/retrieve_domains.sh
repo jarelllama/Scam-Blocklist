@@ -682,7 +682,7 @@ source_fakewebsitebuster() {
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'rel="bookmark">.*</a></h2>' \
         | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-        | head -n 50 > "$results_file"
+        | sed 's/\[//; s/\]//' | head -n 50 > "$results_file"
         # Keep only newest 50 results
 }
 
