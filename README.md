@@ -24,7 +24,7 @@ In the last 30 days, more than 12056[^1] malicious NRDs were found.
 
 ``` text
 Total domains: 57805
-Light version: 5247
+Light version: 5296
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -36,13 +36,13 @@ Today | Yesterday | Excluded | Source
     0 |       422 |       2% | Regex Matching (NRDs)
     0 |         9 |       9% | aa419.org
     0 |        18 |       0% | dnstwist (NRDs)
-  341 |         0 |       1% | fakewebsitebuster.com
+  391 |         0 |       0% | fakewebsitebuster.com
     0 |         0 |      20% | guntab.com
     0 |         9 |       8% | petscams.com
     0 |         0 |      67% | scam.directory
     0 |         1 |      38% | scamadviser.com
     0 |         0 |       4% | stopgunscams.com
-  341 |       918 |      15% | All sources
+  391 |       918 |      15% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
