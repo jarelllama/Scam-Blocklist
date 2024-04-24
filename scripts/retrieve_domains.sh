@@ -417,9 +417,9 @@ source_google_search() {
             [[ ! -f "$results_file" ]] && return
 
             # Remove header from file name
-            search_term=${results_file#data/pending/domains_google_search_}
+            search_term="${results_file#data/pending/domains_google_search_}"
             # Remove file extension from file name to get search term
-            search_term=${search_term%.tmp}
+            search_term="${search_term%.tmp}"
 
             process_source
         done
