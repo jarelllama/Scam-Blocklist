@@ -211,6 +211,7 @@ Unparked domains added today: 0
 * [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
 * [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
+* [Jarelllama's Blocklist Checker](https://github.com/jarelllama/Blocklist-Checker): generate a simple static report for blocklists or see previous reports of requested blocklists
 * [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 * [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
 * [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
