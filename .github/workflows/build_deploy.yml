@@ -8,17 +8,18 @@ permissions:
   contents: write
 
 jobs:
-  test:
-    uses: ./.github/workflows/test_functions.yml
-
   # This condition lets the job run even if any of the previous jobs failed
   # ${{ ! cancelled() }}
 
   # This condition prevents the job from running if the test job failed
   # ${{ needs.test.result == 'success' }}
 
+  test:
+    uses: ./.github/workflows/test_functions.yml
+
   build-nsfw:
-    if: ${{ ! cancelled() }}
+    needs: test
+    if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/build_nsfw.yml
 
   build:
