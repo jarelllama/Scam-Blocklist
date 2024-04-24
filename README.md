@@ -28,21 +28,21 @@ Light version: 5303
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    0 |         0 |      37% | Emerging Threats
-   15 |        23 |       5% | Google Search
-    0 |        65 |       2% | Manual Entries
-  297 |       371 |      16% | PhishStats
-   24 |        12 |       0% | PhishStats (NRDs)
-  267 |       422 |       3% | Regex Matching (NRDs)
-   28 |         9 |       8% | aa419.org
-   14 |        18 |       0% | dnstwist (NRDs)
-  391 |         0 |       0% | fakewebsitebuster.com
-    0 |         0 |      20% | guntab.com
-    1 |         9 |       8% | petscams.com
-    0 |         0 |      67% | scam.directory
-    1 |         1 |      38% | scamadviser.com
-    0 |         0 |       4% | stopgunscams.com
- 1014 |       918 |      16% | All sources
+    - |         0 |      37% | Emerging Threats
+    - |        15 |       5% | Google Search
+    - |         0 |       2% | Manual Entries
+    - |       297 |      16% | PhishStats
+    - |        24 |       0% | PhishStats (NRDs)
+    - |       267 |       3% | Regex Matching (NRDs)
+    - |        28 |       8% | aa419.org
+    - |        14 |       0% | dnstwist (NRDs)
+    - |       391 |       0% | fakewebsitebuster.com
+    - |         0 |      20% | guntab.com
+    - |         1 |       8% | petscams.com
+    - |         0 |      67% | scam.directory
+    - |         1 |      38% | scamadviser.com
+    - |         0 |       4% | stopgunscams.com
+    - |      1014 |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -103,7 +103,7 @@ This blocklist does not just include adult videos, but also NSFW content of the 
 
 ### Malware Blocklist
 
-A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats](https://rules.emergingthreats.net/) rulesets can be found here: [jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)
+A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats](https://rules.emergingthreats.net/) rulesets can be found here: **[jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)**
 
 Parts of the rulesets are integrated into the Scam Blocklist as well.
 
@@ -121,8 +121,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 22
-API calls made today: 176
-Domains retrieved today: 15
+API calls made today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -139,7 +139,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 65
-Domains retrieved today: 14
+Domains retrieved today: -
 ```
 
 ### Regarding other sources
@@ -172,8 +172,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 790
-Resurrected domains added today: 316
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -188,8 +188,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 591
-Unparked domains added today: 456
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## As seen in
