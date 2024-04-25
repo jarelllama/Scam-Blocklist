@@ -28,21 +28,21 @@ Light version: 5347
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    0 |         0 |      49% | Emerging Threats
-   36 |        23 |       5% | Google Search
-    6 |         1 |       2% | Manual Entries
-  774 |       580 |      17% | PhishStats
+    0 |         0 |       0% | Emerging Threats
+   36 |        23 |       0% | Google Search
+    6 |         1 |       0% | Manual Entries
+  739 |       543 |       0% | PhishStats
    35 |        37 |       0% | PhishStats (NRDs)
-  397 |       448 |       3% | Regex Matching (NRDs)
-   11 |        15 |       8% | aa419.org
+  397 |       448 |       0% | Regex Matching (NRDs)
+   11 |        15 |       0% | aa419.org
    57 |        35 |       0% | dnstwist (NRDs)
-    0 |         0 |      11% | fakewebsitebuster.com
-    6 |         3 |      20% | guntab.com
-    0 |         1 |       8% | petscams.com
-    0 |        48 |      67% | scam.directory
-    0 |         0 |      38% | scamadviser.com
-    0 |         0 |       4% | stopgunscams.com
- 1287 |      1154 |      16% | All sources
+    0 |         0 |       0% | fakewebsitebuster.com
+    6 |         3 |       0% | guntab.com
+    0 |         1 |       0% | petscams.com
+    0 |        48 |       0% | scam.directory
+    0 |         0 |       0% | scamadviser.com
+    0 |         0 |       0% | stopgunscams.com
+    0 |         0 |       0% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
