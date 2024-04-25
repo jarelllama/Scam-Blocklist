@@ -278,7 +278,7 @@ sum() {
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
     # grep used here as mawk has issues with brackets after whitespaces
-    grep "^{1},${2},.*saved$" "$SOURCE_LOG" | csvcut -c 5 \
+    grep "${1},${2},.*saved$" "$SOURCE_LOG" | csvcut -c 5 \
         | mawk '{sum += $1} END {print sum}'
 }
 
