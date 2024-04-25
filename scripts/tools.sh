@@ -103,8 +103,7 @@ download_toplist() {
 }
 
 # Function 'download_nrd_feed' downloads and collates NRD feeds consisting
-# domains registered in the last 30 days. Note that the NRD feeds do not seem
-# to contain subdomains.
+# domains registered in the last 30 days.
 # Output:
 #   nrd.tmp
 #   Telegram notification if an error occurred while downloading the NRD feeds

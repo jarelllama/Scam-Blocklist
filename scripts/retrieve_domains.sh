@@ -351,7 +351,6 @@ log_domains() {
 }
 
 # Function 'download_nrd_feed' calls a shell wrapper to download the NRD feed.
-# Note that the NRD feed does not seem to contain subdomains.
 # Output:
 #   nrd.tmp
 download_nrd_feed() {
