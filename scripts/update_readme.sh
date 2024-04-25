@@ -278,7 +278,7 @@ sum() {
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
     # grep used here as mawk has issues with brackets after whitespaces
-    grep -F "${1},${2}" "$SOURCE_LOG" | mawk '/,saved$/' | csvcut -c 5 \
+    grep "^${1},${2},.*saved$" "$SOURCE_LOG" | csvcut -c 5 \
         | mawk '{sum += $1} END {print sum}'
 }
 
@@ -286,15 +286,16 @@ sum() {
 # excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 sum_excluded() {
-    grep -F "$1" "$SOURCE_LOG" > rows.tmp  # Includes unsaved
+    # Get required columns of the source (includes unsaved)
+    grep -F "$1" "$SOURCE_LOG" | csvcut -c 4,6,7,8 > rows.tmp
 
-    raw_count="$(csvcut -c 4 rows.tmp | mawk '{sum += $1} END {print sum}')"
+    raw_count="$(mawk '{sum += $1} END {print sum}' rows.tmp)"
     # Return if raw count is 0 to avoid divide by zero error
     (( raw_count == 0 )) && { printf "0"; return; }
 
-    white_count="$(csvcut -c 6 rows.tmp | mawk '{sum += $1} END {print sum}')"
-    dead_count="$(csvcut -c 7 rows.tmp | mawk '{sum += $1} END {print sum}')"
-    parked_count="$(csvcut -c 8 rows.tmp | mawk '{sum += $1} END {print sum}')"
+    white_count="$(mawk '{sum += $2} END {print sum}' rows.tmp)"
+    dead_count="$(mawk '{sum += $3} END {print sum}' rows.tmp)"
+    parked_count="$(mawk '{sum += $4} END {print sum}' rows.tmp)"
     excluded_count="$(( white_count + dead_count + parked_count ))"
 
     printf "%s" "$(( excluded_count * 100 / raw_count ))"
