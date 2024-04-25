@@ -306,7 +306,7 @@ sum_nrds() {
     # Only Hagezi's NRD feed is downloaded to save processing time
     curl -sSL 'https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt' \
         -o nrd.tmp
-    grep -cxFf "$RAW" nrd.tmp
+    grep -cxFf "$RAW" nrd.tmp | sed 's/\([0-9]\{3\}\)$/,\1/'
 }
 
 # Entry point
