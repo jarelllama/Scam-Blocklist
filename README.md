@@ -204,7 +204,7 @@ Unparked domains added today: 524
 * [file-git.trli.club](https://file-git.trli.club/)
 * [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
 
-## Resources / see also
+## Resources / See also
 
 * [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
 * [AdGuard's Hostlist Compiler](https://github.com/AdguardTeam/HostlistCompiler): simple tool that compiles hosts blocklists and removes redundant rules
