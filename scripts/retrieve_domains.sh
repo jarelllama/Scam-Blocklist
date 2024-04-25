@@ -350,35 +350,12 @@ log_domains() {
     $FUNCTION --log-domains "$1" "$2" "$source" "$TIMESTAMP"
 }
 
-# Function 'download_nrd_feed' downloads and collates NRD feeds consisting
-# domains registered in the last 30 days. A Telegram notification is sent if
-# the feeds were improperly downloaded.
-# Note that the NRD feeds do not seem to have subdomains.
+# Function 'download_nrd_feed' calls a shell wrapper to download the NRD feed.
+# Note that the NRD feed does not seem to contain subdomains.
 # Output:
 #   nrd.tmp
 download_nrd_feed() {
-    [[ -f nrd.tmp ]] && return
-
-    url1='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
-    url2='https://feeds.opensquat.com/domain-names-month.txt'
-    url3='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
-
-    {
-        curl -sSL "$url1" || $FUNCTION --send-telegram \
-            "Error occurred while downloading NRD feeds."
-
-        # Download the bigger feeds in parallel
-        curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url2" "$url3"
-    } | mawk '!/#/' > nrd.tmp
-
-    # Appears to be the best way of checking if the bigger feeds downloaded
-    # properly without checking each feed individually and losing
-    # parallelization.
-    if (( $(wc -l < nrd.tmp) < 9000000 )); then
-        $FUNCTION --send-telegram "Error occurred while downloading NRD feeds."
-    fi
-
-    $FUNCTION --format nrd.tmp
+    $FUNCTION --download-nrd-feed
 
     # Remove already processed domains to save processing time
     comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp

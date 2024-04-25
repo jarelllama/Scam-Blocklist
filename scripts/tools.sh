@@ -87,7 +87,8 @@ prune_lines() {
     fi
 }
 
-# Function 'download_toplist' downloads and formats the Tranco toplist.
+# Function 'download_toplist' downloads and formats the Tranco toplist. Note
+# that the toplist does not contain subdomains.
 # Output:
 #   toplist.tmp
 #   Telegram notification if an error occurred while downloading the toplist
@@ -99,6 +100,37 @@ download_toplist() {
 
     sed -i 's/^.*,//' toplist.tmp
     format_file toplist.tmp
+}
+
+# Function 'download_nrd_feed' downloads and collates NRD feeds consisting
+# domains registered in the last 30 days. Note that the NRD feeds do not seem
+# to contain subdomains.
+# Output:
+#   nrd.tmp
+#   Telegram notification if an error occurred while downloading the NRD feeds
+download_nrd_feed() {
+    [[ -f nrd.tmp ]] && return
+
+    url1='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
+    url2='https://feeds.opensquat.com/domain-names-month.txt'
+    url3='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
+
+    {
+        curl -sSL "$url1" || send_telegram \
+            "Error occurred while downloading NRD feeds."
+
+        # Download the bigger feeds in parallel
+        curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url2" "$url3"
+    } | mawk '!/#/' > nrd.tmp
+
+    # Appears to be the best way of checking if the bigger feeds downloaded
+    # properly without checking each feed individually and losing
+    # parallelization.
+    if (( $(wc -l < nrd.tmp) < 9000000 )); then
+        send_telegram "Error occurred while downloading NRD feeds."
+    fi
+
+    format_file nrd.tmp
 }
 
 # Function 'send_telegram' sends a Telegram notification with the given
@@ -131,6 +163,9 @@ case "$1" in
         ;;
     --download-toplist)
         download_toplist
+        ;;
+    --download-nrd-feed)
+        download_nrd_feed
         ;;
     --send-telegram)
         send_telegram "$2"
