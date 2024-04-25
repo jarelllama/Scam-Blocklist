@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.25.132745.2024
+! Version: 04.25.133402.2024
 ! Expires: 12 hours
-! Last modified: Thu Apr 25 13:27:45 UTC 2024
+! Last modified: Thu Apr 25 13:34:02 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 5344
+! Number of entries: 5347
 !
 ||01edc.com^
 ||10bet938.com^
@@ -321,6 +321,7 @@
 ||aplotesto.top^
 ||apmody.graphicsmarket.net^
 ||apole.xyz^
+||app-facbook-log-in-profile.ecwid.com^
 ||app-gotchi.com^
 ||app-ios-apk.weebly.com^
 ||app-moey.com^
@@ -3559,6 +3560,8 @@
 ||radarak.com^
 ||railess.com^
 ||raincrossshihtzubreeder.com^
+||rakuten.co.jp.rakutav.xyz^
+||rakuten.co.jp.rakutpi.xyz^
 ||rakuten58.com^
 ||ramglobalmine.com^
 ||randaso.com^
