@@ -46,9 +46,8 @@ readonly -a WHITELIST=(
 # Function 'build' retrieves domains from the Tranco toplist, adds them to the
 # raw file, formats it, and removes dead domains.
 build() {
-    # Format raw file
-    grep -F '||' "$BLOCKLIST" > raw.tmp
-    sed -i 's/[|\^]//g' raw.tmp
+    # Format raw file to Domains format
+    mawk '/[|]/ {gsub(/[|^]/, "", $0); print $0}' "$BLOCKLIST" > raw.tmp
 
     # Remove already processed domains
     comm -23 toplist.tmp raw.tmp > temp
