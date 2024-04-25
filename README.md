@@ -31,7 +31,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |       0% | Emerging Threats
    36 |        23 |       0% | Google Search
     6 |         1 |       0% | Manual Entries
-  739 |       543 |       0% | PhishStats
+  774 |       580 |       0% | PhishStats
    35 |        37 |       0% | PhishStats (NRDs)
   397 |       448 |       0% | Regex Matching (NRDs)
    11 |        15 |       0% | aa419.org
@@ -42,7 +42,7 @@ Today | Yesterday | Excluded | Source
     0 |        48 |       0% | scam.directory
     0 |         0 |       0% | scamadviser.com
     0 |         0 |       0% | stopgunscams.com
-    0 |         0 |       0% | All sources
+ 1287 |      1154 |       0% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
