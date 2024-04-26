@@ -392,6 +392,9 @@ source_google_search() {
         for results_file in data/pending/domains_google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
 
+            # Set execution time for each individual search term
+            execution_time="$(date +%s)"
+
             # Remove header from file name
             search_term="${results_file#data/pending/domains_google_search_}"
             # Remove file extension from file name to get search term
@@ -434,6 +437,8 @@ search_google() {
     encoded_search_term="$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
     results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     query_count=0
+    # Set execution time for each individual search term
+    execution_time="$(date +%s)"
 
     touch "$results_file"  # Create results file to ensure proper logging
 
