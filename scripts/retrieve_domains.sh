@@ -560,7 +560,7 @@ source_regex() {
 
         # Get regex of target
         pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
-        escaped_domain="$(printf "%s" "$domain" | sed 's/\./\\./g')"
+        escaped_domain="${domain//[.]/\\&}"
         regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
 
         # Get matches in NRD feed
@@ -571,8 +571,8 @@ source_regex() {
 
         # Escape periods and backslashes
         row="$(printf "%s" "$row" | sed 's/[.\]/\\&/g')"
-        # Escape &, periods and backslashes
-        pattern="$(printf "%s" "$pattern" | sed 's/[&.\]/\\&/g')"
+        # Escape '&', periods and backslashes
+        pattern="${pattern//[&.\\]/\\&}"
 
         # Update counts for the target domain
         count="$(( count + $(wc -w <<< "$results") ))"
