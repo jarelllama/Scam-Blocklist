@@ -36,9 +36,8 @@ build() {
     printf "\n"
     hostlist-compiler -i "$source" -o compiled.tmp
 
-    # Get entries, ignoring comments
-    grep -F '||' compiled.tmp > temp
-    mv temp compiled.tmp
+    # Remove comments
+    sed -i '/!/d' compiled.tmp
 
     # Build Adblock Plus format
     printf "[Adblock Plus]\n" > "${ADBLOCK}/${list}"

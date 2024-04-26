@@ -55,7 +55,7 @@ build() {
 
     # Get matching domains in toplist
     for term in "${TERMS[@]}"; do
-        mawk "/$term/" toplist.tmp >> domains.tmp
+        mawk "/${term}/" toplist.tmp >> domains.tmp
     done
 
     # Add new domains to raw file
@@ -63,7 +63,7 @@ build() {
 
     # Remove whitelisted domains
     for white in "${WHITELIST[@]}"; do
-        sed -i "/$white/d" raw.tmp
+        sed -i "/${white}/d" raw.tmp
     done
 
     # Compile list. See the list of transformations here:
@@ -75,9 +75,8 @@ build() {
     printf "\n"
     dead-domains-linter -a -i compiled.tmp
 
-    # Get entries, ignoring comments
-    grep -F '||' compiled.tmp > temp
-    mv temp compiled.tmp
+    # Remove comments
+    sed -i '/!/d' compiled.tmp
 }
 
 # Function 'deploy' builds the blocklist in Adblock Plus syntax.

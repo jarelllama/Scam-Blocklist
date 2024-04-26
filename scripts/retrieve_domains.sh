@@ -129,7 +129,7 @@ process_source() {
     # is done here once instead of multiple times in the source functions)
     # Note that this still allows invalid entries to get through so they can be
     # flagged later on.
-    sed -i 's/https\?://; s/\///g' "$results_file"
+    sed -i 's/https\?://; s/[/]//g' "$results_file"
 
     # Convert Unicode to Punycode
     # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
@@ -491,7 +491,7 @@ source_dnstwist() {
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above.
     tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
-        | sort -nr | head -n 15 | grep -oE '[[:alpha:]]+')"
+        | sort -nr | head -n 15 | mawk '{print $2}')"
 
     # Remove duplicate targets from targets file
     mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
@@ -560,11 +560,12 @@ source_regex() {
 
         # Get regex of target
         pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
-        escaped_domain="${domain//[.]/\\&}"
+        escaped_domain="${domain//[.]/\\.}"
+        # '&' does not work for parameter substitution
         regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
 
         # Get matches in NRD feed
-        results="$(mawk "/$regex/" nrd.tmp | sort -u)"
+        results="$(mawk "/${regex}/" nrd.tmp | sort -u)"
 
         # Collate results
         printf "%s\n" "$results" >> "$results_file"
@@ -572,7 +573,7 @@ source_regex() {
         # Escape periods and backslashes
         row="$(printf "%s" "$row" | sed 's/[.\]/\\&/g')"
         # Escape '&', periods and backslashes
-        pattern="${pattern//[&.\\]/\\&}"
+        pattern="$(printf "%s" "$pattern" | sed 's/[&.\]/\\&/g')"
 
         # Update counts for the target domain
         count="$(( count + $(wc -w <<< "$results") ))"
