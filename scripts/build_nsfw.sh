@@ -30,7 +30,7 @@ readonly -a TERMS=(
     brazzers
     hookup
     ^sex
-    \\.sex$
+    \.sex$
     escorts
     rule34
     hookers
