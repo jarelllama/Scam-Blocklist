@@ -83,7 +83,7 @@ Targeted at list maintainers, a light version of the blocklist is available in t
 Sources excluded from the light version are marked in SOURCES.md.
 <br>
 <br>
-The full version should be used where possible as it fully contains the light version.
+The full version should be used where possible as it fully contains the light version and accounts for resurrected/unparked domains.
 </details>
 
 ## Other blocklists
