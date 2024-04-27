@@ -23,15 +23,15 @@ In the last 30 days, more than 9,315[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 60208
-Light version: 5516
+Total domains: 65163
+Light version: 5813
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |         0 |      54% | Emerging Threats
    16 |        36 |       6% | Google Search
-    0 |         0 |       0% | Jeroengui phishing
-    0 |         0 |       0% | Jeroengui scam
+ 4831 |         0 |       4% | Jeroengui phishing
+  294 |         0 |       0% | Jeroengui scam
     1 |        10 |       1% | Manual Entries
   502 |       633 |      18% | PhishStats
    29 |        61 |       0% | PhishStats (NRDs)
