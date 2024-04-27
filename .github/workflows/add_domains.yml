@@ -21,12 +21,11 @@ jobs:
         run: |
           mkdir -p data/pending
 
-          # Match for domains or URLs up to before the third slash, then strip
-          # URls to domains. This ignores subdirectories and IP addresses.
+          # Get domains, ignoring subdirectories and IP addresses
           # Note this overrides any previous entries
           grep -zo 'What domain.*Why should' <<< '${{ github.event.issue.body }}' \
-            | grep -aoE '^(https?://)?[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
-            | sed 's/https\?:\/\///' > data/pending/domains_manual.tmp
+            | grep -aPo '^(https?://)?/K[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+            > data/pending/domains_manual.tmp
 
       - name: Close issue
         run: |
