@@ -666,7 +666,7 @@ source_fakewebsitebuster() {
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'rel="bookmark">.*</a></h2>' \
         | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" \
-        | head -n 50 > "$results_file" # Keep only newest 50 results
+        | head -n 50 > "$results_file"  # Keep only newest 50 results
 }
 
 source_guntab() {
@@ -743,7 +743,7 @@ source_stopgunscams() {
     # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
         | grep -Po "class=\"rank-math-html-sitemap__link\">\K${DOMAIN_REGEX}" \
-        | head -n 100 > "$results_file" # Keep only newest 100 results
+        | head -n 100 > "$results_file"  # Keep only newest 100 results
 }
 
 # Entry point
