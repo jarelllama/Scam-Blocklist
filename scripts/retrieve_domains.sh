@@ -570,9 +570,8 @@ source_regex() {
         # Get regex of target
         pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
         escaped_domain="${domain//[.]/\\.}"
-        # '&' does not work for parameter substitution
-        regex="$(printf "%s" "$pattern" | sed "s/&/${escaped_domain}/")"
-
+        regex="${pattern/&/${escaped_domain}}"
+  
         # Get matches in NRD feed
         results="$(mawk "/${regex}/" nrd.tmp | sort -u)"
 
