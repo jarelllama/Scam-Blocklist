@@ -29,14 +29,22 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-
+    source_manual
+    source_aa419
+    source_emerging_threats
     source_fakewebsitebuster
-
+    source_dnstwist
+    source_guntab
     source_jeroenguibe_phishing
     source_jeroenguibe_scam
-
+    source_petscams
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamdirectory
     source_scamadviser
-
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -701,8 +709,7 @@ source_jeroenguibe_scam() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    # TODO: change to weekly feed
-    local url='https://file.jeroengui.be/scam/last_month.txt'
+    local url='https://file.jeroengui.be/scam/last_week.txt'
     # Get URLs with no subdirectories, exclude IP addresses and extract domains
     curl -sSL --retry 2 --retry-all-errors "$url" \
         | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
