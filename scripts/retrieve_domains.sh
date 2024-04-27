@@ -35,7 +35,8 @@ readonly -a SOURCES=(
     source_fakewebsitebuster
     source_dnstwist
     source_guntab
-    source_jeroenguibe
+    source_jeroenguibe_phishing
+    source_jeroenguibe_scams
     source_petscams
     source_phishstats
     source_phishstats_nrd
@@ -689,23 +690,30 @@ source_guntab() {
         # Note results are not sorted by time added
 }
 
-source_jeroenguibe() {
-    source='jeroengui.be'
-    results_file="data/pending/domains_${source}.tmp"
+source_jeroenguibe_phishing() {
+    source='jeroengui.be phishing'
+    ignore_from_light=true
+    results_file='data/pending/domains_jeroengui.be_phishing.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url
-    url='https://file.jeroengui.be/scam/last_month.txt'  # TODO: change to weekly feed and use curl URL globbing
-    curl -sSL --retry 2 --retry-all-errors "$url" >> results.tmp
-    url='https://file.jeroengui.be/phishing/last_week.txt'
-    curl -sSL --retry 2 --retry-all-errors "$url" >> results.tmp
-
+    local url='https://file.jeroengui.be/phishing/last_week.txt'
     # Get URLs with no subdirectories, exclude IP addresses and extract domains
-    grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" results.tmp \
-        -o "$results_file"
+    curl -sSL --retry 2 --retry-all-errors "$url" \
+        | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
+}
 
-    rm results.tmp
+source_jeroenguibe_scam() {
+    source='jeroengui.be scam'
+    results_file='data/pending/domains_jeroengui.be_scam.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    # TODO: change to weekly feed
+    local url='https://file.jeroengui.be/scam/last_month.txt'
+    # Get URLs with no subdirectories, exclude IP addresses and extract domains
+    curl -sSL --retry 2 --retry-all-errors "$url" \
+        | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
 }
 
 source_petscams() {
