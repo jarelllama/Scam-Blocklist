@@ -30,7 +30,11 @@ readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]
 
 readonly -a SOURCES=(
 
+    source_fakewebsitebuster
+
     source_jeroenguibe
+
+    source_scamadviser
 
 )
 
