@@ -20,8 +20,11 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
-# Matches example.com, example[.]com, example-com, 1.1.1.1
-readonly DOMAIN_REGEX='[[:alnum:].-]+\[?(\.|-)\]?[[:alnum:]-]+'
+# Matches example.com, example[.]com, 1.1.1.1
+readonly DOMAIN_REGEX='[[:alnum:].-]+\[?\.\]?[[:alnum:]-]+'
+# Matches example-com, 1.1.1.1
+# https://github.com/jarelllama/Scam-Blocklist/issues/349
+readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 # Only matches domains
 readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
@@ -663,6 +666,8 @@ source_fakewebsitebuster() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://fakewebsitebuster.com/category/website-reviews'
+    # Regarding grep pipe errors, see:
+    # https://github.com/jarelllama/Scam-Blocklist/issues/349
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'rel="bookmark">.*</a></h2>' \
         | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" \
@@ -683,6 +688,17 @@ source_guntab() {
         # Note results are not sorted by time added
 }
 
+source_jeroenguibe() {
+    source='jeroengui.be'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    # TODO: change to weekly feed
+    local url='https://file.jeroengui.be/phishing/last_month.txt'
+
+}
+
 source_petscams() {
     source='petscams.com'
     results_file="data/pending/domains_${source}.tmp"
@@ -699,7 +715,7 @@ source_petscams() {
     # of domains returned per page may be >15.
     # [:alpha:] is used because [a-z] does not seem to work here
     # Matching '/">' ensures not matching false positives
-    grep -Po "<a href=\"https://petscams.com/[[:alpha:]-]+/\K${DOMAIN_REGEX}(?=/\">)" \
+    grep -Po "<a href=\"https://petscams.com/[[:alpha:]-]+/\K${DOMAIN_DASH_REGEX}(?=/\">)" \
         results.tmp | mawk '{sub(/-[0-9]$/, "", $0);
         gsub(/-/, ".", $0); print $0}' > "$results_file"
 
@@ -714,7 +730,7 @@ source_scamdirectory() {
 
     local url='https://scam.directory/category'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -Po "href=\"/\K${DOMAIN_REGEX}(?=\" title)" \
+        | grep -Po "href=\"/\K${DOMAIN_DASH_REGEX}(?=\" title)" \
         | mawk 'NR<=100 {gsub(/-/, ".", $0); print $0}' > "$results_file"
         # Keep only newest 100 results
 }
@@ -726,7 +742,8 @@ source_scamadviser() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.scamadviser.com/articles'
-    # URL globbing added after https://github.com/T145/black-mirror/issues/179
+    # Regarding grep pipe errors, see:
+    # https://github.com/jarelllama/Scam-Blocklist/issues/349
     # Trailing slash intentionally omitted
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<h2 class="mb-0">.*</h2>' \
