@@ -24,7 +24,7 @@ jobs:
           # Get domains, ignoring subdirectories and IP addresses
           # Note this overrides any previous entries
           grep -zo 'What domain.*Why should' <<< '${{ github.event.issue.body }}' \
-            | grep -aPo '^(https?://)?/K[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+            | grep -aPo '^(https?://)?\K[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
             > data/pending/domains_manual.tmp
 
       - name: Close issue
