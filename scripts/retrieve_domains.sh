@@ -695,7 +695,11 @@ source_jeroenguibe() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     # TODO: change to weekly feed
-    local url='https://file.jeroengui.be/phishing/last_month.txt'
+    local url
+    url='https://file.jeroengui.be/scam/last_month.txt'
+    curl -sSL --retry 2 --retry-all-errors "$url" >> results.tmp
+    url='https://file.jeroengui.be/phishing/last_week.txt'
+    curl -sSL --retry 2 --retry-all-errors "$url" >> results.tmp
 
 }
 
