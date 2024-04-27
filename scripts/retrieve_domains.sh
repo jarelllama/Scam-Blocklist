@@ -419,11 +419,11 @@ source_google_search() {
     # Install jq
     command -v jq &> /dev/null || apt-get install -qq jq
 
-    # Get active search times and quote them
+    # Get active search terms
     # csvkit has to be used here as the search terms may contain commas which
     # makes using mawk complicated.
     search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
-        | tail -n +2 | sed 's/.*/"&"/')"
+        | tail -n +2)"
 
     # Loop through search terms
     while read -r search_term; do
@@ -438,7 +438,8 @@ source_google_search() {
 
 search_google() {
     search_term="${1//\"/}"  # Remove quotes before encoding
-    encoded_search_term="$(printf "%s" "$search_term" | sed 's/[^[:alnum:]]/%20/g')"
+    # Replace non-alphanumeric characters with spaces
+    encoded_search_term="${search_term//[^[:alnum:]]/%20}"
     results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     query_count=0
     # Set execution time for each individual search term
@@ -571,7 +572,7 @@ source_regex() {
         pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
         escaped_domain="${domain//[.]/\\.}"
         regex="${pattern/&/${escaped_domain}}"
-  
+
         # Get matches in NRD feed
         results="$(mawk "/${regex}/" nrd.tmp | sort -u)"
 
