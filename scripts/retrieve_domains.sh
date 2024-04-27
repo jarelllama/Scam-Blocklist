@@ -695,7 +695,7 @@ source_jeroenguibe() {
 
     # Get URLs with no subdirectories, exclude IP addresses and extract domains
     grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" results.tmp \
-        -o "$results_file"
+        > "$results_file"
 
     rm results.tmp
 }
