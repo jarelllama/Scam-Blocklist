@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 8,912[^1] malicious NRDs were found.
+In the last 30 days, more than 9,315[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -30,19 +30,21 @@ New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |         0 |      54% | Emerging Threats
    16 |        36 |       6% | Google Search
+    0 |         0 |       0% | Jeroengui phishing
+    0 |         0 |       0% | Jeroengui scam
     1 |        10 |       1% | Manual Entries
   502 |       633 |      18% | PhishStats
    29 |        61 |       0% | PhishStats (NRDs)
   620 |       559 |       3% | Regex Matching (NRDs)
     6 |         5 |       9% | aa419.org
    52 |        39 |       0% | dnstwist (NRDs)
-    0 |         0 |      14% | fakewebsitebuster.com
+    0 |         0 |      17% | fakewebsitebuster.com
    14 |        24 |      20% | guntab.com
     0 |         0 |       9% | petscams.com
     8 |         0 |      67% | scam.directory
-    0 |         1 |      38% | scamadviser.com
+    8 |         1 |      38% | scamadviser.com
    10 |         0 |       4% | stopgunscams.com
- 1229 |      1307 |      17% | All sources
+ 6362 |      1307 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
