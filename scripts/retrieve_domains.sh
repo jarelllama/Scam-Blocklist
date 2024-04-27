@@ -702,7 +702,7 @@ source_jeroenguibe_scam() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    # TODO: change to weekly feed and use curl URL globbing
+    # TODO: change to weekly feed
     local url='https://file.jeroengui.be/scam/last_month.txt'
     # Get URLs with no subdirectories, exclude IP addresses and extract domains
     curl -sSL --retry 2 --retry-all-errors "$url" \
