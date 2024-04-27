@@ -16,6 +16,8 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
 | [Hagezi's NRD List](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#nrd) | NRD | - | - |
+| [Jeroen Gui's phishing list](https://jeroengui.be/anti-phishing-project/) | Phishing | | |
+| [Jeroen Gui's scam list](https://jeroengui.be/anti-phishing-project/) | Any | | |
 | [PetScams.com](https://petscams.com/) | Pet | | |
 | [PhishStats](https://phishstats.info/)[^1] | Phishing | | |
 | [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) | Phishing | | Yes |
