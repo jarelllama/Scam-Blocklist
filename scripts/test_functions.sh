@@ -288,7 +288,8 @@ TEST_BUILD() {
 test_manual_addition() {
     # INPUT
     # Note URL conversion is done in the workflow now
-    printf "manual-addition-test.com\n" >> data/pending/domains_manual.tmp
+    # Also test removal of square brackets
+    printf "manual-addition-test[.]com\n" >> data/pending/domains_manual.tmp
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
 
@@ -401,7 +402,7 @@ test_invalid_removal() {
             # Invalid subdomains/root domains should not make it into
             # subdomains/root domains file
             printf "www.invalid-test-com\n"
-            printf "100.100.100.100\n"
+            printf "100.100.100.1\n"
             printf "invalid-test.xn--903fds\n"
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
@@ -412,7 +413,7 @@ test_invalid_removal() {
         # The retrieval script saves invalid entries to the manual review file
         {
             printf "invalid-test-com\n"
-            printf "100.100.100.100\n"
+            printf "100.100.100.1\n"
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
@@ -421,7 +422,7 @@ test_invalid_removal() {
         printf "invalid-test.xn--903fds\n" >> out_raw.txt
         {
             printf "invalid,invalid-test-com,scamadviser.com\n"
-            printf "invalid,100.100.100.100,scamadviser.com\n"
+            printf "invalid,100.100.100.1,scamadviser.com\n"
             printf "invalid,invalid-test.x,scamadviser.com\n"
             printf "invalid,invalid-test.100,scamadviser.com\n"
             printf "invalid,invalid-test.1x,scamadviser.com\n"
@@ -435,7 +436,7 @@ test_invalid_removal() {
         # Invalid subdomains/root domains should not make it into
         # subdomains/root domains file
         printf "www.invalid-test-com\n"
-        printf "100.100.100.100\n"
+        printf "100.100.100.1\n"
         printf "invalid-test.xn--903fds\n"
         printf "invalid-test.x\n"
     } >> input.txt
@@ -451,7 +452,7 @@ test_invalid_removal() {
     printf "dead-domain.com\n" >> out_dead.txt
     {
         printf "invalid,invalid-test-com,raw\n"
-        printf "invalid,100.100.100.100,raw\n"
+        printf "invalid,100.100.100.1,raw\n"
         printf "invalid,invalid-test.x,raw\n"
         printf "invalid,invalid-test.100,dead_domains_file\n"
         printf "invalid,invalid-test.1x,dead_domains_file\n"
