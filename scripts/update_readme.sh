@@ -36,6 +36,8 @@ New domains from each source: *
 Today | Yesterday | Excluded | Source
 $(print_stats 'Emerging Threats')
 $(print_stats 'Google Search')
+$(print_stats 'Jeroengui phishing')
+$(print_stats 'Jeroengui scam')
 $(print_stats Manual) Entries
 $(print_stats PhishStats)
 $(print_stats 'PhishStats (NRDs)')

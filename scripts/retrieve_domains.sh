@@ -29,10 +29,22 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-
-    source_jeroenguibe_phishing
-    source_jeroenguibe_scam
-
+    source_manual
+    source_aa419
+    source_emerging_threats
+    source_fakewebsitebuster
+    source_dnstwist
+    source_guntab
+    source_jeroengui_phishing
+    source_jeroengui_scam
+    source_petscams
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamdirectory
+    source_scamadviser
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -678,10 +690,10 @@ source_guntab() {
         # Note results are not sorted by time added
 }
 
-source_jeroenguibe_phishing() {
-    source='jeroengui.be phishing'
+source_jeroengui_phishing() {
+    source='Jeroengui phishing'
     ignore_from_light=true
-    results_file='data/pending/domains_jeroengui.be_phishing.tmp'
+    results_file='data/pending/domains_jeroengui_phishing.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -691,9 +703,9 @@ source_jeroenguibe_phishing() {
         | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
 }
 
-source_jeroenguibe_scam() {
-    source='jeroengui.be scam'
-    results_file='data/pending/domains_jeroengui.be_scam.tmp'
+source_jeroengui_scam() {
+    source='Jeroengui scam'
+    results_file='data/pending/domains_jeroengui_scam.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
