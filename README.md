@@ -23,26 +23,26 @@ In the last 30 days, more than 10,234[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 58843
-Light version: 5475
+Total domains: 58842
+Light version: 5474
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    0 |         0 |      52% | Emerging Threats
-   36 |        36 |       6% | Google Search
-   10 |       118 |       1% | Manual Entries
-  633 |       774 |      17% | PhishStats
-   61 |        35 |       0% | PhishStats (NRDs)
-  559 |       397 |       3% | Regex Matching (NRDs)
-    5 |        11 |       9% | aa419.org
-   39 |        57 |       0% | dnstwist (NRDs)
-    0 |         0 |      11% | fakewebsitebuster.com
-   24 |         6 |      20% | guntab.com
-    0 |         0 |       8% | petscams.com
-    0 |         0 |      67% | scam.directory
-    1 |         0 |      38% | scamadviser.com
-    0 |         0 |       4% | stopgunscams.com
- 1307 |      1399 |      17% | All sources
+    - |         0 |      52% | Emerging Threats
+    - |        36 |       6% | Google Search
+    - |        10 |       1% | Manual Entries
+    - |       633 |      17% | PhishStats
+    - |        61 |       0% | PhishStats (NRDs)
+    - |       559 |       3% | Regex Matching (NRDs)
+    - |         5 |       9% | aa419.org
+    - |        39 |       0% | dnstwist (NRDs)
+    - |         0 |      11% | fakewebsitebuster.com
+    - |        24 |      20% | guntab.com
+    - |         0 |       8% | petscams.com
+    - |         0 |      67% | scam.directory
+    - |         1 |      38% | scamadviser.com
+    - |         0 |       4% | stopgunscams.com
+    - |      1307 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -120,9 +120,9 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 22
-API calls made today: 177
-Domains retrieved today: 36
+Active search terms: 21
+API calls made today: 0
+Domains retrieved today: -
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -139,7 +139,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 64
-Domains retrieved today: 39
+Domains retrieved today: -
 ```
 
 ### Regarding other sources
@@ -172,8 +172,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 1066
-Resurrected domains added today: 298
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -188,8 +188,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 592
-Unparked domains added today: 103
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## As seen in
