@@ -35,6 +35,7 @@ readonly -a SOURCES=(
     source_fakewebsitebuster
     source_dnstwist
     source_guntab
+    source_jeroenguibe
     source_petscams
     source_phishstats
     source_phishstats_nrd
@@ -694,13 +695,17 @@ source_jeroenguibe() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    # TODO: change to weekly feed
     local url
-    url='https://file.jeroengui.be/scam/last_month.txt'
+    url='https://file.jeroengui.be/scam/last_month.txt'  # TODO: change to weekly feed and use curl URL globbing
     curl -sSL --retry 2 --retry-all-errors "$url" >> results.tmp
     url='https://file.jeroengui.be/phishing/last_week.txt'
     curl -sSL --retry 2 --retry-all-errors "$url" >> results.tmp
 
+    # Get URLs with no subdirectories, exclude IP addresses and extract domains
+    grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" results.tmp \
+        -o "$results_file"
+
+    rm results.tmp
 }
 
 source_petscams() {
