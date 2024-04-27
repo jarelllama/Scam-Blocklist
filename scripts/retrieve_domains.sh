@@ -36,7 +36,7 @@ readonly -a SOURCES=(
     source_dnstwist
     source_guntab
     source_jeroenguibe_phishing
-    source_jeroenguibe_scams
+    source_jeroenguibe_scam
     source_petscams
     source_phishstats
     source_phishstats_nrd
