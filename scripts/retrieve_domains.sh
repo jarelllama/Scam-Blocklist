@@ -20,6 +20,11 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
+# Matches example.com, example[.]com, example-com, 1.1.1.1
+readonly DOMAIN_REGEX='[[:alnum:].-]+\[?(\.|-)\]?[[:alnum:]-]+'
+# Only matches domains
+readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+
 readonly -a SOURCES=(
     source_manual
     source_aa419
@@ -125,11 +130,11 @@ filter() {
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
-    # Remove http(s): and slashes (some of the results are in URL form so this
-    # is done here once instead of multiple times in the source functions)
+    # Remove http(s):, slashes, and square brackets (this is done here once
+    # instead of multiple times in the source functions)
     # Note that this still allows invalid entries to get through so they can be
     # flagged later on.
-    sed -i 's/https\?://; s/[/]//g' "$results_file"
+    sed -i 's/https\?://; s/[/]//g; s/\[//; s/\]//' "$results_file"
 
     # Convert Unicode to Punycode
     # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
@@ -186,8 +191,7 @@ process_source() {
     whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
     # Remove non-domain entries including IP addresses excluding punycode
-    regex='^[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$'
-    invalid="$(grep -vE "$regex" "$results_file")"
+    invalid="$(grep -vE "^${STRICT_DOMAIN_REGEX}$" "$results_file")"
     # Note invalid entries are not counted
     filter "$invalid" invalid --preserve > /dev/null
 
@@ -597,13 +601,11 @@ source_phishstats() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://phishstats.info/phish_score.csv'
-    # Get only URLs with no subdirectories, exclude IP addresses and extract
-    # domains
-    # -o for grep can be omitted since each entry is on its own line.
-    # Once again, mawk does not work well with such regex expressions.
+    # Get URLs with no subdirectories, exclude IP addresses and extract domains
+    # (?=/?\"?$) is lookahead that matches an optional slash followed by an
+    # optional end quote at the end of the line.
     curl -sSL "$url" | mawk -F ',' '{print $3}' \
-        | grep -E '^"?https?://[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*."?$' \
-        | mawk -F '/' '{gsub(/"/, "", $3); print $3}' \
+        | grep -Po "^\"?https?://\K${STRICT_DOMAIN_REGEX}(?=/?\"?$)" \
         | sort -u -o "$results_file"
 
     # Get matching NRDs for light version (Unicode ignored)
@@ -663,9 +665,8 @@ source_fakewebsitebuster() {
     local url='https://fakewebsitebuster.com/category/website-reviews'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -oE 'rel="bookmark">.*</a></h2>' \
-        | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-        | sed 's/\[//; s/\]//' | head -n 50 > "$results_file"
-        # Keep only newest 50 results
+        | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" \
+        | head -n 50 > "$results_file" # Keep only newest 50 results
 }
 
 source_guntab() {
@@ -678,7 +679,7 @@ source_guntab() {
     local url='https://www.guntab.com/scam-websites'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -zoE '<table class="datatable-list table">.*</table>' \
-        | grep -aoE '[[:alnum:].-]+\.[[:alnum:]-]{2,}$' > "$results_file"
+        | grep -aoE "${DOMAIN_REGEX}$" > "$results_file"
         # Note results are not sorted by time added
 }
 
@@ -696,10 +697,11 @@ source_petscams() {
     # Each page in theory should return 15 domains, but the regex also matches
     # domains under 'Latest Articles' at the bottom of the page, so the number
     # of domains returned per page may be >15.
-    # Note [a-z] does not seem to work in this regex expression
-    grep -oE '<a href="https://petscams.com/[[:alpha:]-]+/[[:alnum:].-]+-[[:alnum:]-]{2,}/">' \
-        results.tmp | mawk -F '/' '{sub(/-[0-9]$/, "", $5);
-        gsub(/-/, ".", $5); print $5}' > "$results_file"
+    # [:alpha:] is used because [a-z] does not seem to work here
+    # Matching '/">' ensures not matching false positives
+    grep -Po "<a href=\"https://petscams.com/[[:alpha:]-]+/\K${DOMAIN_REGEX}(?=/\">)" \
+        results.tmp | mawk '{sub(/-[0-9]$/, "", $0);
+        gsub(/-/, ".", $0); print $0}' > "$results_file"
 
     rm results.tmp
 }
@@ -712,9 +714,9 @@ source_scamdirectory() {
 
     local url='https://scam.directory/category'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -oE 'href="/[[:alnum:].-]+-[[:alnum:]-]{2,}" title' \
-        | mawk -F '"/|"' 'NR<=100 {gsub(/-/, ".", $2); print $2}' \
-        > "$results_file"  # Keep only newest 100 results
+        | grep -Po "href=\"/\K${DOMAIN_REGEX}(?=\" title)" \
+        | mawk 'NR<=100 {gsub(/-/, ".", $0); print $0}' > "$results_file"
+        # Keep only newest 100 results
 }
 
 source_scamadviser() {
@@ -728,8 +730,7 @@ source_scamadviser() {
     # Trailing slash intentionally omitted
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<h2 class="mb-0">.*</h2>' \
-        | grep -oE '([0-9]|[A-Z])[[:alnum:].-]+\[?\.\]?[[:alnum:]-]{2,}' \
-        | sed 's/\[//; s/\]//' > "$results_file"
+        | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_stopgunscams() {
@@ -741,9 +742,8 @@ source_stopgunscams() {
     local url='https://stopgunscams.com'
     # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
-        | grep -oE 'class="rank-math-html-sitemap__link">[[:alnum:].-]+\.[[:alnum:]-]{2,}' \
-        | mawk -F '>' 'NR<=100 {print $2}' > "$results_file"
-        # Keep only newest 100 results
+        | grep -Po "class=\"rank-math-html-sitemap__link\">\K${DOMAIN_REGEX}" \
+        | head -n 100 > "$results_file" # Keep only newest 100 results
 }
 
 # Entry point
