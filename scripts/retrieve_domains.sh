@@ -29,22 +29,22 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-    source_manual
     source_aa419
+    source_dnstwist
     source_emerging_threats
     source_fakewebsitebuster
-    source_dnstwist
+    source_google_search
     source_guntab
     source_jeroengui_phishing
     source_jeroengui_scam
+    source_manual
     source_petscams
     source_phishstats
     source_phishstats_nrd
     source_regex
-    source_scamdirectory
     source_scamadviser
+    source_scamdirectory
     source_stopgunscams
-    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -598,36 +598,6 @@ source_regex() {
     done <<< "$targets"
 }
 
-source_phishstats() {
-    source='PhishStats'
-    ignore_from_light=true
-    results_file='data/pending/domains_phishstats.tmp'
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local url='https://phishstats.info/phish_score.csv'
-    # Get URLs with no subdirectories, exclude IP addresses and extract domains
-    # (?=/?\"?$) is lookahead that matches an optional slash followed by an
-    # optional end quote at the end of the line.
-    curl -sSL "$url" | mawk -F ',' '{print $3}' \
-        | grep -Po "^\"?https?://\K${STRICT_DOMAIN_REGEX}(?=/?\"?$)" \
-        | sort -u -o "$results_file"
-
-    # Get matching NRDs for light version (Unicode ignored)
-    comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
-}
-
-source_phishstats_nrd() {
-    # For the light version
-    # Only includes domains found in the NRD feed
-    source='PhishStats (NRDs)'
-    results_file='data/pending/domains_phishstats_nrd.tmp'
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    mv phishstats_nrds.tmp "$results_file"
-}
-
 source_manual() {
     source='Manual'
     results_file='data/pending/domains_manual.tmp'
@@ -738,17 +708,34 @@ source_petscams() {
     rm results.tmp
 }
 
-source_scamdirectory() {
-    source='scam.directory'
-    results_file="data/pending/domains_${source}.tmp"
+source_phishstats() {
+    source='PhishStats'
+    ignore_from_light=true
+    results_file='data/pending/domains_phishstats.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://scam.directory/category'
-    curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -Po "href=\"/\K${DOMAIN_DASH_REGEX}(?=\" title)" \
-        | mawk 'NR<=100 {gsub(/-/, ".", $0); print $0}' > "$results_file"
-        # Keep only newest 100 results
+    local url='https://phishstats.info/phish_score.csv'
+    # Get URLs with no subdirectories, exclude IP addresses and extract domains
+    # (?=/?\"?$) is lookahead that matches an optional slash followed by an
+    # optional end quote at the end of the line.
+    curl -sSL "$url" | mawk -F ',' '{print $3}' \
+        | grep -Po "^\"?https?://\K${STRICT_DOMAIN_REGEX}(?=/?\"?$)" \
+        | sort -u -o "$results_file"
+
+    # Get matching NRDs for light version (Unicode ignored)
+    comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
+}
+
+source_phishstats_nrd() {
+    # For the light version
+    # Only includes domains found in the NRD feed
+    source='PhishStats (NRDs)'
+    results_file='data/pending/domains_phishstats_nrd.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    mv phishstats_nrds.tmp "$results_file"
 }
 
 source_scamadviser() {
@@ -764,6 +751,19 @@ source_scamadviser() {
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<h2 class="mb-0">.*</h2>' \
         | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" > "$results_file"
+}
+
+source_scamdirectory() {
+    source='scam.directory'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://scam.directory/category'
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
+        | grep -Po "href=\"/\K${DOMAIN_DASH_REGEX}(?=\" title)" \
+        | mawk 'NR<=100 {gsub(/-/, ".", $0); print $0}' > "$results_file"
+        # Keep only newest 100 results
 }
 
 source_stopgunscams() {
