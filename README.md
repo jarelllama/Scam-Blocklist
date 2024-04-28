@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 9,023[^1] malicious NRDs were found.
+In the last 30 days, more than 9,040[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -23,15 +23,15 @@ In the last 30 days, more than 9,023[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 64313
-Light version: 5840
+Total domains: 64882
+Light version: 6414
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |         0 |      55% | Emerging Threats
    20 |        16 |       6% | Google Search
-    0 |         0 |       0% | Jeroengui daily feed
-    0 |         0 |       0% | Jeroengui weekly feed
+  574 |         0 |       2% | Jeroengui daily feed
+  590 |         0 |      15% | Jeroengui weekly feed
    10 |         1 |       1% | Manual Entries
   282 |       502 |      18% | PhishStats
    11 |        29 |       0% | PhishStats (NRDs)
@@ -44,7 +44,7 @@ Today | Yesterday | Excluded | Source
    64 |         8 |      67% | scam.directory
     0 |         8 |      38% | scamadviser.com
     3 |        10 |       4% | stopgunscams.com
- 1324 |      6362 |      17% | All sources
+ 2488 |      6362 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
