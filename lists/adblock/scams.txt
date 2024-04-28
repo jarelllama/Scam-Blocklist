@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 04.28.130716.2024
+! Version: 04.28.131337.2024
 ! Expires: 12 hours
-! Last modified: Sun Apr 28 13:07:16 UTC 2024
+! Last modified: Sun Apr 28 13:13:37 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 64882
+! Number of entries: 64884
 !
 ||0.0.0dbs.cryptonight.net^
 ||0.0.0fileserver.cryptonight.net^
@@ -24192,6 +24192,7 @@
 ||grapefruit20745545.brizy.site^
 ||graph-transparencymeta.my.id^
 ||graph-transparencypage.my.id^
+||graph.facebook.com.hireka.biz.id^
 ||graph.instagram.com.hireka.biz.id^
 ||graphicdesignmarketingllc.com^
 ||grappsg0v.firebaseapp.com^
@@ -61307,6 +61308,7 @@
 ||welcobnk.com^
 ||welcome-exodus.webflow.io^
 ||welcome-mazzelab.app^
+||welcomecnb-dot-clever-hangar-358813.ue.r.appspot.com^
 ||welder-market.com^
 ||welikeflorianopolis.com.br^
 ||wellappliance.com^
