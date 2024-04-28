@@ -33,7 +33,6 @@ readonly -a SOURCES=(
     source_dnstwist
     source_emerging_threats
     source_fakewebsitebuster
-    source_google_search
     source_guntab
     source_jeroengui_phishing
     source_jeroengui_scam
@@ -45,6 +44,7 @@ readonly -a SOURCES=(
     source_scamadviser
     source_scamdirectory
     source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
