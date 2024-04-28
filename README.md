@@ -30,8 +30,8 @@ New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |         0 |      54% | Emerging Threats
     0 |        16 |       6% | Google Search
-    0 |      4831 |       4% | Jeroengui phishing
-    0 |       294 |       0% | Jeroengui scam
+    0 |         0 |       0% | Jeroengui daily feed
+    0 |         0 |       0% | Jeroengui weekly feed
     5 |         1 |       1% | Manual Entries
     0 |       502 |      18% | PhishStats
     0 |        29 |       0% | PhishStats (NRDs)
