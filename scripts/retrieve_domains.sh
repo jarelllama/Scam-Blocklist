@@ -29,22 +29,22 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-    source_aa419
-    source_dnstwist
-    source_emerging_threats
-    source_fakewebsitebuster
-    source_guntab
+    #source_aa419
+    #source_dnstwist
+    #source_emerging_threats
+    #source_fakewebsitebuster
+    #source_guntab
     source_jeroengui_daily
     source_jeroengui_weekly
-    source_manual
-    source_petscams
-    source_phishstats
-    source_phishstats_nrd
-    source_regex
-    source_scamadviser
-    source_scamdirectory
-    source_stopgunscams
-    source_google_search
+    #source_manual
+    #source_petscams
+    #source_phishstats
+    #source_phishstats_nrd
+    #source_regex
+    #source_scamadviser
+    #source_scamdirectory
+    #source_stopgunscams
+    #source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -668,7 +668,7 @@ source_jeroengui_daily() {
 
     local url='https://file.jeroengui.be'
     # Get URLs with no subdirectories, exclude IP addresses and extract domains
-    curl -sSLZ "${url}/{scam,phishing]/last_24_hours.txt" \
+    curl -sSLZ "${url}/{scam,phishing}/last_24_hours.txt" \
         | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
 }
 
@@ -681,7 +681,7 @@ source_jeroengui_weekly() {
 
     local url='https://file.jeroengui.be'
     # Get URLs with no subdirectories, exclude IP addresses and extract domains
-    curl -sSLZ "${url}/{scam,phishing]/last_week.txt" \
+    curl -sSLZ "${url}/{scam,phishing}/last_week.txt" \
         | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
 }
 
