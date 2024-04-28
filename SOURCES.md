@@ -16,10 +16,9 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
 | [Hagezi's NRD List](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#nrd) | NRD | - | - |
-| [Jeroen Gui's phishing list](https://jeroengui.be/anti-phishing-project/) | Phishing | | Yes |
-| [Jeroen Gui's scam list](https://jeroengui.be/anti-phishing-project/) | Any | | |
+| [Jeroen Gui's Phishing & Scam lists](https://jeroengui.be/anti-phishing-project/)[^1] | Phishing | | |
 | [PetScams.com](https://petscams.com/) | Pet | | |
-| [PhishStats](https://phishstats.info/)[^1] | Phishing | | |
+| [PhishStats](https://phishstats.info/)[^2] | Phishing | | |
 | [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) | Phishing | | Yes |
 | [Scam Directory](https://scam.directory/) | Any | | |
 | [Scam.Delivery](https://scam.delivery/) | Non-delivery | Yes | - |
@@ -31,4 +30,5 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [openSquat](https://github.com/atenreiro/opensquat) | Phishing | Yes | - |
 | [r/Scams](https://www.reddit.com/r/Scams/) | Any | Yes | - |
 
-[^1]: Only domains found in the NRD feed are used for the light version.
+[^1]: The full and the light versions use the weekly and daily feeds respectively.
+[^2]: Only domains found in the NRD feed are used for the light version.
