@@ -455,7 +455,8 @@ search_google() {
     # Loop through each page of results
     for start in {1..100..10}; do
     # Indentation intentionally lacking here
-    params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&start=${start}&excludeTerms=scam&filter=0"
+    # Restrict to results from the last 30 days
+    params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&dateRestrict=m1&sort=date&start=${start}&filter=0"
     page_results="$(curl -sS "${url}?${params}")"
 
         (( query_count++ ))
@@ -762,8 +763,8 @@ source_scamdirectory() {
     local url='https://scam.directory/category'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "href=\"/\K${DOMAIN_DASH_REGEX}(?=\" title)" \
-        | mawk 'NR<=100 {gsub(/-/, ".", $0); print $0}' > "$results_file"
-        # Keep only newest 100 results
+        | mawk 'NR<=50 {gsub(/-/, ".", $0); print $0}' > "$results_file"
+        # Keep only newest 50 results
 }
 
 source_stopgunscams() {
