@@ -24,7 +24,7 @@ In the last 30 days, more than 8,292[^1] malicious NRDs were found.
 
 ``` text
 Total domains: 65672
-Light version: 7460
+Light version: 6812
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
