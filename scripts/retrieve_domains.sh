@@ -34,8 +34,8 @@ readonly -a SOURCES=(
     source_emerging_threats
     source_fakewebsitebuster
     source_guntab
-    source_jeroengui_daily
-    source_jeroengui_weekly
+    source_jeroengui_phishing
+    source_jeroengui_scam
     source_manual
     source_petscams
     source_phishstats
@@ -661,29 +661,28 @@ source_guntab() {
         # Note results are not sorted by time added
 }
 
-source_jeroengui_daily() {
-    source='Jeroengui daily'
-    results_file='data/pending/domains_jeroengui_daily.tmp'
+source_jeroengui_phishing() {
+    source='Jeroengui phishing'
+    ignore_from_light=true
+    results_file='data/pending/domains_jeroengui_phishing.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://file.jeroengui.be'
+    local url='https://file.jeroengui.be/phishing/last_week.txt'
     # Get URLs with no subdirectories, exclude IP addresses and extract domains
-    curl -sSLZ "${url}/{scam,phishing}/last_24_hours.txt" \
-        | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
+    curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" \
+        > "$results_file"
 }
 
-source_jeroengui_weekly() {
-    source='Jeroengui weekly'
-    ignore_from_light=true
-    results_file='data/pending/domains_jeroengui_weekly.tmp'
+source_jeroengui_scam() {
+    source='Jeroengui scam'
+    results_file='data/pending/domains_jeroengui_scam.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://file.jeroengui.be'
-    # Get URLs with no subdirectories, exclude IP addresses and extract domains
-    curl -sSLZ "${url}/{scam,phishing}/last_week.txt" \
-        | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" > "$results_file"
+    local url='https://file.jeroengui.be/scam/last_week.txt'
+    curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" \
+        > "$results_file"
 }
 
 source_petscams() {
