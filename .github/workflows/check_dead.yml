@@ -9,6 +9,7 @@ permissions:
 jobs:
   remove-dead-domains:
     runs-on: ubuntu-latest
+    timeout-minutes: 180  # For if the Dead Domains Linter API hangs
     steps:
       - name: Checkout
         uses: actions/checkout@v4
