@@ -28,7 +28,7 @@ Light version: 7007
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    0 |         0 |      58% | Emerging Threats
+    0 |         0 |      58% | Emerging Threats phishing rules
    50 |       442 |       6% | Google Search
   968 |         0 |       8% | Jeroengui phishing feed
    15 |         0 |       0% | Jeroengui scam feed
