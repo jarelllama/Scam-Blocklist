@@ -29,22 +29,22 @@ Light version: 6812
 New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |         0 |      57% | Emerging Threats
-  442 |        20 |       6% | Google Search
+    0 |       442 |       6% | Google Search
     0 |         0 |       4% | Jeroengui phishing feed
     0 |         0 |       0% | Jeroengui scam feed
-    0 |        20 |       1% | Manual Entries
- 1105 |       282 |      18% | PhishStats
-  146 |        11 |       0% | PhishStats (NRDs)
-  417 |       717 |       3% | Regex Matching (NRDs)
-    6 |        16 |       9% | aa419.org
-   40 |        43 |       0% | dnstwist (NRDs)
+    0 |         0 |       1% | Manual Entries
+    0 |      1105 |      18% | PhishStats
+    0 |       146 |       0% | PhishStats (NRDs)
+    0 |       417 |       3% | Regex Matching (NRDs)
+    0 |         6 |       9% | aa419.org
+    0 |        40 |       0% | dnstwist (NRDs)
     0 |         0 |      22% | fakewebsitebuster.com
-    6 |       149 |      20% | guntab.com
-    8 |        20 |       9% | petscams.com
-   50 |        64 |      66% | scam.directory
+    0 |         6 |      20% | guntab.com
+    0 |         8 |       9% | petscams.com
+    0 |        50 |      66% | scam.directory
     0 |         0 |      38% | scamadviser.com
-    0 |         3 |       4% | stopgunscams.com
- 3711 |      2498 |      17% | All sources
+    0 |         0 |       4% | stopgunscams.com
+    0 |      3711 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -122,9 +122,9 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 23
-API calls made today: 78
-Domains retrieved today: 442
+Active search terms: 29
+API calls made today: 0
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -141,7 +141,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 64
-Domains retrieved today: 40
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
@@ -174,8 +174,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 1944
-Resurrected domains added today: 258
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -190,8 +190,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 321
-Unparked domains added today: 274
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## As seen in
