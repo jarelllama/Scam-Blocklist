@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 6,216[^1] malicious NRDs were found.
+In the last 30 days, more than 5,559[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -23,15 +23,15 @@ In the last 30 days, more than 6,216[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 68888
-Light version: 7100
+Total domains: 68890
+Light version: 7101
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
   251 |         0 |      55% | Emerging Threats phishing
    33 |        42 |       6% | Google Search
-  772 |      1050 |       9% | Jeroengui phishing feed
-   14 |        12 |       1% | Jeroengui scam feed
+  773 |      1050 |       9% | Jeroengui phishing feed
+   15 |        12 |       1% | Jeroengui scam feed
     0 |         0 |       1% | Manual Entries
   523 |      1019 |      18% | PhishStats
    42 |        79 |       0% | PhishStats (NRDs)
@@ -44,7 +44,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      66% | scam.directory
     0 |        10 |      38% | scamadviser.com
     0 |         0 |       4% | stopgunscams.com
- 2263 |      2745 |      17% | All sources
+ 2265 |      2745 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
