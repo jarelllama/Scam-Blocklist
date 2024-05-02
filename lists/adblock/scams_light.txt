@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.02.125526.2024
+! Version: 05.02.153443.2024
 ! Expires: 12 hours
-! Last modified: Thu May  2 12:55:26 UTC 2024
+! Last modified: Thu May  2 15:34:43 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 7100
+! Number of entries: 7101
 !
 ||0.0meta1.cryptonight.net^
 ||0.seetherofficialmerch.com^
@@ -2234,6 +2234,7 @@
 ||fenodex.com^
 ||feogi.com^
 ||fernandogoes.com^
+||fesalsa.online^
 ||festbuy.ru^
 ||festiart.com^
 ||fexpresslogisticservice.com^
