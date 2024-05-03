@@ -5,30 +5,29 @@
 # Function 'format_file' standardizes the format of the given file.
 #   $1: file to be formatted
 format_file() {
-    file="$1"
+    local file="$1"
 
-    [[ ! -f "$file" ]] && return
-
+    if [[ ! -f "$file" ]]; then
+        return
+    fi
+    
     # Applicable to all files:
     # Remove carriage return characters, empty lines, and trailing whitespaces
     sed -i 's/\r//g; /^$/d; s/[[:space:]]*$//' "$file"
 
     # Applicable to specific files/extensions:
     case "$file" in
-        'data/dead_domains.txt'|'data/parked_domains.txt')
+        data/dead_domains.txt|data/parked_domains.txt)
             # Remove duplicates, whitespaces, and convert to lowercase
-            mawk '!seen[$0]++ {gsub(/ /, "", $0); print tolower($0)}' "$file" \
-                > "${file}.tmp"
+            awk '!seen[$0]++ {gsub(/ /, "", $0); print tolower($0)}' "$file" > "${file}.tmp"
             ;;
-        'config/parked_terms.txt')
+        config/parked_terms.txt)
             # Convert to lowercase, sort, and remove duplicates
-            mawk '{print tolower($0)}' "$file" | sort -u -o "${file}.tmp"
+            awk '{print tolower($0)}' "$file" | sort -u -o "${file}.tmp"
             ;;
         *.txt|*.tmp)
-            # Remove whitespaces, convert to lowercase, sort, and remove
-            # duplicates
-            mawk '{gsub(/ /, "", $0); print tolower($0)}' "$file" \
-                | sort -u -o "${file}.tmp"
+            # Remove whitespaces, convert to lowercase, sort, and remove duplicates
+            awk '{gsub(/ /, "", $0); print tolower($0)}' "$file" | sort -u -o "${file}.tmp"
             ;;
         *)
             return
@@ -40,9 +39,7 @@ format_file() {
 
 # Function 'format_all' formats all files in the config and data directories.
 format_all() {
-    for file in config/* data/*; do
-        format_file "$file"
-    done
+    find config data -type f -exec format_file {} \;
 }
 
 # Function 'log_domains' logs domain processing events into the domain log.
@@ -51,21 +48,16 @@ format_all() {
 #   $3: source
 #   $4: timestamp (optional)
 log_domains() {
-    # Check if a file or variable was passed
-    # Note [[ -s ]] causes unintended behavior when the file is empty
-    if [[ -f "$1" ]]; then
-        domains="$(<"$1")"
-    else
-        domains="$1"
+    local domains="$1"
+    local event="$2"
+    local source="$3"
+    local timestamp="${4:-$(date -u +"%H:%M:%S %d-%m-%y")}"
+
+    if [[ -z "$domains" ]]; then
+        return
     fi
 
-    # Return if no domains were passed
-    [[ -z "$domains" ]] && return
-
-    timestamp="${4:-$(date -u +"%H:%M:%S %d-%m-%y")}"
-
-    printf "%s\n" "$domains" \
-        | mawk -v event="$2" -v source="$3" -v time="$timestamp" \
+    printf "%s\n" "$domains" | awk -v event="$event" -v source="$source" -v time="$timestamp" \
         '{print time "," event "," $0 "," source}' >> config/domain_log.csv
 }
 
@@ -74,16 +66,13 @@ log_domains() {
 #   $1: file to be pruned
 #   $2: maximum number of lines to keep
 prune_lines() {
-    lines="$(wc -l < "$1")"
+    local file="$1"
+    local max_lines="$2"
+    local lines=$(wc -l < "$file")
 
-    if (( lines > $2 )); then
+    if (( lines > max_lines )); then
         # Do not delete the header in CSVs
-        if [[ "$1" == *.csv ]]; then
-            sed -i "2,$(( lines - $2 ))d" "$1"
-            return
-        fi
-
-        sed -i "1,$(( lines - $2 ))d" "$1"
+        sed -i "1,$(( lines - max_lines ))d" "$file"
     fi
 }
 
@@ -95,8 +84,7 @@ prune_lines() {
 download_toplist() {
     [[ -f toplist.tmp ]] && return
 
-    curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
-        > toplist.tmp || send_telegram "Error downloading toplist."
+    curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - > toplist.tmp || send_telegram "Error downloading toplist."
 
     sed -i 's/^.*,//' toplist.tmp
     format_file toplist.tmp
@@ -110,17 +98,16 @@ download_toplist() {
 download_nrd_feed() {
     [[ -f nrd.tmp ]] && return
 
-    url1='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
-    url2='https://feeds.opensquat.com/domain-names-month.txt'
+    url1='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv' # This feed is not complete. I think shreshta has a trial or sample source?
+    url2='https://feeds.opensquat.com/domain-names-month.txt' # I RECEIVED ERROR 403! IS THIS FEED TEMPORARELY DOWN?
     url3='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
 
     {
-        curl -sSL "$url1" || send_telegram \
-            "Error occurred while downloading NRD feeds."
+        curl -sSL "$url1" || send_telegram "Error occurred while downloading NRD feeds."
 
         # Download the bigger feeds in parallel
         curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url2" "$url3"
-    } | mawk '!/#/' > nrd.tmp
+    } | awk '!/#/' > nrd.tmp
 
     # Appears to be the best way of checking if the bigger feeds downloaded
     # properly without checking each feed individually and losing
@@ -146,7 +133,6 @@ send_telegram() {
 }
 
 # Entry point
-
 case "$1" in
     --format)
         format_file "$2"
@@ -174,3 +160,5 @@ case "$1" in
         exit 1
         ;;
 esac
+
+exit 0
