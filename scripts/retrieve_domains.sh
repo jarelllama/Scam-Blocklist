@@ -195,7 +195,7 @@ process_source() {
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$results_file")"
     whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
 
-    # Remove non-domain entries including IP addresses excluding punycode
+    # Remove non-domain entries including IP addresses excluding Punycode
     invalid="$(grep -vE "^${STRICT_DOMAIN_REGEX}$" "$results_file")"
     # Note invalid entries are not counted
     filter "$invalid" invalid --preserve > /dev/null
