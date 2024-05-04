@@ -74,16 +74,18 @@ log_domains() {
 #   $1: file to be pruned
 #   $2: maximum number of lines to keep
 prune_lines() {
+    file="$1"
+    max_lines="$2"
     lines="$(wc -l < "$1")"
 
-    if (( lines > $2 )); then
+    if (( lines > max_lines )); then
         # Do not delete the header in CSVs
-        if [[ "$1" == *.csv ]]; then
-            sed -i "2,$(( lines - $2 ))d" "$1"
+        if [[ "$file" == *.csv ]]; then
+            sed -i "2,$(( lines - max_lines ))d" "$file"
             return
         fi
 
-        sed -i "1,$(( lines - $2 ))d" "$1"
+        sed -i "1,$(( lines - max_lines ))d" "$file"
     fi
 }
 
