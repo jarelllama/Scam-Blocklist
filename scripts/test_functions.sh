@@ -299,7 +299,7 @@ test_manual_addition() {
     printf ",Manual,,1,1,0,0,0,0,,saved\n" >> out_source_log.txt
 }
 
-# TEST: conversion to punycode
+# TEST: conversion to Punycode
 test_punycode_conversion() {
     # INPUT
     printf "punycodé-test.cöm\n" >> input.txt
