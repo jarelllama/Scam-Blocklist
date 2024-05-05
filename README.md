@@ -23,8 +23,8 @@ In the last 30 days, more than 3,781[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 69884
-Light version: 7179
+Total domains: 69885
+Light version: 7180
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -32,7 +32,7 @@ Today | Yesterday | Excluded | Source
    42 |        33 |       6% | Google Search
   883 |       946 |      10% | Jeroengui phishing feed
     7 |        10 |       2% | Jeroengui scam feed
-    0 |         0 |       1% | Manual Entries
+    1 |         0 |       1% | Manual Entries
   405 |       701 |      19% | PhishStats
    14 |        50 |       0% | PhishStats (NRDs)
   725 |       640 |       3% | Regex Matching (NRDs)
@@ -44,7 +44,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      66% | scam.directory
     2 |         1 |      38% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
- 2166 |      2422 |      17% | All sources
+ 2167 |      2422 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -122,7 +122,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 13
+Active search terms: 14
 API calls made today: 65
 Domains retrieved today: 42
 ```
