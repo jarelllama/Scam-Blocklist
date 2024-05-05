@@ -773,6 +773,8 @@ source_stopgunscams() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://stopgunscams.com'
+    # Regarding using /sitemap:
+    # https://github.com/jarelllama/Scam-Blocklist/issues/365
     # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
         | grep -Po "class=\"rank-math-html-sitemap__link\">\K${DOMAIN_REGEX}" \
