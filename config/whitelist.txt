@@ -1,5 +1,3 @@
-^google.com$
-^cf-ipfs.com$
 ^18.116.21.103$
 ^3.144.84.22$
 ^31.220.2.141$
@@ -25,6 +23,7 @@
 ^calameo.com$
 ^carrefouruae.com$
 ^catch.com.au$
+^cf-ipfs.com$
 ^cherypop.com$
 ^clutch.co$
 ^companies.naukri.com$
@@ -40,7 +39,6 @@
 ^etsy.com$
 ^everythingkitchens.com$
 ^experienceleague.adobe.com$
-fakewebsite
 ^findglocal.com$
 ^firstcry.com$
 ^fobshanghai.com$
@@ -55,6 +53,7 @@ fakewebsite
 ^gnacsports.com$
 ^google.ae$
 ^google.bg$
+^google.com$
 ^google.com.pe$
 ^google.com.qa$
 ^google.com.sa$
@@ -95,7 +94,6 @@ fakewebsite
 ^localnetld.com$
 ^lostmypass.com$
 ^lyst.co.uk$
-malware
 ^marciatravessoni.com.br$
 ^matrixwarehouse.co.za$
 ^maxxfour.com$
@@ -121,15 +119,12 @@ malware
 ^pearson.com$
 ^pennfosterglobal.com$
 ^philips.com$
-phishing
 ^podfriend.com$
 ^porteduc.ml$
 ^preceden.com$
 ^revanced.net$
 ^s.a.r.l$
-scam-detector
-scamadviser
-scamscavenger
+^scribd.com$
 ^shawacademy.com$
 ^signal-arnaques.com$
 ^singletrackworld.com$
@@ -166,11 +161,16 @@ scamscavenger
 ^wired.com$
 ^wolvden.com$
 ^wspa.com$
-^scribd.com$
-xiaoming
 ^xvideos.es$
 ^yelp.com$
 ^zdnet.com$
 ^zhentaivn.net$
 ^zoomex.com$
 ^zoominfo.com$
+fakewebsite
+malware
+phishing
+scam-detector
+scamadviser
+scamscavenger
+xiaoming
