@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.08.081423.2024
+! Version: 05.08.081536.2024
 ! Expires: 12 hours
-! Last modified: Wed May  8 08:14:23 UTC 2024
+! Last modified: Wed May  8 08:15:36 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 72812
+! Number of entries: 72813
 !
 ||0.0.0dbs.cryptonight.net^
 ||0.0.0fileserver.cryptonight.net^
@@ -70006,6 +70006,7 @@
 ||wp.3381811460.workers.dev^
 ||wp.zmax.eu.org^
 ||wpadki-gwiazdwp.pl^
+||wpclick.cc^
 ||wpm.mutuelcredible.com^
 ||wpmarketing.site^
 ||wpn.cdpowghe.top^
