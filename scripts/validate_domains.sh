@@ -67,8 +67,8 @@ validate() {
     sort -u "$RAW_LIGHT" -o "$RAW_LIGHT"
 
     # Remove whitelisted domains excluding blacklisted domains
-    # Note whitelist matching uses keywords
-    whitelisted="$(grep -Ff "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
+    # Note whitelist matching uses regex
+    whitelisted="$(grep -Ef "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
     filter "$whitelisted" whitelist
 
     # Remove domains with whitelisted TLDs

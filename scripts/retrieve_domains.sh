@@ -185,8 +185,8 @@ process_source() {
     log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
 
     # Remove whitelisted domains excluding blacklisted domains
-    # Note whitelist matching uses keywords
-    whitelisted="$(grep -Ff "$WHITELIST" "$results_file" | grep -vxFf "$BLACKLIST")"
+    # Note whitelist matching uses regex
+    whitelisted="$(grep -Ef "$WHITELIST" "$results_file" | grep -vxFf "$BLACKLIST")"
     whitelisted_count="$(filter "$whitelisted" whitelist)"
 
     # Remove domains with whitelisted TLDs
