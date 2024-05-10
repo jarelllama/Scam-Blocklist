@@ -365,7 +365,7 @@ test_subdomain_removal() {
 # TEST: whitelisted domains removal and blacklist logging
 test_whitelist_blacklist() {
     # Sample whitelist term
-    printf "^whitelist\n" >> "$WHITELIST"
+    printf '^whitelist-test\.com$\n' >> "$WHITELIST"
     # Sample blacklisted domain
     printf "whitelist-blacklisted-test.com\n" >> "$BLACKLIST"
     # INPUT
