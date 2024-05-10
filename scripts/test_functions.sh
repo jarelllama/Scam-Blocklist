@@ -651,5 +651,7 @@ check_output() {
     error=true
 }
 
+# Entry point
+
 # Do not allow running locally
 [[ "$CI" == true ]] && main "$1"
