@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.12.053355.2024
+! Version: 05.12.084811.2024
 ! Expires: 12 hours
-! Last modified: Sun May 12 05:33:55 UTC 2024
+! Last modified: Sun May 12 08:48:11 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 74877
+! Number of entries: 74875
 !
 ||0-usps.com^
 ||0.0.0.0en.cryptonight.net^
@@ -41782,7 +41782,6 @@
 ||mining-eth.club^
 ||mining-eth.com^
 ||mining-eth.vip^
-||mining-money.xyz^
 ||mining-profits.com^
 ||mining-tec.kz^
 ||mining-trustwallet.info^
@@ -44579,7 +44578,6 @@
 ||newterry.shop^
 ||newtest.serpgold.com^
 ||newtestresult.duckdns.org^
-||newtoki337.com^
 ||newtonrunningsverige.com^
 ||newtoolsregion.com^
 ||newtoolstore.com^
