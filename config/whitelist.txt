@@ -7,7 +7,10 @@
 ^about\.me$
 ^aha\.org$
 ^aihitdata\.com$
+^airbnb\.com\.hn$
 ^alpari\.org$
+^amazon\.[a-z]*$
+^amazon\.com\.[a-z]*$
 ^anatakip\.com$
 ^apollo\.io$
 ^arabnews\.com$
@@ -34,6 +37,7 @@
 ^copyleaks\.com$
 ^creatikbilisim\.com$
 ^crunchbase\.com$
+^cwbrokers\.com$
 ^datanyze\.com$
 ^de-reviews\.com$
 ^econstrunet\.com\.br$
@@ -54,6 +58,8 @@
 ^gentikoule\.gr$
 ^github\.com$
 ^gnacsports\.com$
+^google\.[a-z]*$
+^google\.com\.[a-z]*$
 ^graduan\.com$
 ^grimfrost\.com$
 ^gudsen\.com$
@@ -159,6 +165,7 @@
 ^virtualgraffiti\.com$
 ^virtuemap\.com$
 ^walkhighlands\.co\.uk$
+^walmart\.com\.ni$
 ^webparanoid\.com$
 ^whitecoatinvestor\.com$
 ^wifispc\.com$
@@ -173,13 +180,6 @@
 ^zhentaivn\.net$
 ^zoomex\.com$
 ^zoominfo\.com$
-^amazon\.[a-z]*$
-^amazon\.com\.[a-z]*$
-^google\.[a-z]*$
-^google\.com\.[a-z]*$
-^airbnb\.com\.hn$
-^cwbrokers\.com$
-^walmart\.com\.ni$
 fakewebsite
 malware
 phishing
