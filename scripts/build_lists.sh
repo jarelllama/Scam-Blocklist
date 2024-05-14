@@ -32,13 +32,15 @@ main() {
 # Function 'build' removes redundant entries from the raw files and compiles
 # them into the various blocklist formats.
 build() {
-    # Append wildcards to optimize the list
-    sort -u "$WILDCARDS" "$source" -o "$source"
+    # Append wildcards to the raw file to optimize the list
+    # The wildcards are not saved to the raw file as some of them do not
+    # resolve and would be removed by the dead check.
+    sort -u "$WILDCARDS" "$source" -o source.tmp
 
     # Compile blocklist. See the list of transformations here:
     # https://github.com/AdguardTeam/HostlistCompiler
     printf "\n"
-    hostlist-compiler -i "$source" -o compiled.tmp
+    hostlist-compiler -i source.tmp -o compiled.tmp
 
     # Remove comments
     sed -i '/!/d' compiled.tmp
