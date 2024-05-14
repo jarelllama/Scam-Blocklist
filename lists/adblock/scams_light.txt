@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.14.041247.2024
+! Version: 05.14.042300.2024
 ! Expires: 12 hours
-! Last modified: Tue May 14 04:12:47 UTC 2024
+! Last modified: Tue May 14 04:23:00 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 7925
+! Number of entries: 7921
 !
 ||0.0meta1.cryptonight.net^
 ||0.seetherofficialmerch.com^
@@ -19,6 +19,7 @@
 ||1122288914.z28.web.core.windows.net^
 ||123hgh.com^
 ||12bet938.com^
+||185-224-83-37.cprapid.com^
 ||1911buildkit.com^
 ||1stccjp04101err0rsers.z31.web.core.windows.net^
 ||1stccjp04103err0rsers.z31.web.core.windows.net^
@@ -4866,8 +4867,6 @@
 ||pawsylove.com^
 ||pay-usps.shop^
 ||pay-usps.xyz^
-||pay.nalozhka.nalozhka.seckys5.credituniouruae.whod1dars.185-224-83-37.cprapid.com^
-||pay.www.wwwozon.pay.pay.shoid1dars.185-224-83-37.cprapid.com^
 ||payback-grouplp.com^
 ||payback-inc.com^
 ||payback-ltd.com^
@@ -7679,7 +7678,6 @@
 ||www-iphoe.com^
 ||www-usps.cloud^
 ||www-v-pass-ne.com^
-||wwwblog.185-224-83-37.cprapid.com^
 ||wwwtoken.com^
 ||wyalmart.com^
 ||wyczyscto.com^
@@ -7791,8 +7789,6 @@
 ||yamahabansheeandelectricbikeshop.com^
 ||yamahafourwheeler.com^
 ||yandeh.site^
-||yandex.nalozhka.nalozhka.ozon.mizy2d14ekys5.credituniouruae.shod1dars.185-224-83-37.cprapid.com^
-||yandex.pay.pay.avito.mizy2d14ekys5.credituniouruae.shod1dars.185-224-83-37.cprapid.com^
 ||yandext.com^
 ||yandexx.net^
 ||yandexx.online^
