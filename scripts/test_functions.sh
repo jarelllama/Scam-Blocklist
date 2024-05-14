@@ -10,6 +10,7 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
+readonly WILDCARDS='config/wildcards.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
@@ -22,13 +23,10 @@ readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
     # Initialize
-    : > "$RAW"
-    : > "$DEAD_DOMAINS"
-    : > "$SUBDOMAINS"
-    : > "$ROOT_DOMAINS"
-    : > "$PARKED_DOMAINS"
-    : > "$WHITELIST"
-    : > "$BLACKLIST"
+    for file in "$RAW" "$DEAD_DOMAINS" "$SUBDOMAINS" "$ROOT_DOMAINS" \
+        "$PARKED_DOMAINS" "$WHITELIST" "$BLACKLIST" "$WILDCARDS"; do
+        : > "$file"
+    done
     sed -i '1q' "$DOMAIN_LOG"
     sed -i '1q' "$SOURCE_LOG"
     error=false
@@ -245,7 +243,7 @@ TEST_PARKED_CHECK() {
 # correctly built with the right syntax.
 TEST_BUILD() {
     # INPUT
-    printf "build-test.com\n" >> "$RAW"
+    printf "build-test.com\n" >> "$WILDCARDS"
     printf "redundant.build-test.com\n" >> "$RAW"
 
     # EXPECTED OUTPUT

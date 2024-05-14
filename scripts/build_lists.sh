@@ -7,6 +7,7 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly ADBLOCK='lists/adblock'
 readonly DOMAINS='lists/wildcard_domains'
+readonly WILDCARDS='config/wildcards.txt'
 
 main() {
     # Install AdGuard's Hostlist Compiler
@@ -31,6 +32,9 @@ main() {
 # Function 'build' removes redundant entries from the raw files and compiles
 # them into the various blocklist formats.
 build() {
+    # Append wildcards to optimize the list
+    sort -u "$WILDCARDS" "$source" -o "$source"
+
     # Compile blocklist. See the list of transformations here:
     # https://github.com/AdguardTeam/HostlistCompiler
     printf "\n"
