@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.14.041037.2024
+! Version: 05.14.041247.2024
 ! Expires: 12 hours
-! Last modified: Tue May 14 04:10:37 UTC 2024
+! Last modified: Tue May 14 04:12:47 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 7927
+! Number of entries: 7925
 !
 ||0.0meta1.cryptonight.net^
 ||0.seetherofficialmerch.com^
@@ -244,7 +244,6 @@
 ||airbnbsex.com^
 ||airconnectionapi.azurewebsites.net^
 ||airconnectionsapijson.azurewebsites.net^
-||airdrops-event.eth.limo^
 ||airfnb.info^
 ||airfnb.store^
 ||airgadgetsolution.azurewebsites.net^
@@ -1462,7 +1461,6 @@
 ||claim-opennftpr0.firebaseapp.com^
 ||claimboxmintn0w.firebaseapp.com^
 ||claimethenafinance.000webhostapp.com^
-||claiming-bonus.eth.limo^
 ||claritymininggroup.com^
 ||clashroyalegoldandgems2022.blogspot.be^
 ||clashroyalegoldandgems2022.blogspot.mx^
@@ -2289,6 +2287,7 @@
 ||eth-events.tiiny.co^
 ||eth-swap.global^
 ||eth-usd30.com^
+||eth.limo^
 ||etharbitrage.org^
 ||etharbitrage.space^
 ||ethereum-events.net^
@@ -2366,7 +2365,6 @@
 ||exchtestcheckingapi.azurewebsites.net^
 ||exchtestcheckingapihealth.azurewebsites.net^
 ||excitedwagsenglishcockerspanielpups.com^
-||exclusive-events.eth.limo^
 ||exdocumentation.com^
 ||exeplorer.buzz^
 ||exodushashhub.com^
