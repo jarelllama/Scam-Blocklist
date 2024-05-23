@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 4,840[^1] malicious NRDs were found.
+In the last 30 days, more than 5,344[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -23,8 +23,8 @@ In the last 30 days, more than 4,840[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 85492
-Light version: 8237
+Total domains: 85636
+Light version: 8219
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -169,8 +169,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 1520
-Resurrected domains added today: 184
+Dead domains removed today: 1625
+Resurrected domains added today: 457
 ```
 
 ## Parked domains
@@ -185,8 +185,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 339
-Unparked domains added today: 83
+Parked domains removed today: 439
+Unparked domains added today: 161
 ```
 
 ## As seen in
