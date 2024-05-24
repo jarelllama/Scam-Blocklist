@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.24.045038.2024
+! Version: 05.24.045222.2024
 ! Expires: 12 hours
-! Last modified: Fri May 24 04:50:38 UTC 2024
+! Last modified: Fri May 24 04:52:22 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 85642
+! Number of entries: 85640
 !
 ||0-usps.com^
 ||0.0.0.0en.cryptonight.net^
@@ -6185,7 +6185,6 @@
 ||animaltravellocality24-7.com^
 ||animedwarf.com^
 ||animefansite.com^
-||animeshouse.app^
 ||animestorify.com^
 ||animexhd.xyz^
 ||animezeno.sbs^
@@ -13090,7 +13089,6 @@
 ||brokerproinsurance.com^
 ||brokersammopack.com^
 ||brokersfcourier.com^
-||brokersview.com^
 ||brokerswoodinsurance.co.uk^
 ||bromarketing.digital^
 ||bromo.cloud^
