@@ -12,6 +12,7 @@
 ^amazon\.[a-z]*$
 ^amazon\.com\.[a-z]*$
 ^anatakip\.com$
+^animeshouse\.app$
 ^apollo\.io$
 ^arabnews\.com$
 ^archive\.org$
@@ -25,6 +26,7 @@
 ^booktoki[0-9]{3}\.com$
 ^boykot\.co$
 ^brightnetwork\.co\.uk$
+^brokersview\.com$
 ^business2community\.com$
 ^calameo\.com$
 ^carrefouruae\.com$
@@ -188,8 +190,6 @@
 ^zhentaivn\.net$
 ^zoomex\.com$
 ^zoominfo\.com$
-^brokersview\.com$
-^animeshouse\.app$
 fakewebsite
 malware
 phishing
