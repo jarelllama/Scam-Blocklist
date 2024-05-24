@@ -43,19 +43,29 @@ check_parked() {
     mv temp "$SUBDOMAINS"
 
     # Strip subdomains from parked domains
+    strip_subdomains_from_parked
+
+    # Remove parked domains from the various files
+    remove_parked_from_files "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"
+
+    # Call shell wrapper to log parked domains into domain log
+    $FUNCTION --log-domains parked.tmp parked raw
+}
+
+# Strip subdomains from parked domains
+strip_subdomains_from_parked() {
     while read -r subdomain; do
         sed -i "s/^${subdomain}\.//" parked.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u parked.tmp -o parked.tmp
+}
 
-    # Remove parked domains from the various files
-    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
+# Remove parked domains from the various files
+remove_parked_from_files() {
+    for file in "$@"; do
         comm -23 "$file" parked.tmp > temp
         mv temp "$file"
     done
-
-    # Call shell wrapper to log parked domains into domain log
-    $FUNCTION --log-domains parked.tmp parked raw
 }
 
 # Function 'check_unparked' finds unparked domains in the parked domains file
@@ -108,24 +118,27 @@ find_parked_in() {
     split -d -l $(( $(wc -l < "$1") / 16 )) "$1"
 
     # Run checks in parallel
-    find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
-    find_parked x04 & find_parked x05 & find_parked x06 & find_parked x07 &
-    find_parked x08 & find_parked x09 & find_parked x10 & find_parked x11 &
-    find_parked x12 & find_parked x13 & find_parked x14 & find_parked x15 &
-    find_parked x16 & find_parked x17
+    for file in x??; do
+        find_parked "$file" &
+    done
     wait
     rm x??
 
     # Collate parked domains and errored domains (ignore not found errors)
-    sort -u parked_domains_x??.tmp -o parked.tmp 2> /dev/null
-    sort -u errored_domains_x??.tmp -o errored.tmp 2> /dev/null
-    rm ./*_x??.tmp 2> /dev/null
+    collate_results
 
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 
     # Return 1 if no parked domains were found
     [[ ! -s parked.tmp ]] && return 1 || return 0
+}
+
+# Collate parked domains and errored domains (ignore not found errors)
+collate_results() {
+    sort -u parked_domains_x??.tmp -o parked.tmp 2> /dev/null
+    sort -u errored_domains_x??.tmp -o errored.tmp 2> /dev/null
+    rm ./*_x??.tmp 2> /dev/null
 }
 
 # Function 'find_parked' queries sites in a given file for parked messages in
@@ -139,21 +152,21 @@ find_parked() {
     [[ ! -f "$1" ]] && return
 
     # Track progress only for first split file
+    local track=false
+    local count=1
+
     if [[ "$1" == 'x00' ]]; then
-        local track=true
-        local count=1
+        track=true
     fi
 
     # Loop through domains
     while read -r domain; do
-        if [[ "$track" == true ]]; then
-            if (( count % 100 == 0 )); then
-                printf "[info] Analyzed %s%% of domains\n" \
-                    "$(( count * 100 / $(wc -l < "$1") ))"
-            fi
-
-            (( count++ ))
+        if [[ "$track" == true && $(( count % 100 )) == 0 ]]; then
+            printf "[info] Analyzed %s%% of domains\n" \
+                "$(( count * 100 / $(wc -l < "$1") ))"
         fi
+
+        (( count++ ))
 
         # Get the site's HTML and redirect stderror to stdout for error
         # checking later
