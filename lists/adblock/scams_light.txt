@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.25.151821.2024
+! Version: 05.25.152002.2024
 ! Expires: 12 hours
-! Last modified: Sat May 25 15:18:21 UTC 2024
+! Last modified: Sat May 25 15:20:02 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 8328
+! Number of entries: 8327
 !
 ||0.0meta1.cryptonight.net^
 ||0.seetherofficialmerch.com^
@@ -3595,7 +3595,6 @@
 ||imtoken3.com^
 ||imtokezhcn.com^
 ||imtoouun.com^
-||in.pinterest.com^
 ||inabanzalivestock.co.za^
 ||inacool.com^
 ||inance.xyz^
