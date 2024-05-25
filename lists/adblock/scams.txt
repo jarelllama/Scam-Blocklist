@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 05.25.152002.2024
+! Version: 05.25.152149.2024
 ! Expires: 12 hours
-! Last modified: Sat May 25 15:20:02 UTC 2024
+! Last modified: Sat May 25 15:21:50 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 86794
+! Number of entries: 86801
 !
 ||0-usps.com^
 ||0.0.0.0en.cryptonight.net^
@@ -20368,6 +20368,7 @@
 ||datawllv3.com^
 ||datein.shop^
 ||datemeetsmart.link^
+||datemeuk.today^
 ||datgp.jaxbeach.shop^
 ||dati.online.159-100-20-216.cprapid.com^
 ||datingl.com^
@@ -20690,6 +20691,7 @@
 ||decorsalesstore.com^
 ||decotrustbank.com^
 ||decryptdexnode.com^
+||dedate.live^
 ||dede-30e87.firebaseapp.com^
 ||dede-30e87.web.app^
 ||dedf-109760.weeblysite.com^
@@ -27838,6 +27840,7 @@
 ||find-applesupport.com^
 ||find-furniture.com^
 ||find-my-apple.click^
+||find-partner.today^
 ||find-usps.com^
 ||find-usps.xyz^
 ||find-xiaomi-lost.info^
@@ -30218,6 +30221,8 @@
 ||geraldinopadovanogpo2.blogspot.com^
 ||geraldtaylor.shop^
 ||gerdance.com^
+||gerdate.live^
+||gerdating.live^
 ||gerdetect.de^
 ||gerf.choiseprog.xyz^
 ||gerginerripose.firebaseapp.com^
@@ -30238,6 +30243,7 @@
 ||germanrottweilers.online^
 ||germanshepherdor.com^
 ||germanshepherdpuppiesadoption.com^
+||germanydate.live^
 ||germanyoutletdz.com^
 ||gerobak123.org^
 ||gerobak89.org^
@@ -36553,6 +36559,7 @@
 ||hubusfashion.com^
 ||hubusvintage.com^
 ||hucgvsjoqd.net^
+||hudating.today^
 ||hudejos.de^
 ||hudhomesforsale.xyz^
 ||hudongjiaoxue.cn^
