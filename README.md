@@ -23,28 +23,28 @@ In the last 30 days, more than 5,209[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 87448
+Total domains: 87449
 Light version: 8337
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    - |         0 |      62% | Emerging Threats phishing
-    - |         0 |       7% | Google Search
-    - |         0 |      10% | Jeroengui phishing feed
-    - |         0 |       7% | Jeroengui scam feed
-    - |         1 |       1% | Manual Entries
-    - |         0 |      20% | PhishStats
-    - |         0 |       0% | PhishStats (NRDs)
-    - |         0 |       4% | Regex Matching (NRDs)
-    - |         0 |       8% | aa419.org
-    - |         0 |       0% | dnstwist (NRDs)
-    - |         0 |      43% | fakewebsitebuster.com
-    - |         0 |      22% | guntab.com
-    - |         0 |       9% | petscams.com
-    - |         0 |      65% | scam.directory
-    - |         0 |      39% | scamadviser.com
-    - |         0 |       5% | stopgunscams.com
-    - |         1 |      17% | All sources
+    0 |         0 |      62% | Emerging Threats phishing
+    0 |         0 |       7% | Google Search
+    0 |         0 |      10% | Jeroengui phishing feed
+    0 |         0 |       7% | Jeroengui scam feed
+    0 |         1 |       1% | Manual Entries
+    1 |         0 |      20% | PhishStats
+    0 |         0 |       0% | PhishStats (NRDs)
+    0 |         0 |       4% | Regex Matching (NRDs)
+    0 |         0 |       8% | aa419.org
+    0 |         0 |       0% | dnstwist (NRDs)
+    0 |         0 |      43% | fakewebsitebuster.com
+    0 |         0 |      22% | guntab.com
+    0 |         0 |       9% | petscams.com
+    0 |         0 |      65% | scam.directory
+    0 |         0 |      39% | scamadviser.com
+    0 |         0 |       5% | stopgunscams.com
+    1 |         1 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -124,7 +124,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 ``` text
 Active search terms: 16
 API calls made today: 0
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -141,7 +141,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 64
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
