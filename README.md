@@ -23,7 +23,7 @@ In the last 30 days, more than 5,209[^1] malicious NRDs were found.
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 87449
+Total domains: 87448
 Light version: 8337
 
 New domains from each source: *
