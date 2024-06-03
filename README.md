@@ -6,7 +6,7 @@ The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/w
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
 
-In the last 30 days, more than 4,470[^1] malicious NRDs were found.
+In the last 30 days, more than 4,280[^1] malicious NRDs were found.
 
 [^1]: Number calculated using NRDs from [Hagezi's NRD 30 feed](https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt). The number of malicious NRDs found in reality is higher due to additional feeds being used. See the list of feeds used here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
 
@@ -30,7 +30,7 @@ New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |         0 |      61% | Emerging Threats phishing
     0 |         0 |       7% | Google Search
-    0 |         0 |      10% | Jeroengui phishing feed
+    2 |         0 |      10% | Jeroengui phishing feed
     0 |         0 |       7% | Jeroengui scam feed
     0 |         0 |       1% | Manual Entries
     0 |         0 |      19% | PhishStats
@@ -44,7 +44,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      65% | scam.directory
     0 |         0 |      39% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
-    0 |         0 |      17% | All sources
+    2 |         0 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -169,8 +169,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 356
-Resurrected domains added today: 292
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -185,8 +185,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 149
-Unparked domains added today: 83
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## As seen in
