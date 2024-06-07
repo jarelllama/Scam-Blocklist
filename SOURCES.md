@@ -15,7 +15,6 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Fake Website Buster](https://fakewebsitebuster.com/) | Fake | | |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
-| [Hagezi's NRD List](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#nrd) | NRD | - | - |
 | [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Phishing | | |
 | [PetScams.com](https://petscams.com/) | Pet | | |
 | [PhishStats](https://phishstats.info/)[^2] | Phishing | | |
@@ -23,12 +22,12 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Scam Directory](https://scam.directory/) | Any | | |
 | [Scam.Delivery](https://scam.delivery/) | Non-delivery | Yes | - |
 | [ScamAdvisor](https://www.scamadviser.com/) | Any | | |
-| [Shreshta's NRD List](https://github.com/shreshta-labs/newly-registered-domains) | NRD | - | - |
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | Any | Yes | - |
 | [StopGunScams.com](https://stopgunscams.com/) | Firearm | | |
 | [dnstwist](https://github.com/elceef/dnstwist) | Phishing | | |
 | [openSquat](https://github.com/atenreiro/opensquat) | Phishing | Yes | - |
 | [r/Scams](https://www.reddit.com/r/Scams/) | Any | Yes | - |
+| [xRuffKez's NRD List](https://github.com/xRuffKez/NRD) | NRD | - | - |
 
 [^1]: Only the scam feed is used for the light version.
 [^2]: Only domains found in the NRD feed are used for the light version.

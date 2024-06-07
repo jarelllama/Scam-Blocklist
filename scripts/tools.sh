@@ -112,24 +112,22 @@ download_toplist() {
 download_nrd_feed() {
     [[ -f nrd.tmp ]] && return
 
-    url1='https://raw.githubusercontent.com/shreshta-labs/newly-registered-domains/main/nrd-1m.csv'
-    url2='https://feeds.opensquat.com/domain-names-month.txt'
-    url3='https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/nrds.30-onlydomains.txt'
+    url1='https://raw.githubusercontent.com/xRuffKez/NRD/main/nrd-30day_part1.txt'
+    url2='https://raw.githubusercontent.com/xRuffKez/NRD/main/nrd-30day_part2.txt'
+    # Disabled due to size of the combined feeds
+    #url3='https://feeds.opensquat.com/domain-names-month.txt'
 
-    {
-        curl -sSL "$url1" || send_telegram \
-            "Error occurred while downloading NRD feeds."
+    # Download the feeds in parallel
+    curl -sSLZ "$url1" "$url2" | mawk '!/#/' > nrd.tmp
 
-        # Download the bigger feeds in parallel
-        curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url2" "$url3"
-    } | mawk '!/#/' > nrd.tmp
-
+    # TODO: update method of checking if the feeds downloaded correctly
+    #
     # Appears to be the best way of checking if the bigger feeds downloaded
     # properly without checking each feed individually and losing
     # parallelization.
-    if (( $(wc -l < nrd.tmp) < 9000000 )); then
-        send_telegram "Error occurred while downloading NRD feeds."
-    fi
+    #if (( $(wc -l < nrd.tmp) < 9000000 )); then
+    #    send_telegram "Error occurred while downloading NRD feeds."
+    #fi
 
     format_file nrd.tmp
 }
