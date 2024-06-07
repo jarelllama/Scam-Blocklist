@@ -241,7 +241,6 @@ EOF
 }
 
 readonly FUNCTION='bash scripts/tools.sh'
-readonly RAW='data/raw.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
