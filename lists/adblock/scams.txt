@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 06.06.233348.2024
+! Version: 06.07.124601.2024
 ! Expires: 12 hours
-! Last modified: Thu Jun  6 23:33:48 UTC 2024
+! Last modified: Fri Jun  7 12:46:01 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 97669
+! Number of entries: 97672
 !
 ||0-usps.com^
 ||0.0.0.0en.cryptonight.net^
@@ -33683,6 +33683,7 @@
 ||gbtbc.blogspot.hr^
 ||gbtrht.blogspot.fi^
 ||gbu.education^
+||gbwhatsapp.dev^
 ||gbwhatsapppro-in.com^
 ||gbwhatsapppros.net^
 ||gc-bag.com^
@@ -57330,6 +57331,7 @@
 ||namfonpapermill.com^
 ||namihentai.com^
 ||naminhaestante.com^
+||namlipastirma.com.tr^
 ||namnj3.duckdns.org^
 ||nampakwwgr.duckdns.org^
 ||namso-delivery.com^
@@ -62458,6 +62460,7 @@
 ||outletsbaby.com^
 ||outletsbike.com^
 ||outletselected.com^
+||outletseur.com^
 ||outletsewing.com^
 ||outletshoesbelgie.top^
 ||outletsloggi.com^
