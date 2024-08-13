@@ -19,8 +19,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 92193
-Light version: 7547
+Total domains: 92165
+Light version: 7530
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -35,7 +35,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |       7% | aa419.org
     0 |         0 |       0% | dnstwist (NRDs)
     0 |         0 |      44% | fakewebsitebuster.com
-    0 |         0 |      22% | guntab.com
+    0 |         0 |      23% | guntab.com
     0 |         0 |      10% | petscams.com
     0 |         0 |      63% | scam.directory
     0 |         0 |      39% | scamadviser.com
@@ -93,7 +93,7 @@ Created from requests, a blocklist for NSFW domains is available in Adblock Plus
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 10720
+Total domains: 10722
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
@@ -165,8 +165,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 427
-Resurrected domains added today: 792
+Dead domains removed today: 358
+Resurrected domains added today: 370
 ```
 
 ## Parked domains
@@ -181,8 +181,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 212
-Unparked domains added today: 100
+Parked domains removed today: 96
+Unparked domains added today: 55
 ```
 
 ## As seen in
