@@ -19,28 +19,28 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 89870
+Total domains: 89873
 Light version: 6896
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    - |         0 |      62% | Emerging Threats phishing
-    - |         0 |       7% | Google Search
-    - |         0 |       9% | Jeroengui phishing feed
-    - |         0 |       7% | Jeroengui scam feed
-    - |         0 |       1% | Manual Entries
-    - |         0 |      19% | PhishStats
-    - |         0 |       0% | PhishStats (NRDs)
-    - |         0 |       4% | Regex Matching (NRDs)
-    - |         0 |       7% | aa419.org
-    - |         0 |       0% | dnstwist (NRDs)
-    - |         0 |      44% | fakewebsitebuster.com
-    - |         0 |      23% | guntab.com
-    - |         0 |      10% | petscams.com
-    - |         0 |      60% | scam.directory
-    - |         0 |      39% | scamadviser.com
-    - |         0 |       5% | stopgunscams.com
-    - |         0 |      17% | All sources
+    0 |         0 |      62% | Emerging Threats phishing
+    0 |         0 |       7% | Google Search
+    0 |         0 |       9% | Jeroengui phishing feed
+    0 |         0 |       7% | Jeroengui scam feed
+    0 |         0 |       1% | Manual Entries
+    0 |         0 |      19% | PhishStats
+    0 |         0 |       0% | PhishStats (NRDs)
+    3 |         0 |       4% | Regex Matching (NRDs)
+    0 |         0 |       7% | aa419.org
+    0 |         0 |       0% | dnstwist (NRDs)
+    0 |         0 |      44% | fakewebsitebuster.com
+    0 |         0 |      23% | guntab.com
+    0 |         0 |      10% | petscams.com
+    0 |         0 |      60% | scam.directory
+    0 |         0 |      39% | scamadviser.com
+    0 |         0 |       5% | stopgunscams.com
+    3 |         0 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -120,7 +120,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 ``` text
 Active search terms: 17
 API calls made today: 0
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -137,7 +137,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 64
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
