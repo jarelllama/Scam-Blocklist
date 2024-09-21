@@ -20004,3 +20004,11 @@ Timestamp,Event,Domain,Source
 02:56:57 21-09-24,whitelist,xiaomitime.com,raw
 02:56:57 21-09-24,toplist,chargeupbikeshop.com,raw
 02:56:57 21-09-24,toplist,primexbt.one,raw
+03:02:26 21-09-24,blacklist,jeu-samsung.fr,Regex
+03:02:26 21-09-24,blacklist,tiktoklive.pk,Regex
+03:02:26 21-09-24,blacklist,xiaomistore.com.gt,Regex
+03:02:26 21-09-24,whitelist,discord.do,Regex
+03:02:26 21-09-24,saved,jeu-samsung.fr,Regex
+03:02:26 21-09-24,saved,tiktoklive.pk,Regex
+03:02:26 21-09-24,saved,xiaomistore.com.gt,Regex
+03:02:26 21-09-24,whitelist,tiktok.com,Google Search
