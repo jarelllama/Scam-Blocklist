@@ -19,28 +19,28 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 115027
-Light version: 9790
+Total domains: 115046
+Light version: 9791
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
   185 |         0 |      61% | Emerging Threats phishing
   524 |         0 |       7% | Google Search
- 5442 |         0 |       9% | Jeroengui phishing feed
+ 5447 |         0 |       9% | Jeroengui phishing feed
    57 |         0 |       7% | Jeroengui scam feed
     0 |         0 |       1% | Manual Entries
-22905 |         0 |      18% | PhishStats
+22912 |         0 |      18% | PhishStats
  3374 |         0 |       0% | PhishStats (NRDs)
-11268 |         0 |       3% | Regex Matching (NRDs)
+11274 |         0 |       3% | Regex Matching (NRDs)
   245 |         0 |       7% | aa419.org
   644 |         0 |       0% | dnstwist (NRDs)
    26 |         0 |      44% | fakewebsitebuster.com
-  632 |         0 |      23% | guntab.com
+  633 |         0 |      23% | guntab.com
     0 |         0 |      10% | petscams.com
    50 |         0 |      61% | scam.directory
    32 |         0 |      39% | scamadviser.com
-   89 |         0 |       5% | stopgunscams.com
-42099 |         0 |      16% | All sources
+   90 |         0 |       5% | stopgunscams.com
+42119 |         0 |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -118,7 +118,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 17
+Active search terms: 11
 API calls made today: 73
 Domains retrieved today: 524
 ```
