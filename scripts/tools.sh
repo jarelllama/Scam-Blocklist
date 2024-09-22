@@ -1,4 +1,4 @@
-#!/bin/bash
+f#!/bin/bash
 
 # tools.sh is a shell wrapper intended to store commonly used functions.
 
@@ -112,8 +112,8 @@ download_toplist() {
 download_nrd_feed() {
     [[ -f nrd.tmp ]] && return
 
-    url1='https://raw.githubusercontent.com/xRuffKez/NRD/main/nrd-30day_part1.txt'
-    url2='https://raw.githubusercontent.com/xRuffKez/NRD/main/nrd-30day_part2.txt'
+    url1='https://github.com/xRuffKez/NRD/raw/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt'
+    url2='https://github.com/xRuffKez/NRD/raw/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt'
     # Disabled due to size of the combined feeds
     #url3='https://feeds.opensquat.com/domain-names-month.txt'
 
