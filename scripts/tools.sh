@@ -1,4 +1,4 @@
-f#!/bin/bash
+#!/bin/bash
 
 # tools.sh is a shell wrapper intended to store commonly used functions.
 
