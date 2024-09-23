@@ -678,8 +678,9 @@ source_petscams() {
 
     local url='https://petscams.com'
     # First page must not have '/page'
-    curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
-    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
+    curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" \
+        -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
+    #curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
 
     cat results.tmp
 
