@@ -29,7 +29,21 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-    source_petscams
+    source_aa419
+    source_dnstwist
+    source_emerging_threats
+    source_fakewebsitebuster
+    source_guntab
+    source_jeroengui_phishing
+    source_jeroengui_scam
+    source_manual
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamadviser
+    source_scamdirectory
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -668,32 +682,6 @@ source_jeroengui_scam() {
     local url='https://file.jeroengui.be/scam/last_week.txt'
     curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" \
         > "$results_file"
-}
-
-source_petscams() {
-    source='petscams.com'
-    results_file="data/pending/domains_${source}.tmp"
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local url='https://petscams.com'
-    # First page must not have '/page'
-    curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" \
-        -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
-    #curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
-
-    cat results.tmp
-
-    # Each page in theory should return 15 domains, but the regex also matches
-    # domains under 'Latest Articles' at the bottom of the page, so the number
-    # of domains returned per page may be >15.
-    # [:alpha:] is used because [a-z] does not seem to work here
-    # Matching '/">' ensures not matching false positives
-    grep -Po "<a href=\"https://petscams.com/[[:alpha:]-]+/\K${DOMAIN_DASH_REGEX}(?=/\">)" \
-        results.tmp | mawk '{sub(/-[0-9]$/, "", $0);
-        gsub(/-/, ".", $0); print $0}' > "$results_file"
-
-    rm results.tmp
 }
 
 source_phishstats() {

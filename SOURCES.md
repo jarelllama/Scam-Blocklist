@@ -16,7 +16,7 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
 | [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Phishing | | |
-| [PetScams.com](https://petscams.com/) | Pet | | |
+| [PetScams.com](https://petscams.com/) | Pet | Yes | - |
 | [PhishStats](https://phishstats.info/)[^2] | Phishing | | |
 | [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) | Phishing | | Yes |
 | [Scam Directory](https://scam.directory/) | Any | | |
