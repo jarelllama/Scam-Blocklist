@@ -692,6 +692,7 @@ source_petscams() {
 
     rm results.tmp
 
+    echo "Test"
     cat "$results_file"
 }
 
