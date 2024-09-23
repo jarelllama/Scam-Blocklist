@@ -36,7 +36,6 @@ Today | Yesterday | Excluded | Source
     0 |        58 |       0% | dnstwist (NRDs)
     0 |         0 |      44% | fakewebsitebuster.com
     0 |         4 |      24% | guntab.com
-    0 |         0 |      11% | petscams.com
     0 |         0 |      63% | scam.directory
     0 |         0 |      39% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
