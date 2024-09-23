@@ -678,8 +678,8 @@ source_petscams() {
 
     local url='https://petscams.com'
     # First page must not have '/page'
-    curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
-    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
+    curl --retry 2 --retry-all-errors "${url}/" >> results.tmp
+    curl -Z --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
 
     # Each page in theory should return 15 domains, but the regex also matches
     # domains under 'Latest Articles' at the bottom of the page, so the number
@@ -691,9 +691,6 @@ source_petscams() {
         gsub(/-/, ".", $0); print $0}' > "$results_file"
 
     rm results.tmp
-
-    echo "Test"
-    cat "$results_file"
 }
 
 source_phishstats() {
