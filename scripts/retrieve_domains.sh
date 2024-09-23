@@ -133,6 +133,9 @@ process_source() {
 
     $FUNCTION --format "$results_file"
 
+    # FOR TESTING
+    cat "$results_file"
+
     # Count number of unfiltered domains pending
     raw_count="$(wc -l < "$results_file")"
 
