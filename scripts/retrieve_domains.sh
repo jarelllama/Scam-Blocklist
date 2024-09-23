@@ -133,9 +133,6 @@ process_source() {
 
     $FUNCTION --format "$results_file"
 
-    # FOR TESTING
-    cat "$results_file"
-
     # Count number of unfiltered domains pending
     raw_count="$(wc -l < "$results_file")"
 
@@ -694,6 +691,8 @@ source_petscams() {
         gsub(/-/, ".", $0); print $0}' > "$results_file"
 
     rm results.tmp
+
+    cat "$results_file"
 }
 
 source_phishstats() {
