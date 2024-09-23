@@ -24,23 +24,23 @@ Light version: 9824
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    - |         2 |      60% | Emerging Threats phishing
-    - |        44 |       7% | Google Search
-    - |       651 |       9% | Jeroengui phishing feed
-    - |         5 |       6% | Jeroengui scam feed
-    - |         0 |       1% | Manual Entries
-    - |       317 |      18% | PhishStats
-    - |         5 |       0% | PhishStats (NRDs)
-    - |       874 |       3% | Regex Matching (NRDs)
-    - |        44 |       7% | aa419.org
-    - |        58 |       0% | dnstwist (NRDs)
-    - |         0 |      44% | fakewebsitebuster.com
-    - |         4 |      24% | guntab.com
-    - |         0 |      11% | petscams.com
-    - |         0 |      63% | scam.directory
-    - |         0 |      39% | scamadviser.com
-    - |         0 |       5% | stopgunscams.com
-    - |      1999 |      16% | All sources
+    0 |         2 |      60% | Emerging Threats phishing
+    0 |        44 |       7% | Google Search
+    0 |       651 |       9% | Jeroengui phishing feed
+    0 |         5 |       6% | Jeroengui scam feed
+    0 |         0 |       1% | Manual Entries
+    0 |       317 |      18% | PhishStats
+    0 |         5 |       0% | PhishStats (NRDs)
+    0 |       874 |       3% | Regex Matching (NRDs)
+    0 |        44 |       7% | aa419.org
+    0 |        58 |       0% | dnstwist (NRDs)
+    0 |         0 |      44% | fakewebsitebuster.com
+    0 |         4 |      24% | guntab.com
+    0 |         0 |      11% | petscams.com
+    0 |         0 |      63% | scam.directory
+    0 |         0 |      39% | scamadviser.com
+    0 |         0 |       5% | stopgunscams.com
+    0 |      1999 |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -120,7 +120,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 ``` text
 Active search terms: 11
 API calls made today: 0
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -137,7 +137,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 64
-Domains retrieved today: -
+Domains retrieved today: 0
 ```
 
 ### Regarding other sources
