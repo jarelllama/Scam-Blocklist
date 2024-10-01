@@ -17,7 +17,7 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
-TIMESTAMP="$(date -u +"%H:%M:%S %d-%m-%y")"
+TIMESTAMP="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
 # Matches example.com, example[.]com, 1.1.1.1
