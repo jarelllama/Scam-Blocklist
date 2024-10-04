@@ -19,27 +19,27 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 124216
-Light version: 10607
+Total domains: 124658
+Light version: 10631
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-   20 |         0 |      60% | Emerging Threats phishing
-   49 |         0 |       7% | Google Search
-  622 |         0 |       9% | Jeroengui phishing feed
-   16 |         0 |       6% | Jeroengui scam feed
-    0 |         0 |       0% | Manual Entries
- 1064 |         1 |      18% | PhishStats
-  225 |         0 |       0% | PhishStats (NRDs)
- 1446 |         0 |       3% | Regex Matching (NRDs)
-   25 |         0 |       7% | aa419.org
-   42 |         0 |       0% | dnstwist (NRDs)
-    2 |         0 |      46% | fakewebsitebuster.com
-  189 |         0 |      25% | guntab.com
-   45 |         0 |      57% | scam.directory
-    6 |         0 |      38% | scamadviser.com
-    0 |         0 |       6% | stopgunscams.com
- 3526 |         1 |      16% | All sources
+   49 |         - |      59% | Emerging Threats phishing
+   81 |         - |       7% | Google Search
+ 2190 |         - |       9% | Jeroengui phishing feed
+   45 |         - |       6% | Jeroengui scam feed
+    0 |         - |       0% | Manual Entries
+ 2420 |         - |      18% | PhishStats
+  515 |         - |       0% | PhishStats (NRDs)
+  657 |         - |       3% | Regex Matching (NRDs)
+   36 |         - |       7% | aa419.org
+   90 |         - |       0% | dnstwist (NRDs)
+    8 |         - |      46% | fakewebsitebuster.com
+  125 |         - |      26% | guntab.com
+   49 |         - |      55% | scam.directory
+    5 |         - |      38% | scamadviser.com
+    1 |         - |       6% | stopgunscams.com
+ 5756 |         - |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -92,7 +92,7 @@ Created from requests, a blocklist for NSFW domains is available in Adblock Plus
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 11528
+Total domains: 11426
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
@@ -117,9 +117,9 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 11
-API calls made today: 62
-Domains retrieved today: 49
+Active search terms: 10
+API calls made today: 53
+Domains retrieved today: 81
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -136,7 +136,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 64
-Domains retrieved today: 42
+Domains retrieved today: 90
 ```
 
 ### Regarding other sources
@@ -164,8 +164,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 3172
-Resurrected domains added today: 452
+Dead domains removed today: 4434
+Resurrected domains added today: 162
 ```
 
 ## Parked domains
@@ -180,8 +180,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 173
-Unparked domains added today: 69
+Parked domains removed today: 377
+Unparked domains added today: 132
 ```
 
 ## As seen in
