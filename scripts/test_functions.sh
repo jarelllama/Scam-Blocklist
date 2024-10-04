@@ -212,7 +212,7 @@ TEST_PARKED_CHECK() {
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
     # (Unparked domains are not added back into light)
-    grep -vxF 'www.google.com' out_raw.txt > out_raw_light.txt
+    grep -vxF 'www.github.com' out_raw.txt > out_raw_light.txt
 
     # Run script
     run_script check_parked.sh
