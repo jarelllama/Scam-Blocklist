@@ -521,14 +521,14 @@ test_alive_check() {
 test_parked_check() {
     # INPUT
     printf "apple.com\n" >> "$RAW"
-    printf "youtuber.cash\n" >> "$RAW"
-    printf "youtuber.cash\n" >> "$ROOT_DOMAINS"
-    printf "www.youtuber.cash\n" >> "$SUBDOMAINS"
+    printf "ourlittlefarms.com\n" >> "$RAW"
+    printf "ourlittlefarms.com\n" >> "$ROOT_DOMAINS"
+    printf "www.ourlittlefarms.com\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
     # Subdomains should be kept to be processed by the validation check
-    printf "www.youtuber.cash\n" >> out_parked.txt
-    printf "parked,youtuber.cash,raw\n" >> out_log.txt
+    printf "www.ourlittlefarms.com\n" >> out_parked.txt
+    printf "parked,ourlittlefarms.com,raw\n" >> out_log.txt
     # Both files should be empty (all dead)
     : > out_subdomains.txt
     : > out_root_domains.txt
