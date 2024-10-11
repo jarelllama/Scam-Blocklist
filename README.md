@@ -19,14 +19,14 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 130662
+Total domains: 130663
 Light version: 11044
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
    80 |        16 |      60% | Emerging Threats phishing
    21 |        22 |       7% | Google Search
-  871 |       669 |       9% | Jeroengui phishing feed
+  872 |       669 |       9% | Jeroengui phishing feed
    34 |         8 |       6% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
  1352 |       558 |      17% | PhishStats
@@ -39,7 +39,7 @@ Today | Yesterday | Excluded | Source
    48 |         0 |      46% | scam.directory
     9 |         2 |      37% | scamadviser.com
     9 |         0 |       6% | stopgunscams.com
- 3424 |      1925 |      16% | All sources
+ 3425 |      1925 |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
