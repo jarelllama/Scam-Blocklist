@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 10.16.234424.2024
+! Version: 10.17.021330.2024
 ! Expires: 12 hours
-! Last modified: Wed Oct 16 23:44:24 UTC 2024
+! Last modified: Thu Oct 17 02:13:30 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 135063
+! Number of entries: 135065
 !
 ||0-bitcoin.com^
 ||0-usps.com^
@@ -50640,6 +50640,7 @@
 ||googleseous.com^
 ||googleseowork.com^
 ||googlesepn.com^
+||googleserver.top^
 ||googleservice-support.top^
 ||googleservice.top^
 ||googleservices.live^
@@ -84891,6 +84892,7 @@
 ||onlyfanspremium.com^
 ||onlyfansprime.com^
 ||onlyfanspriv.store^
+||onlyfansprofiles.net^
 ||onlyfansproperty.com^
 ||onlyfanspropertyinvestment.com^
 ||onlyfansprosecrets.store^
