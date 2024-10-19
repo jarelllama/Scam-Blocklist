@@ -19,14 +19,14 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 135924
+Total domains: 135929
 Light version: 11267
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |        24 |      58% | Emerging Threats phishing
    56 |        24 |       6% | Google Search
-  858 |       639 |       9% | Jeroengui phishing feed
+  870 |       639 |       9% | Jeroengui phishing feed
     2 |        25 |       6% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
   747 |       893 |      17% | PhishStats
@@ -39,7 +39,7 @@ Today | Yesterday | Excluded | Source
     0 |         3 |      37% | scam.directory
     0 |         1 |      36% | scamadviser.com
     0 |         1 |       7% | stopgunscams.com
- 2028 |      3537 |      15% | All sources
+ 2040 |      3537 |      15% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -117,7 +117,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 10
+Active search terms: 11
 API calls made today: 52
 Domains retrieved today: 56
 ```
@@ -135,7 +135,7 @@ dnstwist uses a list of common phishing targets to find permutations of the targ
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
 
 ``` text
-Active targets: 65
+Active targets: 64
 Domains retrieved today: 13
 ```
 
