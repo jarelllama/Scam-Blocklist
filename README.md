@@ -19,13 +19,13 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 136473
-Light version: 11176
+Total domains: 136474
+Light version: 11177
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
    41 |        37 |      57% | Emerging Threats phishing
-   20 |        30 |       6% | Google Search
+   21 |        30 |       6% | Google Search
   787 |       691 |       9% | Jeroengui phishing feed
    10 |         6 |       6% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
@@ -39,7 +39,7 @@ Today | Yesterday | Excluded | Source
    48 |         1 |      36% | scam.directory
     3 |         9 |      36% | scamadviser.com
     3 |         3 |       7% | stopgunscams.com
- 4704 |      5167 |      15% | All sources
+ 4705 |      5167 |      15% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -119,7 +119,7 @@ The list of search terms is proactively maintained and is mostly sourced from in
 ``` text
 Active search terms: 10
 API calls made today: 49
-Domains retrieved today: 20
+Domains retrieved today: 21
 ```
 
 ### Retrieving phishing NRDs using dnstwist
