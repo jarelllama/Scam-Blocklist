@@ -416,6 +416,7 @@ test_invalid_removal() {
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
+            printf ".invalid-test.com\n"
         } >> out_manual_review.txt
 
         printf "invalid-test.xn--903fds\n" >> out_raw.txt

@@ -26,7 +26,7 @@ readonly DOMAIN_REGEX='[[:alnum:].-]+\[?\.\]?[[:alnum:]-]+'
 # https://github.com/jarelllama/Scam-Blocklist/issues/349
 readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 # Only matches domains
-readonly STRICT_DOMAIN_REGEX='[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
     source_aa419
