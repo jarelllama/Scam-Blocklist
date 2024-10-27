@@ -405,7 +405,6 @@ test_invalid_removal() {
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
-            printf ".invalid-test.com\n"
         } >> data/pending/domains_scamadviser.com.tmp
 
         # EXPECTED OUTPUT
@@ -416,7 +415,6 @@ test_invalid_removal() {
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
-            printf ".invalid-test.com\n"
         } >> out_manual_review.txt
 
         printf "invalid-test.xn--903fds\n" >> out_raw.txt
@@ -426,7 +424,6 @@ test_invalid_removal() {
             printf "invalid,invalid-test.x,scamadviser.com\n"
             printf "invalid,invalid-test.100,scamadviser.com\n"
             printf "invalid,invalid-test.1x,scamadviser.com\n"
-            printf "invalid,.invalid-test.com,scamadviser.com\n"
         } >> out_log.txt
 
         return
