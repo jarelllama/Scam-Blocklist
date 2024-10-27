@@ -32,6 +32,7 @@ readonly -a SOURCES=(
     source_aa419
     source_dnstwist
     source_emerging_threats
+    source_fakewebshoplisthun
     source_fakewebsitebuster
     source_guntab
     source_jeroengui_phishing
@@ -629,6 +630,19 @@ source_emerging_threats() {
 
     local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/data/phishing.txt'
     curl -sSL "$url" -o "$results_file"
+}
+
+source_fakewebshoplisthun() {
+    source='FakeWebshopListHUN'
+    ignore_from_light=true
+    results_file='data/pending/domains_fakewebshoplisthun.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
+    # Remove carriage return characters
+    curl -sSL "$url" | sed 's/\r//g' \
+        | grep -Po "^${STRICT_DOMAIN_REGEX}$" > "$results_file"
 }
 
 source_fakewebsitebuster() {

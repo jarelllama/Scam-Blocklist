@@ -13,6 +13,7 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | Yes | - |
 | [Emerging Threats phishing rules](https://rules.emergingthreats.net/) | Phishing | | |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | Fake | | |
+| [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Fake | | Yes |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
 | [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Phishing | | |
