@@ -741,7 +741,7 @@ source_scamadviser() {
     # https://github.com/jarelllama/Scam-Blocklist/issues/349
     # Trailing slash intentionally omitted
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
-        | grep -oE '<h2 class="mb-0">.*</h2>' \
+        | grep -oE '<h2 class=mb-0>.*</h2>' \
         | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" > "$results_file"
 }
 
