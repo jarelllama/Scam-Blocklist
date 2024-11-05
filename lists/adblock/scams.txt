@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 11.05.001144.2024
+! Version: 11.05.004726.2024
 ! Expires: 12 hours
-! Last modified: Tue Nov  5 00:11:44 UTC 2024
+! Last modified: Tue Nov  5 00:47:26 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 149938
+! Number of entries: 149940
 !
 ||0-bitcoin.com^
 ||0-usps.com^
@@ -98033,6 +98033,7 @@
 ||phantom-wallut.weebly.com^
 ||phantom-warllet.webflow.io^
 ||phantom-weallet.webflow.io^
+||phantom.lu^
 ||phantomallet-extension.webflow.io^
 ||phantomdex.com^
 ||phantomewalletds.webflow.io^
@@ -138776,6 +138777,7 @@
 ||was.f57a6889.cyou^
 ||was.f57a898a.cyou^
 ||wasakie.myshopify.com^
+||wasap-plus.net^
 ||waschebek.com^
 ||wasfo.org^
 ||washingtonea.pages.dev^
