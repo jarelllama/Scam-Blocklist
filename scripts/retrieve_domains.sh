@@ -634,7 +634,7 @@ source_greek_tax_scam() {
     dead-domains-linter -i formatted.tmp --export dead.tmp > /dev/null
     comm -23 results.tmp dead.tmp > "$results_file"
 
-    rm results.tmp formatted.tmp
+    rm results.tmp formatted.tmp dead.tmp
 }
 
 source_manual() {
