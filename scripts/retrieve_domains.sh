@@ -37,6 +37,7 @@ readonly -a SOURCES=(
     source_fakewebshoplisthun
     source_fakewebsitebuster
     source_guntab
+    source_greek_tax_scam
     source_jeroengui_phishing
     source_jeroengui_scam
     source_manual
