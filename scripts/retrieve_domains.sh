@@ -601,6 +601,41 @@ source_regex() {
     done <<< "$targets"
 }
 
+source_greek_tax_scam() {
+    # https://github.com/hagezi/dns-blocklists/issues/4191
+    source='Greek Tax Scam'
+    results_file='data/pending/domains_greek_tax_scam.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    # Install AdGuard's Dead Domains Linter
+    if ! command -v dead-domains-linter &> /dev/null; then
+        npm install -g @adguard/dead-domains-linter > /dev/null
+    fi
+
+    # Get the top 15 TLDs from the NRD feed
+    tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
+        | sort -nr | head -n 15 | mawk '{print $2}')"
+
+    # Get matching NRDs
+    while read -r tld; do
+        grep -E "gr\.${tld}$" nrd.tmp >> results.tmp
+    done <<< "$tlds"
+
+    # Append 'gov' subdomain
+    sed -i 's/^/gov./' results.tmp
+    sort -u results.tmp -o results.tmp
+
+    # Format to Adblock Plus syntax
+    sed 's/.*/||&^/' results.tmp > formatted.tmp
+
+    # Get resolving subdomains
+    dead-domains-linter -i formatted.tmp --export dead.tmp > /dev/null
+    comm -23 results.tmp dead.tmp > "$results_file"
+
+    rm results.tmp formatted.tmp
+}
+
 source_manual() {
     source='Manual'
     results_file='data/pending/domains_manual.tmp'
