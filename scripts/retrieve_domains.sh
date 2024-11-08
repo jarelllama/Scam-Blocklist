@@ -614,9 +614,9 @@ source_greek_tax_scam() {
         npm install -g @adguard/dead-domains-linter > /dev/null
     fi
 
-    # Get the top 15 TLDs from the NRD feed
+    # Get the top 50 TLDs from the NRD feed
     tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
-        | sort -nr | head -n 15 | mawk '{print $2}')"
+        | sort -nr | head -n 50 | mawk '{print $2}')"
 
     # Get matching NRDs
     while read -r tld; do
