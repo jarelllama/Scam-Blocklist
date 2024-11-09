@@ -27,6 +27,7 @@ Today | Yesterday | Excluded | Source
    39 |         0 |      53% | Emerging Threats phishing
     7 |         0 |      17% | FakeWebshopListHUN
    94 |        64 |       5% | Google Search
+  777 |         0 |       0% | Greek Tax Scam
   867 |       635 |       8% | Jeroengui phishing feed
     3 |         3 |       7% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
