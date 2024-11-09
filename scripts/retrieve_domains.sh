@@ -506,11 +506,11 @@ source_dnstwist() {
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
-    # Get the top 15 TLDs from the NRD feed
+    # Get the top 30 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above.
     tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
-        | sort -nr | head -n 15 | mawk '{print $2}')"
+        | sort -nr | head -n 30 | mawk '{print $2}')"
 
     # Remove duplicate targets from targets file
     mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
