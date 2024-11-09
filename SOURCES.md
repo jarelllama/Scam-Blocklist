@@ -15,6 +15,7 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [Fake Website Buster](https://fakewebsitebuster.com/) | Fake | | |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Fake | | Yes |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
+| [Greek Tax Scam](https://github.com/hagezi/dns-blocklists/issues/4191) | Phishing | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Firearm | | Yes |
 | [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Phishing | | |
 | [PetScams.com](https://petscams.com/) | Pet | Yes | - |

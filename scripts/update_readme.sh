@@ -33,6 +33,7 @@ Today | Yesterday | Excluded | Source
 $(print_stats 'Emerging Threats') phishing
 $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
+$(print_stats 'Greek Tax Scam')
 $(print_stats 'Jeroengui phishing') feed
 $(print_stats 'Jeroengui scam') feed
 $(print_stats Manual) Entries
