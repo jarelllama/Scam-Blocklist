@@ -19,7 +19,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 153792
+Total domains: 153793
 Light version: 13728
 
 New domains from each source: *
@@ -31,7 +31,7 @@ Today | Yesterday | Excluded | Source
   867 |       635 |       8% | Jeroengui phishing feed
     3 |         3 |       7% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
- 2889 |       928 |      17% | PhishStats
+ 2890 |       928 |      17% | PhishStats
   834 |       243 |       0% | PhishStats (NRDs)
   906 |       355 |       2% | Regex Matching (NRDs)
     5 |         4 |       8% | aa419.org
@@ -41,7 +41,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      26% | scam.directory
     3 |         0 |      34% | scamadviser.com
     0 |         0 |       6% | stopgunscams.com
- 5810 |      2026 |      15% | All sources
+ 5811 |      2026 |      15% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -137,7 +137,7 @@ dnstwist uses a list of common phishing targets to find permutations of the targ
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
 
 ``` text
-Active targets: 65
+Active targets: 54
 Domains retrieved today: 52
 ```
 
