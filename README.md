@@ -19,29 +19,29 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 [![Test functions](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml/badge.svg)](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/test_functions.yml)
 
 ``` text
-Total domains: 153793
-Light version: 13728
+Total domains: 155976
+Light version: 14107
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-   39 |         0 |      53% | Emerging Threats phishing
-    7 |         0 |      17% | FakeWebshopListHUN
-   94 |        64 |       5% | Google Search
-  777 |         0 |       0% | Greek Tax Scam
-  867 |       635 |       8% | Jeroengui phishing feed
-    3 |         3 |       7% | Jeroengui scam feed
+   29 |        39 |      53% | Emerging Threats phishing
+  376 |         7 |      17% | FakeWebshopListHUN
+   79 |        94 |       5% | Google Search
+  110 |       777 |       4% | Greek Tax Scam
+  604 |       867 |       8% | Jeroengui phishing feed
+    5 |         3 |       7% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
- 2890 |       928 |      17% | PhishStats
-  834 |       243 |       0% | PhishStats (NRDs)
-  906 |       355 |       2% | Regex Matching (NRDs)
-    5 |         4 |       8% | aa419.org
-   52 |        27 |       1% | dnstwist (NRDs)
-    8 |         0 |      56% | fakewebsitebuster.com
-  160 |        10 |      30% | guntab.com
-    0 |         0 |      26% | scam.directory
-    3 |         0 |      34% | scamadviser.com
+    0 |      2890 |      17% | PhishStats
+    0 |       834 |       0% | PhishStats (NRDs)
+  812 |       906 |       2% | Regex Matching (NRDs)
+   11 |         5 |       8% | aa419.org
+  188 |        52 |       1% | dnstwist (NRDs)
+    4 |         8 |      56% | fakewebsitebuster.com
+  159 |       160 |      30% | guntab.com
+    0 |         0 |      25% | scam.directory
+    7 |         3 |      34% | scamadviser.com
     0 |         0 |       6% | stopgunscams.com
- 5811 |      2026 |      15% | All sources
+ 2384 |      5811 |      15% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -94,7 +94,7 @@ Created from requests, a blocklist for NSFW domains is available in Adblock Plus
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 11915
+Total domains: 11918
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
@@ -120,8 +120,8 @@ The list of search terms is proactively maintained and is mostly sourced from in
 
 ``` text
 Active search terms: 11
-API calls made today: 70
-Domains retrieved today: 94
+API calls made today: 72
+Domains retrieved today: 79
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -138,7 +138,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 54
-Domains retrieved today: 52
+Domains retrieved today: 188
 ```
 
 ### Regarding other sources
@@ -166,8 +166,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 2580
-Resurrected domains added today: 295
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ## Parked domains
@@ -182,8 +182,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed today: 311
-Unparked domains added today: 87
+Parked domains removed today: 240
+Unparked domains added today: 70
 ```
 
 ## As seen in
