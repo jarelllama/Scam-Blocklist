@@ -35,7 +35,6 @@ readonly -a SOURCES=(
     source_dnstwist
     source_emerging_threats
     source_fakewebshoplisthun
-    source_fakewebsitebuster
     source_greek_tax_scam
     source_guntab
     source_jeroengui_phishing
@@ -681,21 +680,6 @@ source_fakewebshoplisthun() {
     # Remove carriage return characters
     curl -sSL "$url" | sed 's/\r//g' \
         | grep -Po "^${STRICT_DOMAIN_REGEX}$" > "$results_file"
-}
-
-source_fakewebsitebuster() {
-    source='fakewebsitebuster.com'
-    results_file="data/pending/domains_${source}.tmp"
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local url='https://fakewebsitebuster.com/category/website-reviews'
-    # Regarding grep pipe errors, see:
-    # https://github.com/jarelllama/Scam-Blocklist/issues/349
-    curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -oE 'rel="bookmark">.*</a></h2>' \
-        | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" \
-        | head -n 50 > "$results_file"  # Keep only newest 50 results
 }
 
 source_guntab() {
