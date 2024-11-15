@@ -33,7 +33,6 @@ Today | Yesterday | Excluded | Source
   605 |       929 |       2% | Regex Matching (NRDs)
     7 |        10 |       8% | aa419.org
    75 |        57 |       2% | dnstwist (NRDs)
-    0 |         0 |      55% | fakewebsitebuster.com
   219 |       194 |      31% | guntab.com
    49 |         0 |      18% | scam.directory
     7 |         1 |      33% | scamadviser.com
