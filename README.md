@@ -115,7 +115,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 11
+Active search terms: 10
 API calls made today: 70
 Domains retrieved today: 41
 ```
