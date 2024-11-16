@@ -3,11 +3,11 @@
 ! Description: Blocklist for NSFW domains automatically retrieved daily.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist#nsfw-blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 11.15.161319.2024
+! Version: 11.16.161217.2024
 ! Expires: 12 hours
-! Last modified: Fri Nov 15 16:13:19 UTC 2024
+! Last modified: Sat Nov 16 16:12:17 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 11985
+! Number of entries: 12010
 !
 ||01porno.club^
 ||03xxx.net^
@@ -32,6 +32,7 @@
 ||168porn4.com^
 ||18-porn.me^
 ||18-teen-porn.com^
+||18chineseporn.com^
 ||18indianporn.com^
 ||18porn.biz^
 ||18porn.cc^
@@ -220,6 +221,7 @@
 ||7dakxxxw.net^
 ||7dakxxxw.org^
 ||7pornmovies.com^
+||7porno365.biz^
 ||807admiral-xxx.com^
 ||8090porn.com^
 ||80spornclassic.com^
@@ -877,6 +879,7 @@
 ||boboporn.net^
 ||bodyxxx.top^
 ||bokepporn.top^
+||bokepporno.co^
 ||boldxxx.win^
 ||bollywoodporn.pro^
 ||bollywoodxxx.pro^
@@ -1598,7 +1601,6 @@
 ||evexxx.com^
 ||evexxx.me^
 ||eviewporn.com^
-||evpornotube.cfd^
 ||evpornotube.rest^
 ||exaltedporn.com^
 ||excelenteporno.com^
@@ -1819,6 +1821,7 @@
 ||fotosporno.blog^
 ||fotosxxx.org^
 ||fouporno.com^
+||fourporn.net^
 ||foxporn.me^
 ||foxporns.com^
 ||foxporns.net^
@@ -2046,6 +2049,7 @@
 ||fullxxxmovies.me^
 ||fullxxxmovies.net^
 ||fullxxxvideo.net^
+||fullxxxvideo.org^
 ||fullxxxvideos.net^
 ||fulxxx.com^
 ||fumettiporno.net^
@@ -2650,6 +2654,7 @@
 ||hentaihaven.info^
 ||hentaihaven.io^
 ||hentaihaven.online^
+||hentaihaven.org^
 ||hentaihaven.red^
 ||hentaihaven.vip^
 ||hentaihaven.ws^
@@ -2715,6 +2720,7 @@
 ||hentaimoi1.lol^
 ||hentaimoi1.net^
 ||hentaimoi1.xyz^
+||hentaimoi2.lol^
 ||hentaimood.me^
 ||hentaimoodx.org^
 ||hentaimovie.tv^
@@ -3101,6 +3107,7 @@
 ||hotporn.red^
 ||hotporn.today^
 ||hotporn.vip^
+||hotporn.wtf^
 ||hotpornaction.com^
 ||hotpornbros.com^
 ||hotpornfile.org^
@@ -3229,6 +3236,7 @@
 ||ihentai.lat^
 ||ihentai.mx^
 ||ihentai.top^
+||ihentai.wiki^
 ||ihentaiz.com^
 ||ihentaiz.vip^
 ||ihookup.com^
@@ -3478,6 +3486,7 @@
 ||ixiporn.sbs^
 ||ixiporn.video^
 ||ixiporn2.com^
+||ixiporn3.com^
 ||ixxx.asia^
 ||ixxx.cc^
 ||ixxx.com^
@@ -3736,6 +3745,7 @@
 ||lastxxxmovies.com^
 ||latesthentai.com^
 ||latestporn.co^
+||latestpornhd.com^
 ||latestpornvideo.com^
 ||latestpornvideos.com^
 ||latinaporn.one^
@@ -5503,6 +5513,7 @@
 ||porno-chaman.com^
 ||porno-chan.com^
 ||porno-cum.com^
+||porno-deutsche.com^
 ||porno-doiki.fun^
 ||porno-dojki.red^
 ||porno-doma.net^
@@ -6266,6 +6277,7 @@
 ||pornosex18.org^
 ||pornosexbot.com^
 ||pornosexoamador.com^
+||pornosexsikis.pro^
 ||pornosfilmes.com^
 ||pornoshkura.com^
 ||pornoshub.site^
@@ -6586,7 +6598,6 @@
 ||pornstar-scenes.com^
 ||pornstar.fyi^
 ||pornstar.gallery^
-||pornstarbrasil.com^
 ||pornstarbyface.com^
 ||pornstargold.com^
 ||pornstarharem.com^
@@ -7143,6 +7154,7 @@
 ||runporn.com^
 ||rupiahxxx.xyz^
 ||ruporno.club^
+||ruporno.link^
 ||ruporno.one^
 ||ruporno21.com^
 ||ruporno365.cc^
@@ -7261,6 +7273,7 @@
 ||sex-arebi.com^
 ||sex-babki.com^
 ||sex-bez-granic.ru^
+||sex-blog-info.online^
 ||sex-blog-info.space^
 ||sex-bomb.com^
 ||sex-bongacams.com^
@@ -7379,6 +7392,7 @@
 ||sex-tok.com^
 ||sex-top.life^
 ||sex-torrent.net^
+||sex-tracker.com^
 ||sex-trust.com^
 ||sex-ukraine.net^
 ||sex-uzbek.top^
@@ -8064,6 +8078,7 @@
 ||sexiseks.com^
 ||sexistorii.com^
 ||sexitok.com^
+||sexitop.com^
 ||sexivanovo.club^
 ||sexivi.com^
 ||sexiwatch.com^
@@ -8165,6 +8180,7 @@
 ||sexloveyou.com^
 ||sexloz.com^
 ||sexloz.net^
+||sexlt.pro^
 ||sexlux.net^
 ||sexm.xxx^
 ||sexmag.ru^
@@ -8297,9 +8313,11 @@
 ||sexnung.info^
 ||sexnung.vip^
 ||sexnungbim.com^
+||sexnunghd.pro^
 ||sexnungpro.pro^
 ||sexnungqua.net^
 ||sexnxx.net^
+||sexnxxx.vin^
 ||sexo-hub.com^
 ||sexo-vids.com^
 ||sexo.bg^
@@ -8746,9 +8764,11 @@
 ||sextop1xz.net^
 ||sextop1z.net^
 ||sextop1zz.net^
+||sextop2.chat^
 ||sextop2.com^
 ||sextop2.net^
 ||sextop2.one^
+||sextop2.team^
 ||sextop2.vip^
 ||sextop3s.net^
 ||sextop3x.org^
@@ -8963,6 +8983,7 @@
 ||sexvietmoi.io^
 ||sexvietmoi.pro^
 ||sexvietnam.art^
+||sexvietnam.dev^
 ||sexvietnam.info^
 ||sexvietnam.ink^
 ||sexvietnam.io^
@@ -9034,7 +9055,6 @@
 ||sexwapxvideos.com^
 ||sexwax.me^
 ||sexwebgirls.com^
-||sexwebhost.com^
 ||sexwebseries.com^
 ||sexwebvideo.net^
 ||sexwell.bg^
@@ -10075,7 +10095,6 @@
 ||tytporn.com^
 ||tytporno.club^
 ||tytporno.online^
-||tytporno.top^
 ||u-porno.com^
 ||uaporn.net^
 ||ubertogelxxxx.org^
@@ -10695,7 +10714,10 @@
 ||xvideos-ru3.com^
 ||xvideos-ru4.com^
 ||xvideos-ru5.com^
+||xvideos-ru6.com^
+||xvideos-ru7.com^
 ||xvideos-ru8.com^
+||xvideos-ru9.com^
 ||xvideos-rus.com^
 ||xvideos-rus1.com^
 ||xvideos-rus2.com^
@@ -10765,6 +10787,7 @@
 ||xvideos3.pro^
 ||xvideos300.com^
 ||xvideos4.com^
+||xvideos4.pro^
 ||xvideos47.com^
 ||xvideos4k.org^
 ||xvideos5.com^
@@ -10856,6 +10879,7 @@
 ||xvideosxxx.fun^
 ||xvideosxxx.net^
 ||xvideosxxx.stream^
+||xvideosxxx1.com^
 ||xvideoszoofilia.blog^
 ||xvideoszoofilia.com^
 ||xvidioporno.com^
@@ -11474,6 +11498,7 @@
 ||xxxpornfucking.com^
 ||xxxpornfull.com^
 ||xxxporngood.com^
+||xxxpornhd.org^
 ||xxxpornhd.pro^
 ||xxxpornhubsex.com^
 ||xxxpornimages.me^
