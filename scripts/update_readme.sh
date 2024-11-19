@@ -63,7 +63,9 @@ Any data hidden behind account creation/commercial licenses is never used.
 Courtesy of iam-py-test/blocklist_stats.
 </details>
 
-## Light version
+## Other blocklists
+
+### Light version
 
 Targeted at list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
 
@@ -80,8 +82,6 @@ Sources excluded from the light version are marked in SOURCES.md.
 <br>
 The full version should be used where possible as it fully contains the light version and accounts for resurrected/unparked domains.
 </details>
-
-## Other blocklists
 
 ### NSFW Blocklist
 
