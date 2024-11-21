@@ -16,8 +16,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 163790
-Light version: 14742
+Total domains: 163793
+Light version: 14745
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -27,7 +27,7 @@ Today | Yesterday | Excluded | Source
   103 |         - |      10% | Greek Tax Scam
  1692 |         - |       8% | Jeroengui phishing feed
    35 |         - |       6% | Jeroengui scam feed
-    0 |         - |       0% | Manual Entries
+    3 |         - |       0% | Manual Entries
  3336 |         - |      18% | PhishStats
   917 |         - |       0% | PhishStats (NRDs)
  1152 |         - |       1% | Regex Matching (NRDs)
@@ -37,7 +37,7 @@ Today | Yesterday | Excluded | Source
    50 |         - |      14% | scam.directory
     5 |         - |      32% | scamadviser.com
     2 |         - |       6% | stopgunscams.com
- 6999 |         - |      16% | All sources
+ 7002 |         - |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
