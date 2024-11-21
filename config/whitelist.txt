@@ -270,3 +270,6 @@ scam-detector
 scamadviser
 scamscavenger
 xiaoming
+^amazon\.co\.[a-z]*$
+^teepublic\.com$
+^fixed\.zone$
