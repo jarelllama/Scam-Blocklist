@@ -16,19 +16,19 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 163786
+Total domains: 163790
 Light version: 14742
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
    38 |         - |      50% | Emerging Threats phishing
-  173 |         - |      18% | FakeWebshopListHUN
+  175 |         - |      18% | FakeWebshopListHUN
    52 |         - |       4% | Google Search
   103 |         - |      10% | Greek Tax Scam
- 1691 |         - |       8% | Jeroengui phishing feed
+ 1692 |         - |       8% | Jeroengui phishing feed
    35 |         - |       6% | Jeroengui scam feed
     0 |         - |       0% | Manual Entries
- 3335 |         - |      18% | PhishStats
+ 3336 |         - |      18% | PhishStats
   917 |         - |       0% | PhishStats (NRDs)
  1152 |         - |       1% | Regex Matching (NRDs)
    13 |         - |       9% | aa419.org
@@ -37,7 +37,7 @@ Today | Yesterday | Excluded | Source
    50 |         - |      14% | scam.directory
     5 |         - |      32% | scamadviser.com
     2 |         - |       6% | stopgunscams.com
- 6995 |         - |      16% | All sources
+ 6999 |         - |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -115,7 +115,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 10
+Active search terms: 13
 API calls made today: 69
 Domains retrieved today: 52
 ```
