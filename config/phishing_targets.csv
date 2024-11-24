@@ -17,7 +17,7 @@ canva,3,11,3,y,(^|-)&-,,,,,
 capitalone,0,48,111,,(^|-)&|&(-|\.),1,221,111,n,
 chat.openai,0,7,97,y,(^|-)&-,,,,,
 chatgpt,1,199,111,,(^|-)&|&(-|\.),22,1194,52,,regex: Too many FPs
-chromewebstore,0,2,3,,&,1,5,3,n,
+chromewebstore,0,2,3,,&,1,5,3,,
 citigroup,0,16,97,y,(^|-)&-,,,,,
 coinbase,1,187,111,,(^|-)&|&(-|\.),50,5613,111,n,
 crypto,1,134,111,,-&|&-,18,2103,111,n,regex: Made less agressive for FPs
@@ -105,3 +105,7 @@ xvideos,6,36,6,y,(^|-)&|&-,5,182,34,,regex: Too many FPs
 yahoo,5,35,6,,(^|-)&-,,,,,regex: Too few TPs
 yandex,0,41,111,,(^|-)&|&(-|\.),29,3228,111,n,
 youtube,0,108,111,,(^|-)&|&(-|\.),20,2299,111,n,
+presale-friday,,,,y,^&,,,,n,
+sale-friday,,,,y,^&,,,,n,
+stage3sale,,,,y,^&,,,,n,
+stage3,,,,y,^&-,,,,n,
