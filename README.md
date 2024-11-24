@@ -16,7 +16,7 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 166146
+Total domains: 166148
 Light version: 14951
 
 New domains from each source: *
@@ -25,10 +25,10 @@ Today | Yesterday | Excluded | Source
   201 |       332 |      18% | FakeWebshopListHUN
    51 |        48 |       4% | Google Search
    78 |        64 |      10% | Greek Tax Scam
-  912 |       945 |       8% | Jeroengui phishing feed
+  913 |       945 |       8% | Jeroengui phishing feed
    23 |        10 |       6% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
- 3457 |      4833 |      18% | PhishStats
+ 3458 |      4833 |      18% | PhishStats
  1023 |      1432 |       0% | PhishStats (NRDs)
  1194 |      1278 |       1% | Regex Matching (NRDs)
    16 |        14 |      10% | aa419.org
@@ -37,7 +37,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |      11% | scam.directory
     5 |         5 |      32% | scamadviser.com
     2 |         0 |       6% | stopgunscams.com
- 6290 |      7907 |      16% | All sources
+ 6292 |      7907 |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -115,7 +115,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 11
+Active search terms: 9
 API calls made today: 69
 Domains retrieved today: 51
 ```
@@ -133,7 +133,7 @@ dnstwist uses a list of common phishing targets to find permutations of the targ
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
 
 ``` text
-Active targets: 55
+Active targets: 50
 Domains retrieved today: 104
 ```
 
