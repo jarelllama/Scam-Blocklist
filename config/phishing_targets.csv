@@ -105,8 +105,8 @@ xvideos,36,6,y,(^|-)&|&-,182,34,,regex: Too many FPs
 yahoo,46,8,,(^|-)&-,,,,regex: Too few TPs
 yandex,41,113,,(^|-)&|&(-|\.),3314,113,n,
 youtube,109,113,,(^|-)&|&(-|\.),2333,113,n,
-presale-friday,,,y,^&,1,1,,
-sale-friday,,,y,^&,1,1,,
-stage3sale,,,y,^&,0,1,,
-stage3,,,y,^&-,0,1,,
+presale-friday,,,y,^&,1,1,n,
+sale-friday,,,y,^&,1,1,n,
+stage3sale,,,y,^&,0,1,n,
+stage3,,,y,^&-,0,1,n,
 black-sales,,,y,^&,,,n,
