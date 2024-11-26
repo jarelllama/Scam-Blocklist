@@ -174,7 +174,7 @@ Resurrected domains added today: $(grep -cF "${TODAY},resurrected" "$DOMAIN_LOG"
 
 ## Parked domains
 
-From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/84e682fea95866670dd99f5c98f350bc7377011a) of the blocklist consisted of [parked domains](https://www.godaddy.com/resources/ae/skills/parked-domain) that inflated the number of entries. Because these domains pose no real threat (besides the obnoxious advertising), they are removed from the blocklist daily.
+From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/84e682fea95866670dd99f5c98f350bc7377011a) of the blocklist consisted of [parked domains](https://www.godaddy.com/resources/ae/skills/parked-domain) that inflated the number of entries. Because these domains pose no real threat (besides the obnoxious advertising), they are removed from the blocklist weekly.
 
 A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt)
 
@@ -184,8 +184,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 \`\`\` text
-Parked domains removed today: $(grep -cF "${TODAY},parked" "$DOMAIN_LOG")
-Unparked domains added today: $(grep -cF "${TODAY},unparked" "$DOMAIN_LOG")
+Parked domains removed this month: $(grep -cF "${THIS_MONTH},parked" "$DOMAIN_LOG")
+Unparked domains added this month: $(grep -cF "${THIS_MONTH},unparked" "$DOMAIN_LOG")
 \`\`\`
 
 ## As seen in
@@ -243,7 +243,8 @@ readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
-YESTERDAY="$(TZ=Asia/Singapore date -d yesterday +"%d-%m-%y")"
+YESTERDAY="$(TZ=Asia/Singapore date -d yesterday +"%d-%m-%y")"\
+THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 
 # Function 'print_stats' is an echo wrapper that returns the formatted
 # statistics for the given source.
