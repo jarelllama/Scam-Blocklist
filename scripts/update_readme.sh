@@ -243,7 +243,7 @@ readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
-YESTERDAY="$(TZ=Asia/Singapore date -d yesterday +"%d-%m-%y")"\
+YESTERDAY="$(TZ=Asia/Singapore date -d yesterday +"%d-%m-%y")"
 THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 
 # Function 'print_stats' is an echo wrapper that returns the formatted
