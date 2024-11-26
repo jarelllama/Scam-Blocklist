@@ -21,23 +21,23 @@ Light version: 15387
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-   61 |         - |      49% | Emerging Threats phishing
-  319 |         - |      18% | FakeWebshopListHUN
-   24 |         - |       3% | Google Search
-   58 |         - |      10% | Greek Tax Scam
-  174 |         - |       8% | Jeroengui phishing feed
-    3 |         - |       7% | Jeroengui scam feed
-    0 |         - |       0% | Manual Entries
- 3841 |         - |      18% | PhishStats
- 1259 |         - |       0% | PhishStats (NRDs)
- 1168 |         - |       1% | Regex Matching (NRDs)
-   47 |         - |      10% | aa419.org
-   67 |         - |       1% | dnstwist (NRDs)
-  232 |         - |      31% | guntab.com
-    0 |         - |       9% | scam.directory
-    9 |         - |      32% | scamadviser.com
-    1 |         - |       6% | stopgunscams.com
- 6004 |         - |      16% | All sources
+   61 |        76 |      49% | Emerging Threats phishing
+  319 |        34 |      18% | FakeWebshopListHUN
+   24 |        28 |       3% | Google Search
+   58 |        47 |      10% | Greek Tax Scam
+  174 |       432 |       8% | Jeroengui phishing feed
+    3 |         2 |       7% | Jeroengui scam feed
+    0 |         0 |       0% | Manual Entries
+ 3841 |      4982 |      18% | PhishStats
+ 1259 |      1438 |       0% | PhishStats (NRDs)
+ 1168 |      1137 |       1% | Regex Matching (NRDs)
+   47 |        17 |      10% | aa419.org
+   67 |        86 |       1% | dnstwist (NRDs)
+  232 |       286 |      31% | guntab.com
+    0 |        50 |       9% | scam.directory
+    9 |         9 |      32% | scamadviser.com
+    1 |         8 |       6% | stopgunscams.com
+ 6004 |      7194 |      16% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -178,7 +178,7 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 8000 entries)
 
 ``` text
-Parked domains removed this month: 534
+Parked domains removed this month: 376
 Unparked domains added this month: 158
 ```
 
