@@ -515,16 +515,16 @@ source_dnstwist() {
     mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
-    # Get targets ignoring disabled ones
-    targets="$(mawk -F ',' '$5 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
+    # Get targets ignoring disabled ones and the header
+    targets="$(mawk -F ',' '$4 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
 
     # Loop through the targets
     while read -r domain; do
         # Get row and counts for the target domain
         row="$(mawk -F ',' -v domain="$domain" \
-            '$1 == domain {printf $1","$2","$3","$4}' "$PHISHING_TARGETS")"
-        count="$(mawk -F ',' '{print $3}' <<< "$row")"
-        runs="$(mawk -F ',' '{print $4}' <<< "$row")"
+            '$1 == domain {printf $1","$2","$3}' "$PHISHING_TARGETS")"
+        count="$(mawk -F ',' '{print $2}' <<< "$row")"
+        runs="$(mawk -F ',' '{print $3}' <<< "$row")"
 
         # Run dnstwist
         results="$(dnstwist "${domain}.com" -f list)"
@@ -545,8 +545,7 @@ source_dnstwist() {
         # Update counts for the target domain
         count="$(( count + $(wc -l < results.tmp) ))"
         (( runs++ ))
-        counts_run="$(( count / runs ))"
-        sed -i "s/${row}/${domain},${counts_run},${count},${runs}/" \
+        sed -i "s/${row}/${domain},${count},${runs}/" \
             "$PHISHING_TARGETS"
 
         # Reset results file for the next target domain
@@ -566,15 +565,15 @@ source_regex() {
     mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones
-    targets="$(mawk -F ',' '$10 == "n" {print $1}' "$PHISHING_TARGETS")"
+    targets="$(mawk -F ',' '$8 == "n" {print $1}' "$PHISHING_TARGETS")"
 
     # Loop through the targets
     while read -r domain; do
         # Get row and counts for the target domain
         row="$(mawk -F ',' -v domain="$domain" \
-            '$1 == domain {printf $6","$7","$8","$9}' "$PHISHING_TARGETS")"
-        count="$(mawk -F ',' '{print $3}' <<< "$row")"
-        runs="$(mawk -F ',' '{print $4}' <<< "$row")"
+            '$1 == domain {printf $5","$6","$7}' "$PHISHING_TARGETS")"
+        count="$(mawk -F ',' '{print $2}' <<< "$row")"
+        runs="$(mawk -F ',' '{print $3}' <<< "$row")"
 
         # Get regex of target
         pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
@@ -595,8 +594,7 @@ source_regex() {
         # Update counts for the target domain
         count="$(( count + $(wc -w <<< "$results") ))"
         (( runs++ ))
-        counts_run="$(( count / runs ))"
-        sed -i "/${domain}/s/${row}/${pattern},${counts_run},${count},${runs}/" \
+        sed -i "/${domain}/s/${row}/${pattern},${count},${runs}/" \
             "$PHISHING_TARGETS"
     done <<< "$targets"
 }
