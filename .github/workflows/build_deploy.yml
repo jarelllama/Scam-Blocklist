@@ -33,10 +33,11 @@ jobs:
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
-  prune-parked:
-    needs: [test, prune-dead]
-    if: ${{ ! cancelled() && needs.test.result == 'success' }}
-    uses: ./.github/workflows/check_parked.yml
+  # Moved to weekly workflow
+  #prune-parked:
+  #  needs: [test, prune-dead]
+  #  if: ${{ ! cancelled() && needs.test.result == 'success' }}
+  #  uses: ./.github/workflows/check_parked.yml
 
   validate:
     needs: [test, prune-parked]

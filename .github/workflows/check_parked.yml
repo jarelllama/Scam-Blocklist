@@ -2,7 +2,9 @@ name: Remove parked domains
 run-name: Remove parked domains
 on:
   workflow_dispatch:
-  workflow_call:
+  schedule:
+    - cron: '0 4 * * 0'
+  #workflow_call:
 permissions:
   contents: write
 
