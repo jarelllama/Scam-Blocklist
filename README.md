@@ -115,7 +115,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
 
 ``` text
-Active search terms: 9
+Active search terms: 10
 API calls made today: 66
 Domains retrieved today: 32
 ```
@@ -133,7 +133,7 @@ dnstwist uses a list of common phishing targets to find permutations of the targ
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
 
 ``` text
-Active targets: 111
+Active targets: 118
 Domains retrieved today: 77
 ```
 
@@ -175,7 +175,7 @@ A list of common parked domain messages is used to automatically detect these do
 If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
 
 > [!TIP]
-For list maintainers interested in integrating the parked domains as a source, the list of daily-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries)
+For list maintainers interested in integrating the parked domains as a source, the list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries)
 
 ``` text
 Parked domains removed this month: 376
