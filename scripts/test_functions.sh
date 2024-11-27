@@ -498,8 +498,10 @@ test_dead_check() {
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
     # Subdomains should be kept to be processed by the validation check
-    printf "www.49532dead-domain-test.com\n" >> out_dead.txt
-    printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt
+    printf "www.49532dead-domain-test.com\n" >> out_dead.txt\
+    # https://github.com/jarelllama/Scam-Blocklist/commit/9526f71896b6950ffa75b1ff092b4af6066c0991
+    #printf "dead,49532dead-domain-test.com,raw\n" >> out_log.txt\
+
     # Both files should be empty (all dead)
     : > out_subdomains.txt
     : > out_root_domains.txt
@@ -512,7 +514,7 @@ test_alive_check() {
     # EXPECTED OUTPUT
     # Subdomains should be kept to be processed by the validation check
     printf "www.google.com\n" >> out_raw.txt
-    printf "resurrected,www.google.com,dead_domains_file\n" >> out_log.txt
+    #printf "resurrected,www.google.com,dead_domains_file\n" >> out_log.txt
 }
 
 ### PARKED CHECK TESTS
