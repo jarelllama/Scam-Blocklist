@@ -56,8 +56,9 @@ check_dead() {
         mv temp "$file"
     done
 
+    # Disable logging since changes can be seen in the dead domains file's commits.
     # Call shell wrapper to log dead domains into domain log
-    $FUNCTION --log-domains dead.tmp dead raw
+    #$FUNCTION --log-domains dead.tmp dead raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -84,7 +85,7 @@ check_alive() {
     sort -u alive.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log resurrected domains into domain log
-    $FUNCTION --log-domains alive.tmp resurrected dead_domains_file
+    #$FUNCTION --log-domains alive.tmp resurrected dead_domains_file
 }
 
 # Function 'find_dead_in' finds dead domains in a given file by formatting the

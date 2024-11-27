@@ -54,8 +54,9 @@ check_parked() {
         mv temp "$file"
     done
 
+    # Disable logging since changes can be seen in the parked domains file's commits.
     # Call shell wrapper to log parked domains into domain log
-    $FUNCTION --log-domains parked.tmp parked raw
+    #$FUNCTION --log-domains parked.tmp parked raw
 }
 
 # Function 'check_unparked' finds unparked domains in the parked domains file
@@ -86,7 +87,7 @@ check_unparked() {
     sort -u unparked.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log unparked domains into domain log
-    $FUNCTION --log-domains unparked.tmp unparked parked_domains_file
+    #$FUNCTION --log-domains unparked.tmp unparked parked_domains_file
 }
 
 # Function 'find_parked_in' efficiently checks for parked domains in a given
