@@ -530,7 +530,7 @@ test_parked_check() {
     printf "apple.com\n" >> out_raw.txt
     # Subdomains should be kept to be processed by the validation check
     printf "www.masculinenightvitality.com\n" >> out_parked.txt
-    printf "parked,masculinenightvitality.com,raw\n" >> out_log.txt
+    #printf "parked,masculinenightvitality.com,raw\n" >> out_log.txt
     # Both files should be empty (all dead)
     : > out_subdomains.txt
     : > out_root_domains.txt
@@ -546,7 +546,7 @@ test_unparked_check() {
     printf "www.github.com\n" >> out_raw.txt
     # Domains that errored during curl should be assumed still parked
     printf "parked-errored-test.com\n" >> out_parked.txt
-    printf "unparked,www.github.com,parked_domains_file\n" >> out_log.txt
+    #printf "unparked,www.github.com,parked_domains_file\n" >> out_log.txt
 }
 
 ### END OF 'test_<process>' functions
