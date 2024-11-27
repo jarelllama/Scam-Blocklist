@@ -106,7 +106,7 @@ This blocklist does not just include adult videos, but also NSFW content of the 
 
 A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats](https://rules.emergingthreats.net/) rulesets can be found here: **[jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)**
 
-Parts of the rulesets are integrated into the Scam Blocklist as well.
+The phishing ruleset is integrated into the Scam Blocklist as well.
 
 ## Sources
 
@@ -118,7 +118,7 @@ Google provides a [Search API](https://developers.google.com/custom-search/v1/ov
 
 Scam sites often do not have long lifespans; malicious domains may be replaced before they can be manually reported. By programmatically searching Google using paragraphs from real-world scam sites, new domains can be added as soon as Google crawls the site. This requires no manual reporting.
 
-The list of search terms is proactively maintained and is mostly sourced from investigating new scam site templates seen on [r/Scams](https://www.reddit.com/r/Scams/).
+The list of search terms is proactively maintained and is sourced from manual investigations of scam sites.
 
 \`\`\` text
 Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
@@ -157,7 +157,7 @@ The domain retrieval process for all sources can be viewed in the repository's c
 * Only domains are included in the blocklist; URLs are stripped down to their domains and IP addresses are manually checked for resolving DNS records
 * Redundant rules are removed via wildcard matching. For example, 'abc.example.com' is a wildcard match of 'example.com' and, therefore, is redundant and removed. Wildcards are occasionally added to the blocklist manually to further optimize the number of entries
 
-Entries that require manual verification/intervention are sent in a Telegram notification for fast remediations.
+Entries that require manual verification/intervention are notified to the maintainer for fast remediations.
 
 The full filtering process can be viewed in the repository's code.
 
