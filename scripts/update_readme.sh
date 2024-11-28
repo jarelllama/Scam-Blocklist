@@ -2,6 +2,8 @@
 
 # Updates the README.md content and statistics.
 
+# TODO: mawk '{sum += $1} END {print sum}' can be used to print 0 when there is no value.
+
 update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
