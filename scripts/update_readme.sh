@@ -136,7 +136,7 @@ dnstwist is an open-source detection tool for common cybersquatting techniques l
 
 dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked compilation of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv)
 
-The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 15 most prevalent TLDs from the NRD feed at the time of retrieval.
+The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 30 most prevalent TLDs from the NRD feed at the time of retrieval.
 
 \`\`\` text
 Active targets: $(mawk -F ',' '$5 != "y"' "$PHISHING_TARGETS" | tail -n +2 | wc -l)
@@ -168,8 +168,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 \`\`\` text
-Dead domains removed today: $(grep -cF "${TODAY},dead" "$DOMAIN_LOG")
-Resurrected domains added today: $(grep -cF "${TODAY},resurrected" "$DOMAIN_LOG")
+Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | csvcut -c 3)
+Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | csvcut -c 3)
 \`\`\`
 
 ## Parked domains
@@ -184,8 +184,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries)
 
 \`\`\` text
-Parked domains removed this month: $(grep -cF "${THIS_MONTH},parked" "$DOMAIN_LOG")
-Unparked domains added this month: $(grep -cF "${THIS_MONTH},unparked" "$DOMAIN_LOG")
+Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" domain_log.csv | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
+Unparked domains added this month: $(mawk "/${THIS_MONTH},unparked_count/" domain_log.csv | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 \`\`\`
 
 ## As seen in
