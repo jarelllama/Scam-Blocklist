@@ -184,8 +184,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries)
 
 \`\`\` text
-Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" domain_log.csv | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
-Unparked domains added this month: $(mawk "/${THIS_MONTH},unparked_count/" domain_log.csv | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
+Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
+Unparked domains added this month: $(mawk "/${THIS_MONTH},unparked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 \`\`\`
 
 ## As seen in
