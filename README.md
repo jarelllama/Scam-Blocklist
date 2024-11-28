@@ -16,19 +16,19 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 167326
-Light version: 15450
+Total domains: 167327
+Light version: 15451
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |        28 |      49% | Emerging Threats phishing
     0 |       162 |      18% | FakeWebshopListHUN
-    0 |        32 |       3% | Google Search
+    1 |        32 |       3% | Google Search
     0 |        63 |      11% | Greek Tax Scam
     0 |      1029 |       8% | Jeroengui phishing feed
     0 |        13 |       7% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
-    0 |      5829 |      18% | PhishStats
+    1 |      5829 |      18% | PhishStats
     0 |      1490 |       0% | PhishStats (NRDs)
     0 |      1186 |       1% | Regex Matching (NRDs)
     0 |        17 |      10% | aa419.org
@@ -37,7 +37,7 @@ Today | Yesterday | Excluded | Source
     0 |         4 |       9% | scam.directory
     0 |         6 |      32% | scamadviser.com
     0 |         1 |       5% | stopgunscams.com
-    0 |      8666 |      17% | All sources
+    2 |      8666 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -117,7 +117,7 @@ The list of search terms is proactively maintained and is sourced from manual in
 ``` text
 Active search terms: 10
 API calls made today: 0
-Domains retrieved today: 0
+Domains retrieved today: 1
 ```
 
 ### Retrieving phishing NRDs using dnstwist
