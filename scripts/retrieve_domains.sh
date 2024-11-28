@@ -586,10 +586,10 @@ source_regex() {
         # Collate results
         printf "%s\n" "$results" >> "$results_file"
 
-        # Escape periods, backslashes and '^'
-        row="$(printf "%s" "$row" | sed 's/[.\^]/\\&/g')"
-        # Escape '&', periods, backslashes and '^'
-        pattern="$(printf "%s" "$pattern" | sed 's/[&.\^]/\\&/g')"
+        # Escape the following: . \ ^ *
+        row="$(printf "%s" "$row" | sed 's/[.\^*]/\\&/g')"
+        # Escape the following: & . \ ^ *
+        pattern="$(printf "%s" "$pattern" | sed 's/[&.\^*]/\\&/g')"
 
         # Update counts for the target domain
         count="$(( count + $(wc -w <<< "$results") ))"
