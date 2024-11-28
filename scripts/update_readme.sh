@@ -48,8 +48,7 @@ $(print_stats)
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
-* The Excluded % is of domains not included in the
- blocklist. Mostly dead, whitelisted, and parked domains.
+* The excluded % is of domains that are dead, whitelisted, or parked.
 \`\`\`
 
 > [!IMPORTANT]
