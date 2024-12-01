@@ -16,8 +16,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 172874
-Light version: 15781
+Total domains: 172257
+Light version: 15617
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -113,7 +113,7 @@ Scam sites often do not have long lifespans; malicious domains may be replaced b
 The list of search terms is proactively maintained and is sourced from manual investigations of scam sites.
 
 ``` text
-Active search terms: 11
+Active search terms: 10
 API calls made today: 76
 Domains retrieved today: 42
 ```
@@ -176,8 +176,8 @@ If these parked sites no longer contain any of the parked messages, they are ass
 For list maintainers interested in integrating the parked domains as a source, the list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries)
 
 ``` text
-Parked domains removed this month: 0
-Unparked domains added this month: 0
+Parked domains removed this month: 839
+Unparked domains added this month: 243
 ```
 
 ## As seen in
