@@ -16,8 +16,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 172631
-Light version: 15719
+Total domains: 172629
+Light version: 15718
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
