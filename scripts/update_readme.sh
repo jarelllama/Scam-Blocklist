@@ -174,11 +174,9 @@ Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_
 
 ## Parked domains
 
-From initial testing, [9%](https://github.com/jarelllama/Scam-Blocklist/commit/84e682fea95866670dd99f5c98f350bc7377011a) of the blocklist consisted of [parked domains](https://www.godaddy.com/resources/ae/skills/parked-domain) that inflated the number of entries. Because these domains pose no real threat (besides the obnoxious advertising), they are removed from the blocklist weekly.
+Parked domains are removed weekly. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt)
 
-A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt)
-
-If these parked sites no longer contain any of the parked messages, they are assumed to be unparked and are added back into the blocklist.
+Parked sites no longer containing any of the parked messages are assumed to be unparked and are included back into the blocklist.
 
 > [!TIP]
 For list maintainers interested in integrating the parked domains as a source, the list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries)
