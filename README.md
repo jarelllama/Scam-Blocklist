@@ -21,7 +21,6 @@ Light version: 15779
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-   62 |        73 |      48% | Emerging Threats phishing
   289 |        97 |      18% | FakeWebshopListHUN
    33 |        52 |       3% | Google Search
   353 |       450 |       8% | Jeroengui phishing feed
