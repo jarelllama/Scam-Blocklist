@@ -29,7 +29,6 @@ Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-$(print_stats 'Emerging Threats') phishing
 $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
 $(print_stats 'Jeroengui phishing') feed

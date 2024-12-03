@@ -11,7 +11,7 @@ Sources marked as inactive are not being automatically employed to retrieve doma
 | [ANFRAS](https://anfras.com/fakeshops/) | Fake | Yes | - |
 | [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Advance-fee | | |
 | [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | Yes | - |
-| [Emerging Threats phishing rules](https://rules.emergingthreats.net/) | Phishing | | |
+| [Emerging Threats phishing rules](https://rules.emergingthreats.net/) | Phishing | Yes | - |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | Fake | Yes | - |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Fake | | Yes |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | | |
