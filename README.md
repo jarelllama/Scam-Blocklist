@@ -16,26 +16,26 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 172529
-Light version: 15779
+Total domains: 173846
+Light version: 15845
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-  289 |        97 |      18% | FakeWebshopListHUN
-   33 |        52 |       3% | Google Search
-  353 |       450 |       8% | Jeroengui phishing feed
-    7 |         9 |       7% | Jeroengui scam feed
+  180 |       289 |      18% | FakeWebshopListHUN
+   37 |        33 |       3% | Google Search
+  914 |       353 |       8% | Jeroengui phishing feed
+    9 |         7 |       7% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
- 3399 |      3865 |      19% | PhishStats
- 1007 |      1229 |       0% | PhishStats (NRDs)
- 1123 |      1035 |       1% | Regex Matching (NRDs)
-   10 |        37 |      10% | aa419.org
-   94 |        74 |       1% | dnstwist (NRDs)
-  194 |       244 |      31% | guntab.com
-    0 |        50 |       8% | scam.directory
-    6 |        10 |      31% | scamadviser.com
-    1 |         1 |       5% | stopgunscams.com
- 5571 |      5997 |      17% | All sources
+ 4318 |      3399 |      19% | PhishStats
+ 1201 |      1007 |       0% | PhishStats (NRDs)
+ 1312 |      1123 |       1% | Regex Matching (NRDs)
+   10 |        10 |      10% | aa419.org
+   71 |        94 |       1% | dnstwist (NRDs)
+  228 |       194 |      31% | guntab.com
+    0 |         0 |       8% | scam.directory
+    5 |         6 |      31% | scamadviser.com
+    0 |         1 |       5% | stopgunscams.com
+ 7084 |      5571 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -87,7 +87,7 @@ Created from requests, a blocklist for NSFW domains is available in Adblock Plus
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 12303
+Total domains: 12323
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
@@ -111,8 +111,8 @@ The list of search terms is proactively maintained and is sourced from manual in
 
 ``` text
 Active search terms: 10
-API calls made today: 69
-Domains retrieved today: 33
+API calls made today: 65
+Domains retrieved today: 37
 ```
 
 ### Retrieving phishing NRDs using dnstwist
@@ -129,7 +129,7 @@ The generated domain permutations are checked for matches in a newly registered 
 
 ``` text
 Active targets: 129
-Domains retrieved today: 94
+Domains retrieved today: 71
 ```
 
 ### Regarding other sources
@@ -157,8 +157,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 4733
-Resurrected domains added today: 173
+Dead domains removed today: 4651
+Resurrected domains added today: 292
 ```
 
 ## Parked domains
