@@ -16,8 +16,8 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 173847
-Light version: 15845
+Total domains: 173894
+Light version: 15892
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -32,10 +32,10 @@ Today | Yesterday | Excluded | Source
    10 |        10 |      10% | aa419.org
    71 |        94 |       1% | dnstwist (NRDs)
   228 |       194 |      31% | guntab.com
-    0 |         0 |       8% | scam.directory
+   47 |         0 |       8% | scam.directory
     5 |         6 |      31% | scamadviser.com
     0 |         1 |       5% | stopgunscams.com
- 7085 |      5571 |      17% | All sources
+ 7132 |      5571 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
