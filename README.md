@@ -16,14 +16,14 @@ This blocklist aims to be an alternative to blocking all newly registered domain
 ## Statistics
 
 ``` text
-Total domains: 173846
+Total domains: 173847
 Light version: 15845
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
   180 |       289 |      18% | FakeWebshopListHUN
    37 |        33 |       3% | Google Search
-  914 |       353 |       8% | Jeroengui phishing feed
+  915 |       353 |       8% | Jeroengui phishing feed
     9 |         7 |       7% | Jeroengui scam feed
     0 |         0 |       0% | Manual Entries
  4318 |      3399 |      19% | PhishStats
@@ -35,7 +35,7 @@ Today | Yesterday | Excluded | Source
     0 |         0 |       8% | scam.directory
     5 |         6 |      31% | scamadviser.com
     0 |         1 |       5% | stopgunscams.com
- 7084 |      5571 |      17% | All sources
+ 7085 |      5571 |      17% | All sources
 
 * The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -128,7 +128,7 @@ dnstwist uses a list of common phishing targets to find permutations of the targ
 The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 30 most prevalent TLDs from the NRD feed at the time of retrieval.
 
 ``` text
-Active targets: 129
+Active targets: 132
 Domains retrieved today: 71
 ```
 
