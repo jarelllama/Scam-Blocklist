@@ -33,7 +33,6 @@ Today | Yesterday | Excluded | Source
    26 |        37 |       3% | Google Search
  1300 |       915 |       8% | Jeroengui phishing feed
     7 |         9 |       7% | Jeroengui scam feed
-    0 |         0 |       0% | Manual Entries
  4679 |      4318 |      19% | PhishStats
  1461 |      1201 |       0% | PhishStats (NRDs)
  3186 |      1312 |       1% | Regex Matching (NRDs)
