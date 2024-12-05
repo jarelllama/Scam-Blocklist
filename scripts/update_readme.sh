@@ -109,7 +109,7 @@ Entries that require manual verification/intervention are notified to the mainta
 
 The full filtering process can be viewed in the repository's code.
 
-## Dead domains
+### Dead domains
 
 Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter).
 
@@ -120,7 +120,7 @@ Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | csvcu
 Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | csvcut -c 3)
 \`\`\`
 
-## Parked domains
+### Parked domains
 
 Parked domains are removed weekly. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
 
@@ -158,21 +158,6 @@ Unparked domains added this month: $(mawk "/${THIS_MONTH},unparked_count/" "$DOM
 - [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
 - [VirusTotal](https://www.virustotal.com/): analyze suspicious files, domains, IPs, and URLs to detect malware (also includes WHOIS lookup)
 - [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
-
-## Contributing
-
-You can contribute to this project in the following ways:
-
-- [Sponsorship](https://github.com/sponsors/jarelllama)
-- Star this repository
-- [Code](https://github.com/jarelllama/Scam-Blocklist/blob/main/scripts) reviews
-- Report domains and false positives
-- Report false negatives in the [whitelist](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
-- Suggest [search terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) for the Google Search source
-- Suggest [phishing targets](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) for the dnstwist and Regex Matching sources
-- Suggest new [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
-- Suggest [parked terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt) for the parked domains detection
-- Report false positives in the [parked domains](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) file
 EOF
 }
 
