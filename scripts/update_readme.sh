@@ -10,9 +10,17 @@ update_readme() {
 
 ${BLOCKLIST_DESCRIPTION}
 
-The [automated retrieval](https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml) is done daily at 16:00 UTC.
+This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. This is done by detecting new malicious domains within a short period of their registration date.
+Sources include:
 
-This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. A variety of sources are integrated to detect new malicious domains within a short time span of their registration date.
+- Public databases
+- Google Search indexing to find common scam site templates
+- Open source tools such as [dnstwist](https://github.com/elceef/dnstwist) to detect common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack)
+- Regex expression matching for NRDs
+
+A list of all sources can be found in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).<br>
+
+The automated retrieval is done daily at 16:00 UTC.
 
 ## Download
 
@@ -50,10 +58,6 @@ $(print_stats)
 * The excluded % is of domains that are dead, whitelisted, or parked.
 \`\`\`
 
-> [!IMPORTANT]
-All data retrieved are publicly available and can be viewed from their respective [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).<br>
-Any data hidden behind account creation/commercial licenses is never used.
-
 <details>
 <summary>Domains over time (days)</summary>
 
@@ -66,26 +70,14 @@ Courtesy of iam-py-test/blocklist_stats.
 
 ### Light version
 
-Targeted at list maintainers, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory.
+For collated blocklists cautious about size, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory. Sources excluded from the light version are marked in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/).
 
-<details>
-<summary>Details about the light version</summary>
-<ul>
-<li>Intended for collated blocklists cautious about size</li>
-<li>Only includes sources whose domains can be filtered by date registered/reported</li>
-<li>Only includes domains retrieved/reported from February 2024 onwards, whereas the full list goes back further historically</li>
-<li>Note that dead and parked domains that become alive/unparked are not added back into the light version (due to limitations in the way these domains are recorded)</li>
-</ul>
-Sources excluded from the light version are marked in SOURCES.md.
-<br>
-<br>
-The full version should be used where possible as it fully contains the light version and accounts for resurrected/unparked domains.
-</details>
+Note that dead and parked domains that become alive/unparked are not added back into the light version due to limitations in the way these domains are recorded.
 
 ### NSFW Blocklist
 
 Created from requests, a blocklist for NSFW domains is available in Adblock Plus format here:
-[nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt)
+[nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt).
 
 <details>
 <summary>Details about the NSFW Blocklist</summary>
@@ -103,48 +95,7 @@ This blocklist does not just include adult videos, but also NSFW content of the 
 
 ### Malware Blocklist
 
-A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats](https://rules.emergingthreats.net/) rulesets can be found here: **[jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)**
-
-## Sources
-
-### Retrieving scam domains using Google Search API
-
-Google provides a [Search API](https://developers.google.com/custom-search/v1/overview) to retrieve JSON-formatted results from Google Search. A list of search terms almost exclusively found in scam sites is used by the API to retrieve domains. See the list of search terms here: [search_terms.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv)
-
-#### Details
-
-Scam sites often do not have long lifespans; malicious domains may be replaced before they can be manually reported. By programmatically searching Google using paragraphs from real-world scam sites, new domains can be added as soon as Google crawls the site. This requires no manual reporting.
-
-The list of search terms is proactively maintained and is sourced from manual investigations of scam sites.
-
-\`\`\` text
-Active search terms: $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | tail -n +2 | wc -l)
-API calls made today: $(mawk "/${TODAY},Google Search/" "$SOURCE_LOG" | csvcut -c 10 | mawk '{sum += $1} END {print sum}')
-Domains retrieved today: $(sum "$TODAY" 'Google Search')
-\`\`\`
-
-### Retrieving phishing NRDs using dnstwist
-
-New phishing domains are created daily, and unlike other sources that rely on manual reporting, [dnstwist](https://github.com/elceef/dnstwist) can automatically detect new phishing domains within days of their registration date.
-
-dnstwist is an open-source detection tool for common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack).
-
-#### Details
-
-dnstwist uses a list of common phishing targets to find permutations of the targets' domains. The target list is a handpicked compilation of cryptocurrency exchanges, delivery companies, etc. collated while wary of potential false positives. The list of phishing targets can be viewed here: [phishing_targets.csv](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv)
-
-The generated domain permutations are checked for matches in a newly registered domains (NRDs) feed comprising domains registered within the last 30 days. Each permutation is tested for alternate top-level domains (TLDs) using the 30 most prevalent TLDs from the NRD feed at the time of retrieval.
-
-\`\`\` text
-Active targets: $(mawk -F ',' '$5 != "y"' "$PHISHING_TARGETS" | tail -n +2 | wc -l)
-Domains retrieved today: $(sum "$TODAY" dnstwist)
-\`\`\`
-
-### Regarding other sources
-
-All sources used presently or formerly are credited here: [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
-
-The domain retrieval process for all sources can be viewed in the repository's code.
+A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats](https://rules.emergingthreats.net/) rulesets can be found here: **[jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)**.
 
 ## Automated filtering process
 
@@ -171,12 +122,12 @@ Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_
 
 ## Parked domains
 
-Parked domains are removed weekly. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt)
+Parked domains are removed weekly. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
 
 Parked sites no longer containing any of the parked messages are assumed to be unparked and are included back into the blocklist.
 
 > [!TIP]
-For list maintainers interested in integrating the parked domains as a source, the list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries)
+For list maintainers interested in integrating the parked domains as a source, a list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries).
 
 \`\`\` text
 Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
@@ -203,17 +154,10 @@ Unparked domains added this month: $(mawk "/${THIS_MONTH},unparked_count/" "$DOM
 * [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
 * [Grammarly](https://grammarly.com/): spelling and grammar checker
 * [Jarelllama's Blocklist Checker](https://github.com/jarelllama/Blocklist-Checker): generate a simple static report for blocklists or see previous reports of requested blocklists
-* [Legality of web scraping](https://www.quinnemanuel.com/the-firm/publications/the-legal-landscape-of-web-scraping/): the law firm of Quinn Emanuel Urquhart & Sullivan's memoranda on web scraping
 * [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
 * [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
 * [VirusTotal](https://www.virustotal.com/): analyze suspicious files, domains, IPs, and URLs to detect malware (also includes WHOIS lookup)
 * [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
-
-## Appreciation
-
-Thanks to the following people for the help, inspiration, and support!
-
-[@T145](https://github.com/T145) - [@bongochong](https://github.com/bongochong) - [@hagezi](https://github.com/hagezi) - [@iam-py-test](https://github.com/iam-py-test) - [@sefinek24](https://github.com/sefinek24) - [@sjhgvr](https://github.com/sjhgvr)
 
 ## Contributing
 

@@ -4,7 +4,7 @@
 All data retrieved from the following sources are publicly available.<br>
 Any data hidden behind account creation/commercial licenses is never used.
 
-Sources marked as inactive are not being automatically employed to retrieve domains.
+Only active sources are used to automatically retrieve domains.
 
 | Source | Type | Active | Excluded from light |
 |:--- |:--- |:--- |:--- |
