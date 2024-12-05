@@ -622,7 +622,6 @@ source_aa419() {
 
 source_fakewebshoplisthun() {
     source='FakeWebshopListHUN'
-    ignore_from_light=true
     results_file='data/pending/domains_fakewebshoplisthun.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
