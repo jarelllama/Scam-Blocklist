@@ -24,7 +24,9 @@ main() {
     fi
 
     # DEBUGGING
+    echo "Parked domains:"
     cat "$PARKED_DOMAINS"
+    echo "Raw file:"
     cat "$RAW"
 }
 
