@@ -22,9 +22,6 @@ main() {
         # Note the parked domains file should remain unsorted
         cat parked_cache.tmp >> "$PARKED_DOMAINS"
     fi
-
-    # DEBUGGING
-    cat unparked.tmp
 }
 
 # Function 'check_parked' removes parked domains from the raw file, raw light
