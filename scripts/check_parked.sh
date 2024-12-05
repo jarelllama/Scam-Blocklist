@@ -164,9 +164,14 @@ find_parked() {
         # causes parked domains to seem unparked.
         html="$(curl -sSL --max-time 3 "https://${domain}/" 2>&1 | tr -d '\0')"
 
-        # Collate domains that errored so they can be dealt with later
-        # accordingly
-        if grep -qF 'curl:' <<< "$html"; then
+        # If using HTTPS fails, use HTTP
+        if grep -qF 'curl: (60) SSL: no alternative certificate subject name matches target host name' \
+            <<< "$html"; then
+            html="$(curl -sSL --max-time 3 "http://${domain}/" 2>&1 \
+                | tr -d '\0')"
+        elif grep -qF 'curl:' <<< "$html"; then
+            # Collate domains that errored so they can be dealt with later
+            # accordingly
             printf "%s\n" "$domain" >> "errored_domains_${1}.tmp"
             continue
         fi
