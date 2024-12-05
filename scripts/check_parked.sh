@@ -162,7 +162,7 @@ find_parked() {
         # tr is used here to remove null characters found in some sites
         # Appears that -k causes some domains to have an empty response, which
         # causes parked domains to seem unparked.
-        html="$(curl -sSL --max-time 3 "http://${domain}/" 2>&1 | tr -d '\0')"
+        html="$(curl -sSL --max-time 3 "https://${domain}/" 2>&1 | tr -d '\0')"
 
         # Collate domains that errored so they can be dealt with later
         # accordingly
