@@ -29,20 +29,20 @@ Light version: 15380
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-  307 |       180 |      18% | FakeWebshopListHUN
-   27 |        37 |       3% | Google Search
- 1300 |       915 |       8% | Jeroengui phishing feed
-    8 |         9 |       7% | Jeroengui scam feed
- 4679 |      4318 |      19% | PhishStats
- 1461 |      1201 |       0% | PhishStats (NRDs)
- 3186 |      1312 |       1% | Regex Matching (NRDs)
-    9 |        10 |      10% | aa419.org
-   73 |        71 |       1% | dnstwist (NRDs)
-  170 |       228 |      31% | guntab.com
-   49 |        47 |       8% | scam.directory
-    8 |         5 |      31% | scamadviser.com
-    1 |         0 |       5% | stopgunscams.com
- 9818 |      7132 |      17% | All sources
+    - |       307 |      18% | FakeWebshopListHUN
+    - |        27 |       3% | Google Search
+    - |      1300 |       8% | Jeroengui phishing feed
+    - |         8 |       7% | Jeroengui scam feed
+    - |      4679 |      19% | PhishStats
+    - |      1461 |       0% | PhishStats (NRDs)
+    - |      3186 |       1% | Regex Matching (NRDs)
+    - |         9 |      10% | aa419.org
+    - |        73 |       1% | dnstwist (NRDs)
+    - |       170 |      31% | guntab.com
+    - |        49 |       8% | scam.directory
+    - |         8 |      31% | scamadviser.com
+    - |         1 |       5% | stopgunscams.com
+    - |      9818 |      17% | All sources
 
 - The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -107,8 +107,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 6674
-Resurrected domains added today: 200
+Dead domains removed today: 
+Resurrected domains added today: 
 ```
 
 ### Parked domains
@@ -118,7 +118,7 @@ Parked domains are removed weekly. A list of common parked domain messages is us
 Parked sites no longer containing any of the parked messages are assumed to be unparked and are included back into the blocklist.
 
 > [!TIP]
-For list maintainers interested in integrating the parked domains as a source, a list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries).
+For list maintainers interested in integrating the parked domains as a source, a list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 50000 entries).
 
 ``` text
 Parked domains removed this month: 13470
