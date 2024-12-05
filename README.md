@@ -24,8 +24,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 173826
-Light version: 15849
+Total domains: 161448
+Light version: 15380
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -121,8 +121,8 @@ Parked sites no longer containing any of the parked messages are assumed to be u
 For list maintainers interested in integrating the parked domains as a source, a list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 12000 entries).
 
 ``` text
-Parked domains removed this month: 839
-Unparked domains added this month: 243
+Parked domains removed this month: 13470
+Unparked domains added this month: 456
 ```
 
 ## As seen in
