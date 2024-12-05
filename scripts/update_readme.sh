@@ -53,9 +53,9 @@ $(print_stats scamadviser.com)
 $(print_stats stopgunscams.com)
 $(print_stats)
 
-* The new domain numbers reflect what was retrieved, not
+- The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
-* The excluded % is of domains that are dead, whitelisted, or parked.
+- The excluded % is of domains that are dead, whitelisted, or parked.
 \`\`\`
 
 <details>
@@ -76,11 +76,11 @@ Note that dead and parked domains that become alive/unparked are not added back 
 
 ### NSFW Blocklist
 
-Created from requests, a blocklist for NSFW domains is available in Adblock Plus format here:
+A blocklist for NSFW domains is available in Adblock Plus format here:
 [nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt).
 
 <details>
-<summary>Details about the NSFW Blocklist</summary>
+<summary>Details</summary>
 <ul>
 <li>Domains are automatically retrieved from the Tranco Top Sites Ranking daily</li>
 <li>Dead domains are removed daily</li>
@@ -99,11 +99,11 @@ A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats]
 
 ## Automated filtering process
 
-* The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
-* The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
-* Common subdomains like 'www' are stripped. The list of subdomains checked for can be viewed here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
-* Only domains are included in the blocklist; URLs are stripped down to their domains and IP addresses are manually checked for resolving DNS records
-* Redundant rules are removed via wildcard matching. For example, 'abc.example.com' is a wildcard match of 'example.com' and, therefore, is redundant and removed. Wildcards are occasionally added to the blocklist manually to further optimize the number of entries
+- The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
+- The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
+- Common subdomains like 'www' are stripped. The list of subdomains checked for can be viewed here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
+- Only domains are included in the blocklist; URLs are stripped down to their domains and IP addresses are manually checked for resolving DNS records
+- Redundant rules are removed via wildcard matching. For example, 'abc.example.com' is a wildcard match of 'example.com' and, therefore, is redundant and removed. Wildcards are occasionally added to the blocklist manually to further optimize the number of entries
 
 Entries that require manual verification/intervention are notified to the maintainer for fast remediations.
 
@@ -136,49 +136,47 @@ Unparked domains added this month: $(mawk "/${THIS_MONTH},unparked_count/" "$DOM
 
 ## As seen in
 
-* [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
-* [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
-* [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
-* [T145's Black Mirror](https://github.com/T145/black-mirror)
-* [The oisd blocklist](https://oisd.nl/)
-* [doh.tiar.app privacy DNS](https://doh.tiar.app/)
-* [dnswarden privacy-focused DNS](https://dnswarden.com/)
-* [file-git.trli.club](https://file-git.trli.club/)
-* [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
+- [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
+- [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
+- [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
+- [T145's Black Mirror](https://github.com/T145/black-mirror)
+- [The oisd blocklist](https://oisd.nl/)
+- [doh.tiar.app privacy DNS](https://doh.tiar.app/)
+- [dnswarden privacy-focused DNS](https://dnswarden.com/)
+- [file-git.trli.club](https://file-git.trli.club/)
+- [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
 
 ## Resources / See also
 
-* [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
-* [AdGuard's Hostlist Compiler](https://github.com/AdguardTeam/HostlistCompiler): simple tool that compiles hosts blocklists and removes redundant rules
-* [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
-* [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
-* [Grammarly](https://grammarly.com/): spelling and grammar checker
-* [Jarelllama's Blocklist Checker](https://github.com/jarelllama/Blocklist-Checker): generate a simple static report for blocklists or see previous reports of requested blocklists
-* [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
-* [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
-* [VirusTotal](https://www.virustotal.com/): analyze suspicious files, domains, IPs, and URLs to detect malware (also includes WHOIS lookup)
-* [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
+- [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
+- [AdGuard's Hostlist Compiler](https://github.com/AdguardTeam/HostlistCompiler): simple tool that compiles hosts blocklists and removes redundant rules
+- [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
+- [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
+- [Grammarly](https://grammarly.com/): spelling and grammar checker
+- [Jarelllama's Blocklist Checker](https://github.com/jarelllama/Blocklist-Checker): generate a simple static report for blocklists or see previous reports of requested blocklists
+- [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
+- [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
+- [VirusTotal](https://www.virustotal.com/): analyze suspicious files, domains, IPs, and URLs to detect malware (also includes WHOIS lookup)
+- [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
 
 ## Contributing
 
 You can contribute to this project in the following ways:
 
-* [Sponsorship](https://github.com/sponsors/jarelllama)
-* Star this repository
-* [Code](https://github.com/jarelllama/Scam-Blocklist/blob/main/scripts) reviews
-* Report domains and false positives
-* Report false negatives in the [whitelist](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
-* Suggest [search terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) for the Google Search source
-* Suggest [phishing targets](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) for the dnstwist and Regex Matching sources
-* Suggest new [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
-* Suggest [parked terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt) for the parked domains detection
-* Report false positives in the [parked domains](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) file
+- [Sponsorship](https://github.com/sponsors/jarelllama)
+- Star this repository
+- [Code](https://github.com/jarelllama/Scam-Blocklist/blob/main/scripts) reviews
+- Report domains and false positives
+- Report false negatives in the [whitelist](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/whitelist.txt)
+- Suggest [search terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) for the Google Search source
+- Suggest [phishing targets](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) for the dnstwist and Regex Matching sources
+- Suggest new [sources](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md)
+- Suggest [parked terms](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt) for the parked domains detection
+- Report false positives in the [parked domains](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) file
 EOF
 }
 
 readonly FUNCTION='bash scripts/tools.sh'
-#readonly SEARCH_TERMS='config/search_terms.csv'
-#readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
