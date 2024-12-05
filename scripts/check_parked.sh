@@ -22,6 +22,10 @@ main() {
         # Note the parked domains file should remain unsorted
         cat parked_cache.tmp >> "$PARKED_DOMAINS"
     fi
+
+    # DEBUGGING
+    cat "$PARKED_DOMAINS"
+    cat "$RAW"
 }
 
 # Function 'check_parked' removes parked domains from the raw file, raw light
@@ -150,7 +154,7 @@ find_parked() {
     while read -r domain; do
         if [[ "$track" == true ]]; then
             if (( count % 100 == 0 )); then
-                printf "[info] Analyzed %s%% of domains\n" \
+                printf "\e[1m[info] Analyzed %s%% of domains\n\e[0m" \
                     "$(( count * 100 / $(wc -l < "$1") ))"
             fi
 
