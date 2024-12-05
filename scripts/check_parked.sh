@@ -150,7 +150,7 @@ find_parked() {
     while read -r domain; do
         if [[ "$track" == true ]]; then
             if (( count % 100 == 0 )); then
-                printf "[info] Analyzed %s%% of domains\n" \
+                printf "\e[1m[info] Analyzed %s%% of domains\n\e[0m" \
                     "$(( count * 100 / $(wc -l < "$1") ))"
             fi
 
@@ -189,7 +189,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from parked domains file
-    $FUNCTION --prune-lines "$PARKED_DOMAINS" 12000
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" 20000
 }
 
 # Entry point
