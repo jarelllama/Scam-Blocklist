@@ -24,10 +24,7 @@ main() {
     fi
 
     # DEBUGGING
-    echo "Parked domains:"
-    cat "$PARKED_DOMAINS"
-    echo "Raw file:"
-    cat "$RAW"
+    cat unparked.tmp
 }
 
 # Function 'check_parked' removes parked domains from the raw file, raw light
@@ -195,7 +192,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from parked domains file
-    $FUNCTION --prune-lines "$PARKED_DOMAINS" 12000
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" 50000
 }
 
 # Entry point
