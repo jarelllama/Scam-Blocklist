@@ -24,25 +24,25 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 161448
-Light version: 15380
+Total domains: 163688
+Light version: 15876
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-    - |       307 |      18% | FakeWebshopListHUN
-    - |        27 |       3% | Google Search
-    - |      1300 |       8% | Jeroengui phishing feed
-    - |         8 |       7% | Jeroengui scam feed
-    - |      4679 |      19% | PhishStats
-    - |      1461 |       0% | PhishStats (NRDs)
-    - |      3186 |       1% | Regex Matching (NRDs)
-    - |         9 |      10% | aa419.org
-    - |        73 |       1% | dnstwist (NRDs)
-    - |       170 |      31% | guntab.com
-    - |        49 |       8% | scam.directory
-    - |         8 |      31% | scamadviser.com
-    - |         1 |       5% | stopgunscams.com
-    - |      9818 |      17% | All sources
+  867 |       307 |      18% | FakeWebshopListHUN
+   29 |        27 |       3% | Google Search
+  841 |      1300 |       8% | Jeroengui phishing feed
+    9 |         8 |       7% | Jeroengui scam feed
+    0 |      4679 |      19% | PhishStats
+    0 |      1461 |       0% | PhishStats (NRDs)
+ 2584 |      3186 |       1% | Regex Matching (NRDs)
+   19 |         9 |      10% | aa419.org
+  258 |        73 |       1% | dnstwist (NRDs)
+  496 |       170 |      31% | guntab.com
+    6 |        49 |       8% | scam.directory
+   14 |         8 |      31% | scamadviser.com
+    2 |         1 |       5% | stopgunscams.com
+ 5125 |      9818 |      17% | All sources
 
 - The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -78,7 +78,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 12355
+Total domains: 12374
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
@@ -107,8 +107,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 
-Resurrected domains added today: 
+Dead domains removed today: 3239
+Resurrected domains added today: 472
 ```
 
 ### Parked domains
