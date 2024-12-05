@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 12.04.220857.2024
+! Version: 12.05.042140.2024
 ! Expires: 12 hours
-! Last modified: Wed Dec  4 22:08:57 UTC 2024
+! Last modified: Thu Dec  5 04:21:40 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 15844
+! Number of entries: 15851
 !
 ||0.seetherofficialmerch.com^
 ||01edc.com^
@@ -59,6 +59,7 @@
 ||24expresstransportllc.com^
 ||24hrsroyaltrst.com^
 ||2afirearmsdealer.com^
+||3-89-181-9.cprapid.com^
 ||336655v.com^
 ||34-82-64-200.cprapid.com^
 ||365cn.vip^
@@ -163,6 +164,7 @@
 ||801013lht4776af5cdnlla0g.z13.web.core.windows.net^
 ||80handcraftedgifts.shop^
 ||80lowerkits.com^
+||87.sslip.io^
 ||8702666.com^
 ||8836500.vip^
 ||8836522.vip^
@@ -7740,6 +7742,10 @@
 ||kw-zains.top^
 ||kw-zajel.com^
 ||kw-zajel.top^
+||kwid9.appsoft.xyz^
+||kwid9.m-r.xyz^
+||kwid9.safetravel.xyz^
+||kwid9.zavod.xy^
 ||kws-zain.top^
 ||kwt-zain.top^
 ||kwt-zajel.com^
@@ -10131,6 +10137,7 @@
 ||pknryr.com^
 ||pksinha.co.uk^
 ||pkudigital.com^
+||pl-oferta-id2387942371.top^
 ||pl.24-7cryptocurrenciez.crypto-market-world.com^
 ||plamat.top^
 ||planaheadus.com^
