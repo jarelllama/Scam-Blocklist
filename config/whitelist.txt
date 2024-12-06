@@ -68,6 +68,7 @@
 ^experienceleague\.adobe\.com$
 ^facebook\.com$
 ^facebookini\.it$
+^faire\.com$
 ^findglocal\.com$
 ^firstcry\.com$
 ^fixed\.zone$
@@ -196,6 +197,7 @@
 ^scribd\.com$
 ^sepa\.hu$
 ^shawacademy\.com$
+^shopeepay\.com\.[a-z]*$
 ^shopeepay\.com\.br$
 ^signal-arnaques\.com$
 ^singletrackworld\.com$
@@ -278,5 +280,3 @@ scam-detector
 scamadviser
 scamscavenger
 xiaoming
-^faire\.com$
-^shopeepay\.com\.[a-z]*$
