@@ -24,14 +24,14 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 163688
-Light version: 15876
+Total domains: 163690
+Light version: 15877
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
-  867 |       307 |      18% | FakeWebshopListHUN
+  868 |       307 |      18% | FakeWebshopListHUN
    29 |        27 |       3% | Google Search
-  841 |      1300 |       8% | Jeroengui phishing feed
+  842 |      1300 |       8% | Jeroengui phishing feed
     9 |         8 |       7% | Jeroengui scam feed
     0 |      4679 |      19% | PhishStats
     0 |      1461 |       0% | PhishStats (NRDs)
@@ -42,7 +42,7 @@ Today | Yesterday | Excluded | Source
     6 |        49 |       8% | scam.directory
    14 |         8 |      31% | scamadviser.com
     2 |         1 |       5% | stopgunscams.com
- 5125 |      9818 |      17% | All sources
+ 5127 |      9818 |      17% | All sources
 
 - The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
