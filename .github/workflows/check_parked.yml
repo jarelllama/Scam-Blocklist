@@ -3,6 +3,7 @@ run-name: Remove parked domains
 on:
   workflow_dispatch:
   schedule:
+    # Run weekly to give external organisations time to flag NRDs.
     - cron: '0 4 * * 0'
   #workflow_call:
 permissions:
