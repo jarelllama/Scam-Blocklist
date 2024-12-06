@@ -24,8 +24,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 162522
-Light version: 15895
+Total domains: 162524
+Light version: 15897
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
@@ -42,7 +42,7 @@ Today | Yesterday | Excluded | Source
     6 |        49 |       8% | scam.directory
    14 |         8 |      31% | scamadviser.com
     2 |         1 |       5% | stopgunscams.com
- 5127 |      9818 |      17% | All sources
+ 5129 |      9818 |      17% | All sources
 
 - The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
