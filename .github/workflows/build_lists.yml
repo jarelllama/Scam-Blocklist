@@ -12,6 +12,9 @@ on:
       - Validate domains
     types:
       - completed
+  push:
+    paths:
+      - 'config/wildcards.txt'
 permissions:
   contents: write
 
