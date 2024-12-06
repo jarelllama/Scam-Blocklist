@@ -7,14 +7,14 @@ Sources include:
 
 - Public databases
 - Google Search indexing to find common scam site templates
-- Open source tools such as [dnstwist](https://github.com/elceef/dnstwist) to detect common cybersquatting techniques like typosquatting, doppelganger Domains, and IDN homograph attacks
+- Open source tools such as [dnstwist](https://github.com/elceef/dnstwist) to detect cybersquatting techniques like typosquatting, doppelganger domains, and IDN homograph attacks
 - Regex expression matching for phishing NRDs
 
 A list of all sources can be found in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md) with config files [here](https://github.com/jarelllama/Scam-Blocklist/tree/main/config).
 
 The automated retrieval is done daily at 16:00 UTC.
 
-## Download
+## Downloads
 
 | Format | Syntax |
 | --- | --- |
@@ -90,9 +90,9 @@ A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats]
 
 ## Automated filtering process
 
-- The domains collated from all sources are filtered against an actively maintained whitelist (scam reporting sites, forums, vetted stores, etc.)
-- The domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
-- Common subdomains like 'www' are stripped. The list of subdomains checked for can be viewed here: [subdomains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/subdomains.txt)
+- Domains are filtered against an actively maintained whitelist
+- Domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
+- Common subdomains like 'www' are stripped
 - Only domains are included in the blocklist; URLs are stripped down to their domains and IP addresses are manually checked for resolving DNS records
 - Redundant rules are removed via wildcard matching. For example, 'abc.example.com' is a wildcard match of 'example.com' and, therefore, is redundant and removed. Wildcards are occasionally added to the blocklist manually to further optimize the number of entries
 
