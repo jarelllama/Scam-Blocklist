@@ -7,10 +7,10 @@ Sources include:
 
 - Public databases
 - Google Search indexing to find common scam site templates
-- Open source tools such as [dnstwist](https://github.com/elceef/dnstwist) to detect common cybersquatting techniques like [Typosquatting](https://en.wikipedia.org/wiki/Typosquatting), [Doppelganger Domains](https://en.wikipedia.org/wiki/Doppelganger_domain), and [IDN Homograph Attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack)
-- Regex expression matching for NRDs
+- Open source tools such as [dnstwist](https://github.com/elceef/dnstwist) to detect common cybersquatting techniques like typosquatting, doppelganger Domains, and IDN homograph attacks
+- Regex expression matching for phishing NRDs
 
-A list of all sources can be found in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md).<br>
+A list of all sources can be found in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md) with config files [here](https://github.com/jarelllama/Scam-Blocklist/tree/main/config).
 
 The automated retrieval is done daily at 16:00 UTC.
 
