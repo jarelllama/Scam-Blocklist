@@ -32,6 +32,7 @@ readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[
 
 readonly -a SOURCES=(
     source_aa419
+    source_dfpi
     source_dnstwist
     source_fakewebshoplisthun
     source_guntab
@@ -618,6 +619,18 @@ source_aa419() {
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
+}
+
+source_dfpi() {
+    source='DFPIs Crypto Scam Tracker'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
+        | grep -zoE '<th class="column-5">Website</th>.*<a href="#pig"' \
+        | grep -aoE "${STRICT_DOMAIN_REGEX}" > "$results_file"
 }
 
 source_fakewebshoplisthun() {
