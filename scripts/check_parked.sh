@@ -150,7 +150,7 @@ find_parked() {
     while read -r domain; do
         if [[ "$track" == true ]]; then
             if (( count % 100 == 0 )); then
-                printf "\e[1m[info] Analyzed %s%% of domains\n\e[0m" \
+                printf "[progress] Analyzed %s%% of domains\n" \
                     "$(( count * 100 / $(wc -l < "$1") ))"
             fi
 
