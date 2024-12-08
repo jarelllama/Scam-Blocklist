@@ -8,7 +8,7 @@ amazon,435,125,,-&|&-,1248,125,n,regex: Made less aggressive for sites related t
 apple,59,4,y,-&,2415,125,n,regex: Made less aggressive for sites related to the fruit
 avast,,,y,avast.*virus,1,10,n,
 avg,,,y,avg.*virus,2,10,n,
-bankofamerica,84,125,,&,,,,
+bankofamerica,84,125,,&,,,n,
 bestbuy,112,125,,^&,,,,regex: Too many FPs
 bilibili,52,125,,(^|-)&-,,,,
 binance,243,125,,&,3040,125,n,
@@ -22,7 +22,7 @@ canva,11,3,y,(^|-)&-,,,,
 capitalone,49,125,,&,244,125,n,
 chat.openai,7,97,y,(openai.*chat|chat.*openai),5,1,n,
 chatgpt,223,125,,(^|-)&|&(-|\.),1194,52,,regex: Too many FPs
-chromewebstore,3,14,y,&,5,3,,
+chromewebstore,3,14,y,&,5,3,n,
 citigroup,16,97,y,(^|-)&-,,,,
 coinbase,217,125,,&,6943,125,n,
 correos,,,y,-&|&-,49,11,n,
