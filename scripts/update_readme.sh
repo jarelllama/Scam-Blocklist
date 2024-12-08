@@ -133,18 +133,6 @@ Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" "$DOMAI
 Unparked domains added this month: $(mawk "/${THIS_MONTH},unparked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 \`\`\`
 
-## As seen in
-
-- [Fabriziosalmi's Hourly Updated Domains Blacklist](https://github.com/fabriziosalmi/blacklists)
-- [Hagezi's Threat Intelligence Feeds](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-)
-- [Sefinek24's blocklist generator and collection](https://blocklist.sefinek.net/)
-- [T145's Black Mirror](https://github.com/T145/black-mirror)
-- [The oisd blocklist](https://oisd.nl/)
-- [doh.tiar.app privacy DNS](https://doh.tiar.app/)
-- [dnswarden privacy-focused DNS](https://dnswarden.com/)
-- [file-git.trli.club](https://file-git.trli.club/)
-- [iam-py-test/my_filters_001](https://github.com/iam-py-test/my_filters_001)
-
 ## Resources / See also
 
 - [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
