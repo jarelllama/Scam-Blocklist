@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Checks for parked/unparked domains and removes/adds them accordingly.
-# Current calculations put the processing speed at 12-15 entries/second.
+# Current calculations put the processing speed at 12.5 entries/second.
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
