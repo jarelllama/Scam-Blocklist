@@ -24,25 +24,25 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 165059
-Light version: 16172
+Total domains: 166680
+Light version: 16258
 
 New domains from each source: *
 Today | Yesterday | Excluded | Source
     0 |         0 |      18% | FakeWebshopListHUN
-   44 |        34 |       3% | Google Search
-  895 |       584 |       8% | Jeroengui phishing feed
-    7 |         7 |       7% | Jeroengui scam feed
- 2561 |      7450 |      20% | PhishStats
-  722 |      1944 |       0% | PhishStats (NRDs)
- 1263 |       488 |       1% | Regex Matching (NRDs)
-    4 |         8 |      10% | aa419.org
-   46 |        31 |       1% | dnstwist (NRDs)
-    2 |         1 |      31% | guntab.com
+   34 |        44 |       3% | Google Search
+ 1021 |       895 |       8% | Jeroengui phishing feed
+    2 |         7 |       7% | Jeroengui scam feed
+ 1368 |      2561 |      20% | PhishStats
+  161 |       722 |       0% | PhishStats (NRDs)
+  502 |      1263 |       1% | Regex Matching (NRDs)
+    7 |         4 |      10% | aa419.org
+   55 |        46 |       1% | dnstwist (NRDs)
+    0 |         2 |      31% | guntab.com
     0 |         0 |       8% | scam.directory
-    0 |         1 |      31% | scamadviser.com
+    0 |         0 |      31% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
- 4822 |      8905 |      18% | All sources
+ 2989 |      4822 |      18% | All sources
 
 - The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
@@ -78,7 +78,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 12469
+Total domains: 12474
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
@@ -107,8 +107,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 1390
-Resurrected domains added today: 303
+Dead domains removed today: 1111
+Resurrected domains added today: 436
 ```
 
 ### Parked domains
