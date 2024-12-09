@@ -76,17 +76,17 @@ mcafee,,,,(^|-)&|&(-|\.),61,12,y,
 messenger,68,127,y,(^|-)&-,,,,regex: Too few TPs
 metamask,103,127,y,meta.*mask,1256,127,y,
 microsoft,172,127,y,&,2939,127,y,
-microsoft365,26,112,,(^|-)&|&(-|\.),332,125,,regex: microsoft matches microsoft365
+microsoft365,26,112,,m.*soft.*365|365.*m.*soft,332,125,y,
 mullvad,,,,(^|-)&|&(-|\.),4,9,,
 netflix,199,127,y,(^|-)&|&(-|\.),2453,127,y,
 nicehash,9,97,,^&,3,3,y,
 norton,,,,norton.*virus,0,12,y,
-office365,55,127,y,&,373,127,y,
+office 365,55,127,y,365.*office|office.*365,373,127,y,
 okcupid,14,97,,(^|-)&-,,,,
-onedrive,17,98,,-&|&(-|\.),197,127,y,regex: Made less aggressive for 'onedriver' domains
+onedrive,17,98,,(^|-)&|&(-|\.),197,127,y,
 onlyfans,129,127,y,&,1195,127,y,
 openai,139,127,y,(^|-)&|&(-|\.),1512,127,y,
-outlook,119,127,y,(^|-)&-,,,,regex: Too many FPs
+outlook,119,127,y,microsoft.*&|&.*login|login.*&|&-,,,y,regex: Too many FPs
 paypal,120,127,y,&,853,127,y,
 pinterest,72,127,y,(^|-)&|&(-|\.),211,124,y,
 pornhub,62,127,y,(^|-)&|&(-|\.),373,127,y,
@@ -139,3 +139,7 @@ xvideos,36,6,,(^|-)&|&-,182,34,,regex: Too many FPs
 yahoo,62,22,y,(^|-)&-,,,,regex: Too few TPs
 yandex,49,127,y,(^|-)&|&(-|\.),3765,127,y,
 youtube,118,127,y,(^|-)&|&(-|\.),2641,127,y,
+video editing,,,,edit.*pro,,,y,
+utility billing,,,,^(energy|electic|utility).*bill,,,y,
+microsoft teams,,,,^m.*soft.*team|team.*meets,,,y,
+money recover,,,,money.*recover|recover.*money,,,y,
