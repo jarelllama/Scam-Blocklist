@@ -35,7 +35,7 @@ The automated retrieval is done daily at 16:00 UTC.
 Total domains: $(grep -cF '||' lists/adblock/scams.txt)
 Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
-New domains after filtering: *
+New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
 $(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
