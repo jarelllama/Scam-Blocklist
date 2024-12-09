@@ -36,7 +36,7 @@ Total domains: $(grep -cF '||' lists/adblock/scams.txt)
 Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains after filtering: *
-Today | Monthly | % Monthly | % Filtered | Source
+Today | Monthly | %Monthly | %Filtered | Source
 $(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
@@ -53,9 +53,8 @@ $(print_stats scamadviser.com)
 $(print_stats stopgunscams.com)
 $(print_stats)
 
-- % Monthly: percentage out of total domains from all sources.
-- % Filtered: percentage of dead, whitelisted and parked domains.
-
+- %Monthly: percentage out of total domains from all sources.
+- %Filtered: percentage of dead, whitelisted and parked domains.
 \`\`\`
 
 <details>
@@ -163,7 +162,7 @@ print_stats() {
     this_month="$(sum "$THIS_MONTH" "$1")"
     total_this_month="$(sum "$THIS_MONTH")"
 
-    printf "%5s |%6s |%4s%% |%4s%% | %s" \
+    printf "%5s |%8s |%8s%% |%9s%% | %s" \
         "$(sum "$TODAY" "$1")" "$this_month" \
         "$(( this_month * 100 / total_this_month ))" "$(sum_excluded "$1" )" "${1:-All sources}"
 }
