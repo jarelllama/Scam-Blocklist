@@ -27,26 +27,27 @@ The automated retrieval is done daily at 16:00 UTC.
 Total domains: 170772
 Light version: 16269
 
-New domains from each source: *
-Today | Yesterday | Excluded | Source
-    0 |         0 |      18% | FakeWebshopListHUN
-   34 |        44 |       3% | Google Search
- 1021 |       895 |       8% | Jeroengui phishing feed
-    2 |         7 |       7% | Jeroengui scam feed
- 1368 |      2561 |      20% | PhishStats
-  161 |       722 |       0% | PhishStats (NRDs)
- 4583 |      1263 |       1% | Regex Matching (NRDs)
-    7 |         4 |      10% | aa419.org
-   66 |        46 |       1% | dnstwist (NRDs)
-    0 |         2 |      31% | guntab.com
-    0 |         0 |       8% | scam.directory
-    0 |         0 |      31% | scamadviser.com
-    0 |         0 |       5% | stopgunscams.com
- 7081 |      4822 |      18% | All sources
+New domains after filtering: *
+Today | Monthly | % Monthly | % Filtered | Source
+    0 |   148 |   0% |  48% | Emerging Threats
+    0 |  1781 |   2% |  18% | FakeWebshopListHUN
+   34 |   332 |   0% |   3% | Google Search
+ 1021 |  7352 |  11% |   8% | Jeroengui phishing feed
+    2 |    69 |   0% |   7% | Jeroengui scam feed
+ 1368 | 32707 |  52% |  20% | PhishStats
+  161 |  9089 |  14% |   0% | PhishStats (NRDs)
+ 4583 | 16953 |  27% |   1% | Regex Matching (NRDs)
+    7 |   124 |   0% |  10% | aa419.org
+   66 |   788 |   1% |   1% | dnstwist (NRDs)
+    0 |  1469 |   2% |  31% | guntab.com
+    0 |   153 |   0% |   8% | scam.directory
+    0 |    45 |   0% |  31% | scamadviser.com
+    0 |     5 |   0% |   5% | stopgunscams.com
+ 7081 | 62230 | 100% |  18% | All sources
 
-- The new domain numbers reflect what was retrieved, not
- what was added to the blocklist.
-- The excluded % is of domains that are dead, whitelisted, or parked.
+- % Monthly: percentage out of total domains from all sources.
+- % Filtered: percentage of dead, whitelisted and parked domains.
+
 ```
 
 <details>
