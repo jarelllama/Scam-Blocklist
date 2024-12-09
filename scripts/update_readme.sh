@@ -162,7 +162,7 @@ print_stats() {
     this_month="$(sum "$THIS_MONTH" "$1")"
     total_this_month="$(sum "$THIS_MONTH")"
 
-    printf "%5s |%8s |%8s%% |%9s%% | %s" \
+    printf "%5s |%8s |%8s% % |%9s% % | %s" \
         "$(sum "$TODAY" "$1")" "$this_month" \
         "$(( this_month * 100 / total_this_month ))" "$(sum_excluded "$1" )" "${1:-All sources}"
 }
