@@ -36,6 +36,7 @@ readonly -a SOURCES=(
     source_emerging_threats
     source_fakewebshoplisthun
     source_guntab
+    source_isc
     source_jeroengui_phishing
     source_jeroengui_scam
     source_manual
@@ -656,6 +657,15 @@ source_guntab() {
         | grep -zoE '<table class="datatable-list table">.*</table>' \
         | grep -aoE "${DOMAIN_REGEX}$" > "$results_file"
         # Note results are not sorted by time added
+}
+
+source_isc() {
+    source='Internet Storm Center'
+    results_file='data/pending/domains_isc.tmp'
+
+    url='https://isc.sans.edu/diaryarchive.html'
+    curl -sSZ --retry 2 --retry-all-errors "${url}" \
+        | grep -oE "$DOMAIN_REGEX" | grep '\[\.\]' > "$results_file"
 }
 
 source_jeroengui_phishing() {
