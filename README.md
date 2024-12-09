@@ -24,8 +24,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 170772
-Light version: 16269
+Total domains: 170790
+Light version: 16287
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -43,7 +43,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     153 |      0 % |       8 % | scam.directory
     0 |      45 |      0 % |      31 % | scamadviser.com
     0 |       5 |      0 % |       5 % | stopgunscams.com
- 7081 |   62230 |    100 % |      18 % | All sources
+ 7099 |   62248 |    100 % |      18 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted and parked domains.
