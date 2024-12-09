@@ -127,7 +127,6 @@ Unparked domains added this month: 517
 
 ## Resources / See also
 
-- [AdGuard's Dead Domains Linter](https://github.com/AdguardTeam/DeadDomainsLinter): simple tool to check adblock filtering rules for dead domains
 - [AdGuard's Hostlist Compiler](https://github.com/AdguardTeam/HostlistCompiler): simple tool that compiles hosts blocklists and removes redundant rules
 - [Elliotwutingfeng's repositories](https://github.com/elliotwutingfeng?tab=repositories): various original blocklists
 - [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html): Shell script style guide
@@ -135,6 +134,5 @@ Unparked domains added this month: 517
 - [Hagezi's DNS Blocklists](https://github.com/hagezi/dns-blocklists): various curated blocklists including threat intelligence feeds
 - [Jarelllama's Blocklist Checker](https://github.com/jarelllama/Blocklist-Checker): generate a simple static report for blocklists or see previous reports of requested blocklists
 - [ShellCheck](https://github.com/koalaman/shellcheck): static analysis tool for Shell scripts
-- [Tranco](https://tranco-list.eu/): research-oriented top sites ranking hardened against manipulation
 - [VirusTotal](https://www.virustotal.com/): analyze suspicious files, domains, IPs, and URLs to detect malware (also includes WHOIS lookup)
 - [iam-py-test/blocklist_stats](https://github.com/iam-py-test/blocklist_stats): statistics on various blocklists
