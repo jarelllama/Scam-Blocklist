@@ -35,8 +35,9 @@ The automated retrieval is done daily at 16:00 UTC.
 Total domains: $(grep -cF '||' lists/adblock/scams.txt)
 Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
-New domains from each source: *
-Today | Yesterday | Excluded | Source
+New domains after filtering: *
+Today | Monthly | % Monthly | % Filtered | Source
+$(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
 $(print_stats 'Jeroengui phishing') feed
@@ -52,9 +53,9 @@ $(print_stats scamadviser.com)
 $(print_stats stopgunscams.com)
 $(print_stats)
 
-- The new domain numbers reflect what was retrieved, not
- what was added to the blocklist.
-- The excluded % is of domains that are dead, whitelisted, or parked.
+- % Monthly: percentage out of total domains from all sources.
+- % Filtered: percentage of dead, whitelisted and parked domains.
+
 \`\`\`
 
 <details>
@@ -153,23 +154,25 @@ readonly FUNCTION='bash scripts/tools.sh'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
-YESTERDAY="$(TZ=Asia/Singapore date -d yesterday +"%d-%m-%y")"
 THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 
 # Function 'print_stats' is an echo wrapper that returns the formatted
 # statistics for the given source.
 #   $1: source to process (default is all sources)
 print_stats() {
-    printf "%5s |%10s |%8s%% | %s" \
-        "$(sum "$TODAY" "$1")" "$(sum "$YESTERDAY" "$1")" \
-        "$(sum_excluded "$1" )" "${1:-All sources}"
+    this_month="$(sum "$THIS_MONTH" "$1")"
+    total_this_month="$(sum "$THIS_MONTH")"
+
+    printf "%5s |%6s |%4s%% |%4s%% | %s" \
+        "$(sum "$TODAY" "$1")" "$this_month" \
+        "$(( this_month * 100 / total_this_month ))" "$(sum_excluded "$1" )" "${1:-All sources}"
 }
 
 # Note that csvkit is used in the following functions as the Google Search
 # search terms may contain commas which makes using mawk complicated.
 
 # Function 'sum' is an echo wrapper that returns the total sum of domains
-# retrieved by the given source for that particular day.
+# retrieved by the given source for that timeframe.
 #   $1: day to process
 #   $2: source to process (default is all sources)
 sum() {
