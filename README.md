@@ -27,7 +27,7 @@ The automated retrieval is done daily at 16:00 UTC.
 Total domains: 170772
 Light version: 16269
 
-New domains after filtering: *
+New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     0 |     148 |      0 % |      48 % | Emerging Threats
     0 |    1781 |      2 % |      18 % | FakeWebshopListHUN
