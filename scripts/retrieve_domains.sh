@@ -33,6 +33,7 @@ readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[
 readonly -a SOURCES=(
     source_aa419
     source_dnstwist
+    source_emerging_threats
     source_fakewebshoplisthun
     source_guntab
     source_jeroengui_phishing
@@ -618,6 +619,17 @@ source_aa419() {
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
+}
+
+source_emerging_threats() {
+    source='Emerging Threats'
+    results_file='data/pending/emerging_threats.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
+    curl -sSL "$url" | mawk '!/!/' | grep -Po "^${STRICT_DOMAIN_REGEX}$" \
+        > "$results_file"
 }
 
 source_fakewebshoplisthun() {
