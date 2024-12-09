@@ -514,7 +514,7 @@ source_dnstwist() {
     mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones and the header
-    targets="$(mawk -F ',' '$4 != "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
+    targets="$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
 
     # Loop through the targets
     while read -r domain; do
@@ -563,7 +563,7 @@ source_regex() {
     mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones
-    targets="$(mawk -F ',' '$8 == "n" {print $1}' "$PHISHING_TARGETS")"
+    targets="$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
 
     # Loop through the targets
     while read -r domain; do
@@ -576,7 +576,7 @@ source_regex() {
         # Get regex of target
         pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
         escaped_domain="${domain//[.]/\\.}"
-        regex="${pattern/&/${escaped_domain}}"
+        regex="${pattern//&/${escaped_domain}}"
 
         # Get matches in NRD feed
         results="$(mawk "/${regex}/" nrd.tmp | sort -u)"
