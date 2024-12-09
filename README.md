@@ -24,7 +24,7 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 170771
+Total domains: 170772
 Light version: 16269
 
 New domains from each source: *
@@ -35,14 +35,14 @@ Today | Yesterday | Excluded | Source
     2 |         7 |       7% | Jeroengui scam feed
  1368 |      2561 |      20% | PhishStats
   161 |       722 |       0% | PhishStats (NRDs)
- 4582 |      1263 |       1% | Regex Matching (NRDs)
+ 4583 |      1263 |       1% | Regex Matching (NRDs)
     7 |         4 |      10% | aa419.org
    66 |        46 |       1% | dnstwist (NRDs)
     0 |         2 |      31% | guntab.com
     0 |         0 |       8% | scam.directory
     0 |         0 |      31% | scamadviser.com
     0 |         0 |       5% | stopgunscams.com
- 7080 |      4822 |      18% | All sources
+ 7081 |      4822 |      18% | All sources
 
 - The new domain numbers reflect what was retrieved, not
  what was added to the blocklist.
