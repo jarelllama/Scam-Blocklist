@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 12.10.003410.2024
+! Version: 12.10.090745.2024
 ! Expires: 12 hours
-! Last modified: Tue Dec 10 00:34:10 UTC 2024
+! Last modified: Tue Dec 10 09:07:45 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 16193
+! Number of entries: 16190
 !
 ||0.seetherofficialmerch.com^
 ||01edc.com^
@@ -1550,6 +1550,7 @@
 ||bezily.com^
 ||bfl.org.bt^
 ||bflax.monster^
+||bftiekalosczo.z28.web.core.windows.net^
 ||bg.ihappynewyearwishes.com^
 ||bgain-globalltd.com^
 ||bgihgcf.datedat.com^
@@ -7272,9 +7273,6 @@
 ||ios-evri.com^
 ||iowa-gunshop.com^
 ||iowafamilyacupuncture.com^
-||ipfs.dweb.link^
-||ipfs.flk-ipfs.xyz^
-||ipfs.w3s.link^
 ||iphone-nr.com^
 ||ipinfraiot.com^
 ||ipknetsv.com^
@@ -16069,7 +16067,6 @@
 ||yzuspsfan.com^
 ||yzuspsgan.com^
 ||z1gv9.shop^
-||z28.web.core.windows.net^
 ||za-vadcom.lat^
 ||za-vadcom.lol^
 ||za-vadcom.shop^
