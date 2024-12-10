@@ -24,7 +24,7 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 171890
+Total domains: 171891
 Light version: 16194
 
 New domains after filtering:
@@ -32,7 +32,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     148 |      0 % |      48 % | Emerging Threats
     0 |    1781 |      2 % |      18 % | FakeWebshopListHUN
    33 |     365 |      0 % |       3 % | Google Search
- 1761 |    9113 |     13 % |       9 % | Jeroengui phishing feed
+ 1762 |    9114 |     13 % |       9 % | Jeroengui phishing feed
     6 |      75 |      0 % |       7 % | Jeroengui scam feed
   555 |   33262 |     50 % |      21 % | PhishStats
    61 |    9150 |     13 % |       0 % | PhishStats (NRDs)
@@ -43,7 +43,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     3 |     156 |      0 % |       8 % | scam.directory
     0 |      45 |      0 % |      32 % | scamadviser.com
     0 |       5 |      0 % |       5 % | stopgunscams.com
- 3246 |   65476 |    100 % |      18 % | All sources
+ 3247 |   65477 |    100 % |      18 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted and parked domains.
