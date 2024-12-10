@@ -321,7 +321,7 @@ log_source() {
     if [[ "$rate_limited" == true ]]; then
         status='eror: rate_limited'
     elif (( raw_count == 0 )); then
-        status='error: empty'
+        status='ERROR: empty'
     fi
 
     final_count="$(wc -l < "$results_file")"
@@ -336,7 +336,7 @@ ${query_count},${status}" >> "$SOURCE_LOG"
 
     printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
 
-    if [[ "$status" == 'error: empty' ]]; then
+    if [[ "$status" == 'ERROR: empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
 
         # Send telegram notification
