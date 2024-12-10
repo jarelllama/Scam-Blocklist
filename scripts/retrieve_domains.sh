@@ -628,7 +628,7 @@ source_emerging_threats() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
-    curl -sSL "$url" | mawk '!/!/' | grep -Po "^${STRICT_DOMAIN_REGEX}$" \
+    curl -sSL "$url" | mawk '!/!/' | grep -Po "${STRICT_DOMAIN_REGEX}" \
         > "$results_file"
 }
 
