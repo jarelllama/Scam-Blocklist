@@ -35,19 +35,18 @@ main() {
     comm -23 "$SUBDOMAINS" "$DEAD_DOMAINS" > temp
     mv temp "$SUBDOMAINS"
 
-    cat "$DEAD_DOMAINS"  # For debugging
+    cp "$DEAD_DOMAINS" dead.tmp
 
     # Strip subdomains from dead domains
     while read -r subdomain; do
-        mawk 'sub(^)'
-        sed "s/^${subdomain}\.//" "$DEAD_DOMAINS" \
-            | sort -o dead_no_subdomains.tmp
+        sed -i "s/^${subdomain}\.//" dead.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
+    sort -u dead.tmp -o dead.tmp
 
     # Remove dead domains from the various files
     # grep is used here because the dead domains file is unsorted
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        comm -23 "$file" dead_no_subdomains.tmp > temp
+        comm -23 "$file" dead.tmp > temp
         mv temp "$file"
     done
 
@@ -60,6 +59,8 @@ main() {
 # file, raw light file and subdomains file.
 # Input:
 #   $1: file to process
+# Output:
+#   dead.tmp
 check_dead() {
     # Include subdomains found in the given file. Exclude the root domains
     # since the subdomains were what was retrieved during domain retrieval.
@@ -67,9 +68,6 @@ check_dead() {
         > domains.tmp
 
     find_dead_in domains.tmp || return
-
-    # Collate dead domains including subdomains
-    cp dead.tmp dead_saved.tmp
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -130,12 +128,10 @@ find_dead_in() {
 # Function 'save_dead' collates the dead domains into one file that can later
 # be used to remove dead domains from other files.
 save_dead() {
-    [[ -f dead_saved.tmp ]] || return
-
     # Cache dead domains to be used as a filter for newly retrieved domains
     # (done last to skip alive check)
     # Note the dead domains file should remain unsorted
-    cat dead_saved.tmp >> "$DEAD_DOMAINS"
+    [[ -f dead_saved.tmp ]] && cat dead.tmp >> "$DEAD_DOMAINS"
 }
 
 cleanup() {
