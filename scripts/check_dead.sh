@@ -19,6 +19,13 @@ main() {
     # Split raw file into 2 parts for each job
     split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
 
+    echo "00:"
+    cat x00
+    echo "01:"
+    cat x01
+    echo "02:"
+    ecat x02
+
     case "$1" in
         'part2')
             # Sometimes an x02 exists
@@ -131,7 +138,7 @@ find_dead_in() {
 
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
-    find . -maxdepth 1 -type f -name "x??" -delete
+    #find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
     $FUNCTION --prune-lines "$DEAD_DOMAINS" 50000
