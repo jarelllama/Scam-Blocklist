@@ -21,15 +21,17 @@ main() {
 
     # Part 1 (default)
     if [[ "$1" != 'part2' ]]; then
-        check_dead x00
+        check_dead x00 || exit 1
         save_dead
         exit 0
     fi
 
+    [[ ! -f dead.tmp ]] && exit 1
+
     # Part 2
     check_dead x01
-    save_dead
     check_alive
+    save_dead
 
     # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" "$DEAD_DOMAINS" > temp
@@ -53,21 +55,6 @@ main() {
     # Call shell wrapper to log number of dead domains in domain log
     #$FUNCTION --log-domains dead.tmp dead raw
     $FUNCTION --log-domains "$(wc -l < "$DEAD_DOMAINS")" "dead_domains" raw
-}
-
-# Function 'check_dead' removes dead domains in the given file from the raw
-# file, raw light file and subdomains file.
-# Input:
-#   $1: file to process
-# Output:
-#   dead.tmp
-check_dead() {
-    # Include subdomains found in the given file. Exclude the root domains
-    # since the subdomains were what was retrieved during domain retrieval.
-    comm -23 <(sort <(grep -Ef "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
-        > domains.tmp
-
-    find_dead_in domains.tmp || return
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -104,12 +91,16 @@ check_alive() {
 #   $1: file to process
 # Output:
 #   dead.tmp
-#   return 1 (if dead domains not found)
-find_dead_in() {
+check_dead() {
     local temp
     temp="$(basename "$1").tmp"
     local execution_time
     execution_time="$(date +%s)"
+
+    # Include subdomains found in the given file. Exclude the root domains
+    # since the subdomains were what was retrieved during domain retrieval.
+    comm -23 <(sort <(grep -Ef "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
+        > domains.tmp
 
     # Format to Adblock Plus syntax for Dead Domains Linter
     sed 's/.*/||&^/' "$1" > "$temp"
@@ -131,7 +122,7 @@ save_dead() {
     # Cache dead domains to be used as a filter for newly retrieved domains
     # (done last to skip alive check)
     # Note the dead domains file should remain unsorted
-    [[ -f dead_saved.tmp ]] && cat dead.tmp >> "$DEAD_DOMAINS"
+    [[ -f dead.tmp ]] && cat dead.tmp >> "$DEAD_DOMAINS"
 }
 
 cleanup() {

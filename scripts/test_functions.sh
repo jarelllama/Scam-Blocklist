@@ -492,9 +492,11 @@ test_light_build() {
 # TEST: removal of dead domains
 test_dead_check() {
     # INPUT
-    printf "apple.com\n" >> "$RAW"
-    printf "49532dead-domain-test.com\n" >> "$RAW"
-    printf "843902dead-domain-test.com\n" >> "$RAW"
+    {
+        printf "apple.com\n"
+        printf "49532dead-domain-test.com\n"
+        printf "843902dead-domain-test.com\n"
+    } >> "$RAW"
     printf "49532dead-domain-test.com\n" >> "$ROOT_DOMAINS"
     printf "www.49532dead-domain-test.com\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
