@@ -42,13 +42,13 @@ main() {
 
     # Remove dead domains from the various files
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        comm -23 "$file" "$DEAD_DOMAINS" > temp
+        grep -vxFf "$DEAD_DOMAINS" "$file" > temp
         mv temp "$file"
     done
 
     # Call shell wrapper to log number of dead domains in domain log
     #$FUNCTION --log-domains dead.tmp dead raw
-    $FUNCTION --log-domains "$(wc -l < "$DEAD_DOMAINS")" "dead_domains" raw
+    $FUNCTION --log-domains "$(wc -l < "$DEAD_DOMAINS")" "dead_domainsf" raw
 }
 
 # Function 'check_dead' removes dead domains in the given file from the raw
