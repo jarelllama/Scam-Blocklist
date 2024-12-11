@@ -31,11 +31,11 @@ main() {
     check_alive
     save_dead
 
-    # Remove dead domains from subdomains file
-    comm -23 "$SUBDOMAINS" "$DEAD_DOMAINS" > temp
-    mv temp "$SUBDOMAINS"
-
     cp "$DEAD_DOMAINS" dead.tmp
+
+    # Remove dead domains from subdomains file
+    comm -23 "$SUBDOMAINS" dead.tmp > temp
+    mv temp "$SUBDOMAINS"
 
     # Strip subdomains from dead domains
     while read -r subdomain; do
@@ -44,7 +44,6 @@ main() {
     sort -u dead.tmp -o dead.tmp
 
     # Remove dead domains from the various files
-    # grep is used here because the dead domains file is unsorted
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
         comm -23 "$file" dead.tmp > temp
         mv temp "$file"
@@ -61,7 +60,7 @@ main() {
 # Note that resurrected domains are not added back into the raw light file due
 # to limitations in the way the dead domains are recorded.
 check_alive() {
-    find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
+    check_dead "$DEAD_DOMAINS"  # No need to return if no dead domains found
 
     # Get resurrected domains in dead domains file
     comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive.tmp
@@ -83,7 +82,7 @@ check_alive() {
     $FUNCTION --log-domains "$(wc -l < alive.tmp)" resurrected_count dead_domains_file
 }
 
-# Function 'find_dead_in' finds dead domains in a given file by formatting the
+# Function 'check_dead' finds dead domains in a given file by formatting the
 # file and then processing it through AdGuard's Dead Domains Linter.
 # Input:
 #   $1: file to process
@@ -104,6 +103,7 @@ check_dead() {
     printf "\n"
     dead-domains-linter -i domains.tmp --export dead.tmp
 
+    # The dead_saved.tmp file will be used to collate dead domains
     sort -u dead.tmp -o dead_saved.tmp
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
@@ -113,9 +113,9 @@ check_dead() {
 # be used to remove dead domains from other files.
 save_dead() {
     # Exit with error if no dead domains found
-    [[ ! -s dead.tmp ]] && exit 1
+    [[ ! -s dead_saved.tmp ]] && exit 1
 
-    # This step is done last to skip alive check
+    # This step should be done last to skip alive check
     # Note the dead domains file should remain unsorted
     cat dead_saved.tmp >> "$DEAD_DOMAINS"
 }
