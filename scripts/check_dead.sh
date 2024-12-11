@@ -31,13 +31,6 @@ main() {
             check_dead x00
             ;;
     esac
-
-    if [[ -f dead_domains.tmp ]]; then
-        # Cache dead domains to be used as a filter for newly retrieved domains
-        # (done last to skip alive check)
-        # Note the dead domains file should remain unsorted
-        cat dead_domains.tmp >> "$DEAD_DOMAINS"
-    fi
 }
 
 # Function 'check_dead' finds dead domains and collates them into the dead
@@ -51,6 +44,13 @@ check_dead() {
     find_dead_in domains.tmp || return
 
     cp dead.tmp dead_domains.tmp
+
+    if [[ -f dead_domains.tmp ]]; then
+        # Cache dead domains to be used as a filter for newly retrieved domains
+        # (done last to skip alive check)
+        # Note the dead domains file should remain unsorted
+        cat dead_domains.tmp >> "$DEAD_DOMAINS"
+    fi
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -62,9 +62,9 @@ check_alive() {
     find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
 
     # Get resurrected domains in dead domains file
-    comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive.tmp
+    comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive_domains.tmp
 
-    [[ ! -s alive.tmp ]] && return
+    [[ ! -s alive_domains.tmp ]] && return
 
     # Update dead domains file to only include dead domains
     # grep is used here because the dead domains file is unsorted
@@ -74,11 +74,11 @@ check_alive() {
     # Add resurrected domains to raw file
     # Note that resurrected subdomains are added back too and will be processed
     # by the validation check outside of this script.
-    sort -u alive.tmp "$RAW" -o "$RAW"
+    sort -u alive_domains.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log number of resurrected domains in domain log
-    #$FUNCTION --log-domains alive.tmp resurrected dead_domains_file
-    $FUNCTION --log-domains "$(wc -l < alive.tmp)" resurrected_count dead_domains_file
+    #$FUNCTION --log-domains alive_domains.tmp resurrected dead_domains_file
+    $FUNCTION --log-domains "$(wc -l < alive_domains.tmp)" resurrected_count dead_domains_file
 }
 
 # Function 'find_dead_in' finds dead domains in a given file by formatting the
@@ -136,7 +136,7 @@ remove_dead() {
 
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
-    #find . -maxdepth 1 -type f -name "x??" -delete
+    find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
     $FUNCTION --prune-lines "$DEAD_DOMAINS" 50000
