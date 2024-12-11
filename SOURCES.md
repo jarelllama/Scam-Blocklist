@@ -17,9 +17,9 @@ Only active sources are used to automatically retrieve domains.
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Fake | Yes | |
 | [Greek Tax Scam](https://github.com/hagezi/dns-blocklists/issues/4191) | Phishing | | |
 | [GunTab](https://www.guntab.com/scam-websites) | Fake | Yes | Yes |
-| [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Phishing | Yes | |
+| [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Phishing | Yes | ~ |
 | [PetScams.com](https://petscams.com/) | Fake | | |
-| [PhishStats](https://phishstats.info/)[^2] | Phishing | Yes | |
+| [PhishStats](https://phishstats.info/)[^2] | Phishing | Yes | ~ |
 | [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) | Phishing | Yes | Yes |
 | [Scam Directory](https://scam.directory/) | Any | Yes | |
 | [Scam.Delivery](https://scam.delivery/) | Non-delivery | | |
