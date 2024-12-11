@@ -169,14 +169,6 @@ TEST_RETRIEVE_VALIDATE() {
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
 # domains respectively.
 TEST_DEAD_CHECK() {
-    # Generate placeholders
-    # (split does not work well without enough records)
-    for i in {1..30};do
-        printf "placeholder48390%s.com\n" "$i" >> placeholders.txt
-    done
-    cat placeholders.txt >> "$RAW"
-    cat placeholders.txt >> out_dead.txt
-
     test_dead_check
     test_alive_check
 
@@ -500,15 +492,19 @@ test_light_build() {
 # TEST: removal of dead domains
 test_dead_check() {
     # INPUT
-    printf "apple.com\n" >> "$RAW"
-    printf "49532dead-domain-test.com\n" >> "$RAW"
+    {
+        printf "apple.com\n"
+        printf "49532dead-domain-test.com\n"
+        printf "843902dead-domain-test.com\n"
+    } >> "$RAW"
     printf "49532dead-domain-test.com\n" >> "$ROOT_DOMAINS"
-    printf "www.49532subdomain-test.com\n" >> "$SUBDOMAINS"
+    printf "www.49532dead-domain-test.com\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
     # Subdomains should be kept to be processed by the validation check
     printf "www.49532dead-domain-test.com\n" >> out_dead.txt
-    printf "dead_domains,31,raw\n" >> out_log.txt
+    printf "843902dead-domain-test.com\n" >> out_dead.txt
+    printf "dead_domains,2,raw\n" >> out_log.txt
 
     # Both files should be empty (all dead)
     : > out_subdomains.txt
