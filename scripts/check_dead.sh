@@ -19,35 +19,29 @@ main() {
     # Split raw file into 2 parts for each job
     split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
 
-    echo "00:"
-    cat x00
-    echo "01:"
-    cat x01
-    echo "02:"
-    cat x02
-
     case "$1" in
         'part2')
             # Sometimes an x02 exists
             [[ -f x02 ]] && cat x02 >> x01
             check_dead x01
             check_alive
+            remove_dead
             ;;
         *)
             check_dead x00
             ;;
     esac
 
-    if [[ -f dead_cache.tmp ]]; then
+    if [[ -f dead_domains.tmp ]]; then
         # Cache dead domains to be used as a filter for newly retrieved domains
         # (done last to skip alive check)
         # Note the dead domains file should remain unsorted
-        cat dead_cache.tmp >> "$DEAD_DOMAINS"
+        cat dead_domains.tmp >> "$DEAD_DOMAINS"
     fi
 }
 
-# Function 'check_dead' removes dead domains from the raw file, raw light file,
-# and subdomains file.
+# Function 'check_dead' finds dead domains and collates them into the dead
+# domains file to be removed from the various files later.
 check_dead() {
     # Include subdomains found in the given file. Exclude the root domains
     # since the subdomains were what was retrieved during domain retrieval.
@@ -56,29 +50,7 @@ check_dead() {
 
     find_dead_in domains.tmp || return
 
-    # Copy temporary dead file to be added into dead cache later
-    # This dead cache includes subdomains
-    cp dead.tmp dead_cache.tmp
-
-    # Remove dead domains from subdomains file
-    comm -23 "$SUBDOMAINS" dead.tmp > temp
-    mv temp "$SUBDOMAINS"
-
-    # Strip subdomains from dead domains
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" dead.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u dead.tmp -o dead.tmp
-
-    # Remove dead domains from the various files
-    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        comm -23 "$file" dead.tmp > temp
-        mv temp "$file"
-    done
-
-    # Call shell wrapper to log number of dead domains in domain log
-    #$FUNCTION --log-domains dead.tmp dead raw
-    $FUNCTION --log-domains "$(wc -l < dead.tmp)" dead_count raw
+    cp dead.tmp dead_domains.tmp
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -134,6 +106,32 @@ find_dead_in() {
 
     # Return 1 if no dead domains were found
     [[ ! -s dead.tmp ]] && return 1 || return 0
+}
+
+# Function 'remove_dead' removes dead domains from the raw file, raw light
+# file, root domains file and subdomains file.
+remove_dead() {
+    cp "$DEAD_DOMAINS" dead.tmp
+
+    # Remove dead domains from subdomains file
+    comm -23 "$SUBDOMAINS" dead.tmp > temp
+    mv temp "$SUBDOMAINS"
+
+    # Strip subdomains from dead domains
+    while read -r subdomain; do
+        sed -i "s/^${subdomain}\.//" dead.tmp
+    done < "$SUBDOMAINS_TO_REMOVE"
+    sort -u dead.tmp -o dead.tmp
+
+    # Remove dead domains from the various files
+    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
+        comm -23 "$file" dead.tmp > temp
+        mv temp "$file"
+    done
+
+    # Call shell wrapper to log number of dead domains in domain log
+    #$FUNCTION --log-domains dead.tmp dead raw
+    $FUNCTION --log-domains "$(wc -l < dead.tmp)" dead_count raw
 }
 
 cleanup() {
