@@ -35,13 +35,14 @@ main() {
     comm -23 "$SUBDOMAINS" "$DEAD_DOMAINS" > temp
     mv temp "$SUBDOMAINS"
 
+    cat "$DEAD_DOMAINS"  # For debugging
+
     # Strip subdomains from dead domains
     while read -r subdomain; do
+        mawk 'sub(^)'
         sed "s/^${subdomain}\.//" "$DEAD_DOMAINS" \
             | sort -o dead_no_subdomains.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
-
-    cat dead_no_subdomains.tmp  # For debugging
 
     # Remove dead domains from the various files
     # grep is used here because the dead domains file is unsorted

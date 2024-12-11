@@ -12,7 +12,6 @@ permissions:
 jobs:
   remove-parked-domains:
     runs-on: ubuntu-latest
-    timeout-minutes: 420
     steps:
       - name: Checkout
         uses: actions/checkout@v4

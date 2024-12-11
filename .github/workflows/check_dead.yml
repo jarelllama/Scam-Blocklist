@@ -15,7 +15,7 @@ jobs:
         with:
           ref: main
 
-      - name: check_dead.sh
+      - name: check_dead.sh part 1
         run: bash scripts/check_dead.sh
 
       - name: Push
@@ -34,7 +34,7 @@ jobs:
         with:
           ref: main
 
-      - name: check_dead.sh
+      - name: check_dead.sh part 2
         # Note the resurrected domains check only runs during part 2
         run: bash scripts/check_dead.sh part2
 
