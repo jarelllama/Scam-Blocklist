@@ -19,24 +19,39 @@ main() {
     # Split raw file into 2 parts for each job
     split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
 
-    # Part 1 (default)
-    if [[ "$1" != 'part2' ]]; then
-        check_dead x00
-        #save_dead
-        exit 0
-    fi
+    case "$1" in
+        'part2')
+            part=x01
+            ;;
+        *)
+            part=x00
+            ;;
+    esac
 
-    # Part 2
-    check_dead x01
+    check_dead "$part"
     check_alive
-    #save_dead
 
-    cp "$DEAD_DOMAINS" dead.tmp
+    if [[ -f dead_cache.tmp ]]; then
+        # Cache dead domains to be used as a filter for newly retrieved domains
+        # (done last to skip alive check)
+        # Note the dead domains file should remain unsorted
+        cat dead_cache.tmp >> "$DEAD_DOMAINS"
+    fi
+}
 
-    echo "Dead:"
-    cat dead.tmp # FOR DEBUGGING
-    echo "Alive:"
-    cat alive.tmp
+# Function 'check_dead' removes dead domains from the raw file, raw light file,
+# and subdomains file.
+check_dead() {
+    # Include subdomains found in the given file. Exclude the root domains
+    # since the subdomains were what was retrieved during domain retrieval.
+    comm -23 <(sort <(grep -Ef "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
+        > domains.tmp
+
+    find_dead_in domains.tmp || return
+
+    # Copy temporary dead file to be added into dead cache later
+    # This dead cache includes subdomains
+    cp dead.tmp dead_cache.tmp
 
     # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" dead.tmp > temp
@@ -56,7 +71,7 @@ main() {
 
     # Call shell wrapper to log number of dead domains in domain log
     #$FUNCTION --log-domains dead.tmp dead raw
-    $FUNCTION --log-domains "$(wc -l < "$DEAD_DOMAINS")" "dead_domains" raw
+    $FUNCTION --log-domains "$(wc -l < dead.tmp)" dead_count raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -65,7 +80,7 @@ main() {
 # Note that resurrected domains are not added back into the raw light file due
 # to limitations in the way the dead domains are recorded.
 check_alive() {
-    check_dead "$DEAD_DOMAINS"  # No need to return if no dead domains found
+    find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
 
     # Get resurrected domains in dead domains file
     comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive.tmp
@@ -87,49 +102,35 @@ check_alive() {
     $FUNCTION --log-domains "$(wc -l < alive.tmp)" resurrected_count dead_domains_file
 }
 
-# Function 'check_dead' finds dead domains in a given file by formatting the
+# Function 'find_dead_in' finds dead domains in a given file by formatting the
 # file and then processing it through AdGuard's Dead Domains Linter.
 # Input:
 #   $1: file to process
 # Output:
 #   dead.tmp
-check_dead() {
+#   return 1 (if dead domains not found)
+find_dead_in() {
+    local temp
+    temp="$(basename "$1").tmp"
     local execution_time
     execution_time="$(date +%s)"
 
-    # Include subdomains found in the given file. Exclude the root domains
-    # since the subdomains were what was retrieved during domain retrieval.
-    comm -23 <(sort <(grep -Ef "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
-        > domains.tmp
-
     # Format to Adblock Plus syntax for Dead Domains Linter
-    sed 's/.*/||&^/' "$1" > domains.tmp
+    sed 's/.*/||&^/' "$1" > "$temp"
 
     printf "\n"
-    dead-domains-linter -i domains.tmp --export dead.tmp
+    dead-domains-linter -i "$temp" --export dead.tmp
 
-    # Collate dead domains into the daed domains file
-    [[ ! -s alive.tmp ]] && cat dead.tmp >> "$DEAD_DOMAINS"
+    sort -u dead.tmp -o dead.tmp
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
-}
 
-# Function 'save_dead' collates the dead domains into one file that can later
-# be used to remove dead domains from other files.
-save_dead() {
-    # Exit with error if no dead domains found
-    [[ ! -s dead_saved.tmp ]] && exit 1
-
-    # This step should be done last to skip alive check
-    # Note the dead domains file should remain unsorted
-    cat dead_saved.tmp >> "$DEAD_DOMAINS"
-
-    cat dead_saved.tmp # FOR DEBUGGING
+    # Return 1 if no dead domains were found
+    [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
-    find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
     $FUNCTION --prune-lines "$DEAD_DOMAINS" 50000
