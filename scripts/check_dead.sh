@@ -26,7 +26,7 @@ main() {
         exit 0
     fi
 
-    [[ ! -f dead.tmp ]] && exit 1
+    [[ ! -s dead.tmp ]] && exit 1
 
     # Part 2
     check_dead x01
