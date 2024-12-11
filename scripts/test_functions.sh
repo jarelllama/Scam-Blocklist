@@ -494,13 +494,16 @@ test_dead_check() {
     # INPUT
     printf "apple.com\n" >> "$RAW"
     printf "49532dead-domain-test.com\n" >> "$RAW"
+    printf "324394803dead-domain-test.com\n" >> "$RAW"
     printf "49532dead-domain-test.com\n" >> "$ROOT_DOMAINS"
     printf "www.49532dead-domain-test.com\n" >> "$SUBDOMAINS"
     # EXPECTED OUTPUT
     printf "apple.com\n" >> out_raw.txt
     # Subdomains should be kept to be processed by the validation check
     printf "www.49532dead-domain-test.com\n" >> out_dead.txt
-    printf "dead_count,1,raw\n" >> out_log.txt
+    printf "324394803dead-domain-test.com\n" >> out_dead.txt
+    printf "dead_x00,1,raw\n" >> out_log.txt
+    printf "dead_x01,1,raw\n" >> out_log.txt
 
     # Both files should be empty (all dead)
     : > out_subdomains.txt
@@ -555,6 +558,7 @@ test_unparked_check() {
 # exit status of the script.
 # Input:
 #   $1: script to execute
+#   $2: arguments to pass to script
 run_script() {
     # Format expected output files (ignore not found error)
     for file in out_*; do
