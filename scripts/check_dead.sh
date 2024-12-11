@@ -35,14 +35,16 @@ main() {
     comm -23 "$SUBDOMAINS" "$DEAD_DOMAINS" > temp
     mv temp "$SUBDOMAINS"
 
+    cp "$DEAD_DOMAINS" dead_no_subdomains.tmp
+
     # Strip subdomains from dead domains
     while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" "$DEAD_DOMAINS"
+        sed -i "s/^${subdomain}\.//" dead_no_subdomains.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Remove dead domains from the various files
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        grep -vxFf "$DEAD_DOMAINS" "$file" > temp
+        grep -vxFf dead_no_subdomains.tmp "$file" > temp
         mv temp "$file"
     done
 
