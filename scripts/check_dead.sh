@@ -17,7 +17,7 @@ main() {
     fi
 
     # Split raw file into 2 parts to get around the 6 hour job limit
-    split -n 2 -d "$RAW"
+    split -d -l $(( $(wc -l < "$1") / 2 )) "$1"
 
     # Part 1 (default)
     if [[ "$1" != 'part2' ]]; then
