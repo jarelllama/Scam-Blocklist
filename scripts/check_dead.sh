@@ -21,12 +21,10 @@ main() {
 
     # Part 1 (default)
     if [[ "$1" != 'part2' ]]; then
-        check_dead x00 || exit 1
+        check_dead x00
         save_dead
         exit 0
     fi
-
-    [[ ! -s dead.tmp ]] && exit 1
 
     # Part 2
     check_dead x01
@@ -92,8 +90,6 @@ check_alive() {
 # Output:
 #   dead.tmp
 check_dead() {
-    local temp
-    temp="$(basename "$1").tmp"
     local execution_time
     execution_time="$(date +%s)"
 
@@ -103,26 +99,25 @@ check_dead() {
         > domains.tmp
 
     # Format to Adblock Plus syntax for Dead Domains Linter
-    sed 's/.*/||&^/' "$1" > "$temp"
+    sed 's/.*/||&^/' "$1" > domains.tmp
 
     printf "\n"
-    dead-domains-linter -i "$temp" --export dead.tmp
+    dead-domains-linter -i domains.tmp --export dead.tmp
 
-    sort -u dead.tmp -o dead.tmp
+    sort -u dead.tmp -o dead_saved.tmp
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
-
-    # Return 1 if no dead domains were found
-    [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
 # Function 'save_dead' collates the dead domains into one file that can later
 # be used to remove dead domains from other files.
 save_dead() {
-    # Cache dead domains to be used as a filter for newly retrieved domains
-    # (done last to skip alive check)
+    # Exit with error if no dead domains found
+    [[ ! -s dead.tmp ]] && exit 1
+
+    # This step is done last to skip alive check
     # Note the dead domains file should remain unsorted
-    [[ -f dead.tmp ]] && cat dead.tmp >> "$DEAD_DOMAINS"
+    cat dead_saved.tmp >> "$DEAD_DOMAINS"
 }
 
 cleanup() {
