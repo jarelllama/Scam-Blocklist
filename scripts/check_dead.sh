@@ -16,7 +16,7 @@ main() {
         npm install -g @adguard/dead-domains-linter > /dev/null
     fi
 
-    # Split raw file into 2 parts to get around the 6 hour job limit
+    # Split raw file into 2 parts for each job
     split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
 
     # Part 1 (default)
@@ -28,18 +28,16 @@ main() {
 
     # Part 2
     check_dead x01
-    check_alive
     save_dead
+    check_alive
 
     # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" "$DEAD_DOMAINS" > temp
     mv temp "$SUBDOMAINS"
 
-    cp "$DEAD_DOMAINS" dead_no_subdomains.tmp
-
     # Strip subdomains from dead domains
     while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" dead_no_subdomains.tmp
+        sed "s/^${subdomain}\.//" "$DEAD_DOMAINS" dead_no_subdomains.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Remove dead domains from the various files
@@ -124,7 +122,11 @@ find_dead_in() {
     [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
+# Function 'save_dead' collates the dead domains into one file that can later
+# be used to remove dead domains from other files.
 save_dead() {
+    [[ -f dead_saved.tmp ]] || return
+
     # Cache dead domains to be used as a filter for newly retrieved domains
     # (done last to skip alive check)
     # Note the dead domains file should remain unsorted
