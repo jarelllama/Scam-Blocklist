@@ -63,13 +63,10 @@ check_dead() {
     comm -23 <(sort <(grep -Ef "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
         > domains.tmp
 
-    cat domains.tmp  # FOR TESTING
-
     find_dead_in domains.tmp || return
 
-    # Copy temporary dead file to be added into dead cache later
-    # This dead cache includes subdomains
-    cp dead.tmp dead_cache.tmp
+    # Collate dead domains including subdomains
+    cp dead.tmp dead_saved.tmp
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -131,9 +128,7 @@ save_dead() {
     # Cache dead domains to be used as a filter for newly retrieved domains
     # (done last to skip alive check)
     # Note the dead domains file should remain unsorted
-    cat dead.tmp >> "$DEAD_DOMAINS"
-
-    cat dead.tmp  ## FOR TESTING
+    cat dead_saved.tmp >> "$DEAD_DOMAINS"
 }
 
 cleanup() {
