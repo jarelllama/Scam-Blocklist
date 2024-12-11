@@ -7,9 +7,8 @@ permissions:
   contents: write
 
 jobs:
-  remove-dead-domains:
+  remove-dead-domains-1:
     runs-on: ubuntu-latest
-    timeout-minutes: 420
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,5 +23,25 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: prune dead domains"
+          git diff-index --quiet HEAD || git commit -m "CI: prune dead domains part 1"
+          git push -q
+
+  remove-dead-domains-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: check_dead.sh
+        # Note the resurrected domains check only runs during part 2
+        run: bash scripts/check_dead.sh part2
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: prune dead domains part 2"
           git push -q
