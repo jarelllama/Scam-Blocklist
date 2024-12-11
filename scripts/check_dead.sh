@@ -120,6 +120,8 @@ save_dead() {
     # This step should be done last to skip alive check
     # Note the dead domains file should remain unsorted
     cat dead_saved.tmp >> "$DEAD_DOMAINS"
+
+    cat dead_saved.tmp # FOR DEBUGGING
 }
 
 cleanup() {
