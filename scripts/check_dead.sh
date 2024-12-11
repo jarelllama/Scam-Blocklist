@@ -24,7 +24,7 @@ main() {
     echo "01:"
     cat x01
     echo "02:"
-    ecat x02
+    cat x02
 
     case "$1" in
         'part2')
