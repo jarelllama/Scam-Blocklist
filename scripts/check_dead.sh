@@ -33,7 +33,10 @@ main() {
 
     cp "$DEAD_DOMAINS" dead.tmp
 
+    echo "Dead:"
     cat dead.tmp # FOR DEBUGGING
+    echo "Alive:"
+    cat alive.tmp
 
     # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" dead.tmp > temp
