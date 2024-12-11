@@ -37,7 +37,7 @@ main() {
 
     # Strip subdomains from dead domains
     while read -r subdomain; do
-        sed "s/^${subdomain}\.//" "$DEAD_DOMAINS" dead_no_subdomains.tmp
+        sed "s/^${subdomain}\.//" "$DEAD_DOMAINS" > dead_no_subdomains.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # Remove dead domains from the various files
