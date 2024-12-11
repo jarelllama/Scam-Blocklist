@@ -35,7 +35,7 @@ jobs:
           ref: main
 
       - name: check_dead.sh part 2
-        # Note the resurrected domains check only runs during part 2
+        # Note dead domains and resurrected domains are only removed/added in part 2.
         run: bash scripts/check_dead.sh part2
 
       - name: Push

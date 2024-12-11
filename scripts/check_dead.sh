@@ -111,7 +111,7 @@ find_dead_in() {
 # Function 'remove_dead' removes dead domains from the raw file, raw light
 # file, root domains file and subdomains file.
 remove_dead() {
-    cp "$DEAD_DOMAINS" dead.tmp
+    sort "$DEAD_DOMAINS" -o dead.tmp
 
     # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" dead.tmp > temp
