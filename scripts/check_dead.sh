@@ -22,14 +22,14 @@ main() {
     # Part 1 (default)
     if [[ "$1" != 'part2' ]]; then
         check_dead x00
-        cache_domains
+        save_dead
         exit 0
     fi
 
     # Part 2
     check_dead x01
     check_alive
-    cache_domains
+    save_dead
 
     # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" "$DEAD_DOMAINS" > temp
@@ -48,7 +48,7 @@ main() {
 
     # Call shell wrapper to log number of dead domains in domain log
     #$FUNCTION --log-domains dead.tmp dead raw
-    $FUNCTION --log-domains "$(wc -l < "$DEAD_DOMAINS")" "dead_domainsf" raw
+    $FUNCTION --log-domains "$(wc -l < "$DEAD_DOMAINS")" "dead_domains" raw
 }
 
 # Function 'check_dead' removes dead domains in the given file from the raw
@@ -60,6 +60,8 @@ check_dead() {
     # since the subdomains were what was retrieved during domain retrieval.
     comm -23 <(sort <(grep -Ef "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
         > domains.tmp
+
+    cat domains.tmp  # FOR TESTING
 
     find_dead_in domains.tmp || return
 
@@ -123,7 +125,7 @@ find_dead_in() {
     [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
-cache_domains() {
+save_dead() {
     # Cache dead domains to be used as a filter for newly retrieved domains
     # (done last to skip alive check)
     # Note the dead domains file should remain unsorted
