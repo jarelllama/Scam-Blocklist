@@ -40,7 +40,10 @@ main() {
         sed "s/^${subdomain}\.//" "$DEAD_DOMAINS" > dead_no_subdomains.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
 
+    cat dead_no_subdomains.tmp
+
     # Remove dead domains from the various files
+    # grep is used here because the dead domains file is unsorted
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
         grep -vxFf dead_no_subdomains.tmp "$file" > temp
         mv temp "$file"
