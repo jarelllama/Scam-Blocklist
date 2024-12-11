@@ -66,7 +66,7 @@ check_dead() {
 
     # Call shell wrapper to log number of dead domains in domain log
     #$FUNCTION --log-domains dead.tmp dead raw
-    $FUNCTION --log-domains "$(wc -l < all_dead.tmp)" "dead_${1}" raw
+    $FUNCTION --log-domains "$(wc -l < dead.tmp)" "dead_${1}" raw
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -133,6 +133,7 @@ cache_domains() {
 
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
+    find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
     $FUNCTION --prune-lines "$DEAD_DOMAINS" 50000
