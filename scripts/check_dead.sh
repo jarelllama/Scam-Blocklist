@@ -21,6 +21,8 @@ main() {
 
     case "$1" in
         'part2')
+            # Sometimes an x02 exists
+            [[ -f x02 ]] && cat x02 >> x01
             part=x01
             ;;
         *)
@@ -131,6 +133,7 @@ find_dead_in() {
 
 cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
+    find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
     $FUNCTION --prune-lines "$DEAD_DOMAINS" 50000
