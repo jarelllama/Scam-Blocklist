@@ -26,26 +26,26 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 175912
-Light version: 18069
+Total domains: 178488
+Light version: 18252
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
- 1774 |    1922 |      2 % |      44 % | Emerging Threats
+   12 |    1934 |      2 % |      41 % | Emerging Threats
     0 |    1781 |      2 % |      18 % | FakeWebshopListHUN
-   38 |     403 |      0 % |       3 % | Google Search
- 2680 |   11794 |     16 % |       9 % | Jeroengui phishing feed
-    7 |      82 |      0 % |       7 % | Jeroengui scam feed
-  732 |   33994 |     48 % |      21 % | PhishStats
-   59 |    9209 |     13 % |       0 % | PhishStats (NRDs)
-   10 |   17815 |     25 % |       1 % | Regex Matching (NRDs)
-   13 |     137 |      0 % |      11 % | aa419.org
-    2 |     826 |      1 % |       1 % | dnstwist (NRDs)
-    3 |    1472 |      2 % |      31 % | guntab.com
-    3 |     159 |      0 % |       8 % | scam.directory
-    1 |      46 |      0 % |      32 % | scamadviser.com
-    0 |       5 |      0 % |       5 % | stopgunscams.com
- 5263 |   70740 |    100 % |      18 % | All sources
+   25 |     428 |      0 % |       3 % | Google Search
+ 1518 |   13312 |     18 % |       9 % | Jeroengui phishing feed
+    5 |      87 |      0 % |       7 % | Jeroengui scam feed
+  517 |   34511 |     46 % |      21 % | PhishStats
+   84 |    9293 |     12 % |       0 % | PhishStats (NRDs)
+  849 |   18664 |     25 % |       1 % | Regex Matching (NRDs)
+    4 |     141 |      0 % |      11 % | aa419.org
+   46 |     872 |      1 % |       1 % | dnstwist (NRDs)
+    3 |    1475 |      2 % |      31 % | guntab.com
+    7 |     166 |      0 % |       8 % | scam.directory
+    0 |      46 |      0 % |      32 % | scamadviser.com
+    3 |       8 |      0 % |       5 % | stopgunscams.com
+ 2989 |   73729 |    100 % |      18 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted and parked domains.
@@ -80,7 +80,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back into the blocklist</li>
 <li>Note that parked domains are not checked for in this blocklist</li>
 </ul>
-Total domains: 12471
+Total domains: 12487
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
