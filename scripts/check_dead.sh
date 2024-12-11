@@ -23,15 +23,13 @@ main() {
         'part2')
             # Sometimes an x02 exists
             [[ -f x02 ]] && cat x02 >> x01
-            part=x01
+            check_dead x01
+            check_alive
             ;;
         *)
-            part=x00
+            check_dead x00
             ;;
     esac
-
-    check_dead "$part"
-    check_alive
 
     if [[ -f dead_cache.tmp ]]; then
         # Cache dead domains to be used as a filter for newly retrieved domains
