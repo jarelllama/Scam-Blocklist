@@ -22,14 +22,14 @@ main() {
     # Part 1 (default)
     if [[ "$1" != 'part2' ]]; then
         check_dead x00
-        save_dead
+        #save_dead
         exit 0
     fi
 
     # Part 2
     check_dead x01
     check_alive
-    save_dead
+    #save_dead
 
     cp "$DEAD_DOMAINS" dead.tmp
 
@@ -105,8 +105,8 @@ check_dead() {
     printf "\n"
     dead-domains-linter -i domains.tmp --export dead.tmp
 
-    # The dead_saved.tmp file will be used to collate dead domains
-    sort -u dead.tmp -o dead_saved.tmp
+    # Collate dead domains into the daed domains file
+    [[ ! -s alive.tmp ]] && cat dead.tmp >> "$DEAD_DOMAINS"
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
