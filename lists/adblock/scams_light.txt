@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 12.11.181115.2024
+! Version: 12.12.012835.2024
 ! Expires: 12 hours
-! Last modified: Wed Dec 11 18:11:15 UTC 2024
+! Last modified: Thu Dec 12 01:28:35 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 18252
+! Number of entries: 18254
 !
 ||0.seetherofficialmerch.com^
 ||01edc.com^
@@ -1494,6 +1494,7 @@
 ||b2kmjunit.com^
 ||b2secops.co.uk^
 ||b3vv.com^
+||b69kq.com^
 ||b8x.org^
 ||b8yxmetpg0uns.pages.dev^
 ||b9.pm^
@@ -2063,6 +2064,7 @@
 ||bitdefendrr.com^
 ||bitdefendwr.com^
 ||bitdefwnder.com^
+||biteupdates.live^
 ||biteupdates.site^
 ||bitfreds.pro^
 ||bitgames.world^
