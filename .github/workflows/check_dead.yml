@@ -1,5 +1,5 @@
-name: Remove dead domains
-run-name: Remove dead domains
+name: Check for dead domains
+run-name: Check for dead domains
 on:
   workflow_dispatch:
   workflow_call:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  remove-dead-domains-1:
+  part-1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,11 +23,11 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: prune dead domains part 1"
+          git diff-index --quiet HEAD || git commit -m "CI: check for dead domains (1)"
           git push -q
 
-  remove-dead-domains-2:
-    needs: remove-dead-domains-1
+  part-2:
+    needs: part-1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -44,5 +44,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: prune dead domains part 2"
+          git diff-index --quiet HEAD || git commit -m "CI: check for dead domains (2)"
           git push -q

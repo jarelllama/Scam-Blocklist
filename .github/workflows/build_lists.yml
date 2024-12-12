@@ -5,8 +5,8 @@ on:
   workflow_call:
   workflow_run:
     workflows:
-      - Remove dead domains
-      - Remove parked domains
+      - Check for dead domains
+      - Check for parked domains
       - Manually add domains
       - Retrieve domains
       - Validate domains

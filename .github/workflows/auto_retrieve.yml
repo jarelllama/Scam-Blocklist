@@ -1,5 +1,5 @@
-name: Build and deploy
-run-name: Build and deploy
+name: Automatic retreival
+run-name: Automatic retreival
 on:
   workflow_dispatch:
   schedule:
@@ -19,17 +19,17 @@ jobs:
 
   build-nsfw:
     needs: test
-    if: ${{ ! cancelled() && needs.test.result == 'success' }}
+    if: ${{ ! cancelled() }}
     uses: ./.github/workflows/build_nsfw.yml
 
-  build:
+  retrieve-domains:
     needs: [test, build-nsfw]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
-  prune-dead:
-    needs: [test, build]
+  check-dead:
+    needs: [test, retrieve-domains]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
@@ -40,18 +40,18 @@ jobs:
   #  uses: ./.github/workflows/check_parked.yml
 
   validate:
-    needs: [test, prune-dead]
+    needs: [test, check-dead]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/validate_domains.yml
     secrets: inherit
 
-  deploy:
+  build:
     needs: [test, validate]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 
   prune-logs:
-    needs: deploy
+    needs: build
     if: ${{ ! cancelled() }}
     runs-on: ubuntu-latest
     steps:
@@ -74,7 +74,7 @@ jobs:
           git push -q
 
   update-readme:
-    needs: [deploy, prune-logs]
-    # Run only if deployment was successful
-    if: ${{ ! cancelled() && needs.deploy.result == 'success' }}
+    needs: [build, prune-logs]
+    # Run only if build was successful
+    if: ${{ ! cancelled() && needs.build.result == 'success' }}
     uses: ./.github/workflows/update_readme.yml
