@@ -26,8 +26,8 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 178491
-Light version: 18254
+Total domains: 175486
+Light version: 17677
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -109,8 +109,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 0
-Resurrected domains added today: 0
+Dead domains removed today: 25449
+Resurrected domains added today: 872
 ```
 
 ### Parked domains
