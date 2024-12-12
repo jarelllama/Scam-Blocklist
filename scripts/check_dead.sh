@@ -123,15 +123,19 @@ remove_dead() {
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u dead.tmp -o dead.tmp
 
+    raw_count="$(wc -l < "$RAW")"
+
     # Remove dead domains from the various files
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
         comm -23 "$file" dead.tmp > temp
         mv temp "$file"
     done
 
+    dead_count="$(( raw_count - $(wc -l < "$RAW") ))"
+
     # Call shell wrapper to log number of dead domains in domain log
     #$FUNCTION --log-domains dead.tmp dead raw
-    $FUNCTION --log-domains "$(wc -l < dead.tmp)" dead_count raw
+    $FUNCTION --log-domains "$dead_count" dead_count raw
 }
 
 cleanup() {
