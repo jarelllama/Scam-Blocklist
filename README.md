@@ -109,8 +109,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 ``` text
-Dead domains removed today: 
-Resurrected domains added today: 
+Dead domains removed today: 0
+Resurrected domains added today: 0
 ```
 
 ### Parked domains
