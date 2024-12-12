@@ -117,8 +117,8 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 Dead domains that are resolving again are included back into the blocklist.
 
 \`\`\` text
-Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | csvcut -c 3)
-Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | csvcut -c 3)
+Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
+Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 \`\`\`
 
 ### Parked domains
