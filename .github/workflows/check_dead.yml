@@ -27,6 +27,7 @@ jobs:
           git push -q
 
   remove-dead-domains-2:
+    needs: remove-dead-domains-1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
