@@ -28,6 +28,7 @@ jobs:
 
   part-2:
     needs: part-1
+    if: ${{ ! cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,7 +37,6 @@ jobs:
           ref: main
 
       - name: check_dead.sh part 2
-        # Note dead domains and resurrected domains are only removed/added in part 2.
         run: bash scripts/check_dead.sh part2
 
       - name: Push
@@ -45,4 +45,46 @@ jobs:
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
           git diff-index --quiet HEAD || git commit -m "CI: check for dead domains (2)"
+          git push -q
+
+  check-alive:
+    needs: part-2
+    if: ${{ ! cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: check_dead.sh checkalive
+        run: bash scripts/check_dead.sh checkalive
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: check for resurrected domains"
+          git push -q
+
+  remove-dead-domains:
+    needs: part-2
+    if: ${{ ! cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: check_dead.sh remove
+        run: bash scripts/check_dead.sh remove
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: remove dead domains"
           git push -q

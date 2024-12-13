@@ -24,10 +24,16 @@ main() {
             # Sometimes an x02 exists
             [[ -f x02 ]] && cat x02 >> x01
             check_dead x01
+            ;;
+
+        'checkalive')
             check_alive
+            ;;
+        'remove')
             remove_dead
             ;;
         *)
+            # Part 1
             check_dead x00
             ;;
     esac
