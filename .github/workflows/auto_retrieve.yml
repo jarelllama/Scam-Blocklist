@@ -1,5 +1,5 @@
-name: Automatic retreival
-run-name: Automatic retreival
+name: Automated retrieval
+run-name: Automated retrieval
 on:
   workflow_dispatch:
   schedule:
