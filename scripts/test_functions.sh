@@ -181,6 +181,8 @@ TEST_DEAD_CHECK() {
     # Run script
     run_script check_dead.sh
     run_script check_dead.sh part2
+    run_script check_dead.sh checkalive
+    run_script check_dead.sh remove
 
     # Sort dead domains file for easier comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
