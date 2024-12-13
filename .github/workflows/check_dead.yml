@@ -69,7 +69,7 @@ jobs:
           git push -q
 
   remove-dead-domains:
-    needs: part-2
+    needs: check-alive
     if: ${{ ! cancelled() }}
     runs-on: ubuntu-latest
     steps:
