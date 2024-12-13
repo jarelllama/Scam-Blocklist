@@ -26,13 +26,13 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 178101
-Light version: 17985
+Total domains: 178105
+Light version: 17989
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-   17 |    1953 |      2 % |      38 % | Emerging Threats
-  203 |    1984 |      2 % |      18 % | FakeWebshopListHUN
+   19 |    1955 |      2 % |      38 % | Emerging Threats
+  205 |    1986 |      2 % |      18 % | FakeWebshopListHUN
    18 |     446 |      0 % |       3 % | Google Search
  1307 |   14620 |     19 % |       9 % | Jeroengui phishing feed
     2 |      89 |      0 % |       8 % | Jeroengui scam feed
@@ -45,7 +45,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     166 |      0 % |       8 % | scam.directory
     0 |      46 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       5 % | stopgunscams.com
- 2841 |   76573 |    100 % |      19 % | All sources
+ 2845 |   76577 |    100 % |      19 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted and parked domains.
