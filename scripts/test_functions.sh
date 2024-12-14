@@ -568,7 +568,7 @@ run_script() {
         sort "$file" -o "$file" 2> /dev/null
     done
 
-    printf "\e[1m[start] %s %s\e[0m\n" "$1" "$2"
+    printf "\n\e[1m[start] %s %s\e[0m\n" "$1" "$2"
     echo "----------------------------------------------------------------------"
 
     # Run script
