@@ -52,6 +52,7 @@ jobs:
   check-resurrected-domains:
     needs: part-2
     if: ${{ ! cancelled() }}
+    timeout-minutes: 180
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -71,7 +72,7 @@ jobs:
           git push -q
 
   remove-dead-domains:
-    needs: check-alive
+    needs: check-resurrected-domains
     if: ${{ ! cancelled() }}
     runs-on: ubuntu-latest
     steps:
