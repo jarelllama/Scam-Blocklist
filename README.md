@@ -26,8 +26,8 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 178999
-Light version: 18036
+Total domains: 176689
+Light version: 17698
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -123,8 +123,8 @@ Parked sites no longer containing any of the parked messages are assumed to be u
 For list maintainers interested in integrating the parked domains as a source, a list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 50000 entries).
 
 ``` text
-Parked domains removed this month: 15835
-Unparked domains added this month: 517
+Parked domains removed this month: 18320
+Unparked domains added this month: 674
 ```
 
 ## Resources / See also
