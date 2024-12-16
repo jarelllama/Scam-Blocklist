@@ -179,7 +179,7 @@ TEST_DEAD_CHECK() {
     grep -vxF 'www.google.com' out_raw.txt > out_raw_light.txt
 
     # Run script
-    cat out_dead.txt # DEBUG
+    cat "$DEAD_DOMAINS_FILE" # DEBUG
     run_script check_dead.sh checkalive
     run_script check_dead.sh part1
     run_script check_dead.sh part2
