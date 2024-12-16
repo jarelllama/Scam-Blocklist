@@ -120,6 +120,8 @@ find_dead_in() {
 # Function 'remove_dead' removes dead domains from the raw file, raw light
 # file, root domains file and subdomains file.
 remove_dead() {
+    count_before="$(wc -l < "$RAW")"
+
     sort -u "$DEAD_DOMAINS" -o dead.tmp
 
     # Remove dead domains from subdomains file
@@ -132,15 +134,18 @@ remove_dead() {
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u dead.tmp -o dead.tmp
 
-    raw_count="$(wc -l < "$RAW")"
-
     # Remove dead domains from the various files
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
         comm -23 "$file" dead.tmp > temp
         mv temp "$file"
     done
 
-    dead_count="$(( raw_count - $(wc -l < "$RAW") ))"
+    count_after="$(wc -l < "$RAW")"
+
+    dead_count="$(( count_before - count_after ))"
+
+    printf "\nRemoved dead domains from the blocklist.\nBefore: %s  Removed: %s  After: %s\n" \
+    "$count_before" "$dead_count" "$count_after"
 
     # Call shell wrapper to log number of dead domains in domain log
     #$FUNCTION --log-domains dead.tmp dead raw
