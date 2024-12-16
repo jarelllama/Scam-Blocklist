@@ -169,6 +169,14 @@ TEST_RETRIEVE_VALIDATE() {
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
 # domains respectively.
 TEST_DEAD_CHECK() {
+    # Generate placeholders
+    # (split does not work well without enough records)
+    for i in {1..30};do
+        printf "placeholder48390%s.com\n" "$i" >> placeholders.txt
+    done
+    cat placeholders.txt >> "$RAW"
+    cat placeholders.txt >> "$DEAD_DOMAINS"
+
     test_dead_check
     test_alive_check
 
@@ -184,6 +192,15 @@ TEST_DEAD_CHECK() {
     run_script check_dead.sh part1
     run_script check_dead.sh part2
     run_script check_dead.sh remove
+
+    # Remove placeholder line
+    for file in "$RAW" "$RAW_LIGHT" "$DEAD_DOMAINS"; do
+        grep -vxFf placeholders.txt "$file" > temp
+        mv temp "$file"
+    done
+    # Not exact match in domain log
+    grep -vFf placeholders.txt "$DOMAIN_LOG" > temp
+    mv temp "$DOMAIN_LOG"
 
     # Sort dead domains file for easier comparison with expected output
     sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
