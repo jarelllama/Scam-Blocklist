@@ -171,9 +171,13 @@ TEST_RETRIEVE_VALIDATE() {
 TEST_DEAD_CHECK() {
     # Generate placeholders
     # (split does not work well without enough records)
-    for i in {1..30};do
-        printf "placeholder48390%s.com\n" "$i" >> placeholders.txt
-    done
+    {
+        printf "github.com\n"
+        printf "delta.com\n"
+        printf "microsoft.com\n"
+        printf "facebook.com\n"
+        printf "instagram.com\n"
+    } >> placeholders.txt
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$DEAD_DOMAINS"
 
@@ -187,7 +191,6 @@ TEST_DEAD_CHECK() {
     grep -vxF 'www.google.com' out_raw.txt > out_raw_light.txt
 
     # Run script
-    cat "$DEAD_DOMAINS" # DEBUG
     run_script check_dead.sh checkalive
     run_script check_dead.sh part1
     run_script check_dead.sh part2
