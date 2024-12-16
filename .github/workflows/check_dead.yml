@@ -7,9 +7,31 @@ permissions:
   contents: write
 
 jobs:
-  part-1:
-    runs-on: ubuntu-latest
+  check-resurrected-domains:
     timeout-minutes: 180
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: check_dead.sh checkalive
+        run: bash scripts/check_dead.sh checkalive
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: check for resurrected domains"
+          git push -q
+
+  check-dead-part-1:
+    needs: check-resurrected-domains
+    if: ${{ ! cancelled() }}
+    timeout-minutes: 180
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,7 +39,7 @@ jobs:
           ref: main
 
       - name: check_dead.sh part 1
-        run: bash scripts/check_dead.sh
+        run: bash scripts/check_dead.sh part1
 
       - name: Push
         run: |
@@ -27,8 +49,8 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "CI: check for dead domains (1)"
           git push -q
 
-  part-2:
-    needs: part-1
+  check-dead-part-2:
+    needs: check-dead-part-1
     if: ${{ ! cancelled() }}
     timeout-minutes: 180
     runs-on: ubuntu-latest
@@ -49,30 +71,8 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "CI: check for dead domains (2)"
           git push -q
 
-  check-resurrected-domains:
-    needs: part-2
-    if: ${{ ! cancelled() }}
-    timeout-minutes: 180
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: check_dead.sh checkalive
-        run: bash scripts/check_dead.sh checkalive
-
-      - name: Push
-        run: |
-          git config user.email ${{ vars.GIT_EMAIL }}
-          git config user.name ${{ vars.GIT_USERNAME }}
-          git add .
-          git diff-index --quiet HEAD || git commit -m "CI: check for resurrected domains"
-          git push -q
-
   remove-dead-domains:
-    needs: check-resurrected-domains
+    needs: check-dead-part-2
     if: ${{ ! cancelled() }}
     runs-on: ubuntu-latest
     steps:

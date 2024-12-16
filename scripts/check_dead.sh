@@ -20,21 +20,28 @@ main() {
     split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
 
     case "$1" in
+        'checkalive')
+            # The alive check should be done before the new dead domains are
+            # added to the dead domains file as to not process these domains
+            # twice.
+            check_alive
+            ;;
+        'part1')
+            # Sometimes an x02 exists
+            [[ -f x02 ]] && cat x02 >> x01
+            check_dead x01
+            ;;
         'part2')
             # Sometimes an x02 exists
             [[ -f x02 ]] && cat x02 >> x01
             check_dead x01
             ;;
-
-        'checkalive')
-            check_alive
-            ;;
         'remove')
             remove_dead
             ;;
         *)
-            # Part 1
-            check_dead x00
+            printf "\n\e[1;31mNo argument passed.\e[0m\n\n"
+            exit 1
             ;;
     esac
 }
@@ -52,9 +59,9 @@ check_dead() {
     cp dead.tmp dead_domains.tmp
 
     if [[ -f dead_domains.tmp ]]; then
-        # Cache dead domains to be used as a filter for newly retrieved domains
-        # (done last to skip alive check)
-        # Note the dead domains file should remain unsorted
+        # Cache dead domains to be removed from the various files later
+        # and to act as a filter for newly retrieved domains.
+        # Note the dead domains file should remain unsorted.
         cat dead_domains.tmp >> "$DEAD_DOMAINS"
     fi
 }
