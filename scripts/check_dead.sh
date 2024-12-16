@@ -56,12 +56,10 @@ check_dead() {
 
     cp dead.tmp dead_domains.tmp
 
-    if [[ -f dead_domains.tmp ]]; then
-        # Cache dead domains to be removed from the various files later
-        # and to act as a filter for newly retrieved domains.
-        # Note the dead domains file should remain unsorted.
-        cat dead_domains.tmp >> "$DEAD_DOMAINS"
-    fi
+    # Save dead domains to be removed from the various files later
+    # and to act as a filter for newly retrieved domains.
+    # Note the dead domains file should remain unsorted.
+    cat dead_domains.tmp >> "$DEAD_DOMAINS"
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file
@@ -122,7 +120,7 @@ find_dead_in() {
 # Function 'remove_dead' removes dead domains from the raw file, raw light
 # file, root domains file and subdomains file.
 remove_dead() {
-    sort "$DEAD_DOMAINS" -o dead.tmp
+    sort -u "$DEAD_DOMAINS" -o dead.tmp
 
     # Remove dead domains from subdomains file
     comm -23 "$SUBDOMAINS" dead.tmp > temp
