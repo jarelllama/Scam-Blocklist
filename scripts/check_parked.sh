@@ -123,11 +123,11 @@ find_parked_in() {
     sort -u errored_domains_x??.tmp -o errored.tmp 2> /dev/null
     rm ./*_x??.tmp 2> /dev/null
 
-    printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
-    printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
-
     # Return 1 if no parked domains were found
     [[ ! -s parked.tmp ]] && return 1 || return 0
+
+    printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
+    printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
 
 # Function 'find_parked' queries sites in a given file for parked messages in
