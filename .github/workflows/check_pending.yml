@@ -1,0 +1,23 @@
+name: Check if there are pending domains
+run-name: Check if there are pending domains
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'
+permissions:
+  contents: write
+
+jobs:
+  check-pending-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Check if there are pending domains
+        run: |
+          if [[ -d data/pending ]]; then
+            bash scripts/tools.sh --send-telegram 'Pending domains not cleared.''
+          fi
