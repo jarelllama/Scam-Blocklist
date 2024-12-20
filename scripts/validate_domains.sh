@@ -131,7 +131,7 @@ validate() {
 
     # Call shell wrapper to send telegram notification
     $FUNCTION --send-telegram \
-        "Problematic domains found during validation check:\n$(<filter_log.tmp)"
+        "Validation: problematic domains found:\n$(<filter_log.tmp)"
 
     printf "\nTelegram notification sent.\n"
 }

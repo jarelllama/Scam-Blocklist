@@ -240,7 +240,7 @@ build() {
 
         # Send telegram notification
         $FUNCTION --send-telegram \
-            "Entries requiring manual review:\n$(<manual_review.tmp)"
+            "Retrieval: entries requiring manual review:\n$(<manual_review.tmp)"
 
         printf "\nTelegram notification sent.\n"
     fi
@@ -254,7 +254,7 @@ build() {
         [[ "$USE_EXISTING" == true ]] && return
         # Send Telegram update if not using existing results
         $FUNCTION --send-telegram \
-            "Run completed. No new domains added.\n${workflow_url}"
+            "Retrieval: no new domains added."
 
         return
     fi
@@ -304,7 +304,7 @@ build() {
     [[ "$USE_EXISTING" == true ]] && return
     # Send Telegram update if not using existing results
     $FUNCTION --send-telegram \
-        "Run completed. Retrieved ${count_added} domains.\n${workflow_url}"
+        "Retrieval: added ${count_added} domains."
 }
 
 # Function 'log_source' prints and logs statistics for each source using the
@@ -341,7 +341,7 @@ ${query_count},${status}" >> "$SOURCE_LOG"
 
         # Send telegram notification
         $FUNCTION --send-telegram \
-            "Source '$source' retrieved no results. Potential error occurred."
+            "Retrieval: '$source' retrieved no results. Potential error occurred."
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
             "$raw_count" "$final_count" "$total_whitelisted_count" \
