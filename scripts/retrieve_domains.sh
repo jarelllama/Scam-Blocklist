@@ -231,7 +231,7 @@ process_source() {
 # some basic numbers to the user.
 build() {
     # For telegram message
-    workflow_url='https://github.com/jarelllama/Scam-Blocklist/actions/workflows/build_deploy.yml'
+    workflow_url='https://github.com/jarelllama/Scam-Blocklist/actions/workflows/auto_retrieve.yml'
 
     if [[ -f manual_review.tmp ]]; then
         # Print domains requiring manual review
