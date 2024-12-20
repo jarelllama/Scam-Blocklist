@@ -19,5 +19,8 @@ jobs:
       - name: Check if there are pending domains
         run: |
           if [[ -d data/pending ]]; then
-            bash scripts/tools.sh --send-telegram "Pending domains not cleared."
+            bash scripts/tools.sh --send-telegram 'Pending domains not cleared.'
           fi
+        env:
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
