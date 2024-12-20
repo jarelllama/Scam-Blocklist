@@ -115,16 +115,16 @@ Resurrected domains added today: 1293
 
 ### Parked domains
 
-Parked domains are removed weekly. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
+Parked domains are removed daily. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
 
 Parked sites no longer containing any of the parked messages are assumed to be unparked and are included back into the blocklist.
 
 > [!TIP]
-For list maintainers interested in integrating the parked domains as a source, a list of weekly-updated parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 50000 entries).
+For list maintainers interested in integrating the parked domains as a source, the list of parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 50000 entries).
 
 ``` text
-Parked domains removed this month: 18320
-Unparked domains added this month: 674
+Parked domains removed today: 0
+Unparked domains added today: 0
 ```
 
 ## Resources / See also
