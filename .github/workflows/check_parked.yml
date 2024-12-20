@@ -2,10 +2,10 @@ name: Check for parked domains
 run-name: Check for parked domains
 on:
   workflow_dispatch:
-  schedule:
+  #schedule:
     # Run weekly to give external organisations time to flag NRDs.
-    - cron: '0 4 * * 0'
-  #workflow_call:
+  #  - cron: '0 4 * * 0'
+  workflow_call:
 permissions:
   contents: write
 
