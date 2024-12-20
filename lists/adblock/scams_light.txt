@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam and phishing domains automatically retrieved daily using Google Search API, automated detection, and other public sources.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 12.20.095606.2024
+! Version: 12.20.203015.2024
 ! Expires: 12 hours
-! Last modified: Fri Dec 20 09:56:06 UTC 2024
+! Last modified: Fri Dec 20 20:30:15 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 17852
+! Number of entries: 17889
 !
 ||0.seetherofficialmerch.com^
 ||01edc.com^
@@ -300,8 +300,6 @@
 ||aazaza.z21.web.core.windows.net^
 ||ab1abad1d0c2a.com^
 ||ab1c403220c27.com^
-||ab2da3d400c20.com^
-||ab3d685a0c37.com^
 ||ab6d54340c1a.com^
 ||ab70a139cc3a.com^
 ||ab890e964c34.com^
@@ -932,6 +930,7 @@
 ||amazoon.top^
 ||amazou0.com^
 ||amazouo1.com^
+||amazouo9.com^
 ||amazun.sbs^
 ||amazzon.top^
 ||ambags.shop^
@@ -1321,7 +1320,6 @@
 ||athlyss.com^
 ||athoser.com^
 ||atikisoi.com^
-||atk-transport.com^
 ||atlanticcapitalfinance.co.uk^
 ||atlanticshippingservices.com^
 ||atlantictrustfl.net^
@@ -1728,6 +1726,7 @@
 ||berien.top^
 ||berkleybulls.com^
 ||bermanholdingslimited.com^
+||berryattract.com^
 ||bersafirearms.com^
 ||bersafirearmsshop.com^
 ||bertrand-chameroy-immediate-app.blogspot.be^
@@ -1809,12 +1808,12 @@
 ||bestoshoe.com^
 ||bestpetpack.com^
 ||bestpetsandfriends.com^
-||bestpharmacyshop.com^
 ||bestprimexchangelimited.com^
 ||bestproject.info^
 ||bestqs-pro.com^
 ||bestresulttostart.com^
 ||bestsbuy.vip^
+||bestsellingusa.com^
 ||bestshoptodays.com^
 ||bestshowthingshere.com^
 ||bestsies.com^
@@ -1892,6 +1891,7 @@
 ||biannce.ru^
 ||biber.top^
 ||bibinnet.com^
+||bibinv.com^
 ||bichonfriseparadise.com^
 ||bicoin.lol^
 ||bicoin.se^
@@ -2452,6 +2452,12 @@
 ||butterfly-hilfe-fuer-afrika.ch^
 ||buy-new-car.com^
 ||buy-pteieltsscoreonline.com^
+||buy-shop2.quest^
+||buy-shop4.quest^
+||buy-shop5.quest^
+||buy-shop7.quest^
+||buy-shop8.quest^
+||buy-shop9.quest^
 ||buy-shroomsonline.com^
 ||buy4wheels.com^
 ||buyadderallpillssonline.com^
@@ -2546,6 +2552,7 @@
 ||caggaads.top^
 ||caha-hatya.top^
 ||caha-traa.top^
+||cahlla.shop^
 ||cakespen.com^
 ||calbbs.com^
 ||calbrooksuniversity.education^
@@ -2588,6 +2595,7 @@
 ||canadapost-postescanatp.top^
 ||canadapost-postescnada.vip^
 ||canadapost-potescnada.vip^
+||canadapost.com^
 ||canadaposts-postesscanada.top^
 ||canaddwapostoffice.top^
 ||canaddwaposts.top^
@@ -2684,6 +2692,7 @@
 ||cartshopbusiness.com^
 ||cartsjoy.com^
 ||cartsncups.com^
+||cartthustics.com^
 ||carvecomfort.com^
 ||casadelasdospalmas.com.co^
 ||casadina.co^
@@ -4130,6 +4139,7 @@
 ||devolredir.com^
 ||devonrexkittenhaven.com^
 ||dew4.my.id^
+||dewanddazzle.shop^
 ||dex-tool-portal.live^
 ||dexercisep.com^
 ||dexiadigitalcompany.com^
@@ -5033,6 +5043,7 @@
 ||everitewest.com^
 ||everstarttrading.com^
 ||evertrademarket.com^
+||everycomer.com^
 ||everythingtravelshop.com^
 ||eviciv.com^
 ||evirbgb.top^
@@ -5233,7 +5244,6 @@
 ||facebokislocked.netlify.app^
 ||faceboko.com^
 ||facebook1.net^
-||facebookcom.click^
 ||facebooks.pro^
 ||faceboook.net^
 ||facedook.ru^
@@ -5350,7 +5360,6 @@
 ||fast-swapper.com^
 ||fastandever.com^
 ||fastdaydeliveries.com^
-||fastdaydelivery.com^
 ||fastdeliveryshippingagency.com^
 ||fastexportservice.com^
 ||fastflowcourier.com^
@@ -5605,7 +5614,6 @@
 ||fnpistol.com^
 ||fnuttlie.wiki^
 ||fnx.wf^
-||focalpallets.uk^
 ||focusedfinds.com^
 ||foesce.com^
 ||fog.maker.com^
@@ -6244,7 +6252,6 @@
 ||goldmansachsa.com^
 ||goldmansachsa.xyz^
 ||goldmansachsb.xyz^
-||goldmansachsc.com^
 ||goldmansachsd.vip^
 ||goldmansachse.vip^
 ||goldmansachse.xyz^
@@ -6400,8 +6407,6 @@
 ||gov.1161ynpgr.lat^
 ||gov.1211pxbgr.lat^
 ||gov.1be6gr.top^
-||gov.1egr.lat^
-||gov.1ugr.lat^
 ||gov.203hgr.top^
 ||gov.3v91o6gr.vip^
 ||gov.49c8gr.top^
@@ -6999,7 +7004,6 @@
 ||gov.vsygr.click^
 ||gov.vulkanvegas-gr.top^
 ||gov.vwg1ulgr.vip^
-||gov.vxgr.lat^
 ||gov.vxtef3ab-rgr.com^
 ||gov.vyefgr.buzz^
 ||gov.vzbgr.info^
@@ -7175,6 +7179,7 @@
 ||grupoopcion.com^
 ||grupotecnopro.com.br^
 ||grupotentacioones.com^
+||grusofe.com^
 ||grutic.store^
 ||grystores.com^
 ||gsccamexportlivestock.co.za^
@@ -7295,6 +7300,10 @@
 ||handyworkhub.com^
 ||hangetg.com^
 ||hanielstore.com^
+||hank.si^
+||hanksly.hu^
+||hanksly.pl^
+||hanksome.hu^
 ||hannahsale.store^
 ||hannelipuppieshome.co.za^
 ||hanngah.shop^
@@ -7864,9 +7873,9 @@
 ||idocap.com^
 ||ieebee.com^
 ||iejhdaummx.uldomatek.su^
-||ieltslanguage.com^
 ||ieltsptecertificationfreedom.com^
 ||ieltsptefreedom.com^
+||ievanrs.com^
 ||ieveryshop.com^
 ||iextract.lol^
 ||ifanze.net^
@@ -8104,7 +8113,6 @@
 ||injectpurring.com^
 ||inkxklw.com^
 ||inkxpbf.com^
-||inlandkennel.com^
 ||innmoonlight.com^
 ||innolover.com^
 ||innovatety.com^
@@ -8527,7 +8535,6 @@
 ||jrtz.re^
 ||jrx.fr^
 ||jrx.tw^
-||js88.ag^
 ||jscloud.live^
 ||jshendla.com^
 ||jsincloud.com^
@@ -9228,6 +9235,7 @@
 ||littledreamerskingdom.com^
 ||littleduckpress.com^
 ||littlefinelinecattery.com^
+||littlejojo.net^
 ||littlepawdreams.com^
 ||littlepawslovers.com^
 ||littleprettypaws.com^
@@ -10466,6 +10474,7 @@
 ||nafeessweetscentre.com^
 ||nailsmith.co^
 ||nailswag.shop^
+||najindom.si^
 ||najmashoppify.com^
 ||nakedforsex.com^
 ||nakwhy.com^
@@ -10500,6 +10509,7 @@
 ||natflix.pro^
 ||natflix.vip^
 ||nathalievanaudenhove.be^
+||nathanboyd.shop^
 ||nationalguild.org^
 ||nationalpowwow.shop^
 ||nationaltrees.shop^
@@ -11052,7 +11062,6 @@
 ||onlyfan.biz^
 ||onlyfan.boats^
 ||onlyfan.fun^
-||onlyfane.online^
 ||onlyfane.site^
 ||onlyfans.store^
 ||onlyfanss.net^
@@ -11267,7 +11276,6 @@
 ||paaypal.org^
 ||pacermonitor.com^
 ||pacholet.com^
-||pacificnorthgatesec.com^
 ||pack-usps.shop^
 ||packedbrick.com^
 ||packwelltrackwell.com^
@@ -12078,6 +12086,7 @@
 ||premiumcattery.wixsite.com^
 ||premiumchemlab.com^
 ||premiumcookingoils.com^
+||premiumcounterfeitstore.com^
 ||premiumdigitalonline.com^
 ||premiumfillers-au.com^
 ||premiumfirewoodstore.com^
@@ -12909,7 +12918,6 @@
 ||rotter2.publicvm.com^
 ||rouyalmail-uk.top^
 ||rovaine.com^
-||roverrunpuppies.com^
 ||rovertac.com^
 ||rovgarena.com^
 ||rovixo.fr^
@@ -13044,6 +13052,7 @@
 ||sale-mall.live^
 ||sale-market.live^
 ||sale-shop.live^
+||sale-store.live^
 ||salehubb.com^
 ||salemagazineonline.com^
 ||salemart.top^
@@ -13413,6 +13422,15 @@
 ||shoetidepo.com^
 ||shootersgunshop.com^
 ||shop-mall-fb.shop^
+||shop-sale1.quest^
+||shop-sale2.quest^
+||shop-sale3.quest^
+||shop-sale4.quest^
+||shop-sale5.quest^
+||shop-sale6.quest^
+||shop-sale7.quest^
+||shop-sale8.quest^
+||shop-sale9.quest^
 ||shopakaso.com^
 ||shopaquaticsports.com^
 ||shopbuzzhq.com^
@@ -13471,6 +13489,10 @@
 ||shopruto.com^
 ||shopseasion.com^
 ||shopsjourney.com^
+||shopsmart2.store^
+||shopsmart4.store^
+||shopsmart5.store^
+||shopsmart7.store^
 ||shopsnapl.com^
 ||shopspaceus.com^
 ||shopspn.com^
@@ -13511,7 +13533,6 @@
 ||shsung.shop^
 ||shubhkalastore.com^
 ||sialnexus.com^
-||siamesekittenssale.com^
 ||siamexportersth.com^
 ||siamsugarexport.com^
 ||siberianannallc.com^
@@ -13547,6 +13568,7 @@
 ||silver-dates.com^
 ||silvercoin42.docinano.com^
 ||silverstonecredit.com^
+||simbahungaria.com^
 ||simeonnava.com^
 ||similacity.com^
 ||simos.online^
@@ -13663,6 +13685,7 @@
 ||sliceofdelightpizza.ca^
 ||slight-xr-trading-llc.shop^
 ||slim.medsocial.bio^
+||slimastonish.com^
 ||slimeoutt.com^
 ||slimhealth.us^
 ||sliperyedhby.icu^
@@ -14167,6 +14190,7 @@
 ||stylelaboy.com^
 ||stylesaverz.com^
 ||styleshow.online^
+||stylesphere247.store^
 ||styleussavant.com^
 ||stylewe.com^
 ||stylify.ie^
@@ -15364,6 +15388,7 @@
 ||townofstark.org^
 ||townscap.store^
 ||toxpas.com^
+||toyandturf.com^
 ||toylandjoys.co^
 ||toypoodlesroyale.com^
 ||toysarina.com^
@@ -16475,6 +16500,7 @@
 ||ver2.law.blog^
 ||vera-bergen.com^
 ||veraella.com^
+||veraze.eu^
 ||veri.center^
 ||verifameli.top^
 ||verified-documents.com^
@@ -16518,6 +16544,7 @@
 ||vibecoutur.com^
 ||vibedazzle.com^
 ||vibedrape.com^
+||vibedresser.com^
 ||vibeglowz.com^
 ||vibeshopus.com^
 ||vibeupus.com^
@@ -16556,6 +16583,7 @@
 ||vineeman.com^
 ||vintagedis.shop^
 ||vintagegoldenretrievers.com^
+||vintagenr.store^
 ||vintagepips.com^
 ||vintagerpcb.shop^
 ||vintagesnords.com^
@@ -17113,6 +17141,7 @@
 ||wonderfullifess.info^
 ||wonderfullifess.net^
 ||wondermentmall.com^
+||wonderwalljewels.com^
 ||woocommercedestek.com^
 ||woodcrafthive.com^
 ||woodcraftloom.com^
@@ -17550,7 +17579,15 @@
 ||youngbison.com^
 ||youngeez.com^
 ||youngsweays.my^
+||your-store1.info^
+||your-store2.info^
 ||your-store3.info^
+||your-store4.info^
+||your-store5.info^
+||your-store6.info^
+||your-store7.info^
+||your-store8.info^
+||your-store9.info^
 ||yourbucketlist.store^
 ||yourclothes.vip^
 ||yourdobermann.com^
