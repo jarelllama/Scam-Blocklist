@@ -16,6 +16,7 @@ Sources include:
 - Public databases
 - Google Search indexing to find common scam site templates
 - Open source tools such as [dnstwist](https://github.com/elceef/dnstwist) to detect cybersquatting techniques like typosquatting, doppelganger domains, and IDN homograph attacks
+- Domain generation algorithm (DGA) domain detection using [DGA Detector](https://github.com/exp0se/dga_detector) which analyzes domains based on entropy, consonants, and length
 - Regex expression matching for phishing NRDs. See the list of expressions [here](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv)
 
 A list of all sources can be found in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md) with config files [here](https://github.com/jarelllama/Scam-Blocklist/tree/main/config).
@@ -57,7 +58,7 @@ $(print_stats stopgunscams.com)
 $(print_stats)
 
 - %Monthly: percentage out of total domains from all sources.
-- %Filtered: percentage of dead, whitelisted and parked domains.
+- %Filtered: percentage of dead, whitelisted, and parked domains.
 \`\`\`
 
 <details>
