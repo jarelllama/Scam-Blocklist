@@ -10,6 +10,8 @@ update_readme() {
 
 ${BLOCKLIST_DESCRIPTION}
 
+Since the project began, the blocklist has expanded to include not only scam websites but also malware domains.
+
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. This is done by detecting new malicious domains within a short period of their registration date.
 Sources include:
 
