@@ -98,16 +98,12 @@ Total domains: $(grep -cF '||' lists/adblock/nsfw.txt)
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
 </details>
 
-### Malware Blocklist
-
-A blocklist for malicious domains extracted from Proofpoint's [Emerging Threats](https://rules.emergingthreats.net/) rulesets can be found here: **[jarelllama/Emerging-Threats](https://github.com/jarelllama/Emerging-Threats)**.
-
 ## Automated filtering process
 
 - Domains are filtered against an actively maintained whitelist
 - Domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
 - Common subdomains like 'www' are stripped
-- Only domains are included in the blocklist; URLs are stripped down to their domains and IP addresses are manually checked for resolving DNS records
+- Non-domain entries are removed
 - Redundant rules are removed via wildcard matching. For example, 'abc.example.com' is a wildcard match of 'example.com' and, therefore, is redundant and removed. Wildcards are occasionally added to the blocklist manually to further optimize the number of entries
 
 Entries that require manual verification/intervention are notified to the maintainer for fast remediations.
