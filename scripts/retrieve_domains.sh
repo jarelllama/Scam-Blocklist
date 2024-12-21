@@ -31,9 +31,22 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-
+    source_aa419
     source_dga_detector
-
+    source_dnstwist
+    source_emerging_threats
+    source_fakewebshoplisthun
+    source_guntab
+    source_jeroengui_phishing
+    source_jeroengui_scam
+    source_manual
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamadviser
+    source_scamdirectory
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -182,7 +195,7 @@ process_source() {
     # mawk does not work with this expression so grep is intentionally chosen
     # over awk. The same applies for the invalid check below.
     whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$results_file")"
-    whitelisted_tld_count="$(filter "$whitelisted_tld" tld)"
+    whitelisted_tld_count="$(filter "$whitelisted_tld" whitelisted_tld)"
 
     # Remove non-domain entries including IP addresses excluding Punycode
     invalid="$(grep -vE "^${STRICT_DOMAIN_REGEX}$" "$results_file")"
@@ -326,7 +339,7 @@ ${query_count},${status}" >> "$SOURCE_LOG"
 
         # Send telegram notification
         $FUNCTION --send-telegram \
-            "Retrieval: '$source' retrieved no results. Potential error occurred."
+            "Warning: '$source' retrieved no results. Potential error occurred."
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
             "$raw_count" "$final_count" "$total_whitelisted_count" \
@@ -616,7 +629,7 @@ source_dga_detector() {
     # Keep only NRDs with more than 12 characters
     mawk 'length($0) > 12' nrd.tmp > domains.tmp
 
-    git clone https://github.com/exp0se/dga_detector --depth 1 > /dev/null
+    git clone -q https://github.com/exp0se/dga_detector --depth 1
     pip install -q tldextract
 
     cd dga_detector || return
