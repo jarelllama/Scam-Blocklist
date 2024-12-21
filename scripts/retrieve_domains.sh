@@ -32,7 +32,7 @@ readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[
 
 readonly -a SOURCES=(
     source_aa419
-    source_dga_detection
+    source_dga_detector
     source_dnstwist
     source_emerging_threats
     source_fakewebshoplisthun
