@@ -617,6 +617,7 @@ source_dga_detector() {
     mawk 'length($0) > 12' nrd.tmp > domains.tmp
 
     git clone https://github.com/exp0se/dga_detector --depth 1 > /dev/null
+    pip install -q tldextract
 
     cd dga_detector || return
 
