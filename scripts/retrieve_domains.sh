@@ -32,6 +32,7 @@ readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[
 
 readonly -a SOURCES=(
     source_aa419
+    source_dga_detection
     source_dnstwist
     source_emerging_threats
     source_fakewebshoplisthun
@@ -616,6 +617,38 @@ source_aa419() {
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
+}
+
+source_dga_detector() {
+    source='DGA Detector'
+    ignore_from_light=true
+    results_file="data/pending/domains_dga_detector.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    # Keep only NRDs with more than 12 characters
+    mawk 'length($0) > 12' nrd.tmp > domains.tmp
+
+    git clone https://github.com/exp0se/dga_detector --depth 1 > /dev/null
+
+    cd dga_detector || return
+
+    # Set detection threshold
+    # A lower threshold lowers the domain yield and reduces false positives
+    # Note that adding domains to big.txt does not seem to affect detection
+    sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.001/" \
+        dga_detector.py
+
+    # Run DGA Detector on remaining NRDs
+    python3 dga_detector.py -f ../domains.tmp > /dev/null
+
+    # Extract DGA domains from json output
+    jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
+        > "../${results_file}"
+
+    cd ..
+
+    rm -rf dga_detector domains.tmp
 }
 
 source_emerging_threats() {

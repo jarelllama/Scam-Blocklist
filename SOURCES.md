@@ -11,6 +11,7 @@ Only active sources are used to automatically retrieve domains.
 | [ANFRAS](https://anfras.com/fakeshops/) | Fake | | |
 | [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Advance-fee | Yes | |
 | [DFPI's Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Crypto | | |
+| [DGA Detector](https://github.com/exp0se/dga_detector) | DGA | Yes | Yes |
 | [Emerging Threats](https://rules.emergingthreats.net/) | Malware | Yes | |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | Fake | | |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Fake | Yes | |
