@@ -634,9 +634,9 @@ source_dga_detector() {
 
     cd dga_detector || return
 
-    # Set detection threshold
-    # A lower threshold lowers the domain yield and reduces false positives
-    # Note that adding domains to big.txt does not seem to affect detection
+    # Set detection threshold. DGA domains fall below the threshold set here.
+    # A lower threshold lowers the domain yield and reduces false positives.
+    # Note that adding domains to big.txt does not seem to affect detection.
     sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.001/" \
         dga_detector.py
 
