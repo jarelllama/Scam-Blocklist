@@ -39,7 +39,7 @@ jobs:
     uses: ./.github/workflows/check_parked.yml
 
   validate:
-    needs: [test, check-dead]
+    needs: [test, check-parked]
     if: ${{ ! cancelled() && needs.test.result == 'success' }}
     uses: ./.github/workflows/validate_domains.yml
     secrets: inherit
