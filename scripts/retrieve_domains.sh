@@ -237,7 +237,7 @@ build() {
 
         # Send telegram notification
         $FUNCTION --send-telegram \
-            "Retrieval: entries requiring manual review:\n$(<manual_review.tmp)"
+            "Retrieval: entries requiring manual review\n\n$(<manual_review.tmp)"
 
         printf "\nTelegram notification sent.\n"
     fi
@@ -251,7 +251,7 @@ build() {
         [[ "$USE_EXISTING" == true ]] && return
         # Send Telegram update if not using existing results
         $FUNCTION --send-telegram \
-            "Retrieval: no new domains added."
+            "Retrieval: no new domains added"
 
         return
     fi
@@ -301,7 +301,7 @@ build() {
     [[ "$USE_EXISTING" == true ]] && return
     # Send Telegram update if not using existing results
     $FUNCTION --send-telegram \
-        "Retrieval: added ${count_added} domains."
+        "Retrieval: added ${count_added} domains"
 }
 
 # Function 'log_source' prints and logs statistics for each source using the
