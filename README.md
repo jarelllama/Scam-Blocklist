@@ -26,27 +26,27 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 183259
+Total domains: 209390
 Light version: 17722
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    0 |       0 |      0 % |       0 % | DGA Detector
-    0 |    2119 |      2 % |      27 % | Emerging Threats
-   46 |    2365 |      2 % |      19 % | FakeWebshopListHUN
+26132 |   26132 |     21 % |       0 % | DGA Detector
+    0 |    2119 |      1 % |      27 % | Emerging Threats
+   46 |    2365 |      1 % |      19 % | FakeWebshopListHUN
    18 |     701 |      0 % |       3 % | Google Search
-  209 |   20287 |     21 % |       9 % | Jeroengui phishing feed
+  209 |   20287 |     16 % |       9 % | Jeroengui phishing feed
     0 |     139 |      0 % |       8 % | Jeroengui scam feed
-  359 |   40624 |     42 % |      24 % | PhishStats
-    2 |    9986 |     10 % |       0 % | PhishStats (NRDs)
-    8 |   26035 |     27 % |       1 % | Regex Matching (NRDs)
+  359 |   40624 |     33 % |      24 % | PhishStats
+    2 |    9986 |      8 % |       0 % | PhishStats (NRDs)
+    8 |   26035 |     21 % |       1 % | Regex Matching (NRDs)
     0 |     244 |      0 % |      11 % | aa419.org
-    2 |    1137 |      1 % |       1 % | dnstwist (NRDs)
+    2 |    1137 |      0 % |       1 % | dnstwist (NRDs)
     1 |    1488 |      1 % |      32 % | guntab.com
     0 |     269 |      0 % |       7 % | scam.directory
     0 |      47 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       5 % | stopgunscams.com
-  643 |   95767 |    100 % |      20 % | All sources
+26775 |  121899 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted and parked domains.
