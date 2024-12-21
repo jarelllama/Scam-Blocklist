@@ -31,6 +31,7 @@ Light version: 17722
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
+    0 |       0 |      0 % |       0 % | DGA Detector
     0 |    2119 |      2 % |      27 % | Emerging Threats
    46 |    2365 |      2 % |      19 % | FakeWebshopListHUN
    18 |     701 |      0 % |       3 % | Google Search
