@@ -492,7 +492,8 @@ source_cybersquatting() {
     # Install URLCrazy and dependencies
     git clone -q https://github.com/urbanadventurer/urlcrazy.git
     command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
-    gem install json colorize async async-dns async-http
+    # sudo is needed for gem
+    sudo gem install json colorize async async-dns async-http
 
     # Get the majority of TLDs from the NRD feed for dnstwist.
     # This is not needed for URLCrazy as that already checks for
