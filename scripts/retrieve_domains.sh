@@ -31,9 +31,22 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-
+    source_aa419
+    source_dga_detector
     source_cybersquatting
-
+    source_emerging_threats
+    source_fakewebshoplisthun
+    source_guntab
+    source_jeroengui_phishing
+    source_jeroengui_scam
+    source_manual
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamadviser
+    source_scamdirectory
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -493,7 +506,7 @@ source_cybersquatting() {
     git clone -q https://github.com/urbanadventurer/urlcrazy.git
     command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
     # sudo is needed for gem
-    sudo gem install json colorize async async-dns async-http
+    sudo gem install --silent json colorize async async-dns async-http
 
     # Get the majority of TLDs from the NRD feed for dnstwist.
     # This is not needed for URLCrazy as that already checks for
@@ -551,6 +564,8 @@ source_cybersquatting() {
         # Reset results file for the next target domain
         rm results.tmp
     done <<< "$targets"
+
+    rm -rf urlcrazy
 }
 
 source_regex() {
