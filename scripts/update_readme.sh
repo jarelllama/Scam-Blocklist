@@ -13,11 +13,14 @@ ${BLOCKLIST_DESCRIPTION}
 Since the project began, the blocklist has expanded to include not only scam websites but also malware domains.
 
 This blocklist aims to be an alternative to blocking all newly registered domains (NRDs) seeing how many, but not all, NRDs are malicious. This is done by detecting new malicious domains within a short period of their registration date.
+
+For blocking all NRDs, use [xRuffKez's NRD Lists](https://github.com/xRuffKez/NRD).
+
 Sources include:
 
 - Public databases
 - Google Search indexing to find common scam site templates
-- Open source tools such as [dnstwist](https://github.com/elceef/dnstwist) to detect cybersquatting techniques like typosquatting, doppelganger domains, and IDN homograph attacks
+- Detection of common cybersquatting techniques like typosquatting, doppelganger domains, and IDN homograph attacks using [dnstwist](https://github.com/elceef/dnstwist) and [URLCrazy](https://github.com/urbanadventurer/urlcrazy)
 - Domain generation algorithm (DGA) domain detection using [DGA Detector](https://github.com/exp0se/dga_detector)
 - Regex expression matching for phishing NRDs. See the list of expressions [here](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv)
 
@@ -32,7 +35,7 @@ The automated retrieval is done daily at 16:00 UTC.
 | [Adblock Plus](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/scams.txt) | \|\|scam.com^ |
 | [Wildcard Domains](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/scams.txt) | scam.com |
 
-This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#tif) (full version). For extended protection, please use his list instead.
+This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#tif) (full version). For extended protection, please use that list instead.
 
 ## Statistics
 
@@ -51,6 +54,7 @@ $(print_stats 'Jeroengui scam') feed
 $(print_stats PhishStats)
 $(print_stats 'PhishStats (NRDs)')
 $(print_stats Regex) Matching (NRDs)
+$(print_stats URLCrazy) (NRDs)
 $(print_stats aa419.org)
 $(print_stats dnstwist) (NRDs)
 $(print_stats guntab.com)
@@ -77,7 +81,7 @@ Courtesy of iam-py-test/blocklist_stats.
 
 For collated blocklists cautious about size, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory. Sources excluded from the light version are marked in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/).
 
-Note that dead and parked domains that become alive/unparked are not added back into the light version due to limitations in the way these domains are recorded.
+Note that dead and parked domains that become alive/unparked are not added back into the light version due to limitations in how these domains are recorded.
 
 ### NSFW Blocklist
 
@@ -89,8 +93,8 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <ul>
 <li>Domains are automatically retrieved from the Tranco Top Sites Ranking daily</li>
 <li>Dead domains are removed daily</li>
-<li>Note that resurrected domains are not added back into the blocklist</li>
-<li>Note that parked domains are not checked for in this blocklist</li>
+<li>Note that resurrected domains are not added back</li>
+<li>Note that parked domains are not checked for</li>
 </ul>
 Total domains: $(grep -cF '||' lists/adblock/nsfw.txt)
 <br>

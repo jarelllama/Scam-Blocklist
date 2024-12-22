@@ -27,7 +27,8 @@ Only active sources are used to automatically retrieve domains.
 | [ScamAdvisor](https://www.scamadviser.com/) | Any | Yes | |
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | Any | | |
 | [StopGunScams.com](https://stopgunscams.com/) | Fake | Yes | |
-| [dnstwist](https://github.com/elceef/dnstwist) | Phishing | Yes | |
+| [URLCrazy](https://github.com/urbanadventurer/urlcrazy) | Cybersquatting | Yes | |
+| [dnstwist](https://github.com/elceef/dnstwist) | Cybersquatting | Yes | |
 | [openSquat](https://github.com/atenreiro/opensquat) | Phishing | | |
 | [r/Scams](https://www.reddit.com/r/Scams/) | Any | | |
 | [xRuffKez's NRD List](https://github.com/xRuffKez/NRD) | NRD | - | - |
