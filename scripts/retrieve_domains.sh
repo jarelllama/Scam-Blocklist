@@ -33,7 +33,7 @@ readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[
 readonly -a SOURCES=(
     source_aa419
     source_dga_detector
-    source_dnstwist
+    source_cybersquatting
     source_emerging_threats
     source_fakewebshoplisthun
     source_guntab
@@ -66,7 +66,7 @@ source() {
     # Install idn (requires sudo) (note -qq does not seem to work here)
     # Call shell wrapper to download toplist
     # Download NRD feed
-    { command -v idn &> /dev/null || sudo apt-get install idn > /dev/null; } \
+    { command -v idn > /dev/null || sudo apt-get install idn > /dev/null; } \
         & $FUNCTION --download-toplist \
         & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
     wait
@@ -419,9 +419,9 @@ source_google_search() {
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
 
     # Install csvkit
-    command -v csvgrep &> /dev/null || pip install -q csvkit
+    command -v csvgrep > /dev/null || pip install -q csvkit
     # Install jq
-    command -v jq &> /dev/null || apt-get install -qq jq
+    command -v jq > /dev/null || apt-get install -qq jq
 
     # Get active search terms
     # csvkit has to be used here as the search terms may contain commas which
@@ -493,20 +493,26 @@ search_google() {
     process_source
 }
 
-source_dnstwist() {
-    source='dnstwist'
-    results_file="data/pending/domains_${source}.tmp"
+source_cybersquatting() {
+    source='Cybersquatting'
+    results_file='data/pending/domains_cybersquatting.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
-    # Get the top 30 TLDs from the NRD feed
-    # Only 10,000 entries are sampled to save time while providing the same
-    # ranking as 100,000 entries and above.
-    tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
-        | sort -nr | head -n 30 | mawk '{print $2}')"
+    # Install URLCrazy and dependencies
+    git clone -q https://github.com/urbanadventurer/urlcrazy.git
+    command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
+    gem install json colorize async async-dns async-http
+
+    # Get the majority of TLDs from the NRD feed for dnstwist.
+    # This is not needed for URLCrazy as that already checks for
+    # alternate TLDs.
+    # The top 500 is a good number to avoid invalid TLDs.
+    tlds="$(mawk -F '.' '{print $NF}' nrd.tmp | sort | uniq -c \
+        | sort -nr | head -n 500 | mawk '{print $2}')"
 
     # Remove duplicate targets from targets file
     mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
@@ -526,10 +532,19 @@ source_dnstwist() {
         # Run dnstwist
         results="$(dnstwist "${domain}.com" -f list)"
 
-        # Append TLDs to results
+        # Append TLDs to dnstwist results
+        # Note the dnstwist --tld argument only replaces the TLDs of the
+        # original domain.
         while read -r tld; do
             printf "%s\n" "$results" | sed "s/\.com/.${tld}/" >> results.tmp
         done <<< "$tlds"
+
+        # Run URLCrazy (bash does not work)
+        ./urlcrazy/urlcrazy -r "${domain}.com" -f CSV \
+            | mawk -F, '!/"Original"/ {print $2}' \
+            | grep -oE '[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+            >> results.tmp
+
         sort -u results.tmp -o results.tmp
 
         # Get matching NRDs
@@ -611,7 +626,7 @@ source_aa419() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     # Install jq
-    command -v jq &> /dev/null || apt-get install -qq jq
+    command -v jq > /dev/null || apt-get install -qq jq
 
     local url='https://api.aa419.org/fakesites'
     # Trailing slash intentionally omitted
