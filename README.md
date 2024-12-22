@@ -46,9 +46,8 @@ Today | Monthly | %Monthly | %Filtered | Source
  1272 |   41896 |     33 % |      24 % | PhishStats
   208 |   10194 |      8 % |       0 % | PhishStats (NRDs)
   497 |   26532 |     21 % |       1 % | Regex Matching (NRDs)
-    0 |       0 |      0 % |       0 % | URLCrazy (NRDs)
+  663 |    1800 |      1 % |       1 % | Cybersquatting (NRDs)
     8 |     252 |      0 % |      11 % | aa419.org
-   43 |    1180 |      0 % |       1 % | dnstwist (NRDs)
     0 |    1488 |      1 % |      32 % | guntab.com
    50 |     319 |      0 % |       7 % | scam.directory
     0 |      47 |      0 % |      32 % | scamadviser.com
