@@ -40,12 +40,12 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 \`\`\` text
-Total domains: $(grep -cF '||' lists/adblock/scams.txt)
+Total domains: $(greps -cF '||' lists/adblock/scams.txt)
 Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-$(print_stats Cybersquatting
+$(print_stats Cybersquatting)
 $(print_stats 'DGA Detector')
 $(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
