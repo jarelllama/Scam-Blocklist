@@ -45,6 +45,7 @@ Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
+$(print_stats Cybersquatting) (NRDs)
 $(print_stats 'DGA Detector')
 $(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
@@ -54,7 +55,6 @@ $(print_stats 'Jeroengui scam') feed
 $(print_stats PhishStats)
 $(print_stats 'PhishStats (NRDs)')
 $(print_stats Regex) Matching (NRDs)
-$(print_stats Cybersquatting) (NRDs)
 $(print_stats aa419.org)
 $(print_stats guntab.com)
 $(print_stats scam.directory)
