@@ -3,7 +3,7 @@ run-name: Check if there are pending domains
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 14 * * *'
 permissions:
   contents: write
 
