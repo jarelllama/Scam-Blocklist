@@ -40,7 +40,7 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 \`\`\` text
-Total domains: $(greps -cF '||' lists/adblock/scams.txt)
+Total domains: $(grep -cF '||' lists/adblock/scams.txt)
 Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains after filtering:
