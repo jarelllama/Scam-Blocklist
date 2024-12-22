@@ -502,11 +502,11 @@ source_dnstwist() {
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
-    # Get the top 50 TLDs from the NRD feed
+    # Get the top 30 TLDs from the NRD feed
     # Only 10,000 entries are sampled to save time while providing the same
     # ranking as 100,000 entries and above.
     tlds="$(shuf -n 10000 nrd.tmp | mawk -F '.' '{print $NF}' | sort | uniq -c \
-        | sort -nr | head -n 50 | mawk '{print $2}')"
+        | sort -nr | head -n 30 | mawk '{print $2}')"
 
     # Remove duplicate targets from targets file
     mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
@@ -553,7 +553,7 @@ source_dnstwist() {
 source_regex() {
     source='Regex'
     ignore_from_light=true
-    results_file="data/pending/domains_${source}.tmp"
+    results_file='data/pending/domains_regex.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -598,7 +598,7 @@ source_regex() {
 
 source_manual() {
     source='Manual'
-    results_file="data/pending/domains_${source}.tmp"
+    results_file='data/pending/domains_manual.tmp'
 
     # Process only if file is found (source is the file itself)
     [[ -f "$results_file" ]] && process_source
@@ -664,7 +664,7 @@ source_emerging_threats() {
 
 source_fakewebshoplisthun() {
     source='FakeWebshopListHUN'
-    results_file="data/pending/domains_${source}.tmp"
+    results_file='data/pending/domains_fakewebshoplisthun.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -715,7 +715,7 @@ source_jeroengui_scam() {
 source_phishstats() {
     source='PhishStats'
     ignore_from_light=true
-    results_file="data/pending/domains_${source}.tmp"
+    results_file='data/pending/domains_phishstats.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
