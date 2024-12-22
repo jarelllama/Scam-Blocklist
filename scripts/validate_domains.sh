@@ -149,4 +149,6 @@ $FUNCTION --format-all
     & $FUNCTION --download-toplist
 wait
 
-validate
+rm -rf urlcrazy
+
+#validate
