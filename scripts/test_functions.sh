@@ -389,9 +389,9 @@ test_whitelisted_tld_removal() {
         printf "white-tld-test.mil\n"
     } >> input.txt  # INPUT
     {
-        printf "tld,white-tld-test.gov.us\n"
-        printf "tld,white-tld-test.edu\n"
-        printf "tld,white-tld-test.mil\n"
+        printf "whitelisted_tld,white-tld-test.gov.us\n"
+        printf "whitelisted_tld,white-tld-test.edu\n"
+        printf "whitelisted_tld,white-tld-test.mil\n"
     } >> out_log.txt  # EXPECTED OUTPUT
 }
 

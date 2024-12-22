@@ -118,7 +118,10 @@ download_nrd_feed() {
     #url3='https://feeds.opensquat.com/domain-names-month.txt'
 
     # Download the feeds in parallel
-    curl -sSLZ "$url1" "$url2" | mawk '!/#/' > nrd.tmp
+    # Note the feeds currently have a bug where it contains invalid domains
+    curl -sSLZ "$url1" "$url2" | mawk '!/#/' \
+        | grep -oE '[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+        > nrd.tmp
 
     # TODO: update method of checking if the feeds downloaded correctly
     #
