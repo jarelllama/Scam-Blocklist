@@ -29,7 +29,7 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 198995
+Total domains: 198997
 Light version: 18003
 
 New domains after filtering:
@@ -40,7 +40,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    27 |     728 |      0 % |       3 % | Google Search
   249 |   20536 |     16 % |       9 % | Jeroengui phishing feed
     2 |     141 |      0 % |       8 % | Jeroengui scam feed
- 1270 |   41894 |     33 % |      24 % | PhishStats
+ 1272 |   41896 |     33 % |      24 % | PhishStats
   208 |   10194 |      8 % |       0 % | PhishStats (NRDs)
   497 |   26532 |     21 % |       1 % | Regex Matching (NRDs)
     8 |     252 |      0 % |      11 % | aa419.org
@@ -49,7 +49,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    50 |     319 |      0 % |       7 % | scam.directory
     0 |      47 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       5 % | stopgunscams.com
- 2359 |  124298 |    100 % |      20 % | All sources
+ 2361 |  124300 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
