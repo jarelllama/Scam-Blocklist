@@ -37,6 +37,7 @@ Light version: 18622
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
+  663 |    1800 |      1 % |       1 % | Cybersquatting (NRDs)
    23 |   26195 |     20 % |       0 % | DGA Detector
    21 |    2140 |      1 % |      26 % | Emerging Threats
   169 |    2534 |      2 % |      19 % | FakeWebshopListHUN
@@ -46,7 +47,6 @@ Today | Monthly | %Monthly | %Filtered | Source
  1272 |   41896 |     33 % |      24 % | PhishStats
   208 |   10194 |      8 % |       0 % | PhishStats (NRDs)
   497 |   26532 |     21 % |       1 % | Regex Matching (NRDs)
-  663 |    1800 |      1 % |       1 % | Cybersquatting (NRDs)
     8 |     252 |      0 % |      11 % | aa419.org
     0 |    1488 |      1 % |      32 % | guntab.com
    50 |     319 |      0 % |       7 % | scam.directory
