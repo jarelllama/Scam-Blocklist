@@ -543,8 +543,7 @@ source_cybersquatting() {
         # Run URLCrazy (bash does not work)
         ./urlcrazy/urlcrazy -r "${domain}.com" -f CSV \
             | mawk -F, '!/"Original"/ {print $2}' \
-            | grep -oE '[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
-            >> results.tmp
+            | grep -oE "$STRICT_DOMAIN_REGEX" >> results.tmp
 
         sort -u results.tmp -o results.tmp
 
