@@ -32,12 +32,12 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 212810
+Total domains: 212813
 Light version: 18559
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-11454 |   11454 |      8 % |       0 % | 165 Anti-fraud
+11459 |   11459 |      8 % |       0 % | 165 Anti-fraud
    33 |    1833 |      1 % |       1 % | Cybersquatting
   992 |   27187 |     19 % |       0 % | DGA Detector
    11 |    2151 |      1 % |      25 % | Emerging Threats
@@ -53,7 +53,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     319 |      0 % |       7 % | scam.directory
     0 |      47 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       4 % | stopgunscams.com
-13976 |  138896 |    100 % |      20 % | All sources
+13981 |  138901 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
