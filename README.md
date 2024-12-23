@@ -37,6 +37,7 @@ Light version: 18559
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
+10790 |   10790 |      7 % |       0 % | 165 Anti-fraud
    33 |    1833 |      1 % |       1 % | Cybersquatting
   992 |   27187 |     19 % |       0 % | DGA Detector
    11 |    2151 |      1 % |      25 % | Emerging Threats
