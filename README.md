@@ -32,27 +32,27 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 201515
+Total domains: 212158
 Light version: 18559
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
    33 |    1833 |      1 % |       1 % | Cybersquatting
-  992 |   27187 |     21 % |       0 % | DGA Detector
+  992 |   27187 |     19 % |       0 % | DGA Detector
    11 |    2151 |      1 % |      25 % | Emerging Threats
     0 |    2534 |      1 % |      19 % | FakeWebshopListHUN
    30 |     758 |      0 % |       3 % | Google Search
-  237 |   20773 |     16 % |       9 % | Jeroengui phishing feed
+  237 |   20773 |     15 % |       9 % | Jeroengui phishing feed
     2 |     143 |      0 % |       8 % | Jeroengui scam feed
-  505 |   42401 |     33 % |      24 % | PhishStats
-   85 |   10279 |      8 % |       0 % | PhishStats (NRDs)
-  690 |   27222 |     21 % |       1 % | Regex Matching
+  505 |   42401 |     30 % |      24 % | PhishStats
+   85 |   10279 |      7 % |       0 % | PhishStats (NRDs)
+  690 |   27222 |     19 % |       1 % | Regex Matching
    15 |     267 |      0 % |      12 % | aa419.org
     7 |    1495 |      1 % |      33 % | guntab.com
     0 |     319 |      0 % |       7 % | scam.directory
     0 |      47 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       4 % | stopgunscams.com
- 2522 |  127442 |    100 % |      20 % | All sources
+13312 |  138232 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
