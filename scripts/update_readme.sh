@@ -45,6 +45,7 @@ Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
+$(print_stats '165 Anti-fraud')
 $(print_stats Cybersquatting)
 $(print_stats 'DGA Detector')
 $(print_stats 'Emerging Threats')
