@@ -670,11 +670,11 @@ source_165antifraud() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://quality.data.gov.tw/dq_download_csv.php?nid=160055&md5_url=45ab3c35d9f3f23d0166ba8f5ab9fd6d'
-    # Get only entries in the current year
+    local url='https://165.npa.gov.tw/api/article/subclass/3'
     curl -sSL "$url" \
-        | mawk -v year="$(date +"%Y")/" -F ',' '$5 ~ year {print $2}' \
-        | grep -Po "^(https?://)?\K${STRICT_DOMAIN_REGEX}" > "$results_file"
+        | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
+        | grep -Po "\\\">(https?://)?\K${STRICT_DOMAIN_REGEX}" \
+        | sort -u -o "$results_file"
 }
 
 source_aa419() {
