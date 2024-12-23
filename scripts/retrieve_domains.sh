@@ -21,7 +21,9 @@ TIMESTAMP="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 readonly TIMESTAMP
 
 # Matches example.com, example[.]com, 1.1.1.1
-readonly DOMAIN_REGEX='[[:alnum:].-]+\[?\.\]?[[:alnum:]-]+'
+# Seems like the strict regex can be used for most cases
+#readonly DOMAIN_REGEX='[[:alnum:].-]+\[?\.\]?[[:alnum:]-]+'
+
 # Matches example-com, 1.1.1.1
 # https://github.com/jarelllama/Scam-Blocklist/issues/349
 readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
@@ -31,6 +33,7 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
+    source_165antifraud
     source_aa419
     source_dga_detector
     source_cybersquatting
@@ -392,6 +395,7 @@ cleanup() {
 # Note the output results can be in URL form without subfolders.
 
 source_google_search() {
+    # Last checked: 23/12/24
     source='Google Search'
 
     if [[ "$USE_EXISTING" == true ]]; then
@@ -441,6 +445,7 @@ source_google_search() {
 }
 
 search_google() {
+    # Last checked: 23/12/24
     search_term="${1//\"/}"  # Remove quotes before encoding
     # Replace non-alphanumeric characters with spaces
     encoded_search_term="${search_term//[^[:alnum:]]/%20}"
@@ -494,6 +499,7 @@ search_google() {
 }
 
 source_cybersquatting() {
+    # Last checked: 23/12/24
     source='Cybersquatting'
     results_file='data/pending/domains_cybersquatting.tmp'
 
@@ -519,8 +525,8 @@ source_cybersquatting() {
     mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
     mv temp "$PHISHING_TARGETS"
 
-    # Get targets ignoring disabled ones and the header
-    targets="$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS" | tail -n +2)"
+    # Get targets ignoring disabled ones
+    targets="$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
 
     # Loop through the targets
     while read -r domain; do
@@ -542,7 +548,7 @@ source_cybersquatting() {
 
         # Run URLCrazy (bash does not work)
         ./urlcrazy/urlcrazy -r "${domain}.com" -f CSV \
-            | mawk -F, '!/"Original"/ {print $2}' \
+            | mawk -F ',' '!/"Original"/ {print $2}' \
             | grep -oE "$STRICT_DOMAIN_REGEX" >> results.tmp
 
         sort -u results.tmp -o results.tmp
@@ -567,7 +573,42 @@ source_cybersquatting() {
     rm -rf urlcrazy
 }
 
+source_dga_detector() {
+    # Last checked: 23/12/24
+    source='DGA Detector'
+    ignore_from_light=true
+    results_file="data/pending/domains_dga_detector.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    # Keep only NRDs with more than 12 characters
+    mawk 'length($0) > 12' nrd.tmp > domains.tmp
+
+    git clone -q https://github.com/exp0se/dga_detector --depth 1
+    pip install -q tldextract
+
+    cd dga_detector || return
+
+    # Set detection threshold. DGA domains fall below the threshold set here.
+    # A lower threshold lowers the domain yield and reduces false positives.
+    # Note that adding domains to big.txt does not seem to affect detection.
+    sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.001/" \
+        dga_detector.py
+
+    # Run DGA Detector on remaining NRDs
+    python3 dga_detector.py -f ../domains.tmp > /dev/null
+
+    # Extract DGA domains from json output
+    jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
+        > "../${results_file}"
+
+    cd ..
+
+    rm -rf dga_detector domains.tmp
+}
+
 source_regex() {
+    # Last checked: 09/12/24
     source='Regex'
     ignore_from_light=true
     results_file='data/pending/domains_regex.tmp'
@@ -621,7 +662,23 @@ source_manual() {
     [[ -f "$results_file" ]] && process_source
 }
 
+source_165antifraud() {
+    # Last checked: 23/12/24
+    source='165 Anti-fraud'
+    ignore_from_light=true
+    results_file='data/pending/domains_165antifraud.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://quality.data.gov.tw/dq_download_csv.php?nid=160055&md5_url=45ab3c35d9f3f23d0166ba8f5ab9fd6d'
+    # Get only entries in the current year
+    curl -sSL "$url" \
+        | mawk -v year="$(date +"%Y")/" -F ',' '$5 ~ year {print $2}' \
+        | grep -Po "^(https?://)?\K${STRICT_DOMAIN_REGEX}" > "$results_file"
+}
+
 source_aa419() {
+    # Last checked: 23/12/24
     source='aa419.org'
     results_file="data/pending/domains_${source}.tmp"
 
@@ -636,40 +693,8 @@ source_aa419() {
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
 }
 
-source_dga_detector() {
-    source='DGA Detector'
-    ignore_from_light=true
-    results_file="data/pending/domains_dga_detector.tmp"
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    # Keep only NRDs with more than 12 characters
-    mawk 'length($0) > 12' nrd.tmp > domains.tmp
-
-    git clone -q https://github.com/exp0se/dga_detector --depth 1
-    pip install -q tldextract
-
-    cd dga_detector || return
-
-    # Set detection threshold. DGA domains fall below the threshold set here.
-    # A lower threshold lowers the domain yield and reduces false positives.
-    # Note that adding domains to big.txt does not seem to affect detection.
-    sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.001/" \
-        dga_detector.py
-
-    # Run DGA Detector on remaining NRDs
-    python3 dga_detector.py -f ../domains.tmp > /dev/null
-
-    # Extract DGA domains from json output
-    jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
-        > "../${results_file}"
-
-    cd ..
-
-    rm -rf dga_detector domains.tmp
-}
-
 source_emerging_threats() {
+    # Last checked: 23/12/24
     source='Emerging Threats'
     results_file='data/pending/emerging_threats.tmp'
 
@@ -680,6 +705,7 @@ source_emerging_threats() {
 }
 
 source_fakewebshoplisthun() {
+    # Last checked: 23/12/24
     source='FakeWebshopListHUN'
     results_file='data/pending/domains_fakewebshoplisthun.tmp'
 
@@ -692,6 +718,7 @@ source_fakewebshoplisthun() {
 }
 
 source_guntab() {
+    # Last checked: 23/12/24
     source='guntab.com'
     ignore_from_light=true
     results_file="data/pending/domains_${source}.tmp"
@@ -701,11 +728,12 @@ source_guntab() {
     local url='https://www.guntab.com/scam-websites'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -zoE '<table class="datatable-list table">.*</table>' \
-        | grep -aoE "${DOMAIN_REGEX}$" > "$results_file"
+        | grep -aoE "${STRICT_DOMAIN_REGEX}$" > "$results_file"
         # Note results are not sorted by time added
 }
 
 source_jeroengui_phishing() {
+    # Last checked: 23/12/24
     source='Jeroengui phishing'
     ignore_from_light=true
     results_file='data/pending/domains_jeroengui_phishing.tmp'
@@ -713,23 +741,26 @@ source_jeroengui_phishing() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://file.jeroengui.be/phishing/last_week.txt'
-    # Get URLs with no subdirectories, exclude IP addresses and extract domains
+    # Get URLs with no subdirectories (some of the URLs use docs.google.com),
+    # exclude IP addresses and extract domains.
     curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" \
         > "$results_file"
 }
 
 source_jeroengui_scam() {
+    # Last checked: 23/12/24
     source='Jeroengui scam'
     results_file='data/pending/domains_jeroengui_scam.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://file.jeroengui.be/scam/last_week.txt'
-    curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" \
+    curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}" \
         > "$results_file"
 }
 
 source_phishstats() {
+    # Last checked: 23/12/24
     source='PhishStats'
     ignore_from_light=true
     results_file='data/pending/domains_phishstats.tmp'
@@ -737,18 +768,21 @@ source_phishstats() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://phishstats.info/phish_score.csv'
-    # Get URLs with no subdirectories, exclude IP addresses and extract domains
-    # (?=/?\"?$) is lookahead that matches an optional slash followed by an
-    # optional end quote at the end of the line.
+    # Get URLs with no subdirectories (some of the URLs use docs.google.com),
+    # exclude IP addresses and extract domains.
+    # (?=/?\"$) is lookahead that matches an optional slash followed by an end
+    # quote at the end of the line.
     curl -sSL "$url" | mawk -F ',' '{print $3}' \
-        | grep -Po "^\"?https?://\K${STRICT_DOMAIN_REGEX}(?=/?\"?$)" \
-        | sort -u -o "$results_file"
+        | grep -Po "^\"https?://\K${STRICT_DOMAIN_REGEX}(?=/?\"$)" \
+        | sort -u -o "$results_file"  # sort -u for faster comm
 
-    # Get matching NRDs for light version (Unicode ignored)
+    # Get matching NRDs for light version. Unicode is only processed by the
+    # full version.
     comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
 }
 
 source_phishstats_nrd() {
+    # Last checked: 23/12/24
     # For the light version
     # Only includes domains found in the NRD feed
     source='PhishStats (NRDs)'
@@ -760,6 +794,7 @@ source_phishstats_nrd() {
 }
 
 source_scamadviser() {
+    # Last checked: 23/12/24
     source='scamadviser.com'
     results_file="data/pending/domains_${source}.tmp"
 
@@ -771,10 +806,11 @@ source_scamadviser() {
     # Trailing slash intentionally omitted
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<h2 class=mb-0>.*</h2>' \
-        | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" > "$results_file"
+        | grep -oE "([0-9]|[A-Z])${STRICT_DOMAIN_REGEX}" > "$results_file"
 }
 
 source_scamdirectory() {
+    # Last checked: 23/12/24
     source='scam.directory'
     results_file="data/pending/domains_${source}.tmp"
 
@@ -788,6 +824,7 @@ source_scamdirectory() {
 }
 
 source_stopgunscams() {
+    # Last checked: 23/12/24
     source='stopgunscams.com'
     results_file="data/pending/domains_${source}.tmp"
 
@@ -798,7 +835,7 @@ source_stopgunscams() {
     # https://github.com/jarelllama/Scam-Blocklist/issues/365
     # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
-        | grep -Po "class=\"rank-math-html-sitemap__link\">\K${DOMAIN_REGEX}" \
+        | grep -Po "class=\"rank-math-html-sitemap__link\">\K${STRICT_DOMAIN_REGEX}" \
         | head -n 100 > "$results_file"  # Keep only newest 100 results
 }
 
