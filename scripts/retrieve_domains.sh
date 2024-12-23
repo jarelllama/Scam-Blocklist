@@ -34,7 +34,22 @@ readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[
 
 readonly -a SOURCES=(
     source_165antifraud
-
+    source_aa419
+    source_dga_detector
+    source_cybersquatting
+    source_emerging_threats
+    source_fakewebshoplisthun
+    source_guntab
+    source_jeroengui_phishing
+    source_jeroengui_scam
+    source_manual
+    source_phishstats
+    source_phishstats_nrd
+    source_regex
+    source_scamadviser
+    source_scamdirectory
+    source_stopgunscams
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -649,6 +664,7 @@ source_manual() {
 
 source_165antifraud() {
     # Last checked: 23/12/24
+    # Credit to @tanmarpn for the source idea
     source='165 Anti-fraud'
     ignore_from_light=true
     results_file='data/pending/domains_165antifraud.tmp'
