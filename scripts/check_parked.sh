@@ -2,6 +2,8 @@
 
 # Checks for parked/unparked domains and removes/adds them accordingly.
 # Current calculations put the processing speed at 12.5 entries/second.
+# It should be noted that although the domain may be parked, subfolders of the
+# domain may host malicious content. This script does not account for that.
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
