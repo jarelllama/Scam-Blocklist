@@ -57,6 +57,12 @@ Today | Monthly | %Monthly | %Filtered | Source
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
+
+Dead domains removed today: 7866
+Resurrected domains added today: 721
+
+Parked domains removed today: 536
+Unparked domains added today: 197
 ```
 
 <details>
@@ -112,11 +118,6 @@ Dead domains are removed daily using AdGuard's [Dead Domains Linter](https://git
 
 Dead domains that are resolving again are included back into the blocklist.
 
-``` text
-Dead domains removed today: 7866
-Resurrected domains added today: 721
-```
-
 ### Parked domains
 
 Parked domains are removed daily. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
@@ -125,11 +126,6 @@ Parked sites no longer containing any of the parked messages are assumed to be u
 
 > [!TIP]
 For list maintainers interested in integrating the parked domains as a source, the list of parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 50000 entries).
-
-``` text
-Parked domains removed today: 536
-Unparked domains added today: 197
-```
 
 ## Resources / See also
 
