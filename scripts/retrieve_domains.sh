@@ -16,9 +16,6 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
-readonly DOMAIN_LOG='config/domain_log.csv'
-TIMESTAMP="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
-readonly TIMESTAMP
 
 # Matches example.com, example[.]com, 1.1.1.1
 # Seems like the strict regex can be used for most cases
@@ -218,7 +215,7 @@ process_source() {
         cat "$results_file" >> retrieved_light_domains.tmp
     fi
 
-    log_domains "$results_file" unsaved
+    log_domains "$results_file" saved
 
     log_source
 
@@ -298,10 +295,6 @@ build() {
     printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$count_added" "$count_after"
 
-    # Mark sources/events as saved in the log files
-    sed -i "/${TIMESTAMP}/s/,unsaved/,saved/" "$SOURCE_LOG"
-    sed -i "/${TIMESTAMP}/s/,unsaved/,saved/" "$DOMAIN_LOG"
-
     [[ "$USE_EXISTING" == true ]] && return
     # Send Telegram update if not using existing results
     $FUNCTION --send-telegram \
@@ -312,7 +305,7 @@ build() {
 # variables declared in the 'process_source' function.
 log_source() {
     local item
-    local status='unsaved'
+    local status='saved'
 
     if [[ "$source" == 'Google Search' ]]; then
         item="\"${search_term:0:100}...\""
@@ -320,7 +313,7 @@ log_source() {
 
     # Check for errors to log
     if [[ "$rate_limited" == true ]]; then
-        status='eror: rate_limited'
+        status='ERROR: rate_limited'
     elif (( raw_count == 0 )); then
         status='ERROR: empty'
     fi
@@ -329,7 +322,7 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
-    echo "${TIMESTAMP},${source},${item},${raw_count},${final_count},\
+    echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source},${item},${raw_count},${final_count},\
 ${total_whitelisted_count},${dead_count},${parked_count},${in_toplist_count},\
 ${query_count},${status}" >> "$SOURCE_LOG"
 
@@ -358,7 +351,7 @@ ${query_count},${status}" >> "$SOURCE_LOG"
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 log_domains() {
-    $FUNCTION --log-domains "$1" "$2" "$source" "$TIMESTAMP"
+    $FUNCTION --log-domains "$1" "$2" "$source" "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 }
 
 # Function 'download_nrd_feed' calls a shell wrapper to download the NRD feed.

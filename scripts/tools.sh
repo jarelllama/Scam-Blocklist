@@ -49,7 +49,6 @@ format_all() {
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
-#   $4: timestamp (optional)
 log_domains() {
     # Check if a file or variable was passed
     # Note [[ -s ]] causes unintended behavior when the file is empty
@@ -62,7 +61,7 @@ log_domains() {
     # Return if no domains were passed
     [[ -z "$domains" ]] && return
 
-    timestamp="${4:-$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")}"
+    timestamp="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
     printf "%s\n" "$domains" \
         | mawk -v event="$2" -v source="$3" -v time="$timestamp" \
