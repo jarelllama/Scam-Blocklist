@@ -45,11 +45,12 @@ Today | Monthly | %Monthly | %Filtered | Source
    33 |     808 |      0 % |       3 % | Google Search
   270 |   21295 |     14 % |       9 % | Jeroengui phishing feed
     1 |     159 |      0 % |       8 % | Jeroengui scam feed
+    0 |       0 |      0 % |       0 % | PetScams.com
     0 |   42784 |     29 % |      24 % | PhishStats
     0 |   10310 |      7 % |       0 % | PhishStats (NRDs)
+    0 |       0 |      0 % |       0 % | PuppyScams.org
   797 |   28103 |     19 % |       1 % | Regex Matching
     5 |     276 |      0 % |      12 % | aa419.org
-    5 |    1502 |      1 % |      33 % | guntab.com
     2 |     371 |      0 % |       7 % | scam.directory
     0 |      47 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       4 % | stopgunscams.com
@@ -71,33 +72,6 @@ Unparked domains added today: 136
 ![Domains over time](https://raw.githubusercontent.com/iam-py-test/blocklist_stats/main/stats/Jarelllamas_Scam_Blocklist.png)
 
 Courtesy of iam-py-test/blocklist_stats.
-</details>
-
-## Other blocklists
-
-### Light version
-
-For collated blocklists cautious about size, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory. Sources excluded from the light version are marked in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/).
-
-Note that dead and parked domains that become alive/unparked are not added back into the light version due to limitations in how these domains are recorded.
-
-### NSFW Blocklist
-
-A blocklist for NSFW domains is available in Adblock Plus format here:
-[nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt).
-
-<details>
-<summary>Details</summary>
-<ul>
-<li>Domains are automatically retrieved from the Tranco Top Sites Ranking daily</li>
-<li>Dead domains are removed daily</li>
-<li>Note that resurrected domains are not added back</li>
-<li>Note that parked domains are not checked for</li>
-</ul>
-Total domains: 12689
-<br>
-<br>
-This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
 </details>
 
 ## Automated filtering process
@@ -126,6 +100,33 @@ Parked sites no longer containing any of the parked messages are assumed to be u
 
 > [!TIP]
 For list maintainers interested in integrating the parked domains as a source, the list of parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 50000 entries).
+
+## Other blocklists
+
+### Light version
+
+For collated blocklists cautious about size, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory. Sources excluded from the light version are marked in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/).
+
+Note that dead and parked domains that become alive/unparked are not added back into the light version due to limitations in how these domains are recorded.
+
+### NSFW Blocklist
+
+A blocklist for NSFW domains is available in Adblock Plus format here:
+[nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt).
+
+<details>
+<summary>Details</summary>
+<ul>
+<li>Domains are automatically retrieved from the Tranco Top Sites Ranking daily</li>
+<li>Dead domains are removed daily</li>
+<li>Note that resurrected domains are not added back</li>
+<li>Note that parked domains are not checked for</li>
+</ul>
+Total domains: 12689
+<br>
+<br>
+This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
+</details>
 
 ## Resources / See also
 
