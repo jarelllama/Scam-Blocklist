@@ -19,7 +19,7 @@ Only active sources are used to automatically retrieve domains.
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Yes | |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
 | [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
-| [PetScams.com](https://petscams.com/) | Yes | |
+| [PetScams.com](https://petscams.com/) | | |
 | [PhishStats](https://phishstats.info/)[^2] | Yes | ~ |
 | [PuppyScams.org](https://puppyscams.org/) | Yes | |
 | [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) | Yes | Yes |

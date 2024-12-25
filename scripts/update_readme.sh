@@ -53,7 +53,6 @@ $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
 $(print_stats 'Jeroengui phishing') feed
 $(print_stats 'Jeroengui scam') feed
-$(print_stats PetScams.com)
 $(print_stats PhishStats)
 $(print_stats 'PhishStats (NRDs)')
 $(print_stats PuppyScams.org)
