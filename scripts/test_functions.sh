@@ -290,7 +290,7 @@ test_manual_addition() {
     # INPUT
     # Note URL conversion is done in the workflow now
     # Also test removal of square brackets
-    printf "manual-addition-test[.]com\n" >> data/pending/domains_manual.tmp
+    printf "manual-addition-test[.]com\n" >> data/pending/domains_Manual.tmp
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
 
