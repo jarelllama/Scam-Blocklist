@@ -25,14 +25,14 @@ jobs:
           # Note this overrides any previous entries
           grep -zo 'What domain.*Why should' <<< '${{ github.event.issue.body }}' \
             | grep -aPo '^(https?://)?\K[[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
-            > data/pending/domains_manual.tmp
+            > data/pending/domains_Manual.tmp
 
       - name: Close issue
         run: |
           gh issue close ${{ github.event.issue.number }} -c \
           "Sent the following domains for processing:
           \`\`\`
-          $(cat data/pending/domains_manual.tmp)
+          $(cat data/pending/domains_Manual.tmp)
           \`\`\`"
         env:
           GH_TOKEN: ${{ github.token }}
