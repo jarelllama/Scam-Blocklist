@@ -27,7 +27,7 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 # Only matches domains
 # Note the [[:alnum:]] in the front is to prevent matching entries
 # that start with a period.
-readonly STRICT_DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
     source_165antifraud
@@ -40,8 +40,10 @@ readonly -a SOURCES=(
     source_jeroengui_phishing
     source_jeroengui_scam
     source_manual
+    source_petscams
     source_phishstats
     source_phishstats_nrd
+    source_puppyscams
     source_regex
     source_scamadviser
     source_scamdirectory
@@ -198,7 +200,7 @@ process_source() {
     whitelisted_tld_count="$(filter "$whitelisted_tld" whitelisted_tld)"
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    invalid="$(grep -vE "^${STRICT_DOMAIN_REGEX}$" "$results_file")"
+    invalid="$(grep -vE "^${DOMAIN_REGEX}$" "$results_file")"
     # Note invalid entries are not counted
     filter "$invalid" invalid --preserve > /dev/null
 
@@ -494,7 +496,7 @@ search_google() {
 source_cybersquatting() {
     # Last checked: 23/12/24
     source='Cybersquatting'
-    results_file='data/pending/domains_cybersquatting.tmp'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -542,7 +544,7 @@ source_cybersquatting() {
         # Run URLCrazy (bash does not work)
         ./urlcrazy/urlcrazy -r "${domain}.com" -f CSV \
             | mawk -F ',' '!/"Original"/ {print $2}' \
-            | grep -oE "$STRICT_DOMAIN_REGEX" >> results.tmp
+            | grep -oE "$DOMAIN_REGEX" >> results.tmp
 
         sort -u results.tmp -o results.tmp
 
@@ -604,7 +606,7 @@ source_regex() {
     # Last checked: 09/12/24
     source='Regex'
     ignore_from_light=true
-    results_file='data/pending/domains_regex.tmp'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -649,7 +651,7 @@ source_regex() {
 
 source_manual() {
     source='Manual'
-    results_file='data/pending/domains_manual.tmp'
+    results_file="data/pending/domains_${source}.tmp"
 
     # Process only if file is found (source is the file itself)
     [[ -f "$results_file" ]] && process_source
@@ -667,7 +669,7 @@ source_165antifraud() {
     local url='https://165.npa.gov.tw/api/article/subclass/3'
     curl -sSL "$url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
-        | grep -Po "\\\">(https?://)?\K${STRICT_DOMAIN_REGEX}" \
+        | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" \
         | sort -u -o "$results_file"
 }
 
@@ -695,35 +697,20 @@ source_emerging_threats() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
-    curl -sSL "$url" | grep -Po "\|\K${STRICT_DOMAIN_REGEX}" > "$results_file"
+    curl -sSL "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_fakewebshoplisthun() {
     # Last checked: 23/12/24
     source='FakeWebshopListHUN'
-    results_file='data/pending/domains_fakewebshoplisthun.tmp'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
     # Remove carriage return characters
-    curl -sSL "$url" | sed 's/\r//g' \
-        | grep -Po "^${STRICT_DOMAIN_REGEX}$" > "$results_file"
-}
-
-source_guntab() {
-    # Last checked: 23/12/24
-    source='guntab.com'
-    ignore_from_light=true
-    results_file="data/pending/domains_${source}.tmp"
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local url='https://www.guntab.com/scam-websites'
-    curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -zoE '<table class="datatable-list table">.*</table>' \
-        | grep -aoE "${STRICT_DOMAIN_REGEX}$" > "$results_file"
-        # Note results are not sorted by time added
+    curl -sSL "$url" | sed 's/\r//g' | grep -Po "^${DOMAIN_REGEX}$" \
+        > "$results_file"
 }
 
 source_jeroengui_phishing() {
@@ -737,7 +724,7 @@ source_jeroengui_phishing() {
     local url='https://file.jeroengui.be/phishing/last_week.txt'
     # Get URLs with no subdirectories (some of the URLs use docs.google.com),
     # exclude IP addresses and extract domains.
-    curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}(?=/?$)" \
+    curl -sSL "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
         > "$results_file"
 }
 
@@ -749,15 +736,40 @@ source_jeroengui_scam() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://file.jeroengui.be/scam/last_week.txt'
-    curl -sSL "$url" | grep -Po "^https?://\K${STRICT_DOMAIN_REGEX}" \
-        > "$results_file"
+    curl -sSL "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+}
+
+source_petscams() {
+    # Last checked: 25/12/24
+    source='PetScams.com'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://petscams.com'
+    # First page must not have '/page'
+    curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
+    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
+
+    # Notes:
+    # Each page should return 10 domains but the regex also matches domains
+    # under 'Latest Articles' at the bottom so the number of domains retrieved
+    # per page may be higher.
+    # Some pages are duplicate of each other so the number of domains retrieved
+    # may be lower than expected.
+    # [:alpha:] is used because [a-z] does not seem to work here
+    # Matching '/">' ensures not matching false positives
+    grep -Po "<a href=\"https://petscams.com/[[:alpha:]-]+/\K${DOMAIN_DASH_REGEX}(?=/\">)" \
+        results.tmp | mawk '{gsub(/-/, ".", $0); print $0}' > "$results_file"
+
+    rm results.tmp
 }
 
 source_phishstats() {
     # Last checked: 23/12/24
     source='PhishStats'
     ignore_from_light=true
-    results_file='data/pending/domains_phishstats.tmp'
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -767,7 +779,7 @@ source_phishstats() {
     # (?=/?\"$) is lookahead that matches an optional slash followed by an end
     # quote at the end of the line.
     curl -sSL "$url" | mawk -F ',' '{print $3}' \
-        | grep -Po "^\"https?://\K${STRICT_DOMAIN_REGEX}(?=/?\"$)" \
+        | grep -Po "^\"https?://\K${DOMAIN_REGEX}(?=/?\"$)" \
         | sort -u -o "$results_file"  # sort -u for faster comm
 
     # Get matching NRDs for light version. Unicode is only processed by the
@@ -787,6 +799,19 @@ source_phishstats_nrd() {
     mv phishstats_nrds.tmp "$results_file"
 }
 
+source_puppyscams() {
+    # Last checked: 25/12/24
+    source='PuppyScams.org'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://puppyscams.org'
+    curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
+        | grep -Po "<h4 class=\"-ih\"><a href=\"/\K${DOMAIN_DASH_REGEX}(?=\">)" \
+        | mawk '{gsub(/-/, ".", $0); print $0}' > "$results_file"
+}
+
 source_scamadviser() {
     # Last checked: 23/12/24
     source='scamadviser.com'
@@ -800,11 +825,11 @@ source_scamadviser() {
     # Trailing slash intentionally omitted
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -oE '<h2 class=mb-0>.*</h2>' \
-        | grep -oE "([0-9]|[A-Z])${STRICT_DOMAIN_REGEX}" > "$results_file"
+        | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_scamdirectory() {
-    # Last checked: 23/12/24
+    # Last checked: 25/12/24
     source='scam.directory'
     results_file="data/pending/domains_${source}.tmp"
 
@@ -818,19 +843,16 @@ source_scamdirectory() {
 }
 
 source_stopgunscams() {
-    # Last checked: 23/12/24
+    # Last checked: 25/12/24
     source='stopgunscams.com'
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://stopgunscams.com'
-    # Regarding using /sitemap:
-    # https://github.com/jarelllama/Scam-Blocklist/issues/365
-    # Trailing slash intentionally omitted
-    curl -sS --retry 2 --retry-all-errors "${url}/sitemap" \
-        | grep -Po "class=\"rank-math-html-sitemap__link\">\K${STRICT_DOMAIN_REGEX}" \
-        | head -n 100 > "$results_file"  # Keep only newest 100 results
+    local url='https://stopgunscams.com/firearm-scammer-list'
+    # 'page/1' does not exist
+    curl -sS --retry 2 --retry-all-errors "${url}/page/[0-15]" \
+        | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$results_file"
 }
 
 # Entry point
