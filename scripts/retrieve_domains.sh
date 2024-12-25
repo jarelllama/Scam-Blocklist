@@ -32,9 +32,10 @@ readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum
 readonly -a SOURCES=(
     source_165antifraud
     source_aa419
-    source_dga_detector
     source_cybersquatting
+    source_dga_detector
     source_emerging_threats
+    source_fakewebshoplisthun
     source_jeroengui_phishing
     source_jeroengui_scam
     source_manual
