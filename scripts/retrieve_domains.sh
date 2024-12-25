@@ -33,8 +33,6 @@ readonly -a SOURCES=(
 
     source_petscams
 
-    source_puppyscams
-
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -735,7 +733,7 @@ source_petscams() {
     local url='https://petscams.com'
     # First page must not have '/page'
     curl -sS --retry 2 --retry-all-errors "${url}/" >> results.tmp
-    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-15]/" >> results.tmp
+    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[2-3]/" >> results.tmp
 
     # Notes:
     # Each page should return 10 domains but the regex also matches domains
