@@ -12,41 +12,41 @@ jobs:
   # ${{ ! cancelled() }}
 
   # This condition prevents the job from running if the test job failed
-  # ${{ needs.test.result == 'success' }}
+  # ${{ needs.test-functions.result == 'success' }}
 
-  test:
+  test-functions:
     uses: ./.github/workflows/test_functions.yml
 
   build-nsfw:
-    needs: test
+    needs: test-functions
     if: ${{ ! cancelled() }}
     uses: ./.github/workflows/build_nsfw.yml
 
   retrieve-domains:
-    needs: [test, build-nsfw]
-    if: ${{ ! cancelled() && needs.test.result == 'success' }}
+    needs: [test-functions, build-nsfw]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
   check-dead:
-    needs: [test, retrieve-domains]
-    if: ${{ ! cancelled() && needs.test.result == 'success' }}
+    needs: [test-functions, retrieve-domains]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
   check-parked:
-    needs: [test, check-dead]
-    if: ${{ ! cancelled() && needs.test.result == 'success' }}
+    needs: [test-functions, check-dead]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_parked.yml
 
   validate:
-    needs: [test, check-parked]
-    if: ${{ ! cancelled() && needs.test.result == 'success' }}
+    needs: [test-functions, check-parked]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/validate_domains.yml
     secrets: inherit
 
   build:
-    needs: [test, validate]
-    if: ${{ ! cancelled() && needs.test.result == 'success' }}
+    needs: [test-functions, validate]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 
   prune-logs:
