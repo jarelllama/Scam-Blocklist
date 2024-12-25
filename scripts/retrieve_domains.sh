@@ -664,7 +664,7 @@ source_165antifraud() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://165.npa.gov.tw/api/article/subclass/3'
-    curl -sSL "$url" \
+    curl -sS "$url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
         | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" \
         | sort -u -o "$results_file"
@@ -694,7 +694,7 @@ source_emerging_threats() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
-    curl -sSL "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
+    curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_fakewebshoplisthun() {
@@ -706,7 +706,7 @@ source_fakewebshoplisthun() {
 
     local url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
     # Remove carriage return characters
-    curl -sSL "$url" | sed 's/\r//g' | grep -Po "^${DOMAIN_REGEX}$" \
+    curl -sS "$url" | sed 's/\r//g' | grep -Po "^${DOMAIN_REGEX}$" \
         > "$results_file"
 }
 
@@ -721,7 +721,7 @@ source_jeroengui_phishing() {
     local url='https://file.jeroengui.be/phishing/last_week.txt'
     # Get URLs with no subdirectories (some of the URLs use docs.google.com),
     # exclude IP addresses and extract domains.
-    curl -sSL "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
+    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
         > "$results_file"
 }
 
@@ -733,7 +733,7 @@ source_jeroengui_scam() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://file.jeroengui.be/scam/last_week.txt'
-    curl -sSL "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_phishstats() {
@@ -749,7 +749,7 @@ source_phishstats() {
     # exclude IP addresses and extract domains.
     # (?=/?\"$) is lookahead that matches an optional slash followed by an end
     # quote at the end of the line.
-    curl -sSL "$url" | mawk -F ',' '{print $3}' \
+    curl -sS "$url" | mawk -F ',' '{print $3}' \
         | grep -Po "^\"https?://\K${DOMAIN_REGEX}(?=/?\"$)" \
         | sort -u -o "$results_file"  # sort -u for faster comm
 
@@ -822,7 +822,7 @@ source_stopgunscams() {
 
     local url='https://stopgunscams.com/firearm-scammer-list'
     # 'page/1' does not exist
-    curl -sS --retry 2 --retry-all-errors "${url}/page/[0-15]" \
+    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[0-14]" \
         | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$results_file"
 }
 
