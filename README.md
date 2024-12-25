@@ -45,7 +45,6 @@ Today | Monthly | %Monthly | %Filtered | Source
    33 |     808 |      0 % |       3 % | Google Search
   270 |   21295 |     14 % |       9 % | Jeroengui phishing feed
     1 |     159 |      0 % |       8 % | Jeroengui scam feed
-    0 |       0 |      0 % |       0 % | PetScams.com
     0 |   42784 |     29 % |      24 % | PhishStats
     0 |   10310 |      7 % |       0 % | PhishStats (NRDs)
   213 |     213 |      0 % |       0 % | PuppyScams.org
