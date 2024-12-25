@@ -157,7 +157,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
-    $FUNCTION --prune-lines "$DEAD_DOMAINS" 50000
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" 75000
 }
 
 # Entry point
