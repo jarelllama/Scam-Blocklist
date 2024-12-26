@@ -411,6 +411,7 @@ test_invalid_removal() {
             printf "invalid-test.1x\n"
             printf "invalid-test.com/subfolder\n"
             printf "invalid-test-.com\n"
+            printf "in.com\n"
             printf "i.com\n"
         } >> data/pending/domains_scamadviser.com.tmp
 
@@ -428,6 +429,7 @@ test_invalid_removal() {
         } >> out_manual_review.txt
 
         printf "invalid-test.xn--903fds\n" >> out_raw.txt
+        printf "in.com\n" >> out_raw.txt
         {
             printf "invalid,invalid-test-com,scamadviser.com\n"
             printf "invalid,100.100.100.1,scamadviser.com\n"
@@ -459,12 +461,14 @@ test_invalid_removal() {
         printf "invalid-test.com/subfolder\n"
         printf "invalid-test-.com\n"
         printf "i.com\n"
+        printf "in.com\n"
         printf "dead-domain.com\n"
     } >> "$DEAD_DOMAINS"
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
     printf "dead-domain.com\n" >> out_dead.txt
+    printf "in.com\n" >> out_dead.txt
     {
         printf "invalid,invalid-test-com,raw\n"
         printf "invalid,100.100.100.1,raw\n"
