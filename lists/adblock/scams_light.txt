@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 12.26.045947.2024
+! Version: 12.26.052245.2024
 ! Expires: 12 hours
-! Last modified: Thu Dec 26 04:59:47 UTC 2024
+! Last modified: Thu Dec 26 05:22:45 UTC 2024
 ! Syntax: Adblock Plus
-! Number of entries: 18873
+! Number of entries: 18778
 !
 ||0.seetherofficialmerch.com^
 ||01edc.com^
@@ -15,27 +15,18 @@
 ||09uu0u0.com^
 ||0a0074066c49886a39b5a3072582f5d6.net^
 ||0cf5ff34.ngrok.io^
-||0e.si^
 ||0ffice365.nu^
 ||0ffice365.org^
 ||0ffice395.net^
-||0i.pm^
-||0i.wf^
-||0j.re^
-||0j.wf^
 ||0nedr1ve.com^
 ||0nlyfams.com^
 ||0onlyfans.com^
 ||0openai.com^
-||0p.rs^
 ||0pdent.com^
 ||0pena1.com^
 ||0storageatools0.xyz^
-||0t.yt^
 ||0utl00k.org^
-||0v.wf^
 ||0vijv8w.com^
-||0w.pm^
 ||1000mostrecommended.com^
 ||10bet938.com^
 ||10xtdg.com^
@@ -61,8 +52,6 @@
 ||1cbit.org^
 ||1clickshops.com^
 ||1firstcapitals.com^
-||1i.pm^
-||1j.pm^
 ||1k4.xyz^
 ||1lunatic1icepick.my.id^
 ||1n4.xyz^
@@ -71,8 +60,6 @@
 ||1stpremierplc.com^
 ||1sttheworld.com^
 ||1tab.co^
-||1u.pm^
-||1u.wf^
 ||2022factorysale.ru^
 ||2024giftexchage.info^
 ||2024giftredem.info^
@@ -88,12 +75,7 @@
 ||24hrsroyaltrst.com^
 ||27o.nl^
 ||2fa3c2fa16c47d9b9bff8986a42b048f.com^
-||2i.nu^
-||2i.pm^
-||2i.wf^
 ||2n8rd3zz1.top^
-||2t.pm^
-||2t.wf^
 ||2xdepp.com^
 ||2yd.eu^
 ||322ffbbc7c1b312c2f9d942f20422f8d.com^
@@ -106,19 +88,16 @@
 ||3656qq.com^
 ||365cn.vip^
 ||37513.cn^
-||3e.pm^
 ||3ec9b600789b3bacf2c72ebae142a9c3.net^
 ||3ed.hu^
 ||3ellsfargo.com^
 ||3ezzy.finance^
-||3h.wf^
 ||3h1.xyz^
 ||3hhr8h2hx.top^
 ||3iq-digital.com^
 ||3kdyn.com^
 ||3number.employerdbz.icu^
 ||3potify.shop^
-||3z.nu^
 ||4-72-oc-w.top^
 ||4-72.homes^
 ||4-72com.ink^
@@ -131,20 +110,12 @@
 ||455686.c1.biz^
 ||48hourseasyproact.com^
 ||48proactivemarketing.com^
-||4c.pm^
 ||4iktok.com^
-||4j.pm^
 ||4k1.xyz^
-||4m.wf^
-||4n.wf^
-||4q.pm^
 ||4roblox.shop^
-||4s.pm^
 ||4uscompanyllc.com^
 ||4uvize.com^
 ||4vri.website^
-||4w.pm^
-||4w.wf^
 ||4wheelsfame.com^
 ||4xq.nl^
 ||51goout.com^
@@ -161,12 +132,9 @@
 ||5qe8.com^
 ||5qh.net^
 ||5qw.pw^
-||5s.pm^
 ||5sed1.eieaapdnox.top^
 ||5starjersey.com^
 ||5v0.nl^
-||5z.pm^
-||5z.wf^
 ||6-5-grendel-ammo.com^
 ||60af8bc770ccf54023d620dfd5ceb7b8-customers-mufg.com^
 ||60i.nl^
@@ -229,20 +197,14 @@
 ||6836501.com^
 ||6ax.nl^
 ||6google.com^
-||6t.nz^
-||6t.pm^
-||6t.re^
 ||6t4.nl^
-||6w.re^
 ||6wr9.com^
-||6y.re^
 ||70334p7x2zwnx4ninrrbfz02.z13.web.core.windows.net^
 ||73780fbd309561e201a4aee9914d882d.org^
 ||750review.com^
 ||756723.top^
 ||77unishop.com^
 ||79jewellers.com^
-||7d.wf^
 ||7jj34.com^
 ||7nq48cg.njwhmg.info^
 ||7p8t44.shop^
@@ -260,9 +222,6 @@
 ||8836500.vip^
 ||8836522.vip^
 ||8885716.com^
-||8t.ae^
-||8t.pm^
-||8t.wf^
 ||8tradersmarket.com^
 ||900cap.blogspot.com^
 ||93mobiles.com^
@@ -277,14 +236,11 @@
 ||9a89785fcf4ffd75b7363a31b6dddec4.serveo.net^
 ||9bet938.com^
 ||9gp.cc^
-||9r.re^
-||9r.sk^
 ||9xflix.bar^
 ||a-fin.net^
 ||a-isth.ink^
 ||a-libaba.sbs^
 ||a-spotify.freewebhostmost.com^
-||a0.pm^
 ||a1mazon.com^
 ||a2qy9.shop^
 ||a2zshop.store^
@@ -1564,7 +1520,6 @@
 ||b3vv.com^
 ||b8x.org^
 ||b8yxmetpg0uns.pages.dev^
-||b9.pm^
 ||b9inance.com^
 ||babaroga.lib^
 ||babybeans.shop^
@@ -2638,7 +2593,6 @@
 ||bytewhales.com^
 ||bytlo.com^
 ||bytrejo.com^
-||c0.wf^
 ||c0inbase.org^
 ||c0lnbase.com^
 ||c13a856f4a879a89e9a638207efd6c94.biz^
@@ -2646,7 +2600,6 @@
 ||c4ypto.com^
 ||c4z.pl^
 ||c5ypto.com^
-||c7.lc^
 ||caadapsal.top^
 ||caasdagg.top^
 ||cabezonshop.me^
@@ -4120,7 +4073,6 @@
 ||cysotomotiv.com^
 ||cywdhlposs.ink^
 ||czfirearmstore.usa.com^
-||d0.wf^
 ||d1sneyplus.com^
 ||d2luxcosmetics.com^
 ||daatha.com^
@@ -4835,9 +4787,7 @@
 ||dynastydigitalfx.com^
 ||dzppyl.love^
 ||e-cavi.com^
-||e0.wf^
 ||e3tk4.shop^
-||e9.wf^
 ||eabilityz.com^
 ||eachustr.com^
 ||eaglebossconcrete.com^
@@ -5483,7 +5433,6 @@
 ||ezicerinks.shop^
 ||eznb.net^
 ||f-istudio.ru^
-||f0.tel^
 ||f1acebook.com^
 ||f2wq6.shop^
 ||f7011a-4.myshopify.com^
@@ -6130,19 +6079,14 @@
 ||fygchcytctyctyctytytyxty.d1f6y3om6phcc6.amplifyapp.com^
 ||fyingshy.com^
 ||fynavi.com^
-||fz.ms^
 ||g-1st.com^
 ||g-coinbase-ppsecure.com.serveo.net^
 ||g-oogle.net^
-||g0.pm^
 ||g00gle.info^
 ||g00gle.online^
 ||g00qle.com^
 ||g0oogle.site^
 ||g1vm6.shop^
-||g4.nu^
-||g4.tel^
-||g4.wf^
 ||g4u22g.blogspot.com^
 ||g5wcesdfjzne7255.onion.to^
 ||g6nx2.shop^
@@ -7595,14 +7539,11 @@
 ||gz3.nl^
 ||gzdonno.com^
 ||gzwx001.com^
-||h0.pm^
-||h0.wf^
 ||h2gconsultores.cl^
 ||h378576.atwebpages.com^
 ||h4wn3.shop^
 ||h5.ichcoin.top^
 ||h5.luckycoinn.com^
-||h6.re^
 ||haaretz-news.com^
 ||habfan.com^
 ||habitatfortool.com^
@@ -8185,9 +8126,7 @@
 ||i-consultants.online^
 ||i-dhl.top^
 ||i-postacg-me.top^
-||i0.wf^
 ||i0up.com^
-||i1.pm^
 ||i6n.xyz^
 ||i758769.atwebpages.com^
 ||iaidevrssfeed.centralus.cloudapp.azure.com^
@@ -8723,13 +8662,9 @@
 ||iworldfxdigitals.com^
 ||ixfkrld.heavyteen.shop^
 ||iybaorcv.black^
-||iz.gy^
 ||izezggefgegfzto.ws^
 ||j-ic.co.intneral-document-he-gr-me.run.place^
-||j0.wf^
-||j2.gy^
 ||j68.info^
-||j8.si^
 ||j9roofing.com^
 ||jaabalshop.com^
 ||jabhp.art^
@@ -9024,7 +8959,6 @@
 ||jwilliamsattorneys.com^
 ||jwskuw.biz^
 ||jwskuw.love^
-||k0.pm^
 ||k1gkl25as.top^
 ||k2spicesprayshop.com^
 ||k2spicevendors.com^
@@ -9348,7 +9282,6 @@
 ||kzbxpmtdqvlyo.love^
 ||kzktio.com^
 ||l.ead.me^
-||l0.wf^
 ||l12.shigexc.shop^
 ||l2nlp.ygrrvlvvgf.top^
 ||l6.datingeo.com^
@@ -9933,9 +9866,6 @@
 ||lyrades.com^
 ||lyycs.store^
 ||m-grill.com^
-||m0.nu^
-||m0.wf^
-||m0.yt^
 ||m1crosoft.support^
 ||m1crosoft365.com^
 ||m8zk1.shop^
@@ -11047,10 +10977,8 @@
 ||n27.de3.mytemp.website^
 ||n2dlk.bfrtbrkefc.top^
 ||n2nstore.com^
-||n3.wf^
 ||n3tc4t.hopto.com^
 ||n3tflix.shop^
-||n5.ms^
 ||n9fz.com^
 ||nachary.shop^
 ||nacki.store^
@@ -11875,7 +11803,6 @@
 ||oztzshop.com^
 ||ozzon.co.za^
 ||ozzshop.myshoplaza.com^
-||p0.wf^
 ||p0rnexternalswx.z13.web.core.windows.net^
 ||p0rnhub.click^
 ||p0rnhub.online^
@@ -11884,8 +11811,6 @@
 ||p0rnsverbatim.z13.web.core.windows.net^
 ||p1nterest.com^
 ||p2pnations-capital.com^
-||p3.ms^
-||p9.tel^
 ||pa6ypal.com^
 ||paaypal.org^
 ||pacermonitor.com^
@@ -13079,8 +13004,6 @@
 ||pyhdge.com^
 ||pyth-network-io.firebaseapp.com^
 ||pzrs.shop^
-||q0.pm^
-||q0.wf^
 ||q6zp8.shop^
 ||qaardan.org^
 ||qaliexpress.com^
@@ -13203,8 +13126,6 @@
 ||qzbiog.africantexas.shop^
 ||qzjfyl.com^
 ||qzkgp.top^
-||r0.pm^
-||r0.wf^
 ||r0bl0x.ru^
 ||r1visa.law.blog^
 ||r2elajikcosf7zee.onion.to^
@@ -13212,7 +13133,6 @@
 ||r4e.pl^
 ||r551001.com^
 ||r58ua.ygrrvlvvgf.top^
-||r6.nz^
 ||r6hp2.shop^
 ||rabbitstub.com^
 ||racebook.nu^
@@ -13679,14 +13599,12 @@
 ||s-neu.info^
 ||s-p-o-o-f-e-d.h-o-s-t.name^
 ||s-prozess.com^
-||s0.pm^
 ||s1gn1fyh0se.cyou^
 ||s3-be.cloud^
 ||s3-dk.cloud^
 ||s3-eu-north-1.culture-quest.shop^
 ||s4iq9.shop^
 ||s5s9mr9tqkt1e2ggi.z20.web.core.windows.net^
-||s8.cx^
 ||s8iz8.eieaapdnox.top^
 ||sa.skin.healthfindings.website^
 ||saaadnesss.shop^
@@ -15087,13 +15005,11 @@
 ||szuperpiac.hu^
 ||t-iktok.com^
 ||t-iktok.shop^
-||t0.wf^
 ||t0kempock2t.com^
 ||t0kinpoiket.mom^
 ||t0knnponket.mom^
 ||t3mk7.shop^
 ||t551001.com^
-||t7.nz^
 ||t78r.vip^
 ||t7myr.com^
 ||taabao.com^
@@ -16657,8 +16573,6 @@
 ||tz6.org^
 ||tzdxi.com^
 ||tzkcl.shop^
-||u0.nz^
-||u0.pm^
 ||u1ib3.shop^
 ||u4ks8.shop^
 ||u6oo3.shop^
@@ -17324,7 +17238,6 @@
 ||uzgirlsmassaj.com^
 ||uzwmlmz.shop^
 ||v-b-h.us^
-||v0.cx^
 ||v0dacom.art^
 ||v0dacom.one^
 ||v0dacom.shop^
@@ -17618,7 +17531,6 @@
 ||vrl-y6523.top^
 ||vrlltagov.ink^
 ||vrtistic.shop^
-||vs.gy^
 ||vs95off.com^
 ||vsliveagent.com^
 ||vsudbduvrdhdh.blogspot.is^
@@ -17648,11 +17560,7 @@
 ||vybroh.click^
 ||vzkpwtgoyxvfj.work^
 ||vzoh.art^
-||w0.pm^
 ||w2mu4.shop^
-||w4.nz^
-||w4.wf^
-||w6.nz^
 ||w88br.com^
 ||w88kub.com^
 ||waalmart.info^
@@ -18390,8 +18298,6 @@
 ||xznrkvibjqu.beauty^
 ||y-dhl.top^
 ||y-stop.com^
-||y0.pm^
-||y0.wf^
 ||y0utube.click^
 ||y0utube.xyz^
 ||y6ss1.shop^
@@ -18838,7 +18744,6 @@
 ||zjhao.dtdns.net^
 ||zjsndb.xyz^
 ||zjyrsolar.com^
-||zk.qa^
 ||zk4.me^
 ||zksync-dapp-portal.web.app^
 ||zmcvlcmpm4epp9h304lg6j700.majesticbank.ru^
