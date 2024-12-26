@@ -415,6 +415,9 @@ test_invalid_removal() {
             printf "i.com\n"
         } >> data/pending/domains_scamadviser.com.tmp
 
+        # in.com is in the toplist
+        printf "in.com\n" >> "$BLACKLIST"
+
         # EXPECTED OUTPUT
         # The retrieval script saves invalid entries to the manual review file
         {
@@ -467,8 +470,8 @@ test_invalid_removal() {
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-    printf "dead-domain.com\n" >> out_dead.txt
     printf "in.com\n" >> out_dead.txt
+    printf "dead-domain.com\n" >> out_dead.txt
     {
         printf "invalid,invalid-test-com,raw\n"
         printf "invalid,100.100.100.1,raw\n"
