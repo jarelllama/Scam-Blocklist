@@ -587,11 +587,6 @@ test_unparked_check() {
 #   $1: script to execute
 #   $2: arguments to pass to script
 run_script() {
-    # Format expected output files (ignore not found error)
-    for file in out_*; do
-        sort "$file" -o "$file" 2> /dev/null
-    done
-
     printf "\n\e[1m[start] %s %s\e[0m\n" "$1" "$2"
     echo "----------------------------------------------------------------------"
 
@@ -673,6 +668,8 @@ check_terms() {
 #   $2: expected output file
 #   $3: name of the file being checked
 check_output() {
+    sort "$1" -o "$1"
+    sort "$2" -o "$2"
     cmp -s "$1" "$2" && return  # Return if files are the same
     printf "\e[1m[warn] %s file is not as expected:\e[0m\n" "$3"
     cat "$1"
