@@ -32,37 +32,37 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 208098
-Light version: 18722
+Total domains: 208581
+Light version: 18873
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-  168 |   11627 |      8 % |      12 % | 165 Anti-fraud
-   44 |    1920 |      1 % |       1 % | Cybersquatting
- 1168 |   29139 |     20 % |       0 % | DGA Detector
-    9 |    2167 |      1 % |      24 % | Emerging Threats
-    0 |    2534 |      1 % |      19 % | FakeWebshopListHUN
-   33 |     808 |      0 % |       3 % | Google Search
-  270 |   21295 |     14 % |       9 % | Jeroengui phishing feed
-    1 |     159 |      0 % |       8 % | Jeroengui scam feed
-    0 |   42784 |     29 % |      24 % | PhishStats
-    0 |   10310 |      7 % |       0 % | PhishStats (NRDs)
-  213 |     213 |      0 % |       0 % | PuppyScams.org
-  797 |   28103 |     19 % |       1 % | Regex Matching
-    5 |     276 |      0 % |      12 % | aa419.org
-    2 |     371 |      0 % |       7 % | scam.directory
-    0 |      47 |      0 % |      32 % | scamadviser.com
+    7 |   11634 |      7 % |      20 % | 165 Anti-fraud
+   40 |    1960 |      1 % |       1 % | Cybersquatting
+  679 |   29818 |     20 % |       0 % | DGA Detector
+   30 |    2197 |      1 % |      23 % | Emerging Threats
+    6 |    2540 |      1 % |      19 % | FakeWebshopListHUN
+   71 |     879 |      0 % |       3 % | Google Search
+  342 |   21637 |     14 % |       9 % | Jeroengui phishing feed
+    0 |     159 |      0 % |       8 % | Jeroengui scam feed
+ 1136 |   43920 |     30 % |      25 % | PhishStats
+  285 |   10595 |      7 % |       0 % | PhishStats (NRDs)
+    0 |     213 |      0 % |       0 % | PuppyScams.org
+  610 |   28713 |     19 % |       1 % | Regex Matching
+    3 |     279 |      0 % |      12 % | aa419.org
+    0 |     371 |      0 % |       7 % | scam.directory
+    1 |      48 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       4 % | stopgunscams.com
- 2716 |  143258 |    100 % |      20 % | All sources
+ 2925 |  146183 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 2345
-Resurrected domains added today: 1158
+Dead domains removed today: 2744
+Resurrected domains added today: 954
 
-Parked domains removed today: 385
-Unparked domains added today: 136
+Parked domains removed today: 289
+Unparked domains added today: 123
 ```
 
 <details>
@@ -121,7 +121,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 12689
+Total domains: 12698
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
