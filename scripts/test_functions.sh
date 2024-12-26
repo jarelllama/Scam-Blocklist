@@ -398,6 +398,9 @@ test_whitelisted_tld_removal() {
 
 # TEST: removal of non-domain entries
 test_invalid_removal() {
+    # in.com is in the toplist
+    printf "in.com\n" >> "$BLACKLIST"
+
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # INPUT
         {
@@ -414,9 +417,6 @@ test_invalid_removal() {
             printf "in.com\n"
             printf "i.com\n"
         } >> data/pending/domains_scamadviser.com.tmp
-
-        # in.com is in the toplist
-        printf "in.com\n" >> "$BLACKLIST"
 
         # EXPECTED OUTPUT
         # The retrieval script saves invalid entries to the manual review file
@@ -464,13 +464,13 @@ test_invalid_removal() {
         printf "invalid-test.com/subfolder\n"
         printf "invalid-test-.com\n"
         printf "i.com\n"
-        printf "qn.com\n"
+        printf "in.com\n"
         printf "dead-domain.com\n"
     } >> "$DEAD_DOMAINS"
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-    printf "qn.com\n" >> out_dead.txt
+    printf "in.com\n" >> out_dead.txt
     printf "dead-domain.com\n" >> out_dead.txt
     {
         printf "invalid,invalid-test-com,raw\n"
