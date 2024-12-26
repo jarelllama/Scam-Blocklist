@@ -111,7 +111,7 @@ TEST_RETRIEVE_VALIDATE() {
     test_whitelist_blacklist
     test_whitelisted_tld_removal
     test_invalid_removal
-    test_toplist_removal
+    test_toplist_check
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         test_manual_addition
@@ -464,13 +464,13 @@ test_invalid_removal() {
         printf "invalid-test.com/subfolder\n"
         printf "invalid-test-.com\n"
         printf "i.com\n"
-        printf "in.com\n"
+        printf "an.com\n"
         printf "dead-domain.com\n"
     } >> "$DEAD_DOMAINS"
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-    printf "in.com\n" >> out_dead.txt
+    printf "an.com\n" >> out_dead.txt
     printf "dead-domain.com\n" >> out_dead.txt
     {
         printf "invalid,invalid-test-com,raw\n"
@@ -484,8 +484,8 @@ test_invalid_removal() {
     } >> out_log.txt
 }
 
-# TEST: removal of domains found in toplist
-test_toplist_removal() {
+# TEST: checking of domains against toplist
+test_toplist_check() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # INPUT
         printf "microsoft.com\n" >> data/pending/domains_scamadviser.com.tmp
