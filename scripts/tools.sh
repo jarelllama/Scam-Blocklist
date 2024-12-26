@@ -120,7 +120,7 @@ download_nrd_feed() {
     # Download the feeds in parallel
     # Note the feeds currently have a bug where it contains invalid domains
     curl -sSLZ "$url1" "$url2" | mawk '!/#/' \
-        | grep -oE '[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+        | grep -oE '[[:alnum:]][[:alnum:].-]+[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
         > nrd.tmp
 
     format_file nrd.tmp
