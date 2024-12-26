@@ -29,7 +29,7 @@ Only active sources are used to automatically retrieve domains.
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | | |
 | [StopGunScams.com](https://stopgunscams.com/) | Yes | |
 | [URLCrazy](https://github.com/urbanadventurer/urlcrazy) | Yes | |
-| [Viriback C2 Tracker](tracker.viriback.com) | Yes | |
+| [Viriback C2 Tracker](https://tracker.viriback.com) | Yes | |
 | [dnstwist](https://github.com/elceef/dnstwist) | Yes | |
 | [openSquat](https://github.com/atenreiro/opensquat) | | |
 | [r/Scams](https://www.reddit.com/r/Scams/) | | |
