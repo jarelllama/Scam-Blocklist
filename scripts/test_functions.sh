@@ -312,8 +312,8 @@ test_punycode_conversion() {
 # TEST: conversion of URLs to domains
 test_url_conversion() {
     # INPUT
-    printf "https://conversion-test.com/\n" >> input.txt
-    printf "http://conversion-test-2.com/\n" >> input.txt
+    printf "https://conversion-test.com\n" >> input.txt
+    printf "http://conversion-test-2.com\n" >> input.txt
     # EXPECTED OUTPUT
     printf "conversion-test.com\n" >> out_raw.txt
     printf "conversion-test-2.com\n" >> out_raw.txt
