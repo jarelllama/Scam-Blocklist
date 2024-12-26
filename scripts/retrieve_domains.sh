@@ -30,24 +30,7 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
-    source_165antifraud
-    source_aa419
-    source_cybersquatting
-    source_dga_detector
-    source_emerging_threats
-    source_fakewebshoplisthun
-    source_jeroengui_phishing
-    source_jeroengui_scam
-    source_manual
-    source_phishstats
-    source_phishstats_nrd
-    source_puppyscams
-    source_regex
-    source_scamadviser
-    source_scamdirectory
-    source_stopgunscams
     source_viriback_tracker
-    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
