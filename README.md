@@ -38,21 +38,22 @@ Light version: 19097
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     7 |   11634 |      7 % |      20 % | 165 Anti-fraud
+    3 |     279 |      0 % |      12 % | Artists Against 419
    40 |    1960 |      1 % |       1 % | Cybersquatting
   679 |   29818 |     20 % |       0 % | DGA Detector
    30 |    2197 |      1 % |      23 % | Emerging Threats
     6 |    2540 |      1 % |      19 % | FakeWebshopListHUN
    71 |     879 |      0 % |       3 % | Google Search
-  342 |   21637 |     14 % |       9 % | Jeroengui phishing feed
-    0 |     159 |      0 % |       8 % | Jeroengui scam feed
+  342 |   21637 |     14 % |       9 % | Jeroengui Phishing feed
+    0 |     159 |      0 % |       8 % | Jeroengui Scam feed
  1136 |   43920 |     29 % |      25 % | PhishStats
   285 |   10595 |      7 % |       0 % | PhishStats (NRDs)
     0 |     213 |      0 % |       0 % | PuppyScams.org
   610 |   28713 |     19 % |       1 % | Regex Matching
-    3 |     279 |      0 % |      12 % | aa419.org
-    0 |     371 |      0 % |       7 % | scam.directory
-    1 |      48 |      0 % |      32 % | scamadviser.com
-    0 |       8 |      0 % |       4 % | stopgunscams.com
+    0 |     371 |      0 % |       7 % | Scam Directory
+    1 |      48 |      0 % |      32 % | ScamAdviser
+    0 |       8 |      0 % |       4 % | StopGunScams.com
+  231 |     231 |      0 % |       0 % | ViriBack C2 Tracker
  3156 |  146414 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
