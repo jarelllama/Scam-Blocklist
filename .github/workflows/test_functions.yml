@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Test domain validation
+      - name: Test raw file validation
         run: bash scripts/test_functions.sh validate
 
   test-build:

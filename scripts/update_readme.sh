@@ -166,8 +166,7 @@ print_stats() {
 
     printf "%5s |%8s |%7s %% |%8s %% | %s" \
         "$(sum "$TODAY" "$1")" "$this_month" \
-        "$(( this_month * 100 / total_this_month ))" \
-        "$(sum_excluded "$1" )" "${1:-All sources}"
+        "$(( this_month * 100 / total_this_month ))" "$(sum_excluded "$1" )" "${1:-All sources}"
 }
 
 # Note that csvkit is used in the following functions as the Google Search
