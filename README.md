@@ -97,9 +97,6 @@ Parked domains are removed daily. A list of common parked domain messages is use
 
 Parked sites no longer containing any of the parked messages are assumed to be unparked and are included back into the blocklist.
 
-> [!TIP]
-For list maintainers interested in integrating the parked domains as a source, the list of parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt) (capped to newest 50000 entries).
-
 ## Other blocklists
 
 ### Light version
@@ -126,6 +123,10 @@ Total domains: 12698
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
 </details>
+
+### Parked domains
+
+For list maintainers interested in using the parked domains as a source, the list of parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt). This list is capped at 50,000 domains.
 
 ## Resources / See also
 
