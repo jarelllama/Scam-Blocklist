@@ -37,32 +37,32 @@ Light version: 18873
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-11634 |   11634 |      2 % |      20 % | 165 Anti-fraud
- 6879 |    6879 |      1 % |       1 % | Cybersquatting
-29818 |   29818 |      5 % |       0 % | DGA Detector
- 4921 |    4921 |      0 % |      23 % | Emerging Threats
-11044 |   11044 |      2 % |      19 % | FakeWebshopListHUN
- 4682 |    4682 |      0 % |       3 % | Google Search
-91348 |   91348 |     17 % |       9 % | Jeroengui phishing feed
- 1105 |    1105 |      0 % |       8 % | Jeroengui scam feed
-209072 |  209072 |     41 % |      25 % | PhishStats
-49335 |   49335 |      9 % |       0 % | PhishStats (NRDs)
-  213 |     213 |      0 % |       0 % | PuppyScams.org
-118464 |  118464 |     23 % |       1 % | Regex Matching
- 2038 |    2038 |      0 % |      12 % | aa419.org
- 1109 |    1109 |      0 % |       7 % | scam.directory
-  433 |     433 |      0 % |      32 % | scamadviser.com
-  215 |     215 |      0 % |       4 % | stopgunscams.com
-508183 |  508183 |    100 % |      20 % | All sources
+    7 |   11634 |      7 % |      20 % | 165 Anti-fraud
+   40 |    1960 |      1 % |       1 % | Cybersquatting
+  679 |   29818 |     20 % |       0 % | DGA Detector
+   30 |    2197 |      1 % |      23 % | Emerging Threats
+    6 |    2540 |      1 % |      19 % | FakeWebshopListHUN
+   71 |     879 |      0 % |       3 % | Google Search
+  342 |   21637 |     14 % |       9 % | Jeroengui phishing feed
+    0 |     159 |      0 % |       8 % | Jeroengui scam feed
+ 1136 |   43920 |     30 % |      25 % | PhishStats
+  285 |   10595 |      7 % |       0 % | PhishStats (NRDs)
+    0 |     213 |      0 % |       0 % | PuppyScams.org
+  610 |   28713 |     19 % |       1 % | Regex Matching
+    3 |     279 |      0 % |      12 % | aa419.org
+    0 |     371 |      0 % |       7 % | scam.directory
+    1 |      48 |      0 % |      32 % | scamadviser.com
+    0 |       8 |      0 % |       4 % | stopgunscams.com
+ 2925 |  146183 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 71526
-Resurrected domains added today: 13869
+Dead domains removed today: 2744
+Resurrected domains added today: 954
 
-Parked domains removed today: 24604
-Unparked domains added today: 1271
+Parked domains removed today: 289
+Unparked domains added today: 123
 ```
 
 <details>
