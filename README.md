@@ -32,8 +32,8 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 208750
-Light version: 19042
+Total domains: 208805
+Light version: 19097
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -45,7 +45,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    71 |     879 |      0 % |       3 % | Google Search
   342 |   21637 |     14 % |       9 % | Jeroengui phishing feed
     0 |     159 |      0 % |       8 % | Jeroengui scam feed
- 1136 |   43920 |     30 % |      25 % | PhishStats
+ 1136 |   43920 |     29 % |      25 % | PhishStats
   285 |   10595 |      7 % |       0 % | PhishStats (NRDs)
     0 |     213 |      0 % |       0 % | PuppyScams.org
   610 |   28713 |     19 % |       1 % | Regex Matching
@@ -53,7 +53,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     371 |      0 % |       7 % | scam.directory
     1 |      48 |      0 % |      32 % | scamadviser.com
     0 |       8 |      0 % |       4 % | stopgunscams.com
- 3101 |  146359 |    100 % |      20 % | All sources
+ 3156 |  146414 |    100 % |      20 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
