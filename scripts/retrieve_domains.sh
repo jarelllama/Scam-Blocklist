@@ -141,7 +141,7 @@ process_source() {
     # multiple times in the source functions)
     # Note that this still allows invalid entries like entries with subfolders
     # to get through so they can be flagged later on.
-    sed -i 's/https\?://; s/\[//; s/\]//' "$results_file"
+    sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$results_file"
 
     # Convert Unicode to Punycode
     # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
