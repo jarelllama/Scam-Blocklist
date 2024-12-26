@@ -410,6 +410,7 @@ test_invalid_removal() {
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
             printf "invalid-test.com/subfolder\n"
+            printf "invalid-test-.com\n"
         } >> data/pending/domains_scamadviser.com.tmp
 
         # EXPECTED OUTPUT
@@ -421,6 +422,7 @@ test_invalid_removal() {
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
             printf "invalid-test.com/subfolder\n"
+            printf "invalid-test-.com\n"
         } >> out_manual_review.txt
 
         printf "invalid-test.xn--903fds\n" >> out_raw.txt
@@ -431,6 +433,7 @@ test_invalid_removal() {
             printf "invalid,invalid-test.100,scamadviser.com\n"
             printf "invalid,invalid-test.1x,scamadviser.com\n"
             printf "invalid,invalid-test.com/subfolder,scamadviser.com\n"
+            printf "invalid,invalid-test-.com,scamadviser.com\n"
         } >> out_log.txt
 
         return
@@ -444,11 +447,13 @@ test_invalid_removal() {
         printf "100.100.100.1\n"
         printf "invalid-test.xn--903fds\n"
         printf "invalid-test.x\n"
+        printf "invalid-test.100\n"
     } >> input.txt
     # Validation script checks for invalid entries in the dead domains file
     {
-        printf "invalid-test.100\n"
         printf "invalid-test.1x\n"
+        printf "invalid-test.com/subfolder\n"
+        printf "invalid-test-.com\n"
         printf "dead-domain.com\n"
     } >> "$DEAD_DOMAINS"
 
@@ -459,8 +464,10 @@ test_invalid_removal() {
         printf "invalid,invalid-test-com,raw\n"
         printf "invalid,100.100.100.1,raw\n"
         printf "invalid,invalid-test.x,raw\n"
-        printf "invalid,invalid-test.100,dead_domains_file\n"
+        printf "invalid,invalid-test.100,raw\n"
         printf "invalid,invalid-test.1x,dead_domains_file\n"
+        printf "invalid,invalid-test.com/subfolder,dead_domains_file\n"
+        printf "invalid,invalid-test-.com,dead_domains_file\n"
     } >> out_log.txt
 }
 
