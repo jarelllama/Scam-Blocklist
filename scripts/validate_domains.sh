@@ -76,7 +76,7 @@ validate() {
     filter "$whitelisted_tld" whitelisted_tld
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    regex='[[:alnum:]][[:alnum:].-]+[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+    regex='^[[:alnum:]][[:alnum:].-]+[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$'
     invalid="$(grep -vE "$regex" "$RAW")"
     filter "$invalid" invalid
     # The dead domains file is also checked here as invalid entries may get
