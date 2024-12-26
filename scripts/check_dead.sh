@@ -9,6 +9,7 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly LOG_SIZE=75000
 
 main() {
     # Install AdGuard's Dead Domains Linter
@@ -16,14 +17,17 @@ main() {
         npm install -g @adguard/dead-domains-linter > /dev/null
     fi
 
-    # Split raw file into 2 parts for each job
-    split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
+    # Split raw file into 2 parts for each dead check job
+    if [[ "$1" == part? ]]; then
+        split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
+    fi
 
     case "$1" in
         'checkalive')
-            # The alive check should be done before the new dead domains are
-            # added to the dead domains file as to not process these domains
-            # twice.
+            # The alive check being done in the workflow before the dead check
+            # means the recently added resurrected domains are processed by the
+            # dead check while the recently added dead domains are not
+            # processed by the alive check.
             check_alive
             ;;
         'part1')
@@ -45,7 +49,8 @@ main() {
 }
 
 # Function 'check_dead' finds dead domains and collates them into the dead
-# domains file to be removed from the various files later.
+# domains file to be removed from the various files later. The dead domains
+# file is also used as a filter for newly retrieved domains.
 check_dead() {
     # Include subdomains found in the given file. Exclude the root domains
     # since the subdomains were what was retrieved during domain retrieval.
@@ -62,11 +67,11 @@ check_dead() {
     cat dead_domains.tmp >> "$DEAD_DOMAINS"
 }
 
-# Function 'check_alive' finds resurrected domains in the dead domains file
-# (also called the dead domains cache) and adds them back into the raw file.
+# Function 'check_alive' finds resurrected domains in the dead domains file and
+# adds them back into the raw file.
 #
-# Note that resurrected domains are not added back into the raw light file due
-# to limitations in the way the dead domains are recorded.
+# Note that resurrected domains are not added back into the raw light file as
+# the dead domains are not logged with their sources.
 check_alive() {
     find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
 
@@ -86,7 +91,6 @@ check_alive() {
     sort -u alive_domains.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log number of resurrected domains in domain log
-    #$FUNCTION --log-domains alive_domains.tmp resurrected dead_domains_file
     $FUNCTION --log-domains "$(wc -l < alive_domains.tmp)" resurrected_count dead_domains_file
 }
 
@@ -144,11 +148,10 @@ remove_dead() {
 
     dead_count="$(( count_before - count_after ))"
 
-    printf "\nRemoved dead domains from the blocklist.\nBefore: %s  Removed: %s  After: %s\n" \
+    printf "\nRemoved dead domains from raw file.\nBefore: %s  Removed: %s  After: %s\n" \
     "$count_before" "$dead_count" "$count_after"
 
     # Call shell wrapper to log number of dead domains in domain log
-    #$FUNCTION --log-domains dead.tmp dead raw
     $FUNCTION --log-domains "$dead_count" dead_count raw
 }
 
@@ -157,7 +160,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
-    $FUNCTION --prune-lines "$DEAD_DOMAINS" 75000
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" "$LOG_SIZE"
 }
 
 # Entry point

@@ -32,7 +32,7 @@ main() {
 # Function 'build' removes redundant entries from the raw files and compiles
 # them into the various blocklist formats.
 build() {
-    # Append wildcards to the raw file to optimize the list
+    # Append wildcards to the raw file to optimize the nubmer of entries.
     # The wildcards are not saved to the raw file as some of them do not
     # resolve and would be removed by the dead check.
     sort -u "$WILDCARDS" "$source" -o source.tmp

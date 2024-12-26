@@ -96,6 +96,7 @@ prune_lines() {
 download_toplist() {
     [[ -f toplist.tmp ]] && return
 
+    # curl -L is needed here
     curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
         > toplist.tmp || send_telegram "Error downloading toplist."
 
@@ -121,15 +122,6 @@ download_nrd_feed() {
     curl -sSLZ "$url1" "$url2" | mawk '!/#/' \
         | grep -oE '[[:alnum:]][[:alnum:].-]+\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
         > nrd.tmp
-
-    # TODO: update method of checking if the feeds downloaded correctly
-    #
-    # Appears to be the best way of checking if the bigger feeds downloaded
-    # properly without checking each feed individually and losing
-    # parallelization.
-    #if (( $(wc -l < nrd.tmp) < 9000000 )); then
-    #    send_telegram "Error occurred while downloading NRD feeds."
-    #fi
 
     format_file nrd.tmp
 }
@@ -157,7 +149,7 @@ case "$1" in
         format_all
         ;;
     --log-domains)
-        log_domains "$2" "$3" "$4" "$5"
+        log_domains "$2" "$3" "$4"
         ;;
     --prune-lines)
         prune_lines "$2" "$3"

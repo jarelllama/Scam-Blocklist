@@ -80,7 +80,7 @@ validate() {
     invalid="$(grep -vE "$regex" "$RAW")"
     filter "$invalid" invalid
     # The dead domains file is also checked here as invalid entries may get
-    # picked up by the dead check and get saved in the dead cache.
+    # picked up by the dead check and get saved in the dead domains file.
     if invalid_dead="$(grep -vE "$regex" "$DEAD_DOMAINS")"; then
         grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
         mv dead.tmp "$DEAD_DOMAINS"

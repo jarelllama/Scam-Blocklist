@@ -13,16 +13,17 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly LOG_SIZE=50000
 
 main() {
     check_parked
     check_unparked
 
-    if [[ -f parked_cache.tmp ]]; then
-        # Cache parked domains to be used as a filter for newly retrieved
+    if [[ -f parked_domains.tmp ]]; then
+        # Save parked domains to be used as a filter for newly retrieved
         # domains (done last to skip unparked check)
         # Note the parked domains file should remain unsorted
-        cat parked_cache.tmp >> "$PARKED_DOMAINS"
+        cat parked_domains.tmp >> "$PARKED_DOMAINS"
     fi
 }
 
@@ -36,9 +37,9 @@ check_parked() {
 
     find_parked_in domains.tmp || return
 
-    # Copy temporary parked file to be added into parked cache later
-    # This parked cache includes subdomains
-    cp parked.tmp parked_cache.tmp
+    # Copy temporary parked file to be added into the parked domains file
+    # later. This includes subdomains.
+    cp parked.tmp parked_domains.tmp
 
     # Remove parked domains from subdomains file
     comm -23 "$SUBDOMAINS" parked.tmp > temp
@@ -57,15 +58,14 @@ check_parked() {
     done
 
     # Call shell wrapper to log number of parked domains in domain log
-    #$FUNCTION --log-domains parked.tmp parked raw
     $FUNCTION --log-domains "$(wc -l < parked.tmp)" parked_count raw
 }
 
 # Function 'check_unparked' finds unparked domains in the parked domains file
 # (also called the parked domains cache) and adds them back into the raw file.
 #
-# Note that unparked domains are not added back into the raw light file due
-# to limitations in the way the parked domains are recorded.
+# Note that resurrected domains are not added back into the raw light file as
+# the parked domains are not logged with their sources.
 check_unparked() {
     find_parked_in "$PARKED_DOMAINS"
     # No need to return if no parked domains found
@@ -89,7 +89,6 @@ check_unparked() {
     sort -u unparked.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log number of unparked domains in domain log
-    #$FUNCTION --log-domains unparked.tmp unparked parked_domains_file
     $FUNCTION --log-domains "$(wc -l < unparked.tmp)" unparked_count parked_domains_file
 }
 
@@ -191,7 +190,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from parked domains file
-    $FUNCTION --prune-lines "$PARKED_DOMAINS" 50000
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" "$LOG_SIZE"
 }
 
 # Entry point
