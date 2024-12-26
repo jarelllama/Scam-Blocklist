@@ -46,6 +46,7 @@ readonly -a SOURCES=(
     source_scamadviser
     source_scamdirectory
     source_stopgunscams
+    source_viriback_tracker
     source_google_search
 )
 
@@ -825,6 +826,19 @@ source_stopgunscams() {
     # 'page/1' does not exist
     curl -sSZ --retry 2 --retry-all-errors "${url}/page/[0-14]" \
         | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$results_file"
+}
+
+source_viriback_tracker() {
+    # Last checked: 26/12/24
+    source='tracker.viriback.com'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://tracker.viriback.com/dump.php'
+    curl -sS "$url" | mawk -v year="$(date +"%Y")" \
+        -F ',' '$4 ~ year {print $2}' \
+        | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 # Entry point
