@@ -122,7 +122,7 @@ TEST_RETRIEVE_VALIDATE() {
 
         # Distribute the sample input into various sources
         split -n l/3 input.txt
-        mv xaa data/pending/domains_aa419.org.tmp
+        mv xaa data/pending/domains_aa419.tmp
         mv xab data/pending/domains_google_search_search-term-1.tmp
         mv xac data/pending/domains_google_search_search-term-2.tmp
 
