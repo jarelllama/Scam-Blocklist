@@ -464,13 +464,13 @@ test_invalid_removal() {
         printf "invalid-test.com/subfolder\n"
         printf "invalid-test-.com\n"
         printf "i.com\n"
-        printf "in.com\n"
+        printf "qn.com\n"
         printf "dead-domain.com\n"
     } >> "$DEAD_DOMAINS"
 
     # EXPECTED OUTPUT
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-    printf "in.com\n" >> out_dead.txt
+    printf "qn.com\n" >> out_dead.txt
     printf "dead-domain.com\n" >> out_dead.txt
     {
         printf "invalid,invalid-test-com,raw\n"
