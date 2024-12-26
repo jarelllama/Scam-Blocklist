@@ -137,11 +137,11 @@ filter() {
 process_source() {
     [[ ! -f "$results_file" ]] && return
 
-    # Remove http(s):, slashes, and square brackets (this is done here once
-    # instead of multiple times in the source functions)
-    # Note that this still allows invalid entries to get through so they can be
-    # flagged later on.
-    sed -i 's/https\?://; s/[/]//g; s/\[//; s/\]//' "$results_file"
+    # Remove http(s): and square brackets (this is done here once instead of
+    # multiple times in the source functions)
+    # Note that this still allows invalid entries like entries with subfolders
+    # to get through so they can be flagged later on.
+    sed -i 's/https\?://; s/\[//; s/\]//' "$results_file"
 
     # Convert Unicode to Punycode
     # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
@@ -292,7 +292,7 @@ build() {
     count_after="$(wc -l < "$RAW")"
     count_added="$(( count_after - count_before ))"
 
-    printf "\nAdded new domains to blocklist.\nBefore: %s  Added: %s  After: %s\n" \
+    printf "\nAdded new domains to raw file.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$count_added" "$count_after"
 
     [[ "$USE_EXISTING" == true ]] && return
@@ -351,7 +351,7 @@ ${query_count},${status}" >> "$SOURCE_LOG"
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 log_domains() {
-    $FUNCTION --log-domains "$1" "$2" "$source" "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
+    $FUNCTION --log-domains "$1" "$2" "$source"
 }
 
 # Function 'download_nrd_feed' calls a shell wrapper to download the NRD feed.
