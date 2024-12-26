@@ -160,6 +160,7 @@ TEST_RETRIEVE_VALIDATE() {
         # Check source log
         check_terms "$SOURCE_LOG" out_source_log.txt "Source log"
     else
+        # The validation check also checks for invalid dead domains
         check_output "$DEAD_DOMAINS" out_dead.txt "Dead domains"
     fi
 
@@ -408,6 +409,7 @@ test_invalid_removal() {
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
+            printf "invalid-test.com/subfolder\n"
         } >> data/pending/domains_scamadviser.com.tmp
 
         # EXPECTED OUTPUT
@@ -418,6 +420,7 @@ test_invalid_removal() {
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
             printf "invalid-test.1x\n"
+            printf "invalid-test.com/subfolder\n"
         } >> out_manual_review.txt
 
         printf "invalid-test.xn--903fds\n" >> out_raw.txt
@@ -427,6 +430,7 @@ test_invalid_removal() {
             printf "invalid,invalid-test.x,scamadviser.com\n"
             printf "invalid,invalid-test.100,scamadviser.com\n"
             printf "invalid,invalid-test.1x,scamadviser.com\n"
+            printf "invalid,invalid-test.com/subfolder,scamadviser.com\n"
         } >> out_log.txt
 
         return
@@ -507,7 +511,6 @@ test_dead_check() {
     printf "www.abcdead-domain-test.com\n" >> out_dead.txt
     printf "xyzdead-domain-test.com\n" >> out_dead.txt
     printf "dead_count,2,raw\n" >> out_log.txt
-
     # Both files should be empty (all dead)
     : > out_subdomains.txt
     : > out_root_domains.txt
@@ -529,6 +532,7 @@ test_alive_check() {
 test_parked_check() {
     # INPUT
     printf "apple.com\n" >> "$RAW"
+    # Subfolder used here for easier testing despite being an invalid entry
     printf "porkbun.com/parked\n" >> "$RAW"
     printf "porkbun.com/parked\n" >> "$ROOT_DOMAINS"
     printf "www.porkbun.com/parked\n" >> "$SUBDOMAINS"
@@ -537,7 +541,7 @@ test_parked_check() {
     # Subdomains should be kept to be processed by the validation check
     printf "www.porkbun.com/parked\n" >> out_parked.txt
     printf "parked_count,1,raw\n" >> out_log.txt
-    # Both files should be empty (all dead)
+    # Both files should be empty (all parked)
     : > out_subdomains.txt
     : > out_root_domains.txt
 }
