@@ -18,7 +18,7 @@ Only active sources are used to automatically retrieve domains.
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | |
 | [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Yes | |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
-| [Jeroen Gui's phishing & scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
+| [Jeroen Gui's Phishing & Scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
 | [PetScams.com](https://petscams.com/) | | |
 | [PhishStats](https://phishstats.info/)[^2] | Yes | ~ |
 | [PuppyScams.org](https://puppyscams.org/) | Yes | |
@@ -29,6 +29,7 @@ Only active sources are used to automatically retrieve domains.
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | | |
 | [StopGunScams.com](https://stopgunscams.com/) | Yes | |
 | [URLCrazy](https://github.com/urbanadventurer/urlcrazy) | Yes | |
+| [Viriback C2 Tracker](tracker.viriback.com) | Yes | |
 | [dnstwist](https://github.com/elceef/dnstwist) | Yes | |
 | [openSquat](https://github.com/atenreiro/opensquat) | | |
 | [r/Scams](https://www.reddit.com/r/Scams/) | | |

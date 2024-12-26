@@ -30,7 +30,24 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
+    source_165antifraud
+    source_aa419
+    source_cybersquatting
+    source_dga_detector
+    source_emerging_threats
+    source_fakewebshoplisthun
+    source_jeroengui_phishing
+    source_jeroengui_scam
+    source_manual
+    source_phishstats
+    source_phishstats_nrd
+    source_puppyscams
+    source_regex
+    source_scamadviser
+    source_scamdirectory
+    source_stopgunscams
     source_viriback_tracker
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
@@ -657,8 +674,8 @@ source_165antifraud() {
 
 source_aa419() {
     # Last checked: 23/12/24
-    source='aa419.org'
-    results_file="data/pending/domains_${source}.tmp"
+    source='Artists Against 419'
+    results_file='data/pending/domains_aa419.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -697,7 +714,7 @@ source_fakewebshoplisthun() {
 
 source_jeroengui_phishing() {
     # Last checked: 23/12/24
-    source='Jeroengui phishing'
+    source='Jeroengui Phishing'
     ignore_from_light=true
     results_file='data/pending/domains_jeroengui_phishing.tmp'
 
@@ -712,7 +729,7 @@ source_jeroengui_phishing() {
 
 source_jeroengui_scam() {
     # Last checked: 23/12/24
-    source='Jeroengui scam'
+    source='Jeroengui Scam'
     results_file='data/pending/domains_jeroengui_scam.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
@@ -770,7 +787,7 @@ source_puppyscams() {
 
 source_scamadviser() {
     # Last checked: 23/12/24
-    source='scamadviser.com'
+    source='ScamAdviser'
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
@@ -786,8 +803,8 @@ source_scamadviser() {
 
 source_scamdirectory() {
     # Last checked: 25/12/24
-    source='scam.directory'
-    results_file="data/pending/domains_${source}.tmp"
+    source='Scam Directory'
+    results_file='data/pending/domains_scam_directory.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -800,7 +817,7 @@ source_scamdirectory() {
 
 source_stopgunscams() {
     # Last checked: 25/12/24
-    source='stopgunscams.com'
+    source='StopGunScams.com'
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
@@ -813,8 +830,8 @@ source_stopgunscams() {
 
 source_viriback_tracker() {
     # Last checked: 26/12/24
-    source='tracker.viriback.com'
-    results_file="data/pending/domains_${source}.tmp"
+    source='ViriBack C2 Tracker'
+    results_file='data/pending/domains_viriback_tracker.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 

@@ -154,7 +154,7 @@ TEST_RETRIEVE_VALIDATE() {
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Check entries saved for manual review
-        check_output data/pending/domains_scamadviser.com.tmp \
+        check_output data/pending/domains_ScamAdviser.tmp \
             out_manual_review.txt "Manual review"
 
         # Check source log
@@ -416,7 +416,7 @@ test_invalid_removal() {
             printf "invalid-test-.com\n"
             printf "in.com\n"
             printf "i.com\n"
-        } >> data/pending/domains_scamadviser.com.tmp
+        } >> data/pending/domains_ScamAdviser.tmp
 
         # EXPECTED OUTPUT
         # The retrieval script saves invalid entries to the manual review file
@@ -434,14 +434,14 @@ test_invalid_removal() {
         printf "invalid-test.xn--903fds\n" >> out_raw.txt
         printf "in.com\n" >> out_raw.txt
         {
-            printf "invalid,invalid-test-com,scamadviser.com\n"
-            printf "invalid,100.100.100.1,scamadviser.com\n"
-            printf "invalid,invalid-test.x,scamadviser.com\n"
-            printf "invalid,invalid-test.100,scamadviser.com\n"
-            printf "invalid,invalid-test.1x,scamadviser.com\n"
-            printf "invalid,invalid-test.com/subfolder,scamadviser.com\n"
-            printf "invalid,invalid-test-.com,scamadviser.com\n"
-            printf "invalid,i.com,scamadviser.com\n"
+            printf "invalid,invalid-test-com,ScamAdviser\n"
+            printf "invalid,100.100.100.1,ScamAdviser\n"
+            printf "invalid,invalid-test.x,ScamAdviser\n"
+            printf "invalid,invalid-test.100,ScamAdviser\n"
+            printf "invalid,invalid-test.1x,ScamAdviser\n"
+            printf "invalid,invalid-test.com/subfolder,ScamAdviser\n"
+            printf "invalid,invalid-test-.com,ScamAdviser\n"
+            printf "invalid,i.com,ScamAdviser\n"
         } >> out_log.txt
 
         return
@@ -488,10 +488,10 @@ test_invalid_removal() {
 test_toplist_check() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # INPUT
-        printf "microsoft.com\n" >> data/pending/domains_scamadviser.com.tmp
+        printf "microsoft.com\n" >> data/pending/domains_ScamAdviser.tmp
         # EXPECTED OUTPUT
         printf "microsoft.com\n" >> out_manual_review.txt
-        printf "toplist,microsoft.com,scamadviser.com\n" >> out_log.txt
+        printf "toplist,microsoft.com,ScamAdviser\n" >> out_log.txt
         return
     fi
 

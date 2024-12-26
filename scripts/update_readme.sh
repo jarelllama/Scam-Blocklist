@@ -47,21 +47,22 @@ Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
 $(print_stats '165 Anti-fraud')
+$(print_stats 'Artists Against 419')
 $(print_stats Cybersquatting)
 $(print_stats 'DGA Detector')
 $(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
-$(print_stats 'Jeroengui phishing') feed
-$(print_stats 'Jeroengui scam') feed
+$(print_stats 'Jeroengui Phishing') feed
+$(print_stats 'Jeroengui Scam') feed
 $(print_stats PhishStats)
 $(print_stats 'PhishStats (NRDs)')
 $(print_stats PuppyScams.org)
 $(print_stats Regex) Matching
-$(print_stats aa419.org)
-$(print_stats scam.directory)
-$(print_stats scamadviser.com)
-$(print_stats stopgunscams.com)
+$(print_stats 'Scam Directory')
+$(print_stats ScamAdviser)
+$(print_stats StopGunScams.com)
+$(print_stats 'ViriBack C2 Tracker')
 $(print_stats)
 
 - %Monthly: percentage out of total domains from all sources.
