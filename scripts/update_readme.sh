@@ -153,7 +153,8 @@ EOF
 readonly FUNCTION='bash scripts/tools.sh'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
-readonly TODAY THIS_MONTH
+readonly TODAY
+readonly THIS_MONTH
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 
@@ -166,7 +167,8 @@ print_stats() {
 
     printf "%5s |%8s |%7s %% |%8s %% | %s" \
         "$(sum "$TODAY" "$1")" "$this_month" \
-        "$(( this_month * 100 / total_this_month ))" "$(sum_excluded "$1" )" "${1:-All sources}"
+        "$(( this_month * 100 / total_this_month ))" \
+        "$(sum_excluded "$1" )" "${1:-All sources}"
 }
 
 # Note that csvkit is used in the following functions as the Google Search
