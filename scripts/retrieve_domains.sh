@@ -27,7 +27,7 @@ readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
 # Only matches domains
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.
-readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]+[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
     source_165antifraud
