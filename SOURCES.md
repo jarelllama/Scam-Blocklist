@@ -16,7 +16,7 @@ Only active sources are used to automatically retrieve domains.
 | [Emerging Threats](https://rules.emergingthreats.net/) | Yes | |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | | |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | |
-| [Google's Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction) | Yes | |
+| [Google's Custom Search JSON API](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) | Yes | |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
 | [Jeroen Gui's Phishing & Scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
 | [PetScams.com](https://petscams.com/) | | |
