@@ -657,10 +657,9 @@ source_manual() {
 }
 
 source_165antifraud() {
-    # Last checked: 23/12/24
+    # Last checked: 27/12/24
     # Credit to @tanmarpn for the source idea
     source='165 Anti-fraud'
-    ignore_from_light=true
     results_file='data/pending/domains_165antifraud.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
