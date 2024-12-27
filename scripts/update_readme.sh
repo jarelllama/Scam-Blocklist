@@ -62,8 +62,8 @@ $(print_stats Regex) Matching
 $(print_stats 'Scam Directory')
 $(print_stats ScamAdviser)
 $(print_stats StopGunScams.com)
-$(print_stats 'ViriBack C2 Tracker')
 $(print_stats 'Verbraucherzentrale Hamburg')
+$(print_stats 'ViriBack C2 Tracker')
 $(print_stats)
 
 - %Monthly: percentage out of total domains from all sources.
