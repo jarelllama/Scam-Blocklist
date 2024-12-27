@@ -47,6 +47,7 @@ readonly -a SOURCES=(
     source_scamdirectory
     source_stopgunscams
     source_viriback_tracker
+    source_vzhh
     source_google_search
 )
 
@@ -838,6 +839,19 @@ source_viriback_tracker() {
     curl -sS "$url" | mawk -v year="$(date +"%Y")" \
         -F ',' '$4 ~ year {print $2}' \
         | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+}
+
+source_vzhh() {
+    # Last checked: 27/12/24
+    source='Verbraucherzentrale Hamburg'
+    results_file='data/pending/domains_vzhh.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
+    curl -sS --retry 2 --retry-all-errors "${url}" \
+        | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
+        > "$results_file"
 }
 
 # Entry point
