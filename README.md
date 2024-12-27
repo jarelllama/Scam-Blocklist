@@ -54,6 +54,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      48 |      0 % |      32 % | ScamAdviser
     0 |       8 |      0 % |       4 % | StopGunScams.com
     0 |     231 |      0 % |       0 % | ViriBack C2 Tracker
+   88 |      88 |      0 % |       0 % | Verbraucherzentrale Hamburg
  2633 |  149047 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
