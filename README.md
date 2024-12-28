@@ -32,13 +32,13 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 213620
-Light version: 19552
+Total domains: 213622
+Light version: 19554
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
   226 |   11868 |      7 % |      29 % | 165 Anti-fraud
-    5 |     288 |      0 % |      12 % | Artists Against 419
+    7 |     290 |      0 % |      12 % | Artists Against 419
    46 |    2085 |      1 % |       1 % | Cybersquatting
  1029 |   31732 |     20 % |       0 % | DGA Detector
     3 |    2209 |      1 % |      22 % | Emerging Threats
@@ -55,7 +55,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       8 |      0 % |       4 % | StopGunScams.com
     0 |      88 |      0 % |       0 % | Verbraucherzentrale Hamburg
     5 |     236 |      0 % |      13 % | ViriBack C2 Tracker
- 2537 |  151584 |    100 % |      21 % | All sources
+ 2539 |  151586 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
