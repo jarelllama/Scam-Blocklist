@@ -66,7 +66,7 @@ append_header() {
 ${1} Title: Jarelllama's Scam Blocklist ${VERSION}
 ${1} Description: ${BLOCKLIST_DESCRIPTION}
 ${1} Homepage: https://github.com/jarelllama/Scam-Blocklist
-${1} License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
+${1} License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
 ${1} Version: $(date -u +"%m.%d.%H%M%S.%Y")
 ${1} Expires: 12 hours
 ${1} Last modified: $(date -u)
