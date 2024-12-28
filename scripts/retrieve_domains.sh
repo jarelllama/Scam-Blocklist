@@ -739,11 +739,8 @@ source_gridinsoft() {
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://gridinsoft.com/website-reputation-checker'
-    # Some entries have '_' instead of '-' in the domain name
-    curl -sS --retry 2 --retry-all-errors "$url" \
-        | grep -Po "online-virus-scanner/url/\K[[:alnum:].-_]+-[[:alnum:]-]+(?=\".*--suspicious\">)" \
-        | mawk '{gsub(/_/, "-"); gsub(/-/, "."); print}' > "$results_file"
+    local url='https://raw.githubusercontent.com/jarelllama/Gridinsoft-Blocklist/refs/heads/main/suspicious.txt'
+    curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_manual() {
