@@ -702,6 +702,7 @@ source_emerging_threats() {
 source_fakewebshoplisthun() {
     # Last checked: 23/12/24
     source='FakeWebshopListHUN'
+    ignore_from_light=true
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }

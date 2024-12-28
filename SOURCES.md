@@ -15,7 +15,7 @@ Only active sources are used to automatically retrieve domains.
 | [DGA Detector](https://github.com/exp0se/dga_detector) | Yes | Yes |
 | [Emerging Threats](https://rules.emergingthreats.net/) | Yes | |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | | |
-| [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | |
+| [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | Yes |
 | [Google's Custom Search JSON API](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) | Yes | |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
 | [Jeroen Gui's Phishing & Scam feeds](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
