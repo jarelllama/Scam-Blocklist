@@ -353,15 +353,13 @@ test_subdomain_removal() {
         printf "%s\n" "$subdomain" >> input.txt
         # EXPECTED OUTPUT
         printf "%s\n" "$subdomain" >> out_subdomains.txt
+        # 'www' subdomains are not logged
         printf "subdomain,%s" "$subdomain" | mawk '!/www\./' >> out_log.txt
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # EXPECTED OUTPUT
     printf "subdomain-test.com\n" >> out_raw.txt
     printf "subdomain-test.com\n" >> out_root_domains.txt
-    # The retrieval script does not log 'www.' subdomains
-    [[ "$script_to_test" == 'retrieve' ]] && return
-    printf "subdomain,www.subdomain-test.com\n" >> out_log.txt
 }
 
 # TEST: whitelisted domains removal and blacklist logging
