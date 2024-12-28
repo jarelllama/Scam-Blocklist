@@ -53,6 +53,7 @@ $(print_stats 'DGA Detector')
 $(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
+$(print_stats 'Gridinsoft')
 $(print_stats 'Jeroengui Phishing') feed
 $(print_stats 'Jeroengui Scam') feed
 $(print_stats PhishStats)
