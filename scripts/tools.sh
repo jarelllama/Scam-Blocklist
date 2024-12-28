@@ -17,7 +17,7 @@ format_file() {
     case "$file" in
         'data/dead_domains.txt'|'data/parked_domains.txt')
             # Remove duplicates, whitespaces, and convert to lowercase
-            mawk '!seen[$0]++ {gsub(/ /, "", $0); print tolower($0)}' "$file" \
+            mawk '!seen[$0]++ {gsub(/ /, ""); print tolower($0)}' "$file" \
                 > "${file}.tmp"
             ;;
         'config/parked_terms.txt')
@@ -27,7 +27,7 @@ format_file() {
         *.txt|*.tmp)
             # Remove whitespaces, convert to lowercase, sort, and remove
             # duplicates
-            mawk '{gsub(/ /, "", $0); print tolower($0)}' "$file" \
+            mawk '{gsub(/ /, ""); print tolower($0)}' "$file" \
                 | sort -u -o "${file}.tmp"
             ;;
         *)

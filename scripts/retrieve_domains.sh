@@ -783,7 +783,7 @@ source_puppyscams() {
     local url='https://puppyscams.org'
     curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
         | grep -Po "<h4 class=\"-ih\"><a href=\"/\K${DOMAIN_DASH_REGEX}(?=\">)" \
-        | mawk '{gsub(/-/, ".", $0); print $0}' > "$results_file"
+        | mawk '{gsub(/-/, "."); print}' > "$results_file"
 }
 
 source_scamadviser() {
@@ -812,7 +812,7 @@ source_scamdirectory() {
     local url='https://scam.directory/category'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "href=\"/\K${DOMAIN_DASH_REGEX}(?=\" title)" \
-        | mawk 'NR<=50 {gsub(/-/, ".", $0); print $0}' > "$results_file"
+        | mawk 'NR<=50 {gsub(/-/, "."); print}' > "$results_file"
         # Keep only newest 50 results
 }
 

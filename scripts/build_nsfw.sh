@@ -47,7 +47,7 @@ readonly -a WHITELIST=(
 # raw file, formats it, and removes dead domains.
 build() {
     # Format raw file to Domains format
-    mawk '/[|]/ {gsub(/[|^]/, "", $0); print $0}' "$BLOCKLIST" > raw.tmp
+    mawk '/[|]/ {gsub(/[|^]/, ""); print}' "$BLOCKLIST" > raw.tmp
 
     # Remove already processed domains
     comm -23 toplist.tmp raw.tmp > temp
