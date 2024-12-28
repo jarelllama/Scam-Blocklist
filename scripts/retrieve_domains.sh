@@ -38,6 +38,7 @@ readonly -a SOURCES=(
     source_fakewebshoplisthun
     source_jeroengui_phishing
     source_jeroengui_scam
+    source_gridinsoft
     source_manual
     source_phishstats
     source_phishstats_nrd
@@ -649,14 +650,6 @@ source_regex() {
     done <<< "$targets"
 }
 
-source_manual() {
-    source='Manual'
-    results_file="data/pending/domains_${source}.tmp"
-
-    # Process only if file is found (source is the file itself)
-    [[ -f "$results_file" ]] && process_source
-}
-
 source_165antifraud() {
     # Last checked: 27/12/24
     # Credit to @tanmarpn for the source idea
@@ -737,6 +730,28 @@ source_jeroengui_scam() {
 
     local url='https://file.jeroengui.be/scam/last_week.txt'
     curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+}
+
+source_gridinsoft() {
+    # Last checked: 28/12/24
+    source='Gridinsoft'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://gridinsoft.com/website-reputation-checker'
+    # Some entries have '_' instead of '-' in the domain name
+    curl -sS --retry 2 --retry-all-errors "$url" \
+        | grep -Po "online-virus-scanner/url/\K[[:alnum:].-_]+-[[:alnum:]-]+(?=\".*--suspicious\">)" \
+        | mawk '{gsub(/_/, "-"); gsub(/-/, "."); print}' > "$results_file"
+}
+
+source_manual() {
+    source='Manual'
+    results_file="data/pending/domains_${source}.tmp"
+
+    # Process only if file is found (source is the file itself)
+    [[ -f "$results_file" ]] && process_source
 }
 
 source_phishstats() {
