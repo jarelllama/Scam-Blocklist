@@ -44,6 +44,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     3 |    2209 |      1 % |      22 % | Emerging Threats
     0 |    2540 |      1 % |      20 % | FakeWebshopListHUN
    72 |     982 |      0 % |       3 % | Google Search
+    3 |       3 |      0 % |       0 % | Gridinsoft
   242 |   22153 |     14 % |      10 % | Jeroengui Phishing feed
     7 |     169 |      0 % |       8 % | Jeroengui Scam feed
   356 |   44917 |     29 % |      25 % | PhishStats
