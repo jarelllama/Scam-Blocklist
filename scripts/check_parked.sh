@@ -107,15 +107,17 @@ find_parked_in() {
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
-    # Split file into 16 equal files
-    split -d -l $(( $(wc -l < "$1") / 16 )) "$1"
+    # Split file into 17 equal files
+    split -d -l $(( $(wc -l < "$1") / 17 )) "$1"
+    # Sometimes an x19 exists
+    [[ -f x19 ]] && cat x19 >> x18
 
     # Run checks in parallel
     find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
     find_parked x04 & find_parked x05 & find_parked x06 & find_parked x07 &
     find_parked x08 & find_parked x09 & find_parked x10 & find_parked x11 &
     find_parked x12 & find_parked x13 & find_parked x14 & find_parked x15 &
-    find_parked x16 & find_parked x17
+    find_parked x16 & find_parked x17 & find_parked x18
     wait
     rm x??
 
@@ -168,7 +170,8 @@ find_parked() {
         # If using HTTPS fails, use HTTP
         if grep -qF 'curl: (60) SSL: no alternative certificate subject name matches target host name' \
             <<< "$html"; then
-            html="$(curl -sSL --max-time 3 "http://${domain}/" 2>&1 \
+            # Lower max time
+            html="$(curl -sSL --max-time 2 "http://${domain}/" 2>&1 \
                 | tr -d '\0')"
         elif grep -qF 'curl:' <<< "$html"; then
             # Collate domains that errored so they can be dealt with later
