@@ -36,8 +36,8 @@ readonly -a SOURCES=(
     source_dga_detector
     source_emerging_threats
     source_fakewebshoplisthun
-    source_jeroengui_phishing
-    source_jeroengui_scam
+    source_jeroengui
+    source_jeroengui_nrd
     source_gridinsoft
     source_manual
     source_phishstats
