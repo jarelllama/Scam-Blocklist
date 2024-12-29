@@ -32,40 +32,40 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 213625
-Light version: 19557
+Total domains: 213428
+Light version: 19543
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-  226 |   11868 |      7 % |      29 % | 165 Anti-fraud
-    7 |     290 |      0 % |      12 % | Artists Against 419
-   46 |    2085 |      1 % |       1 % | Cybersquatting
- 1029 |   31732 |     20 % |       0 % | DGA Detector
-    3 |    2209 |      1 % |      22 % | Emerging Threats
+    7 |   11875 |      7 % |      32 % | 165 Anti-fraud
+   49 |     339 |      0 % |      12 % | Artists Against 419
+   34 |    2119 |      1 % |       1 % | Cybersquatting
+  935 |   32667 |     21 % |       0 % | DGA Detector
+   39 |    2248 |      1 % |      22 % | Emerging Threats
     0 |    2540 |      1 % |      20 % | FakeWebshopListHUN
-   72 |     982 |      0 % |       3 % | Google Search
-    3 |       3 |      0 % |       0 % | Gridinsoft
-  242 |   22153 |     14 % |      10 % | Jeroengui Phishing feed
-    7 |     169 |      0 % |       8 % | Jeroengui Scam feed
-  356 |   44917 |     29 % |      25 % | PhishStats
-   71 |   10855 |      7 % |       0 % | PhishStats (NRDs)
-    5 |     221 |      0 % |       6 % | PuppyScams.org
-  541 |   29861 |     19 % |       1 % | Regex Matching
+   44 |    1026 |      0 % |       3 % | Google Search
+   16 |      19 |      0 % |       0 % | Gridinsoft
+  376 |   22529 |     14 % |      10 % | Jeroengui Phishing feed
+    1 |     170 |      0 % |       8 % | Jeroengui Scam feed
+  662 |   45579 |     29 % |      25 % | PhishStats
+   67 |   10922 |      7 % |       0 % | PhishStats (NRDs)
+    0 |     221 |      0 % |       7 % | PuppyScams.org
+  604 |   30465 |     19 % |       1 % | Regex Matching
     0 |     372 |      0 % |       7 % | Scam Directory
     0 |      48 |      0 % |      32 % | ScamAdviser
-    0 |       8 |      0 % |       4 % | StopGunScams.com
+    0 |       8 |      0 % |       5 % | StopGunScams.com
     0 |      88 |      0 % |       0 % | Verbraucherzentrale Hamburg
-    5 |     236 |      0 % |      13 % | ViriBack C2 Tracker
- 2542 |  151589 |    100 % |      21 % | All sources
+    0 |     236 |      0 % |      21 % | ViriBack C2 Tracker
+ 2767 |  154356 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 1688
-Resurrected domains added today: 1094
+Dead domains removed today: 3012
+Resurrected domains added today: 679
 
-Parked domains removed today: 430
-Unparked domains added today: 141
+Parked domains removed today: 350
+Unparked domains added today: 124
 ```
 
 <details>
@@ -121,7 +121,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 12723
+Total domains: 12752
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
