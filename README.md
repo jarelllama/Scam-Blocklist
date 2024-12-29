@@ -32,7 +32,7 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 213428
+Total domains: 213431
 Light version: 19543
 
 New domains after filtering:
@@ -44,19 +44,19 @@ Today | Monthly | %Monthly | %Filtered | Source
    39 |    2248 |      1 % |      22 % | Emerging Threats
     0 |    2540 |      1 % |      20 % | FakeWebshopListHUN
    44 |    1026 |      0 % |       3 % | Google Search
-   16 |      19 |      0 % |       0 % | Gridinsoft
+   17 |      20 |      0 % |       8 % | Gridinsoft
   377 |   22699 |     14 % |      10 % | Jeroengui
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
-  662 |   45579 |     29 % |      25 % | PhishStats
+  663 |   45580 |     29 % |      25 % | PhishStats
    67 |   10922 |      7 % |       0 % | PhishStats (NRDs)
     0 |     221 |      0 % |       7 % | PuppyScams.org
-  604 |   30465 |     19 % |       1 % | Regex Matching
+  605 |   30466 |     19 % |       1 % | Regex Matching
     0 |     372 |      0 % |       7 % | Scam Directory
     0 |      48 |      0 % |      32 % | ScamAdviser
     0 |       8 |      0 % |       5 % | StopGunScams.com
     0 |      88 |      0 % |       0 % | Verbraucherzentrale Hamburg
     0 |     236 |      0 % |      21 % | ViriBack C2 Tracker
- 2767 |  154356 |    100 % |      21 % | All sources
+ 2770 |  154359 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
