@@ -203,7 +203,7 @@ TEST_DEAD_CHECK() {
 TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough records)
-    for i in {1..30};do
+    for i in {1..50};do
         printf "placeholder48390%s.com\n" "$i" >> placeholders.txt
     done
     cat placeholders.txt >> "$RAW"
