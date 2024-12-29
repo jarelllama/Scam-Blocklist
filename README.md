@@ -45,8 +45,8 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |    2540 |      1 % |      20 % | FakeWebshopListHUN
    44 |    1026 |      0 % |       3 % | Google Search
    16 |      19 |      0 % |       0 % | Gridinsoft
-  376 |   22529 |     14 % |      10 % | Jeroengui Phishing feed
-    1 |     170 |      0 % |       8 % | Jeroengui Scam feed
+  377 |   22699 |     14 % |      10 % | Jeroengui
+    0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
   662 |   45579 |     29 % |      25 % | PhishStats
    67 |   10922 |      7 % |       0 % | PhishStats (NRDs)
     0 |     221 |      0 % |       7 % | PuppyScams.org
