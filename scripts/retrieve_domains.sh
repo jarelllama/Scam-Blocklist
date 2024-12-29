@@ -695,22 +695,21 @@ source_emerging_threats() {
 source_fakewebshoplisthun() {
     # Last checked: 23/12/24
     source='FakeWebshopListHUN'
-    ignore_from_light=true
+    ignore_from_light=true  # Has a few false positives
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
-    # Remove carriage return characters
-    curl -sS "$url" | sed 's/\r//g' | grep -Po "^${DOMAIN_REGEX}$" \
+    curl -sS "$url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
         > "$results_file"
 }
 
-source_jeroengui_phishing() {
-    # Last checked: 23/12/24
-    source='Jeroengui Phishing'
-    ignore_from_light=true
-    results_file='data/pending/domains_jeroengui_phishing.tmp'
+source_jeroengui() {
+    # Last checked: 29/12/24
+    source='Jeroengui'
+    ignore_from_light=true  # Too many domains
+    results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -719,22 +718,32 @@ source_jeroengui_phishing() {
     # exclude IP addresses and extract domains.
     curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
         > "$results_file"
+
+    # The scam feed requires a different regex expression
+    local url='https://file.jeroengui.be/scam/last_week.txt'
+    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$results_file"
+
+    # Get matching NRDs for the light version. Unicode is only processed by the
+    # full version.
+    comm -12 <(sort "$results_file") nrd.tmp > jeroengui_nrds.tmp
 }
 
-source_jeroengui_scam() {
-    # Last checked: 23/12/24
-    source='Jeroengui Scam'
-    results_file='data/pending/domains_jeroengui_scam.tmp'
+source_jeroengui_nrd() {
+    # Last checked: 29/12/24
+    # For the light version
+    # Only includes domains found in the NRD feed
+    source='Jeroengui (NRDs)'
+    results_file='data/pending/domains_jeroengui_nrd.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://file.jeroengui.be/scam/last_week.txt'
-    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+    mv jeroengui_nrds.tmp "$results_file"
 }
 
 source_gridinsoft() {
-    # Last checked: 28/12/24
+    # Last checked: 29/12/24
     source='Gridinsoft'
+    ignore_from_light=true  # Has a few false positives
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
@@ -752,9 +761,9 @@ source_manual() {
 }
 
 source_phishstats() {
-    # Last checked: 23/12/24
+    # Last checked: 29/12/24
     source='PhishStats'
-    ignore_from_light=true
+    ignore_from_light=true  # Too many domains
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
@@ -765,12 +774,11 @@ source_phishstats() {
     # (?=/?\"$) is lookahead that matches an optional slash followed by an end
     # quote at the end of the line.
     curl -sS "$url" | mawk -F ',' '{print $3}' \
-        | grep -Po "^\"https?://\K${DOMAIN_REGEX}(?=/?\"$)" \
-        | sort -u -o "$results_file"  # sort -u for faster comm
+        | grep -Po "^\"https?://\K${DOMAIN_REGEX}(?=/?\"$)" > "$results_file"
 
-    # Get matching NRDs for light version. Unicode is only processed by the
+    # Get matching NRDs for the light version. Unicode is only processed by the
     # full version.
-    comm -12 "$results_file" nrd.tmp > phishstats_nrds.tmp
+    comm -12 <(sort "$results_file") nrd.tmp > phishstats_nrds.tmp
 }
 
 source_phishstats_nrd() {

@@ -54,8 +54,8 @@ $(print_stats 'Emerging Threats')
 $(print_stats FakeWebshopListHUN)
 $(print_stats 'Google Search')
 $(print_stats 'Gridinsoft')
-$(print_stats 'Jeroengui Phishing') feed
-$(print_stats 'Jeroengui Scam') feed
+$(print_stats 'Jeroengui')
+$(print_stats 'Jeroengui (NRDs)')
 $(print_stats PhishStats)
 $(print_stats 'PhishStats (NRDs)')
 $(print_stats PuppyScams.org)
