@@ -3,9 +3,9 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 12.29.034221.2024
+! Version: 12.29.035603.2024
 ! Expires: 12 hours
-! Last modified: Sun Dec 29 03:42:21 UTC 2024
+! Last modified: Sun Dec 29 03:56:03 UTC 2024
 ! Syntax: Adblock Plus
 ! Number of entries: 19544
 !
@@ -3623,7 +3623,6 @@
 ||com-trackgsz.top^
 ||com-trackhsy.top^
 ||com-trackibc.top^
-||com-tracking-helpsenf.xyz^
 ||com-tracking.vip^
 ||com-trackingai.vip^
 ||com-trackingba.vip^
@@ -17638,6 +17637,7 @@
 ||usps-vips.top^
 ||usps-web.com^
 ||usps.bid^
+||usps.com-tracking-helpsenf.xyz^
 ||usps.upsupost.com^
 ||usps348.com^
 ||usps360.sbs^
