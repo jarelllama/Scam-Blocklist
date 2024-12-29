@@ -32,8 +32,8 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 213431
-Light version: 19543
+Total domains: 213432
+Light version: 19544
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -56,7 +56,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       8 |      0 % |       5 % | StopGunScams.com
     0 |      88 |      0 % |       0 % | Verbraucherzentrale Hamburg
     0 |     236 |      0 % |      21 % | ViriBack C2 Tracker
- 2770 |  154359 |    100 % |      21 % | All sources
+ 2772 |  154361 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
