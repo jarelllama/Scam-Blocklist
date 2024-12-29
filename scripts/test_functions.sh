@@ -504,7 +504,7 @@ test_toplist_check() {
 # TEST: exclusion of specific sources from light version
 test_light_build() {
     # INPUT
-    printf "raw-light-test.com\n" >> data/pending/domains_jeroengui.tmp
+    printf "raw-light-test.com\n" >> data/pending/domains_jeroengui_nrd.tmp
     # EXPECTED OUTPUT
     printf "raw-light-test.com\n" >> out_raw.txt
     # Domain from excluded source should not be in output
