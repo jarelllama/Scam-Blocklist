@@ -32,8 +32,8 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 214098
-Light version: 19569
+Total domains: 214097
+Light version: 19568
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
