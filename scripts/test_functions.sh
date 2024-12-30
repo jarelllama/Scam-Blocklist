@@ -170,8 +170,8 @@ TEST_RETRIEVE_VALIDATE() {
 # Function 'TEST_DEAD_CHECK' tests the removal/addition of dead and resurrected
 # domains respectively.
 TEST_DEAD_CHECK() {
-    test_dead_check
     test_alive_check
+    test_dead_check
 
     # Prepare sample raw light file
     cp "$RAW" "$RAW_LIGHT"
@@ -517,6 +517,16 @@ test_light_build() {
 
 ### DEAD CHECK TESTS
 
+# TEST: addition of resurrected domains
+test_alive_check() {
+    # INPUT
+    printf "www.google.com\n" >> "$DEAD_DOMAINS"
+    # EXPECTED OUTPUT
+    # Subdomains should be kept to be processed by the validation check
+    printf "www.google.com\n" >> out_raw.txt
+    printf "resurrected_count,1,dead_domains_file\n" >> out_log.txt
+}
+
 # TEST: removal of dead domains
 test_dead_check() {
     # INPUT
@@ -536,16 +546,6 @@ test_dead_check() {
     # Both files should be empty (all dead)
     : > out_subdomains.txt
     : > out_root_domains.txt
-}
-
-# TEST: addition of resurrected domains
-test_alive_check() {
-    # INPUT
-    printf "www.google.com\n" >> "$DEAD_DOMAINS"
-    # EXPECTED OUTPUT
-    # Subdomains should be kept to be processed by the validation check
-    printf "www.google.com\n" >> out_raw.txt
-    printf "resurrected_count,1,dead_domains_file\n" >> out_log.txt
 }
 
 ### PARKED CHECK TESTS
