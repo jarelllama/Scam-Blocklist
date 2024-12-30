@@ -64,7 +64,7 @@ Today | Monthly | %Monthly | %Filtered | Source
 Dead domains removed today: 1063
 Resurrected domains added today: 886
 
-Parked domains removed today: 482
+Parked domains removed this month: 26279
 Unparked domains added today: 89
 ```
 
