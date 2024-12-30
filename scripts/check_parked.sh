@@ -77,15 +77,13 @@ check_parked() {
 check_unparked() {
     find_parked_in "$PARKED_DOMAINS"
 
+    # Assume domains that errored out during the check are still parked
+    sort -u errored.tmp parked.tmp -o parked.tmp
+
     # Get unparked domains in parked domains file
     comm -23 <(sort "$PARKED_DOMAINS") parked.tmp > unparked_domains.tmp
 
     [[ ! -s unparked_domains.tmp ]] && return
-
-    # Assume domains that errored out during the check are still parked
-    sort -u errored.tmp unparked_domains.tmp -o unparked_domains.tmp
-
-    [[ ! -s unparked.tmp ]] && return
 
     # Update parked domains file to only include parked domains
     # grep is used here because the parked domains file is unsorted
@@ -113,6 +111,9 @@ find_parked_in() {
     local execution_time
     execution_time="$(date +%s)"
 
+    # Always create parked.tmp file to avoid not found errors
+    touch parked.tmp
+
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
@@ -135,11 +136,11 @@ find_parked_in() {
     sort -u errored_domains_x??.tmp -o errored.tmp 2> /dev/null
     rm ./*_x??.tmp 2> /dev/null
 
+    printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp) "
+    printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
+
     # Return 1 if no parked domains were found
     [[ ! -s parked.tmp ]] && return 1 || return 0
-
-    printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp)"
-    printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
 
 # Function 'find_parked' queries sites in a given file for parked messages in
