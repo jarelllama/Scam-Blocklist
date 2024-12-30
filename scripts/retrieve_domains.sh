@@ -32,6 +32,7 @@ readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{
 readonly -a SOURCES=(
     source_165antifraud
     source_aa419
+    source_coi.gov.cz
     source_cybersquatting
     source_dga_detector
     source_emerging_threats
@@ -681,6 +682,19 @@ source_aa419() {
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
 }
 
+source_coi.gov.cz() {
+    # Last checked: 30/12/24
+    source='Česká obchodní inspekce'
+    results_file='data/pending/domains_coi.gov.cz.tmp'
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://www.coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
+    curl -sS --retry 2 --retry-all-errors "${url}/" \
+        | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
+        > "$results_file"
+}
+
 source_emerging_threats() {
     # Last checked: 23/12/24
     source='Emerging Threats'
@@ -870,7 +884,7 @@ source_vzhh() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
-    curl -sS --retry 2 --retry-all-errors "${url}" \
+    curl -sS --retry 2 --retry-all-errors "$url" \
         | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
         > "$results_file"
 }
