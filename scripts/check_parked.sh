@@ -93,10 +93,10 @@ check_unparked() {
     # Add unparked domains to raw file
     # Note that unparked subdomains are added back too and will be processed by
     # the validation check outside of this script.
-    sort -u unparked.tmp "$RAW" -o "$RAW"
+    sort -u unparked_domains.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log number of unparked domains in domain log
-    $FUNCTION --log-domains "$(wc -l < unparked.tmp)" unparked_count parked_domains_file
+    $FUNCTION --log-domains "$(wc -l < unparked_domains.tmp)" unparked_count parked_domains_file
 }
 
 # Function 'find_parked_in' efficiently checks for parked domains in a given
