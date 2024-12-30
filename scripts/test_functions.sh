@@ -218,9 +218,6 @@ TEST_PARKED_CHECK() {
     # (Unparked domains are not added back into light)
     grep -vxF 'www.github.com' out_raw.txt > out_raw_light.txt
 
-    # DEBUG
-    cat "$PARKED_DOMAINS"
-
     # Run script
     run_script check_parked.sh checkunparked
     run_script check_parked.sh checkparked
