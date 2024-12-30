@@ -32,8 +32,8 @@ This blocklist is integrated into [Hagezi's Threat Intelligence Feed](https://gi
 ## Statistics
 
 ``` text
-Total domains: 214097
-Light version: 19568
+Total domains: 214092
+Light version: 19569
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -41,10 +41,10 @@ Today | Monthly | %Monthly | %Filtered | Source
     3 |     342 |      0 % |      12 % | Artists Against 419
     0 |    2119 |      1 % |       1 % | Cybersquatting
     7 |   32674 |     20 % |       0 % | DGA Detector
-    1 |    2249 |      1 % |      21 % | Emerging Threats
-   67 |    2607 |      1 % |      20 % | FakeWebshopListHUN
+    2 |    2250 |      1 % |      21 % | Emerging Threats
+   69 |    2609 |      1 % |      20 % | FakeWebshopListHUN
    36 |    1062 |      0 % |       3 % | Google Search
-  243 |     263 |      0 % |       1 % | Gridinsoft
+  251 |     271 |      0 % |       1 % | Gridinsoft
   342 |   23041 |     14 % |      10 % | Jeroengui
    29 |      29 |      0 % |       0 % | Jeroengui (NRDs)
   603 |   46183 |     29 % |      25 % | PhishStats
@@ -56,7 +56,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       8 |      0 % |       5 % | StopGunScams.com
     0 |      88 |      0 % |       1 % | Verbraucherzentrale Hamburg
     1 |     237 |      0 % |      26 % | ViriBack C2 Tracker
- 1610 |  155971 |    100 % |      21 % | All sources
+ 1621 |  155982 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
