@@ -11,6 +11,7 @@ Only active sources are used to automatically retrieve domains.
 | [165 Anti-fraud](https://165.npa.gov.tw/#/articles/subclass/3) | Yes | |
 | [ANFRAS](https://anfras.com/fakeshops/) | | |
 | [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Yes | |
+| [Česká Obchodní Inspekce](https://www.coi.gov.cz/pro-spotrebitele/rizikove-e-shopy/) | Yes | |
 | [DFPI Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | | |
 | [DGA Detector](https://github.com/exp0se/dga_detector) | Yes | Yes |
 | [Emerging Threats](https://rules.emergingthreats.net/) | Yes | |
