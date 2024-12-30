@@ -73,7 +73,7 @@ $(print_stats)
 Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 
-Parked domains removed today: $(mawk "/${TODAY},parked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
+Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 Unparked domains added today: $(mawk "/${TODAY},unparked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
 \`\`\`
 
