@@ -28,14 +28,14 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 215223
-Light version: 20704
+Total domains: 215231
+Light version: 20712
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     8 |   11883 |      7 % |      34 % | 165 Anti-fraud
     3 |     342 |      0 % |      12 % | Artists Against 419
-    0 |       0 |      0 % |       0 % | Česká Obchodní Inspekce
+    8 |       8 |      0 % |      38 % | Česká Obchodní Inspekce
     0 |    2119 |      1 % |       1 % | Cybersquatting
     7 |   32674 |     20 % |       0 % | DGA Detector
     2 |    2250 |      1 % |      21 % | Emerging Threats
@@ -53,7 +53,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       8 |      0 % |       5 % | StopGunScams.com
     0 |      88 |      0 % |       1 % | Verbraucherzentrale Hamburg
     1 |     237 |      0 % |      26 % | ViriBack C2 Tracker
- 2756 |  157117 |    100 % |      21 % | All sources
+ 2764 |  157125 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
