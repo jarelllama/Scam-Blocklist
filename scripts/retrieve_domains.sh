@@ -33,6 +33,8 @@ readonly -a SOURCES=(
 
     source_coi.gov.cz
 
+)
+
 # Function 'source' calls on the respective functions of each source to
 # retrieve results. The results are then passed to the 'process_source'
 # function for further processing.
