@@ -209,8 +209,8 @@ TEST_PARKED_CHECK() {
     cat placeholders.txt >> "$RAW"
     cat placeholders.txt >> "$PARKED_DOMAINS"
 
-    test_parked_check
     test_unparked_check
+    test_parked_check
 
     # Prepare sample raw light file
     cp "$RAW" "$RAW_LIGHT"
@@ -547,6 +547,19 @@ test_alive_check() {
 
 ### PARKED CHECK TESTS
 
+# TEST: addition of unparked domains
+test_unparked_check() {
+    # INPUT
+    printf "www.github.com\n" >> "$PARKED_DOMAINS"
+    printf "parked-errored-test.com\n" >> "$PARKED_DOMAINS"
+    # EXPECTED OUTPUT
+    # Subdomains should be kept to be processed by the validation check
+    printf "www.github.com\n" >> out_raw.txt
+    # Domains that errored during curl should be assumed still parked
+    printf "parked-errored-test.com\n" >> out_parked.txt
+    printf "unparked_count,1,parked_domains_file\n" >> out_log.txt
+}
+
 # TEST: removal of parked domains
 test_parked_check() {
     # INPUT
@@ -563,19 +576,6 @@ test_parked_check() {
     # Both files should be empty (all parked)
     : > out_subdomains.txt
     : > out_root_domains.txt
-}
-
-# TEST: addition of unparked domains
-test_unparked_check() {
-    # INPUT
-    printf "www.github.com\n" >> "$PARKED_DOMAINS"
-    printf "parked-errored-test.com\n" >> "$PARKED_DOMAINS"
-    # EXPECTED OUTPUT
-    # Subdomains should be kept to be processed by the validation check
-    printf "www.github.com\n" >> out_raw.txt
-    # Domains that errored during curl should be assumed still parked
-    printf "parked-errored-test.com\n" >> out_parked.txt
-    printf "unparked_count,1,parked_domains_file\n" >> out_log.txt
 }
 
 ### END OF 'test_<process>' functions
