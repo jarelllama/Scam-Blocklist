@@ -35,6 +35,7 @@ New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     8 |   11883 |      7 % |      34 % | 165 Anti-fraud
     3 |     342 |      0 % |      12 % | Artists Against 419
+    0 |       0 |      0 % |       0 % | Česká Obchodní Inspekce
     0 |    2119 |      1 % |       1 % | Cybersquatting
     7 |   32674 |     20 % |       0 % | DGA Detector
     2 |    2250 |      1 % |      21 % | Emerging Threats
