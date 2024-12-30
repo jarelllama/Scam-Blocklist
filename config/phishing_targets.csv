@@ -33,7 +33,7 @@ coinbase,244,149,y,&,7422,148,y,
 correos,,,,-&|&-,177,34,y,
 credit score,,,,credit.*score,183,33,y,
 crypto,287,149,y,-&|&-,3343,148,y,regex: Made less agressive for FPs
-crypto recovery,,,,(crypto.*recover|recover.*crypto),39,33,y,
+crypto recovery,,,,((crypto|coin).*recover|recover.*(crypto|coin)),39,33,y,
 deezer,2,3,,(^|-)&-,,,,
 dhl,,,,dhl.*(post|express|track|delivery|parcel),136,33,y,
 discord,150,149,y,(^|-)&|&(-|\.),1015,148,y,
