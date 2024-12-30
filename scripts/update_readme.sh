@@ -105,9 +105,9 @@ Dead domains that are resolving again are included back into the blocklist.
 
 ### Parked domains
 
-Parked domains are removed daily. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
+Parked domains are removed weekly while unparked domains are added back daily. A list of common parked domain messages is used to automatically detect parked domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
 
-Parked sites no longer containing any of the parked messages are assumed to be unparked and are included back into the blocklist.
+Parked sites no longer containing any of the parked messages are assumed to be unparked.
 
 ## Other blocklists
 
