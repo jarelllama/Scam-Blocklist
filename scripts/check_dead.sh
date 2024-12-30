@@ -59,12 +59,10 @@ check_dead() {
 
     find_dead_in domains.tmp || return
 
-    cp dead.tmp dead_domains.tmp
-
     # Save dead domains to be removed from the various files later
     # and to act as a filter for newly retrieved domains.
     # Note the dead domains file should remain unsorted.
-    cat dead_domains.tmp >> "$DEAD_DOMAINS"
+    cat dead.tmp >> "$DEAD_DOMAINS"
 }
 
 # Function 'check_alive' finds resurrected domains in the dead domains file and

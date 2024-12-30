@@ -33,13 +33,13 @@ jobs:
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
-  check-parked:
+  check_unparked:
     needs: [test-functions, check-dead]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
-    uses: ./.github/workflows/check_parked.yml
+    uses: ./.github/workflows/check_unparked.yml
 
   validate:
-    needs: [test-functions, check-parked]
+    needs: [test-functions, check_unparked]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/validate_domains.yml
     secrets: inherit

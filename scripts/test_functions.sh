@@ -219,7 +219,8 @@ TEST_PARKED_CHECK() {
     grep -vxF 'www.github.com' out_raw.txt > out_raw_light.txt
 
     # Run script
-    run_script check_parked.sh
+    run_script check_parked.sh checkunparked
+    run_script check_parked.sh checkparked
 
     # Remove placeholder line
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS"; do

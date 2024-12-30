@@ -16,15 +16,22 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly LOG_SIZE=50000
 
 main() {
-    check_parked
-    check_unparked
-
-    if [[ -f parked_domains.tmp ]]; then
-        # Save parked domains to be used as a filter for newly retrieved
-        # domains (done last to skip unparked check)
-        # Note the parked domains file should remain unsorted
-        cat parked_domains.tmp >> "$PARKED_DOMAINS"
-    fi
+    case "$1" in
+        'checkunparked')
+            # The unparked check being done in the workflow before the parked
+            # check means the recently added unparked domains are processed by
+            # the parked check while the recently added parked domains are not
+            # processed by the unparked check.
+            check_unparked
+            ;;
+        'checkparked')
+            check_parked
+            ;;
+        *)
+            printf "\n\e[1;31mNo argument passed.\e[0m\n\n"
+            exit 1
+            ;;
+    esac
 }
 
 # Function 'check_parked' removes parked domains from the raw file, raw light
@@ -37,9 +44,10 @@ check_parked() {
 
     find_parked_in domains.tmp || return
 
-    # Copy temporary parked file to be added into the parked domains file
-    # later. This includes subdomains.
-    cp parked.tmp parked_domains.tmp
+    # Save parked domains to be used as a filter for newly retrieved
+    # domains. This includes subdomains.
+    # Note the parked domains file should remain unsorted
+    cat parked.tmp >> "$PARKED_DOMAINS"
 
     # Remove parked domains from subdomains file
     comm -23 "$SUBDOMAINS" parked.tmp > temp
@@ -202,4 +210,4 @@ trap cleanup EXIT
 
 $FUNCTION --format-all
 
-main
+main "$1"

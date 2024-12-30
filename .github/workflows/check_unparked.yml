@@ -1,16 +1,13 @@
-name: Check for parked domains
-run-name: Check for parked domains
+name: Check for unparked domains
+run-name: Check for unparked domains
 on:
   workflow_dispatch:
-  schedule:
-    # Run weekly to give external organisations time to flag NRDs.
-    - cron: '0 11 * * 0'
   workflow_call:
 permissions:
   contents: write
 
 jobs:
-  check-parked-domains:
+  check-unparked-domains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,12 +16,12 @@ jobs:
           ref: main
 
       - name: check_parked.sh
-        run: bash scripts/check_parked.sh checkparked
+        run: bash scripts/check_parked.sh checkunparked
 
       - name: Push
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: check for parked domains"
+          git diff-index --quiet HEAD || git commit -m "CI: check for unparked domains"
           git push -q
