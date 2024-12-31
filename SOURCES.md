@@ -18,7 +18,7 @@ Only active sources are used to automatically retrieve domains.
 | [Fake Website Buster](https://fakewebsitebuster.com/) | | |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | Yes |
 | [Google Custom Search JSON API](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) | Yes | |
-| [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | |
+| [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | Yes |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
 | [Jeroen Gui Anti-Phishing Project](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
 | [PetScams.com](https://petscams.com/) | | |
