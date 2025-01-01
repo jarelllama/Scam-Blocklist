@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 01.01.041057.2025
+! Version: 01.01.103301.2025
 ! Expires: 12 hours
-! Last modified: Wed Jan  1 04:10:57 UTC 2025
+! Last modified: Wed Jan  1 10:33:01 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 20373
+! Number of entries: 20374
 !
 ||0.seetherofficialmerch.com^
 ||01edc.com^
@@ -13484,6 +13484,7 @@
 ||posstaa-hr.top^
 ||posstahr.ink^
 ||post-ad.info^
+||post-austria.bar^
 ||post-bn.shop^
 ||post-can.top^
 ||post-ch3.shop^
