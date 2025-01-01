@@ -28,8 +28,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 217138
-Light version: 20373
+Total domains: 217139
+Light version: 20374
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -53,7 +53,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       0 |      0 % |       5 % | StopGunScams.com
     0 |       0 |      0 % |       3 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
- 2475 |    2475 |    100 % |      22 % | All sources
+ 2476 |    2476 |    100 % |      22 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
