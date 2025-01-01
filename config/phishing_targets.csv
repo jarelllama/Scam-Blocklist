@@ -27,7 +27,7 @@ capitalone,54,150,,&,269,150,y,
 chase bank,,,,chase.*bank,25,25,,
 chat.openai,7,97,,(openai.*chat|chat.*openai),6,8,,
 chatgpt,255,151,y,(^|-)&|&(-|\.),1194,52,,regex: Too many FPs
-chromewebstore,4,19,,&,5,10,,
+chromewebstore,4,19,,chrome.*web.*store|chrome.*extension,5,10,y,
 citigroup,19,98,,(^|-)&|&(-|\.),9,18,,
 coinbase,246,151,y,&,7493,150,y,
 correos,,,,-&|&-,180,36,y,
