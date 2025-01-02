@@ -28,32 +28,32 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 217028
-Light version: 20304
+Total domains: 217231
+Light version: 20360
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     0 |      11 |      0 % |      37 % | 165 Anti-fraud
-    4 |      85 |      2 % |      13 % | Artists Against 419
-    0 |       0 |      0 % |      26 % | Česká Obchodní Inspekce
+   31 |     112 |      3 % |      13 % | Artists Against 419
+    0 |       0 |      0 % |      31 % | Česká Obchodní Inspekce
     0 |      49 |      1 % |       1 % | Cybersquatting
-    3 |     876 |     27 % |       0 % | DGA Detector
+   14 |     887 |     26 % |       0 % | DGA Detector
     5 |      40 |      1 % |      20 % | Emerging Threats
     0 |       0 |      0 % |      20 % | FakeWebshopListHUN
-   52 |      82 |      2 % |       3 % | Google Search
-  139 |     298 |      9 % |       8 % | Gridinsoft
-  317 |     692 |     21 % |      10 % | Jeroengui
-   21 |      46 |      1 % |       0 % | Jeroengui (NRDs)
-  148 |     503 |     15 % |      26 % | PhishStats
-    5 |      35 |      1 % |       0 % | PhishStats (NRDs)
-    0 |       7 |      0 % |      10 % | PuppyScams.org
-   30 |     491 |     15 % |       1 % | Regex Matching
+   75 |     105 |      3 % |       3 % | Google Search
+  184 |     343 |     10 % |       9 % | Gridinsoft
+  395 |     770 |     22 % |      10 % | Jeroengui
+   28 |      53 |      1 % |       0 % | Jeroengui (NRDs)
+  173 |     528 |     15 % |      26 % | PhishStats
+    6 |      36 |      1 % |       0 % | PhishStats (NRDs)
+    0 |       7 |      0 % |      11 % | PuppyScams.org
+   36 |     497 |     14 % |       1 % | Regex Matching
     0 |      39 |      1 % |       7 % | Scam Directory
     0 |       0 |      0 % |      32 % | ScamAdviser
     0 |       0 |      0 % |       5 % | StopGunScams.com
-    0 |       0 |      0 % |       3 % | Verbraucherzentrale Hamburg
+    0 |       0 |      0 % |       4 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
-  698 |    3174 |    100 % |      22 % | All sources
+  913 |    3389 |    100 % |      22 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
