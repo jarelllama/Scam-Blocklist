@@ -720,21 +720,24 @@ source_fakewebshoplisthun() {
 }
 
 source_jeroengui() {
-    # Last checked: 29/12/24
+    # Last checked: 03/01/25
     source='Jeroengui'
     ignore_from_light=true  # Too many domains
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://file.jeroengui.be/phishing/last_week.txt'
-    # Get URLs with no subdirectories (some of the URLs use docs.google.com),
-    # exclude IP addresses and extract domains.
-    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
-        > "$results_file"
+    local url
 
-    # The scam feed requires a different regex expression
-    local url='https://file.jeroengui.be/scam/last_week.txt'
+    url='https://file.jeroengui.be/phishing/last_week.txt'
+    #curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
+    #    > "$results_file"
+    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+
+    url='https://file.jeroengui.be/malware/last_week.txt'
+    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$results_file"
+
+    url='https://file.jeroengui.be/scam/last_week.txt'
     curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$results_file"
 
     # Get matching NRDs for the light version. Unicode is only processed by the
