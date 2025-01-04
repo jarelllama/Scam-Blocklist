@@ -896,7 +896,9 @@ source_vzhh() {
 
 trap cleanup EXIT
 
-NEEDRESTART_MODE=a apt-get dist-upgrade --yes
+# Hide needrestart message on ubuntu-24.04
+# https://askubuntu.com/questions/1367139/apt-get-upgrade-auto-restart-services
+sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
 
 $FUNCTION --format-all
 
