@@ -898,7 +898,7 @@ trap cleanup EXIT
 
 # Hide needrestart message on ubuntu-24.04
 # https://askubuntu.com/questions/1367139/apt-get-upgrade-auto-restart-services
-sudo NEEDRESTART_MODE=a apt-get dist-upgrade --yes
+sudo NEEDRESTART_MODE=a apt-get instal --yes
 
 $FUNCTION --format-all
 
