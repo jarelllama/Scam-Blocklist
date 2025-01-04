@@ -897,8 +897,8 @@ source_vzhh() {
 trap cleanup EXIT
 
 # Uninstall needrestart
-# sudo is needed here
-sudo apt-get remove -qq needrestart
+# sudo is needed here (note -qq does not seem to work here)
+sudo apt-get remove needrestart > /dev/null
 
 $FUNCTION --format-all
 
