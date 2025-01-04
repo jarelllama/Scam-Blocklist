@@ -896,6 +896,8 @@ source_vzhh() {
 
 trap cleanup EXIT
 
+NEEDRESTART_MODE=a apt-get dist-upgrade --yes
+
 $FUNCTION --format-all
 
 source
