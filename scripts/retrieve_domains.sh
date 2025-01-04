@@ -898,7 +898,7 @@ trap cleanup EXIT
 
 # Uninstall needrestart
 # sudo is needed here
-sudo apt remove -qq needrestart
+apt-get remove -qq needrestart
 
 $FUNCTION --format-all
 
