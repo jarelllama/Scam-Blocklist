@@ -19,7 +19,7 @@ jobs:
   update-readme:
     # Do not run if workflow_run failed/cancelled (still allows workflow_dispatch and workflow_call)
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
