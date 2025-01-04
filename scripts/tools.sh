@@ -141,6 +141,11 @@ send_telegram() {
 
 # Entry point
 
+# Uninstall needrestart which is needed for most scripts
+# sudo is needed here
+# note -qq does not seem to work here
+sudo apt-get remove needrestart > /dev/null
+
 case "$1" in
     --format)
         format_file "$2"
