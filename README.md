@@ -28,8 +28,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 223609
-Light version: 21342
+Total domains: 223637
+Light version: 21370
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -44,18 +44,18 @@ Today | Monthly | %Monthly | %Filtered | Source
   153 |     729 |      4 % |      10 % | Gridinsoft
   288 |    3816 |     22 % |      10 % | Jeroengui
    21 |     317 |      1 % |       0 % | Jeroengui (NRDs)
-   37 |      37 |      0 % |       1 % | PCrisk
+   53 |      53 |      0 % |       1 % | PCrisk
   357 |    1831 |     10 % |      26 % | PhishStats
    29 |     174 |      1 % |       0 % | PhishStats (NRDs)
     0 |      14 |      0 % |      12 % | PuppyScams.org
   829 |    3723 |     22 % |       1 % | Regex Matching
-  251 |     251 |      1 % |       0 % | SafelyWeb
+  263 |     263 |      1 % |       0 % | SafelyWeb
     0 |      39 |      0 % |       7 % | Scam Directory
     0 |       0 |      0 % |      32 % | ScamAdviser
     0 |       0 |      0 % |       5 % | StopGunScams.com
     0 |       8 |      0 % |       5 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
- 2963 |   16882 |    100 % |      22 % | All sources
+ 2991 |   16910 |    100 % |      22 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
