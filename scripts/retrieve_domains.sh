@@ -442,10 +442,11 @@ source_google_search() {
 }
 
 search_google() {
-    # Last checked: 23/12/24
+    # Last checked: 05/01/25
     search_term="${1//\"/}"  # Remove quotes before encoding
     # Replace non-alphanumeric characters with spaces
     encoded_search_term="${search_term//[^[:alnum:]]/%20}"
+    search_term="${search_term//\//}"  # Remove slashes for file creation
     results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
     query_count=0
     # Set execution time for each individual search term
