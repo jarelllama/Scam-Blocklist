@@ -44,10 +44,12 @@ Today | Monthly | %Monthly | %Filtered | Source
   153 |     729 |      4 % |      10 % | Gridinsoft
   288 |    3816 |     22 % |      10 % | Jeroengui
    21 |     317 |      1 % |       0 % | Jeroengui (NRDs)
+   37 |      37 |      0 % |       1 % | PCrisk
   357 |    1831 |     10 % |      26 % | PhishStats
    29 |     174 |      1 % |       0 % | PhishStats (NRDs)
     0 |      14 |      0 % |      12 % | PuppyScams.org
   829 |    3723 |     22 % |       1 % | Regex Matching
+  251 |     251 |      1 % |       0 % | SafelyWeb
     0 |      39 |      0 % |       7 % | Scam Directory
     0 |       0 |      0 % |      32 % | ScamAdviser
     0 |       0 |      0 % |       5 % | StopGunScams.com
