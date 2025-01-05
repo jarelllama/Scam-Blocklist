@@ -61,6 +61,7 @@ Today | Monthly | %Monthly | %Filtered | Source
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
 Dead domains removed today: 3737
+Dead domains removed this month: 13287
 Resurrected domains added today: 990
 
 Parked domains removed this month: 0
