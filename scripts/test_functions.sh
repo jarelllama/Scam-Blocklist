@@ -586,6 +586,7 @@ test_parked_check() {
 #   $1: script to execute
 #   $2: arguments to pass to script
 run_script() {
+    echo ""
     echo "----------------------------------------------------------------------"
     printf "\e[1m[start] %s %s\e[0m\n" "$1" "$2"
     echo "----------------------------------------------------------------------"
