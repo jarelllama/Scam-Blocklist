@@ -41,10 +41,12 @@ readonly -a SOURCES=(
     source_jeroengui_nrd
     source_gridinsoft
     source_manual
+    source_pcrisk
     source_phishstats
     source_phishstats_nrd
     source_puppyscams
     source_regex
+    source_safelyweb
     source_scamadviser
     source_scamdirectory
     source_stopgunscams
@@ -778,6 +780,20 @@ source_manual() {
     [[ -f "$results_file" ]] && process_source
 }
 
+source_pcrisk() {
+    # Last checked: 05/01/25
+    source='PCrisk.com'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://www.pcrisk.com/removal-guides'
+    # Matches domain[.]com and domain.com
+    curl -sS --retry 2 --retry-all-errors "${url}?start=[0-15]0" \
+        | grep -Po '>What (kind of (page|website) )?is \K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+        > "$results_file"
+}
+
 source_phishstats() {
     # Last checked: 29/12/24
     source='PhishStats'
@@ -822,6 +838,18 @@ source_puppyscams() {
     curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
         | grep -Po "<h4 class=\"-ih\"><a href=\"/\K${DOMAIN_DASH_REGEX}(?=\">)" \
         | mawk '{gsub(/-/, "."); print}' > "$results_file"
+}
+
+source_safelyweb() {
+    # Last checked: 05/01/25
+    source='SafelyWeb'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://safelyweb.com/scams-database'
+    curl -sSZ --retry 2 --retry-all-errors "${url}/?per_page=[1-15]" \
+        | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_scamadviser() {
