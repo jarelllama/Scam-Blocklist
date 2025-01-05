@@ -28,8 +28,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 223321
-Light version: 21054
+Total domains: 223609
+Light version: 21342
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -37,14 +37,14 @@ Today | Monthly | %Monthly | %Filtered | Source
    51 |     209 |      1 % |      12 % | Artists Against 419
     0 |       7 |      0 % |      39 % | Česká Obchodní Inspekce
    34 |     296 |      1 % |       1 % | Cybersquatting
-  855 |    5201 |     31 % |       0 % | DGA Detector
+  855 |    5201 |     30 % |       0 % | DGA Detector
    48 |      98 |      0 % |      19 % | Emerging Threats
     0 |       0 |      0 % |      20 % | FakeWebshopListHUN
    57 |     354 |      2 % |       3 % | Google Search
   153 |     729 |      4 % |      10 % | Gridinsoft
   288 |    3816 |     22 % |      10 % | Jeroengui
    21 |     317 |      1 % |       0 % | Jeroengui (NRDs)
-  357 |    1831 |     11 % |      26 % | PhishStats
+  357 |    1831 |     10 % |      26 % | PhishStats
    29 |     174 |      1 % |       0 % | PhishStats (NRDs)
     0 |      14 |      0 % |      12 % | PuppyScams.org
   829 |    3723 |     22 % |       1 % | Regex Matching
@@ -53,7 +53,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       0 |      0 % |       5 % | StopGunScams.com
     0 |       8 |      0 % |       5 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
- 2675 |   16594 |    100 % |      22 % | All sources
+ 2963 |   16882 |    100 % |      22 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
