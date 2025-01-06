@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 01.05.231615.2025
+! Version: 01.06.034908.2025
 ! Expires: 12 hours
-! Last modified: Sun Jan  5 23:16:15 UTC 2025
+! Last modified: Mon Jan  6 03:49:08 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 21132
+! Number of entries: 21133
 !
 ||0.seetherofficialmerch.com^
 ||01edc.com^
@@ -18259,6 +18259,7 @@
 ||topshop-eu.com^
 ||topshopnow.store^
 ||topshoptiktok-v.com^
+||topsmartwatchnews.com^
 ||topsvipclothes.com^
 ||toptipvideo.com^
 ||topwatchxs.com^
