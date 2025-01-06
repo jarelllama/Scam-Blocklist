@@ -112,15 +112,14 @@ download_toplist() {
 download_nrd_feed() {
     [[ -f nrd.tmp ]] && return
 
-    url1='https://github.com/xRuffKez/NRD/raw/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt'
-    url2='https://github.com/xRuffKez/NRD/raw/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt'
-    # Disabled due to size of the combined feeds
-    #url3='https://feeds.opensquat.com/domain-names-month.txt'
+    url1='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt'
+    url2='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt'
+    url3='https://raw.githubusercontent.com/SystemJargon/filters/refs/heads/main/nrds-30days.txt'
+    url4='https://feeds.opensquat.com/domain-names-month.txt'
 
-    # Download the feeds in parallel
-    # Note the feeds currently have a bug where it contains invalid domains
-    curl -sSLZ "$url1" "$url2" | mawk '!/#/' \
-        | grep -oE '[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+    # Download the feeds in parallel and get only domains, ignoring comments
+    curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
+        | grep -oE '^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
         > nrd.tmp
 
     format_file nrd.tmp
