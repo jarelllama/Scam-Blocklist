@@ -733,9 +733,9 @@ source_jeroengui() {
     local url
 
     url='https://file.jeroengui.be/phishing/last_week.txt'
-    #curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
-    #    > "$results_file"
-    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+    # Get URLs with no subdirectories (too many link shorteners)
+    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
+        > "$results_file"
 
     url='https://file.jeroengui.be/malware/last_week.txt'
     curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$results_file"
