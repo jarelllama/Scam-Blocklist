@@ -17,13 +17,13 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
-# Matches example.com, example[.]com, 1.1.1.1
 # Seems like the strict regex can be used for most cases
+# Matches example.com, example[.]com, 1.1.1.1
 #readonly DOMAIN_REGEX='[[:alnum:].-]+\[?\.\]?[[:alnum:]-]+'
-
 # Matches example-com, 1.1.1.1
 # https://github.com/jarelllama/Scam-Blocklist/issues/349
-readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
+#readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
+
 # Only matches domains
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.
@@ -828,7 +828,7 @@ source_phishstats_nrd() {
 }
 
 source_puppyscams() {
-    # Last checked: 25/12/24
+    # Last checked: 07/01/25
     source='PuppyScams.org'
     results_file="data/pending/domains_${source}.tmp"
 
@@ -836,19 +836,18 @@ source_puppyscams() {
 
     local url='https://puppyscams.org'
     curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
-        | grep -Po "<h4 class=\"-ih\"><a href=\"/\K${DOMAIN_DASH_REGEX}(?=\">)" \
-        | mawk '{gsub(/-/, "."); print}' > "$results_file"
+        | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$results_file"
 }
 
 source_safelyweb() {
-    # Last checked: 05/01/25
+    # Last checked: 07/01/25
     source='SafelyWeb'
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://safelyweb.com/scams-database'
-    curl -sSZ --retry 2 --retry-all-errors "${url}/?per_page=[1-15]" \
+    curl -sSZ --retry 2 --retry-all-errors "${url}/?per_page=[1-30]" \
         | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > "$results_file"
 }
 
@@ -869,7 +868,7 @@ source_scamadviser() {
 }
 
 source_scamdirectory() {
-    # Last checked: 25/12/24
+    # Last checked: 07/01/25
     source='Scam Directory'
     results_file='data/pending/domains_scam_directory.tmp'
 
@@ -877,21 +876,21 @@ source_scamdirectory() {
 
     local url='https://scam.directory/category'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -Po "href=\"/\K${DOMAIN_DASH_REGEX}(?=\" title)" \
-        | mawk 'NR<=50 {gsub(/-/, "."); print}' > "$results_file"
-        # Keep only newest 50 results
+        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" \
+        | head -n 50 > "$results_file"
+        # The 50 newest domains are sufficient for the number of
+        # reports in a day
 }
 
 source_stopgunscams() {
-    # Last checked: 25/12/24
+    # Last checked: 07/01/25
     source='StopGunScams.com'
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://stopgunscams.com/firearm-scammer-list'
-    # 'page/1' does not exist
-    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[0-14]" \
+    local url='https://stopgunscams.com'
+    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[1-15]" \
         | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$results_file"
 }
 
