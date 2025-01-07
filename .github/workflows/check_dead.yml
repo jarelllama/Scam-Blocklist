@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   check-resurrected-domains:
-    timeout-minutes: 180
+    timeout-minutes: 300
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -30,7 +30,7 @@ jobs:
   check-dead-part-1:
     needs: check-resurrected-domains
     if: ${{ ! cancelled() }}
-    timeout-minutes: 180
+    timeout-minutes: 300
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -52,7 +52,7 @@ jobs:
   check-dead-part-2:
     needs: check-dead-part-1
     if: ${{ ! cancelled() }}
-    timeout-minutes: 180
+    timeout-minutes: 300
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
