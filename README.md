@@ -28,7 +28,7 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 252328
+Total domains: 252329
 Light version: 23577
 
 New domains after filtering:
@@ -41,7 +41,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     3 |     114 |      0 % |      19 % | Emerging Threats
     0 |       0 |      0 % |      21 % | FakeWebshopListHUN
    38 |     427 |      0 % |       3 % | Google Search
-  172 |    1009 |      1 % |      12 % | Gridinsoft
+  173 |    1010 |      1 % |      12 % | Gridinsoft
 26082 |   30036 |     58 % |      10 % | Jeroengui
  1879 |    2207 |      4 % |       0 % | Jeroengui (NRDs)
     1 |      54 |      0 % |      11 % | PCrisk
@@ -55,7 +55,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       0 |      0 % |       5 % | StopGunScams.com
     8 |      16 |      0 % |       7 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
-30992 |   50987 |    100 % |      22 % | All sources
+30993 |   50988 |    100 % |      22 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
