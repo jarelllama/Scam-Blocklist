@@ -686,13 +686,13 @@ source_aa419() {
 }
 
 source_coi.gov.cz() {
-    # Last checked: 30/12/24
+    # Last checked: 08/01/25
     source='Česká Obchodní Inspekce'
     results_file='data/pending/domains_coi.gov.cz.tmp'
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://www.coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
+    local url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
         > "$results_file"
