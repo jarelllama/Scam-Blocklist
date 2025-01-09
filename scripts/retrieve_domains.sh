@@ -40,6 +40,7 @@ readonly -a SOURCES=(
     source_jeroengui
     source_jeroengui_nrd
     source_gridinsoft
+    source_malwaretips
     source_manual
     source_pcrisk
     source_phishstats
@@ -772,6 +773,24 @@ source_gridinsoft() {
     curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
+    source_malwaretips() {
+    # Last checked: 09/01/25
+    source='MalwareTips'
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local urls=(
+        'https://malwaretips.com/blogs/category/adware'
+        'https://malwaretips.com/blogs/category/hijackers'
+        'https://malwaretips.com/blogs/category/rogue-software'
+    )
+
+    for url in "${urls[@]}"; do
+        curl -sSZL --retry 2 --retry-all-errors "${url}/page/[1-15]"
+    done | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= [A-Z])" > "$results_file"
+}
+
 source_manual() {
     source='Manual'
     results_file="data/pending/domains_${source}.tmp"
@@ -781,7 +800,7 @@ source_manual() {
 }
 
 source_pcrisk() {
-    # Last checked: 05/01/25
+    # Last checked: 09/01/25
     source='PCrisk'
     results_file="data/pending/domains_${source}.tmp"
 
@@ -789,8 +808,8 @@ source_pcrisk() {
 
     local url='https://www.pcrisk.com/removal-guides'
     # Matches domain[.]com and domain.com
-    curl -sS --retry 2 --retry-all-errors "${url}?start=[0-15]0" \
-        | grep -Po '>What (kind of (page|website) )?is \K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+    curl -sSZ --retry 2 --retry-all-errors "${url}?start=[0-15]0" \
+        | grep -iPo '>what (kind of (page|website) )?is \K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
         > "$results_file"
 }
 
@@ -852,19 +871,15 @@ source_safelyweb() {
 }
 
 source_scamadviser() {
-    # Last checked: 23/12/24
+    # Last checked: 09/01/25
     source='ScamAdviser'
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://www.scamadviser.com/articles'
-    # Regarding grep pipe errors, see:
-    # https://github.com/jarelllama/Scam-Blocklist/issues/349
-    # Trailing slash intentionally omitted
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
-        | grep -oE '<h2 class=mb-0>.*</h2>' \
-        | grep -oE "([0-9]|[A-Z])${DOMAIN_REGEX}" > "$results_file"
+        | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" > "$results_file"
 }
 
 source_scamdirectory() {
