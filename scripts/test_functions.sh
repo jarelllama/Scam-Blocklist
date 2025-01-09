@@ -203,11 +203,13 @@ TEST_DEAD_CHECK() {
 TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough records)
-    for i in {1..50};do
-        printf "placeholder48390%s.com\n" "$i" >> placeholders.txt
+    for i in {1..25};do
+        printf "placeholder48390%s.com\n" "$i" >> "$RAW"
     done
-    cat placeholders.txt >> "$RAW"
-    cat placeholders.txt >> "$PARKED_DOMAINS"
+
+    for i in {26..50};do
+        printf "placeholder48390%s.com\n" "$i" >> "$PARKED_DOMAINS"
+    done
 
     test_unparked_check
     test_parked_check
