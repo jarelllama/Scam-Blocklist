@@ -113,9 +113,6 @@ find_dead_in() {
     sort -u dead.tmp -o dead.tmp
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
-
-    # Return 1 if no dead domains were found
-    [[ ! -s dead.tmp ]] && return 1 || return 0
 }
 
 # Function 'remove_dead' removes dead domains from the raw file, raw light
