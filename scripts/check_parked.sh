@@ -56,7 +56,7 @@ check_parked() {
     comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
         > domains.tmp
 
-    find_parked_in domains.tmp || return
+    find_parked_in domains.tmp
 
     # Save parked domains to be removed from the various files later
     # and to act as a filter for newly retrieved domains.
@@ -101,7 +101,6 @@ check_unparked() {
 # Output:
 #   parked.tmp
 #   errored.tmp (consists of domains that errored during curl)
-#   return 1 (if parked domains not found)
 find_parked_in() {
     local execution_time
     execution_time="$(date +%s)"
@@ -133,9 +132,6 @@ find_parked_in() {
 
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp) "
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
-
-    # Return 1 if no parked domains were found
-    [[ ! -s parked.tmp ]] && return 1 || return 0
 }
 
 # Function 'find_parked' queries sites in a given file for parked messages in
