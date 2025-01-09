@@ -203,7 +203,7 @@ TEST_DEAD_CHECK() {
 TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough records)
-    for i in {1..100};do
+    for i in {1..50};do
         printf "placeholder48390%s.com\n" "$i" >> placeholders.txt
     done
     cat placeholders.txt >> "$RAW"
@@ -224,7 +224,12 @@ TEST_PARKED_CHECK() {
     run_script check_parked.sh part2
     run_script check_parked.sh remove
 
-    # Remove placeholder line
+    ### FOR DEBUGGING
+    cat "$RAW"
+    echo ""
+    cat "$PARKED_DOMAINS"
+
+    # Remove placeholder lines
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS"; do
         grep -vxFf placeholders.txt "$file" > temp
         mv temp "$file"

@@ -195,6 +195,8 @@ find_parked() {
     done < "$1"
 }
 
+# Function 'remove_parked' removes parked domains from the raw file, raw light
+# file, root domains file and subdomains file.
 remove_parked() {
     count_before="$(wc -l < "$RAW")"
 
