@@ -57,7 +57,7 @@ check_dead() {
     comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
         > domains.tmp
 
-    find_dead_in domains.tmp || return
+    find_dead_in domains.tmp
 
     # Save dead domains to be removed from the various files later
     # and to act as a filter for newly retrieved domains.
@@ -71,7 +71,7 @@ check_dead() {
 # Note that resurrected domains are not added back into the raw light file as
 # the dead domains are not logged with their sources.
 check_alive() {
-    find_dead_in "$DEAD_DOMAINS"  # No need to return if no dead domains found
+    find_dead_in "$DEAD_DOMAINS"
 
     # Get resurrected domains in dead domains file
     comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive_domains.tmp
@@ -98,7 +98,6 @@ check_alive() {
 #   $1: file to process
 # Output:
 #   dead.tmp
-#   return 1 (if dead domains not found)
 find_dead_in() {
     local temp
     temp="$(basename "$1").tmp"
