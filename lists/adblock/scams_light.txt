@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 01.09.111829.2025
+! Version: 01.09.113100.2025
 ! Expires: 12 hours
-! Last modified: Thu Jan  9 11:18:29 UTC 2025
+! Last modified: Thu Jan  9 11:31:00 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 26657
+! Number of entries: 26687
 !
 ||0.seetherofficialmerch.com^
 ||000014.cc^
@@ -2870,6 +2870,7 @@
 ||bingeink.com^
 ||bingmwe.com^
 ||bingqyu.com^
+||bingsearch.io^
 ||bingstorefront.com^
 ||binjance.com^
 ||binmance.com^
@@ -3231,6 +3232,7 @@
 ||boldqual.com^
 ||boldstylea.com^
 ||boldwheaton.shop^
+||bolingor.co.in^
 ||bollywoods.co.in^
 ||bolsasell.com^
 ||bolsasmini.com^
@@ -7201,6 +7203,7 @@
 ||engwe-bikes-eu.com^
 ||engwe-bikes.de^
 ||engwe-ireland.ie^
+||enhanceconnection.co.in^
 ||enhancehomesupply.com^
 ||enhmgrzvyhapbszxk.shop^
 ||enigma.net.in^
@@ -7965,6 +7968,7 @@
 ||faveshoptop.com^
 ||favesnug.com^
 ||favicase.com^
+||favoritesearches.com^
 ||favorlook.com^
 ||favouremeli.com^
 ||faxbadnexteriao.com^
@@ -8056,6 +8060,7 @@
 ||ferfibutik.com^
 ||ferfipatika.to^
 ||ferienemart.com^
+||ferma.co.in^
 ||ferplastverkaufe.com^
 ||fertechtion.shop^
 ||fesmemood.com^
@@ -10845,6 +10850,7 @@
 ||hgvzrpxnkmbtw.wiki^
 ||hgvzrpxnkmbtw.work^
 ||hgwrts.pro^
+||hh-click.com^
 ||hhdsozxpp.top^
 ||hhealthy.webflow.io^
 ||hhentai.shop^
@@ -12856,6 +12862,7 @@
 ||korstoreuk.shop^
 ||korucc.com^
 ||korvon.tech^
+||kosearch.com^
 ||kosile.shop^
 ||kosmetik-dediscount.com^
 ||kosovo.ubuy.com^
@@ -13627,6 +13634,7 @@
 ||lotteli.com^
 ||lottovyprodej.cz^
 ||lotturo.com^
+||lotus-tab.com^
 ||louboutinboty.cz^
 ||louisao.shop^
 ||louisthebaud.shop^
@@ -15441,6 +15449,7 @@
 ||nartlogisticsglobal.com^
 ||nasafashiongalaxy51.shop^
 ||nasetrade.guru^
+||nashickaltirdab.com^
 ||nashona.shop^
 ||nassinimary.shop^
 ||nassosblog.gr.com^
@@ -15656,13 +15665,20 @@
 ||news-bfezuri.xyz^
 ||news-bfofefu.live^
 ||news-bfopeci.info^
+||news-bfowago.cc^
 ||news-bfugaho.info^
+||news-bgakeba.cc^
 ||news-bganise.info^
 ||news-bgejaka.info^
 ||news-bgigubu.cc^
+||news-bgitagu.cc^
 ||news-bhecudu.live^
 ||news-bhexusa.xyz^
+||news-bhiciwe.today^
+||news-bhocime.info^
 ||news-bhotiwe.cc^
+||news-bhupotu.xyz^
+||news-bkemowi.cc^
 ||news-bkeyole.cc^
 ||news-bkiluxe.cc^
 ||news-bkulago.cc^
@@ -15681,6 +15697,7 @@
 ||news-bpudepi.today^
 ||news-bpugiru.xyz^
 ||news-bpuroki.today^
+||news-byikivu.info^
 ||news-cekufa.com^
 ||news-jufife.com^
 ||news-mensual.com^
@@ -15713,7 +15730,6 @@
 ||newsfeeds-microsoft.press^
 ||newshoes-de.com^
 ||newshoes-nl.com^
-||newsubmission-com.s1search.co^
 ||newsyoucanread24.com^
 ||newteeoutlook.com^
 ||newtektronyxe.shop^
@@ -17723,6 +17739,7 @@
 ||potify.pt^
 ||potify.shop^
 ||potok.cash^
+||potterfun.com^
 ||pottio.top^
 ||poutoi.shop^
 ||povylokap.ink^
@@ -18450,6 +18467,7 @@
 ||queencychemshop.com^
 ||queensrhodeuniversity.education^
 ||queenstreetbears.com^
+||query-redir.com^
 ||quest.metisl2snetwork.net^
 ||questionsdatabases.azurewebsites.net^
 ||quichvibe.com^
@@ -19301,6 +19319,7 @@
 ||s-shaped.shop^
 ||s0.pm^
 ||s1gn1fyh0se.cyou^
+||s1search.co^
 ||s26.yesjjj.com^
 ||s3-atlassian.cloud^
 ||s3-bah.cloud^
@@ -19623,7 +19642,9 @@
 ||seanmiller.shop^
 ||search-2go.com^
 ||search-great.com^
+||search-load.com^
 ||search-owl.com^
+||search-redir.com^
 ||search-secured.com^
 ||search.defaultredirect.com^
 ||search.feedvertizus.com^
@@ -19637,7 +19658,9 @@
 ||searchgptchat.info^
 ||searchinclient.com^
 ||searchinstyle.com^
+||searchmana.com^
 ||searchnukes.com^
+||searchtheweb-green.com^
 ||seasonperiod.com^
 ||seasonsattirepro.com^
 ||seatspin.shop^
@@ -20322,6 +20345,7 @@
 ||skybridgeplc.com^
 ||skydrive.services^
 ||skyhomedeals.shop^
+||skyjem.com^
 ||skylineglobalequipment.com^
 ||skylineinvesthub.com^
 ||skylogixgroup.com^
@@ -20851,6 +20875,7 @@
 ||sqwonline.com^
 ||sqzbts.buzz^
 ||src-assistanceclient.com^
+||srchfst10.com^
 ||srcip.com^
 ||srcips.com^
 ||srcypugpbgomk.shop^
@@ -21596,6 +21621,7 @@
 ||taotyi.com^
 ||taotyo.com^
 ||taovbao.com^
+||targetads-hub.top^
 ||targus-netherlands.com^
 ||targus-romania.com^
 ||tarhive.shop^
@@ -22413,6 +22439,7 @@
 ||tf2economy.com^
 ||tf2unusual.shop^
 ||tfirstdaily.store^
+||tfrsrch.com^
 ||tftinvestmentpro.com^
 ||tg-chat.com^
 ||tg-online.info^
@@ -23279,6 +23306,7 @@
 ||trapstar.cz^
 ||tratofeito.co^
 ||travaildhl333.com^
+||travelbugtab.com^
 ||travelbyjen.com^
 ||travelessenshop.com^
 ||travelocragency.com^
@@ -25108,6 +25136,7 @@
 ||web3walletpw.cc^
 ||webcardprocessing.com^
 ||webcodez.com^
+||webdaily.live^
 ||webdatacache.com^
 ||webdataspace.com^
 ||weben.shop^
@@ -25335,6 +25364,7 @@
 ||whtasapp.shop^
 ||whtsapp.icu^
 ||whtsapp.team^
+||whubaesingotbrewer.com^
 ||whumafpv.freewebhostmost.com^
 ||widenaly.com^
 ||wifixlsatufiberpekanbaru.net^
