@@ -750,7 +750,7 @@ source_gridinsoft() {
     curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
-    source_malwaretips() {
+source_malwaretips() {
     # Last checked: 09/01/25
     source='MalwareTips'
     results_file="data/pending/domains_${source}.tmp"
