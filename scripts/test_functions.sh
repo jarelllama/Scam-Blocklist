@@ -226,11 +226,6 @@ TEST_PARKED_CHECK() {
     run_script check_parked.sh part2
     run_script check_parked.sh remove
 
-    ### FOR DEBUGGING
-    cat "$RAW"
-    echo ""
-    cat "$PARKED_DOMAINS"
-
     # Remove placeholder lines
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS"; do
         grep -v placeholder "$file" > temp
@@ -239,6 +234,11 @@ TEST_PARKED_CHECK() {
     # Not exact match in domain log
     grep -v placeholder "$DOMAIN_LOG" > temp
     mv temp "$DOMAIN_LOG"
+
+    ### FOR DEBUGGING
+    cat "$RAW"
+    echo ""
+    cat "$PARKED_DOMAINS"
 
     # Sort parked domains file for easier comparison with expected output
     sort "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
