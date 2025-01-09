@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  check-parked-domains:
+  check-parked-part-1:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -18,13 +18,34 @@ jobs:
         with:
           ref: main
 
-      - name: check_parked.sh
-        run: bash scripts/check_parked.sh checkparked
+      - name: check_parked.sh part 1
+        run: bash scripts/check_parked.sh part1
 
       - name: Push
         run: |
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: check for parked domains"
+          git diff-index --quiet HEAD || git commit -m "CI: check for parked domains (1)"
+          git push -q
+
+  check-parked-part-2:
+    needs: check-parked-part-1
+    if: ${{ ! cancelled() }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: check_parked.sh part 2
+        run: bash scripts/check_parked.sh part2
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: check for parked domains (2)"
           git push -q

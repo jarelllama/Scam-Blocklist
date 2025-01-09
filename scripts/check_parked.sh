@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Checks for parked/unparked domains and removes/adds them accordingly.
-# Current calculations put the processing speed at 12.5 entries/second.
 # It should be noted that although the domain may be parked, subfolders of the
 # domain may host malicious content. This script does not account for that.
 
@@ -16,6 +15,11 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly LOG_SIZE=50000
 
 main() {
+    # Split raw file into 2 parts for each parked check job
+    if [[ "$1" == part? ]]; then
+        split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
+    fi
+
     case "$1" in
         'checkunparked')
             # The unparked check being done in the workflow before the parked
@@ -24,8 +28,16 @@ main() {
             # processed by the unparked check.
             check_unparked
             ;;
-        'checkparked')
-            check_parked
+        'part1')
+            check_parked x00
+            ;;
+        'part2')
+            # Sometimes an x02 exists
+            [[ -f x02 ]] && cat x02 >> x01
+            check_parked x01
+            ;;
+        'remove')
+            remove_parked
             ;;
         *)
             printf "\n\e[1;31mNo argument passed.\e[0m\n\n"
@@ -34,45 +46,28 @@ main() {
     esac
 }
 
-# Function 'check_parked' removes parked domains from the raw file, raw light
-# file, and subdomains file.
+# Function 'check_parked' finds parked domains and collates them into the
+# parked domains file to be removed from the various files later. The parked
+# domains file is also used as a filter for newly retrieved domains.
 check_parked() {
-    # Include subdomains in the parked check. It is assumed that if the
+    # Include subdomains found in the given file. It is assumed that if the
     # subdomain is parked, so is the root domain. For this reason, the root
     # domains are excluded to not waste processing time.
-    comm -23 <(sort "$RAW" "$SUBDOMAINS") "$ROOT_DOMAINS" > domains.tmp
+    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
+        > domains.tmp
 
     find_parked_in domains.tmp || return
 
-    # Save parked domains to be used as a filter for newly retrieved
-    # domains. This includes subdomains.
-    # Note the parked domains file should remain unsorted
+    # Save parked domains to be removed from the various files later
+    # and to act as a filter for newly retrieved domains.
+    # Note the parked domains file should remain unsorted.
     cat parked.tmp >> "$PARKED_DOMAINS"
-
-    # Remove parked domains from subdomains file
-    comm -23 "$SUBDOMAINS" parked.tmp > temp
-    mv temp "$SUBDOMAINS"
-
-    # Strip subdomains from parked domains
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" parked.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u parked.tmp -o parked.tmp
-
-    # Remove parked domains from the various files
-    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        comm -23 "$file" parked.tmp > temp
-        mv temp "$file"
-    done
-
-    # Call shell wrapper to log number of parked domains in domain log
-    $FUNCTION --log-domains "$(wc -l < parked.tmp)" parked_count raw
 }
 
 # Function 'check_unparked' finds unparked domains in the parked domains file
-# (also called the parked domains cache) and adds them back into the raw file.
+# and adds them back into the raw file.
 #
-# Note that resurrected domains are not added back into the raw light file as
+# Note that unparked domains are not added back into the raw light file as
 # the parked domains are not logged with their sources.
 check_unparked() {
     find_parked_in "$PARKED_DOMAINS"
@@ -178,12 +173,14 @@ find_parked() {
         html="$(curl -sSL --max-time 3 "https://${domain}/" 2>&1 | tr -d '\0')"
 
         # If using HTTPS fails, use HTTP
-        if grep -qF 'curl: (60) SSL: no alternative certificate subject name matches target host name' \
-            <<< "$html"; then
+        if grep -qF 'curl: (60) SSL:' <<< "$html"; then
             # Lower max time
             html="$(curl -sSL --max-time 2 "http://${domain}/" 2>&1 \
                 | tr -d '\0')"
-        elif grep -qF 'curl:' <<< "$html"; then
+        fi
+
+        # Check for curl errors
+        if grep -qF 'curl:' <<< "$html"; then
             # Collate domains that errored so they can be dealt with later
             # accordingly
             printf "%s\n" "$domain" >> "errored_domains_${1}.tmp"
@@ -196,6 +193,38 @@ find_parked() {
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
     done < "$1"
+}
+
+remove_parked() {
+    count_before="$(wc -l < "$RAW")"
+
+    sort -u "$PARKED_DOMAINS" -o parked.tmp
+
+    # Remove parked domains from subdomains file
+    comm -23 "$SUBDOMAINS" parked.tmp > temp
+    mv temp "$SUBDOMAINS"
+
+    # Strip subdomains from parked domains
+    while read -r subdomain; do
+        sed -i "s/^${subdomain}\.//" parked.tmp
+    done < "$SUBDOMAINS_TO_REMOVE"
+    sort -u parked.tmp -o parked.tmp
+
+    # Remove parked domains from the various files
+    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
+        comm -23 "$file" parked.tmp > temp
+        mv temp "$file"
+    done
+
+    count_after="$(wc -l < "$RAW")"
+
+    parked_count="$(( count_before - count_after ))"
+
+    printf "\nRemoved parked domains from raw file.\nBefore: %s  Removed: %s  After: %s\n" \
+    "$count_before" "$parked_count" "$count_after"
+
+    # Call shell wrapper to log number of parked domains in domain log
+    $FUNCTION --log-domains "$parked_count" parked_count raw
 }
 
 cleanup() {

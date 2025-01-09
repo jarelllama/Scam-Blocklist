@@ -220,7 +220,9 @@ TEST_PARKED_CHECK() {
 
     # Run script
     run_script check_parked.sh checkunparked
-    run_script check_parked.sh checkparked
+    run_script check_parked.sh part1
+    run_script check_parked.sh part2
+    run_script check_parked.sh remove
 
     # Remove placeholder line
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS"; do
