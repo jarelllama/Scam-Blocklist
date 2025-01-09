@@ -6,6 +6,8 @@ on:
 permissions:
   contents: write
 
+# timeout-minutes is required because the dead domains linter sometimes hangs
+
 jobs:
   check-resurrected-domains:
     timeout-minutes: 300
