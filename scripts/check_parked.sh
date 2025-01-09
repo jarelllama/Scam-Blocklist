@@ -135,7 +135,7 @@ find_parked_in() {
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 
     # Return 1 if no parked domains were found
-    [[ ! -s parked.tmp ]] && return 1 || return 0
+    #[[ ! -s parked.tmp ]] && return 1 || return 0  # DEBUG
 }
 
 # Function 'find_parked' queries sites in a given file for parked messages in
