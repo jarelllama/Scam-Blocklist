@@ -203,11 +203,11 @@ TEST_DEAD_CHECK() {
 TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough records)
-    for i in {1..50};do
+    for i in {1..100};do
         printf "placeholder483%s.com\n" "$i" >> "$RAW"
     done
 
-    for i in {51..100};do
+    for i in {101..200};do
         printf "placeholder483%s.com\n" "$i" >> "$PARKED_DOMAINS"
     done
 
@@ -231,7 +231,6 @@ TEST_PARKED_CHECK() {
         grep -v placeholder "$file" > temp
         mv temp "$file"
     done
-    # Not exact match in domain log
     grep -v placeholder "$DOMAIN_LOG" > temp
     mv temp "$DOMAIN_LOG"
 
