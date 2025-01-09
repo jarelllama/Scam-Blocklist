@@ -233,11 +233,11 @@ TEST_PARKED_CHECK() {
 
     # Remove placeholder lines
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS"; do
-        grep -vxFf placeholders.txt "$file" > temp
+        grep -v placeholder "$file" > temp
         mv temp "$file"
     done
     # Not exact match in domain log
-    grep -vFf placeholders.txt "$DOMAIN_LOG" > temp
+    grep -v placeholder "$DOMAIN_LOG" > temp
     mv temp "$DOMAIN_LOG"
 
     # Sort parked domains file for easier comparison with expected output
