@@ -54,7 +54,7 @@ main() {
 check_dead() {
     # Include subdomains found in the given file. Exclude the root domains
     # since the subdomains were what was retrieved during domain retrieval.
-    comm -23 <(sort <(grep -Ef "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
+    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
         > domains.tmp
 
     find_dead_in domains.tmp || return
