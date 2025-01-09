@@ -21,6 +21,7 @@ Only active sources are used to automatically retrieve domains.
 | [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | Yes |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
 | [Jeroen Gui Anti-Phishing Project](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
+| [MalwareTips](https://malwaretips.com/blogs/) | Yes | |
 | [PCrisk](https://www.pcrisk.com/) | Yes | |
 | [PetScams.com](https://petscams.com/) | | |
 | [PhishStats](https://phishstats.info/)[^2] | Yes | ~ |
