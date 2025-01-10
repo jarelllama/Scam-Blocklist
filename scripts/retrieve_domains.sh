@@ -35,6 +35,7 @@ readonly -a SOURCES=(
     source_coi.gov.cz
     source_cybersquatting
     source_dga_detector
+    source_easydmarc
     source_emerging_threats
     source_fakewebshoplisthun
     source_jeroengui
@@ -700,6 +701,18 @@ source_coi.gov.cz() {
         > "$results_file"
 }
 
+source_easydmarc() {
+    # Last checked: 10/01/25
+    source='EasyDMARC'
+    ignore_from_light=true  # Has a few false positives
+    results_file="data/pending/domains_${source}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+
+    local url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/easydmarc.txt'
+    curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
+}
+
 source_emerging_threats() {
     # Last checked: 23/12/24
     source='Emerging Threats'
@@ -763,14 +776,14 @@ source_jeroengui_nrd() {
 }
 
 source_gridinsoft() {
-    # Last checked: 29/12/24
+    # Last checked: 10/01/25
     source='Gridinsoft'
     ignore_from_light=true  # Has a few false positives
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://raw.githubusercontent.com/jarelllama/Gridinsoft-Blocklist/refs/heads/main/suspicious.txt'
+    local url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
     curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
