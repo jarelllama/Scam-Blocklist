@@ -14,7 +14,7 @@ Only active sources are used to automatically retrieve domains.
 | [Česká Obchodní Inspekce](https://www.coi.gov.cz/pro-spotrebitele/rizikove-e-shopy/) | Yes | |
 | [DFPI Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | | |
 | [DGA Detector](https://github.com/exp0se/dga_detector) | Yes | Yes |
-| [EasyDMARC](https://easydmarc.com/tools/phishing-url) | Yes | Yes |
+| [EasyDMARC](https://easydmarc.com/tools/phishing-url) | | |
 | [Emerging Threats](https://rules.emergingthreats.net/) | Yes | |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | | |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | Yes |

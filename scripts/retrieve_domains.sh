@@ -35,7 +35,6 @@ readonly -a SOURCES=(
     source_coi.gov.cz
     source_cybersquatting
     source_dga_detector
-    source_easydmarc
     source_emerging_threats
     source_fakewebshoplisthun
     source_jeroengui
@@ -699,18 +698,6 @@ source_coi.gov.cz() {
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
         > "$results_file"
-}
-
-source_easydmarc() {
-    # Last checked: 10/01/25
-    source='EasyDMARC'
-    ignore_from_light=true  # Has a few false positives
-    results_file="data/pending/domains_${source}.tmp"
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/easydmarc.txt'
-    curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_emerging_threats() {
