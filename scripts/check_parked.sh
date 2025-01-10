@@ -123,12 +123,12 @@ find_parked_in() {
     find_parked x12 & find_parked x13 & find_parked x14 & find_parked x15 &
     find_parked x16 & find_parked x17 & find_parked x18
     wait
-    rm x??
 
     # Collate parked domains and errored domains (ignore not found errors)
     sort -u parked_domains_x??.tmp -o parked.tmp 2> /dev/null
     sort -u errored_domains_x??.tmp -o errored.tmp 2> /dev/null
-    rm ./*_x??.tmp
+
+    rm ./*x??.tmp
 
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp) "
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
@@ -170,21 +170,18 @@ find_parked() {
 
         # If using HTTPS fails, use HTTP
         if grep -qF 'curl: (60) SSL:' <<< "$html"; then
-            # Lower max time
-            html="$(curl -sSL --max-time 2 "http://${domain}/" 2>&1 \
+            html="$(curl -sSL --max-time 3 "http://${domain}/" 2>&1 \
                 | tr -d '\0')"
-        fi
 
         # Check for curl errors
-        if grep -qF 'curl:' <<< "$html"; then
+        elif grep -qF 'curl:' <<< "$html"; then
             # Collate domains that errored so they can be dealt with later
             # accordingly
             printf "%s\n" "$domain" >> "errored_domains_${1}.tmp"
             continue
-        fi
 
         # Check for parked messages in the site's HTML
-        if grep -qiFf "$PARKED_TERMS" <<< "$html"; then
+        elif grep -qiFf "$PARKED_TERMS" <<< "$html"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
