@@ -61,8 +61,9 @@ validate() {
         printf "%s\n" "$subdomains" >> subdomains.tmp
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
+        # No longer log subdomains due to the high number of them
         # Exclude 'www' subdomains (too many of them)
-        filter "$(mawk '!/^www\./' <<< "$subdomains")" subdomain --preserve
+        #filter "$(mawk '!/^www\./' <<< "$subdomains")" subdomain --preserve
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$RAW" -o "$RAW"
     sort -u "$RAW_LIGHT" -o "$RAW_LIGHT"

@@ -181,8 +181,9 @@ process_source() {
         printf "%s\n" "$subdomains" >> subdomains.tmp
         printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
 
+        # No longer log subdomains due to the high number of them
         # Log subdomains excluding 'www' (too many of them)
-        log_domains "$(mawk '!/^www\./' <<< "$subdomains")" subdomain
+        #log_domains "$(mawk '!/^www\./' <<< "$subdomains")" subdomain
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$results_file" -o "$results_file"
 
