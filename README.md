@@ -38,7 +38,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      16 |      0 % |      45 % | Česká Obchodní Inspekce
     1 |     705 |      0 % |       1 % | Cybersquatting
     2 |   10032 |     11 % |       0 % | DGA Detector
-    2 |       2 |      0 % |       0 % | EasyDMARC
+    2 |       2 |      0 % |      25 % | EasyDMARC
    42 |     199 |      0 % |      18 % | Emerging Threats
     0 |      35 |      0 % |      21 % | FakeWebshopListHUN
    15 |     656 |      0 % |       3 % | Google Search
