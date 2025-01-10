@@ -883,7 +883,7 @@ source_scamadviser() {
 }
 
 source_scamdirectory() {
-    # Last checked: 07/01/25
+    # Last checked: 10/01/25
     source='Scam Directory'
     results_file='data/pending/domains_scam_directory.tmp'
 
