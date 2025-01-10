@@ -49,3 +49,24 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "CI: check for parked domains (2)"
           git push -q
+
+  remove-parked-domains:
+    needs: check-parked-part-2
+    if: ${{ ! cancelled() }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: check_parked.sh remove
+        run: bash scripts/check_parked.sh remove
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: remove parked domains"
+          git push -q
