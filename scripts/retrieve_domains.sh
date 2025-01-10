@@ -30,7 +30,31 @@ readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 readonly -a SOURCES=(
+    source_165antifraud
+    source_aa419
+    source_coi.gov.cz
+    source_cybersquatting
+    source_dga_detector
     source_easydmarc
+    source_emerging_threats
+    source_fakewebshoplisthun
+    source_jeroengui
+    source_jeroengui_nrd
+    source_gridinsoft
+    source_malwaretips
+    source_manual
+    source_pcrisk
+    source_phishstats
+    source_phishstats_nrd
+    source_puppyscams
+    source_regex
+    source_safelyweb
+    source_scamadviser
+    source_scamdirectory
+    source_stopgunscams
+    source_viriback_tracker
+    source_vzhh
+    source_google_search
 )
 
 # Function 'source' calls on the respective functions of each source to
