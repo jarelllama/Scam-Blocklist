@@ -202,7 +202,7 @@ TEST_DEAD_CHECK() {
 # unparked domains respectively.
 TEST_PARKED_CHECK() {
     # Generate placeholders
-    # (split does not work well without enough records)
+    # (split does not work well without enough lines)
     for i in {1..100};do
         printf "placeholder483%s.com\n" "$i" >> "$RAW"
     done
@@ -217,7 +217,7 @@ TEST_PARKED_CHECK() {
     # Prepare sample raw light file
     cp "$RAW" "$RAW_LIGHT"
     # Expected output for light version
-    # (Unparked domains are not added back into light)
+    # (unparked domains are not added back into light)
     grep -vxF 'www.github.com' out_raw.txt > out_raw_light.txt
 
     # Run script
@@ -558,7 +558,7 @@ test_unparked_check() {
     # EXPECTED OUTPUT
     # Subdomains should be kept to be processed by the validation check
     printf "www.github.com\n" >> out_raw.txt
-    # Domains that errored during curl should be assumed still parked
+    # Domains that errored during curl should be assumed to be still parked
     printf "parked-errored-test.com\n" >> out_parked.txt
     printf "unparked_count,1,parked_domains_file\n" >> out_log.txt
 }
