@@ -357,8 +357,9 @@ test_subdomain_removal() {
         printf "%s\n" "$subdomain" >> input.txt
         # EXPECTED OUTPUT
         printf "%s\n" "$subdomain" >> out_subdomains.txt
+        # subdomains are no longer logged
         # 'www' subdomains are not logged
-        printf "subdomain,%s" "$subdomain" | mawk '!/www\./' >> out_log.txt
+        #printf "subdomain,%s" "$subdomain" | mawk '!/www\./' >> out_log.txt
     done < "$SUBDOMAINS_TO_REMOVE"
 
     # EXPECTED OUTPUT
