@@ -890,11 +890,9 @@ source_scamdirectory() {
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     local url='https://scam.directory/category'
+    # head -n causes grep broken pipe error
     curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" \
-        | head -n 50 > "$results_file"
-        # The 50 newest domains are sufficient for the number of
-        # reports in a day
+        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$results_file"
 }
 
 source_stopgunscams() {
