@@ -28,20 +28,20 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 281507
-Light version: 28788
+Total domains: 281543
+Light version: 28798
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-  199 |     453 |      0 % |      37 % | 165 Anti-fraud
+  200 |     454 |      0 % |      37 % | 165 Anti-fraud
     5 |     308 |      0 % |      13 % | Artists Against 419
     0 |      16 |      0 % |      46 % | Česká Obchodní Inspekce
    51 |     756 |      0 % |       1 % | Cybersquatting
   839 |   10871 |     11 % |       0 % | DGA Detector
-    8 |     207 |      0 % |      18 % | Emerging Threats
-   84 |     119 |      0 % |      21 % | FakeWebshopListHUN
-   77 |     733 |      0 % |       3 % | Google Search
-  199 |    1695 |      1 % |      14 % | Gridinsoft
+    9 |     208 |      0 % |      18 % | Emerging Threats
+   86 |     121 |      0 % |      21 % | FakeWebshopListHUN
+   78 |     734 |      0 % |       3 % | Google Search
+  212 |    1708 |      1 % |      14 % | Gridinsoft
  1359 |   61819 |     63 % |       9 % | Jeroengui
   301 |    4967 |      5 % |       0 % | Jeroengui (NRDs)
     1 |     243 |      0 % |       3 % | MalwareTips
@@ -49,14 +49,14 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |    4772 |      4 % |      27 % | PhishStats
     0 |     668 |      0 % |       0 % | PhishStats (NRDs)
     0 |      50 |      0 % |      13 % | PuppyScams.org
-  697 |    9698 |     10 % |       1 % | Regex Matching
-  237 |    1580 |      1 % |       2 % | SafelyWeb
- 3360 |    3454 |      3 % |       5 % | Scam Directory
+  698 |    9699 |     10 % |       1 % | Regex Matching
+  247 |    1590 |      1 % |       2 % | SafelyWeb
+ 3367 |    3461 |      3 % |       5 % | Scam Directory
     2 |       4 |      0 % |      32 % | ScamAdviser
     0 |      34 |      0 % |       5 % | StopGunScams.com
     0 |      16 |      0 % |       9 % | Verbraucherzentrale Hamburg
     1 |       1 |      0 % |      31 % | ViriBack C2 Tracker
- 7122 |   96917 |    100 % |      21 % | All sources
+ 7158 |   96953 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
