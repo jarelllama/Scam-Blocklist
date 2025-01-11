@@ -860,8 +860,9 @@ source_puppyscams() {
 }
 
 source_safelyweb() {
-    # Last checked: 07/01/25
+    # Last checked: 11/01/25
     source='SafelyWeb'
+    ignore_from_light=true  # Has a few false positives
     results_file="data/pending/domains_${source}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
