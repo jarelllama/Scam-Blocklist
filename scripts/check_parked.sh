@@ -204,10 +204,31 @@ remove_parked() {
     mv temp "$SUBDOMAINS"
 
     # Strip subdomains from parked domains
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" parked.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u parked.tmp -o parked.tmp
+    gawk '
+        # store lines from subdomains_to_remove as keys in array "dom"
+        NR==FNR { dom[$0]; next }
+        # process parked.tmp
+        {
+            # split current line by "." and store strings in array "arr"
+            n=split($0,arr,".")
+            # if "arr" has more than 1 element, loop over domains in array "dom"
+            if (n>1) {
+                for (d in dom) {
+                    # if string in "dom" matches 1st element of array "arr", remove subdomain from the line and break the loop
+                    if (match(arr[1], d)) {
+                        regex="^" d "."
+                        sub(regex,"")
+                        break
+                    }
+                }
+            }
+            # print out the line
+            print $0
+        }
+    ' "$SUBDOMAINS_TO_REMOVE" parked.tmp |
+    sort -u > parked-removed-subdomains.tmp
+
+    mv parked-removed-subdomains.tmp parked.tmp
 
     # Remove parked domains from the various files
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
@@ -235,6 +256,11 @@ cleanup() {
 }
 
 # Entry point
+
+command -v "gawk" 1>/dev/null || {
+    echo "Error: gawk not found." >&2
+    exit 1
+}
 
 trap cleanup EXIT
 
