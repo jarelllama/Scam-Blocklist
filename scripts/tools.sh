@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# tools.sh is a shell wrapper intended to store commonly used functions.
+# tools.sh is a shell wrapper that stores commonly used functions.
 
 # Function 'format_file' standardizes the format of the given file.
 #   $1: file to be formatted
