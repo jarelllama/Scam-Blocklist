@@ -203,15 +203,15 @@ remove_parked() {
 
     # Strip subdomains from parked domains
     gawk '
-        # store lines from subdomains_to_remove as keys in array "dom"
-        NR==FNR { dom[$0]; next }
+        # store lines from subdomains_to_remove as keys in array "subdom"
+        NR==FNR { subdom[$0]; next }
         # process parked.tmp
         {
             # split current line by "." and store strings in array "arr"
             n=split($0,arr,".")
             # if "arr" has more than 1 element,
-            # and string in "dom" matches 1st element of array "arr", remove subdomain from the line
-            if (n>1 && arr[1] in dom) {
+            # and string in "subdom" matches 1st element of array "arr", remove subdomain from the line
+            if (n>1 && arr[1] in subdom) {
                 regex="^" arr[1] "."
                 sub(regex,"")
             }
