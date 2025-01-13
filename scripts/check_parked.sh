@@ -148,18 +148,16 @@ find_parked() {
     if [[ "$1" == 'x00' ]]; then
         local track=true
         local count=1
+        local lines
+        lines="$(wc -l < "$1")"
     fi
-
-    # Count lines
-    local lines_cnt
-    lines_cnt="$(wc -l < "$1")"
 
     # Loop through domains
     while read -r domain; do
         if [[ "$track" == true ]]; then
             if (( count % 100 == 0 )); then
                 printf "[progress] Analyzed %s%% of domains\n" \
-                    "$(( count * 100 / lines_cnt ))"
+                    "$(( count * 100 / lines ))"
             fi
 
             (( count++ ))
