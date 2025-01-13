@@ -211,16 +211,11 @@ remove_parked() {
         {
             # split current line by "." and store strings in array "arr"
             n=split($0,arr,".")
-            # if "arr" has more than 1 element, loop over domains in array "dom"
-            if (n>1) {
-                for (d in dom) {
-                    # if string in "dom" matches 1st element of array "arr", remove subdomain from the line and break the loop
-                    if (match(arr[1], d)) {
-                        regex="^" d "."
-                        sub(regex,"")
-                        break
-                    }
-                }
+            # if "arr" has more than 1 element,
+            # and string in "dom" matches 1st element of array "arr", remove subdomain from the line
+            if (n>1 && arr[1] in dom) {
+                regex="^" arr[1] "."
+                sub(regex,"")
             }
             # print out the line
             print $0
