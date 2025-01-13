@@ -172,14 +172,14 @@ find_parked() {
         if grep -qF 'curl: (60) SSL:' <<< "$html"; then
             html="$(curl -sSL --max-time 3 "http://${domain}/" 2>&1 \
                 | tr -d '\0')"
+        fi
 
         # Check for curl errors
-        elif grep -qF 'curl:' <<< "$html"; then
+        if grep -qF 'curl:' <<< "$html"; then
             # Collate domains that errored so they can be dealt with later
             # accordingly
             printf "%s\n" "$domain" >> "errored_domains_${1}.tmp"
             continue
-
         # Check for parked messages in the site's HTML
         elif grep -qiFf "$PARKED_TERMS" <<< "$html"; then
             printf "[info] Found parked domain: %s\n" "$domain"
