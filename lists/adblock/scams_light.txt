@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 01.14.041932.2025
+! Version: 01.14.042622.2025
 ! Expires: 12 hours
-! Last modified: Tue Jan 14 04:19:32 UTC 2025
+! Last modified: Tue Jan 14 04:26:22 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 35669
+! Number of entries: 35670
 !
 ||0.seetherofficialmerch.com^
 ||000014.cc^
@@ -15964,6 +15964,7 @@
 ||jio-offers-india.site^
 ||jioimjl.com^
 ||jiosewa.com^
+||jirte.com^
 ||jisawes.com^
 ||jitcom.info^
 ||jithyxrl.com^
