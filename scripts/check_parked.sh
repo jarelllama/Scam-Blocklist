@@ -148,6 +148,8 @@ find_parked() {
     if [[ "$1" == 'x00' ]]; then
         local track=true
         local count=1
+        local lines
+        lines="$(wc -l < "$1")"
     fi
 
     # Loop through domains
@@ -155,7 +157,7 @@ find_parked() {
         if [[ "$track" == true ]]; then
             if (( count % 100 == 0 )); then
                 printf "[progress] Analyzed %s%% of domains\n" \
-                    "$(( count * 100 / $(wc -l < "$1") ))"
+                    "$(( count * 100 / lines ))"
             fi
 
             (( count++ ))
@@ -200,10 +202,26 @@ remove_parked() {
     mv temp "$SUBDOMAINS"
 
     # Strip subdomains from parked domains
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" parked.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u parked.tmp -o parked.tmp
+    gawk '
+        # store lines from subdomains_to_remove as keys in array "subdom"
+        NR==FNR { subdom[$0]; next }
+        # process parked.tmp
+        {
+            # split current line by "." and store strings in array "arr"
+            n=split($0,arr,".")
+            # if "arr" has more than 1 element,
+            # and string in "subdom" matches 1st element of array "arr", remove subdomain from the line
+            if (n>1 && arr[1] in subdom) {
+                regex="^" arr[1] "."
+                sub(regex,"")
+            }
+            # print out the line
+            print $0
+        }
+    ' "$SUBDOMAINS_TO_REMOVE" parked.tmp |
+    sort -u > parked-removed-subdomains.tmp
+
+    mv parked-removed-subdomains.tmp parked.tmp
 
     # Remove parked domains from the various files
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
@@ -231,6 +249,11 @@ cleanup() {
 }
 
 # Entry point
+
+command -v "gawk" 1>/dev/null || {
+    echo "Error: gawk not found." >&2
+    exit 1
+}
 
 trap cleanup EXIT
 
