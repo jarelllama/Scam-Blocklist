@@ -83,9 +83,12 @@ source() {
         # Skip commented out sources
         [[ "$SOURCE" == \#* ]] && continue
 
+        local source_name
+        local url
+        local results_file
         local ignore_from_light=false
         local rate_limited=false
-        local query_count=''
+        local query_count
         local execution_time
         execution_time="$(date +%s)"
 
@@ -397,6 +400,9 @@ cleanup() {
 source_google_search() {
     # Last checked: 23/12/24
     source_name='Google Search'
+    url='https://customsearch.googleapis.com/customsearch/v1'
+    local search_id="$GOOGLE_SEARCH_ID"
+    local search_api_key="$GOOGLE_SEARCH_API_KEY"
 
     if [[ "$USE_EXISTING" == true ]]; then
         # Use existing retrieved results
@@ -416,11 +422,6 @@ source_google_search() {
         done
         return
     fi
-
-    # Retrieve new results
-    local url='https://customsearch.googleapis.com/customsearch/v1'
-    local search_id="$GOOGLE_SEARCH_ID"
-    local search_api_key="$GOOGLE_SEARCH_API_KEY"
 
     # Install csvkit
     command -v csvgrep > /dev/null || pip install -q csvkit
@@ -659,11 +660,11 @@ source_165antifraud() {
     # Last checked: 27/12/24
     # Credit to @tanmarpn for the source idea
     source_name='165 Anti-fraud'
+    url='https://165.npa.gov.tw/api/article/subclass/3'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://165.npa.gov.tw/api/article/subclass/3'
     curl -sS "$url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
         | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" \
@@ -673,6 +674,7 @@ source_165antifraud() {
 source_aa419() {
     # Last checked: 23/12/24
     source_name='Artists Against 419'
+    url='https://api.aa419.org/fakesites'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
@@ -680,7 +682,6 @@ source_aa419() {
     # Install jq
     command -v jq > /dev/null || apt-get install -qq jq
 
-    local url='https://api.aa419.org/fakesites'
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
@@ -689,11 +690,11 @@ source_aa419() {
 source_coi.gov.cz() {
     # Last checked: 08/01/25
     source_name='Česká Obchodní Inspekce'
+    url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
         > "$results_file"
@@ -702,23 +703,23 @@ source_coi.gov.cz() {
 source_emerging_threats() {
     # Last checked: 23/12/24
     source_name='Emerging Threats'
+    url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
     curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_fakewebshoplisthun() {
     # Last checked: 23/12/24
     source_name='FakeWebshopListHUN'
+    url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
     ignore_from_light=true  # Has a few false positives
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
     curl -sS "$url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
         > "$results_file"
 }
@@ -730,8 +731,6 @@ source_jeroengui() {
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local url
 
     url='https://file.jeroengui.be/phishing/last_week.txt'
     # Get URLs with no subdirectories (too many link shorteners)
@@ -764,27 +763,26 @@ source_jeroengui_nrd() {
 source_gridinsoft() {
     # Last checked: 10/01/25
     source_name='Gridinsoft'
+    url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
     ignore_from_light=true  # Has a few false positives
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
     curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
 
 source_malwaretips() {
     # Last checked: 09/01/25
     source_name='MalwareTips'
-    results_file="data/pending/${source_name// /_}.tmp"
-
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
-
-    local urls=(
+    urls=(
         'https://malwaretips.com/blogs/category/adware'
         'https://malwaretips.com/blogs/category/hijackers'
         'https://malwaretips.com/blogs/category/rogue-software'
     )
+    results_file="data/pending/${source_name// /_}.tmp"
+
+    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
     for url in "${urls[@]}"; do
         curl -sSZL --retry 2 --retry-all-errors "${url}/page/[1-15]"
@@ -802,11 +800,11 @@ source_manual() {
 source_pcrisk() {
     # Last checked: 09/01/25
     source_name='PCrisk'
+    url='https://www.pcrisk.com/removal-guides'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://www.pcrisk.com/removal-guides'
     # Matches domain[.]com and domain.com
     curl -sSZ --retry 2 --retry-all-errors "${url}?start=[0-15]0" \
         | grep -iPo '>what (kind of (page|website) )?is \K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
@@ -816,12 +814,12 @@ source_pcrisk() {
 source_phishstats() {
     # Last checked: 29/12/24
     source_name='PhishStats'
+    url='https://phishstats.info/phish_score.csv'
     ignore_from_light=true  # Too many domains
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://phishstats.info/phish_score.csv'
     # Get URLs with no subdirectories (some of the URLs use docs.google.com),
     # exclude IP addresses and extract domains.
     # (?=/?\"$) is lookahead that matches an optional slash followed by an end
@@ -849,11 +847,11 @@ source_phishstats_nrd() {
 source_puppyscams() {
     # Last checked: 07/01/25
     source_name='PuppyScams.org'
+    url='https://puppyscams.org'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://puppyscams.org'
     curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
         | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$results_file"
 }
@@ -861,12 +859,12 @@ source_puppyscams() {
 source_safelyweb() {
     # Last checked: 11/01/25
     source_name='SafelyWeb'
+    url='https://safelyweb.com/scams-database'
     ignore_from_light=true  # Has a few false positives
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://safelyweb.com/scams-database'
     curl -sSZ --retry 2 --retry-all-errors "${url}/?per_page=[1-30]" \
         | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > "$results_file"
 }
@@ -874,11 +872,11 @@ source_safelyweb() {
 source_scamadviser() {
     # Last checked: 09/01/25
     source_name='ScamAdviser'
+    url='https://www.scamadviser.com/articles'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://www.scamadviser.com/articles'
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" > "$results_file"
 }
@@ -886,11 +884,11 @@ source_scamadviser() {
 source_scamdirectory() {
     # Last checked: 10/01/25
     source_name='Scam Directory'
+    url='https://scam.directory/category'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://scam.directory/category'
     # head -n causes grep broken pipe error
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$results_file"
@@ -899,11 +897,11 @@ source_scamdirectory() {
 source_stopgunscams() {
     # Last checked: 07/01/25
     source_name='StopGunScams.com'
+    url='https://stopgunscams.com'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://stopgunscams.com'
     curl -sSZ --retry 2 --retry-all-errors "${url}/page/[1-15]" \
         | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$results_file"
 }
@@ -911,11 +909,11 @@ source_stopgunscams() {
 source_viriback_tracker() {
     # Last checked: 26/12/24
     source_name='ViriBack C2 Tracker'
+    url='https://tracker.viriback.com/dump.php'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://tracker.viriback.com/dump.php'
     curl -sS "$url" | mawk -v year="$(date +"%Y")" \
         -F ',' '$4 ~ year {print $2}' \
         | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
@@ -924,11 +922,11 @@ source_viriback_tracker() {
 source_vzhh() {
     # Last checked: 27/12/24
     source_name='Verbraucherzentrale Hamburg'
+    url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
-    local url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
     curl -sS --retry 2 --retry-all-errors "$url" \
         | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
         > "$results_file"
