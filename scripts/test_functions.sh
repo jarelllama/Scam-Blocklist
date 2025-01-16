@@ -122,9 +122,9 @@ TEST_RETRIEVE_VALIDATE() {
 
         # Distribute the sample input into various sources
         split -n l/3 input.txt
-        mv xaa data/pending/domains_aa419.tmp
-        mv xab data/pending/domains_google_search_search-term-1.tmp
-        mv xac data/pending/domains_google_search_search-term-2.tmp
+        mv xaa data/pending/Artists_Against_419.tmp
+        mv xab data/pending/google_search_search-term-1.tmp
+        mv xac data/pending/google_search_search-term-2.tmp
 
         # Prepare sample raw light file
         cp "$RAW" "$RAW_LIGHT"
@@ -154,7 +154,7 @@ TEST_RETRIEVE_VALIDATE() {
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Check entries saved for manual review
-        check_output data/pending/domains_ScamAdviser.tmp \
+        check_output data/pending/ScamAdviser.tmp \
             out_manual_review.txt "Manual review"
 
         # Check source log
@@ -295,7 +295,7 @@ test_manual_addition() {
     # INPUT
     # Note URL conversion is done in the workflow now
     # Also test removal of square brackets
-    printf "manual-addition-test[.]com\n" >> data/pending/domains_Manual.tmp
+    printf "manual-addition-test[.]com\n" >> data/pending/Manual.tmp
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
 
@@ -419,7 +419,7 @@ test_invalid_removal() {
             printf "invalid-test-.com\n"
             printf "in.com\n"
             printf "i.com\n"
-        } >> data/pending/domains_ScamAdviser.tmp
+        } >> data/pending/ScamAdviser.tmp
 
         # EXPECTED OUTPUT
         # The retrieval script saves invalid entries to the manual review file
@@ -491,7 +491,7 @@ test_invalid_removal() {
 test_toplist_check() {
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # INPUT
-        printf "microsoft.com\n" >> data/pending/domains_ScamAdviser.tmp
+        printf "microsoft.com\n" >> data/pending/ScamAdviser.tmp
         # EXPECTED OUTPUT
         printf "microsoft.com\n" >> out_manual_review.txt
         printf "toplist,microsoft.com,ScamAdviser\n" >> out_log.txt
@@ -509,7 +509,7 @@ test_toplist_check() {
 # TEST: exclusion of specific sources from light version
 test_light_build() {
     # INPUT
-    printf "raw-light-test.com\n" >> data/pending/domains_Jeroengui.tmp
+    printf "raw-light-test.com\n" >> data/pending/Jeroengui.tmp
     # EXPECTED OUTPUT
     printf "raw-light-test.com\n" >> out_raw.txt
     # Domain from excluded source should not be in output

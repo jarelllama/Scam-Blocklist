@@ -141,11 +141,14 @@ filter() {
 # source. The output is a cumulative filtered domains file of all filtered
 # domains from all sources in this run.
 process_source() {
-    [[ ! -f "$results_file" ]] && return
+    if [[ "$USE_EXISTING" != true ]]; then
+        # Move results file to pending directory
+        mv "$results_file" data/pending
+    fi
 
-    # Move results file to pending directory
-    mv "$results_file" data/pending
-    results_file="data/pending/$(basename "$results_file")"
+    results_file="data/pending/${results_file}"
+
+    [[ ! -f "$results_file" ]] && return
 
     # Remove http(s): and square brackets (this is done here once instead of
     # multiple times in the source functions)
