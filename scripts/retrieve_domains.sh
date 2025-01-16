@@ -144,9 +144,8 @@ process_source() {
     if [[ "$USE_EXISTING" != true ]]; then
         # Move results file to pending directory
         mv "$results_file" data/pending
+        results_file="data/pending/${results_file}"
     fi
-
-    results_file="data/pending/${results_file}"
 
     [[ ! -f "$results_file" ]] && return
 
