@@ -94,8 +94,6 @@ source() {
 
         $SOURCE
 
-        [[ "$USE_EXISTING" == true ]] && continue
-
         # The Google Search source is processed by individual search terms, not
         # as one source
         [[ "$source_name" == 'Google Search' ]] && continue
@@ -505,7 +503,7 @@ source_cybersquatting() {
     source_name='Cybersquatting'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
@@ -581,7 +579,7 @@ source_dga_detector() {
     ignore_from_light=true
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     # Keep only NRDs with more than 12 characters
     mawk 'length($0) > 12' nrd.tmp > domains.tmp
@@ -615,7 +613,7 @@ source_regex() {
     ignore_from_light=true
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     # Remove duplicate targets from targets file
     mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
@@ -663,7 +661,7 @@ source_165antifraud() {
     url='https://165.npa.gov.tw/api/article/subclass/3'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sS "$url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
@@ -677,7 +675,7 @@ source_aa419() {
     url='https://api.aa419.org/fakesites'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     # Install jq
     command -v jq > /dev/null || apt-get install -qq jq
@@ -693,7 +691,7 @@ source_coi.gov.cz() {
     url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
@@ -706,7 +704,7 @@ source_emerging_threats() {
     url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
@@ -718,7 +716,7 @@ source_fakewebshoplisthun() {
     ignore_from_light=true  # Has a few false positives
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sS "$url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
         > "$results_file"
@@ -730,7 +728,7 @@ source_jeroengui() {
     ignore_from_light=true  # Too many domains
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     url='https://file.jeroengui.be/phishing/last_week.txt'
     # Get URLs with no subdirectories (too many link shorteners)
@@ -755,7 +753,7 @@ source_jeroengui_nrd() {
     source_name='Jeroengui (NRDs)'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     mv jeroengui_nrds.tmp "$results_file"
 }
@@ -767,7 +765,7 @@ source_gridinsoft() {
     ignore_from_light=true  # Has a few false positives
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
 }
@@ -782,7 +780,7 @@ source_malwaretips() {
     )
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     for url in "${urls[@]}"; do
         curl -sSZL --retry 2 --retry-all-errors "${url}/page/[1-15]"
@@ -803,7 +801,7 @@ source_pcrisk() {
     url='https://www.pcrisk.com/removal-guides'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     # Matches domain[.]com and domain.com
     curl -sSZ --retry 2 --retry-all-errors "${url}?start=[0-15]0" \
@@ -818,7 +816,7 @@ source_phishstats() {
     ignore_from_light=true  # Too many domains
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     # Get URLs with no subdirectories (some of the URLs use docs.google.com),
     # exclude IP addresses and extract domains.
@@ -839,7 +837,7 @@ source_phishstats_nrd() {
     source_name='PhishStats (NRDs)'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     mv phishstats_nrds.tmp "$results_file"
 }
@@ -850,7 +848,7 @@ source_puppyscams() {
     url='https://puppyscams.org'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
         | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$results_file"
@@ -863,7 +861,7 @@ source_safelyweb() {
     ignore_from_light=true  # Has a few false positives
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}/?per_page=[1-30]" \
         | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > "$results_file"
@@ -875,7 +873,7 @@ source_scamadviser() {
     url='https://www.scamadviser.com/articles'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
         | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" > "$results_file"
@@ -887,7 +885,7 @@ source_scamdirectory() {
     url='https://scam.directory/category'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     # head -n causes grep broken pipe error
     curl -sS --retry 2 --retry-all-errors "${url}/" \
@@ -900,7 +898,7 @@ source_stopgunscams() {
     url='https://stopgunscams.com'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}/page/[1-15]" \
         | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$results_file"
@@ -912,7 +910,7 @@ source_viriback_tracker() {
     url='https://tracker.viriback.com/dump.php'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sS "$url" | mawk -v year="$(date +"%Y")" \
         -F ',' '$4 ~ year {print $2}' \
@@ -925,7 +923,7 @@ source_vzhh() {
     url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
     results_file="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && { process_source; return; }
+    [[ "$USE_EXISTING" == true ]] && return
 
     curl -sS --retry 2 --retry-all-errors "$url" \
         | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
