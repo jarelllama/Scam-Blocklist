@@ -87,7 +87,6 @@ source() {
         local rate_limited=false
         local query_count=''
         local execution_time
-
         execution_time="$(date +%s)"
 
         $SOURCE
@@ -96,7 +95,7 @@ source() {
 
         # The Google Search source is processed by individual search terms, not
         # as one source
-        [[ "$source" == 'Google Search' ]] && continue
+        [[ "$source_name" == 'Google Search' ]] && continue
 
         process_source
     done
@@ -143,6 +142,10 @@ filter() {
 # domains from all sources in this run.
 process_source() {
     [[ ! -f "$results_file" ]] && return
+
+    # Move results file to pending directory
+    mv "$results_file" data/pending
+    results_file="data/pending/$(basename "$results_file")"
 
     # Remove http(s): and square brackets (this is done here once instead of
     # multiple times in the source functions)
@@ -315,7 +318,7 @@ log_source() {
     local item
     local status='saved'
 
-    if [[ "$source" == 'Google Search' ]]; then
+    if [[ "$source_name" == 'Google Search' ]]; then
         item="\"${search_term:0:100}...\""
     fi
 
@@ -330,20 +333,20 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
-    echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source},${item},${raw_count},${final_count},\
-${total_whitelisted_count},${dead_count},${parked_count},${in_toplist_count},\
-${query_count},${status}" >> "$SOURCE_LOG"
+    echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},${item},\
+${raw_count},${final_count},${total_whitelisted_count},${dead_count},\
+${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
 
-    printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source}"
+    printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source_name}"
 
     if [[ "$status" == 'ERROR: empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
 
         # Send telegram notification
         $FUNCTION --send-telegram \
-            "Warning: '$source' retrieved no results. Potential error occurred."
+            "Warning: '$source_name' retrieved no results. Potential error occurred."
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
             "$raw_count" "$final_count" "$total_whitelisted_count" \
@@ -359,7 +362,7 @@ ${query_count},${status}" >> "$SOURCE_LOG"
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 log_domains() {
-    $FUNCTION --log-domains "$1" "$2" "$source"
+    $FUNCTION --log-domains "$1" "$2" "$source_name"
 }
 
 # Function 'download_nrd_feed' calls a shell wrapper to download the NRD feed.
@@ -383,7 +386,7 @@ cleanup() {
 # The 'source_<source>' functions are to retrieve results from the respective
 # sources.
 # Input:
-#   $source:            name of the source to use in the console and logs
+#   $source_name:            name of the source to use in the console and logs
 #   $ignore_from_light: if true, the results are not included in the light
 #                       version (default is false)
 #   $results_file:      file path to save retrieved results to be used for
@@ -397,19 +400,19 @@ cleanup() {
 
 source_google_search() {
     # Last checked: 23/12/24
-    source='Google Search'
+    source_name='Google Search'
 
     if [[ "$USE_EXISTING" == true ]]; then
         # Use existing retrieved results
         # Loop through the results from each search term
-        for results_file in data/pending/domains_google_search_*.tmp; do
+        for results_file in data/pending/google_search_*.tmp; do
             [[ ! -f "$results_file" ]] && return
 
             # Set execution time for each individual search term
             execution_time="$(date +%s)"
 
             # Remove header from file name
-            search_term="${results_file#data/pending/domains_google_search_}"
+            search_term="${results_file#data/pending/google_search_}"
             # Remove file extension from file name to get search term
             search_term="${search_term%.tmp}"
 
@@ -451,7 +454,7 @@ search_google() {
     # Replace non-alphanumeric characters with spaces
     encoded_search_term="${search_term//[^[:alnum:]]/%20}"
     search_term="${search_term//\//}"  # Remove slashes for file creation
-    results_file="data/pending/domains_google_search_${search_term:0:100}.tmp"
+    results_file="google_search_${search_term:0:100}.tmp"
     query_count=0
     # Set execution time for each individual search term
     execution_time="$(date +%s)"
@@ -502,8 +505,8 @@ search_google() {
 
 source_cybersquatting() {
     # Last checked: 23/12/24
-    source='Cybersquatting'
-    results_file="data/pending/domains_${source}.tmp"
+    source_name='Cybersquatting'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -577,9 +580,9 @@ source_cybersquatting() {
 
 source_dga_detector() {
     # Last checked: 23/12/24
-    source='DGA Detector'
+    source_name='DGA Detector'
     ignore_from_light=true
-    results_file="data/pending/domains_dga_detector.tmp"
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -611,9 +614,9 @@ source_dga_detector() {
 
 source_regex() {
     # Last checked: 09/12/24
-    source='Regex'
+    source_name='Regex'
     ignore_from_light=true
-    results_file="data/pending/domains_${source}.tmp"
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -659,8 +662,8 @@ source_regex() {
 source_165antifraud() {
     # Last checked: 27/12/24
     # Credit to @tanmarpn for the source idea
-    source='165 Anti-fraud'
-    results_file='data/pending/domains_165antifraud.tmp'
+    source_name='165 Anti-fraud'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -673,8 +676,8 @@ source_165antifraud() {
 
 source_aa419() {
     # Last checked: 23/12/24
-    source='Artists Against 419'
-    results_file='data/pending/domains_aa419.tmp'
+    source_name='Artists Against 419'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -689,8 +692,8 @@ source_aa419() {
 
 source_coi.gov.cz() {
     # Last checked: 08/01/25
-    source='Česká Obchodní Inspekce'
-    results_file='data/pending/domains_coi.gov.cz.tmp'
+    source_name='Česká Obchodní Inspekce'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -702,8 +705,8 @@ source_coi.gov.cz() {
 
 source_emerging_threats() {
     # Last checked: 23/12/24
-    source='Emerging Threats'
-    results_file='data/pending/emerging_threats.tmp'
+    source_name='Emerging Threats'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -713,9 +716,9 @@ source_emerging_threats() {
 
 source_fakewebshoplisthun() {
     # Last checked: 23/12/24
-    source='FakeWebshopListHUN'
+    source_name='FakeWebshopListHUN'
     ignore_from_light=true  # Has a few false positives
-    results_file="data/pending/domains_${source}.tmp"
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -726,9 +729,9 @@ source_fakewebshoplisthun() {
 
 source_jeroengui() {
     # Last checked: 03/01/25
-    source='Jeroengui'
+    source_name='Jeroengui'
     ignore_from_light=true  # Too many domains
-    results_file="data/pending/domains_${source}.tmp"
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -754,8 +757,8 @@ source_jeroengui_nrd() {
     # Last checked: 29/12/24
     # For the light version
     # Only includes domains found in the NRD feed
-    source='Jeroengui (NRDs)'
-    results_file='data/pending/domains_jeroengui_nrd.tmp'
+    source_name='Jeroengui (NRDs)'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -764,9 +767,9 @@ source_jeroengui_nrd() {
 
 source_gridinsoft() {
     # Last checked: 10/01/25
-    source='Gridinsoft'
+    source_name='Gridinsoft'
     ignore_from_light=true  # Has a few false positives
-    results_file="data/pending/domains_${source}.tmp"
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -776,8 +779,8 @@ source_gridinsoft() {
 
 source_malwaretips() {
     # Last checked: 09/01/25
-    source='MalwareTips'
-    results_file="data/pending/domains_${source}.tmp"
+    source_name='MalwareTips'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -793,17 +796,14 @@ source_malwaretips() {
 }
 
 source_manual() {
-    source='Manual'
-    results_file="data/pending/domains_${source}.tmp"
-
-    # Process only if file is found (source is the file itself)
-    [[ -f "$results_file" ]] && process_source
+    source_name='Manual'
+    results_file='data/pending/Manual.tmp'
 }
 
 source_pcrisk() {
     # Last checked: 09/01/25
-    source='PCrisk'
-    results_file="data/pending/domains_${source}.tmp"
+    source_name='PCrisk'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -816,9 +816,9 @@ source_pcrisk() {
 
 source_phishstats() {
     # Last checked: 29/12/24
-    source='PhishStats'
+    source_name='PhishStats'
     ignore_from_light=true  # Too many domains
-    results_file="data/pending/domains_${source}.tmp"
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -839,8 +839,8 @@ source_phishstats_nrd() {
     # Last checked: 23/12/24
     # For the light version
     # Only includes domains found in the NRD feed
-    source='PhishStats (NRDs)'
-    results_file='data/pending/domains_phishstats_nrd.tmp'
+    source_name='PhishStats (NRDs)'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -849,8 +849,8 @@ source_phishstats_nrd() {
 
 source_puppyscams() {
     # Last checked: 07/01/25
-    source='PuppyScams.org'
-    results_file="data/pending/domains_${source}.tmp"
+    source_name='PuppyScams.org'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -861,9 +861,9 @@ source_puppyscams() {
 
 source_safelyweb() {
     # Last checked: 11/01/25
-    source='SafelyWeb'
+    source_name='SafelyWeb'
     ignore_from_light=true  # Has a few false positives
-    results_file="data/pending/domains_${source}.tmp"
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -874,8 +874,8 @@ source_safelyweb() {
 
 source_scamadviser() {
     # Last checked: 09/01/25
-    source='ScamAdviser'
-    results_file="data/pending/domains_${source}.tmp"
+    source_name='ScamAdviser'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -886,8 +886,8 @@ source_scamadviser() {
 
 source_scamdirectory() {
     # Last checked: 10/01/25
-    source='Scam Directory'
-    results_file='data/pending/domains_scam_directory.tmp'
+    source_name='Scam Directory'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -899,8 +899,8 @@ source_scamdirectory() {
 
 source_stopgunscams() {
     # Last checked: 07/01/25
-    source='StopGunScams.com'
-    results_file="data/pending/domains_${source}.tmp"
+    source_name='StopGunScams.com'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -911,8 +911,8 @@ source_stopgunscams() {
 
 source_viriback_tracker() {
     # Last checked: 26/12/24
-    source='ViriBack C2 Tracker'
-    results_file='data/pending/domains_viriback_tracker.tmp'
+    source_name='ViriBack C2 Tracker'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
@@ -924,8 +924,8 @@ source_viriback_tracker() {
 
 source_vzhh() {
     # Last checked: 27/12/24
-    source='Verbraucherzentrale Hamburg'
-    results_file='data/pending/domains_vzhh.tmp'
+    source_name='Verbraucherzentrale Hamburg'
+    results_file="${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && { process_source; return; }
 
