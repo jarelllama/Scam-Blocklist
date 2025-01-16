@@ -521,10 +521,6 @@ source_cybersquatting() {
     tlds="$(mawk -F '.' '{print $NF}' nrd.tmp | sort | uniq -c \
         | sort -nr | head -n 500 | mawk '{print $2}')"
 
-    # Remove duplicate targets from targets file
-    mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
-    mv temp "$PHISHING_TARGETS"
-
     # Get targets ignoring disabled ones
     targets="$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
 
@@ -608,16 +604,12 @@ source_dga_detector() {
 }
 
 source_regex() {
-    # Last checked: 09/12/24
+    # Last checked: 16/01/25
     source_name='Regex'
     ignore_from_light=true
     results_file="data/pending/${source_name// /_}.tmp"
 
     [[ "$USE_EXISTING" == true ]] && return
-
-    # Remove duplicate targets from targets file
-    mawk -F ',' '!seen[$1]++' "$PHISHING_TARGETS" > temp
-    mv temp "$PHISHING_TARGETS"
 
     # Get targets ignoring disabled ones
     targets="$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
