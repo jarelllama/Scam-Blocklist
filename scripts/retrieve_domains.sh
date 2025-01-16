@@ -141,7 +141,7 @@ filter() {
 # source. The output is a cumulative filtered domains file of all filtered
 # domains from all sources in this run.
 process_source() {
-    if [[ "$USE_EXISTING" != true ]]; then
+    if [[ "$results_file" != data/pending/* ]]; then
         # Move results file to pending directory
         mv "$results_file" data/pending
         results_file="data/pending/${results_file}"
