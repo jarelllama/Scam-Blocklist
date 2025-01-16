@@ -794,6 +794,9 @@ source_malwaretips() {
 source_manual() {
     source_name='Manual'
     results_file='data/pending/Manual.tmp'
+
+    # Process only if file is found (source is the file itself)
+    [[ -f "$results_file" ]] && process_source
 }
 
 source_pcrisk() {
