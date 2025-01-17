@@ -375,10 +375,12 @@ test_whitelist_blacklist() {
     printf "whitelist-blacklisted-test.com\n" >> "$BLACKLIST"
     # INPUT
     printf "whitelist-test.com\n" >> input.txt
-    printf "whitelist-blacklisted-test.com\n" >> input.txt
+    printf "www.whitelist-blacklisted-test.com\n" >> input.txt
 
     # EXPECTED OUTPUT
     printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
+    printf "whitelist-blacklisted-test.com\n" >> out_root_domains.txt
+    printf "www.whitelist-blacklisted-test.com\n" >> out_subdomains.txt
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
     # The validate script does not log blacklisted domains
     [[ "$script_to_test" == 'validate' ]] && return
