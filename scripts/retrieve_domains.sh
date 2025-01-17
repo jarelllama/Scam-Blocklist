@@ -17,7 +17,6 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
-# Seems like the strict regex can be used for most cases
 # Matches example.com, example[.]com, 1.1.1.1
 #readonly DOMAIN_REGEX='[[:alnum:].-]+\[?\.\]?[[:alnum:]-]+'
 # Matches example-com, 1.1.1.1
@@ -56,33 +55,36 @@ readonly -a SOURCES=(
     source_google_search
 )
 
-# Function 'source' calls on the respective functions of each source to
-# retrieve results. The results are then passed to the 'process_source'
-# function for further processing.
-source() {
+main() {
     # Check whether to use existing retrieved results
     if [[ -d data/pending ]]; then
         printf "\nUsing existing lists of retrieved results.\n"
         readonly USE_EXISTING=true
+    else
+        mkdir -p data/pending
     fi
 
-    mkdir -p data/pending
-
-    # Download dependencies here to not bias the processing time of
-    # the sources (done in parallel):
+    # Download dependencies (done in parallel):
     # Install idn (requires sudo) (note -qq does not seem to work here)
     # Call shell wrapper to download toplist
     # Download NRD feed
     { command -v idn > /dev/null || sudo apt-get install idn > /dev/null; } \
         & $FUNCTION --download-toplist \
-        & { [[ "$USE_EXISTING" != true ]] && download_nrd_feed; }
+        & { [[ "$USE_EXISTING" != true ]] && $FUNCTION --download-nrd-feed; }
     wait
 
-    # Declare default values and run each source function
-    for SOURCE in "${SOURCES[@]}"; do
-        # Skip commented out sources
-        [[ "$SOURCE" == \#* ]] && continue
+    if [[ -f nrd.tmp ]]; then
+        # Remove already processed NRDs to save processing time
+        comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
+        mv temp nrd.tmp
+    fi
 
+    # Run and process each source
+    for source in "${SOURCES[@]}"; do
+        # Skip commented out sources
+        [[ "$source" == \#* ]] && continue
+
+        # Declare default values
         local source_name
         local url
         local results_file
@@ -92,14 +94,16 @@ source() {
         local execution_time
         execution_time="$(date +%s)"
 
-        $SOURCE
+        # Run source
+        $source
 
-        # The Google Search source is processed by individual search terms, not
-        # as one source
-        [[ "$source_name" == 'Google Search' ]] && continue
-
-        process_source
+        # Process source except for Google Search as that is handled per
+        # search term
+        [[ "$source_name" != 'Google Search' ]] && process_source
     done
+
+    # Build raw file
+    build_raw
 }
 
 # Function 'filter' logs the given entries and removes them from the results
@@ -236,9 +240,9 @@ process_source() {
     fi
 }
 
-# Function 'build' appends the filtered domains into the raw files and presents
-# some basic numbers to the user.
-build() {
+# Function 'build_raw' appends the filtered domains into the raw files and
+# presents some basic numbers to the user.
+build_raw() {
     if [[ -f manual_review.tmp ]]; then
         # Print domains requiring manual review
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
@@ -360,17 +364,6 @@ ${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 #   $2: event type (dead, whitelisted, etc.)
 log_domains() {
     $FUNCTION --log-domains "$1" "$2" "$source_name"
-}
-
-# Function 'download_nrd_feed' calls a shell wrapper to download the NRD feed.
-# Output:
-#   nrd.tmp
-download_nrd_feed() {
-    $FUNCTION --download-nrd-feed
-
-    # Remove already processed domains to save processing time
-    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
-    mv temp nrd.tmp
 }
 
 cleanup() {
@@ -928,6 +921,4 @@ trap cleanup EXIT
 
 $FUNCTION --format-all
 
-source
-
-build
+main
