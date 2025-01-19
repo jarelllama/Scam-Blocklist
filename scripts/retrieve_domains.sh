@@ -77,6 +77,8 @@ main() {
 # Run each source function to retrieve domains to pass to the source processing
 # function.
 retrieve_source_results() {
+    local source
+
     for source in "${SOURCES[@]}"; do
         # Skip commented out sources
         [[ "$source" == \#* ]] && continue
@@ -143,6 +145,9 @@ process_source_results() {
     # file?
     [[ ! -f "$source_results" ]] && return
 
+    local raw_count dead_count parked_count whitelisted_count
+    local whitelisted_tld_count in_toplist_count
+
     # TODO: check what else can be moved here from the source functions
     # Remove http(s): and square brackets (this is done here once instead of
     # multiple times in the source functions)
@@ -163,15 +168,19 @@ process_source_results() {
 
     # Remove known dead domains (dead domains file is not sorted and includes
     # subdomains)
-    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") "$source_results")"
-    dead_count="$(filter "$dead_domains" dead --no-log)"
+    dead_count="$(filter \
+        "$(comm -12 <(sort "$DEAD_DOMAINS") "$source_results")" dead --no-log)"
 
     # Remove known parked domains (parked domains file is not sorted and
     # includes subdomains)
-    parked_domains="$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")"
-    parked_count="$(filter "$parked_domains" parked --no-log)"
+    parked_count="$(filter \
+        "$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")" parked \
+        --no-log)"
 
     # Strip away subdomains
+    # Note that using 'while read' does not set the variable 'subdomain' as
+    # global.
+    local subdomains
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(mawk "/^${subdomain}\./" "$source_results")" || continue
 
@@ -196,27 +205,27 @@ process_source_results() {
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist uses regex matching
-    whitelisted_domains="$(grep -Ef "$WHITELIST" "$source_results" \
-        | grep -vxFf "$BLACKLIST")"
-    whitelisted_count="$(filter "$whitelisted_domains" whitelist)"
+    whitelisted_count="$(filter \
+        "$(grep -Ef "$WHITELIST" "$source_results" \
+        | grep -vxFf "$BLACKLIST")" whitelist)"
 
     # Remove domains with whitelisted TLDs
     # mawk does not work with this expression so grep is intentionally chosen.
     # The same applies for the invalid check below.
-    whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' \
-        "$source_results")"
-    whitelisted_tld_count="$(filter "$whitelisted_tld" whitelisted_tld)"
+    whitelisted_tld_count="$(filter \
+        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' \
+        "$source_results")" whitelisted_tld)"
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    invalid_entries="$(grep -vE "^${DOMAIN_REGEX}$" "$source_results")"
     # Redirect output to /dev/null as the invalid entries count is not needed
-    filter "$invalid_entries" invalid --preserve > /dev/null
+    filter "$(grep -vE "^${DOMAIN_REGEX}$" "$source_results")" \
+        invalid --preserve > /dev/null
 
     # Remove domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
-    domains_in_toplist="$(comm -12 toplist.tmp "$source_results" \
-        | grep -vxFf "$BLACKLIST")"
-    in_toplist_count="$(filter "$domains_in_toplist" toplist --preserve)"
+    in_toplist_count="$(filter \
+        "$(comm -12 toplist.tmp "$source_results" \
+        | grep -vxFf "$BLACKLIST")" toplist --preserve)"
 
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
@@ -275,6 +284,8 @@ build_raw_file() {
     # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
+        local root_domains
+
         # Find root domains (subdomains stripped off) in the filtered domains
         root_domains="$(comm -12 <(sort root_domains.tmp) \
             all_retrieved_domains.tmp)"
@@ -293,6 +304,8 @@ build_raw_file() {
             sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
         fi
     fi
+
+    local count_before count_after count_added
 
     count_before="$(wc -l < "$RAW")"
 
@@ -320,7 +333,7 @@ build_raw_file() {
 # Print and log statistics for each source after the source processing
 # function.
 log_source() {
-    local item
+    local item final_count total_whitelisted_count excluded_count
     local status='saved'
 
     if [[ "$source_name" == 'Google Search' ]]; then
@@ -396,6 +409,7 @@ source_google_search() {
     source_url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
+    local search_term encoded_search_term
 
     if [[ "$USE_EXISTING_RESULTS" == true ]]; then
         # Use existing retrieved results
@@ -455,8 +469,9 @@ search_google() {
     for start in {1..100..10}; do
     # Indentation intentionally lacking here
     # Restrict to results from the last 30 days
-    params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&dateRestrict=m1&sort=date&start=${start}&filter=0"
-    page_results="$(curl -sS "${url}?${params}")"
+    local params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&dateRestrict=m1&sort=date&start=${start}&filter=0"
+    local page_results
+    page_results="$(curl -sS "${source_url}?${params}")"
 
         (( query_count++ ))
 
@@ -500,6 +515,8 @@ source_cybersquatting() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
+    local tlds row count runs results
+
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
@@ -516,12 +533,9 @@ source_cybersquatting() {
     tlds="$(mawk -F '.' '{print $NF}' nrd.tmp | sort | uniq -c \
         | sort -nr | head -n 500 | mawk '{print $2}')"
 
-    # Get targets ignoring disabled ones
-    targets="$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
-
-    # Loop through the targets
+    # Loop through phishing targets
     while read -r domain; do
-        # Get row and counts for the target domain
+        # Get info of the target domain
         row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $1","$2","$3}' "$PHISHING_TARGETS")"
         count="$(mawk -F ',' '{print $2}' <<< "$row")"
@@ -559,7 +573,8 @@ source_cybersquatting() {
 
         # Reset results file for the next target domain
         rm results.tmp
-    done <<< "$targets"
+
+    done <<< "$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
 
     rm -rf urlcrazy
 }
@@ -606,21 +621,20 @@ source_regex() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    # Get targets ignoring disabled ones
-    targets="$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
+    local row count runs pattern results
 
-    # Loop through the targets
+    # Loop through phishing targets
     while read -r domain; do
-        # Get row and counts for the target domain
+        # Get info of the target domain
         row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $5","$6","$7}' "$PHISHING_TARGETS")"
         count="$(mawk -F ',' '{print $2}' <<< "$row")"
         runs="$(mawk -F ',' '{print $3}' <<< "$row")"
+        pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
 
         # Get regex of target
-        pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
-        escaped_domain="${domain//[.]/\\.}"
-        regex="${pattern//&/${escaped_domain}}"
+        local escaped_domain="${domain//[.]/\\.}"
+        local regex="${pattern//&/${escaped_domain}}"
 
         # Get matches in NRD feed
         results="$(mawk "/${regex}/" nrd.tmp | sort -u)"
@@ -638,7 +652,8 @@ source_regex() {
         (( runs++ ))
         sed -i "/${domain}/s/${row}/${pattern},${count},${runs}/" \
             "$PHISHING_TARGETS"
-    done <<< "$targets"
+
+    done <<< "$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
 }
 
 source_165antifraud() {
@@ -668,7 +683,7 @@ source_aa419() {
     command -v jq > /dev/null || apt-get install -qq jq
 
     # Trailing slash intentionally omitted
-    curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
+    curl -sSH "Auth-API-Id:${AA419_API_ID}" "${source_url}/0/250?Status=active" \
         --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$source_results"
 }
 
@@ -680,7 +695,7 @@ source_coi.gov.cz() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS --retry 2 --retry-all-errors "${url}/" \
+    curl -sS --retry 2 --retry-all-errors "${source_url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
         > "$source_results"
 }
@@ -760,7 +775,7 @@ source_gridinsoft() {
 source_malwaretips() {
     # Last checked: 09/01/25
     source_name='MalwareTips'
-    urls=(
+    source_url=(
         'https://malwaretips.com/blogs/category/adware'
         'https://malwaretips.com/blogs/category/hijackers'
         'https://malwaretips.com/blogs/category/rogue-software'
@@ -769,8 +784,8 @@ source_malwaretips() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    for url in "${urls[@]}"; do
-        curl -sSZL --retry 2 --retry-all-errors "${url}/page/[1-15]"
+    for source_url in "${source_url[@]}"; do
+        curl -sSZL --retry 2 --retry-all-errors "${source_url}/page/[1-15]"
     done | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= [A-Z])" > "$source_results"
 }
 
@@ -791,7 +806,7 @@ source_pcrisk() {
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Matches domain[.]com and domain.com
-    curl -sSZ --retry 2 --retry-all-errors "${url}?start=[0-15]0" \
+    curl -sSZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
         | grep -iPo '>what (kind of (page|website) )?is \K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
         > "$source_results"
 }
@@ -837,7 +852,7 @@ source_puppyscams() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
+    curl -sSZ --retry 2 --retry-all-errors "${source_url}/?page=[1-15]" \
         | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$source_results"
 }
 
@@ -850,7 +865,7 @@ source_safelyweb() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sSZ --retry 2 --retry-all-errors "${url}/?per_page=[1-30]" \
+    curl -sSZ --retry 2 --retry-all-errors "${source_url}/?per_page=[1-30]" \
         | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > "$source_results"
 }
 
@@ -862,7 +877,7 @@ source_scamadviser() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
+    curl -sSZ --retry 2 --retry-all-errors "${source_url}?p=[1-15]" \
         | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" > "$source_results"
 }
 
@@ -875,7 +890,7 @@ source_scamdirectory() {
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # head -n causes grep broken pipe error
-    curl -sS --retry 2 --retry-all-errors "${url}/" \
+    curl -sS --retry 2 --retry-all-errors "${source_url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$source_results"
 }
 
@@ -887,7 +902,7 @@ source_stopgunscams() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sSZ --retry 2 --retry-all-errors "${url}/page/[1-15]" \
+    curl -sSZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$source_results"
 }
 
