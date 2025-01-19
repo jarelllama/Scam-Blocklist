@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Retrieves domains from various sources, processes them and outputs a raw file
+# Retrieve domains from the various sources, process them and output a raw file
 # that contains the cumulative domains from all sources over time.
 
 readonly FUNCTION='bash scripts/tools.sh'
@@ -16,18 +16,10 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly PHISHING_TARGETS='config/phishing_targets.csv'
 readonly SOURCE_LOG='config/source_log.csv'
-
-# Matches example.com, example[.]com, 1.1.1.1
-#readonly DOMAIN_REGEX='[[:alnum:].-]+\[?\.\]?[[:alnum:]-]+'
-# Matches example-com, 1.1.1.1
-# https://github.com/jarelllama/Scam-Blocklist/issues/349
-#readonly DOMAIN_DASH_REGEX='[[:alnum:].-]+-[[:alnum:]-]+'
-
-# Only matches domains
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
-
+# Array of sources used to retrieve domains
 readonly -a SOURCES=(
     source_165antifraud
     source_aa419
@@ -56,38 +48,43 @@ readonly -a SOURCES=(
 )
 
 main() {
-    # Check whether to use existing retrieved results
+    # Check whether to use existing results in data/pending
     if [[ -d data/pending ]]; then
         printf "\nUsing existing lists of retrieved results.\n"
-        readonly USE_EXISTING=true
+        readonly USE_EXISTING_RESULTS=true
     else
         mkdir -p data/pending
     fi
 
     # Download dependencies (done in parallel):
     # Install idn (requires sudo) (note -qq does not seem to work here)
-    # Call shell wrapper to download toplist
-    # Download NRD feed
+    # Call shell wrapper to download toplist.tmp and nrd.tmp
     { command -v idn > /dev/null || sudo apt-get install idn > /dev/null; } \
         & $FUNCTION --download-toplist \
-        & { [[ "$USE_EXISTING" != true ]] && $FUNCTION --download-nrd-feed; }
+        & { [[ "$USE_EXISTING_RESULTS" != true ]] \
+        && $FUNCTION --download-nrd-feed; }
     wait
 
-    if [[ -f nrd.tmp ]]; then
-        # Remove already processed NRDs to save processing time
-        comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
-        mv temp nrd.tmp
-    fi
+    # Remove already processed NRDs to save processing time
+    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
+    mv temp nrd.tmp
 
-    # Run and process each source
+    retrieve_source_results
+
+    build_raw_file
+}
+
+# Run each source function to retrieve domains to pass to the source processing
+# function.
+retrieve_source_results() {
     for source in "${SOURCES[@]}"; do
         # Skip commented out sources
         [[ "$source" == \#* ]] && continue
 
         # Declare default values
         local source_name
-        local url
-        local results_file
+        local source_url
+        local source_results
         local ignore_from_light=false
         local rate_limited=false
         local query_count
@@ -99,18 +96,15 @@ main() {
 
         # Process source except for Google Search as that is handled per
         # search term
-        [[ "$source_name" != 'Google Search' ]] && process_source
+        [[ "$source_name" != 'Google Search' ]] && process_source_results
     done
-
-    # Build raw file
-    build_raw
 }
 
-# Function 'filter' logs the given entries and removes them from the results
-# file.
+# Called by the source processing function to remove entries from the source
+# results file and log them into the domain log.
 # Input:
 #   $1: entries to remove passed in a variable
-#   $2: tag given to entries
+#   $2: tag to be shown in log
 #   --no-log:   do not log entries into the domain log
 #   --preserve: save entries for manual review and for rerun
 # Output:
@@ -123,8 +117,8 @@ filter() {
     [[ -z "$entries" ]] && { printf "0"; return; }
 
     # Remove entries from results file
-    comm -23 "$results_file" <(printf "%s" "$entries") > results.tmp
-    mv results.tmp "$results_file"
+    comm -23 "$source_results" <(printf "%s" "$entries") > results.tmp
+    mv results.tmp "$source_results"
 
     if [[ "$3" != '--no-log' ]]; then
        log_domains "$entries" "$tag"
@@ -133,8 +127,8 @@ filter() {
     if [[ "$3" == '--preserve' ]]; then
         # Save entries for manual review and for rerun
         mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
-            >> manual_review.tmp
-        printf "%s\n" "$entries" >> "${results_file}.tmp"
+            >> entries_for_review.tmp
+        printf "%s\n" "$entries" >> "${source_results}.tmp"
     fi
 
     # Return number of entries
@@ -142,126 +136,132 @@ filter() {
     wc -w <<< "$entries"
 }
 
-# Function 'process_source' filters the results retrieved from the caller
-# source. The output is a cumulative filtered domains file of all filtered
-# domains from all sources in this run.
-process_source() {
-    [[ ! -f "$results_file" ]] && return
+# Filter the results from the source and append the domains to
+# all_retrieved_domains.tmp/all_retrieved_light_domains.tmp.
+process_source_results() {
+    # TODO: how to do error handling for sources with no results/no results
+    # file?
+    [[ ! -f "$source_results" ]] && return
 
+    # TODO: check what else can be moved here from the source functions
     # Remove http(s): and square brackets (this is done here once instead of
     # multiple times in the source functions)
     # Note that this still allows invalid entries like entries with subfolders
     # to get through so they can be flagged later on.
-    sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$results_file"
+    sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$source_results"
 
     # Convert Unicode to Punycode
     # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
-    idn --no-tld < "$results_file" > results.tmp
-    mv results.tmp "$results_file"
+    idn --no-tld < "$source_results" > results.tmp
+    mv results.tmp "$source_results"
 
-    $FUNCTION --format "$results_file"
+    # Format results file
+    $FUNCTION --format "$source_results"
 
     # Count number of unfiltered domains pending
-    raw_count="$(wc -l < "$results_file")"
+    raw_count="$(wc -l < "$source_results")"
 
-    # Remove known dead domains (includes subdomains)
-    dead="$(comm -12 <(sort "$DEAD_DOMAINS") "$results_file")"
-    dead_count="$(filter "$dead" dead --no-log)"
-    # Logging disabled as it inflated log size
+    # Remove known dead domains (dead domains file is not sorted and includes
+    # subdomains)
+    dead_domains="$(comm -12 <(sort "$DEAD_DOMAINS") "$source_results")"
+    dead_count="$(filter "$dead_domains" dead --no-log)"
 
-    # Remove known parked domains (includes subdomains)
-    parked="$(comm -12 <(sort "$PARKED_DOMAINS") "$results_file")"
-    parked_count="$(filter "$parked" parked --no-log)"
-    # Logging disabled as it inflated log size
+    # Remove known parked domains (parked domains file is not sorted and
+    # includes subdomains)
+    parked_domains="$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")"
+    parked_count="$(filter "$parked_domains" parked --no-log)"
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
-        subdomains="$(mawk "/^${subdomain}\./" "$results_file")" || continue
+        subdomains="$(mawk "/^${subdomain}\./" "$source_results")" || continue
 
         # Strip subdomains down to their root domains
-        sed -i "s/^${subdomain}\.//" "$results_file"
+        sed -i "s/^${subdomain}\.//" "$source_results"
 
         # Save subdomains and root domains to be filtered later
         printf "%s\n" "$subdomains" >> subdomains.tmp
-        printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
-
-        # No longer log subdomains due to the high number of them
-        # Log subdomains excluding 'www' (too many of them)
-        #log_domains "$(mawk '!/^www\./' <<< "$subdomains")" subdomain
+        printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" \
+            >> root_domains.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u "$results_file" -o "$results_file"
+    sort -u "$source_results" -o "$source_results"
 
     # Remove domains already in raw file
-    comm -23 "$results_file" "$RAW" > results.tmp
-    mv results.tmp "$results_file"
+    comm -23 "$source_results" "$RAW" > results.tmp
+    mv results.tmp "$source_results"
 
     # Log blacklisted domains
-    log_domains "$(comm -12 "$BLACKLIST" "$results_file")" blacklist
+    # log_domains is used instead of filter as the blacklisted domains should
+    # not be removed from the results file.
+    log_domains "$(comm -12 "$BLACKLIST" "$source_results")" blacklist
 
     # Remove whitelisted domains excluding blacklisted domains
-    # Note whitelist matching uses regex
-    whitelisted="$(grep -Ef "$WHITELIST" "$results_file" | grep -vxFf "$BLACKLIST")"
-    whitelisted_count="$(filter "$whitelisted" whitelist)"
+    # Note whitelist uses regex matching
+    whitelisted_domains="$(grep -Ef "$WHITELIST" "$source_results" \
+        | grep -vxFf "$BLACKLIST")"
+    whitelisted_count="$(filter "$whitelisted_domains" whitelist)"
 
     # Remove domains with whitelisted TLDs
-    # mawk does not work with this expression so grep is intentionally chosen
-    # over awk. The same applies for the invalid check below.
-    whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$results_file")"
+    # mawk does not work with this expression so grep is intentionally chosen.
+    # The same applies for the invalid check below.
+    whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' \
+        "$source_results")"
     whitelisted_tld_count="$(filter "$whitelisted_tld" whitelisted_tld)"
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    invalid="$(grep -vE "^${DOMAIN_REGEX}$" "$results_file")"
-    # Note invalid entries are not counted
-    filter "$invalid" invalid --preserve > /dev/null
+    invalid_entries="$(grep -vE "^${DOMAIN_REGEX}$" "$source_results")"
+    # Redirect output to /dev/null as the invalid entries count is not needed
+    filter "$invalid_entries" invalid --preserve > /dev/null
 
     # Remove domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
-    in_toplist="$(comm -12 toplist.tmp "$results_file" | grep -vxFf "$BLACKLIST")"
-    in_toplist_count="$(filter "$in_toplist" toplist --preserve)"
+    domains_in_toplist="$(comm -12 toplist.tmp "$source_results" \
+        | grep -vxFf "$BLACKLIST")"
+    in_toplist_count="$(filter "$domains_in_toplist" toplist --preserve)"
 
     # Collate filtered domains
-    cat "$results_file" >> retrieved_domains.tmp
+    cat "$source_results" >> all_retrieved_domains.tmp
 
     if [[ "$ignore_from_light" != true ]]; then
         # Collate filtered domains from light sources
-        cat "$results_file" >> retrieved_light_domains.tmp
+        cat "$source_results" >> all_retrieved_light_domains.tmp
     fi
 
-    log_domains "$results_file" saved
+    log_domains "$source_results" saved
 
     log_source
 
-    rm "$results_file"
+    rm "$source_results"
 
-    if [[ -f "${results_file}.tmp" ]]; then
+    # TODO: collate entries pending manual review into seperate config file for
+    # easier blacklisting/whitelisting: https://github.com/jarelllama/Scam-Blocklist/issues/411
+    if [[ -f "${source_results}.tmp" ]]; then
         # Save entries that are pending manual review for rerun
-        mv "${results_file}.tmp" "$results_file"
-        $FUNCTION --format "$results_file"
+        mv "${source_results}.tmp" "$source_results"
+        $FUNCTION --format "$source_results"
     fi
 }
 
-# Function 'build_raw' appends the filtered domains into the raw files and
-# presents some basic numbers to the user.
-build_raw() {
-    if [[ -f manual_review.tmp ]]; then
+# Append filtered domains onto the raw file.
+build_raw_file() {
+    if [[ -f entries_for_review.tmp ]]; then
         # Print domains requiring manual review
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
-        sed 's/(/(\o033[31m/; s/)/\o033[0m)/' manual_review.tmp
+        sed 's/(/(\o033[31m/; s/)/\o033[0m)/' entries_for_review.tmp
 
         # Send telegram notification
         $FUNCTION --send-telegram \
-            "Retrieval: entries requiring manual review\n\n$(<manual_review.tmp)"
+            "Retrieval: entries requiring manual review\n\n$(<entries_for_review.tmp)"
 
         printf "\nTelegram notification sent.\n"
     fi
 
-    $FUNCTION --format retrieved_domains.tmp
+    $FUNCTION --format all_retrieved_domains.tmp
 
     # Return if no new domains to add
-    if [[ ! -s retrieved_domains.tmp ]]; then
+    if [[ ! -s all_retrieved_domains.tmp ]]; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
 
-        [[ "$USE_EXISTING" == true ]] && return
+        [[ "$USE_EXISTING_RESULTS" == true ]] && return
         # Send Telegram update if not using existing results
         $FUNCTION --send-telegram \
             "Retrieval: no new domains added"
@@ -269,11 +269,15 @@ build_raw() {
         return
     fi
 
+    # TODO: how to save subdomains of domains manually blacklisted after review?
+    # https://github.com/jarelllama/Scam-Blocklist/issues/412
+    #
     # Collate only filtered subdomains and root domains into the subdomains
     # file and root domains file
     if [[ -f root_domains.tmp ]]; then
         # Find root domains (subdomains stripped off) in the filtered domains
-        root_domains="$(comm -12 <(sort root_domains.tmp) retrieved_domains.tmp)"
+        root_domains="$(comm -12 <(sort root_domains.tmp) \
+            all_retrieved_domains.tmp)"
 
         # Check if any filtered root domains are found to avoid appending an
         # empty line
@@ -293,11 +297,11 @@ build_raw() {
     count_before="$(wc -l < "$RAW")"
 
     # Add domains to raw file
-    sort -u retrieved_domains.tmp "$RAW" -o "$RAW"
+    sort -u all_retrieved_domains.tmp "$RAW" -o "$RAW"
 
-    if [[ -f retrieved_light_domains.tmp ]]; then
+    if [[ -f all_retrieved_light_domains.tmp ]]; then
         # Add domains to raw light file
-        cat retrieved_light_domains.tmp >> "$RAW_LIGHT"
+        cat all_retrieved_light_domains.tmp >> "$RAW_LIGHT"
         $FUNCTION --format "$RAW_LIGHT"
     fi
 
@@ -307,14 +311,14 @@ build_raw() {
     printf "\nAdded new domains to raw file.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$count_added" "$count_after"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
     # Send Telegram update if not using existing results
     $FUNCTION --send-telegram \
         "Retrieval: added ${count_added} domains"
 }
 
-# Function 'log_source' prints and logs statistics for each source using the
-# variables declared in the 'process_source' function.
+# Print and log statistics for each source after the source processing
+# function.
 log_source() {
     local item
     local status='saved'
@@ -330,7 +334,7 @@ log_source() {
         status='ERROR: empty'
     fi
 
-    final_count="$(wc -l < "$results_file")"
+    final_count="$(wc -l < "$source_results")"
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
@@ -358,8 +362,7 @@ ${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
     echo "----------------------------------------------------------------------"
 }
 
-# Function 'log_domains' calls a shell wrapper to log domain processing events
-# into the domain log.
+# Call a shell wrapper to to log domain processing events into the domain log.
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 log_domains() {
@@ -373,43 +376,42 @@ cleanup() {
     find . -maxdepth 1 -type f -name "*.tmp" -delete
 }
 
-# The 'source_<source>' functions are to retrieve results from the respective
-# sources.
+# The 'source_<source>' functions retrieve results from the respective sources.
 # Input:
-#   $source_name:            name of the source to use in the console and logs
-#   $ignore_from_light: if true, the results are not included in the light
-#                       version (default is false)
-#   $results_file:      file path to save retrieved results to be used for
-#                       further processing
-#   $USE_EXISTING:      if true, skip the retrieval process and use the
-#                       existing results files (if found)
+#   $source_name:          name of the source to use in the console and logs
+#   $ignore_from_light:    if true, the results are not included in the light
+#                          version (default is false)
+#   $source_results:       file path to save retrieved results for the source
+#                          processing function
+#   $USE_EXISTING_RESULTS: if true, skip the retrieval process and use the
+#                          existing results files
 # Output:
-#   $results_file (if results retrieved)
+#   $source_results (if results retrieved)
 #
 # Note the output results can be in URL form without subfolders.
 
 source_google_search() {
     # Last checked: 23/12/24
     source_name='Google Search'
-    url='https://customsearch.googleapis.com/customsearch/v1'
+    source_url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
 
-    if [[ "$USE_EXISTING" == true ]]; then
+    if [[ "$USE_EXISTING_RESULTS" == true ]]; then
         # Use existing retrieved results
         # Loop through the results from each search term
-        for results_file in data/pending/google_search_*.tmp; do
-            [[ ! -f "$results_file" ]] && return
+        for source_results in data/pending/google_search_*.tmp; do
+            [[ ! -f "$source_results" ]] && return
 
             # Set execution time for each individual search term
             execution_time="$(date +%s)"
 
             # Remove header from file name
-            search_term="${results_file#data/pending/google_search_}"
+            search_term="${source_results#data/pending/google_search_}"
             # Remove file extension from file name to get search term
             search_term="${search_term%.tmp}"
 
-            process_source
+            process_source_results
         done
         return
     fi
@@ -442,12 +444,12 @@ search_google() {
     # Replace non-alphanumeric characters with spaces
     encoded_search_term="${search_term//[^[:alnum:]]/%20}"
     search_term="${search_term//\//}"  # Remove slashes for file creation
-    results_file="google_search_${search_term:0:100}.tmp"
+    source_results="google_search_${search_term:0:100}.tmp"
     query_count=0
     # Set execution time for each individual search term
     execution_time="$(date +%s)"
 
-    touch "$results_file"  # Create results file to ensure proper logging
+    touch "$source_results"  # Create results file to ensure proper logging
 
     # Loop through each page of results
     for start in {1..100..10}; do
@@ -482,21 +484,21 @@ search_google() {
         # Get domains from each page
         page_domains="$(jq -r '.items[].link' <<< "$page_results" \
             | mawk -F '/' '{print $3}')"
-        printf "%s\n" "$page_domains" >> "$results_file"
+        printf "%s\n" "$page_domains" >> "$source_results"
 
         # Stop search term if no more pages are required
         (( $(wc -w <<< "$page_domains") < 10 )) && break
     done
 
-    process_source
+    process_source_results
 }
 
 source_cybersquatting() {
     # Last checked: 23/12/24
     source_name='Cybersquatting'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
@@ -547,7 +549,7 @@ source_cybersquatting() {
         mv temp results.tmp
 
         # Collate results
-        cat results.tmp >> "$results_file"
+        cat results.tmp >> "$source_results"
 
         # Update counts for the target domain
         count="$(( count + $(wc -l < results.tmp) ))"
@@ -566,9 +568,9 @@ source_dga_detector() {
     # Last checked: 23/12/24
     source_name='DGA Detector'
     ignore_from_light=true
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Keep only NRDs with more than 12 characters
     mawk 'length($0) > 12' nrd.tmp > domains.tmp
@@ -589,7 +591,7 @@ source_dga_detector() {
 
     # Extract DGA domains from json output
     jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
-        > "../${results_file}"
+        > "../${source_results}"
 
     cd ..
 
@@ -600,9 +602,9 @@ source_regex() {
     # Last checked: 16/01/25
     source_name='Regex'
     ignore_from_light=true
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Get targets ignoring disabled ones
     targets="$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
@@ -624,7 +626,7 @@ source_regex() {
         results="$(mawk "/${regex}/" nrd.tmp | sort -u)"
 
         # Collate results
-        printf "%s\n" "$results" >> "$results_file"
+        printf "%s\n" "$results" >> "$source_results"
 
         # Escape the following: . \ ^ *
         row="$(printf "%s" "$row" | sed 's/[.\^*]/\\&/g')"
@@ -643,92 +645,92 @@ source_165antifraud() {
     # Last checked: 27/12/24
     # Credit to @tanmarpn for the source idea
     source_name='165 Anti-fraud'
-    url='https://165.npa.gov.tw/api/article/subclass/3'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://165.npa.gov.tw/api/article/subclass/3'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS "$url" \
+    curl -sS "$source_url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
         | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" \
-        | sort -u -o "$results_file"
+        | sort -u -o "$source_results"
 }
 
 source_aa419() {
     # Last checked: 23/12/24
     source_name='Artists Against 419'
-    url='https://api.aa419.org/fakesites'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://api.aa419.org/fakesites'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Install jq
     command -v jq > /dev/null || apt-get install -qq jq
 
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" "${url}/0/250?Status=active" \
-        --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$results_file"
+        --retry 2 --retry-all-errors | jq -r '.[].Domain' > "$source_results"
 }
 
 source_coi.gov.cz() {
     # Last checked: 08/01/25
     source_name='Česká Obchodní Inspekce'
-    url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sS --retry 2 --retry-all-errors "${url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
-        > "$results_file"
+        > "$source_results"
 }
 
 source_emerging_threats() {
     # Last checked: 23/12/24
     source_name='Emerging Threats'
-    url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://raw.githubusercontent.com/jarelllama/Emerging-Threats/main/malicious.txt'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
+    curl -sS "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_fakewebshoplisthun() {
     # Last checked: 23/12/24
     source_name='FakeWebshopListHUN'
-    url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
+    source_url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
     ignore_from_light=true  # Has a few false positives
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS "$url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
-        > "$results_file"
+    curl -sS "$source_url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
+        > "$source_results"
 }
 
 source_jeroengui() {
     # Last checked: 03/01/25
     source_name='Jeroengui'
     ignore_from_light=true  # Too many domains
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    url='https://file.jeroengui.be/phishing/last_week.txt'
+    source_url='https://file.jeroengui.be/phishing/last_week.txt'
     # Get URLs with no subdirectories (too many link shorteners)
-    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
-        > "$results_file"
+    curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
+        > "$source_results"
 
-    url='https://file.jeroengui.be/malware/last_week.txt'
-    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$results_file"
+    source_url='https://file.jeroengui.be/malware/last_week.txt'
+    curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$source_results"
 
-    url='https://file.jeroengui.be/scam/last_week.txt'
-    curl -sS "$url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$results_file"
+    source_url='https://file.jeroengui.be/scam/last_week.txt'
+    curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}" >> "$source_results"
 
     # Get matching NRDs for the light version. Unicode is only processed by the
     # full version.
-    comm -12 <(sort "$results_file") nrd.tmp > jeroengui_nrds.tmp
+    comm -12 <(sort "$source_results") nrd.tmp > jeroengui_nrds.tmp
 }
 
 source_jeroengui_nrd() {
@@ -736,23 +738,23 @@ source_jeroengui_nrd() {
     # For the light version
     # Only includes domains found in the NRD feed
     source_name='Jeroengui (NRDs)'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    mv jeroengui_nrds.tmp "$results_file"
+    mv jeroengui_nrds.tmp "$source_results"
 }
 
 source_gridinsoft() {
     # Last checked: 10/01/25
     source_name='Gridinsoft'
-    url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
+    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
     ignore_from_light=true  # Has a few false positives
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS "$url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$results_file"
+    curl -sS "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_malwaretips() {
@@ -763,56 +765,56 @@ source_malwaretips() {
         'https://malwaretips.com/blogs/category/hijackers'
         'https://malwaretips.com/blogs/category/rogue-software'
     )
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     for url in "${urls[@]}"; do
         curl -sSZL --retry 2 --retry-all-errors "${url}/page/[1-15]"
-    done | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= [A-Z])" > "$results_file"
+    done | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= [A-Z])" > "$source_results"
 }
 
 source_manual() {
     source_name='Manual'
-    results_file='data/pending/Manual.tmp'
+    source_results='data/pending/Manual.tmp'
 
     # Process only if file is found (source is the file itself)
-    [[ -f "$results_file" ]] && process_source
+    [[ -f "$source_results" ]] && process_source_results
 }
 
 source_pcrisk() {
     # Last checked: 09/01/25
     source_name='PCrisk'
-    url='https://www.pcrisk.com/removal-guides'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://www.pcrisk.com/removal-guides'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Matches domain[.]com and domain.com
     curl -sSZ --retry 2 --retry-all-errors "${url}?start=[0-15]0" \
         | grep -iPo '>what (kind of (page|website) )?is \K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
-        > "$results_file"
+        > "$source_results"
 }
 
 source_phishstats() {
     # Last checked: 29/12/24
     source_name='PhishStats'
-    url='https://phishstats.info/phish_score.csv'
+    source_url='https://phishstats.info/phish_score.csv'
     ignore_from_light=true  # Too many domains
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Get URLs with no subdirectories (some of the URLs use docs.google.com),
     # exclude IP addresses and extract domains.
     # (?=/?\"$) is lookahead that matches an optional slash followed by an end
     # quote at the end of the line.
-    curl -sS "$url" | mawk -F ',' '{print $3}' \
-        | grep -Po "^\"https?://\K${DOMAIN_REGEX}(?=/?\"$)" > "$results_file"
+    curl -sS "$source_url" | mawk -F ',' '{print $3}' \
+        | grep -Po "^\"https?://\K${DOMAIN_REGEX}(?=/?\"$)" > "$source_results"
 
     # Get matching NRDs for the light version. Unicode is only processed by the
     # full version.
-    comm -12 <(sort "$results_file") nrd.tmp > phishstats_nrds.tmp
+    comm -12 <(sort "$source_results") nrd.tmp > phishstats_nrds.tmp
 }
 
 source_phishstats_nrd() {
@@ -820,99 +822,99 @@ source_phishstats_nrd() {
     # For the light version
     # Only includes domains found in the NRD feed
     source_name='PhishStats (NRDs)'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    mv phishstats_nrds.tmp "$results_file"
+    mv phishstats_nrds.tmp "$source_results"
 }
 
 source_puppyscams() {
     # Last checked: 07/01/25
     source_name='PuppyScams.org'
-    url='https://puppyscams.org'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://puppyscams.org'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}/?page=[1-15]" \
-        | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$results_file"
+        | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$source_results"
 }
 
 source_safelyweb() {
     # Last checked: 11/01/25
     source_name='SafelyWeb'
-    url='https://safelyweb.com/scams-database'
+    source_url='https://safelyweb.com/scams-database'
     ignore_from_light=true  # Has a few false positives
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}/?per_page=[1-30]" \
-        | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > "$results_file"
+        | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_scamadviser() {
     # Last checked: 09/01/25
     source_name='ScamAdviser'
-    url='https://www.scamadviser.com/articles'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://www.scamadviser.com/articles'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}?p=[1-15]" \
-        | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" > "$results_file"
+        | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" > "$source_results"
 }
 
 source_scamdirectory() {
     # Last checked: 10/01/25
     source_name='Scam Directory'
-    url='https://scam.directory/category'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://scam.directory/category'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # head -n causes grep broken pipe error
     curl -sS --retry 2 --retry-all-errors "${url}/" \
-        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$results_file"
+        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$source_results"
 }
 
 source_stopgunscams() {
     # Last checked: 07/01/25
     source_name='StopGunScams.com'
-    url='https://stopgunscams.com'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://stopgunscams.com'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSZ --retry 2 --retry-all-errors "${url}/page/[1-15]" \
-        | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$results_file"
+        | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > "$source_results"
 }
 
 source_viriback_tracker() {
     # Last checked: 26/12/24
     source_name='ViriBack C2 Tracker'
-    url='https://tracker.viriback.com/dump.php'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://tracker.viriback.com/dump.php'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS "$url" | mawk -v year="$(date +"%Y")" \
+    curl -sS "$source_url" | mawk -v year="$(date +"%Y")" \
         -F ',' '$4 ~ year {print $2}' \
-        | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$results_file"
+        | grep -Po "^https?://\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_vzhh() {
     # Last checked: 27/12/24
     source_name='Verbraucherzentrale Hamburg'
-    url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
-    results_file="data/pending/${source_name// /_}.tmp"
+    source_url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
+    source_results="data/pending/${source_name// /_}.tmp"
 
-    [[ "$USE_EXISTING" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS --retry 2 --retry-all-errors "$url" \
+    curl -sS --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
-        > "$results_file"
+        > "$source_results"
 }
 
 # Entry point
