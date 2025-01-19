@@ -28,8 +28,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 302361
-Light version: 35476
+Total domains: 302364
+Light version: 35477
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -41,22 +41,22 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     258 |      0 % |      16 % | Emerging Threats
     0 |     657 |      0 % |      21 % | FakeWebshopListHUN
     0 |    1111 |      0 % |       2 % | Google Search
-    0 |    2542 |      1 % |      14 % | Gridinsoft
-    0 |   98325 |     64 % |       8 % | Jeroengui
+    6 |    2548 |      1 % |      14 % | Gridinsoft
+    2 |   98327 |     64 % |       8 % | Jeroengui
     0 |   14627 |      9 % |       0 % | Jeroengui (NRDs)
-    0 |     397 |      0 % |       4 % | MalwareTips
+    1 |     398 |      0 % |       4 % | MalwareTips
     0 |      75 |      0 % |      16 % | PCrisk
     0 |    7816 |      5 % |      27 % | PhishStats
     0 |    1018 |      0 % |       0 % | PhishStats (NRDs)
     0 |      83 |      0 % |      13 % | PuppyScams.org
     0 |   15572 |     10 % |       1 % | Regex Matching
-    0 |    2940 |      1 % |       3 % | SafelyWeb
+    8 |    2948 |      1 % |       3 % | SafelyWeb
     0 |    3589 |      2 % |      29 % | Scam Directory
     0 |      16 |      0 % |      32 % | ScamAdviser
     0 |      49 |      0 % |       5 % | StopGunScams.com
     0 |      31 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       1 |      0 % |      31 % | ViriBack C2 Tracker
-    0 |  151273 |    100 % |      21 % | All sources
+   17 |  151290 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
