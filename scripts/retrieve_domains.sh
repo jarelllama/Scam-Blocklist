@@ -66,8 +66,10 @@ main() {
     wait
 
     # Remove already processed NRDs to save processing time
-    comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
-    mv temp nrd.tmp
+    if [[ -f nrd.tmp ]]; then
+        comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
+        mv temp nrd.tmp
+    fi
 
     retrieve_source_results
 
