@@ -92,13 +92,13 @@ retrieve_source_results() {
             error 'source_results.tmp not properly cleaned up.'
         fi
 
-        # Declare default values
-        local source_name
-        local source_url
-        local source_results
+        # Initialize default values
+        local source_name=
+        local source_url=
+        local source_results=
         local ignore_from_light=false
         local rate_limited=false
-        local query_count
+        local query_count=
         local execution_time
         execution_time="$(date +%s)"
 
@@ -107,9 +107,6 @@ retrieve_source_results() {
 
         # Set source results path based of source name if not explicitly set
         : "${source_results:=data/pending/${source_name// /_}.tmp}"
-
-        # DEBUG
-        echo "$source_results"
 
         if [[ -f source_results.tmp ]]; then
             # source_results.tmp should only be present when not using existing
