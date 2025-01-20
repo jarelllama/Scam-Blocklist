@@ -118,6 +118,7 @@ download_nrd_feed() {
     url4='https://feeds.opensquat.com/domain-names-month.txt'
 
     # Download the feeds in parallel and get only domains, ignoring comments
+    # TODO: error handling
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
         | grep -oE '^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
         > nrd.tmp

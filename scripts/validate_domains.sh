@@ -3,6 +3,9 @@
 # Validates the collated domains via a variety of checks and flags entries that
 # require attention.
 
+# TODO: implement a way to use a config file to blacklist/whitelist domains
+# found in the toplist similiar to retrieve_domains.sh
+
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
