@@ -65,9 +65,10 @@ main() {
         && $FUNCTION --download-nrd-feed; }
     wait
 
-    # Remove already processed NRDs to save processing time
     if [[ -f nrd.tmp ]]; then
-        comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") > temp
+        # Remove already processed NRDs to save processing time
+        comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
+            > temp
         mv temp nrd.tmp
     fi
 
@@ -150,7 +151,6 @@ process_source_results() {
     local raw_count dead_count parked_count whitelisted_count
     local whitelisted_tld_count in_toplist_count
 
-    # TODO: check what else can be moved here from the source functions
     # Remove http(s): and square brackets (this is done here once instead of
     # multiple times in the source functions)
     # Note that this still allows invalid entries like entries with subfolders
