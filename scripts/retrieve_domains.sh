@@ -108,6 +108,9 @@ retrieve_source_results() {
         # Set source results path based of source name if not explicitly set
         : "${source_results:=data/pending/${source_name// /_}.tmp}"
 
+        # DEBUG
+        echo "$source_results"
+
         if [[ -f source_results.tmp ]]; then
             # source_results.tmp should only be present when not using existing
             # results
