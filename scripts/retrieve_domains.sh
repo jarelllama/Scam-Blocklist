@@ -282,12 +282,13 @@ process_source_results() {
 
 # Save filtered domains into the raw, subdomains and root domains files.
 save_domains() {
+    sort -u all_retrieved_domains.tmp -o all_retrieved_domains.tmp
+
     if [[ -f entries_for_review.tmp ]]; then
         # Print domains requiring manual review
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
         sed 's/(/(\o033[31m/; s/)/\o033[0m)/' entries_for_review.tmp
 
-        # Send telegram notification
         $FUNCTION --send-telegram \
             "Retrieval: entries requiring manual review\n\n$(<entries_for_review.tmp)"
 
