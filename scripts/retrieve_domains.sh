@@ -95,12 +95,12 @@ retrieve_source_results() {
         fi
 
         # Initialize source variables
-        local source_name=
-        local source_url=
-        local source_results=
+        local source_name=''
+        local source_url=''
+        local source_results=''
         local ignore_from_light=false
         local rate_limited=false
-        local query_count=
+        local query_count=''
         local execution_time
         execution_time="$(date +%s)"
 
@@ -941,6 +941,8 @@ source_vzhh() {
 }
 
 # Entry point
+
+set -e
 
 trap cleanup EXIT
 
