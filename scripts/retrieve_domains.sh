@@ -59,8 +59,10 @@ main() {
 
     # Download dependencies (done in parallel):
     # Install idn (requires sudo) (note -qq does not seem to work here)
+    # Install jq
     # Call shell wrapper to download toplist.tmp and nrd.tmp
     { command -v idn > /dev/null || sudo apt-get install idn > /dev/null; } \
+        & { command -v jq > /dev/null || apt-get install -qq jq; } \
         & $FUNCTION --download-toplist \
         & { [[ "$USE_EXISTING_RESULTS" == false ]] \
         && $FUNCTION --download-nrd-feed; }
@@ -75,7 +77,7 @@ main() {
 
     retrieve_source_results
 
-    build_raw_file
+    save_domains
 }
 
 # Run each source function to retrieve domains to pass to the source processing
@@ -92,7 +94,7 @@ retrieve_source_results() {
             error 'source_results.tmp not properly cleaned up.'
         fi
 
-        # Initialize default values
+        # Initialize source variables
         local source_name=
         local source_url=
         local source_results=
@@ -118,8 +120,8 @@ retrieve_source_results() {
             mv source_results.tmp "$source_results"
         fi
 
-        # The Google Search source process each search term as one source.
-        # Thus, handles the source processing logic within its source function.
+        # The Google Search source processes each search term as one source and
+        # handles the source processing logic within its source function.
         [[ "$source_name" == 'Google Search' ]] && continue
 
         process_source_results
@@ -163,12 +165,16 @@ filter() {
 }
 
 # Filter the results from the source and append the domains to
-# all_retrieved_domains.tmp/all_retrieved_light_domains.tmp.
+# all_retrieved_domains.tmp/all_retrieved_light_domains.tmp and save entries
+# requiring manual review.
 process_source_results() {
     [[ ! -f "$source_results" ]] && return
 
     local raw_count dead_count parked_count whitelisted_count
     local whitelisted_tld_count in_toplist_count
+
+    # Format results file
+    $FUNCTION --format "$source_results"
 
     # Remove http(s): and square brackets (this is done here once instead of
     # multiple times in the source functions)
@@ -178,11 +184,10 @@ process_source_results() {
 
     # Convert Unicode to Punycode
     # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
-    idn --no-tld < "$source_results" > results.tmp
-    mv results.tmp "$source_results"
+    idn --no-tld < "$source_results" > temp
+    mv temp "$source_results"
 
-    # Format results file
-    $FUNCTION --format "$source_results"
+    sort -u "$source_results" -o "$source_results"
 
     # Count number of unfiltered domains pending
     raw_count="$(wc -l < "$source_results")"
@@ -216,8 +221,8 @@ process_source_results() {
     sort -u "$source_results" -o "$source_results"
 
     # Remove domains already in raw file
-    comm -23 "$source_results" "$RAW" > results.tmp
-    mv results.tmp "$source_results"
+    comm -23 "$source_results" "$RAW" > temp
+    mv temp "$source_results"
 
     # Log blacklisted domains
     # log_domains is used instead of filter as the blacklisted domains should
@@ -275,8 +280,8 @@ process_source_results() {
     fi
 }
 
-# Append filtered domains onto the raw file.
-build_raw_file() {
+# Save filtered domains into the raw, subdomains and root domains files.
+save_domains() {
     if [[ -f entries_for_review.tmp ]]; then
         # Print domains requiring manual review
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
@@ -289,14 +294,12 @@ build_raw_file() {
         printf "\nTelegram notification sent.\n"
     fi
 
-    $FUNCTION --format all_retrieved_domains.tmp
-
-    # Return if no new domains to add
+    # Return if no new domains to save
     if [[ ! -s all_retrieved_domains.tmp ]]; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
 
         [[ "$USE_EXISTING_RESULTS" == true ]] && return
-        # Send Telegram update if not using existing results
+
         $FUNCTION --send-telegram \
             "Retrieval: no new domains added"
 
@@ -334,13 +337,12 @@ build_raw_file() {
 
     count_before="$(wc -l < "$RAW")"
 
-    # Add domains to raw file
+    # Save domains to raw file
     sort -u all_retrieved_domains.tmp "$RAW" -o "$RAW"
 
+    # Save domains to raw light file
     if [[ -f all_retrieved_light_domains.tmp ]]; then
-        # Add domains to raw light file
-        cat all_retrieved_light_domains.tmp >> "$RAW_LIGHT"
-        $FUNCTION --format "$RAW_LIGHT"
+        sort -u all_retrieved_light_domains.tmp "$RAW_LIGHT" -o "$RAW_LIGHT"
     fi
 
     count_after="$(wc -l < "$RAW")"
@@ -350,7 +352,7 @@ build_raw_file() {
         "$count_before" "$count_added" "$count_after"
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
-    # Send Telegram update if not using existing results
+
     $FUNCTION --send-telegram \
         "Retrieval: added ${count_added} domains"
 }
@@ -407,7 +409,7 @@ log_domains() {
     $FUNCTION --log-domains "$1" "$2" "$source_name"
 }
 
-# TODO
+# Print error message and exit.
 error() {
     printf "%s\n" "$*" >&2
     exit 1
@@ -462,8 +464,6 @@ source_google_search() {
 
     # Install csvkit
     command -v csvgrep > /dev/null || pip install -q csvkit
-    # Install jq
-    command -v jq > /dev/null || apt-get install -qq jq
 
     # Get active search terms
     # csvkit has to be used here as the search terms may contain commas which
@@ -703,12 +703,10 @@ source_aa419() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    # Install jq
-    command -v jq > /dev/null || apt-get install -qq jq
-
     # Trailing slash intentionally omitted
-    curl -sSH "Auth-API-Id:${AA419_API_ID}" "${source_url}/0/250?Status=active" \
-        --retry 2 --retry-all-errors | jq -r '.[].Domain' > source_results.tmp
+    curl -sSH "Auth-API-Id:${AA419_API_ID}" \
+        "${source_url}/0/250?Status=active" --retry 2 --retry-all-errors \
+        | jq -r '.[].Domain' > source_results.tmp
 }
 
 source_coi.gov.cz() {
@@ -719,8 +717,7 @@ source_coi.gov.cz() {
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sS --retry 2 --retry-all-errors "${source_url}/" \
-        | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" \
-        > source_results.tmp
+        | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" > source_results.tmp
 }
 
 source_emerging_threats() {
