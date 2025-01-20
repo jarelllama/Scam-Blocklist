@@ -80,10 +80,13 @@ main() {
     save_domains
 }
 
-# Run each source function to retrieve domains to pass to the source processing
-# function.
+# Run each source function to retrieve results which are then processed per
+# source by process_source_results. The processed domains are collated into
+# all_retrieved_domains.tmp and all_retrieved_light_domains.tmp.
 retrieve_source_results() {
     local source
+
+    touch all_retrieved_domains.tmp all_retrieved_light_domains.tmp
 
     for source in "${SOURCES[@]}"; do
         # Skip commented out sources
@@ -128,8 +131,8 @@ retrieve_source_results() {
     done
 }
 
-# Called by the source processing function to remove entries from the source
-# results file and log them into the domain log.
+# Called by process_source_results to remove entries from the source results
+# file and log the entries into the domain log.
 # Input:
 #   $1: entries to remove passed in a variable
 #   $2: tag to be shown in the domain log
@@ -164,7 +167,7 @@ filter() {
     wc -w <<< "$entries"
 }
 
-# Filter the results from the source and append the domains to
+# Process/filter the results from the source, append the resulting domains to
 # all_retrieved_domains.tmp/all_retrieved_light_domains.tmp and save entries
 # requiring manual review.
 process_source_results() {
@@ -189,7 +192,7 @@ process_source_results() {
 
     sort -u "$source_results" -o "$source_results"
 
-    # Count number of unfiltered domains pending
+    # Count number of unfiltered domains
     raw_count="$(wc -l < "$source_results")"
 
     # Remove known dead domains (dead domains file is not sorted and includes
@@ -208,6 +211,7 @@ process_source_results() {
     # global.
     local subdomains
     while read -r subdomain; do  # Loop through common subdomains
+        # continue if no subdomains found
         subdomains="$(mawk "/^${subdomain}\./" "$source_results")" || continue
 
         # Strip subdomains down to their root domains
@@ -254,11 +258,13 @@ process_source_results() {
         | grep -vxFf "$BLACKLIST")" toplist --preserve)"
 
     # Collate filtered domains
-    cat "$source_results" >> all_retrieved_domains.tmp
+    sort -u "$source_results" all_retrieved_domains.tmp \
+        -o all_retrieved_domains.tmp
 
     if [[ "$ignore_from_light" == false ]]; then
         # Collate filtered domains from light sources
-        cat "$source_results" >> all_retrieved_light_domains.tmp
+        sort -u "$source_results" all_retrieved_light_domains.tmp \
+            -o all_retrieved_light_domains.tmp
     fi
 
     log_domains "$source_results" saved
@@ -282,8 +288,6 @@ process_source_results() {
 
 # Save filtered domains into the raw, subdomains and root domains files.
 save_domains() {
-    sort -u all_retrieved_domains.tmp -o all_retrieved_domains.tmp
-
     if [[ -f entries_for_review.tmp ]]; then
         # Print domains requiring manual review
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"
@@ -338,13 +342,9 @@ save_domains() {
 
     count_before="$(wc -l < "$RAW")"
 
-    # Save domains to raw file
+    # Save domains to raw files
     sort -u all_retrieved_domains.tmp "$RAW" -o "$RAW"
-
-    # Save domains to raw light file
-    if [[ -f all_retrieved_light_domains.tmp ]]; then
-        sort -u all_retrieved_light_domains.tmp "$RAW_LIGHT" -o "$RAW_LIGHT"
-    fi
+    sort -u all_retrieved_light_domains.tmp "$RAW_LIGHT" -o "$RAW_LIGHT"
 
     count_after="$(wc -l < "$RAW")"
     count_added="$(( count_after - count_before ))"
@@ -390,7 +390,6 @@ ${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
     if [[ "$status" == 'ERROR: empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
 
-        # Send telegram notification
         $FUNCTION --send-telegram \
             "Warning: '$source_name' retrieved no results. Potential error occurred."
     else
@@ -437,7 +436,7 @@ cleanup() {
 # Note the output results can be in URL form without subfolders.
 
 source_google_search() {
-    # Last checked: 23/12/24
+    # Last checked: 21/01/25
     source_name='Google Search'
     source_url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
@@ -466,12 +465,6 @@ source_google_search() {
     # Install csvkit
     command -v csvgrep > /dev/null || pip install -q csvkit
 
-    # Get active search terms
-    # csvkit has to be used here as the search terms may contain commas which
-    # makes using mawk complicated.
-    search_terms="$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 \
-        | tail -n +2)"
-
     # Loop through search terms
     while read -r search_term; do
         # Stop if rate limited
@@ -480,11 +473,14 @@ source_google_search() {
             return
         fi
         search_google "$search_term"
-    done <<< "$search_terms"
+    done \
+        <<< "$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" \
+        | csvcut -c 1 | tail -n +2)"
+
 }
 
 search_google() {
-    # Last checked: 05/01/25
+    # Last checked: 21/01/25
     search_term="${1//\"/}"  # Remove quotes before encoding
     # Replace non-alphanumeric characters with spaces
     encoded_search_term="${search_term//[^[:alnum:]]/%20}"
@@ -497,12 +493,11 @@ search_google() {
     touch "$source_results"  # Create results file to ensure proper logging
 
     # Loop through each page of results
+    local start params page_results page_domains
     for start in {1..100..10}; do
-    # Indentation intentionally lacking here
-    # Restrict to results from the last 30 days
-    local params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&dateRestrict=m1&sort=date&start=${start}&filter=0"
-    local page_results
-    page_results="$(curl -sS "${source_url}?${params}")"
+        # Restrict to results from the last 30 days
+        params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&dateRestrict=m1&sort=date&start=${start}&filter=0"
+        page_results="$(curl -sS "${source_url}?${params}")"
 
         (( query_count++ ))
 
@@ -540,7 +535,7 @@ search_google() {
 }
 
 source_cybersquatting() {
-    # Last checked: 23/12/24
+    # Last checked: 21/01/25
     source_name='Cybersquatting'
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
@@ -603,14 +598,14 @@ source_cybersquatting() {
 
         # Reset results file for the next target domain
         rm results.tmp
-
-    done <<< "$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
+    done \
+        <<< "$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
 
     rm -rf urlcrazy
 }
 
 source_dga_detector() {
-    # Last checked: 23/12/24
+    # Last checked: 21/01/25
     source_name='DGA Detector'
     ignore_from_light=true
 
@@ -635,7 +630,7 @@ source_dga_detector() {
 
     # Extract DGA domains from json output
     jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
-        > "../source_results.tmp"
+        > ../source_results.tmp
 
     cd ..
 
@@ -643,7 +638,7 @@ source_dga_detector() {
 }
 
 source_regex() {
-    # Last checked: 16/01/25
+    # Last checked: 21/01/25
     source_name='Regex'
     ignore_from_light=true
 
@@ -680,8 +675,8 @@ source_regex() {
         (( runs++ ))
         sed -i "/${domain}/s/${row}/${pattern},${count},${runs}/" \
             "$PHISHING_TARGETS"
-
-    done <<< "$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
+    done \
+        <<< "$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
 }
 
 source_165antifraud() {
