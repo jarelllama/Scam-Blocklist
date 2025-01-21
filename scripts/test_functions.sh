@@ -133,7 +133,7 @@ TEST_RETRIEVE_VALIDATE() {
         run_script retrieve_domains.sh
 
         # DEBUG
-        cat data/config/review.csv
+        cat config/review.csv
     fi
 
     if [[ "$script_to_test" == 'validate' ]]; then
@@ -426,8 +426,9 @@ test_invalid_removal() {
 
         # EXPECTED OUTPUT
         # The retrieval script saves invalid entries to the manual review file
+        # Subdomains should be saved
         {
-            printf "invalid-test-com\n"
+            printf "www.invalid-test-com\n"
             printf "100.100.100.1\n"
             printf "invalid-test.x\n"
             printf "invalid-test.100\n"
