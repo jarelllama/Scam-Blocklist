@@ -76,7 +76,7 @@ check_alive() {
     # Get resurrected domains in dead domains file
     comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive_domains.tmp
 
-    #[[ ! -s alive_domains.tmp ]] && return
+    [[ ! -s alive_domains.tmp ]] && return
 
     # Update dead domains file to only include dead domains
     # grep is used here because the dead domains file is unsorted
@@ -109,6 +109,9 @@ find_dead_in() {
 
     printf "\n"
     dead-domains-linter -i "$temp" --export dead.tmp
+
+    # Print empty newline to fix dead.tmp not being processed by grep
+    printf "\n" >> dead.tmp
 
     sort -u dead.tmp -o dead.tmp
 
