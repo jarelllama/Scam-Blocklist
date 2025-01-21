@@ -1,25 +1,8 @@
 #!/bin/bash
 
-# Retrieve domains from the various sources, process them and output a raw file
+# Retrieve domains from the sources, process them and output a raw file
 # that contains the cumulative domains from all sources over time.
 
-readonly FUNCTION='bash scripts/tools.sh'
-readonly RAW='data/raw.txt'
-readonly RAW_LIGHT='data/raw_light.txt'
-readonly SEARCH_TERMS='config/search_terms.csv'
-readonly WHITELIST='config/whitelist.txt'
-readonly BLACKLIST='config/blacklist.txt'
-readonly REVIEW_FILE='config/review.csv'
-readonly ROOT_DOMAINS='data/root_domains.txt'
-readonly SUBDOMAINS='data/subdomains.txt'
-readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
-readonly DEAD_DOMAINS='data/dead_domains.txt'
-readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly PHISHING_TARGETS='config/phishing_targets.csv'
-readonly SOURCE_LOG='config/source_log.csv'
-# Note the [[:alnum:]] in the front and end of the main domain body is to
-# prevent matching entries that start or end with a dash or period.
-readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 # Array of sources used to retrieve domains
 readonly -a SOURCES=(
     source_165antifraud
@@ -47,9 +30,26 @@ readonly -a SOURCES=(
     source_vzhh
     source_google_search
 )
+readonly FUNCTION='bash scripts/tools.sh'
+readonly RAW='data/raw.txt'
+readonly RAW_LIGHT='data/raw_light.txt'
+readonly SEARCH_TERMS='config/search_terms.csv'
+readonly WHITELIST='config/whitelist.txt'
+readonly BLACKLIST='config/blacklist.txt'
+readonly REVIEW_FILE='config/review.csv'
+readonly ROOT_DOMAINS='data/root_domains.txt'
+readonly SUBDOMAINS='data/subdomains.txt'
+readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly DEAD_DOMAINS='data/dead_domains.txt'
+readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly PHISHING_TARGETS='config/phishing_targets.csv'
+readonly SOURCE_LOG='config/source_log.csv'
+# Note the [[:alnum:]] in the front and end of the main domain body is to
+# prevent matching entries that start or end with a dash or period.
+readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 main() {
-    # Check whether to use existing results in data/pending
+    # Check whether to use existing results in the pending directory
     if [[ -d data/pending ]]; then
         printf "\nUsing existing lists of retrieved results.\n"
         readonly USE_EXISTING_RESULTS=true
@@ -64,6 +64,8 @@ main() {
     $FUNCTION --download-toplist
 
     if [[ "$USE_EXISTING_RESULTS" == false ]]; then
+        # These dependencies are required by some sources
+
         # Install jq
         command -v jq > /dev/null || apt-get install -qq jq
 
@@ -84,7 +86,7 @@ main() {
     save_subdomains
 }
 
-# Add the configured entries in the review config file to the
+# Check for configured entries in the review config file and add them to the
 # whitelist/blacklist.
 check_review_file() {
    # Add blacklisted entries to blacklist and remove them from the review file
@@ -130,9 +132,10 @@ retrieve_source_results() {
         # Set source results path based of source name if not explicitly set
         : "${source_results:=data/pending/${source_name// /_}.tmp}"
 
+        # source_results.tmp should be created when the source retrieves new
+        # results
         if [[ -f source_results.tmp ]]; then
-            # source_results.tmp should only be present when not using existing
-            # results
+            # An error would mean a problem with the source function
             if [[ "$USE_EXISTING_RESULTS" == true ]]; then
                 error 'source_results.tmp present while USE_EXISTING_RESULTS is true.'
             fi
@@ -177,10 +180,11 @@ filter() {
         mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> entries_for_review.tmp
 
-        # Save entries into review config file ensuring there are no duplicates
+        # Save entries into review config file
         mawk -v source="$source_name" -v reason="$tag" \
             '{print source "," $0 "," reason ",,"}' <<< "$entries" \
             >> "$REVIEW_FILE"
+        # Remove duplicates
         mawk '!seen[$0]++' "$REVIEW_FILE"> temp
         mv temp "$REVIEW_FILE"
 
@@ -388,8 +392,7 @@ save_subdomains() {
         | sort -u - "$SUBDOMAINS" -o "$SUBDOMAINS"
 }
 
-# Print and log statistics for each source after the source processing
-# function.
+# Print and log statistics for each source.
 log_source() {
     local item final_count total_whitelisted_count excluded_count
     local status='saved'
