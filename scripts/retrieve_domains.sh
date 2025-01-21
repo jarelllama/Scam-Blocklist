@@ -57,18 +57,18 @@ main() {
         mkdir -p data/pending
     fi
 
-    # Download dependencies (done in parallel):
     # Install idn (requires sudo) (note -qq does not seem to work here)
-    # Install jq
-    # Call shell wrapper to download toplist.tmp and nrd.tmp
-    { command -v idn > /dev/null || sudo apt-get install idn > /dev/null; } \
-        & { command -v jq > /dev/null || apt-get install -qq jq; } \
-        & $FUNCTION --download-toplist \
-        & { [[ "$USE_EXISTING_RESULTS" == false ]] \
-        && $FUNCTION --download-nrd-feed; }
-    wait
+    command -v idn > /dev/null || sudo apt-get install idn > /dev/null
 
-    if [[ -f nrd.tmp ]]; then
+    # Download toplist
+    $FUNCTION --download-toplist
+
+    if [[ "$USE_EXISTING_RESULTS" == false ]]; then
+        # Install jq
+        command -v jq > /dev/null || apt-get install -qq jq
+
+        # Download NRD feed
+        $FUNCTION --download-nrd-feed
         # Remove already processed NRDs to save processing time
         comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
             > temp
@@ -84,11 +84,9 @@ main() {
     save_subdomains
 }
 
-# Check if the review config file exists. If so, add the configured entries to
-# the whitelist/blacklist.
+# Add the configured entries in the review config file to the
+# whitelist/blacklist.
 check_review_file() {
-    [[ ! -f "$REVIEW_FILE" ]] && return
-
    # Add blacklisted entries to blacklist and remove them from the review file
     mawk -F ',' '$4 == "y" {print $2}' "$REVIEW_FILE" \
         | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
@@ -102,13 +100,10 @@ check_review_file() {
         | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
 }
 
-# Run each source function to retrieve results which are then processed per
-# source by process_source_results. The processed domains are collated into
-# all_retrieved_domains.tmp and all_retrieved_light_domains.tmp.
+# Run each source function to retrieve results collated in "$source_results"
+# which are then processed per source by process_source_results.
 retrieve_source_results() {
     local source
-
-    touch all_retrieved_domains.tmp all_retrieved_light_domains.tmp
 
     for source in "${SOURCES[@]}"; do
         # Skip commented out sources
@@ -181,12 +176,6 @@ filter() {
         # Save entries to print in console later
         mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> entries_for_review.tmp
-
-        # Create review config file with header if not already created
-        if [[ ! -f "$REVIEW_FILE" ]]; then
-            printf 'source,entry,reason,blacklist (y/N),whitelist (y/N)\n' \
-                > "$REVIEW_FILE"
-        fi
 
         # Save entries into review config file ensuring there are no duplicates
         mawk -v source="$source_name" -v reason="$tag" \
@@ -297,13 +286,11 @@ process_source_results() {
         | grep -vxFf "$BLACKLIST")" toplist --preserve)"
 
     # Collate filtered domains
-    sort -u "$source_results" all_retrieved_domains.tmp \
-        -o all_retrieved_domains.tmp
+    cat "$source_results" >> all_retrieved_domains.tmp
 
     if [[ "$ignore_from_light" == false ]]; then
         # Collate filtered domains from light sources
-        sort -u "$source_results" all_retrieved_light_domains.tmp \
-            -o all_retrieved_light_domains.tmp
+        cat "$source_results" >> all_retrieved_light_domains.tmp
     fi
 
     log_domains "$source_results" saved
@@ -318,7 +305,7 @@ process_source_results() {
     fi
 }
 
-# Save filtered domains into the raw, subdomains and root domains files.
+# Save filtered domains into the raw file.
 save_domains() {
     if [[ -f entries_for_review.tmp ]]; then
         # Print domains requiring manual review
@@ -363,10 +350,16 @@ save_domains() {
         "Retrieval: added ${count_added} domains"
 }
 
+# Save filtered subdomains and root domains into the subdomains and root
+# domains files.
 save_subdomains() {
     [[ ! -f root_domains.tmp ]] && return
 
-    sort -u subdomains.tmp -o subdomains.tmp
+    # If all_retrieved_domains.tmp is empty, root_domains.tmp should not exist
+    if [[ ! -s all_retrieved_domains.tmp ]]; then
+        error 'root_domains.tmp present althought all_retrieved_domains.tmp is empty.'
+    fi
+
     sort -u root_domains.tmp -o root_domains.tmp
 
     # Keep subdomains and remove root domains from entries requiring manual
@@ -384,8 +377,7 @@ save_subdomains() {
     done
 
     # Keep only root domains present in the final filtered domains
-    # TODO: how to handle all_retrieved empty
-    comm -12 root_domains.tmp all_retrieved_domains.tmp > temp
+    comm -12 root_domains.tmp <(sort all_retrieved_domains.tmp) > temp
     mv temp root_domains.tmp
 
     # Collate filtered root domains
@@ -454,7 +446,7 @@ error() {
 }
 
 cleanup() {
-    # Initialize pending directory if no domains to be saved for rerun
+    # Delete pending directory if no domains to be saved for rerun
     find data/pending -type d -empty -delete
 
     find . -maxdepth 1 -type f -name "*.tmp" -delete
