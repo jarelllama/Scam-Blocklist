@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# Validates the collated domains via a variety of checks and flags entries that
-# require attention.
-
-# TODO: implement a way to use a config file to blacklist/whitelist domains
-# found in the toplist similiar to retrieve_domains.sh
+# Validate domains in the raw file via a variety of checks and flag entries
+# that require attention.
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
@@ -12,14 +9,32 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
+readonly REVIEW_FILE='config/review.csv'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
-# Function 'filter' logs the given entries and removes them from the raw file.
+# Add the configured entries in the review config file to the
+# whitelist/blacklist.
+check_review_file() {
+   # Add blacklisted entries to blacklist and remove them from the review file
+    mawk -F ',' '$4 == "y" {print $2}' "$REVIEW_FILE" \
+        | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
+
+    # Add whitelisted entries to whitelist after formatting to regex and remove
+    # them from the review file
+    mawk -F ',' '$5 == "y" {print $2}' "$REVIEW_FILE" \
+        | tee >(mawk '{gsub(/\./, "\."); print "^" $0 "$"}' \
+        | sort -u - "$WHITELIST" -o "$WHITELIST") \
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
+}
+
+# Remove entries from the raw file and log the entries into the domain log.
 # Input:
 #   $1: entries to process passed in a variable
-#   $2: tag given to entries
+#   $2: tag to be shown in the domain log
 #   --preserve: keep entries in the raw file
 # Output:
 #   filter_log.tmp (if filtered domains found)
@@ -30,10 +45,17 @@ filter() {
     # Return if no entries passed
     [[ -z "$entries" ]] && return
 
-    if [[ "$3" != '--preserve' ]]; then
+    if [[ "$3" == '--preserve' ]]; then
+        # Save entries into review config file ensuring there are no duplicates
+        mawk -v reason="$tag" \
+            '{print "raw," $0 "," reason ",,"}' <<< "$entries" \
+            >> "$REVIEW_FILE"
+        mawk '!seen[$0]++' "$REVIEW_FILE"> temp
+        mv temp "$REVIEW_FILE"
+    else
         # Remove entries from raw file
-        comm -23 "$RAW" <(printf "%s" "$entries") > raw.tmp
-        mv raw.tmp "$RAW"
+        comm -23 "$RAW" <(printf "%s" "$entries") > temp
+        mv temp "$RAW"
     fi
 
     # Record entries into filter log
@@ -46,6 +68,7 @@ filter() {
 
 validate() {
     # Convert Unicode to Punycode in raw file and raw light file
+    local file
     for file in "$RAW" "$RAW_LIGHT"; do
         # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
         idn --no-tld < "$file" | sort > temp
@@ -53,8 +76,12 @@ validate() {
     done
 
     # Strip away subdomains
+    local subdomain
     while read -r subdomain; do  # Loop through common subdomains
-        subdomains="$(mawk "/^${subdomain}\./" "$RAW")" || continue
+        subdomains="$(mawk "/^${subdomain}\./" "$RAW")"
+
+        # Continue if no subdomains found
+        [[ -z "$subdomains" ]] && continue
 
         # Strip subdomains from raw file and raw light file
         sed -i "s/^${subdomain}\.//" "$RAW"
@@ -62,67 +89,61 @@ validate() {
 
         # Save subdomains and root domains to be filtered later
         printf "%s\n" "$subdomains" >> subdomains.tmp
-        printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" >> root_domains.tmp
-
-        # No longer log subdomains due to the high number of them
-        # Exclude 'www' subdomains (too many of them)
-        #filter "$(mawk '!/^www\./' <<< "$subdomains")" subdomain --preserve
+        printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" \
+            >> root_domains.tmp
     done < "$SUBDOMAINS_TO_REMOVE"
     sort -u "$RAW" -o "$RAW"
     sort -u "$RAW_LIGHT" -o "$RAW_LIGHT"
 
     # Remove whitelisted domains excluding blacklisted domains
-    # Note whitelist matching uses regex
-    whitelisted="$(grep -Ef "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")"
-    filter "$whitelisted" whitelist
+    # Note whitelist matching uses regex matching
+    filter \
+        "$(grep -Ef "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")" whitelist
 
     # Remove domains with whitelisted TLDs
-    whitelisted_tld="$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")"
-    filter "$whitelisted_tld" whitelisted_tld
+    filter \
+        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")" whitelisted_tld
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    regex='^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$'
-    invalid="$(grep -vE "$regex" "$RAW")"
-    filter "$invalid" invalid
+    filter "$(grep -vE "^${DOMAIN_REGEX}$" "$RAW")" invalid
     # The dead domains file is also checked here as invalid entries may get
     # picked up by the dead check and get saved in the dead domains file.
-    if invalid_dead="$(grep -vE "$regex" "$DEAD_DOMAINS")"; then
-        grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > dead.tmp
-        mv dead.tmp "$DEAD_DOMAINS"
+    if invalid_dead="$(grep -vE "^${DOMAIN_REGEX}$" "$DEAD_DOMAINS")"; then
+        grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > temp
+        mv temp "$DEAD_DOMAINS"
         mawk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
         $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
     fi
 
     # Find domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
-    in_toplist="$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")"
-    filter "$in_toplist" toplist --preserve
+    filter \
+        "$(comm -12 toplist.tmp "$RAW" | grep -vxFf "$BLACKLIST")" \
+            toplist --preserve
 
     # Return if no filtering done
     [[ ! -f filter_log.tmp ]] && return
 
-    # Collate only filtered subdomains and root domains into the subdomains
-    # file and root domains file
+    # Save filtered subdomains and root domains into the subdomains and root
+    # domains files.
     if [[ -f root_domains.tmp ]]; then
-        # Find root domains (subdomains stripped off) in the filtered raw file
-        root_domains="$(comm -12 <(sort root_domains.tmp) "$RAW")"
+        sort -u root_domains.tmp -o root_domains.tmp
 
-        # Check if any filtered root domains are found to avoid appending an
-        # empty line
-        if [[ -n "$root_domains" ]]; then
-            # Collate filtered root domains to exclude from dead check
-            printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
-            sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
+        # Keep only root domains present in the final filtered domains
+        comm -12 root_domains.tmp "$RAW" > temp
+        mv temp root_domains.tmp
 
-            # Collate filtered subdomains for dead check
-            grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
-            sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
-        fi
+        # Collate filtered root domains
+        sort -u root_domains.tmp "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
+
+        # Collate filtered subdomains
+        grep -f root_domains.tmp subdomains.tmp \
+            | sort -u - "$SUBDOMAINS" -o "$SUBDOMAINS"
     fi
 
     # Save changes to raw light file
-    comm -12 "$RAW_LIGHT" "$RAW" > light.tmp
-    mv light.tmp "$RAW_LIGHT"
+    comm -12 "$RAW_LIGHT" "$RAW" > temp
+    mv temp "$RAW_LIGHT"
 
     # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
@@ -147,11 +168,12 @@ trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 $FUNCTION --format-all
 
-# Download dependencies (done in parallel):
 # Install idn (requires sudo) (note -qq does not seem to work here)
-# Call shell wrapper to download toplist
-{ command -v idn &> /dev/null || sudo apt-get install idn > /dev/null; } \
-    & $FUNCTION --download-toplist
-wait
+command -v idn > /dev/null || sudo apt-get install idn > /dev/null
+
+# Download toplist
+$FUNCTION --download-toplis
+
+check_review_file
 
 validate

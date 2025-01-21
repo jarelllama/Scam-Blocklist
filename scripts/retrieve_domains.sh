@@ -151,7 +151,7 @@ retrieve_source_results() {
 # Called by process_source_results to remove entries from the source results
 # file and log the entries into the domain log.
 # Input:
-#   $1: entries to remove passed in a variable
+#   $1: entries to process passed in a variable
 #   $2: tag to be shown in the domain log
 #   --no-log:   do not log entries into the domain log
 #   --preserve: save entries for manual review and for rerun
