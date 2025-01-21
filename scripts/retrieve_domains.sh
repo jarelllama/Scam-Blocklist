@@ -9,7 +9,7 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
-readonly REVIEW_FILE='config/review.txt'
+readonly REVIEW_FILE='config/review.csv'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
@@ -81,7 +81,7 @@ main() {
 
     save_domains
 
-    save_domains
+    save_subdomains
 }
 
 # Check if the review config file exists. If so, add the configured entries to
