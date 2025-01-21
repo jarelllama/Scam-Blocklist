@@ -66,6 +66,7 @@ filter() {
     $FUNCTION --log-domains "$entries" "$tag" raw
 }
 
+# Validate raw file.
 validate() {
     # Convert Unicode to Punycode in raw file and raw light file
     local file
@@ -164,6 +165,8 @@ validate() {
 
 # Entry point
 
+set -e
+
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 $FUNCTION --format-all
@@ -172,7 +175,7 @@ $FUNCTION --format-all
 command -v idn > /dev/null || sudo apt-get install idn > /dev/null
 
 # Download toplist
-$FUNCTION --download-toplis
+$FUNCTION --download-toplist
 
 check_review_file
 
