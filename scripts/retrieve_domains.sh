@@ -9,7 +9,7 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
-#readonly REVIEW_FILE='config/review.txt'
+readonly REVIEW_FILE='config/review.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
@@ -75,9 +75,31 @@ main() {
         mv temp nrd.tmp
     fi
 
+    check_review_file
+
     retrieve_source_results
 
     save_domains
+
+    save_domains
+}
+
+# Check if the review config file exists. If so, add the configured entries to
+# the whitelist/blacklist.
+check_review_file() {
+    [[ ! -f "$REVIEW_FILE" ]] && return
+
+   # Add blacklisted entries to blacklist and remove them from the review file
+    mawk -F ',' '$4 == "y" {print $2}' "$REVIEW_FILE" \
+        | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
+
+    # Add whitelisted entries to whitelist after formatting to regex and remove
+    # them from the review file
+    mawk -F ',' '$5 == "y" {print $2}' "$REVIEW_FILE" \
+        | tee >(mawk '{gsub(/\./, "\."); print "^" $0 "$"}' \
+        | sort -u - "$WHITELIST" -o "$WHITELIST") \
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
 }
 
 # Run each source function to retrieve results which are then processed per
@@ -156,9 +178,22 @@ filter() {
     fi
 
     if [[ "$3" == '--preserve' ]]; then
-        # Save entries for manual review and for rerun
+        # Save entries to print in console later
         mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> entries_for_review.tmp
+
+        # Create review config file with header if not already created
+        if [[ ! -f "$REVIEW_FILE" ]]; then
+            printf 'source,entry,reason,blacklist (y/N),whitelist (y/N)' \
+                > "$REVIEW_FILE"
+        fi
+
+        # Save entries into review config file ensuring there are no duplicates
+        mawk -v source="$source_name" -v reason="$tag" \
+            '{print source "," $0 "," reason ",,"}' <<< "$entries" \
+            | awk '!seen[$0]++' >> "$REVIEW_FILE"
+
+        # Save entries to use in rerun
         printf "%s\n" "$entries" >> "${source_results}.tmp"
     fi
 
@@ -211,8 +246,10 @@ process_source_results() {
     # global.
     local subdomains
     while read -r subdomain; do  # Loop through common subdomains
-        # continue if no subdomains found
-        subdomains="$(mawk "/^${subdomain}\./" "$source_results")" || continue
+        subdomains="$(mawk "/^${subdomain}\./" "$source_results")"
+
+        # Continue if no subdomains found
+        [[ -z "$subdomains" ]] && continue
 
         # Strip subdomains down to their root domains
         sed -i "s/^${subdomain}\.//" "$source_results"
@@ -273,16 +310,9 @@ process_source_results() {
 
     rm "$source_results"
 
-    # TODO: collate entries pending manual review into separate config file for
-    # easier blacklisting/whitelisting: https://github.com/jarelllama/Scam-Blocklist/issues/411
     if [[ -f "${source_results}.tmp" ]]; then
-        # Append entries that are pending manual review to manual review
-        # config file
-        #printf "### %s\n" "$source_name" >> "$REVIEW_FILE"
-        #cat "${source_results}.tmp" >> "$REVIEW_FILE"
-
         # Save entries that are pending manual review for rerun
-        mv "${source_results}.tmp" "$source_results"
+        sort -u "${source_results}.tmp" -o "$source_results"
     fi
 }
 
@@ -311,33 +341,6 @@ save_domains() {
         return
     fi
 
-    # TODO: how to save subdomains of domains manually blacklisted after review?
-    # https://github.com/jarelllama/Scam-Blocklist/issues/412
-    #
-    # Collate only filtered subdomains and root domains into the subdomains
-    # file and root domains file
-    if [[ -f root_domains.tmp ]]; then
-        local root_domains
-
-        # Find root domains (subdomains stripped off) in the filtered domains
-        root_domains="$(comm -12 <(sort root_domains.tmp) \
-            all_retrieved_domains.tmp)"
-
-        # Check if any filtered root domains are found to avoid appending an
-        # empty line
-        if [[ -n "$root_domains" ]]; then
-            # Collate filtered root domains to exclude from dead check
-            printf "%s\n" "$root_domains" >> "$ROOT_DOMAINS"
-            sort -u "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
-
-            # Collate filtered subdomains for dead check
-            # grep is used here as mawk does not interpret variables with
-            # multiple lines well when matching.
-            grep "\.${root_domains}$" subdomains.tmp >> "$SUBDOMAINS"
-            sort -u "$SUBDOMAINS" -o "$SUBDOMAINS"
-        fi
-    fi
-
     local count_before count_after count_added
 
     count_before="$(wc -l < "$RAW")"
@@ -356,6 +359,39 @@ save_domains() {
 
     $FUNCTION --send-telegram \
         "Retrieval: added ${count_added} domains"
+}
+
+save_subdomains() {
+    [[ ! -f root_domains.tmp ]] && return
+
+    sort -u subdomains.tmp -o subdomains.tmp
+    sort -u root_domains.tmp -o root_domains.tmp
+
+    # Keep subdomains and remove root domains from entries requiring manual
+    # review in data/pending
+    local entries
+    for entries in data/pending/*.tmp; do
+        [[ ! -f "$entries" ]] && continue
+
+        # Add back subdomains
+        grep -f "$entries" subdomains.tmp | sort -u - "$entries" -o "$entries"
+
+        # Keep only domains not found in root_domains.tmp
+        comm -23 "$entries" root_domains.tmp > temp
+        mv temp "$entries"
+    done
+
+    # Keep only root domains present in the final filtered domains
+    # TODO: how to handle all_retrieved empty
+    comm -12 root_domains.tmp all_retrieved_domains.tmp > temp
+    mv temp root_domains.tmp
+
+    # Collate filtered root domains
+    sort -u root_domains.tmp "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
+
+    # Collate filtered subdomains
+    grep -f root_domains.tmp subdomains.tmp \
+        | sort -u - "$SUBDOMAINS" -o "$SUBDOMAINS"
 }
 
 # Print and log statistics for each source after the source processing

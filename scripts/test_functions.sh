@@ -131,6 +131,9 @@ TEST_RETRIEVE_VALIDATE() {
 
         # Run retrieval script
         run_script retrieve_domains.sh
+
+        # DEBUG
+        cat data/config/review.csv
     fi
 
     if [[ "$script_to_test" == 'validate' ]]; then
