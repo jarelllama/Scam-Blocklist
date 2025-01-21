@@ -76,7 +76,7 @@ check_alive() {
     # Get resurrected domains in dead domains file
     comm -23 <(sort "$DEAD_DOMAINS") dead.tmp > alive_domains.tmp
 
-    [[ ! -s alive_domains.tmp ]] && return
+    #[[ ! -s alive_domains.tmp ]] && return
 
     # Update dead domains file to only include dead domains
     # grep is used here because the dead domains file is unsorted
@@ -157,7 +157,7 @@ cleanup() {
     find . -maxdepth 1 -type f -name "x??" -delete
 
     # Call shell wrapper to prune old entries from dead domains file
-    #$FUNCTION --prune-lines "$DEAD_DOMAINS" "$LOG_SIZE"
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" "$LOG_SIZE"
 }
 
 # Entry point
