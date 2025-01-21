@@ -162,7 +162,7 @@ cleanup() {
 
 # Entry point
 
-set -e
+#set -e
 
 trap cleanup EXIT
 
