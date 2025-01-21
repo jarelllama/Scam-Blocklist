@@ -84,8 +84,8 @@ check_alive() {
         grep -xFf dead.tmp "$DEAD_DOMAINS" > temp
         mv temp "$DEAD_DOMAINS"
     else
-        # For the edge case where dead.tmp is empty, the dead domains file should
-        # be empty too. Without this check, grep would error.
+        # This if condition is a workaround for the edge case where dead.tmp is
+        # empty which causes grep to error.
         : > "$DEAD_DOMAINS"
     fi
 
