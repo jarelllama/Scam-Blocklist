@@ -5,7 +5,7 @@
 # Function 'format_file' standardizes the format of the given file.
 #   $1: file to be formatted
 format_file() {
-    file="$1"
+    local file="$1"
 
     [[ ! -f "$file" ]] && return
 
@@ -40,6 +40,7 @@ format_file() {
 
 # Function 'format_all' formats all files in the config and data directories.
 format_all() {
+    local file
     for file in config/* data/*; do
         format_file "$file"
     done
@@ -50,6 +51,8 @@ format_all() {
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_domains() {
+    local domains timestamp
+
     # Check if a file or variable was passed
     # Note [[ -s ]] causes unintended behavior when the file is empty
     if [[ -f "$1" ]]; then
@@ -73,8 +76,9 @@ log_domains() {
 #   $1: file to be pruned
 #   $2: maximum number of lines to keep
 prune_lines() {
-    file="$1"
-    max_lines="$2"
+    local file="$1"
+    local max_lines="$2"
+    local lines
     lines="$(wc -l < "$1")"
 
     if (( lines > max_lines )); then
@@ -112,13 +116,12 @@ download_toplist() {
 download_nrd_feed() {
     [[ -f nrd.tmp ]] && return
 
-    url1='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt'
-    url2='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt'
-    url3='https://raw.githubusercontent.com/SystemJargon/filters/refs/heads/main/nrds-30days.txt'
-    url4='https://feeds.opensquat.com/domain-names-month.txt'
+    local url1='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt'
+    local url2='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt'
+    local url3='https://raw.githubusercontent.com/SystemJargon/filters/refs/heads/main/nrds-30days.txt'
+    local url4='https://feeds.opensquat.com/domain-names-month.txt'
 
     # Download the feeds in parallel and get only domains, ignoring comments
-    # TODO: error handling
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
         | grep -oE '^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
         > nrd.tmp
@@ -140,6 +143,8 @@ send_telegram() {
 }
 
 # Entry point
+
+set -e
 
 case "$1" in
     --format)

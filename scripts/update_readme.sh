@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Updates the README.md content and statistics.
+# Update the README.md content and statistics.
 
 # Note: mawk '{sum += $1} END {print sum}' can be used to print 0 when there
 # is no value.
@@ -158,6 +158,7 @@ EOF
 readonly FUNCTION='bash scripts/tools.sh'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
+readonly TODAY THIS_MONTH
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 
@@ -165,6 +166,7 @@ THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 # statistics for the given source.
 #   $1: source to process (default is all sources)
 print_stats() {
+    local this_month total_this_month
     this_month="$(sum "$THIS_MONTH" "$1")"
     total_this_month="$(sum "$THIS_MONTH")"
 
@@ -177,7 +179,7 @@ print_stats() {
 # Note that csvkit is used in the following functions as the Google Search
 # search terms may contain commas which makes using mawk complicated.
 
-# Function 'sum' is an echo wrapper that returns the total sum of filterd
+# Function 'sum' is an echo wrapper that returns the total sum of filtered
 # domains retrieved by the given source for that timeframe.
 #   $1: timeframe to process
 #   $2: source to process (default is all sources)
@@ -194,6 +196,8 @@ sum() {
 # excluded domains out of the raw count retrieved by the given source.
 #   $1: source to process (default is all sources)
 sum_excluded() {
+    local raw_count white_count dead_count parked_count excluded_count
+
     # Get required columns of the source (includes unsaved)
     grep -F "$1" "$SOURCE_LOG" | csvcut -c 4,6,7,8 > rows.tmp
 
@@ -210,6 +214,8 @@ sum_excluded() {
 }
 
 # Entry point
+
+set -e
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 

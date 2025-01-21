@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Builds the NSFW blocklist. The build process is entirely self-contained in
+# Build the NSFW blocklist. The build process is entirely self-contained in
 # this script.
 
 readonly FUNCTION='bash scripts/tools.sh'
@@ -43,8 +43,8 @@ readonly -a WHITELIST=(
     1337xxx.to
 )
 
-# Function 'build' retrieves domains from the Tranco toplist, adds them to the
-# raw file, formats it, and removes dead domains.
+# Retrieve domains from the Tranco toplist, add them to the
+# raw file, format the file and remove dead domains.
 build() {
     # Format raw file to Domains format
     mawk '/[|]/ {gsub(/[|^]/, ""); print}' "$BLOCKLIST" > raw.tmp
@@ -54,6 +54,7 @@ build() {
     mv temp toplist.tmp
 
     # Get matching domains in toplist
+    local term
     for term in "${TERMS[@]}"; do
         mawk "/${term}/" toplist.tmp >> domains.tmp
     done
@@ -62,6 +63,7 @@ build() {
     sort -u domains.tmp raw.tmp -o raw.tmp
 
     # Remove whitelisted domains
+    local white
     for white in "${WHITELIST[@]}"; do
         sed -i "/${white}/d" raw.tmp
     done
@@ -79,7 +81,7 @@ build() {
     sed -i '/!/d' compiled.tmp
 }
 
-# Function 'deploy' builds the blocklist in Adblock Plus syntax.
+# Create the blocklist in Adblock Plus syntax.
 deploy() {
     cat << EOF > "$BLOCKLIST"
 [Adblock Plus]
@@ -98,6 +100,8 @@ EOF
 }
 
 # Entry point
+
+set -e
 
 trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
