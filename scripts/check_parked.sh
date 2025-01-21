@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Checks for parked/unparked domains and removes/adds them accordingly.
+# Check for parked/unparked domains and remove/add them accordingly.
 # It should be noted that although the domain may be parked, subfolders of the
 # domain may host malicious content. This script does not account for that.
 
@@ -20,6 +20,8 @@ main() {
         split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
     fi
 
+    # The parked check consists of multiple parts to get around the time limit
+    # of Github jobs.
     case "$1" in
         'checkunparked')
             # The unparked check being done in the workflow before the parked
@@ -40,7 +42,7 @@ main() {
             remove_parked
             ;;
         *)
-            printf "\n\e[1;31mNo argument passed.\e[0m\n\n"
+            printf "\n\e[1;31mNo argument passed.\e[0m\n\n" >&2
             exit 1
             ;;
     esac
@@ -94,8 +96,8 @@ check_unparked() {
     $FUNCTION --log-domains "$(wc -l < unparked_domains.tmp)" unparked_count parked_domains_file
 }
 
-# Function 'find_parked_in' efficiently checks for parked domains in a given
-# file by running the checks in parallel.
+# Efficiently check for parked domains in a given file by running the checks in
+# parallel.
 # Input:
 #   $1: file to process
 # Output:
@@ -134,8 +136,7 @@ find_parked_in() {
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
 
-# Function 'find_parked' queries sites in a given file for parked messages in
-# their HTML.
+# Query sites in a given file for parked messages in their HTML.
 # Input:
 #   $1: file to process
 # Output:
@@ -144,10 +145,12 @@ find_parked_in() {
 find_parked() {
     [[ ! -f "$1" ]] && return
 
+    local track count html
+
     # Track progress only for first split file
     if [[ "$1" == 'x00' ]]; then
-        local track=true
-        local count=1
+        track=true
+        count=1
     fi
 
     # Loop through domains
@@ -188,9 +191,11 @@ find_parked() {
     done < "$1"
 }
 
-# Function 'remove_parked' removes parked domains from the raw file, raw light
-# file, root domains file and subdomains file.
+# Remove parked domains from the raw file, raw light file, root domains file
+# and subdomains file.
 remove_parked() {
+    local count_before count_after parked_count
+
     count_before="$(wc -l < "$RAW")"
 
     sort -u "$PARKED_DOMAINS" -o parked.tmp
@@ -231,6 +236,8 @@ cleanup() {
 }
 
 # Entry point
+
+set -e
 
 trap cleanup EXIT
 

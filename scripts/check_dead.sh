@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Checks for dead/resurrected domains and removes/adds them accordingly.
+# Check for dead/resurrected domains and remove/add them accordingly.
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
@@ -22,6 +22,8 @@ main() {
         split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
     fi
 
+    # The dead check consists of multiple parts to get around the time limit of
+    # Github jobs.
     case "$1" in
         'checkalive')
             # The alive check being done in the workflow before the dead check
@@ -42,15 +44,15 @@ main() {
             remove_dead
             ;;
         *)
-            printf "\n\e[1;31mNo argument passed.\e[0m\n\n"
+            printf "\n\e[1;31mNo argument passed.\e[0m\n\n" >&2
             exit 1
             ;;
     esac
 }
 
-# Function 'check_dead' finds dead domains and collates them into the dead
-# domains file to be removed from the various files later. The dead domains
-# file is also used as a filter for newly retrieved domains.
+# Find dead domains and collate them into the dead domains file to be removed
+# from the various files later. The dead domains file is also used as a filter
+# for newly retrieved domains.
 check_dead() {
     # Include subdomains found in the given file. Exclude the root domains
     # since the subdomains were what was retrieved during domain retrieval.
@@ -65,11 +67,9 @@ check_dead() {
     cat dead.tmp >> "$DEAD_DOMAINS"
 }
 
-# Function 'check_alive' finds resurrected domains in the dead domains file and
-# adds them back into the raw file.
-#
-# Note that resurrected domains are not added back into the raw light file as
-# the dead domains are not logged with their sources.
+# Find resurrected domains in the dead domains file and add them back into the
+# raw file. Note that resurrected domains are not added back into the raw light
+# file as the dead domains are not logged with their sources.
 check_alive() {
     find_dead_in "$DEAD_DOMAINS"
 
@@ -92,8 +92,8 @@ check_alive() {
     $FUNCTION --log-domains "$(wc -l < alive_domains.tmp)" resurrected_count dead_domains_file
 }
 
-# Function 'find_dead_in' finds dead domains in a given file by formatting the
-# file and then processing it through AdGuard's Dead Domains Linter.
+# Find dead domains in a given file by formatting the file and then processing
+# it through AdGuard's Dead Domains Linter.
 # Input:
 #   $1: file to process
 # Output:
@@ -115,9 +115,11 @@ find_dead_in() {
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
 
-# Function 'remove_dead' removes dead domains from the raw file, raw light
-# file, root domains file and subdomains file.
+# Remove dead domains from the raw file, raw light file, root domains file and
+# subdomains file.
 remove_dead() {
+    local count_before count_after dead_count
+
     count_before="$(wc -l < "$RAW")"
 
     sort -u "$DEAD_DOMAINS" -o dead.tmp
@@ -133,6 +135,7 @@ remove_dead() {
     sort -u dead.tmp -o dead.tmp
 
     # Remove dead domains from the various files
+    local file
     for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
         comm -23 "$file" dead.tmp > temp
         mv temp "$file"
@@ -158,6 +161,8 @@ cleanup() {
 }
 
 # Entry point
+
+set -e
 
 trap cleanup EXIT
 
