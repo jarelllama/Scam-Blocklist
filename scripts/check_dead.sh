@@ -78,10 +78,16 @@ check_alive() {
 
     [[ ! -s alive_domains.tmp ]] && return
 
-    # Update dead domains file to only include dead domains
-    # grep is used here because the dead domains file is unsorted
-    grep -xFf dead.tmp "$DEAD_DOMAINS" > temp
-    mv temp "$DEAD_DOMAINS"
+    if [[ -s dead.tmp ]]; then
+        # Update dead domains file to only include dead domains
+        # grep is used here because the dead domains file is unsorted
+        grep -xFf dead.tmp "$DEAD_DOMAINS" > temp
+        mv temp "$DEAD_DOMAINS"
+    else
+        # For the edge case where dead.tmp is empty, the dead domains file should
+        # be empty too. Without this check, grep would error.
+        : > "$DEAD_DOMAINS"
+    fi
 
     # Add resurrected domains to raw file
     # Note that resurrected subdomains are added back too and will be processed
@@ -109,9 +115,6 @@ find_dead_in() {
 
     printf "\n"
     dead-domains-linter -i "$temp" --export dead.tmp
-
-    # Print empty newline to fix dead.tmp not being processed by grep
-    printf "\n" >> dead.tmp
 
     sort -u dead.tmp -o dead.tmp
 
