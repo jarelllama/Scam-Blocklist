@@ -176,7 +176,7 @@ filter() {
     fi
 
     if [[ "$3" == '--preserve' ]]; then
-        # Save entries to print in console later
+        # Save entries for console output
         mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
             >> entries_for_review.tmp
 

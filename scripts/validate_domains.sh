@@ -15,7 +15,19 @@ readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
-# Add the configured entries in the review config file to the
+main() {
+    # Install idn (requires sudo) (note -qq does not seem to work here)
+    command -v idn > /dev/null || sudo apt-get install idn > /dev/null
+
+    # Download toplist
+    $FUNCTION --download-toplist
+
+    check_review_file
+
+    validate
+}
+
+# Check for configured entries in the review config file and add them to the
 # whitelist/blacklist.
 check_review_file() {
    # Add blacklisted entries to blacklist and remove them from the review file
@@ -46,10 +58,11 @@ filter() {
     [[ -z "$entries" ]] && return
 
     if [[ "$3" == '--preserve' ]]; then
-        # Save entries into review config file ensuring there are no duplicates
+        # Save entries into review config file
         mawk -v reason="$tag" \
             '{print "raw," $0 "," reason ",,"}' <<< "$entries" \
             >> "$REVIEW_FILE"
+        # Remove duplicates
         mawk '!seen[$0]++' "$REVIEW_FILE"> temp
         mv temp "$REVIEW_FILE"
     else
@@ -58,7 +71,7 @@ filter() {
         mv temp "$RAW"
     fi
 
-    # Record entries into filter log
+    # Record entries into filter log for console output
     mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
         >> filter_log.tmp
 
@@ -77,7 +90,7 @@ validate() {
     done
 
     # Strip away subdomains
-    local subdomain
+    local subdomains
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(mawk "/^${subdomain}\./" "$RAW")"
 
@@ -171,12 +184,4 @@ trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
 
 $FUNCTION --format-all
 
-# Install idn (requires sudo) (note -qq does not seem to work here)
-command -v idn > /dev/null || sudo apt-get install idn > /dev/null
-
-# Download toplist
-$FUNCTION --download-toplist
-
-check_review_file
-
-validate
+main
