@@ -312,7 +312,7 @@ process_source_results() {
 
     if [[ -f "${source_results}.tmp" ]]; then
         # Save entries that are pending manual review for rerun
-        sort -u "${source_results}.tmp" -o "$source_results"
+        mv "${source_results}.tmp" "$source_results"
     fi
 }
 
