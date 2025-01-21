@@ -41,7 +41,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     278 |      0 % |      16 % | Emerging Threats
     0 |     681 |      0 % |      21 % | FakeWebshopListHUN
     0 |    1243 |      0 % |       2 % | Google Search
-    0 |    2897 |      1 % |      15 % | Gridinsoft
+    0 |    2897 |      1 % |      14 % | Gridinsoft
     0 |  106354 |     64 % |       8 % | Jeroengui
     0 |   16885 |     10 % |       0 % | Jeroengui (NRDs)
     0 |     423 |      0 % |       4 % | MalwareTips
