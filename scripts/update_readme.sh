@@ -158,9 +158,9 @@ EOF
 readonly FUNCTION='bash scripts/tools.sh'
 readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
-readonly TODAY THIS_MONTH
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
+readonly TODAY THIS_MONTH
 
 # Function 'print_stats' is an echo wrapper that returns the formatted
 # statistics for the given source.
