@@ -184,7 +184,7 @@ filter() {
 
         # Create review config file with header if not already created
         if [[ ! -f "$REVIEW_FILE" ]]; then
-            printf 'source,entry,reason,blacklist (y/N),whitelist (y/N)' \
+            printf 'source,entry,reason,blacklist (y/N),whitelist (y/N)\n' \
                 > "$REVIEW_FILE"
         fi
 
