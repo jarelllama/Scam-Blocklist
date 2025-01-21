@@ -357,7 +357,7 @@ save_subdomains() {
 
     # If all_retrieved_domains.tmp is empty, root_domains.tmp should not exist
     if [[ ! -s all_retrieved_domains.tmp ]]; then
-        error 'root_domains.tmp present althought all_retrieved_domains.tmp is empty.'
+        error 'root_domains.tmp present although all_retrieved_domains.tmp is empty.'
     fi
 
     sort -u root_domains.tmp -o root_domains.tmp
