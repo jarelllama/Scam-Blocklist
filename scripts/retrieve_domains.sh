@@ -191,7 +191,9 @@ filter() {
         # Save entries into review config file ensuring there are no duplicates
         mawk -v source="$source_name" -v reason="$tag" \
             '{print source "," $0 "," reason ",,"}' <<< "$entries" \
-            | awk '!seen[$0]++' >> "$REVIEW_FILE"
+            >> "$REVIEW_FILE"
+        mawk '!seen[$0]++' "$REVIEW_FILE"> temp
+        mv temp "$REVIEW_FILE"
 
         # Save entries to use in rerun
         printf "%s\n" "$entries" >> "${source_results}.tmp"
