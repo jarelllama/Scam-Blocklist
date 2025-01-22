@@ -489,20 +489,10 @@ test_invalid_removal() {
     } >> input.txt
 
     # EXPECTED OUTPUT
+    # Note that invalid domains from the validation check are not added to the
+    # review config file.
 
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-
-    # Subdomains should not be included in the review config file
-    {
-        printf "raw,www.invalid-test-com,invalid,,\n"
-        printf "raw,100.100.100.1,invalid,,\n"
-        printf "raw,invalid-test.x,invalid,,\n"
-        printf "raw,invalid-test.100,invalid,,\n"
-        printf "raw,invalid-test.1x,invalid,,\n"
-        printf "raw,invalid-test.com/subfolder,invalid,,\n"
-        printf "raw,invalid-test-.com,invalid,,\n"
-        printf "raw,i.com,invalid,,\n"
-    } >> out_review_config.txt
 
     {
         printf "invalid,invalid-test-com,raw\n"
