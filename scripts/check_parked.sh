@@ -113,9 +113,6 @@ find_parked_in() {
     local execution_time
     execution_time="$(date +%s)"
 
-    # Always create parked.tmp file to avoid not found errors
-    touch parked.tmp
-
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
@@ -132,9 +129,12 @@ find_parked_in() {
     find_parked x16 & find_parked x17 & find_parked x18
     wait
 
-    # Collate parked domains and errored domains (ignore not found errors)
-    sort -u parked_domains_x??.tmp -o parked.tmp 2> /dev/null
-    sort -u errored_domains_x??.tmp -o errored.tmp 2> /dev/null
+    # Create files to avoid not found errors
+    touch parked_domains_xxx.tmp errored_domains_xxx.tmp
+
+    # Collate parked domains and errored domains
+    sort -u parked_domains_x??.tmp -o parked.tmp
+    sort -u errored_domains_x??.tmp -o errored.tmp
 
     rm ./*x??.tmp
 
