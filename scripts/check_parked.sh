@@ -82,10 +82,16 @@ check_unparked() {
 
     [[ ! -s unparked_domains.tmp ]] && return
 
-    # Update parked domains file to only include parked domains
-    # grep is used here because the parked domains file is unsorted
-    grep -xFf parked.tmp "$PARKED_DOMAINS" > temp
-    mv temp "$PARKED_DOMAINS"
+    if [[ -s parked.tmp ]]; then
+        # Update parked domains file to only include parked domains
+        # grep is used here because the parked domains file is unsorted
+        grep -xFf parked.tmp "$PARKED_DOMAINS" > temp
+        mv temp "$PARKED_DOMAINS"
+    else
+        # This if condition is a workaround for the edge case where parked.tmp
+        # is empty which causes grep to error.
+        : > "$PARKED_DOMAINS"
+    fi
 
     # Add unparked domains to raw file
     # Note that unparked subdomains are added back too and will be processed by
