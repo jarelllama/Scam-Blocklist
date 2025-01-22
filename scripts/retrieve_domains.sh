@@ -201,6 +201,7 @@ filter() {
 # all_retrieved_domains.tmp/all_retrieved_light_domains.tmp and save entries
 # requiring manual review.
 process_source_results() {
+    # Skip to next source by returning if no results from this source is found
     [[ ! -f "$source_results" ]] && return
 
     local raw_count dead_count parked_count whitelisted_count
@@ -311,6 +312,10 @@ process_source_results() {
 
 # Save filtered domains into the raw file.
 save_domains() {
+    # Create files to avoid not found errors especially when no light sources
+    # were used
+    touch all_retrieved_domains.tmp all_retrieved_light_domains.tmp
+
     if [[ -f entries_for_review.tmp ]]; then
         # Print domains requiring manual review
         printf "\n\e[1mEntries requiring manual review:\e[0m\n"

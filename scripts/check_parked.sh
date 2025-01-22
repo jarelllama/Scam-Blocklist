@@ -48,9 +48,9 @@ main() {
     esac
 }
 
-# Function 'check_parked' finds parked domains and collates them into the
-# parked domains file to be removed from the various files later. The parked
-# domains file is also used as a filter for newly retrieved domains.
+# Find parked domains and collate them into the parked domains file to be
+# removed from the various files later. The parked domains file is also used as
+# a filter for newly retrieved domains.
 check_parked() {
     # Include subdomains found in the given file. It is assumed that if the
     # subdomain is parked, so is the root domain. For this reason, the root
@@ -66,11 +66,9 @@ check_parked() {
     cat parked.tmp >> "$PARKED_DOMAINS"
 }
 
-# Function 'check_unparked' finds unparked domains in the parked domains file
-# and adds them back into the raw file.
-#
-# Note that unparked domains are not added back into the raw light file as
-# the parked domains are not logged with their sources.
+# Find unparked domains in the parked domains file and add them back into the
+# raw file. Note that unparked domains are not added back into the raw light
+# file as the parked domains are not logged with their sources.
 check_unparked() {
     find_parked_in "$PARKED_DOMAINS"
 
@@ -82,16 +80,12 @@ check_unparked() {
 
     [[ ! -s unparked_domains.tmp ]] && return
 
-    if [[ -s parked.tmp ]]; then
-        # Update parked domains file to only include parked domains
-        # grep is used here because the parked domains file is unsorted
-        grep -xFf parked.tmp "$PARKED_DOMAINS" > temp
-        mv temp "$PARKED_DOMAINS"
-    else
-        # This if condition is a workaround for the edge case where parked.tmp
-        # is empty which causes grep to error.
-        : > "$PARKED_DOMAINS"
-    fi
+    # Update parked domains file to only include parked domains
+    # grep is used here because the parked domains file is unsorted
+    # Exit status always true to avoid script exiting when no results were
+    # found (parked.tmp empty).
+    grep -xFf parked.tmp "$PARKED_DOMAINS" > temp || true
+    mv temp "$PARKED_DOMAINS"
 
     # Add unparked domains to raw file
     # Note that unparked subdomains are added back too and will be processed by
@@ -99,7 +93,8 @@ check_unparked() {
     sort -u unparked_domains.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log number of unparked domains in domain log
-    $FUNCTION --log-domains "$(wc -l < unparked_domains.tmp)" unparked_count parked_domains_file
+    $FUNCTION --log-domains "$(wc -l < unparked_domains.tmp)" unparked_count \
+        parked_domains_file
 }
 
 # Efficiently check for parked domains in a given file by running the checks in

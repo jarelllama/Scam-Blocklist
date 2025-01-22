@@ -54,8 +54,9 @@ main() {
 # from the various files later. The dead domains file is also used as a filter
 # for newly retrieved domains.
 check_dead() {
-    # Include subdomains found in the given file. Exclude the root domains
-    # since the subdomains were what was retrieved during domain retrieval.
+    # Include subdomains found in the given file. It is assumed that if the
+    # subdomain is parked, so is the root domain. For this reason, the root
+    # domains are excluded to not waste processing time.
     comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
         > domains.tmp
 
@@ -78,16 +79,12 @@ check_alive() {
 
     [[ ! -s alive_domains.tmp ]] && return
 
-    if [[ -s dead.tmp ]]; then
-        # Update dead domains file to only include dead domains
-        # grep is used here because the dead domains file is unsorted
-        grep -xFf dead.tmp "$DEAD_DOMAINS" > temp
-        mv temp "$DEAD_DOMAINS"
-    else
-        # This if condition is a workaround for the edge case where dead.tmp is
-        # empty which causes grep to error.
-        : > "$DEAD_DOMAINS"
-    fi
+    # Update dead domains file to only include dead domains
+    # grep is used here because the dead domains file is unsorted
+    # Exit status always true to avoid script exiting when no results were
+    # found (dead.tmp empty).
+    grep -xFf dead.tmp "$DEAD_DOMAINS" > temp || true
+    mv temp "$DEAD_DOMAINS"
 
     # Add resurrected domains to raw file
     # Note that resurrected subdomains are added back too and will be processed
@@ -95,7 +92,8 @@ check_alive() {
     sort -u alive_domains.tmp "$RAW" -o "$RAW"
 
     # Call shell wrapper to log number of resurrected domains in domain log
-    $FUNCTION --log-domains "$(wc -l < alive_domains.tmp)" resurrected_count dead_domains_file
+    $FUNCTION --log-domains "$(wc -l < alive_domains.tmp)" resurrected_count\
+        dead_domains_file
 }
 
 # Find dead domains in a given file by formatting the file and then processing
