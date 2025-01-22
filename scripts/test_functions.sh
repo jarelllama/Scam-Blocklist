@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script is used to test the various functions/scripts of this project.
+# This script is used to test the various functions/scripts of this repository.
 # Each test consists of an input file which will be processed by the called
 # script, and an output file which is the expected results from the processing.
 # The input and output files are compared to determine the success or failure
@@ -26,8 +26,10 @@ readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
     # Initialize
+    local file
     for file in "$RAW" "$DEAD_DOMAINS" "$SUBDOMAINS" "$ROOT_DOMAINS" \
-        "$PARKED_DOMAINS" "$WHITELIST" "$BLACKLIST" "$WILDCARDS" "$REVIEW_FILE"; do
+        "$PARKED_DOMAINS" "$WHITELIST" "$BLACKLIST" "$WILDCARDS" \
+        "$REVIEW_FILE"; do
         : > "$file"
     done
     sed -i '1q' "$DOMAIN_LOG"
@@ -55,6 +57,8 @@ main() {
 # Function 'SHELLCHECK' runs ShellCheck for all scripts along with other checks
 # for common errors/mistakes.
 SHELLCHECK() {
+    local url scripts files
+
     printf "\e[1m[start] ShellCheck\e[0m\n"
 
     # Install ShellCheck
@@ -73,19 +77,19 @@ SHELLCHECK() {
     done <<< "$scripts"
 
     # Check for carriage return characters
-    files=$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)
+    files="$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)"
     if [[ -n "$files" ]]; then
-        printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n"
-        printf "%s\n" "$files"
+        printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n" >&2
+        printf "%s\n" "$files" >&2
         error=true
     fi
 
     # Check for missing space before comments
-    files=$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
-        --exclude=*.csv .)
+    files="$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
+        --exclude=*.csv .)"
     if [[ -n "$files" ]]; then
-        printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n"
-        printf "%s\n" "$files"
+        printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n" >&2
+        printf "%s\n" "$files" >&2
         error=true
     fi
 
@@ -101,14 +105,9 @@ SHELLCHECK() {
 # validation process depending on which argument is passed to the function.
 #   $1: script to test ('retrieve' or 'validate')
 TEST_RETRIEVE_VALIDATE() {
-    script_to_test="$1"
-
-    # Initialize pending directory
-    rm -r data/pending 2> /dev/null
-    mkdir -p data/pending
+    local script_to_test="$1"
 
     # Note removal of domains already in raw file is redundant to test
-
     test_punycode_conversion
     test_subdomain_removal
     test_whitelist_blacklist
@@ -117,6 +116,10 @@ TEST_RETRIEVE_VALIDATE() {
     test_toplist_check
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
+        # Initialize pending directory
+        [[ -d data/pending ]] && rm -r data/pending
+        mkdir -p data/pending
+
         test_manual_addition
         test_url_conversion
         test_known_dead_removal
@@ -134,15 +137,12 @@ TEST_RETRIEVE_VALIDATE() {
 
         # Run retrieval script
         run_script retrieve_domains.sh
-
-        # DEBUG
-        cat config/review.csv
     fi
 
     if [[ "$script_to_test" == 'validate' ]]; then
         # Use input.txt as sample raw files to test
         cp input.txt "$RAW"
-        cp "$RAW" "$RAW_LIGHT"
+        cp input.txt "$RAW_LIGHT"
 
         # Expected output for light version
         cp out_raw.txt out_raw_light.txt
@@ -154,20 +154,20 @@ TEST_RETRIEVE_VALIDATE() {
     ### Check and verify outputs
 
     check_output "$RAW" out_raw.txt Raw
-    check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
+    check_output "$RAW_LIGHT" out_raw_light.txt 'Raw light'
     check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
-    check_output "$ROOT_DOMAINS" out_root_domains.txt "Root domains"
+    check_output "$ROOT_DOMAINS" out_root_domains.txt 'Root domains'
+    check_output "$REVIEW_FILE" out_review_file.txt 'Review file'
+    check_output "$BLACKLIST" out_blacklist.txt 'Blacklist file'
+    check_output "$WHITELIST" out_whitelist.txt 'Whitelist file'
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Check entries saved for manual review
         check_output data/pending/ScamAdviser.tmp \
-            out_manual_review.txt "Manual review"
+            out_manual_review.txt 'Manual review'
 
         # Check source log
-        check_terms "$SOURCE_LOG" out_source_log.txt "Source log"
-    else
-        # The validation check also checks for invalid dead domains
-        check_output "$DEAD_DOMAINS" out_dead.txt "Dead domains"
+        check_terms "$SOURCE_LOG" out_source_log.txt 'Source log'
     fi
 
     check_and_exit
@@ -296,11 +296,11 @@ TEST_BUILD() {
 
 ### RETRIEVAL/VALIDATION TESTS
 
-# TEST: manual addition of domains from repo issue
+# TEST: manual addition of domains from repo issue, proper logging in domain
+# log and source log and removal of square brackets
 test_manual_addition() {
     # INPUT
     # Note URL conversion is done in the workflow now
-    # Also test removal of square brackets
     printf "manual-addition-test[.]com\n" >> data/pending/Manual.tmp
     # EXPECTED OUTPUT
     printf "manual-addition-test.com\n" >> out_raw.txt
@@ -311,7 +311,7 @@ test_manual_addition() {
     printf ",Manual,,1,1,0,0,0,0,,saved\n" >> out_source_log.txt
 }
 
-# TEST: conversion to Punycode
+# TEST: conversion of Unicode to Punycode
 test_punycode_conversion() {
     # INPUT
     printf "punycodé-test.cöm\n" >> input.txt
@@ -329,30 +329,30 @@ test_url_conversion() {
     printf "conversion-test-2.com\n" >> out_raw.txt
 }
 
-# TEST: removal of known dead domains
+# TEST: removal of known dead domains including subdomains
 test_known_dead_removal() {
     {
         printf "www.dead-test.com\n"
-    } >> "$DEAD_DOMAINS"  # Known dead domains
-    # Dead subdomains should be matched
+    } >> "$DEAD_DOMAINS"
+
+    # INPUT
     {
         printf "www.dead-test.com\n"
-    } >> input.txt  # INPUT
-
-    # Expected output: domain not in raw file/raw light file
+    } >> input.txt
+    # EXPECTED OUTPUT: domain not in raw file/raw light file
 }
 
-# TEST: removal of known parked domains
+# TEST: removal of known parked domains including subdomains
 test_known_parked_removal() {
     {
         printf "www.parked-test.com\n"
-    } >> "$PARKED_DOMAINS"  # Known parked domains
-    # Parked subdomains should be matched
+    } >> "$PARKED_DOMAINS"
+
+    # INPUT
     {
         printf "www.parked-test.com\n"
-    } >> input.txt  # INPUT
-
-   # Expected output: domains not in raw file/raw light file
+    } >> input.txt
+   # EXPECTED OUTPUT: domain not in raw file/raw light file
 }
 
 # TEST: removal of common subdomains
@@ -373,43 +373,49 @@ test_subdomain_removal() {
     printf "subdomain-test.com\n" >> out_root_domains.txt
 }
 
-# TEST: whitelisted domains removal and blacklist logging
+# TEST: whitelisting/blacklisting via review config file
 test_whitelist_blacklist() {
-    # Sample whitelist term
-    printf '^whitelist-test\.com$\n' >> "$WHITELIST"
-    # Sample blacklisted domain
-    printf "whitelist-blacklisted-test.com\n" >> "$BLACKLIST"
     # INPUT
+    # Add entries to blacklist and whitelist via review config file
+    {
+        printf "Source,review-file-test.com,toplist,,\n"
+        printf "Source,blacklist-test.com,toplist,y,\n"
+        printf "Source,whitelist-test.com,toplist,,y\n"
+    } >> "$REVIEW_FILE"
+    # INPUT
+    printf "blacklist-test.com\n" >> input.txt
     printf "whitelist-test.com\n" >> input.txt
-    printf "whitelist-blacklisted-test.com\n" >> input.txt
 
     # EXPECTED OUTPUT
-    printf "whitelist-blacklisted-test.com\n" >> out_raw.txt
+    printf "blacklist-test.com\n" >> out_blacklist.txt
+    printf "^whitelist-test\.com$\n" >> out_whitelist.txt
+    printf "blacklist-test.com\n" >> out_raw.txt
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
+    # Only the unconfigured entry should remain in the review config file
+    printf "Source,review-file-test.com,toplist,,\n" >> out_review_config.txt
     # The validate script does not log blacklisted domains
     [[ "$script_to_test" == 'validate' ]] && return
-    printf "blacklist,whitelist-blacklisted-test.com\n" >> out_log.txt
+    printf "blacklist,blacklist-test.com\n" >> out_log.txt
 }
 
 # TEST: removal of domains with whitelisted TLDs
 test_whitelisted_tld_removal() {
+    # INPUT
     {
         printf "white-tld-test.gov.us\n"
         printf "white-tld-test.edu\n"
         printf "white-tld-test.mil\n"
-    } >> input.txt  # INPUT
+    } >> input.txt
+    # EXPECTED OUTPUT
     {
         printf "whitelisted_tld,white-tld-test.gov.us\n"
         printf "whitelisted_tld,white-tld-test.edu\n"
         printf "whitelisted_tld,white-tld-test.mil\n"
-    } >> out_log.txt  # EXPECTED OUTPUT
+    } >> out_log.txt
 }
 
 # TEST: removal of non-domain entries
 test_invalid_removal() {
-    # in.com is in the toplist
-    printf "in.com\n" >> "$BLACKLIST"
-
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # INPUT
         {
@@ -423,13 +429,13 @@ test_invalid_removal() {
             printf "invalid-test.1x\n"
             printf "invalid-test.com/subfolder\n"
             printf "invalid-test-.com\n"
-            printf "in.com\n"
             printf "i.com\n"
         } >> data/pending/ScamAdviser.tmp
 
         # EXPECTED OUTPUT
-        # The retrieval script saves invalid entries to the manual review file
-        # Subdomains should be saved
+
+        # The retrieval script saves invalid entries including subdomains to
+        # the manual review file
         {
             printf "www.invalid-test-com\n"
             printf "100.100.100.1\n"
@@ -441,8 +447,20 @@ test_invalid_removal() {
             printf "i.com\n"
         } >> out_manual_review.txt
 
+        # Subdomains should not be included in the review config file
+        {
+            printf "ScamAdviser,invalid-test-com,invalid,,\n"
+            printf "ScamAdviser,100.100.100.1,invalid,,\n"
+            printf "ScamAdviser,invalid-test.x,invalid,,\n"
+            printf "ScamAdviser,invalid-test.100,invalid,,\n"
+            printf "ScamAdviser,invalid-test.1x,invalid,,\n"
+            printf "ScamAdviser,invalid-test.com/subfolder,invalid,,\n"
+            printf "ScamAdviser,invalid-test-.com,invalid,,\n"
+            printf "ScamAdviser,i.com,invalid,,\n"
+        } >> out_review_config.txt
+
         printf "invalid-test.xn--903fds\n" >> out_raw.txt
-        printf "in.com\n" >> out_raw.txt
+
         {
             printf "invalid,invalid-test-com,ScamAdviser\n"
             printf "invalid,100.100.100.1,ScamAdviser\n"
@@ -461,36 +479,42 @@ test_invalid_removal() {
     {
         # Invalid subdomains/root domains should not make it into
         # subdomains/root domains file
-        printf "www.invalid-test-com\n"
-        printf "100.100.100.1\n"
-        printf "invalid-test.xn--903fds\n"
-        printf "invalid-test.x\n"
-        printf "invalid-test.100\n"
-        printf "invalid-test.1x\n"
+            printf "www.invalid-test-com\n"
+            printf "100.100.100.1\n"
+            printf "invalid-test.xn--903fds\n"
+            printf "invalid-test.x\n"
+            printf "invalid-test.100\n"
+            printf "invalid-test.1x\n"
+            printf "invalid-test.com/subfolder\n"
+            printf "invalid-test-.com\n"
+            printf "i.com\n"
     } >> input.txt
-    # Validation script checks for invalid entries in the dead domains file
-    {
-
-        printf "invalid-test.com/subfolder\n"
-        printf "invalid-test-.com\n"
-        printf "i.com\n"
-        printf "in.com\n"
-        printf "dead-domain.com\n"
-    } >> "$DEAD_DOMAINS"
 
     # EXPECTED OUTPUT
+
     printf "invalid-test.xn--903fds\n" >> out_raw.txt
-    printf "in.com\n" >> out_dead.txt
-    printf "dead-domain.com\n" >> out_dead.txt
+
+    # Subdomains should not be included in the review config file
+    {
+        printf "raw,www.invalid-test-com,invalid,,\n"
+        printf "raw,100.100.100.1,invalid,,\n"
+        printf "raw,invalid-test.x,invalid,,\n"
+        printf "raw,invalid-test.100,invalid,,\n"
+        printf "raw,invalid-test.1x,invalid,,\n"
+        printf "raw,invalid-test.com/subfolder,invalid,,\n"
+        printf "raw,invalid-test-.com,invalid,,\n"
+        printf "raw,i.com,invalid,,\n"
+    } >> out_review_config.txt
+
     {
         printf "invalid,invalid-test-com,raw\n"
         printf "invalid,100.100.100.1,raw\n"
         printf "invalid,invalid-test.x,raw\n"
         printf "invalid,invalid-test.100,raw\n"
         printf "invalid,invalid-test.1x,raw\n"
-        printf "invalid,invalid-test.com/subfolder,dead_domains_file\n"
-        printf "invalid,invalid-test-.com,dead_domains_file\n"
-        printf "invalid,i.com,dead_domains_file\n"
+        printf "invalid,invalid-test.com/subfolder,raw\n"
+        printf "invalid,invalid-test-.com,raw\n"
+        printf "invalid,i.com,raw\n"
     } >> out_log.txt
 }
 
@@ -501,6 +525,7 @@ test_toplist_check() {
         printf "microsoft.com\n" >> data/pending/ScamAdviser.tmp
         # EXPECTED OUTPUT
         printf "microsoft.com\n" >> out_manual_review.txt
+        printf "ScamAdviser,microsoft.com,toplist,,\n" >> out_review_config.txt
         printf "toplist,microsoft.com,ScamAdviser\n" >> out_log.txt
         return
     fi
@@ -510,6 +535,7 @@ test_toplist_check() {
     # EXPECTED OUTPUT
     # The validate script does not save invalid domains to manual review file
     printf "microsoft.com\n" >> out_raw.txt
+    printf "raw,microsoft.com,toplist,,\n" >> out_review_config.txt
     printf "toplist,microsoft.com\n" >> out_log.txt
 }
 
@@ -591,12 +617,13 @@ test_parked_check() {
 
 ### END OF 'test_<process>' functions
 
-# Function 'run_script' executes the script passed by the caller and checks the
-# exit status of the script.
+# Execute the script passed by the caller and check the exit status.
 # Input:
 #   $1: script to execute
 #   $2: arguments to pass to script
 run_script() {
+    local errored
+
     echo ""
     echo "----------------------------------------------------------------------"
     printf "\e[1m[start] %s %s\e[0m\n" "$1" "$2"
@@ -607,19 +634,20 @@ run_script() {
 
     echo "----------------------------------------------------------------------"
 
-    # Check exit status
+    # Return if script had no errors
     [[ "$errored" != true ]] && return
 
-    printf "\e[1m[warn] Script returned with an error\e[0m\n\n"
+    printf "\e[1m[warn] Script returned with an error\e[0m\n\n" >&2
     error=true
 }
 
-# Function 'check_and_exit' checks if the script should exit with an exit
-# status of 1 or 0.
+# Check if the test should exit with an exit status of 1 or 0.
 check_and_exit() {
+    local log_error
+
     # Check that all temporary files have been deleted after the run
     if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
-        printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
+        printf "\e[1m[warn] Temporary files were not removed:\e[0m\n" >&2
         ls x?? ./*.tmp 2> /dev/null
         printf "\n"
         error=true
@@ -646,7 +674,7 @@ check_and_exit() {
     [[ "$error" == true ]] && exit 1 || exit 0
 }
 
-# Function 'check_terms' checks that a file contains all the given terms.
+# Check that a file contains all the given terms.
 # Input:
 #   $1: file to check
 #   $2: file with terms to check for
@@ -654,9 +682,11 @@ check_and_exit() {
 # Output:
 #   return 1 (if one or more terms not found)
 check_terms() {
+    local term_error
+
     while read -r term; do
         if ! grep -qF "$term" "$1"; then
-            local term_error=true
+            term_error=true
             break
         fi
     done < "$2"
@@ -674,8 +704,8 @@ check_terms() {
     return 1
 }
 
-# Function 'check_output' compares the input file with the expected output file
-# and prints a warning if they are not the same.
+# Compare the input file with the expected output file and print a warning if
+# they are not the same.
 #   $1: input file
 #   $2: expected output file
 #   $3: name of the file being checked
@@ -692,6 +722,8 @@ check_output() {
 }
 
 # Entry point
+
+set -e
 
 # Do not allow running locally
 [[ "$CI" == true ]] && main "$1"
