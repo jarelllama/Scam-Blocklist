@@ -6,7 +6,6 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly REVIEW_FILE='config/review.csv'
@@ -120,14 +119,6 @@ validate() {
 
     # Remove non-domain entries including IP addresses excluding Punycode
     filter "$(grep -vE "^${DOMAIN_REGEX}$" "$RAW")" invalid
-    # The dead domains file is also checked here as invalid entries may get
-    # picked up by the dead check and get saved in the dead domains file.
-    if invalid_dead="$(grep -vE "^${DOMAIN_REGEX}$" "$DEAD_DOMAINS")"; then
-        grep -vxF "$invalid_dead" "$DEAD_DOMAINS" > temp
-        mv temp "$DEAD_DOMAINS"
-        mawk '{print $0 " (invalid)"}' <<< "$invalid_dead" >> filter_log.tmp
-        $FUNCTION --log-domains "$invalid_dead" invalid dead_domains_file
-    fi
 
     # Find domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains
