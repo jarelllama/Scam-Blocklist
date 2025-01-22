@@ -28,8 +28,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 367984
-Light version: 41228
+Total domains: 368040
+Light version: 41231
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -37,26 +37,26 @@ Today | Monthly | %Monthly | %Filtered | Source
     8 |     339 |      0 % |      14 % | Artists Against 419
     6 |      33 |      0 % |      49 % | Česká Obchodní Inspekce
   153 |    1452 |      0 % |       1 % | Cybersquatting
-47694 |   65609 |     29 % |       0 % | DGA Detector
+47705 |   65620 |     29 % |       0 % | DGA Detector
    11 |     289 |      0 % |      16 % | Emerging Threats
     8 |     689 |      0 % |      21 % | FakeWebshopListHUN
   112 |    1355 |      0 % |       2 % | Google Search
-  266 |    3163 |      1 % |      15 % | Gridinsoft
- 9046 |  115401 |     51 % |       8 % | Jeroengui
- 2786 |   19671 |      8 % |       0 % | Jeroengui (NRDs)
+  291 |    3188 |      1 % |      15 % | Gridinsoft
+ 9055 |  115410 |     51 % |       8 % | Jeroengui
+ 2788 |   19673 |      8 % |       0 % | Jeroengui (NRDs)
     5 |     428 |      0 % |       4 % | MalwareTips
-    6 |      82 |      0 % |      15 % | PCrisk
+    7 |      83 |      0 % |      15 % | PCrisk
   856 |    9741 |      4 % |      27 % | PhishStats
    77 |    1259 |      0 % |       0 % | PhishStats (NRDs)
    23 |     106 |      0 % |      14 % | PuppyScams.org
  1569 |   19049 |      8 % |       1 % | Regex Matching
-  513 |    3969 |      1 % |       3 % | SafelyWeb
+  525 |    3981 |      1 % |       3 % | SafelyWeb
    12 |    3662 |      1 % |      31 % | Scam Directory
     1 |      17 |      0 % |      32 % | ScamAdviser
    10 |      59 |      0 % |       5 % | StopGunScams.com
     7 |      45 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       1 |      0 % |      31 % | ViriBack C2 Tracker
-60306 |  226161 |    100 % |      21 % | All sources
+60364 |  226219 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
