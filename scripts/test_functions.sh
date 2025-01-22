@@ -11,7 +11,7 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly WILDCARDS='config/wildcards.txt'
-readonly REVIEW_FILE='config/review.csv'
+readonly REVIEW_CONFIG='config/review_config.csv'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
@@ -27,7 +27,7 @@ main() {
     local file
     for file in "$RAW" "$DEAD_DOMAINS" "$SUBDOMAINS" "$ROOT_DOMAINS" \
         "$PARKED_DOMAINS" "$WHITELIST" "$BLACKLIST" "$WILDCARDS" \
-        "$REVIEW_FILE"; do
+        "$REVIEW_CONFIG"; do
         : > "$file"
     done
     sed -i '1q' "$DOMAIN_LOG"
@@ -153,7 +153,7 @@ TEST_RETRIEVE_VALIDATE() {
     check_output "$RAW_LIGHT" out_raw_light.txt 'Raw light'
     check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
     check_output "$ROOT_DOMAINS" out_root_domains.txt 'Root domains'
-    check_output "$REVIEW_FILE" out_review_config.txt 'Review file'
+    check_output "$REVIEW_CONFIG" out_review_config.txt 'Review file'
     check_output "$BLACKLIST" out_blacklist.txt 'Blacklist file'
     check_output "$WHITELIST" out_whitelist.txt 'Whitelist file'
 
@@ -370,7 +370,7 @@ test_whitelist_blacklist() {
         printf "Source,blacklist-test.com,toplist,y,\n"
         printf "Source,whitelist-test.com,toplist,,y\n"
         printf "Source,review-file-misconfigured-test.com,toplist,y,y\n"
-    } >> "$REVIEW_FILE"
+    } >> "$REVIEW_CONFIG"
     # INPUT
     printf "blacklist-test.com\n" >> input.txt
     printf "whitelist-test.com\n" >> input.txt

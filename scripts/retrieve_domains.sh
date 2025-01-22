@@ -36,7 +36,7 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
-readonly REVIEW_FILE='config/review.csv'
+readonly REVIEW_CONFIG='config/review_config.csv'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
@@ -91,16 +91,16 @@ main() {
 # blacklist and whitelist.
 check_review_file() {
     # Add blacklisted entries to blacklist and remove them from the review file
-    mawk -F ',' '$4 == "y" && $5 != "y" {print $2}' "$REVIEW_FILE" \
+    mawk -F ',' '$4 == "y" && $5 != "y" {print $2}' "$REVIEW_CONFIG" \
         | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
-        | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
 
     # Add whitelisted entries to whitelist after formatting to regex and remove
     # them from the review file
-    mawk -F ',' '$5 == "y" && $4 != "y" {print $2}' "$REVIEW_FILE" \
+    mawk -F ',' '$5 == "y" && $4 != "y" {print $2}' "$REVIEW_CONFIG" \
         | tee >(mawk '{gsub(/\./, "\."); print "^" $0 "$"}' \
         | sort -u - "$WHITELIST" -o "$WHITELIST") \
-        | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
 }
 
 # Run each source function to retrieve results collated in "$source_results"
@@ -184,10 +184,10 @@ filter() {
         # Save entries into review config file
         mawk -v source="$source_name" -v reason="$tag" \
             '{print source "," $0 "," reason ",,"}' <<< "$entries" \
-            >> "$REVIEW_FILE"
+            >> "$REVIEW_CONFIG"
         # Remove duplicates
-        mawk '!seen[$0]++' "$REVIEW_FILE"> temp
-        mv temp "$REVIEW_FILE"
+        mawk '!seen[$0]++' "$REVIEW_CONFIG"> temp
+        mv temp "$REVIEW_CONFIG"
 
         # Save entries to use in rerun
         printf "%s\n" "$entries" >> "${source_results}.tmp"
