@@ -77,17 +77,15 @@ SHELLCHECK() {
     done <<< "$scripts"
 
     # Check for carriage return characters
-    files="$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)"
-    if [[ -n "$files" ]]; then
+    if files="$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)"; then
         printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
         error=true
     fi
 
     # Check for missing space before comments
-    files="$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
-        --exclude=*.csv .)"
-    if [[ -n "$files" ]]; then
+    if files="$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
+        --exclude=*.csv .)"; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
         error=true
@@ -157,7 +155,7 @@ TEST_RETRIEVE_VALIDATE() {
     check_output "$RAW_LIGHT" out_raw_light.txt 'Raw light'
     check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
     check_output "$ROOT_DOMAINS" out_root_domains.txt 'Root domains'
-    check_output "$REVIEW_FILE" out_review_file.txt 'Review file'
+    check_output "$REVIEW_FILE" out_review_config.txt 'Review file'
     check_output "$BLACKLIST" out_blacklist.txt 'Blacklist file'
     check_output "$WHITELIST" out_whitelist.txt 'Whitelist file'
 
