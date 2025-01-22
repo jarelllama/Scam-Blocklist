@@ -29,14 +29,14 @@ main() {
 # Check for configured entries in the review config file and add them to the
 # whitelist/blacklist.
 check_review_file() {
-   # Add blacklisted entries to blacklist and remove them from the review file
-    mawk -F ',' '$4 == "y" {print $2}' "$REVIEW_FILE" \
+    # Add blacklisted entries to blacklist and remove them from the review file
+    mawk -F ',' '$4 == "y" && $5 != "y" {print $2}' "$REVIEW_FILE" \
         | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
         | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
 
     # Add whitelisted entries to whitelist after formatting to regex and remove
     # them from the review file
-    mawk -F ',' '$5 == "y" {print $2}' "$REVIEW_FILE" \
+    mawk -F ',' '$5 == "y" && $4 != "y" {print $2}' "$REVIEW_FILE" \
         | tee >(mawk '{gsub(/\./, "\."); print "^" $0 "$"}' \
         | sort -u - "$WHITELIST" -o "$WHITELIST") \
         | xargs -I {} sed -i "/,{},/d" "$REVIEW_FILE"
