@@ -28,8 +28,14 @@ jobs:
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
-  check-dead:
+  validate:
     needs: [test-functions, retrieve-domains]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    uses: ./.github/workflows/validate_domains.yml
+    secrets: inherit
+
+  check-dead:
+    needs: [test-functions, validate]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
@@ -38,14 +44,8 @@ jobs:
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_unparked.yml
 
-  validate:
-    needs: [test-functions, check-unparked]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
-    uses: ./.github/workflows/validate_domains.yml
-    secrets: inherit
-
   build:
-    needs: [test-functions, validate]
+    needs: [test-functions, check-unparked]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 
