@@ -382,7 +382,7 @@ test_whitelist_blacklist() {
     printf "whitelist,whitelist-test.com\n" >> out_log.txt
     # Only unconfigured/misconfigured entries should remain in the review config file
     printf "Source,review-file-test.com,toplist,,\n" >> out_review_config.txt
-    printf "Source,review-file-incorrect-test.com,toplist,y,y\n" >> out_review_config.txt
+    printf "Source,review-file-misconfigured-test.com,toplist,y,y\n" >> out_review_config.txt
     # The validate script does not log blacklisted domains
     [[ "$script_to_test" == 'validate' ]] && return
     printf "blacklist,blacklist-test.com\n" >> out_log.txt
