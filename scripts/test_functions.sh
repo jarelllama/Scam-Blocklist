@@ -6,8 +6,6 @@
 # The input and output files are compared to determine the success or failure
 # of the test.
 
-# TODO: set -e
-
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly WHITELIST='config/whitelist.txt'
@@ -73,14 +71,14 @@ SHELLCHECK() {
 
     # Run ShellCheck for each script
     while read -r script; do
-        shellcheck-stable/shellcheck "$script" || error=true
+        shellcheck-stable/shellcheck "$script" || readonly error=true
     done <<< "$scripts"
 
     # Check for carriage return characters
     if files="$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)"; then
         printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
-        error=true
+        readonly error=true
     fi
 
     # Check for missing space before comments
@@ -88,7 +86,7 @@ SHELLCHECK() {
         --exclude=*.csv .)"; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
-        error=true
+        readonly error=true
     fi
 
     printf "\n[info] Scripts checked (%s):\n%s\n\n" \
@@ -189,9 +187,6 @@ TEST_DEAD_CHECK() {
     run_script check_dead.sh part2
     run_script check_dead.sh remove
 
-    # Sort dead domains file for easier comparison with expected output
-    sort "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
-
     ### Check and verify outputs
     check_output "$RAW" out_raw.txt Raw
     check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
@@ -231,15 +226,10 @@ TEST_PARKED_CHECK() {
     run_script check_parked.sh remove
 
     # Remove placeholder lines
-    for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS"; do
+    for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" "$DOMAIN_LOG"; do
         grep -v placeholder "$file" > temp
         mv temp "$file"
     done
-    grep -v placeholder "$DOMAIN_LOG" > temp
-    mv temp "$DOMAIN_LOG"
-
-    # Sort parked domains file for easier comparison with expected output
-    sort "$PARKED_DOMAINS" -o "$PARKED_DOMAINS"
 
     ### Check and verify outputs
     check_output "$RAW" out_raw.txt Raw
@@ -626,7 +616,7 @@ run_script() {
     [[ "$errored" != true ]] && return
 
     printf "\e[1m[warn] Script returned with an error\e[0m\n\n" >&2
-    error=true
+    readonly error=true
 }
 
 # Check if the test should exit with an exit status of 1 or 0.
@@ -635,10 +625,13 @@ check_and_exit() {
 
     # Check that all temporary files have been deleted after the run
     if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
-        printf "\e[1m[warn] Temporary files were not removed:\e[0m\n" >&2
-        ls x?? ./*.tmp 2> /dev/null
-        printf "\n"
-        error=true
+        {
+            printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
+            ls x?? ./*.tmp 2> /dev/null
+            printf "\n"
+        } >&2
+
+        readonly error=true
     fi
 
     # Check domain log
@@ -674,7 +667,7 @@ check_terms() {
 
     while read -r term; do
         if ! grep -qF "$term" "$1"; then
-            term_error=true
+            term_readonly error=true
             break
         fi
     done < "$2"
@@ -682,12 +675,15 @@ check_terms() {
     # Return if all terms found
     [[ "$term_error" != true ]] && return
 
-    printf "\e[1m[warn] %s is not as expected:\e[0m\n" "$3"
-    cat "$1"
-    printf "\n[info] Terms expected:\n"
-    cat "$2"
-    printf "\n"
-    error=true
+    {
+        printf "\e[1m[warn] %s is not as expected:\e[0m\n" "$3"
+        cat "$1"
+        printf "\n[info] Terms expected:\n"
+        cat "$2"
+        printf "\n"
+    } >&2
+
+    readonly error=true
 
     return 1
 }
@@ -701,12 +697,15 @@ check_output() {
     sort "$1" -o "$1"
     sort "$2" -o "$2"
     cmp -s "$1" "$2" && return  # Return if files are the same
-    printf "\e[1m[warn] %s file is not as expected:\e[0m\n" "$3"
-    cat "$1"
-    printf "\n[info] Expected output:\n"
-    cat "$2"
-    printf "\n"
-    error=true
+    {
+        printf "\e[1m[warn] %s file is not as expected:\e[0m\n" "$3"
+        cat "$1"
+        printf "\n[info] Expected output:\n"
+        cat "$2"
+        printf "\n"
+    } >&2
+
+    readonly error=true
 }
 
 # Entry point
