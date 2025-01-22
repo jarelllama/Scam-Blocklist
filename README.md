@@ -28,8 +28,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 311612
-Light version: 38082
+Total domains: 311671
+Light version: 38090
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -41,22 +41,22 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     278 |      0 % |      16 % | Emerging Threats
     0 |     681 |      0 % |      21 % | FakeWebshopListHUN
     0 |    1243 |      0 % |       2 % | Google Search
-    0 |    2897 |      1 % |      14 % | Gridinsoft
-    1 |  106355 |     64 % |       8 % | Jeroengui
-    0 |   16885 |     10 % |       0 % | Jeroengui (NRDs)
-    0 |     423 |      0 % |       4 % | MalwareTips
-    0 |      76 |      0 % |      15 % | PCrisk
-    0 |    8885 |      5 % |      27 % | PhishStats
+   25 |    2922 |      1 % |      14 % | Gridinsoft
+   17 |  106372 |     64 % |       8 % | Jeroengui
+    3 |   16888 |     10 % |       0 % | Jeroengui (NRDs)
+    5 |     428 |      0 % |       4 % | MalwareTips
+    2 |      78 |      0 % |      15 % | PCrisk
+    1 |    8886 |      5 % |      27 % | PhishStats
     0 |    1182 |      0 % |       0 % | PhishStats (NRDs)
     0 |      83 |      0 % |      14 % | PuppyScams.org
     0 |   17480 |     10 % |       1 % | Regex Matching
-    1 |    3456 |      2 % |       3 % | SafelyWeb
+   15 |    3471 |      2 % |       3 % | SafelyWeb
     0 |    3650 |      2 % |      30 % | Scam Directory
     0 |      16 |      0 % |      32 % | ScamAdviser
     0 |      49 |      0 % |       5 % | StopGunScams.com
     0 |      38 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       1 |      0 % |      31 % | ViriBack C2 Tracker
-    2 |  165855 |    100 % |      21 % | All sources
+   65 |  165920 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
@@ -122,7 +122,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13041
+Total domains: 13055
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
