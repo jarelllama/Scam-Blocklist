@@ -105,6 +105,10 @@ SHELLCHECK() {
 TEST_RETRIEVE_VALIDATE() {
     local script_to_test="$1"
 
+    # Initialize pending directory before creating test input files
+    [[ -d data/pending ]] && rm -r data/pending
+    mkdir -p data/pending
+
     # Note removal of domains already in raw file is redundant to test
     test_punycode_conversion
     test_subdomain_removal
@@ -114,10 +118,6 @@ TEST_RETRIEVE_VALIDATE() {
     test_toplist_check
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
-        # Initialize pending directory
-        [[ -d data/pending ]] && rm -r data/pending
-        mkdir -p data/pending
-
         test_manual_addition
         test_url_conversion
         test_known_dead_removal
