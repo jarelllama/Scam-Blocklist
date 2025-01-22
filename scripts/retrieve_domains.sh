@@ -54,6 +54,7 @@ main() {
         printf "\nUsing existing lists of retrieved results.\n"
         readonly USE_EXISTING_RESULTS=true
     else
+        readonly USE_EXISTING_RESULTS=false
         mkdir -p data/pending
     fi
 
