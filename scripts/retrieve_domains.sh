@@ -128,8 +128,9 @@ retrieve_source_results() {
         local execution_time
         execution_time="$(date +%s)"
 
-        # Run source
-        $source
+        # Run source. Always return true to avoid script exiting when no
+        # results were retrieved
+        $source || true
 
         # Set source results path based of source name if not explicitly set
         : "${source_results:=data/pending/${source_name// /_}.tmp}"

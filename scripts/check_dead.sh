@@ -81,8 +81,8 @@ check_alive() {
 
     # Update dead domains file to only include dead domains
     # grep is used here because the dead domains file is unsorted
-    # Exit status always true to avoid script exiting when no results were
-    # found (dead.tmp empty).
+    # Always return true to avoid script exiting when no results were found
+    # (dead.tmp empty).
     grep -xFf dead.tmp "$DEAD_DOMAINS" > temp || true
     mv temp "$DEAD_DOMAINS"
 

@@ -82,8 +82,8 @@ check_unparked() {
 
     # Update parked domains file to only include parked domains
     # grep is used here because the parked domains file is unsorted
-    # Exit status always true to avoid script exiting when no results were
-    # found (parked.tmp empty).
+    # Always return true to avoid script exiting when no results were found
+    # (parked.tmp empty).
     grep -xFf parked.tmp "$PARKED_DOMAINS" > temp || true
     mv temp "$PARKED_DOMAINS"
 
