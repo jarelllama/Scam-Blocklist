@@ -15,7 +15,7 @@ readonly -a SOURCES=(
     source_jeroengui
     source_jeroengui_nrd
     source_gridinsoft
-    source_malwaretips
+    #source_malwaretips
     source_manual
     source_pcrisk
     source_phishstats
