@@ -106,6 +106,9 @@ find_dead_in() {
     local execution_time
     execution_time="$(date +%s)"
 
+    printf "\n[info] Processing file %s\n" "$1"
+    printf "[start] Analyzing %s entries for dead domains\n" "$(wc -l < "$1")"
+
     # Split file into 2 equal parts
     split -d -l $(( $(wc -l < "$1") / 2 )) "$1"
     # Sometimes an x02 exists
@@ -117,6 +120,7 @@ find_dead_in() {
 
     sort -u dead_domains_x??.tmp -o dead.tmp
 
+    printf "[success] Found %s dead domains\n" "$(wc -l < parked.tmp) "
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
 

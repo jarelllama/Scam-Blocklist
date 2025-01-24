@@ -572,7 +572,8 @@ test_dead_check() {
     # Subdomains should be kept to be processed by the validation check
     printf "www.abcdead-domain-test.com\n" >> out_dead.txt
     printf "xyzdead-domain-test.com\n" >> out_dead.txt
-    printf "dead_count,2,raw\n" >> out_log.txt
+    # dead count is 102 because of the placeholder lines
+    printf "dead_count,102,raw\n" >> out_log.txt
     # Both files should be empty (all dead)
     : > out_subdomains.txt
     : > out_root_domains.txt
