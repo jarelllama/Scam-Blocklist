@@ -107,7 +107,7 @@ find_dead_in() {
     execution_time="$(date +%s)"
 
     # Split file into 2 equal parts
-    split -d -l $(( $(wc -l < "$1") / 2 )) "$1"
+    split -d -l 2 "$1"
     # Sometimes an x02 exists
     [[ -f x02 ]] && cat x02 >> x01
 
