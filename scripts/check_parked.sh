@@ -12,7 +12,7 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
-readonly LOG_SIZE=50000
+readonly LOG_SIZE=75000
 
 main() {
     # Split raw file into 2 parts for each parked check job

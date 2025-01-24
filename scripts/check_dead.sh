@@ -96,27 +96,46 @@ check_alive() {
         dead_domains_file
 }
 
-# Find dead domains in a given file by formatting the file and then processing
-# it through AdGuard's Dead Domains Linter.
+# Efficiently check for dead domains in a given file by running the checks in
+# parallel.
 # Input:
 #   $1: file to process
 # Output:
 #   dead.tmp
 find_dead_in() {
-    local temp
-    temp="$(basename "$1").tmp"
     local execution_time
     execution_time="$(date +%s)"
 
-    # Format to Adblock Plus syntax for Dead Domains Linter
-    sed 's/.*/||&^/' "$1" > "$temp"
+    # Split file into 2 equal parts
+    split -d -l $(( $(wc -l < "$1") / 2 )) "$1"
+    # Sometimes an x02 exists
+    [[ -f x02 ]] && cat x02 >> x01
 
-    printf "\n"
-    dead-domains-linter -i "$temp" --export dead.tmp
+    # Run checks in parallel
+    find_dead x00 & find_dead x01
+    wait
 
-    sort -u dead.tmp -o dead.tmp
+    sort -u dead_domains_x??.tmp -o dead.tmp
+
+    rm ./*x??.tmp
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
+}
+
+# Find dead domains in a given file by formatting the file and then processing
+# it through AdGuard's Dead Domains Linter.
+# Input:
+#   $1: file to process
+# Output:
+#   dead_domains_x??.tmp
+find_dead() {
+    [[ ! -f "$1" ]] && return
+
+    # Format to Adblock Plus syntax for Dead Domains Linter
+    sed 's/.*/||&^/' "$1" > temp
+
+    printf "\n"
+    dead-domains-linter -i temp --export "dead_domains_${1}.tmp"
 }
 
 # Remove dead domains from the raw file, raw light file, root domains file and
