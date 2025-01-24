@@ -117,8 +117,6 @@ find_dead_in() {
 
     sort -u dead_domains_x??.tmp -o dead.tmp
 
-    rm ./*x??.tmp
-
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
 
@@ -132,10 +130,10 @@ find_dead() {
     [[ ! -f "$1" ]] && return
 
     # Format to Adblock Plus syntax for Dead Domains Linter
-    sed 's/.*/||&^/' "$1" > temp
+    sed 's/.*/||&^/' "$1" > "${1}.tmp"
 
     printf "\n"
-    dead-domains-linter -i temp --export "dead_domains_${1}.tmp"
+    dead-domains-linter -i "${1}.tmp" --export "dead_domains_${1}.tmp"
 }
 
 # Remove dead domains from the raw file, raw light file, root domains file and

@@ -71,14 +71,14 @@ SHELLCHECK() {
 
     # Run ShellCheck for each script
     while read -r script; do
-        shellcheck-stable/shellcheck "$script" || readonly error=true
+        shellcheck-stable/shellcheck "$script" || error=true
     done <<< "$scripts"
 
     # Check for carriage return characters
     if files="$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)"; then
         printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
-        readonly error=true
+        error=true
     fi
 
     # Check for missing space before comments
@@ -86,7 +86,7 @@ SHELLCHECK() {
         --exclude=*.csv .)"; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
-        readonly error=true
+        error=true
     fi
 
     printf "\n[info] Scripts checked (%s):\n%s\n\n" \
@@ -634,7 +634,7 @@ run_script() {
     [[ "$errored" != true ]] && return
 
     printf "\e[1m[warn] Script returned with an error\e[0m\n\n" >&2
-    readonly error=true
+    error=true
 }
 
 # Check if the test should exit with an exit status of 1 or 0.
@@ -649,7 +649,7 @@ check_and_exit() {
             printf "\n"
         } >&2
 
-        readonly error=true
+        error=true
     fi
 
     # Check domain log
@@ -685,7 +685,7 @@ check_terms() {
 
     while read -r term; do
         if ! grep -qF "$term" "$1"; then
-            term_readonly error=true
+            term_error=true
             break
         fi
     done < "$2"
@@ -701,7 +701,7 @@ check_terms() {
         printf "\n"
     } >&2
 
-    readonly error=true
+    error=true
 
     return 1
 }
@@ -723,7 +723,7 @@ check_output() {
         printf "\n"
     } >&2
 
-    readonly error=true
+    error=true
 }
 
 # Entry point

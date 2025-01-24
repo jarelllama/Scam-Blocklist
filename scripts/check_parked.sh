@@ -131,8 +131,6 @@ find_parked_in() {
     sort -u parked_domains_x??.tmp -o parked.tmp
     sort -u errored_domains_x??.tmp -o errored.tmp
 
-    rm ./*x??.tmp
-
     printf "[success] Found %s parked domains\n" "$(wc -l < parked.tmp) "
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
