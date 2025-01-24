@@ -55,7 +55,7 @@ main() {
 # for newly retrieved domains.
 check_dead() {
     # Include subdomains found in the given file. It is assumed that if the
-    # subdomain is parked, so is the root domain. For this reason, the root
+    # subdomain is dead, so is the root domain. For this reason, the root
     # domains are excluded to not waste processing time.
     comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
         > domains.tmp
@@ -120,7 +120,7 @@ find_dead_in() {
 
     sort -u dead_domains_x??.tmp -o dead.tmp
 
-    printf "[success] Found %s dead domains\n" "$(wc -l < parked.tmp) "
+    printf "[success] Found %s dead domains\n" "$(wc -l < dead.tmp) "
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
 }
 
