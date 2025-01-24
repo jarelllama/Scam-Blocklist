@@ -197,10 +197,9 @@ TEST_DEAD_CHECK() {
     run_script check_dead.sh part2
     run_script check_dead.sh remove
 
-    # Remove placeholder lines (all placeholders should be dead and therefore,
-    # not in the raw file)
-    for file in "$DEAD_DOMAINS" "$DOMAIN_LOG"; do
-        grep -v placeholder "$file" > temp
+    # Remove placeholder lines
+    for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" "$DOMAIN_LOG"; do
+        grep -v placeholder "$file" > temp || true
         mv temp "$file"
     done
 
@@ -244,7 +243,7 @@ TEST_PARKED_CHECK() {
 
     # Remove placeholder lines
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" "$DOMAIN_LOG"; do
-        grep -v placeholder "$file" > temp
+        grep -v placeholder "$file" > temp || true
         mv temp "$file"
     done
 
