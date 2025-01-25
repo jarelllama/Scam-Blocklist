@@ -11,7 +11,6 @@ Only active sources are used to automatically retrieve domains.
 | [165 Anti-fraud](https://165.npa.gov.tw/#/articles/subclass/3) | Yes | |
 | [ANFRAS](https://anfras.com/fakeshops/) | | |
 | [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Yes | |
-| [Česká Obchodní Inspekce](https://www.coi.gov.cz/pro-spotrebitele/rizikove-e-shopy/) | Yes | |
 | [DFPI Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | | |
 | [DGA Detector](https://github.com/exp0se/dga_detector) | Yes | Yes |
 | [EasyDMARC](https://easydmarc.com/tools/phishing-url) | | |
@@ -22,7 +21,7 @@ Only active sources are used to automatically retrieve domains.
 | [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | Yes |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
 | [Jeroen Gui Anti-Phishing Project](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
-| [MalwareTips](https://malwaretips.com/blogs/) | Yes | |
+| [MalwareTips](https://malwaretips.com/blogs/) | | |
 | [PCrisk](https://www.pcrisk.com/) | Yes | |
 | [PetScams.com](https://petscams.com/) | | |
 | [PhishStats](https://phishstats.info/)[^2] | Yes | ~ |
@@ -38,10 +37,13 @@ Only active sources are used to automatically retrieve domains.
 | [URLCrazy](https://github.com/urbanadventurer/urlcrazy) | Yes | |
 | [Verbraucherzentrale Hamburg](https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird) | Yes | |
 | [Viriback C2 Tracker](https://tracker.viriback.com) | Yes | |
+| [Wildcat Cyber Patrol](https://greatis.com/unhackme/help/category/remove) | Yes | |
+| [WiperSoft](https://www.wipersoft.com/blog) | Yes | |
 | [dnstwist](https://github.com/elceef/dnstwist) | Yes | |
 | [openSquat](https://github.com/atenreiro/opensquat) | | |
 | [r/Scams](https://www.reddit.com/r/Scams/) | | |
 | [xRuffKez's NRD List](https://github.com/xRuffKez/NRD) | - | - |
+| [Česká Obchodní Inspekce](https://www.coi.gov.cz/pro-spotrebitele/rizikove-e-shopy/) | Yes | |
 
 [^1]: Only newly registered domains are used in the light version.
 [^2]: Only newly registered domains are used in the light version.

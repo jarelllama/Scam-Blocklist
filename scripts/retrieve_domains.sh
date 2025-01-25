@@ -12,10 +12,10 @@ readonly -a SOURCES=(
     source_dga_detector
     source_emerging_threats
     source_fakewebshoplisthun
+    source_greatis
+    source_gridinsoft
     source_jeroengui
     source_jeroengui_nrd
-    source_gridinsoft
-    #source_malwaretips
     source_manual
     source_pcrisk
     source_phishstats
@@ -28,6 +28,7 @@ readonly -a SOURCES=(
     source_stopgunscams
     source_viriback_tracker
     source_vzhh
+    source_wipersoft
     source_google_search
 )
 readonly FUNCTION='bash scripts/tools.sh'
@@ -816,6 +817,19 @@ source_jeroengui_nrd() {
     mv jeroengui_nrds.tmp source_results.tmp
 }
 
+source_greatis() {
+    # Last checked: 25/01/25
+    source_name='Wildcat Cyber Patrol'
+    source_url='https://greatis.com/unhackme/help/category/remove'
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    # -L required
+    curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
+        | grep -iPo "rel=\"bookmark\">remove \K${DOMAIN_REGEX}" \
+        > source_results.tmp
+}
+
 source_gridinsoft() {
     # Last checked: 10/01/25
     source_name='Gridinsoft'
@@ -825,23 +839,6 @@ source_gridinsoft() {
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sS "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
-        > source_results.tmp
-}
-
-source_malwaretips() {
-    # Last checked: 09/01/25
-    source_name='MalwareTips'
-    source_url=(
-        'https://malwaretips.com/blogs/category/adware'
-        'https://malwaretips.com/blogs/category/hijackers'
-        'https://malwaretips.com/blogs/category/rogue-software'
-    )
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
-    for source_url in "${source_url[@]}"; do
-        curl -sSZL --retry 2 --retry-all-errors "${source_url}/page/[1-15]"
-    done | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= [A-Z])" \
         > source_results.tmp
 }
 
@@ -974,6 +971,18 @@ source_vzhh() {
     curl -sS --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
         > source_results.tmp
+}
+
+source_wipersoft() {
+    # Last checked: 25/01/25
+    source_name='WiperSoft'
+    source_url='https://www.wipersoft.com/blog'
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    # -L required
+    curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
+        | grep -iPo "\">(remove|stop) \K${DOMAIN_REGEX}" > source_results.tmp
 }
 
 # Entry point
