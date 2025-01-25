@@ -28,8 +28,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 365006
-Light version: 42999
+Total domains: 365366
+Light version: 43359
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -54,10 +54,10 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      60 |      0 % |       5 % | StopGunScams.com
     0 |      45 |      0 % |      10 % | Verbraucherzentrale Hamburg
     1 |       2 |      0 % |      31 % | ViriBack C2 Tracker
-    0 |       0 |      0 % |       0 % | Wildcat Cyber Patrol
-    0 |       0 |      0 % |       0 % | WiperSoft
+  354 |     354 |      0 % |       2 % | Wildcat Cyber Patrol
+    7 |       7 |      0 % |       6 % | WiperSoft
     2 |      45 |      0 % |      50 % | Česká Obchodní Inspekce
- 7293 |  242496 |    100 % |      21 % | All sources
+ 7654 |  242857 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
