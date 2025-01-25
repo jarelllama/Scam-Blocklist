@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 01.24.223306.2025
+! Version: 01.25.084808.2025
 ! Expires: 12 hours
-! Last modified: Fri Jan 24 22:33:06 UTC 2025
+! Last modified: Sat Jan 25 08:48:08 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 42997
+! Number of entries: 42999
 !
 ||000014.cc^
 ||000042.cc^
@@ -1316,6 +1316,7 @@
 ||aabsencen.shop^
 ||aak-telegram.org^
 ||aaloyoga.shop^
+||aalten.pics^
 ||aamzon.shop^
 ||aantrekkelijkevrouw.com^
 ||aardepuur.nl^
@@ -7841,6 +7842,7 @@
 ||coltarmsstore.com^
 ||coltellistrumenti.com^
 ||coltellosconto.com^
+||columbcasino.ru^
 ||columbiaoff.shop^
 ||columbiasportsweara.com^
 ||columbiasportswearuk.com^
