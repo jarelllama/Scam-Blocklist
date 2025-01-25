@@ -35,19 +35,17 @@ New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
    16 |     883 |      0 % |      36 % | 165 Anti-fraud
     0 |     371 |      0 % |      14 % | Artists Against 419
-    2 |      45 |      0 % |      50 % | Česká Obchodní Inspekce
    62 |    1551 |      0 % |       1 % | Cybersquatting
   708 |   67074 |     27 % |       0 % | DGA Detector
     8 |     329 |      0 % |      16 % | Emerging Threats
   166 |     855 |      0 % |      22 % | FakeWebshopListHUN
    87 |    1610 |      0 % |       2 % | Google Search
   183 |    3519 |      1 % |      15 % | Gridinsoft
- 5107 |  127182 |     52 % |       8 % | Jeroengui
  1218 |   22462 |      9 % |       0 % | Jeroengui (NRDs)
-    0 |     428 |      0 % |       4 % | MalwareTips
+ 5107 |  127182 |     52 % |       8 % | Jeroengui
     4 |      89 |      0 % |      13 % | PCrisk
-   14 |    9764 |      4 % |      27 % | PhishStats
     1 |    1261 |      0 % |       0 % | PhishStats (NRDs)
+   14 |    9764 |      4 % |      27 % | PhishStats
     1 |     107 |      0 % |      14 % | PuppyScams.org
   630 |   20291 |      8 % |       1 % | Regex Matching
   227 |    4509 |      1 % |       3 % | SafelyWeb
@@ -56,6 +54,9 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      60 |      0 % |       5 % | StopGunScams.com
     0 |      45 |      0 % |      10 % | Verbraucherzentrale Hamburg
     1 |       2 |      0 % |      31 % | ViriBack C2 Tracker
+    0 |       0 |      0 % |       0 % | Wildcat Cyber Patrol
+    0 |       0 |      0 % |       0 % | WiperSoft
+    2 |      45 |      0 % |      50 % | Česká Obchodní Inspekce
  7293 |  242496 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
