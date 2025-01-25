@@ -197,8 +197,7 @@ filter() {
     fi
 
     # Return number of entries
-    # Note wc -w is used here because wc -l counts empty variables as 1 line
-    wc -w <<< "$entries"
+    wc -l <<< "$entries"
 }
 
 # Process/filter the results from the source, append the resulting domains to
