@@ -28,46 +28,46 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 365451
-Light version: 43446
+Total domains: 370437
+Light version: 43958
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-   16 |     883 |      0 % |      36 % | 165 Anti-fraud
-    0 |     371 |      0 % |      14 % | Artists Against 419
-   62 |    1551 |      0 % |       1 % | Cybersquatting
-  708 |   67074 |     27 % |       0 % | DGA Detector
-    8 |     329 |      0 % |      16 % | Emerging Threats
-  166 |     855 |      0 % |      22 % | FakeWebshopListHUN
-   87 |    1610 |      0 % |       2 % | Google Search
-  183 |    3519 |      1 % |      15 % | Gridinsoft
- 1218 |   22462 |      9 % |       0 % | Jeroengui (NRDs)
- 5107 |  127182 |     52 % |       8 % | Jeroengui
-    4 |      89 |      0 % |      13 % | PCrisk
-    1 |    1261 |      0 % |       0 % | PhishStats (NRDs)
-   14 |    9764 |      4 % |      27 % | PhishStats
-    1 |     107 |      0 % |      14 % | PuppyScams.org
-  630 |   20291 |      8 % |       1 % | Regex Matching
-  227 |    4509 |      1 % |       3 % | SafelyWeb
-   77 |    3740 |      1 % |      33 % | Scam Directory
+   18 |     901 |      0 % |      36 % | 165 Anti-fraud
+    7 |     378 |      0 % |      14 % | Artists Against 419
+   49 |    1600 |      0 % |       1 % | Cybersquatting
+  447 |   67521 |     27 % |       0 % | DGA Detector
+    5 |     334 |      0 % |      16 % | Emerging Threats
+    1 |     856 |      0 % |      22 % | FakeWebshopListHUN
+   71 |    1681 |      0 % |       2 % | Google Search
+  139 |    3658 |      1 % |      15 % | Gridinsoft
+  518 |   22980 |      9 % |       0 % | Jeroengui (NRDs)
+ 2741 |  129923 |     52 % |       8 % | Jeroengui
+    0 |      89 |      0 % |      12 % | PCrisk
+    1 |    1262 |      0 % |       0 % | PhishStats (NRDs)
+    7 |    9771 |      3 % |      27 % | PhishStats
+   10 |     117 |      0 % |      14 % | PuppyScams.org
+ 1406 |   21697 |      8 % |       1 % | Regex Matching
+  205 |    4714 |      1 % |       3 % | SafelyWeb
+   67 |    3807 |      1 % |      33 % | Scam Directory
     0 |      17 |      0 % |      32 % | ScamAdviser
     0 |      60 |      0 % |       5 % | StopGunScams.com
     0 |      45 |      0 % |      10 % | Verbraucherzentrale Hamburg
-    1 |       2 |      0 % |      31 % | ViriBack C2 Tracker
-  443 |     443 |      0 % |       3 % | Wildcat Cyber Patrol
-    7 |       7 |      0 % |       6 % | WiperSoft
-    2 |      45 |      0 % |      50 % | Česká Obchodní Inspekce
- 7743 |  242946 |    100 % |      21 % | All sources
+    0 |       2 |      0 % |      31 % | ViriBack C2 Tracker
+    6 |     449 |      0 % |       3 % | Wildcat Cyber Patrol
+    0 |       7 |      0 % |       6 % | WiperSoft
+    0 |      45 |      0 % |      50 % | Česká Obchodní Inspekce
+ 5179 |  248125 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 3005
-Dead domains removed this month: 65260
-Resurrected domains added today: 930
+Dead domains removed today: 1556
+Dead domains removed this month: 66816
+Resurrected domains added today: 1977
 
 Parked domains removed this month: 8176
-Unparked domains added today: 136
+Unparked domains added today: 69
 ```
 
 <details>
@@ -123,7 +123,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13110
+Total domains: 13125
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
