@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and malware domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 01.26.022214.2025
+! Version: 01.26.041915.2025
 ! Expires: 12 hours
-! Last modified: Sun Jan 26 02:22:14 UTC 2025
+! Last modified: Sun Jan 26 04:19:15 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 43958
+! Number of entries: 43959
 !
 ||0.majorlinker.com^
 ||000014.cc^
@@ -6021,6 +6021,7 @@
 ||buzzardhui.com^
 ||buzzlcart.com^
 ||buzzsiteus.com^
+||buzzworthyoffers.com^
 ||bvceofxakycsc.shop^
 ||bvfhtvuzkqwergcvdob.shop^
 ||bvgctbjejeu.shop^
