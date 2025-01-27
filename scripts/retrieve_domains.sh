@@ -43,7 +43,7 @@ readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly PHISHING_TARGETS='config/phishing_targets.csv'
+readonly PHISHING_TARGETS='config/phishing_detection.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.

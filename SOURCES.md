@@ -26,7 +26,7 @@ Only active sources are used to automatically retrieve domains.
 | [PetScams.com](https://petscams.com/) | | |
 | [PhishStats](https://phishstats.info/)[^2] | Yes | ~ |
 | [PuppyScams.org](https://puppyscams.org/) | Yes | |
-| [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_targets.csv) | Yes | Yes |
+| [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_detection.csv) | Yes | Yes |
 | [SafelyWeb](https://safelyweb.com/) | Yes | Yes |
 | [Scam Directory](https://scam.directory/) | Yes | |
 | [Scam.Delivery](https://scam.delivery/) | | |
