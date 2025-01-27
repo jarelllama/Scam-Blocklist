@@ -55,10 +55,11 @@ main() {
 # for newly retrieved domains.
 check_dead() {
     # Include subdomains found in the given file. It is assumed that if the
-    # subdomain is dead, so is the root domain. For this reason, the root
-    # domains are excluded to not waste processing time.
-    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
-        > domains.tmp
+    # subdomain is dead, so is the root domain.
+    # Exclude root domains and domains already in the dead domains file but not
+    # yet removed.
+    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") \
+        <(sort "$ROOT_DOMAINS" "$DEAD_DOMAINS") > domains.tmp
 
     find_dead_in domains.tmp
 

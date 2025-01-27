@@ -53,10 +53,11 @@ main() {
 # a filter for newly retrieved domains.
 check_parked() {
     # Include subdomains found in the given file. It is assumed that if the
-    # subdomain is parked, so is the root domain. For this reason, the root
-    # domains are excluded to not waste processing time.
-    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") "$ROOT_DOMAINS" \
-        > domains.tmp
+    # subdomain is parked, so is the root domain.
+    # Exclude root domains and domains already in the parked domains file but
+    # not yet removed.
+    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") \
+        <(sort "$ROOT_DOMAINS" "$PARKED_DOMAINS") > domains.tmp
 
     find_parked_in domains.tmp
 
