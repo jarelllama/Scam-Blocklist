@@ -348,11 +348,6 @@ save_domains() {
 save_subdomains() {
     [[ ! -f root_domains.tmp ]] && return
 
-    # If all_retrieved_domains.tmp is empty, root_domains.tmp should not exist
-    if [[ ! -s all_retrieved_domains.tmp ]]; then
-        error 'root_domains.tmp present although all_retrieved_domains.tmp is empty.'
-    fi
-
     sort -u root_domains.tmp -o root_domains.tmp
 
     # Keep subdomains and remove root domains from entries requiring manual
