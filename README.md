@@ -57,6 +57,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |    3807 |      1 % |      34 % | Scam Directory
     0 |      17 |      0 % |      32 % | ScamAdviser
     0 |      60 |      0 % |       5 % | StopGunScams.com
+   13 |      13 |      0 % |       5 % | Unit42
     0 |      45 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       2 |      0 % |      31 % | ViriBack C2 Tracker
    14 |     463 |      0 % |       6 % | Wildcat Cyber Patrol
