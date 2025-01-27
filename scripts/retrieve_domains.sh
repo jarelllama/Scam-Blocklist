@@ -123,7 +123,7 @@ retrieve_source_results() {
         local source_name=''
         local source_url=''
         local source_results=''
-        local ignore_from_light=false
+        local exclude_from_light=false
         local rate_limited=false
         local query_count=''
         local execution_time
@@ -296,7 +296,7 @@ process_source_results() {
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
 
-    if [[ "$ignore_from_light" == false ]]; then
+    if [[ "$exclude_from_light" == false ]]; then
         # Collate filtered domains from light sources
         cat "$source_results" >> all_retrieved_light_domains.tmp
     fi
@@ -467,7 +467,7 @@ cleanup() {
 # and outputs them to source_results.tmp.
 # Input:
 #   $source_name:          name of the source to use in the console and logs
-#   $ignore_from_light:    if true, the results are not included in the light
+#   $exclude_from_light:    if true, the results are not included in the light
 #                          version (default is false)
 #   $USE_EXISTING_RESULTS: if true, skip the retrieval process and use the
 #                          existing results files
@@ -648,7 +648,7 @@ source_cybersquatting() {
 source_dga_detector() {
     # Last checked: 21/01/25
     source_name='DGA Detector'
-    ignore_from_light=true
+    exclude_from_light=true
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
@@ -681,7 +681,7 @@ source_dga_detector() {
 source_regex() {
     # Last checked: 21/01/25
     source_name='Regex'
-    ignore_from_light=true
+    exclude_from_light=true
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
@@ -772,7 +772,7 @@ source_fakewebshoplisthun() {
     # Last checked: 23/12/24
     source_name='FakeWebshopListHUN'
     source_url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
-    ignore_from_light=true  # Has a few false positives
+    exclude_from_light=true  # Has a few false positives
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
@@ -783,7 +783,7 @@ source_fakewebshoplisthun() {
 source_jeroengui() {
     # Last checked: 03/01/25
     source_name='Jeroengui'
-    ignore_from_light=true  # Too many domains
+    exclude_from_light=true  # Too many domains
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
@@ -833,7 +833,7 @@ source_gridinsoft() {
     # Last checked: 10/01/25
     source_name='Gridinsoft'
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
-    ignore_from_light=true  # Has a few false positives
+    exclude_from_light=true  # Has a few false positives
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
@@ -862,7 +862,7 @@ source_phishstats() {
     # Last checked: 29/12/24
     source_name='PhishStats'
     source_url='https://phishstats.info/phish_score.csv'
-    ignore_from_light=true  # Too many domains
+    exclude_from_light=true  # Too many domains
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
@@ -905,7 +905,7 @@ source_safelyweb() {
     # Last checked: 11/01/25
     source_name='SafelyWeb'
     source_url='https://safelyweb.com/scams-database'
-    ignore_from_light=true  # Has a few false positives
+    exclude_from_light=true  # Has a few false positives
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
