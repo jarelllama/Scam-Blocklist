@@ -642,23 +642,26 @@ source_dga_detector() {
     curl -sSL "$source_url" -o dga_detector.zip
     unzip -q dga_detector.zip -d dga_detector
     pip install -q tldextract
-    local path='dga_detector/dga_detector-master'
+
+    # Keep only NRDs with more than 12 characters
+    mawk 'length($0) > 12' nrd.tmp > domains.tmp
+
+    cd dga_detector/dga_detector-master
 
     # Set detection threshold. DGA domains fall below the threshold set here.
     # A lower threshold lowers the domain yield and reduces false positives.
     # Note that adding domains to big.txt does not seem to affect detection.
     sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.0009/" \
-        "${path}/dga_detector.py"
-
-    # Keep only NRDs with more than 12 characters
-    mawk 'length($0) > 12' nrd.tmp > domains.tmp
+        dga_detector.py
 
     # Run DGA Detector on remaining NRDs
-    python3 "${path}/dga_detector.py" -f domains.tmp > /dev/null
+    python3 dga_detector.py -f ../domains.tmp > /dev/null
 
     # Extract DGA domains from json output
-    jq -r 'select(.is_dga == true) | .domain' "${path}/dga_domains.json" \
-        > source_results.tmp
+    jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
+        > ../source_results.tmp
+
+    cd ..
 
     rm -r dga_detector* domains.tmp
 }
