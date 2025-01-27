@@ -61,7 +61,8 @@ jobs:
 
       - name: Prune logs
         run: |
-          bash scripts/tools.sh --prune-lines config/domain_log.csv 200000
+          # 250,000 is enough for a month's worth of logs.
+          bash scripts/tools.sh --prune-lines config/domain_log.csv 250000
           bash scripts/tools.sh --prune-lines config/source_log.csv 10000
 
       - name: Push

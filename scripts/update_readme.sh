@@ -20,7 +20,7 @@ This blocklist aims to detect new malicious domains within a short period of the
 
 For extended protection, use [xRuffKez's NRD Lists](https://github.com/xRuffKez/NRD) to block all newly registered domains (NRDs), and [Hagezi's Threat Intelligence Feed](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#tif) (full version) which includes this blocklist.
 
-Sources include:
+Sources for this blocklist include:
 
 - Public databases
 - Google Search indexing to find common scam site templates
