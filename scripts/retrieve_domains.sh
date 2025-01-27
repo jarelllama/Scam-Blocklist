@@ -566,7 +566,7 @@ source_cybersquatting() {
     # curl -L required
     curl -sSL 'https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip' \
         -o urlcrazy.zip
-    unzip -q urlcrazy.zip -d urlcrazy
+    unzip -q urlcrazy.zip
     command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
     # sudo is needed for gem
     sudo gem install --silent json colorize async async-dns async-http
@@ -597,7 +597,7 @@ source_cybersquatting() {
         done <<< "$tlds"
 
         # Run URLCrazy (bash does not work)
-        ./urlcrazy/urlcrazy-master/urlcrazy -r "${domain}.com" -f CSV \
+        ./urlcrazy-master/urlcrazy -r "${domain}.com" -f CSV \
             | mawk -F ',' '!/"Original"/ {print $2}' \
             | grep -oE "$DOMAIN_REGEX" >> results.tmp
 
@@ -635,13 +635,13 @@ source_dga_detector() {
     # Install DGA Detector and dependencies
     # curl -L required
     curl -sSL "$source_url" -o dga_detector.zip
-    unzip -q dga_detector.zip -d dga_detector
+    unzip -q dga_detector.zip
     pip install -q tldextract
 
     # Keep only NRDs with more than 12 characters
     mawk 'length($0) > 12' nrd.tmp > domains.tmp
 
-    cd dga_detector/dga_detector-master
+    cd dga_detector-master
 
     # Set detection threshold. DGA domains fall below the threshold set here.
     # A lower threshold lowers the domain yield and reduces false positives.
