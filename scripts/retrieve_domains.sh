@@ -26,6 +26,7 @@ readonly -a SOURCES=(
     source_scamadviser
     source_scamdirectory
     source_stopgunscams
+    source_unit42
     source_viriback_tracker
     source_vzhh
     source_wipersoft
@@ -48,6 +49,8 @@ readonly SOURCE_LOG='config/source_log.csv'
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+# Matches domain.com, domain[.]com, and sub[.]domain[.]com
+readonly DOMAIN_SQUARE_REGEX='[[:alnum:]][[:alnum:]\[\].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 main() {
     # Check whether to use existing results in the pending directory
@@ -576,7 +579,7 @@ search_google() {
 }
 
 source_cybersquatting() {
-    # Last checked: 21/01/25
+    # Last checked: 27/01/25
     source_name='Cybersquatting'
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
@@ -587,7 +590,10 @@ source_cybersquatting() {
     command -v dnstwist > /dev/null || pip install -q dnstwist
 
     # Install URLCrazy and dependencies
-    git clone -q https://github.com/urbanadventurer/urlcrazy.git
+    # curl -L required
+    curl -sSL 'https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip' \
+        -o urlcrazy.zip
+    unzip -q urlcrazy.zip -d urlcrazy
     command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
     # sudo is needed for gem
     sudo gem install --silent json colorize async async-dns async-http
@@ -618,7 +624,7 @@ source_cybersquatting() {
         done <<< "$tlds"
 
         # Run URLCrazy (bash does not work)
-        ./urlcrazy/urlcrazy -r "${domain}.com" -f CSV \
+        ./urlcrazy/urlcrazy-master/urlcrazy -r "${domain}.com" -f CSV \
             | mawk -F ',' '!/"Original"/ {print $2}' \
             | grep -oE "$DOMAIN_REGEX" >> results.tmp
 
@@ -642,40 +648,41 @@ source_cybersquatting() {
     done \
         <<< "$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
 
-    rm -rf urlcrazy
+    rm -r urlcrazy*
 }
 
 source_dga_detector() {
-    # Last checked: 21/01/25
+    # Last checked: 27/01/25
     source_name='DGA Detector'
+    source_url='https://github.com/exp0se/dga_detector/archive/refs/heads/master.zip'
     exclude_from_light=true
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    # Keep only NRDs with more than 12 characters
-    mawk 'length($0) > 12' nrd.tmp > domains.tmp
-
-    git clone -q https://github.com/exp0se/dga_detector --depth 1
+    # Install DGA Detector and dependencies
+    # curl -L required
+    curl -sSL "$source_url" -o dga_detector.zip
+    unzip -q dga_detector.zip -d dga_detector
     pip install -q tldextract
-
-    cd dga_detector || return
+    local path='dga_detector/dga_detector-master'
 
     # Set detection threshold. DGA domains fall below the threshold set here.
     # A lower threshold lowers the domain yield and reduces false positives.
     # Note that adding domains to big.txt does not seem to affect detection.
     sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.0009/" \
-        dga_detector.py
+        "${path}/dga_detector.py"
+
+    # Keep only NRDs with more than 12 characters
+    mawk 'length($0) > 12' nrd.tmp > domains.tmp
 
     # Run DGA Detector on remaining NRDs
-    python3 dga_detector.py -f ../domains.tmp > /dev/null
+    python3 "${path}/dga_detector.py" -f domains.tmp > /dev/null
 
     # Extract DGA domains from json output
-    jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
-        > ../source_results.tmp
+    jq -r 'select(.is_dga == true) | .domain' "${path}/dga_domains.json" \
+        > source_results.tmp
 
-    cd ..
-
-    rm -rf dga_detector domains.tmp
+    rm -r dga_detector* domains.tmp
 }
 
 source_regex() {
@@ -823,7 +830,7 @@ source_greatis() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    # -L required
+    # curl -L required
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "rel=\"bookmark\">remove \K${DOMAIN_REGEX}" \
         > source_results.tmp
@@ -854,7 +861,7 @@ source_pcrisk() {
 
     # Matches domain[.]com and domain.com
     curl -sSZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
-        | grep -iPo '>what (kind of (page|website) )?is \K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+        | grep -iPo ">what (kind of (page|website) )?is \K${DOMAIN_SQUARE_REGEX}" \
         > source_results.tmp
 }
 
@@ -948,6 +955,23 @@ source_stopgunscams() {
         | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > source_results.tmp
 }
 
+source_unit42() {
+    # Last checked: 27/01/25
+    source_name='Unit42'
+    source_url='https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/archive/refs/heads/main.zip'
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    # curl -L required
+    curl -sSL "$source_url" -o unit42.zip
+    unzip -q unit42.zip -d unit42
+
+    grep -hPo "hxxps?\[:\]//\K${DOMAIN_SQUARE_REGEX}" unit42/*/"$(date +%Y)"* \
+        > source_results.tmp
+
+    rm -r unit42*
+}
+
 source_viriback_tracker() {
     # Last checked: 26/12/24
     source_name='ViriBack C2 Tracker'
@@ -979,7 +1003,7 @@ source_wipersoft() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    # -L required
+    # curl -L required
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "\">(remove|stop) \K${DOMAIN_REGEX}" > source_results.tmp
 }

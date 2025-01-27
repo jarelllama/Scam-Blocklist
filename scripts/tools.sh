@@ -100,7 +100,7 @@ prune_lines() {
 download_toplist() {
     [[ -f toplist.tmp ]] && return
 
-    # curl -L is needed here
+    # curl -L required
     curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
         > toplist.tmp || send_telegram "Error downloading toplist."
 
