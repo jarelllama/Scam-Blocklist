@@ -192,7 +192,7 @@ filter() {
             '{print source "," $0 "," reason ",,"}' <<< "$entries" \
             >> "$REVIEW_CONFIG"
         # Remove duplicates
-        mawk '!seen[$0]++' "$REVIEW_CONFIG"> temp
+        mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
         mv temp "$REVIEW_CONFIG"
 
         # Save entries to use in rerun
@@ -598,7 +598,7 @@ source_cybersquatting() {
     # alternate TLDs.
     # The top 500 is a good number to avoid invalid TLDs.
     tlds="$(mawk -F '.' '{print $NF}' nrd.tmp | sort | uniq -c \
-        | sort -nr | head -n 500 | mawk '{print $2}')"
+        | sort -nr | head -n 250 | mawk '{print $2}')"
 
     # Loop through phishing targets
     while read -r domain; do

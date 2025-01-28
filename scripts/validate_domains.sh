@@ -62,7 +62,7 @@ filter() {
             '{print "raw," $0 "," reason ",,"}' <<< "$entries" \
             >> "$REVIEW_CONFIG"
         # Remove duplicates
-        mawk '!seen[$0]++' "$REVIEW_CONFIG"> temp
+        mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
         mv temp "$REVIEW_CONFIG"
     else
         # Remove entries from raw file
