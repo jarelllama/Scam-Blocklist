@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 372085
-Light version: 44841
+Total domains: 372120
+Light version: 44850
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -45,25 +45,25 @@ Today | Monthly | %Monthly | %Filtered | Source
     1 |     339 |      0 % |      15 % | Emerging Threats
     8 |     864 |      0 % |      22 % | FakeWebshopListHUN
    40 |    1777 |      0 % |       2 % | Google Search
-  171 |    3940 |      1 % |      16 % | Gridinsoft
-  753 |   24534 |      9 % |       0 % | Jeroengui (NRDs)
- 3350 |  136994 |     53 % |       8 % | Jeroengui
-    3 |      93 |      0 % |      11 % | PCrisk
+  182 |    3951 |      1 % |      16 % | Gridinsoft
+  754 |   24535 |      9 % |       0 % | Jeroengui (NRDs)
+ 3354 |  136998 |     52 % |       8 % | Jeroengui
+    6 |      96 |      0 % |      11 % | PCrisk
     1 |    1263 |      0 % |       0 % | PhishStats (NRDs)
    14 |    9791 |      3 % |      28 % | PhishStats
     4 |     121 |      0 % |      14 % | PuppyScams.org
   548 |   22936 |      8 % |       1 % | Regex Matching
-  331 |    5208 |      2 % |       3 % | SafelyWeb
+  344 |    5221 |      2 % |       3 % | SafelyWeb
    10 |    3817 |      1 % |      34 % | Scam Directory
     0 |      17 |      0 % |      32 % | ScamAdviser
     1 |      61 |      0 % |       5 % | StopGunScams.com
     0 |      13 |      0 % |       8 % | Unit42
    19 |      64 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       2 |      0 % |      31 % | ViriBack C2 Tracker
-   20 |     483 |      0 % |      10 % | Wildcat Cyber Patrol
+   28 |     491 |      0 % |      10 % | Wildcat Cyber Patrol
     0 |       7 |      0 % |       7 % | WiperSoft
     0 |      45 |      0 % |      50 % | Česká Obchodní Inspekce
- 4581 |  258461 |    100 % |      21 % | All sources
+ 4620 |  258500 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
