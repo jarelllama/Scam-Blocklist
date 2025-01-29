@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script is used to test the various functions/scripts of this repository.
+# This script is used to test the various functions/scripts in this repository.
 # Each test consists of an input file which will be processed by the called
 # script, and an output file which is the expected results from the processing.
 # The input and output files are compared to determine the success or failure
@@ -403,7 +403,7 @@ test_whitelist_blacklist() {
     printf "blacklist-test.com\n" >> "$BLACKLIST"
     printf "whitelist-test.com\n" >> "$WHITELIST"
     # Test that the blacklist takes priority over the whitelist
-    printf "blacklisted.whitelist-test.com\n" >> "$WHITELIST"
+    printf "blacklisted.whitelist-test.com\n" >> "$BLACKLIST"
     {
         printf "blacklist-test.com\n"
         # Test that the whitelist uses regex matching
@@ -431,7 +431,7 @@ test_whitelisted_tld_removal() {
         printf "whitelisted-tld-test.mil\n"
         # Test that the blacklist takes priority over the whitelisted TLDs
         printf "blacklisted.whitelisted-tld-test.mil\n"
-    } >> input.txt
+    } >> data/pending/ScamAdviser.tmp
     printf "blacklisted.whitelisted-tld-test.mil\n" >> "$BLACKLIST"
 
     # EXPECTED OUTPUT
@@ -442,6 +442,14 @@ test_whitelisted_tld_removal() {
         printf "whitelisted_tld,white-tld-test.mil\n"
         printf "blacklist,blacklisted.whitelisted-tld-test.mil\n"
     } >> out_log.txt
+
+    # The validate script does not add whitelisted TLDs to the review config file
+    [[ "$script_to_test" == 'validate' ]] && return
+    {
+        printf "ScamAdviser,white-tld-test.gov.us,whitelisted_tld,,\n"
+        printf "ScamAdviser,white-tld-test.edu,whitelisted_tld,,\n"
+        printf "ScamAdviser,white-tld-test.mil,whitelisted_tld,,\n"
+    } >> out_review_config.txt
 }
 
 # TEST: removal of non-domain entries
