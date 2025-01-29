@@ -112,7 +112,7 @@ TEST_RETRIEVE_VALIDATE() {
     test_subdomain_removal
     test_review_file
     test_whitelist_blacklist
-    test_whitelisted_tld_remova
+    test_whitelisted_tld_removal
     test_invalid_removal
     test_toplist_check
 
