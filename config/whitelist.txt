@@ -1,4 +1,7 @@
 \.exophase\.com$
+^res\.cloudinary\.com$
+^nyc3\.digitaloceanspaces\.com$
+^s\.deemos\.com$
 \.frontierstore\.net$
 \.google\.com$
 \.googleapis\.com$
@@ -6,10 +9,7 @@
 ^1337x\.tw$
 ^180\.dk$
 ^1888pressrelease\.com$
-^18\.116\.21\.103$
 ^1xbet\.com$
-^31\.220\.2\.141$
-^3\.144\.84\.22$
 ^4fstore\.com$
 ^4sync\.com$
 ^5movierulz\.gay$
@@ -175,7 +175,6 @@
 ^globalwaterintel\.com$
 ^gmail\.com$
 ^gnacsports\.com$
-^gold$
 ^gomerblog\.com$
 ^goo\.su$
 ^google\.[a-z]*$
@@ -189,7 +188,6 @@
 ^grimfrost\.com$
 ^gudsen\.com$
 ^gulfpartyline\.com$
-^gy$
 ^gyms1\.com$
 ^hackerearth\.com$
 ^hacktricks\.wiki$
@@ -248,7 +246,6 @@
 ^justgiving\.com$
 ^justwatch\.com$
 ^keykobo\.com$
-^kg$
 ^kinogo\.as$
 ^krikam\.net$
 ^kspaceproject\.com$
@@ -387,7 +384,6 @@
 ^rockymountainbride\.com$
 ^rojadirectvonline\.com$
 ^rossignol\.com$
-^s\.a\.r\.l$
 ^samsungtradein\.co\.nz$
 ^samsunguncovered\.com$
 ^scamminder\.com$
@@ -399,7 +395,6 @@
 ^sflix\.ca$
 ^shawacademy\.com$
 ^shopeepay\.com\.[a-z]*$
-^shopeepay\.com\.br$
 ^shorten\.is$
 ^shorten\.so$
 ^shorter\.me$
@@ -521,7 +516,6 @@
 ^yotpoclicks\.com$
 ^yourketo\.diet$
 ^yourwobb\.com$
-^youtube\.[a-z]*$
 ^youtube\.co\.[a-z]*$
 ^youtube\.com\.[a-z]*$
 ^youtubetowav\.net$
@@ -539,8 +533,7 @@
 ^zornher\.com$
 ^zpr\.io$
 fakewebsite
-malware
-phishingf
+phishing
 reportscam
 scam-detector
 scamadviser
