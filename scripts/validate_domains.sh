@@ -113,9 +113,10 @@ validate() {
     filter \
         "$(grep -Ef "$WHITELIST" "$RAW" | grep -vxFf "$BLACKLIST")" whitelist
 
-    # Remove domains with whitelisted TLDs
+    # Remove domains with whitelisted TLDs excluding blacklisted domains
     filter \
-        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW")" whitelisted_tld
+        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW" \
+        | grep -vxFf "$BLACKLIST")" whitelisted_tld
 
     # Remove non-domain entries including IP addresses excluding Punycode
     filter "$(grep -vE "^${DOMAIN_REGEX}$" "$RAW")" invalid
