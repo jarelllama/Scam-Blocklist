@@ -110,8 +110,9 @@ TEST_RETRIEVE_VALIDATE() {
     # Note removal of domains already in raw file is redundant to test
     test_punycode_conversion
     test_subdomain_removal
+    test_review_file
     test_whitelist_blacklist
-    test_whitelisted_tld_removal
+    test_whitelisted_tld_remova
     test_invalid_removal
     test_toplist_check
 
@@ -153,9 +154,9 @@ TEST_RETRIEVE_VALIDATE() {
     check_output "$RAW_LIGHT" out_raw_light.txt 'Raw light'
     check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
     check_output "$ROOT_DOMAINS" out_root_domains.txt 'Root domains'
-    check_output "$REVIEW_CONFIG" out_review_config.txt 'Review file'
-    check_output "$BLACKLIST" out_blacklist.txt 'Blacklist file'
-    check_output "$WHITELIST" out_whitelist.txt 'Whitelist file'
+    check_output "$REVIEW_CONFIG" out_review_config.txt Review
+    check_output "$BLACKLIST" out_blacklist.txt Blacklist
+    check_output "$WHITELIST" out_whitelist.txt Whitelist
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
         # Check entries saved for manual review
@@ -205,10 +206,10 @@ TEST_DEAD_CHECK() {
 
     ### Check and verify outputs
     check_output "$RAW" out_raw.txt Raw
-    check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
-    check_output "$DEAD_DOMAINS" out_dead.txt "Dead domains"
+    check_output "$RAW_LIGHT" out_raw_light.txt 'Raw light'
+    check_output "$DEAD_DOMAINS" out_dead.txt 'Dead domains'
     check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
-    check_output "$ROOT_DOMAINS" out_root_domains.txt "Root domains"
+    check_output "$ROOT_DOMAINS" out_root_domains.txt 'Root domains'
 
     check_and_exit
 }
@@ -249,10 +250,10 @@ TEST_PARKED_CHECK() {
 
     ### Check and verify outputs
     check_output "$RAW" out_raw.txt Raw
-    check_output "$RAW_LIGHT" out_raw_light.txt "Raw light"
-    check_output "$PARKED_DOMAINS" out_parked.txt "Parked domains"
+    check_output "$RAW_LIGHT" out_raw_light.txt 'Raw light'
+    check_output "$PARKED_DOMAINS" out_parked.txt 'Parked domains'
     check_output "$SUBDOMAINS" out_subdomains.txt Subdomains
-    check_output "$ROOT_DOMAINS" out_root_domains.txt "Root domains"
+    check_output "$ROOT_DOMAINS" out_root_domains.txt 'Root domains'
 
     check_and_exit
 }
@@ -284,9 +285,9 @@ TEST_BUILD() {
 
     ### Check and verify outputs
     check_output "${ADBLOCK}/scams.txt" out_adblock.txt Adblock
-    check_output "${DOMAINS}/scams.txt" out_domains.txt "Wildcard Domains"
-    check_output "${ADBLOCK}/scams_light.txt" out_adblock_light.txt "Adblock light"
-    check_output "${DOMAINS}/scams_light.txt" out_domains_light.txt "Wildcard Domains light"
+    check_output "${DOMAINS}/scams.txt" out_domains.txt 'Wildcard Domains'
+    check_output "${ADBLOCK}/scams_light.txt" out_adblock_light.txt 'Adblock light'
+    check_output "${DOMAINS}/scams_light.txt" out_domains_light.txt 'Wildcard Domains light'
 
     [[ "$error" == true ]] && exit 1
 
@@ -377,46 +378,68 @@ test_subdomain_removal() {
     printf "subdomain-test.com\n" >> out_root_domains.txt
 }
 
-# TEST: whitelisting/blacklisting via review config file
-test_whitelist_blacklist() {
+# TEST: adding entries to the whitelist and blacklist via the review config
+# file
+test_review_file() {
     # INPUT
-    # Add entries to blacklist and whitelist via review config file
     {
         printf "Source,review-file-test.com,toplist,,\n"
-        printf "Source,blacklist-test.com,toplist,y,\n"
-        printf "Source,whitelist-test.com,toplist,,y\n"
         printf "Source,review-file-misconfigured-test.com,toplist,y,y\n"
+        printf "Source,review-file-blacklist-test.com,toplist,y,\n"
+        printf "Source,review-file-whitelist-test.com,toplist,,y\n"
     } >> "$REVIEW_CONFIG"
-    # INPUT
-    printf "blacklist-test.com\n" >> input.txt
-    printf "whitelist-test.com\n" >> input.txt
-
     # EXPECTED OUTPUT
-    printf "blacklist-test.com\n" >> out_blacklist.txt
-    printf "^whitelist-test\.com$\n" >> out_whitelist.txt
-    printf "blacklist-test.com\n" >> out_raw.txt
-    printf "whitelist,whitelist-test.com\n" >> out_log.txt
     # Only unconfigured/misconfigured entries should remain in the review config file
     printf "Source,review-file-test.com,toplist,,\n" >> out_review_config.txt
     printf "Source,review-file-misconfigured-test.com,toplist,y,y\n" >> out_review_config.txt
+
+    printf "review-file-blacklist-test.com\n" >> out_blacklist.txt
+    printf "^review-file-whitelist-test\.com$\n" >> out_whitelist.txt
+}
+
+# TEST: whitelisting and blacklisting entries
+test_whitelist_blacklist() {
+    # INPUT
+    printf "blacklist-test.com\n" >> "$BLACKLIST"
+    printf "whitelist-test.com\n" >> "$WHITELIST"
+    # Test that the blacklist takes priority over the whitelist
+    printf "blacklisted.whitelist-test.com\n" >> "$WHITELIST"
+    {
+        printf "blacklist-test.com\n"
+        # Test that the whitelist uses regex matching
+        printf "regex-test.whitelist-test.com\n"
+        printf "blacklisted.whitelist-test.com\n"
+    } >> input.txt
+
+    # EXPECTED OUTPUT
+    printf "blacklist-test.com\n" >> out_raw.txt
+    printf "blacklisted.whitelist-test.com\n" >> out_raw.txt
+    printf "whitelist,regex-test.whitelist-test.com\n" >> out_log.txt
+
     # The validate script does not log blacklisted domains
     [[ "$script_to_test" == 'validate' ]] && return
     printf "blacklist,blacklist-test.com\n" >> out_log.txt
+    printf "blacklist,blacklisted.whitelist-test.com\n" >> out_log.txt
 }
 
 # TEST: removal of domains with whitelisted TLDs
 test_whitelisted_tld_removal() {
     # INPUT
     {
-        printf "white-tld-test.gov.us\n"
-        printf "white-tld-test.edu\n"
-        printf "white-tld-test.mil\n"
+        printf "whitelisted-tld-test.gov.us\n"
+        printf "whitelisted-tld-test.edu\n"
+        printf "whitelisted-tld-test.mil\n"
+        # Test that the blacklist takes priority over the whitelisted TLDs
+        printf "blacklisted.whitelisted-tld-test.mil\n"
     } >> input.txt
+    printf "blacklisted.whitelisted-tld-test.mil\n" >> "$BLACKLIST"
+
     # EXPECTED OUTPUT
     {
         printf "whitelisted_tld,white-tld-test.gov.us\n"
         printf "whitelisted_tld,white-tld-test.edu\n"
         printf "whitelisted_tld,white-tld-test.mil\n"
+        printf "blacklist,blacklisted.whitelisted-tld-test.mil\n"
     } >> out_log.txt
 }
 
