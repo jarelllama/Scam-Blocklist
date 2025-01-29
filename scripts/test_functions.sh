@@ -435,6 +435,7 @@ test_whitelisted_tld_removal() {
     printf "blacklisted.whitelisted-tld-test.mil\n" >> "$BLACKLIST"
 
     # EXPECTED OUTPUT
+    printf "blacklisted.whitelisted-tld-test.mil\n" >> out_raw.txt
     {
         printf "whitelisted_tld,white-tld-test.gov.us\n"
         printf "whitelisted_tld,white-tld-test.edu\n"
