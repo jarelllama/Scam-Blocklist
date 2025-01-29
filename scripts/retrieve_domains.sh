@@ -278,12 +278,12 @@ process_source_results() {
         "$(grep -Ef "$WHITELIST" "$source_results" \
         | grep -vxFf "$BLACKLIST")" whitelist)"
 
-    # Remove domains with whitelisted TLDs
+    # Remove domains with whitelisted TLDs excluding blacklisted domains
     # mawk does not work with this expression so grep is intentionally chosen.
     # The same applies for the invalid check below.
     whitelisted_tld_count="$(filter \
-        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' \
-        "$source_results")" whitelisted_tld)"
+        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$source_results" \
+        | grep -vxFf "$BLACKLIST")" whitelisted_tld --preserve)"
 
     # Remove non-domain entries including IP addresses excluding Punycode
     # Redirect output to /dev/null as the invalid entries count is not needed
