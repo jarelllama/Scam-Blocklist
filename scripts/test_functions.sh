@@ -437,18 +437,18 @@ test_whitelisted_tld_removal() {
     # EXPECTED OUTPUT
     printf "blacklisted.whitelisted-tld-test.mil\n" >> out_raw.txt
     {
-        printf "whitelisted_tld,white-tld-test.gov.us\n"
-        printf "whitelisted_tld,white-tld-test.edu\n"
-        printf "whitelisted_tld,white-tld-test.mil\n"
+        printf "whitelisted_tld,whitelisted-tld-test.gov.us\n"
+        printf "whitelisted_tld,whitelisted-tld-test.edu\n"
+        printf "whitelisted_tld,whitelisted-tld-test.mil\n"
         printf "blacklist,blacklisted.whitelisted-tld-test.mil\n"
     } >> out_log.txt
 
     # The validate script does not add whitelisted TLDs to the review config file
     [[ "$script_to_test" == 'validate' ]] && return
     {
-        printf "ScamAdviser,white-tld-test.gov.us,whitelisted_tld,,\n"
-        printf "ScamAdviser,white-tld-test.edu,whitelisted_tld,,\n"
-        printf "ScamAdviser,white-tld-test.mil,whitelisted_tld,,\n"
+        printf "ScamAdviser,whitelisted-tld-test.gov.us,whitelisted_tld,,\n"
+        printf "ScamAdviser,whitelisted-tld-test.edu,whitelisted_tld,,\n"
+        printf "ScamAdviser,whitelisted-tld-test.mil,whitelisted_tld,,\n"
     } >> out_review_config.txt
 }
 
