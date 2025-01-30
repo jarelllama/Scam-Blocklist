@@ -129,7 +129,7 @@ TEST_RETRIEVE_VALIDATE() {
         run_script retrieve_domains.sh
 
     elif [[ "$script_to_test" == 'validate' ]]; then
-        # Use input.txt as sample raw files for processing
+        # Prepare sample raw files for processing
         cp input.txt "$RAW"
         cp input.txt "$RAW_LIGHT"
 
@@ -145,19 +145,19 @@ TEST_DEAD_CHECK() {
     # Generate placeholders
     # (split does not work well without enough lines)
     for i in {1..100};do
-        printf "placeholder483%s.com\n" "$i" >> "$RAW"
+        input "placeholder483${i}s.com"
     done
 
     for i in {101..200};do
-        printf "placeholder483%s.com\n" "$i" >> "$DEAD_DOMAINS"
+        input "placeholder483${i}s.com" "$DEAD_DOMAINS"
     done
 
     test_alive_check
     test_dead_check
 
     # Prepare sample raw files for processing
-    mv input.txt "$RAW"
-    mv input.txt "$RAW_LIGHT"
+    cp input.txt "$RAW"
+    cp input.txt "$RAW_LIGHT"
 
     # Run script
     run_script check_dead.sh checkalive
@@ -179,19 +179,19 @@ TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough lines)
     for i in {1..100};do
-        printf "placeholder483%s.com\n" "$i" >> "$RAW"
+        input "placeholder483${i}s.com"
     done
 
     for i in {101..200};do
-        printf "placeholder483%s.com\n" "$i" >> "$PARKED_DOMAINS"
+        input "placeholder483${i}s.com" "$PARKED_DOMAINS"
     done
 
     test_unparked_check
     test_parked_check
 
     # Prepare sample raw files for processing
-    mv input.txt "$RAW"
-    mv input.txt "$RAW_LIGHT"
+    cp input.txt "$RAW"
+    cp input.txt "$RAW_LIGHT"
 
     # Run script
     run_script check_parked.sh checkunparked
