@@ -212,30 +212,30 @@ TEST_PARKED_CHECK() {
 TEST_BUILD() {
     # Test full version
     input build-test.com "$RAW"
-    input test.wildcard.build-test.com "$RAW"
-    input full-version-only.build-test.com "$RAW"
+    input test.wildcard-test.com "$RAW"
+    input full-version-only.com "$RAW"
     # Test light version
     input build-test.com "$RAW_LIGHT"
-    input test.wildcard.build-test.com "$RAW_LIGHT"
+    input test.wildcard-test.com "$RAW_LIGHT"
     # Test removal of redundant entries via wildcard matching
-    input wildcard.build-test.com "$WILDCARDS"
+    input wildcard-test.com "$WILDCARDS"
 
     # Adblock format full version
     output '[Adblock Plus]' "${ADBLOCK}/scams.txt"
     output '||build-test.com^' "${ADBLOCK}/scams.txt"
-    output '||wildcard.build-test.com^' "${ADBLOCK}/scams.txt"
-    output '||full-version-only.build-test.com^' "${ADBLOCK}/scams.txt"
+    output '||wildcard-test.com^' "${ADBLOCK}/scams.txt"
+    output '||full-version-only.com^' "${ADBLOCK}/scams.txt"
     # Adblock format light version
     output '[Adblock Plus]' "${ADBLOCK}/scams_light.txt"
     output '||build-test.com^' "${ADBLOCK}/scams_light.txt"
-    output '||wildcard.build-test.com^' "${ADBLOCK}/scams_light.txt"
+    output '||wildcard-test.com^' "${ADBLOCK}/scams_light.txt"
     # Domains format full version
     output build-test.com "${DOMAINS}/scams.txt"
-    output wildcard.build-test.com "${DOMAINS}/scams.txt"
-    output full-version-only.build-test.com "${DOMAINS}/scams.txt"
+    output wildcard-test.com "${DOMAINS}/scams.txt"
+    output full-version-only.com "${DOMAINS}/scams.txt"
     # Domains format light version
     output build-test.com "${DOMAINS}/scams_light.txt"
-    output wildcard.build-test.com "${DOMAINS}/scams_light.txt"
+    output wildcard-test.com "${DOMAINS}/scams_light.txt"
 
     # Run build script
     run_script build_lists.sh
