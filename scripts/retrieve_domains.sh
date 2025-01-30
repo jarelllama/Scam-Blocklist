@@ -216,8 +216,8 @@ process_source_results() {
     # Format results file
     $FUNCTION --format "$source_results"
 
-    # Remove http(s): and square brackets (this is done here once instead of
-    # multiple times in the source functions)
+    # Convert URLs to domains and remove square brackets (this is done here
+    # once instead of multiple times in the source functions)
     # Note that this still allows invalid entries like entries with subfolders
     # to get through so they can be flagged later on.
     sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$source_results"
@@ -450,7 +450,7 @@ log_domains() {
 
 # Print error message and exit.
 error() {
-    printf "%s\n" "$*" >&2
+    printf "%s\n" "$1" >&2
     exit 1
 }
 
