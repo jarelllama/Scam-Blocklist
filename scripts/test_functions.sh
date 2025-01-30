@@ -266,7 +266,7 @@ TEST_BUILD() {
 # log, source log, review config file, and additions to the manual review file
 test_manual_addition_and_logging() {
     input manual-addition-test.com data/pending/Manual.tmp
-    input invalid-logging-test data/pending/Regex.tmp
+    input invalid-logging-test data/pending/Manual.tmp
     output manual-addition-test.com "$RAW"
     output manual-addition-test.com "$RAW_LIGHT"
     output ,Manual,,1,1,0,0,0,0,,saved "$SOURCE_LOG"
@@ -367,6 +367,7 @@ test_whitelisted_tld_removal() {
     input blacklisted.whitelisted-tld-test.mil "$BLACKLIST"
     input blacklisted.whitelisted-tld-test.mil
 
+    output blacklisted.whitelisted-tld-test.mil "$BLACKLIST"
     output blacklisted.whitelisted-tld-test.mil "$RAW"
     output blacklisted.whitelisted-tld-test.mil "$RAW_LIGHT"
     output whitelisted_tld,whitelisted-tld-test.gov.us "$DOMAIN_LOG"
