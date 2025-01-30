@@ -616,6 +616,7 @@ output() {
     local actual_output_file="$2"
 
     printf "%s\n" "$actual_output_file" >> output_files_to_test.txt
+    sort -u output_files_to_test.txt -o output_files_to_test.txt
 
     touch "$expected_output_file"
 
