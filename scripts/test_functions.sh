@@ -405,14 +405,14 @@ test_invalid_removal() {
     output '' "$ROOT_DOMAINS"
     output invalid-test.xn--903fds "$RAW"
     output invalid-test.xn--903fds "$RAW_LIGHT"
-    output invalid,invalid-test-com,raw "$DOMAIN_LOG"
-    output invalid,100.100.100.1,raw "$DOMAIN_LOG"
-    output invalid,invalid-test.x,raw "$DOMAIN_LOG"
-    output invalid,invalid-test.100,raw "$DOMAIN_LOG"
-    output invalid,invalid-test.1x,raw "$DOMAIN_LOG"
-    output invalid,invalid-test.com/subfolder,raw "$DOMAIN_LOG"
-    output invalid,invalid-test-.com,raw "$DOMAIN_LOG"
-    output invalid,i.com,raw "$DOMAIN_LOG"
+    output invalid,invalid-test-com "$DOMAIN_LOG"
+    output invalid,100.100.100.1 "$DOMAIN_LOG"
+    output invalid,invalid-test.x "$DOMAIN_LOG"
+    output invalid,invalid-test.100 "$DOMAIN_LOG"
+    output invalid,invalid-test.1x "$DOMAIN_LOG"
+    output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
+    output invalid,invalid-test-.com "$DOMAIN_LOG"
+    output invalid,i.com "$DOMAIN_LOG"
 
     # The validate script does not add invalid entries to the review config
     # file
