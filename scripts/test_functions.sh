@@ -193,12 +193,6 @@ TEST_PARKED_CHECK() {
     cp input.txt "$RAW"
     cp input.txt "$RAW_LIGHT"
 
-    # DEBUG
-    cat "$RAW"
-    echo
-    cat "$PARKED_DOMAINS"
-    echo
-
     # Run script
     run_script check_parked.sh checkunparked
     run_script check_parked.sh part1
@@ -210,12 +204,6 @@ TEST_PARKED_CHECK() {
         grep -v placeholder "$file" > temp || true
         mv temp "$file"
     done
-
-    # DEBUG
-    cat "$RAW"
-    echo
-    cat "$PARKED_DOMAINS"
-    echo
 
     check_output
 }
