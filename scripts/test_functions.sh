@@ -526,7 +526,7 @@ check_output() {
     local actual_output_file expected_output_file term_error
 
     while read -r actual_output_file; do
-        expected_output_file="${expected_output_file//\//_}"
+        expected_output_file="${actual_output_file//\//_}"
 
         if [[ ! -f "$actual_output_file" ]]; then
             error "${actual_output_file} is not found."
@@ -608,8 +608,8 @@ input() {
 #   $2: Actual results file path
 output() {
     local expected_output="$1"
-    local expected_output_file="${expected_output_file//\//_}"
     local actual_output_file="$2"
+    local expected_output_file="${actual_output_file//\//_}"
 
     printf "%s\n" "$actual_output_file" >> output_files_to_test.txt
     sort -u output_files_to_test.txt -o output_files_to_test.txt
