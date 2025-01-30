@@ -171,9 +171,6 @@ TEST_DEAD_CHECK() {
         mv temp "$file"
     done
 
-    # DEBUG
-    cat "$DEAD_DOMAINS"
-
     check_output
 }
 
@@ -191,6 +188,11 @@ TEST_PARKED_CHECK() {
 
     test_unparked_check
     test_parked_check
+
+    # DEBUG
+    cat "$RAW"
+    cat "$PARKED_DOMAINS"
+    echo ""
 
     # Prepare sample raw files for processing
     cp input.txt "$RAW"
