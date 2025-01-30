@@ -23,12 +23,20 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
-    # Initialize files
-    find data config -type f -name "*.txt" -exec truncate -s 0 {} \;
-    # Keep headers in the CSV files
-    sed -i '1q' "$DOMAIN_LOG"
-    sed -i '1q' "$SOURCE_LOG"
-    sed -i '1q' "$REVIEW_CONFIG"
+    # Initialize data directory
+    find data -type f -name "*.txt" -exec truncate -s 0 {} \;
+    # Initialize config directory
+    local config
+    for config in "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" "$SOURCE_LOG" \
+        "$WHITELIST" "$WILDCARDS"; do
+        if [[ "$config" != *.csv ]]; then
+            : > "$config"
+            continue
+        fi
+        # Keep headers in the CSV files
+        sed -i '1q' "$config"
+    done
+
     error=false
 
     case "$1" in
@@ -163,11 +171,10 @@ TEST_DEAD_CHECK() {
     run_script check_dead.sh checkalive
     run_script check_dead.sh part1
     run_script check_dead.sh part2
-    # DEBUG
-    cat "$DEAD_DOMAINS"
     run_script check_dead.sh remove
 
     # Remove placeholder lines
+    local file
     for file in "$RAW" "$RAW_LIGHT" "$DEAD_DOMAINS" "$DOMAIN_LOG"; do
         grep -v placeholder "$file" > temp || true
         mv temp "$file"
@@ -202,6 +209,7 @@ TEST_PARKED_CHECK() {
     run_script check_parked.sh remove
 
     # Remove placeholder lines
+    local file
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" "$DOMAIN_LOG"; do
         grep -v placeholder "$file" > temp || true
         mv temp "$file"
