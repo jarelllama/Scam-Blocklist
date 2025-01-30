@@ -211,6 +211,12 @@ TEST_PARKED_CHECK() {
         mv temp "$file"
     done
 
+    # DEBUG
+    cat "$RAW"
+    echo
+    cat "$PARKED_DOMAINS"
+    echo
+
     check_output
 }
 
