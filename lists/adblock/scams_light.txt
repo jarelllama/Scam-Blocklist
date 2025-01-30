@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 01.29.120504.2025
+! Version: 01.30.130405.2025
 ! Expires: 12 hours
-! Last modified: Wed Jan 29 12:05:04 UTC 2025
+! Last modified: Thu Jan 30 13:04:05 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 44632
+! Number of entries: 44633
 !
 ||0.majorlinker.com^
 ||000014.cc^
@@ -12796,6 +12796,7 @@
 ||fastcartsus.com^
 ||fastchipsminerstrade.com^
 ||fastchowdaheadsz.shop^
+||fastconnectionflow.com^
 ||fastdaydeliveries.com^
 ||fastdearyest.shop^
 ||fastdeliveryshippingagency.com^
