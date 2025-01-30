@@ -563,7 +563,7 @@ check_output() {
         else
 
             # If files match, skip to next file to check
-            if ! cmp -s <(sort "$actual_output_file") <(sort "$expected_output_file"); then
+            if cmp -s <(sort "$actual_output_file") <(sort "$expected_output_file"); then
                 continue
             fi
         fi
