@@ -171,6 +171,9 @@ TEST_DEAD_CHECK() {
         mv temp "$file"
     done
 
+    # DEBUG
+    cat "$DEAD_DOMAINS"
+
     check_output
 }
 
