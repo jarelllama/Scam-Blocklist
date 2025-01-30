@@ -523,6 +523,9 @@ run_script() {
 
 # Compare the actual results file with the expected results file.
 check_output() {
+    # DEBUG
+    cat output_files_to_test.txt
+
     local actual_output_file expected_output_file term_error
 
     while read -r actual_output_file; do
