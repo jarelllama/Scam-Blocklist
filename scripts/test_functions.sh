@@ -189,14 +189,15 @@ TEST_PARKED_CHECK() {
     test_unparked_check
     test_parked_check
 
-    # DEBUG
-    cat "$RAW"
-    cat "$PARKED_DOMAINS"
-    echo ""
-
     # Prepare sample raw files for processing
     cp input.txt "$RAW"
     cp input.txt "$RAW_LIGHT"
+
+    # DEBUG
+    cat "$RAW"
+    echo
+    cat "$PARKED_DOMAINS"
+    echo
 
     # Run script
     run_script check_parked.sh checkunparked
