@@ -538,7 +538,7 @@ run_script() {
 # Compare the actual results file with the expected results file.
 check_output() {
     while read -r actual_output_file; do
-        local expected_output_file="${actual_output_file//\//_}"
+        local expected_output_file="${actual_output_file//\//_}.txt"
         local term_error=false
 
         if [[ ! -f "$actual_output_file" ]]; then
@@ -620,7 +620,7 @@ input() {
 output() {
     local expected_output="$1"
     local actual_output_file="$2"
-    local expected_output_file="${actual_output_file//\//_}"
+    local expected_output_file="${actual_output_file//\//_}.txt"
 
     printf "%s\n" "$actual_output_file" >> output_files_to_test.txt
     # Remove duplicates without sorting
