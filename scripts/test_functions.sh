@@ -595,10 +595,7 @@ check_output() {
 #   $1: Entry to add into file
 #   $2: File to add entry into (default is input.txt)
 input() {
-    local input="$1"
-    local input_file="${2:-input.txt}"
-
-    printf "%s\n" "$input" >> "$input_file"
+    printf "%s\n" "$1" >> "${2:-input.txt}"
 }
 
 # Add an entry to an output file which is used as the expected results to
