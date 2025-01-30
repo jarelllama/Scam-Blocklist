@@ -529,7 +529,7 @@ run_script() {
     echo "----------------------------------------------------------------------"
 
     # Return if script had no errors
-    [[ "$exit_status" == 1 ]] && return
+    [[ "$exit_status" == 0 ]] && return
 
     printf "\e[1m[warn] Script returned with an error\e[0m\n\n" >&2
     error=true
