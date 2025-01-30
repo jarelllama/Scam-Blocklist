@@ -163,6 +163,8 @@ TEST_DEAD_CHECK() {
     run_script check_dead.sh checkalive
     run_script check_dead.sh part1
     run_script check_dead.sh part2
+    # DEBUG
+    cat "$DEAD_DOMAINS"
     run_script check_dead.sh remove
 
     # Remove placeholder lines

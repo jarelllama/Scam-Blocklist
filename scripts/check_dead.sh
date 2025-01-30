@@ -61,11 +61,6 @@ check_dead() {
     comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") \
         <(sort "$ROOT_DOMAINS" "$DEAD_DOMAINS") > domains.tmp
 
-    # DEBUG
-    echo
-    cat domains.tmp
-    echo
-
     find_dead_in domains.tmp
 
     # Save dead domains to be removed from the various files later
