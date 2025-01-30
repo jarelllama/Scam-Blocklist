@@ -523,13 +523,10 @@ run_script() {
 
 # Compare the actual results file with the expected results file.
 check_output() {
-    # DEBUG
-    cat output_files_to_test.txt
-
     local actual_output_file expected_output_file term_error
 
     while read -r actual_output_file; do
-        expected_output_file="output_$(basename "$actual_output_file")"
+        expected_output_file="${expected_output_file//\//_}"
 
         if [[ ! -f "$actual_output_file" ]]; then
             error "${actual_output_file} is not found."
@@ -611,8 +608,7 @@ input() {
 #   $2: Actual results file path
 output() {
     local expected_output="$1"
-    local expected_output_file
-    expected_output_file="output_$(basename "$2")"
+    local expected_output_file="${expected_output_file//\//_}"
     local actual_output_file="$2"
 
     printf "%s\n" "$actual_output_file" >> output_files_to_test.txt
