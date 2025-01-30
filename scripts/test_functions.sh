@@ -269,7 +269,7 @@ test_manual_addition_and_logging() {
     input invalid-logging-test data/pending/Manual.tmp
     output manual-addition-test.com "$RAW"
     output manual-addition-test.com "$RAW_LIGHT"
-    output ,Manual,,1,1,0,0,0,0,,saved "$SOURCE_LOG"
+    output ,Manual,,2,1,0,0,0,0,,saved "$SOURCE_LOG"
     output ,saved,manual-addition-test.com,Manual "$DOMAIN_LOG"
     output ,invalid,invalid-logging-test,Manual "$DOMAIN_LOG"
     output Manual,invalid-logging-test,invalid,, "$REVIEW_CONFIG"
