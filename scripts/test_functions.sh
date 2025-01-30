@@ -25,6 +25,7 @@ readonly SOURCE_LOG='config/source_log.csv'
 main() {
     # Initialize data directory
     find data -type f -name "*.txt" -exec truncate -s 0 {} \;
+
     # Initialize config directory
     local config
     for config in "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" "$SOURCE_LOG" \
@@ -57,15 +58,15 @@ main() {
     esac
 }
 
-# Run ShellCheck for all scripts along with other checks for common errors
-# and mistakes.
+# Run ShellCheck for all scripts along with checks for common errors and
+# mistakes.
 SHELLCHECK() {
-    local url scripts files
+    local scripts files
 
     printf "\e[1m[start] ShellCheck\e[0m\n"
 
     # Install ShellCheck
-    url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
+    local url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     curl -sSL "$url" | tar -xJ
 
     # Check that ShellCheck was successfully installed
@@ -152,6 +153,7 @@ TEST_RETRIEVE_VALIDATE() {
 TEST_DEAD_CHECK() {
     # Generate placeholders
     # (split does not work well without enough lines)
+    local i
     for i in {1..100};do
         input "placeholder483${i}s.com"
     done
@@ -187,6 +189,7 @@ TEST_DEAD_CHECK() {
 TEST_PARKED_CHECK() {
     # Generate placeholders
     # (split does not work well without enough lines)
+    local i
     for i in {1..100};do
         input "placeholder483${i}s.com"
     done
@@ -247,7 +250,7 @@ TEST_BUILD() {
     output build-test.com "${DOMAINS}/scams_light.txt"
     output wildcard-test.com "${DOMAINS}/scams_light.txt"
 
-    # Run build script
+    # Run script
     run_script build_lists.sh
 
     # Remove comments from the resulting blocklists for easier checking against
@@ -513,7 +516,7 @@ test_parked_check() {
 #   $1: script to execute
 #   $2: arguments to pass to script
 run_script() {
-    local errored
+    local exit_status=0
 
     echo ""
     echo "----------------------------------------------------------------------"
@@ -521,12 +524,12 @@ run_script() {
     echo "----------------------------------------------------------------------"
 
     # Run script
-    bash "scripts/${1}" "$2" || errored=true
+    bash "scripts/${1}" "$2" || exit_status=1
 
     echo "----------------------------------------------------------------------"
 
     # Return if script had no errors
-    [[ "$errored" != true ]] && return
+    [[ "$exit_status" == 1 ]] && return
 
     printf "\e[1m[warn] Script returned with an error\e[0m\n\n" >&2
     error=true
@@ -534,10 +537,9 @@ run_script() {
 
 # Compare the actual results file with the expected results file.
 check_output() {
-    local actual_output_file expected_output_file term_error
-
     while read -r actual_output_file; do
-        expected_output_file="${actual_output_file//\//_}"
+        local expected_output_file="${actual_output_file//\//_}"
+        local term_error=false
 
         if [[ ! -f "$actual_output_file" ]]; then
             error "${actual_output_file} is not found."
@@ -556,13 +558,14 @@ check_output() {
             done < "$expected_output_file"
 
             # If all terms are matching, skip to next file to check
-            [[ "$term_error" != true ]] && continue
+            [[ "$term_error" == false ]] && continue
+
         else
-            sort "$actual_output_file" -o "$actual_output_file"
-            sort "$expected_output_file" -o "$expected_output_file"
 
             # If files match, skip to next file to check
-            cmp -s "$actual_output_file" "$expected_output_file" && continue
+            if ! cmp -s <(sort "$actual_output_file") <(sort "$expected_output_file"); then
+                continue
+            fi
         fi
 
         {
@@ -620,8 +623,11 @@ output() {
     local expected_output_file="${actual_output_file//\//_}"
 
     printf "%s\n" "$actual_output_file" >> output_files_to_test.txt
-    sort -u output_files_to_test.txt -o output_files_to_test.txt
+    # Remove duplicates without sorting
+    mawk '!seen[$0]++' output_files_to_test.txt > temp
+    mv temp output_files_to_test.txt
 
+    # Always ensure the expected results file is created
     touch "$expected_output_file"
 
     [[ -z "$expected_output" ]] && return
