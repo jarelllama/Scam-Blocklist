@@ -1,96 +1,96 @@
 source,entry,reason,blacklist (y/N),whitelist (y/N)
-DGA Detector,bhzyxy.edu.cn,whitelisted_tld,,
-DGA Detector,cvgbmt.edu.vn,whitelisted_tld,,
-DGA Detector,gxjmxy.edu.cn,whitelisted_tld,,
-Emerging Threats,amos-malware.ru,toplist,,
-Emerging Threats,statswp.org,toplist,,
-Wildcat Cyber Patrol,1wbapm.life,toplist,,
-Wildcat Cyber Patrol,1wwnf.com,toplist,,
-Wildcat Cyber Patrol,news-xtajahu.com,toplist,,
-Wildcat Cyber Patrol,prize-stash.com,toplist,,
-Wildcat Cyber Patrol,theamericansweepstakes.com,toplist,,
-Gridinsoft,american.edu.co,whitelisted_tld,,
-Gridinsoft,ceipa.edu.co,whitelisted_tld,,
-Gridinsoft,dpe.gov.bd,whitelisted_tld,,
-Gridinsoft,ens36.sfe.infd.edu.ar,whitelisted_tld,,
-Gridinsoft,miespe.espe.edu.ec,whitelisted_tld,,
-Gridinsoft,psschool.edu.bd,whitelisted_tld,,
-Gridinsoft,upb.edu.co,whitelisted_tld,,
-Gridinsoft,allmy.cam,toplist,,
-Gridinsoft,bodymove.gr,toplist,,
-Gridinsoft,ceaondlet.com,toplist,,
-Gridinsoft,clearnview.com,toplist,,
-Gridinsoft,clksite.com,toplist,,
-Gridinsoft,cpalead.com,toplist,,
-Gridinsoft,crushon.ai,toplist,,
-Gridinsoft,cuevana3.ch,toplist,,
-Gridinsoft,gamingbeasts.com,toplist,,
-Gridinsoft,gnulahd.nu,toplist,,
-Gridinsoft,grabpoints.com,toplist,,
-Gridinsoft,hondapartshouse.com,toplist,,
-Gridinsoft,href.li,toplist,,
-Gridinsoft,indigocard.com,toplist,,
-Gridinsoft,kcex.com,toplist,,
-Gridinsoft,labs24.nl,toplist,,
-Gridinsoft,lbank.com,toplist,,
-Gridinsoft,lmy.de,toplist,,
-Gridinsoft,payproglobal.com,toplist,,
-Gridinsoft,pionex.com,toplist,,
-Gridinsoft,selwix.net,toplist,,
-Gridinsoft,shopr.tv,toplist,,
-Gridinsoft,teneo.pro,toplist,,
-Gridinsoft,toggle.pro,toplist,,
-Gridinsoft,traiex.com,toplist,,
-Gridinsoft,ukflirtzone.com,toplist,,
-Gridinsoft,unblocked.watch,toplist,,
-Gridinsoft,usapassportonline.org,toplist,,
-Gridinsoft,vashiser.com,toplist,,
-Gridinsoft,viagogo.com,toplist,,
-Gridinsoft,xtrade.com,toplist,,
-Jeroengui,hamamozu.gov.tr,whitelisted_tld,,
-Jeroengui,milestonecollege.edu.bd,whitelisted_tld,,
-Jeroengui,taxzonemymensingh.gov.bd,whitelisted_tld,,
-Jeroengui,abmining.pro,toplist,,
-Jeroengui,ap-store.ru,toplist,,
-Jeroengui,azislam.com,toplist,,
-Regex,evisa.gov.vn,whitelisted_tld,,
-Regex,medicalbillrights.gov,whitelisted_tld,,
-Regex,usbankruptcy.gov,whitelisted_tld,,
-SafelyWeb,98kjackpot.com,toplist,,
-SafelyWeb,dreamscapea.com,toplist,,
-SafelyWeb,edly.io,toplist,,
-SafelyWeb,forumsexyprimecom.com,toplist,,
-SafelyWeb,homeunix.org,toplist,,
-SafelyWeb,indosange.rest,toplist,,
-SafelyWeb,lyzr.ai,toplist,,
-SafelyWeb,musiceti.com,toplist,,
-SafelyWeb,ohmycams.com,toplist,,
-SafelyWeb,proxyparts.com,toplist,,
-SafelyWeb,rendeljkinait.hu,toplist,,
-SafelyWeb,sbcr.jp,toplist,,
-SafelyWeb,shopioffer.com,toplist,,
-SafelyWeb,studentaccess.com,toplist,,
-SafelyWeb,v2i5.com,toplist,,
-Google Search,malwaretips.com,toplist,,
-Google Search,youtube.com,toplist,,
-raw,0gomovies.bz,toplist,,
-raw,b9f26bbf80.com,toplist,,
-raw,bubstugkaatc.com,toplist,,
-raw,cosycustume.com,toplist,,
-raw,democracyy.shop,toplist,,
-raw,googleuseries2.com,toplist,,
-raw,keboorsootch.net,toplist,,
-raw,laronnistore.com,toplist,,
-raw,lifeofrileytavern.com,toplist,,
-raw,llbeansaless.com,toplist,,
-raw,lucky888.top,toplist,,
-raw,majesticbank.is,toplist,,
-raw,newstargetingads.top,toplist,,
-raw,placeofgame.com,toplist,,
-raw,remittix.io,toplist,,
-raw,roblox.web.pk,toplist,,
-raw,search-thrill.com,toplist,,
-raw,tiktok.net,toplist,,
-raw,totoloveet.best,toplist,,
-raw,vulkan-yandexmoney.site,toplist,,
-raw,whatsappcnweb.com,toplist,,
+DGA Detector,bhzyxy.edu.cn,whitelisted_tld,y,
+DGA Detector,cvgbmt.edu.vn,whitelisted_tld,y,
+DGA Detector,gxjmxy.edu.cn,whitelisted_tld,y,
+Emerging Threats,amos-malware.ru,toplist,y,
+Emerging Threats,statswp.org,toplist,y,
+Wildcat Cyber Patrol,1wbapm.life,toplist,y,
+Wildcat Cyber Patrol,1wwnf.com,toplist,y,
+Wildcat Cyber Patrol,news-xtajahu.com,toplist,y,
+Wildcat Cyber Patrol,prize-stash.com,toplist,y,
+Wildcat Cyber Patrol,theamericansweepstakes.com,toplist,y,
+Gridinsoft,american.edu.co,whitelisted_tld,y,
+Gridinsoft,ceipa.edu.co,whitelisted_tld,,y
+Gridinsoft,dpe.gov.bd,whitelisted_tld,,y
+Gridinsoft,ens36.sfe.infd.edu.ar,whitelisted_tld,,y
+Gridinsoft,miespe.espe.edu.ec,whitelisted_tld,,y
+Gridinsoft,psschool.edu.bd,whitelisted_tld,,y
+Gridinsoft,upb.edu.co,whitelisted_tld,,y
+Gridinsoft,allmy.cam,toplist,,y
+Gridinsoft,bodymove.gr,toplist,,y
+Gridinsoft,ceaondlet.com,toplist,y,
+Gridinsoft,clearnview.com,toplist,y,
+Gridinsoft,clksite.com,toplist,y,
+Gridinsoft,cpalead.com,toplist,y,
+Gridinsoft,crushon.ai,toplist,,y
+Gridinsoft,cuevana3.ch,toplist,y,
+Gridinsoft,gamingbeasts.com,toplist,y,
+Gridinsoft,gnulahd.nu,toplist,,y
+Gridinsoft,grabpoints.com,toplist,,y
+Gridinsoft,hondapartshouse.com,toplist,y,
+Gridinsoft,href.li,toplist,,y
+Gridinsoft,indigocard.com,toplist,y,
+Gridinsoft,kcex.com,toplist,y,
+Gridinsoft,labs24.nl,toplist,y,
+Gridinsoft,lbank.com,toplist,y,
+Gridinsoft,lmy.de,toplist,,y
+Gridinsoft,payproglobal.com,toplist,,y
+Gridinsoft,pionex.com,toplist,,y
+Gridinsoft,selwix.net,toplist,,y
+Gridinsoft,shopr.tv,toplist,,y
+Gridinsoft,teneo.pro,toplist,,y
+Gridinsoft,toggle.pro,toplist,,y
+Gridinsoft,traiex.com,toplist,y,
+Gridinsoft,ukflirtzone.com,toplist,y,
+Gridinsoft,unblocked.watch,toplist,y,
+Gridinsoft,usapassportonline.org,toplist,y,
+Gridinsoft,vashiser.com,toplist,y,
+Gridinsoft,viagogo.com,toplist,,y
+Gridinsoft,xtrade.com,toplist,,y
+Jeroengui,hamamozu.gov.tr,whitelisted_tld,,y
+Jeroengui,milestonecollege.edu.bd,whitelisted_tld,,y
+Jeroengui,taxzonemymensingh.gov.bd,whitelisted_tld,y,
+Jeroengui,abmining.pro,toplist,y,
+Jeroengui,ap-store.ru,toplist,y,
+Jeroengui,azislam.com,toplist,,y
+Regex,evisa.gov.vn,whitelisted_tld,,y
+Regex,medicalbillrights.gov,whitelisted_tld,,y
+Regex,usbankruptcy.gov,whitelisted_tld,,y
+SafelyWeb,98kjackpot.com,toplist,y,
+SafelyWeb,dreamscapea.com,toplist,y,
+SafelyWeb,edly.io,toplist,,y
+SafelyWeb,forumsexyprimecom.com,toplist,,y
+SafelyWeb,homeunix.org,toplist,,y
+SafelyWeb,indosange.rest,toplist,,y
+SafelyWeb,lyzr.ai,toplist,,y
+SafelyWeb,musiceti.com,toplist,,y
+SafelyWeb,ohmycams.com,toplist,,y
+SafelyWeb,proxyparts.com,toplist,,y
+SafelyWeb,rendeljkinait.hu,toplist,,y
+SafelyWeb,sbcr.jp,toplist,,y
+SafelyWeb,shopioffer.com,toplist,y,
+SafelyWeb,studentaccess.com,toplist,,y
+SafelyWeb,v2i5.com,toplist,y,
+Google Search,malwaretips.com,toplist,,y
+Google Search,youtube.com,toplist,,y
+raw,0gomovies.bz,toplist,,y
+raw,b9f26bbf80.com,toplist,y,
+raw,bubstugkaatc.com,toplist,y,
+raw,cosycustume.com,toplist,y,
+raw,democracyy.shop,toplist,y,
+raw,googleuseries2.com,toplist,y,
+raw,keboorsootch.net,toplist,y,
+raw,laronnistore.com,toplist,y,
+raw,lifeofrileytavern.com,toplist,y,
+raw,llbeansaless.com,toplist,y,
+raw,lucky888.top,toplist,y,
+raw,majesticbank.is,toplist,y,
+raw,newstargetingads.top,toplist,y,
+raw,placeofgame.com,toplist,y,
+raw,remittix.io,toplist,y,
+raw,roblox.web.pk,toplist,y,
+raw,search-thrill.com,toplist,y,
+raw,tiktok.net,toplist,y,
+raw,totoloveet.best,toplist,y,
+raw,vulkan-yandexmoney.site,toplist,y,
+raw,whatsappcnweb.com,toplist,y,
