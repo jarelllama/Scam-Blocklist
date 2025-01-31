@@ -598,7 +598,7 @@ source_cybersquatting() {
     # alternate TLDs.
     # The top 500 is a good number to avoid invalid TLDs.
     tlds="$(mawk -F '.' '{print $NF}' nrd.tmp | sort | uniq -c \
-        | sort -nr | head -n 250 | mawk '{print $2}')"
+        | sort -nr | mawk '{print $2}' | head -n 250)"
 
     # Loop through phishing targets
     while read -r domain; do
