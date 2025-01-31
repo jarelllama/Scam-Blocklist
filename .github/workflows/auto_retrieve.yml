@@ -28,14 +28,8 @@ jobs:
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
-  validate:
-    needs: [test-functions, retrieve-domains]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
-    uses: ./.github/workflows/validate_domains.yml
-    secrets: inherit
-
   check-dead:
-    needs: [test-functions, validate]
+    needs: [test-functions, retrieve-domains]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_dead.yml
 
@@ -43,6 +37,13 @@ jobs:
     needs: [test-functions, check-dead]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/check_unparked.yml
+
+  # Run validation after dead/unparked checks to process subdomains
+  validate:
+    needs: [test-functions, check-unparked]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    uses: ./.github/workflows/validate_domains.yml
+    secrets: inherit
 
   build:
     needs: [test-functions, check-unparked]
