@@ -33,47 +33,47 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 374161
-Light version: 45422
+Total domains: 373915
+Light version: 45205
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    3 |       3 |      0 % |      36 % | 165 Anti-fraud
-   32 |      32 |      1 % |      14 % | Artists Against 419
-   44 |      44 |      1 % |       1 % | Cybersquatting
-  352 |     352 |     11 % |       0 % | DGA Detector
-    3 |       3 |      0 % |      15 % | Emerging Threats
-   18 |      18 |      0 % |      22 % | FakeWebshopListHUN
-   32 |      32 |      1 % |       2 % | Google Search
-  110 |     110 |      3 % |      16 % | Gridinsoft
-  231 |     231 |      7 % |       0 % | Jeroengui (NRDs)
- 1714 |    1714 |     56 % |       8 % | Jeroengui
-    1 |       1 |      0 % |      10 % | PCrisk
-    0 |       0 |      0 % |       0 % | PhishStats (NRDs)
-    0 |       0 |      0 % |      28 % | PhishStats
-    2 |       2 |      0 % |      15 % | PuppyScams.org
-  507 |     507 |     16 % |       1 % | Regex Matching
-  212 |     212 |      6 % |       3 % | SafelyWeb
-    2 |       2 |      0 % |      35 % | Scam Directory
-    0 |       0 |      0 % |      32 % | ScamAdviser
-    0 |       0 |      0 % |       5 % | StopGunScams.com
-    0 |       0 |      0 % |      11 % | Unit42
-    8 |       8 |      0 % |      10 % | Verbraucherzentrale Hamburg
-    0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
-    5 |       5 |      0 % |      15 % | Wildcat Cyber Patrol
-    1 |       1 |      0 % |       8 % | WiperSoft
-    8 |       8 |      0 % |      50 % | Česká Obchodní Inspekce
- 3054 |    3054 |    100 % |      21 % | All sources
+    - |       3 |      0 % |      36 % | 165 Anti-fraud
+    - |      32 |      1 % |      14 % | Artists Against 419
+    - |      44 |      1 % |       1 % | Cybersquatting
+    - |     352 |     11 % |       0 % | DGA Detector
+    - |       3 |      0 % |      15 % | Emerging Threats
+    - |      18 |      0 % |      22 % | FakeWebshopListHUN
+    - |      32 |      1 % |       2 % | Google Search
+    - |     110 |      3 % |      16 % | Gridinsoft
+    - |     231 |      7 % |       0 % | Jeroengui (NRDs)
+    - |    1714 |     56 % |       8 % | Jeroengui
+    - |       1 |      0 % |      10 % | PCrisk
+    - |       0 |      0 % |       0 % | PhishStats (NRDs)
+    - |       0 |      0 % |      28 % | PhishStats
+    - |       2 |      0 % |      15 % | PuppyScams.org
+    - |     507 |     16 % |       1 % | Regex Matching
+    - |     212 |      6 % |       3 % | SafelyWeb
+    - |       2 |      0 % |      35 % | Scam Directory
+    - |       0 |      0 % |      32 % | ScamAdviser
+    - |       0 |      0 % |       5 % | StopGunScams.com
+    - |       0 |      0 % |      11 % | Unit42
+    - |       8 |      0 % |      10 % | Verbraucherzentrale Hamburg
+    - |       0 |      0 % |      31 % | ViriBack C2 Tracker
+    - |       5 |      0 % |      15 % | Wildcat Cyber Patrol
+    - |       1 |      0 % |       8 % | WiperSoft
+    - |       8 |      0 % |      50 % | Česká Obchodní Inspekce
+    - |    3054 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 1942
-Dead domains removed this month: 1942
-Resurrected domains added today: 1466
+Dead domains removed today: 3248
+Dead domains removed this month: 5190
+Resurrected domains added today: 1570
 
 Parked domains removed this month: 0
-Unparked domains added today: 163
+Unparked domains added today: 1368
 ```
 
 <details>
@@ -129,7 +129,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13289
+Total domains: 13296
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
