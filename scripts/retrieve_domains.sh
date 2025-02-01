@@ -505,17 +505,16 @@ source_google_search() {
     command -v csvgrep > /dev/null || pip install -q csvkit
 
     # Loop through search terms
-    while read -r search_term; do
+    for search_term in $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" \
+        | csvcut -c 1 | tail -n +2); do
+
         # Stop if rate limited
         if [[ "$rate_limited" == true ]]; then
             printf "\n\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
             return
         fi
         search_google "$search_term"
-    done \
-        <<< "$(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" \
-        | csvcut -c 1 | tail -n +2)"
-
+    done
 }
 
 search_google() {
@@ -579,7 +578,7 @@ source_cybersquatting() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    local tlds row count runs results
+    local domain tlds tld row count runs results
 
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
@@ -593,15 +592,14 @@ source_cybersquatting() {
     # sudo is needed for gem
     sudo gem install --silent json colorize async async-dns async-http
 
-    # Get the majority of TLDs from the NRD feed for dnstwist.
+    # Get TLDs from the NRD feed for dnstwist.
     # This is not needed for URLCrazy as that already checks for
     # alternate TLDs.
-    # The top 500 is a good number to avoid invalid TLDs.
     tlds="$(mawk -F '.' '{print $NF}' nrd.tmp | sort | uniq -c \
-        | sort -nr | mawk '{print $2}' | head -n 250)"
+        | sort -nr | mawk '{print $2}')"
 
     # Loop through phishing targets
-    while read -r domain; do
+    for domain in $(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS"); do
         # Get info of the target domain
         row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $1","$2","$3}' "$PHISHING_TARGETS")"
@@ -614,9 +612,9 @@ source_cybersquatting() {
         # Append TLDs to dnstwist results
         # Note the dnstwist --tld argument only replaces the TLDs of the
         # original domain.
-        while read -r tld; do
+        for tld in $tlds; do
             printf "%s\n" "$results" | sed "s/\.com/.${tld}/" >> results.tmp
-        done <<< "$tlds"
+        done
 
         # Run URLCrazy (bash does not work)
         ./urlcrazy-master/urlcrazy -r "${domain}.com" -f CSV \
@@ -640,8 +638,7 @@ source_cybersquatting() {
 
         # Reset results file for the next target domain
         rm results.tmp
-    done \
-        <<< "$(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS")"
+    done
 
     rm -r urlcrazy*
 }
@@ -690,10 +687,10 @@ source_regex() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    local row count runs pattern results
+    local domain row count runs pattern results
 
     # Loop through phishing targets
-    while read -r domain; do
+    for domain in $(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS"); do
         # Get info of the target domain
         row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $5","$6","$7}' "$PHISHING_TARGETS")"
@@ -721,8 +718,7 @@ source_regex() {
         (( runs++ ))
         sed -i "/${domain}/s/${row}/${pattern},${count},${runs}/" \
             "$PHISHING_TARGETS"
-    done \
-        <<< "$(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS")"
+    done
 }
 
 source_165antifraud() {
