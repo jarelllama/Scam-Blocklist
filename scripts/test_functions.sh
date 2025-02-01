@@ -61,7 +61,7 @@ main() {
 # Run ShellCheck for all scripts along with checks for common errors and
 # mistakes.
 SHELLCHECK() {
-    local scripts files
+    local scripts script files
 
     printf "\e[1m[start] ShellCheck\e[0m\n"
 
@@ -76,9 +76,9 @@ SHELLCHECK() {
     scripts=$(find . -type f -name "*.sh")
 
     # Run ShellCheck for each script
-    while read -r script; do
+    for script in $scripts; do
         shellcheck-stable/shellcheck "$script" || error=true
-    done <<< "$scripts"
+    done
 
     # Check for carriage return characters
     if files="$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)"; then
