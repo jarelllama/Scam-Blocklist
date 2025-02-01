@@ -33,47 +33,47 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 371725
-Light version: 45182
+Total domains: 374150
+Light version: 45422
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    3 |     934 |      0 % |      36 % | 165 Anti-fraud
-   49 |     498 |      0 % |      14 % | Artists Against 419
-   57 |    1835 |      0 % |       1 % | Cybersquatting
-  885 |   69588 |     25 % |       0 % | DGA Detector
-   27 |     387 |      0 % |      15 % | Emerging Threats
-   11 |     875 |      0 % |      22 % | FakeWebshopListHUN
-   94 |    1937 |      0 % |       2 % | Google Search
-  259 |    4271 |      1 % |      16 % | Gridinsoft
-  664 |   25723 |      9 % |       0 % | Jeroengui (NRDs)
- 4266 |  143735 |     53 % |       8 % | Jeroengui
-    3 |     104 |      0 % |      11 % | PCrisk
-    0 |    1263 |      0 % |       0 % | PhishStats (NRDs)
-   13 |    9806 |      3 % |      28 % | PhishStats
-   21 |     150 |      0 % |      15 % | PuppyScams.org
- 1141 |   24478 |      9 % |       1 % | Regex Matching
-  461 |    5820 |      2 % |       3 % | SafelyWeb
-   60 |    3878 |      1 % |      35 % | Scam Directory
-    2 |      19 |      0 % |      32 % | ScamAdviser
-    5 |      66 |      0 % |       5 % | StopGunScams.com
-    0 |      13 |      0 % |      10 % | Unit42
-    0 |      64 |      0 % |      10 % | Verbraucherzentrale Hamburg
-    0 |       2 |      0 % |      31 % | ViriBack C2 Tracker
-   19 |     510 |      0 % |      14 % | Wildcat Cyber Patrol
-    4 |      12 |      0 % |       8 % | WiperSoft
-    6 |      51 |      0 % |      50 % | Česká Obchodní Inspekce
- 7386 |  269486 |    100 % |      21 % | All sources
+    3 |       3 |      0 % |      36 % | 165 Anti-fraud
+   32 |      32 |      1 % |      14 % | Artists Against 419
+   44 |      44 |      1 % |       1 % | Cybersquatting
+  352 |     352 |     11 % |       0 % | DGA Detector
+    3 |       3 |      0 % |      15 % | Emerging Threats
+   18 |      18 |      0 % |      22 % | FakeWebshopListHUN
+   32 |      32 |      1 % |       2 % | Google Search
+  100 |     100 |      3 % |      16 % | Gridinsoft
+  231 |     231 |      7 % |       0 % | Jeroengui (NRDs)
+ 1711 |    1711 |     56 % |       8 % | Jeroengui
+    1 |       1 |      0 % |      10 % | PCrisk
+    0 |       0 |      0 % |       0 % | PhishStats (NRDs)
+    0 |       0 |      0 % |      28 % | PhishStats
+    2 |       2 |      0 % |      15 % | PuppyScams.org
+  507 |     507 |     16 % |       1 % | Regex Matching
+  205 |     205 |      6 % |       3 % | SafelyWeb
+    2 |       2 |      0 % |      35 % | Scam Directory
+    0 |       0 |      0 % |      32 % | ScamAdviser
+    0 |       0 |      0 % |       5 % | StopGunScams.com
+    0 |       0 |      0 % |      11 % | Unit42
+    8 |       8 |      0 % |      10 % | Verbraucherzentrale Hamburg
+    0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
+    3 |       3 |      0 % |      15 % | Wildcat Cyber Patrol
+    1 |       1 |      0 % |       8 % | WiperSoft
+    8 |       8 |      0 % |      50 % | Česká Obchodní Inspekce
+ 3032 |    3032 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 5896
-Dead domains removed this month: 83916
-Resurrected domains added today: 3077
+Dead domains removed today: 1942
+Dead domains removed this month: 1942
+Resurrected domains added today: 1466
 
-Parked domains removed this month: 17449
-Unparked domains added today: 908
+Parked domains removed this month: 0
+Unparked domains added today: 163
 ```
 
 <details>
@@ -129,7 +129,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13214
+Total domains: 13289
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
