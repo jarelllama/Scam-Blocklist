@@ -231,6 +231,11 @@ process_source_results() {
     # Count number of unfiltered domains
     raw_count="$(wc -l < "$source_results")"
 
+    # Error in case a source wrongly retrieves too many results.
+    if (( raw_count > 10000 )) then
+        error 'Source is unusually large.'
+    fi
+
     # Remove known dead domains (dead domains file is not sorted and includes
     # subdomains)
     dead_count="$(filter \
