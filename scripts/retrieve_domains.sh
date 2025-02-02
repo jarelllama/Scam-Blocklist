@@ -784,24 +784,23 @@ source_fakewebshoplisthun() {
 }
 
 source_jeroengui() {
-    # Last checked: 03/01/25
+    # Last checked: 02/02/25
     source_name='Jeroengui'
     exclude_from_light=true  # Too many domains
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    source_url='https://file.jeroengui.be/phishing/last_week.txt'
-    # Get URLs with no subdirectories (too many link shorteners)
-    curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)" \
-        > source_results.tmp
+    {
+        source_url='https://file.jeroengui.be/phishing/last_week.txt'
+        # Get URLs with no subdirectories (too many link shorteners)
+        curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)"
 
-    source_url='https://file.jeroengui.be/malware/last_week.txt'
-    curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}" \
-        >> source_results.tmp
+        source_url='https://file.jeroengui.be/malware/last_week.txt'
+        curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}"
 
-    source_url='https://file.jeroengui.be/scam/last_week.txt'
-    curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}" \
-        >> source_results.tmp
+        source_url='https://file.jeroengui.be/scam/last_week.txt'
+        curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}"
+    } > source_results.tmp
 
     # Get matching NRDs for the light version. Unicode is only processed by the
     # full version.
