@@ -320,7 +320,6 @@ test_known_parked_removal() {
 
 # Test removal of common subdomains
 test_subdomain_removal() {
-    local subdomain
     while read -r subdomain; do
         subdomain="${subdomain}.subdomain-test.com"
         input "$subdomain"

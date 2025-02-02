@@ -84,7 +84,6 @@ validate() {
     done
 
     # Strip away subdomains
-    local subdomains
     while read -r subdomain; do  # Loop through common subdomains
         subdomains="$(mawk "/^${subdomain}\./" "$RAW")"
 

@@ -507,8 +507,8 @@ source_google_search() {
     command -v csvgrep > /dev/null || pip install -q csvkit
 
     # Loop through search terms
-    for search_term in $(csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" \
-        | csvcut -c 1 | tail -n +2); do
+    csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 | tail -n +2 \
+        | while read -r search_term; do
 
         # Stop if rate limited
         if [[ "$rate_limited" == true ]]; then
@@ -580,7 +580,7 @@ source_cybersquatting() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    local domain tlds tld row count runs results
+    local tlds row count runs results
 
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
@@ -601,7 +601,9 @@ source_cybersquatting() {
         | sort -nr | mawk '{print $2}')"
 
     # Loop through phishing targets
-    for domain in $(mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS"); do
+    mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS" \
+        | while read -r domain; do
+
         # Get info of the target domain
         row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $1","$2","$3}' "$PHISHING_TARGETS")"
@@ -614,9 +616,9 @@ source_cybersquatting() {
         # Append TLDs to dnstwist results
         # Note the dnstwist --tld argument only replaces the TLDs of the
         # original domain.
-        for tld in $tlds; do
+        while read -r tld; do
             printf "%s\n" "$results" | sed "s/\.com/.${tld}/" >> results.tmp
-        done
+        done <<< "$tlds"
 
         # Run URLCrazy (bash does not work)
         ./urlcrazy-master/urlcrazy -r "${domain}.com" -f CSV \
@@ -689,10 +691,12 @@ source_regex() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    local domain row count runs pattern results
+    local row count runs pattern results
 
     # Loop through phishing targets
-    for domain in $(mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS"); do
+    mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS" \
+        | while read -r domain; do
+
         # Get info of the target domain
         row="$(mawk -F ',' -v domain="$domain" \
             '$1 == domain {printf $5","$6","$7}' "$PHISHING_TARGETS")"

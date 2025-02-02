@@ -54,7 +54,7 @@ convert_unicode() {
     # Install idn2 (requires sudo. -qq doesn not work here)
     command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
 
-    # Process the file, handling entries that may cause idn2 to error
+    # Process the file, handling entries that may cause idn2 to error:
     # https://www.rfc-editor.org/rfc/rfc5891#section-4.2.3.1. If idn2 does
     # error, exit 1.
     {
