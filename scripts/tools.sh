@@ -168,19 +168,19 @@ set -e
 
 case "$1" in
     --format)
-        format_file "$*"
+        format_file "$2"
         ;;
     --format-all)
         format_all
         ;;
     --convert-unicode)
-        convert_unicode "$*"
+        convert_unicode "$2"
         ;;
     --log-domains)
-        log_domains "$*"
+        log_domains "$2" "$3" "$4"
         ;;
     --prune-lines)
-        prune_lines "$*"
+        prune_lines "$2" "$3"
         ;;
     --download-toplist)
         download_toplist
@@ -189,7 +189,7 @@ case "$1" in
         download_nrd_feed
         ;;
     --send-telegram)
-        send_telegram "$*"
+        send_telegram "$2"
         ;;
     *)
         printf "\n\e[1;31mInvalid argument: %s\e[0m\n\n" "$*" >&2
