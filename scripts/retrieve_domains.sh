@@ -62,8 +62,8 @@ main() {
         mkdir -p data/pending
     fi
 
-    # Install idn2
-    command -v idn2 > /dev/null || apt-get install -qq idn2
+    # Install idn2 (requires sudo)
+    command -v idn2 > /dev/null || sudo apt-get install -qq idn2
 
     # Download toplist
     $FUNCTION --download-toplist
