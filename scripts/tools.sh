@@ -58,8 +58,8 @@ convert_unicode() {
     # https://www.rfc-editor.org/rfc/rfc5891#section-4.2.3.1. If idn2 does
     # error, exit 1.
     {
-        grep -vE '\-\.|..--' "$1" | idn2 || exit 1
-        grep -E '\-\.|..--' "$1"
+        grep -vE '\-\.|^..--' "$1" | idn2 || exit 1
+        grep -E '\-\.|^..--' "$1"
     } | sort -u -o "$1"
 }
 
