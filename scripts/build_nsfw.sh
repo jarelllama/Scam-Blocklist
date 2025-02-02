@@ -34,6 +34,8 @@ readonly -a TERMS=(
     escorts
     rule34
     hookers
+    blowjob
+    jizz
 )
 
 # Whitelisted domains
