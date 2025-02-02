@@ -15,9 +15,6 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 main() {
-    # Install idn2 (requires sudo. -qq doesn not work here)
-    command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
-
     # Download toplist
     $FUNCTION --download-toplist
 
@@ -83,9 +80,7 @@ validate() {
     # Convert Unicode to Punycode in raw file and raw light file
     local file
     for file in "$RAW" "$RAW_LIGHT"; do
-        idn2 < "$file" > temp || exit 1
-        mv temp "$file"
-        sort -u "$file" -o "$file"
+        $FUNCTION --convert-unicode "$file"
     done
 
     # Strip away subdomains

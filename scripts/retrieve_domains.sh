@@ -62,7 +62,8 @@ main() {
         mkdir -p data/pending
     fi
 
-    # Install idn2 (requires sudo. -qq doesn not work here)
+    # Install idn2 here instead of in $FUNCTION to not bias source processing
+    # time.
     command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
 
     # Download toplist
@@ -223,8 +224,7 @@ process_source_results() {
     sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$source_results"
 
     # Convert Unicode to Punycode
-    idn2 < "$source_results" > temp || exit 1
-    mv temp "$source_results"
+    $FUNCTION --convert-unicode "$source_results"
 
     sort -u "$source_results" -o "$source_results"
 
@@ -441,6 +441,7 @@ ${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 }
 
 # Call a shell wrapper to to log domain processing events into the domain log.
+# Input:
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 log_domains() {
@@ -448,6 +449,8 @@ log_domains() {
 }
 
 # Print error message and exit.
+# Input:
+#   $1: error message to print
 error() {
     printf "%s\n" "$1" >&2
     exit 1

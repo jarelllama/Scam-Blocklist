@@ -3,6 +3,7 @@
 # tools.sh is a shell wrapper that stores commonly used functions.
 
 # Function 'format_file' standardizes the format of the given file.
+# Input:
 #   $1: file to be formatted
 format_file() {
     local file="$1"
@@ -46,7 +47,24 @@ format_all() {
     done
 }
 
+# Function 'convert_unicode' converts Unicode to Punycode.
+# Input:
+#   $1: file to process
+convert_unicode() {
+    # Install idn2 (requires sudo. -qq doesn not work here)
+    command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
+
+    # Process the file, handling entries that may cause idn2 to error
+    # https://www.rfc-editor.org/rfc/rfc5891#section-4.2.3.1. If idn2 does
+    # error, exit 1.
+    {
+        grep -vE '\-\.|..--' "$1" | idn2 || exit 1
+        grep -E '\-\.|..--' "$1"
+    } | sort -u -o "$1"
+}
+
 # Function 'log_domains' logs domain processing events into the domain log.
+# Input:
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
@@ -73,6 +91,7 @@ log_domains() {
 
 # Function 'prune_lines' prunes lines in the given file to keep its number of
 # lines within the given threshold.
+# Input:
 #   $1: file to be pruned
 #   $2: maximum number of lines to keep
 prune_lines() {
@@ -131,6 +150,7 @@ download_nrd_feed() {
 
 # Function 'send_telegram' sends a Telegram notification with the given
 # message.
+# Input:
 #   $TELEGRAM_CHAT_ID:   Telegram user Chat ID
 #   $TELEGRAM_BOT_TOKEN: Telegram Bot Token
 #   $1: message body
@@ -148,16 +168,19 @@ set -e
 
 case "$1" in
     --format)
-        format_file "$2"
+        format_file "$*"
         ;;
     --format-all)
         format_all
         ;;
+    --convert-unicode)
+        convert_unicode "$*"
+        ;;
     --log-domains)
-        log_domains "$2" "$3" "$4"
+        log_domains "$*"
         ;;
     --prune-lines)
-        prune_lines "$2" "$3"
+        prune_lines "$*"
         ;;
     --download-toplist)
         download_toplist
@@ -166,10 +189,10 @@ case "$1" in
         download_nrd_feed
         ;;
     --send-telegram)
-        send_telegram "$2"
+        send_telegram "$*"
         ;;
     *)
-        printf "\n\e[1;31mInvalid argument: %s\e[0m\n\n" "$1" >&2
+        printf "\n\e[1;31mInvalid argument: %s\e[0m\n\n" "$*" >&2
         exit 1
         ;;
 esac

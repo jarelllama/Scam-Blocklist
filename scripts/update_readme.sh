@@ -171,6 +171,7 @@ readonly TODAY THIS_MONTH
 
 # Function 'print_stats' is an echo wrapper that returns the formatted
 # statistics for the given source.
+# Input:
 #   $1: source to process (default is all sources)
 print_stats() {
     local this_month total_this_month
@@ -188,6 +189,7 @@ print_stats() {
 
 # Function 'sum' is an echo wrapper that returns the total sum of filtered
 # domains retrieved by the given source for that timeframe.
+# Input:
 #   $1: timeframe to process
 #   $2: source to process (default is all sources)
 sum() {
@@ -201,6 +203,7 @@ sum() {
 
 # Function 'sum_excluded' is an echo wrapper that returns the percentage of
 # excluded domains out of the raw count retrieved by the given source.
+# Input:
 #   $1: source to process (default is all sources)
 sum_excluded() {
     local raw_count white_count dead_count parked_count excluded_count
