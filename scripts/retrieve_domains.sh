@@ -62,8 +62,8 @@ main() {
         mkdir -p data/pending
     fi
 
-    # Install idn2 (requires sudo)
-    command -v idn2 > /dev/null || sudo apt-get install -qq idn2
+    # Install idn2 (requires sudo. -qq doesn not work here)
+    command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
 
     # Download toplist
     $FUNCTION --download-toplist
@@ -223,8 +223,7 @@ process_source_results() {
     sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$source_results"
 
     # Convert Unicode to Punycode
-    # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
-    idn2 --no-tld < "$source_results" > temp
+    idn2 < "$source_results" > temp
     mv temp "$source_results"
 
     sort -u "$source_results" -o "$source_results"
