@@ -223,7 +223,7 @@ process_source_results() {
     sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$source_results"
 
     # Convert Unicode to Punycode
-    idn2 < "$source_results" > temp
+    idn2 < "$source_results" > temp || exit 1
     mv temp "$source_results"
 
     sort -u "$source_results" -o "$source_results"

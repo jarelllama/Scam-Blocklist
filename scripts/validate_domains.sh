@@ -83,8 +83,9 @@ validate() {
     # Convert Unicode to Punycode in raw file and raw light file
     local file
     for file in "$RAW" "$RAW_LIGHT"; do
-        idn2 < "$file" | sort > temp
+        idn2 < "$file" > temp || exit 1
         mv temp "$file"
+        sort -u "$file" -o "$file"
     done
 
     # Strip away subdomains
