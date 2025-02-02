@@ -293,9 +293,9 @@ test_url_conversion() {
 
 # Test conversion of Unicode to Punycode
 test_punycode_conversion() {
-    input punycodé-test.cöm
-    output xn--punycod-test-heb.xn--cm-fka "$RAW"
-    output xn--punycod-test-heb.xn--cm-fka "$RAW_LIGHT"
+    input 'ⴰⵣⵓⵍ.bortzmeyer.fr'
+    output xn--4lj0cra7d.bortzmeyer.fr "$RAW"
+    output xn--4lj0cra7d.bortzmeyer.fr "$RAW_LIGHT"
 }
 
 # Test removal of known dead domains including subdomains

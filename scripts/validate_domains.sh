@@ -15,8 +15,8 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 main() {
-    # Install idn (requires sudo) (note -qq does not seem to work here)
-    command -v idn > /dev/null || sudo apt-get install idn > /dev/null
+    # Install idn2
+    command -v idn2 > /dev/null || apt-get install -qq idn2
 
     # Download toplist
     $FUNCTION --download-toplist
@@ -84,7 +84,7 @@ validate() {
     local file
     for file in "$RAW" "$RAW_LIGHT"; do
         # '--no-tld' to fix 'idn: tld_check_4z: Missing input' error
-        idn --no-tld < "$file" | sort > temp
+        idn2 --no-tld < "$file" | sort > temp
         mv temp "$file"
     done
 
