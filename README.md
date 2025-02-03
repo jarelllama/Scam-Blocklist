@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 379501
-Light version: 45943
+Total domains: 380024
+Light version: 45844
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -68,12 +68,12 @@ Today | Monthly | %Monthly | %Filtered | Source
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 2819
-Dead domains removed this month: 8009
-Resurrected domains added today: 1559
+Dead domains removed today: 2172
+Dead domains removed this month: 10181
+Resurrected domains added today: 2827
 
 Parked domains removed this month: 0
-Unparked domains added today: 296
+Unparked domains added today: 188
 ```
 
 <details>
@@ -129,7 +129,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13354
+Total domains: 13369
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
