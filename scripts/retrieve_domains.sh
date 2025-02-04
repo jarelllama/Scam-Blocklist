@@ -7,6 +7,7 @@
 readonly -a SOURCES=(
     source_165antifraud
     source_aa419
+    source_behindmlm
     source_coi.gov.cz
     source_cybersquatting
     source_dga_detector
@@ -757,6 +758,18 @@ source_aa419() {
         | jq -r '.[].Domain' > source_results.tmp
 }
 
+source_behindmlm() {
+    # Last checked: 04/02/25
+    source_name='BehindMLM'
+    source_url='https://behindmlm.com'
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    curl -sSZ --retry 2 --retry-all-errors "${source_url}/page/[0-15]/" \
+        | grep -iPo "&#8220;\K${DOMAIN_REGEX}(?=&#8221;)|<li>\K${DOMAIN_REGEX}|(;|:) \K${DOMAIN_REGEX}|and \K${DOMAIN_REGEX}" \
+        > source_results.tmp
+}
+
 source_coi.gov.cz() {
     # Last checked: 08/01/25
     source_name='Česká Obchodní Inspekce'
@@ -801,11 +814,14 @@ source_jeroengui() {
 
     {
         # Get URLs with no subdirectories (too many link shorteners)
-        curl -sS "${source_url}/phishing/last_week.txt" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)"
+        curl -sS "${source_url}/phishing/last_week.txt" \
+            | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)"
 
-        curl -sS "${source_url}/malware/last_week.txt" | grep -Po "^https?://\K${DOMAIN_REGEX}"
+        curl -sS "${source_url}/malware/last_week.txt" \
+            | grep -Po "^https?://\K${DOMAIN_REGEX}"
 
-        curl -sS "${source_url}/scam/last_week.txt" | grep -Po "^https?://\K${DOMAIN_REGEX}"
+        curl -sS "${source_url}/scam/last_week.txt" \
+            | grep -Po "^https?://\K${DOMAIN_REGEX}"
     } > source_results.tmp
 
     # Get matching NRDs for the light version. Unicode is only processed by the
@@ -825,7 +841,7 @@ source_jeroengui_nrd() {
 }
 
 source_greatis() {
-    # Last checked: 25/01/25
+    # Last checked: 04/02/25
     source_name='Wildcat Cyber Patrol'
     source_url='https://greatis.com/unhackme/help/category/remove'
 
@@ -989,7 +1005,7 @@ source_vzhh() {
 }
 
 source_wipersoft() {
-    # Last checked: 25/01/25
+    # Last checked: 04/02/25
     source_name='WiperSoft'
     source_url='https://www.wipersoft.com/blog'
 
