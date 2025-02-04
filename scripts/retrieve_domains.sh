@@ -232,7 +232,7 @@ process_source_results() {
     raw_count="$(wc -l < "$source_results")"
 
     # Error in case a source wrongly retrieves too many results.
-    if (( raw_count > 10000 )); then
+    if (( raw_count > 20000 )); then
         error 'Source is unusually large.'
     fi
 
