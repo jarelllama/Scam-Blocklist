@@ -5,7 +5,31 @@
 
 # Array of sources used to retrieve domains
 readonly -a SOURCES=(
-    source_podvodnabazaru
+    source_165antifraud
+    source_aa419
+    source_coi.gov.cz
+    source_cybersquatting
+    source_dga_detector
+    source_emerging_threats
+    source_fakewebshoplisthun
+    source_greatis
+    source_gridinsoft
+    source_jeroengui
+    source_jeroengui_nrd
+    source_manual
+    source_pcrisk
+    source_phishstats
+    source_phishstats_nrd
+    source_puppyscams
+    source_regex
+    source_scamadviser
+    source_scamdirectory
+    source_stopgunscams
+    source_unit42
+    source_viriback_tracker
+    source_vzhh
+    source_wipersoft
+    source_google_search
 )
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
@@ -875,18 +899,6 @@ source_phishstats_nrd() {
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     mv phishstats_nrds.tmp source_results.tmp
-}
-
-source_podvodnabazaru() {
-    # Last checked: 04/02/25
-    source_name='Podvod na bazaru'
-    source_url='https://podvodnabazaru.cz/database/scam-eshop'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
-    # DEBUG
-    curl --retry 2 --retry-all-errors "$source_url" #\
-    #    | grep -Po "${DOMAIN_REGEX}(?=,)" > source_results.tmp
 }
 
 source_puppyscams() {
