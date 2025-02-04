@@ -49,6 +49,7 @@ New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
 $(print_stats '165 Anti-fraud')
 $(print_stats 'Artists Against 419')
+$(print_stats 'BehindMLM')
 $(print_stats 'Cybersquatting')
 $(print_stats 'DGA Detector')
 $(print_stats 'Emerging Threats')
