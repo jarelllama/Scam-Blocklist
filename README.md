@@ -33,37 +33,37 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 380047
-Light version: 45850
+Total domains: 386747
+Light version: 46950
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    0 |       6 |      0 % |      36 % | 165 Anti-fraud
-    0 |      39 |      0 % |      14 % | Artists Against 419
-    1 |     152 |      1 % |       1 % | Cybersquatting
-    0 |    1162 |     10 % |       0 % | DGA Detector
-    0 |       8 |      0 % |      15 % | Emerging Threats
-    0 |      33 |      0 % |      22 % | FakeWebshopListHUN
-    0 |      87 |      0 % |       2 % | Google Search
-    6 |     309 |      2 % |      16 % | Gridinsoft
-    0 |     914 |      8 % |       0 % | Jeroengui (NRDs)
-    7 |    6454 |     58 % |       8 % | Jeroengui
+    2 |       8 |      0 % |      36 % | 165 Anti-fraud
+    8 |      47 |      0 % |      14 % | Artists Against 419
+   78 |     229 |      1 % |       1 % | Cybersquatting
+ 1244 |    2406 |     12 % |       0 % | DGA Detector
+    1 |       9 |      0 % |      15 % | Emerging Threats
+    5 |      38 |      0 % |      22 % | FakeWebshopListHUN
+   75 |     162 |      0 % |       2 % | Google Search
+  278 |     581 |      3 % |      17 % | Gridinsoft
+  846 |    1760 |      9 % |       0 % | Jeroengui (NRDs)
+ 4876 |   11323 |     60 % |       8 % | Jeroengui
     0 |       1 |      0 % |      10 % | PCrisk
     0 |       0 |      0 % |       0 % | PhishStats (NRDs)
-    0 |       4 |      0 % |      28 % | PhishStats
-    0 |       2 |      0 % |      15 % | PuppyScams.org
-    1 |    1718 |     15 % |       1 % | Regex Matching
-    3 |     469 |      4 % |       3 % | SafelyWeb
+    2 |       6 |      0 % |      28 % | PhishStats
+   19 |      21 |      0 % |      15 % | PuppyScams.org
+  848 |    2565 |     13 % |       1 % | Regex Matching
+  376 |     842 |      4 % |       3 % | SafelyWeb
     0 |       3 |      0 % |      35 % | Scam Directory
     0 |       0 |      0 % |      32 % | ScamAdviser
-    0 |       0 |      0 % |       5 % | StopGunScams.com
-    0 |       0 |      0 % |      12 % | Unit42
-    0 |       8 |      0 % |      10 % | Verbraucherzentrale Hamburg
+    3 |       3 |      0 % |       5 % | StopGunScams.com
+    5 |       5 |      0 % |      13 % | Unit42
+    3 |      11 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
-    5 |      28 |      0 % |      16 % | Wildcat Cyber Patrol
+   15 |      38 |      0 % |      17 % | Wildcat Cyber Patrol
     0 |       1 |      0 % |       8 % | WiperSoft
-    0 |     474 |      4 % |      49 % | Česká Obchodní Inspekce
-   23 |   10958 |    100 % |      21 % | All sources
+   58 |     532 |      2 % |      49 % | Česká Obchodní Inspekce
+ 7896 |   18831 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
