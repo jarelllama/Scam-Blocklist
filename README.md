@@ -48,7 +48,7 @@ Today | Monthly | %Monthly | %Filtered | Source
   288 |     591 |      3 % |      17 % | Gridinsoft
   846 |    1760 |      9 % |       0 % | Jeroengui (NRDs)
  4881 |   11328 |     60 % |       8 % | Jeroengui
-    3 |       4 |      0 % |      10 % | PCrisk
+    3 |       4 |      0 % |       9 % | PCrisk
     0 |       0 |      0 % |       0 % | PhishStats (NRDs)
     2 |       6 |      0 % |      28 % | PhishStats
    19 |      21 |      0 % |      15 % | PuppyScams.org
