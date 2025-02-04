@@ -5,8 +5,6 @@
 
 # Array of sources used to retrieve domains
 readonly -a SOURCES=(
-
-    source_pcrisk
     source_podvodnabazaru
 )
 readonly FUNCTION='bash scripts/tools.sh'
@@ -886,8 +884,9 @@ source_podvodnabazaru() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    curl -sS --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "${DOMAIN_REGEX}(?=,)" > source_results.tmp
+    # DEBUG
+    curl --retry 2 --retry-all-errors "$source_url" #\
+    #    | grep -Po "${DOMAIN_REGEX}(?=,)" > source_results.tmp
 }
 
 source_puppyscams() {
