@@ -20,9 +20,9 @@ readonly -a SOURCES=(
     source_pcrisk
     source_phishstats
     source_phishstats_nrd
+    source_podvodnabazaru
     source_puppyscams
     source_regex
-    source_safelyweb
     source_scamadviser
     source_scamdirectory
     source_stopgunscams
@@ -793,22 +793,20 @@ source_fakewebshoplisthun() {
 }
 
 source_jeroengui() {
-    # Last checked: 02/02/25
+    # Last checked: 04/02/25
     source_name='Jeroengui'
+    source_url='https://file.jeroengui.be'
     exclude_from_light=true  # Too many domains
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     {
-        source_url='https://file.jeroengui.be/phishing/last_week.txt'
         # Get URLs with no subdirectories (too many link shorteners)
-        curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)"
+        curl -sS "${source_url}/phishing/last_week.txt" | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)"
 
-        source_url='https://file.jeroengui.be/malware/last_week.txt'
-        curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}"
+        curl -sS "${source_url}/malware/last_week.txt" | grep -Po "^https?://\K${DOMAIN_REGEX}"
 
-        source_url='https://file.jeroengui.be/scam/last_week.txt'
-        curl -sS "$source_url" | grep -Po "^https?://\K${DOMAIN_REGEX}"
+        curl -sS "${source_url}/scam/last_week.txt" | grep -Po "^https?://\K${DOMAIN_REGEX}"
     } > source_results.tmp
 
     # Get matching NRDs for the light version. Unicode is only processed by the
@@ -857,16 +855,19 @@ source_manual() {
 }
 
 source_pcrisk() {
-    # Last checked: 09/01/25
+    # Last checked: 04/02/25
     source_name='PCrisk'
     source_url='https://www.pcrisk.com/removal-guides'
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    # Matches domain[.]com and domain.com
-    curl -sSZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
-        | grep -iPo ">what (kind of (page|website) )?is \K${DOMAIN_SQUARE_REGEX}" \
-        > source_results.tmp
+    {
+        curl -sSZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
+            | grep -iPo ">what (kind of (page|website) )?is \K${DOMAIN_SQUARE_REGEX}"
+
+        curl -sS --retry 2 --retry-all-errors "${source_url}" \
+            | grep -iPo "${DOMAIN_REGEX}(?= redirect)"
+    } > source_results.tmp
 }
 
 source_phishstats() {
@@ -901,6 +902,17 @@ source_phishstats_nrd() {
     mv phishstats_nrds.tmp source_results.tmp
 }
 
+source_podvodnabazaru() {
+    # Last checked: 04/02/25
+    source_name='Podvod na bazaru'
+    source_url='https://podvodnabazaru.cz/database/scam-eshop'
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    curl -sS --retry 2 --retry-all-errors "$source_url" \
+        | grep -Po "${DOMAIN_REGEX}(?=,)" > source_results.tmp
+}
+
 source_puppyscams() {
     # Last checked: 07/01/25
     source_name='PuppyScams.org'
@@ -910,18 +922,6 @@ source_puppyscams() {
 
     curl -sSZ --retry 2 --retry-all-errors "${source_url}/?page=[1-15]" \
         | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > source_results.tmp
-}
-
-source_safelyweb() {
-    # Last checked: 11/01/25
-    source_name='SafelyWeb'
-    source_url='https://safelyweb.com/scams-database'
-    exclude_from_light=true  # Has a few false positives
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
-    curl -sSZ --retry 2 --retry-all-errors "${source_url}/?per_page=[1-30]" \
-        | grep -Po "<h2 class=\"title\">\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
 source_scamadviser() {
