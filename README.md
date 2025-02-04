@@ -40,6 +40,7 @@ New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     2 |       8 |      0 % |      36 % | 165 Anti-fraud
     8 |      47 |      0 % |      14 % | Artists Against 419
+   54 |      54 |      0 % |       3 % | BehindMLM
    78 |     229 |      1 % |       1 % | Cybersquatting
  1245 |    2407 |     12 % |       0 % | DGA Detector
     1 |       9 |      0 % |      15 % | Emerging Threats
