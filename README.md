@@ -33,37 +33,37 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 386747
-Light version: 46950
+Total domains: 386772
+Light version: 46953
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     2 |       8 |      0 % |      36 % | 165 Anti-fraud
     8 |      47 |      0 % |      14 % | Artists Against 419
    78 |     229 |      1 % |       1 % | Cybersquatting
- 1244 |    2406 |     12 % |       0 % | DGA Detector
+ 1245 |    2407 |     12 % |       0 % | DGA Detector
     1 |       9 |      0 % |      15 % | Emerging Threats
     5 |      38 |      0 % |      22 % | FakeWebshopListHUN
    75 |     162 |      0 % |       2 % | Google Search
-  278 |     581 |      3 % |      17 % | Gridinsoft
+  288 |     591 |      3 % |      17 % | Gridinsoft
   846 |    1760 |      9 % |       0 % | Jeroengui (NRDs)
- 4876 |   11323 |     60 % |       8 % | Jeroengui
-    0 |       1 |      0 % |      10 % | PCrisk
+ 4881 |   11328 |     60 % |       8 % | Jeroengui
+    1 |       2 |      0 % |      10 % | PCrisk
     0 |       0 |      0 % |       0 % | PhishStats (NRDs)
     2 |       6 |      0 % |      28 % | PhishStats
    19 |      21 |      0 % |      15 % | PuppyScams.org
   848 |    2565 |     13 % |       1 % | Regex Matching
-  376 |     842 |      4 % |       3 % | SafelyWeb
+  382 |     848 |      4 % |       3 % | SafelyWeb
     0 |       3 |      0 % |      35 % | Scam Directory
     0 |       0 |      0 % |      32 % | ScamAdviser
     3 |       3 |      0 % |       5 % | StopGunScams.com
     5 |       5 |      0 % |      13 % | Unit42
     3 |      11 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      31 % | ViriBack C2 Tracker
-   15 |      38 |      0 % |      17 % | Wildcat Cyber Patrol
+   18 |      41 |      0 % |      17 % | Wildcat Cyber Patrol
     0 |       1 |      0 % |       8 % | WiperSoft
    58 |     532 |      2 % |      49 % | Česká Obchodní Inspekce
- 7896 |   18831 |    100 % |      21 % | All sources
+ 7922 |   18857 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
