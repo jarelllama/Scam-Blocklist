@@ -53,7 +53,6 @@ Today | Monthly | %Monthly | %Filtered | Source
     2 |       6 |      0 % |      28 % | PhishStats
    19 |      21 |      0 % |      15 % | PuppyScams.org
   848 |    2565 |     13 % |       1 % | Regex Matching
-  382 |     848 |      4 % |       3 % | SafelyWeb
     0 |       3 |      0 % |      35 % | Scam Directory
     0 |       0 |      0 % |      32 % | ScamAdviser
     3 |       3 |      0 % |       5 % | StopGunScams.com
