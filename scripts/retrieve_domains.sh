@@ -8,6 +8,7 @@ readonly -a SOURCES=(
     source_165antifraud
     source_aa419
     source_behindmlm
+    source_bugsfigher
     source_coi.gov.cz
     source_cybersquatting
     source_dga_detector
@@ -770,6 +771,17 @@ source_behindmlm() {
         > source_results.tmp
 }
 
+source_bugsfigher() {
+    # Last checked: 05/02/25
+    source_name='BugsFigher'
+    source_url='https://www.bugsfighter.com/blog'
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    curl -sSZ --retry 2 --retry-all-errors "${source_url}/page/[0-15]/" \
+        | grep -iPo "remove \K${DOMAIN_REGEX}" > source_results.tmp
+}
+
 source_coi.gov.cz() {
     # Last checked: 08/01/25
     source_name='Česká Obchodní Inspekce'
@@ -929,7 +941,7 @@ source_puppyscams() {
 }
 
 source_scamadviser() {
-    # Last checked: 09/01/25
+    # Last checked: 05/02/25
     source_name='ScamAdviser'
     source_url='https://www.scamadviser.com/articles'
 
