@@ -33,7 +33,7 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 386404
+Total domains: 386407
 Light version: 46850
 
 New domains after filtering:
@@ -42,13 +42,13 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      47 |      0 % |      14 % | Artists Against 419
     3 |      63 |      0 % |       3 % | BehindMLM
    17 |     246 |      1 % |       1 % | Cybersquatting
-    6 |    2413 |     12 % |       0 % | DGA Detector
+    6 |    2413 |     11 % |       0 % | DGA Detector
    20 |      29 |      0 % |      15 % | Emerging Threats
     0 |      38 |      0 % |      22 % | FakeWebshopListHUN
    29 |     191 |      0 % |       2 % | Google Search
-   35 |     626 |      3 % |      17 % | Gridinsoft
+   36 |     627 |      3 % |      17 % | Gridinsoft
    70 |    1830 |      9 % |       0 % | Jeroengui (NRDs)
-  970 |   12298 |     61 % |       8 % | Jeroengui
+  972 |   12300 |     61 % |       8 % | Jeroengui
     0 |       4 |      0 % |       9 % | PCrisk
     0 |       0 |      0 % |       0 % | PhishStats (NRDs)
     1 |       7 |      0 % |      28 % | PhishStats
@@ -63,7 +63,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      41 |      0 % |      18 % | Wildcat Cyber Patrol
     0 |       1 |      0 % |       8 % | WiperSoft
     0 |     532 |      2 % |      49 % | Česká Obchodní Inspekce
- 1186 |   20106 |    100 % |      21 % | All sources
+ 1189 |   20109 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
