@@ -8,7 +8,7 @@ readonly -a SOURCES=(
     source_165antifraud
     source_aa419
     source_behindmlm
-    source_bugsfigher
+    source_BugsFighter
     source_coi.gov.cz
     source_cybersquatting
     source_dga_detector
@@ -771,9 +771,9 @@ source_behindmlm() {
         > source_results.tmp
 }
 
-source_bugsfigher() {
+source_BugsFighter() {
     # Last checked: 05/02/25
-    source_name='BugsFigher'
+    source_name='BugsFighter'
     source_url='https://www.bugsfighter.com/blog'
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
