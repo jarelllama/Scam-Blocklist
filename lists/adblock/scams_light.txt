@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.05.035615.2025
+! Version: 02.05.040744.2025
 ! Expires: 12 hours
-! Last modified: Wed Feb  5 03:56:15 UTC 2025
+! Last modified: Wed Feb  5 04:07:44 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 46850
+! Number of entries: 46870
 !
 ||0.majorlinker.com^
 ||000014.cc^
@@ -852,6 +852,7 @@
 ||49169p.com^
 ||4941.loan^
 ||49795.loan^
+||4anime.to^
 ||4blok.cz^
 ||4c.pm^
 ||4di9iz3dd3.baby^
@@ -3332,6 +3333,7 @@
 ||apptryst.live^
 ||apptubg.com^
 ||appusd.top^
+||appwinz.com^
 ||appzxcdnsa3.com^
 ||apqxbjzhmxuncurhzm.shop^
 ||apqxfybgafgcn.shop^
@@ -4826,6 +4828,7 @@
 ||bestspiritscollection.shop^
 ||beststarstoreus.com^
 ||bestsuperiorstore.com^
+||bestsystemav.xyz^
 ||besttarpsplus.shop^
 ||besttbuy.in^
 ||besttbuy.lol^
@@ -18442,9 +18445,13 @@
 ||hostpdf.co^
 ||hotadon.com^
 ||hotbcaguba.cc^
+||hotbcebeba.cc^
 ||hotbnaxele.today^
 ||hotbneyabe.com^
+||hotbneyazu.today^
 ||hotboxvalet.com^
+||hotbrakuvo.cc^
+||hotbsopika.cc^
 ||hotbuyon.shop^
 ||hotbvehoru.cc^
 ||hotbvezede.cc^
@@ -18453,6 +18460,7 @@
 ||hotbviviva.cc^
 ||hotbvoweme.cc^
 ||hotbxegabo.today^
+||hotbyapodo.cc^
 ||hotbyoxaya.cc^
 ||hotcheerryewg.shop^
 ||hotcheyshop.shop^
@@ -26277,6 +26285,7 @@
 ||newrptai.com^
 ||newrtp3-agam69.click^
 ||news-bathrooms.com^
+||news-bbavuri.info^
 ||news-bbucoxe.today^
 ||news-bbufiya.today^
 ||news-bbutohu.info^
@@ -26334,17 +26343,21 @@
 ||news-xdetake.cc^
 ||news-xdewezo.com^
 ||news-xdeyive.com^
+||news-xdimaci.xyz^
 ||news-xdipohi.com^
 ||news-xheluza.cc^
 ||news-xhijupa.com^
 ||news-xhunoyi.cc^
+||news-xjotedu.info^
 ||news-xlepege.today^
 ||news-xlixoti.com^
 ||news-xnazojo.cc^
 ||news-xnicini.cc^
 ||news-xnonafi.com^
 ||news-xpafema.cc^
+||news-xretewi.xyz^
 ||news-xricuno.cc^
+||news-xroceju.today^
 ||news-xrolole.xyz^
 ||news-xsadabe.com^
 ||news-xsazuza.xyz^
@@ -30512,6 +30525,7 @@
 ||pumasouth-africa.com^
 ||pummadiscounnt.com^
 ||pumpexperts.shop^
+||punalgasus.co.in^
 ||punkfrock.com^
 ||punkglowz.com^
 ||punkhouse.shop^
@@ -31863,6 +31877,7 @@
 ||reward-reputation.ru^
 ||rewarding-aerodrome.xyz^
 ||rewarding-avail.org^
+||rewardlevel.myfunnelish.com^
 ||rewards-symbiotlc.com^
 ||rewardscsh.com^
 ||rewardzinga3.com^
@@ -32719,6 +32734,7 @@
 ||safeenaicm.shop^
 ||safeenspecials.shop^
 ||safefxtrading.pro^
+||safeguardtool.site^
 ||safeheavenfirearms.com^
 ||safehomean.shop^
 ||safeimadeyad.shop^
@@ -33232,6 +33248,7 @@
 ||search.news-homepage.com^
 ||search.onfireshield.com^
 ||search.safefinder.com^
+||search.softonic.com^
 ||search.withaiforchrome.com^
 ||searchaiassitant.info^
 ||searchcommons.com^
@@ -36088,6 +36105,7 @@
 ||sylviescie.shop^
 ||symantke.com^
 ||sync-ledgerlive.com^
+||sync.clearnview.com^
 ||sync.webappclick.net^
 ||synchronize-wallet.in^
 ||syncxtrades.com^
@@ -40703,6 +40721,7 @@
 ||trobustech.com^
 ||trochad.com^
 ||trodat-cz.cz^
+||trojan.misplacedlegit.autoit^
 ||trojan1117.hopto.org^
 ||trollelifemarket.com^
 ||trolleyundgolf.com^
@@ -41606,6 +41625,7 @@
 ||unpwple.com^
 ||unqrjcwonmyq.shop^
 ||unrbshzbsbrxerwqj.shop^
+||unsentane.co.in^
 ||unserapplispe.co.in^
 ||unsiwap.pro^
 ||unsiwap.tech^
