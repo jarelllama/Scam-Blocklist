@@ -41,7 +41,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       8 |      0 % |      35 % | 165 Anti-fraud
     0 |      47 |      0 % |      14 % | Artists Against 419
     3 |      63 |      0 % |       3 % | BehindMLM
-    0 |       0 |      0 % |       0 % | BugsFighter
+   23 |      23 |      0 % |       3 % | BugsFighter
    17 |     246 |      1 % |       1 % | Cybersquatting
     6 |    2413 |     11 % |       0 % | DGA Detector
    20 |      29 |      0 % |      15 % | Emerging Threats
