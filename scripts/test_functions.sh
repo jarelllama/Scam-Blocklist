@@ -285,11 +285,11 @@ test_manual_addition_and_logging() {
 # Test conversion of URLs to domains
 # Test removal of square brackets
 test_url_conversion() {
-    input https://conversion-test[.]com
+    input https://conversion-test[.]com[.]us
     input http://conversion-test-2.com
-    output conversion-test.com "$RAW"
+    output conversion-test.com.us "$RAW"
     output conversion-test-2.com "$RAW"
-    output conversion-test.com "$RAW_LIGHT"
+    output conversion-test.com.us "$RAW_LIGHT"
     output conversion-test-2.com "$RAW_LIGHT"
 }
 

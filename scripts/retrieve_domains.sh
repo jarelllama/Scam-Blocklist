@@ -222,7 +222,7 @@ process_source_results() {
     # once instead of multiple times in the source functions)
     # Note that this still allows invalid entries like entries with subfolders
     # to get through so they can be flagged later on.
-    sed -i 's/https\?:\/\///; s/\[//; s/\]//' "$source_results"
+    sed -i 's/https\?:\/\///; s/\[//g; s/\]//g' "$source_results"
 
     # Convert Unicode to Punycode
     $FUNCTION --convert-unicode "$source_results"
