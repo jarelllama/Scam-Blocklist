@@ -75,6 +75,8 @@ SHELLCHECK() {
     # Find scripts
     scripts=$(find . -type f -name "*.sh")
 
+    [[ -z "$scripts" ]] && error 'No scripts found.'
+
     # Run ShellCheck for each script
     for script in $scripts; do
         shellcheck-stable/shellcheck "$script" || error=true

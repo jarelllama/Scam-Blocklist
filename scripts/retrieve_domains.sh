@@ -574,7 +574,7 @@ search_google() {
         printf "%s\n" "$page_domains" >> "$source_results"
 
         # Stop search term if no more pages are required
-        (( $(wc -w <<< "$page_domains") < 10 )) && break
+        (( $(wc -l <<< "$page_domains") < 10 )) && break
     done
 
     process_source_results
@@ -691,7 +691,7 @@ source_dga_detector() {
 }
 
 source_regex() {
-    # Last checked: 21/01/25
+    # Last checked: 06/02/25
     source_name='Regex'
     exclude_from_light=true
 
@@ -715,7 +715,7 @@ source_regex() {
         local regex="${pattern//&/${escaped_domain}}"
 
         # Get matches in NRD feed
-        results="$(mawk "/${regex}/" nrd.tmp | sort -u)"
+        results="$(grep -E "$regex" nrd.tmp | sort -u)"
 
         # Collate results
         printf "%s\n" "$results" >> source_results.tmp
