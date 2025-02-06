@@ -715,7 +715,9 @@ source_regex() {
         local regex="${pattern//&/${escaped_domain}}"
 
         # Get matches in NRD feed
-        results="$(grep -E "$regex" nrd.tmp | sort -u)"
+        # awk is used here instead of mawk for compatibility with the regex
+        # expressions.
+        results="$(awk "/${regex}/" nrd.tmp | sort -u)"
 
         # Collate results
         printf "%s\n" "$results" >> source_results.tmp
