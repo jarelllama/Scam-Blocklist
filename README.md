@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 392170
-Light version: 47889
+Total domains: 392047
+Light version: 47698
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -69,9 +69,9 @@ Today | Monthly | %Monthly | %Filtered | Source
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 0
-Dead domains removed this month: 16425
-Resurrected domains added today: 0
+Dead domains removed today: 2212
+Dead domains removed this month: 18637
+Resurrected domains added today: 1964
 
 Parked domains removed this month: 0
 Unparked domains added today: 0
