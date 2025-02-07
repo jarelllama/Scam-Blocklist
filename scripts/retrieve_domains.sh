@@ -135,7 +135,7 @@ retrieve_source_results() {
 
         # Run source. Always return true to avoid script exiting when no
         # results were retrieved
-        $source || echo "error"
+        $source || true
 
         # Set source results path based of source name if not explicitly set
         : "${source_results:=data/pending/${source_name// /_}.tmp}"
@@ -155,7 +155,7 @@ retrieve_source_results() {
         # handles the source processing logic within its source function.
         [[ "$source_name" == 'Google Search' ]] && continue
 
-        process_source_results
+        process_source_results || echo error
     done
 }
 
