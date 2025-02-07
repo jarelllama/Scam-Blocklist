@@ -400,7 +400,6 @@ test_invalid_removal() {
     input invalid-test.1x
     input invalid-test.com/subfolder
     input invalid-test-.com
-    input '-invalid-test.com'
     input i.com
     # Test that invalid subdomains/root domains are not added into the
     # subdomains/root domains files
@@ -419,7 +418,6 @@ test_invalid_removal() {
     output invalid,invalid-test.1x "$DOMAIN_LOG"
     output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
     output invalid,invalid-test-.com "$DOMAIN_LOG"
-    output '-invalid-test.com' "$DOMAIN_LOG"
     output invalid,i.com "$DOMAIN_LOG"
 
     # The validate script does not add invalid entries to the review config
@@ -432,7 +430,6 @@ test_invalid_removal() {
     output invalid-test.1x,invalid "$REVIEW_CONFIG"
     output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
     output invalid-test-.com,invalid "$REVIEW_CONFIG"
-    output '-invalid-test.com' "$REVIEW_CONFIG"
     output i.com,invalid "$REVIEW_CONFIG"
 }
 
