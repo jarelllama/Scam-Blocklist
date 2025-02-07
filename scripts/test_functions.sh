@@ -187,7 +187,7 @@ TEST_DEAD_CHECK() {
     # Remove placeholder lines
     local file
     for file in "$RAW" "$RAW_LIGHT" "$DEAD_DOMAINS" "$DOMAIN_LOG"; do
-        grep -v placeholder "$file" > temp || true
+        mawk '!/placeholder/' "$file" > temp || true
         mv temp "$file"
     done
 
@@ -223,7 +223,7 @@ TEST_PARKED_CHECK() {
     # Remove placeholder lines
     local file
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" "$DOMAIN_LOG"; do
-        grep -v placeholder "$file" > temp || true
+        mawk '!/placeholder/' "$file" > temp || true
         mv temp "$file"
     done
 

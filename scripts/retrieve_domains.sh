@@ -224,7 +224,7 @@ process_source_results() {
     sed -i 's/https\?:\/\///; s/\[//g; s/\]//g' "$source_results"
 
     # Convert Unicode to Punycode
-    $FUNCTION --convert-unicode "$source_results" || echo error
+    $FUNCTION --convert-unicode "$source_results"
 
     sort -u "$source_results" -o "$source_results"
 

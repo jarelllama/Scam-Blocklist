@@ -57,8 +57,8 @@ convert_unicode() {
     # Process the file, handling entries that may cause idn2 to error:
     # https://www.rfc-editor.org/rfc/rfc5891#section-4.2.3.1. If idn2 does
     # error, exit 1.
-    grep -E '\-\.|^-|^..--' "$1" > temp
-    grep -vE '\-\.|^-|^..--' "$1" | idn2 >> temp || exit 1
+    mawk '/-\.|^-|^..--/' "$1" > temp
+    mawk '!/-\.|^-|^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
     mv temp "$1"
 }
 
@@ -143,9 +143,7 @@ download_nrd_feed() {
     # Download the feeds in parallel and get only domains, ignoring comments
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
         | grep -oE '^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
-        > nrd.tmp
-
-    [[ ! -s nrd.tmp ]] && error 'Error downloading NRD feed.'
+        > nrd.tmp || error 'Error downloading NRD feed.'
 
     format_file nrd.tmp
 }
