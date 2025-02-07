@@ -465,7 +465,7 @@ cleanup() {
     # Delete pending directory if no domains to be saved for rerun
     find data/pending -type d -empty -delete
 
-    find . -maxdepth 1 -type f -name "*.tmp" -delete
+    rm ./*.tmp temp 2> /dev/null || true
 }
 
 # The 'source_<source>' functions retrieve results from the respective sources
@@ -607,16 +607,15 @@ source_cybersquatting() {
 
     # Loop through phishing targets
     mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS" \
-        | while read -r domain; do
+        | while read -r target; do
 
         # Get info of the target domain
-        row="$(mawk -F ',' -v domain="$domain" \
-            '$1 == domain {printf $1","$2","$3}' "$PHISHING_TARGETS")"
+        row="$(mawk -v target="$target" '$0 ~ domain' "$PHISHING_TARGETS")"
         count="$(mawk -F ',' '{print $2}' <<< "$row")"
         runs="$(mawk -F ',' '{print $3}' <<< "$row")"
 
         # Run dnstwist
-        results="$(dnstwist "${domain}.com" -f list)"
+        results="$(dnstwist "${target}.com" -f list)"
 
         # Append TLDs to dnstwist results
         # Note the dnstwist --tld argument only replaces the TLDs of the
@@ -626,7 +625,7 @@ source_cybersquatting() {
         done <<< "$tlds"
 
         # Run URLCrazy (bash does not work)
-        ./urlcrazy-master/urlcrazy -r "${domain}.com" -f CSV \
+        ./urlcrazy-master/urlcrazy -r "${target}.com" -f CSV \
             | mawk -F ',' '!/"Original"/ {print $2}' \
             | grep -oE "$DOMAIN_REGEX" >> results.tmp
 
@@ -639,11 +638,13 @@ source_cybersquatting() {
         # Collate results
         cat results.tmp >> source_results.tmp
 
-        # Update counts for the target domain
-        count="$(( count + $(wc -l < results.tmp) ))"
-        (( runs++ ))
-        sed -i "s/${row}/${domain},${count},${runs}/" \
-            "$PHISHING_TARGETS"
+        # Update counts for the target
+        mawk -F ',' -v target="$target" \
+            -v count="$(( count + $(wc -l < results.tmp) ))" \
+            -v runs="$(( runs + 1 ))" \
+            'BEGIN {OFS=","} $1==target {$2=count; $3=runs} 1' \
+            "$PHISHING_TARGETS" > temp
+        mv temp "$PHISHING_TARGETS"
 
         # Reset results file for the next target domain
         rm results.tmp
@@ -700,17 +701,16 @@ source_regex() {
 
     # Loop through phishing targets
     mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS" \
-        | while read -r domain; do
+        | while read -r target; do
 
         # Get info of the target domain
-        row="$(mawk -F ',' -v domain="$domain" \
-            '$1 == domain {printf $5","$6","$7}' "$PHISHING_TARGETS")"
-        count="$(mawk -F ',' '{print $2}' <<< "$row")"
-        runs="$(mawk -F ',' '{print $3}' <<< "$row")"
-        pattern="$(mawk -F ',' '{printf $1}' <<< "$row")"
+        row="$(mawk -v target="$target" '$0 ~ target' "$PHISHING_TARGETS")"
+        count="$(mawk -F ',' '{print $6}' <<< "$row")"
+        runs="$(mawk -F ',' '{print $7}' <<< "$row")"
+        pattern="$(mawk -F ',' '{printf $5}' <<< "$row")"
 
         # Get regex of target
-        local escaped_domain="${domain//[.]/\\.}"
+        local escaped_domain="${target//[.]/\\.}"
         local regex="${pattern//&/${escaped_domain}}"
 
         # Get matches in NRD feed
@@ -721,16 +721,13 @@ source_regex() {
         # Collate results
         printf "%s\n" "$results" >> source_results.tmp
 
-        # Escape the following: . \ ^ *
-        row="$(printf "%s" "$row" | sed 's/[.\^*]/\\&/g')"
-        # Escape the following: & . \ ^ *
-        pattern="$(printf "%s" "$pattern" | sed 's/[&.\^*]/\\&/g')"
-
-        # Update counts for the target domain
-        count="$(( count + $(wc -w <<< "$results") ))"
-        (( runs++ ))
-        sed -i "/${domain}/s/${row}/${pattern},${count},${runs}/" \
-            "$PHISHING_TARGETS"
+        # Update counts for the target
+        mawk -F ',' -v target="$target" \
+            -v count="$(( count + $(wc -w <<< "$results") ))" \
+            -v runs="$(( runs + 1 ))" \
+            'BEGIN {OFS=","} $1==target {$6=count; $7=runs} 1' \
+            "$PHISHING_TARGETS" > temp
+        mv temp "$PHISHING_TARGETS"
     done
 }
 
