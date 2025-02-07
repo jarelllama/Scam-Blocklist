@@ -44,8 +44,7 @@ main() {
             remove_dead
             ;;
         *)
-            printf "\n\e[1;31mNo argument passed.\e[0m\n\n" >&2
-            exit 1
+            error "Invalid argument passed: $1"
             ;;
     esac
 
@@ -179,6 +178,14 @@ remove_dead() {
 
     # Call shell wrapper to log number of dead domains in domain log
     $FUNCTION --log-domains "$dead_count" dead_count raw
+}
+
+# Print error message and exit.
+# Input:
+#   $1: error message to print
+error() {
+    printf "\n\e[1;31m%s\e[0m\n\n" "$1" >&2
+    exit 1
 }
 
 # Entry point

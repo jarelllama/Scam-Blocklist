@@ -42,19 +42,26 @@ main() {
 
     case "$1" in
         'retrieve')
-            TEST_RETRIEVE_VALIDATE "$1" ;;
+            TEST_RETRIEVE_VALIDATE "$1"
+            ;;
         'validate')
-            TEST_RETRIEVE_VALIDATE "$1" ;;
+            TEST_RETRIEVE_VALIDATE "$1"
+            ;;
         'dead')
-            TEST_DEAD_CHECK ;;
+            TEST_DEAD_CHECK
+            ;;
         'parked')
-            TEST_PARKED_CHECK ;;
+            TEST_PARKED_CHECK
+            ;;
         'build')
-            TEST_BUILD ;;
+            TEST_BUILD
+            ;;
         'shellcheck')
-            SHELLCHECK ;;
+            SHELLCHECK
+            ;;
         *)
-            error 'No tests to run' ;;
+            error 'No tests to run'
+            ;;
     esac
 }
 
@@ -645,7 +652,7 @@ output() {
 # Input:
 #   $1: error message to print
 error() {
-    printf "%s\n" "$1" >&2
+    printf "\n\e[1;31m%s\e[0m\n\n" "$1" >&2
     exit 1
 }
 

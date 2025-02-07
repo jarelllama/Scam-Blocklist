@@ -119,10 +119,11 @@ download_toplist() {
     [[ -f toplist.tmp ]] && return
 
     # curl -L required
-    curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' | gunzip - \
-        > toplist.tmp || send_telegram "Error downloading toplist."
+    curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' -o temp
+    unzip -p temp | mawk -F ',' '{print $2}' > toplist.tmp
 
-    sed -i 's/^.*,//' toplist.tmp
+    [[ ! -s toplist.tmp ]] && error 'Error downloading toplist.'
+
     format_file toplist.tmp
 }
 
@@ -144,6 +145,8 @@ download_nrd_feed() {
         | grep -oE '^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
         > nrd.tmp
 
+    [[ ! -s nrd.tmp ]] && error 'Error downloading NRD feed.'
+
     format_file nrd.tmp
 }
 
@@ -159,6 +162,14 @@ send_telegram() {
         -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
         "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
         -o /dev/null
+}
+
+# Print error message and exit.
+# Input:
+#   $1: error message to print
+error() {
+    printf "\n\e[1;31m%s\e[0m\n\n" "$1" >&2
+    exit 1
 }
 
 # Entry point
@@ -194,7 +205,6 @@ case "$1" in
         send_telegram "$2"
         ;;
     *)
-        printf "\n\e[1;31mInvalid argument: %s\e[0m\n\n" "$*" >&2
-        exit 1
+        error "Invalid argument passed: $1"
         ;;
 esac

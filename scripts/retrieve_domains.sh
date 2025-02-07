@@ -457,7 +457,7 @@ log_domains() {
 # Input:
 #   $1: error message to print
 error() {
-    printf "%s\n" "$1" >&2
+    printf "\n\e[1;31m%s\e[0m\n\n" "$1" >&2
     exit 1
 }
 
