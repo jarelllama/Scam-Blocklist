@@ -587,7 +587,7 @@ source_cybersquatting() {
         | while read -r target; do
 
         # Get info of the target domain
-        row="$(mawk -v target="$target" '$0 ~ domain' "$PHISHING_TARGETS")"
+        row="$(mawk -v target="$target" '$0 ~ target' "$PHISHING_TARGETS")"
         count="$(mawk -F ',' '{print $2}' <<< "$row")"
         runs="$(mawk -F ',' '{print $3}' <<< "$row")"
 
