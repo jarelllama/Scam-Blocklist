@@ -166,7 +166,7 @@ send_telegram() {
 set -e
 
 # Do not remove .tmp files
-trap 'rm temp 2> /dev/null' EXIT
+trap 'rm temp 2> /dev/null || true' EXIT
 
 case "$1" in
     --format)

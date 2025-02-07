@@ -465,7 +465,7 @@ cleanup() {
     # Delete pending directory if no domains to be saved for rerun
     find data/pending -type d -empty -delete
 
-    rm ./*.tmp temp 2> /dev/null
+    rm ./*.tmp temp 2> /dev/null || true
 }
 
 # The 'source_<source>' functions retrieve results from the respective sources

@@ -185,7 +185,7 @@ remove_dead() {
 
 set -e
 
-trap 'rm ./*.tmp temp x?? 2> /dev/null' EXIT
+trap 'rm ./*.tmp temp x?? 2> /dev/null || true' EXIT
 
 $FUNCTION --format-all
 

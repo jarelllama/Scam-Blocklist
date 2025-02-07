@@ -105,7 +105,7 @@ EOF
 
 set -e
 
-trap 'rm ./*.tmp temp 2> /dev/null' EXIT
+trap 'rm ./*.tmp temp 2> /dev/null || true' EXIT
 
 # Install AdGuard's Dead Domains Linter
 if ! command -v dead-domains-linter &> /dev/null; then

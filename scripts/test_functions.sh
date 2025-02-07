@@ -593,7 +593,7 @@ check_output() {
     if ls x?? &> /dev/null || ls ./*.tmp &> /dev/null; then
         {
             printf "\e[1m[warn] Temporary files were not removed:\e[0m\n"
-            ls x?? ./*.tmp 2> /dev/null
+            ls x?? ./*.tmp 2> /dev/null || true
             printf "\n"
         } >&2
 
