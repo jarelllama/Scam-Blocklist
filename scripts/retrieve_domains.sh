@@ -155,7 +155,7 @@ retrieve_source_results() {
         # handles the source processing logic within its source function.
         [[ "$source_name" == 'Google Search' ]] && continue
 
-        process_source_results || echo error
+        process_source_results
     done
 }
 
