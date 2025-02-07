@@ -21,7 +21,6 @@ readonly -a SOURCES=(
     source_manual
     source_pcrisk
     source_phishstats
-    source_phishstats_nrd
     source_puppyscams
     source_regex
     source_scamadviser
@@ -900,35 +899,15 @@ source_pcrisk() {
 }
 
 source_phishstats() {
-    # Last checked: 29/12/24
+    # Last checked: 07/02/25
     source_name='PhishStats'
     source_url='https://phishstats.info/phish_score.csv'
-    exclude_from_light=true  # Too many domains
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    # Get URLs with no subdirectories (some of the URLs use docs.google.com),
-    # exclude IP addresses and extract domains.
-    # (?=/?\"$) is lookahead that matches an optional slash followed by an end
-    # quote at the end of the line.
-    curl -sS "$source_url" | mawk -F ',' '{print $3}' \
-        | grep -Po "^\"https?://\K${DOMAIN_REGEX}(?=/?\"$)" \
+    # Get URLs with no subdirectories (some of the URLs use docs.google.com)
+    curl -sS "$source_url" | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" \
         > source_results.tmp
-
-    # Get matching NRDs for the light version. Unicode is only processed by the
-    # full version.
-    comm -12 <(sort source_results.tmp) nrd.tmp > phishstats_nrds.tmp
-}
-
-source_phishstats_nrd() {
-    # Last checked: 23/12/24
-    # For the light version
-    # Only includes domains found in the NRD feed
-    source_name='PhishStats (NRDs)'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
-    mv phishstats_nrds.tmp source_results.tmp
 }
 
 source_puppyscams() {
