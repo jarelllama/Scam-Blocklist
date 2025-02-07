@@ -51,7 +51,6 @@ Today | Monthly | %Monthly | %Filtered | Source
   870 |    3041 |      7 % |       0 % | Jeroengui (NRDs)
  9252 |   25059 |     62 % |       8 % | Jeroengui
     6 |      13 |      0 % |       9 % | PCrisk
-    0 |       0 |      0 % |       0 % | PhishStats (NRDs)
    24 |      34 |      0 % |      28 % | PhishStats
    22 |      47 |      0 % |      16 % | PuppyScams.org
  3764 |    7082 |     17 % |       1 % | Regex Matching
