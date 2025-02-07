@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 392045
-Light version: 47698
+Total domains: 392065
+Light version: 47702
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -44,26 +44,26 @@ Today | Monthly | %Monthly | %Filtered | Source
     2 |      26 |      0 % |       5 % | BugsFighter
    94 |     382 |      0 % |       1 % | Cybersquatting
  1360 |    4253 |     10 % |       0 % | DGA Detector
-   22 |      57 |      0 % |      14 % | Emerging Threats
+   23 |      58 |      0 % |      14 % | Emerging Threats
     8 |      47 |      0 % |      23 % | FakeWebshopListHUN
    33 |     271 |      0 % |       2 % | Google Search
-  295 |    1047 |      2 % |      17 % | Gridinsoft
-  870 |    3041 |      7 % |       0 % | Jeroengui (NRDs)
- 9252 |   25059 |     62 % |       8 % | Jeroengui
+  303 |    1055 |      2 % |      17 % | Gridinsoft
+  871 |    3042 |      7 % |       0 % | Jeroengui (NRDs)
+ 9258 |   25065 |     62 % |       8 % | Jeroengui
     6 |      13 |      0 % |       9 % | PCrisk
    24 |      34 |      0 % |      28 % | PhishStats
    22 |      47 |      0 % |      16 % | PuppyScams.org
- 3764 |    7082 |     17 % |       1 % | Regex Matching
+ 3770 |    7088 |     17 % |       1 % | Regex Matching
    16 |      23 |      0 % |      36 % | Scam Directory
     0 |       0 |      0 % |      32 % | ScamAdviser
     0 |       3 |      0 % |       5 % | StopGunScams.com
     0 |       9 |      0 % |      14 % | Unit42
     0 |      11 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-   24 |      68 |      0 % |      19 % | Wildcat Cyber Patrol
+   26 |      70 |      0 % |      19 % | Wildcat Cyber Patrol
     2 |       3 |      0 % |       9 % | WiperSoft
     0 |     533 |      1 % |      49 % | Česká Obchodní Inspekce
-14968 |   40195 |    100 % |      21 % | All sources
+14991 |   40218 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
