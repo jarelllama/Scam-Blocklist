@@ -122,7 +122,7 @@ TEST_RETRIEVE_VALIDATE() {
     [[ -d data/pending ]] && rm -r data/pending
     mkdir -p data/pending
 
-    #test_punycode_conversion
+    test_punycode_conversion
     test_subdomain_removal
     test_review_file
     test_whitelist_blacklist
