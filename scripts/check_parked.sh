@@ -46,6 +46,9 @@ main() {
             exit 1
             ;;
     esac
+
+    # Call shell wrapper to prune old entries from parked domains file
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" "$LOG_SIZE"
 }
 
 # Find parked domains and collate them into the parked domains file to be
@@ -227,19 +230,11 @@ remove_parked() {
     $FUNCTION --log-domains "$parked_count" parked_count raw
 }
 
-cleanup() {
-    find . -maxdepth 1 -type f -name "*.tmp" -delete
-    find . -maxdepth 1 -type f -name "x??" -delete
-
-    # Call shell wrapper to prune old entries from parked domains file
-    $FUNCTION --prune-lines "$PARKED_DOMAINS" "$LOG_SIZE"
-}
-
 # Entry point
 
 set -e
 
-trap cleanup EXIT
+trap 'rm ./*.tmp temp x?? 2> /dev/null' EXIT
 
 $FUNCTION --format-all
 

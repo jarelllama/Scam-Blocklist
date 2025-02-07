@@ -48,6 +48,9 @@ main() {
             exit 1
             ;;
     esac
+
+    # Call shell wrapper to prune old entries from dead domains file
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" "$LOG_SIZE"
 }
 
 # Find dead domains and collate them into the dead domains file to be removed
@@ -135,6 +138,7 @@ find_dead() {
     [[ ! -f "$1" ]] && return
 
     # Format to Adblock Plus syntax for Dead Domains Linter
+    # Use variable filename to avoid filename clashes
     sed 's/.*/||&^/' "$1" > "${1}.tmp"
 
     dead-domains-linter -i "${1}.tmp" --export "dead_domains_${1}.tmp"
@@ -177,19 +181,11 @@ remove_dead() {
     $FUNCTION --log-domains "$dead_count" dead_count raw
 }
 
-cleanup() {
-    find . -maxdepth 1 -type f -name "*.tmp" -delete
-    find . -maxdepth 1 -type f -name "x??" -delete
-
-    # Call shell wrapper to prune old entries from dead domains file
-    $FUNCTION --prune-lines "$DEAD_DOMAINS" "$LOG_SIZE"
-}
-
 # Entry point
 
 set -e
 
-trap cleanup EXIT
+trap 'rm ./*.tmp temp x?? 2> /dev/null' EXIT
 
 $FUNCTION --format-all
 

@@ -19,24 +19,24 @@ format_file() {
         'data/dead_domains.txt'|'data/parked_domains.txt')
             # Remove duplicates, whitespaces, and convert to lowercase
             mawk '!seen[$0]++ {gsub(/ /, ""); print tolower($0)}' "$file" \
-                > "${file}.tmp"
+                > temp
             ;;
         'config/parked_terms.txt')
             # Convert to lowercase, sort, and remove duplicates
-            mawk '{print tolower($0)}' "$file" | sort -u -o "${file}.tmp"
+            mawk '{print tolower($0)}' "$file" | sort -u -o temp
             ;;
         *.txt|*.tmp)
             # Remove whitespaces, convert to lowercase, sort, and remove
             # duplicates
             mawk '{gsub(/ /, ""); print tolower($0)}' "$file" \
-                | sort -u -o "${file}.tmp"
+                | sort -u -o temp
             ;;
         *)
             return
             ;;
     esac
 
-    [[ -f "${file}.tmp" ]] && mv "${file}.tmp" "$file"
+    [[ -f temp ]] && mv temp "$file"
 }
 
 # Function 'format_all' formats all files in the config and data directories.
@@ -57,10 +57,9 @@ convert_unicode() {
     # Process the file, handling entries that may cause idn2 to error:
     # https://www.rfc-editor.org/rfc/rfc5891#section-4.2.3.1. If idn2 does
     # error, exit 1.
-    {
-        grep -vE '\-\.|^..--' "$1" | idn2 || exit 1
-        grep -E '\-\.|^..--' "$1"
-    } | sort -u -o "$1"
+    grep -E '\-\.|^-|^..--' "$1" > temp
+    grep -vE '\-\.|^-|^..--' "$1" | idn2 >> temp || exit 1
+    mv temp "$1"
 }
 
 # Function 'log_domains' logs domain processing events into the domain log.
@@ -165,6 +164,9 @@ send_telegram() {
 # Entry point
 
 set -e
+
+# Do not remove .tmp files
+trap 'rm temp 2> /dev/null' EXIT
 
 case "$1" in
     --format)

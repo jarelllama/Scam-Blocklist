@@ -297,11 +297,15 @@ test_url_conversion() {
 test_punycode_conversion() {
     input 'ⴰⵣⵓⵍ.bortzmeyer.fr'
     # Test that entries that may cause idn2 to error are handled properly
-    input 12--5.com
+    input pu--nycode-conversion-test.com
+    input '-punycode-conversion-test.com'
+
     output xn--4lj0cra7d.bortzmeyer.fr "$RAW"
-    output 12--5.com "$RAW"
+    output pu--nycode-conversion-test.com "$RAW"
+    output '-punycode-conversion-test.com' "$RAW"
     output xn--4lj0cra7d.bortzmeyer.fr "$RAW_LIGHT"
-    output 12--5.com "$RAW_LIGHT"
+    output pu--nycode-conversion-test.com "$RAW_LIGHT"
+    output '-punycode-conversion-test.com' "$RAW_LIGHT"
 }
 
 # Test removal of known dead domains including subdomains

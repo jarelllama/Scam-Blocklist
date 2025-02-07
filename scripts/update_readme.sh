@@ -227,7 +227,7 @@ sum_excluded() {
 
 set -e
 
-trap 'find . -maxdepth 1 -type f -name "*.tmp" -delete' EXIT
+trap 'rm ./*.tmp temp 2> /dev/null' EXIT
 
 # Install csvkit
 command -v csvgrep &> /dev/null || pip install -q csvkit
