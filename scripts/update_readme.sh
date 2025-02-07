@@ -60,7 +60,6 @@ $(print_stats 'Gridinsoft')
 $(print_stats 'Jeroengui (NRDs)')
 $(print_stats 'Jeroengui')
 $(print_stats 'PCrisk')
-$(print_stats 'PhishStats (NRDs)')
 $(print_stats 'PhishStats')
 $(print_stats 'PuppyScams.org')
 $(print_stats 'Regex') Matching

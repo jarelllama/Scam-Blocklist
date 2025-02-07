@@ -26,7 +26,7 @@ Only active sources are used to automatically retrieve domains.
 | [MalwareTips](https://malwaretips.com/blogs/) | | |
 | [PCrisk](https://www.pcrisk.com/) | Yes | |
 | [PetScams.com](https://petscams.com/) | | |
-| [PhishStats](https://phishstats.info/)[^2] | Yes | ~ |
+| [PhishStats](https://phishstats.info/) | Yes | |
 | [PuppyScams.org](https://puppyscams.org/) | Yes | |
 | [Regex Matching](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/phishing_detection.csv) | Yes | Yes |
 | [SafelyWeb](https://safelyweb.com/) | | |
@@ -49,4 +49,3 @@ Only active sources are used to automatically retrieve domains.
 | [Česká Obchodní Inspekce](https://www.coi.gov.cz/pro-spotrebitele/rizikove-e-shopy/) | Yes | |
 
 [^1]: Only newly registered domains are used in the light version.
-[^2]: Only newly registered domains are used in the light version.
