@@ -298,14 +298,11 @@ test_punycode_conversion() {
     input 'ⴰⵣⵓⵍ.bortzmeyer.fr'
     # Test that entries that may cause idn2 to error are handled properly
     input pu--nycode-conversion-test.com
-    input '-punycode-conversion-test.com'
 
     output xn--4lj0cra7d.bortzmeyer.fr "$RAW"
     output pu--nycode-conversion-test.com "$RAW"
-    output '-punycode-conversion-test.com' "$RAW"
     output xn--4lj0cra7d.bortzmeyer.fr "$RAW_LIGHT"
     output pu--nycode-conversion-test.com "$RAW_LIGHT"
-    output '-punycode-conversion-test.com' "$RAW_LIGHT"
 }
 
 # Test removal of known dead domains including subdomains
@@ -403,6 +400,7 @@ test_invalid_removal() {
     input invalid-test.1x
     input invalid-test.com/subfolder
     input invalid-test-.com
+    input '-invalid-test.com'
     input i.com
     # Test that invalid subdomains/root domains are not added into the
     # subdomains/root domains files
@@ -421,6 +419,7 @@ test_invalid_removal() {
     output invalid,invalid-test.1x "$DOMAIN_LOG"
     output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
     output invalid,invalid-test-.com "$DOMAIN_LOG"
+    output '-invalid-test.com' "$DOMAIN_LOG"
     output invalid,i.com "$DOMAIN_LOG"
 
     # The validate script does not add invalid entries to the review config
@@ -433,6 +432,7 @@ test_invalid_removal() {
     output invalid-test.1x,invalid "$REVIEW_CONFIG"
     output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
     output invalid-test-.com,invalid "$REVIEW_CONFIG"
+    output '-invalid-test.com' "$REVIEW_CONFIG"
     output i.com,invalid "$REVIEW_CONFIG"
 }
 
