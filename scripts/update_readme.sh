@@ -198,19 +198,6 @@ sum() {
         | mawk '{ sum += $1 } END { print sum }'
 }
 
-sum_domains() {
-    mawk -F -v time="$1" ',' '/today,dead_count/ {
-        sum += $3
-    }
-    END {
-        if (sum == "") {
-            print 0
-        } else {
-            print sum
-        }
-    }'
-}
-
 # Function 'sum_excluded' is an echo wrapper that returns the percentage of
 # excluded domains out of the raw count retrieved by the given source.
 # Input:

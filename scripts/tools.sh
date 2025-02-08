@@ -18,17 +18,17 @@ format_file() {
     case "$file" in
         'data/dead_domains.txt'|'data/parked_domains.txt')
             # Remove duplicates, whitespaces, and convert to lowercase
-            mawk '!seen[$0]++ {gsub(/ /, ""); print tolower($0)}' "$file" \
+            mawk '!seen[$0]++ { gsub(/ /, ""); print tolower($0) }' "$file" \
                 > temp
             ;;
         'config/parked_terms.txt')
             # Convert to lowercase, sort, and remove duplicates
-            mawk '{print tolower($0)}' "$file" | sort -u -o temp
+            mawk '{ print tolower($0) }' "$file" | sort -u -o temp
             ;;
         *.txt|*.tmp)
             # Remove whitespaces, convert to lowercase, sort, and remove
             # duplicates
-            mawk '{gsub(/ /, ""); print tolower($0)}' "$file" \
+            mawk '{ gsub(/ /, ""); print tolower($0) }' "$file" \
                 | sort -u -o temp
             ;;
         *)
@@ -85,7 +85,7 @@ log_domains() {
 
     printf "%s\n" "$domains" \
         | mawk -v event="$2" -v source="$3" -v time="$timestamp" \
-        '{print time "," event "," $0 "," source}' >> config/domain_log.csv
+        '{ print time "," event "," $0 "," source }' >> config/domain_log.csv
 }
 
 # Function 'prune_lines' prunes lines in the given file to keep its number of
@@ -120,7 +120,7 @@ download_toplist() {
 
     # curl -L required
     curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' -o temp
-    unzip -p temp | mawk -F ',' '{print $2}' > toplist.tmp
+    unzip -p temp | mawk -F ',' '{ print $2 }' > toplist.tmp
 
     [[ ! -s toplist.tmp ]] && error 'Error downloading toplist.'
 

@@ -27,14 +27,14 @@ main() {
 # whitelist/blacklist.
 check_review_file() {
     # Add blacklisted entries to blacklist and remove them from the review file
-    mawk -F ',' '$4 == "y" && $5 != "y" {print $2}' "$REVIEW_CONFIG" \
+    mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \
         | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
         | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
 
     # Add whitelisted entries to whitelist after formatting to regex and remove
     # them from the review file
-    mawk -F ',' '$5 == "y" && $4 != "y" {print $2}' "$REVIEW_CONFIG" \
-        | tee >(mawk '{gsub(/\./, "\."); print "^" $0 "$"}' \
+    mawk -F ',' '$5 == "y" && $4 != "y" { print $2 }' "$REVIEW_CONFIG" \
+        | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
         | sort -u - "$WHITELIST" -o "$WHITELIST") \
         | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
 }
@@ -56,7 +56,7 @@ filter() {
     if [[ "$3" == '--preserve' ]]; then
         # Save entries into review config file
         mawk -v reason="$tag" \
-            '{print "raw," $0 "," reason ",,"}' <<< "$entries" \
+            '{ print "raw," $0 "," reason ",," }' <<< "$entries" \
             >> "$REVIEW_CONFIG"
         # Remove duplicates
         mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
@@ -68,7 +68,7 @@ filter() {
     fi
 
     # Record entries into filter log for console output
-    mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
+    mawk -v tag="$tag" '{ print $0 " (" tag ")" }' <<< "$entries" \
         >> filter_log.tmp
 
     # Call shell wrapper to log entries into domain log
@@ -148,10 +148,6 @@ validate() {
     # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
     sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
-
-    # Do not notify for subdomains (the notifications got annoying)
-    mawk '!/subdomain/' filter_log.tmp > temp
-    mv temp filter_log.tmp
 
     [[ ! -s filter_log.tmp ]] && return
 

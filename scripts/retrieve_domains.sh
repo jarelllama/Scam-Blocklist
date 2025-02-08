@@ -74,14 +74,14 @@ main() {
 # blacklist and whitelist.
 check_review_file() {
     # Add blacklisted entries to blacklist and remove them from the review file
-    mawk -F ',' '$4 == "y" && $5 != "y" {print $2}' "$REVIEW_CONFIG" \
+    mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \
         | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
         | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
 
     # Add whitelisted entries to whitelist after formatting to regex and remove
     # them from the review file
-    mawk -F ',' '$5 == "y" && $4 != "y" {print $2}' "$REVIEW_CONFIG" \
-        | tee >(mawk '{gsub(/\./, "\."); print "^" $0 "$"}' \
+    mawk -F ',' '$5 == "y" && $4 != "y" { print $2 }' "$REVIEW_CONFIG" \
+        | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
         | sort -u - "$WHITELIST" -o "$WHITELIST") \
         | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
 }
@@ -162,14 +162,15 @@ filter() {
 
     if [[ "$3" == '--preserve' ]]; then
         # Save entries for console output
-        mawk -v tag="$tag" '{print $0 " (" tag ")"}' <<< "$entries" \
+        mawk -v tag="$tag" '{ print $0 " (" tag ")" }' <<< "$entries" \
             >> entries_for_review.tmp
 
         # Save entries into review config file
         mawk -v source="$source_name" -v reason="$tag" \
-            '{print source "," $0 "," reason ",,"}' <<< "$entries" \
+            '{ print source "," $0 "," reason ",," }' <<< "$entries" \
             >> "$REVIEW_CONFIG"
-        # Remove duplicates
+
+        # Remove duplicates from review config file
         mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
         mv temp "$REVIEW_CONFIG"
 
@@ -546,7 +547,7 @@ search_google() {
 
         # Get domains from each page
         page_domains="$(jq -r '.items[].link' <<< "$page_results" \
-            | mawk -F '/' '{print $3}')"
+            | mawk -F '/' '{ print $3 }')"
         printf "%s\n" "$page_domains" >> "$source_results"
 
         # Stop search term if no more pages are required
@@ -557,12 +558,12 @@ search_google() {
 }
 
 source_cybersquatting() {
-    # Last checked: 27/01/25
+    # Last checked: 08/02/25
     source_name='Cybersquatting'
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    local tlds row count runs results
+    local tlds
 
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
@@ -579,31 +580,31 @@ source_cybersquatting() {
     # Get TLDs from the NRD feed for dnstwist.
     # This is not needed for URLCrazy as that already checks for
     # alternate TLDs.
-    tlds="$(mawk -F '.' '{print $NF}' nrd.tmp | sort | uniq -c \
-        | sort -nr | mawk '{print $2}')"
+    tlds="$(mawk -F '.' '!seen[$NF]++ { print $NF }' nrd.tmp)"
 
     # Loop through phishing targets
-    mawk -F ',' '$4 == "y" {print $1}' "$PHISHING_TARGETS" \
+    mawk -F ',' '$4 == "y" { print $1 }' "$PHISHING_TARGETS" \
         | while read -r target; do
 
-        # Get info of the target domain
-        row="$(mawk -v target="$target" '$0 ~ target' "$PHISHING_TARGETS")"
-        count="$(mawk -F ',' '{print $2}' <<< "$row")"
-        runs="$(mawk -F ',' '{print $3}' <<< "$row")"
-
-        # Run dnstwist
-        results="$(dnstwist "${target}.com" -f list)"
-
-        # Append TLDs to dnstwist results
+        # Run dnstwist and append possible TLDs.
         # Note the dnstwist --tld argument only replaces the TLDs of the
-        # original domain.
-        while read -r tld; do
-            printf "%s\n" "$results" | sed "s/\.com/.${tld}/" >> results.tmp
-        done <<< "$tlds"
+        # original domain, not the resulting domains.
+        dnstwist "${target}.com" -f list | mawk -v tlds="$tlds" '
+            BEGIN {
+                n = split(tlds, tldArray, "\n")
+            }
+            {
+                for (i = 1; i <= n; i++) {
+                    modified = $0
+                    gsub(/\.com/, "." tldArray[i], modified)
+                    print modified
+                }
+            }
+        ' >> results.tmp
 
         # Run URLCrazy (bash does not work)
         ./urlcrazy-master/urlcrazy -r "${target}.com" -f CSV \
-            | mawk -F ',' '!/"Original"/ {print $2}' \
+            | mawk -F ',' '$1 !~ /Original/ { print $2 }' \
             | grep -oE "$DOMAIN_REGEX" >> results.tmp
 
         sort -u results.tmp -o results.tmp
@@ -616,11 +617,14 @@ source_cybersquatting() {
         cat results.tmp >> source_results.tmp
 
         # Update counts for the target
-        mawk -F ',' -v target="$target" \
-            -v count="$(( count + $(wc -l < results.tmp) ))" \
-            -v runs="$(( runs + 1 ))" \
-            'BEGIN {OFS=","} $1==target {$2=count; $3=runs} 1' \
-            "$PHISHING_TARGETS" > temp
+        mawk -F ',' -v target="$target" -v count="$(wc -l < results.tmp)" '
+            BEGIN {OFS = ","}
+            $1 == target {
+                $6 += count
+                $7 += 1
+            }
+            { print }
+        ' "$PHISHING_TARGETS" > temp
         mv temp "$PHISHING_TARGETS"
 
         # Reset results file for the next target domain
@@ -668,42 +672,43 @@ source_dga_detector() {
 }
 
 source_regex() {
-    # Last checked: 06/02/25
+    # Last checked: 08/02/25
     source_name='Regex'
     exclude_from_light=true
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    local row count runs pattern results
+    local pattern
 
     # Loop through phishing targets
-    mawk -F ',' '$8 == "y" {print $1}' "$PHISHING_TARGETS" \
+    mawk -F ',' '$8 == "y" { print $1 }' "$PHISHING_TARGETS" \
         | while read -r target; do
 
-        # Get info of the target domain
-        row="$(mawk -v target="$target" '$0 ~ target' "$PHISHING_TARGETS")"
-        count="$(mawk -F ',' '{print $6}' <<< "$row")"
-        runs="$(mawk -F ',' '{print $7}' <<< "$row")"
-        pattern="$(mawk -F ',' '{printf $5}' <<< "$row")"
-
         # Get regex of target
-        local escaped_domain="${target//[.]/\\.}"
-        local regex="${pattern//&/${escaped_domain}}"
+        pattern="$(mawk -F ',' -v target="$target" '
+            $1 == target {
+                print $5
+            }
+        ' "$PHISHING_TARGETS")"
+        local escaped_target="${target//[.]/\\.}"
+        local regex="${pattern//&/${escaped_target}}"
 
-        # Get matches in NRD feed
+        # Get matches in NRD feed and update counts
         # awk is used here instead of mawk for compatibility with the regex
         # expressions.
-        results="$(awk "/${regex}/" nrd.tmp | sort -u)"
-
-        # Collate results
-        printf "%s\n" "$results" >> source_results.tmp
-
-        # Update counts for the target
-        mawk -F ',' -v target="$target" \
-            -v count="$(( count + $(wc -w <<< "$results") ))" \
-            -v runs="$(( runs + 1 ))" \
-            'BEGIN {OFS=","} $1==target {$6=count; $7=runs} 1' \
-            "$PHISHING_TARGETS" > temp
+        mawk -F ',' -v target="$target" -v results="$(
+            awk "/${regex}/" nrd.tmp \
+                | sort -u \
+                | tee -a source_results.tmp \
+                | wc -l
+            )" '
+            BEGIN {OFS = ","}
+            $1 == target {
+                $6 += results
+                $7 += 1
+            }
+            { print }
+        ' "$PHISHING_TARGETS" > temp
         mv temp "$PHISHING_TARGETS"
     done
 }
@@ -955,7 +960,7 @@ source_viriback_tracker() {
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sS "$source_url" | mawk -v year="$(date +"%Y")" \
-        -F ',' '$4 ~ year {print $2}' \
+        -F ',' '$4 ~ year { print $2 }' \
         | grep -Po "^https?://\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
