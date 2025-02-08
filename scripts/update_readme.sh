@@ -2,9 +2,6 @@
 
 # Update the README.md content and statistics.
 
-# Note: mawk '{sum += $1} END {print sum}' can be used to print 0 when there
-# is no value.
-
 update_readme() {
     cat << EOF > README.md
 # Jarelllama's Scam Blocklist
@@ -77,12 +74,12 @@ $(print_stats)
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
-Dead domains removed this month: $(mawk "/${THIS_MONTH},dead_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
-Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
+Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
+Dead domains removed this month: $(mawk "/${THIS_MONTH},dead_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
+Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
 
-Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
-Unparked domains added today: $(mawk "/${TODAY},unparked_count/" "$DOMAIN_LOG" | csvcut -c 3 | mawk '{sum += $1} END {print sum}')
+Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
+Unparked domains added today: $(mawk "/${TODAY},unparked_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
 \`\`\`
 
 <details>
@@ -196,9 +193,9 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    # grep used here as mawk has issues with brackets after whitespaces
+    # grep used here as mawk has issues with matching source names
     grep "${1},${2}.*,saved$" "$SOURCE_LOG" | csvcut -c 5 \
-        | mawk '{sum += $1} END {print sum}'
+        | mawk '{ sum += $1 } END { print sum }'
 }
 
 # Function 'sum_excluded' is an echo wrapper that returns the percentage of
@@ -206,21 +203,26 @@ sum() {
 # Input:
 #   $1: source to process (default is all sources)
 sum_excluded() {
-    local raw_count white_count dead_count parked_count excluded_count
+    # csvcut used here as some of the sources include commas which causes
+    # problems for mawk.
+    read -r raw_count excluded_count <<< "$(csvcut -c 4,6,7,8 "$SOURCE_LOG" \
+        | mawk -F ',' '
+        {
+            raw_count += $1
+            white_count += $2
+            dead_count += $3
+            parked_count += $4
+        }
+        END {
+            print raw_count, white_count + dead_count + parked_count
+        }
+        ')"
 
-    # Get required columns of the source (includes unsaved)
-    grep -F "$1" "$SOURCE_LOG" | csvcut -c 4,6,7,8 > rows.tmp
-
-    raw_count="$(mawk -F ',' '{sum += $1} END {print sum}' rows.tmp)"
-    # Return if raw count is 0 to avoid divide by zero error
-    (( raw_count == 0 )) && { printf "0"; return; }
-
-    white_count="$(mawk -F ',' '{sum += $2} END {print sum}' rows.tmp)"
-    dead_count="$(mawk -F ',' '{sum += $3} END {print sum}' rows.tmp)"
-    parked_count="$(mawk -F ',' '{sum += $4} END {print sum}' rows.tmp)"
-    excluded_count="$(( white_count + dead_count + parked_count ))"
-
-    printf "%s" "$(( excluded_count * 100 / raw_count ))"
+    if (( raw_count == 0 )); then
+        printf "0"
+    else
+        printf "%s" "$(( excluded_count * 100 / raw_count ))"
+    fi
 }
 
 # Entry point
