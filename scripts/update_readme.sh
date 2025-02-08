@@ -74,12 +74,12 @@ $(print_stats)
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: $(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
-Dead domains removed this month: $(mawk "/${THIS_MONTH},dead_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
-Resurrected domains added today: $(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
+Dead domains removed today: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${TODAY},dead_count/" "$DOMAIN_LOG")")
+Dead domains removed this month: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${THIS_MONTH},dead_count/" "$DOMAIN_LOG")")
+Resurrected domains added today: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG")")
 
-Parked domains removed this month: $(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
-Unparked domains added today: $(mawk "/${TODAY},unparked_count/" "$DOMAIN_LOG" | mawk -F ',' '{ sum += $3 } END { print sum }')
+Parked domains removed this month: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG")")
+Unparked domains added today: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${TODAY},unparked_count/" "$DOMAIN_LOG")")
 \`\`\`
 
 <details>
@@ -198,6 +198,19 @@ sum() {
         | mawk '{ sum += $1 } END { print sum }'
 }
 
+sum_domains() {
+    mawk -F -v time="$1" ',' '/today,dead_count/ {
+        sum += $3
+    }
+    END {
+        if (sum == "") {
+            print 0
+        } else {
+            print sum
+        }
+    }'
+}
+
 # Function 'sum_excluded' is an echo wrapper that returns the percentage of
 # excluded domains out of the raw count retrieved by the given source.
 # Input:
@@ -205,8 +218,8 @@ sum() {
 sum_excluded() {
     # csvcut used here as some of the sources include commas which causes
     # problems for mawk.
-    read -r raw_count excluded_count <<< "$(csvcut -c 4,6,7,8 "$SOURCE_LOG" \
-        | mawk -F ',' '
+    read -r raw_count excluded_count \
+        <<< "$(grep -F "$1" "$SOURCE_LOG" | csvcut -c 4,6,7,8 | mawk -F ',' '
         {
             raw_count += $1
             white_count += $2
