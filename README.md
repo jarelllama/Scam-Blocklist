@@ -38,42 +38,42 @@ Light version: 47702
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-   36 |     250 |      0 % |      35 % | 165 Anti-fraud
-    6 |      60 |      0 % |      14 % | Artists Against 419
-    2 |      68 |      0 % |       8 % | BehindMLM
-    2 |      26 |      0 % |       5 % | BugsFighter
-   94 |     382 |      0 % |       1 % | Cybersquatting
- 1360 |    4253 |     10 % |       0 % | DGA Detector
-   23 |      58 |      0 % |      14 % | Emerging Threats
-    8 |      47 |      0 % |      23 % | FakeWebshopListHUN
-   33 |     271 |      0 % |       2 % | Google Search
-  303 |    1055 |      2 % |      17 % | Gridinsoft
-  871 |    3042 |      7 % |       0 % | Jeroengui (NRDs)
- 9258 |   25065 |     62 % |       8 % | Jeroengui
-    6 |      13 |      0 % |       9 % | PCrisk
-   24 |      34 |      0 % |      28 % | PhishStats
-   22 |      47 |      0 % |      16 % | PuppyScams.org
- 3770 |    7088 |     17 % |       1 % | Regex Matching
-   16 |      23 |      0 % |      36 % | Scam Directory
-    0 |       0 |      0 % |      32 % | ScamAdviser
-    0 |       3 |      0 % |       5 % | StopGunScams.com
-    0 |       9 |      0 % |      14 % | Unit42
-    0 |      11 |      0 % |      10 % | Verbraucherzentrale Hamburg
-    0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-   26 |      70 |      0 % |      19 % | Wildcat Cyber Patrol
-    2 |       3 |      0 % |       9 % | WiperSoft
-    0 |     533 |      1 % |      49 % | Česká Obchodní Inspekce
-14991 |   40218 |    100 % |      21 % | All sources
+    - |     250 |      0 % |      21 % | 165 Anti-fraud
+    - |      60 |      0 % |      21 % | Artists Against 419
+    - |      68 |      0 % |      21 % | BehindMLM
+    - |      26 |      0 % |      21 % | BugsFighter
+    - |     401 |      0 % |      21 % | Cybersquatting
+    - |    4253 |     10 % |      21 % | DGA Detector
+    - |      58 |      0 % |      21 % | Emerging Threats
+    - |      47 |      0 % |      21 % | FakeWebshopListHUN
+    - |     271 |      0 % |      21 % | Google Search
+    - |    1055 |      2 % |      21 % | Gridinsoft
+    - |    3042 |      7 % |      21 % | Jeroengui (NRDs)
+    - |   25065 |     62 % |      21 % | Jeroengui
+    - |      13 |      0 % |      21 % | PCrisk
+    - |      34 |      0 % |      21 % | PhishStats
+    - |      47 |      0 % |      21 % | PuppyScams.org
+    - |    7105 |     17 % |      21 % | Regex Matching
+    - |      23 |      0 % |      21 % | Scam Directory
+    - |       0 |      0 % |      21 % | ScamAdviser
+    - |       3 |      0 % |      21 % | StopGunScams.com
+    - |       9 |      0 % |      21 % | Unit42
+    - |      11 |      0 % |      21 % | Verbraucherzentrale Hamburg
+    - |       0 |      0 % |      21 % | ViriBack C2 Tracker
+    - |      70 |      0 % |      21 % | Wildcat Cyber Patrol
+    - |       3 |      0 % |      21 % | WiperSoft
+    - |     533 |      1 % |      21 % | Česká Obchodní Inspekce
+    - |   40254 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 2212
+Dead domains removed today: 
 Dead domains removed this month: 18637
-Resurrected domains added today: 1964
+Resurrected domains added today: 
 
-Parked domains removed this month: 0
-Unparked domains added today: 0
+Parked domains removed this month: 
+Unparked domains added today: 
 ```
 
 <details>
