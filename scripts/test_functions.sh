@@ -442,14 +442,14 @@ test_invalid_removal() {
 
 # Test checking of domains against toplist
 test_toplist_check() {
-    input microsoft.com
-    output microsoft.com,toplist "$REVIEW_CONFIG"
-    output toplist,microsoft.com "$DOMAIN_LOG"
+    input data.microsoft.com
+    output data.microsoft.com,toplist "$REVIEW_CONFIG"
+    output toplist,data.microsoft.com "$DOMAIN_LOG"
     # The validate script does not remove domains found in the toplist from the
     # raw file
     [[ "$script_to_test" == 'retrieve' ]] && return
-    output microsoft.com "$RAW"
-    output microsoft.com "$RAW_LIGHT"
+    output data.microsoft.com "$RAW"
+    output data.microsoft.com "$RAW_LIGHT"
 }
 
 # Test exclusion of specific sources from light version
