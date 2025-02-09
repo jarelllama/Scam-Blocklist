@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.07.082141.2025
+! Version: 02.09.085213.2025
 ! Expires: 12 hours
-! Last modified: Fri Feb  7 08:21:41 UTC 2025
+! Last modified: Sun Feb  9 08:52:13 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 47702
+! Number of entries: 47859
 !
 ||0.majorlinker.com^
 ||000014.cc^
@@ -2092,6 +2092,7 @@
 ||aibaba.capital^
 ||aibaba.fun^
 ||aibaba.net^
+||aibaba.ru^
 ||aibcgroup.com^
 ||aibnb17.cc^
 ||aibonline-securepayments.com^
@@ -2506,6 +2507,7 @@
 ||aliexpresss.nl^
 ||aliexpresss.online^
 ||aliexpresss.store^
+||aliexpresss.us^
 ||aliexpressy.ru^
 ||aliexpresy.com^
 ||aliexprezss.com^
@@ -2630,6 +2632,7 @@
 ||almajallarconstruction.com^
 ||almalisiniade.xyz^
 ||almart.fun^
+||almart.online^
 ||almart.sbs^
 ||almart.store^
 ||almart.xyz^
@@ -2724,6 +2727,7 @@
 ||amaaon.nl^
 ||amaasp.org.br^
 ||amaazon.pl^
+||amaazon.sbs^
 ||amaazon.shop^
 ||amaazon.store^
 ||amaazon.work^
@@ -2789,6 +2793,8 @@
 ||amazo.site^
 ||amazo.today^
 ||amazo.world^
+||amazol.co^
+||amazol.shop^
 ||amazom.click^
 ||amazom.cyou^
 ||amazom.fun^
@@ -2834,6 +2840,7 @@
 ||amazonp.top^
 ||amazonprimefirsatlari.com.tr^
 ||amazonq.xyz^
+||amazons.care^
 ||amazonshome.com^
 ||amazonssale.top^
 ||amazont.it^
@@ -3966,6 +3973,7 @@
 ||autibo.com^
 ||autkgjwbck.shop^
 ||autlook.org^
+||autlook.pro^
 ||autocar.serveuser.com^
 ||autocarbr.com^
 ||autocaressema.com^
@@ -4388,6 +4396,7 @@
 ||bankofamerica.club^
 ||bankofamerica.fr^
 ||bankofamerica.nu^
+||bankofamerican.net^
 ||bankofamerjca.com^
 ||bankofamerkca.com^
 ||bankofamerlca.info^
@@ -5397,6 +5406,7 @@
 ||bincnce.com^
 ||binder-sa.com^
 ||bindsolutions.com^
+||binence.co^
 ||binence.me^
 ||binence.us^
 ||binexness.online^
@@ -5510,6 +5520,8 @@
 ||bitcoin1.net^
 ||bitcoin1.site^
 ||bitcoin1.vip^
+||bitcoina.cc^
+||bitcoina.vip^
 ||bitcoinb.org^
 ||bitcoinbanktradingapp.ch^
 ||bitcoinblast.weebly.com^
@@ -7342,6 +7354,7 @@
 ||caterpillarshungary.com^
 ||catfaksvyo.shop^
 ||catfootwearhungary.com^
+||catgpt.ceo^
 ||catgpt.cm^
 ||catgpt.ink^
 ||catgpt.news^
@@ -7680,6 +7693,7 @@
 ||characterstamp.shop^
 ||charamtomdatdigital.io.vn^
 ||chargebackmetro.com^
+||chargpt.site^
 ||charislegalpractice.com.ng^
 ||charismaticyorkieandcorgipuppies.com^
 ||charityr.shop^
@@ -7730,6 +7744,7 @@
 ||chat-gpt-pc.online^
 ||chat-gpt.de^
 ||chat-gpt.nu^
+||chat-gpt.tips^
 ||chat-openai.online^
 ||chatept.com^
 ||chatfgpt.com^
@@ -7757,12 +7772,15 @@
 ||chatgpr.org^
 ||chatgpr.store^
 ||chatgpt.be^
+||chatgpt.broker^
 ||chatgpt.contractors^
 ||chatgpt.courses^
 ||chatgpt.exposed^
+||chatgpt.futbol^
 ||chatgpt.industries^
 ||chatgpt.jobs^
 ||chatgpt.markets^
+||chatgpt.mortgage^
 ||chatgpt.ooo^
 ||chatgpt.parts^
 ||chatgpt.place^
@@ -7793,6 +7811,7 @@
 ||chatgptn.shop^
 ||chatgpto.asia^
 ||chatgpto.ru^
+||chatgpts.click^
 ||chatgpts.news^
 ||chatgpts.se^
 ||chatgptx.africa^
@@ -8057,6 +8076,7 @@
 ||cht-tw.com^
 ||chtgpt.info^
 ||chtgpt.net^
+||chtgpt.xyz^
 ||chtneomulic.com^
 ||chuanqigems.shop^
 ||chubbybotakkoalla.com^
@@ -8587,12 +8607,14 @@
 ||coffeeuncle.com^
 ||coffeinoffice.xyz^
 ||coglam.com^
+||coibase.sbs^
 ||coifloortrade.pro^
 ||coiinbase.online^
 ||coiissimo-livraison.com^
 ||coilyummy.com^
 ||coimal.shop^
 ||coimbase.pro^
+||coin-base.exchange^
 ||coin-base.org^
 ||coin-base.vip^
 ||coin-base.world^
@@ -8632,6 +8654,7 @@
 ||coinbasex.pro^
 ||coinbasex.site^
 ||coinbasez.com^
+||coinbasse.tech^
 ||coinbaze.net^
 ||coinbaze.org^
 ||coinbaze.xyz^
@@ -8641,6 +8664,7 @@
 ||coinbose.bond^
 ||coinbose.cfd^
 ||coinbose.net^
+||coinbose.org^
 ||coinbs-helpez.gitbook.io^
 ||coinbse.xyz^
 ||coinbyu.com^
@@ -9497,10 +9521,12 @@
 ||crypt.win^
 ||crypt0.archi^
 ||crypt0.monster^
+||crypta.exchange^
 ||crypta.online^
 ||cryptexpro-tech.com^
 ||cryptg.com^
 ||cryptgo.org^
+||crypti.site^
 ||cryptl.net^
 ||cryptland.net^
 ||cryptn.online^
@@ -9516,6 +9542,7 @@
 ||crypto.archi^
 ||crypto.boston^
 ||crypto.cpa^
+||crypto.cricket^
 ||crypto.deal^
 ||crypto.forum^
 ||crypto.gd^
@@ -9523,9 +9550,13 @@
 ||crypto.guitars^
 ||crypto.net.br^
 ||crypto.onl^
+||crypto.republican^
 ||crypto.saarland^
+||crypto.surgery^
+||crypto1.fr^
 ||crypto1.news^
 ||crypto1.tokyo^
+||crypto1.top^
 ||crypto2.site^
 ||crypto3.biz^
 ||crypto3.click^
@@ -9535,6 +9566,7 @@
 ||crypto3.site^
 ||crypto3.space^
 ||crypto3.tokyo^
+||crypto4.live^
 ||crypto4.ru^
 ||crypto4.tech^
 ||crypto5.news^
@@ -9566,6 +9598,7 @@
 ||cryptol.info^
 ||cryptol.site^
 ||cryptoliq.org^
+||cryptom.site^
 ||cryptom.vip^
 ||cryptomatrixdex.asia^
 ||cryptomeg.org^
@@ -9576,6 +9609,7 @@
 ||crypton.capital^
 ||crypton.cash^
 ||crypton.chat^
+||crypton.fun^
 ||crypton.group^
 ||crypton.lat^
 ||crypton.news^
@@ -9601,6 +9635,7 @@
 ||cryptos.berlin^
 ||cryptos.boats^
 ||cryptos.com^
+||cryptos.cyou^
 ||cryptos.design^
 ||cryptos.foo^
 ||cryptos.gay^
@@ -9617,6 +9652,7 @@
 ||cryptot.app^
 ||cryptot.pro^
 ||cryptot.run^
+||cryptot.xyz^
 ||cryptotecfx.com^
 ||cryptou.fyi^
 ||cryptou.news^
@@ -9638,6 +9674,7 @@
 ||cryptto.org^
 ||cryptvista.com^
 ||crypvexo.com^
+||crypzo.xyz^
 ||crystal-maker.com^
 ||crystal-pitch-hummingbird.glitch.me^
 ||crystalballshop.shop^
@@ -11115,15 +11152,18 @@
 ||discerd.com^
 ||disciplineq.shop^
 ||discod.ru^
+||discoed.site^
 ||discoerd.com^
 ||discor.com^
 ||discor.xyz^
+||discorb.site^
 ||discord.bond^
 ||discord.business^
 ||discord.cyou^
 ||discord.diy^
 ||discord.fo^
 ||discord.love^
+||discord.now^
 ||discord.productions^
 ||discord.rosekiller.com^
 ||discord.sn^
@@ -13673,6 +13713,7 @@
 ||facerook.ru^
 ||facesbook.nl^
 ||facesbook.org^
+||facesbook.shop^
 ||facetofaceeach.com^
 ||facettv.com^
 ||facialthehealth.com^
@@ -14241,11 +14282,14 @@
 ||finance.design^
 ||finance.diamonds^
 ||finance.fyi^
+||finance.limo^
 ||finance.live^
 ||finance.org^
 ||finance.rip^
 ||finance.tz^
+||finance.vin^
 ||finance.watch^
+||finance.yt^
 ||financebridgelimited.com^
 ||financecontrolinc.com^
 ||financeexpressltd.net^
@@ -16581,6 +16625,7 @@
 ||googie.es^
 ||googie.nu^
 ||googie.top^
+||googke.fr^
 ||googl.immo^
 ||googl.nu^
 ||googl.pro^
@@ -16651,6 +16696,7 @@
 ||googlle.es^
 ||googlle.help^
 ||googlle.in^
+||googlle.store^
 ||googlme.com^
 ||googlo-analytics.com^
 ||googlo.top^
@@ -16690,12 +16736,14 @@
 ||gooogle.sbs^
 ||gooogle.shop^
 ||gooogle.uno^
+||gooogle.website^
 ||gooogle.xyz^
 ||goooglefolders.com^
 ||gooqle.kz^
 ||gooqle.nu^
 ||gooseberrystyle.com^
 ||gooutdoorusa.com^
+||goozle.site^
 ||gordugun-seyler-sinirli-olarak-geldik.com^
 ||goreveleo.myshopify.com^
 ||gorgeousgalleri.com^
@@ -19431,10 +19479,13 @@
 ||insta-mod-d820a-default-rtdb.firebaseio.com^
 ||instadryclean.com^
 ||instagam.club^
+||instagam.fr^
+||instagarm.live^
 ||instagbam.com^
 ||instagbram.com^
 ||instagfram.com^
 ||instagram.ky^
+||instagram0.asia^
 ||instagraml.ru^
 ||instagramm.biz^
 ||instagramr.ru^
@@ -19484,6 +19535,7 @@
 ||intercontinentalshippingcompany.com^
 ||intercontinentaltobacco.com^
 ||interest.baby^
+||interest.bio^
 ||interestendes.com^
 ||interestingfindsonline.com^
 ||intergherwcrets.shop^
@@ -20296,6 +20348,7 @@
 ||jncojeans.cz^
 ||jncojeans.de^
 ||jnesygmpfg.shop^
+||jnetflix.com^
 ||jnfacai141.cc^
 ||jnfacai18.top^
 ||jnfacai3.top^
@@ -21793,14 +21846,17 @@
 ||krypto.beauty^
 ||krypto.berlin^
 ||krypto.bio^
+||krypto.ceo^
 ||krypto.college^
 ||krypto.company^
 ||krypto.day^
+||krypto.deal^
 ||krypto.fyi^
 ||krypto.jetzt^
 ||krypto.koeln^
 ||krypto.meme^
 ||krypto.nu^
+||krypto.onl^
 ||krypto.press^
 ||krypto.sbs^
 ||krypto.ventures^
@@ -22702,12 +22758,14 @@
 ||linkcurtto.com^
 ||linkdin.store^
 ||linkdojodrwagons.shop^
+||linkebin.net^
 ||linkeblin.online^
 ||linkecdin.com^
 ||linked-in.site^
 ||linked-in.us^
 ||linkeddin.net^
 ||linkeden.xyz^
+||linkedi.fun^
 ||linkedi.pl^
 ||linkedil.com^
 ||linkedin3.com^
@@ -23035,6 +23093,7 @@
 ||lonlnvips.com^
 ||lonlyfans.info^
 ||lonlyfans.live^
+||lonlyfans.se^
 ||lonngefyeurope.site^
 ||lonniefred.shop^
 ||lonyidt.com^
@@ -24525,6 +24584,7 @@
 ||messanger.shop^
 ||messengar.net^
 ||messenger.guru^
+||messenger.news^
 ||messengeri.online^
 ||messengers.cafe^
 ||messengers.site^
@@ -24809,7 +24869,12 @@
 ||microsofft.info^
 ||microsoft-365.nu^
 ||microsoft-free.live^
+||microsoft1.top^
+||microsoft2.top^
+||microsoft3.top^
 ||microsoft365.nu^
+||microsoft4.top^
+||microsoft5.top^
 ||microsofta.xyz^
 ||microsoftdriver.com^
 ||microsofthelpcenter.info^
@@ -24827,9 +24892,12 @@
 ||microsooft.fr^
 ||microsopft.fun^
 ||microsort.ru^
+||microsot.pl^
 ||microsotf.cn^
 ||microsotf.pl^
+||microsotf.store^
 ||microsovt.com^
+||microsowft.com^
 ||microssoft-teams.com^
 ||microssoft.click^
 ||microssoft.xyz^
@@ -25882,6 +25950,7 @@
 ||mycpagettipotok1.com^
 ||mycpagettipotok2.com^
 ||mycraftzone.com^
+||mycrosoft.online^
 ||mydachshundhaven.com^
 ||mydaticloud.top^
 ||mydesignofgems.com^
@@ -26383,6 +26452,7 @@
 ||netfilx.site^
 ||netfix.site^
 ||netflix-gpt.xyz^
+||netflix.fit^
 ||netflix.nu^
 ||netflix.rent^
 ||netflix.tokyo^
@@ -27325,6 +27395,7 @@
 ||o18a.com^
 ||o1y9a8idc1.mba^
 ||o5krc3ltwf.shop^
+||o5tlook.com^
 ||o7car.com^
 ||o7labs.top^
 ||o9gm6cxvbt.art^
@@ -27685,6 +27756,8 @@
 ||omegashark.com^
 ||omegastocktradingpro.com^
 ||omenai.co^
+||omenai.org^
+||omenai.pro^
 ||omenine.com^
 ||omenkid.top^
 ||omilawatch.com^
@@ -27853,9 +27926,12 @@
 ||onlpyfans.com^
 ||only-discount.shop^
 ||only-fans.app^
+||only-fans.cloud^
 ||only-fans.id^
 ||only-fans.mom^
+||only-fans.name^
 ||only-fans.photos^
+||only-fans.sbs^
 ||only-fans.site^
 ||only-fans.uno^
 ||only-fans.us^
@@ -27864,6 +27940,7 @@
 ||only-save.shop^
 ||onlybans.lol^
 ||onlybans.online^
+||onlybans.org^
 ||onlybio.es^
 ||onlycans.earth^
 ||onlycans.se^
@@ -27872,6 +27949,7 @@
 ||onlydans.click^
 ||onlydans.dad^
 ||onlydans.fans^
+||onlydans.gay^
 ||onlydans.lol^
 ||onlyfabs.agency^
 ||onlyfabs.ch^
@@ -27902,6 +27980,7 @@
 ||onlyfanse.info^
 ||onlyfanss.net^
 ||onlyfanss.shop^
+||onlyfanss.site^
 ||onlyfansv.com^
 ||onlyfansw.com^
 ||onlyfansx.fun^
@@ -27926,6 +28005,7 @@
 ||onlyfrans.fr^
 ||onlyfrans.info^
 ||onlyftans.com^
+||onlyfuns.icu^
 ||onlyfuns.net^
 ||onlyfuns.online^
 ||onlyfuns.vip^
@@ -27938,6 +28018,7 @@
 ||onlytans.vip^
 ||onlyvans.club^
 ||onlyvans.fr^
+||onlyvans.fun^
 ||onlyvans.nu^
 ||onlyvans.shop^
 ||onlyvans.space^
@@ -28286,6 +28367,7 @@
 ||ottlook.ru^
 ||ottofoodonline.com^
 ||otwgjtzfocahdsztyp.shop^
+||ou4look.com^
 ||ouafei.com^
 ||oubkenhmhwv.shop^
 ||ouc.education^
@@ -28395,8 +28477,10 @@
 ||outlstore.com^
 ||outluok.shop^
 ||outolook.cam^
+||outook.click^
 ||outslook.com^
 ||outsungarten.com^
+||outtlook.site^
 ||outube.ru^
 ||outusproduct.com^
 ||ouutlook.info^
@@ -28770,6 +28854,7 @@
 ||pascalpeyrichou.shop^
 ||pascalrey.shop^
 ||pascbnhwfsa.shop^
+||paspal.org^
 ||pasqualeamore.shop^
 ||passaksms.com^
 ||passbridon.shop^
@@ -28930,6 +29015,7 @@
 ||paypalu.com^
 ||paypaysend-up.replit.app^
 ||paypl.app^
+||paypol.in^
 ||paypol.taxi^
 ||paypol.top^
 ||paypul.shop^
@@ -32233,6 +32319,7 @@
 ||reuqzvxjragcgefsjpf.shop^
 ||reuters-press.com^
 ||revamav.com^
+||revanced.pk^
 ||revead.top^
 ||reveayado.com^
 ||reverbuy01.top^
@@ -32604,6 +32691,7 @@
 ||robottaiwan.xyz^
 ||robotverifier.com^
 ||robox.center^
+||robox.events^
 ||robox.icu^
 ||robox.studio^
 ||robustesgepack.com^
@@ -34933,6 +35021,7 @@
 ||snapchatk.com^
 ||snapchatr.com^
 ||snapchats.site^
+||snapchats.uk^
 ||snapchatt.fr^
 ||snapchatt.site^
 ||snapchatv.com^
@@ -35485,6 +35574,7 @@
 ||spotifi.lat^
 ||spotifi.shop^
 ||spotifi.top^
+||spotifry.com^
 ||spotify-phonewave.freewebhostmost.com^
 ||spotify.cn^
 ||spotify.nu^
@@ -35497,6 +35587,7 @@
 ||spotifycom.com^
 ||spotifyd.com^
 ||spotifydypcoe.freewebhostmost.com^
+||spotifye.top^
 ||spotifyg.com^
 ||spotifyi.vip^
 ||spotifyprojectyash.freewebhostmost.com^
@@ -35759,6 +35850,7 @@
 ||stazaengine.com^
 ||stb-trustsave.com^
 ||stbjkeoktwufkjnfby.shop^
+||stcancommunity.com^
 ||stciasa.ink^
 ||stcseasa.ink^
 ||stdtrad.com^
@@ -35774,12 +35866,15 @@
 ||steamcommumnity.ru^
 ||steamcommunifty.com^
 ||steamcommunisty.com^
+||steamcommunity.help^
 ||steamcommunity.life^
+||steamcommunity.my^
 ||steamcommunity.us^
 ||steamcommunity1.com^
 ||steamcommunityu.com^
 ||steamcommunjty.ru^
 ||steamcommunlty.cfd^
+||steamcommunlty.website^
 ||steamcommunlvty.com^
 ||steamcommunmity.com^
 ||steamcommurnity.ru^
@@ -36664,6 +36759,8 @@
 ||t0.wf^
 ||t0kempock2t.com^
 ||t1-4fv.pages.dev^
+||t1kt0k.top^
+||t1kt0k.vip^
 ||t1t0kshop027.cc^
 ||t3mk7.shop^
 ||t551001.com^
@@ -36689,6 +36786,7 @@
 ||tabutemptationsshop.com^
 ||tabvteobtyfocej.shop^
 ||tacebook.cn^
+||tacebook.it^
 ||tachyonn.com^
 ||tacking-usps-vip.com^
 ||tackleft.com^
@@ -36717,6 +36815,7 @@
 ||tahogbal.ro^
 ||tahoo.live^
 ||tahoo.xyz^
+||taibao.org^
 ||taiegrma.biz^
 ||taiegrma.live^
 ||taiegrmqxp.club^
@@ -37267,6 +37366,7 @@
 ||tele-gram-w.org^
 ||tele-gram-y.org^
 ||tele-gram-z.org^
+||tele-gram.info^
 ||tele-gram.link^
 ||tele-gram.top^
 ||tele-grann.xyz^
@@ -37280,6 +37380,7 @@
 ||telebram.today^
 ||telebram.vip^
 ||telecentre.info^
+||telecram.cc^
 ||teleegam.art^
 ||teleeggram.cyou^
 ||telefon1subat.college^
@@ -37509,6 +37610,7 @@
 ||telegdays.pro^
 ||telegdays.shop^
 ||telegdays.world^
+||telegdram.cc^
 ||telegeam.info^
 ||telegemaar.life^
 ||telegemon.boats^
@@ -38243,9 +38345,11 @@
 ||telegram.observer^
 ||telegram.photos^
 ||telegram.qpon^
+||telegram.red^
 ||telegram.top^
 ||telegram.wales^
 ||telegram.win^
+||telegram0.asia^
 ||telegram0.com^
 ||telegram1.cyou^
 ||telegram2.app^
@@ -38266,8 +38370,25 @@
 ||telegramae.monster^
 ||telegramb.xyz^
 ||telegramc.cc^
+||telegrame.click^
+||telegrame.college^
+||telegrame.digital^
+||telegrame.hair^
+||telegrame.help^
+||telegrame.homes^
+||telegrame.info^
+||telegrame.life^
+||telegrame.live^
+||telegrame.monster^
 ||telegrame.net^
 ||telegrame.one^
+||telegrame.pro^
+||telegrame.quest^
+||telegrame.shop^
+||telegrame.space^
+||telegrame.website^
+||telegrame.world^
+||telegrame.xin^
 ||telegramg.net^
 ||telegramg.top^
 ||telegramg.xin^
@@ -38286,6 +38407,7 @@
 ||telegraml.online^
 ||telegraml.pro^
 ||telegraml.ru^
+||telegraml.site^
 ||telegramm.app^
 ||telegramm.bar^
 ||telegramm.ch^
@@ -38330,6 +38452,15 @@
 ||telegramr.org^
 ||telegrams-u.com^
 ||telegrams-z.com^
+||telegrams.boats^
+||telegrams.hair^
+||telegrams.my^
+||telegrams.pics^
+||telegrams.quest^
+||telegrams.rest^
+||telegrams.shop^
+||telegrams.space^
+||telegrams.today^
 ||telegramt.info^
 ||telegramt.org^
 ||telegramt.ru^
@@ -40162,6 +40293,7 @@
 ||tik-shops.pro^
 ||tik-shops.top^
 ||tik-tok.academy^
+||tik-tok.ceo^
 ||tik-tok.fun^
 ||tik-tok.info^
 ||tik-tok.life^
@@ -40178,7 +40310,9 @@
 ||tikkisandale.cz^
 ||tikktok.info^
 ||tikktok.store^
+||tikltok.shop^
 ||tikok.shop^
+||tikpok.ru^
 ||tikpok.site^
 ||tikshoop.top^
 ||tikshops.biz^
@@ -40212,9 +40346,11 @@
 ||tikto1.com^
 ||tiktoc.pics^
 ||tiktok.build^
+||tiktok.ceo^
 ||tiktok.inc^
 ||tiktok.net^
 ||tiktok.org.za^
+||tiktok.qpon^
 ||tiktok.skin^
 ||tiktok.web.id^
 ||tiktok1.club^
@@ -40252,6 +40388,7 @@
 ||tiktokp.top^
 ||tiktokp.xyz^
 ||tiktokq.top^
+||tiktoks.asia^
 ||tiktoks.blog^
 ||tiktoks.info^
 ||tiktoks.xyz^
@@ -40383,6 +40520,7 @@
 ||titomio.com^
 ||titter.cloud^
 ||titter.com^
+||titter.net^
 ||titter.pro^
 ||tityshop.com^
 ||tityteacup.com^
@@ -41669,7 +41807,9 @@
 ||twitter.nu^
 ||twitter.pink^
 ||twitter.review^
+||twitter.rocks^
 ||twitter.uk^
+||twitter0.asia^
 ||twitter2.uk^
 ||twitter5.cyou^
 ||twitter7.com^
@@ -44739,6 +44879,7 @@
 ||whatsepp.xyz^
 ||whatspp.icu^
 ||whatssapp.link^
+||whatssapp.online^
 ||whatsupp.fun^
 ||whatsupp.info^
 ||whatsupp.store^
@@ -44857,9 +44998,11 @@
 ||wigstudioshop.com^
 ||wijipedia.org^
 ||wikaba.com^
+||wiki-pedia.pl^
 ||wiki0edia.org^
 ||wikichemicals.com^
 ||wikimedia.blog^
+||wikipddia.com^
 ||wikipe-dia.com^
 ||wikipedea.net^
 ||wikipedi.pl^
@@ -44867,6 +45010,10 @@
 ||wikipediag.org^
 ||wikipedija.com^
 ||wikipediw.com^
+||wikippedia.online^
+||wikippedia.site^
+||wikippedia.space^
+||wikippedia.store^
 ||wilbercardenas.shop^
 ||wilcoscholten.shop^
 ||wilcox.plus^
@@ -45707,13 +45854,16 @@
 ||xhamstar.org^
 ||xhamster.autos^
 ||xhamster.casino^
+||xhamster.ceo^
 ||xhamster.coupons^
 ||xhamster.guru^
 ||xhamster.nu^
 ||xhamster.pics^
+||xhamster.rest^
 ||xhamster.rocks^
 ||xhamster.shop^
 ||xhamster.site^
+||xhamster.watch^
 ||xhamster.world^
 ||xhamster1.ru^
 ||xhamster2.mom^
@@ -45915,6 +46065,7 @@
 ||xn--disneypus-msb.com^
 ||xn--faceook-1yb.com^
 ||xn--fcebook-hwa.com^
+||xn--gge-snaa17b.com^
 ||xn--ggle-lqax.com^
 ||xn--gogl-epa0d.com^
 ||xn--gogl-epa1d.com^
@@ -45930,6 +46081,7 @@
 ||xn--joulesespaa-beb.com^
 ||xn--krken2025-6pd.com^
 ||xn--linkedn-0w4c.com^
+||xn--lnkedn-3vae.com^
 ||xn--mcrosoft-9ib.com^
 ||xn--mcrosoft-c2a.live^
 ||xn--mcrosoft-g80d.com^
@@ -45947,6 +46099,7 @@
 ||xn--nstagram-skb.xyz^
 ||xn--offce-p4a.net^
 ||xn--onbase-wva0w.com^
+||xn--outube-v0b.net^
 ||xn--paypa-o7a.online^
 ||xn--penai-l29a.com^
 ||xn--pokmon-tcg-d7a.fr^
@@ -46240,12 +46393,14 @@
 ||yafxyrnvxc.shop^
 ||yagerweb.com^
 ||yagoo.cc^
+||yagoo.org^
 ||yagsbkjfcoycdj.shop^
 ||yah00.tech^
 ||yahao.online^
 ||yahhoo.blog^
 ||yahhoo.cam^
 ||yaho.chat^
+||yaho.live^
 ||yahong.shop^
 ||yahooai.live^
 ||yahood.net^
@@ -46711,11 +46866,13 @@
 ||youtbe.top^
 ||youtebe.vip^
 ||youthfulyarvs.shop^
+||youtobe.online^
 ||youtrube.ru^
 ||youtub.shop^
 ||youtub.uk^
 ||youtubbe.top^
 ||youtube.voto^
+||youtube0.asia^
 ||youtube0.ru^
 ||youtube2.online^
 ||youtube4.site^
