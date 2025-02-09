@@ -54,7 +54,8 @@ build() {
     dir="$DOMAINS"
     : > "${dir}/${output_file}"
     append_header '#' 'Wildcard Domains'
-    sed 's/[|\^]//g' compiled.tmp >> "${dir}/${output_file}"
+    mawk '{ gsub (/[|^]/, ""); print }' compiled.tmp \
+        >> "${dir}/${output_file}"
 }
 
 # Append the header onto the blocklist.
