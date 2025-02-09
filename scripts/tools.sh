@@ -114,17 +114,25 @@ prune_lines() {
 # that the toplist does not contain subdomains.
 # Output:
 #   toplist.tmp
-#   Telegram notification if an error occurred while downloading the toplist
 download_toplist() {
-    [[ -f toplist.tmp ]] && return
+    local max_attempts=3  # Retries twice
+    local attempt=1
 
-    # curl -L required
-    curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' -o temp
-    unzip -p temp | mawk -F ',' '{ print $2 }' > toplist.tmp
+    while (( attempt <= max_attempts )); do
+        curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' -o temp
 
-    [[ ! -s toplist.tmp ]] && error 'Error downloading toplist.'
+        unzip -p temp | mawk -F ',' '{ print $2 }' > toplist.tmp
 
-    format_file toplist.tmp
+        [[ -s toplist.tmp ]] && break
+
+        ((attempt++))
+    done || true
+
+    if [[ -s toplist.tmp ]]; then
+        format_file toplist.tmp
+    else
+        error 'Error downloading toplist.'
+    fi
 }
 
 # Function 'download_nrd_feed' downloads and collates NRD feeds consisting
