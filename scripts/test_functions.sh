@@ -60,7 +60,7 @@ main() {
             SHELLCHECK
             ;;
         *)
-            error 'No tests to run'
+            error 'No tests to run.'
             ;;
     esac
 }
@@ -77,7 +77,7 @@ SHELLCHECK() {
     curl -sSL "$url" | tar -xJ
 
     # Check that ShellCheck was successfully installed
-    shellcheck-stable/shellcheck --version || error 'ShellCheck did not install successfully'
+    shellcheck-stable/shellcheck --version || error 'ShellCheck did not install successfully.'
 
     # Find scripts
     scripts=$(find . -type f -name "*.sh")
@@ -109,7 +109,7 @@ SHELLCHECK() {
 
     [[ "$error" == true ]] && exit 1
 
-    printf "\e[1m[success] Test completed. No errors found\e[0m\n"
+    printf "\e[1m[success] Test completed. No errors found.\e[0m\n"
 }
 
 # Test the retrieval or validation scripts.
@@ -606,7 +606,7 @@ check_output() {
 
     # Check if the tests were all completed successfully
     if [[ "$error" == false ]]; then
-        printf "\e[1m[success] Test completed. No errors found\e[0m\n\n"
+        printf "\e[1m[success] Test completed. No errors found.\e[0m\n\n"
     fi
 
     # Print source log for retrieval test
