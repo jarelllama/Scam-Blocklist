@@ -563,7 +563,7 @@ source_cybersquatting() {
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    local tlds
+    local tlds results
 
     # Install dnstwist
     command -v dnstwist > /dev/null || pip install -q dnstwist
@@ -586,26 +586,19 @@ source_cybersquatting() {
     mawk -F ',' '$4 == "y" { print $1 }' "$PHISHING_TARGETS" \
         | while read -r target; do
 
-        # Run dnstwist and append possible TLDs.
-        # Note the dnstwist --tld argument only replaces the TLDs of the
-        # original domain, not the resulting domains.
-        dnstwist "${target}.com" -f list | mawk -v tlds="$tlds" '
-            BEGIN {
-                n = split(tlds, tldArray, "\n")
-            }
-            {
-                for (i = 1; i <= n; i++) {
-                    modified = $0
-                    gsub(/\.com/, "." tldArray[i], modified)
-                    print modified
-                }
-            }
-        ' >> results.tmp
+        # Run dnstwist
+        results="$(dnstwist "${target}.com" -f list)"
+
+        # Append possible TLDs
+        while read -r tld; do
+            printf "%s\n" "$results" | mawk -v tld="$tld" '
+                { sub(/\.com$/, "."tld); print }' >> results.tmp
+        done <<< "$tlds"
 
         # Run URLCrazy (bash does not work)
-        ./urlcrazy-master/urlcrazy -r "${target}.com" -f CSV \
-            | mawk -F ',' '$1 !~ /Original/ { print $2 }' \
-            | grep -oE "$DOMAIN_REGEX" >> results.tmp
+        # Note that URLCrazy appends possible TLDs
+        ./urlcrazy-master/urlcrazy -r "${target}.com" -f CSV | mawk -F ',' '
+            NR > 2 { gsub(/"/, "", $2); print $2 }' >> results.tmp
 
         sort -u results.tmp -o results.tmp
 
@@ -617,11 +610,12 @@ source_cybersquatting() {
         cat results.tmp >> source_results.tmp
 
         # Update counts for the target
-        mawk -F ',' -v target="$target" -v count="$(wc -l < results.tmp)" '
+        mawk -F ',' \
+            -v target="$target" -v results_count="$(wc -l < results.tmp)" '
             BEGIN {OFS = ","}
             $1 == target {
-                $6 += count
-                $7 += 1
+                $2 += results_count
+                $3 += 1
             }
             { print }
         ' "$PHISHING_TARGETS" > temp
@@ -686,10 +680,7 @@ source_regex() {
 
         # Get regex of target
         pattern="$(mawk -F ',' -v target="$target" '
-            $1 == target {
-                print $5
-            }
-        ' "$PHISHING_TARGETS")"
+            $1 == target { print $5 }' "$PHISHING_TARGETS")"
         local escaped_target="${target//[.]/\\.}"
         local regex="${pattern//&/${escaped_target}}"
 
