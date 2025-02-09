@@ -115,25 +115,34 @@ prune_lines() {
 # Output:
 #   toplist.tmp
 download_toplist() {
+    [[ -s toplist.tmp ]] && return
+
     local max_attempts=3  # Retries twice
     local attempt=1
+    local url='https://tranco-list.eu/top-1m-incl-subdomains.csv.zip'
 
     while (( attempt <= max_attempts )); do
-        curl -sSLZ 'https://tranco-list.eu/top-1m.csv.zip' \
-            'https://tranco-list.eu/top-1m-incl-subdomains.csv.zip' -o temp
+        curl -sSLZ "$url" -o temp
 
         unzip -p temp | mawk -F ',' '{ print $2 }' > toplist.tmp
 
-        [[ -s toplist.tmp ]] && break
-
         ((attempt++))
+
+        [[ ! -s toplist.tmp ]] && continue
+
+        format_file toplist.tmp
+
+        # Strip away subdomains
+        while read -r subdomain; do
+            sed -i "s/^${subdomain}\.//" toplist.tmp
+        done < config/subdomains.txt
+
+        sort -u toplist.tmp -o toplist.tmp
+
+        return
     done || true
 
-    if [[ -s toplist.tmp ]]; then
-        format_file toplist.tmp
-    else
-        error 'Error downloading toplist.'
-    fi
+    error 'Error downloading toplist.'
 }
 
 # Function 'download_nrd_feed' downloads and collates NRD feeds consisting
@@ -142,7 +151,7 @@ download_toplist() {
 #   nrd.tmp
 #   Telegram notification if an error occurred while downloading the NRD feeds
 download_nrd_feed() {
-    [[ -f nrd.tmp ]] && return
+    [[ -s nrd.tmp ]] && return
 
     local url1='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt'
     local url2='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt'
