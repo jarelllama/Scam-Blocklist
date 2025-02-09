@@ -119,7 +119,8 @@ download_toplist() {
     local attempt=1
 
     while (( attempt <= max_attempts )); do
-        curl -sSL 'https://tranco-list.eu/top-1m.csv.zip' -o temp
+        curl -sSLZ 'https://tranco-list.eu/top-1m.csv.zip' \
+            'https://tranco-list.eu/top-1m-incl-subdomains.csv.zip' -o temp
 
         unzip -p temp | mawk -F ',' '{ print $2 }' > toplist.tmp
 
