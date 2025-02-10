@@ -47,7 +47,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     1 |      87 |      0 % |      14 % | Emerging Threats
     0 |      48 |      0 % |      23 % | FakeWebshopListHUN
    12 |     368 |      0 % |       2 % | Google Search
-   22 |    1429 |      2 % |      17 % | Gridinsoft
+   23 |    1430 |      2 % |      17 % | Gridinsoft
     0 |    3453 |      7 % |       0 % | Jeroengui (NRDs)
     8 |   28273 |     57 % |       8 % | Jeroengui
     0 |      17 |      0 % |       8 % | PCrisk
@@ -63,7 +63,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      82 |      0 % |      19 % | Wildcat Cyber Patrol
     0 |       3 |      0 % |       9 % | WiperSoft
     0 |     534 |      1 % |      49 % | Česká Obchodní Inspekce
-  107 |   49022 |    100 % |      21 % | All sources
+  108 |   49023 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
