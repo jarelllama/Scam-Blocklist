@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 395630
-Light version: 50349
+Total domains: 395250
+Light version: 50359
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -47,11 +47,11 @@ Today | Monthly | %Monthly | %Filtered | Source
     1 |      88 |      0 % |      14 % | Emerging Threats
     9 |      57 |      0 % |      23 % | FakeWebshopListHUN
    78 |     446 |      0 % |       2 % | Google Search
-  134 |    1564 |      2 % |      17 % | Gridinsoft
+  139 |    1569 |      2 % |      17 % | Gridinsoft
   162 |    3615 |      6 % |       0 % | Jeroengui (NRDs)
-  861 |   29134 |     54 % |       8 % | Jeroengui
+  862 |   29135 |     54 % |       8 % | Jeroengui
     5 |      22 |      0 % |       8 % | PCrisk
- 1949 |    2381 |      4 % |      28 % | PhishStats
+ 1950 |    2382 |      4 % |      28 % | PhishStats
    24 |      71 |      0 % |      16 % | PuppyScams.org
   601 |   10252 |     19 % |       1 % | Regex Matching
     9 |      32 |      0 % |      37 % | Scam Directory
@@ -60,10 +60,10 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       9 |      0 % |      14 % | Unit42
     8 |      19 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-   13 |      95 |      0 % |      19 % | Wildcat Cyber Patrol
+   14 |      96 |      0 % |      19 % | Wildcat Cyber Patrol
     0 |       3 |      0 % |       9 % | WiperSoft
    13 |     547 |      1 % |      49 % | Česká Obchodní Inspekce
- 4148 |   53171 |    100 % |      21 % | All sources
+ 4156 |   53179 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
