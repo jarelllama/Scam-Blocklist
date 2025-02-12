@@ -22,6 +22,7 @@ Only active sources are used to automatically retrieve domains.
 | [Google Custom Search JSON API](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) | Yes | |
 | [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | Yes |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
+| [Hagezi's URL Shorterners Whitelist](https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt) | - | - |
 | [Jeroen Gui Anti-Phishing Project](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
 | [MalwareTips](https://malwaretips.com/blogs/) | | |
 | [PCrisk](https://www.pcrisk.com/) | Yes | |
