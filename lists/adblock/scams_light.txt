@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.11.231050.2025
+! Version: 02.12.084156.2025
 ! Expires: 12 hours
-! Last modified: Tue Feb 11 23:10:50 UTC 2025
+! Last modified: Wed Feb 12 08:41:56 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 51319
+! Number of entries: 51322
 !
 ||0-1-x.591581547.xyz^
 ||0-i-x.29651548.xyz^
@@ -407,6 +407,7 @@
 ||199555.vip^
 ||19988808.com^
 ||1a2a5.zwodvnowkb.top^
+||1aleks.com^
 ||1binance.com^
 ||1bitcoin.fun^
 ||1bitcoin.lol^
@@ -12125,6 +12126,7 @@
 ||disudgs.clicsk.web.id^
 ||disxord.ru^
 ||ditcoin.site^
+||dithodackee.com^
 ||ditspillers.com^
 ||dittmarwerkzeuge.com^
 ||diuuwkaksmneshd.weebly.com^
@@ -48506,6 +48508,7 @@
 ||winegaze.com^
 ||winemallwine.com^
 ||winepreserve.shop^
+||winfr-wtc.com^
 ||winghrk.com^
 ||wingpass.com^
 ||wininit.myq-see.com^
