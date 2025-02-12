@@ -43,6 +43,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     2 |      80 |      0 % |       8 % | BehindMLM
     0 |      41 |      0 % |       6 % | BugsFighter
    61 |     657 |      1 % |       1 % | Cybersquatting
+    0 |       0 |      0 % |       0 % | DFPI Crypto Scam Tracker
   331 |    6749 |     11 % |       1 % | DGA Detector
    11 |      99 |      0 % |      14 % | Emerging Threats
     3 |      60 |      0 % |      23 % | FakeWebshopListHUN
