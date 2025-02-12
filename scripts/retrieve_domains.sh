@@ -811,24 +811,22 @@ source_fakewebshoplisthun() {
 }
 
 source_jeroengui() {
-    # Last checked: 04/02/25
+    # Last checked: 12/02/25
     source_name='Jeroengui'
     source_url='https://file.jeroengui.be'
     exclude_from_light=true  # Too many domains
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
-    {
-        # Get URLs with no subdirectories (too many link shorteners)
-        curl -sS "${source_url}/phishing/last_week.txt" \
-            | grep -Po "^https?://\K${DOMAIN_REGEX}(?=/?$)"
+    local url_shorterners_whitelist='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
 
-        curl -sS "${source_url}/malware/last_week.txt" \
+    # Get domains from various weekly lists and remove link shorterners
+    for list in phishing malware scam; do
+        curl -sS "${source_url}/${list}/last_week.txt" \
             | grep -Po "^https?://\K${DOMAIN_REGEX}"
-
-        curl -sS "${source_url}/scam/last_week.txt" \
-            | grep -Po "^https?://\K${DOMAIN_REGEX}"
-    } > source_results.tmp
+    done | grep -vF \
+        "$(curl -sS "$url_shorterners_whitelist" \
+        | grep -Po "\|\K${DOMAIN_REGEX}")" > source_results.tmp
 
     # Get matching NRDs for the light version. Unicode is only processed by the
     # full version.
