@@ -13,7 +13,7 @@ Only active sources are used to automatically retrieve domains.
 | [Artists Against 419](https://db.aa419.org/fakebankslist.php) | Yes | |
 | [BehindMLM](https://behindmlm.com/)| Yes | |
 | [BugsFighter](https://www.bugsfighter.com/) | Yes | |
-| [DFPI Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | | |
+| [DFPI Crypto Scam Tracker](https://dfpi.ca.gov/crypto-scams/) | Yes | |
 | [DGA Detector](https://github.com/exp0se/dga_detector) | Yes | Yes |
 | [EasyDMARC](https://easydmarc.com/tools/phishing-url) | | |
 | [Emerging Threats](https://rules.emergingthreats.net/) | Yes | |

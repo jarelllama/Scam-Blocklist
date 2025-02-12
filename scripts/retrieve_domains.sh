@@ -5,11 +5,12 @@
 
 # Array of sources used to retrieve domains
 readonly -a SOURCES=(
-source_165antifraud
+    source_165antifraud
     source_aa419
     source_behindmlm
-    source_BugsFighter
+    source_bugsfighter
     source_coi.gov.cz
+    source_crypto_scam_tracker
     source_cybersquatting
     source_dga_detector
     source_emerging_threats
@@ -765,7 +766,7 @@ source_behindmlm() {
         > source_results.tmp
 }
 
-source_BugsFighter() {
+source_bugsfighter() {
     # Last checked: 05/02/25
     source_name='BugsFighter'
     source_url='https://www.bugsfighter.com/blog'
@@ -785,6 +786,18 @@ source_coi.gov.cz() {
 
     curl -sS --retry 2 --retry-all-errors "${source_url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" > source_results.tmp
+}
+
+source_crypto_scam_tracker() {
+    # Last checked: 12/02/25
+    source_name='DFPI Crypto Scam Tracker'
+    source_url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    # curl -L required
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+        | grep -Po "column-5\">\K(https?)?${DOMAIN_REGEX}" > source_results.tmp
 }
 
 source_emerging_threats() {
