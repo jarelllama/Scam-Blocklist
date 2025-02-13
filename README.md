@@ -33,48 +33,48 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 393098
-Light version: 50884
+Total domains: 400478
+Light version: 53025
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    - |     403 |      0 % |      35 % | 165 Anti-fraud
-    - |      77 |      0 % |      14 % | Artists Against 419
-    - |      80 |      0 % |       8 % | BehindMLM
-    - |      41 |      0 % |       6 % | BugsFighter
-    - |     657 |      1 % |       1 % | Cybersquatting
-    - |       0 |      0 % |       0 % | DFPI Crypto Scam Tracker
-    - |    6749 |     11 % |       1 % | DGA Detector
-    - |      99 |      0 % |      14 % | Emerging Threats
-    - |      60 |      0 % |      23 % | FakeWebshopListHUN
-    - |     511 |      0 % |       2 % | Google Search
-    - |    1663 |      2 % |      17 % | Gridinsoft
-    - |    3849 |      6 % |       0 % | Jeroengui (NRDs)
-    - |   30026 |     53 % |       8 % | Jeroengui
-    - |      22 |      0 % |       8 % | PCrisk
-    - |    3193 |      5 % |      28 % | PhishStats
-    - |      75 |      0 % |      16 % | PuppyScams.org
-    - |   10891 |     19 % |       1 % | Regex Matching
-    - |     133 |      0 % |      37 % | Scam Directory
-    - |       0 |      0 % |      31 % | ScamAdviser
-    - |      20 |      0 % |       5 % | StopGunScams.com
-    - |       9 |      0 % |      15 % | Unit42
-    - |      28 |      0 % |      10 % | Verbraucherzentrale Hamburg
-    - |       0 |      0 % |      30 % | ViriBack C2 Tracker
-    - |     110 |      0 % |      20 % | Wildcat Cyber Patrol
-    - |       3 |      0 % |       9 % | WiperSoft
-    - |     547 |      0 % |      49 % | Česká Obchodní Inspekce
-    - |   56246 |    100 % |      21 % | All sources
+    9 |     412 |      0 % |      35 % | 165 Anti-fraud
+   23 |     100 |      0 % |      14 % | Artists Against 419
+    0 |      80 |      0 % |       8 % | BehindMLM
+    1 |      42 |      0 % |       6 % | BugsFighter
+  115 |     772 |      1 % |       1 % | Cybersquatting
+   54 |      54 |      0 % |       0 % | DFPI Crypto Scam Tracker
+ 1232 |    7981 |     11 % |       1 % | DGA Detector
+   16 |     115 |      0 % |      14 % | Emerging Threats
+   44 |     104 |      0 % |      23 % | FakeWebshopListHUN
+   83 |     594 |      0 % |       2 % | Google Search
+  263 |    1926 |      2 % |      17 % | Gridinsoft
+ 1272 |    5121 |      7 % |       0 % | Jeroengui (NRDs)
+ 5880 |   35906 |     53 % |       8 % | Jeroengui
+    3 |      25 |      0 % |       8 % | PCrisk
+ 1148 |    4341 |      6 % |      28 % | PhishStats
+   29 |     104 |      0 % |      16 % | PuppyScams.org
+ 1782 |   12673 |     18 % |       1 % | Regex Matching
+  118 |     251 |      0 % |      37 % | Scam Directory
+    3 |       3 |      0 % |      31 % | ScamAdviser
+    6 |      26 |      0 % |       5 % | StopGunScams.com
+    0 |       9 |      0 % |      15 % | Unit42
+    0 |      28 |      0 % |      10 % | Verbraucherzentrale Hamburg
+    0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
+   27 |     137 |      0 % |      20 % | Wildcat Cyber Patrol
+    3 |       6 |      0 % |       9 % | WiperSoft
+    4 |     551 |      0 % |      49 % | Česká Obchodní Inspekce
+10843 |   67089 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 3976
-Dead domains removed this month: 41091
-Resurrected domains added today: 1752
+Dead domains removed today: 4233
+Dead domains removed this month: 45324
+Resurrected domains added today: 2837
 
 Parked domains removed this month: 0
-Unparked domains added today: 115
+Unparked domains added today: 96
 ```
 
 <details>
@@ -130,7 +130,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13471
+Total domains: 13481
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
