@@ -19,6 +19,7 @@ readonly -a SOURCES=(
     source_gridinsoft
     source_jeroengui
     source_jeroengui_nrd
+    source_malwareurl
     source_manual
     source_pcrisk
     source_phishstats
@@ -653,7 +654,7 @@ source_cybersquatting() {
 }
 
 source_dga_detector() {
-    # Last checked: 27/01/25
+    # Last checked: 14/02/25
     source_name='DGA Detector'
     source_url='https://github.com/exp0se/dga_detector/archive/refs/heads/master.zip'
     exclude_from_light=true
@@ -666,8 +667,8 @@ source_dga_detector() {
     unzip -q dga_detector.zip
     pip install -q tldextract
 
-    # Keep only NRDs with more than 12 characters
-    mawk 'length($0) > 12' nrd.tmp > domains.tmp
+    # Keep only non punycode NRDs with 12 or more characters
+    mawk 'length($0) >= 12 && $0 !~ /xn--/' nrd.tmp > domains.tmp
 
     cd dga_detector-master
 
@@ -875,6 +876,17 @@ source_gridinsoft() {
     source_name='Gridinsoft'
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
     exclude_from_light=true  # Has a few false positives
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
+    curl -sS "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
+        > source_results.tmp
+}
+
+source_malwareurl() {
+    # Last checked: 14/02/25
+    source_name='MalwareURL'
+    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/malwareurl.txt'
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 

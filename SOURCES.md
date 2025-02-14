@@ -25,6 +25,7 @@ Only active sources are used to automatically retrieve domains.
 | [Hagezi's URL Shorterners Whitelist](https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt) | - | - |
 | [Jeroen Gui Anti-Phishing Project](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
 | [MalwareTips](https://malwaretips.com/blogs/) | | |
+| [MalwareURL](https://www.malwareurl.com/) | Yes | |
 | [PCrisk](https://www.pcrisk.com/) | Yes | |
 | [PetScams.com](https://petscams.com/) | | |
 | [PhishStats](https://phishstats.info/) | Yes | |
