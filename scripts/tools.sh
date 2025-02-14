@@ -57,8 +57,8 @@ convert_unicode() {
     # Process the file, handling entries that may cause idn2 to error:
     # https://www.rfc-editor.org/rfc/rfc5891#section-4.2.3.1. If idn2 does
     # error, exit 1.
-    mawk '/-\.|^-|^..--/' "$1" > temp
-    mawk '!/-\.|^-|^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
+    mawk '/-(\.|$)|^-|^..--/' "$1" > temp
+    mawk '/-(\.|$)|^-|^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
     mv temp "$1"
 }
 
