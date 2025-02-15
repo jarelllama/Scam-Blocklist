@@ -33,24 +33,24 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 405610
-Light version: 52228
+Total domains: 405620
+Light version: 52230
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
    10 |     422 |      0 % |      35 % | 165 Anti-fraud
    14 |     114 |      0 % |      14 % | Artists Against 419
-    6 |      86 |      0 % |       9 % | BehindMLM
+    7 |      87 |      0 % |       9 % | BehindMLM
     6 |      48 |      0 % |       6 % | BugsFighter
    53 |     825 |      0 % |       1 % | Cybersquatting
     0 |      54 |      0 % |      43 % | DFPI Crypto Scam Tracker
-15033 |   23014 |     26 % |       1 % | DGA Detector
+15036 |   23017 |     26 % |       1 % | DGA Detector
    11 |     126 |      0 % |      14 % | Emerging Threats
    57 |     161 |      0 % |      23 % | FakeWebshopListHUN
    39 |     633 |      0 % |       2 % | Google Search
-  106 |    2037 |      2 % |      18 % | Gridinsoft
+  109 |    2040 |      2 % |      18 % | Gridinsoft
   691 |    5812 |      6 % |       0 % | Jeroengui (NRDs)
- 2931 |   38842 |     44 % |       8 % | Jeroengui
+ 2933 |   38844 |     44 % |       8 % | Jeroengui
    58 |      58 |      0 % |       2 % | MalwareURL
     5 |      30 |      0 % |       8 % | PCrisk
     0 |    4341 |      4 % |      28 % | PhishStats
@@ -62,10 +62,10 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       9 |      0 % |      15 % | Unit42
     4 |      32 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-   10 |     147 |      0 % |      20 % | Wildcat Cyber Patrol
+   11 |     148 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       6 |      0 % |       9 % | WiperSoft
     6 |     557 |      0 % |      49 % | Česká Obchodní Inspekce
-20072 |   87171 |    100 % |      21 % | All sources
+20082 |   87181 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
