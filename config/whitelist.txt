@@ -1,4 +1,5 @@
 \.formula1\.com$
+^fr\.wix\.com$
 \.google\.com$
 \.googleapis\.com$
 \.pinterest\.com$
@@ -27,9 +28,8 @@
 ^altroconsumo\.it$
 ^altyazilifilmizle1\.cc$
 ^amagi\.tv$
-^amazon\.[a-z]*$
-^amazon\.co\.[a-z]*$
-^amazon\.com\.[a-z]*$
+^amazon\.xyz$
+^amazon\.co\.uk$
 ^analdin\.com$
 ^anonym\.ninja$
 ^anycast\.me$
@@ -277,7 +277,6 @@
 ^lyzr\.ai$
 ^madmuscles\.com$
 ^malwaretips\.com$
-^manatoki[0-9]{3}\.net$
 ^massgrave\.dev$
 ^mastodon\.online$
 ^maxxfour\.com$
@@ -319,7 +318,6 @@
 ^netsolhost\.com$
 ^neverbounce\.com$
 ^newjerseyhunter\.com$
-^newtoki[0-9]{3}\.com$
 ^niolic\.com$
 ^niyeedep\.org$
 ^noblequran\.org$
@@ -464,7 +462,6 @@
 ^tinfoil\.io$
 ^tiny\.one$
 ^toggle\.pro$
-^toonkor[0-9]{3}\.com$
 ^tradeeuglobal\.net$
 ^trading\.com$
 ^trendiano\.in$
@@ -529,9 +526,7 @@
 ^yourketo\.diet$
 ^yourwobb\.com$
 ^youtube-transcript\.io$
-^youtube\.co\.[a-z]*$
 ^youtube\.com$
-^youtube\.com\.[a-z]*$
 ^youtubetranscriptoptimizer\.com$
 ^ytmp3\.ec$
 ^yts\.skin$
