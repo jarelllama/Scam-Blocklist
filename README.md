@@ -33,49 +33,49 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 405616
-Light version: 52230
+Total domains: 409986
+Light version: 52722
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-   10 |     422 |      0 % |      35 % | 165 Anti-fraud
-   14 |     114 |      0 % |      14 % | Artists Against 419
-    7 |      87 |      0 % |       9 % | BehindMLM
-    6 |      48 |      0 % |       6 % | BugsFighter
-   53 |     825 |      0 % |       1 % | Cybersquatting
-    0 |      54 |      0 % |      43 % | DFPI Crypto Scam Tracker
-15036 |   23017 |     26 % |       1 % | DGA Detector
-   11 |     126 |      0 % |      14 % | Emerging Threats
-   57 |     161 |      0 % |      23 % | FakeWebshopListHUN
-   39 |     633 |      0 % |       2 % | Google Search
-  109 |    2040 |      2 % |      18 % | Gridinsoft
-  691 |    5812 |      6 % |       0 % | Jeroengui (NRDs)
- 2933 |   38844 |     44 % |       8 % | Jeroengui
-   58 |      58 |      0 % |       2 % | MalwareURL
-    5 |      30 |      0 % |       8 % | PCrisk
-    0 |    4341 |      4 % |      28 % | PhishStats
-    0 |     104 |      0 % |      16 % | PuppyScams.org
-  934 |   13607 |     15 % |       1 % | Regex Matching
-  786 |    1037 |      1 % |      36 % | Scam Directory
-    2 |       5 |      0 % |      31 % | ScamAdviser
-    1 |      27 |      0 % |       5 % | StopGunScams.com
+   18 |     440 |      0 % |      35 % | 165 Anti-fraud
+   17 |     131 |      0 % |      14 % | Artists Against 419
+    2 |      89 |      0 % |      10 % | BehindMLM
+    0 |      48 |      0 % |       7 % | BugsFighter
+   74 |     899 |      0 % |       1 % | Cybersquatting
+    0 |      54 |      0 % |      58 % | DFPI Crypto Scam Tracker
+ 1184 |   24201 |     26 % |       1 % | DGA Detector
+    7 |     133 |      0 % |      14 % | Emerging Threats
+  158 |     319 |      0 % |      23 % | FakeWebshopListHUN
+   38 |     671 |      0 % |       2 % | Google Search
+  136 |    2176 |      2 % |      18 % | Gridinsoft
+  251 |    6063 |      6 % |       0 % | Jeroengui (NRDs)
+ 1896 |   40740 |     43 % |       8 % | Jeroengui
+   14 |      72 |      0 % |       5 % | MalwareURL
+    0 |      30 |      0 % |       8 % | PCrisk
+  393 |    4734 |      5 % |      28 % | PhishStats
+    4 |     108 |      0 % |      16 % | PuppyScams.org
+  942 |   14549 |     15 % |       1 % | Regex Matching
+  768 |    1805 |      1 % |      36 % | Scam Directory
+    4 |       9 |      0 % |      31 % | ScamAdviser
+    2 |      29 |      0 % |       5 % | StopGunScams.com
     0 |       9 |      0 % |      15 % | Unit42
-    4 |      32 |      0 % |      10 % | Verbraucherzentrale Hamburg
+    0 |      32 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-   11 |     148 |      0 % |      20 % | Wildcat Cyber Patrol
+    6 |     154 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       6 |      0 % |       9 % | WiperSoft
-    6 |     557 |      0 % |      49 % | Česká Obchodní Inspekce
-20082 |   87181 |    100 % |      21 % | All sources
+    2 |     559 |      0 % |      49 % | Česká Obchodní Inspekce
+ 5665 |   92846 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 7112
-Dead domains removed this month: 52436
-Resurrected domains added today: 1646
+Dead domains removed today: 3845
+Dead domains removed this month: 56281
+Resurrected domains added today: 1821
 
 Parked domains removed this month: 10753
-Unparked domains added today: 1209
+Unparked domains added today: 1157
 ```
 
 <details>
@@ -131,7 +131,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13487
+Total domains: 13503
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
