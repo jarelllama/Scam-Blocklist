@@ -33,49 +33,49 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 409982
-Light version: 52720
+Total domains: 412899
+Light version: 53520
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-   18 |     440 |      0 % |      35 % | 165 Anti-fraud
-   17 |     131 |      0 % |      14 % | Artists Against 419
-    2 |      89 |      0 % |      10 % | BehindMLM
-    1 |      49 |      0 % |       7 % | BugsFighter
-   74 |     899 |      0 % |       1 % | Cybersquatting
-    0 |      54 |      0 % |      58 % | DFPI Crypto Scam Tracker
- 1185 |   24202 |     26 % |       1 % | DGA Detector
-    7 |     133 |      0 % |      14 % | Emerging Threats
-  158 |     319 |      0 % |      23 % | FakeWebshopListHUN
-   38 |     671 |      0 % |       2 % | Google Search
-  139 |    2179 |      2 % |      18 % | Gridinsoft
-  251 |    6063 |      6 % |       0 % | Jeroengui (NRDs)
- 1896 |   40740 |     43 % |       8 % | Jeroengui
-   14 |      72 |      0 % |       5 % | MalwareURL
-    0 |      30 |      0 % |       8 % | PCrisk
-  393 |    4734 |      5 % |      28 % | PhishStats
-    4 |     108 |      0 % |      16 % | PuppyScams.org
-  942 |   14549 |     15 % |       1 % | Regex Matching
-  768 |    1805 |      1 % |      36 % | Scam Directory
-    4 |       9 |      0 % |      31 % | ScamAdviser
-    2 |      29 |      0 % |       5 % | StopGunScams.com
+    4 |     444 |      0 % |      35 % | 165 Anti-fraud
+    3 |     134 |      0 % |      14 % | Artists Against 419
+    0 |      89 |      0 % |      10 % | BehindMLM
+    3 |      52 |      0 % |       7 % | BugsFighter
+   48 |     947 |      0 % |       1 % | Cybersquatting
+    0 |      54 |      0 % |      66 % | DFPI Crypto Scam Tracker
+ 1021 |   25223 |     25 % |       1 % | DGA Detector
+    2 |     135 |      0 % |      14 % | Emerging Threats
+  285 |     604 |      0 % |      23 % | FakeWebshopListHUN
+   31 |     702 |      0 % |       2 % | Google Search
+  126 |    2305 |      2 % |      18 % | Gridinsoft
+  305 |    6368 |      6 % |       0 % | Jeroengui (NRDs)
+ 2361 |   43101 |     43 % |       8 % | Jeroengui
+   10 |      82 |      0 % |       6 % | MalwareURL
+    0 |      30 |      0 % |       7 % | PCrisk
+  657 |    5391 |      5 % |      28 % | PhishStats
+    0 |     108 |      0 % |      16 % | PuppyScams.org
+ 1028 |   15577 |     15 % |       1 % | Regex Matching
+   15 |    1820 |      1 % |      36 % | Scam Directory
+    5 |      14 |      0 % |      31 % | ScamAdviser
+    0 |      29 |      0 % |       5 % | StopGunScams.com
     0 |       9 |      0 % |      15 % | Unit42
     0 |      32 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-    6 |     154 |      0 % |      20 % | Wildcat Cyber Patrol
+    3 |     157 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       6 |      0 % |       9 % | WiperSoft
-    2 |     559 |      0 % |      49 % | Česká Obchodní Inspekce
- 5670 |   92851 |    100 % |      21 % | All sources
+    2 |     561 |      0 % |      49 % | Česká Obchodní Inspekce
+ 5604 |   98455 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 3845
-Dead domains removed this month: 56281
-Resurrected domains added today: 1821
+Dead domains removed today: 3602
+Dead domains removed this month: 59883
+Resurrected domains added today: 1349
 
 Parked domains removed this month: 10753
-Unparked domains added today: 1157
+Unparked domains added today: 112
 ```
 
 <details>
@@ -131,7 +131,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13503
+Total domains: 13510
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
