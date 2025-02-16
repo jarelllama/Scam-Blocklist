@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.15.231500.2025
+! Version: 02.16.084422.2025
 ! Expires: 12 hours
-! Last modified: Sat Feb 15 23:15:00 UTC 2025
+! Last modified: Sun Feb 16 08:44:22 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 52722
+! Number of entries: 52723
 !
 ||0.majorlinker.com^
 ||000014.cc^
@@ -20000,6 +20000,7 @@
 ||hotmalgift.com^
 ||hotmazeoutlet.com^
 ||hotmoneyguard.vercel.app^
+||hotmoza.tv^
 ||hotnewday.com^
 ||hotofficialsale.shop^
 ||hotona.sbs^
