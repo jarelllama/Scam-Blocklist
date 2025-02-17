@@ -58,6 +58,7 @@ Today | Monthly | %Monthly | %Filtered | Source
  1028 |   15577 |     15 % |       1 % | Regex Matching
    15 |    1820 |      1 % |      36 % | Scam Directory
     5 |      14 |      0 % |      31 % | ScamAdviser
+    0 |       0 |      0 % |       0 % | ScamMinder
     0 |      29 |      0 % |       5 % | StopGunScams.com
     0 |       9 |      0 % |      15 % | Unit42
     0 |      32 |      0 % |      10 % | Verbraucherzentrale Hamburg
