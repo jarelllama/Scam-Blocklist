@@ -33,50 +33,50 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 412915
-Light version: 53520
+Total domains: 417594
+Light version: 55319
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    4 |     444 |      0 % |      35 % | 165 Anti-fraud
-    3 |     134 |      0 % |      14 % | Artists Against 419
+    7 |     451 |      0 % |      35 % | 165 Anti-fraud
+    1 |     135 |      0 % |      14 % | Artists Against 419
     0 |      89 |      0 % |      10 % | BehindMLM
-    3 |      52 |      0 % |       7 % | BugsFighter
-   48 |     947 |      0 % |       1 % | Cybersquatting
-    0 |      54 |      0 % |      66 % | DFPI Crypto Scam Tracker
- 1021 |   25223 |     25 % |       1 % | DGA Detector
-    2 |     135 |      0 % |      14 % | Emerging Threats
-  285 |     604 |      0 % |      23 % | FakeWebshopListHUN
-   31 |     702 |      0 % |       2 % | Google Search
-  135 |    2314 |      2 % |      18 % | Gridinsoft
-  305 |    6368 |      6 % |       0 % | Jeroengui (NRDs)
- 2367 |   43107 |     43 % |       8 % | Jeroengui
-   10 |      82 |      0 % |       6 % | MalwareURL
-    0 |      30 |      0 % |       7 % | PCrisk
-  657 |    5391 |      5 % |      28 % | PhishStats
-    0 |     108 |      0 % |      16 % | PuppyScams.org
- 1028 |   15577 |     15 % |       1 % | Regex Matching
-   15 |    1820 |      1 % |      36 % | Scam Directory
-    5 |      14 |      0 % |      31 % | ScamAdviser
-    0 |       0 |      0 % |       0 % | ScamMinder
+    7 |      59 |      0 % |       7 % | BugsFighter
+   38 |     985 |      0 % |       1 % | Cybersquatting
+    0 |      54 |      0 % |      70 % | DFPI Crypto Scam Tracker
+  704 |   25927 |     23 % |       1 % | DGA Detector
+ 3679 |    3814 |      3 % |      14 % | Emerging Threats
+   97 |     701 |      0 % |      23 % | FakeWebshopListHUN
+   47 |     749 |      0 % |       2 % | Google Search
+  144 |    2458 |      2 % |      18 % | Gridinsoft
+  951 |    7319 |      6 % |       0 % | Jeroengui (NRDs)
+ 4219 |   47326 |     43 % |       8 % | Jeroengui
+   13 |      95 |      0 % |       6 % | MalwareURL
+    7 |      37 |      0 % |       7 % | PCrisk
+  374 |    5765 |      5 % |      28 % | PhishStats
+    5 |     113 |      0 % |      16 % | PuppyScams.org
+  899 |   16476 |     15 % |       1 % | Regex Matching
+   21 |    1841 |      1 % |      37 % | Scam Directory
+    3 |      17 |      0 % |      31 % | ScamAdviser
+  154 |     154 |      0 % |       0 % | ScamMinder
     0 |      29 |      0 % |       5 % | StopGunScams.com
-    0 |       9 |      0 % |      15 % | Unit42
+  466 |     475 |      0 % |      12 % | Unit42
     0 |      32 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-    3 |     157 |      0 % |      20 % | Wildcat Cyber Patrol
-    0 |       6 |      0 % |       9 % | WiperSoft
-    2 |     561 |      0 % |      49 % | Česká Obchodní Inspekce
- 5619 |   98470 |    100 % |      21 % | All sources
+    0 |     157 |      0 % |      21 % | Wildcat Cyber Patrol
+    2 |       8 |      0 % |       9 % | WiperSoft
+    2 |     563 |      0 % |      49 % | Česká Obchodní Inspekce
+10889 |  109359 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 3602
-Dead domains removed this month: 59883
-Resurrected domains added today: 1349
+Dead domains removed today: 6722
+Dead domains removed this month: 66605
+Resurrected domains added today: 1796
 
 Parked domains removed this month: 10753
-Unparked domains added today: 112
+Unparked domains added today: 131
 ```
 
 <details>
@@ -132,7 +132,7 @@ A blocklist for NSFW domains is available in Adblock Plus format here:
 <li>Note that resurrected domains are not added back</li>
 <li>Note that parked domains are not checked for</li>
 </ul>
-Total domains: 13510
+Total domains: 13514
 <br>
 <br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
