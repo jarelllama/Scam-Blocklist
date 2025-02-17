@@ -64,6 +64,7 @@ $(print_stats 'PuppyScams.org')
 $(print_stats 'Regex') Matching
 $(print_stats 'Scam Directory')
 $(print_stats 'ScamAdviser')
+$(print_stats 'ScamMinder')
 $(print_stats 'StopGunScams.com')
 $(print_stats 'Unit42')
 $(print_stats 'Verbraucherzentrale Hamburg')
