@@ -5,8 +5,35 @@
 
 # Array of sources used to retrieve domains
 readonly -a SOURCES=(
-
+    source_165antifraud
+    source_aa419
+    source_behindmlm
+    source_bugsfighter
+    source_coi.gov.cz
+    source_crypto_scam_tracker
+    source_cybersquatting
+    source_dga_detector
+    source_emerging_threats
+    source_fakewebshoplisthun
+    source_greatis
+    source_gridinsoft
+    source_jeroengui
+    source_jeroengui_nrd
+    source_malwareurl
+    source_manual
+    source_pcrisk
+    source_phishstats
+    source_puppyscams
+    source_regex
+    source_scamadviser
+    source_scamdirectory
     source_scamminder
+    source_stopgunscams
+    source_unit42
+    source_viriback_tracker
+    source_vzhh
+    source_wipersoft
+    source_google_search
 )
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
