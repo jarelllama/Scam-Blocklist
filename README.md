@@ -59,7 +59,6 @@ Today | Monthly | %Monthly | %Filtered | Source
    21 |    1841 |      1 % |      37 % | Scam Directory
     3 |      17 |      0 % |      31 % | ScamAdviser
   161 |     161 |      0 % |       7 % | ScamMinder
-    0 |      29 |      0 % |       5 % | StopGunScams.com
   466 |     475 |      0 % |      12 % | Unit42
     0 |      32 |      0 % |      10 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
