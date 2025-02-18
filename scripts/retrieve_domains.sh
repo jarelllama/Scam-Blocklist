@@ -971,9 +971,10 @@ source_scamdirectory() {
 }
 
 source_scamminder() {
-    # Last checked: 17/02/25
+    # Last checked: 18/02/25
     source_name='ScamMinder'
     source_url='https://scamminder.com/websites'
+    exclude_from_light=true
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
