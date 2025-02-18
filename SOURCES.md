@@ -35,9 +35,9 @@ Only active sources are used to automatically retrieve domains.
 | [Scam Directory](https://scam.directory/) | Yes | |
 | [Scam.Delivery](https://scam.delivery/) | | |
 | [ScamAdvisor](https://www.scamadviser.com/) | Yes | |
-| [ScamMinder](https://scamminder.com/) | Yes | |
+| [ScamMinder](https://scamminder.com/) | Yes | Yes |
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | | |
-| [StopGunScams.com](https://stopgunscams.com/) | Yes | |
+| [StopGunScams.com](https://stopgunscams.com/) | | |
 | [SystemJargon's NRD List](https://github.com/SystemJargon/filters) | - | - |
 | [Unit 42](https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel) | Yes | |
 | [URLCrazy](https://github.com/urbanadventurer/urlcrazy) | Yes | |

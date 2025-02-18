@@ -983,17 +983,6 @@ source_scamminder() {
         | grep -Po "class=\"h5\">\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
-source_stopgunscams() {
-    # Last checked: 07/01/25
-    source_name='StopGunScams.com'
-    source_url='https://stopgunscams.com'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
-    curl -sSZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
-        | grep -Po "title=\"\K${DOMAIN_REGEX}(?=\"></a>)" > source_results.tmp
-}
-
 source_unit42() {
     # Last checked: 17/02/25
     source_name='Unit42'
