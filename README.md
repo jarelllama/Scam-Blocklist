@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 416988
-Light version: 55329
+Total domains: 416989
+Light version: 55330
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -65,7 +65,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     157 |      0 % |      21 % | Wildcat Cyber Patrol
     2 |       8 |      0 % |       9 % | WiperSoft
     2 |     563 |      0 % |      49 % | Česká Obchodní Inspekce
-10908 |  109378 |    100 % |      21 % | All sources
+10910 |  109380 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
