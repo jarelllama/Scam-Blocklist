@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.18.234639.2025
+! Version: 02.19.053648.2025
 ! Expires: 12 hours
-! Last modified: Tue Feb 18 23:46:39 UTC 2025
+! Last modified: Wed Feb 19 05:36:48 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 56627
+! Number of entries: 56628
 !
 ||0-lx.35300934.xyz^
 ||0.majorlinker.com^
@@ -520,6 +520,7 @@
 ||1wxcds.com^
 ||1wxfst.com^
 ||1wxomy.com^
+||1wxscr.com^
 ||1wyasx.com^
 ||1wyoxf.com^
 ||1wzdwc.com^
