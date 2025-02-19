@@ -21,10 +21,11 @@ main() {
 
     # Add domains found in the full version that are in the toplist and are
     # blacklisted into the light version.
-    comm -12 "$RAW" <(comm -12 toplist.tmp "$BLACKLIST") >> "$RAW_LIGHT"
+    comm -12 "$RAW" <(comm -12 toplist.tmp "$BLACKLIST") \
+        | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
     build '' "$RAW" 'scams.txt'
-    build 'LIGHT VERSION' "$RAW_LIGHT" 'scams_light.txt'
+    build 'LIGHT VERSION' 'raw_light.tmp' 'scams_light.txt'
 }
 
 # Remove redundant entries from the raw files and compile them into the various
