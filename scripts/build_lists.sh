@@ -8,12 +8,20 @@ readonly RAW_LIGHT='data/raw_light.txt'
 readonly ADBLOCK='lists/adblock'
 readonly DOMAINS='lists/wildcard_domains'
 readonly WILDCARDS='config/wildcards.txt'
+readonly BLACKLIST='config/blacklist.txt'
 
 main() {
     # Install AdGuard's Hostlist Compiler
     if ! command -v hostlist-compiler &> /dev/null; then
         npm install -g @adguard/hostlist-compiler > /dev/null
     fi
+
+    # Download toplist
+    $FUNCTION --download-toplist
+
+    # Add domains found in the full version that are in the toplist and are
+    # blacklisted into the light version.
+    comm -12 "$RAW" <(comm -12 toplist.tmp "$BLACKLIST") >> "$RAW_LIGHT"
 
     build '' "$RAW" 'scams.txt'
     build 'LIGHT VERSION' "$RAW_LIGHT" 'scams_light.txt'
@@ -34,6 +42,7 @@ build() {
     # Append wildcards to the raw file to optimize the number of entries.
     # The wildcards are not saved to the raw file as some of them do not
     # resolve and would be removed by the dead check.
+    # Note that this adds the wildcards to the light version too.
     sort -u "$WILDCARDS" "$raw_file" -o source.tmp
 
     # Compile blocklist. See the list of transformations here:

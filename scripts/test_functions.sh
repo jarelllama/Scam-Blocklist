@@ -233,30 +233,32 @@ TEST_PARKED_CHECK() {
 # Test that the various formats of blocklists are built correctly.
 TEST_BUILD() {
     # Test full version
-    input build-test.com "$RAW"
+    input google.com "$RAW"
+    input google.com "$BLACKLIST"
     input test.wildcard-test.com "$RAW"
     input full-version-only.com "$RAW"
     # Test light version
-    input build-test.com "$RAW_LIGHT"
+    # Note that google.com should be in the light version as it is in the
+    # toplist and is blacklisted.
     input test.wildcard-test.com "$RAW_LIGHT"
     # Test removal of redundant entries via wildcard matching
     input wildcard-test.com "$WILDCARDS"
 
     # Adblock format full version
     output '[Adblock Plus]' "${ADBLOCK}/scams.txt"
-    output '||build-test.com^' "${ADBLOCK}/scams.txt"
+    output '||google.com^' "${ADBLOCK}/scams.txt"
     output '||wildcard-test.com^' "${ADBLOCK}/scams.txt"
     output '||full-version-only.com^' "${ADBLOCK}/scams.txt"
     # Adblock format light version
     output '[Adblock Plus]' "${ADBLOCK}/scams_light.txt"
-    output '||build-test.com^' "${ADBLOCK}/scams_light.txt"
+    output '||google.com^' "${ADBLOCK}/scams_light.txt"
     output '||wildcard-test.com^' "${ADBLOCK}/scams_light.txt"
     # Domains format full version
-    output build-test.com "${DOMAINS}/scams.txt"
+    output google.com "${DOMAINS}/scams.txt"
     output wildcard-test.com "${DOMAINS}/scams.txt"
     output full-version-only.com "${DOMAINS}/scams.txt"
     # Domains format light version
-    output build-test.com "${DOMAINS}/scams_light.txt"
+    output google.com "${DOMAINS}/scams_light.txt"
     output wildcard-test.com "${DOMAINS}/scams_light.txt"
 
     # Run script

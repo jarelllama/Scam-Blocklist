@@ -973,7 +973,7 @@ source_scamminder() {
     # Last checked: 18/02/25
     source_name='ScamMinder'
     source_url='https://scamminder.com/websites'
-    exclude_from_light=true
+    exclude_from_light=true  # Has a few false positives
 
     [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
