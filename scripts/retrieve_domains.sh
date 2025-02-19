@@ -28,7 +28,6 @@ readonly -a SOURCES=(
     source_scamadviser
     source_scamdirectory
     source_scamminder
-    source_stopgunscams
     source_unit42
     source_viriback_tracker
     source_vzhh
