@@ -401,7 +401,7 @@ log_source() {
     printf "\n\e[1mSource: %s\e[0m\n" "${search_term:-$source_name}"
 
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
-${search_term},${raw_count},${final_count},${total_whitelisted_count},\
+\"${search_term:0:100}...\",${raw_count},${final_count},${total_whitelisted_count},\
 ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     >> "$SOURCE_LOG"
 
