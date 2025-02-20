@@ -95,20 +95,19 @@ retrieve_source_results() {
         source_name="$(mawk -F ',' -v source="$source" '
             $1 == source { print $2 }' "$SOURCES")"
 
-        if [[ -n "$(mawk -F ',' -v source="$source" '
-            $1 == source { print $3 }' "$SOURCES")" ]]; then
-            local exclude_from_light=false
-        else
-            local exclude_from_light=true
-        fi
-
         # Initialize source variables
+        local exclude_from_light=false
         local source_url=''
         local source_results=''
         local rate_limited=false
         local query_count=''
         local execution_time
         execution_time="$(date +%s)"
+
+        if [[ -z "$(mawk -F ',' -v source="$source" '
+            $1 == source { print $3 }' "$SOURCES")" ]]; then
+            exclude_from_light=true
+        fi
 
         # Run source to retrieve results if not using existing results except
         # for Google Search source as that handles existing results in its
