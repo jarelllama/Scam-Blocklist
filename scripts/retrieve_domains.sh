@@ -3,41 +3,12 @@
 # Retrieve domains from the sources, process them and output a raw file
 # that contains the cumulative domains from all sources over time.
 
-# Array of sources used to retrieve domains
-readonly -a SOURCES=(
-    source_165antifraud
-    source_aa419
-    source_behindmlm
-    source_bugsfighter
-    source_coi.gov.cz
-    source_crypto_scam_tracker
-    source_cybersquatting
-    source_dga_detector
-    source_emerging_threats
-    source_fakewebshoplisthun
-    source_greatis
-    source_gridinsoft
-    source_jeroengui
-    source_jeroengui_nrd
-    source_malwareurl
-    source_manual
-    source_pcrisk
-    source_phishstats
-    source_puppyscams
-    source_regex
-    source_scamadviser
-    source_scamdirectory
-    source_scamminder
-    source_unit42
-    source_viriback_tracker
-    source_vzhh
-    source_wipersoft
-    source_google_search
-)
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly SOURCES='config/sources.csv'
 readonly SEARCH_TERMS='config/search_terms.csv'
+readonly PHISHING_TARGETS='config/phishing_detection.csv'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
@@ -46,7 +17,6 @@ readonly SUBDOMAINS='data/subdomains.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly PHISHING_TARGETS='config/phishing_detection.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.
@@ -114,30 +84,37 @@ check_review_file() {
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
-    local source
+    local source source_name
 
-    for source in "${SOURCES[@]}"; do
-        # Skip commented out sources
-        [[ "$source" == \#* ]] && continue
-
+    for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
         # Error if source_results.tmp from previous source is still present
         if [[ -f source_results.tmp ]]; then
             error 'source_results.tmp not properly cleaned up.'
         fi
 
+        source_name="$(mawk -F ',' -v source="$source" '
+            $1 == source { print $2 }' "$SOURCES")"
+
+        if [[ -n "$(mawk -F ',' -v source="$source" '
+            $1 == source { print $3 }' "$SOURCES")" ]]; then
+            local
+        else
+            local exclude_from_light=false
+        fi
+
         # Initialize source variables
-        local source_name=''
         local source_url=''
         local source_results=''
-        local exclude_from_light=false
         local rate_limited=false
         local query_count=''
         local execution_time
         execution_time="$(date +%s)"
 
-        # Run source. Always return true to avoid script exiting when no
-        # results were retrieved
-        $source || true
+        if [[ "$USE_EXISTING_RESULTS" == false ]]; then
+            # Run source to retrieve results. Always return true to avoid
+            # script exiting when no results were retrieved.
+            $source || true
+        fi
 
         # Set source results path based of source name if not explicitly set
         : "${source_results:=data/pending/${source_name// /_}.tmp}"
@@ -344,8 +321,6 @@ save_domains() {
     if [[ ! -s all_retrieved_domains.tmp ]]; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
 
-        [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
         $FUNCTION --send-telegram \
             "Retrieval: no new domains added"
 
@@ -365,8 +340,6 @@ save_domains() {
 
     printf "\nAdded new domains to raw file.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$count_added" "$count_after"
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     $FUNCTION --send-telegram \
         "Retrieval: added ${count_added} domains"
@@ -486,7 +459,6 @@ cleanup() {
 
 source_google_search() {
     # Last checked: 21/01/25
-    source_name='Google Search'
     source_url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
@@ -584,10 +556,6 @@ search_google() {
 
 source_cybersquatting() {
     # Last checked: 08/02/25
-    source_name='Cybersquatting'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
     local tlds results
 
     # Install dnstwist
@@ -655,11 +623,7 @@ source_cybersquatting() {
 
 source_dga_detector() {
     # Last checked: 14/02/25
-    source_name='DGA Detector'
     source_url='https://github.com/exp0se/dga_detector/archive/refs/heads/master.zip'
-    exclude_from_light=true
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Install DGA Detector and dependencies
     # curl -L required
@@ -692,11 +656,6 @@ source_dga_detector() {
 
 source_regex() {
     # Last checked: 08/02/25
-    source_name='Regex'
-    exclude_from_light=true
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
     local pattern
 
     # Loop through phishing targets
@@ -732,10 +691,7 @@ source_regex() {
 source_165antifraud() {
     # Last checked: 17/02/25
     # Credit to @tanmarpn for the source idea
-    source_name='165 Anti-fraud'
     source_url='https://165.npa.gov.tw/api/article/subclass/3'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL "$source_url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
@@ -744,10 +700,7 @@ source_165antifraud() {
 
 source_aa419() {
     # Last checked: 23/12/24
-    source_name='Artists Against 419'
     source_url='https://api.aa419.org/fakesites'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Trailing slash intentionally omitted
     curl -sSH "Auth-API-Id:${AA419_API_ID}" \
@@ -757,10 +710,7 @@ source_aa419() {
 
 source_behindmlm() {
     # Last checked: 17/02/25
-    source_name='BehindMLM'
     source_url='https://behindmlm.com'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "&#8220;\K${DOMAIN_REGEX}(?=&#8221;)|<li>\K${DOMAIN_REGEX}|(;|:) \K${DOMAIN_REGEX}|and \K${DOMAIN_REGEX}" \
@@ -769,10 +719,7 @@ source_behindmlm() {
 
 source_bugsfighter() {
     # Last checked: 17/02/25
-    source_name='BugsFighter'
     source_url='https://www.bugsfighter.com/blog'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "remove \K${DOMAIN_REGEX}" > source_results.tmp
@@ -780,10 +727,7 @@ source_bugsfighter() {
 
 source_coi.gov.cz() {
     # Last checked: 17/02/25
-    source_name='Česká Obchodní Inspekce'
     source_url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL --retry 2 --retry-all-errors "${source_url}/" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" > source_results.tmp
@@ -791,10 +735,7 @@ source_coi.gov.cz() {
 
 source_crypto_scam_tracker() {
     # Last checked: 12/02/25
-    source_name='DFPI Crypto Scam Tracker'
     source_url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "column-5\">\K(https?)?${DOMAIN_REGEX}" > source_results.tmp
@@ -802,10 +743,7 @@ source_crypto_scam_tracker() {
 
 source_emerging_threats() {
     # Last checked: 17/02/25
-    source_name='Emerging Threats'
     source_url='https://rules.emergingthreats.net/open/suricata-5.0/emerging.rules.zip'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" -o rules.zip
     unzip -q rules.zip -d rules
@@ -827,23 +765,35 @@ source_emerging_threats() {
 
 source_fakewebshoplisthun() {
     # Last checked: 17/02/25
-    source_name='FakeWebshopListHUN'
     source_url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
-    exclude_from_light=true  # Has a few false positives
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+      # Has a few false positives
 
     curl -sSL "$source_url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
         > source_results.tmp
 }
 
+source_greatis() {
+    # Last checked: 17/02/25
+    source_url='https://greatis.com/unhackme/help/category/remove'
+
+    curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
+        | grep -iPo "rel=\"bookmark\">remove \K${DOMAIN_REGEX}" \
+        > source_results.tmp
+}
+
+source_gridinsoft() {
+    # Last checked: 17/02/25
+    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
+      # Has a few false positives
+
+    curl -sSL "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
+        > source_results.tmp
+}
+
 source_jeroengui() {
     # Last checked: 12/02/25
-    source_name='Jeroengui'
     source_url='https://file.jeroengui.be'
-    exclude_from_light=true  # Too many domains
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+      # Too many domains
 
     local url_shorterners_whitelist='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
 
@@ -864,58 +814,24 @@ source_jeroengui_nrd() {
     # Last checked: 29/12/24
     # For the light version
     # Only includes domains found in the NRD feed
-    source_name='Jeroengui (NRDs)'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
     mv jeroengui_nrds.tmp source_results.tmp
-}
-
-source_greatis() {
-    # Last checked: 17/02/25
-    source_name='Wildcat Cyber Patrol'
-    source_url='https://greatis.com/unhackme/help/category/remove'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
-    curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
-        | grep -iPo "rel=\"bookmark\">remove \K${DOMAIN_REGEX}" \
-        > source_results.tmp
-}
-
-source_gridinsoft() {
-    # Last checked: 17/02/25
-    source_name='Gridinsoft'
-    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
-    exclude_from_light=true  # Has a few false positives
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
-
-    curl -sSL "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
-        > source_results.tmp
 }
 
 source_malwareurl() {
     # Last checked: 17/02/25
-    source_name='MalwareURL'
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/malwareurl.txt'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
         > source_results.tmp
 }
 
 source_manual() {
-    source_name='Manual'
+    return
 }
 
 source_pcrisk() {
     # Last checked: 17/02/25
-    source_name='PCrisk'
     source_url='https://www.pcrisk.com/removal-guides'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
         | mawk '/<div class="text-article">/ { getline; getline; print }' \
@@ -924,10 +840,7 @@ source_pcrisk() {
 
 source_phishstats() {
     # Last checked: 17/02/25
-    source_name='PhishStats'
     source_url='https://phishstats.info/phish_score.csv'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # Get URLs with no subdirectories (some of the URLs use docs.google.com)
     curl -sSL "$source_url" | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" \
@@ -936,10 +849,7 @@ source_phishstats() {
 
 source_puppyscams() {
     # Last checked: 17/02/25
-    source_name='PuppyScams.org'
     source_url='https://puppyscams.org'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?page=[1-15]" \
         | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > source_results.tmp
@@ -947,10 +857,7 @@ source_puppyscams() {
 
 source_scamadviser() {
     # Last checked: 17/02/25
-    source_name='ScamAdviser'
     source_url='https://www.scamadviser.com/articles'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?p=[1-15]" \
         | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" \
@@ -959,10 +866,7 @@ source_scamadviser() {
 
 source_scamdirectory() {
     # Last checked: 17/02/25
-    source_name='Scam Directory'
     source_url='https://scam.directory/category'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     # head -n causes grep broken pipe error
     curl -sSL --retry 2 --retry-all-errors "${source_url}/" \
@@ -971,11 +875,8 @@ source_scamdirectory() {
 
 source_scamminder() {
     # Last checked: 18/02/25
-    source_name='ScamMinder'
     source_url='https://scamminder.com/websites'
-    exclude_from_light=true  # Has a few false positives
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+      # Has a few false positives
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-100]" \
         | mawk '/Trust Score :  strongly low/ { getline; print }' \
@@ -984,10 +885,7 @@ source_scamminder() {
 
 source_unit42() {
     # Last checked: 17/02/25
-    source_name='Unit42'
     source_url='https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/archive/refs/heads/main.zip'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL "$source_url" -o unit42.zip
     unzip -q unit42.zip -d unit42
@@ -1000,10 +898,7 @@ source_unit42() {
 
 source_viriback_tracker() {
     # Last checked: 17/02/25
-    source_name='ViriBack C2 Tracker'
     source_url='https://tracker.viriback.com/dump.php'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL "$source_url" | mawk -v year="$(date +"%Y")" \
         -F ',' '$4 ~ year { print $2 }' \
@@ -1012,10 +907,7 @@ source_viriback_tracker() {
 
 source_vzhh() {
     # Last checked: 17/02/25
-    source_name='Verbraucherzentrale Hamburg'
     source_url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
@@ -1024,10 +916,7 @@ source_vzhh() {
 
 source_wipersoft() {
     # Last checked: 17/02/25
-    source_name='WiperSoft'
     source_url='https://www.wipersoft.com/blog'
-
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | mawk '/<div class="post-content">/ { getline; print }' \
