@@ -84,7 +84,7 @@ check_review_file() {
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
-    local source source_name
+    local source
 
     for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
         # Error if source_results.tmp from previous source is still present
@@ -92,19 +92,20 @@ retrieve_source_results() {
             error 'source_results.tmp not properly cleaned up.'
         fi
 
-        source_name="$(mawk -F ',' -v source="$source" '
-            $1 == source { print $2 }' "$SOURCES")"
-
         # Initialize source variables
-        local exclude_from_light=false
+        local source_name
         local source_url=''
         local source_results=''
+        local exclude_from_light=false
         local rate_limited=false
         local query_count=''
         local execution_time
         execution_time="$(date +%s)"
 
-        if [[ -z "$(mawk -F ',' -v source="$source" '
+        source_name="$(mawk -F ',' -v source="$source" '
+            $1 == source { print $2 }' "$SOURCES")"
+
+        if [[ -n "$(mawk -F ',' -v source="$source" '
             $1 == source { print $3 }' "$SOURCES")" ]]; then
             exclude_from_light=true
         fi
