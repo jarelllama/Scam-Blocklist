@@ -110,9 +110,13 @@ retrieve_source_results() {
         local execution_time
         execution_time="$(date +%s)"
 
-        if [[ "$USE_EXISTING_RESULTS" == false ]]; then
-            # Run source to retrieve results. Always return true to avoid
-            # script exiting when no results were retrieved.
+        # Run source to retrieve results if not using existing results except
+        # for Google Search source as that handles existing results in its
+        # function.
+        if [[ "$USE_EXISTING_RESULTS" == false \
+            || "$source_name" == 'Google Search' ]]; then
+            # Always return true to avoid script exiting when no results were
+            # retrieved.
             $source || true
         fi
 
