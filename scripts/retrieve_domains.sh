@@ -251,7 +251,7 @@ process_source_results() {
     mv temp "$source_results"
 
     # Error in case a source wrongly retrieves too many results.
-    if (( $(wc -l < "$source_results") > 20000 )); then
+    if (( $(wc -l < "$source_results") > 10000 )); then
         error "Source is unusually large: $(wc -l < "$source_results") entries"
     fi
 
