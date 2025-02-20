@@ -99,7 +99,7 @@ retrieve_source_results() {
             $1 == source { print $3 }' "$SOURCES")" ]]; then
             local exclude_from_light=false
         else
-            local exclude_from_light=false
+            local exclude_from_light=true
         fi
 
         # Initialize source variables
