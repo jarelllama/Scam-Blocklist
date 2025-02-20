@@ -49,20 +49,19 @@ readonly -a WHITELIST=(
 # raw file, format the file and remove dead domains.
 build() {
     # Format raw file to Domains format
-    mawk '/[|]/ { gsub(/[|^]/, ""); print }' "$BLOCKLIST" > raw.tmp
+    mawk '/\|/ { gsub(/[|^]/, ""); print }' "$BLOCKLIST" > raw.tmp
 
     # Remove already processed domains
     comm -23 toplist.tmp raw.tmp > temp
     mv temp toplist.tmp
 
-    # Get matching domains in toplist
+    # Add matching domains in toplist to raw file
     local term
     for term in "${TERMS[@]}"; do
-        mawk "/${term}/" toplist.tmp >> domains.tmp
+        mawk "/${term}/" toplist.tmp >> raw.tmp
     done
 
-    # Add new domains to raw file
-    sort -u domains.tmp raw.tmp -o raw.tmp
+    sort -u raw.tmp -o raw.tmp
 
     # Remove whitelisted domains
     local white
