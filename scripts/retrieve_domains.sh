@@ -325,6 +325,8 @@ save_domains() {
     if [[ ! -s all_retrieved_domains.tmp ]]; then
         printf "\n\e[1mNo new domains to add.\e[0m\n"
 
+        [[ "$USE_EXISTING_RESULTS" == true ]] && return
+
         $FUNCTION --send-telegram \
             "Retrieval: no new domains added"
 
@@ -344,6 +346,8 @@ save_domains() {
 
     printf "\nAdded new domains to raw file.\nBefore: %s  Added: %s  After: %s\n" \
         "$count_before" "$count_added" "$count_after"
+
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
 
     $FUNCTION --send-telegram \
         "Retrieval: added ${count_added} domains"
@@ -398,10 +402,14 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
+    if [[ -n "$search_term" ]]; then
+        search_term="\"${search_term:0:100}...\""
+    fi
+
     printf "\n\e[1mSource: %s\e[0m\n" "${search_term:-$source_name}"
 
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
-\"${search_term:0:100}...\",${raw_count},${final_count},${total_whitelisted_count},\
+${search_term},${raw_count},${final_count},${total_whitelisted_count},\
 ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     >> "$SOURCE_LOG"
 
