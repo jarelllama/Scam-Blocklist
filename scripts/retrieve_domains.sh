@@ -110,13 +110,6 @@ retrieve_source_results() {
             exclude_from_light=true
         fi
 
-        # The Google Search source prints the search term instead of the source
-        # name. The search term is only assigned after running the source
-        # function.
-        if [[ "$source_name" != 'Google Search' ]]; then
-            printf "\n\e[1mSource: %s\e[0m\n" "$source_name"
-        fi
-
         # Run source to retrieve results if not using existing results except
         # for Google Search source as that handles existing results in its
         # function.
@@ -258,7 +251,7 @@ process_source_results() {
     mv temp "$source_results"
 
     # Error in case a source wrongly retrieves too many results.
-    if (( $(wc -l < test.txt) > 20000 )); then
+    if (( $(wc -l < "$source_results") > 20000 )); then
         error 'Source is unusually large.'
     fi
 
@@ -405,6 +398,8 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
+    printf "\n\e[1mSource: %s\e[0m\n" "${search_term:-$source_name}"
+
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},${search_term},\
 ${raw_count},${final_count},${total_whitelisted_count},${dead_count},\
 ${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
@@ -483,8 +478,6 @@ source_google_search() {
             # Remove file extension from file name to get search term
             search_term="${search_term%.tmp}"
 
-            printf "\n\e[1mSource: %s\e[0m\n" "$search_term"
-
             process_source_results
         done
         return
@@ -516,8 +509,6 @@ search_google() {
     query_count=0
     # Set execution time for each individual search term
     execution_time="$(date +%s)"
-
-    printf "\n\e[1mSource: %s\e[0m\n" "$search_term"
 
     touch "$source_results"  # Create results file to ensure proper logging
 
