@@ -33,39 +33,39 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 429712
-Light version: 2928
+Total domains: 429730
+Light version: 2961
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
    13 |     619 |      0 % |      35 % | 165 Anti-fraud
     8 |     143 |      0 % |      14 % | Artists Against 419
     1 |      91 |      0 % |      11 % | BehindMLM
-    1 |      60 |      0 % |       7 % | BugsFighter
+    2 |      61 |      0 % |       7 % | BugsFighter
   115 |    1132 |      0 % |       1 % | Cybersquatting
     0 |      54 |      0 % |      75 % | DFPI Crypto Scam Tracker
  2639 |   29429 |     23 % |       1 % | DGA Detector
    54 |    3890 |      3 % |      18 % | Emerging Threats
    25 |     802 |      0 % |      24 % | FakeWebshopListHUN
-  279 |    1085 |      0 % |       2 % | Google Search
-  158 |    2748 |      2 % |      18 % | Gridinsoft
+    0 |     806 |      0 % |       2 % | Google Search
+  168 |    2758 |      2 % |      18 % | Gridinsoft
     0 |    8525 |      6 % |       0 % | Jeroengui (NRDs)
  3199 |   55610 |     43 % |       8 % | Jeroengui
    15 |     127 |      0 % |       7 % | MalwareURL
-    3 |      42 |      0 % |       7 % | PCrisk
+    4 |      43 |      0 % |       7 % | PCrisk
   868 |    6906 |      5 % |      27 % | PhishStats
     9 |     127 |      0 % |      17 % | PuppyScams.org
  2602 |   19846 |     15 % |       1 % | Regex Matching
    26 |    1898 |      1 % |      37 % | Scam Directory
     1 |      18 |      0 % |      31 % | ScamAdviser
-  115 |     385 |      0 % |       5 % | ScamMinder
+  119 |     389 |      0 % |       7 % | ScamMinder
     3 |     481 |      0 % |       9 % | Unit42
     0 |      33 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-   17 |     180 |      0 % |      21 % | Wildcat Cyber Patrol
+   20 |     183 |      0 % |      21 % | Wildcat Cyber Patrol
     1 |      10 |      0 % |       8 % | WiperSoft
     2 |     565 |      0 % |      49 % | Česká Obchodní Inspekce
-10154 |  127161 |    100 % |      21 % | All sources
+ 9894 |  126901 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
