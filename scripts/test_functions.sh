@@ -151,7 +151,8 @@ TEST_RETRIEVE_VALIDATE() {
             NR > 1 {
                 $4 = "y"
                 print
-            }' "$SOURCES"
+            }' "$SOURCES" > temp
+            mv temp "$SOURCES"
 
         # Run retrieval script
         run_script retrieve_domains.sh
