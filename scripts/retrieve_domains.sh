@@ -97,7 +97,7 @@ retrieve_source_results() {
 
         if [[ -n "$(mawk -F ',' -v source="$source" '
             $1 == source { print $3 }' "$SOURCES")" ]]; then
-            local
+            local exclude_from_light=false
         else
             local exclude_from_light=false
         fi
