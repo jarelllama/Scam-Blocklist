@@ -31,12 +31,13 @@ main() {
     local config
     for config in "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" "$SOURCE_LOG" \
         "$WHITELIST" "$WILDCARDS"; do
-        if [[ "$config" != *.csv ]]; then
-            : > "$config"
+        if [[ "$config" == *.csv ]]; then
+            # Keep headers in the CSV files
+            sed -i '1q' "$config"
             continue
         fi
-        # Keep headers in the CSV files
-        sed -i '1q' "$config"
+
+        : > "$config"
     done
 
     error=false
@@ -152,7 +153,7 @@ TEST_RETRIEVE_VALIDATE() {
                 $4 = "y"
                 print
             }' "$SOURCES" > temp
-            mv temp "$SOURCES"
+        mv temp "$SOURCES"
 
         # Run retrieval script
         run_script retrieve_domains.sh
@@ -587,7 +588,6 @@ check_output() {
             [[ "$term_error" == false ]] && continue
 
         else
-
             # If files match, skip to next file to check
             if cmp -s <(sort "$actual_output_file") <(sort "$expected_output_file"); then
                 continue
