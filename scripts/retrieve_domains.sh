@@ -606,7 +606,7 @@ source_cybersquatting() {
         # Update counts for the target
         mawk -F ',' \
             -v target="$target" -v results_count="$(wc -l < results.tmp)" '
-            BEGIN {OFS = ","}
+            BEGIN { OFS = "," }
             $1 == target {
                 $2 += results_count
                 $3 += 1
@@ -678,7 +678,7 @@ source_regex() {
                 | tee -a source_results.tmp \
                 | wc -l
             )" '
-            BEGIN {OFS = ","}
+            BEGIN { OFS = "," }
             $1 == target {
                 $6 += results
                 $7 += 1
@@ -790,7 +790,7 @@ source_gridinsoft() {
 }
 
 source_jeroengui() {
-    # Last checked: 12/02/25
+    # Last checked: 20/02/25
     local url_shorterners_whitelist list
 
     source_url='https://file.jeroengui.be'

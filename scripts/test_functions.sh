@@ -8,6 +8,7 @@
 
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly SOURCES='config/sources.csv'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly WILDCARDS='config/wildcards.txt'
@@ -142,6 +143,15 @@ TEST_RETRIEVE_VALIDATE() {
         mv xaa data/pending/Artists_Against_419.tmp
         mv xab data/pending/google_search_search-term-1.tmp
         mv xac data/pending/google_search_search-term-2.tmp
+
+        # Enable all sources in the sources config file
+        mawk '
+            BEGIN { FS = OFS= "," }
+            NR == 1 { print }
+            NR > 1 {
+                $4 = "y"
+                print
+            }' "$SOURCES"
 
         # Run retrieval script
         run_script retrieve_domains.sh
