@@ -110,6 +110,13 @@ retrieve_source_results() {
             exclude_from_light=true
         fi
 
+        # The Google Search source prints the search term instead of the source
+        # name. The search term is only assigned after running the source
+        # function.
+        if [[ "$source_name" != 'Google Search' ]]; then
+            printf "\n\e[1mSource: %s\e[0m\n" "$source_name"
+        fi
+
         # Run source to retrieve results if not using existing results except
         # for Google Search source as that handles existing results in its
         # function.
@@ -215,11 +222,6 @@ process_source_results() {
     # Count number of unfiltered domains
     raw_count="$(wc -l < "$source_results")"
 
-    # Error in case a source wrongly retrieves too many results.
-    if (( raw_count > 20000 )); then
-        error 'Source is unusually large.'
-    fi
-
     # Remove known dead domains (dead domains file is not sorted and includes
     # subdomains)
     dead_count="$(filter \
@@ -254,6 +256,11 @@ process_source_results() {
     # Remove domains already in raw file
     comm -23 "$source_results" "$RAW" > temp
     mv temp "$source_results"
+
+    # Error in case a source wrongly retrieves too many results.
+    if (( $(wc -l < test.txt) > 20000 )); then
+        error 'Source is unusually large.'
+    fi
 
     # Log blacklisted domains
     # log_domains is used instead of filter as the blacklisted domains should
@@ -384,12 +391,8 @@ save_subdomains() {
 
 # Print and log statistics for each source.
 log_source() {
-    local item final_count total_whitelisted_count excluded_count
+    local final_count total_whitelisted_count excluded_count
     local status='saved'
-
-    if [[ "$source_name" == 'Google Search' ]]; then
-        item="\"${search_term:0:100}...\""
-    fi
 
     # Check for errors to log
     if [[ "$rate_limited" == true ]]; then
@@ -402,13 +405,11 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
-    echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},${item},\
+    echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},${search_term},\
 ${raw_count},${final_count},${total_whitelisted_count},${dead_count},\
 ${parked_count},${in_toplist_count},${query_count},${status}" >> "$SOURCE_LOG"
 
     [[ "$rate_limited" == true ]] && return
-
-    printf "\n\e[1mSource: %s\e[0m\n" "${item:-$source_name}"
 
     if [[ "$status" == 'ERROR: empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
@@ -482,6 +483,8 @@ source_google_search() {
             # Remove file extension from file name to get search term
             search_term="${search_term%.tmp}"
 
+            printf "\n\e[1mSource: %s\e[0m\n" "$search_term"
+
             process_source_results
         done
         return
@@ -513,6 +516,8 @@ search_google() {
     query_count=0
     # Set execution time for each individual search term
     execution_time="$(date +%s)"
+
+    printf "\n\e[1mSource: %s\e[0m\n" "$search_term"
 
     touch "$source_results"  # Create results file to ensure proper logging
 
@@ -770,7 +775,6 @@ source_emerging_threats() {
 source_fakewebshoplisthun() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
-      # Has a few false positives
 
     curl -sSL "$source_url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
         > source_results.tmp
@@ -788,7 +792,6 @@ source_greatis() {
 source_gridinsoft() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
-      # Has a few false positives
 
     curl -sSL "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
         > source_results.tmp
@@ -796,10 +799,10 @@ source_gridinsoft() {
 
 source_jeroengui() {
     # Last checked: 12/02/25
-    source_url='https://file.jeroengui.be'
-      # Too many domains
+    local url_shorterners_whitelist list
 
-    local url_shorterners_whitelist='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
+    source_url='https://file.jeroengui.be'
+    url_shorterners_whitelist='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
 
     # Get domains from various weekly lists and remove link shorterners
     for list in phishing malware scam; do
@@ -880,7 +883,6 @@ source_scamdirectory() {
 source_scamminder() {
     # Last checked: 18/02/25
     source_url='https://scamminder.com/websites'
-      # Has a few false positives
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-100]" \
         | mawk '/Trust Score :  strongly low/ { getline; print }' \
