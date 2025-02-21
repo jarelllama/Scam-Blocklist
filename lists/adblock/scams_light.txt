@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.21.063600.2025
+! Version: 02.21.064916.2025
 ! Expires: 12 hours
-! Last modified: Fri Feb 21 06:36:00 UTC 2025
+! Last modified: Fri Feb 21 06:49:16 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 3412
+! Number of entries: 3459
 !
 ||00privacidad-cuenta-bhd-2025-22.weebly.com^
 ||028426.com^
@@ -173,6 +173,7 @@
 ||aladdinmarketgrill.com^
 ||alert-user-breach-six.vercel.app^
 ||alidada.by^
+||aliexprcss.com^
 ||aliexpress.bar^
 ||aliexpress.fun^
 ||aliexpressn.com^
@@ -246,9 +247,11 @@
 ||alphaperson.shop^
 ||alpinestars.com^
 ||alza.hu^
+||amaz0n.world^
 ||amazing-blockifi-loggin.webflow.io^
 ||amazon.fsghghvvkliu.com^
 ||amazone.xyz^
+||amazzon.site^
 ||americanfunds.com^
 ||ametronles.com^
 ||amezon.pro^
@@ -346,6 +349,7 @@
 ||baisihair.fr^
 ||bankofaerica.net^
 ||bankofameica.net^
+||bankofannerica.com^
 ||bankofmerica.net^
 ||banksofamerica.biz^
 ||banofamerica.net^
@@ -422,6 +426,7 @@
 ||birthjeans.icu^
 ||bitcapital.online^
 ||bitcine.app^
+||bitcoiin.store^
 ||bitcoinker.com^
 ||bitcolin.consulting^
 ||bitcolin.school^
@@ -470,6 +475,7 @@
 ||bookieboutique.shop^
 ||bookp.ru.com^
 ||booshoatoocotez.net^
+||botcoin.online^
 ||boundpeter.shop^
 ||boursobank.info^
 ||boutiqueond.shop^
@@ -569,6 +575,7 @@
 ||chat.ichatlink.net^
 ||chatgpt.icu^
 ||chatgpt.press^
+||chatgpt.select^
 ||chatgpt4.com^
 ||chatgpt5.cloud^
 ||chatgptbrasil.com.br^
@@ -614,6 +621,7 @@
 ||codeanyapp.com^
 ||coffeinoffice.xyz^
 ||coinarns.com^
+||coinbase.best^
 ||coinhive.com^
 ||com-etrafad.top^
 ||com-etrcca.xin^
@@ -724,13 +732,16 @@
 ||crohasit.net^
 ||crossurl.shop^
 ||crpyto.net^
+||crypro.org^
 ||cryptex.to^
 ||crypto-loot.com^
 ||crypto-market-world.com^
 ||cryptoa.cc^
 ||cryptocurrencies-offers.com^
+||cryptoe.ru^
 ||cryptog.wtf^
 ||cryptonight.net^
+||cryptor.work^
 ||cs.money^
 ||csdazzle.shop^
 ||csidokk.store^
@@ -818,6 +829,7 @@
 ||discord.loginredirect.com^
 ||discord.reviews^
 ||discord.site^
+||discordd.cyou^
 ||discordinvites.net^
 ||discounthero.org^
 ||discoverbrombal.com^
@@ -1257,7 +1269,9 @@
 ||f2pool.com^
 ||f7d607451c.com^
 ||f95zone.to.it^
+||facebooks.marketing^
 ||facepl.com^
+||faeebook.live^
 ||fairu-blog.com^
 ||fairu-blog.xyz^
 ||fairu-cdn.com^
@@ -1275,6 +1289,7 @@
 ||fanttik.com^
 ||fanwestdoll.best^
 ||faqserv.com^
+||fasebook.pro^
 ||fashiontrendyessence.com^
 ||fastconnectionflow.com^
 ||fastcontent.live^
@@ -1432,7 +1447,9 @@
 ||gooba.top^
 ||goodcosts.shop^
 ||goofhvh.weebly.com^
+||goog1e.pro^
 ||googie-anaiytics.com^
+||googld.site^
 ||google-bravip.com^
 ||google-rag.net^
 ||google-rga.com^
@@ -1451,7 +1468,11 @@
 ||googleserver.top^
 ||googletagmanagers.com^
 ||googleuseries2.com^
+||googlle.vip^
 ||googls.site^
+||gooogle.bargains^
+||gooqle.store^
+||goosgle.store^
 ||gov-sk.cloud^
 ||gowedhemarketing.shop^
 ||gplhub.net^
@@ -1486,6 +1507,7 @@
 ||h1-h2-h3-h4.info^
 ||h1-h2-h3.info^
 ||halloweencp.com^
+||hamster.makeup^
 ||hanatyury.online^
 ||handgripknuckle.com^
 ||hanefra7bikiemta.com^
@@ -1886,8 +1908,10 @@
 ||messageriefreefr22.godaddysites.com^
 ||messageriefreefr3.godaddysites.com^
 ||messenger.accountants^
+||messinger.pro^
 ||metamaesklogini.webflow.io^
 ||metamask.codes^
+||metamask.farm^
 ||metamask.group^
 ||metamenu.org^
 ||metamskweleat.webflow.io^
@@ -2026,6 +2050,7 @@
 ||neighborhoodsluts.com^
 ||nepizzabraintree.com^
 ||netbrowser.shop^
+||netflex.online^
 ||netflix-app-clone-three.vercel.app^
 ||netflix-clone-9qo.pages.dev^
 ||netflixc.online^
@@ -2063,6 +2088,7 @@
 ||nimprove.top^
 ||ninewest.com.tr^
 ||nixelmedia.com^
+||nnicrosoft.com^
 ||nnoomm.co.in^
 ||noahlawrence.shop^
 ||nodeyearnfi.com^
@@ -2131,6 +2157,8 @@
 ||onlinelas.com^
 ||onlinemac.com^
 ||onlineviagraprescription.com^
+||only-fans.bid^
+||only-fans.space^
 ||only-fans.tech^
 ||onlyfans.ma^
 ||onlyfanslive.org^
@@ -2601,6 +2629,7 @@
 ||slyvora.store^
 ||smartpanel.top^
 ||snapchata.com^
+||snapchatcom.chat^
 ||snapsave.app^
 ||snmc.io^
 ||snowflakeclickurl.xyz^
@@ -2657,6 +2686,8 @@
 ||start-x-blockfie-cdn.webflow.io^
 ||startperfectsolutions.com^
 ||startservicefounds.com^
+||steamcommunnity.gifts^
+||steamcommuunity.com^
 ||steamcummunity.com^
 ||steamworkshopdownloader.io^
 ||steanmeconnunnity.com^
@@ -2695,6 +2726,7 @@
 ||szerszamkell.hu^
 ||szpnc.cn^
 ||szshenyao.com^
+||t1ktok.vip^
 ||tablewindow82.com^
 ||tabtouch.com.au^
 ||takasu.shop^
@@ -2853,13 +2885,17 @@
 ||telegqzkr.motorcycles^
 ||telegqzkr.rocks^
 ||telegqzkr.run^
+||telegraj.icu^
 ||telegram-ios.com^
 ||telegram-region.ru^
+||telegram1.live^
 ||telegram88.xyz^
 ||telegramcc.hxinternet.com^
 ||telegramcn.me^
 ||telegramtraffic.ru^
 ||telegramzhvip.com^
+||telegrap.icu^
+||telegrar.icu^
 ||telegreet.motorcycles^
 ||telegreet.pro^
 ||telegrgjr.club^
@@ -2915,6 +2951,7 @@
 ||telegypib.lol^
 ||telegyqsb.email^
 ||telegyqsb.life^
+||telegyram.org^
 ||telegysyt.email^
 ||telegztyr.beauty^
 ||telegztyr.lol^
@@ -2986,12 +3023,14 @@
 ||ticketxking.com^
 ||tik-tok.club^
 ||tikmining.com^
+||tiktmk.com^
 ||tiktok.enisn.com^
 ||tiktokio.cc^
 ||tiktoklive.pk^
 ||tiktokmod.pro^
 ||tiktokmusics.ir^
 ||tiktokpangle-cdn-us.com^
+||tiktoks.net^
 ||tiktokvapp.com^
 ||timeactive.shop^
 ||timelesstreasuresbrandco.com^
@@ -3099,6 +3138,8 @@
 ||underantivirus.com^
 ||underxdown.com^
 ||undressbaby.com^
+||uniiswap.app^
+||uniswa-p.org^
 ||unlockcontent.org^
 ||unmuha.ac.id^
 ||unveriumenflue.com^
@@ -3313,6 +3354,7 @@
 ||xeocashouteu.top^
 ||xfsrg.xyz^
 ||xgo791266c.vip^
+||xiami.uk^
 ||xiao-mi.cfd^
 ||xiaomioficial.pe^
 ||xietaoz.com^
@@ -3335,6 +3377,7 @@
 ||xn--hz2b1jz6shzo6la.store^
 ||xn--jj0bz6z98ct0a29q.com^
 ||xn--lg3bt1seyav2ya.com^
+||xn--linkein-k7a.com^
 ||xn--mcrosoft-l2a.com^
 ||xn--mondalrelay-fcb.fr^
 ||xn--tr-bnance-t5a.com^
@@ -3371,6 +3414,8 @@
 ||yonosbi.replit.app^
 ||you-tube.top^
 ||yourselfirst.com^
+||youtobe.net^
+||youtub.live^
 ||youtube1.cyou^
 ||youtube2.qpon^
 ||youtube4.cyou^
@@ -3379,7 +3424,9 @@
 ||youtubei.qpon^
 ||youtubem.cyou^
 ||youtuben.qpon^
+||youtuber.asia^
 ||youtubes.tech^
+||youtubo.net^
 ||youyube.nl^
 ||yovip.net^
 ||ypfku.info^
