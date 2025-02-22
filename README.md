@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 429889
-Light version: 4031
+Total domains: 429903
+Light version: 4059
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -48,24 +48,24 @@ Today | Monthly | %Monthly | %Filtered | Source
    20 |    3910 |      2 % |      21 % | Emerging Threats
    25 |     827 |      0 % |      24 % | FakeWebshopListHUN
    67 |     897 |      0 % |       2 % | Google Search
-   96 |    2879 |      2 % |      18 % | Gridinsoft
-  554 |    9361 |      6 % |       0 % | Jeroengui (NRDs)
- 3136 |   60220 |     44 % |       8 % | Jeroengui
-   14 |     151 |      0 % |       7 % | MalwareURL
-    1 |      48 |      0 % |       7 % | PCrisk
+  101 |    2884 |      2 % |      18 % | Gridinsoft
+  555 |    9362 |      6 % |       0 % | Jeroengui (NRDs)
+ 3142 |   60226 |     44 % |       8 % | Jeroengui
+   15 |     152 |      0 % |       7 % | MalwareURL
+    2 |      49 |      0 % |       7 % | PCrisk
     0 |    7157 |      5 % |      27 % | PhishStats
     6 |     133 |      0 % |      17 % | PuppyScams.org
     4 |   21599 |     15 % |       1 % | Regex Matching
    14 |    1912 |      1 % |      37 % | Scam Directory
     0 |      18 |      0 % |      31 % | ScamAdviser
-   57 |     471 |      0 % |       7 % | ScamMinder
+   60 |     474 |      0 % |       7 % | ScamMinder
     0 |     481 |      0 % |       8 % | Unit42
     1 |      34 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
-    4 |     187 |      0 % |      21 % | Wildcat Cyber Patrol
+    5 |     188 |      0 % |      21 % | Wildcat Cyber Patrol
     0 |      12 |      0 % |       8 % | WiperSoft
     5 |     577 |      0 % |      49 % | Česká Obchodní Inspekce
- 3482 |  135109 |    100 % |      21 % | All sources
+ 3499 |  135126 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
