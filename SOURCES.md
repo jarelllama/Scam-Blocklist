@@ -36,6 +36,7 @@ Only active sources are used to automatically retrieve domains.
 | [Scam.Delivery](https://scam.delivery/) | | |
 | [ScamAdvisor](https://www.scamadviser.com/) | Yes | |
 | [ScamMinder](https://scamminder.com/) | Yes | Yes |
+| [ScamTracker](https://scam-tracker.net/) | Yes | |
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | | |
 | [StopGunScams.com](https://stopgunscams.com/) | | |
 | [SystemJargon's NRD List](https://github.com/SystemJargon/filters) | - | - |

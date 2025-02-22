@@ -65,6 +65,7 @@ $(print_stats 'Regex') Matching
 $(print_stats 'Scam Directory')
 $(print_stats 'ScamAdviser')
 $(print_stats 'ScamMinder')
+$(print_stats 'ScamTracker')
 $(print_stats 'Unit42')
 $(print_stats 'Verbraucherzentrale Hamburg')
 $(print_stats 'ViriBack C2 Tracker')

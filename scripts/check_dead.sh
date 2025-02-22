@@ -138,7 +138,7 @@ find_dead() {
 
     # Format to Adblock Plus syntax for Dead Domains Linter
     # Use variable filename to avoid filename clashes
-    sed 's/.*/||&^/' "$1" > "${1}.tmp"
+    mawk '{ print "||" $0 "^" }' > "${1}.tmp"
 
     dead-domains-linter -i "${1}.tmp" --export "dead_domains_${1}.tmp"
 }

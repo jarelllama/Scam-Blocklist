@@ -736,11 +736,12 @@ source_bugsfighter() {
 }
 
 source_coi.gov.cz() {
-    # Last checked: 17/02/25
+    # Last checked: 22/02/25
     source_url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
 
     curl -sSL --retry 2 --retry-all-errors "${source_url}/" \
-        | grep -Po "<span>\K${DOMAIN_REGEX}(?=.*</span>)" > source_results.tmp
+        | mawk '/<p class = "list_titles">/ { getline; getline; print }' \
+        | grep -Po "<span>\K$DOMAIN_REGEX" > source_results.tmp
 }
 
 source_crypto_scam_tracker() {
