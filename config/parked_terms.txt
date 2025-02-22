@@ -109,6 +109,7 @@ website has been suspended
 website is coming soon
 website is ready. the content is to be added
 welcome to wordpress. this is your first post. edit or delete it, then start writing
+window.location.href="/lander
 you have probably come across this site because you received an email that was sent by one of our customers.
 your domain is pointed to the server, but there is no site with that domain name on the server.
 your request is invalid. most probably, the cid (the part after <code>/ipfs/</code>) is incorrect.
@@ -119,4 +120,3 @@ your request is invalid. most probably, the cid (the part after <code>/ipfs/</co
 您的网站因未备案或涉及违规被禁止访问，请及时联系实际接入商办理备案
 您的请求在web服务器中没有找到对应的站点
 该域名已过期，不能正常访问
-window.location.href="/lander
