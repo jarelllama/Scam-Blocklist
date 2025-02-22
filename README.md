@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 431940
-Light version: 4773
+Total domains: 431955
+Light version: 4788
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -59,14 +59,14 @@ Today | Monthly | %Monthly | %Filtered | Source
    14 |    1912 |      1 % |      37 % | Scam Directory
     0 |      18 |      0 % |      31 % | ScamAdviser
    60 |     474 |      0 % |       7 % | ScamMinder
-  714 |     714 |      0 % |       3 % | ScamTracker
+  729 |     729 |      0 % |       3 % | ScamTracker
     0 |     481 |      0 % |       8 % | Unit42
     1 |      34 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
     5 |     188 |      0 % |      21 % | Wildcat Cyber Patrol
     0 |      12 |      0 % |       8 % | WiperSoft
     5 |     577 |      0 % |      49 % | Česká Obchodní Inspekce
- 5620 |  137247 |    100 % |      21 % | All sources
+ 5635 |  137262 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
