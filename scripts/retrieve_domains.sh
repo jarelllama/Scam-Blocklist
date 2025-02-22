@@ -572,7 +572,8 @@ source_cybersquatting() {
 
     # Install URLCrazy and dependencies
     # curl -L required
-    curl -sSL 'https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip' \
+    curl -sSL --retry 2 --retry-all-errors \
+        'https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip' \
         -o urlcrazy.zip
     unzip -q urlcrazy.zip
     command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
@@ -636,7 +637,7 @@ source_dga_detector() {
 
     # Install DGA Detector and dependencies
     # curl -L required
-    curl -sSL "$source_url" -o dga_detector.zip
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o dga_detector.zip
     unzip -q dga_detector.zip
     pip install -q tldextract
 
@@ -702,7 +703,7 @@ source_165antifraud() {
     # Credit to @tanmarpn for the source idea
     source_url='https://165.npa.gov.tw/api/article/subclass/3'
 
-    curl -sSL "$source_url" \
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
         | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" > source_results.tmp
 }
@@ -712,7 +713,7 @@ source_aa419() {
     source_url='https://api.aa419.org/fakesites'
 
     # Trailing slash intentionally omitted
-    curl -sSH "Auth-API-Id:${AA419_API_ID}" \
+    curl -sSH --retry 2 --retry-all-errors "Auth-API-Id:${AA419_API_ID}" \
         "${source_url}/0/250?Status=active" --retry 2 --retry-all-errors \
         | jq -r '.[].Domain' > source_results.tmp
 }
@@ -776,8 +777,8 @@ source_fakewebshoplisthun() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
 
-    curl -sSL "$source_url" | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" \
-        > source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+        | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" > source_results.tmp
 }
 
 source_greatis() {
@@ -793,23 +794,24 @@ source_gridinsoft() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
 
-    curl -sSL "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
-        > source_results.tmp
+    curl -sSL--retry 2 --retry-all-errors "$source_url" \
+        | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
 source_jeroengui() {
-    # Last checked: 20/02/25
-    local url_shorterners_whitelist list
+    # Last checked: 22/02/25
+    local url_shorterners_whitelist
 
     source_url='https://file.jeroengui.be'
     url_shorterners_whitelist='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
 
     # Get domains from various weekly lists and remove link shorterners
-    for list in phishing malware scam; do
-        curl -sSL "${source_url}/${list}/last_week.txt" \
-            | grep -Po "^https?://\K${DOMAIN_REGEX}"
-    done | grep -vF \
-        "$(curl -sSL "$url_shorterners_whitelist" \
+    curl -sSLZ --retry 2 --retry-all-errors \
+        "${source_url}/phishing/last_week.txt" \
+        "${source_url}/malware/last_week.txt" \
+        "${source_url}/scam/last_week.txt" \
+        | grep -Po "^https?://\K${DOMAIN_REGEX}" \
+        | grep -vF "$(curl -sSL --retry 2 --retry-all-errors "$url_shorterners_whitelist" \
         | grep -Po "\|\K${DOMAIN_REGEX}")" > source_results.tmp
 
     # Get matching NRDs for the light version. Unicode is only processed by the
@@ -828,8 +830,8 @@ source_malwareurl() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/malwareurl.txt'
 
-    curl -sSL "$source_url" | grep -Po "\|\K${DOMAIN_REGEX}" \
-        > source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+        | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
 source_manual() {
@@ -837,7 +839,7 @@ source_manual() {
 }
 
 source_pcrisk() {
-    # Last checked: 17/02/25
+    # Last checked: 22/02/25
     source_url='https://www.pcrisk.com/removal-guides'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
@@ -850,8 +852,8 @@ source_phishstats() {
     source_url='https://phishstats.info/phish_score.csv'
 
     # Get URLs with no subdirectories (some of the URLs use docs.google.com)
-    curl -sSL "$source_url" | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" \
-        > source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+        | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" > source_results.tmp
 }
 
 source_puppyscams() {
@@ -889,11 +891,26 @@ source_scamminder() {
         | grep -Po "class=\"h5\">\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
+source_scamtracker() {
+    # Last checked: 22/02/25
+    source_url='https://scam-tracker.net/category/crypto-scams'
+    local -a review_urls
+
+    # Add URLs of reviews into an array
+    mapfile -t review_urls \
+        < <(curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-100]" \
+        | grep -Po '"headline"><a href="\Khttps://scam-tracker.net/crypto-scams/.*(?=/" rel="bookmark">)')
+
+    curl -sSLZ --retry 2 --retry-all-errors "${review_urls[@]}" \
+        | grep -Po "<div class=\"review-value\">\K${DOMAIN_REGEX}(?=</div>)" \
+        > source_results.tmp
+}
+
 source_unit42() {
     # Last checked: 17/02/25
     source_url='https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/archive/refs/heads/main.zip'
 
-    curl -sSL "$source_url" -o unit42.zip
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o unit42.zip
     unzip -q unit42.zip -d unit42
 
     grep -hPo "hxxps?\[:\]//\K${DOMAIN_SQUARE_REGEX}|^- \K${DOMAIN_SQUARE_REGEX}" \
@@ -906,8 +923,8 @@ source_viriback_tracker() {
     # Last checked: 17/02/25
     source_url='https://tracker.viriback.com/dump.php'
 
-    curl -sSL "$source_url" | mawk -v year="$(date +"%Y")" \
-        -F ',' '$4 ~ year { print $2 }' \
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+        | mawk -v year="$(date +"%Y")"  -F ',' '$4 ~ year { print $2 }' \
         | grep -Po "^https?://\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
@@ -921,7 +938,7 @@ source_vzhh() {
 }
 
 source_wipersoft() {
-    # Last checked: 17/02/25
+    # Last checked: 22/02/25
     source_url='https://www.wipersoft.com/blog'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \

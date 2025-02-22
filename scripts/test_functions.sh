@@ -76,7 +76,7 @@ SHELLCHECK() {
 
     # Install ShellCheck
     local url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
-    curl -sSL "$url" | tar -xJ
+    curl -sSL --retry 2 --retry-all-errors "$url" | tar -xJ
 
     # Check that ShellCheck was successfully installed
     shellcheck-stable/shellcheck --version || error 'ShellCheck did not install successfully.'
