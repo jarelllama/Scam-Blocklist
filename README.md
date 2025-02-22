@@ -59,6 +59,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    14 |    1912 |      1 % |      37 % | Scam Directory
     0 |      18 |      0 % |      31 % | ScamAdviser
    60 |     474 |      0 % |       7 % | ScamMinder
+  714 |     714 |      0 % |       3 % | ScamTracker
     0 |     481 |      0 % |       8 % | Unit42
     1 |      34 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      30 % | ViriBack C2 Tracker
