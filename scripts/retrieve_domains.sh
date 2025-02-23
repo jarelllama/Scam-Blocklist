@@ -713,7 +713,7 @@ source_aa419() {
     source_url='https://api.aa419.org/fakesites'
 
     # Trailing slash intentionally omitted
-    curl -sSH --retry 2 --retry-all-errors "Auth-API-Id:${AA419_API_ID}" \
+    curl -sS --retry 2 --retry-all-errors -H "Auth-API-Id:${AA419_API_ID}" \
         "${source_url}/0/250?Status=active" --retry 2 --retry-all-errors \
         | jq -r '.[].Domain' > source_results.tmp
 }
@@ -795,7 +795,7 @@ source_gridinsoft() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
 
-    curl -sSL--retry 2 --retry-all-errors "$source_url" \
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
