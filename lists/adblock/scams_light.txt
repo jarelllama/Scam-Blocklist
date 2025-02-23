@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.22.234042.2025
+! Version: 02.23.072348.2025
 ! Expires: 12 hours
-! Last modified: Sat Feb 22 23:40:42 UTC 2025
+! Last modified: Sun Feb 23 07:23:48 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 5972
+! Number of entries: 5993
 !
 ||001-x.38452658.xyz^
 ||00privacidad-cuenta-bhd-2025-22.weebly.com^
@@ -43,7 +43,12 @@
 ||1wxscr.com^
 ||1wxxlb.com^
 ||1wzjvm.top^
+||1xbet-ffe.top^
 ||1xbet-officialsite.vip^
+||1xbet-sfz.top^
+||1xbet-sqf.top^
+||1xbet-svt.top^
+||1xbet-vhod.ru^
 ||1xbet.ci^
 ||1xslots-zerkalo-official.ru^
 ||20240225.19978888.xyz^
@@ -400,6 +405,7 @@
 ||apkhihe.org^
 ||apkmill.xyz^
 ||apl-org.online^
+||apornovideo.com^
 ||appmap.store^
 ||aproductivelook.com^
 ||aproxcapital.com^
@@ -517,6 +523,7 @@
 ||bbnvcg.weebly.com^
 ||bbroadband.fitbudd.com^
 ||bbyklai.top^
+||bclubs.to^
 ||bcokcoins.com^
 ||bcxbalkan.net^
 ||bdexet.org^
@@ -557,6 +564,7 @@
 ||bets365.jp^
 ||betsmove635.com^
 ||betteranime.net^
+||betvisa.com^
 ||bfbdt55.com^
 ||bggbet.com^
 ||bgydnb.vip^
@@ -609,6 +617,7 @@
 ||bitcine.app^
 ||bitcoen.xyz^
 ||bitcoiin.store^
+||bitcoin-guide.de^
 ||bitcoin.co.il^
 ||bitcoinker.com^
 ||bitcoinloaner.com^
@@ -2214,6 +2223,7 @@
 ||glousism.co.in^
 ||glxy-dapp.com^
 ||gmailucky.com^
+||gmehukuk.com^
 ||goblinx.org^
 ||goboksehee.net^
 ||godscience.shop^
@@ -2302,6 +2312,7 @@
 ||h1-h2-h3-h4.info^
 ||h1-h2-h3.info^
 ||hackcrack.io^
+||hackroblox.vn^
 ||halloweencp.com^
 ||hamster8e.net^
 ||hanatyury.online^
@@ -2393,6 +2404,7 @@
 ||hotbwodama.today^
 ||hotbxurupa.cc^
 ||hotbyagade.cc^
+||hotbyalaga.today^
 ||hotbyapodo.cc^
 ||hotbyosaji.cc^
 ||hotbyoxaya.cc^
@@ -2415,6 +2427,7 @@
 ||huawei-connect.ru^
 ||huaweim9car.com^
 ||hubhc.com^
+||huefrost.com^
 ||huftwrs.top^
 ||huizhe.top^
 ||humoazulfrance.net^
@@ -2642,8 +2655,10 @@
 ||kosearch.com^
 ||kptzpotuscpfo.shop^
 ||kra20.at^
+||kra21.cc^
 ||kra23c.cc^
 ||kra23s.cc^
+||kra24.cc^
 ||kra25.cc^
 ||kra25s.cc^
 ||kra26.at^
@@ -2764,6 +2779,7 @@
 ||lorabijoux.com^
 ||lordfilmo.site^
 ||lordfilmu2.cc^
+||lotoclub.kz^
 ||lotradecoin.net^
 ||lotus-tab.com^
 ||lovefloraco.com^
@@ -3038,6 +3054,7 @@
 ||myamericanprizes3.com^
 ||mybanterrabk.weebly.com^
 ||mybordercollieworld.com^
+||mybrowserresults.io^
 ||mybtlogin-100173.weeblysite.com^
 ||mybtlogin-107530.weeblysite.com^
 ||mycryptotrends.com^
@@ -4027,6 +4044,7 @@
 ||search-load.com^
 ||search-owl.com^
 ||search-redir.com^
+||search-sprint.com^
 ||search-thrill.com^
 ||search.onfireshield.com^
 ||searchesinstyle.com^
@@ -4147,6 +4165,7 @@
 ||smartwardrobe.shop^
 ||smichovpraha.cz^
 ||smithoptics-outlet.com^
+||smokcenter15.com^
 ||smokeandmirrorshobbyh.shop^
 ||snapchata.com^
 ||snapchatcom.chat^
@@ -4178,6 +4197,7 @@
 ||soundestlink.com^
 ||soundstate.shop^
 ||sp903461.sitebeat.crazydomains.com^
+||spaios.com^
 ||sparkingelite.com^
 ||specifye.shop^
 ||spedizione-mastercard-bnl.com^
@@ -4306,6 +4326,7 @@
 ||szshenyao.com^
 ||tablewindow82.com^
 ||tabtouch.com.au^
+||tacticoolammoshop.com^
 ||taibao.tw^
 ||takasu.shop^
 ||talergam.wiki^
