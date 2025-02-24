@@ -2,11 +2,11 @@
 # Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 # Homepage: https://github.com/jarelllama/Scam-Blocklist
 # License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-# Version: 02.24.070314.2025
+# Version: 02.24.070711.2025
 # Expires: 12 hours
-# Last modified: Mon Feb 24 07:03:14 UTC 2025
+# Last modified: Mon Feb 24 07:07:11 UTC 2025
 # Syntax: Wildcard Domains
-# Number of entries: 7229
+# Number of entries: 7228
 #
 001-x.38452658.xyz
 00privacidad-cuenta-bhd-2025-22.weebly.com
@@ -1018,7 +1018,6 @@ cdn-analytic.com
 cdn-learnt-start-trezor.webflow.io
 cdn-learnt-start-ttrezor.webflow.io
 cdn-trezorhardwerwallet.webflow.io
-cdn.livechat-files.com
 ce5b467b-1bc28460.usradiology.xyz
 cen-8mmk.vercel.app
 cenorix.com
