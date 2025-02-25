@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 449600
-Light version: 9204
+Total domains: 449612
+Light version: 9231
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -48,17 +48,17 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |    3919 |      2 % |      25 % | Emerging Threats
    50 |     879 |      0 % |      24 % | FakeWebshopListHUN
    54 |    1044 |      0 % |       2 % | Google Search
-   95 |    3116 |      1 % |      19 % | Gridinsoft
+  101 |    3122 |      1 % |      19 % | Gridinsoft
   656 |   10384 |      6 % |       0 % | Jeroengui (NRDs)
- 3388 |   68626 |     42 % |       8 % | Jeroengui
+ 3390 |   68628 |     42 % |       8 % | Jeroengui
    14 |     198 |      0 % |       7 % | MalwareURL
     2 |      51 |      0 % |       7 % | PCrisk
  1753 |   11258 |      6 % |      27 % | PhishStats
     0 |     147 |      0 % |      17 % | PuppyScams.org
- 1530 |   31129 |     19 % |       1 % | Regex Matching
+ 1531 |   31130 |     19 % |       1 % | Regex Matching
    28 |    2022 |      1 % |      38 % | Scam Directory
     0 |      19 |      0 % |      31 % | ScamAdviser
-   67 |     676 |      0 % |       6 % | ScamMinder
+   71 |     680 |      0 % |       7 % | ScamMinder
    97 |     911 |      0 % |      11 % | ScamTracker
     0 |     481 |      0 % |       7 % | Unit42
     3 |      37 |      0 % |      11 % | Verbraucherzentrale Hamburg
@@ -66,7 +66,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     4 |     203 |      0 % |      21 % | Wildcat Cyber Patrol
     1 |      13 |      0 % |       8 % | WiperSoft
     3 |     581 |      0 % |      49 % | Česká Obchodní Inspekce
- 8297 |  162585 |    100 % |      21 % | All sources
+ 8310 |  162598 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
