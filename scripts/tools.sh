@@ -55,9 +55,11 @@ download_toplist() {
 
         unzip -p temp | mawk -F ',' '{ print $2 }' > toplist.tmp
 
-        ((attempt++))
+        [[ -s toplist.tmp ]] && break
 
-        (( attempt > max_attempts )) && error 'Error downloading toplist.'
+        (( attempt == max_attempts )) && error 'Error downloading toplist.'
+
+        ((attempt++))
     done
 
     format_file toplist.tmp
