@@ -15,7 +15,7 @@ readonly DOMAIN_LOG='config/domain_log.csv'
 # Input:
 #   $1: file to process
 convert_unicode() {
-    # Install idn2 (requires sudo. -qq doesn not work here)
+    # Install idn2 (requires sudo. -qq does not work here)
     command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
 
     # Process the file, handling entries that may cause idn2 to error:
@@ -240,9 +240,6 @@ case "$1" in
         ;;
     --prune-lines)
         prune_lines "$2" "$3"
-        ;;
-    --prune-wildcards)
-        prune_wilddcards
         ;;
     --send-telegram)
         send_telegram "$2"

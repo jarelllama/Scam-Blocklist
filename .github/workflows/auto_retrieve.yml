@@ -17,8 +17,41 @@ jobs:
   test-functions:
     uses: ./.github/workflows/test_functions.yml
 
-  build-nsfw:
+  tidy-repo:
     needs: test-functions
+    if: ${{ ! cancelled() }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Prune wildcards file
+        run: |
+          while read -r wildcard; do
+            if (( $(grep -c "$wildcard" data/raw.txt) >= 10 )); then
+              printf "%s\n" "$wildcard"
+            fi
+          done < config/wildcards.txt > temp
+          mv temp config/wildcards.txt
+
+      - name: Prune logs
+        run: |
+          # 250,000 is enough for a month's worth of logs.
+          bash scripts/tools.sh --prune-lines config/domain_log.csv 250000
+          bash scripts/tools.sh --prune-lines config/source_log.csv 10000
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: tidy repo"
+          git push -q
+
+  build-nsfw:
+    needs: [test-functions, tidy-repo]
     if: ${{ ! cancelled() }}
     uses: ./.github/workflows/build_nsfw.yml
 
@@ -50,32 +83,8 @@ jobs:
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 
-  prune-logs:
-    needs: build
-    if: ${{ ! cancelled() }}
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Prune logs
-        run: |
-          # 250,000 is enough for a month's worth of logs.
-          bash scripts/tools.sh --prune-lines config/domain_log.csv 250000
-          bash scripts/tools.sh --prune-lines config/source_log.csv 10000
-
-      - name: Push
-        run: |
-          git config user.email ${{ vars.GIT_EMAIL }}
-          git config user.name ${{ vars.GIT_USERNAME }}
-          git add .
-          git diff-index --quiet HEAD || git commit -m "CI: prune logs"
-          git push -q
-
   update-readme:
-    needs: [build, prune-logs]
+    needs: build
     # Run only if build was successful
     if: ${{ ! cancelled() && needs.build.result == 'success' }}
     uses: ./.github/workflows/update_readme.yml
