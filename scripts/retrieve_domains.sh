@@ -38,7 +38,6 @@ main() {
     # time.
     command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
 
-    # Download toplist
     $FUNCTION --download-toplist
 
     if [[ "$USE_EXISTING_RESULTS" == false ]]; then
@@ -47,15 +46,15 @@ main() {
         # Install jq
         command -v jq > /dev/null || apt-get install -qq jq
 
-        # Download NRD feed
         $FUNCTION --download-nrd-feed
+
         # Remove already processed NRDs to save processing time
         comm -23 nrd.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
             > temp
         mv temp nrd.tmp
     fi
 
-    check_review_file
+    $FUNCTION --update-review-config
 
     retrieve_source_results
 
@@ -163,7 +162,7 @@ filter() {
     mv temp "$source_results"
 
     if [[ "$3" != '--no-log' ]]; then
-       log_domains "$entries" "$tag"
+       $FUNCTION --log-domains "$entries" "$tag" "$source_name"
     fi
 
     if [[ "$3" == '--preserve' ]]; then
@@ -256,9 +255,10 @@ process_source_results() {
     fi
 
     # Log blacklisted domains
-    # log_domains is used instead of filter as the blacklisted domains should
-    # not be removed from the results file.
-    log_domains "$(comm -12 "$BLACKLIST" "$source_results")" blacklist
+    # 'filter' is not used as the blacklisted domains should not be removed
+    # from the results file.
+    $FUNCTION --log-domains \
+        "$(comm -12 "$BLACKLIST" "$source_results")" 'blacklist' "$source_name"
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist uses regex matching
@@ -292,7 +292,7 @@ process_source_results() {
         cat "$source_results" >> all_retrieved_light_domains.tmp
     fi
 
-    log_domains "$source_results" saved
+    $FUNCTION --log-domains "$source_results" 'saved' "$source_name"
 
     log_source
 
@@ -428,14 +428,6 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
     echo "----------------------------------------------------------------------"
-}
-
-# Call a shell wrapper to to log domain processing events into the domain log.
-# Input:
-#   $1: domains to log either in a file or variable
-#   $2: event type (dead, whitelisted, etc.)
-log_domains() {
-    $FUNCTION --log-domains "$1" "$2" "$source_name"
 }
 
 # Print error message and exit.

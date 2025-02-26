@@ -15,10 +15,9 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 main() {
-    # Download toplist
     $FUNCTION --download-toplist
 
-    check_review_file
+    $FUNCTION --update-review-config
 
     validate
 }
@@ -72,7 +71,7 @@ filter() {
         >> filter_log.tmp
 
     # Call shell wrapper to log entries into domain log
-    $FUNCTION --log-domains "$entries" "$tag" raw
+    $FUNCTION --log-domains "$entries" "$tag" 'raw'
 }
 
 # Validate raw file.

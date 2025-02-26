@@ -48,7 +48,6 @@ main() {
             ;;
     esac
 
-    # Call shell wrapper to prune old entries from dead domains file
     $FUNCTION --prune-lines "$DEAD_DOMAINS" "$LOG_SIZE"
 }
 

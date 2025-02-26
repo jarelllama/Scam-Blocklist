@@ -116,7 +116,6 @@ if ! command -v hostlist-compiler &> /dev/null; then
     npm install -g @adguard/hostlist-compiler > /dev/null
 fi
 
-# Download the Tranco toplist
 $FUNCTION --download-toplist
 
 build

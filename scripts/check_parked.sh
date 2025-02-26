@@ -46,7 +46,6 @@ main() {
             ;;
     esac
 
-    # Call shell wrapper to prune old entries from parked domains file
     $FUNCTION --prune-lines "$PARKED_DOMAINS" "$LOG_SIZE"
 }
 

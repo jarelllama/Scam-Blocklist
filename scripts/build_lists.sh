@@ -16,7 +16,6 @@ main() {
         npm install -g @adguard/hostlist-compiler > /dev/null
     fi
 
-    # Download toplist
     $FUNCTION --download-toplist
 
     # Add domains found in the full version that are in the toplist and are

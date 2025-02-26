@@ -2,6 +2,15 @@
 
 # tools.sh is a shell wrapper that stores commonly used functions.
 
+readonly PARKED_TERMS='config/parked_terms.txt'
+readonly WHITELIST='config/whitelist.txt'
+readonly BLACKLIST='config/blacklist.txt'
+readonly REVIEW_CONFIG='config/review_config.csv'
+readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly DEAD_DOMAINS='data/dead_domains.txt'
+readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly DOMAIN_LOG='config/domain_log.csv'
+
 # Function 'convert_unicode' converts Unicode to Punycode.
 # Input:
 #   $1: file to process
@@ -67,7 +76,7 @@ download_toplist() {
     # Strip away subdomains
     while read -r subdomain; do
         sed -i "s/^${subdomain}\.//" toplist.tmp
-    done < config/subdomains.txt
+    done < "$SUBDOMAINS_TO_REMOVE"
 
     sort -u toplist.tmp -o toplist.tmp
 }
@@ -86,12 +95,12 @@ format_file() {
 
     # Applicable to specific files/extensions:
     case "$file" in
-        'data/dead_domains.txt'|'data/parked_domains.txt')
+        "$DEAD_DOMAINS"|"$PARKED_DOMAINS")
             # Remove duplicates, whitespaces, and convert to lowercase
             mawk '!seen[$0]++ { gsub(/ /, ""); print tolower($0) }' "$file" \
                 > temp
             ;;
-        'config/parked_terms.txt')
+        "$PARKED_TERMS")
             # Convert to lowercase, sort, and remove duplicates
             mawk '{ print tolower($0) }' "$file" | sort -u -o temp
             ;;
@@ -140,7 +149,7 @@ log_domains() {
 
     printf "%s\n" "$domains" \
         | mawk -v event="$2" -v source="$3" -v time="$timestamp" \
-        '{ print time "," event "," $0 "," source }' >> config/domain_log.csv
+        '{ print time "," event "," $0 "," source }' >> "$DOMAIN_LOG"
 }
 
 # Function 'prune_lines' prunes lines in the given file to keep its number of
@@ -177,6 +186,22 @@ send_telegram() {
         -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
         "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
         -o /dev/null
+}
+
+# Function 'update_review_config' checks for configured entries in the review
+# config file and add them to the whitelist/blacklist.
+update_review_config() {
+    # Add blacklisted entries to blacklist and remove them from the review file
+    mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \
+        | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
+
+    # Add whitelisted entries to whitelist after formatting to regex and remove
+    # them from the review file
+    mawk -F ',' '$5 == "y" && $4 != "y" { print $2 }' "$REVIEW_CONFIG" \
+        | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
+        | sort -u - "$WHITELIST" -o "$WHITELIST") \
+        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
 }
 
 # Print error message and exit.
