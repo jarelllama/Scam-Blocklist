@@ -33,15 +33,15 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 455134
-Light version: 11043
+Total domains: 454441
+Light version: 10962
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
   144 |     804 |      0 % |      35 % | 165 Anti-fraud
     4 |     168 |      0 % |      13 % | Artists Against 419
     1 |      96 |      0 % |      11 % | BehindMLM
-    5 |      72 |      0 % |       7 % | BugsFighter
+    6 |      73 |      0 % |       7 % | BugsFighter
    44 |    1387 |      0 % |       1 % | Cybersquatting
     0 |      54 |      0 % |      81 % | DFPI Crypto Scam Tracker
   766 |   34777 |     20 % |       1 % | DGA Detector
@@ -50,15 +50,15 @@ Today | Monthly | %Monthly | %Filtered | Source
    41 |    1085 |      0 % |       2 % | Google Search
    73 |    3195 |      1 % |      19 % | Gridinsoft
   817 |   11201 |      6 % |       0 % | Jeroengui (NRDs)
- 4577 |   73205 |     42 % |       7 % | Jeroengui
+ 4581 |   73209 |     42 % |       7 % | Jeroengui
    13 |     211 |      0 % |       7 % | MalwareURL
-    5 |      56 |      0 % |       7 % | PCrisk
+    6 |      57 |      0 % |       7 % | PCrisk
  1423 |   12681 |      7 % |      27 % | PhishStats
     8 |     155 |      0 % |      17 % | PuppyScams.org
  3334 |   34464 |     19 % |       1 % | Regex Matching
    76 |    2098 |      1 % |      38 % | Scam Directory
     1 |      20 |      0 % |      31 % | ScamAdviser
-   78 |     758 |      0 % |       7 % | ScamMinder
+   82 |     762 |      0 % |       7 % | ScamMinder
    10 |     921 |      0 % |      13 % | ScamTracker
     0 |     481 |      0 % |       7 % | Unit42
     0 |      37 |      0 % |      11 % | Verbraucherzentrale Hamburg
@@ -66,7 +66,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    22 |     225 |      0 % |      21 % | Wildcat Cyber Patrol
     3 |      16 |      0 % |       8 % | WiperSoft
     0 |     581 |      0 % |      50 % | Česká Obchodní Inspekce
-10785 |  173383 |    100 % |      21 % | All sources
+10795 |  173393 |    100 % |      21 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
