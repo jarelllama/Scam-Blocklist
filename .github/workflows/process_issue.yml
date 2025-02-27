@@ -123,7 +123,7 @@ jobs:
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
-  validate:
+  whitelist:
     needs: add-to-whitelist
     if: ${{ github.event.label.name == 'whitelist domains' && github.actor == github.repository_owner }}
     uses: ./.github/workflows/validate_domains.yml
