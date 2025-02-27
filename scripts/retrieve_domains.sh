@@ -241,7 +241,7 @@ process_source_results() {
     # 'filter' is not used as the blacklisted domains should not be removed
     # from the results file.
     $FUNCTION --log-domains \
-        "$(comm -12 "$BLACKLIST" "$source_results")" 'blacklist' "$source_name"
+        "$(comm -12 "$BLACKLIST" "$source_results")" blacklist "$source_name"
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist uses regex matching
@@ -275,7 +275,7 @@ process_source_results() {
         cat "$source_results" >> all_retrieved_light_domains.tmp
     fi
 
-    $FUNCTION --log-domains "$source_results" 'saved' "$source_name"
+    $FUNCTION --log-domains "$source_results" saved "$source_name"
 
     log_source
 

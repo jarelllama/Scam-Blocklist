@@ -55,7 +55,7 @@ filter() {
         >> filter_log.tmp
 
     # Call shell wrapper to log entries into domain log
-    $FUNCTION --log-domains "$entries" "$tag" 'raw'
+    $FUNCTION --log-domains "$entries" "$tag" raw
 }
 
 # Validate raw file.
