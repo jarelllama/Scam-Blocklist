@@ -69,7 +69,23 @@ jobs:
   check-unparked:
     needs: [test-functions, check-dead]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
-    uses: ./.github/workflows/check_unparked.yml
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: check_parked.sh
+        run: bash scripts/check_parked.sh checkunparked
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "CI: check for unparked domains"
+          git push -q
 
   # Run validation after dead/unparked checks to process subdomains
   validate:
