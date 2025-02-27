@@ -1,0 +1,21 @@
+name: Report false positives
+description: Please use this template to report false positives so they can be properly incorporated with the workflows.
+title: Report false positives
+body:
+  - type: textarea
+    attributes:
+      label: What domains are false positives?
+      placeholder: |
+        example.com
+        https://www.example.com
+        http://example.com/index.php
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Why are they false positives?
+      placeholder: |
+        Genuine store. See the reviews here: https://example.com/.
+        I own this domain.
+    validations:
+      required: true
