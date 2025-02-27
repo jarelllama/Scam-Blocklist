@@ -12,7 +12,7 @@ readonly -a TERMS=(
     xxx
     spankbang
     xhamster
-    xvideos
+    xvideo
     onlyfans
     fansly
     hentai
@@ -31,11 +31,22 @@ readonly -a TERMS=(
     hookup
     ^sex
     \.sex$
-    escorts
+    escort
     rule34
     hookers
     blowjob
     jizz
+    xnxx
+    noodlemagazine
+    xhopen
+    xgroovy
+    ^xcafe
+    asiangalore
+    dinotube
+    4tube
+    gaymaletube
+    tubesafari
+    xfree
 )
 
 # Whitelisted domains
