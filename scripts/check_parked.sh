@@ -17,7 +17,7 @@ readonly LOG_SIZE=75000
 main() {
     # Split raw file into 2 parts for each parked check job
     if [[ "$1" == part? ]]; then
-        split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
+        split -d -l "$(( $(wc -l < "$RAW") / 2 ))" "$RAW"
     fi
 
     # The parked check consists of multiple parts to get around the time limit
@@ -114,7 +114,7 @@ find_parked_in() {
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
     # Split file into 17 equal files
-    split -d -l $(( $(wc -l < "$1") / 17 )) "$1"
+    split -d -l "$(( $(wc -l < "$1") / 17 ))" "$1"
     # Sometimes an x19 exists
     [[ -f x19 ]] && cat x19 >> x18
 
@@ -192,7 +192,7 @@ find_parked() {
     done < "$1"
 }
 
-# Remove parked domains from the raw file, raw light file, root domains file
+# Remove parked domains from the raw file, raw light file, root domains file,
 # and subdomains file.
 remove_parked() {
     local count_before count_after parked_count
@@ -242,6 +242,6 @@ set -e
 
 trap 'rm ./*.tmp temp x?? 2> /dev/null || true' EXIT
 
-$FUNCTION --format-all
+$FUNCTION --format-files
 
 main "$1"

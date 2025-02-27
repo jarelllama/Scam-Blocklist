@@ -54,17 +54,14 @@ filter() {
     mawk -v tag="$tag" '{ print $0 " (" tag ")" }' <<< "$entries" \
         >> filter_log.tmp
 
-    # Call shell wrapper to log entries into domain log
     $FUNCTION --log-domains "$entries" "$tag" raw
 }
 
 # Validate raw file.
 validate() {
     # Convert Unicode to Punycode in raw file and raw light file
-    local file
-    for file in "$RAW" "$RAW_LIGHT"; do
-        $FUNCTION --convert-unicode "$file"
-    done
+    $FUNCTION --convert-unicode "$RAW"
+    $FUNCTION --convert-unicode "$RAW_LIGHT"
 
     # Strip away subdomains
     while read -r subdomain; do  # Loop through common subdomains
@@ -134,7 +131,6 @@ validate() {
 
     [[ ! -s filter_log.tmp ]] && return
 
-    # Call shell wrapper to send telegram notification
     $FUNCTION --send-telegram \
         "Validation: problematic domains found\n\n$(<filter_log.tmp)"
 
@@ -147,6 +143,6 @@ set -e
 
 trap 'rm ./*.tmp temp 2> /dev/null || true' EXIT
 
-$FUNCTION --format-all
+$FUNCTION --format-files
 
 main

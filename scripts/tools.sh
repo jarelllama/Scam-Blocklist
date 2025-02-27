@@ -10,6 +10,7 @@ readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
+readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 # Function 'convert_unicode' converts Unicode to Punycode.
 # Input:
@@ -40,7 +41,7 @@ download_nrd_feed() {
 
     # Download the feeds in parallel and get only domains, ignoring comments
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
-        | awk '/^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$/' \
+        | awk "/^${DOMAIN_REGEX}$/" \
         > nrd.tmp || error 'Error downloading NRD feed.'
 
     format_file nrd.tmp
@@ -68,7 +69,7 @@ download_toplist() {
 
         (( attempt == max_attempts )) && error 'Error downloading toplist.'
 
-        ((attempt++))
+        (( attempt++ ))
     done
 
     format_file toplist.tmp
@@ -81,48 +82,37 @@ download_toplist() {
     sort -u toplist.tmp -o toplist.tmp
 }
 
-# Function 'format_file' standardizes the format of the given file.
-# Input:
-#   $1: file to be formatted
-format_file() {
-    local file="$1"
-
-    [[ ! -f "$file" ]] && return
-
-    # Applicable to all files:
-    # Remove carriage return characters, empty lines, and trailing whitespaces
-    sed -i 's/\r//g; /^$/d; s/[[:space:]]*$//' "$file"
-
-    # Applicable to specific files/extensions:
-    case "$file" in
-        "$DEAD_DOMAINS"|"$PARKED_DOMAINS")
-            # Remove duplicates, whitespaces, and convert to lowercase
-            mawk '!seen[$0]++ { gsub(/ /, ""); print tolower($0) }' "$file" \
-                > temp
-            ;;
-        "$PARKED_TERMS")
-            # Convert to lowercase, sort, and remove duplicates
-            mawk '{ print tolower($0) }' "$file" | sort -u -o temp
-            ;;
-        *.txt|*.tmp)
-            # Remove whitespaces, convert to lowercase, sort, and remove
-            # duplicates
-            mawk '{ gsub(/ /, ""); print tolower($0) }' "$file" \
-                | sort -u -o temp
-            ;;
-        *)
-            return
-            ;;
-    esac
-
-    [[ -f temp ]] && mv temp "$file"
-}
-
-# Function 'format_all' formats all files in the config and data directories.
-format_all() {
+# Function 'format-files' formats all files in the config and data directories.
+format-files() {
     local file
     for file in config/* data/*; do
-        format_file "$file"
+        # Applicable to all files:
+        # Remove carriage return characters, empty lines, and trailing whitespaces
+        sed -i 's/\r//g; /^$/d; s/[[:space:]]*$//' "$file"
+
+        # Applicable to specific files/extensions:
+        case "$file" in
+            "$DEAD_DOMAINS"|"$PARKED_DOMAINS")
+                # Remove duplicates, whitespaces, and convert to lowercase
+                mawk '!seen[$0]++ { gsub(/ /, ""); print tolower($0) }' "$file" \
+                    > temp
+                ;;
+            "$PARKED_TERMS")
+                # Convert to lowercase, sort, and remove duplicates
+                mawk '{ print tolower($0) }' "$file" | sort -u -o temp
+                ;;
+            *.txt|*.tmp)
+                # Remove whitespaces, convert to lowercase, sort, and remove
+                # duplicates
+                mawk '{ gsub(/ /, ""); print tolower($0) }' "$file" \
+                    | sort -u -o temp
+                ;;
+            *)
+                continue
+                ;;
+        esac
+
+        [[ -f temp ]] && mv temp "$file"
     done
 }
 
@@ -229,11 +219,8 @@ case "$1" in
     --download-toplist)
         download_toplist
         ;;
-    --format)
-        format_file "$2"
-        ;;
-    --format-all)
-        format_all
+    --format-files)
+        format_files
         ;;
     --log-domains)
         log_domains "$2" "$3" "$4"

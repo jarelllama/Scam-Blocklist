@@ -34,12 +34,6 @@ main() {
         mkdir -p data/pending
     fi
 
-    # Install idn2 here instead of in $FUNCTION to not bias source processing
-    # time.
-    command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
-
-    $FUNCTION --download-toplist
-
     if [[ "$USE_EXISTING_RESULTS" == false ]]; then
         # These dependencies are required by some sources
 
@@ -53,6 +47,12 @@ main() {
             > temp
         mv temp nrd.tmp
     fi
+
+    # Install idn2 here instead of in $FUNCTION to not bias source processing
+    # time.
+    command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
+
+    $FUNCTION --download-toplist
 
     $FUNCTION --update-review-config
 
@@ -171,7 +171,7 @@ filter() {
 }
 
 # Process/filter the results from the source, append the resulting domains to
-# all_retrieved_domains.tmp/all_retrieved_light_domains.tmp and save entries
+# all_retrieved_domains.tmp/all_retrieved_light_domains.tmp, and save entries
 # requiring manual review.
 process_source_results() {
     # Skip to next source by returning if no results from this source is found
@@ -180,14 +180,16 @@ process_source_results() {
     local raw_count dead_count parked_count whitelisted_count
     local whitelisted_tld_count in_toplist_count
 
-    # Format results file
-    $FUNCTION --format "$source_results"
-
-    # Convert URLs to domains and remove square brackets (this is done here
-    # once instead of multiple times in the source functions)
+    # Convert URLs to domains, remove square brackets, and conver to lowercase.
+    # This is done here once instead of multiple times in the source functions.
     # Note that this still allows invalid entries like entries with subfolders
     # to get through so they can be flagged later on.
-    sed -i 's/https\?:\/\///; s/\[//g; s/\]//g' "$source_results"
+    mawk '{
+        gsub(/https?:\/\//, "")
+        gsub(/[\[\]]/, "")
+        print tolower($0)
+    }' "$source_results" | sort -u -o temp
+    mv temp "$source_results"
 
     # Convert Unicode to Punycode
     $FUNCTION --convert-unicode "$source_results"
@@ -928,6 +930,6 @@ set -e
 
 trap cleanup EXIT
 
-$FUNCTION --format-all
+$FUNCTION --format-files
 
 main

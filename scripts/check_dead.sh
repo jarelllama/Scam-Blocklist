@@ -19,7 +19,7 @@ main() {
 
     # Split raw file into 2 parts for each dead check job
     if [[ "$1" == part? ]]; then
-        split -d -l $(( $(wc -l < "$RAW") / 2 )) "$RAW"
+        split -d -l "$(( $(wc -l < "$RAW") / 2 ))" "$RAW"
     fi
 
     # The dead check consists of multiple parts to get around the time limit of
@@ -112,7 +112,7 @@ find_dead_in() {
     printf "[start] Analyzing %s entries for dead domains\n" "$(wc -l < "$1")"
 
     # Split file into 2 equal parts
-    split -d -l $(( $(wc -l < "$1") / 2 )) "$1"
+    split -d -l "$(( $(wc -l < "$1") / 2 ))" "$1"
     # Sometimes an x02 exists
     [[ -f x02 ]] && cat x02 >> x01
 
@@ -193,6 +193,6 @@ set -e
 
 trap 'rm ./*.tmp temp x?? 2> /dev/null || true' EXIT
 
-$FUNCTION --format-all
+$FUNCTION --format-files
 
 main "$1"

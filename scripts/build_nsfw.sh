@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Build the NSFW blocklist. The build process is entirely self-contained in
-# this script.
+# Build the NSFW blocklist.
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly BLOCKLIST='lists/adblock/nsfw.txt'
@@ -57,14 +56,10 @@ readonly -a WHITELIST=(
 )
 
 # Retrieve domains from the Tranco toplist, add them to the
-# raw file, format the file and remove dead domains.
+# raw file, format the file, and remove dead domains.
 build() {
     # Format raw file to Domains format
     mawk '/\|/ { gsub(/[|^]/, ""); print }' "$BLOCKLIST" > raw.tmp
-
-    # Remove already processed domains
-    comm -23 toplist.tmp raw.tmp > temp
-    mv temp toplist.tmp
 
     # Add matching domains in toplist to raw file
     local term

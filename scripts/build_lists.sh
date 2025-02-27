@@ -24,6 +24,7 @@ main() {
         | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
     build '' "$RAW" scams.txt
+
     build 'LIGHT VERSION' raw_light.tmp scams_light.txt
 }
 
@@ -91,6 +92,6 @@ set -e
 
 trap 'rm ./*.tmp temp 2> /dev/null || true' EXIT
 
-$FUNCTION --format-all
+$FUNCTION --format-files
 
 main

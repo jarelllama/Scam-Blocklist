@@ -237,6 +237,6 @@ trap 'rm ./*.tmp temp 2> /dev/null || true' EXIT
 # Install csvkit
 command -v csvgrep &> /dev/null || pip install -q csvkit
 
-$FUNCTION --format-all
+$FUNCTION --format-files
 
 update_readme
