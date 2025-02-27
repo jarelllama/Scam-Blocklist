@@ -253,7 +253,7 @@ process_source_results() {
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_tld_count="$(filter \
-        "$(awk '\.(gov|edu|mil)(\.[a-z]{2})?$/' "$source_results" \
+        "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$source_results" \
         | grep -vxFf "$BLACKLIST")" whitelisted_tld --preserve)"
 
     # Remove non-domain entries including IP addresses excluding Punycode

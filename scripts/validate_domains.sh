@@ -92,7 +92,7 @@ validate() {
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     filter \
-        "$(awk '\.(gov|edu|mil)(\.[a-z]{2})?$/' "$RAW" \
+        "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$RAW" \
         | grep -vxFf "$BLACKLIST")" whitelisted_tld
 
     # Remove non-domain entries including IP addresses excluding Punycode
