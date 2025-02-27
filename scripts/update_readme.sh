@@ -196,7 +196,7 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    mawk "/${1},${2},.*,saved$/" "$SOURCE_LOG" | csvcut -c 5 \
+    mawk "/${1},${2}.*,saved$/" "$SOURCE_LOG" | csvcut -c 5 \
         | mawk '{ sum += $1 } END { print sum }'
 }
 
