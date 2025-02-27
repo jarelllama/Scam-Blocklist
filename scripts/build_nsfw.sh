@@ -46,7 +46,7 @@ readonly -a TERMS=(
     4tube
     gaymaletube
     tubesafari
-    xfree
+    ^xfree
 )
 
 # Whitelisted domains
