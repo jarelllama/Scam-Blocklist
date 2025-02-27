@@ -37,7 +37,6 @@ build() {
     local version="$1"
     local raw_file="$2"
     local output_file="$3"
-    local dir
 
     # Append wildcards to the raw file to optimize the number of entries.
     # The wildcards are not saved to the raw file as some of them do not
@@ -54,17 +53,17 @@ build() {
     sed -i '/!/d' compiled.tmp
 
     # Build Adblock Plus format
-    dir="$ADBLOCK"
-    printf "[Adblock Plus]\n" > "${dir}/${output_file}"
-    append_header '!' 'Adblock Plus'
-    cat compiled.tmp >> "${dir}/${output_file}"
+    {
+        printf "[Adblock Plus]\n"
+        append_header '!' 'Adblock Plus'
+        cat compiled.tmp
+    } > "${ADBLOCK}}/${output_file}"
 
     # Build Wildcard Domains format
-    dir="$DOMAINS"
-    : > "${dir}/${output_file}"
-    append_header '#' 'Wildcard Domains'
-    mawk '{ gsub (/[|^]/, ""); print }' compiled.tmp \
-        >> "${dir}/${output_file}"
+    {
+        append_header '#' 'Wildcard Domains'
+        mawk '{ gsub (/[|^]/, ""); print }' compiled.tmp
+    } > "${DOMAINS}}/${output_file}"
 }
 
 # Append the header onto the blocklist.
@@ -72,7 +71,7 @@ build() {
 #   $1: comment character to use
 #   $2: syntax of the blocklist
 append_header() {
-    cat << EOF >> "${dir}/${output_file}"
+    cat << EOF
 ${1} Title: Jarelllama's Scam Blocklist ${version}
 ${1} Description: ${BLOCKLIST_DESCRIPTION}
 ${1} Homepage: https://github.com/jarelllama/Scam-Blocklist
