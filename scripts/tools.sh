@@ -82,39 +82,48 @@ download_toplist() {
     sort -u toplist.tmp -o toplist.tmp
 }
 
+# Function 'format_file' standardizes the format of the given file.
+# Input:
+#   $1: file to be formatted
+format_file() {
+    local file="$1"
+
+    [[ ! -f "$file" ]] && return
+
+    # Applicable to all files:
+    # Remove carriage return characters, empty lines, and trailing whitespaces
+    sed -i 's/\r//g; /^$/d; s/[[:space:]]*$//' "$file"
+
+    # Applicable to specific files/extensions:
+    case "$file" in
+        "$DEAD_DOMAINS"|"$PARKED_DOMAINS")
+            # Remove duplicates, whitespaces, and convert to lowercase
+            mawk '!seen[$0]++ { gsub(/ /, ""); print tolower($0) }' "$file" \
+                > temp
+            ;;
+        "$PARKED_TERMS")
+            # Convert to lowercase, sort, and remove duplicates
+            mawk '{ print tolower($0) }' "$file" | sort -u -o temp
+            ;;
+        *.txt|*.tmp)
+            # Remove whitespaces, convert to lowercase, sort, and remove
+            # duplicates
+            mawk '{ gsub(/ /, ""); print tolower($0) }' "$file" \
+                | sort -u -o temp
+            ;;
+        *)
+            return
+            ;;
+    esac
+
+    [[ -f temp ]] && mv temp "$file"
+}
+
 # Function 'format_files' formats all files in the config and data directories.
 format_files() {
     local file
     for file in config/* data/*; do
-        [[ ! -f "$file" ]] && continue
-
-        # Applicable to all files:
-        # Remove carriage return characters, empty lines, and trailing whitespaces
-        sed -i 's/\r//g; /^$/d; s/[[:space:]]*$//' "$file"
-
-        # Applicable to specific files/extensions:
-        case "$file" in
-            "$DEAD_DOMAINS"|"$PARKED_DOMAINS")
-                # Remove duplicates, whitespaces, and convert to lowercase
-                mawk '!seen[$0]++ { gsub(/ /, ""); print tolower($0) }' "$file" \
-                    > temp
-                ;;
-            "$PARKED_TERMS")
-                # Convert to lowercase, sort, and remove duplicates
-                mawk '{ print tolower($0) }' "$file" | sort -u -o temp
-                ;;
-            *.txt|*.tmp)
-                # Remove whitespaces, convert to lowercase, sort, and remove
-                # duplicates
-                mawk '{ gsub(/ /, ""); print tolower($0) }' "$file" \
-                    | sort -u -o temp
-                ;;
-            *)
-                continue
-                ;;
-        esac
-
-        [[ -f temp ]] && mv temp "$file"
+        format_file "$file"
     done
 }
 
