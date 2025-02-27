@@ -57,13 +57,13 @@ build() {
         printf "[Adblock Plus]\n"
         append_header '!' 'Adblock Plus'
         cat compiled.tmp
-    } > "${ADBLOCK}}/${output_file}"
+    } > "${ADBLOCK}/${output_file}"
 
     # Build Wildcard Domains format
     {
         append_header '#' 'Wildcard Domains'
         mawk '{ gsub (/[|^]/, ""); print }' compiled.tmp
-    } > "${DOMAINS}}/${output_file}"
+    } > "${DOMAINS}/${output_file}"
 }
 
 # Append the header onto the blocklist.
