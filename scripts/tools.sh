@@ -86,6 +86,8 @@ download_toplist() {
 format_files() {
     local file
     for file in config/* data/*; do
+        [[ ! -f "$file" ]] && continue
+
         # Applicable to all files:
         # Remove carriage return characters, empty lines, and trailing whitespaces
         sed -i 's/\r//g; /^$/d; s/[[:space:]]*$//' "$file"
