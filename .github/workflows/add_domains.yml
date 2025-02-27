@@ -56,6 +56,6 @@ jobs:
           git push -q
 
   build:
-    needs: read-domains
+    needs: add-domains
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
