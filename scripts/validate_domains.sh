@@ -96,7 +96,7 @@ validate() {
         | grep -vxFf "$BLACKLIST")" whitelisted_tld
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    filter "$(awk "!/${DOMAIN_REGEX}/" "$RAW")" invalid
+    filter "$(awk "!/^${DOMAIN_REGEX}$/" "$RAW")" invalid
 
     # Find domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains

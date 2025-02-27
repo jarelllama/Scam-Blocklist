@@ -258,7 +258,7 @@ process_source_results() {
 
     # Remove non-domain entries including IP addresses excluding Punycode
     # Redirect output to /dev/null as the invalid entries count is not needed
-    filter "$(awk "!/${DOMAIN_REGEX}/" "$source_results")" \
+    filter "$(awk "!/^${DOMAIN_REGEX}$/" "$source_results")" \
         invalid --preserve > /dev/null
 
     # Remove domains in toplist excluding blacklisted domains
