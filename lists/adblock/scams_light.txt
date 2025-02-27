@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 02.27.002936.2025
+! Version: 02.27.051701.2025
 ! Expires: 12 hours
-! Last modified: Thu Feb 27 00:29:36 UTC 2025
+! Last modified: Thu Feb 27 05:17:01 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 11048
+! Number of entries: 11073
 !
 ||0-ollx.365094325.xyz^
 ||0-olz.165094325.xyz^
@@ -79,6 +79,8 @@
 ||1xbet-jdm.top^
 ||1xbet-loft.top^
 ||1xbet-officialsite.vip^
+||1xbet-pdox.top^
+||1xbet-pdt.top^
 ||1xbet-sfz.top^
 ||1xbet-sqf.top^
 ||1xbet-svt.top^
@@ -285,6 +287,7 @@
 ||adhple.com^
 ||admarketlocation.com^
 ||adminmailservers.weebly.com^
+||adnxs.com^
 ||adorabit.com^
 ||ads-supportverifyaccount-managerbusiness.com^
 ||adsforleads.top^
@@ -1037,6 +1040,7 @@
 ||bet365huangguang3.com^
 ||bet4.pe^
 ||bet63071.com^
+||bet888t-01-googleplay.com^
 ||betbixo.com^
 ||betcasn.com^
 ||bethelcreations.shop^
@@ -1415,6 +1419,7 @@
 ||bwb-104412.weeblysite.com^
 ||bwertuop.com^
 ||bxbx132.top^
+||bxtrade.net^
 ||bytebus.com^
 ||byuwef.com^
 ||byxol.com^
@@ -1691,6 +1696,7 @@
 ||clksite.com^
 ||clladss.com^
 ||cloudata-m365-0ec375.netlify.app^
+||cloudlessdatapowerful.com^
 ||clslshop.com^
 ||club2.site^
 ||cluster.buydoorlitesandlouvers.com^
@@ -2150,6 +2156,7 @@
 ||cupboardx.com^
 ||curemon.com^
 ||curently-att-2-22-2025.weeblysite.com^
+||curiconectado.cl^
 ||currencycartel.shop^
 ||currencyminer.com^
 ||currently-103283.square.site^
@@ -2871,6 +2878,7 @@
 ||expeditions2025.com^
 ||expressdoorstepdeliveryservice.com^
 ||expressminerpro.com^
+||expressunlocks.com^
 ||expresswallet.pro^
 ||extopbit.com^
 ||extremetfx.org^
@@ -3431,6 +3439,7 @@
 ||francetradingcompanysas.com^
 ||fransktimer.dk^
 ||frdl.io^
+||free-bonk.com^
 ||free-gifts.website^
 ||free-ltc-info.com^
 ||freebitco.in^
@@ -3543,6 +3552,7 @@
 ||gemniloginus.webflow.io^
 ||gemstone-holdings.com^
 ||genevanode.com^
+||gentwoleads.top^
 ||geo-trades.com^
 ||geo.netsupportsoftware.com^
 ||georgiatwo.shop^
@@ -3557,7 +3567,9 @@
 ||get-trzzor-logicn.webflow.io^
 ||getbigcoin.su^
 ||getbtc.live^
+||getelltheprecise.org^
 ||getintopc.com^
+||getpremiumapp.monster^
 ||getresponsesite.com^
 ||getrunkhomuto.info^
 ||getsightcarefast.net^
@@ -4399,6 +4411,7 @@
 ||kra26c.cc^
 ||kra26s.cc^
 ||kra27.at^
+||kra28.cc^
 ||kraken2trfqodidvlh4aa337cpzfrhdlfldhve5nf7njhumwr7insta.cc^
 ||kranekam.com^
 ||kristeldick.shop^
@@ -4948,6 +4961,7 @@
 ||monro67.casino^
 ||moonclickurl.top^
 ||moonwalkbaby.com^
+||moreadsfeed.top^
 ||moriartiarmaments.com^
 ||morosan.shop^
 ||motamaszkdlog.webflow.io^
@@ -6227,6 +6241,7 @@
 ||pulsenox.top^
 ||pulsepicks.pro^
 ||puma-sport.ru^
+||pumaslovensko.sk^
 ||purchase.midasbuyrp.com^
 ||puredapk.com^
 ||purestylesz.com^
@@ -6235,6 +6250,7 @@
 ||purfectpalscattery.com^
 ||purple935257.studio.site^
 ||purryup.store^
+||pusulabet867.com^
 ||pwhde.info^
 ||pwresetcisco.com^
 ||pwttr.xyz^
@@ -6275,6 +6291,7 @@
 ||qlgwoimzkn.qpon^
 ||qmbit.net^
 ||qqqqdgg.weebly.com^
+||qua-x.net^
 ||quantumx-ex.com^
 ||quarantine-malicious-logs.vercel.app^
 ||quarrelsomefeel.com^
@@ -6548,6 +6565,7 @@
 ||satpi.com^
 ||sauberm.com^
 ||saveautodeals.com^
+||savefrom.net^
 ||savenax.com^
 ||saxabspro.com^
 ||saxobankasia.com^
@@ -6956,6 +6974,7 @@
 ||starteo--trzr-io.webflow.io^
 ||startledger---auth.webflow.io^
 ||startperfectsolutions.com^
+||startrade2.net^
 ||startservicefounds.com^
 ||staticpips.com^
 ||statrtt-iotrrezzor.webflow.io^
@@ -9012,6 +9031,7 @@
 ||terzzrr-start-page.webflow.io^
 ||testupdate.info^
 ||tetriscontainerlogistics.com^
+||texbiom.com^
 ||tfeiita.shop^
 ||tffconeyone.com^
 ||tfrsrch.com^
@@ -9831,6 +9851,7 @@
 ||tpvwnpytbz.net^
 ||tpzxlqmbcs.work^
 ||tqhmu.cn^
+||tracelo.com^
 ||traceyparrillo.shop^
 ||track-app1e.live^
 ||track.roknabolls.com^
@@ -10282,6 +10303,7 @@
 ||uggeboots.com^
 ||ui-7t3.pages.dev^
 ||uiytbtrertewwe.weeblysite.com^
+||ujw1y54r.fun^
 ||ukewi.com^
 ||ukflirtzone.com^
 ||ukprw.info^
@@ -10434,6 +10456,7 @@
 ||vaultis.io^
 ||vcrypto.ru^
 ||vebson.trade^
+||vector-cryptoagnostic.com^
 ||vegaxbit.com^
 ||veklo.info^
 ||veldzicht1.com^
@@ -10957,6 +10980,7 @@
 ||youtubet.icu^
 ||youtubet.shop^
 ||youtubev.icu^
+||youtubevd.com^
 ||youtubex.cyou^
 ||youtubex.xyz^
 ||youtubo.net^
@@ -11022,6 +11046,7 @@
 ||zitoken.com^
 ||zjutb.info^
 ||zjxjmp.cn^
+||zl5de9.vip^
 ||zljjp.info^
 ||zlulh.info^
 ||zollars.org^
