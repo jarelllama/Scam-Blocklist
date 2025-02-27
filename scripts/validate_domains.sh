@@ -22,22 +22,6 @@ main() {
     validate
 }
 
-# Check for configured entries in the review config file and add them to the
-# whitelist/blacklist.
-check_review_file() {
-    # Add blacklisted entries to blacklist and remove them from the review file
-    mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \
-        | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
-        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
-
-    # Add whitelisted entries to whitelist after formatting to regex and remove
-    # them from the review file
-    mawk -F ',' '$5 == "y" && $4 != "y" { print $2 }' "$REVIEW_CONFIG" \
-        | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
-        | sort -u - "$WHITELIST" -o "$WHITELIST") \
-        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
-}
-
 # Remove entries from the raw file and log the entries into the domain log.
 # Input:
 #   $1: entries to process passed in a variable
@@ -108,11 +92,11 @@ validate() {
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     filter \
-        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW" \
+        "$(awk '\.(gov|edu|mil)(\.[a-z]{2})?$' "$RAW" \
         | grep -vxFf "$BLACKLIST")" whitelisted_tld
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    filter "$(grep -vE "^${DOMAIN_REGEX}$" "$RAW")" invalid
+    filter "$(awk "!/${DOMAIN_REGEX}/" "$RAW")" invalid
 
     # Find domains in toplist excluding blacklisted domains
     # Note the toplist does not include subdomains

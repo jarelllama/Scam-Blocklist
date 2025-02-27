@@ -40,7 +40,7 @@ download_nrd_feed() {
 
     # Download the feeds in parallel and get only domains, ignoring comments
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
-        | grep -oE '^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$' \
+        | awk '/^[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*$/' \
         > nrd.tmp || error 'Error downloading NRD feed.'
 
     format_file nrd.tmp

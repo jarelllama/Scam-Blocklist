@@ -184,7 +184,7 @@ print_stats() {
         "$(sum_excluded "$1" )" "${1:-All sources}"
 }
 
-# Note that csvkit is used in the following functions as the Google Search
+# Note that csvcut is used in the following functions as the Google Search
 # search terms may contain commas which makes using mawk complicated.
 
 # Function 'sum' is an echo wrapper that returns the total sum of filtered
@@ -196,8 +196,7 @@ sum() {
     # Print dash if no runs for that day found
     ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
 
-    # grep used here as mawk has issues with matching source names
-    grep "${1},${2}.*,saved$" "$SOURCE_LOG" | csvcut -c 5 \
+    mawk "/${1},${2},.*,saved$/" "$SOURCE_LOG" | csvcut -c 5 \
         | mawk '{ sum += $1 } END { print sum }'
 }
 
@@ -209,7 +208,8 @@ sum_excluded() {
     # csvcut used here as some of the sources include commas which causes
     # problems for mawk.
     read -r raw_count excluded_count \
-        <<< "$(grep -F "$1" "$SOURCE_LOG" | csvcut -c 4,6,7,8 | mawk -F ',' '
+        <<< "$(mawk -v source="$1" -F ',' '$2 == source { print }' \
+            "$SOURCE_LOG" | csvcut -c 4,6,7,8 | mawk -F ',' '
         {
             raw_count += $1
             white_count += $2

@@ -63,23 +63,6 @@ main() {
     save_subdomains
 }
 
-# Check for configured entries in the review config file and add them to the
-# whitelist/blacklist. Do nothing for entries that are incorrectly set to both
-# blacklist and whitelist.
-check_review_file() {
-    # Add blacklisted entries to blacklist and remove them from the review file
-    mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \
-        | tee >(sort -u - "$BLACKLIST" -o "$BLACKLIST") \
-        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
-
-    # Add whitelisted entries to whitelist after formatting to regex and remove
-    # them from the review file
-    mawk -F ',' '$5 == "y" && $4 != "y" { print $2 }' "$REVIEW_CONFIG" \
-        | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
-        | sort -u - "$WHITELIST" -o "$WHITELIST") \
-        | xargs -I {} sed -i "/,{},/d" "$REVIEW_CONFIG"
-}
-
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
@@ -101,10 +84,10 @@ retrieve_source_results() {
         local execution_time
         execution_time="$(date +%s)"
 
-        source_name="$(mawk -F ',' -v source="$source" '
+        source_name="$(mawk -v source="$source" -F ',' '
             $1 == source { print $2 }' "$SOURCES")"
 
-        if [[ -n "$(mawk -F ',' -v source="$source" '
+        if [[ -n "$(mawk -v source="$source" -F ',' '
             $1 == source { print $3 }' "$SOURCES")" ]]; then
             exclude_from_light=true
         fi
@@ -267,15 +250,15 @@ process_source_results() {
         | grep -vxFf "$BLACKLIST")" whitelist)"
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
-    # mawk does not work with this expression so grep is intentionally chosen.
-    # The same applies for the invalid check below.
+    # awk is used here instead of mawk for compatibility with the regex
+    # expression.
     whitelisted_tld_count="$(filter \
-        "$(grep -E '\.(gov|edu|mil)(\.[a-z]{2})?$' "$source_results" \
+        "$(awk '\.(gov|edu|mil)(\.[a-z]{2})?$' "$source_results" \
         | grep -vxFf "$BLACKLIST")" whitelisted_tld --preserve)"
 
     # Remove non-domain entries including IP addresses excluding Punycode
     # Redirect output to /dev/null as the invalid entries count is not needed
-    filter "$(grep -vE "^${DOMAIN_REGEX}$" "$source_results")" \
+    filter "$(awk "!/${DOMAIN_REGEX}/" "$source_results")" \
         invalid --preserve > /dev/null
 
     # Remove domains in toplist excluding blacklisted domains
@@ -605,8 +588,8 @@ source_cybersquatting() {
         cat results.tmp >> source_results.tmp
 
         # Update counts for the target
-        mawk -F ',' \
-            -v target="$target" -v results_count="$(wc -l < results.tmp)" '
+        mawk -v target="$target" -v results_count="$(wc -l < results.tmp)" \
+            -F ',' '
             BEGIN { OFS = "," }
             $1 == target {
                 $2 += results_count
@@ -665,7 +648,7 @@ source_regex() {
         | while read -r target; do
 
         # Get regex of target
-        pattern="$(mawk -F ',' -v target="$target" '
+        pattern="$(mawk -v target="$target" -F ',' '
             $1 == target { print $5 }' "$PHISHING_TARGETS")"
         local escaped_target="${target//[.]/\\.}"
         local regex="${pattern//&/${escaped_target}}"
@@ -673,12 +656,12 @@ source_regex() {
         # Get matches in NRD feed and update counts
         # awk is used here instead of mawk for compatibility with the regex
         # expressions.
-        mawk -F ',' -v target="$target" -v results="$(
+        mawk -v target="$target" -v results="$(
             awk "/${regex}/" nrd.tmp \
                 | sort -u \
                 | tee -a source_results.tmp \
                 | wc -l
-            )" '
+            )" -F ',' '
             BEGIN { OFS = "," }
             $1 == target {
                 $6 += results
@@ -798,7 +781,7 @@ source_jeroengui() {
     source_url='https://file.jeroengui.be'
     url_shorterners_whitelist='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
 
-    # Get domains from various weekly lists and remove link shorterners
+    # Get domains from various weekly lists and remove link shorteners
     curl -sSLZ --retry 2 --retry-all-errors \
         "${source_url}/phishing/last_week.txt" \
         "${source_url}/malware/last_week.txt" \
@@ -917,7 +900,7 @@ source_viriback_tracker() {
     source_url='https://tracker.viriback.com/dump.php'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | mawk -v year="$(date +"%Y")"  -F ',' '$4 ~ year { print $2 }' \
+        | mawk -v year="$(date +"%Y")" -F ',' '$4 ~ year { print $2 }' \
         | grep -Po "^https?://\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
