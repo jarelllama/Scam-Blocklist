@@ -19,8 +19,11 @@ jobs:
 
       - name: Get domains
         run: |
+          mkdir -p data/pending
+
           # Get domains, ignoring subdirectories and IP addresses
-          echo "DOMAINS=$(mawk '
+          # Note this overrides any previous entries
+          mawk '
             /###/ {
                 i++
             }
@@ -30,19 +33,15 @@ jobs:
             i == 2 {
                 exit
             }' <<< "${{ github.event.issue.body }}" \
-            | grep -Po '^(https?://)?\K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*')" \
-            >> "$GITHUB_ENV"
-
-          mkdir -p data/pending
-
-          printf "%s\n" ${{ env.DOMAINS }} >> data/pending/Manual.tmp
+            | grep -Po '^(https?://)?\K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+            > data/pending/Manual.tmp
 
       - name: Close issue
         run: |
           gh issue close ${{ github.event.issue.number }} -c \
           "Sent the following domains for processing:
           \`\`\`
-          printf "%s\n" ${{ env.DOMAINS }}
+          $(cat data/pending/Manual.tmp)
           \`\`\`"
         env:
           GH_TOKEN: ${{ github.token }}
