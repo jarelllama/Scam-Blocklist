@@ -82,8 +82,8 @@ download_toplist() {
     sort -u toplist.tmp -o toplist.tmp
 }
 
-# Function 'format-files' formats all files in the config and data directories.
-format-files() {
+# Function 'format_files' formats all files in the config and data directories.
+format_files() {
     local file
     for file in config/* data/*; do
         # Applicable to all files:
