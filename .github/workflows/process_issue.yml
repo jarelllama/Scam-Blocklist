@@ -82,7 +82,7 @@ jobs:
             | sort -u - config/whitelist.txt -o config/whitelist.txt
 
   build:
-    needs: add-to-whitelist
+    needs: add-to-blocklist
     if: ${{ github.event.label.name == 'add domains' && github.actor == github.repository_owner }}
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
