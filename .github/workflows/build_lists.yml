@@ -7,9 +7,10 @@ on:
     workflows:
       - Check for dead domains
       - Check for parked domains
-      - Manually add domains
+      - Process issue
       - Retrieve domains
       - Validate domains
+      - Retrieve and validate domains
     types:
       - completed
 permissions:

@@ -1,5 +1,5 @@
-name: Check pending domains
-run-name: Check pending domains
+name: Check for pending domains
+run-name: Check for pending domains
 on:
   workflow_dispatch:
   schedule:
