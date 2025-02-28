@@ -33,40 +33,40 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 464584
-Light version: 10904
+Total domains: 463429
+Light version: 10919
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
    38 |     862 |      0 % |      35 % | 165 Anti-fraud
     1 |     173 |      0 % |      13 % | Artists Against 419
     0 |      96 |      0 % |      11 % | BehindMLM
-    2 |      76 |      0 % |       7 % | BugsFighter
+    3 |      77 |      0 % |       7 % | BugsFighter
    85 |    1543 |      0 % |       1 % | Cybersquatting
     0 |      54 |      0 % |      82 % | DFPI Crypto Scam Tracker
  1319 |   38808 |     19 % |       1 % | DGA Detector
    34 |    4016 |      2 % |      29 % | Emerging Threats
    36 |    1090 |      0 % |      24 % | FakeWebshopListHUN
    37 |    1157 |      0 % |       2 % | Google Search
-  193 |    3506 |      1 % |      19 % | Gridinsoft
+  198 |    3511 |      1 % |      19 % | Gridinsoft
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
- 2283 |   77726 |     39 % |       8 % | Jeroengui
+ 2284 |   77727 |     39 % |       8 % | Jeroengui
    19 |     234 |      0 % |       7 % | MalwareURL
-    4 |      62 |      0 % |       7 % | PCrisk
+    5 |      63 |      0 % |       7 % | PCrisk
   279 |   13226 |      6 % |      28 % | PhishStats
     2 |     157 |      0 % |      17 % | PuppyScams.org
- 9387 |   45623 |     23 % |       1 % | Regex Matching
+ 9392 |   45628 |     23 % |       1 % | Regex Matching
    24 |    2139 |      1 % |      38 % | Scam Directory
     1 |      21 |      0 % |      31 % | ScamAdviser
     0 |     762 |      0 % |       7 % | ScamMinder
     1 |     959 |      0 % |      14 % | ScamTracker
-   20 |     507 |      0 % |       7 % | Unit42
+   21 |     508 |      0 % |       7 % | Unit42
     3 |      40 |      0 % |      11 % | Verbraucherzentrale Hamburg
     1 |       3 |      0 % |      29 % | ViriBack C2 Tracker
-   22 |     286 |      0 % |      21 % | Wildcat Cyber Patrol
+   26 |     290 |      0 % |      21 % | Wildcat Cyber Patrol
     3 |      22 |      0 % |       8 % | WiperSoft
     1 |     586 |      0 % |      50 % | Česká Obchodní Inspekce
-13795 |  194614 |    100 % |       0 % | All sources
+13813 |  194632 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
