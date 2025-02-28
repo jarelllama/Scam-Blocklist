@@ -10,6 +10,6 @@ jobs:
     secrets: inherit
 
   validate:
-    needs: validate
+    needs: retrieve
     uses: ./.github/workflows/validate_domains.yml
     secrets: inherit
