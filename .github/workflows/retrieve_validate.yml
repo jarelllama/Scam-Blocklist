@@ -1,0 +1,15 @@
+name: Retrieve and validate domains
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  retrieve:
+    uses: ./.github/workflows/retrieve_domains.yml
+    secrets: inherit
+
+  validate:
+    needs: validate
+    uses: ./.github/workflows/validate_domains.yml
+    secrets: inherit
