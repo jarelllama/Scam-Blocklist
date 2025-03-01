@@ -412,7 +412,7 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     fi
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
-    echo "----------------------------------------------------------------------"
+    printf "----------------------------------------------------------------------\n"
 }
 
 # Print error message and exit.

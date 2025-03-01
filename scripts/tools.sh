@@ -194,7 +194,7 @@ send_telegram() {
 update_review_config() {
     # Add blacklisted entries to blacklist and remove them from the review file
     mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \
-        | xargs -I {} sh -c "echo {} | sort -u - $BLACKLIST -o $BLACKLIST
+        | xargs -I {} sh -c "printf {} | sort -u - $BLACKLIST -o $BLACKLIST
         sed -i "/,{},/d" $REVIEW_CONFIG"
 
     # Add whitelisted entries to whitelist after formatting to regex and remove
