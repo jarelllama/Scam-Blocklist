@@ -5,7 +5,6 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly BLACKLIST='config/blacklist.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='config/wildcards.txt'
 readonly ADBLOCK='lists/adblock'
@@ -19,14 +18,9 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Get blacklist in the form of a regex expresion
-    local blacklist='_'
-    if [[ -s "$BLACKLIST" ]]; then
-        blacklist="$(mawk '{
-            gsub(/\./, "\.")
-            print "(^|\.)" $0 "$"
-        }' "$BLACKLIST" | paste -sd '|')"
-    fi
+    # Store blacklist in a variable
+    blacklist="$(FUNCTION --get-blacklist)"
+    readonly blacklist
 
     # Add blacklisted domains in the full version that are in the toplist to
     # the light version.
@@ -34,8 +28,7 @@ main() {
         NR==FNR {
             lines[$0]
             next
-        }
-        ($0 in lines) && ($0 ~ blacklist)
+        } $0 in lines && $0 ~ blacklist
     ' "$RAW" toplist.tmp | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
     build '' "$RAW" scams.txt

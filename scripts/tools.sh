@@ -133,6 +133,20 @@ format_files() {
     done
 }
 
+# Function 'get_blacklist' is an echo wrapper that returns the formatted
+# blacklist. If no entries are found in the blacklist, a placeholder is
+# returned to avoid errors when doing regex matching with a blank value.
+get_blacklist() {
+    if [[ -s "$BLACKLIST" ]]; then
+        mawk '{
+            gsub(/\./, "\.")
+            print "(^|\.)" $0 "$"
+        }' "$BLACKLIST"
+    else
+        printf '_'
+    fi
+}
+
 # Function 'log_domains' logs domain processing events into the domain log.
 # Input:
 #   $1: domains to log either in a file or variable
@@ -238,6 +252,9 @@ case "$1" in
         ;;
     --format-files)
         format_files
+        ;;
+    --get-blacklist)
+        get_blacklist
         ;;
     --log-domains)
         log_domains "$2" "$3" "$4"

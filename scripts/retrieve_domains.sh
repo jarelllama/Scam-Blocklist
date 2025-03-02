@@ -8,7 +8,6 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly BLACKLIST='config/blacklist.txt'
 readonly PHISHING_TARGETS='config/phishing_detection.csv'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SEARCH_TERMS='config/search_terms.csv'
@@ -45,20 +44,16 @@ main() {
         mv temp nrd.tmp
     fi
 
-    # Get whitelist in the form of a regex expresion
-    local whitelist='_'
+    # Store whitelist in a variable
+    whitelist='_'
     if [[ -s "$WHITELIST" ]]; then
-        whitelist="$(paste -sd '|' "$WHITELIST")"
+        whitelist="$(<$WHITELIST)"
     fi
+    readonly whitelist
 
-    # Get blacklist in the form of a regex expresion
-    local blacklist='_'
-    if [[ -s "$BLACKLIST" ]]; then
-        blacklist="$(mawk '{
-            gsub(/\./, "\.")
-            print "(^|\.)" $0 "$"
-        }' "$BLACKLIST" | paste -sd '|')"
-    fi
+    # Store blacklist in a variable
+    blacklist="$(FUNCTION --get-blacklist)"
+    readonly blacklist
 
     # Install idn2 here instead of in $FUNCTION to not bias source processing
     # time.
@@ -164,8 +159,8 @@ filter() {
             >> entries_for_review.tmp
 
         # Save entries into review config file
-        mawk -v source="$source_name" -v reason="$tag" \
-            '{ print source "," $0 "," reason ",," }' <<< "$entries" \
+        mawk -v source="$source_name" -v reason="$tag" '
+            { print source "," $0 "," reason ",," }' <<< "$entries" \
             >> "$REVIEW_CONFIG"
 
         # Remove duplicates from review config file
@@ -236,27 +231,27 @@ process_source_results() {
     # 'filter' is not used as the blacklisted domains should not be removed
     # from the results file.
     $FUNCTION --log-domains \
-        "$(mawk "/$blacklist/" "$source_results")" blacklist "$source_name"
+        "$(mawk -v blacklist="$blacklist" '
+        $0 ~ blacklist' "$source_results")" blacklist "$source_name"
 
     # Remove whitelisted domains excluding blacklisted domains
-    # Note that the whitelist uses regex matching.
-    # awk is used here instead of mawk for compatibility with the regex
-    # expression.
     whitelisted_count="$(filter \
-        "$(awk "/$whitelist/ && !/$blacklist/" "$source_results")" whitelist)"
+        "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
+        $0 ~ whitelist && $0 !~ blacklist' "$source_results")" whitelist)"
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_tld_count="$(filter \
-        "$(awk "/\.(gov|edu|mil)(\.[a-z]{2})?$/ && !/$blacklist/" \
-            "$source_results")" whitelisted_tld --preserve)"
+        "$(awk -v blacklist="$blacklist" '
+        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist
+        ' "$source_results")" whitelisted_tld --preserve)"
 
     # Remove domains in toplist excluding blacklisted domains
     in_toplist_count="$(filter \
-        "$(mawk -v blacklist="$blacklist" '
-        NR==FNR { lines[$0]; next } ($0 in lines) && !($0 ~ blacklist)' \
-        "$source_results" toplist.tmp)" toplist --preserve)"
+        "$(mawk -v blacklist="$blacklist" 'NR==FNR { lines[$0]; next }
+        $0 in lines && $0 !~ blacklist
+        ' "$source_results" toplist.tmp)" toplist --preserve)"
 
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
@@ -575,7 +570,7 @@ source_dga_detector() {
     pip install -q tldextract
 
     # Keep only non punycode NRDs with 12 or more characters
-    mawk 'length($0) >= 12 && $0 !~ /xn--/' nrd.tmp > domains.tmp
+    mawk 'length($0) >= 12 && !/xn--/' nrd.tmp > domains.tmp
 
     cd dga_detector-master
 

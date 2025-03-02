@@ -80,11 +80,11 @@ check_alive() {
     sort -u alive_domains.tmp "$RAW" -o "$RAW"
 
     # Update dead domains file to only include dead domains
-    mawk 'NR==FNR {
-        lines[$0]
-        next
-        }
-        $0 in lines
+    mawk '
+        NR==FNR {
+            lines[$0]
+            next
+        } $0 in lines
     ' dead.tmp "$DEAD_DOMAINS" > temp
     mv temp "$DEAD_DOMAINS"
 

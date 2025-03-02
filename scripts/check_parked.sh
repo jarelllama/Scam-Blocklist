@@ -81,11 +81,11 @@ check_unparked() {
     sort -u unparked_domains.tmp "$RAW" -o "$RAW"
 
     # Update parked domains file to only include parked domains
-    mawk 'NR==FNR {
-        lines[$0]
-        next
-        }
-        $0 in lines
+    mawk '
+        NR==FNR {
+            lines[$0]
+            next
+        } $0 in lines
     ' parked.tmp "$PARKED_DOMAINS" > temp
     mv temp "$PARKED_DOMAINS"
 
