@@ -55,7 +55,7 @@ main() {
 #   $1: file to check for dead domains in
 check_dead() {
     # Exclude domains already in the dead domains file but not yet removed
-    comm -23 "$1" "$DEAD_DOMAINS" > domains.tmp
+    comm -23 "$1" <(sort "$DEAD_DOMAINS") > domains.tmp
 
     find_dead_in domains.tmp
 

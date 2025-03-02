@@ -53,7 +53,7 @@ main() {
 #   $1: file to check for parked domains in
 check_parked() {
     # Exclude parked already in the parked domains file but not yet removed
-    comm -23 "$1" "$PARKED_DOMAINS" > domains.tmp
+    comm -23 "$1" <(sort "$PARKED_DOMAINS") > domains.tmp
 
     find_parked_in domains.tmp
 
