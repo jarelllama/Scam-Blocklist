@@ -36,7 +36,7 @@ main() {
             next
         }
         ($0 in lines) && ($0 ~ blacklist)
-    ' "$RAW" | sort -u - "$RAW_LIGHT" -o raw_light.tmp
+    ' "$RAW" toplist.tmp | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
     build '' "$RAW" scams.txt
 
