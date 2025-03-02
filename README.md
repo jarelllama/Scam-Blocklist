@@ -33,24 +33,24 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 462964
-Light version: 1807
+Total domains: 462977
+Light version: 1846
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
     0 |      16 |      0 % |      35 % | 165 Anti-fraud
     0 |       2 |      0 % |      13 % | Artists Against 419
     0 |       1 |      0 % |      11 % | BehindMLM
-    0 |       6 |      0 % |       7 % | BugsFighter
+    1 |       7 |      0 % |       7 % | BugsFighter
     0 |      50 |      0 % |       1 % | Cybersquatting
     0 |       0 |      0 % |      83 % | DFPI Crypto Scam Tracker
     0 |    1076 |     15 % |       1 % | DGA Detector
     0 |      18 |      0 % |      30 % | Emerging Threats
     0 |      71 |      0 % |      24 % | FakeWebshopListHUN
     0 |      66 |      0 % |       2 % | Google Search
-    0 |     191 |      2 % |      19 % | Gridinsoft
+    8 |     201 |      2 % |      19 % | Gridinsoft
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
-    0 |    2788 |     39 % |       8 % | Jeroengui
+    1 |    2789 |     39 % |       8 % | Jeroengui
     0 |      14 |      0 % |       7 % | MalwareURL
     0 |       7 |      0 % |       7 % | PCrisk
     0 |     367 |      5 % |      28 % | PhishStats
@@ -64,20 +64,20 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |       0 |      0 % |       6 % | Unit42
     0 |       6 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      29 % | ViriBack C2 Tracker
-    0 |      29 |      0 % |      20 % | Wildcat Cyber Patrol
+    3 |      32 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       0 |      0 % |       8 % | WiperSoft
     0 |     406 |      5 % |      49 % | Česká Obchodní Inspekce
-    0 |    7136 |    100 % |       0 % | All sources
+   13 |    7151 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 3628
+Dead domains removed today: 0
 Dead domains removed this month: 11791
-Resurrected domains added today: 1929
+Resurrected domains added today: 0
 
 Parked domains removed this month: 0
-Unparked domains added today: 63
+Unparked domains added today: 0
 ```
 
 <details>
