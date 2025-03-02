@@ -19,7 +19,7 @@ main() {
     $FUNCTION --download-toplist
 
     # Store blacklist in a variable
-    blacklist="$(FUNCTION --get-blacklist)"
+    blacklist="$($FUNCTION --get-blacklist)"
     readonly blacklist
 
     # Add blacklisted domains in the full version that are in the toplist to

@@ -70,7 +70,7 @@ validate() {
     readonly whitelist
 
     # Store blacklist in a variable
-    blacklist="$(FUNCTION --get-blacklist)"
+    blacklist="$($FUNCTION --get-blacklist)"
     readonly blacklist
 
     # Remove whitelisted domains excluding blacklisted domains

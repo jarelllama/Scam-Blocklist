@@ -52,7 +52,7 @@ main() {
     readonly whitelist
 
     # Store blacklist in a variable
-    blacklist="$(FUNCTION --get-blacklist)"
+    blacklist="$($FUNCTION --get-blacklist)"
     readonly blacklist
 
     # Install idn2 here instead of in $FUNCTION to not bias source processing
