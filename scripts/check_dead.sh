@@ -33,9 +33,9 @@ main() {
             check_dead x00
             ;;
         part2)
-            check_dead x01
             # Sometimes an x02 exists
             [[ -f x02 ]] && cat x02 >> x01
+            check_dead x01
             ;;
         remove)
             remove_dead

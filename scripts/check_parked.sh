@@ -31,9 +31,9 @@ main() {
             check_parked x00
             ;;
         part2)
-            check_parked x01
             # Sometimes an x02 exists
             [[ -f x02 ]] && cat x02 >> x01
+            check_parked x01
             ;;
         remove)
             remove_parked
