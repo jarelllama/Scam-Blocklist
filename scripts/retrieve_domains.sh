@@ -798,6 +798,15 @@ source_puppyscams() {
         | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > source_results.tmp
 }
 
+source_safelyweb() {
+    # Last checked: 02/03/25
+    source_url='https://safelyweb.com/scams-database'
+
+    curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?per_page=[1-30]" \
+        | grep -Po "Suspicious Website</div> <h2 class=\"title\">\K${DOMAIN_REGEX}" \
+        > source_results.tmp
+}
+
 source_scamadviser() {
     # Last checked: 17/02/25
     source_url='https://www.scamadviser.com/articles'

@@ -63,6 +63,7 @@ $(print_stats 'PhishStats')
 $(print_stats 'PuppyScams.org')
 $(print_stats 'Regex') Matching
 $(print_stats 'Scam Directory')
+$(print_stats 'SafelyWeb')
 $(print_stats 'ScamAdviser')
 $(print_stats 'ScamMinder')
 $(print_stats 'ScamTracker')
