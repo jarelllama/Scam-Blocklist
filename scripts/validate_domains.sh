@@ -78,7 +78,7 @@ validate() {
     # Find domains in toplist excluding blacklisted domains
     filter "$(mawk -v blacklist="$blacklist" '
         NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
-        ' "$RAW")" toplist --preserve
+        ' "$RAW" toplist.tmp)" toplist --preserve
 
     # Return if no filtering done
     [[ ! -f filter_log.tmp ]] && return
