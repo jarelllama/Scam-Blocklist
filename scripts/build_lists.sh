@@ -5,7 +5,6 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly BLACKLIST='config/blacklist.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='config/wildcards.txt'
 readonly ADBLOCK='lists/adblock'
@@ -19,10 +18,8 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Store blacklist in a variable
-    blacklist="$(mawk '{ gsub(/\./, "\.")
-        print "(^|\.)" $0 "$" }' "$BLACKLIST")"
-    readonly blacklist="${blacklist:-_}"
+    blacklist="$($FUNCTION --get-blacklist)"
+    readonly blacklist
 
     # Add blacklisted domains in the full version that are in the toplist to
     # the light version.
@@ -57,7 +54,7 @@ build() {
     sort -u "$WILDCARDS" source.tmp -o source.tmp
 
     # Remove common subdomains to better make use of wildcard matching.
-    mawk -v subdomains="$(mawk '{ print "^" $0 "\\." }' \
+    mawk -v subdomains="$(mawk '{ print "^" $0 "\." }' \
         "$SUBDOMAINS_TO_REMOVE" | paste -sd '|')" '{
         if ($0 ~ subdomains) {
             sub(subdomains, "")

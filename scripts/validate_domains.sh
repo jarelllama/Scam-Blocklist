@@ -6,9 +6,7 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly BLACKLIST='config/blacklist.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
-readonly WHITELIST='config/whitelist.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 main() {
@@ -63,18 +61,14 @@ validate() {
     # Remove non-domain entries including IP addresses excluding Punycode
     filter "$(awk "!/^${DOMAIN_REGEX}$/" "$RAW")" invalid
 
-    # Store whitelist in a variable
-    whitelist="$(<$WHITELIST)"
-    readonly whitelist="${whitelist:-_}"
-
-    # Store blacklist in a variable
-    blacklist="$(mawk '{ gsub(/\./, "\.")
-        print "(^|\.)" $0 "$" }' "$BLACKLIST")"
-    readonly blacklist="${blacklist:-_}"
+    # Store whitelist and blacklist in a variable
+    whitelist="$($FUNCTION --get-whitelist)"
+    blacklist="$($FUNCTION --get-blacklist)"
+    readonly whitelist blacklist
 
     # Remove whitelisted domains excluding blacklisted domains
-    filter "$(grep -E "$whitelist" "$RAW" \
-        | mawk -v blacklist="$blacklist" '$0 !~ blacklist')" whitelist
+    filter "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
+        $0 ~ whitelist && $0 !~ blacklist' "$RAW")" whitelist
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     filter "$(awk -v blacklist="$blacklist" '
@@ -82,8 +76,9 @@ validate() {
         ' "$RAW")" whitelisted_tld
 
     # Find domains in toplist excluding blacklisted domains
-    filter "$(mawk -v blacklist="$blacklist" 'NR==FNR { lines[$0]; next }
-        $0 in lines && $0 !~ blacklist' "$RAW")" toplist --preserve
+    filter "$(mawk -v blacklist="$blacklist" '
+        NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
+        ' "$RAW")" toplist --preserve
 
     # Return if no filtering done
     [[ ! -f filter_log.tmp ]] && return

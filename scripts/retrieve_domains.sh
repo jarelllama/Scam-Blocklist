@@ -8,13 +8,11 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly BLACKLIST='config/blacklist.txt'
 readonly PHISHING_TARGETS='config/phishing_detection.csv'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCES='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
-readonly WHITELIST='config/whitelist.txt'
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
@@ -45,14 +43,10 @@ main() {
         mv temp nrd.tmp
     fi
 
-    # Store whitelist in a variable
-    whitelist="$(<$WHITELIST)"
-    readonly whitelist="${whitelist:-_}"
-
-    # Store blacklist in a variable
-    blacklist="$(mawk '{ gsub(/\./, "\.")
-        print "(^|\.)" $0 "$" }' "$BLACKLIST")"
-    readonly blacklist="${blacklist:-_}"
+    # Store whitelist and blacklist in a variable
+    whitelist="$($FUNCTION --get-whitelist)"
+    blacklist="$($FUNCTION --get-blacklist)"
+    readonly whitelist blacklist
 
     # Install idn2 here instead of in $FUNCTION to not bias source processing
     # time.
@@ -203,12 +197,13 @@ process_source_results() {
 
     # Remove known dead domains (dead domains file is not sorted)
     dead_count="$(filter \
-        "$(comm -12 <(sort "$DEAD_DOMAINS") "$source_results")" dead --no-log)"
+        "$(comm -12 <(sort "$DEAD_DOMAINS") "$source_results")" \
+        dead --no-log)"
 
     # Remove known parked domains (parked domains file is not sorted)
     parked_count="$(filter \
-        "$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")" parked \
-        --no-log)"
+        "$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")" \
+        parked --no-log)"
 
     # Remove domains already in raw file
     comm -23 "$source_results" "$RAW" > temp
@@ -229,17 +224,15 @@ process_source_results() {
     # Log blacklisted domains
     # 'filter' is not used as the blacklisted domains should not be removed
     # from the results file.
-    $FUNCTION --log-domains \
-        "$(mawk -v blacklist="$blacklist" '
+    $FUNCTION --log-domains "$(mawk -v blacklist="$blacklist" '
         $0 ~ blacklist' "$source_results")" blacklist "$source_name"
 
     # Remove whitelisted domains excluding blacklisted domains
-    # grep is used here instead of awk to avoid
-    # 'awk: warning: escape sequence...' error with the expresions in the
-    # whitelist.
+    # awk is used here instead of mawk for compatibility with the regex
+    # expression.
     whitelisted_count="$(filter \
-        "$(grep -E "$whitelist" "$source_results" \
-        | mawk -v blacklist="$blacklist" '$0 !~ blacklist')" whitelist)"
+        "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
+        $0 ~ whitelist && $0 !~ blacklist' "$source_results")" whitelist)"
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     # awk is used here instead of mawk for compatibility with the regex
@@ -251,8 +244,8 @@ process_source_results() {
 
     # Remove domains in toplist excluding blacklisted domains
     in_toplist_count="$(filter \
-        "$(mawk -v blacklist="$blacklist" 'NR==FNR { lines[$0]; next }
-        $0 in lines && $0 !~ blacklist
+        "$(mawk -v blacklist="$blacklist" '
+        NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
         ' "$source_results" toplist.tmp)" toplist --preserve)"
 
     # Collate filtered domains

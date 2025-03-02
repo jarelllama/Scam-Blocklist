@@ -76,7 +76,7 @@ download_toplist() {
     format_file toplist.tmp
 
     # Expand toplist to include both root domains and subdomains
-    mawk -v subdomains="$(mawk '{ print "^" $0 "\\." }' \
+    mawk -v subdomains="$(mawk '{ print "^" $0 "\." }' \
         "$SUBDOMAINS_TO_REMOVE" | paste -sd '|')" '{
         if ($0 ~ subdomains) {
             print  # Print subdomains
@@ -131,6 +131,36 @@ format_files() {
     for file in config/* data/*; do
         format_file "$file"
     done
+}
+
+# Function 'get_blacklist' is an echo wrapper that returns the formatted
+# blacklist. If no entries are found in the blacklist, a placeholder is
+# returned to avoid errors when doing regex matching with a blank value.
+get_blacklist() {
+    if [[ ! -s "$BLACKLIST" ]]; then
+        printf '_'
+        return
+    fi
+
+    mawk '{
+        gsub(/\./, "\\\\\.")
+        print "(^|\\\.)" $0 "$"
+    }' "$BLACKLIST"
+}
+
+# Function 'get_whitelist' is an echo wrapper that returns the formatted
+# whitelist. If no entries are found in the whitelist, a placeholder is
+# returned to avoid errors when doing regex matching with a blank value.
+get_whitelist() {
+    if [[ ! -s "$WHITELIST" ]]; then
+        printf '_'
+        return
+    fi
+
+    mawk '{
+        gsub(/\./, "\.")
+        print
+    }' "$WHITELIST"
 }
 
 # Function 'log_domains' logs domain processing events into the domain log.
@@ -238,6 +268,12 @@ case "$1" in
         ;;
     --format-files)
         format_files
+        ;;
+    --get-blacklist)
+        get_blacklist
+        ;;
+    --get-whitelist)
+        get_whitelist
         ;;
     --log-domains)
         log_domains "$2" "$3" "$4"
