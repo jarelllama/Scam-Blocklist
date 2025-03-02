@@ -33,50 +33,50 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 464586
-Light version: 10652
+Total domains: 463016
+Light version: 10151
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-   16 |      16 |      0 % |      35 % | 165 Anti-fraud
-    2 |       2 |      0 % |      13 % | Artists Against 419
-    1 |       1 |      0 % |      11 % | BehindMLM
-    6 |       6 |      0 % |       7 % | BugsFighter
-   50 |      50 |      0 % |       1 % | Cybersquatting
+    0 |      16 |      0 % |      35 % | 165 Anti-fraud
+    0 |       2 |      0 % |      13 % | Artists Against 419
+    0 |       1 |      0 % |      11 % | BehindMLM
+    0 |       6 |      0 % |       7 % | BugsFighter
+    0 |      50 |      0 % |       1 % | Cybersquatting
     0 |       0 |      0 % |      83 % | DFPI Crypto Scam Tracker
- 1076 |    1076 |     15 % |       1 % | DGA Detector
-   18 |      18 |      0 % |      30 % | Emerging Threats
-   71 |      71 |      0 % |      24 % | FakeWebshopListHUN
-   66 |      66 |      0 % |       2 % | Google Search
-  191 |     191 |      2 % |      19 % | Gridinsoft
+    0 |    1076 |     15 % |       1 % | DGA Detector
+    0 |      18 |      0 % |      30 % | Emerging Threats
+    0 |      71 |      0 % |      24 % | FakeWebshopListHUN
+    0 |      66 |      0 % |       2 % | Google Search
+    0 |     191 |      2 % |      19 % | Gridinsoft
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
- 2788 |    2788 |     39 % |       8 % | Jeroengui
-   14 |      14 |      0 % |       7 % | MalwareURL
-    7 |       7 |      0 % |       7 % | PCrisk
-  367 |     367 |      5 % |      28 % | PhishStats
-   17 |      17 |      0 % |      17 % | PuppyScams.org
- 1866 |    1866 |     26 % |       1 % | Regex Matching
-   78 |      78 |      1 % |      38 % | Scam Directory
+    0 |    2788 |     39 % |       8 % | Jeroengui
+    0 |      14 |      0 % |       7 % | MalwareURL
+    0 |       7 |      0 % |       7 % | PCrisk
+    0 |     367 |      5 % |      28 % | PhishStats
+    0 |      17 |      0 % |      17 % | PuppyScams.org
+    0 |    1866 |     26 % |       1 % | Regex Matching
+    0 |      78 |      1 % |      38 % | Scam Directory
     0 |       0 |      0 % |      31 % | ScamAdviser
-   27 |      27 |      0 % |       7 % | ScamMinder
-   34 |      34 |      0 % |      14 % | ScamTracker
+    0 |      27 |      0 % |       7 % | ScamMinder
+    0 |      34 |      0 % |      14 % | ScamTracker
     0 |       0 |      0 % |       6 % | Unit42
-    6 |       6 |      0 % |      11 % | Verbraucherzentrale Hamburg
+    0 |       6 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      29 % | ViriBack C2 Tracker
-   29 |      29 |      0 % |      20 % | Wildcat Cyber Patrol
+    0 |      29 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       0 |      0 % |       8 % | WiperSoft
-  406 |     406 |      5 % |      49 % | Česká Obchodní Inspekce
- 7136 |    7136 |    100 % |       0 % | All sources
+    0 |     406 |      5 % |      49 % | Česká Obchodní Inspekce
+    0 |    7136 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 8163
-Dead domains removed this month: 8163
-Resurrected domains added today: 1633
+Dead domains removed today: 3628
+Dead domains removed this month: 11791
+Resurrected domains added today: 1929
 
 Parked domains removed this month: 0
-Unparked domains added today: 58
+Unparked domains added today: 63
 ```
 
 <details>
