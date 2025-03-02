@@ -171,11 +171,11 @@ TEST_DEAD_CHECK() {
     # Generate placeholders
     # (split does not work well without enough lines)
     local i
-    for i in {1..100};do
+    for i in {1..50};do
         input "placeholder483${i}s.com"
     done
 
-    for i in {101..200};do
+    for i in {51..100};do
         input "placeholder483${i}s.com" "$DEAD_DOMAINS"
     done
 
@@ -473,8 +473,8 @@ test_dead_check() {
     output apple.com "$RAW"
     output apple.com "$RAW_LIGHT"
     output abcdead-domain-test.com "$DEAD_DOMAINS"
-    # Dead count is 101 because of the placeholder lines
-    output dead_count,101,raw "$DOMAIN_LOG"
+    # Dead count is 51 because of the placeholder lines
+    output dead_count,51,raw "$DOMAIN_LOG"
 }
 
 ### PARKED CHECK TESTS
