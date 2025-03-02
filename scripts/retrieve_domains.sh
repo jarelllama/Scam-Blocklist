@@ -12,9 +12,6 @@ readonly PHISHING_TARGETS='config/phishing_detection.csv'
 readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
-readonly ROOT_DOMAINS='data/root_domains.txt'
-readonly SUBDOMAINS='data/subdomains.txt'
-readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly SOURCE_LOG='config/source_log.csv'
@@ -27,8 +24,8 @@ readonly DOMAIN_SQUARE_REGEX='[[:alnum:]][[:alnum:]\[\].-]*[[:alnum:]]\[?\.\]?[[
 main() {
     # Check whether to use existing results in the pending directory
     if [[ -d data/pending ]]; then
-        printf "\nUsing existing lists of retrieved results.\n"
         readonly USE_EXISTING_RESULTS=true
+        printf "\nUsing existing lists of retrieved results.\n"
     else
         readonly USE_EXISTING_RESULTS=false
         mkdir -p data/pending
@@ -59,8 +56,6 @@ main() {
     retrieve_source_results
 
     save_domains
-
-    save_subdomains
 }
 
 # Run each source function to retrieve results collated in "$source_results"
@@ -108,12 +103,12 @@ retrieve_source_results() {
         # source_results.tmp should be created when the source retrieves new
         # results
         if [[ -f source_results.tmp ]]; then
-            # An error would mean a problem with the source function
-            if [[ "$USE_EXISTING_RESULTS" == true ]]; then
-                error 'source_results.tmp present while USE_EXISTING_RESULTS is true.'
+            if [[ "$USE_EXISTING_RESULTS" == false ]]; then
+                # Move source results to source results path
+                mv source_results.tmp "$source_results"
             fi
-            # Move source results to source results path
-            mv source_results.tmp "$source_results"
+            # An error would mean a problem with the source function
+            error 'source_results.tmp present while USE_EXISTING_RESULTS is true.'
         fi
 
         # The Google Search source processes each search term as one source and
@@ -177,13 +172,13 @@ process_source_results() {
     # Skip to next source by returning if no results from this source is found
     [[ ! -f "$source_results" ]] && return
 
-    local raw_count dead_count parked_count whitelisted_count
+    local raw_count dead_count parked_count blacklist whitelisted_count
     local whitelisted_tld_count in_toplist_count
 
-    # Convert URLs to domains, remove square brackets, and conver to lowercase.
-    # This is done here once instead of multiple times in the source functions.
-    # Note that this still allows invalid entries like entries with subfolders
-    # to get through so they can be flagged later on.
+    # Convert URLs to domains, remove square brackets, and convert to
+    # lowercase. This is done here once instead of multiple times in the source
+    # functions. Note that this still allows invalid entries like entries with
+    # subfolders to get through so they can be flagged later on.
     mawk '{
         gsub(/https?:\/\//, "")
         gsub(/[\[\]]/, "")
@@ -194,41 +189,17 @@ process_source_results() {
     # Convert Unicode to Punycode
     $FUNCTION --convert-unicode "$source_results"
 
-    sort -u "$source_results" -o "$source_results"
-
     # Count number of unfiltered domains
     raw_count="$(wc -l < "$source_results")"
 
-    # Remove known dead domains (dead domains file is not sorted and includes
-    # subdomains)
+    # Remove known dead domains (dead domains file is not sorted)
     dead_count="$(filter \
         "$(comm -12 <(sort "$DEAD_DOMAINS") "$source_results")" dead --no-log)"
 
-    # Remove known parked domains (parked domains file is not sorted and
-    # includes subdomains)
+    # Remove known parked domains (parked domains file is not sorted)
     parked_count="$(filter \
         "$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")" parked \
         --no-log)"
-
-    # Strip away subdomains
-    # Note that using 'while read' does not set the variable 'subdomain' as
-    # global.
-    local subdomains
-    while read -r subdomain; do  # Loop through common subdomains
-        subdomains="$(mawk "/^${subdomain}\./" "$source_results")"
-
-        # Continue if no subdomains found
-        [[ -z "$subdomains" ]] && continue
-
-        # Strip subdomains down to their root domains
-        sed -i "s/^${subdomain}\.//" "$source_results"
-
-        # Save subdomains and root domains to be filtered later
-        printf "%s\n" "$subdomains" >> subdomains.tmp
-        printf "%s\n" "$subdomains" | sed "s/^${subdomain}\.//" \
-            >> root_domains.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u "$source_results" -o "$source_results"
 
     # Remove domains already in raw file
     comm -23 "$source_results" "$RAW" > temp
@@ -239,35 +210,42 @@ process_source_results() {
         error "Source is unusually large: $(wc -l < "$source_results") entries"
     fi
 
+    # Remove non-domain entries including IP addresses excluding Punycode
+    # Redirect output to /dev/null as the invalid entries count is not needed
+    filter "$(awk "!/^${DOMAIN_REGEX}$/" "$source_results")" \
+        invalid --preserve > /dev/null
+
+    # Get blacklist in the form of a regex expresion
+    blacklist="$(
+        mawk '{
+            gsub(/\./, "\.")
+            print "(^|\.)" $0 "$"
+        }' "$BLACKLIST" | paste -sd '|'
+    )"
+
     # Log blacklisted domains
     # 'filter' is not used as the blacklisted domains should not be removed
     # from the results file.
     $FUNCTION --log-domains \
-        "$(comm -12 "$BLACKLIST" "$source_results")" blacklist "$source_name"
+        "$(mawk "/$blacklist/" "$source_results")" blacklist "$source_name"
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist uses regex matching
     whitelisted_count="$(filter \
         "$(grep -Ef "$WHITELIST" "$source_results" \
-        | grep -vxFf "$BLACKLIST")" whitelist)"
+        | mawk "!/$blacklist/")" whitelist)"
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_tld_count="$(filter \
         "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$source_results" \
-        | grep -vxFf "$BLACKLIST")" whitelisted_tld --preserve)"
-
-    # Remove non-domain entries including IP addresses excluding Punycode
-    # Redirect output to /dev/null as the invalid entries count is not needed
-    filter "$(awk "!/^${DOMAIN_REGEX}$/" "$source_results")" \
-        invalid --preserve > /dev/null
+        | mawk "!/$blacklist/")" whitelisted_tld --preserve)"
 
     # Remove domains in toplist excluding blacklisted domains
-    # Note the toplist does not include subdomains
     in_toplist_count="$(filter \
         "$(comm -12 toplist.tmp "$source_results" \
-        | grep -vxFf "$BLACKLIST")" toplist --preserve)"
+        | mawk "!/$blacklist/")" toplist --preserve)"
 
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
@@ -336,39 +314,6 @@ save_domains() {
 
     $FUNCTION --send-telegram \
         "Retrieval: added ${count_added} domains"
-}
-
-# Save filtered subdomains and root domains into the subdomains and root
-# domains files.
-save_subdomains() {
-    [[ ! -f root_domains.tmp ]] && return
-
-    sort -u root_domains.tmp -o root_domains.tmp
-
-    # Keep subdomains and remove root domains from entries requiring manual
-    # review in data/pending
-    local entries
-    for entries in data/pending/*.tmp; do
-        [[ ! -f "$entries" ]] && continue
-
-        # Add back subdomains
-        grep -f "$entries" subdomains.tmp | sort -u - "$entries" -o "$entries"
-
-        # Keep only domains not found in root_domains.tmp
-        comm -23 "$entries" root_domains.tmp > temp
-        mv temp "$entries"
-    done
-
-    # Keep only root domains present in the final filtered domains
-    comm -12 root_domains.tmp <(sort all_retrieved_domains.tmp) > temp
-    mv temp root_domains.tmp
-
-    # Collate filtered root domains
-    sort -u root_domains.tmp "$ROOT_DOMAINS" -o "$ROOT_DOMAINS"
-
-    # Collate filtered subdomains
-    grep -f root_domains.tmp subdomains.tmp \
-        | sort -u - "$SUBDOMAINS" -o "$SUBDOMAINS"
 }
 
 # Print and log statistics for each source.

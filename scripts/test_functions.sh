@@ -15,7 +15,6 @@ readonly WILDCARDS='config/wildcards.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly ROOT_DOMAINS='data/root_domains.txt'
 readonly SUBDOMAINS='data/subdomains.txt'
-readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly ADBLOCK='lists/adblock'
@@ -288,6 +287,21 @@ TEST_BUILD() {
 
 ### RETRIEVAL/VALIDATION TESTS
 
+# Test adding entries to the whitelist and blacklist via the review config file
+test_review_file() {
+    input Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
+    input Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
+    input Source,review-file-blacklist-test.com,toplist,y, "$REVIEW_CONFIG"
+    input Source,review-file-whitelist-test.com,toplist,,y "$REVIEW_CONFIG"
+
+    # Only unconfigured/misconfigured entries should remain in the review config file
+    output Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
+    output Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
+
+    output review-file-blacklist-test.com "$BLACKLIST"
+    output '^review-file-whitelist-test\.com$' "$WHITELIST"
+}
+
 # Test manual addition of domains from repo issue, proper logging into domain
 # log, source log, review config file, and additions to the manual review file
 test_manual_addition_and_logging() {
@@ -342,51 +356,60 @@ test_known_parked_removal() {
     output '' "$RAW_LIGHT"
 }
 
-# Test removal of common subdomains
-test_subdomain_removal() {
-    while read -r subdomain; do
-        subdomain="${subdomain}.subdomain-test.com"
-        input "$subdomain"
-        output "$subdomain" "$SUBDOMAINS"
-    done < "$SUBDOMAINS_TO_REMOVE"
+# Test removal of invalid entries
+test_invalid_removal() {
+    input 100.100.100.1
+    input invalid-test.x
+    input invalid-test.100
+    input invalid-test.1x
+    input invalid-test.com/subfolder
+    input invalid-test-.com
+    input i.com
+    # Test that punycode is allowed in the TLD
+    input invalid-test.xn--903fds
 
-    output subdomain-test.com "$RAW"
-    output subdomain-test.com "$RAW_LIGHT"
-    output subdomain-test.com "$ROOT_DOMAINS"
-}
+    output '' "$SUBDOMAINS"
+    output '' "$ROOT_DOMAINS"
+    output invalid-test.xn--903fds "$RAW"
+    output invalid-test.xn--903fds "$RAW_LIGHT"
+    output invalid,100.100.100.1 "$DOMAIN_LOG"
+    output invalid,invalid-test.x "$DOMAIN_LOG"
+    output invalid,invalid-test.100 "$DOMAIN_LOG"
+    output invalid,invalid-test.1x "$DOMAIN_LOG"
+    output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
+    output invalid,invalid-test-.com "$DOMAIN_LOG"
+    output invalid,i.com "$DOMAIN_LOG"
 
-# Test adding entries to the whitelist and blacklist via the review config file
-test_review_file() {
-    input Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
-    input Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
-    input Source,review-file-blacklist-test.com,toplist,y, "$REVIEW_CONFIG"
-    input Source,review-file-whitelist-test.com,toplist,,y "$REVIEW_CONFIG"
-
-    # Only unconfigured/misconfigured entries should remain in the review config file
-    output Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
-    output Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
-
-    output review-file-blacklist-test.com "$BLACKLIST"
-    output '^review-file-whitelist-test\.com$' "$WHITELIST"
+    # The validate script does not add invalid entries to the review config
+    # file
+    [[ "$script_to_test" == 'validate' ]] && return
+    output 100.100.100.1,invalid "$REVIEW_CONFIG"
+    output invalid-test.x,invalid "$REVIEW_CONFIG"
+    output invalid-test.100,invalid "$REVIEW_CONFIG"
+    output invalid-test.1x,invalid "$REVIEW_CONFIG"
+    output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
+    output invalid-test-.com,invalid "$REVIEW_CONFIG"
+    output i.com,invalid "$REVIEW_CONFIG"
 }
 
 # Test whitelisting and blacklisting entries
 test_whitelist_blacklist() {
-    input 'whitelist-test\.com' "$WHITELIST"
+    input '(regex-test)?\.whitelist-test\.com' "$WHITELIST"
     input blacklisted.whitelist-test.com "$BLACKLIST"
-    input blacklisted.whitelist-test.com
     # Test that the whitelist uses regex matching
     input regex-test.whitelist-test.com
+    # Test that the blacklist matches subdomains
+    input www.blacklisted.whitelist-test.com
 
-    output 'whitelist-test\.com' "$WHITELIST"
+    output '(regex-test)?\.whitelist-test\.com' "$WHITELIST"
     output blacklisted.whitelist-test.com "$BLACKLIST"
-    output blacklisted.whitelist-test.com "$RAW"
-    output blacklisted.whitelist-test.com "$RAW_LIGHT"
+    output www.blacklisted.whitelist-test.com "$RAW"
+    output www.blacklisted.whitelist-test.com "$RAW_LIGHT"
     output whitelist,regex-test.whitelist-test.com "$DOMAIN_LOG"
 
     # The validate script does not log blacklisted domains
     [[ "$script_to_test" == 'validate' ]] && return
-    output blacklist,blacklisted.whitelist-test.com "$DOMAIN_LOG"
+    output blacklist,www.blacklisted.whitelist-test.com "$DOMAIN_LOG"
 }
 
 # Test removal of domains with whitelisted TLDs
@@ -413,57 +436,16 @@ test_whitelisted_tld_removal() {
     output whitelisted-tld-test.mil,whitelisted_tld "$REVIEW_CONFIG"
 }
 
-# Test removal of invalid entries
-test_invalid_removal() {
-    input 100.100.100.1
-    input invalid-test.x
-    input invalid-test.100
-    input invalid-test.1x
-    input invalid-test.com/subfolder
-    input invalid-test-.com
-    input i.com
-    # Test that invalid subdomains/root domains are not added into the
-    # subdomains/root domains files
-    input www.invalid-test-com
-    # Test that punycode is allowed in the TLD
-    input invalid-test.xn--903fds
-
-    output '' "$SUBDOMAINS"
-    output '' "$ROOT_DOMAINS"
-    output invalid-test.xn--903fds "$RAW"
-    output invalid-test.xn--903fds "$RAW_LIGHT"
-    output invalid,invalid-test-com "$DOMAIN_LOG"
-    output invalid,100.100.100.1 "$DOMAIN_LOG"
-    output invalid,invalid-test.x "$DOMAIN_LOG"
-    output invalid,invalid-test.100 "$DOMAIN_LOG"
-    output invalid,invalid-test.1x "$DOMAIN_LOG"
-    output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
-    output invalid,invalid-test-.com "$DOMAIN_LOG"
-    output invalid,i.com "$DOMAIN_LOG"
-
-    # The validate script does not add invalid entries to the review config
-    # file
-    [[ "$script_to_test" == 'validate' ]] && return
-    output invalid-test-com,invalid "$REVIEW_CONFIG"
-    output 100.100.100.1,invalid "$REVIEW_CONFIG"
-    output invalid-test.x,invalid "$REVIEW_CONFIG"
-    output invalid-test.100,invalid "$REVIEW_CONFIG"
-    output invalid-test.1x,invalid "$REVIEW_CONFIG"
-    output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
-    output invalid-test-.com,invalid "$REVIEW_CONFIG"
-    output i.com,invalid "$REVIEW_CONFIG"
-}
-
 # Test checking of domains against toplist
 test_toplist_check() {
-    input data.microsoft.com
-    output data.microsoft.com,toplist "$REVIEW_CONFIG"
-    output toplist,data.microsoft.com "$DOMAIN_LOG"
+    input www.microsoft.com
+    output www.microsoft.com,toplist "$REVIEW_CONFIG"
+    output toplist,www.microsoft.com "$DOMAIN_LOG"
     # The validate script does not remove domains found in the toplist from the
     # raw file
     [[ "$script_to_test" == 'retrieve' ]] && return
-    output data.microsoft.com "$RAW"
-    output data.microsoft.com "$RAW_LIGHT"
+    output www.microsoft.com "$RAW"
+    output www.microsoft.com "$RAW_LIGHT"
 }
 
 # Test exclusion of specific sources from light version
