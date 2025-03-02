@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 03.02.101616.2025
+! Version: 03.02.160326.2025
 ! Expires: 12 hours
-! Last modified: Sun Mar  2 10:16:16 UTC 2025
+! Last modified: Sun Mar  2 16:03:26 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 1807
+! Number of entries: 1846
 !
 ||028426.com^
 ||07080900.xyz^
@@ -27,6 +27,7 @@
 ||1aleks.com^
 ||1wbapm.life^
 ||1wpeck.com^
+||1wqjnb.com^
 ||1wwfkf.top^
 ||1wwnf.com^
 ||1wxscr.com^
@@ -34,6 +35,7 @@
 ||1wzjvm.top^
 ||1xbet-adu.top^
 ||1xbet-c1.site^
+||1xbet-cdb.top^
 ||1xbet-era.top^
 ||1xbet-ffe.top^
 ||1xbet-jdm.top^
@@ -64,6 +66,7 @@
 ||365bbt.link^
 ||3988tqcdn.com^
 ||3ec9b600789b3bacf2c72ebae142a9c3.net^
+||47f0db81c9.com^
 ||4everland.app^
 ||4f9566374d.com^
 ||4uvize.com^
@@ -101,6 +104,7 @@
 ||aa7a70aa38.com^
 ||aaafc94b3a37b75ae9cb60afc42e86fe.org^
 ||aberzing.com^
+||absolutepower24.site^
 ||accutane.one^
 ||acesports.world^
 ||acinstitute.org^
@@ -116,6 +120,7 @@
 ||advertoix.live^
 ||aeonmining.com^
 ||ag0rcgwjv5.com^
+||agj9lx191.com^
 ||ahoravideo-blog.com^
 ||ahoravideo-cdn.com^
 ||ahoravideo-chat.com^
@@ -137,10 +142,13 @@
 ||akusoli.com^
 ||aladdinmarketgrill.com^
 ||allpubmusic.my^
+||allpurposenetwork.co.in^
 ||alny.ge^
+||aloidvg.com^
 ||alotofquotes.com^
 ||alpinestars.com^
 ||alza.hu^
+||amazon182.com^
 ||americanfunds.com^
 ||ametronles.com^
 ||amongusonline.io^
@@ -161,6 +169,7 @@
 ||ap-store.ru^
 ||apertum.io^
 ||apeweae.top^
+||apiexplorerzone.com^
 ||apkhihe.org^
 ||apkmill.xyz^
 ||apornovideo.com^
@@ -174,8 +183,10 @@
 ||aremining.app^
 ||argentpropertiesvb.com^
 ||arldeemix.com^
+||arsenalverlag.com^
 ||arturelights.com^
 ||arzookanak.in^
+||ashmjt.com^
 ||asiaal.shop^
 ||asiame.com^
 ||asian-women.org^
@@ -237,6 +248,7 @@
 ||bggbet.com^
 ||bgydnb.vip^
 ||biconomy.com^
+||bideo-blog.com^
 ||bideo-blog.xyz^
 ||bideo-cdn.com^
 ||bideo-cdn.xyz^
@@ -270,6 +282,7 @@
 ||bitronx.xyz^
 ||bitrue.com^
 ||bitsbfree.com^
+||bitstake.su^
 ||bitycrypto.com^
 ||bizmovie.shop^
 ||bkajcueevk.top^
@@ -407,6 +420,7 @@
 ||crlocsp.cn^
 ||crohasit.net^
 ||crossurl.shop^
+||crown99.win^
 ||cryptex.to^
 ||crypto-loot.com^
 ||crypto-market-world.com^
@@ -444,6 +458,7 @@
 ||dcb5684707f6c66492aaa9f7d9bfb5a6.biz^
 ||dcr.sehlat.io^
 ||ddjiayou.cn^
+||de-lumelia.com^
 ||deftsecurity.com^
 ||delta-roblox.com^
 ||delta.exchange^
@@ -515,6 +530,7 @@
 ||earn-pepe.com^
 ||earnbitmoon.club^
 ||ecomicrolab.com^
+||ecstore2021.com^
 ||edate.com^
 ||edesalenergia.com.ar^
 ||edikted.com^
@@ -609,6 +625,7 @@
 ||filedn.eu^
 ||filegear-sg.me^
 ||filemoon.sx^
+||filesfly.cc^
 ||filesor.com^
 ||filespayouts.com^
 ||filmix.my^
@@ -718,10 +735,12 @@
 ||google.77in.games^
 ||google3zc888k.buzz^
 ||google809.com^
+||google88.vip^
 ||googleana.cc^
 ||googleapis.support^
 ||googleobd.vip^
 ||googleod.vip^
+||googleplay7878br.com^
 ||googleplazy.com^
 ||googlepllev.com^
 ||googlepwa.app^
@@ -799,6 +818,7 @@
 ||hotbvukavi.today^
 ||hotbwodama.today^
 ||hotbxurupa.cc^
+||hotbyafuni.cc^
 ||hotbyagade.cc^
 ||hotbyalaga.today^
 ||hotbyapodo.cc^
@@ -860,11 +880,13 @@
 ||itpatches.com^
 ||itsaol.com^
 ||itsecuritymessage.com^
+||iuyggvhq.icu^
 ||iwoozie.baby^
 ||jcmemoryscan.com^
 ||jcswcd.com^
 ||jebnmgvdz.com^
 ||jetton.fan^
+||jewimsixobie.net^
 ||jifr.net^
 ||jili188.tv^
 ||jinmap.top^
@@ -991,6 +1013,7 @@
 ||lpr.articlefindpro.com^
 ||lrepacks.net^
 ||lrgqpjbwm.com^
+||lstjump.click^
 ||ltcautomining.com^
 ||ltcminer.com^
 ||luamoxyfid.com^
@@ -1049,6 +1072,7 @@
 ||metamask.github.io^
 ||metamask.group^
 ||metamenu.org^
+||metaredi.org^
 ||metarows.org^
 ||metasmak.cam^
 ||metasnap.org^
@@ -1061,6 +1085,7 @@
 ||microsoftupdateswin.com^
 ||mihaivibsaz.net^
 ||minepulse.top^
+||miniclickurl.top^
 ||mint-stealer.top^
 ||miravia.es^
 ||misc89nema.com^
@@ -1174,6 +1199,7 @@
 ||o7labs.top^
 ||oabaubsutha.com^
 ||oardaptaunga.net^
+||oargusongous.com^
 ||ocry.com^
 ||oemete.com^
 ||offerindia.xyz^
@@ -1212,7 +1238,9 @@
 ||orderedlinks.shop^
 ||ordinalswallet.com^
 ||organiccrap.com^
+||originefondi-binance.com^
 ||orthoture.com^
+||osdnetwork.xyz^
 ||ourcoincash.xyz^
 ||ourtime.com^
 ||ouseswhichtot.org^
@@ -1322,6 +1350,7 @@
 ||qvion8.com^
 ||rabbit77.online^
 ||racpigeon.com^
+||ranular.com^
 ||rapelust.com^
 ||rateglo.com^
 ||raybansales.us^
@@ -1370,9 +1399,11 @@
 ||rongshop.com^
 ||roundcubemarketing.com^
 ||royalreels7.com^
+||rpbuildify.xyz^
 ||rpcloudnet.xyz^
 ||rpcreative.xyz^
 ||rpdataplex.xyz^
+||rpnetworkx.xyz^
 ||rpprovidrs.xyz^
 ||rpsecurely.xyz^
 ||rpstartup.xyz^
@@ -1406,6 +1437,7 @@
 ||sbobet.com^
 ||scanned.page^
 ||schoeffel.com^
+||scouted-today.me^
 ||sdcts.com^
 ||search-2go.com^
 ||search-bridge.com^
@@ -1632,6 +1664,7 @@
 ||trjpscan.top^
 ||tronking.io^
 ||troove.top^
+||trumpfaucet.com^
 ||truthwasisadl.org^
 ||trxh.xyz^
 ||trxq.xyz^
@@ -1642,6 +1675,8 @@
 ||twiitter.com^
 ||twtter.com^
 ||ua.kinogo.ec^
+||uagra.com.ua^
+||uasdealshop.online^
 ||ubxai.vip^
 ||ucarecdn.com^
 ||uewlihasq.com^
@@ -1717,6 +1752,7 @@
 ||webaccess-alert.com^
 ||webcodez.com^
 ||webdaily.live^
+||webdesignofegypt.com^
 ||webogram.org^
 ||websaver.ca^
 ||websitetheme.com^
@@ -1757,6 +1793,7 @@
 ||wuporg.com^
 ||wwwfucai28.cc^
 ||wy5532.com^
+||wykkselling.online^
 ||x24hr.com^
 ||xacaci.xyz^
 ||xandelissane20.top^
@@ -1779,6 +1816,7 @@
 ||xn--jj0bz6z98ct0a29q.com^
 ||xn--lg3bt1seyav2ya.com^
 ||xn--v67b6oi9asze.com^
+||xshiba.app^
 ||xsph.ru^
 ||xtexchangeswap.com^
 ||xxuz.com^
@@ -1803,6 +1841,7 @@
 ||za.pl^
 ||zapacesauto.shop^
 ||zdirect17.com^
+||zebg.top^
 ||zepatifcommerce.shop^
 ||zesllcforex.com^
 ||zimran.net^
