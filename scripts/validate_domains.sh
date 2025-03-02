@@ -57,8 +57,6 @@ filter() {
 
 # Validate raw file.
 validate() {
-    local blacklist
-
     # Convert Unicode to Punycode in raw file and raw light file
     $FUNCTION --convert-unicode "$RAW"
     $FUNCTION --convert-unicode "$RAW_LIGHT"
@@ -66,28 +64,36 @@ validate() {
     # Remove non-domain entries including IP addresses excluding Punycode
     filter "$(awk "!/^${DOMAIN_REGEX}$/" "$RAW")" invalid
 
+    # Get whitelist in the form of a regex expresion
+    local whitelist='_'
+    if [[ -s "$WHITELIST" ]]; then
+        whitelist="$(paste -sd '|' "$WHITELIST")"
+    fi
+
     # Get blacklist in the form of a regex expresion
-    blacklist="$(
-        mawk '{
+    local blacklist='_'
+    if [[ -s blacklist.txt ]]; then
+        blacklist="$(mawk '{
             gsub(/\./, "\.")
             print "(^|\.)" $0 "$"
-        }' "$BLACKLIST" | paste -sd '|'
-    )"
+        }' "$BLACKLIST" | paste -sd '|')"
+    fi
 
     # Remove whitelisted domains excluding blacklisted domains
     # Note whitelist matching uses regex matching
     filter \
-        "$(grep -Ef "$WHITELIST" "$RAW" | mawk "!/$blacklist/")" whitelist
+        "$(awk "/$whitelist/ && !/$blacklist/" "$RAW")" whitelist
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     filter \
-        "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$RAW" \
-        | mawk "!/$blacklist/")" whitelisted_tld
+        "$(awk "/\.(gov|edu|mil)(\.[a-z]{2})?$/
+        && !/$blacklist/" "$RAW")" whitelisted_tld
 
     # Find domains in toplist excluding blacklisted domains
     filter \
-        "$(comm -12 toplist.tmp "$RAW" \
-        | mawk "!/$blacklist/")" toplist --preserve
+        "$(mawk -v blacklist="$blacklist" '
+        NR==FNR { lines[$0]; next } ($0 in lines) && !($0 ~ blacklist)' \
+        "$RAW" toplist.tmp)" toplist --preserve
 
     # Return if no filtering done
     [[ ! -f filter_log.tmp ]] && return

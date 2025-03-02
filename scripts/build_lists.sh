@@ -19,9 +19,24 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Add blacklisted domains in the full version that are in the toplist.
-    comm -12 "$RAW" <(comm -12 toplist.tmp "$BLACKLIST") \
-        | sort -u - "$RAW_LIGHT" -o raw_light.tmp
+    # Get blacklist in the form of a regex expresion
+    local blacklist='_'
+    if [[ -s blacklist.txt ]]; then
+        blacklist="$(mawk '{
+            gsub(/\./, "\.")
+            print "(^|\.)" $0 "$"
+        }' "$BLACKLIST" | paste -sd '|')"
+    fi
+
+    # Add blacklisted domains in the full version that are in the toplist to
+    # the light version.
+    mawk -v blacklist="$blacklist" '
+        NR==FNR {
+            lines[$0]
+            next
+        }
+        ($0 in lines) && !($0 ~ blacklist)
+    ' "$RAW" | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
     build '' "$RAW" scams.txt
 

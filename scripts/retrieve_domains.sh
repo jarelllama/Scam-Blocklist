@@ -45,6 +45,21 @@ main() {
         mv temp nrd.tmp
     fi
 
+    # Get whitelist in the form of a regex expresion
+    local whitelist='_'
+    if [[ -s "$WHITELIST" ]]; then
+        whitelist="$(paste -sd '|' "$WHITELIST")"
+    fi
+
+    # Get blacklist in the form of a regex expresion
+    local blacklist='_'
+    if [[ ! -s "$BLACKLIST" ]]; then
+        blacklist="$(mawk '{
+            gsub(/\./, "\.")
+            print "(^|\.)" $0 "$"
+        }' "$BLACKLIST" | paste -sd '|')"
+    fi
+
     # Install idn2 here instead of in $FUNCTION to not bias source processing
     # time.
     command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
@@ -172,7 +187,7 @@ process_source_results() {
     # Skip to next source by returning if no results from this source is found
     [[ ! -f "$source_results" ]] && return
 
-    local raw_count dead_count parked_count blacklist whitelisted_count
+    local raw_count dead_count parked_count whitelisted_count
     local whitelisted_tld_count in_toplist_count
 
     # Convert URLs to domains, remove square brackets, and convert to
@@ -211,17 +226,11 @@ process_source_results() {
     fi
 
     # Remove non-domain entries including IP addresses excluding Punycode
-    # Redirect output to /dev/null as the invalid entries count is not needed
+    # Redirect output to /dev/null as the invalid entries count is not needed.
+    # awk is used here instead of mawk for compatibility with the regex
+    # expression.
     filter "$(awk "!/^${DOMAIN_REGEX}$/" "$source_results")" \
         invalid --preserve > /dev/null
-
-    # Get blacklist in the form of a regex expresion
-    blacklist="$(
-        mawk '{
-            gsub(/\./, "\.")
-            print "(^|\.)" $0 "$"
-        }' "$BLACKLIST" | paste -sd '|'
-    )"
 
     # Log blacklisted domains
     # 'filter' is not used as the blacklisted domains should not be removed
@@ -230,22 +239,24 @@ process_source_results() {
         "$(mawk "/$blacklist/" "$source_results")" blacklist "$source_name"
 
     # Remove whitelisted domains excluding blacklisted domains
-    # Note whitelist uses regex matching
+    # Note that the whitelist uses regex matching.
+    # awk is used here instead of mawk for compatibility with the regex
+    # expression.
     whitelisted_count="$(filter \
-        "$(grep -Ef "$WHITELIST" "$source_results" \
-        | mawk "!/$blacklist/")" whitelist)"
+        "$(awk "/$whitelist/ && !/$blacklist/" "$source_results")" whitelist)"
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_tld_count="$(filter \
-        "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$source_results" \
-        | mawk "!/$blacklist/")" whitelisted_tld --preserve)"
+        "$(awk "/\.(gov|edu|mil)(\.[a-z]{2})?$/ && !/$blacklist/" \
+            "$source_results")" whitelisted_tld --preserve)"
 
     # Remove domains in toplist excluding blacklisted domains
     in_toplist_count="$(filter \
-        "$(comm -12 toplist.tmp "$source_results" \
-        | mawk "!/$blacklist/")" toplist --preserve)"
+        "$(mawk -v blacklist="$blacklist" '
+        NR==FNR { lines[$0]; next } ($0 in lines) && !($0 ~ blacklist)' \
+        "$source_results" toplist.tmp)" toplist --preserve)"
 
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
