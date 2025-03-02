@@ -47,6 +47,10 @@ main() {
     whitelist="$($FUNCTION --get-whitelist)"
     blacklist="$($FUNCTION --get-blacklist)"
     readonly whitelist blacklist
+    # DEBUG
+    echo "$whitelist"
+    echo
+    echo "$blacklist"
 
     # Install idn2 here instead of in $FUNCTION to not bias source processing
     # time.
