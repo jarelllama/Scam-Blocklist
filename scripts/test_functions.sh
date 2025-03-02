@@ -123,12 +123,11 @@ TEST_RETRIEVE_VALIDATE() {
     [[ -d data/pending ]] && rm -r data/pending
     mkdir -p data/pending
 
-    test_punycode_conversion
-    test_subdomain_removal
     test_review_file
+    test_punycode_conversion
+    test_invalid_removal
     test_whitelist_blacklist
     test_whitelisted_tld_removal
-    test_invalid_removal
     test_toplist_check
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
