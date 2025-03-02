@@ -106,12 +106,12 @@ retrieve_source_results() {
         # source_results.tmp should be created when the source retrieves new
         # results
         if [[ -f source_results.tmp ]]; then
-            if [[ "$USE_EXISTING_RESULTS" == false ]]; then
-                # Move source results to source results path
-                mv source_results.tmp "$source_results"
+            if [[ "$USE_EXISTING_RESULTS" == true ]]; then
+                # An error would mean a problem with the source function
+                error 'source_results.tmp present while USE_EXISTING_RESULTS is true.'
             fi
-            # An error would mean a problem with the source function
-            error 'source_results.tmp present while USE_EXISTING_RESULTS is true.'
+            # Move source results to source results path
+            mv source_results.tmp "$source_results"
         fi
 
         # The Google Search source processes each search term as one source and
