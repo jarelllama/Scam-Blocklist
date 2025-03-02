@@ -33,7 +33,7 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 462965
+Total domains: 462964
 Light version: 1807
 
 New domains after filtering:
