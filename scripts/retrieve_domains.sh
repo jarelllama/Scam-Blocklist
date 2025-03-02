@@ -53,7 +53,7 @@ main() {
 
     # Get blacklist in the form of a regex expresion
     local blacklist='_'
-    if [[ ! -s "$BLACKLIST" ]]; then
+    if [[ -s "$BLACKLIST" ]]; then
         blacklist="$(mawk '{
             gsub(/\./, "\.")
             print "(^|\.)" $0 "$"

@@ -86,8 +86,8 @@ validate() {
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     filter \
-        "$(awk "/\.(gov|edu|mil)(\.[a-z]{2})?$/
-        && !/$blacklist/" "$RAW")" whitelisted_tld
+        "$(awk "/\.(gov|edu|mil)(\.[a-z]{2})?$/ && !/$blacklist/" "$RAW")" \
+        whitelisted_tld
 
     # Find domains in toplist excluding blacklisted domains
     filter \
