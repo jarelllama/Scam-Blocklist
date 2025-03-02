@@ -24,7 +24,8 @@ convert_unicode() {
     # error, exit 1.
     mawk '/-(\.|$)|^-|^..--/' "$1" > temp
     mawk '!/-(\.|$)|^-|^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
-    mv temp "$1"
+    sort -u temp -o "$1"
+    rm temp
 }
 
 # Function 'download_nrd_feed' downloads and collates NRD feeds consisting
@@ -74,12 +75,17 @@ download_toplist() {
 
     format_file toplist.tmp
 
-    # Strip away subdomains
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" toplist.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-
-    sort -u toplist.tmp -o toplist.tmp
+    # Expand toplist to include both root domains and subdomains
+    mawk -v subdomains="$(mawk '{ print "^" $0 "\\." }' \
+        "$SUBDOMAINS_TO_REMOVE" | paste -sd '|')" '{
+        if ($0 ~ subdomains) {
+            print  # Print subdomains
+            sub(subdomains, "")
+            print  # Print root domains
+        } else {
+            print  # Print domains that originally have no subdomains
+        }
+    }' toplist.tmp | sort -u -o toplist.tmp
 }
 
 # Function 'format_file' standardizes the format of the given file.
