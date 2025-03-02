@@ -27,7 +27,7 @@ main() {
     # Initialize config directory
     local config
     for config in "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" "$SOURCE_LOG" \
-        "$WHITELIST" "$WILDCARDS"; do
+        "$WILDCARDS"; do
         if [[ "$config" == *.csv ]]; then
             # Keep headers in the CSV files
             sed -i '1q' "$config"
@@ -36,6 +36,11 @@ main() {
 
         : > "$config"
     done
+
+    # The ShellCheck test checks the whitelist file
+    if [[ "$1" != 'shellcheck' ]]; then
+        : > "$WHITELIST"
+    fi
 
     error=false
 
@@ -100,6 +105,13 @@ SHELLCHECK() {
         --exclude=*.csv .)"; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
+        error=true
+    fi
+
+    # Check for unescaped periods in the whitelist
+    if lines="$(grep -E '(^|[^\])\.' "$WHITELIST")"; then
+        printf "\n\e[1m[warn] Unescaped periods found in the whitelist:\e[0m\n" >&2
+        printf "%s\n" "$lines" >&2
         error=true
     fi
 
