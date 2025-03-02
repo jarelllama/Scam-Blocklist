@@ -527,8 +527,8 @@ source_cybersquatting() {
 
         # Append possible TLDs
         while read -r tld; do
-            printf "%s\n" "$results" | mawk -v tld="$tld" '
-                { sub(/\.com$/, "."tld); print }' >> results.tmp
+            mawk -v tld="$tld" '{ sub(/\.com$/, "."tld); print }' \
+            <<< "$results" >> results.tmp
         done <<< "$tlds"
 
         # Run URLCrazy (bash does not work)

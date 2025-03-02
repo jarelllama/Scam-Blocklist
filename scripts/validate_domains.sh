@@ -35,9 +35,8 @@ filter() {
 
     if [[ "$3" == '--preserve' ]]; then
         # Save entries into review config file
-        mawk -v reason="$tag" \
-            '{ print "raw," $0 "," reason ",," }' <<< "$entries" \
-            >> "$REVIEW_CONFIG"
+        mawk -v reason="$tag" '{ print "raw," $0 "," reason ",," }' \
+            <<< "$entries" >> "$REVIEW_CONFIG"
 
         # Remove duplicates
         mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
@@ -49,8 +48,8 @@ filter() {
     fi
 
     # Record entries into filter log for console output
-    mawk -v tag="$tag" '{ print $0 " (" tag ")" }' <<< "$entries" \
-        >> filter_log.tmp
+    mawk -v tag="$tag" '{ print $0 " (" tag ")" }' \
+        <<< "$entries" >> filter_log.tmp
 
     $FUNCTION --log-domains "$entries" "$tag" raw
 }
@@ -80,20 +79,19 @@ validate() {
     fi
 
     # Remove whitelisted domains excluding blacklisted domains
-    # Note whitelist matching uses regex matching
-    filter \
-        "$(awk "/$whitelist/ && !/$blacklist/" "$RAW")" whitelist
+    filter "$(awk "/$whitelist/ && !/$blacklist/" "$RAW")" whitelist
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
-    filter \
-        "$(awk "/\.(gov|edu|mil)(\.[a-z]{2})?$/ && !/$blacklist/" "$RAW")" \
+    filter "$(awk "/\.(gov|edu|mil)(\.[a-z]{2})?$/ && !/$blacklist/" "$RAW")" \
         whitelisted_tld
 
     # Find domains in toplist excluding blacklisted domains
-    filter \
-        "$(mawk -v blacklist="$blacklist" '
-        NR==FNR { lines[$0]; next } ($0 in lines) && !($0 ~ blacklist)' \
-        "$RAW" toplist.tmp)" toplist --preserve
+    filter "$(mawk -v blacklist="$blacklist" '
+        NR==FNR {
+            lines[$0]
+            next
+        } ($0 in lines) && !($0 ~ blacklist)
+        ' "$RAW" toplist.tmp)" toplist --preserve
 
     # Return if no filtering done
     [[ ! -f filter_log.tmp ]] && return
@@ -103,8 +101,10 @@ validate() {
     mv temp "$RAW_LIGHT"
 
     # Print filter log
-    printf "\n\e[1mProblematic domains (%s):\e[0m\n" "$(wc -l < filter_log.tmp)"
-    sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' filter_log.tmp
+    printf "\n\e[1mProblematic domains (%s):\e[0m\n" \
+        "$(wc -l < filter_log.tmp)"
+    sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' \
+        filter_log.tmp
 
     [[ ! -s filter_log.tmp ]] && return
 

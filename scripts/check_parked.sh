@@ -22,20 +22,20 @@ main() {
     # The parked check consists of multiple parts to get around the time limit
     # of Github jobs.
     case "$1" in
-        'checkunparked')
+        checkunparked)
             # The unparked check being done in the workflow before the parked
             # check means the recently added unparked domains are processed by
             # the parked check while the recently added parked domains are not
             # processed by the unparked check.
             check_unparked
             ;;
-        'part1')
+        part1)
             check_parked x00
             ;;
-        'part2')
+        part2)
             check_parked x01
             ;;
-        'remove')
+        remove)
             remove_parked
             ;;
         *)

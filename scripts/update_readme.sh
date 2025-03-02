@@ -194,7 +194,10 @@ print_stats() {
 #   $2: source to process (default is all sources)
 sum() {
     # Print dash if no runs for that day found
-    ! grep -qF "$1" "$SOURCE_LOG" && { printf "-"; return; }
+    if ! grep -qF "$1" "$SOURCE_LOG"; then
+        printf "-"
+        return
+    fi
 
     mawk "/${1},${2}.*,saved$/" "$SOURCE_LOG" | csvcut -c 5 \
         | mawk '{ sum += $1 } END { print sum }'
@@ -205,8 +208,6 @@ sum() {
 # Input:
 #   $1: source to process (default is all sources)
 sum_excluded() {
-    # csvcut used here as some of the sources include commas which causes
-    # problems for mawk.
     read -r raw_count excluded_count \
         <<< "$(mawk -v source="$1" -F ',' '$2 == source { print }' \
             "$SOURCE_LOG" | csvcut -c 4,6,7,8 | mawk -F ',' '

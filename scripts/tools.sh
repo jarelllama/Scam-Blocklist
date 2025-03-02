@@ -42,8 +42,8 @@ download_nrd_feed() {
 
     # Download the feeds in parallel and get only domains, ignoring comments
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
-        | awk "/^${DOMAIN_REGEX}$/" \
-        > nrd.tmp || error 'Error downloading NRD feed.'
+        | awk "/^${DOMAIN_REGEX}$/" > nrd.tmp
+    # TODO: error detection
 
     format_file nrd.tmp
 }
@@ -154,9 +154,9 @@ log_domains() {
 
     timestamp="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
 
-    printf "%s\n" "$domains" \
-        | mawk -v event="$2" -v source="$3" -v time="$timestamp" \
-        '{ print time "," event "," $0 "," source }' >> "$DOMAIN_LOG"
+    mawk -v event="$2" -v source="$3" -v time="$timestamp" \
+        '{ print time "," event "," $0 "," source }' \
+        <<< "$domains" >> "$DOMAIN_LOG"
 }
 
 # Function 'prune_lines' prunes lines in the given file to keep its number of

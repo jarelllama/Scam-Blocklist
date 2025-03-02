@@ -24,20 +24,20 @@ main() {
     # The dead check consists of multiple parts to get around the time limit of
     # Github jobs.
     case "$1" in
-        'checkalive')
+        checkalive)
             # The alive check being done in the workflow before the dead check
             # means the recently added resurrected domains are processed by the
             # dead check while the recently added dead domains are not
             # processed by the alive check.
             check_alive
             ;;
-        'part1')
+        part1)
             check_dead x00
             ;;
-        'part2')
+        part2)
             check_dead x01
             ;;
-        'remove')
+        remove)
             remove_dead
             ;;
         *)
