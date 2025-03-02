@@ -8,6 +8,7 @@ readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly BLACKLIST='config/blacklist.txt'
 readonly PHISHING_TARGETS='config/phishing_detection.csv'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SEARCH_TERMS='config/search_terms.csv'
@@ -45,15 +46,13 @@ main() {
     fi
 
     # Store whitelist in a variable
-    whitelist='_'
-    if [[ -s "$WHITELIST" ]]; then
-        whitelist="$(<$WHITELIST)"
-    fi
-    readonly whitelist
+    whitelist="$(<$WHITELIST)"
+    readonly whitelist="${whitelist:-_}"
 
     # Store blacklist in a variable
-    blacklist="$($FUNCTION --get-blacklist)"
-    readonly blacklist
+    blacklist="$(mawk '{ gsub(/\./, "\.")
+        print "(^|\.)" $0 "$" }' "$BLACKLIST")"
+    readonly blacklist="${blacklist:-_}"
 
     # Install idn2 here instead of in $FUNCTION to not bias source processing
     # time.
@@ -235,9 +234,12 @@ process_source_results() {
         $0 ~ blacklist' "$source_results")" blacklist "$source_name"
 
     # Remove whitelisted domains excluding blacklisted domains
+    # grep is used here instead of awk to avoid
+    # 'awk: warning: escape sequence...' error with the expresions in the
+    # whitelist.
     whitelisted_count="$(filter \
-        "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
-        $0 ~ whitelist && $0 !~ blacklist' "$source_results")" whitelist)"
+        "$(grep -E "$whitelist" "$source_results" \
+        | mawk -v blacklist="$blacklist" '$0 !~ blacklist')" whitelist)"
 
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     # awk is used here instead of mawk for compatibility with the regex

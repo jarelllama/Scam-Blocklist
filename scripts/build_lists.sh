@@ -5,6 +5,7 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly BLACKLIST='config/blacklist.txt'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly WILDCARDS='config/wildcards.txt'
 readonly ADBLOCK='lists/adblock'
@@ -19,8 +20,9 @@ main() {
     $FUNCTION --download-toplist
 
     # Store blacklist in a variable
-    blacklist="$($FUNCTION --get-blacklist)"
-    readonly blacklist
+    blacklist="$(mawk '{ gsub(/\./, "\.")
+        print "(^|\.)" $0 "$" }' "$BLACKLIST")"
+    readonly blacklist="${blacklist:-_}"
 
     # Add blacklisted domains in the full version that are in the toplist to
     # the light version.
