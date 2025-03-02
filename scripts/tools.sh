@@ -3,8 +3,9 @@
 # tools.sh is a shell wrapper that stores commonly used functions.
 
 readonly DEAD_DOMAINS='data/dead_domains.txt'
-readonly DOMAIN_LOG='config/domain_log.csv'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly BLACKLIST='config/blacklist.txt'
+readonly DOMAIN_LOG='config/domain_log.csv'
 readonly PARKED_TERMS='config/parked_terms.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
