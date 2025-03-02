@@ -3,12 +3,9 @@
 # Check for dead/resurrected domains and remove/add them accordingly.
 
 readonly FUNCTION='bash scripts/tools.sh'
+readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly DEAD_DOMAINS='data/dead_domains.txt'
-readonly ROOT_DOMAINS='data/root_domains.txt'
-readonly SUBDOMAINS='data/subdomains.txt'
-readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly LOG_SIZE=75000
 
 main() {
@@ -20,6 +17,8 @@ main() {
     # Split raw file into 2 parts for each dead check job
     if [[ "$1" == part? ]]; then
         split -d -l "$(( $(wc -l < "$RAW") / 2 ))" "$RAW"
+        # Sometimes an x02 exists
+        [[ -f x02 ]] && cat x02 >> x01
     fi
 
     # The dead check consists of multiple parts to get around the time limit of
@@ -36,8 +35,6 @@ main() {
             check_dead x00
             ;;
         'part2')
-            # Sometimes an x02 exists
-            [[ -f x02 ]] && cat x02 >> x01
             check_dead x01
             ;;
         'remove')
@@ -52,15 +49,13 @@ main() {
 }
 
 # Find dead domains and collate them into the dead domains file to be removed
-# from the various files later. The dead domains file is also used as a filter
-# for newly retrieved domains.
+# later. The dead domains file is also used as a filter for newly retrieved
+# domains.
+# Input:
+#   $1: file to check for dead domains in
 check_dead() {
-    # Include subdomains found in the given file. It is assumed that if the
-    # subdomain is dead, so is the root domain.
-    # Exclude root domains and domains already in the dead domains file but not
-    # yet removed.
-    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") \
-        <(sort "$ROOT_DOMAINS" "$DEAD_DOMAINS") > domains.tmp
+    # Exclude domains already in the dead domains file but not yet removed
+    comm -23 "$1" "$DEAD_DOMAINS" > domains.tmp
 
     find_dead_in domains.tmp
 
@@ -81,17 +76,17 @@ check_alive() {
 
     [[ ! -s alive_domains.tmp ]] && return
 
-    # Update dead domains file to only include dead domains
-    # grep is used here because the dead domains file is unsorted
-    # Always return true to avoid script exiting when no results were found
-    # (dead.tmp empty).
-    grep -xFf dead.tmp "$DEAD_DOMAINS" > temp || true
-    mv temp "$DEAD_DOMAINS"
-
     # Add resurrected domains to raw file
-    # Note that resurrected subdomains are added back too and will be processed
-    # by the validation check outside of this script.
     sort -u alive_domains.tmp "$RAW" -o "$RAW"
+
+    # Update dead domains file to only include dead domains
+    mawk 'NR==FNR {
+        lines[$0]
+        next
+        }
+        $0 in lines
+    ' dead.tmp "$DEAD_DOMAINS" > temp
+    mv temp "$DEAD_DOMAINS"
 
     # Call shell wrapper to log number of resurrected domains in domain log
     $FUNCTION --log-domains "$(wc -l < alive_domains.tmp)" resurrected_count\
@@ -142,8 +137,7 @@ find_dead() {
     dead-domains-linter -i "${1}.tmp" --export "dead_domains_${1}.tmp"
 }
 
-# Remove dead domains from the raw file, raw light file, root domains file and
-# subdomains file.
+# Remove dead domains from the raw file and raw light file.
 remove_dead() {
     local count_before count_after dead_count
 
@@ -151,22 +145,13 @@ remove_dead() {
 
     sort -u "$DEAD_DOMAINS" -o dead.tmp
 
-    # Remove dead domains from subdomains file
-    comm -23 "$SUBDOMAINS" dead.tmp > temp
-    mv temp "$SUBDOMAINS"
+    # Remove dead domains from the raw file
+    comm -23 "$RAW" dead.tmp > temp
+    mv temp "$RAW"
 
-    # Strip subdomains from dead domains
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" dead.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u dead.tmp -o dead.tmp
-
-    # Remove dead domains from the various files
-    local file
-    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        comm -23 "$file" dead.tmp > temp
-        mv temp "$file"
-    done
+    # Remove dead domains from the raw light file
+    comm -23 "$RAW_LIGHT" dead.tmp > temp
+    mv temp "$RAW_LIGHT"
 
     count_after="$(wc -l < "$RAW")"
 

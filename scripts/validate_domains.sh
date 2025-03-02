@@ -6,9 +6,9 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly WHITELIST='config/whitelist.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
+readonly WHITELIST='config/whitelist.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 main() {
@@ -85,7 +85,6 @@ validate() {
         | mawk "!/$blacklist/")" whitelisted_tld
 
     # Find domains in toplist excluding blacklisted domains
-    # Note the toplist does not include subdomains
     filter \
         "$(comm -12 toplist.tmp "$RAW" \
         | mawk "!/$blacklist/")" toplist --preserve

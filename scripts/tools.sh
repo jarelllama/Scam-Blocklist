@@ -2,14 +2,14 @@
 
 # tools.sh is a shell wrapper that stores commonly used functions.
 
-readonly PARKED_TERMS='config/parked_terms.txt'
-readonly WHITELIST='config/whitelist.txt'
+readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly BLACKLIST='config/blacklist.txt'
+readonly DOMAIN_LOG='config/domain_log.csv'
+readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly PARKED_TERMS='config/parked_terms.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
-readonly DEAD_DOMAINS='data/dead_domains.txt'
-readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly DOMAIN_LOG='config/domain_log.csv'
+readonly WHITELIST='config/whitelist.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
 # Function 'convert_unicode' converts Unicode to Punycode.
@@ -24,8 +24,8 @@ convert_unicode() {
     # error, exit 1.
     mawk '/-(\.|$)|^-|^..--/' "$1" > temp
     mawk '!/-(\.|$)|^-|^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
-    sort -u temp -o "$1"
-    rm temp
+    mv temp "$1"
+    sort -u "$1" -o "$1"
 }
 
 # Function 'download_nrd_feed' downloads and collates NRD feeds consisting

@@ -5,19 +5,18 @@
 # domain may host malicious content. This script does not account for that.
 
 readonly FUNCTION='bash scripts/tools.sh'
+readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly PARKED_TERMS='config/parked_terms.txt'
-readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly ROOT_DOMAINS='data/root_domains.txt'
-readonly SUBDOMAINS='data/subdomains.txt'
-readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
 readonly LOG_SIZE=75000
 
 main() {
     # Split raw file into 2 parts for each parked check job
     if [[ "$1" == part? ]]; then
         split -d -l "$(( $(wc -l < "$RAW") / 2 ))" "$RAW"
+        # Sometimes an x02 exists
+        [[ -f x02 ]] && cat x02 >> x01
     fi
 
     # The parked check consists of multiple parts to get around the time limit
@@ -34,8 +33,6 @@ main() {
             check_parked x00
             ;;
         'part2')
-            # Sometimes an x02 exists
-            [[ -f x02 ]] && cat x02 >> x01
             check_parked x01
             ;;
         'remove')
@@ -50,15 +47,13 @@ main() {
 }
 
 # Find parked domains and collate them into the parked domains file to be
-# removed from the various files later. The parked domains file is also used as
-# a filter for newly retrieved domains.
+# removed later. The parked domains file is also used as a filter for newly
+# retrieved domains.
+# Input
+#   $1: file to check for parked domains in
 check_parked() {
-    # Include subdomains found in the given file. It is assumed that if the
-    # subdomain is parked, so is the root domain.
-    # Exclude root domains and domains already in the parked domains file but
-    # not yet removed.
-    comm -23 <(sort <(grep -f "$1" "$SUBDOMAINS") "$1") \
-        <(sort "$ROOT_DOMAINS" "$PARKED_DOMAINS") > domains.tmp
+    # Exclude parked already in the parked domains file but not yet removed
+    comm -23 "$1" "$PARKED_DOMAINS" > domains.tmp
 
     find_parked_in domains.tmp
 
@@ -82,17 +77,17 @@ check_unparked() {
 
     [[ ! -s unparked_domains.tmp ]] && return
 
-    # Update parked domains file to only include parked domains
-    # grep is used here because the parked domains file is unsorted
-    # Always return true to avoid script exiting when no results were found
-    # (parked.tmp empty).
-    grep -xFf parked.tmp "$PARKED_DOMAINS" > temp || true
-    mv temp "$PARKED_DOMAINS"
-
     # Add unparked domains to raw file
-    # Note that unparked subdomains are added back too and will be processed by
-    # the validation check outside of this script.
     sort -u unparked_domains.tmp "$RAW" -o "$RAW"
+
+    # Update parked domains file to only include parked domains
+    mawk 'NR==FNR {
+        lines[$0]
+        next
+        }
+        $0 in lines
+    ' parked.tmp "$PARKED_DOMAINS" > temp
+    mv temp "$PARKED_DOMAINS"
 
     # Call shell wrapper to log number of unparked domains in domain log
     $FUNCTION --log-domains "$(wc -l < unparked_domains.tmp)" unparked_count \
@@ -192,8 +187,7 @@ find_parked() {
     done < "$1"
 }
 
-# Remove parked domains from the raw file, raw light file, root domains file,
-# and subdomains file.
+# Remove parked domains from the raw file and raw light file.
 remove_parked() {
     local count_before count_after parked_count
 
@@ -201,21 +195,13 @@ remove_parked() {
 
     sort -u "$PARKED_DOMAINS" -o parked.tmp
 
-    # Remove parked domains from subdomains file
-    comm -23 "$SUBDOMAINS" parked.tmp > temp
-    mv temp "$SUBDOMAINS"
+    # Remove dead domains from the raw file
+    comm -23 "$RAW" parked.tmp > temp
+    mv temp "$RAW"
 
-    # Strip subdomains from parked domains
-    while read -r subdomain; do
-        sed -i "s/^${subdomain}\.//" parked.tmp
-    done < "$SUBDOMAINS_TO_REMOVE"
-    sort -u parked.tmp -o parked.tmp
-
-    # Remove parked domains from the various files
-    for file in "$RAW" "$RAW_LIGHT" "$ROOT_DOMAINS"; do
-        comm -23 "$file" parked.tmp > temp
-        mv temp "$file"
-    done
+    # Remove dead domains from the raw light file
+    comm -23 "$RAW_LIGHT" parked.tmp > temp
+    mv temp "$RAW_LIGHT"
 
     count_after="$(wc -l < "$RAW")"
 

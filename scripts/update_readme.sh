@@ -163,8 +163,8 @@ EOF
 }
 
 readonly FUNCTION='bash scripts/tools.sh'
-readonly SOURCE_LOG='config/source_log.csv'
 readonly DOMAIN_LOG='config/domain_log.csv'
+readonly SOURCE_LOG='config/source_log.csv'
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 readonly TODAY THIS_MONTH

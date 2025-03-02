@@ -4,17 +4,17 @@
 # that contains the cumulative domains from all sources over time.
 
 readonly FUNCTION='bash scripts/tools.sh'
-readonly RAW='data/raw.txt'
-readonly RAW_LIGHT='data/raw_light.txt'
-readonly SOURCES='config/sources.csv'
-readonly SEARCH_TERMS='config/search_terms.csv'
-readonly PHISHING_TARGETS='config/phishing_detection.csv'
-readonly WHITELIST='config/whitelist.txt'
-readonly BLACKLIST='config/blacklist.txt'
-readonly REVIEW_CONFIG='config/review_config.csv'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly RAW='data/raw.txt'
+readonly RAW_LIGHT='data/raw_light.txt'
+readonly BLACKLIST='config/blacklist.txt'
+readonly PHISHING_TARGETS='config/phishing_detection.csv'
+readonly REVIEW_CONFIG='config/review_config.csv'
+readonly SEARCH_TERMS='config/search_terms.csv'
+readonly SOURCES='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
+readonly WHITELIST='config/whitelist.txt'
 # Note the [[:alnum:]] in the front and end of the main domain body is to
 # prevent matching entries that start or end with a dash or period.
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
@@ -165,9 +165,9 @@ filter() {
     wc -l <<< "$entries"
 }
 
-# Process/filter the results from the source, append the resulting domains to
-# all_retrieved_domains.tmp/all_retrieved_light_domains.tmp, and save entries
-# requiring manual review.
+# Process and filter the results from the source, append the resulting domains
+# to all_retrieved_domains.tmp/all_retrieved_light_domains.tmp, and save
+# entries requiring manual review.
 process_source_results() {
     # Skip to next source by returning if no results from this source is found
     [[ ! -f "$source_results" ]] && return

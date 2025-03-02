@@ -6,21 +6,19 @@
 # compared against the actual output file of the called script to determine if
 # the results match.
 
-readonly RAW='data/raw.txt'
-readonly RAW_LIGHT='data/raw_light.txt'
-readonly SOURCES='config/sources.csv'
-readonly WHITELIST='config/whitelist.txt'
-readonly BLACKLIST='config/blacklist.txt'
-readonly WILDCARDS='config/wildcards.txt'
-readonly REVIEW_CONFIG='config/review_config.csv'
-readonly ROOT_DOMAINS='data/root_domains.txt'
-readonly SUBDOMAINS='data/subdomains.txt'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
+readonly RAW='data/raw.txt'
+readonly RAW_LIGHT='data/raw_light.txt'
+readonly BLACKLIST='config/blacklist.txt'
+readonly DOMAIN_LOG='config/domain_log.csv'
+readonly REVIEW_CONFIG='config/review_config.csv'
+readonly SOURCES='config/sources.csv'
+readonly SOURCE_LOG='config/source_log.csv'
+readonly WHITELIST='config/whitelist.txt'
+readonly WILDCARDS='config/wildcards.txt'
 readonly ADBLOCK='lists/adblock'
 readonly DOMAINS='lists/wildcard_domains'
-readonly DOMAIN_LOG='config/domain_log.csv'
-readonly SOURCE_LOG='config/source_log.csv'
 
 main() {
     # Initialize data directory
@@ -197,7 +195,7 @@ TEST_DEAD_CHECK() {
     # Remove placeholder lines
     local file
     for file in "$RAW" "$RAW_LIGHT" "$DEAD_DOMAINS" "$DOMAIN_LOG"; do
-        mawk '!/^placeholder/' "$file" > temp || true
+        mawk '!/^placeholder/' "$file" > temp
         mv temp "$file"
     done
 
@@ -233,7 +231,7 @@ TEST_PARKED_CHECK() {
     # Remove placeholder lines
     local file
     for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" "$DOMAIN_LOG"; do
-        mawk '!/^placeholder/' "$file" > temp || true
+        mawk '!/^placeholder/' "$file" > temp
         mv temp "$file"
     done
 
@@ -242,17 +240,20 @@ TEST_PARKED_CHECK() {
 
 # Test that the various formats of blocklists are built correctly.
 TEST_BUILD() {
-    # Test full version
-    input google.com "$RAW"
-    input google.com "$BLACKLIST"
-    input test.wildcard-test.com "$RAW"
-    input full-version-only.com "$RAW"
-    # Test light version
-    # Note that google.com should be in the light version as it is in the
-    # toplist and is blacklisted.
-    input test.wildcard-test.com "$RAW_LIGHT"
     # Test removal of redundant entries via wildcard matching
     input wildcard-test.com "$WILDCARDS"
+
+    # Test full version
+    # Test that subdomains are removed
+    input www.google.com "$RAW"
+    input test.wildcard-test.com "$RAW"
+    input full-version-only.com "$RAW"
+
+    # Test light version
+    # Test that blacklisted domains found in the toplist are added to the light
+    # version.
+    input google.com "$BLACKLIST"
+    input test.wildcard-test.com "$RAW_LIGHT"
 
     # Adblock format full version
     output '[Adblock Plus]' "${ADBLOCK}/scams.txt"
@@ -339,7 +340,7 @@ test_punycode_conversion() {
     output pu--nycode-conversion-test.com "$RAW_LIGHT"
 }
 
-# Test removal of known dead domains including subdomains
+# Test removal of known dead domains
 test_known_dead_removal() {
     input www.known-dead-test.com "$DEAD_DOMAINS"
     input www.known-dead-test.com
@@ -347,7 +348,7 @@ test_known_dead_removal() {
     output '' "$RAW_LIGHT"
 }
 
-# Test removal of known parked domains including subdomains
+# Test removal of known parked domains
 test_known_parked_removal() {
     input www.known-parked-test.com "$PARKED_DOMAINS"
     input www.known-parked-test.com
@@ -367,8 +368,6 @@ test_invalid_removal() {
     # Test that punycode is allowed in the TLD
     input invalid-test.xn--903fds
 
-    output '' "$SUBDOMAINS"
-    output '' "$ROOT_DOMAINS"
     output invalid-test.xn--903fds "$RAW"
     output invalid-test.xn--903fds "$RAW_LIGHT"
     output invalid,100.100.100.1 "$DOMAIN_LOG"
@@ -458,10 +457,9 @@ test_light_build() {
 
 # Test addition of resurrected domains
 test_alive_check() {
-    input www.google.com "$DEAD_DOMAINS"
+    input google.com "$DEAD_DOMAINS"
     input xyzdead-domain-test.com "$DEAD_DOMAINS"
-    # Subdomains should be kept to be processed by the validation check
-    output www.google.com "$RAW"
+    output google.com "$RAW"
     # Resurrected domains should not be added to the light version
     output '' "$RAW_LIGHT"
     output xyzdead-domain-test.com "$DEAD_DOMAINS"
@@ -472,16 +470,9 @@ test_alive_check() {
 test_dead_check() {
     input apple.com
     input abcdead-domain-test.com
-    # Dead domains should be removed from the subdomains/root domains files
-    input www.abcdead-domain-test.com "$SUBDOMAINS"
-    input abcdead-domain-test.com "$ROOT_DOMAINS"
-
     output apple.com "$RAW"
     output apple.com "$RAW_LIGHT"
-    output '' "$SUBDOMAINS"
-    output '' "$ROOT_DOMAINS"
-    # Subdomains should be kept to be processed by the validation check
-    output www.abcdead-domain-test.com "$DEAD_DOMAINS"
+    output abcdead-domain-test.com "$DEAD_DOMAINS"
     # Dead count is 101 because of the placeholder lines
     output dead_count,101,raw "$DOMAIN_LOG"
 }
@@ -490,10 +481,9 @@ test_dead_check() {
 
 # Test addition of unparked domains
 test_unparked_check() {
-    input www.github.com "$PARKED_DOMAINS"
+    input github.com "$PARKED_DOMAINS"
     input parked-errored-test.com "$PARKED_DOMAINS"
-    # Subdomains should be kept to be processed by the validation check
-    output www.github.com "$RAW"
+    output github.com "$RAW"
     # Unparked domains should not be added to the light version
     output '' "$RAW_LIGHT"
     # Domains that errored during curl should be assumed to be still parked
@@ -506,16 +496,9 @@ test_parked_check() {
     input apple.com
     # Subfolder used here for easier testing despite being an invalid entry
     input porkbun.com/parked
-    # Parked domains should be removed from the subdomains/root domains files
-    input www.porkbun.com/parked "$SUBDOMAINS"
-    input porkbun.com/parked "$ROOT_DOMAINS"
-
     output apple.com "$RAW"
     output apple.com "$RAW_LIGHT"
-    output '' "$SUBDOMAINS"
-    output '' "$ROOT_DOMAINS"
-    # Subdomains should be kept to be processed by the validation check
-    output www.porkbun.com/parked "$PARKED_DOMAINS"
+    output porkbun.com/parked "$PARKED_DOMAINS"
     output parked_count,1,raw "$DOMAIN_LOG"
 }
 

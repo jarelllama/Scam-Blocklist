@@ -5,10 +5,11 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly BLACKLIST='config/blacklist.txt'
+readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly WILDCARDS='config/wildcards.txt'
 readonly ADBLOCK='lists/adblock'
 readonly DOMAINS='lists/wildcard_domains'
-readonly WILDCARDS='config/wildcards.txt'
-readonly BLACKLIST='config/blacklist.txt'
 
 main() {
     # Install AdGuard's Hostlist Compiler
@@ -18,8 +19,7 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Add domains found in the full version that are in the toplist and are
-    # blacklisted into the light version.
+    # Add blacklisted domains in the full version that are in the toplist.
     comm -12 "$RAW" <(comm -12 toplist.tmp "$BLACKLIST") \
         | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
@@ -28,8 +28,7 @@ main() {
     build 'LIGHT VERSION' raw_light.tmp scams_light.txt
 }
 
-# Remove redundant entries from the raw files and compile them into the various
-# blocklist formats.
+# Process and compile the raw file into the various blocklist formats.
 # Input:
 #   $1: blocklist version name
 #   $2: raw file
@@ -39,11 +38,22 @@ build() {
     local raw_file="$2"
     local output_file="$3"
 
+    cp "$raw_file" source.tmp
+
     # Append wildcards to the raw file to optimize the number of entries.
     # The wildcards are not saved to the raw file as some of them do not
     # resolve and would be removed by the dead check.
     # Note that this adds the wildcards to the light version too.
-    sort -u "$WILDCARDS" "$raw_file" -o source.tmp
+    sort -u "$WILDCARDS" source.tmp -o source.tmp
+
+    # Remove common subdomains to better make use of wildcard matching.
+    mawk -v subdomains="$(mawk '{ print "^" $0 "\\." }' \
+        "$SUBDOMAINS_TO_REMOVE" | paste -sd '|')" '{
+        if ($0 ~ subdomains) {
+            sub(subdomains, "")
+        }
+        print
+    }' source.tmp | sort -u -o source.tmp
 
     # Compile blocklist. See the list of transformations here:
     # https://github.com/AdguardTeam/HostlistCompiler
