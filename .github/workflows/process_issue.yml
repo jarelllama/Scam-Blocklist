@@ -80,7 +80,7 @@ jobs:
               | grep -Po '^(https?://)?\K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
               | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
               | sort -u - config/whitelist.txt -o config/whitelist.txt) \
-              | xargs -I {} sh -c 'printf {}; sed -i '/{}/d' config/blacklist.txt'
+              | xargs -I {} sh -c 'printf {}; sed -i '/{}$/d' config/blacklist.txt'
             )
           \`\`\`"
         env:
