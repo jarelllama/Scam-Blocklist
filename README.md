@@ -34,7 +34,7 @@ The automated retrieval is done daily at 16:00 UTC.
 
 ``` text
 Total domains: 462977
-Light version: 1846
+Light version: 1845
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
