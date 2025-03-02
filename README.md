@@ -57,6 +57,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |      17 |      0 % |      17 % | PuppyScams.org
     0 |    1866 |     26 % |       1 % | Regex Matching
     0 |      78 |      1 % |      38 % | Scam Directory
+    0 |       0 |      0 % |       3 % | SafelyWeb
     0 |       0 |      0 % |      31 % | ScamAdviser
     0 |      27 |      0 % |       7 % | ScamMinder
     0 |      34 |      0 % |      14 % | ScamTracker
