@@ -17,8 +17,6 @@ main() {
     # Split raw file into 2 parts for each dead check job
     if [[ "$1" == part? ]]; then
         split -d -l "$(( $(wc -l < "$RAW") / 2 ))" "$RAW"
-        # Sometimes an x02 exists
-        [[ -f x02 ]] && cat x02 >> x01
     fi
 
     # The dead check consists of multiple parts to get around the time limit of
@@ -36,6 +34,8 @@ main() {
             ;;
         part2)
             check_dead x01
+            # Sometimes an x02 exists
+            [[ -f x02 ]] && cat x02 >> x01
             ;;
         remove)
             remove_dead
