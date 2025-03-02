@@ -133,8 +133,8 @@ format_files() {
     done
 }
 
-# Function 'get_blacklist' is an echo wrapper that returns the formatted
-# blacklist. If no entries are found in the blacklist, a placeholder is
+# Function 'get_blacklist' is an echo wrapper that returns the blacklist as a
+# regex expression. If no entries are found in the blacklist, a placeholder is
 # returned to avoid errors when doing regex matching with a blank value.
 get_blacklist() {
     if [[ ! -s "$BLACKLIST" ]]; then
@@ -145,11 +145,11 @@ get_blacklist() {
     mawk '{
         gsub(/\./, "\\\\\.")
         print "(^|\\\.)" $0 "$"
-    }' "$BLACKLIST"
+    }' "$BLACKLIST" | paste -sd '|'
 }
 
-# Function 'get_whitelist' is an echo wrapper that returns the formatted
-# whitelist. If no entries are found in the whitelist, a placeholder is
+# Function 'get_whitelist' is an echo wrapper that returns the whitelist as a
+# regex expression. If no entries are found in the whitelist, a placeholder is
 # returned to avoid errors when doing regex matching with a blank value.
 get_whitelist() {
     if [[ ! -s "$WHITELIST" ]]; then
@@ -160,7 +160,7 @@ get_whitelist() {
     mawk '{
         gsub(/\./, "\.")
         print
-    }' "$WHITELIST"
+    }' "$WHITELIST" | paste -sd '|'
 }
 
 # Function 'log_domains' logs domain processing events into the domain log.

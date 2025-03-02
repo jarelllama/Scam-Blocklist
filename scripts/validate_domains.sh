@@ -61,7 +61,7 @@ validate() {
     # Remove non-domain entries including IP addresses excluding Punycode
     filter "$(awk "!/^${DOMAIN_REGEX}$/" "$RAW")" invalid
 
-    # Store whitelist and blacklist in a variable
+    # Store whitelist and blacklist as a regex expression
     whitelist="$($FUNCTION --get-whitelist)"
     blacklist="$($FUNCTION --get-blacklist)"
     readonly whitelist blacklist

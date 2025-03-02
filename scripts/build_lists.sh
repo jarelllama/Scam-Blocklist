@@ -18,6 +18,7 @@ main() {
 
     $FUNCTION --download-toplist
 
+    # Store blacklist as a regex expression
     blacklist="$($FUNCTION --get-blacklist)"
     readonly blacklist
 
