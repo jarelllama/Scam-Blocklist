@@ -1,32 +1,32 @@
 source function,source name,exclude from light,enable
-source_165antifraud,165 Anti-fraud,,y
-source_aa419,Artists Against 419,,y
-source_behindmlm,BehindMLM,,y
-source_bugsfighter,BugsFighter,,y
+source_165antifraud,165 Anti-fraud,,
+source_aa419,Artists Against 419,,
+source_behindmlm,BehindMLM,,
+source_bugsfighter,BugsFighter,,
 source_chainabuse,Chainabuse,,y
-source_coi.gov.cz,Česká Obchodní Inspekce,,y
-source_crypto_scam_tracker,DFPI Crypto Scam Tracker,,y
-source_cybersquatting,Cybersquatting,,y
-source_dga_detector,DGA Detector,y,y
-source_emerging_threats,Emerging Threats,,y
-source_fakewebshoplisthun,FakeWebshopListHUN,y,y
-source_greatis,Wildcat Cyber Patrol,,y
-source_gridinsoft,Gridinsoft,y,y
-source_jeroengui,Jeroengui,y,y
-source_jeroengui_nrd,Jeroengui (NRDs),,y
-source_malwareurl,MalwareURL,,y
-source_manual,Manual,,y
-source_pcrisk,PCrisk,,y
-source_phishstats,PhishStats,,y
-source_puppyscams,PuppyScams.org,,y
-source_regex,Regex,y,y
-source_safelyweb,SafelyWeb,,y
-source_scamadviser,ScamAdviser,,y
-source_scamdirectory,Scam Directory,,y
-source_scamminder,ScamMinder,y,y
-source_scamtracker,ScamTracker,,y
-source_unit42,Unit42,,y
-source_viriback_tracker,ViriBack C2 Tracker,,y
-source_vzhh,Verbraucherzentrale Hamburg,,y
-source_wipersoft,WiperSoft,,y
-source_google_search,Google Search,,y
+source_coi.gov.cz,Česká Obchodní Inspekce,,
+source_crypto_scam_tracker,DFPI Crypto Scam Tracker,,
+source_cybersquatting,Cybersquatting,,
+source_dga_detector,DGA Detector,y,
+source_emerging_threats,Emerging Threats,,
+source_fakewebshoplisthun,FakeWebshopListHUN,y,
+source_greatis,Wildcat Cyber Patrol,,
+source_gridinsoft,Gridinsoft,y,
+source_jeroengui,Jeroengui,y,
+source_jeroengui_nrd,Jeroengui (NRDs),,
+source_malwareurl,MalwareURL,,
+source_manual,Manual,,
+source_pcrisk,PCrisk,,
+source_phishstats,PhishStats,,
+source_puppyscams,PuppyScams.org,,
+source_regex,Regex,y,
+source_safelyweb,SafelyWeb,,
+source_scamadviser,ScamAdviser,,
+source_scamdirectory,Scam Directory,,
+source_scamminder,ScamMinder,y,
+source_scamtracker,ScamTracker,,
+source_unit42,Unit42,,
+source_viriback_tracker,ViriBack C2 Tracker,,
+source_vzhh,Verbraucherzentrale Hamburg,,
+source_wipersoft,WiperSoft,,
+source_google_search,Google Search,,

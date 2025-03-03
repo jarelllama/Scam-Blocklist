@@ -229,12 +229,6 @@ process_source_results() {
         "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
         $0 ~ whitelist && $0 !~ blacklist' "$source_results")" whitelist)"
 
-    # DEBUG
-    echo
-    awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
-        $0 ~ whitelist && $0 !~ blacklist' "$source_results"
-    echo
-
     # Remove domains with whitelisted TLDs excluding blacklisted domains
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
