@@ -17,7 +17,7 @@ jobs:
   test-functions:
     uses: ./.github/workflows/test_functions.yml
 
-  tidy-repo:
+  tidy-and-update:
     needs: test-functions
     if: ${{ ! cancelled() }}
     runs-on: ubuntu-22.04
@@ -26,6 +26,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+
+      - name: Update subdomains file
+        run: |
+          {
+            # Get subdomains less than or equal to 3 characters and occur more
+            # than 15 times
+            mawk -F '.' '{ print $1 }' data/raw.txt | sort | uniq -c | sort -nr \
+                | mawk '$1 > 15 && length($2) <= 3 { print $2 }'
+
+            # Get manually added subdomains
+            mawk 'length($0) > 3 { print }' config/subdomains.txt
+          } | sort -u -o config/subdomains.txt
 
       - name: Prune wildcards file
         run: |
@@ -47,11 +59,11 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: tidy repo"
+          git diff-index --quiet HEAD || git commit -m "CI: tidy and update files"
           git push -q
 
   build-nsfw:
-    needs: [test-functions, tidy-repo]
+    needs: [test-functions, tidy-and-update]
     if: ${{ ! cancelled() }}
     uses: ./.github/workflows/build_nsfw.yml
 

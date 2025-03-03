@@ -5,7 +5,7 @@
 readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
-readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly SUBDOMAINS='config/subdomains.txt'
 readonly WILDCARDS='config/wildcards.txt'
 readonly ADBLOCK='lists/adblock'
 readonly DOMAINS='lists/wildcard_domains'
@@ -56,7 +56,7 @@ build() {
 
     # Remove common subdomains to better make use of wildcard matching.
     mawk -v subdomains="$(mawk '{ print "^" $0 "\." }' \
-        "$SUBDOMAINS_TO_REMOVE" | paste -sd '|')" '{
+        "$SUBDOMAINS" | paste -sd '|')" '{
         if ($0 ~ subdomains) {
             sub(subdomains, "")
         }

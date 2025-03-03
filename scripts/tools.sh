@@ -8,7 +8,7 @@ readonly BLACKLIST='config/blacklist.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
 readonly PARKED_TERMS='config/parked_terms.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
-readonly SUBDOMAINS_TO_REMOVE='config/subdomains.txt'
+readonly SUBDOMAINS='config/subdomains.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
@@ -77,7 +77,7 @@ download_toplist() {
 
     # Expand toplist to include both root domains and subdomains
     mawk -v subdomains="$(mawk '{ print "^" $0 "\." }' \
-        "$SUBDOMAINS_TO_REMOVE" | paste -sd '|')" '{
+        "$SUBDOMAINS" | paste -sd '|')" '{
         if ($0 ~ subdomains) {
             print  # Print subdomains
             sub(subdomains, "")
