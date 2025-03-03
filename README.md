@@ -42,6 +42,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    20 |      22 |      0 % |      13 % | Artists Against 419
     5 |       6 |      0 % |      11 % | BehindMLM
     3 |       9 |      0 % |       8 % | BugsFighter
+    0 |       0 |      0 % |       0 % | Chainabuse
   109 |     159 |      0 % |       1 % | Cybersquatting
     1 |       1 |      0 % |      83 % | DFPI Crypto Scam Tracker
  2683 |    3759 |     15 % |       1 % | DGA Detector
