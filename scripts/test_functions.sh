@@ -117,7 +117,7 @@ SHELLCHECK() {
 
     printf "\n[info] Files checked (%s):\n%s\n" \
         "$(wc -l <<< "$scripts")" "$scripts"
-    printf "%s\n\n" "$WHITELIST"
+    printf "%s\n\n" "./${WHITELIST}"
 
     [[ "$error" == true ]] && exit 1
 
