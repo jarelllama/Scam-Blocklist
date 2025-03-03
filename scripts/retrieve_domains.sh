@@ -65,7 +65,6 @@ main() {
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
     local source
-
     for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
         # Error if source_results.tmp from previous source is still present
         if [[ -f source_results.tmp ]]; then
@@ -103,16 +102,8 @@ retrieve_source_results() {
         # Set source results path based of source name if not explicitly set
         : "${source_results:=data/pending/${source_name// /_}.tmp}"
 
-        # source_results.tmp should be created when the source retrieves new
-        # results
-        if [[ -f source_results.tmp ]]; then
-            if [[ "$USE_EXISTING_RESULTS" == true ]]; then
-                # An error would mean a problem with the source function
-                error 'source_results.tmp present while USE_EXISTING_RESULTS is true.'
-            fi
-            # Move source results to source results path
-            mv source_results.tmp "$source_results"
-        fi
+        # Move source results to source results path
+        mv source_results.tmp "$source_results"
 
         # The Google Search source processes each search term as one source and
         # handles the source processing logic within its source function.
@@ -136,9 +127,12 @@ filter() {
     local tag="$2"
 
     # Return with 0 entries if no entries passed
-    [[ -z "$entries" ]] && { printf "0"; return; }
+    if [[ -z "$entries" ]]; then
+        printf 0
+        return
+    fi
 
-    # Remove entries from results file
+    # Remove entries from the results file
     comm -23 "$source_results" <(printf "%s" "$entries") > temp
     mv temp "$source_results"
 
@@ -172,7 +166,7 @@ filter() {
 # to all_retrieved_domains.tmp/all_retrieved_light_domains.tmp, and save
 # entries requiring manual review.
 process_source_results() {
-    # Skip to next source by returning if no results from this source is found
+    # Skip to the next source if no results are found
     [[ ! -f "$source_results" ]] && return
 
     local raw_count dead_count parked_count whitelisted_count
@@ -186,8 +180,7 @@ process_source_results() {
         gsub(/https?:\/\//, "")
         gsub(/[\[\]]/, "")
         print tolower($0)
-    }' "$source_results" | sort -u -o temp
-    mv temp "$source_results"
+    }' "$source_results" | sort -u -o "$source_results"
 
     # Convert Unicode to Punycode
     $FUNCTION --convert-unicode "$source_results"
@@ -390,25 +383,24 @@ cleanup() {
 # Note the output results can be in URL form without subfolders.
 
 source_google_search() {
-    # Last checked: 21/01/25
+    # Last checked: 03/03/25
     source_url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
     local search_term encoded_search_term
 
+    # Check for existing results
     if [[ "$USE_EXISTING_RESULTS" == true ]]; then
-        # Use existing retrieved results
         # Loop through the results from each search term
         for source_results in data/pending/google_search_*.tmp; do
             [[ ! -f "$source_results" ]] && return
-
-            # Set execution time for each individual search term
-            execution_time="$(date +%s)"
 
             # Remove header from file name
             search_term="${source_results#data/pending/google_search_}"
             # Remove file extension from file name to get search term
             search_term="${search_term%.tmp}"
+            # Set execution time for each individual search term
+            execution_time="$(date +%s)"
 
             process_source_results
         done
@@ -432,7 +424,7 @@ source_google_search() {
 }
 
 search_google() {
-    # Last checked: 21/01/25
+    # Last checked: 03/03/25
     search_term="${1//\"/}"  # Remove quotes before encoding
     # Replace non-alphanumeric characters with spaces
     encoded_search_term="${search_term//[^[:alnum:]]/%20}"

@@ -134,8 +134,10 @@ format_files() {
 }
 
 # Function 'get_blacklist' is an echo wrapper that returns the blacklist as a
-# regex expression. If no entries are found in the blacklist, a placeholder is
-# returned to avoid errors when doing regex matching with a blank value.
+# regex expression.
+# Output:
+#   Blacklisted domains as a regex expression
+#   '-' if no blacklisted domains found to avoid errors with regex matching
 get_blacklist() {
     if [[ ! -s "$BLACKLIST" ]]; then
         printf '_'
@@ -149,8 +151,10 @@ get_blacklist() {
 }
 
 # Function 'get_whitelist' is an echo wrapper that returns the whitelist as a
-# regex expression. If no entries are found in the whitelist, a placeholder is
-# returned to avoid errors when doing regex matching with a blank value.
+# regex expression.
+# Output:
+#   Whitelisted domains as a regex expression
+#   '-' if no whitelisted domains found to avoid errors with regex matching
 get_whitelist() {
     if [[ ! -s "$WHITELIST" ]]; then
         printf '_'

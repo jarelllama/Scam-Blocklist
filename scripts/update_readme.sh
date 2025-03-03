@@ -225,7 +225,7 @@ sum_excluded() {
         ')"
 
     if (( raw_count == 0 )); then
-        printf "0"
+        printf 0
     else
         printf "%s" "$(( excluded_count * 100 / raw_count ))"
     fi
