@@ -452,12 +452,12 @@ test_toplist_check() {
     input www.microsoft.com
     input apple.com
     input apple.com "$BLACKLIST"
-    input output apple.com "$BLACKLIST"
 
+    output apple.com "$BLACKLIST"
     output microsoft.com,toplist "$REVIEW_CONFIG"
     output toplist,www.microsoft.com "$DOMAIN_LOG"
-    # The retrieve script logs the blacklisted domains while the validate
-    # script removes them from the raw file
+    # The retrieve script logs the blacklisted domains and removes them from
+    # the raw file
     if [[ "$script_to_test" == 'retrieve' ]]; then
         output blacklist,apple.com "$DOMAIN_LOG"
         return
