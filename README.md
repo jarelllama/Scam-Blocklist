@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 472366
-Light version: 6928
+Total domains: 472392
+Light version: 6954
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -46,29 +46,29 @@ Today | Monthly | %Monthly | %Filtered | Source
   109 |     159 |      0 % |       1 % | Cybersquatting
     1 |       1 |      0 % |      83 % | DFPI Crypto Scam Tracker
  2683 |    3759 |     15 % |       1 % | DGA Detector
-   80 |      98 |      0 % |      31 % | Emerging Threats
+   81 |      99 |      0 % |      31 % | Emerging Threats
   207 |     278 |      1 % |      24 % | FakeWebshopListHUN
   133 |     199 |      0 % |       2 % | Google Search
-  538 |     731 |      3 % |      19 % | Gridinsoft
+  550 |     743 |      3 % |      19 % | Gridinsoft
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
- 4947 |    7735 |     31 % |       8 % | Jeroengui
+ 4950 |    7738 |     31 % |       8 % | Jeroengui
    26 |      40 |      0 % |       7 % | MalwareURL
     1 |       8 |      0 % |       7 % | PCrisk
  3663 |    4030 |     16 % |      28 % | PhishStats
     6 |      23 |      0 % |      17 % | PuppyScams.org
  3652 |    5518 |     22 % |       1 % | Regex Matching
   151 |     229 |      0 % |      38 % | Scam Directory
-  512 |     512 |      2 % |       3 % | SafelyWeb
+  519 |     519 |      2 % |       3 % | SafelyWeb
     0 |       0 |      0 % |      31 % | ScamAdviser
-   48 |      75 |      0 % |       7 % | ScamMinder
-   52 |      86 |      0 % |      15 % | ScamTracker
+   50 |      77 |      0 % |       7 % | ScamMinder
+   54 |      88 |      0 % |      15 % | ScamTracker
     5 |       5 |      0 % |       6 % | Unit42
     1 |       7 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |       0 |      0 % |      29 % | ViriBack C2 Tracker
    26 |      55 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       0 |      0 % |       8 % | WiperSoft
    61 |     467 |      1 % |      49 % | Česká Obchodní Inspekce
-17051 |   24189 |    100 % |       0 % | All sources
+17078 |   24216 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
