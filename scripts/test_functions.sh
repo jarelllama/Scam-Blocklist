@@ -450,11 +450,18 @@ test_whitelisted_tld_removal() {
 # Test checking of domains against toplist
 test_toplist_check() {
     input www.microsoft.com
-    output www.microsoft.com,toplist "$REVIEW_CONFIG"
+    input apple.com
+    input apple.com "$BLACKLIST"
+    input output apple.com "$BLACKLIST"
+
+    output microsoft.com,toplist "$REVIEW_CONFIG"
     output toplist,www.microsoft.com "$DOMAIN_LOG"
-    # The validate script does not remove domains found in the toplist from the
-    # raw file
-    [[ "$script_to_test" == 'retrieve' ]] && return
+    # The retrieve script logs the blacklisted domains while the validate
+    # script removes them from the raw file
+    if [[ "$script_to_test" == 'retrieve' ]]; then
+        output blacklist,apple.com "$DOMAIN_LOG"
+        return
+    fi
     output www.microsoft.com "$RAW"
     output www.microsoft.com "$RAW_LIGHT"
 }
