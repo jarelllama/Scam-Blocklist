@@ -99,11 +99,14 @@ retrieve_source_results() {
             $source || true
         fi
 
-        # Set source results path based of source name if not explicitly set
+        # Set source results path based of source name if not explicitly set by
+        # the source
         : "${source_results:=data/pending/${source_name// /_}.tmp}"
 
-        # Move source results to source results path
-        mv source_results.tmp "$source_results"
+        # If results were newly retrieved, move them to the source results path
+        if [[ "$USE_EXISTING_RESULTS" == false ]]; then
+            mv source_results.tmp "$source_results"
+        fi
 
         # The Google Search source processes each search term as one source and
         # handles the source processing logic within its source function.
