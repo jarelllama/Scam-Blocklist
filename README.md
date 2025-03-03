@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 472392
-Light version: 6954
+Total domains: 472573
+Light version: 7136
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -42,7 +42,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    20 |      22 |      0 % |      13 % | Artists Against 419
     5 |       6 |      0 % |      11 % | BehindMLM
     3 |       9 |      0 % |       8 % | BugsFighter
-    0 |       0 |      0 % |       0 % | Chainabuse
+  182 |     182 |      0 % |       0 % | Chainabuse
   109 |     159 |      0 % |       1 % | Cybersquatting
     1 |       1 |      0 % |      83 % | DFPI Crypto Scam Tracker
  2683 |    3759 |     15 % |       1 % | DGA Detector
@@ -68,7 +68,7 @@ Today | Monthly | %Monthly | %Filtered | Source
    26 |      55 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       0 |      0 % |       8 % | WiperSoft
    61 |     467 |      1 % |      49 % | Česká Obchodní Inspekce
-17078 |   24216 |    100 % |       0 % | All sources
+17260 |   24398 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
