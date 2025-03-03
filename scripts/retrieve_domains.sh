@@ -64,7 +64,8 @@ main() {
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
-    local source
+    local source source_name execution_time
+
     for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
         # Error if source_results.tmp from previous source is still present
         if [[ -f source_results.tmp ]]; then
@@ -72,13 +73,11 @@ retrieve_source_results() {
         fi
 
         # Initialize source variables
-        local source_name
         local source_url=''
         local source_results=''
         local exclude_from_light=false
         local rate_limited=false
         local query_count=''
-        local execution_time
         execution_time="$(date +%s)"
 
         source_name="$(mawk -v source="$source" -F ',' '
@@ -482,7 +481,7 @@ search_google() {
 }
 
 source_cybersquatting() {
-    # Last checked: 08/02/25
+    # Last checked: 03/03/25
     local tlds results
 
     # Install dnstwist
@@ -550,7 +549,7 @@ source_cybersquatting() {
 }
 
 source_dga_detector() {
-    # Last checked: 14/02/25
+    # Last checked: 03/03/25
     source_url='https://github.com/exp0se/dga_detector/archive/refs/heads/master.zip'
 
     # Install DGA Detector and dependencies
@@ -563,6 +562,12 @@ source_dga_detector() {
     mawk 'length($0) >= 12 && !/xn--/' nrd.tmp > domains.tmp
 
     cd dga_detector-master
+
+    # Ensure the detection threshold can be changed
+    if ! grep -F "threshold = model_data['thresh']"; then
+        printf "\n\e[1;31mProblem changing detection threshold.\e[0m\n"
+        return
+    fi
 
     # Set detection threshold. DGA domains fall below the threshold set here.
     # A lower threshold lowers the domain yield and reduces false positives.
@@ -583,7 +588,7 @@ source_dga_detector() {
 }
 
 source_regex() {
-    # Last checked: 08/02/25
+    # Last checked: 03/03/25
     local pattern
 
     # Loop through phishing targets
@@ -726,11 +731,11 @@ source_gridinsoft() {
 }
 
 source_jeroengui() {
-    # Last checked: 22/02/25
-    local url_shorterners_whitelist
+    # Last checked: 03/03/25
+    local url_shorterners
 
     source_url='https://file.jeroengui.be'
-    url_shorterners_whitelist='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
+    url_shorterners='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
 
     # Get domains from various weekly lists and remove link shorteners
     curl -sSLZ --retry 2 --retry-all-errors \
@@ -738,7 +743,7 @@ source_jeroengui() {
         "${source_url}/malware/last_week.txt" \
         "${source_url}/scam/last_week.txt" \
         | grep -Po "^https?://\K${DOMAIN_REGEX}" \
-        | grep -vF "$(curl -sSL --retry 2 --retry-all-errors "$url_shorterners_whitelist" \
+        | grep -vF "$(curl -sSL --retry 2 --retry-all-errors "$url_shorterners" \
         | grep -Po "\|\K${DOMAIN_REGEX}")" > source_results.tmp
 
     # Get matching NRDs for the light version. Unicode is only processed by the
