@@ -658,6 +658,14 @@ source_bugsfighter() {
         | grep -iPo "remove \K${DOMAIN_REGEX}" > source_results.tmp
 }
 
+source_chainabuse() {
+    # Last checked: 03/03/25
+    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/chainabuse.txt'
+
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+        | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
+}
+
 source_coi.gov.cz() {
     # Last checked: 22/02/25
     source_url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
