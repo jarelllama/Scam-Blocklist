@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 03.03.094916.2025
+! Version: 03.03.101259.2025
 ! Expires: 12 hours
-! Last modified: Mon Mar  3 09:49:16 UTC 2025
+! Last modified: Mon Mar  3 10:12:59 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 7136
+! Number of entries: 7133
 !
 ||0-olx.1850943.xyz^
 ||028426.com^
@@ -251,6 +251,7 @@
 ||alheof.com^
 ||alheriroyalhotel.com^
 ||alkjfhk.top^
+||alkoora.live^
 ||allegr0i0kalnie.5847733.xyz^
 ||allegro-official-pl.shop^
 ||allegro.pl-ofertaid7752917466125.sbs^
@@ -424,7 +425,6 @@
 ||awi.za.com^
 ||axiora.xin^
 ||axisbanksplash.in^
-||ayf666263o.vip^
 ||ayjuss-store.com^
 ||aylry.info^
 ||azunifa.info^
@@ -1304,7 +1304,6 @@
 ||cypto.shop^
 ||cz1.us.kg^
 ||czadmax.cn^
-||d.alkoora.live^
 ||d2dbet888.io^
 ||d5465f9d11.com^
 ||d85p.com^
@@ -1428,33 +1427,6 @@
 ||dopapeak.shop^
 ||dorobotvip.com^
 ||dorothytoremcraig.shop^
-||dot.nd.gov-ticketale.xin^
-||dot.nd.gov-ticketcou.xin^
-||dot.nd.gov-ticketcuw.xin^
-||dot.nd.gov-ticketehg.xin^
-||dot.nd.gov-ticketeof.xin^
-||dot.nd.gov-ticketexg.xin^
-||dot.nd.gov-ticketfve.xin^
-||dot.nd.gov-ticketgtn.xin^
-||dot.nd.gov-tickethae.xin^
-||dot.nd.gov-ticketjwz.xin^
-||dot.nd.gov-ticketkij.xin^
-||dot.nd.gov-ticketlmk.xin^
-||dot.nd.gov-ticketmfi.xin^
-||dot.nd.gov-ticketmje.xin^
-||dot.nd.gov-ticketmuy.xin^
-||dot.nd.gov-ticketnbk.xin^
-||dot.nd.gov-ticketokf.xin^
-||dot.nd.gov-ticketpsa.xin^
-||dot.nd.gov-ticketqcj.xin^
-||dot.nd.gov-ticketrhe.xin^
-||dot.nd.gov-ticketsop.xin^
-||dot.nd.gov-ticketsts.xin^
-||dot.nd.gov-ticketyor.xin^
-||dot.nd.gov-ticketytx.xin^
-||dot.nd.gov-ticketzmo.xin^
-||dot.nd.gov-ticketznq.xin^
-||dot.nd.gov-ticketzuy.xin^
 ||downfall.shop^
 ||download3dsgames.com^
 ||downloaddining.com^
@@ -1785,7 +1757,6 @@
 ||en--app--coinbasepro---cdn-x--auth.webflow.io^
 ||en-exodus.com^
 ||en-us-trezo.github.io^
-||en.loader.to^
 ||eng.york-engineeringinc.com^
 ||engwe-bikes-eu.com^
 ||enhanceconnection.co.in^
@@ -1830,7 +1801,6 @@
 ||etoilemode.shop^
 ||etsycourse.lat^
 ||eu-onlineservices.com^
-||eu.manduka.com^
 ||eufxebus.biz^
 ||eunitedcryptofx.com^
 ||eurekaelectrodomesticos.es^
@@ -3468,6 +3438,7 @@
 ||lloyds.customer-banking.com^
 ||lnt-id225761a.icu^
 ||lnyapechain.com^
+||loader.to^
 ||loadpremiumapp.monster^
 ||locuscoin.com^
 ||loganmarek.shop^
@@ -3560,6 +3531,7 @@
 ||malltree.shop^
 ||manage-support-page.com^
 ||mancntop66.com^
+||manduka.com^
 ||maniacspice.com^
 ||mannta.xyz^
 ||manolyameric.shop^
@@ -3833,6 +3805,33 @@
 ||naukbjo.com^
 ||naweplay.com^
 ||ncssupp.live^
+||nd.gov-ticketale.xin^
+||nd.gov-ticketcou.xin^
+||nd.gov-ticketcuw.xin^
+||nd.gov-ticketehg.xin^
+||nd.gov-ticketeof.xin^
+||nd.gov-ticketexg.xin^
+||nd.gov-ticketfve.xin^
+||nd.gov-ticketgtn.xin^
+||nd.gov-tickethae.xin^
+||nd.gov-ticketjwz.xin^
+||nd.gov-ticketkij.xin^
+||nd.gov-ticketlmk.xin^
+||nd.gov-ticketmfi.xin^
+||nd.gov-ticketmje.xin^
+||nd.gov-ticketmuy.xin^
+||nd.gov-ticketnbk.xin^
+||nd.gov-ticketokf.xin^
+||nd.gov-ticketpsa.xin^
+||nd.gov-ticketqcj.xin^
+||nd.gov-ticketrhe.xin^
+||nd.gov-ticketsop.xin^
+||nd.gov-ticketsts.xin^
+||nd.gov-ticketyor.xin^
+||nd.gov-ticketytx.xin^
+||nd.gov-ticketzmo.xin^
+||nd.gov-ticketznq.xin^
+||nd.gov-ticketzuy.xin^
 ||ndpxzxyqpwcnz.click^
 ||nebumine.com^
 ||nencysmith.site^
@@ -4055,7 +4054,6 @@
 ||owltovalidator.pages.dev^
 ||oxredo.com^
 ||oyxsd.info^
-||ozaki-jp.shop^
 ||p2pexxsapp.com^
 ||pacermonitor.com^
 ||packedbrick.com^
@@ -7011,7 +7009,6 @@
 ||xdmk.cn^
 ||xeocashouteu.top^
 ||xfsrg.xyz^
-||xgo791266c.vip^
 ||xiaomioficial.pe^
 ||xiaomix.xyz^
 ||xibe.pics^
