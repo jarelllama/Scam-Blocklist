@@ -55,9 +55,7 @@ readonly -a WHITELIST=(
     1337xxx.to
 )
 
-# Retrieve domains from the Tranco toplist, add them to the
-# raw file, format the file, and remove dead domains.
-build() {
+main() {
     # Format raw file to Domains format
     mawk '/\|/ { gsub(/[|^]/, ""); print }' "$BLOCKLIST" > raw.tmp
 
@@ -86,10 +84,8 @@ build() {
 
     # Remove comments
     sed -i '/!/d' compiled.tmp
-}
 
-# Create the blocklist in Adblock Plus syntax.
-deploy() {
+    # Append header
     cat << EOF > "$BLOCKLIST"
 [Adblock Plus]
 ! Title: Jarelllama's NSFW Blocklist
@@ -103,6 +99,7 @@ deploy() {
 ! Number of entries: $(wc -l < compiled.tmp)
 !
 EOF
+
     cat compiled.tmp >> "$BLOCKLIST"
 }
 
@@ -124,6 +121,4 @@ fi
 
 $FUNCTION --download-toplist
 
-build
-
-deploy
+main
