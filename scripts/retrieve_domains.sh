@@ -43,11 +43,6 @@ main() {
         mv temp nrd.tmp
     fi
 
-    # Store whitelist and blacklist as a regex expression
-    whitelist="$($FUNCTION --get-whitelist)"
-    blacklist="$($FUNCTION --get-blacklist)"
-    readonly whitelist blacklist
-
     # Install idn2 here instead of in $FUNCTION to not bias source processing
     # time.
     command -v idn2 > /dev/null || sudo apt-get install idn2 > /dev/null
@@ -55,6 +50,11 @@ main() {
     $FUNCTION --download-toplist
 
     $FUNCTION --update-review-config
+
+    # Store whitelist and blacklist as a regex expression
+    whitelist="$($FUNCTION --get-whitelist)"
+    blacklist="$($FUNCTION --get-blacklist)"
+    readonly whitelist blacklist
 
     retrieve_source_results
 
