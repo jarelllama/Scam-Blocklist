@@ -64,52 +64,56 @@ main() {
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
-    local source source_name execution_time
+    local source source_name source_results execution_time
 
     for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
-        # Error if source_results.tmp from previous source is still present
-        if [[ -f source_results.tmp ]]; then
-            error 'source_results.tmp not properly cleaned up.'
-        fi
-
         # Initialize source variables
         local source_url=''
-        local source_results=''
         local exclude_from_light=false
         local rate_limited=false
         local query_count=''
-        execution_time="$(date +%s)"
 
         source_name="$(mawk -v source="$source" -F ',' '
             $1 == source { print $2 }' "$SOURCES")"
+
+        source_results="data/pending/${source_name// /_}.tmp"
 
         if [[ -n "$(mawk -v source="$source" -F ',' '
             $1 == source { print $3 }' "$SOURCES")" ]]; then
             exclude_from_light=true
         fi
 
-        # Run source to retrieve results if not using existing results except
-        # for Google Search source as that handles existing results in its
-        # function.
-        if [[ "$USE_EXISTING_RESULTS" == false \
-            || "$source_name" == 'Google Search' ]]; then
-            # Always return true to avoid script exiting when no results were
-            # retrieved.
-            $source || true
+        execution_time="$(date +%s)"
+
+        if [[ -f "$source_results" || "$USE_EXISTING_RESULTS" == false ]]; then
+            printf "\n\e[1mProcessing source: %s\e[0m\n" "$source_name"
         fi
 
-        # Set source results path based of source name if not explicitly set by
-        # the source
-        : "${source_results:=data/pending/${source_name// /_}.tmp}"
-
-        # If results were newly retrieved, move them to the source results path
-        if [[ "$USE_EXISTING_RESULTS" == false ]]; then
-            mv source_results.tmp "$source_results"
+        # Process existing results if present but ensure the Google Search
+        # source always runs as that source already handles existing results.
+        if [[ "$USE_EXISTING_RESULTS" == true \
+            && "$source_name" != 'Google Search' ]]; then
+            process_source_results
+            continue
         fi
 
-        # The Google Search source processes each search term as one source and
-        # handles the source processing logic within its source function.
+        # Run source. Always return true to avoid script exiting when an error
+        # occurs in the source function.
+        $source || true
+
+        # The Google search source handles its own processing
         [[ "$source_name" == 'Google Search' ]] && continue
+
+        if [[ -f source_results.tmp ]]; then
+            # Move the source results to the source results path
+            mv source_results.tmp "$source_results"
+        else
+            # If source_results.tmp is not found, it means an error in the
+            # source function.
+            printf "\e[1;31msource_results.tmp not found.\e[0m\n"
+            # Create source results file to ensure proper logging
+            touch "$source_results"
+        fi
 
         process_source_results
     done
@@ -168,11 +172,10 @@ filter() {
 # to all_retrieved_domains.tmp/all_retrieved_light_domains.tmp, and save
 # entries requiring manual review.
 process_source_results() {
-    # Skip to the next source if no results are found
     [[ ! -f "$source_results" ]] && return
 
     local raw_count dead_count parked_count whitelisted_count
-    local whitelisted_tld_count in_toplist_count
+    local whitelisted_tld_count in_toplist_count final_count
 
     # Convert URLs to domains, remove square brackets, and convert to
     # lowercase. This is done here once instead of multiple times in the source
@@ -206,7 +209,12 @@ process_source_results() {
 
     # Error in case a source wrongly retrieves too many results.
     if (( $(wc -l < "$source_results") > 10000 )); then
-        error "Source is unusually large: $(wc -l < "$source_results") entries"
+        printf "\e[1;31mSource is unusually large: %s entries\e[0m\n" \
+            "$(wc -l < "$source_results")"
+        # Save entries for troubleshooting
+        cp "$source_results" "${source_results}.tmp"
+        # Empty source results to ensure proper logging
+        : > "$source_results"
     fi
 
     # Remove non-domain entries including IP addresses excluding Punycode
@@ -252,6 +260,8 @@ process_source_results() {
     fi
 
     $FUNCTION --log-domains "$source_results" saved "$source_name"
+
+    final_count="$(wc -l < "$source_results")"
 
     log_source
 
@@ -314,25 +324,18 @@ save_domains() {
 
 # Print and log statistics for each source.
 log_source() {
-    local final_count total_whitelisted_count excluded_count
+    local total_whitelisted_count excluded_count
     local status='saved'
 
     # Check for errors to log
     if [[ "$rate_limited" == true ]]; then
         status='ERROR: rate_limited'
-    elif (( raw_count == 0 )); then
+    elif (( final_count == 0 )); then
         status='ERROR: empty'
     fi
 
-    final_count="$(wc -l < "$source_results")"
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
-
-    if [[ -n "$search_term" ]]; then
-        search_term="\"${search_term:0:100}...\""
-    fi
-
-    printf "\n\e[1mSource: %s\e[0m\n" "${search_term:-$source_name}"
 
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
 ${search_term},${raw_count},${final_count},${total_whitelisted_count},\
@@ -353,7 +356,7 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     fi
 
     printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
-    echo "----------------------------------------------------------------------"
+    printf -- "----------------------------------------------------------------------\n"
 }
 
 # Print error message and exit.
@@ -385,7 +388,7 @@ cleanup() {
 # Note the output results can be in URL form without subfolders.
 
 source_google_search() {
-    # Last checked: 03/03/25
+    # Last checked: 04/03/25
     source_url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
@@ -404,6 +407,7 @@ source_google_search() {
             # Set execution time for each individual search term
             execution_time="$(date +%s)"
 
+            printf "Search term: %s\n" "${search_term:0:100}..."
             process_source_results
         done
         return
@@ -426,17 +430,19 @@ source_google_search() {
 }
 
 search_google() {
-    # Last checked: 03/03/25
+    # Last checked: 04/03/25
     search_term="${1//\"/}"  # Remove quotes before encoding
     # Replace non-alphanumeric characters with spaces
     encoded_search_term="${search_term//[^[:alnum:]]/%20}"
     search_term="${search_term//\//}"  # Remove slashes for file creation
-    source_results="google_search_${search_term:0:100}.tmp"
+    source_results="data/pending/google_search_${search_term:0:100}.tmp"
     query_count=0
     # Set execution time for each individual search term
     execution_time="$(date +%s)"
 
     touch "$source_results"  # Create results file to ensure proper logging
+
+    printf "Search term: %s\n" "${search_term:0:100}..."
 
     # Loop through each page of results
     local start params page_results page_domains
@@ -549,8 +555,8 @@ source_cybersquatting() {
 }
 
 source_dga_detector() {
-    # Last checked: 03/03/25
-    source_url='https://github.com/exp0se/dga_detector/archive/refs/heads/master.zip'
+    # Last checked: 04/03/25
+    source_url='https://github.com/jarelllama/dga_detector/archive/refs/heads/master.zip'
 
     # Install DGA Detector and dependencies
     # curl -L required
@@ -558,20 +564,13 @@ source_dga_detector() {
     unzip -q dga_detector.zip
     pip install -q tldextract
 
-    # Keep only non punycode NRDs with 12 or more characters
+    # Keep only non-punycode NRDs with 12 or more characters
     mawk 'length($0) >= 12 && !/xn--/' nrd.tmp > domains.tmp
 
     cd dga_detector-master
 
-    # Ensure the detection threshold can be changed
-    if ! grep -F "threshold = model_data['thresh']"; then
-        printf "\n\e[1;31mProblem changing detection threshold.\e[0m\n"
-        return
-    fi
-
     # Set detection threshold. DGA domains fall below the threshold set here.
     # A lower threshold lowers the domain yield and reduces false positives.
-    # Note that adding domains to big.txt does not seem to affect detection.
     sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.0009/" \
         dga_detector.py
 
