@@ -75,7 +75,7 @@ retrieve_source_results() {
         local query_count=''
 
         source_name="$(mawk -v source="$source" -F ',' '
-            $1 == source { print $1 }' "$SOURCES")"
+            $2 == source { print $1 }' "$SOURCES")"
 
         source_results="data/pending/${source_name// /_}.tmp"
 
