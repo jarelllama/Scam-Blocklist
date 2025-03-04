@@ -83,16 +83,20 @@ retrieve_source_results() {
             exclude_from_light=true
         fi
 
+        # The Google search source handles its own processing
+        if [[ "$source_name" == 'Google Search' ]]; then
+            $source
+            continue
+        fi
+
         if [[ -f "$source_results" || "$USE_EXISTING_RESULTS" == false ]]; then
             printf "\n\e[1mProcessing source: %s\e[0m\n" "$source_name"
         fi
 
         execution_time="$(date +%s)"
 
-        # Process existing results if present but ensure the Google Search
-        # source always runs as that source already handles existing results.
-        if [[ "$USE_EXISTING_RESULTS" == true \
-            && "$source_name" != 'Google Search' ]]; then
+        # Process existing results if present
+        if [[ "$USE_EXISTING_RESULTS" == true ]]; then
             process_source_results
             continue
         fi
@@ -100,9 +104,6 @@ retrieve_source_results() {
         # Run source. Always return true to avoid script exiting when an error
         # occurs in the source function.
         $source || true
-
-        # The Google search source handles its own processing
-        [[ "$source_name" == 'Google Search' ]] && continue
 
         if [[ -f source_results.tmp ]]; then
             # Move the source results to the source results path
@@ -434,6 +435,7 @@ search_google() {
 
     touch "$source_results"  # Create results file to ensure proper logging
 
+    printf "\n\e[1mProcessing source: Google Search\e[0m\n"
     printf "Search term: %s\n" "${search_term:0:100}..."
 
     # Loop through each page of results
@@ -758,7 +760,8 @@ source_malwareurl() {
 }
 
 source_manual() {
-    return
+    # Ensure source_results.tmp is present
+    cp "$source_results" source_results.tmp
 }
 
 source_pcrisk() {
@@ -797,7 +800,7 @@ source_safelyweb() {
 }
 
 source_scamadviser() {
-    # Last checked: 17/02/25
+    # Last checked: 04/03/25
     source_url='https://www.scamadviser.com/articles'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?p=[1-15]" \
@@ -852,12 +855,11 @@ source_unit42() {
 }
 
 source_viriback_tracker() {
-    # Last checked: 17/02/25
-    source_url='https://tracker.viriback.com/dump.php'
+    # Last checked: 04/03/25
+    source_url='https://tracker.viriback.com/last30.php'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | mawk -v year="$(date +"%Y")" -F ',' '$4 ~ year { print $2 }' \
-        | grep -Po "^https?://\K${DOMAIN_REGEX}" > source_results.tmp
+        | grep -Po ",https?://\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
 source_vzhh() {
