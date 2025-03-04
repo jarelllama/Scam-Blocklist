@@ -209,7 +209,7 @@ process_source_results() {
 
     # Error in case a source wrongly retrieves too many results.
     if (( $(wc -l < "$source_results") > 10000 )); then
-        printf "\e[1;31mSource is unusually large: %s entries\e[0m\n" \
+        printf "\e[1;31mSource is unusually large: %s entries. Not saving.\e[0m\n" \
             "$(wc -l < "$source_results")"
         # Save entries for troubleshooting
         cp "$source_results" "${source_results}.tmp"

@@ -318,11 +318,10 @@ test_review_file() {
 
 # Test error handling from unusually large sources
 test_large_source_error() {
-    entries="$(for i in {1..10001}; do
-        printf "%s.com\n" "$i"
-    done)"
+    local entries
+    entries="$(for i in {1..10001}; do printf "%s.com\n" "$i"; done)"
     input "$entries" data/pending/Gridinsoft.tmp
-    output ',Gridinsoft,,0,0,0,0,0,0,,ERROR: empty' "$SOURCE_LOG"
+    output ',Gridinsoft,,10001,0,0,0,0,0,,ERROR: empty' "$SOURCE_LOG"
     output "$entries" data/pending/Gridinsoft.tmp
 }
 
