@@ -1,33 +1,33 @@
-source name,source function,exclude from light,enable
-165 Anti-fraud,source_165antifraud,,y
-Artists Against 419,source_aa419,,y
-BehindMLM,source_behindmlm,,y
-BugsFighter,source_bugsfighter,,y
-Chainabuse,source_chainabuse,,y
-DFPI Crypto Scam Tracker,source_crypto_scam_tracker,,y
-DGA Detector,source_dga_detector,y,y
-dnstwist,source_dnstwist,,y
-Emerging Threats,source_emerging_threats,,y
-FakeWebshopListHUN,source_fakewebshoplisthun,y,y
-Gridinsoft,source_gridinsoft,y,y
-Jeroengui,source_jeroengui,y,y
-Jeroengui (NRDs),source_jeroengui_nrd,,y
-MalwareURL,source_malwareurl,,y
-Manual,source_manual,,y
-PCrisk,source_pcrisk,,y
-PhishStats,source_phishstats,,y
-PuppyScams.org,source_puppyscams,,y
-Regex,source_regex,y,y
-SafelyWeb,source_safelyweb,,y
-Scam Directory,source_scamdirectory,,y
-ScamAdviser,source_scamadviser,,y
-ScamMinder,source_scamminder,y,y
-ScamTracker,source_scamtracker,,y
-Unit42,source_unit42,,y
-URLCrazy,source_urlcrazy,,y
-Verbraucherzentrale Hamburg,source_vzhh,,y
-ViriBack C2 Tracker,source_viriback_tracker,,y
-Wildcat Cyber Patrol,source_greatis,,y
-WiperSoft,source_wipersoft,,y
-Česká Obchodní Inspekce,source_coi.gov.cz,,y
-Google Search,source_google_search,,y
+source function,source name,exclude from light,enable
+source_165antifraud,165 Anti-fraud,,y
+source_aa419,Artists Against 419,,y
+source_behindmlm,BehindMLM,,y
+source_bugsfighter,BugsFighter,,y
+source_chainabuse,Chainabuse,,y
+source_coi.gov.cz,Česká Obchodní Inspekce,,y
+source_crypto_scam_tracker,DFPI Crypto Scam Tracker,,y
+source_dnstwist,dnstwist,,y
+source_dga_detector,DGA Detector,y,y
+source_emerging_threats,Emerging Threats,,y
+source_fakewebshoplisthun,FakeWebshopListHUN,y,y
+source_greatis,Wildcat Cyber Patrol,,y
+source_gridinsoft,Gridinsoft,y,y
+source_jeroengui,Jeroengui,y,y
+source_jeroengui_nrd,Jeroengui (NRDs),,y
+source_malwareurl,MalwareURL,,y
+source_manual,Manual,,y
+source_pcrisk,PCrisk,,y
+source_phishstats,PhishStats,,y
+source_puppyscams,PuppyScams.org,,y
+source_regex,Regex,y,y
+source_safelyweb,SafelyWeb,,y
+source_scamadviser,ScamAdviser,,y
+source_scamdirectory,Scam Directory,,y
+source_scamminder,ScamMinder,y,y
+source_scamtracker,ScamTracker,,y
+source_unit42,Unit42,,y
+source_viriback_tracker,ViriBack C2 Tracker,,y
+source_vzhh,Verbraucherzentrale Hamburg,,y
+source_wipersoft,WiperSoft,,y
+source_google_search,Google Search,,y
+source_urlcrazy,URLCrazy,,y

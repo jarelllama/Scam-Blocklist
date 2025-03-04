@@ -64,9 +64,9 @@ main() {
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
-    local source_name source_function source_results execution_time
+    local source source_name source_results execution_time
 
-    for source_name in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
+    for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
         # Initialize source variables
         local source_url=''
         local exclude_from_light=false
@@ -74,19 +74,19 @@ retrieve_source_results() {
         local too_large=false
         local query_count=''
 
-        source_function="$(mawk -v source="$source_name" -F ',' '
+        source_name="$(mawk -v source="$source" -F ',' '
             $1 == source { print $2 }' "$SOURCES")"
 
         source_results="data/pending/${source_name// /_}.tmp"
 
-        if [[ -n "$(mawk -v source="$source_name" -F ',' '
+        if [[ -n "$(mawk -v source="$source" -F ',' '
             $1 == source { print $3 }' "$SOURCES")" ]]; then
             exclude_from_light=true
         fi
 
         # The Google search source handles its own processing
         if [[ "$source_name" == 'Google Search' ]]; then
-            $source_function
+            $source
             continue
         fi
 
@@ -104,7 +104,7 @@ retrieve_source_results() {
 
         # Run source. Always return true to avoid script exiting when an error
         # occurs in the source function.
-        $source_function || true
+        $source || true
 
         if [[ -f source_results.tmp ]]; then
             # Move the source results to the source results path
