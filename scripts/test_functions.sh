@@ -142,6 +142,7 @@ TEST_RETRIEVE_VALIDATE() {
     test_toplist_check
 
     if [[ "$script_to_test" == 'retrieve' ]]; then
+        test_large_source_error
         test_manual_addition_and_logging
         test_url_conversion
         test_known_dead_removal
@@ -315,6 +316,16 @@ test_review_file() {
     output '^review-file-whitelist-test\.com$' "$WHITELIST"
 }
 
+# Test error handling from unusually large sources
+test_large_source_error() {
+    entries="$(for i in {1..10001}; do
+        printf "%s.com\n" "$i"
+    done)"
+    input "$entries" data/pending/Gridinsoft.tmp
+    output ',Gridinsoft,,0,0,0,0,0,0,,ERROR: empty' "$SOURCE_LOG"
+    output "$entries" data/pending/Gridinsoft.tmp
+}
+
 # Test manual addition of domains from repo issue, proper logging into domain
 # log, source log, review config file, and additions to the manual review file
 test_manual_addition_and_logging() {
@@ -330,8 +341,7 @@ test_manual_addition_and_logging() {
     output m.invalid-logging-test data/pending/Manual.tmp
 }
 
-# Test conversion of URLs to domains
-# Test removal of square brackets
+# Test conversion of URLs to domains and removal of square brackets
 test_url_conversion() {
     input https://conversion-test[.]com[.]us
     input http://conversion-test-2.com

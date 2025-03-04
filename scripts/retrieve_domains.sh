@@ -83,11 +83,11 @@ retrieve_source_results() {
             exclude_from_light=true
         fi
 
-        execution_time="$(date +%s)"
-
         if [[ -f "$source_results" || "$USE_EXISTING_RESULTS" == false ]]; then
             printf "\n\e[1mProcessing source: %s\e[0m\n" "$source_name"
         fi
+
+        execution_time="$(date +%s)"
 
         # Process existing results if present but ensure the Google Search
         # source always runs as that source already handles existing results.
@@ -175,7 +175,7 @@ process_source_results() {
     [[ ! -f "$source_results" ]] && return
 
     local raw_count dead_count parked_count whitelisted_count
-    local whitelisted_tld_count in_toplist_count final_count
+    local whitelisted_tld_count in_toplist_count filtered_count
 
     # Convert URLs to domains, remove square brackets, and convert to
     # lowercase. This is done here once instead of multiple times in the source
@@ -251,6 +251,9 @@ process_source_results() {
         NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
         ' "$source_results" toplist.tmp)" toplist --preserve)"
 
+    # Count number of filtered domains
+    filtered_count="$(wc -l < "$source_results")"
+
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
 
@@ -260,8 +263,6 @@ process_source_results() {
     fi
 
     $FUNCTION --log-domains "$source_results" saved "$source_name"
-
-    final_count="$(wc -l < "$source_results")"
 
     log_source
 
@@ -330,7 +331,7 @@ log_source() {
     # Check for errors to log
     if [[ "$rate_limited" == true ]]; then
         status='ERROR: rate_limited'
-    elif (( final_count == 0 )); then
+    elif (( filtered_count == 0 )); then
         status='ERROR: empty'
     fi
 
@@ -338,7 +339,7 @@ log_source() {
     excluded_count="$(( dead_count + parked_count ))"
 
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
-${search_term},${raw_count},${final_count},${total_whitelisted_count},\
+${search_term},${raw_count},${filtered_count},${total_whitelisted_count},\
 ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     >> "$SOURCE_LOG"
 
@@ -351,7 +352,7 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
             "Warning: '$source_name' retrieved no results. Potential error occurred."
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
-            "$raw_count" "$final_count" "$total_whitelisted_count" \
+            "$raw_count" "$filtered_count" "$total_whitelisted_count" \
             "$excluded_count" "$in_toplist_count"
     fi
 
@@ -376,16 +377,6 @@ cleanup() {
 
 # The 'source_<source>' functions retrieve results from the respective sources
 # and outputs them to source_results.tmp.
-# Input:
-#   $source_name:          name of the source to use in the console and logs
-#   $exclude_from_light:    if true, the results are not included in the light
-#                          version (default is false)
-#   $USE_EXISTING_RESULTS: if true, skip the retrieval process and use the
-#                          existing results files
-# Output:
-#   source_results.tmp (if USE_EXISTING_RESULTS is false)
-#
-# Note the output results can be in URL form without subfolders.
 
 source_google_search() {
     # Last checked: 04/03/25
@@ -407,6 +398,7 @@ source_google_search() {
             # Set execution time for each individual search term
             execution_time="$(date +%s)"
 
+            printf "\n\e[1mProcessing source: Google Search\e[0m\n"
             printf "Search term: %s\n" "${search_term:0:100}..."
             process_source_results
         done
@@ -518,8 +510,8 @@ source_cybersquatting() {
         # Append possible TLDs
         while read -r tld; do
             mawk -v tld="$tld" '{ sub(/\.com$/, "."tld); print }' \
-            <<< "$results" >> results.tmp
-        done <<< "$tlds"
+            <<< "$results"
+        done <<< "$tlds" > results.tmp
 
         # Run URLCrazy (bash does not work)
         # Note that URLCrazy appends possible TLDs
