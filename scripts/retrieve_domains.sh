@@ -91,7 +91,7 @@ retrieve_source_results() {
         fi
 
         if [[ -f "$source_results" || "$USE_EXISTING_RESULTS" == false ]]; then
-            printf "\n\e[1mProcessing source: %s\e[0m\n" "$source_name"
+            printf "\n\e[1mSource: %s\e[0m\n" "$source_name"
         fi
 
         execution_time="$(date +%s)"
@@ -342,7 +342,7 @@ log_source() {
     excluded_count="$(( dead_count + parked_count ))"
 
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
-${search_term:0:100}...,${raw_count},${filtered_count},${total_whitelisted_count},\
+${search_term:0:100},${raw_count},${filtered_count},${total_whitelisted_count},\
 ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     >> "$SOURCE_LOG"
 
@@ -355,11 +355,11 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
             "Warning: '$source_name' retrieved no results. Potential error occurred."
 
     elif [[ "$status" == 'ERROR: too_large' ]]; then
-        printf "\e[1;31mSource is unusually large: %s entries. Not saving.\e[0m\n" \
+        printf "\e[1;31mSource is unusually large (%s entries). Not saving.\e[0m\n" \
             "$(wc -l < "${source_results}.tmp")"
 
         $FUNCTION --send-telegram \
-            "Warning: '$source_name' is unusually large: $(wc -l < "${source_results}.tmp") entries. Potential error occured."
+            "Warning: '$source_name' is unusually large ($(wc -l < "${source_results}.tmp") entries). Potential error occured."
 
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
@@ -367,7 +367,7 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
             "$excluded_count" "$in_toplist_count"
     fi
 
-    printf "Processing time: %s second(s)\n" "$(( $(date +%s) - execution_time ))"
+    printf "Processing time: %s seconds\n" "$(( $(date +%s) - execution_time ))"
     printf -- "----------------------------------------------------------------------\n"
 }
 
@@ -409,8 +409,8 @@ source_google_search() {
             # Set execution time for each individual search term
             execution_time="$(date +%s)"
 
-            printf "\n\e[1mProcessing source: Google Search\e[0m\n"
-            printf "Search term: %s\n" "${search_term:0:100}..."
+            printf "\n\e[1mSource: Google Search\e[0m\n"
+            printf "Search term: %s\n" "${search_term:0:100}"
             process_source_results
         done
         return
@@ -445,8 +445,8 @@ search_google() {
 
     touch "$source_results"  # Create results file to ensure proper logging
 
-    printf "\n\e[1mProcessing source: Google Search\e[0m\n"
-    printf "Search term: %s\n" "${search_term:0:100}..."
+    printf "\n\e[1mSource: Google Search\e[0m\n"
+    printf "Search term: %s\n" "${search_term:0:100}"
 
     # Loop through each page of results
     local start params page_results page_domains
