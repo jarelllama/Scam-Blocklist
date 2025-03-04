@@ -66,7 +66,7 @@ main() {
 retrieve_source_results() {
     local source source_name source_results execution_time
 
-    for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
+    for source in $(mawk -F ',' '$4 == "y" { print $2 }' "$SOURCES"); do
         # Initialize source variables
         local source_url=''
         local exclude_from_light=false
@@ -75,7 +75,7 @@ retrieve_source_results() {
         local query_count=''
 
         source_name="$(mawk -v source="$source" -F ',' '
-            $1 == source { print $2 }' "$SOURCES")"
+            $1 == source { print $1 }' "$SOURCES")"
 
         source_results="data/pending/${source_name// /_}.tmp"
 
@@ -490,74 +490,6 @@ search_google() {
     process_source_results
 }
 
-source_cybersquatting() {
-    # Last checked: 03/03/25
-    local tlds results
-
-    # Install dnstwist
-    command -v dnstwist > /dev/null || pip install -q dnstwist
-
-    # Install URLCrazy and dependencies
-    # curl -L required
-    curl -sSL --retry 2 --retry-all-errors \
-        'https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip' \
-        -o urlcrazy.zip
-    unzip -q urlcrazy.zip
-    command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
-    # sudo is needed for gem
-    sudo gem install --silent json colorize async async-dns async-http
-
-    # Get TLDs from the NRD feed for dnstwist.
-    # This is not needed for URLCrazy as that already checks for
-    # alternate TLDs.
-    tlds="$(mawk -F '.' '!seen[$NF]++ { print $NF }' nrd.tmp)"
-
-    # Loop through phishing targets
-    mawk -F ',' '$4 == "y" { print $1 }' "$PHISHING_TARGETS" \
-        | while read -r target; do
-
-        # Run dnstwist
-        results="$(dnstwist "${target}.com" -f list)"
-
-        # Append possible TLDs
-        while read -r tld; do
-            mawk -v tld="$tld" '{ sub(/\.com$/, "."tld); print }' \
-            <<< "$results"
-        done <<< "$tlds" > results.tmp
-
-        # Run URLCrazy (bash does not work)
-        # Note that URLCrazy appends possible TLDs
-        ./urlcrazy-master/urlcrazy -r "${target}.com" -f CSV | mawk -F ',' '
-            NR > 2 { gsub(/"/, "", $2); print $2 }' >> results.tmp
-
-        sort -u results.tmp -o results.tmp
-
-        # Get matching NRDs
-        comm -12 results.tmp nrd.tmp > temp
-        mv temp results.tmp
-
-        # Collate results
-        cat results.tmp >> source_results.tmp
-
-        # Update counts for the target
-        mawk -v target="$target" -v results_count="$(wc -l < results.tmp)" \
-            -F ',' '
-            BEGIN { OFS = "," }
-            $1 == target {
-                $2 += results_count
-                $3 += 1
-            }
-            { print }
-        ' "$PHISHING_TARGETS" > temp
-        mv temp "$PHISHING_TARGETS"
-
-        # Reset results file for the next target domain
-        rm results.tmp
-    done
-
-    rm -r urlcrazy*
-}
-
 source_dga_detector() {
     # Last checked: 04/03/25
     source_url='https://github.com/jarelllama/dga_detector/archive/refs/heads/master.zip'
@@ -588,6 +520,53 @@ source_dga_detector() {
     cd ..
 
     rm -r dga_detector* domains.tmp
+}
+
+source_dnstwist() {
+    # Last checked: 04/03/25
+    local tlds
+
+    command -v dnstwist > /dev/null || pip install -q dnstwist
+
+    # Get TLDs from the NRD feed
+    tlds="$(mawk -F '.' '!seen[$NF]++ { print $NF }' nrd.tmp)"
+
+    # Loop through phishing targets
+    mawk -F ',' '$4 == "y" { print $1 }' "$PHISHING_TARGETS" \
+        | while read -r target; do
+
+        # Run dnstwist and append TLDs
+        # Note that redirecting the output to a file is faster than piping.
+        mawk -v tlds="$tlds" '{
+            sub(/\.com$/, "")
+            n = split(tlds, tldArray, " ")
+            for (i = 1; i <= n; i++) {
+                print $0"."tldArray[i]
+            }
+        }' <<< "$(dnstwist "${target}.com" -f list)" > results.tmp
+
+        # Get matching NRDs
+        comm -12 <(sort -u results.tmp) nrd.tmp > temp
+        mv temp results.tmp
+
+        # Collate results
+        cat results.tmp >> source_results.tmp
+
+        # Update counts for the target
+        mawk -v target="$target" \
+            -v results_count="$(wc -l < results.tmp)" -F ',' '
+            BEGIN { OFS = "," }
+            $1 == target {
+                $2 += results_count
+                $3 += 1
+            }
+            { print }
+        ' "$PHISHING_TARGETS" > temp
+        mv temp "$PHISHING_TARGETS"
+
+        # Reset results file for the next target domain
+        rm results.tmp
+    done
 }
 
 source_regex() {
@@ -622,6 +601,53 @@ source_regex() {
         ' "$PHISHING_TARGETS" > temp
         mv temp "$PHISHING_TARGETS"
     done
+}
+
+source_urlcrazy() {
+    # Last checked: 04/03/25
+    source_url='https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip'
+
+    # Install URLCrazy and dependencies
+    # curl -L required
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o urlcrazy.zip
+    unzip -q urlcrazy.zip
+    command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
+    # sudo is needed for gem
+    sudo gem install --silent json colorize async async-dns async-http
+
+    # Loop through phishing targets
+    mawk -F ',' '$4 == "y" { print $1 }' "$PHISHING_TARGETS" \
+        | while read -r target; do
+
+        # Run URLCrazy (bash does not work)
+        # Note that URLCrazy appends possible TLDs
+        ./urlcrazy-master/urlcrazy -r "${target}.com" -f CSV | mawk -F ',' '
+        NR > 2 { gsub(/"/, "", $2); print $2 }' > results.tmp
+
+        # Get matching NRDs
+        comm -12 <(sort -u results.tmp) nrd.tmp > temp
+        mv temp results.tmp
+
+        # Collate results
+        cat results.tmp >> source_results.tmp
+
+        # Update counts for the target
+        mawk -v target="$target" -v results_count="$(wc -l < results.tmp)" \
+            -F ',' '
+            BEGIN { OFS = "," }
+            $1 == target {
+                $2 += results_count
+                $3 += 1
+            }
+            { print }
+        ' "$PHISHING_TARGETS" > temp
+        mv temp "$PHISHING_TARGETS"
+
+        # Reset results file for the next target domain
+        rm results.tmp
+    done
+
+    rm -r urlcrazy*
 }
 
 source_165antifraud() {
