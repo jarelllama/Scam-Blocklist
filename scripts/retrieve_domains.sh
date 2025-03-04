@@ -71,6 +71,7 @@ retrieve_source_results() {
         local source_url=''
         local exclude_from_light=false
         local rate_limited=false
+        local too_large=false
         local query_count=''
 
         source_name="$(mawk -v source="$source" -F ',' '
@@ -210,12 +211,11 @@ process_source_results() {
 
     # Error in case a source wrongly retrieves too many results.
     if (( $(wc -l < "$source_results") > 10000 )); then
-        printf "\e[1;31mSource is unusually large: %s entries. Not saving.\e[0m\n" \
-            "$(wc -l < "$source_results")"
         # Save entries for troubleshooting
         cp "$source_results" "${source_results}.tmp"
         # Empty source results to ensure proper logging
         : > "$source_results"
+        too_large=true
     fi
 
     # Remove non-domain entries including IP addresses excluding Punycode
@@ -332,7 +332,9 @@ log_source() {
     # Check for errors to log
     if [[ "$rate_limited" == true ]]; then
         status='ERROR: rate_limited'
-    elif (( filtered_count == 0 )); then
+    elif [[ "$too_large" == true ]]; then
+        status='ERROR: too_large'
+    elif (( raw_count == 0 )); then
         status='ERROR: empty'
     fi
 
@@ -340,7 +342,7 @@ log_source() {
     excluded_count="$(( dead_count + parked_count ))"
 
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
-${search_term},${raw_count},${filtered_count},${total_whitelisted_count},\
+${search_term:0:100}...,${raw_count},${filtered_count},${total_whitelisted_count},\
 ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     >> "$SOURCE_LOG"
 
@@ -351,6 +353,14 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
 
         $FUNCTION --send-telegram \
             "Warning: '$source_name' retrieved no results. Potential error occurred."
+
+    elif [[ "$status" == 'ERROR: too_large' ]]; then
+        printf "\e[1;31mSource is unusually large: %s entries. Not saving.\e[0m\n" \
+            "$(wc -l < "${source_results}.tmp")"
+
+        $FUNCTION --send-telegram \
+            "Warning: '$source_name' is unusually large: $(wc -l < "${source_results}.tmp") entries. Potential error occured."
+
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
             "$raw_count" "$filtered_count" "$total_whitelisted_count" \
