@@ -52,7 +52,6 @@ Today | Monthly | %Monthly | %Filtered | Source
     - |   11215 |     32 % |       8 % | Jeroengui
     - |       0 |      0 % |       0 % | Jeroengui (NRDs)
     - |      62 |      0 % |       7 % | MalwareURL
-    - |       0 |      0 % |       0 % | Manual
     - |      11 |      0 % |       7 % | PCrisk
     - |    6341 |     18 % |      28 % | PhishStats
     - |      34 |      0 % |      17 % | PuppyScams.org
