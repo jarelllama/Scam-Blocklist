@@ -32,7 +32,7 @@ jobs:
             # Get subdomains less than or equal to 3 characters and occur more
             # than or equal to 10 times
             mawk -F '.' '{ print $1 }' data/raw.txt | sort | uniq -c | sort -nr \
-                | mawk '$1 >= 10 && length($2) <= 3 { print $2 }'
+              | mawk '$1 >= 10 && length($2) <= 3 { print $2 }'
 
             # Get manually added subdomains
             mawk 'length($0) > 3 { print }' config/subdomains.txt
