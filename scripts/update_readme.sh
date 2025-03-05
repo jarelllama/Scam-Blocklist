@@ -167,8 +167,8 @@ print_stats() {
 # Note that csvcut is used in the following functions as the Google Search
 # search terms may contain commas which makes using mawk complicated.
 
-# Function 'sum' is an echo wrapper that returns the total sum of filtered
-# domains retrieved by the given source for that timeframe.
+# Return the total sum of filtered domains retrieved by the given source for
+# that timeframe.
 # Input:
 #   $1: timeframe to process
 #   $2: either 'all' for all sources or empty for "$source"
@@ -187,8 +187,8 @@ sum() {
         | mawk '{ sum += $1 } END { print sum }'
 }
 
-# Function 'sum_excluded' is an echo wrapper that returns the percentage of
-# excluded domains out of the raw count retrieved by the given source.
+# Return the percentage of excluded domains out of the raw count retrieved by
+# the given source.
 # Input:
 #   $2: either 'all' for all sources or empty for "$source"
 sum_excluded() {
