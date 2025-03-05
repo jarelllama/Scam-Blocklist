@@ -782,7 +782,7 @@ source_jeroengui() {
     source_url='https://file.jeroengui.be'
     url_shorterners='https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt'
 
-    # Get domains from various weekly lists and remove link shorteners
+    # Get domains from various weekly lists and exclude link shorteners
     curl -sSLZ --retry 2 --retry-all-errors \
         "${source_url}/phishing/last_week.txt" \
         "${source_url}/malware/last_week.txt" \
@@ -798,8 +798,7 @@ source_jeroengui() {
 
 source_jeroengui_nrd() {
     # Last checked: 29/12/24
-    # For the light version
-    # Only includes domains found in the NRD feed
+    # Only includes domains found in the NRD feed for the light version
     mv jeroengui_nrds.tmp source_results.tmp
 }
 
@@ -842,12 +841,12 @@ source_safelyweb() {
     source_url='https://safelyweb.com/scams-database'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?per_page=[1-30]" \
-        | grep -Po "Suspicious Website</div> <h2 class=\"title\">\K${DOMAIN_REGEX}" \
+        | grep -iPo "suspicious website</div> <h2 class=\"title\">\K${DOMAIN_REGEX}" \
         > source_results.tmp
 }
 
 source_scamadviser() {
-    # Last checked: 04/03/25
+    # Last checked: 06/03/25
     source_url='https://www.scamadviser.com/articles'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?p=[1-15]" \
@@ -889,7 +888,7 @@ source_scamtracker() {
 }
 
 source_unit42() {
-    # Last checked: 17/02/25
+    # Last checked: 06/03/25
     source_url='https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/archive/refs/heads/main.zip'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" -o unit42.zip
