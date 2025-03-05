@@ -20,7 +20,7 @@ main() {
     fi
 
     # The dead check consists of multiple parts to get around the time limit of
-    # Github jobs.
+    # GitHub jobs.
     case "$1" in
         checkalive)
             # The alive check being done in the workflow before the dead check

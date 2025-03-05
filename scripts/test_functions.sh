@@ -22,7 +22,10 @@ readonly DOMAINS='lists/wildcard_domains'
 
 main() {
     # Initialize data directory
-    find data -type f -name "*.txt" -exec truncate -s 0 {} \;
+    local file
+    for file in data/*.txt; do
+        : > "$file"
+    done
 
     # Initialize config directory
     local config
@@ -72,24 +75,19 @@ main() {
 # Run ShellCheck for all scripts along with checks for common errors and
 # mistakes.
 SHELLCHECK() {
-    local scripts script files
+    local url script files
 
     printf "\e[1m[start] ShellCheck\e[0m\n"
 
     # Install ShellCheck
-    local url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
+    url='https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz'
     curl -sSL --retry 2 --retry-all-errors "$url" | tar -xJ
 
     # Check that ShellCheck was successfully installed
     shellcheck-stable/shellcheck --version || error 'ShellCheck did not install successfully.'
 
-    # Find scripts
-    scripts=$(find . -type f -name "*.sh")
-
-    [[ -z "$scripts" ]] && error 'No scripts found.'
-
     # Run ShellCheck for each script
-    for script in $scripts; do
+    for script in *.sh; do
         shellcheck-stable/shellcheck "$script" || error=true
     done
 
@@ -100,7 +98,7 @@ SHELLCHECK() {
         error=true
     fi
 
-    # Check for missing space before comments
+    # Check for missing space before comments excluding in CSV files
     if files="$(grep -rn '\S\s#\s' --exclude-dir={.git,shellcheck-stable} \
         --exclude=*.csv .)"; then
         printf "\n\e[1m[warn] Lines with missing space before comments:\e[0m\n" >&2
@@ -114,10 +112,6 @@ SHELLCHECK() {
         printf "%s\n" "$lines" >&2
         error=true
     fi
-
-    printf "\n[info] Files checked (%s):\n%s\n" \
-        "$(wc -l <<< "$scripts")" "$scripts"
-    printf "%s\n\n" "./${WHITELIST}"
 
     [[ "$error" == true ]] && exit 1
 
@@ -387,7 +381,7 @@ test_invalid_removal() {
     input invalid-test.com/subfolder
     input invalid-test-.com
     input i.com
-    # Test that punycode is allowed in the TLD
+    # Test that Punycode is allowed in the TLD
     input invalid-test.xn--903fds
 
     output invalid-test.xn--903fds "$RAW"
