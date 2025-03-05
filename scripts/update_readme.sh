@@ -44,37 +44,6 @@ Light version: $(grep -cF '||' lists/adblock/scams_light.txt)
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-$(print_stats '165 Anti-fraud')
-$(print_stats 'Artists Against 419')
-$(print_stats 'BehindMLM')
-$(print_stats 'BugsFighter')
-$(print_stats 'Chainabuse')
-$(print_stats 'DFPI Crypto Scam Tracker')
-$(print_stats 'DGA Detector')
-$(print_stats 'Emerging Threats')
-$(print_stats 'FakeWebshopListHUN')
-$(print_stats 'Google Search')
-$(print_stats 'Gridinsoft')
-$(print_stats 'Jeroengui (NRDs)')
-$(print_stats 'Jeroengui')
-$(print_stats 'MalwareURL')
-$(print_stats 'PCrisk')
-$(print_stats 'PhishStats')
-$(print_stats 'PuppyScams.org')
-$(print_stats 'Regex') Matching
-$(print_stats 'Scam Directory')
-$(print_stats 'SafelyWeb')
-$(print_stats 'ScamAdviser')
-$(print_stats 'ScamMinder')
-$(print_stats 'ScamTracker')
-$(print_stats 'Unit42')
-$(print_stats 'URLCrazy')
-$(print_stats 'Verbraucherzentrale Hamburg')
-$(print_stats 'ViriBack C2 Tracker')
-$(print_stats 'Wildcat Cyber Patrol')
-$(print_stats 'WiperSoft')
-$(print_stats 'Česká Obchodní Inspekce')
-$(print_stats 'dnstwist')
 $(print_stats)
 
 - %Monthly: percentage out of total domains from all sources.
@@ -167,24 +136,32 @@ EOF
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly DOMAIN_LOG='config/domain_log.csv'
+readonly SOURCES='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 TODAY="$(TZ=Asia/Singapore date +"%d-%m-%y")"
 THIS_MONTH="$(TZ=Asia/Singapore date +"%m-%y")"
 readonly TODAY THIS_MONTH
 
-# Function 'print_stats' is an echo wrapper that returns the formatted
-# statistics for the given source.
-# Input:
-#   $1: source to process (default is all sources)
+# Return the statistics for all enabled sources.
 print_stats() {
     local this_month total_this_month
-    this_month="$(sum "$THIS_MONTH" "$1")"
-    total_this_month="$(sum "$THIS_MONTH")"
+    total_this_month="$(sum "$THIS_MONTH" all)"
 
-    printf "%5s |%8s |%7s %% |%8s %% | %s" \
-        "$(sum "$TODAY" "$1")" "$this_month" \
+    while read -r source; do
+        this_month="$(sum "$THIS_MONTH")"
+
+        printf "%5s |%8s |%7s %% |%8s %% | %s" \
+        "$(sum "$TODAY")" "$this_month" \
         "$(( this_month * 100 / total_this_month ))" \
-        "$(sum_excluded "$1" )" "${1:-All sources}"
+        "$(sum_excluded)" "$source"
+    done <<< "$(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES")"
+
+    this_month="$(sum "$THIS_MONTH" all)"
+
+    printf "%5s |%8s |%7s %% |%8s %% | All sources" \
+        "$(sum "$TODAY" all)" "$this_month" \
+        "$(( this_month * 100 / total_this_month ))" \
+        "$(sum_excluded all)"
 }
 
 # Note that csvcut is used in the following functions as the Google Search
@@ -194,26 +171,34 @@ print_stats() {
 # domains retrieved by the given source for that timeframe.
 # Input:
 #   $1: timeframe to process
-#   $2: source to process (default is all sources)
+#   $2: either 'all' for all sources, or empty for "$source"
 sum() {
-    # Print dash if no runs for that day found
+    # Print dash if no runs for that timeframe found
     if ! grep -qF "$1" "$SOURCE_LOG"; then
         printf "-"
         return
     fi
 
-    mawk "/${1},${2}.*,saved$/" "$SOURCE_LOG" | csvcut -c 5 \
+    if [[ "$1" == 'all' ]]; then
+        source=''
+    fi
+
+    mawk "/${1},${source}.*,saved$/" "$SOURCE_LOG" | csvcut -c 5 \
         | mawk '{ sum += $1 } END { print sum }'
 }
 
 # Function 'sum_excluded' is an echo wrapper that returns the percentage of
 # excluded domains out of the raw count retrieved by the given source.
 # Input:
-#   $1: source to process (default is all sources)
+#   $2: either 'all' for all sources, or empty for "$source"
 sum_excluded() {
+    if [[ "$1" == 'all' ]]; then
+        source=''
+    fi
+
     read -r raw_count excluded_count \
-        <<< "$(mawk -v source="$1" -F ',' '$2 == source { print }' \
-            "$SOURCE_LOG" | csvcut -c 4,6,7,8 | mawk -F ',' '
+        <<< "$(mawk -v source="$source" -F ',' '$2 == source { print }' \
+        "$SOURCE_LOG" | csvcut -c 4,6,7,8 | mawk -F ',' '
         {
             raw_count += $1
             white_count += $2
