@@ -64,9 +64,11 @@ main() {
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
-    local source source_name source_results execution_time
+    local source_function source_results execution_time
 
-    for source in $(mawk -F ',' '$4 == "y" { print $1 }' "$SOURCES"); do
+    # Get only enabled sources
+    # The while loop sets source_name as local
+    while read -r source_name; do
         # Initialize source variables
         local source_url=''
         local exclude_from_light=false
@@ -74,19 +76,19 @@ retrieve_source_results() {
         local too_large=false
         local query_count=''
 
-        source_name="$(mawk -v source="$source" -F ',' '
+        source_function="$(mawk -v source="$source_name" -F ',' '
             $1 == source { print $2 }' "$SOURCES")"
 
         source_results="data/pending/${source_name// /_}.tmp"
 
-        if [[ -n "$(mawk -v source="$source" -F ',' '
+        if [[ -n "$(mawk -v source="$source_name" -F ',' '
             $1 == source { print $3 }' "$SOURCES")" ]]; then
             exclude_from_light=true
         fi
 
         # The Google search source handles its own processing
         if [[ "$source_name" == 'Google Search' ]]; then
-            $source
+            $source_function
             continue
         fi
 
@@ -104,7 +106,7 @@ retrieve_source_results() {
 
         # Run source. Always return true to avoid script exiting when an error
         # occurs in the source function.
-        $source || true
+        $source_function || true
 
         if [[ -f source_results.tmp ]]; then
             # Move the source results to the source results path
@@ -118,7 +120,11 @@ retrieve_source_results() {
         fi
 
         process_source_results
-    done
+    done <<< "$({
+            mawk -F ',' '$1 != "Google Search" { print }' "$SOURCES"
+            mawk -F ',' '$1 == "Google Search" { print }' "$SOURCES"
+        } | mawk -F ',' '$4 == "y" { print $1 }')"
+        # Ensure the Google Search source runs last
 }
 
 # Called by process_source_results to remove entries from the source results
@@ -211,11 +217,11 @@ process_source_results() {
 
     # Error in case a source wrongly retrieves too many results.
     if (( $(wc -l < "$source_results") > 10000 )); then
+        too_large=true
         # Save entries for troubleshooting
         cp "$source_results" "${source_results}.tmp"
         # Empty source results to ensure proper logging
         : > "$source_results"
-        too_large=true
     fi
 
     # Remove non-domain entries including IP addresses excluding Punycode
