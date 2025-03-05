@@ -41,8 +41,8 @@ Only active sources are used to automatically retrieve domains.
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | | |
 | [StopGunScams.com](https://stopgunscams.com/) | | |
 | [SystemJargon's NRD List](https://github.com/SystemJargon/filters) | - | - |
-| [Unit 42](https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel) | Yes | |
 | [URLCrazy](https://github.com/urbanadventurer/urlcrazy) | Yes | |
+| [Unit 42](https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel) | Yes | |
 | [Verbraucherzentrale Hamburg](https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird) | Yes | |
 | [Viriback C2 Tracker](https://tracker.viriback.com) | Yes | |
 | [Wildcat Cyber Patrol](https://greatis.com/unhackme/help/category/remove) | Yes | |
