@@ -12,7 +12,7 @@ readonly SUBDOMAINS='config/subdomains.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
 
-# Function 'convert_unicode' converts Unicode to Punycode.
+# Convert Unicode to Punycode.
 # Input:
 #   $1: file to process
 convert_unicode() {
@@ -24,12 +24,11 @@ convert_unicode() {
     # error, exit 1.
     mawk '/-(\.|$)|^-|^..--/' "$1" > temp
     mawk '!/-(\.|$)|^-|^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
-    mv temp "$1"
-    sort -u "$1" -o "$1"
+    sort -u temp -o "$1"
 }
 
-# Function 'download_nrd_feed' downloads and collates NRD feeds consisting
-# domains registered in the last 30 days.
+# Download and collate NRD feeds consisting domains registered in the last 30
+# days.
 # Output:
 #   nrd.tmp
 download_nrd_feed() {
@@ -40,7 +39,7 @@ download_nrd_feed() {
     local url3='https://raw.githubusercontent.com/SystemJargon/filters/refs/heads/main/nrds-30days.txt'
     local url4='https://feeds.opensquat.com/domain-names-month.txt'
 
-    # Download the feeds in parallel and get only domains, ignoring comments
+    # Download the feeds in parallel and get domains
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
         | awk "/^${DOMAIN_REGEX}$/" > nrd.tmp
     # TODO: error detection
@@ -48,8 +47,7 @@ download_nrd_feed() {
     format_file nrd.tmp
 }
 
-# Function 'download_toplist' downloads and formats the Tranco toplist. Note
-# that the toplist does not contain subdomains.
+# Download and format the Tranco toplist.
 # Output:
 #   toplist.tmp
 download_toplist() {
@@ -88,7 +86,7 @@ download_toplist() {
     }' toplist.tmp | sort -u -o toplist.tmp
 }
 
-# Function 'format_file' standardizes the format of the given file.
+# Standardize the format of the given file.
 # Input:
 #   $1: file to be formatted
 format_file() {
@@ -125,7 +123,7 @@ format_file() {
     [[ -f temp ]] && mv temp "$file"
 }
 
-# Function 'format_files' formats all files in the config and data directories.
+# Format all files in the config and data directories.
 format_files() {
     local file
     for file in config/* data/*; do
@@ -133,8 +131,7 @@ format_files() {
     done
 }
 
-# Function 'get_blacklist' is an echo wrapper that returns the blacklist as a
-# regex expression.
+# Return the blacklist as a regex expression.
 # Output:
 #   Blacklisted domains as a regex expression
 #   '-' if no blacklisted domains found to avoid errors with regex matching
@@ -150,8 +147,7 @@ get_blacklist() {
     }' "$BLACKLIST" | paste -sd '|'
 }
 
-# Function 'get_whitelist' is an echo wrapper that returns the whitelist as a
-# regex expression.
+# Return the whitelist as a regex expression.
 # Output:
 #   Whitelisted domains as a regex expression
 #   '-' if no whitelisted domains found to avoid errors with regex matching
@@ -167,16 +163,15 @@ get_whitelist() {
     }' "$WHITELIST" | paste -sd '|'
 }
 
-# Function 'log_domains' logs domain processing events into the domain log.
+# Log domain processing events into the domain log.
 # Input:
 #   $1: domains to log either in a file or variable
 #   $2: event type (dead, whitelisted, etc.)
 #   $3: source
 log_domains() {
-    local domains timestamp
+    local domains
 
     # Check if a file or variable was passed
-    # Note [[ -s ]] causes unintended behavior when the file is empty
     if [[ -f "$1" ]]; then
         domains="$(<"$1")"
     else
@@ -186,15 +181,14 @@ log_domains() {
     # Return if no domains were passed
     [[ -z "$domains" ]] && return
 
-    timestamp="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")"
-
-    mawk -v event="$2" -v source="$3" -v time="$timestamp" \
+    mawk -v event="$2" -v source="$3" \
+        -v time="$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y")" \
         '{ print time "," event "," $0 "," source }' \
         <<< "$domains" >> "$DOMAIN_LOG"
 }
 
-# Function 'prune_lines' prunes lines in the given file to keep its number of
-# lines within the given threshold.
+# Prune lines in the given file to keep its number of lines within the set
+# limit.
 # Input:
 #   $1: file to be pruned
 #   $2: maximum number of lines to keep
@@ -215,8 +209,7 @@ prune_lines() {
     fi
 }
 
-# Function 'send_telegram' sends a Telegram notification with the given
-# message.
+# Send a Telegram notification with the given message.
 # Input:
 #   $TELEGRAM_CHAT_ID:   Telegram user Chat ID
 #   $TELEGRAM_BOT_TOKEN: Telegram Bot Token
@@ -224,13 +217,13 @@ prune_lines() {
 send_telegram() {
     curl -sSX POST \
         -H 'Content-Type: application/json' \
-        -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"$1\"}" \
+        -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"${1}\"}" \
         "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
         -o /dev/null
 }
 
-# Function 'update_review_config' checks for configured entries in the review
-# config file and add them to the whitelist/blacklist.
+# Check for configured entries in the review config file and add them to the
+# whitelist/blacklist.
 update_review_config() {
     # Add blacklisted entries to blacklist and remove them from the review file
     mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \

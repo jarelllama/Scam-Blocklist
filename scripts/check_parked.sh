@@ -18,7 +18,7 @@ main() {
     fi
 
     # The parked check consists of multiple parts to get around the time limit
-    # of Github jobs.
+    # of GitHub jobs.
     case "$1" in
         checkunparked)
             # The unparked check being done in the workflow before the parked
