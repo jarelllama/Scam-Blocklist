@@ -64,7 +64,7 @@ main() {
 # Run each source function to retrieve results collated in "$source_results"
 # which are then processed per source by process_source_results.
 retrieve_source_results() {
-    local source_function source_results execution_time
+    local source_results source_function execution_time
 
     # Get only enabled sources
     # The while loop sets source_name as local
@@ -76,14 +76,12 @@ retrieve_source_results() {
         local too_large=false
         local query_count=''
 
-        source_function="$(mawk -v source="$source_name" -F ',' '
-            $1 == source { print $2 }' "$SOURCES")"
-
         source_results="data/pending/${source_name// /_}.tmp"
 
-        if [[ -n "$(mawk -v source="$source_name" -F ',' '
-            $1 == source { print $3 }' "$SOURCES")" ]]; then
-            exclude_from_light=true
+         # If using existing results, skip sources with no results to process
+        if [[ "$USE_EXISTING_RESULTS" == true \
+            && ! -f "$source_results" ]]; then
+            continue
         fi
 
         # Run the Manual source
@@ -96,15 +94,17 @@ retrieve_source_results() {
             continue
         fi
 
+        source_function="$(mawk -v source="$source_name" -F ',' '
+            $1 == source { print $2 }' "$SOURCES")"
+
+        if [[ -n "$(mawk -v source="$source_name" -F ',' '
+            $1 == source { print $3 }' "$SOURCES")" ]]; then
+            exclude_from_light=true
+        fi
+
         # The Google Search source handles its own processing
         if [[ "$source_name" == 'Google Search' ]]; then
             $source_function || true
-            continue
-        fi
-
-        # If using existing results, skip sources with no results to process
-        if [[ "$USE_EXISTING_RESULTS" == true \
-            && ! -f "$source_results" ]]; then
             continue
         fi
 
@@ -118,7 +118,7 @@ retrieve_source_results() {
             continue
         fi
 
-        # Run source to retreive new results
+        # Run source to retrieve new results
         $source_function || true
 
         if [[ -f source_results.tmp ]]; then
@@ -142,7 +142,7 @@ retrieve_source_results() {
 }
 
 # Called by process_source_results to remove entries from the source results
-# file and log the entries into the domain log.
+# file and to log the entries into the domain log.
 # Input:
 #   $1: entries to process passed in a variable
 #   $2: tag to be shown in the domain log
@@ -227,7 +227,7 @@ process_source_results() {
     comm -23 "$source_results" "$RAW" > temp
     mv temp "$source_results"
 
-    # Error in case a source wrongly retrieves too many results.
+    # Error when a source retrieves an unusually large amount of results
     if (( $(wc -l < "$source_results") > 10000 )); then
         too_large=true
         # Save entries for troubleshooting
@@ -397,7 +397,7 @@ cleanup() {
 }
 
 # The 'source_<source>' functions retrieve results from the respective sources
-# and outputs them to source_results.tmp.
+# and output them to source_results.tmp.
 
 source_google_search() {
     # Last checked: 05/03/25
@@ -513,7 +513,7 @@ source_dga_detector() {
     unzip -q dga_detector.zip
     pip install -q tldextract
 
-    # Keep only non-punycode NRDs with 12 or more characters
+    # Keep only non-Punycode NRDs with 12 or more characters
     mawk 'length($0) >= 12 && !/xn--/' nrd.tmp > domains.tmp
 
     cd dga_detector-master
@@ -526,7 +526,7 @@ source_dga_detector() {
     # Run DGA Detector on remaining NRDs
     python3 dga_detector.py -f ../domains.tmp > /dev/null
 
-    # Extract DGA domains from json output
+    # Extract DGA domains from JSON output
     jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
         > ../source_results.tmp
 
