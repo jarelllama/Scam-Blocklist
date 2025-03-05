@@ -3,11 +3,11 @@
 ! Description: Blocklist for NSFW domains automatically retrieved daily.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist#nsfw-blocklist
 ! License: https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/LICENSE.md
-! Version: 03.05.161302.2025
+! Version: 03.05.202725.2025
 ! Expires: 12 hours
-! Last modified: Wed Mar  5 16:13:02 UTC 2025
+! Last modified: Wed Mar  5 20:27:25 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 13756
+! Number of entries: 13758
 !
 ||00xvideos.com^
 ||01porno.club^
@@ -8177,6 +8177,8 @@
 ||redtubepremium.com^
 ||redwap-xxx.com^
 ||redwap.sex^
+||redxxx.cc^
+||redxxx.top^
 ||refaceporn.com^
 ||reiporno.com^
 ||reit-hentai.com^
