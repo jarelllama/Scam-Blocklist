@@ -78,9 +78,12 @@ retrieve_source_results() {
 
         source_results="data/pending/${source_name// /_}.tmp"
 
-         # If using existing results, skip sources with no results to process
+        # If using existing results, skip sources with no results to process
+        # The Google Search source is an exception as each search term has its
+        # own results file.
         if [[ "$USE_EXISTING_RESULTS" == true \
-            && ! -f "$source_results" ]]; then
+            && ! -f "$source_results" \
+            && "$source_name" != 'Google Search' ]]; then
             continue
         fi
 
