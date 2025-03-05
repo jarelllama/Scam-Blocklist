@@ -150,7 +150,7 @@ print_stats() {
     while read -r source; do
         this_month="$(sum "$THIS_MONTH")"
 
-        printf "%5s |%8s |%7s %% |%8s %% | %s" \
+        printf "%5s |%8s |%7s %% |%8s %% | %s\n" \
         "$(sum "$TODAY")" "$this_month" \
         "$(( this_month * 100 / total_this_month ))" \
         "$(sum_excluded)" "$source"
@@ -158,7 +158,7 @@ print_stats() {
 
     this_month="$(sum "$THIS_MONTH" all)"
 
-    printf "%5s |%8s |%7s %% |%8s %% | All sources" \
+    printf "%5s |%8s |%7s %% |%8s %% | All sources\n" \
         "$(sum "$TODAY" all)" "$this_month" \
         "$(( this_month * 100 / total_this_month ))" \
         "$(sum_excluded all)"
@@ -171,7 +171,7 @@ print_stats() {
 # domains retrieved by the given source for that timeframe.
 # Input:
 #   $1: timeframe to process
-#   $2: either 'all' for all sources, or empty for "$source"
+#   $2: either 'all' for all sources or empty for "$source"
 sum() {
     # Print dash if no runs for that timeframe found
     if ! grep -qF "$1" "$SOURCE_LOG"; then
@@ -190,7 +190,7 @@ sum() {
 # Function 'sum_excluded' is an echo wrapper that returns the percentage of
 # excluded domains out of the raw count retrieved by the given source.
 # Input:
-#   $2: either 'all' for all sources, or empty for "$source"
+#   $2: either 'all' for all sources or empty for "$source"
 sum_excluded() {
     if [[ "$1" == 'all' ]]; then
         source=''
