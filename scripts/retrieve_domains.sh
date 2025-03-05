@@ -805,7 +805,7 @@ source_malwareurl() {
 }
 
 source_manual() {
-    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+    [[ "$USE_EXISTING_RESULTS" == false ]] && return
     printf "\n\e[1mSource: Manual\e[0m\n"
     process_source_results
 }
