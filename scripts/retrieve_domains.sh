@@ -87,7 +87,9 @@ retrieve_source_results() {
         fi
 
         # Run the Manual source
-        if [[ "$source_name" == 'Manual' && -f "$source_results" ]]; then
+        if [[ "$source_name" == 'Manual' ]]; then
+            # Skip to next source if no results to add manually
+            [[ ! -f "$source_results" ]] && continue
             printf "\n\e[1mSource: Manual\e[0m\n"
             execution_time="$(date +%s)"
             process_source_results
@@ -385,14 +387,6 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
 
     printf "Processing time: %s seconds\n" "$(( $(date +%s) - execution_time ))"
     printf -- "----------------------------------------------------------------------\n"
-}
-
-# Print error message and exit.
-# Input:
-#   $1: error message to print
-error() {
-    printf "\n\e[1;31m%s\e[0m\n\n" "$1" >&2
-    exit 1
 }
 
 cleanup() {
