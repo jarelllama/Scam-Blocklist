@@ -86,18 +86,29 @@ retrieve_source_results() {
             exclude_from_light=true
         fi
 
-        execution_time="$(date +%s)"
+        # Run the Manual source
+        if [[ "$source_name" == 'Manual' && -f "$source_results" ]]; then
+            printf "\n\e[1mSource: Manual\e[0m\n"
+            execution_time="$(date +%s)"
+            process_source_results
+            continue
+        fi
 
-        # These sources handle their own processing
-        if [[ "$source_name" == 'Google Search' \
-            || "$source_name" == 'Manual' ]]; then
+        # The Google Search source handles its own processing
+        if [[ "$source_name" == 'Google Search' ]]; then
             $source_function || true
             continue
         fi
 
-        if [[ -f "$source_results" || "$USE_EXISTING_RESULTS" == false ]]; then
-            printf "\n\e[1mSource: %s\e[0m\n" "$source_name"
+        # If using existing results, skip sources with no results to process
+        if [[ "$USE_EXISTING_RESULTS" == true \
+            && ! -f "$source_results" ]]; then
+            continue
         fi
+
+        printf "\n\e[1mSource: %s\e[0m\n" "$source_name"
+
+        execution_time="$(date +%s)"
 
         # Process existing results if present
         if [[ "$USE_EXISTING_RESULTS" == true ]]; then
@@ -105,7 +116,7 @@ retrieve_source_results() {
             continue
         fi
 
-        # Run source
+        # Run source to retreive new results
         $source_function || true
 
         if [[ -f source_results.tmp ]]; then
@@ -121,10 +132,11 @@ retrieve_source_results() {
 
         process_source_results
     done <<< "$({
+            printf 'Manual,,,y\n'
             mawk -F ',' '$1 != "Google Search" { print }' "$SOURCES"
             mawk -F ',' '$1 == "Google Search" { print }' "$SOURCES"
         } | mawk -F ',' '$4 == "y" { print $1 }')"
-        # Ensure the Google Search source runs last
+        # Run the Manual source first and the Google Search source last
 }
 
 # Called by process_source_results to remove entries from the source results
@@ -180,8 +192,6 @@ filter() {
 # to all_retrieved_domains.tmp/all_retrieved_light_domains.tmp, and save
 # entries requiring manual review.
 process_source_results() {
-    [[ ! -f "$source_results" ]] && return
-
     local raw_count dead_count parked_count whitelisted_count
     local whitelisted_tld_count in_toplist_count filtered_count
 
@@ -802,12 +812,6 @@ source_malwareurl() {
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
-}
-
-source_manual() {
-    [[ "$USE_EXISTING_RESULTS" == false ]] && return
-    printf "\n\e[1mSource: Manual\e[0m\n"
-    process_source_results
 }
 
 source_pcrisk() {
