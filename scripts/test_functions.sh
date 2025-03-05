@@ -87,7 +87,7 @@ SHELLCHECK() {
     shellcheck-stable/shellcheck --version || error 'ShellCheck did not install successfully.'
 
     # Run ShellCheck for each script
-    for script in *.sh; do
+    for script in scripts/*.sh; do
         shellcheck-stable/shellcheck "$script" || error=true
     done
 
