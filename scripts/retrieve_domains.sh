@@ -86,9 +86,12 @@ retrieve_source_results() {
             exclude_from_light=true
         fi
 
-        # The Google search source handles its own processing
-        if [[ "$source_name" == 'Google Search' ]]; then
-            $source_function
+        execution_time="$(date +%s)"
+
+        # These sources handle their own processing
+        if [[ "$source_name" == 'Google Search' \
+            || "$source_name" == 'Manual' ]]; then
+            $source_function || true
             continue
         fi
 
@@ -96,16 +99,13 @@ retrieve_source_results() {
             printf "\n\e[1mSource: %s\e[0m\n" "$source_name"
         fi
 
-        execution_time="$(date +%s)"
-
         # Process existing results if present
         if [[ "$USE_EXISTING_RESULTS" == true ]]; then
             process_source_results
             continue
         fi
 
-        # Run source. Always return true to avoid script exiting when an error
-        # occurs in the source function.
+        # Run source
         $source_function || true
 
         if [[ -f source_results.tmp ]]; then
@@ -365,7 +365,7 @@ ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
             "$(wc -l < "${source_results}.tmp")"
 
         $FUNCTION --send-telegram \
-            "Warning: '$source_name' is unusually large ($(wc -l < "${source_results}.tmp") entries). Potential error occured."
+            "Warning: '$source_name' is unusually large ($(wc -l < "${source_results}.tmp") entries). Potential error occurred."
 
     else
         printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
@@ -396,11 +396,11 @@ cleanup() {
 # and outputs them to source_results.tmp.
 
 source_google_search() {
-    # Last checked: 04/03/25
+    # Last checked: 05/03/25
     source_url='https://customsearch.googleapis.com/customsearch/v1'
     local search_id="$GOOGLE_SEARCH_ID"
     local search_api_key="$GOOGLE_SEARCH_API_KEY"
-    local search_term encoded_search_term
+    local search_term encoded_search_term start page_results
 
     # Check for existing results
     if [[ "$USE_EXISTING_RESULTS" == true ]]; then
@@ -412,11 +412,13 @@ source_google_search() {
             search_term="${source_results#data/pending/google_search_}"
             # Remove file extension from file name to get search term
             search_term="${search_term%.tmp}"
-            # Set execution time for each individual search term
-            execution_time="$(date +%s)"
 
             printf "\n\e[1mSource: Google Search\e[0m\n"
             printf "Search term: %s\n" "${search_term:0:100}"
+
+            # Set execution time for each individual search term
+            execution_time="$(date +%s)"
+
             process_source_results
         done
         return
@@ -426,74 +428,75 @@ source_google_search() {
     command -v csvgrep > /dev/null || pip install -q csvkit
 
     # Loop through search terms
-    csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 | tail -n +2 \
-        | while read -r search_term; do
-
+    while read -r search_term; do
         # Stop if rate limited
         if [[ "$rate_limited" == true ]]; then
             printf "\n\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
             return
         fi
-        search_google "$search_term"
-    done
-}
 
-search_google() {
-    # Last checked: 04/03/25
-    search_term="${1//\"/}"  # Remove quotes before encoding
-    # Replace non-alphanumeric characters with spaces
-    encoded_search_term="${search_term//[^[:alnum:]]/%20}"
-    search_term="${search_term//\//}"  # Remove slashes for file creation
-    source_results="data/pending/google_search_${search_term:0:100}.tmp"
-    query_count=0
-    # Set execution time for each individual search term
-    execution_time="$(date +%s)"
+        # Remove quotes before encoding
+        search_term="${search_term//\"/}"
+        # Replace non-alphanumeric characters with spaces
+        encoded_search_term="${search_term//[^[:alnum:]]/%20}"
+        query_count=0
 
-    touch "$source_results"  # Create results file to ensure proper logging
+        # Assign and create results file to ensure proper logging
+        search_term="${search_term//\//}"  # Remove slashes
+        source_results="data/pending/google_search_${search_term:0:100}.tmp"
+        touch "$source_results"
 
-    printf "\n\e[1mSource: Google Search\e[0m\n"
-    printf "Search term: %s\n" "${search_term:0:100}"
+        printf "\n\e[1mSource: Google Search\e[0m\n"
+        printf "Search term: %s\n" "${search_term:0:100}"
 
-    # Loop through each page of results
-    local start params page_results page_domains
-    for start in {1..100..10}; do
-        # Restrict to results from the last 30 days
-        params="cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&dateRestrict=m1&sort=date&start=${start}&filter=0"
-        page_results="$(curl -sS "${source_url}?${params}")"
+        # Set execution time for each individual search term
+        execution_time="$(date +%s)"
 
-        (( query_count++ ))
+        # Loop through each page of results
+        for start in {1..100..10}; do
+            # Restrict to results from the last 30 days
+            page_results="$(
+                curl -sS \
+                "${source_url}?cx=${search_id}&key=${search_api_key}&exactTerms=${encoded_search_term}&dateRestrict=m1&sort=date&start=${start}&filter=0"
+            )"
 
-        # Use next API key if first key is rate limited
-        if [[ "$page_results" == *rateLimitExceeded* ]]; then
-            # Stop all searches if second key is also rate limited
-            if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
-                rate_limited=true
-                break
+            (( query_count++ ))
+
+            # Use next API key if first key is rate limited
+            if [[ "$page_results" == *rateLimitExceeded* ]]; then
+                # Stop all searches if second key is also rate limited
+                if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
+                    rate_limited=true
+                    break
+                fi
+
+                printf "\n\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
+
+                # Switch API keys
+                readonly search_api_key="$GOOGLE_SEARCH_API_KEY_2"
+                readonly search_id="$GOOGLE_SEARCH_ID_2"
+
+                # Continue to next page (skip current rate limited page)
+                continue
             fi
 
-            printf "\n\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
+            # Stop search term if page has no results
+            jq -e '.items' &> /dev/null <<< "$page_results" || break
 
-            # Switch API keys
-            readonly search_api_key="$GOOGLE_SEARCH_API_KEY_2"
-            readonly search_id="$GOOGLE_SEARCH_ID_2"
+            # Save domains from each page and stop search term if no more pages
+            # are required
+            if [[ "$(jq -r '.items[].link' <<< "$page_results" \
+                | mawk -F '/' '{ print $3 }' \
+                | tee -a "$source_results" \
+                | wc -l)" -lt 10 ]]; then
+                break
+            fi
+        done
 
-            # Continue to next page (current rate limited page is not repeated)
-            continue
-        fi
+        process_source_results
 
-        # Stop search term if page has no results
-        jq -e '.items' &> /dev/null <<< "$page_results" || break
-
-        # Get domains from each page
-        page_domains="$(jq -r '.items[].link' <<< "$page_results" \
-            | mawk -F '/' '{ print $3 }')"
-        printf "%s\n" "$page_domains" >> "$source_results"
-
-        # Stop search term if no more pages are required
-        (( $(wc -l <<< "$page_domains") < 10 )) && break
-    done
-
-    process_source_results
+    done <<< "$(
+        csvgrep -c 2 -m 'y' -i "$SEARCH_TERMS" | csvcut -c 1 | tail -n +2)"
 }
 
 source_dga_detector() {
@@ -802,8 +805,9 @@ source_malwareurl() {
 }
 
 source_manual() {
-    # Ensure source_results.tmp is present
-    cp "$source_results" source_results.tmp
+    [[ "$USE_EXISTING_RESULTS" == true ]] && return
+    printf "\n\e[1mSource: Manual\e[0m\n"
+    process_source_results
 }
 
 source_pcrisk() {
