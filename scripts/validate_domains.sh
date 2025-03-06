@@ -54,11 +54,17 @@ filter() {
 
 # Validate raw file.
 validate() {
-    # Remove non-domain entries
+    # Remove non-domain entries from raw file
     filter "$(grep -vP "^${DOMAIN_REGEX}$" "$RAW")" invalid
 
-    # Convert Unicode to Punycode in raw file
+    # Remove non-domain entries from raw light file to ensure proper Punycode
+    # conversion
+    comm -23 "$RAW_LIGHT" <(grep -vP "^${DOMAIN_REGEX}$" "$RAW_LIGHT") > temp
+    mv temp "$RAW_LIGHT"
+
+    # Convert Unicode to Punycode in raw file and raw light file
     $FUNCTION --convert-unicode "$RAW"
+    $FUNCTION --convert-unicode "$RAW_LIGHT"
 
     # Store whitelist and blacklist as a regex expression
     whitelist="$($FUNCTION --get-whitelist)"
@@ -78,9 +84,6 @@ validate() {
     filter "$(mawk -v blacklist="$blacklist" '
         NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
         ' "$RAW" toplist.tmp)" toplist --preserve
-
-    # Convert Unicode to Punycode in raw light file
-    $FUNCTION --convert-unicode "$RAW_LIGHT"
 
     # Save changes to raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > temp
