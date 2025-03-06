@@ -520,14 +520,13 @@ test_wildcards_file() {
         # are not added
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
         # Test that existing wildcards are kept if they occur 10 times or more
-        # Use different TLDs to avoid getting matched by wildcard.com
-        for i in {1..10}; do printf "x%s.existing.wildcard.org\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old-existing.wildcard.net\n" "$i"; done
+        for i in {1..10}; do printf "x%s.existing-wildcard.apple.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old-existing-wildcard.github.com\n" "$i"; done
     })"
     input "$input" "$RAW"
     input '^whitelisted\.com$' "$WHITELIST"
-    input existing.wildcard.org "$WILDCARDS"
-    input old-existing.wildcard.net "$WILDCARDS"
+    input existing-wildcard.apple.com "$WILDCARDS"
+    input old-existing-wildcard.github.com "$WILDCARDS"
 
     # Domains that should not be removed via wildcard matching
     output="$({
@@ -535,23 +534,23 @@ test_wildcards_file() {
         for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
         for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old-existing.wildcard.net\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old-existing-wildcard.github.com\n" "$i"; done
     })"
 
     output "$(mawk '{ print "||" $0 "^" }' <<< "$output")" \
         "${ADBLOCK}/scams.txt"
     output "$output" "${DOMAINS}/scams.txt"
     output wildcard.com "$WILDCARDS"
-    output existing.wildcard.com "$WILDCARDS"
+    output existing-wildcard.apple.com "$WILDCARDS"
 
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
         output '||wildcard.com^' "$list"
-        output '||existing.wildcard.org^' "$list"
+        output '||existing-wildcard.apple.com^' "$list"
     done
 
     for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output wildcard.com "$list"
-        output existing.wildcard.org "$list"
+        output existing-wildcard.apple.com "$list"
     done
 }
 
