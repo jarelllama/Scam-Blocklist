@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 03.06.055253.2025
+! Version: 03.06.060740.2025
 ! Expires: 12 hours
-! Last modified: Thu Mar  6 05:52:53 UTC 2025
+! Last modified: Thu Mar  6 06:07:40 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 10151
+! Number of entries: 10150
 !
 ||00087.vip^
 ||028426.com^
@@ -2196,7 +2196,6 @@
 ||dd-shop.ch^
 ||ddjiayou.cn^
 ||ddnccq.com^
-||ddns.cam^
 ||de-lumelia.com^
 ||deactivate-compromised-access.vercel.app^
 ||deandryesclothing.shop^
