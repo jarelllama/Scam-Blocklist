@@ -442,7 +442,7 @@ source_google_search() {
     while read -r search_term; do
         # Stop if rate limited
         if [[ "$rate_limited" == true ]]; then
-            printf "\n\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
+            printf "\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
             return
         fi
 
@@ -481,7 +481,7 @@ source_google_search() {
                     break
                 fi
 
-                printf "\n\e[1mGoogle Search rate limited. Switching API keys.\e[0m\n"
+                printf "\e[1;31mGoogle Search rate limited. Switching API keys.\e[0m\n"
 
                 # Switch API keys
                 readonly search_api_key="$GOOGLE_SEARCH_API_KEY_2"
