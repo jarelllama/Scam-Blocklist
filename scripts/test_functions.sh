@@ -520,13 +520,14 @@ test_wildcards_file() {
         # are not added
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
         # Test that existing wildcards are kept if they occur 10 times or more
-        for i in {1..10}; do printf "x%s.existing.wildcard.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old-existing.wildcard.com\n" "$i"; done
+        # Use different TLDs to avoid getting matched by wildcard.com
+        for i in {1..10}; do printf "x%s.existing.wildcard.org\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old-existing.wildcard.net\n" "$i"; done
     })"
     input "$input" "$RAW"
     input '^whitelisted\.com$' "$WHITELIST"
-    input existing.wildcard.com "$WILDCARDS"
-    input old-existing.wildcard.com "$WILDCARDS"
+    input existing.wildcard.org "$WILDCARDS"
+    input old-existing.wildcard.net "$WILDCARDS"
 
     # Domains that should not be removed via wildcard matching
     output="$({
@@ -534,18 +535,23 @@ test_wildcards_file() {
         for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
         for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old-existing.wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old-existing.wildcard.net\n" "$i"; done
     })"
 
-    output "$output" "${ADBLOCK}/scams.txt"
+    output "$(mawk '{ print "||" $0 "^" }' <<< "$output")" \
+        "${ADBLOCK}/scams.txt"
     output "$output" "${DOMAINS}/scams.txt"
     output wildcard.com "$WILDCARDS"
     output existing.wildcard.com "$WILDCARDS"
 
-    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt" \
-        "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
+    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
+        output '||wildcard.com^' "$list"
+        output '||existing.wildcard.org^' "$list"
+    done
+
+    for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output wildcard.com "$list"
-        output existing.wildcard.com "$list"
+        output existing.wildcard.org "$list"
     done
 }
 
@@ -553,9 +559,13 @@ test_wildcards_file() {
 test_adding_blacklisted() {
     input microsoft.com "$RAW"
     input microsoft.com "$BLACKLIST"
+
     local list
-    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt" \
-        "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
+    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
+        output '||microsoft.com^' "$list"
+    done
+
+    for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output microsoft.com "$list"
     done
 }
@@ -567,14 +577,16 @@ test_blocklist_build() {
     input www.build-test.com "$RAW_LIGHT"
     input full-version-only.com "$RAW"
 
-    output '[Adblock Plus]' "${ADBLOCK}/scams.txt"
-    output '[Adblock Plus]' "${ADBLOCK}/scams_light.txt"
-    output full-version-only.com "${ADBLOCK}/scams.txt"
-    output full-version-only.com "${DOMAINS}/scams.txt"
+    output '||full-version-only.com^' "${ADBLOCK}/scams.txt"
+    output 'full-version-only.com' "${DOMAINS}/scams.txt"
 
     local list
-    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt" \
-        "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
+    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
+        output '[Adblock Plus]' "$list"
+        output '||build-test.com^' "$list"
+    done
+
+    for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output build-test.com "$list"
     done
 
