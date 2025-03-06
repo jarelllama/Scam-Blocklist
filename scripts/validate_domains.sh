@@ -7,7 +7,7 @@ readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
-readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 main() {
     $FUNCTION --download-toplist
@@ -54,12 +54,11 @@ filter() {
 
 # Validate raw file.
 validate() {
-    # Convert Unicode to Punycode in raw file and raw light file
-    $FUNCTION --convert-unicode "$RAW"
-    $FUNCTION --convert-unicode "$RAW_LIGHT"
+    # Remove non-domain entries
+    filter "$(grep -vP "^${DOMAIN_REGEX}$" "$RAW")" invalid
 
-    # Remove non-domain entries including IP addresses excluding Punycode
-    filter "$(awk "!/^${DOMAIN_REGEX}$/" "$RAW")" invalid
+    # Convert Unicode to Punycode in raw file
+    $FUNCTION --convert-unicode "$RAW"
 
     # Store whitelist and blacklist as a regex expression
     whitelist="$($FUNCTION --get-whitelist)"
@@ -80,12 +79,15 @@ validate() {
         NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
         ' "$RAW" toplist.tmp)" toplist --preserve
 
-    # Return if no filtering done
-    [[ ! -f filter_log.tmp ]] && return
+    # Convert Unicode to Punycode in raw light file
+    $FUNCTION --convert-unicode "$RAW_LIGHT"
 
     # Save changes to raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > temp
     mv temp "$RAW_LIGHT"
+
+    # Return if no filtering done
+    [[ ! -f filter_log.tmp ]] && return
 
     # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" \

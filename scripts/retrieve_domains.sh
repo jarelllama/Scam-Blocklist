@@ -13,11 +13,9 @@ readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCES='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
-# Note the [[:alnum:]] in the front and end of the main domain body is to
-# prevent matching entries that start or end with a dash or period.
-readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
-# Matches domain.com, domain[.]com, and sub[.]domain[.]com
-readonly DOMAIN_SQUARE_REGEX='[[:alnum:]][[:alnum:]\[\].-]*[[:alnum:]]\[?\.\]?[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+# Matches [.]
+readonly DOMAIN_SQUARE_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\[?\.\]?)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 main() {
     # Check whether to use existing results in the pending directory
@@ -200,6 +198,9 @@ process_source_results() {
     local raw_count dead_count parked_count whitelisted_count
     local whitelisted_tld_count in_toplist_count filtered_count
 
+    # Count number of unfiltered domains
+    raw_count="$(wc -l < "$source_results")"
+
     # Convert URLs to domains, remove square brackets, and convert to
     # lowercase. This is done here once instead of multiple times in the source
     # functions. Note that this still allows invalid entries like entries with
@@ -210,11 +211,14 @@ process_source_results() {
         print tolower($0)
     }' "$source_results" | sort -u -o "$source_results"
 
+    # Remove non-domain entries
+    # Redirect output to /dev/null as the invalid entries count is not needed.
+    # Perl-compatible regular expressions (PCRE) required
+    filter "$(grep -vP "^${DOMAIN_REGEX}$" "$source_results")" \
+        invalid --preserve > /dev/null
+
     # Convert Unicode to Punycode
     $FUNCTION --convert-unicode "$source_results"
-
-    # Count number of unfiltered domains
-    raw_count="$(wc -l < "$source_results")"
 
     # Remove known dead domains (dead domains file is not sorted)
     dead_count="$(filter \
@@ -238,13 +242,6 @@ process_source_results() {
         # Empty source results to ensure proper logging
         : > "$source_results"
     fi
-
-    # Remove non-domain entries including IP addresses excluding Punycode
-    # Redirect output to /dev/null as the invalid entries count is not needed.
-    # awk is used here instead of mawk for compatibility with the regex
-    # expression.
-    filter "$(awk "!/^${DOMAIN_REGEX}$/" "$source_results")" \
-        invalid --preserve > /dev/null
 
     # Log blacklisted domains
     # 'filter' is not used as the blacklisted domains should not be removed

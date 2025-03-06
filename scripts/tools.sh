@@ -10,7 +10,7 @@ readonly PARKED_TERMS='config/parked_terms.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SUBDOMAINS='config/subdomains.txt'
 readonly WHITELIST='config/whitelist.txt'
-readonly DOMAIN_REGEX='[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*'
+readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 # Convert Unicode to Punycode.
 # Input:
@@ -22,8 +22,8 @@ convert_unicode() {
     # Process the file, handling entries that may cause idn2 to error:
     # https://www.rfc-editor.org/rfc/rfc5891#section-4.2.3.1. If idn2 does
     # error, exit 1.
-    mawk '/-(\.|$)|^-|^..--/' "$1" > temp
-    mawk '!/-(\.|$)|^-|^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
+    mawk '/^..--/' "$1" > temp
+    mawk '!/^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
     sort -u temp -o "$1"
 }
 
@@ -41,7 +41,7 @@ download_nrd_feed() {
 
     # Download the feeds in parallel and get domains
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
-        | awk "/^${DOMAIN_REGEX}$/" > nrd.tmp
+        | grep -P "^${DOMAIN_REGEX}$" > nrd.tmp
     # TODO: error detection
 
     format_file nrd.tmp

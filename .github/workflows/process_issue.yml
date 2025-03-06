@@ -19,6 +19,8 @@ jobs:
 
       - name: Process domains
         run: |
+          readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+
           # Get domains from issue, add to pending file, and print in
           # closing comment.
           gh issue close ${{ github.event.issue.number }} -c \
@@ -35,7 +37,7 @@ jobs:
               i == 2 {
                   exit
               }' <<< "${{ github.event.issue.body }}" \
-              | grep -Po '^(https?://)?\K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+              | grep -Po "^(https?://)?\K${DOMAIN_REGEX}" \
               | xargs -I {} sh -c 'printf {}; printf {} >> data/pending/Manual.tmp'
             )
           \`\`\`"
@@ -61,6 +63,8 @@ jobs:
 
       - name: Process domains
         run: |
+          readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+
           # Get domains from issue, add to whitelist, remove from blacklist,
           # and print in closing comment.
           gh issue close ${{ github.event.issue.number }} -c \
@@ -77,7 +81,7 @@ jobs:
               i == 2 {
                   exit
               }' <<< "${{ github.event.issue.body }}" \
-              | grep -Po '^(https?://)?\K[[:alnum:]][[:alnum:].-]*[[:alnum:]]\.[[:alnum:]-]*[a-z]{2,}[[:alnum:]-]*' \
+              | grep -Po "^(https?://)?\K${DOMAIN_REGEX}" \
               | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
               | sort -u - config/whitelist.txt -o config/whitelist.txt) \
               | xargs -I {} sh -c 'printf {}; sed -i '/{}$/d' config/blacklist.txt'

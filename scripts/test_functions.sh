@@ -316,15 +316,55 @@ test_url_conversion() {
     output conversion-test-2.com "$RAW_LIGHT"
 }
 
+# Test removal of invalid entries
+test_invalid_removal() {
+    input 192.168.1.1
+    input invalid-test.x
+    input invalid-test.com/subfolder
+    input invalid-test-.com
+    input invalid-test.-com
+    input invalid-test.com-
+    input invalid-.test.com
+    input invalid.-test.com
+    input i.com
+    # Test that Punycode is allowed in the TLD
+    input invalid-test.xn--903fds
+
+    output invalid-test.xn--903fds "$RAW"
+    output invalid-test.xn--903fds "$RAW_LIGHT"
+    output invalid,192.168.1.1 "$DOMAIN_LOG"
+    output invalid,invalid-test.x "$DOMAIN_LOG"
+    output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
+    output invalid,invalid-test-.com "$DOMAIN_LOG"
+    output invalid,invalid-test.-com "$DOMAIN_LOG"
+    output invalid,invalid-test.com- "$DOMAIN_LOG"
+    output invalid,invalid-.test.com "$DOMAIN_LOG"
+    output invalid,invalid.-test.com "$DOMAIN_LOG"
+    output invalid,i.com "$DOMAIN_LOG"
+
+    # The validate script does not add invalid entries to the review config
+    # file
+    [[ "$script_to_test" == 'validate' ]] && return
+    output 192.168.1.1,invalid "$REVIEW_CONFIG"
+    output invalid-test.x,invalid "$REVIEW_CONFIG"
+    output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
+    output invalid-test-.com,invalid "$REVIEW_CONFIG"
+    output invalid-test.-com,invalid "$REVIEW_CONFIG"
+    output invalid-test.com-,invalid "$REVIEW_CONFIG"
+    output invalid-.test.com,invalid "$REVIEW_CONFIG"
+    output invalid.-test.com,invalid "$REVIEW_CONFIG"
+    output i.com,invalid "$REVIEW_CONFIG"
+}
+
 # Test conversion of Unicode to Punycode
 test_punycode_conversion() {
-    input 'ⴰⵣⵓⵍ.bortzmeyer.fr'
-    # Test that entries that may cause idn2 to error are handled properly
+    input 'ⴰⵣⵓⵍ.punycode-converstion-test.ⴰⵣⵓⵍ'
+    # Test that entries that may cause idn2 to error are handled
     input pu--nycode-conversion-test.com
 
-    output xn--4lj0cra7d.bortzmeyer.fr "$RAW"
+    output xn--4lj0cra7d.punycode-converstion-test.xn--4lj0cra7d "$RAW"
     output pu--nycode-conversion-test.com "$RAW"
-    output xn--4lj0cra7d.bortzmeyer.fr "$RAW_LIGHT"
+    output xn--4lj0cra7d.punycode-converstion-test.xn--4lj0cra7d "$RAW_LIGHT"
     output pu--nycode-conversion-test.com "$RAW_LIGHT"
 }
 
@@ -342,40 +382,6 @@ test_known_parked_removal() {
     input www.known-parked-test.com
     output '' "$RAW"
     output '' "$RAW_LIGHT"
-}
-
-# Test removal of invalid entries
-test_invalid_removal() {
-    input 100.100.100.1
-    input invalid-test.x
-    input invalid-test.100
-    input invalid-test.1x
-    input invalid-test.com/subfolder
-    input invalid-test-.com
-    input i.com
-    # Test that Punycode is allowed in the TLD
-    input invalid-test.xn--903fds
-
-    output invalid-test.xn--903fds "$RAW"
-    output invalid-test.xn--903fds "$RAW_LIGHT"
-    output invalid,100.100.100.1 "$DOMAIN_LOG"
-    output invalid,invalid-test.x "$DOMAIN_LOG"
-    output invalid,invalid-test.100 "$DOMAIN_LOG"
-    output invalid,invalid-test.1x "$DOMAIN_LOG"
-    output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
-    output invalid,invalid-test-.com "$DOMAIN_LOG"
-    output invalid,i.com "$DOMAIN_LOG"
-
-    # The validate script does not add invalid entries to the review config
-    # file
-    [[ "$script_to_test" == 'validate' ]] && return
-    output 100.100.100.1,invalid "$REVIEW_CONFIG"
-    output invalid-test.x,invalid "$REVIEW_CONFIG"
-    output invalid-test.100,invalid "$REVIEW_CONFIG"
-    output invalid-test.1x,invalid "$REVIEW_CONFIG"
-    output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
-    output invalid-test-.com,invalid "$REVIEW_CONFIG"
-    output i.com,invalid "$REVIEW_CONFIG"
 }
 
 # Test whitelisting and blacklisting entries
