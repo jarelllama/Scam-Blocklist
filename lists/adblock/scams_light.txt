@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 03.06.060740.2025
+! Version: 03.06.065229.2025
 ! Expires: 12 hours
-! Last modified: Thu Mar  6 06:07:40 UTC 2025
+! Last modified: Thu Mar  6 06:52:29 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 10150
+! Number of entries: 10186
 !
 ||00087.vip^
 ||028426.com^
@@ -16,6 +16,7 @@
 ||07080900.xyz^
 ||086dianyuan.com^
 ||09c43fd2-26c5-41f3-8605-572342bb5193-00-28nrq08n6gv9.riker.replit.dev^
+||09u6.com^
 ||0a0074066c49886a39b5a3072582f5d6.net^
 ||0fde014a-4027-4b59-b707-d34d74887d64-00-58nmu8j0mgrz.worf.replit.dev^
 ||0llx.78403478.xyz^
@@ -60,8 +61,12 @@
 ||1xbet-adu.top^
 ||1xbet-afa.top^
 ||1xbet-baf.top^
+||1xbet-bhz.top^
+||1xbet-by.club^
 ||1xbet-c1.site^
+||1xbet-cda.top^
 ||1xbet-cdb.top^
+||1xbet-dko.top^
 ||1xbet-era.top^
 ||1xbet-ffe.top^
 ||1xbet-jdm.top^
@@ -174,6 +179,7 @@
 ||73780fbd309561e201a4aee9914d882d.org^
 ||757813.com^
 ||760.vip^
+||7696w8yh5.com^
 ||77369j.com^
 ||78-shop.com^
 ||7878167.top^
@@ -1147,6 +1153,7 @@
 ||bybitra.net^
 ||byhoopava.shop^
 ||bypass.cn^
+||byronbay-boutique.com^
 ||bzillion.club^
 ||c13a856f4a879a89e9a638207efd6c94.biz^
 ||c6ej69jg.odoo.com^
@@ -1351,6 +1358,7 @@
 ||cdn-start-ledger--docs.webflow.io^
 ||cdn-trezo.github.io^
 ||cdn196888888.com^
+||cdnpk.net^
 ||cdspt.com^
 ||cebe-banking-au.com^
 ||ceedtrope4.space^
@@ -1421,6 +1429,7 @@
 ||chilltshirt.com^
 ||choakenumt.net^
 ||choisis-collecte.com^
+||choxessaiglee.net^
 ||christianay-luxury.shop^
 ||christiantrend.shop^
 ||christmaspremier.com^
@@ -1482,6 +1491,7 @@
 ||clever-onboard-kol-search.top^
 ||click-104919.weeblysite.com^
 ||click.linksynergy.com^
+||click4income.xyz^
 ||clickxjqwages.buzz^
 ||client.toro500.com^
 ||clientnycpark.com^
@@ -1507,6 +1517,7 @@
 ||cnicazionipms.blogspot.com^
 ||cnjlinks.com^
 ||co-overviews.com^
+||coacoalaum.com^
 ||coaglepteepsoli.com^
 ||cobaco.asia^
 ||cobonux.com^
@@ -3403,6 +3414,7 @@
 ||fbmediafor.com^
 ||fbpbpmjjg-f.club^
 ||fbzsa.com^
+||fc244.com^
 ||fc5701c3b2.com^
 ||fc5d7c4624.com^
 ||fc95566.net^
@@ -3633,6 +3645,7 @@
 ||gamacasino486.com^
 ||gambex.top^
 ||gamblerschoiceclothing.shop^
+||gamebitcoin88.co^
 ||gamefabrique.com^
 ||gamefrog.ink^
 ||gamenelognes.webflow.io^
@@ -4176,6 +4189,7 @@
 ||headached.cc^
 ||heafted.shop^
 ||healthncure.org^
+||healthwellbeingplace.online^
 ||healthyemployee.me^
 ||heatherassing.shop^
 ||heatherderryberry.shop^
@@ -4760,8 +4774,10 @@
 ||kra26s.cc^
 ||kra27-28.cc^
 ||kra27.at^
+||kra27c.cc^
 ||kra28.at^
 ||kra28.cc^
+||kra28c.cc^
 ||krakau.shop^
 ||kraken-log-in.webflow.io^
 ||kraken18-att.net^
@@ -4839,6 +4855,7 @@
 ||landbond.com^
 ||landim.cc^
 ||landmen.shop^
+||lara-murphy.com^
 ||lardeerr-xalliert.netlify.app^
 ||largeroofs.top^
 ||laronnistore.com^
@@ -5073,6 +5090,7 @@
 ||luxgez.com^
 ||luxhar.com^
 ||luxurisefashion.com^
+||lwacen.com^
 ||lwltraders.com^
 ||lxvdso.com^
 ||lyk168.com^
@@ -5166,6 +5184,7 @@
 ||maxcubecontainers.com^
 ||maxfinishseveral.com^
 ||maxgriffin.shop^
+||maxispin.best^
 ||maylis.biz^
 ||mayoralimg.com^
 ||mbnutsstore.com^
@@ -5204,6 +5223,7 @@
 ||memegames.ai^
 ||mementonas.com^
 ||memoryoodle.com^
+||menafn.com^
 ||mennyudosirso.shop^
 ||menstudent.shop^
 ||meonq.opecbqcr.com^
@@ -6516,6 +6536,7 @@
 ||poiqndjasfowas.com^
 ||poisedrope.com^
 ||pokp02.net^
+||polarhaircare.com^
 ||police-man.ir^
 ||policy-violation-100029313012.aplewisandsons.co.uk^
 ||policy-violation-100029359025.aplewisandsons.co.uk^
@@ -6566,6 +6587,7 @@
 ||precisionexecutivesearch.pro^
 ||preclknu.com^
 ||prefchose.com^
+||prefer.icu^
 ||prepaid.firstdata.com^
 ||prephe.ro^
 ||presalediscount.com^
@@ -6648,6 +6670,7 @@
 ||pumaslovensko.sk^
 ||pumpbot.space^
 ||puntacana-airport.grab-offer.com^
+||purbat.com^
 ||puredapk.com^
 ||purinose.com^
 ||purpely.com^
@@ -6662,6 +6685,7 @@
 ||q551004.com^
 ||q8play.win^
 ||qalriven.top^
+||qatteeey.com^
 ||qbnfinansliolkazancom.vercel.app^
 ||qbnheyecanlifinanl.vercel.app^
 ||qbnlefinanscom.vercel.app^
@@ -6783,6 +6807,7 @@
 ||refpa28631.top^
 ||refpaucqkl.top^
 ||regentcoin.sa.com^
+||regionaffair.com^
 ||regnarssonjacobsen.shop^
 ||rei.com^
 ||relieffoot.com^
@@ -6910,6 +6935,7 @@
 ||rpsecurely.xyz^
 ||rpsinvests.top^
 ||rpstartup.xyz^
+||rpvisionsx.xyz^
 ||rs-000jh-fd.com^
 ||rs4ott.com^
 ||rseponsequery.com^
@@ -7139,6 +7165,7 @@
 ||shokzaudio.com^
 ||shomareh-yab.ir^
 ||shop-arsenal.com^
+||shop-india.in^
 ||shop-liverpool.com^
 ||shop459.top^
 ||shopanbr.com^
@@ -7220,6 +7247,7 @@
 ||smmcoder.com^
 ||smokcenter15.com^
 ||smsnoti-pagehand.site^
+||snapcams.vc^
 ||snapmuriz.com^
 ||snapsave.app^
 ||snd1-recompense-glady-cci-dealliancepr.glitch.me^
@@ -7474,6 +7502,7 @@
 ||style-curtain.com^
 ||stylefamous.com^
 ||stylehmk.shop^
+||stylesock.com^
 ||stylewe.com^
 ||stylewkrld.shop^
 ||sub.pretty-fly4.net^
@@ -7799,6 +7828,7 @@
 ||thefridgefreezershop.com^
 ||thegalleria-boutique.com^
 ||thegoatsgalorelivestock.com^
+||thejackpotj.com^
 ||thejupitersystems.com^
 ||thelifehmart.com^
 ||theluckylk.com^
@@ -8220,6 +8250,7 @@
 ||trustwalletse.com^
 ||trustwalletsx.com^
 ||trustwalletvu.com^
+||truthfinder.com^
 ||truthwasisadl.org^
 ||trutle.club^
 ||trxh.xyz^
@@ -9703,6 +9734,7 @@
 ||voxen.online^
 ||voxsig.com^
 ||vpn-dlya-youtube.ru^
+||vrdworld.link^
 ||vrsatec.com^
 ||vrspi.weebly.com^
 ||vsgofficial.com^
@@ -9753,6 +9785,7 @@
 ||waterdsq.com^
 ||wateright.com^
 ||watsica.sbs^
+||wavebrowser.co^
 ||wayfoutlet.top^
 ||wbconsulting.live^
 ||wbe3wallet.vip^
@@ -9973,6 +10006,7 @@
 ||xmrminingproxy.com^
 ||xmxxvip.click^
 ||xn-----7kcb0bdajrnhhhe1f7a8fq.org.kz^
+||xn----7sbb2abelvgkbd.xn--p1ai^
 ||xn--188uhuy-tq7o32l.com^
 ||xn--311-j88dt34iplc9w3a.com^
 ||xn--42cf2bul7gtbe3e0e3d.com^
@@ -9986,6 +10020,7 @@
 ||xn--jlqq9ijviq2sg15b.com^
 ||xn--lg3bt1seyav2ya.com^
 ||xn--r1a.website^
+||xn--stn77-nra36dxj.com^
 ||xngakg.com^
 ||xofikoworinar.pages.dev^
 ||xoleak.com^
@@ -10093,6 +10128,7 @@
 ||yzsgj.top^
 ||yzup.xyz^
 ||yzyportal.pages.dev^
+||z7ihwgqj.fun^
 ||za.pl^
 ||zalando-official.shop^
 ||zapacesauto.shop^
