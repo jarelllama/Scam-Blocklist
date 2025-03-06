@@ -362,8 +362,12 @@ log_source() {
     total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
     excluded_count="$(( dead_count + parked_count ))"
 
+    if [[ -n "$search_term" ]]; then
+        search_term="\"${search_term:0:100}...\""
+    fi
+
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
-${search_term:0:100},${raw_count},${filtered_count},${total_whitelisted_count},\
+${search_term},${raw_count},${filtered_count},${total_whitelisted_count},\
 ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     >> "$SOURCE_LOG"
 
@@ -421,7 +425,7 @@ source_google_search() {
             search_term="${search_term%.tmp}"
 
             printf "\n\e[1mSource: Google Search\e[0m\n"
-            printf "Search term: %s\n" "${search_term:0:100}"
+            printf "Search term: \"%s...\"\n" "${search_term:0:100}"
 
             # Set execution time for each individual search term
             execution_time="$(date +%s)"
@@ -454,7 +458,7 @@ source_google_search() {
         touch "$source_results"
 
         printf "\n\e[1mSource: Google Search\e[0m\n"
-        printf "Search term: %s\n" "${search_term:0:100}"
+        printf "Search term: \"%s...\"\n" "${search_term:0:100}"
 
         # Set execution time for each individual search term
         execution_time="$(date +%s)"
