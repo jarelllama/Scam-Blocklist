@@ -250,7 +250,6 @@ TEST_PARKED_CHECK() {
 TEST_BUILD() {
     test_wildcards_file
     test_adding_blacklisted
-    test_subdomain_removal
     test_blocklist_build
 
     # Run script
@@ -286,7 +285,7 @@ test_review_file() {
 # Test error handling from unusually large sources
 test_large_source_error() {
     local entries
-    entries="$(for i in {1..10001}; do printf "%s.com\n" "$i"; done)"
+    entries="$(for i in {1..10001}; do printf "x%s.com\n" "$i"; done)"
     input "$entries" data/pending/Gridinsoft.tmp
     output ',Gridinsoft,,10001,0,0,0,0,0,,ERROR: too_large' "$SOURCE_LOG"
     output "$entries" data/pending/Gridinsoft.tmp
@@ -507,20 +506,22 @@ test_parked_check() {
 test_wildcards_file() {
     local input output list
 
+    # x is appended to the subdomain to prevent getting removed by subdomain
+    # removal.
     input="$({
         # Test that root domains that occur 10 times or more are added
-        for i in {1..10}; do printf "%s.wildcard.com\n" "$i"; done
-        for i in {1..9}; do printf "%s.root-domain.com\n" "$i"; done
+        for i in {1..10}; do printf "x%s.wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.root-domain.com\n" "$i"; done
         # Test that TLDs like 'com.us' should not be added
-        for i in {1..10}; do printf "%s.com.us\n" "$i"; done
+        for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
         # Test that root domains found in the toplist are not added
-        for i in {1..10}; do printf "%s.google.com\n" "$i"; done
+        for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
         # Test that root domains found in the toplist but are whitelisted are
         # added
-        for i in {1..10}; do printf "%s.apple.com\n" "$i"; done
+        for i in {1..10}; do printf "x%s.apple.com\n" "$i"; done
         # Test that existing wildcards are kept if they occur 10 times or more
-        for i in {1..10}; do printf "%s.existing.wildcard.com\n" "$i"; done
-        for i in {1..9}; do printf "%s.old-existing.wildcard.com\n" "$i"; done
+        for i in {1..10}; do printf "x%s.existing.wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old-existing.wildcard.com\n" "$i"; done
     })"
     input "$input" "$RAW"
     input '^apple\.com$' "$WHITELIST"
@@ -529,10 +530,10 @@ test_wildcards_file() {
 
     # Domains that should not be removed via wildcard matching
     output="$({
-        for i in {1..9}; do printf "%s.root-domain.com\n" "$i"; done
-        for i in {1..10}; do printf "%s.com.us\n" "$i"; done
-        for i in {1..10}; do printf "%s.google.com\n" "$i"; done
-        for i in {1..9}; do printf "%s.old-existing.wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.root-domain.com\n" "$i"; done
+        for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
+        for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old-existing.wildcard.com\n" "$i"; done
     })"
 
     output "$output" "${ADBLOCK}/scams.txt"
@@ -560,17 +561,11 @@ test_adding_blacklisted() {
     done
 }
 
-# Test subdomain removal
-test_subdomain_removal() {
-    input www.example.com "$RAW"
-    output example.com "${ADBLOCK}/scams.txt"
-    output example.com "${DOMAINS}/scams.txt"
-}
-
 # Test building the blocklists
 test_blocklist_build() {
-    input build-test.com "$RAW"
-    input build-test.com "$RAW_LIGHT"
+    # Test that subdomains are removed
+    input www.build-test.com "$RAW"
+    input www.build-test.com "$RAW_LIGHT"
     input full-version-only.com "$RAW"
 
     output '[Adblock Plus]' "${ADBLOCK}/scams.txt"
