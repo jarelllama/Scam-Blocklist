@@ -38,15 +38,6 @@ jobs:
             mawk 'length($0) > 3 { print }' config/subdomains.txt
           } | sort -u -o config/subdomains.txt
 
-      - name: Prune wildcards file
-        run: |
-          while read -r wildcard; do
-            if (( $(grep -c "$wildcard" data/raw.txt) >= 10 )); then
-              printf "%s\n" "$wildcard"
-            fi
-          done < config/wildcards.txt > temp
-          mv temp config/wildcards.txt
-
       - name: Prune logs
         run: |
           # 500,000 is enough for a month's worth of logs.

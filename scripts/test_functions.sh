@@ -248,37 +248,10 @@ TEST_PARKED_CHECK() {
 
 # Test that the various formats of blocklists are built correctly.
 TEST_BUILD() {
-    # Test removal of redundant entries via wildcard matching
-    input wildcard-test.com "$WILDCARDS"
-
-    # Test full version
-    # Test that subdomains are removed
-    input www.google.com "$RAW"
-    input test.wildcard-test.com "$RAW"
-    input full-version-only.com "$RAW"
-
-    # Test light version
-    # Test that blacklisted domains found in the toplist are added to the light
-    # version.
-    input google.com "$BLACKLIST"
-    input test.wildcard-test.com "$RAW_LIGHT"
-
-    # Adblock format full version
-    output '[Adblock Plus]' "${ADBLOCK}/scams.txt"
-    output '||google.com^' "${ADBLOCK}/scams.txt"
-    output '||wildcard-test.com^' "${ADBLOCK}/scams.txt"
-    output '||full-version-only.com^' "${ADBLOCK}/scams.txt"
-    # Adblock format light version
-    output '[Adblock Plus]' "${ADBLOCK}/scams_light.txt"
-    output '||google.com^' "${ADBLOCK}/scams_light.txt"
-    output '||wildcard-test.com^' "${ADBLOCK}/scams_light.txt"
-    # Domains format full version
-    output google.com "${DOMAINS}/scams.txt"
-    output wildcard-test.com "${DOMAINS}/scams.txt"
-    output full-version-only.com "${DOMAINS}/scams.txt"
-    # Domains format light version
-    output google.com "${DOMAINS}/scams_light.txt"
-    output wildcard-test.com "${DOMAINS}/scams_light.txt"
+    test_wildcards_file
+    test_adding_blacklisted
+    test_subdomain_removal
+    test_blocklist_build
 
     # Run script
     run_script build_lists.sh
@@ -526,6 +499,91 @@ test_parked_check() {
     output apple.com "$RAW_LIGHT"
     output porkbun.com/parked "$PARKED_DOMAINS"
     output parked_count,1,raw "$DOMAIN_LOG"
+}
+
+### BUILD TESTS
+
+# Test updating wildcards file and adding wildcards to the blocklist
+test_wildcards_file() {
+    local input output list
+
+    input="$({
+        # Test that root domains that occur 10 times or more are added
+        for i in {1..10}; do printf "%s.wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "%s.root-domain.com\n" "$i"; done
+        # Test that TLDs like 'com.us' should not be added
+        for i in {1..10}; do printf "%s.com.us\n" "$i"; done
+        # Test that root domains found in the toplist are not added
+        for i in {1..10}; do printf "%s.google.com\n" "$i"; done
+        # Test that root domains found in the toplist but are whitelisted are
+        # added
+        for i in {1..10}; do printf "%s.apple.com\n" "$i"; done
+        # Test that existing wildcards are kept if they occur 10 times or more
+        for i in {1..10}; do printf "%s.existing.wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "%s.old-existing.wildcard.com\n" "$i"; done
+    })"
+    input "$input" "$RAW"
+    input '^apple\.com$' "$WHITELIST"
+    input existing.wildcard.com "$WILDCARDS"
+    input old-existing.wildcard.com "$WILDCARDS"
+
+    # Domains that should not be removed via wildcard matching
+    output="$({
+        for i in {1..9}; do printf "%s.root-domain.com\n" "$i"; done
+        for i in {1..10}; do printf "%s.com.us\n" "$i"; done
+        for i in {1..10}; do printf "%s.google.com\n" "$i"; done
+        for i in {1..9}; do printf "%s.old-existing.wildcard.com\n" "$i"; done
+    })"
+
+    output "$output" "${ADBLOCK}/scams.txt"
+    output "$output" "${DOMAINS}/scams.txt"
+    output wildcard.com "$WILDCARDS"
+    output apple.com "$WILDCARDS"
+    output existing.wildcard.com "$WILDCARDS"
+
+    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt" \
+        "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
+        output wildcard.com "$list"
+        output apple.com "$list"
+        output existing.wildcard.com "$list"
+    done
+}
+
+# Test adding blacklisted domains to the light version
+test_adding_blacklisted() {
+    input microsoft.com "$RAW"
+    input microsoft.com "$BLACKLIST"
+    local list
+    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt" \
+        "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
+        output microsoft.com "$list"
+    done
+}
+
+# Test subdomain removal
+test_subdomain_removal() {
+    input www.example.com "$RAW"
+    output example.com "${ADBLOCK}/scams.txt"
+    output example.com "${DOMAINS}/scams.txt"
+}
+
+# Test building the blocklists
+test_blocklist_build() {
+    input build-test.com "$RAW"
+    input build-test.com "$RAW_LIGHT"
+    input full-version-only.com "$RAW"
+
+    output '[Adblock Plus]' "${ADBLOCK}/scams.txt"
+    output '[Adblock Plus]' "${ADBLOCK}/scams_light.txt"
+    output full-version-only.com "${ADBLOCK}/scams.txt"
+    output full-version-only.com "${DOMAINS}/scams.txt"
+
+    local list
+    for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt" \
+        "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
+        output build-test.com "$list"
+    done
+
 }
 
 # Execute the called script and check the exit status.

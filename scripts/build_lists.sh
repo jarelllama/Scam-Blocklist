@@ -18,9 +18,42 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Store blacklist as a regex expression
+    # Store whitelist and blacklist as a regex expression
+    whitelist="$($FUNCTION --get-whitelist)"
     blacklist="$($FUNCTION --get-blacklist)"
-    readonly blacklist
+    readonly whitelist blacklist
+
+    # Update wildcards file
+    {
+        # Dynamically get new wildcards by finding root domains that appear 10
+        # or more times that are in the toplist and are not whitelisted.
+        # comm is faster than mawk when comparing lines.
+        comm -23 <(mawk -F '.' '
+            # Check length to avoid TLDs like 'com.us'
+            length($(NF-1)) > 3 {
+                # Increment count each time the root domain is found
+                count[$(NF-1)"."$NF]++
+            }
+            END {
+                for (domain in count) {
+                    if (count[domain] >=10) {
+                        print domain
+                    }
+                }
+            }' "$RAW" | sort) toplist.tmp \
+            | mawk -v whitelist="$whitelist" '$0 !~ whitelist'
+
+        # Keep existing wildcards with subdomains as these tend to be manually
+        # added. Only keep wildcards that occur 10 or more times. Using a while
+        # loop here is faster than using mawk.
+        while read -r wildcard; do
+            [[ -z "$wildcard" ]] && break  # For when no wildcards are found
+            if (( $(grep -c "$wildcard" "$RAW") >= 10 )); then
+                printf "%s\n" "$wildcard"
+            fi
+        done <<< "$(mawk 'gsub(/\./, "&") >= 2' "$WILDCARDS")"
+
+    } | sort -u -o "$WILDCARDS"
 
     # Add blacklisted domains in the full version that are in the toplist to
     # the light version.
