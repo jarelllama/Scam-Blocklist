@@ -806,6 +806,15 @@ source_jeroengui_nrd() {
     mv jeroengui_nrds.tmp source_results.tmp
 }
 
+source_malwarebytes() {
+    # Last checked: 06/03/25
+    source_url='https://www.malwarebytes.com/blog/detections'
+
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+        | grep -Po ">\K${DOMAIN_REGEX}(?=</a>)" | mawk '!/[A-Z]/' \
+        > source_results.tmp
+}
+
 source_malwareurl() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/malwareurl.txt'
