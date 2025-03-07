@@ -7,7 +7,7 @@ readonly FUNCTION='bash scripts/tools.sh'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
-readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 main() {
     $FUNCTION --download-toplist

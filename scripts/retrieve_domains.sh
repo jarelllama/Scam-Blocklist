@@ -13,9 +13,12 @@ readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SEARCH_TERMS='config/search_terms.csv'
 readonly SOURCES='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
-readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
-# Matches [.]
-readonly DOMAIN_SQUARE_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\[?\.\]?)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+# '[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]' matches the root domain and subdomains
+# '[\p{L}\p{N}]' matches single character subdomains
+# '[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]' matches the TLD (TLDs can not start with a number)
+readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+# '\[?\.\]?' matches periods optionally enclosed by square brackets
+readonly DOMAIN_SQUARE_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\[?\.\]?)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 main() {
     # Check whether to use existing results in the pending directory

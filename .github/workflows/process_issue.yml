@@ -19,7 +19,7 @@ jobs:
 
       - name: Process domains
         run: |
-          readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+          readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
           # Get domains from issue, add to pending file, and print in
           # closing comment.
@@ -63,7 +63,7 @@ jobs:
 
       - name: Process domains
         run: |
-          readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+          readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
           # Get domains from issue, add to whitelist, remove from blacklist,
           # and print in closing comment.

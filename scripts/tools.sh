@@ -10,7 +10,7 @@ readonly PARKED_TERMS='config/parked_terms.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SUBDOMAINS='config/subdomains.txt'
 readonly WHITELIST='config/whitelist.txt'
-readonly DOMAIN_REGEX='(?:[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]\.)+[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]'
+readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 # Convert Unicode to Punycode.
 # Input:

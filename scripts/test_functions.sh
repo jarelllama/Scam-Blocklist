@@ -318,42 +318,51 @@ test_url_conversion() {
 
 # Test removal of invalid entries
 test_invalid_removal() {
-    input 192.168.1.1
-    input invalid-test.x
+    input 100.100.100.100
     input invalid-test.com/subfolder
+    input '-invalid-test.com'
     input invalid-test-.com
-    input invalid-test.-com
-    input invalid-test.com-
     input invalid-.test.com
     input invalid.-test.com
-    input i.com
+    # Test that invalid TLDs are not allowed
+    input invalid-test.-com
+    input invalid-test.com-
+    input invalid-test.1com
+    input invalid-test.c
+    # Test that single character subdomains are allowed
+    input 1.invalid-test.com
     # Test that Punycode is allowed in the TLD
     input invalid-test.xn--903fds
 
     output invalid-test.xn--903fds "$RAW"
+    output 1.invalid-test.com "$RAW"
     output invalid-test.xn--903fds "$RAW_LIGHT"
-    output invalid,192.168.1.1 "$DOMAIN_LOG"
-    output invalid,invalid-test.x "$DOMAIN_LOG"
+    output 1.invalid-test.com "$RAW_LIGHT"
+    output invalid,100.100.100.100 "$DOMAIN_LOG"
     output invalid,invalid-test.com/subfolder "$DOMAIN_LOG"
+    output invalid,-invalid-test.com "$DOMAIN_LOG"
     output invalid,invalid-test-.com "$DOMAIN_LOG"
-    output invalid,invalid-test.-com "$DOMAIN_LOG"
-    output invalid,invalid-test.com- "$DOMAIN_LOG"
     output invalid,invalid-.test.com "$DOMAIN_LOG"
     output invalid,invalid.-test.com "$DOMAIN_LOG"
-    output invalid,i.com "$DOMAIN_LOG"
+    output invalid,invalid-test.-com "$DOMAIN_LOG"
+    output invalid,invalid-test.com- "$DOMAIN_LOG"
+    output invalid,invalid-test.1com "$DOMAIN_LOG"
+    output invalid,invalid-test.c "$DOMAIN_LOG"
 
     # The validate script does not add invalid entries to the review config
     # file
     [[ "$script_to_test" == 'validate' ]] && return
-    output 192.168.1.1,invalid "$REVIEW_CONFIG"
-    output invalid-test.x,invalid "$REVIEW_CONFIG"
+    output 100.100.100.100,invalid "$REVIEW_CONFIG"
     output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
+    output -invalid-test.com,invalid "$REVIEW_CONFIG"
     output invalid-test-.com,invalid "$REVIEW_CONFIG"
-    output invalid-test.-com,invalid "$REVIEW_CONFIG"
-    output invalid-test.com-,invalid "$REVIEW_CONFIG"
     output invalid-.test.com,invalid "$REVIEW_CONFIG"
     output invalid.-test.com,invalid "$REVIEW_CONFIG"
-    output i.com,invalid "$REVIEW_CONFIG"
+    output invalid-test.-com,invalid "$REVIEW_CONFIG"
+    output invalid-test.com-,invalid "$REVIEW_CONFIG"
+    output invalid-test.1com,invalid "$REVIEW_CONFIG"
+    output invalid-test.c,invalid "$REVIEW_CONFIG"
+
 }
 
 # Test conversion of Unicode to Punycode
