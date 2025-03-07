@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 03.07.084311.2025
+! Version: 03.07.085234.2025
 ! Expires: 12 hours
-! Last modified: Fri Mar  7 08:43:11 UTC 2025
+! Last modified: Fri Mar  7 08:52:34 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 15610
+! Number of entries: 15609
 !
 ||0-i-x.29651548.xyz^
 ||00087.vip^
@@ -3449,7 +3449,6 @@
 ||cuteplay.live^
 ||cutsy.net^
 ||cuturl.space^
-||cuty.io^
 ||cutyurls.com^
 ||cuyhfshop.com^
 ||cvioert.com^
