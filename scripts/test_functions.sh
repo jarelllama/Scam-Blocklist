@@ -295,15 +295,15 @@ test_large_source_error() {
 # log, source log, review config file, and additions to the manual review file
 test_manual_addition_and_logging() {
     input www.manual-addition-test.com data/pending/Manual.tmp
-    input m.invalid-logging-test data/pending/Manual.tmp
+    input m.-invalid-logging-test data/pending/Manual.tmp
     output www.manual-addition-test.com "$RAW"
     output www.manual-addition-test.com "$RAW_LIGHT"
     output ,Manual,,2,1,0,0,0,0,,saved "$SOURCE_LOG"
     output ,saved,www.manual-addition-test.com,Manual "$DOMAIN_LOG"
-    output ,invalid,m.invalid-logging-test,Manual "$DOMAIN_LOG"
-    output Manual,m.invalid-logging-test,invalid,, "$REVIEW_CONFIG"
+    output ,invalid,m.-invalid-logging-test,Manual "$DOMAIN_LOG"
+    output Manual,m.-invalid-logging-test,invalid,, "$REVIEW_CONFIG"
     # Test additions to the manual review file
-    output m.invalid-logging-test data/pending/Manual.tmp
+    output m.-invalid-logging-test data/pending/Manual.tmp
 }
 
 # Test conversion of URLs to domains and removal of square brackets
