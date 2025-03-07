@@ -645,7 +645,7 @@ check_output() {
             # For CSV files, check for matching terms instead of entire file
             # content
             while read -r term; do
-                if ! grep -qF "$term" "$actual_output_file"; then
+                if ! grep -qF -- "$term" "$actual_output_file"; then
                     term_error=true
                     break
                 fi
