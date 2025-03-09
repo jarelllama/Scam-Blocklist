@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 469074
-Light version: 9288
+Total domains: 469161
+Light version: 9387
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -52,7 +52,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |    2097 |      3 % |      18 % | Gridinsoft
     0 |   16701 |     26 % |       8 % | Jeroengui
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
-  103 |    3043 |      4 % |       1 % | Malwarebytes
+  204 |    3144 |      4 % |       2 % | Malwarebytes
     0 |     111 |      0 % |       7 % | MalwareURL
     0 |      30 |      0 % |       7 % | PCrisk
     0 |    9559 |     14 % |      28 % | PhishStats
@@ -70,7 +70,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     121 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       3 |      0 % |       8 % | WiperSoft
     0 |     491 |      0 % |      49 % | Česká Obchodní Inspekce
-  103 |   63846 |    100 % |       0 % | All sources
+  204 |   63947 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
