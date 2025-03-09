@@ -33,8 +33,8 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 468980
-Light version: 9189
+Total domains: 469074
+Light version: 9288
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
@@ -52,12 +52,12 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |    2097 |      3 % |      18 % | Gridinsoft
     0 |   16701 |     26 % |       8 % | Jeroengui
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
-    2 |    2942 |      4 % |       0 % | Malwarebytes
+  103 |    3043 |      4 % |       1 % | Malwarebytes
     0 |     111 |      0 % |       7 % | MalwareURL
     0 |      30 |      0 % |       7 % | PCrisk
     0 |    9559 |     14 % |      28 % | PhishStats
     0 |      42 |      0 % |      17 % | PuppyScams.org
-    0 |   12750 |     20 % |       1 % | Regex
+    0 |   12750 |     19 % |       1 % | Regex
     0 |    1437 |      2 % |       3 % | SafelyWeb
     0 |    2053 |      3 % |      37 % | Scam Directory
     0 |      11 |      0 % |      30 % | ScamAdviser
@@ -70,7 +70,7 @@ Today | Monthly | %Monthly | %Filtered | Source
     0 |     121 |      0 % |      20 % | Wildcat Cyber Patrol
     0 |       3 |      0 % |       8 % | WiperSoft
     0 |     491 |      0 % |      49 % | Česká Obchodní Inspekce
-    2 |   63745 |    100 % |       0 % | All sources
+  103 |   63846 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
