@@ -53,25 +53,11 @@ download_nrd_feed() {
 download_toplist() {
     [[ -s toplist.tmp ]] && return
 
-    local max_attempts=3  # Retries twice
-    local attempt=1
-    local url='https://tranco-list.eu/top-1m-incl-subdomains.csv.zip'
+    local url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/tranco.txt'
 
-    while (( attempt <= max_attempts )); do
-        (( attempt > 1 )) && printf "\n\e[1mRetrying toplist download.\e[0m\n\n"
+    curl -sSL --retry 2 --retry-all-errors "$url" -o toplist.tmp
 
-        curl -sSLZ "$url" -o temp
-
-        unzip -p temp | mawk -F ',' '{ print $2 }' > toplist.tmp
-
-        [[ -s toplist.tmp ]] && break
-
-        (( attempt == max_attempts )) && error 'Error downloading toplist.'
-
-        (( attempt++ ))
-    done
-
-    format_file toplist.tmp
+    (( $(wc -l < toplist.tmp) > 1000000 )) || error 'Error downloading toplist.'
 
     # Expand toplist to include both root domains and subdomains
     mawk -v subdomains="$(mawk '{ print "^" $0 "\." }' \

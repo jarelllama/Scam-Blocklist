@@ -711,8 +711,7 @@ source_chainabuse() {
     # Last checked: 03/03/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/chainabuse.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
 }
 
 source_coi.gov.cz() {
@@ -775,8 +774,7 @@ source_gridinsoft() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
 }
 
 source_jeroengui() {
@@ -819,8 +817,7 @@ source_malwareurl() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/malwareurl.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "\|\K${DOMAIN_REGEX}" > source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
 }
 
 source_pcrisk() {
