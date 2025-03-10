@@ -20,6 +20,7 @@ Only active sources are used to automatically retrieve domains.
 | [Emerging Threats](https://rules.emergingthreats.net/) | Yes | |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | | |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | Yes |
+| [France Verif](https://franceverif.fr/) | Yes | |
 | [Google Custom Search JSON API](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) | Yes | |
 | [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | Yes |
 | [GunTab](https://www.guntab.com/scam-websites) | | |
@@ -38,6 +39,7 @@ Only active sources are used to automatically retrieve domains.
 | [Scam.Delivery](https://scam.delivery/) | | |
 | [ScamAdvisor](https://www.scamadviser.com/) | Yes | |
 | [ScamMinder](https://scamminder.com/) | Yes | |
+| [ScamScavenger](https://scamscavenger.tech/) | Yes | |
 | [ScamTracker](https://scam-tracker.net/) | Yes | |
 | [Stop 419 Scams and Scammers](https://www.stop419scams.com/) | | |
 | [StopGunScams.com](https://stopgunscams.com/) | | |

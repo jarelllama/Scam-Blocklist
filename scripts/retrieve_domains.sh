@@ -718,7 +718,7 @@ source_coi.gov.cz() {
     # Last checked: 10/03/25
     source_url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
 
-    curl -sSL --retry 2 --retry-all-errors "${source_url}/" \
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | mawk '/<p class = "list_titles">/ { getline; getline; print }' \
         | grep -Po "<span>\K$DOMAIN_REGEX" > source_results.tmp
 }
@@ -727,16 +727,15 @@ source_crypto_scam_tracker() {
     # Last checked: 10/03/25
     source_url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | mawk '
-            /column-4/ {
-                block = 1;
-                next
-            }
-            /column-5/ {
-                block = 0
-            }
-            block
+    curl -sSL --retry 2 --retry-all-errors "$source_url" | mawk '
+        /column-4/ {
+            block = 1;
+            next
+        }
+        /column-5/ {
+            block = 0
+        }
+        block
         ' | grep -Po "(https?://)?\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
@@ -768,6 +767,13 @@ source_fakewebshoplisthun() {
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" > source_results.tmp
+}
+
+source_franceverif() {
+    # Last checked: 10/03/25
+    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/franceverif.txt'
+
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
 }
 
 source_greatis() {
@@ -878,7 +884,7 @@ source_scamdirectory() {
     source_url='https://scam.directory/category'
 
     # head -n causes grep broken pipe error
-    curl -sSL --retry 2 --retry-all-errors "${source_url}/" \
+    curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > source_results.tmp
 }
 
@@ -890,6 +896,13 @@ source_scamminder() {
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-200]" \
         | mawk '/Trust Score :  strongly low/ { getline; print }' \
         | grep -Po "class=\"h5\">\K${DOMAIN_REGEX}" > source_results.tmp
+}
+
+source_scamscavenger() {
+    # Last checked: 10/03/25
+    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/scamscavenger.txt'
+
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
 }
 
 source_scamtracker() {
