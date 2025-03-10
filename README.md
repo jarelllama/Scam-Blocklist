@@ -33,44 +33,44 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 480595
-Light version: 13520
+Total domains: 480627
+Light version: 13605
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
   116 |     535 |      0 % |      34 % | 165 Anti-fraud
     6 |      47 |      0 % |      13 % | Artists Against 419
-   11 |      22 |      0 % |      11 % | BehindMLM
+   12 |      23 |      0 % |      11 % | BehindMLM
     9 |      51 |      0 % |       5 % | BugsFighter
-   99 |     380 |      0 % |       5 % | Chainabuse
+  100 |     381 |      0 % |       5 % | Chainabuse
     0 |      51 |      0 % |      76 % | DFPI Crypto Scam Tracker
  3997 |   13253 |     15 % |       1 % | DGA Detector
   164 |     386 |      0 % |       1 % | dnstwist
  1158 |    3787 |      4 % |      34 % | Emerging Threats
   227 |    1088 |      1 % |      25 % | FakeWebshopListHUN
   136 |     813 |      0 % |       2 % | Google Search
-  817 |    2914 |      3 % |      18 % | Gridinsoft
- 4661 |   21362 |     25 % |       8 % | Jeroengui
+  838 |    2935 |      3 % |      18 % | Gridinsoft
+ 4666 |   21367 |     25 % |       8 % | Jeroengui
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
     1 |    3145 |      3 % |      11 % | Malwarebytes
    52 |     163 |      0 % |       7 % | MalwareURL
     7 |      37 |      0 % |       7 % | PCrisk
  3784 |   13343 |     15 % |      28 % | PhishStats
     9 |      51 |      0 % |      17 % | PuppyScams.org
- 5031 |   17781 |     20 % |       1 % | Regex
-  507 |    1944 |      2 % |       3 % | SafelyWeb
+ 5032 |   17782 |     20 % |       1 % | Regex
+  513 |    1950 |      2 % |       3 % | SafelyWeb
   120 |    2173 |      2 % |      37 % | Scam Directory
     1 |      12 |      0 % |      30 % | ScamAdviser
    30 |     299 |      0 % |       5 % | ScamMinder
-   90 |     344 |      0 % |      15 % | ScamTracker
+   91 |     345 |      0 % |      15 % | ScamTracker
    22 |      69 |      0 % |       6 % | Unit42
    19 |      59 |      0 % |       7 % | URLCrazy
     5 |      16 |      0 % |      11 % | Verbraucherzentrale Hamburg
     0 |      67 |      0 % |      28 % | ViriBack C2 Tracker
-   29 |     150 |      0 % |      20 % | Wildcat Cyber Patrol
+   31 |     152 |      0 % |      20 % | Wildcat Cyber Patrol
     1 |       4 |      0 % |       8 % | WiperSoft
    12 |     503 |      0 % |      49 % | Česká Obchodní Inspekce
-21121 |   85068 |    100 % |       0 % | All sources
+21159 |   85106 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
