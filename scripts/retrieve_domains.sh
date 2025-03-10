@@ -681,7 +681,7 @@ source_165antifraud() {
 }
 
 source_aa419() {
-    # Last checked: 23/12/24
+    # Last checked: 10/03/25
     source_url='https://api.aa419.org/fakesites'
 
     # Trailing slash intentionally omitted
@@ -691,7 +691,7 @@ source_aa419() {
 }
 
 source_behindmlm() {
-    # Last checked: 17/02/25
+    # Last checked: 10/03/25
     source_url='https://behindmlm.com'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
@@ -700,7 +700,7 @@ source_behindmlm() {
 }
 
 source_bugsfighter() {
-    # Last checked: 17/02/25
+    # Last checked: 10/03/25
     source_url='https://www.bugsfighter.com/blog'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
@@ -715,7 +715,7 @@ source_chainabuse() {
 }
 
 source_coi.gov.cz() {
-    # Last checked: 22/02/25
+    # Last checked: 10/03/25
     source_url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
 
     curl -sSL --retry 2 --retry-all-errors "${source_url}/" \
@@ -724,11 +724,20 @@ source_coi.gov.cz() {
 }
 
 source_crypto_scam_tracker() {
-    # Last checked: 12/02/25
+    # Last checked: 10/03/25
     source_url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "column-5\">\K(https?)?${DOMAIN_REGEX}" > source_results.tmp
+        | mawk '
+            /column-4/ {
+                block = 1;
+                next
+            }
+            /column-5/ {
+                block = 0
+            }
+            block
+        ' | grep -Po "(https?://)?\K${DOMAIN_REGEX}" > source_results.tmp
 }
 
 source_emerging_threats() {
@@ -762,7 +771,7 @@ source_fakewebshoplisthun() {
 }
 
 source_greatis() {
-    # Last checked: 17/02/25
+    # Last checked: 10/03/25
     source_url='https://greatis.com/unhackme/help/category/remove'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
@@ -821,7 +830,7 @@ source_malwareurl() {
 }
 
 source_pcrisk() {
-    # Last checked: 22/02/25
+    # Last checked: 09/03/25
     source_url='https://www.pcrisk.com/removal-guides'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
@@ -874,10 +883,11 @@ source_scamdirectory() {
 }
 
 source_scamminder() {
-    # Last checked: 18/02/25
+    # Last checked: 10/03/25
     source_url='https://scamminder.com/websites'
 
-    curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-100]" \
+    # There are about 150 new pages daily
+    curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-200]" \
         | mawk '/Trust Score :  strongly low/ { getline; print }' \
         | grep -Po "class=\"h5\">\K${DOMAIN_REGEX}" > source_results.tmp
 }
@@ -898,7 +908,7 @@ source_scamtracker() {
 }
 
 source_unit42() {
-    # Last checked: 06/03/25
+    # Last checked: 10/03/25
     source_url='https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/archive/refs/heads/main.zip'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" -o unit42.zip
@@ -911,7 +921,7 @@ source_unit42() {
 }
 
 source_viriback_tracker() {
-    # Last checked: 04/03/25
+    # Last checked: 10/03/25
     source_url='https://tracker.viriback.com/last30.php'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
@@ -928,7 +938,7 @@ source_vzhh() {
 }
 
 source_wipersoft() {
-    # Last checked: 22/02/25
+    # Last checked: 10/03/25
     source_url='https://www.wipersoft.com/blog'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
