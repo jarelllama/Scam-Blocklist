@@ -515,7 +515,6 @@ source_dga_detector() {
     source_url='https://github.com/jarelllama/dga_detector/archive/refs/heads/master.zip'
 
     # Install DGA Detector and dependencies
-    # curl -L required
     curl -sSL --retry 2 --retry-all-errors "$source_url" -o dga_detector.zip
     unzip -q dga_detector.zip
     pip install -q tldextract
@@ -628,7 +627,6 @@ source_urlcrazy() {
     source_url='https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip'
 
     # Install URLCrazy and dependencies
-    # curl -L required
     curl -sSL --retry 2 --retry-all-errors "$source_url" -o urlcrazy.zip
     unzip -q urlcrazy.zip
     command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
