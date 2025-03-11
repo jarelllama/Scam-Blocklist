@@ -72,7 +72,6 @@ retrieve_source_results() {
     while read -r source_name; do
         # Initialize source variables
         local source_url=''
-        local exclude_from_light=false
         local rate_limited=false
         local too_large=false
         local query_count=''
@@ -100,11 +99,6 @@ retrieve_source_results() {
 
         source_function="$(mawk -v source="$source_name" -F ',' '
             $1 == source { print $2 }' "$SOURCES")"
-
-        if [[ -n "$(mawk -v source="$source_name" -F ',' '
-            $1 == source { print $3 }' "$SOURCES")" ]]; then
-            exclude_from_light=true
-        fi
 
         # The Google Search source handles its own processing
         if [[ "$source_name" == 'Google Search' ]]; then
@@ -279,7 +273,8 @@ process_source_results() {
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
 
-    if [[ "$exclude_from_light" == false ]]; then
+    if [[ -z "$(mawk -v source="$source_name" -F ',' '
+        $1 == source { print $3 }' "$SOURCES")" ]]; then
         # Collate filtered domains from light sources
         cat "$source_results" >> all_retrieved_light_domains.tmp
     fi
