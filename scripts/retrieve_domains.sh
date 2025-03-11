@@ -150,8 +150,8 @@ retrieve_source_results() {
 # Input:
 #   $1: entries to process passed in a variable
 #   $2: tag to be shown in the domain log
-#   --no-log:   do not log entries into the domain log
-#   --preserve: save entries for manual review and for rerun
+#     --no-log:    do not log entries into the domain log
+#     --preserve:  save entries for manual review and for rerun
 # Output:
 #   Number of entries that were passed
 filter() {

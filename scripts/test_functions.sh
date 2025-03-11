@@ -120,7 +120,9 @@ SHELLCHECK() {
 
 # Test the retrieval or validation scripts.
 # Input:
-#   $1 script to test ('retrieve' or 'validate')
+#   $1: script to test
+#     retrieve
+#     validate
 TEST_RETRIEVE_VALIDATE() {
     local script_to_test="$1"
 

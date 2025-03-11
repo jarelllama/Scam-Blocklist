@@ -21,7 +21,7 @@ main() {
 # Input:
 #   $1: entries to process passed in a variable
 #   $2: tag to be shown in the domain log
-#   --preserve: keep entries in the raw file
+#     --preserve:  keep entries in the raw file
 # Output:
 #   filter_log.tmp (if filtered domains found)
 filter() {
