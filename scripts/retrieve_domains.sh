@@ -526,7 +526,7 @@ source_dga_detector() {
 
     # Set detection threshold. DGA domains fall below the threshold set here.
     # A lower threshold lowers the domain yield and reduces false positives.
-    sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.0009/" \
+    sed -i "s/threshold = model_data\['thresh'\]/threshold = 0.0008/" \
         dga_detector.py
 
     # Run DGA Detector on remaining NRDs
