@@ -1,14 +1,4 @@
 source,entry,reason,blacklist (y/N),whitelist (y/N)
-BugsFighter,kalli-ulx.com,toplist,y,
-Chainabuse,sendgrid.net,toplist,,y
-DGA Detector,ihmc-p.edu.ph,whitelisted_tld,,y
-DGA Detector,yxjljc.gov.cn,whitelisted_tld,,y
-DGA Detector,vcmpbx.com.br,toplist,,y
-dnstwist,openair.pw,toplist,y,
-France Verif,groupebpce.com,toplist,,y
-France Verif,notube.lol,toplist,y,
-France Verif,oqee.tv,toplist,,y
-France Verif,totaladblock.com,toplist,y,
 Gridinsoft,1xbet.cm,toplist,,
 Gridinsoft,anadius.su,toplist,,
 Gridinsoft,app.fundingpips.com,toplist,,
@@ -43,7 +33,6 @@ Regex,kpdelivery.com.br,toplist,,
 Regex,kra19.cc,toplist,,
 Regex,kra25.ec,toplist,,
 Regex,luckywinn.co,toplist,,
-Regex,openair.pw,toplist,,
 Regex,paypal-support.us,toplist,,
 Regex,processing-paypal.us,toplist,,
 Regex,xvisa.io,toplist,,
@@ -63,7 +52,6 @@ ScamMinder,app.rate4rewards.com,toplist,,
 ScamMinder,avatar-of-ltc.com,toplist,,
 ScamMinder,eproc.setadiran.ir,toplist,,
 ScamMinder,ffmovies.lol,toplist,,
-ScamMinder,help.archive.org,toplist,,y
 ScamMinder,izbank.ir,toplist,,
 ScamMinder,mresalat.ir,toplist,,
 ScamMinder,mxline5.online,toplist,,
