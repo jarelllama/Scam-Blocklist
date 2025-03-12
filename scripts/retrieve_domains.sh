@@ -21,8 +21,8 @@ readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\
 readonly DOMAIN_SQUARE_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\[?\.\]?)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 main() {
-    # Check whether to use existing results in the pending directory
     if [[ -d data/pending ]]; then
+        # Use existing results in the pending directory
         readonly USE_EXISTING_RESULTS=true
         printf "\nUsing existing lists of retrieved results.\n"
     else
@@ -74,7 +74,7 @@ retrieve_source_results() {
 
         source_results="data/pending/${source_name// /_}.tmp"
 
-        # If using existing results, skip sources with no results to process
+        # If using existing results, skip sources with no results to process.
         # The Google Search source is an exception as each search term has its
         # own results file.
         if [[ "$USE_EXISTING_RESULTS" == true \
@@ -113,7 +113,7 @@ retrieve_source_results() {
         # Run source to retrieve new results
         $source_function || true
 
-        # Error if the source did not create the source results file
+        # Error if the source did not create its source results file
         if [[ ! -f "$source_results" ]]; then
             printf "\e[1;31mSource results file not found.\e[0m\n"
             # Create source results file to ensure proper logging
@@ -143,7 +143,7 @@ filter() {
     local entries="$1"
     local tag="$2"
 
-    # Return with 0 entries if no entries passed
+    # Return with 0 entries if no entries found
     if [[ -z "$entries" ]]; then
         printf 0
         return
@@ -162,12 +162,12 @@ filter() {
         mawk -v tag="$tag" '{ print $0 " (" tag ")" }' <<< "$entries" \
             >> entries_for_review.tmp
 
-        # Save entries into review config file
+        # Save entries into the review config file
         mawk -v source="$source_name" -v reason="$tag" '
             { print source "," $0 "," reason ",," }' <<< "$entries" \
             >> "$REVIEW_CONFIG"
 
-        # Remove duplicates from review config file
+        # Remove duplicates from the review config file
         mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
         mv temp "$REVIEW_CONFIG"
 
@@ -175,7 +175,7 @@ filter() {
         printf "%s\n" "$entries" >> "${source_results}.tmp"
     fi
 
-    # Return number of entries
+    # Return the number of entries
     wc -l <<< "$entries"
 }
 
@@ -186,7 +186,7 @@ process_source_results() {
     local raw_count dead_count parked_count whitelisted_count
     local whitelisted_tld_count in_toplist_count filtered_count
 
-    # Count number of unfiltered domains
+    # Count the number of unfiltered domains
     raw_count="$(wc -l < "$source_results")"
 
     # Convert URLs to domains, remove square brackets, and convert to
@@ -200,8 +200,7 @@ process_source_results() {
     }' "$source_results" | sort -u -o "$source_results"
 
     # Remove non-domain entries
-    # Redirect output to /dev/null as the invalid entries count is not needed.
-    # Perl-compatible regular expressions (PCRE) required
+    # Redirect output to /dev/null as the invalid entries count is not needed
     filter "$(grep -vP "^${DOMAIN_REGEX}$" "$source_results")" \
         invalid --preserve > /dev/null
 
@@ -218,7 +217,7 @@ process_source_results() {
         "$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")" \
         parked --no-log)"
 
-    # Remove domains already in raw file
+    # Remove domains already in the raw file
     comm -23 "$source_results" "$RAW" > temp
     mv temp "$source_results"
 
@@ -252,13 +251,13 @@ process_source_results() {
         /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist
         ' "$source_results")" whitelisted_tld --preserve)"
 
-    # Remove domains in toplist excluding blacklisted domains
+    # Remove domains found in the toplist excluding blacklisted domains
     in_toplist_count="$(filter \
         "$(mawk -v blacklist="$blacklist" '
         NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
         ' "$source_results" toplist.tmp)" toplist --preserve)"
 
-    # Count number of filtered domains
+    # Count the number of filtered domains
     filtered_count="$(wc -l < "$source_results")"
 
     # Collate filtered domains
