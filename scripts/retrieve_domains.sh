@@ -62,8 +62,8 @@ main() {
     save_domains
 }
 
-# Run each source function to retrieve results collated in "$source_results"
-# which are then processed per source by process_source_results.
+# Run each source function to retrieve results which are then processed per
+# source by process_source_results().
 retrieve_source_results() {
     local source_results source_function execution_time
 
@@ -119,18 +119,15 @@ retrieve_source_results() {
         # Run source to retrieve new results
         $source_function || true
 
-        if [[ -f source_results.tmp ]]; then
-            # Move the source results to the source results path
-            mv source_results.tmp "$source_results"
-        else
-            # If source_results.tmp is not found, it means an error in the
-            # source function.
-            printf "\e[1;31msource_results.tmp not found.\e[0m\n"
+        # Error if the source did not create the source results file
+        if [[ ! -f "$source_results" ]]; then
+            printf "\e[1;31mSource results file not found.\e[0m\n"
             # Create source results file to ensure proper logging
             touch "$source_results"
         fi
 
         process_source_results
+
     done <<< "$({
             printf 'Manual,,,y\n'
             mawk -F ',' '$1 != "Google Search" { print }' "$SOURCES"
@@ -139,7 +136,7 @@ retrieve_source_results() {
         # Run the Manual source first and the Google Search source last
 }
 
-# Called by process_source_results to remove entries from the source results
+# Called by process_source_results() to remove entries from the source results
 # file and to log the entries into the domain log.
 # Input:
 #   $1: entries to process passed in a variable
@@ -399,7 +396,7 @@ cleanup() {
 }
 
 # The 'source_<source>' functions retrieve results from the respective sources
-# and output them to source_results.tmp.
+# and output them to $source_results.
 
 source_google_search() {
     # Last checked: 05/03/25
@@ -529,7 +526,7 @@ source_dga_detector() {
 
     # Extract DGA domains from JSON output
     jq -r 'select(.is_dga == true) | .domain' dga_domains.json \
-        > ../source_results.tmp
+        > "../${source_results}"
 
     cd ..
 
@@ -564,7 +561,7 @@ source_dnstwist() {
         mv temp results.tmp
 
         # Collate results
-        cat results.tmp >> source_results.tmp
+        cat results.tmp >> "$source_results"
 
         # Update counts for the target
         mawk -v target="$target" \
@@ -603,7 +600,7 @@ source_regex() {
         mawk -v target="$target" -v results="$(
             awk "/${regex}/" nrd.tmp \
                 | sort -u \
-                | tee -a source_results.tmp \
+                | tee -a "$source_results" \
                 | wc -l
             )" -F ',' '
             BEGIN { OFS = "," }
@@ -642,7 +639,7 @@ source_urlcrazy() {
         mv temp results.tmp
 
         # Collate results
-        cat results.tmp >> source_results.tmp
+        cat results.tmp >> "$source_results"
 
         # Update counts for the target
         mawk -v target="$target" -v results_count="$(wc -l < results.tmp)" \
@@ -670,7 +667,7 @@ source_165antifraud() {
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
-        | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" > source_results.tmp
+        | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_aa419() {
@@ -680,7 +677,7 @@ source_aa419() {
     # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors -H "Auth-API-Id:${AA419_API_ID}" \
         "${source_url}/0/250?Status=active" --retry 2 --retry-all-errors \
-        | jq -r '.[].Domain' > source_results.tmp
+        | jq -r '.[].Domain' > "$source_results"
 }
 
 source_behindmlm() {
@@ -689,7 +686,7 @@ source_behindmlm() {
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "&#8220;\K${DOMAIN_REGEX}(?=&#8221;)|<li>\K${DOMAIN_REGEX}|(;|:) \K${DOMAIN_REGEX}|and \K${DOMAIN_REGEX}" \
-        > source_results.tmp
+        > "$source_results"
 }
 
 source_bugsfighter() {
@@ -697,14 +694,14 @@ source_bugsfighter() {
     source_url='https://www.bugsfighter.com/blog'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
-        | grep -iPo "remove \K${DOMAIN_REGEX}" > source_results.tmp
+        | grep -iPo "remove \K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_chainabuse() {
     # Last checked: 03/03/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/chainabuse.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
 }
 
 source_coi.gov.cz() {
@@ -713,7 +710,7 @@ source_coi.gov.cz() {
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | mawk '/<p class = "list_titles">/ { getline; getline; print }' \
-        | grep -Po "<span>\K$DOMAIN_REGEX" > source_results.tmp
+        | grep -Po "<span>\K$DOMAIN_REGEX" > "$source_results"
 }
 
 source_crypto_scam_tracker() {
@@ -729,7 +726,7 @@ source_crypto_scam_tracker() {
             block = 0
         }
         block
-        ' | grep -Po "(https?://)?\K${DOMAIN_REGEX}" > source_results.tmp
+        ' | grep -Po "(https?://)?\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_emerging_threats() {
@@ -749,7 +746,7 @@ source_emerging_threats() {
         cat "rules/rules/${RULE}.rules"
     done | mawk '/dns[\.|_]query/ &&
         !/^#|content:!|startswith|offset|distance|within|pcre/' \
-        | grep -Po "content:\"\.?\K${DOMAIN_REGEX}" > source_results.tmp
+        | grep -Po "content:\"\.?\K${DOMAIN_REGEX}" > "$source_results"
 
     rm -r rules*
 }
@@ -759,14 +756,14 @@ source_fakewebshoplisthun() {
     source_url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" > source_results.tmp
+        | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" > "$source_results"
 }
 
 source_franceverif() {
     # Last checked: 10/03/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/franceverif.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
 }
 
 source_greatis() {
@@ -775,14 +772,14 @@ source_greatis() {
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "rel=\"bookmark\">remove \K${DOMAIN_REGEX}" \
-        > source_results.tmp
+        > "$source_results"
 }
 
 source_gridinsoft() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
 }
 
 source_jeroengui() {
@@ -799,17 +796,17 @@ source_jeroengui() {
         "${source_url}/scam/last_week.txt" \
         | grep -Po "^https?://\K${DOMAIN_REGEX}" \
         | grep -vF "$(curl -sSL --retry 2 --retry-all-errors "$url_shorterners" \
-        | grep -Po "\|\K${DOMAIN_REGEX}")" > source_results.tmp
+        | grep -Po "\|\K${DOMAIN_REGEX}")" > "$source_results"
 
     # Get matching NRDs for the light version. Unicode is only processed by the
     # full version.
-    comm -12 <(sort source_results.tmp) nrd.tmp > jeroengui_nrds.tmp
+    comm -12 <(sort "$source_results") nrd.tmp > jeroengui_nrds.tmp
 }
 
 source_jeroengui_nrd() {
     # Last checked: 29/12/24
     # Only includes domains found in the NRD feed for the light version
-    mv jeroengui_nrds.tmp source_results.tmp
+    mv jeroengui_nrds.tmp "$source_results"
 }
 
 source_malwarebytes() {
@@ -818,14 +815,14 @@ source_malwarebytes() {
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po ">\K${DOMAIN_REGEX}(?=</a>)" | mawk '!/[A-Z]/' \
-        > source_results.tmp
+        > "$source_results"
 }
 
 source_malwareurl() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/malwareurl.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
 }
 
 source_pcrisk() {
@@ -834,7 +831,7 @@ source_pcrisk() {
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
         | mawk '/<div class="text-article">/ { getline; getline; print }' \
-        | grep -Po "${DOMAIN_SQUARE_REGEX}" > source_results.tmp
+        | grep -Po "${DOMAIN_SQUARE_REGEX}" > "$source_results"
 }
 
 source_phishstats() {
@@ -843,7 +840,7 @@ source_phishstats() {
 
     # Get URLs with no subdirectories (some of the URLs use docs.google.com)
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" > source_results.tmp
+        | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" > "$source_results"
 }
 
 source_puppyscams() {
@@ -851,7 +848,7 @@ source_puppyscams() {
     source_url='https://puppyscams.org'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?page=[1-15]" \
-        | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > source_results.tmp
+        | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$source_results"
 }
 
 source_safelyweb() {
@@ -860,7 +857,7 @@ source_safelyweb() {
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?per_page=[1-30]" \
         | grep -iPo "suspicious website</div> <h2 class=\"title\">\K${DOMAIN_REGEX}" \
-        > source_results.tmp
+        > "$source_results"
 }
 
 source_scamadviser() {
@@ -869,7 +866,7 @@ source_scamadviser() {
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?p=[1-15]" \
         | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" \
-        > source_results.tmp
+        > "$source_results"
 }
 
 source_scamdirectory() {
@@ -878,7 +875,7 @@ source_scamdirectory() {
 
     # head -n causes grep broken pipe error
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > source_results.tmp
+        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$source_results"
 }
 
 source_scamminder() {
@@ -888,14 +885,14 @@ source_scamminder() {
     # There are about 150 new pages daily
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-200]" \
         | mawk '/Trust Score :  strongly low/ { getline; print }' \
-        | grep -Po "class=\"h5\">\K${DOMAIN_REGEX}" > source_results.tmp
+        | grep -Po "class=\"h5\">\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_scamscavenger() {
     # Last checked: 10/03/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/scamscavenger.txt'
 
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o source_results.tmp
+    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
 }
 
 source_scamtracker() {
@@ -910,7 +907,7 @@ source_scamtracker() {
 
     curl -sSLZ --retry 2 --retry-all-errors "${review_urls[@]}" \
         | grep -Po "<div class=\"review-value\">\K${DOMAIN_REGEX}(?=</div>)" \
-        > source_results.tmp
+        > "$source_results"
 }
 
 source_unit42() {
@@ -921,7 +918,7 @@ source_unit42() {
     unzip -q unit42.zip -d unit42
 
     grep -hPo "hxxps?\[:\]//\K${DOMAIN_SQUARE_REGEX}|^- \K${DOMAIN_SQUARE_REGEX}" \
-        unit42/*/"$(date +%Y)"* > source_results.tmp
+        unit42/*/"$(date +%Y)"* > "$source_results"
 
     rm -r unit42*
 }
@@ -931,7 +928,7 @@ source_viriback_tracker() {
     source_url='https://tracker.viriback.com/last30.php'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po ",https?://\K${DOMAIN_REGEX}" > source_results.tmp
+        | grep -Po ",https?://\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_vzhh() {
@@ -940,7 +937,7 @@ source_vzhh() {
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
-        > source_results.tmp
+        > "$source_results"
 }
 
 source_wipersoft() {
@@ -949,7 +946,7 @@ source_wipersoft() {
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | mawk '/<div class="post-content">/ { getline; print }' \
-        | grep -Po "${DOMAIN_REGEX}" > source_results.tmp
+        | grep -Po "${DOMAIN_REGEX}" > "$source_results"
 }
 
 # Entry point
