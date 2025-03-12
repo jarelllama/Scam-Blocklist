@@ -28,9 +28,7 @@ main() {
     else
         readonly USE_EXISTING_RESULTS=false
         mkdir -p data/pending
-    fi
 
-    if [[ "$USE_EXISTING_RESULTS" == false ]]; then
         # These dependencies are required by some sources
 
         # Install jq
