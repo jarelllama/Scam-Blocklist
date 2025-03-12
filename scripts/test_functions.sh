@@ -393,13 +393,16 @@ test_processing_dead() {
     output '' "$RAW_LIGHT"
     output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
 
-    # Test of dead domains
+    # Test processing of dead domains
     input abcdead-domain-test.com "$RAW"
     input abcdead-domain-test.com dead_domains.tmp
     output abcdead-domain-test.com "$DEAD_DOMAINS"
     output '' "$RAW"
     output '' "$RAW_LIGHT"
     output dead_count,1,raw "$DOMAIN_LOG"
+
+    # DEBUG
+    cat dead_domains.tmp
 }
 
 # Test removal of known parked domains

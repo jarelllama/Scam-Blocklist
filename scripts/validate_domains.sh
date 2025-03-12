@@ -98,7 +98,7 @@ process_resurrected_domains() {
 process_dead_domains() {
     local count_before count_after dead_count
 
-    # dead_domains.txt can be manually created for testing
+    # dead_domains.tmp can be manually created for testing
     if [[ ! -f dead_domains.tmp ]]; then
         # Get dead domains from jarelllama/Dead-Domains
         curl -sSL --retry 2 --retry-all-errors "$DEAD_DOMAINS_URL" \
@@ -115,7 +115,7 @@ process_dead_domains() {
     comm -23 "$RAW" <(sort "$DEAD_DOMAINS") > temp
     mv temp "$RAW"
 
-    # Remove dead domains from the the raw light file
+    # Remove dead domains from the raw light file
     comm -23 "$RAW_LIGHT" <(sort "$DEAD_DOMAINS") > temp
     mv temp "$RAW_LIGHT"
 
