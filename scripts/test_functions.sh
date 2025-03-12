@@ -199,9 +199,6 @@ TEST_DEAD_CHECK() {
     input abcdead-domain-test.com
     output abcdead-domain-test.com dead_domains.txt
 
-    # DEBUG
-    cat input.txt
-
     # Run script
     #run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
     run_script check_dead.sh --check-dead-part-1 input.txt
@@ -210,6 +207,9 @@ TEST_DEAD_CHECK() {
     # Remove placeholder lines
     mawk '!/^placeholder/' dead_domains.txt > temp
     mv temp dead_domains.txt
+
+    # DEBUG
+    cat dead_domains.txt
 
     check_output
 }
