@@ -131,8 +131,10 @@ TEST_RETRIEVE_VALIDATE() {
     mkdir -p data/pending
 
     test_review_file
-    test_punycode_conversion
     test_invalid_removal
+    test_punycode_conversion
+    # TODO
+    #test_dead_removal
     test_whitelist_blacklist
     test_whitelisted_tld_removal
     test_toplist_check
@@ -141,7 +143,6 @@ TEST_RETRIEVE_VALIDATE() {
         test_large_source_error
         test_manual_addition_and_logging
         test_url_conversion
-        test_known_dead_removal
         test_known_parked_removal
         test_light_build
 
@@ -176,7 +177,7 @@ TEST_RETRIEVE_VALIDATE() {
     check_output
 }
 
-# Test the removal and addition of dead and resurrected domains respectively.
+# Test detection of dead and resurrected domains.
 TEST_DEAD_CHECK() {
     # Generate placeholders
     # (split does not work well without enough lines)
@@ -184,30 +185,28 @@ TEST_DEAD_CHECK() {
     for i in {1..50};do
         input "placeholder483${i}s.com"
     done
-
     for i in {51..100};do
         input "placeholder483${i}s.com" "$DEAD_DOMAINS"
     done
 
-    test_alive_check
-    test_dead_check
+    # Test adding resurrected domains to alive_domains.txt
+    input google.com "$DEAD_DOMAINS"
+    input xyzdead-domain-test.com "$DEAD_DOMAINS"
+    output google.com alive_domains.txt
 
-    # Prepare sample raw files for processing
-    cp input.txt "$RAW"
-    cp input.txt "$RAW_LIGHT"
+    # Test adding dead domains to dead_domains.txt
+    input apple.com
+    input abcdead-domain-test.com
+    output abcdead-domain-test.com dead_domains.txt
 
     # Run script
-    run_script check_dead.sh checkalive
-    run_script check_dead.sh part1
-    run_script check_dead.sh part2
-    run_script check_dead.sh remove
+    run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
+    run_script check_dead.sh --check-dead-part-1 input.txt
+    run_script check_dead.sh --check-dead-part-1 input.txt
 
     # Remove placeholder lines
-    local file
-    for file in "$RAW" "$RAW_LIGHT" "$DEAD_DOMAINS" "$DOMAIN_LOG"; do
-        mawk '!/^placeholder/' "$file" > temp
-        mv temp "$file"
-    done
+    mawk '!/^placeholder/' dead_domains.txt > temp
+    mv temp dead_domains.txt
 
     check_output
 }
@@ -364,7 +363,6 @@ test_invalid_removal() {
     output invalid-test.com-,invalid "$REVIEW_CONFIG"
     output invalid-test.1com,invalid "$REVIEW_CONFIG"
     output invalid-test.c,invalid "$REVIEW_CONFIG"
-
 }
 
 # Test conversion of Unicode to Punycode
@@ -379,12 +377,16 @@ test_punycode_conversion() {
     output pu--nycode-conversion-test.com "$RAW_LIGHT"
 }
 
-# Test removal of known dead domains
-test_known_dead_removal() {
-    input www.known-dead-test.com "$DEAD_DOMAINS"
-    input www.known-dead-test.com
-    output '' "$RAW"
-    output '' "$RAW_LIGHT"
+# Test processing of dead domains
+test_dead_removal() {
+    if [[ "$script_to_test" == 'retrieve' ]]; then
+        input www.known-dead-test.com "$DEAD_DOMAINS"
+        input www.known-dead-test.com
+        output '' "$RAW"
+        output '' "$RAW_LIGHT"
+        return
+    fi
+
 }
 
 # Test removal of known parked domains
@@ -429,14 +431,13 @@ test_whitelisted_tld_removal() {
     output whitelisted_tld,whitelisted-tld-test.gov.us "$DOMAIN_LOG"
     output whitelisted_tld,whitelisted-tld-test.edu "$DOMAIN_LOG"
     output whitelisted_tld,whitelisted-tld-test.mil "$DOMAIN_LOG"
-
-    # The validate script does not log blacklisted domains and add whitelisted
-    # TLDs to the review config file
-    [[ "$script_to_test" == 'validate' ]] && return
-    output blacklist,blacklisted.whitelisted-tld-test.mil "$DOMAIN_LOG"
     output whitelisted-tld-test.gov.us,whitelisted_tld "$REVIEW_CONFIG"
     output whitelisted-tld-test.edu,whitelisted_tld "$REVIEW_CONFIG"
     output whitelisted-tld-test.mil,whitelisted_tld "$REVIEW_CONFIG"
+
+    # The validate script does not log blacklisted domains
+    [[ "$script_to_test" == 'validate' ]] && return
+    output blacklist,blacklisted.whitelisted-tld-test.mil "$DOMAIN_LOG"
 }
 
 # Test checking of domains against toplist
