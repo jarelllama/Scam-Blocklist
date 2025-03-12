@@ -384,16 +384,21 @@ test_processing_dead() {
         return
     fi
 
-    # Test addition of resurrected domains
+    # Test processing of resurrected domains
+    input google.com "$DEAD_DOMAINS"
     input google.com alive_domains.tmp
     output google.com "$RAW"
+    output '' "$DEAD_DOMAINS"
     # Resurrected domains should not be added to the light version
     output '' "$RAW_LIGHT"
     output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
 
-    # Test removal of dead domains
+    # Test of dead domains
+    input abcdead-domain-test.com "$RAW"
     input abcdead-domain-test.com dead_domains.tmp
     output abcdead-domain-test.com "$DEAD_DOMAINS"
+    output '' "$RAW"
+    output '' "$RAW_LIGHT"
     output dead_count,1,raw "$DOMAIN_LOG"
 }
 
