@@ -105,6 +105,9 @@ process_dead_domains() {
             -o dead_domains.tmp
     fi
 
+    # DEBUG
+    cat dead_domains.tmp
+
     # Collate dead domains that are found in the raw file to the dead domains
     # file
     comm -12 dead_domains.tmp "$RAW" >> "$DEAD_DOMAINS"

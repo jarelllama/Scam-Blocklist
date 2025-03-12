@@ -400,9 +400,6 @@ test_processing_dead() {
     output '' "$RAW"
     output '' "$RAW_LIGHT"
     output dead_count,1,raw "$DOMAIN_LOG"
-
-    # DEBUG
-    cat dead_domains.tmp
 }
 
 # Test removal of known parked domains
