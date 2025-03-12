@@ -385,14 +385,14 @@ test_processing_dead() {
     fi
 
     # Test addition of resurrected domains
-    input google.com alive_domains.txt
+    input google.com alive_domains.tmp
     output google.com "$RAW"
     # Resurrected domains should not be added to the light version
     output '' "$RAW_LIGHT"
     output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
 
     # Test removal of dead domains
-    input abcdead-domain-test.com dead_domains.txt
+    input abcdead-domain-test.com dead_domains.tmp
     output abcdead-domain-test.com "$DEAD_DOMAINS"
     output dead_count,1,raw "$DOMAIN_LOG"
 }
