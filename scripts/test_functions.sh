@@ -190,9 +190,9 @@ TEST_DEAD_CHECK() {
     done
 
     # Test adding resurrected domains to alive_domains.txt
-    #input google.com "$DEAD_DOMAINS"
-    #input xyzdead-domain-test.com "$DEAD_DOMAINS"
-    #output google.com alive_domains.txt
+    input google.com "$DEAD_DOMAINS"
+    input xyzdead-domain-test.com "$DEAD_DOMAINS"
+    output google.com alive_domains.txt
 
     # Test adding dead domains to dead_domains.txt
     input apple.com
@@ -200,7 +200,7 @@ TEST_DEAD_CHECK() {
     output abcdead-domain-test.com dead_domains.txt
 
     # Run script
-    #run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
+    run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
     run_script check_dead.sh --check-dead-part-1 input.txt
     run_script check_dead.sh --check-dead-part-2 input.txt
 
