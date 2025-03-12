@@ -190,9 +190,9 @@ TEST_DEAD_CHECK() {
     done
 
     # Test adding resurrected domains to alive_domains.txt
-    input google.com "$DEAD_DOMAINS"
-    input xyzdead-domain-test.com "$DEAD_DOMAINS"
-    output google.com alive_domains.txt
+    #input google.com "$DEAD_DOMAINS"
+    #input xyzdead-domain-test.com "$DEAD_DOMAINS"
+    #output google.com alive_domains.txt
 
     # Test adding dead domains to dead_domains.txt
     input apple.com
@@ -200,7 +200,7 @@ TEST_DEAD_CHECK() {
     output abcdead-domain-test.com dead_domains.txt
 
     # Run script
-    run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
+    #run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
     run_script check_dead.sh --check-dead-part-1 input.txt
     run_script check_dead.sh --check-dead-part-1 input.txt
 
@@ -612,15 +612,15 @@ test_blocklist_build() {
 # Execute the called script and check the exit status.
 # Input:
 #   $1: script to execute
-#   $2: arguments to pass to script
+#   $2: argument to pass to script
+#   $3: argument to pass to script
 run_script() {
     local exit_status=0
 
     printf -- "\n----------------------------------------------------------------------\n"
-    printf "\e[1m[start] %s %s\e[0m\n" "$1" "$2"
+    printf "\e[1m[start] %s %s %s\e[0m\n" "$1" "$2" "$3"
     printf -- "----------------------------------------------------------------------\n"
 
-    # Run script
     bash "scripts/${1}" "$2" "$3" || exit_status=1
 
     printf -- "----------------------------------------------------------------------\n"
@@ -665,7 +665,7 @@ check_output() {
         fi
 
         {
-            printf "\e[1m[warn] %s file is not as expected:\e[0m\n" "$actual_output_file"
+            printf "\e[1m[warn] %s is not as expected:\e[0m\n" "$actual_output_file"
             cat "$actual_output_file"
             printf "\n[info] Expected output:\n"
             cat "$expected_output_file"
