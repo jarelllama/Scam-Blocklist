@@ -27,7 +27,7 @@ main() {
         npm install -g @adguard/dead-domains-linter > /dev/null
     fi
 
-    # For dead check, split the file into 2 parts for each GitHub job
+    # Split the file into 2 parts for each GitHub job if requested
     if [[ "$ARGUMENT" == --check-dead-part-? ]]; then
         split -d -l "$(( $(wc -l < "$FILE") / 2 ))" "$FILE"
     fi
