@@ -11,13 +11,11 @@
 #                           file. should only be ran after part 1
 #   $2: file to process
 # Output:
-#   $ALIVE_DOMAINS, for resurrected domains check
-#   $DEAD_DOMAINS, for dead domains check
+#   alive_domains.txt, for resurrected domains check
+#   dead_domains.txt, for dead domains check
 
 readonly ARGUMENT="$1"
 readonly FILE="$2"
-readonly ALIVE_DOMAINS='alive_domains.txt'
-readonly DEAD_DOMAINS='dead_domains.txt'
 
 main() {
     [[ ! -f "$FILE" ]] && error "File $FILE not found"
@@ -35,17 +33,17 @@ main() {
     case "$ARGUMENT" in
         --check-alive)
             find_dead_in "$FILE"
-            comm -23 <(sort -u "$FILE") dead.tmp > "$ALIVE_DOMAINS"
+            comm -23 <(sort -u "$FILE") dead.tmp > alive_domains.txt
             ;;
 
         --check-dead)
             find_dead_in "$FILE"
-            sort -u dead.tmp -o "$DEAD_DOMAINS"
+            sort -u dead.tmp -o dead_domains.txt
             ;;
 
         --check-dead-part-1)
             find_dead_in x00
-            sort -u dead.tmp -o "$DEAD_DOMAINS"
+            sort -u dead.tmp -o dead_domains.txt
             ;;
 
         --check-dead-part-2)
@@ -55,7 +53,7 @@ main() {
             find_dead_in x01
             # Append the dead domains since the dead domains file
             # contains dead domains from part 1.
-            sort -u dead.tmp "$DEAD_DOMAINS" -o "$DEAD_DOMAINS"
+            sort -u dead.tmp dead_domains.txt -o dead_domains.txt
             ;;
 
         *)

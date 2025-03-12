@@ -133,8 +133,7 @@ TEST_RETRIEVE_VALIDATE() {
     test_review_file
     test_invalid_removal
     test_punycode_conversion
-    # TODO
-    #test_dead_removal
+    test_processing_dead
     test_whitelist_blacklist
     test_whitelisted_tld_removal
     test_toplist_check
@@ -179,28 +178,25 @@ TEST_RETRIEVE_VALIDATE() {
 
 # Test detection of dead and resurrected domains.
 TEST_DEAD_CHECK() {
-    # Generate placeholders
-    # (split does not work well without enough lines)
     local i
-    for i in {1..50};do
-        input "placeholder483${i}s.com"
-    done
-    for i in {51..100};do
-        input "placeholder483${i}s.com" "$DEAD_DOMAINS"
-    done
 
     # Test adding resurrected domains to alive_domains.txt
+    # Generate placeholders for split
+    for i in {1..50}; do input "placeholder483${i}s.com" "$DEAD_DOMAINS"; done
     input google.com "$DEAD_DOMAINS"
     input xyzdead-domain-test.com "$DEAD_DOMAINS"
     output google.com alive_domains.txt
 
     # Test adding dead domains to dead_domains.txt
+    # Generate placeholders for split
+    for i in {51..100}; do input "placeholder483${i}s.com"; done
     input apple.com
     input abcdead-domain-test.com
     output abcdead-domain-test.com dead_domains.txt
 
     # Run script
     run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
+    # Test using 2 parts for each GitHub Job
     run_script check_dead.sh --check-dead-part-1 input.txt
     run_script check_dead.sh --check-dead-part-2 input.txt
 
@@ -377,8 +373,9 @@ test_punycode_conversion() {
     output pu--nycode-conversion-test.com "$RAW_LIGHT"
 }
 
-# Test processing of dead domains
-test_dead_removal() {
+# Test processing of dead domains and resurrected domains
+test_processing_dead() {
+    # The retrieve script only removes known dead domains from the results
     if [[ "$script_to_test" == 'retrieve' ]]; then
         input www.known-dead-test.com "$DEAD_DOMAINS"
         input www.known-dead-test.com
@@ -387,6 +384,17 @@ test_dead_removal() {
         return
     fi
 
+    # Test addition of resurrected domains
+    input google.com alive_domains.txt
+    output google.com "$RAW"
+    # Resurrected domains should not be added to the light version
+    output '' "$RAW_LIGHT"
+    output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
+
+    # Test removal of dead domains
+    input abcdead-domain-test.com dead_domains.txt
+    output abcdead-domain-test.com "$DEAD_DOMAINS"
+    output dead_count,1,raw "$DOMAIN_LOG"
 }
 
 # Test removal of known parked domains
@@ -467,30 +475,6 @@ test_light_build() {
     input raw-light-test.com data/pending/Jeroengui.tmp
     output raw-light-test.com "$RAW"
     output '' "$RAW_LIGHT"
-}
-
-### DEAD CHECK TESTS
-
-# Test addition of resurrected domains
-test_alive_check() {
-    input google.com "$DEAD_DOMAINS"
-    input xyzdead-domain-test.com "$DEAD_DOMAINS"
-    output google.com "$RAW"
-    # Resurrected domains should not be added to the light version
-    output '' "$RAW_LIGHT"
-    output xyzdead-domain-test.com "$DEAD_DOMAINS"
-    output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
-}
-
-# Test removal of dead domains
-test_dead_check() {
-    input apple.com
-    input abcdead-domain-test.com
-    output apple.com "$RAW"
-    output apple.com "$RAW_LIGHT"
-    output abcdead-domain-test.com "$DEAD_DOMAINS"
-    # Dead count is 51 because of the placeholder lines
-    output dead_count,51,raw "$DOMAIN_LOG"
 }
 
 ### PARKED CHECK TESTS
