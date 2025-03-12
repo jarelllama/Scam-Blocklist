@@ -61,7 +61,8 @@ main() {
         NR==FNR {
             lines[$0]
             next
-        } $0 in lines && $0 ~ blacklist
+        }
+        $0 in lines && $0 ~ blacklist
     ' "$RAW" toplist.tmp | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
     build '' "$RAW" scams.txt
