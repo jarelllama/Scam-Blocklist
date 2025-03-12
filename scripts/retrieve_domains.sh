@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Retrieve domains from the sources, process them and output a raw file
+# Retrieve domains from the sources, process them, and output a raw file
 # that contains the cumulative domains from all sources over time.
 
 readonly FUNCTION='bash scripts/tools.sh'
@@ -28,8 +28,6 @@ main() {
     else
         readonly USE_EXISTING_RESULTS=false
         mkdir -p data/pending
-
-        # These dependencies are required by some sources
 
         # Install jq
         command -v jq > /dev/null || apt-get install -qq jq
@@ -65,7 +63,7 @@ main() {
 retrieve_source_results() {
     local source_results source_function execution_time
 
-    # Get only enabled sources
+    # Loop through enabled sources
     # The while loop sets source_name as local
     while read -r source_name; do
         # Initialize source variables
@@ -87,8 +85,6 @@ retrieve_source_results() {
 
         # Run the Manual source
         if [[ "$source_name" == 'Manual' ]]; then
-            # Skip to next source if no results to add manually
-            [[ ! -f "$source_results" ]] && continue
             printf "\n\e[1mSource: Manual\e[0m\n"
             execution_time="$(date +%s)"
             process_source_results
