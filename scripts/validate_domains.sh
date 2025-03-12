@@ -106,7 +106,9 @@ process_dead_domains() {
     fi
 
     # DEBUG
-    cat dead_domains.tmp
+    echo
+    comm -12 dead_domains.tmp "$RAW"
+    echo
 
     # Collate dead domains that are found in the raw file to the dead domains
     # file
