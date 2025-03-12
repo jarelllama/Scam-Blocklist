@@ -394,7 +394,7 @@ test_processing_dead() {
     output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
 
     # Test processing of dead domains
-    input abcdead-domain-test.com "$RAW"
+    input abcdead-domain-test.com
     input abcdead-domain-test.com dead_domains.tmp
     output abcdead-domain-test.com "$DEAD_DOMAINS"
     output '' "$RAW"
