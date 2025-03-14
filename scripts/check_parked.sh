@@ -44,7 +44,7 @@ main() {
             ;;
 
         --check-parked-part-1)
-            find_dead_in xaa
+            find_parked_in xaa
             sort -u parked.tmp -o parked_domains.txt
             ;;
 
@@ -52,7 +52,7 @@ main() {
             # Sometimes an xac exists
             [[ -f xac ]] && cat xac >> xab
 
-            find_dead_in xab
+            find_parked_in xab
             # Append the parked domains since the parked domains file
             # should contain parked domains from part 1.
             sort -u parked.tmp parked_domains.txt -o parked_domains.txt

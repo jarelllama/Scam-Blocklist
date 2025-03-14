@@ -472,16 +472,19 @@ test_whitelisted_tld_removal() {
     output whitelisted-tld-test.edu,whitelisted_tld "$REVIEW_CONFIG"
     output whitelisted-tld-test.mil,whitelisted_tld "$REVIEW_CONFIG"
 
-    # The validate script does not remove domains with whitelisted TLDs nor
-    # log blacklisted domains
-    [[ "$script_to_test" == 'validate' ]] && return
+    # The retrieve script logs blacklisted domains and removes domains with
+    # whitelisted TLDs from the results
+    if [[ "$script_to_test" == 'retrieve' ]]; then
+        output blacklist,blacklisted.whitelisted-tld-test.mil "$DOMAIN_LOG"
+        return
+    fi
+
     output whitelisted-tld-test.gov.us "$RAW"
     output whitelisted-tld-test.edu "$RAW"
     output whitelisted-tld-test.mil "$RAW"
     output whitelisted-tld-test.gov.us "$RAW_LIGHT"
     output whitelisted-tld-test.edu "$RAW_LIGHT"
     output whitelisted-tld-test.mil "$RAW_LIGHT"
-    output blacklist,blacklisted.whitelisted-tld-test.mil "$DOMAIN_LOG"
 }
 
 # Test checking of domains against toplist
