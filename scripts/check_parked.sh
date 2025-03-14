@@ -23,7 +23,10 @@ readonly PARKED_TERMS='parked_terms.txt'
 
 main() {
     [[ ! -f "$FILE" ]] && error "File $FILE not found."
-    [[ ! -f "$PARKED_TERMS" ]] && error 'Parked terms not found.'
+    [[ ! -s "$PARKED_TERMS" ]] && error 'Parked terms not found.'
+
+    # DEBUG
+    cat "$PARKED_TERMS"
 
     # Split the file into 2 parts for each GitHub job if requested
     if [[ "$ARGUMENT" == --check-parked-part-? ]]; then

@@ -237,12 +237,6 @@ TEST_PARKED_CHECK() {
     run_script check_parked.sh --check-parked-part-1 input.txt
     run_script check_parked.sh --check-parked-part-2 input.txt
 
-    # Remove placeholder lines
-    #mawk '!/^placeholder/' unparked_domains.txt > temp
-    #mv temp unparked_domains.txt
-    #mawk '!/^placeholder/' parked_domains.txt > temp
-    #mv temp parked_domains.txt
-
     # DEBUG
     echo
     cat unparked_domains.txt
