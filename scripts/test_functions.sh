@@ -243,6 +243,13 @@ TEST_PARKED_CHECK() {
     #mawk '!/^placeholder/' parked_domains.txt > temp
     #mv temp parked_domains.txt
 
+    # DEBUG
+    echo
+    cat unparked_domains.txt
+    echo
+    cat parked_domains.txt
+    echo
+
     check_output
 }
 
