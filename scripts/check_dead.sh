@@ -52,7 +52,7 @@ main() {
 
             find_dead_in x01
             # Append the dead domains since the dead domains file
-            # contains dead domains from part 1.
+            # should contain dead domains from part 1.
             sort -u dead.tmp dead_domains.txt -o dead_domains.txt
             ;;
 
@@ -100,7 +100,7 @@ find_dead() {
     [[ ! -s "$1" ]] && return
 
     # Format to Adblock Plus syntax for Dead Domains Linter
-    # Use variable filename to avoid filename clashes
+    # Use a variable filename to avoid filename clashes
     mawk '{ print "||" $0 "^" }' "$1" > "${1}.tmp"
 
     dead-domains-linter -i "${1}.tmp" --export "dead_${1}.tmp"
