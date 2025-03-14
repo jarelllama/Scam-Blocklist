@@ -5,12 +5,15 @@
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
+readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 readonly ALIVE_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/scripts/alive_domains.tmp'
 readonly DEAD_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/scripts/dead_domains.txt'
+readonly PARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked-Domains/refs/heads/main/scripts/parked_domains.txt'
+readonly UNPARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked-Domains/refs/heads/main/scripts/unparked_domains.tmp'
 
 main() {
     $FUNCTION --download-toplist
@@ -20,6 +23,10 @@ main() {
     process_resurrected_domains
 
     process_dead_domains
+
+    process_unparked_domains
+
+    process_parked_domains
 
     validate_raw_file
 }
@@ -61,6 +68,7 @@ filter() {
 
 process_resurrected_domains() {
     local count_before count_after resurrected_count
+    local size=75000
 
     # alive_domains.tmp can be manually created for testing
     if [[ ! -f alive_domains.tmp ]]; then
@@ -93,6 +101,9 @@ process_resurrected_domains() {
 
     $FUNCTION --log-domains "$resurrected_count" resurrected_count\
         dead_domains_file
+
+    # Prune the dead domains file to keep it within a certain size
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" "$size"
 }
 
 process_dead_domains() {
@@ -126,6 +137,79 @@ process_dead_domains() {
     printf "\nRemoved %s dead domains from the raw file.\n" "$dead_count"
 
     $FUNCTION --log-domains "$dead_count" dead_count raw
+}
+
+process_unparked_domains() {
+    local count_before count_after unparked_count
+    local size=75000
+
+    # unparked_domains.tmp can be manually created for testing
+    if [[ ! -f unparked_domains.tmp ]]; then
+        # Get unparked domains from jarelllama/Parked-Domains
+        curl -sSL --retry 2 --retry-all-errors "$UNPARKED_DOMAINS_URL" \
+            -o unparked_domains.tmp
+    fi
+
+    count_before="$(wc -l < "$RAW")"
+
+    # Get only unparked domains found in the parked domains file. Add them to
+    # the raw file and remove them from the parked domains file.
+    comm -12 unparked_domains.tmp "$PARKED_DOMAINS" \
+        | tee >(sort -u - "$RAW" -o "$RAW") \
+        | mawk '
+            NR==FNR {
+                lines[$0]
+                next
+            }
+            !($0 in lines)
+        ' - "$PARKED_DOMAINS" > temp
+    mv temp "$PARKED_DOMAINS"
+
+    count_after="$(wc -l < "$RAW")"
+
+    unparked_count="$(( count_after - count_before ))"
+
+    printf "\nAdded %s unparked domains to the raw file.\n" \
+        "$unparked_count"
+
+    $FUNCTION --log-domains "$unparked_count" unparked_count\
+        parked_domains_file
+
+    # Prune the parked domains file to keep it within a certain size
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" "$size"
+}
+
+process_parked_domains() {
+    local count_before count_after parked_count
+
+    # parked_domains.tmp can be manually created for testing
+    if [[ ! -f parked_domains.tmp ]]; then
+        # Get parked domains from jarelllama/Parked-Domains
+        curl -sSL --retry 2 --retry-all-errors "$PARKED_DOMAINS_URL" \
+            -o parked_domains.tmp
+    fi
+
+    # Collate parked domains that are found in the raw file to the parked
+    # domains file
+    comm -12 parked_domains.tmp "$RAW" >> "$PARKED_DOMAINS"
+
+    count_before="$(wc -l < "$RAW")"
+
+    # Remove parked domains from the raw file
+    comm -23 "$RAW" <(sort "$PARKED_DOMAINS") > temp
+    mv temp "$RAW"
+
+    # Remove parked domains from the raw light file
+    comm -23 "$RAW_LIGHT" <(sort "$PARKED_DOMAINS") > temp
+    mv temp "$RAW_LIGHT"
+
+    count_after="$(wc -l < "$RAW")"
+
+    parked_count="$(( count_before - count_after ))"
+
+    printf "\nRemoved %s parked domains from the raw file.\n" "$parked_count"
+
+    $FUNCTION --log-domains "$parked_count" parked_count raw
 }
 
 validate_raw_file() {

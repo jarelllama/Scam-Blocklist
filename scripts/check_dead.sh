@@ -11,8 +11,8 @@
 #                           file. should only be ran after part 1
 #   $2: file to process
 # Output:
-#   alive_domains.txt, for resurrected domains check
-#   dead_domains.txt, for dead domains check
+#   alive_domains.txt (for resurrected domains check)
+#   dead_domains.txt (for dead domains check)
 
 readonly ARGUMENT="$1"
 readonly FILE="$2"
@@ -27,7 +27,7 @@ main() {
 
     # Split the file into 2 parts for each GitHub job if requested
     if [[ "$ARGUMENT" == --check-dead-part-? ]]; then
-        split -d -l "$(( $(wc -l < "$FILE") / 2 ))" "$FILE"
+        split -l "$(( $(wc -l < "$FILE") / 2 ))" "$FILE"
     fi
 
     case "$ARGUMENT" in
@@ -42,15 +42,15 @@ main() {
             ;;
 
         --check-dead-part-1)
-            find_dead_in x00
+            find_dead_in xaa
             sort -u dead.tmp -o dead_domains.txt
             ;;
 
         --check-dead-part-2)
-            # Sometimes an x02 exists
-            [[ -f x02 ]] && cat x02 >> x01
+            # Sometimes an xac exists
+            [[ -f xac ]] && cat xac >> xab
 
-            find_dead_in x01
+            find_dead_in xab
             # Append the dead domains since the dead domains file
             # should contain dead domains from part 1.
             sort -u dead.tmp dead_domains.txt -o dead_domains.txt
@@ -76,12 +76,12 @@ find_dead_in() {
     printf "[start] Analyzing %s entries for dead domains\n" "$(wc -l < "$1")"
 
     # Split the file into 2 equal parts
-    split -l "$(( $(wc -l < "$1") / 2 ))" "$1"
-    # Sometimes an xac exists
-    [[ -f xac ]] && cat xac >> xab
+    split -d -l "$(( $(wc -l < "$1") / 2 ))" "$1"
+    # Sometimes an x02 exists
+    [[ -f x02 ]] && cat x02 >> x01
 
     # Run checks in parallel
-    find_dead xaa & find_dead xab
+    find_dead x00 & find_dead x01
     wait
 
     sort -u dead_x??.tmp -o dead.tmp

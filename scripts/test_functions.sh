@@ -134,6 +134,7 @@ TEST_RETRIEVE_VALIDATE() {
     test_invalid_removal
     test_punycode_conversion
     test_processing_dead
+    test_processing_parked
     test_whitelist_blacklist
     test_whitelisted_tld_removal
     test_toplist_check
@@ -142,7 +143,6 @@ TEST_RETRIEVE_VALIDATE() {
         test_large_source_error
         test_manual_addition_and_logging
         test_url_conversion
-        test_known_parked_removal
         test_light_build
 
         # Distribute the test input into various sources
@@ -180,15 +180,16 @@ TEST_RETRIEVE_VALIDATE() {
 TEST_DEAD_CHECK() {
     local i
 
+    # Placeholders are used to avoid errors when there are not enough entries
+    # for split.
+
     # Test adding resurrected domains to alive_domains.txt
-    # Generate placeholders for split
     for i in {1..50}; do input "placeholder483${i}s.com" "$DEAD_DOMAINS"; done
     input google.com "$DEAD_DOMAINS"
     input xyzdead-domain-test.com "$DEAD_DOMAINS"
     output google.com alive_domains.txt
 
     # Test adding dead domains to dead_domains.txt
-    # Generate placeholders for split
     for i in {51..100}; do input "placeholder483${i}s.com"; done
     input apple.com
     input abcdead-domain-test.com
@@ -207,38 +208,38 @@ TEST_DEAD_CHECK() {
     check_output
 }
 
-# Test the removal and addition of parked and unparked domains respectively.
+# Test detection of parked and unparked domains.
 TEST_PARKED_CHECK() {
-    # Generate placeholders
-    # (split does not work well without enough lines)
     local i
-    for i in {1..100};do
-        input "placeholder483${i}s.com"
-    done
 
-    for i in {101..200};do
-        input "placeholder483${i}s.com" "$PARKED_DOMAINS"
-    done
+    # Placeholders are used to avoid errors when there are not enough entries
+    # for split.
 
-    test_unparked_check
-    test_parked_check
+    # Test adding unparked domains to unparked_domains.txt
+    for i in {1..50}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
+    input github.com "$PARKED_DOMAINS"
+    # Test that domains that errored during curl are still assumed to be parked
+    input parked-errored-test.com "$PARKED_DOMAINS"
+    output github.com unparked_domains.txt
 
-    # Prepare sample raw files for processing
-    cp input.txt "$RAW"
-    cp input.txt "$RAW_LIGHT"
+    # Test adding parked domains to parked_domains.txt
+    for i in {51..100}; do input "placeholder483${i}s.com"; done
+    input apple.com
+    # Subfolder used here for easier testing despite being an invalid entry
+    input porkbun.com/parked
+    output porkbun.com/parked parked_domains.txt
 
     # Run script
-    run_script check_parked.sh checkunparked
-    run_script check_parked.sh part1
-    run_script check_parked.sh part2
-    run_script check_parked.sh remove
+    run_script check_parked.sh --check-unparked "$PARKED_DOMAINS"
+    # Test using 2 parts for each GitHub Job
+    run_script check_parked.sh --check-unparked-part-1 input.txt
+    run_script check_parked.sh --check-unparked-part-2 input.txt
 
     # Remove placeholder lines
-    local file
-    for file in "$RAW" "$RAW_LIGHT" "$PARKED_DOMAINS" "$DOMAIN_LOG"; do
-        mawk '!/^placeholder/' "$file" > temp
-        mv temp "$file"
-    done
+    mawk '!/^placeholder/' unparked_domains.txt > temp
+    mv temp unparked_domains.txt
+    mawk '!/^placeholder/' parked_domains.txt > temp
+    mv temp parked_domains.txt
 
     check_output
 }
@@ -387,8 +388,8 @@ test_processing_dead() {
     # Test processing of resurrected domains
     input google.com "$DEAD_DOMAINS"
     input google.com alive_domains.tmp
-    output google.com "$RAW"
     output '' "$DEAD_DOMAINS"
+    output google.com "$RAW"
     # Resurrected domains should not be added to the light version
     output '' "$RAW_LIGHT"
     output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
@@ -402,12 +403,33 @@ test_processing_dead() {
     output dead_count,1,raw "$DOMAIN_LOG"
 }
 
-# Test removal of known parked domains
-test_known_parked_removal() {
-    input www.known-parked-test.com "$PARKED_DOMAINS"
-    input www.known-parked-test.com
+# Test processing of parked domains and unparked domains
+test_processing_parked() {
+    # The retrieve script only removes known parked domains from the results
+    if [[ "$script_to_test" == 'retrieve' ]]; then
+        input www.known-parked-test.com "$PARKED_DOMAINS"
+        input www.known-parked-test.com
+        output '' "$RAW"
+        output '' "$RAW_LIGHT"
+        return
+    fi
+
+    # Test processing of unparked domains
+    input github.com "$PARKED_DOMAINS"
+    input github.com unparked_domains.tmp
+    output '' "$PARKED_DOMAINS"
+    output github.com "$RAW"
+    # Unparked domains should not be added to the light version
+    output '' "$RAW_LIGHT"
+    output unparked_count,1,parked_domains_file "$DOMAIN_LOG"
+
+    # Test processing of parked domains
+    input porkbun.com/parked
+    input porkbun.com/parked parked_domains.tmp
+    output porkbun.com/parked "$PARKED_DOMAINS"
     output '' "$RAW"
     output '' "$RAW_LIGHT"
+    output parked_count,1,raw "$DOMAIN_LOG"
 }
 
 # Test whitelisting and blacklisting entries
@@ -448,8 +470,15 @@ test_whitelisted_tld_removal() {
     output whitelisted-tld-test.edu,whitelisted_tld "$REVIEW_CONFIG"
     output whitelisted-tld-test.mil,whitelisted_tld "$REVIEW_CONFIG"
 
-    # The validate script does not log blacklisted domains
+    # The validate script does not remove domains with whitelisted TLDs nor
+    # log blacklisted domains
     [[ "$script_to_test" == 'validate' ]] && return
+    output whitelisted-tld-test.gov.us "$RAW"
+    output whitelisted-tld-test.edu "$RAW"
+    output whitelisted-tld-test.mil "$RAW"
+    output whitelisted-tld-test.gov.us "$RAW_LIGHT"
+    output whitelisted-tld-test.edu "$RAW_LIGHT"
+    output whitelisted-tld-test.mil "$RAW_LIGHT"
     output blacklist,blacklisted.whitelisted-tld-test.mil "$DOMAIN_LOG"
 }
 

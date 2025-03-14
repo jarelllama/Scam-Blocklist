@@ -1,97 +1,67 @@
 #!/bin/bash
 
-# Check for parked/unparked domains and remove/add them accordingly.
-# It should be noted that although the domain may be parked, subfolders of the
-# domain may host malicious content. This script does not account for that.
+# Check for parked or unparked domains and output them to respective files.
+# Note that although the domain may be parked, subfolders of the domain may
+# host malicious content. This script does not account for that.
+# The parked check can be split into 2 parts to get around GitHub job timeouts.
+# Input:
+#   $1:
+#     --check-unparked:       check for unparked domains in the given file
+#     --check-parked:         check for parked domains in the given file
+#     --check-parked-part-1:  check for parked domains in one half of the file
+#     --check-parked-part-2:  check for parked domains in the other half of the
+#                             file. should only be ran after part 1
+#   $2:                file to process
+#   parked_terms.txt:  list of parked terms to check for
+# Output:
+#   unparked_domains.txt (for unparked domains check)
+#   parked_domains.txt (for parked domains check)
 
-readonly FUNCTION='bash scripts/tools.sh'
-readonly PARKED_DOMAINS='data/parked_domains.txt'
-readonly RAW='data/raw.txt'
-readonly RAW_LIGHT='data/raw_light.txt'
-readonly PARKED_TERMS='config/parked_terms.txt'
-readonly LOG_SIZE=75000
+readonly ARGUMENT="$1"
+readonly FILE="$2"
+readonly PARKED_TERMS='parked_terms.txt'
 
 main() {
-    # Split raw file into 2 parts for each parked check job
-    if [[ "$1" == part? ]]; then
-        split -d -l "$(( $(wc -l < "$RAW") / 2 ))" "$RAW"
+    [[ ! -f "$FILE" ]] && error "File $FILE not found"
+
+    # Split the file into 2 parts for each GitHub job if requested
+    if [[ "$ARGUMENT" == --check-parked-part-? ]]; then
+        split -l "$(( $(wc -l < "$FILE") / 2 ))" "$FILE"
     fi
 
-    # The parked check consists of multiple parts to get around the time limit
-    # of GitHub jobs.
-    case "$1" in
-        checkunparked)
-            # The unparked check being done in the workflow before the parked
-            # check means the recently added unparked domains are processed by
-            # the parked check while the recently added parked domains are not
-            # processed by the unparked check.
-            check_unparked
+    case "$ARGUMENT" in
+        --check-unparked)
+            find_parked_in "$FILE"
+
+            # Assume domains that errored out during the check are still parked
+            comm -23 <(sort -u "$FILE") <(sort -u errored.tmp parked.tmp) \
+                > unparked_domains.txt
             ;;
-        part1)
-            check_parked x00
+
+        --check-parked)
+            find_parked_in "$FILE"
+            sort -u parked.tmp -o parked_domains.txt
             ;;
-        part2)
-            # Sometimes an x02 exists
-            [[ -f x02 ]] && cat x02 >> x01
-            check_parked x01
+
+        --check-parked-part-1)
+            find_dead_in xaa
+            sort -u parked.tmp -o parked_domains.txt
             ;;
-        remove)
-            remove_parked
+
+        --check-parked-part-2)
+            # Sometimes an xac exists
+            [[ -f xac ]] && cat xac >> xab
+
+            find_dead_in xab
+            # Append the parked domains since the parked domains file
+            # should contain parked domains from part 1.
+            sort -u parked.tmp parked_domains.txt -o parked_domains.txt
             ;;
+
         *)
-            error "Invalid argument passed: $1"
+            error "Invalid argument passed: $ARGUMENT"
             ;;
     esac
-
-    $FUNCTION --prune-lines "$PARKED_DOMAINS" "$LOG_SIZE"
-}
-
-# Find parked domains and collate them into the parked domains file to be
-# removed later. The parked domains file is also used as a filter for newly
-# retrieved domains.
-# Input
-#   $1: file to check for parked domains in
-check_parked() {
-    # Exclude parked already in the parked domains file but not yet removed
-    comm -23 "$1" <(sort "$PARKED_DOMAINS") > domains.tmp
-
-    find_parked_in domains.tmp
-
-    # Save parked domains to be removed from the various files later
-    # and to act as a filter for newly retrieved domains.
-    # Note the parked domains file should remain unsorted.
-    cat parked.tmp >> "$PARKED_DOMAINS"
-}
-
-# Find unparked domains in the parked domains file and add them back into the
-# raw file. Note that unparked domains are not added back into the raw light
-# file as the parked domains are not logged with their sources.
-check_unparked() {
-    find_parked_in "$PARKED_DOMAINS"
-
-    # Assume domains that errored out during the check are still parked
-    sort -u errored.tmp parked.tmp -o parked.tmp
-
-    # Get unparked domains in parked domains file
-    comm -23 <(sort "$PARKED_DOMAINS") parked.tmp > unparked_domains.tmp
-
-    [[ ! -s unparked_domains.tmp ]] && return
-
-    # Add unparked domains to raw file
-    sort -u unparked_domains.tmp "$RAW" -o "$RAW"
-
-    # Update parked domains file to only include parked domains
-    mawk '
-        NR==FNR {
-            lines[$0]
-            next
-        } $0 in lines
-    ' parked.tmp "$PARKED_DOMAINS" > temp
-    mv temp "$PARKED_DOMAINS"
-
-    # Call shell wrapper to log number of unparked domains in domain log
-    $FUNCTION --log-domains "$(wc -l < unparked_domains.tmp)" unparked_count \
-        parked_domains_file
 }
 
 # Efficiently check for parked domains in a given file by running the checks in
@@ -108,7 +78,7 @@ find_parked_in() {
     printf "\n[info] Processing file %s\n" "$1"
     printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
 
-    # Split file into 17 equal files
+    # Split the file into 17 equal files
     split -d -l "$(( $(wc -l < "$1") / 17 ))" "$1"
     # Sometimes an x19 exists
     [[ -f x19 ]] && cat x19 >> x18
@@ -139,7 +109,7 @@ find_parked_in() {
 #   parked_domains_x??.tmp (if parked domains found)
 #   errored_domains_x??.tmp (if any domains errored during curl)
 find_parked() {
-    [[ ! -f "$1" ]] && return
+    [[ ! -s "$1" ]] && return
 
     local track count html
 
@@ -187,33 +157,6 @@ find_parked() {
     done < "$1"
 }
 
-# Remove parked domains from the raw file and raw light file.
-remove_parked() {
-    local count_before count_after parked_count
-
-    count_before="$(wc -l < "$RAW")"
-
-    sort -u "$PARKED_DOMAINS" -o parked.tmp
-
-    # Remove dead domains from the raw file
-    comm -23 "$RAW" parked.tmp > temp
-    mv temp "$RAW"
-
-    # Remove dead domains from the raw light file
-    comm -23 "$RAW_LIGHT" parked.tmp > temp
-    mv temp "$RAW_LIGHT"
-
-    count_after="$(wc -l < "$RAW")"
-
-    parked_count="$(( count_before - count_after ))"
-
-    printf "\nRemoved parked domains from raw file.\nBefore: %s  Removed: %s  After: %s\n" \
-    "$count_before" "$parked_count" "$count_after"
-
-    # Call shell wrapper to log number of parked domains in domain log
-    $FUNCTION --log-domains "$parked_count" parked_count raw
-}
-
 # Print error message and exit.
 # Input:
 #   $1: error message to print
@@ -228,6 +171,4 @@ set -e
 
 trap 'rm ./*.tmp temp x?? 2> /dev/null || true' EXIT
 
-$FUNCTION --format-files
-
-main "$1"
+main "$1" "$2"
