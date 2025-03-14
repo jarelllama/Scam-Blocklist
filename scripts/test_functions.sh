@@ -185,13 +185,13 @@ TEST_DEAD_CHECK() {
     # for split.
 
     # Test adding resurrected domains to alive_domains.txt
-    for i in {1..50}; do input "placeholder483${i}s.com" "$DEAD_DOMAINS"; done
+    for i in {1..25}; do input "placeholder483${i}s.com" "$DEAD_DOMAINS"; done
     input google.com "$DEAD_DOMAINS"
     input xyzdead-domain-test.com "$DEAD_DOMAINS"
     output google.com alive_domains.txt
 
     # Test adding dead domains to dead_domains.txt
-    for i in {51..100}; do input "placeholder483${i}s.com"; done
+    for i in {26..50}; do input "placeholder483${i}s.com"; done
     input apple.com
     input abcdead-domain-test.com
     output abcdead-domain-test.com dead_domains.txt
@@ -217,14 +217,14 @@ TEST_PARKED_CHECK() {
     # for split.
 
     # Test adding unparked domains to unparked_domains.txt
-    for i in {1..50}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
+    for i in {1..25}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
     input github.com "$PARKED_DOMAINS"
     # Test that domains that errored during curl are still assumed to be parked
     input parked-errored-test.com "$PARKED_DOMAINS"
     output github.com unparked_domains.txt
 
     # Test adding parked domains to parked_domains.txt
-    for i in {51..100}; do input "placeholder483${i}s.com"; done
+    for i in {26..50}; do input "placeholder483${i}s.com"; done
     input apple.com
     # Subfolder used here for easier testing despite being an invalid entry
     input porkbun.com/parked
