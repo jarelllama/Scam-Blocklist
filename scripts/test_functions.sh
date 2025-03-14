@@ -217,11 +217,11 @@ TEST_PARKED_CHECK() {
     # for split.
 
     # Test adding unparked domains to unparked_domains.txt
-    #for i in {1..50}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
-    #input github.com "$PARKED_DOMAINS"
+    for i in {1..50}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
+    input github.com "$PARKED_DOMAINS"
     # Test that domains that errored during curl are still assumed to be parked
-    #input parked-errored-test.com "$PARKED_DOMAINS"
-    #output github.com unparked_domains.txt
+    input parked-errored-test.com "$PARKED_DOMAINS"
+    output github.com unparked_domains.txt
 
     # Test adding parked domains to parked_domains.txt
     for i in {51..100}; do input "placeholder483${i}s.com"; done
@@ -232,17 +232,10 @@ TEST_PARKED_CHECK() {
 
     # Run script
     cp "$PARKED_TERMS" parked_terms.txt
-    #run_script check_parked.sh --check-unparked "$PARKED_DOMAINS"
+    run_script check_parked.sh --check-unparked "$PARKED_DOMAINS"
     # Test using 2 parts for each GitHub Job
     run_script check_parked.sh --check-parked-part-1 input.txt
     run_script check_parked.sh --check-parked-part-2 input.txt
-
-    # DEBUG
-    echo
-    cat unparked_domains.txt
-    echo
-    cat parked_domains.txt
-    echo
 
     check_output
 }

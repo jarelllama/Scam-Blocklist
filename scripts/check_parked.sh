@@ -27,7 +27,8 @@ main() {
 
     # Split the file into 2 parts for each GitHub job if requested
     if [[ "$ARGUMENT" == --check-parked-part-? ]]; then
-        split -l "$(( $(wc -l < "$FILE") / 2 ))" "$FILE"
+        head -n "$(( $(wc -l < "$FILE") / 2 ))" "$FILE" > part_1.tmp
+        tail -n +"$(( $(wc -l < "$FILE") / 2 + 1))" "$FILE" > part_2.tmp
     fi
 
     case "$ARGUMENT" in
@@ -45,15 +46,12 @@ main() {
             ;;
 
         --check-parked-part-1)
-            find_parked_in xaa
+            find_parked_in part_1.tmp
             sort -u parked.tmp -o parked_domains.txt
             ;;
 
         --check-parked-part-2)
-            # Sometimes an xac exists
-            [[ -f xac ]] && cat xac >> xab
-
-            find_parked_in xab
+            find_parked_in part_2.tmp
             # Append the parked domains since the parked domains file
             # should contain parked domains from part 1.
             sort -u parked.tmp parked_domains.txt -o parked_domains.txt
@@ -73,23 +71,34 @@ main() {
 #   parked.tmp
 #   errored.tmp (consists of domains that errored during curl)
 find_parked_in() {
-    local execution_time
+    local file="$1"
+    local execution_time split
     execution_time="$(date +%s)"
 
-    printf "\n[info] Processing file %s\n" "$1"
-    printf "[start] Analyzing %s entries for parked domains\n" "$(wc -l < "$1")"
+    sort -u "$file" -o "$file"
 
-    # Split the file into 17 equal files
-    split -d -l "$(( $(wc -l < "$1") / 17 ))" "$1"
-    # Sometimes an x19 exists
-    [[ -f x19 ]] && cat x19 >> x18
+    printf "\n[info] Processing file %s\n" "$file"
+    printf "[start] Analyzing %s entries for parked domains\n" \
+        "$(wc -l < "$file")"
+
+    # Split the file into 20 equal files
+    split -d -n 20 "$file"
+    for split in x??; do
+        # Keep only full lines as split may break lines into two
+        comm -12 <(sort "$split") "$file" > temp
+        mv temp "$split"
+    done
+
+    # Add back broken lines so they can be processed
+    cat x?? > temp
+    comm -23 "$file" temp >> x19
 
     # Run checks in parallel
     find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
     find_parked x04 & find_parked x05 & find_parked x06 & find_parked x07 &
     find_parked x08 & find_parked x09 & find_parked x10 & find_parked x11 &
     find_parked x12 & find_parked x13 & find_parked x14 & find_parked x15 &
-    find_parked x16 & find_parked x17 & find_parked x18
+    find_parked x16 & find_parked x17 & find_parked x18 & find_parked x19
     wait
 
     # Create files to avoid not found errors
