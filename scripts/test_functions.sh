@@ -232,24 +232,16 @@ TEST_PARKED_CHECK() {
 
     # Run script
     cp "$PARKED_TERMS" parked_terms.txt
-
-    # DEBUG
-    echo
-    cat parked_terms.txt
-    echo
-    cat input.txt
-    echo
-
     run_script check_parked.sh --check-unparked "$PARKED_DOMAINS"
     # Test using 2 parts for each GitHub Job
     run_script check_parked.sh --check-parked-part-1 input.txt
     run_script check_parked.sh --check-parked-part-2 input.txt
 
     # Remove placeholder lines
-    mawk '!/^placeholder/' unparked_domains.txt > temp
-    mv temp unparked_domains.txt
-    mawk '!/^placeholder/' parked_domains.txt > temp
-    mv temp parked_domains.txt
+    #mawk '!/^placeholder/' unparked_domains.txt > temp
+    #mv temp unparked_domains.txt
+    #mawk '!/^placeholder/' parked_domains.txt > temp
+    #mv temp parked_domains.txt
 
     check_output
 }
