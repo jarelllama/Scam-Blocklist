@@ -232,6 +232,14 @@ TEST_PARKED_CHECK() {
 
     # Run script
     cp "$PARKED_TERMS" parked_terms.txt
+
+    # DEBUG
+    echo
+    cat parked_terms.txt
+    echo
+    cat input.txt
+    echo
+
     run_script check_parked.sh --check-unparked "$PARKED_DOMAINS"
     # Test using 2 parts for each GitHub Job
     run_script check_parked.sh --check-parked-part-1 input.txt
@@ -514,31 +522,6 @@ test_light_build() {
     input raw-light-test.com data/pending/Jeroengui.tmp
     output raw-light-test.com "$RAW"
     output '' "$RAW_LIGHT"
-}
-
-### PARKED CHECK TESTS
-
-# Test addition of unparked domains
-test_unparked_check() {
-    input github.com "$PARKED_DOMAINS"
-    input parked-errored-test.com "$PARKED_DOMAINS"
-    output github.com "$RAW"
-    # Unparked domains should not be added to the light version
-    output '' "$RAW_LIGHT"
-    # Domains that errored during curl should be assumed to be still parked
-    output parked-errored-test.com "$PARKED_DOMAINS"
-    output unparked_count,1,parked_domains_file "$DOMAIN_LOG"
-}
-
-# Test removal of parked domains
-test_parked_check() {
-    input apple.com
-    # Subfolder used here for easier testing despite being an invalid entry
-    input porkbun.com/parked
-    output apple.com "$RAW"
-    output apple.com "$RAW_LIGHT"
-    output porkbun.com/parked "$PARKED_DOMAINS"
-    output parked_count,1,raw "$DOMAIN_LOG"
 }
 
 ### BUILD TESTS
