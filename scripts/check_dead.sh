@@ -18,7 +18,7 @@ readonly ARGUMENT="$1"
 readonly FILE="$2"
 
 main() {
-    [[ ! -f "$FILE" ]] && error "File $FILE not found"
+    [[ ! -f "$FILE" ]] && error "File $FILE not found."
 
     # Install AdGuard's Dead Domains Linter
     if ! command -v dead-domains-linter &> /dev/null; then
