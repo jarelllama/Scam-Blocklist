@@ -12,6 +12,7 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly BLACKLIST='config/blacklist.txt'
 readonly DOMAIN_LOG='config/domain_log.csv'
+readonly PARKED_TERMS='config/parked_terms.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SOURCES='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
@@ -230,6 +231,7 @@ TEST_PARKED_CHECK() {
     output porkbun.com/parked parked_domains.txt
 
     # Run script
+    cp "$PARKED_TERMS" parked_terms.txt
     run_script check_parked.sh --check-unparked "$PARKED_DOMAINS"
     # Test using 2 parts for each GitHub Job
     run_script check_parked.sh --check-unparked-part-1 input.txt
