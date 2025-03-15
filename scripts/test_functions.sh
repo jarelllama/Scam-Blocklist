@@ -199,8 +199,8 @@ TEST_DEAD_CHECK() {
     run_script check_dead.sh --check-dead-part-2 input.txt
 
     # Remove placeholder lines
-    mawk '!/^placeholder/' dead_domains.txt > temp
-    mv temp dead_domains.txt
+    #mawk '!/^placeholder/' dead_domains.txt > temp
+    #mv temp dead_domains.txt
 
     check_output
 }
