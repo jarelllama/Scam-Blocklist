@@ -22,23 +22,19 @@ readonly ADBLOCK='lists/adblock'
 readonly DOMAINS='lists/wildcard_domains'
 
 main() {
-    # Initialize data directory
-    local file
-    for file in data/*.txt; do
-        : > "$file"
-    done
+    error=false
 
-    # Initialize config directory
-    local config
-    for config in "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" "$SOURCE_LOG" \
+    # Initialize data and config directories
+    local file
+    for file in data/*.txt "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" "$SOURCE_LOG" \
         "$WILDCARDS"; do
-        if [[ "$config" == *.csv ]]; then
+        if [[ "$file" == *.csv ]]; then
             # Keep headers in the CSV files
-            sed -i '1q' "$config"
+            sed -i '1q' "$file"
             continue
         fi
 
-        : > "$config"
+        : > "$file"
     done
 
     # The ShellCheck test checks the whitelist file
@@ -46,9 +42,10 @@ main() {
         : > "$WHITELIST"
     fi
 
-    error=false
-
     case "$1" in
+        shellcheck)
+            SHELLCHECK
+            ;;
         retrieve)
             TEST_RETRIEVE_VALIDATE "$1"
             ;;
@@ -63,9 +60,6 @@ main() {
             ;;
         build)
             TEST_BUILD
-            ;;
-        shellcheck)
-            SHELLCHECK
             ;;
         *)
             error 'No tests to run.'
@@ -85,7 +79,8 @@ SHELLCHECK() {
     curl -sSL --retry 2 --retry-all-errors "$url" | tar -xJ
 
     # Check that ShellCheck was successfully installed
-    shellcheck-stable/shellcheck --version || error 'ShellCheck did not install successfully.'
+    shellcheck-stable/shellcheck --version \
+        || error 'ShellCheck did not install successfully.'
 
     # Run ShellCheck for each script
     for script in scripts/*.sh; do
@@ -93,8 +88,9 @@ SHELLCHECK() {
     done
 
     # Check for carriage return characters
+    # grep -l to not return every line
     if files="$(grep -rl $'\r' --exclude-dir={.git,shellcheck-stable} .)"; then
-        printf "\n\e[1m[warn] Lines with carriage return characters:\e[0m\n" >&2
+        printf "\n\e[1m[warn] Files with carriage return characters:\e[0m\n" >&2
         printf "%s\n" "$files" >&2
         error=true
     fi
@@ -134,8 +130,8 @@ TEST_RETRIEVE_VALIDATE() {
     test_review_file
     test_invalid_removal
     test_punycode_conversion
-    test_processing_dead
-    test_processing_parked
+    test_dead_processing
+    test_parked_processing
     test_whitelist_blacklist
     test_whitelisted_tld_removal
     test_toplist_check
@@ -217,14 +213,14 @@ TEST_PARKED_CHECK() {
     # for split.
 
     # Test adding unparked domains to unparked_domains.txt
-    for i in {1..25}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
+    for i in {1..50}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
     input github.com "$PARKED_DOMAINS"
     # Test that domains that errored during curl are still assumed to be parked
     input parked-errored-test.com "$PARKED_DOMAINS"
     output github.com unparked_domains.txt
 
     # Test adding parked domains to parked_domains.txt
-    for i in {26..50}; do input "placeholder483${i}s.com"; done
+    for i in {51..100}; do input "placeholder483${i}s.com"; done
     input apple.com
     # Subfolder used here for easier testing despite being an invalid entry
     input porkbun.com/parked
@@ -281,8 +277,9 @@ test_large_source_error() {
     local entries
     entries="$(for i in {1..10001}; do printf "x%s.com\n" "$i"; done)"
     input "$entries" data/pending/Gridinsoft.tmp
-    output ',Gridinsoft,,10001,0,0,0,0,0,,ERROR: too_large' "$SOURCE_LOG"
     output "$entries" data/pending/Gridinsoft.tmp
+    output '' "$RAW"
+    output ',Gridinsoft,,10001,0,0,0,0,0,,ERROR: too_large' "$SOURCE_LOG"
 }
 
 # Test manual addition of domains from repo issue, proper logging into domain
@@ -371,7 +368,7 @@ test_punycode_conversion() {
 }
 
 # Test processing of dead domains and resurrected domains
-test_processing_dead() {
+test_dead_processing() {
     # The retrieve script only removes known dead domains from the results
     if [[ "$script_to_test" == 'retrieve' ]]; then
         input www.known-dead-test.com "$DEAD_DOMAINS"
@@ -400,7 +397,7 @@ test_processing_dead() {
 }
 
 # Test processing of parked domains and unparked domains
-test_processing_parked() {
+test_parked_processing() {
     # The retrieve script only removes known parked domains from the results
     if [[ "$script_to_test" == 'retrieve' ]]; then
         input www.known-parked-test.com "$PARKED_DOMAINS"
@@ -481,7 +478,7 @@ test_whitelisted_tld_removal() {
     output whitelisted-tld-test.mil "$RAW_LIGHT"
 }
 
-# Test checking of domains against toplist
+# Test checking of domains against the toplist
 test_toplist_check() {
     input www.microsoft.com
     input apple.com "$BLACKLIST"
@@ -490,20 +487,21 @@ test_toplist_check() {
     output apple.com "$BLACKLIST"
     output apple.com "$RAW"
     output apple.com "$RAW_LIGHT"
-    output microsoft.com,toplist "$REVIEW_CONFIG"
+    output www.microsoft.com,toplist "$REVIEW_CONFIG"
     output toplist,www.microsoft.com "$DOMAIN_LOG"
-    # The retrieve script logs blacklisted domains
+
+    # The retrieve script logs blacklisted domains and removes domains in the
+    # toplist from the results
     if [[ "$script_to_test" == 'retrieve' ]]; then
         output blacklist,apple.com "$DOMAIN_LOG"
         return
     fi
-    # The validate script does not remove domains in the toplist from the
-    # raw files
+
     output www.microsoft.com "$RAW"
     output www.microsoft.com "$RAW_LIGHT"
 }
 
-# Test exclusion of specific sources from light version
+# Test exclusion of specific sources from the light version
 test_light_build() {
     input raw-light-test.com data/pending/Jeroengui.tmp
     output raw-light-test.com "$RAW"
