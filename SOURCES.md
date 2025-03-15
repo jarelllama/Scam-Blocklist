@@ -20,7 +20,7 @@ Only active sources are used to automatically retrieve domains.
 | [Emerging Threats](https://rules.emergingthreats.net/) | Yes | |
 | [Fake Website Buster](https://fakewebsitebuster.com/) | | |
 | [FakeWebshopListHUN](https://github.com/FakesiteListHUN/FakeWebshopListHUN) | Yes | Yes |
-| [France Verif](https://franceverif.fr/) | Yes | |
+| [France Verif](https://franceverif.fr/) | | |
 | [Google Custom Search JSON API](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) | Yes | |
 | [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | Yes |
 | [GunTab](https://www.guntab.com/scam-websites) | | |

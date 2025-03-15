@@ -707,7 +707,7 @@ source_coi.gov.cz() {
 }
 
 source_crypto_scam_tracker() {
-    # Last checked: 10/03/25
+    # Last checked: 15/03/25
     source_url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" | mawk '
@@ -756,13 +756,6 @@ source_fakewebshoplisthun() {
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" \
         | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" > "$source_results"
-}
-
-source_franceverif() {
-    # Last checked: 10/03/25
-    source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/franceverif.txt'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
 }
 
 source_greatis() {
