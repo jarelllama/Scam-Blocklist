@@ -38,7 +38,7 @@ jobs:
                   exit
               }' <<< "${{ github.event.issue.body }}" \
               | grep -Po "^(https?://)?\K${DOMAIN_REGEX}" \
-              | xargs -I {} sh -c 'printf {}; printf {} >> data/pending/Manual.tmp'
+              | tee -a data/pending/Manual.tmp
             )
           \`\`\`"
         env:

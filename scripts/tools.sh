@@ -57,7 +57,8 @@ download_toplist() {
 
     curl -sSL --retry 2 --retry-all-errors "$url" -o toplist.tmp
 
-    (( $(wc -l < toplist.tmp) == 1000000 )) || error 'Error downloading toplist.'
+    (( $(wc -l < toplist.tmp) == 1000000 )) \
+        || error 'Error downloading toplist.'
 
     # Expand toplist to include both root domains and subdomains
     mawk -v subdomains="$(mawk '{ print "^" $0 "\." }' \
@@ -69,7 +70,7 @@ download_toplist() {
         } else {
             print  # Print domains that originally have no subdomains
         }
-    }' toplist.tmp | sort -u -o toplist.tmp
+    }' toplist.tmp | grep -P "^${DOMAIN_REGEX}$" | sort -u -o toplist.tmp
 }
 
 # Standardize the format of the given file.
