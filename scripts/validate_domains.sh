@@ -10,10 +10,10 @@ readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
-readonly ALIVE_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/scripts/alive_domains.tmp'
+readonly ALIVE_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/scripts/alive_domains.txt'
 readonly DEAD_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/scripts/dead_domains.txt'
 readonly PARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked-Domains/refs/heads/main/scripts/parked_domains.txt'
-readonly UNPARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked-Domains/refs/heads/main/scripts/unparked_domains.tmp'
+readonly UNPARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked-Domains/refs/heads/main/scripts/unparked_domains.txt'
 
 main() {
     $FUNCTION --download-toplist
@@ -74,7 +74,8 @@ process_resurrected_domains() {
     if [[ ! -f alive_domains.tmp ]]; then
         # Get resurrected domains from jarelllama/Dead-Domains
         curl -sSL --retry 2 --retry-all-errors "$ALIVE_DOMAINS_URL" \
-            -o alive_domains.tmp
+            -o alive_domains.tmp \
+            || error 'Error downloading alive domains file.'
     fi
 
     count_before="$(wc -l < "$RAW")"
@@ -99,7 +100,7 @@ process_resurrected_domains() {
     printf "\nAdded %s resurrected domains to the raw file.\n" \
         "$resurrected_count"
 
-    $FUNCTION --log-domains "$resurrected_count" resurrected_count\
+    $FUNCTION --log-domains "$resurrected_count" resurrected_count \
         dead_domains_file
 
     # Prune the dead domains file to keep it within a certain size
@@ -113,7 +114,8 @@ process_dead_domains() {
     if [[ ! -f dead_domains.tmp ]]; then
         # Get dead domains from jarelllama/Dead-Domains
         curl -sSL --retry 2 --retry-all-errors "$DEAD_DOMAINS_URL" \
-            -o dead_domains.tmp
+            -o dead_domains.tmp \
+            || error 'Error downloading dead domains file.'
     fi
 
     # Collate dead domains that are found in the raw file to the dead domains
@@ -147,7 +149,8 @@ process_unparked_domains() {
     if [[ ! -f unparked_domains.tmp ]]; then
         # Get unparked domains from jarelllama/Parked-Domains
         curl -sSL --retry 2 --retry-all-errors "$UNPARKED_DOMAINS_URL" \
-            -o unparked_domains.tmp
+            -o unparked_domains.tmp \
+            || error 'Error downloading unparked domains file.'
     fi
 
     count_before="$(wc -l < "$RAW")"
@@ -172,7 +175,7 @@ process_unparked_domains() {
     printf "\nAdded %s unparked domains to the raw file.\n" \
         "$unparked_count"
 
-    $FUNCTION --log-domains "$unparked_count" unparked_count\
+    $FUNCTION --log-domains "$unparked_count" unparked_count \
         parked_domains_file
 
     # Prune the parked domains file to keep it within a certain size
@@ -186,7 +189,8 @@ process_parked_domains() {
     if [[ ! -f parked_domains.tmp ]]; then
         # Get parked domains from jarelllama/Parked-Domains
         curl -sSL --retry 2 --retry-all-errors "$PARKED_DOMAINS_URL" \
-            -o parked_domains.tmp
+            -o parked_domains.tmp \
+            || error 'Error downloading parked domains file.'
     fi
 
     # Collate parked domains that are found in the raw file to the parked
@@ -253,7 +257,7 @@ validate_raw_file() {
     mv temp "$RAW_LIGHT"
 
     # Return if no filtering done
-    [[ ! -f filter_log.tmp ]] && return
+    [[ ! -s filter_log.tmp ]] && return
 
     # Print filter log
     printf "\n\e[1mProblematic domains (%s):\e[0m\n" \
@@ -261,12 +265,18 @@ validate_raw_file() {
     sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' \
         filter_log.tmp
 
-    [[ ! -s filter_log.tmp ]] && return
-
     $FUNCTION --send-telegram \
         "Validation: problematic domains found\n\n$(<filter_log.tmp)"
 
     printf "\nTelegram notification sent.\n"
+}
+
+# Print error message and exit.
+# Input:
+#   $1: error message to print
+error() {
+    printf "\n\e[1;31m%s\e[0m\n\n" "$1" >&2
+    exit 1
 }
 
 # Entry point
