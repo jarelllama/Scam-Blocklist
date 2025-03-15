@@ -618,7 +618,7 @@ run_script() {
     # Return if script had no errors
     [[ "$exit_status" == 0 ]] && return
 
-    printf "\e[1m[warn] Script returned with an error\e[0m\n\n" >&2
+    printf "\e[1m[warn] Script returned with an error.\e[0m\n\n" >&2
     error=true
 }
 
@@ -635,8 +635,8 @@ check_output() {
         fi
 
         if [[ "$actual_output_file" == *.csv ]]; then
-            # For CSV files, check for matching terms instead of entire file
-            # content
+            # For CSV files, check for matching terms instead of the entire
+            # file content
             while read -r term; do
                 if ! grep -qF -- "$term" "$actual_output_file"; then
                     term_error=true
@@ -644,11 +644,11 @@ check_output() {
                 fi
             done < "$expected_output_file"
 
-            # If all terms are matching, skip to next file to check
+            # If all terms are matching, skip to next file
             [[ "$term_error" == false ]] && continue
 
         else
-            # If files match, skip to next file to check
+            # If files match, skip to next file
             if cmp -s <(sort "$actual_output_file") <(sort "$expected_output_file"); then
                 continue
             fi
