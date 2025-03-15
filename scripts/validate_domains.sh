@@ -72,7 +72,7 @@ filter() {
 
 process_resurrected_domains() {
     local count_before count_after resurrected_count
-    local size=75000
+    local size=100000
 
     # alive_domains.tmp can be manually created for testing
     if [[ ! -f alive_domains.tmp ]]; then
@@ -147,7 +147,7 @@ process_dead_domains() {
 
 process_unparked_domains() {
     local count_before count_after unparked_count
-    local size=75000
+    local size=100000
 
     # unparked_domains.tmp can be manually created for testing
     if [[ ! -f unparked_domains.tmp ]]; then

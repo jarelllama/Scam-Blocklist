@@ -53,6 +53,7 @@ Dead domains removed today: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< 
 Dead domains removed this month: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${THIS_MONTH},dead_count/" "$DOMAIN_LOG")")
 Resurrected domains added today: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${TODAY},resurrected_count/" "$DOMAIN_LOG")")
 
+Parked domains removed today: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${TODAY},parked_count/" "$DOMAIN_LOG")")
 Parked domains removed this month: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${THIS_MONTH},parked_count/" "$DOMAIN_LOG")")
 Unparked domains added today: $(mawk -F ',' '{ sum += $3 } END { print sum }' <<< "$(mawk "/${TODAY},unparked_count/" "$DOMAIN_LOG")")
 \`\`\`
@@ -69,9 +70,9 @@ Courtesy of iam-py-test/blocklist_stats.
 
 - Domains are filtered against an actively maintained whitelist
 - Domains are checked against the [Tranco Top Sites Ranking](https://tranco-list.eu/) for potential false positives which are then vetted manually
-- Common subdomains like 'www' are stripped
 - Non-domain entries are removed
-- Redundant rules are removed via wildcard matching. For example, 'abc.example.com' is a wildcard match of 'example.com' and, therefore, is redundant and removed. Wildcards are occasionally added to the blocklist manually to further optimize the number of entries
+- Wildcards are automatically added to optimize the size of the blocklist
+- Subdomains are automatically discovered and stripped for better wildcard matching
 
 Entries that require manual verification/intervention are notified to the maintainer for fast remediations.
 
@@ -85,9 +86,9 @@ Dead domains that are resolving again are included back into the blocklist.
 
 ### Parked domains
 
-Parked domains are removed weekly while unparked domains are added back daily. A list of common parked domain messages is used to automatically detect parked domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
+Parked domains are removed daily. A list of common parked domain messages is used to automatically detect these domains. This list can be viewed here: [parked_terms.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/parked_terms.txt).
 
-Parked sites no longer containing any of the parked messages are assumed to be unparked.
+Parked sites no longer containing any of the parked messages are assumed to be unparked and are included back into the blocklist.
 
 ## Other blocklists
 
@@ -118,7 +119,7 @@ This blocklist does not just include adult videos, but also NSFW content of the 
 
 ### Parked domains
 
-For list maintainers interested in using the parked domains as a source, the list of parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt). This list is capped at 75,000 domains.
+For list maintainers interested in using the parked domains as a source, the list of parked domains can be found here: [parked_domains.txt](https://github.com/jarelllama/Scam-Blocklist/blob/main/data/parked_domains.txt). This list is capped at 100,000 domains.
 
 ## Resources / See also
 

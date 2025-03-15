@@ -140,7 +140,7 @@ TEST_RETRIEVE_VALIDATE() {
         test_large_source_error
         test_manual_addition_and_logging
         test_url_conversion
-        test_light_build
+        test_light_version
 
         # Distribute the test input into various sources
         split -n l/3 input.txt
@@ -502,7 +502,7 @@ test_toplist_check() {
 }
 
 # Test exclusion of specific sources from the light version
-test_light_build() {
+test_light_version() {
     input raw-light-test.com data/pending/Jeroengui.tmp
     output raw-light-test.com "$RAW"
     output '' "$RAW_LIGHT"
