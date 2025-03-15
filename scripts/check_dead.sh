@@ -87,7 +87,7 @@ find_dead_in() {
 
     # Add back broken lines so they can be processed
     cat x?? > temp
-    comm -23 "$file" temp >> x02
+    comm -23 "$file" temp >> x00
 
     # Run checks in parallel
     find_dead x00 & find_dead x01 & find_dead x02
