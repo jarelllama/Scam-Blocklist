@@ -119,7 +119,7 @@ build() {
     } > "${DOMAINS}/${output_file}"
 }
 
-# Append the header onto the blocklist.
+# Return the blocklist header.
 # Input:
 #   $1: comment character to use
 #   $2: syntax of the blocklist
