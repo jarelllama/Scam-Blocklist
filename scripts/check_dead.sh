@@ -27,8 +27,7 @@ main() {
 
     # Split the file into 2 parts for each GitHub job if requested
     if [[ "$ARGUMENT" == --check-dead-part-? ]]; then
-        head -n "$(( $(wc -l < "$FILE") / 2 ))" "$FILE" > part_1.tmp
-        tail -n +"$(( $(wc -l < "$FILE") / 2 + 1))" "$FILE" > part_2.tmp
+        split -n l/2 "$FILE"
     fi
 
     case "$ARGUMENT" in
@@ -43,12 +42,12 @@ main() {
             ;;
 
         --check-dead-part-1)
-            find_dead_in part_1.tmp
+            find_dead_in xaa
             sort -u dead.tmp -o dead_domains.txt
             ;;
 
         --check-dead-part-2)
-            find_dead_in part_2.tmp
+            find_dead_in xab
             # Append the dead domains since the dead domains file
             # should contain dead domains from part 1.
             sort -u dead.tmp dead_domains.txt -o dead_domains.txt
@@ -68,7 +67,7 @@ main() {
 #   dead.tmp
 find_dead_in() {
     local file="$1"
-    local execution_time split
+    local execution_time
     execution_time="$(date +%s)"
 
     sort -u "$file" -o "$file"
@@ -78,16 +77,7 @@ find_dead_in() {
         "$(wc -l < "$file")"
 
     # Split the file into 3 equal files
-    split -d -n 3 "$file"
-    for split in x??; do
-        # Keep only full lines as split may break lines into two
-        comm -12 <(sort "$split") "$file" > temp
-        mv temp "$split"
-    done
-
-    # Add back broken lines so they can be processed
-    cat x?? > temp
-    comm -23 "$file" temp >> x00
+    split -d -n l/3 "$file"
 
     # Run checks in parallel
     find_dead x00 & find_dead x01 & find_dead x02

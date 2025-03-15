@@ -27,8 +27,7 @@ main() {
 
     # Split the file into 2 parts for each GitHub job if requested
     if [[ "$ARGUMENT" == --check-parked-part-? ]]; then
-        head -n "$(( $(wc -l < "$FILE") / 2 ))" "$FILE" > part_1.tmp
-        tail -n +"$(( $(wc -l < "$FILE") / 2 + 1))" "$FILE" > part_2.tmp
+        split -n l/2 "$FILE"
     fi
 
     case "$ARGUMENT" in
@@ -46,12 +45,12 @@ main() {
             ;;
 
         --check-parked-part-1)
-            find_parked_in part_1.tmp
+            find_parked_in xaa
             sort -u parked.tmp -o parked_domains.txt
             ;;
 
         --check-parked-part-2)
-            find_parked_in part_2.tmp
+            find_parked_in xab
             # Append the parked domains since the parked domains file
             # should contain parked domains from part 1.
             sort -u parked.tmp parked_domains.txt -o parked_domains.txt
@@ -72,7 +71,7 @@ main() {
 #   errored.tmp (consists of domains that errored during curl)
 find_parked_in() {
     local file="$1"
-    local execution_time split
+    local execution_time
     execution_time="$(date +%s)"
 
     sort -u "$file" -o "$file"
@@ -82,16 +81,7 @@ find_parked_in() {
         "$(wc -l < "$file")"
 
     # Split the file into 20 equal files
-    split -d -n 20 "$file"
-    for split in x??; do
-        # Keep only full lines as split may break lines into two
-        comm -12 <(sort "$split") "$file" > temp
-        mv temp "$split"
-    done
-
-    # Add back broken lines so they can be processed
-    cat x?? > temp
-    comm -23 "$file" temp >> x00
+    split -d -n l/20 "$file"
 
     # Run checks in parallel
     find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
