@@ -20,9 +20,13 @@ main() {
 
     $FUNCTION --update-review-config
 
+    printf "\n\e[1mProcessing dead domains\e[0m\n"
+
     process_resurrected_domains
 
     process_dead_domains
+
+    printf "\n\e[1mProcessing parked domains\e[0m\n"
 
     process_unparked_domains
 
@@ -97,7 +101,7 @@ process_resurrected_domains() {
 
     resurrected_count="$(( count_after - count_before ))"
 
-    printf "\nAdded %s resurrected domains to the raw file.\n" \
+    printf "Added %s resurrected domains to the raw file.\n" \
         "$resurrected_count"
 
     $FUNCTION --log-domains "$resurrected_count" resurrected_count \
@@ -136,7 +140,7 @@ process_dead_domains() {
 
     dead_count="$(( count_before - count_after ))"
 
-    printf "\nRemoved %s dead domains from the raw file.\n" "$dead_count"
+    printf "Removed %s dead domains from the raw file.\n" "$dead_count"
 
     $FUNCTION --log-domains "$dead_count" dead_count raw
 }
@@ -172,7 +176,7 @@ process_unparked_domains() {
 
     unparked_count="$(( count_after - count_before ))"
 
-    printf "\nAdded %s unparked domains to the raw file.\n" \
+    printf "Added %s unparked domains to the raw file.\n" \
         "$unparked_count"
 
     $FUNCTION --log-domains "$unparked_count" unparked_count \
@@ -211,7 +215,7 @@ process_parked_domains() {
 
     parked_count="$(( count_before - count_after ))"
 
-    printf "\nRemoved %s parked domains from the raw file.\n" "$parked_count"
+    printf "Removed %s parked domains from the raw file.\n" "$parked_count"
 
     $FUNCTION --log-domains "$parked_count" parked_count raw
 }

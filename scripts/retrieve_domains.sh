@@ -711,11 +711,17 @@ source_crypto_scam_tracker() {
     source_url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
 
     curl -sSL --retry 2 --retry-all-errors "$source_url" | mawk '
-        /column-4/ {
+        /"column-4"/ && /"column-5"/ {
+            sub(/.*column-4">/, "")
+            sub(/<\/th><th class="column-5">.*/, "")
+            print
+            next
+        }
+        /"column-4"/ {
             block = 1;
             next
         }
-        /column-5/ {
+        /"column-5"/ {
             block = 0
         }
         block
