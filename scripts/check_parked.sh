@@ -35,7 +35,7 @@ main() {
         --check-unparked)
             find_parked_in "$FILE"
 
-            # Assume domains that errored out during the check are still parked
+            # Assume domains that errored during the check are still parked
             comm -23 <(sort -u "$FILE") <(sort -u errored.tmp parked.tmp) \
                 > unparked_domains.txt
             ;;
@@ -91,7 +91,7 @@ find_parked_in() {
 
     # Add back broken lines so they can be processed
     cat x?? > temp
-    comm -23 "$file" temp >> x19
+    comm -23 "$file" temp >> x00
 
     # Run checks in parallel
     find_parked x00 & find_parked x01 & find_parked x02 & find_parked x03 &
