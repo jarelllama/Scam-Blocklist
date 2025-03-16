@@ -68,7 +68,6 @@ retrieve_source_results() {
     while read -r source_name; do
         # Initialize source variables
         local source_url=''
-        local rate_limited=false
         local too_large=false
         local query_count=''
 
@@ -336,27 +335,23 @@ log_source() {
     local status='saved'
 
     # Check for errors to log
-    if [[ "$rate_limited" == true ]]; then
-        status='ERROR: rate_limited'
-    elif [[ "$too_large" == true ]]; then
+    if [[ "$too_large" == true ]]; then
         status='ERROR: too_large'
     elif (( raw_count == 0 )); then
         status='ERROR: empty'
     fi
 
-    total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
-    excluded_count="$(( dead_count + parked_count ))"
-
     if [[ -n "$search_term" ]]; then
         search_term="\"${search_term:0:100}...\""
     fi
+
+    total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
+    excluded_count="$(( dead_count + parked_count ))"
 
     echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
 ${search_term},${raw_count},${filtered_count},${total_whitelisted_count},\
 ${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
     >> "$SOURCE_LOG"
-
-    [[ "$rate_limited" == true ]] && return
 
     if [[ "$status" == 'ERROR: empty' ]]; then
         printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
@@ -425,12 +420,6 @@ source_google_search() {
 
     # Loop through search terms
     while read -r search_term; do
-        # Stop if rate limited
-        if [[ "$rate_limited" == true ]]; then
-            printf "\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
-            return
-        fi
-
         # Remove quotes before encoding
         search_term="${search_term//\"/}"
         # Replace non-alphanumeric characters with spaces
@@ -462,8 +451,8 @@ source_google_search() {
             if [[ "$page_results" == *rateLimitExceeded* ]]; then
                 # Stop all searches if second key is also rate limited
                 if [[ "$search_id" == "$GOOGLE_SEARCH_ID_2" ]]; then
-                    rate_limited=true
-                    break
+                    printf "\e[1;31mBoth Google Search API keys are rate limited.\e[0m\n"
+                    return
                 fi
 
                 printf "\e[1;31mGoogle Search rate limited. Switching API keys.\e[0m\n"
