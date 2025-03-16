@@ -57,13 +57,8 @@ main() {
 
     # Add blacklisted domains in the full version that are in the toplist to
     # the light version.
-    mawk -v blacklist="$blacklist" '
-        NR==FNR {
-            lines[$0]
-            next
-        }
-        $0 in lines && $0 ~ blacklist
-    ' "$RAW" toplist.tmp | sort -u - "$RAW_LIGHT" -o raw_light.tmp
+    comm -12 "$RAW" toplist.tmp | mawk -v blacklist="$blacklist" '
+        $0 ~ blacklist' | sort -u - "$RAW_LIGHT" -o raw_light.tmp
 
     build '' "$RAW" scams.txt
 

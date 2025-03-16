@@ -247,14 +247,14 @@ process_source_results() {
     # expression.
     whitelisted_tld_count="$(filter \
         "$(awk -v blacklist="$blacklist" '
-        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist
-        ' "$source_results")" whitelisted_tld --preserve)"
+        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist' "$source_results"
+        )" whitelisted_tld --preserve)"
 
     # Remove domains found in the toplist excluding blacklisted domains
     in_toplist_count="$(filter \
-        "$(mawk -v blacklist="$blacklist" '
-        NR==FNR { lines[$0]; next } $0 in lines && $0 !~ blacklist
-        ' "$source_results" toplist.tmp)" toplist --preserve)"
+        "$(comm -12 "$source_results" toplist.tmp \
+        | mawk -v blacklist="$blacklist" '$0 !~ blacklist'
+        )" toplist --preserve)"
 
     # Count the number of filtered domains
     filtered_count="$(wc -l < "$source_results")"
@@ -262,9 +262,9 @@ process_source_results() {
     # Collate filtered domains
     cat "$source_results" >> all_retrieved_domains.tmp
 
+    # Check if the source is excluded from the light version
     if [[ -z "$(mawk -v source="$source_name" -F ',' '
         $1 == source { print $3 }' "$SOURCES")" ]]; then
-        # Collate filtered domains from light sources
         cat "$source_results" >> all_retrieved_light_domains.tmp
     fi
 

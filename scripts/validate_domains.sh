@@ -84,17 +84,11 @@ process_resurrected_domains() {
 
     count_before="$(wc -l < "$RAW")"
 
-    # Get only resurrected domains found in the dead domains file. Add them to
-    # the raw file and remove them from the dead domains file.
-    comm -12 alive_domains.tmp "$DEAD_DOMAINS" \
-        | tee >(sort -u - "$RAW" -o "$RAW") \
-        | mawk '
-            NR==FNR {
-                lines[$0]
-                next
-            }
-            !($0 in lines)
-        ' - "$DEAD_DOMAINS" > temp
+    # Add resurrected domains found in the dead domains file to the raw file
+    comm -12 alive_domains.tmp "$DEAD_DOMAINS" | sort -u - "$RAW" -o "$RAW"
+
+    # Remove resurrected domains from the dead domains file
+    comm -23 "$DEAD_DOMAINS" alive_domains.tmp > temp
     mv temp "$DEAD_DOMAINS"
 
     count_after="$(wc -l < "$RAW")"
@@ -159,17 +153,11 @@ process_unparked_domains() {
 
     count_before="$(wc -l < "$RAW")"
 
-    # Get only unparked domains found in the parked domains file. Add them to
-    # the raw file and remove them from the parked domains file.
-    comm -12 unparked_domains.tmp "$PARKED_DOMAINS" \
-        | tee >(sort -u - "$RAW" -o "$RAW") \
-        | mawk '
-            NR==FNR {
-                lines[$0]
-                next
-            }
-            !($0 in lines)
-        ' - "$PARKED_DOMAINS" > temp
+    # Add unparked domains found in the parked domains file to the raw file
+    comm -12 unparked_domains.tmp "$PARKED_DOMAINS" | sort -u - "$RAW" -o "$RAW"
+
+    # Remove unparked domains from the parked domains file
+    comm -23 "$PARKED_DOMAINS" unparked_domains.tmp > temp
     mv temp "$PARKED_DOMAINS"
 
     count_after="$(wc -l < "$RAW")"
@@ -244,17 +232,12 @@ validate_raw_file() {
 
     # Get domains with whitelisted TLDs excluding blacklisted domains
     filter "$(awk -v blacklist="$blacklist" '
-        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist
-        ' "$RAW")" whitelisted_tld --preserve
+        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist' "$RAW"
+        )" whitelisted_tld --preserve
 
     # Get domains in the toplist excluding blacklisted domains
-    filter "$(mawk -v blacklist="$blacklist" '
-        NR==FNR {
-            lines[$0]
-            next
-        }
-        $0 in lines && $0 !~ blacklist' "$RAW" toplist.tmp
-        )" toplist --preserve
+    filter "$(comm -12 "$RAW" toplist.tmp \
+        | mawk -v blacklist="$blacklist" '$0 !~ blacklist')" toplist --preserve
 
     # Save changes to the raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > temp
