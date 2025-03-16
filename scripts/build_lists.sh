@@ -25,8 +25,8 @@ main() {
 
     # Update wildcards file
     {
-        # Dynamically get new wildcards by finding root domains that appear 10
-        # or more times that are in the toplist and are not whitelisted.
+        # Get new wildcards by finding root domains that appear 10 or more
+        # times that are not in the toplist and are not whitelisted.
         # comm is faster than mawk when comparing lines.
         comm -23 <(mawk -F '.' '
             # Check length to avoid TLDs like 'com.us'
