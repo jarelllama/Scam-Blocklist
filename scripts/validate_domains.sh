@@ -154,7 +154,8 @@ process_unparked_domains() {
     count_before="$(wc -l < "$RAW")"
 
     # Add unparked domains found in the parked domains file to the raw file
-    comm -12 unparked_domains.tmp "$PARKED_DOMAINS" | sort -u - "$RAW" -o "$RAW"
+    comm -12 unparked_domains.tmp "$PARKED_DOMAINS" \
+        | sort -u - "$RAW" -o "$RAW"
 
     # Remove unparked domains from the parked domains file
     comm -23 "$PARKED_DOMAINS" unparked_domains.tmp > temp
