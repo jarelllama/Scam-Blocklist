@@ -5,8 +5,6 @@ on:
   workflow_call:
   workflow_run:
     workflows:
-      - Check for dead domains
-      - Check for parked domains
       - Process issue
       - Retrieve domains
       - Validate domains
