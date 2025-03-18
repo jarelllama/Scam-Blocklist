@@ -22,12 +22,6 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Remove entries in the blacklist that are not found in the raw file and
-    # toplist
-    comm -12 "$RAW" toplist.tmp \
-        | mawk -v blacklist="$($FUNCTION --get-blacklist)" '$0 ~ blacklist' \
-        | grep -of "$BLACKLIST" | sort -u -o "$BLACKLIST"
-
     $FUNCTION --update-review-config
 
     # Store whitelist and blacklist as regex expressions
@@ -48,6 +42,8 @@ main() {
     process_parked_domains
 
     validate_raw_file
+
+    tidy_blacklist
 
     prune_files
 }
@@ -282,6 +278,14 @@ validate_raw_file() {
         "Validation: problematic domains found\n\n$(<filter_log.tmp)"
 
     printf "\nTelegram notification sent.\n"
+}
+
+# Remove entries in the blacklist that are not found in the raw file and
+# toplist
+tidy_blacklist() {
+    comm -12 "$RAW" toplist.tmp \
+        | mawk -v blacklist="$BLACKLIST" '$0 ~ blacklist' \
+        | grep -of "$BLACKLIST" | sort -u -o "$BLACKLIST"
 }
 
 # Prune files to keep them within a certain size.
