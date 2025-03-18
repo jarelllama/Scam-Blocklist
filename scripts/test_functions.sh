@@ -264,17 +264,19 @@ TEST_BUILD() {
 
 # Test updating the subdomains file.
 test_updating_subdomains_file() {
-    local i input
+    local i entries
 
-    input="$({
+    entries="$({
         for i in {1..10}; do printf "abc.subdomain-test-%s.com\n" "$i"; done
         for i in {1..10}; do printf "abcxyz.subdomain-test-%s.com\n" "$i"; done
         for i in {1..9}; do printf "xyz.subdomain-test-%s.com\n" "$i"; done
     })"
 
-    input "$input"
+    input "$entries"
     input existing-subdomain "$SUBDOMAINS"
 
+    output "$entries" "$RAW"
+    output "$entries" "$RAW_LIGHT"
     output abc "$SUBDOMAINS"
     output existing-subdomain "$SUBDOMAINS"
 }
