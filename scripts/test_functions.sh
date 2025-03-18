@@ -273,10 +273,10 @@ test_updating_subdomains_file() {
     })"
 
     input "$input" "$RAW"
-    input manual-subdomain.subdomain-test.com "$SUBDOMAINS"
+    input existing-subdomain "$SUBDOMAINS"
 
     output abc "$SUBDOMAINS"
-    output manual-subdomain "$SUBDOMAINS"
+    output existing-subdomain "$SUBDOMAINS"
 }
 
 # Test tidying the blacklist to include only entries found in the raw file and
@@ -290,6 +290,8 @@ test_tidying_blacklist() {
     # Test that domains not in the raw file are not added
     input microsoft.com "$BLACKLIST"
 
+    output microsoft.com "$BLACKLIST"
+    output blacklisted-not-in-toplist.com "$BLACKLIST"
     output github.com "$BLACKLIST"
 }
 
