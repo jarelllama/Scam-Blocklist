@@ -20,6 +20,16 @@ jobs:
       - name: Run ShellCheck
         run: bash scripts/test_functions.sh shellcheck
 
+  test-tidy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Test tidying of repo files
+        run: bash scripts/test_functions.sh tidy
+
   test-retrieval:
     runs-on: ubuntu-22.04
     steps:
@@ -49,16 +59,6 @@ jobs:
           ref: ${{ github.ref }}
       - name: Test parked domains check
         run: bash scripts/test_functions.sh parked
-
-  test-validation-check:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-      - name: Test raw file validation
-        run: bash scripts/test_functions.sh validate
 
   test-build:
     runs-on: ubuntu-22.04

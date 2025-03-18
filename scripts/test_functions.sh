@@ -16,6 +16,7 @@ readonly PARKED_TERMS='config/parked_terms.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
 readonly SOURCES='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
+readonly SUBDOMAINS='config/subdomains.txt'
 readonly WHITELIST='config/whitelist.txt'
 readonly WILDCARDS='config/wildcards.txt'
 readonly ADBLOCK='lists/adblock'
@@ -26,8 +27,9 @@ main() {
 
     # Initialize data and config directories
     local file
-    for file in data/*.txt "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" "$SOURCE_LOG" \
-        "$WILDCARDS"; do
+    for file in data/*.txt "$BLACKLIST" "$DOMAIN_LOG" "$REVIEW_CONFIG" \
+        "$SOURCE_LOG" "$SUBDOMAINS" "$WILDCARDS"; do
+
         if [[ "$file" == *.csv ]]; then
             # Keep headers in the CSV files
             sed -i '1q' "$file"
@@ -46,11 +48,11 @@ main() {
         shellcheck)
             SHELLCHECK
             ;;
-        retrieve)
-            TEST_RETRIEVE_VALIDATE "$1"
+        tidy)
+            TEST_RETRIEVE_TIDY "$1"
             ;;
-        validate)
-            TEST_RETRIEVE_VALIDATE "$1"
+        retrieve)
+            TEST_RETRIEVE_TIDY "$1"
             ;;
         dead)
             TEST_DEAD_CHECK
@@ -115,12 +117,12 @@ SHELLCHECK() {
     printf "\e[1m[success] Test completed. No errors found.\e[0m\n"
 }
 
-# Test the retrieval or validation scripts.
+# Test the tidy or retrieval scripts.
 # Input:
 #   $1: script to test
+#     tidy
 #     retrieve
-#     validate
-TEST_RETRIEVE_VALIDATE() {
+TEST_RETRIEVE_TIDY() {
     local script_to_test="$1"
 
     # Initialize pending directory
@@ -133,14 +135,25 @@ TEST_RETRIEVE_VALIDATE() {
     test_dead_processing
     test_parked_processing
     test_whitelist_blacklist
-    test_whitelisted_tld_removal
+    test_whitelisted_tld_check
     test_toplist_check
 
-    if [[ "$script_to_test" == 'retrieve' ]]; then
+    if [[ "$script_to_test" == 'tidy' ]]; then
+        test_updating_subdomains_file
+        test_tidying_blacklist
+
+        # Prepare sample raw files for processing
+        cp input.txt "$RAW"
+        cp input.txt "$RAW_LIGHT"
+
+        # Run tidy script
+        run_script tidy.sh
+
+    elif [[ "$script_to_test" == 'retrieve' ]]; then
         test_large_source_error
         test_manual_addition_and_logging
         test_url_conversion
-        test_light_version
+        test_light_exclusion
 
         # Distribute the test input into various sources
         split -n l/3 input.txt
@@ -160,14 +173,6 @@ TEST_RETRIEVE_VALIDATE() {
 
         # Run retrieval script
         run_script retrieve_domains.sh
-
-    elif [[ "$script_to_test" == 'validate' ]]; then
-        # Prepare sample raw files for processing
-        cp input.txt "$RAW"
-        cp input.txt "$RAW_LIGHT"
-
-        # Run validation script
-        run_script validate_domains.sh
     fi
 
     check_output
@@ -183,14 +188,14 @@ TEST_DEAD_CHECK() {
     # Test adding resurrected domains to alive_domains.txt
     for i in {1..25}; do input "placeholder483${i}s.com" "$DEAD_DOMAINS"; done
     input google.com "$DEAD_DOMAINS"
-    input xyzdead-domain-test.com "$DEAD_DOMAINS"
+    input abcdead-domain.com "$DEAD_DOMAINS"
     output google.com alive_domains.txt
 
     # Test adding dead domains to dead_domains.txt
     for i in {26..50}; do input "placeholder483${i}s.com"; done
     input apple.com
-    input abcdead-domain-test.com
-    output abcdead-domain-test.com dead_domains.txt
+    input xyzdead-domain.com
+    output xyzdead-domain.com dead_domains.txt
 
     # Run script
     run_script check_dead.sh --check-alive "$DEAD_DOMAINS"
@@ -214,10 +219,10 @@ TEST_PARKED_CHECK() {
 
     # Test adding unparked domains to unparked_domains.txt
     for i in {1..50}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
-    input github.com "$PARKED_DOMAINS"
+    input google.com "$PARKED_DOMAINS"
     # Test that domains that errored during curl are still assumed to be parked
     input parked-errored-test.com "$PARKED_DOMAINS"
-    output github.com unparked_domains.txt
+    output google.com unparked_domains.txt
 
     # Test adding parked domains to parked_domains.txt
     for i in {51..100}; do input "placeholder483${i}s.com"; done
@@ -257,57 +262,95 @@ TEST_BUILD() {
 
 ### RETRIEVAL/VALIDATION TESTS
 
-# Test adding entries to the whitelist and blacklist via the review config file
+# Test updating the subdomains file.
+test_updating_subdomains_file() {
+    local i input
+
+    input="$({
+        for i in {1..10}; do printf "abc.subdomain-test-%s.com\n" "$i"; done
+        for i in {1..10}; do printf "abcxyz.subdomain-test-%s.com\n" "$i"; done
+        for i in {1..9}; do printf "xyz.subdomain-test-%s.com\n" "$i"; done
+    })"
+
+    input "$input" "$RAW"
+    input manual-subdomain.subdomain-test.com "$SUBDOMAINS"
+
+    output abc "$SUBDOMAINS"
+    output manual-subdomain "$SUBDOMAINS"
+}
+
+# Test tidying the blacklist to include only entries found in the raw file and
+# toplist.
+test_tidying_blacklist() {
+    input github.com "$BLACKLIST"
+    input github.com "$RAW"
+    # Test that domains not in the toplist are not added
+    input blacklisted-not-in-toplist.com "$BLACKLIST"
+    input blacklisted-not-in-toplist.com "$RAW"
+    # Test that domains not in the raw file are not added
+    input microsoft.com "$BLACKLIST"
+
+    output github.com "$BLACKLIST"
+}
+
+# Test adding entries to the whitelist and blacklist using the review config
+# file.
 test_review_file() {
     input Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
     input Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
     input Source,review-file-blacklist-test.com,toplist,y, "$REVIEW_CONFIG"
     input Source,review-file-whitelist-test.com,toplist,,y "$REVIEW_CONFIG"
 
-    # Only unconfigured/misconfigured entries should remain in the review config file
-    output Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
-    output Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
-
     output review-file-blacklist-test.com "$BLACKLIST"
     output '^review-file-whitelist-test\.com$' "$WHITELIST"
+    # Only unconfigured and misconfigured entries should remain in the review
+    # config file
+    output Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
+    output Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
 }
 
-# Test error handling from unusually large sources
+# Test error handling for unusually large sources.
 test_large_source_error() {
-    local entries
-    entries="$(for i in {1..10001}; do printf "x%s.com\n" "$i"; done)"
+    local i entries
+
+    entries="$(
+        for i in {1..10001}; do printf "large-source-test-%s.com\n" "$i"; done
+        )"
+
     input "$entries" data/pending/Gridinsoft.tmp
+
     output "$entries" data/pending/Gridinsoft.tmp
     output '' "$RAW"
     output ',Gridinsoft,,10001,0,0,0,0,0,,ERROR: too_large' "$SOURCE_LOG"
 }
 
 # Test manual addition of domains from repo issue, proper logging into domain
-# log, source log, review config file, and additions to the manual review file
+# source logs, and additions to the review config and manual review file.
 test_manual_addition_and_logging() {
     input www.manual-addition-test.com data/pending/Manual.tmp
     input m.-invalid-logging-test data/pending/Manual.tmp
+
     output www.manual-addition-test.com "$RAW"
     output www.manual-addition-test.com "$RAW_LIGHT"
-    output ,Manual,,2,1,0,0,0,0,,saved "$SOURCE_LOG"
     output ,saved,www.manual-addition-test.com,Manual "$DOMAIN_LOG"
     output ,invalid,m.-invalid-logging-test,Manual "$DOMAIN_LOG"
+    output ,Manual,,2,1,0,0,0,0,,saved "$SOURCE_LOG"
     output Manual,m.-invalid-logging-test,invalid,, "$REVIEW_CONFIG"
-    # Test additions to the manual review file
     output m.-invalid-logging-test data/pending/Manual.tmp
 }
 
-# Test conversion of URLs to domains and removal of square brackets
+# Test conversion of URLs to domains and removal of square brackets.
 test_url_conversion() {
     input https://conversion-test[.]com[.]us
     input http://conversion-test-2.com
+
     output conversion-test.com.us "$RAW"
     output conversion-test-2.com "$RAW"
     output conversion-test.com.us "$RAW_LIGHT"
     output conversion-test-2.com "$RAW_LIGHT"
 }
 
-# Test removal of invalid entries
+# Test removal of invalid entries.
 test_invalid_removal() {
     input 100.100.100.100
     input invalid-test.com/subfolder
@@ -340,12 +383,12 @@ test_invalid_removal() {
     output invalid,invalid-test.1com "$DOMAIN_LOG"
     output invalid,invalid-test.c "$DOMAIN_LOG"
 
-    # The validate script does not add invalid entries to the review config
+    # The tidy script does not add invalid entries to the review config
     # file
-    [[ "$script_to_test" == 'validate' ]] && return
+    [[ "$script_to_test" == 'tidy' ]] && return
     output 100.100.100.100,invalid "$REVIEW_CONFIG"
     output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
-    output -invalid-test.com,invalid "$REVIEW_CONFIG"
+    output '-invalid-test.com,invalid' "$REVIEW_CONFIG"
     output invalid-test-.com,invalid "$REVIEW_CONFIG"
     output invalid-.test.com,invalid "$REVIEW_CONFIG"
     output invalid.-test.com,invalid "$REVIEW_CONFIG"
@@ -355,7 +398,7 @@ test_invalid_removal() {
     output invalid-test.c,invalid "$REVIEW_CONFIG"
 }
 
-# Test conversion of Unicode to Punycode
+# Test conversion of Unicode to Punycode.
 test_punycode_conversion() {
     input 'ⴰⵣⵓⵍ.punycode-converstion-test.ⴰⵣⵓⵍ'
     # Test that entries that may cause idn2 to error are handled
@@ -367,7 +410,7 @@ test_punycode_conversion() {
     output pu--nycode-conversion-test.com "$RAW_LIGHT"
 }
 
-# Test processing of dead domains and resurrected domains
+# Test processing of dead and resurrected domains.
 test_dead_processing() {
     # The retrieve script only removes known dead domains from the results
     if [[ "$script_to_test" == 'retrieve' ]]; then
@@ -379,24 +422,24 @@ test_dead_processing() {
     fi
 
     # Test processing of resurrected domains
-    input google.com "$DEAD_DOMAINS"
-    input google.com alive_domains.tmp
+    input resurrected-test.com "$DEAD_DOMAINS"
+    input resurrected-test.com alive_domains.tmp
     output '' "$DEAD_DOMAINS"
-    output google.com "$RAW"
+    output resurrected-test.com "$RAW"
     # Resurrected domains should not be added to the light version
     output '' "$RAW_LIGHT"
     output resurrected_count,1,dead_domains_file "$DOMAIN_LOG"
 
     # Test processing of dead domains
-    input abcdead-domain-test.com
-    input abcdead-domain-test.com dead_domains.tmp
-    output abcdead-domain-test.com "$DEAD_DOMAINS"
+    input dead-test.com
+    input dead-test.com dead_domains.tmp
+    output dead-test.com "$DEAD_DOMAINS"
     output '' "$RAW"
     output '' "$RAW_LIGHT"
     output dead_count,1,raw "$DOMAIN_LOG"
 }
 
-# Test processing of parked domains and unparked domains
+# Test processing of parked and unparked domains.
 test_parked_processing() {
     # The retrieve script only removes known parked domains from the results
     if [[ "$script_to_test" == 'retrieve' ]]; then
@@ -408,24 +451,24 @@ test_parked_processing() {
     fi
 
     # Test processing of unparked domains
-    input github.com "$PARKED_DOMAINS"
-    input github.com unparked_domains.tmp
+    input unparked-test.com "$PARKED_DOMAINS"
+    input unparked-test.com unparked_domains.tmp
     output '' "$PARKED_DOMAINS"
-    output github.com "$RAW"
+    output unparked-test.com "$RAW"
     # Unparked domains should not be added to the light version
     output '' "$RAW_LIGHT"
     output unparked_count,1,parked_domains_file "$DOMAIN_LOG"
 
     # Test processing of parked domains
-    input porkbun.com/parked
-    input porkbun.com/parked parked_domains.tmp
-    output porkbun.com/parked "$PARKED_DOMAINS"
+    input parked-test.com
+    input parked-test.com parked_domains.tmp
+    output parked-test.com "$PARKED_DOMAINS"
     output '' "$RAW"
     output '' "$RAW_LIGHT"
     output parked_count,1,raw "$DOMAIN_LOG"
 }
 
-# Test whitelisting and blacklisting entries
+# Test whitelisting and blacklisting entries.
 test_whitelist_blacklist() {
     input '(regex-test)?\.whitelist-test\.com' "$WHITELIST"
     input blacklisted.whitelist-test.com "$BLACKLIST"
@@ -440,13 +483,13 @@ test_whitelist_blacklist() {
     output www.blacklisted.whitelist-test.com "$RAW_LIGHT"
     output whitelist,regex-test.whitelist-test.com "$DOMAIN_LOG"
 
-    # The validate script does not log blacklisted domains
-    [[ "$script_to_test" == 'validate' ]] && return
+    # The tidy script does not log blacklisted domains
+    [[ "$script_to_test" == 'tidy' ]] && return
     output blacklist,www.blacklisted.whitelist-test.com "$DOMAIN_LOG"
 }
 
-# Test removal of domains with whitelisted TLDs
-test_whitelisted_tld_removal() {
+# Test checking of domains with whitelisted TLDs.
+test_whitelisted_tld_check() {
     input whitelisted-tld-test.gov.us
     input whitelisted-tld-test.edu
     input whitelisted-tld-test.mil
@@ -478,17 +521,17 @@ test_whitelisted_tld_removal() {
     output whitelisted-tld-test.mil "$RAW_LIGHT"
 }
 
-# Test checking of domains against the toplist
+# Test checking of domains against the toplist.
 test_toplist_check() {
-    input www.microsoft.com
+    input www.google.com
     input apple.com "$BLACKLIST"
     input apple.com
 
     output apple.com "$BLACKLIST"
     output apple.com "$RAW"
     output apple.com "$RAW_LIGHT"
-    output www.microsoft.com,toplist "$REVIEW_CONFIG"
-    output toplist,www.microsoft.com "$DOMAIN_LOG"
+    output www.google.com,toplist "$REVIEW_CONFIG"
+    output toplist,www.google.com "$DOMAIN_LOG"
 
     # The retrieve script logs blacklisted domains and removes domains in the
     # toplist from the results
@@ -497,22 +540,23 @@ test_toplist_check() {
         return
     fi
 
-    output www.microsoft.com "$RAW"
-    output www.microsoft.com "$RAW_LIGHT"
+    output www.google.com "$RAW"
+    output www.google.com "$RAW_LIGHT"
 }
 
-# Test exclusion of specific sources from the light version
-test_light_version() {
-    input raw-light-test.com data/pending/Jeroengui.tmp
-    output raw-light-test.com "$RAW"
+# Test exclusion of specific sources from the light version.
+test_light_exclusion() {
+    input light-exclusion-test.com data/pending/Jeroengui.tmp
+
+    output light-exclusion-test.com "$RAW"
     output '' "$RAW_LIGHT"
 }
 
 ### BUILD TESTS
 
-# Test updating wildcards file and adding wildcards to the blocklist
+# Test updating wildcards file and adding wildcards to the blocklist.
 test_wildcards_file() {
-    local input output list
+    local i input output list
 
     # x is appended to the subdomain to prevent getting removed by subdomain
     # removal.
@@ -527,14 +571,16 @@ test_wildcards_file() {
         # Test that root domains not found in the toplist but are whitelisted
         # are not added
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        # Test that existing wildcards are kept if they occur 10 times or more
-        for i in {1..10}; do printf "x%s.existing-wildcard.apple.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old-existing-wildcard.github.com\n" "$i"; done
+        # Test that existing wildcards (wildcards with subdomains) that occur
+        # 10 times or more are kept
+        for i in {1..10}; do printf "x%s.abc.existing-wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.xyz.existing-wildcard.com\n" "$i"; done
     })"
+
     input "$input" "$RAW"
     input '^whitelisted\.com$' "$WHITELIST"
-    input existing-wildcard.apple.com "$WILDCARDS"
-    input old-existing-wildcard.github.com "$WILDCARDS"
+    input abc.existing-wildcard.com "$WILDCARDS"
+    input xyz.existing-wildcard.com "$WILDCARDS"
 
     # Domains that should not be removed via wildcard matching
     output="$({
@@ -542,47 +588,49 @@ test_wildcards_file() {
         for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
         for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old-existing-wildcard.github.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.xyz.existing-wildcard.com\n" "$i"; done
     })"
 
     output "$(mawk '{ print "||" $0 "^" }' <<< "$output")" \
         "${ADBLOCK}/scams.txt"
     output "$output" "${DOMAINS}/scams.txt"
     output wildcard.com "$WILDCARDS"
-    output existing-wildcard.apple.com "$WILDCARDS"
+    output abc.existing-wildcard.com "$WILDCARDS"
 
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
         output '||wildcard.com^' "$list"
-        output '||existing-wildcard.apple.com^' "$list"
+        output '||abc.existing-wildcard.com^' "$list"
     done
 
     for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output wildcard.com "$list"
-        output existing-wildcard.apple.com "$list"
+        output abc.existing-wildcard.com "$list"
     done
 }
 
-# Test adding blacklisted domains to the light version
+# Test adding blacklisted domains that are in the toplist to the light version.
 test_adding_blacklisted() {
-    input microsoft.com "$RAW"
-    input microsoft.com "$BLACKLIST"
+    input apple.com "$BLACKLIST"
+    input apple.com "$RAW"
+    input blacklisted-not-in-toplist.com "$BLACKLIST"
+    input blacklisted-not-in-toplist.com "$RAW"
 
     local list
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
-        output '||microsoft.com^' "$list"
+        output '||apple.com^' "$list"
     done
 
     for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
-        output microsoft.com "$list"
+        output apple.com "$list"
     done
 }
 
-# Test building the blocklists
+# Test building the blocklists.
 test_blocklist_build() {
+    input full-version-only.com "$RAW"
     # Test that subdomains are removed
     input www.build-test.com "$RAW"
     input www.build-test.com "$RAW_LIGHT"
-    input full-version-only.com "$RAW"
 
     output '||full-version-only.com^' "${ADBLOCK}/scams.txt"
     output 'full-version-only.com' "${DOMAINS}/scams.txt"
@@ -596,7 +644,6 @@ test_blocklist_build() {
     for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output build-test.com "$list"
     done
-
 }
 
 # Execute the called script and check the exit status.

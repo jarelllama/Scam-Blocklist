@@ -1,14 +1,15 @@
 #!/bin/bash
 
-# Process domains in the raw file to ensure it is kept clean and filtered and
-# flag entries that require attention.
+# Tidy the files in the repo including filtering the raw file.
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly DEAD_DOMAINS='data/dead_domains.txt'
 readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
+readonly BLACKLIST='config/blacklist.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
+readonly SUBDOMAINS='config/subdomains.txt'
 readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 readonly ALIVE_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/scripts/alive_domains.txt'
 readonly DEAD_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/scripts/dead_domains.txt'
@@ -16,9 +17,23 @@ readonly PARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked
 readonly UNPARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked-Domains/refs/heads/main/scripts/unparked_domains.txt'
 
 main() {
+    # Update subdomains file before downloading the toplist
+    update_subdomains_file
+
     $FUNCTION --download-toplist
 
     $FUNCTION --update-review-config
+
+    # Remove entries in the blacklist that are not found in the raw file and
+    # toplist
+    comm -12 "$RAW" toplist.tmp \
+        | mawk -v blacklist="$($FUNCTION --get-blacklist)" '$0 ~ blacklist' \
+        | grep -of "$BLACKLIST" | sort -u - "$BLACKLIST" -o "$BLACKLIST"
+
+    # Store whitelist and blacklist as regex expressions
+    whitelist="$($FUNCTION --get-whitelist)"
+    blacklist="$($FUNCTION --get-blacklist)"
+    readonly whitelist blacklist
 
     printf "\n\e[1mProcessing dead domains\e[0m\n"
 
@@ -33,46 +48,27 @@ main() {
     process_parked_domains
 
     validate_raw_file
+
+    prune_files
 }
 
-# Remove entries from the raw file and log the entries into the domain log.
-# Input:
-#   $1: entries to process passed in a variable
-#   $2: tag to be shown in the domain log
-#     --preserve:  keep entries in the raw file
-# Output:
-#   filter_log.tmp (if filtered domains found)
-filter() {
-    local entries="$1"
-    local tag="$2"
+# Update the subdomains file.
+update_subdomains_file() {
+    {
+        # Get subdomains less than or equal to 3 characters and occur more
+        # than or equal to 10 times
+        mawk -F '.' '{ print $1 }' "$RAW" | sort | uniq -c | sort -nr \
+            | mawk '$1 >= 10 && length($2) <= 3 { print $2 }'
 
-    # Return if no entries passed
-    [[ -z "$entries" ]] && return
-
-    if [[ "$3" == '--preserve' ]]; then
-        # Save entries into the review config file
-        mawk -v reason="$tag" '{ print "raw," $0 "," reason ",," }' \
-            <<< "$entries" >> "$REVIEW_CONFIG"
-
-        # Remove duplicates
-        mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
-        mv temp "$REVIEW_CONFIG"
-    else
-        # Remove entries from the raw file
-        comm -23 "$RAW" <(printf "%s" "$entries") > temp
-        mv temp "$RAW"
-    fi
-
-    # Record entries into the filter log for console output
-    mawk -v tag="$tag" '{ print $0 " (" tag ")" }' \
-        <<< "$entries" >> filter_log.tmp
-
-    $FUNCTION --log-domains "$entries" "$tag" raw
+        # Get manually added subdomains
+        mawk 'length($0) > 3 { print }' "$SUBDOMAINS"
+    } | sort -u -o "$SUBDOMAINS"
 }
 
+# Add resurrected domains to the raw file and remove them from the dead domains
+# file.
 process_resurrected_domains() {
     local count_before count_after resurrected_count
-    local size=100000
 
     # alive_domains.tmp can be manually created for testing
     if [[ ! -f alive_domains.tmp ]]; then
@@ -100,11 +96,9 @@ process_resurrected_domains() {
 
     $FUNCTION --log-domains "$resurrected_count" resurrected_count \
         dead_domains_file
-
-    # Prune the dead domains file to keep it within a certain size
-    $FUNCTION --prune-lines "$DEAD_DOMAINS" "$size"
 }
 
+# Remove dead domains from the raw file.
 process_dead_domains() {
     local count_before count_after dead_count
 
@@ -139,9 +133,10 @@ process_dead_domains() {
     $FUNCTION --log-domains "$dead_count" dead_count raw
 }
 
+# Add unparked domains to the raw file and remove them from the parked domains
+# file.
 process_unparked_domains() {
     local count_before count_after unparked_count
-    local size=100000
 
     # unparked_domains.tmp can be manually created for testing
     if [[ ! -f unparked_domains.tmp ]]; then
@@ -170,11 +165,9 @@ process_unparked_domains() {
 
     $FUNCTION --log-domains "$unparked_count" unparked_count \
         parked_domains_file
-
-    # Prune the parked domains file to keep it within a certain size
-    $FUNCTION --prune-lines "$PARKED_DOMAINS" "$size"
 }
 
+# Remove parked domains from the raw file.
 process_parked_domains() {
     local count_before count_after parked_count
 
@@ -209,6 +202,43 @@ process_parked_domains() {
     $FUNCTION --log-domains "$parked_count" parked_count raw
 }
 
+# Used by validate_raw_file() to remove entries from the raw file and log them
+# into the domain log.
+# Input:
+#   $1: entries to process passed in a variable
+#   $2: tag to be shown in the domain log
+#   --preserve: keep entries in the raw file
+# Output:
+#   filter_log.tmp (if filtered domains found)
+filter() {
+    local entries="$1"
+    local tag="$2"
+
+    # Return if no entries passed
+    [[ -z "$entries" ]] && return
+
+    if [[ "$3" == '--preserve' ]]; then
+        # Save entries into the review config file
+        mawk -v reason="$tag" '{ print "raw," $0 "," reason ",," }' \
+            <<< "$entries" >> "$REVIEW_CONFIG"
+
+        # Remove duplicates
+        mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
+        mv temp "$REVIEW_CONFIG"
+    else
+        # Remove entries from the raw file
+        comm -23 "$RAW" <(printf "%s" "$entries") > temp
+        mv temp "$RAW"
+    fi
+
+    # Record entries into the filter log for console output
+    mawk -v tag="$tag" '{ print $0 " (" tag ")" }' \
+        <<< "$entries" >> filter_log.tmp
+
+    $FUNCTION --log-domains "$entries" "$tag" raw
+}
+
+# Validate the entries in the raw file.
 validate_raw_file() {
     # Remove non-domain entries
     filter "$(grep -vP "^${DOMAIN_REGEX}$" "$RAW")" invalid
@@ -218,14 +248,9 @@ validate_raw_file() {
     comm -23 "$RAW_LIGHT" <(grep -vP "^${DOMAIN_REGEX}$" "$RAW_LIGHT") > temp
     mv temp "$RAW_LIGHT"
 
-    # Convert Unicode to Punycode in the raw file and the raw light file
+    # Convert Unicode to Punycode
     $FUNCTION --convert-unicode "$RAW"
     $FUNCTION --convert-unicode "$RAW_LIGHT"
-
-    # Store whitelist and blacklist as a regex expression
-    whitelist="$($FUNCTION --get-whitelist)"
-    blacklist="$($FUNCTION --get-blacklist)"
-    readonly whitelist blacklist
 
     # Remove whitelisted domains excluding blacklisted domains
     filter "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
@@ -257,6 +282,20 @@ validate_raw_file() {
         "Validation: problematic domains found\n\n$(<filter_log.tmp)"
 
     printf "\nTelegram notification sent.\n"
+}
+
+# Prune files to keep them within a certain size.
+prune_files() {
+    # Prune logs
+    $FUNCTION --prune-lines config/source_log.csv 10000
+    # 500,000 is enough for a month's worth of logs
+    $FUNCTION --prune-lines config/domain_log.csv 500000
+
+    # Prune dead domains file
+    $FUNCTION --prune-lines data/dead_domains.txt 100000
+
+    # Prune parked domains file
+    $FUNCTION --prune-lines data/parked_domains.txt 100000
 }
 
 # Print error message and exit.
