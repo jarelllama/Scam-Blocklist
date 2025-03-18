@@ -28,7 +28,7 @@ main() {
     # toplist
     comm -12 "$RAW" toplist.tmp \
         | mawk -v blacklist="$($FUNCTION --get-blacklist)" '$0 ~ blacklist' \
-        | grep -of "$BLACKLIST" | sort -u - "$BLACKLIST" -o "$BLACKLIST"
+        | grep -of "$BLACKLIST" | sort -u -o "$BLACKLIST"
 
     # Store whitelist and blacklist as regex expressions
     whitelist="$($FUNCTION --get-whitelist)"
