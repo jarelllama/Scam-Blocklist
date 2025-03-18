@@ -146,9 +146,6 @@ TEST_TIDY_RETRIEVE() {
         cp input.txt "$RAW"
         cp input.txt "$RAW_LIGHT"
 
-        # DEBUG
-        cat "$RAW"
-
         # Run tidy script
         run_script tidy.sh
 
@@ -275,7 +272,7 @@ test_updating_subdomains_file() {
         for i in {1..9}; do printf "xyz.subdomain-test-%s.com\n" "$i"; done
     })"
 
-    input "$input" "$RAW"
+    input "$input"
     input existing-subdomain "$SUBDOMAINS"
 
     output abc "$SUBDOMAINS"
@@ -286,15 +283,13 @@ test_updating_subdomains_file() {
 # toplist.
 test_tidying_blacklist() {
     input github.com "$BLACKLIST"
-    input github.com "$RAW"
+    input github.com
     # Test that domains not in the toplist are not added
     input blacklisted-not-in-toplist.com "$BLACKLIST"
-    input blacklisted-not-in-toplist.com "$RAW"
+    input blacklisted-not-in-toplist.com
     # Test that domains not in the raw file are not added
     input microsoft.com "$BLACKLIST"
 
-    output microsoft.com "$BLACKLIST"
-    output blacklisted-not-in-toplist.com "$BLACKLIST"
     output github.com "$BLACKLIST"
 }
 
