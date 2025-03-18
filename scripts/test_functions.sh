@@ -49,10 +49,10 @@ main() {
             SHELLCHECK
             ;;
         tidy)
-            TEST_RETRIEVE_TIDY "$1"
+            TEST_TIDY_RETRIEVE "$1"
             ;;
         retrieve)
-            TEST_RETRIEVE_TIDY "$1"
+            TEST_TIDY_RETRIEVE "$1"
             ;;
         dead)
             TEST_DEAD_CHECK
@@ -122,7 +122,7 @@ SHELLCHECK() {
 #   $1: script to test
 #     tidy
 #     retrieve
-TEST_RETRIEVE_TIDY() {
+TEST_TIDY_RETRIEVE() {
     local script_to_test="$1"
 
     # Initialize pending directory
@@ -145,6 +145,9 @@ TEST_RETRIEVE_TIDY() {
         # Prepare sample raw files for processing
         cp input.txt "$RAW"
         cp input.txt "$RAW_LIGHT"
+
+        # DEBUG
+        cat "$RAW"
 
         # Run tidy script
         run_script tidy.sh
