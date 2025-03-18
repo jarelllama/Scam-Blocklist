@@ -24,6 +24,8 @@ main() {
 
     $FUNCTION --update-review-config
 
+    tidy_blacklist
+
     # Store whitelist and blacklist as regex expressions
     whitelist="$($FUNCTION --get-whitelist)"
     blacklist="$($FUNCTION --get-blacklist)"
@@ -43,8 +45,6 @@ main() {
 
     validate_raw_file
 
-    tidy_blacklist
-
     prune_files
 }
 
@@ -59,6 +59,19 @@ update_subdomains_file() {
         # Get manually added subdomains
         mawk 'length($0) > 3 { print }' "$SUBDOMAINS"
     } | sort -u -o "$SUBDOMAINS"
+}
+
+# Tidy the blacklist.
+tidy_blacklist() {
+    {
+        # Remove entries that are not found in the raw file and toplist
+        comm -12 "$RAW" toplist.tmp \
+            | mawk -v blacklist="$($FUNCTION --get-blacklist)" '
+            $0 ~ blacklist' | grep -of "$BLACKLIST"
+
+        # Keep entries with whitelisted TLDs
+        awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$BLACKLIST"
+    } | sort -u -o "$BLACKLIST"
 }
 
 # Add resurrected domains to the raw file and remove them from the dead domains
@@ -278,14 +291,6 @@ validate_raw_file() {
         "Validation: problematic domains found\n\n$(<filter_log.tmp)"
 
     printf "\nTelegram notification sent.\n"
-}
-
-# Remove entries in the blacklist that are not found in the raw file and
-# toplist
-tidy_blacklist() {
-    comm -12 "$RAW" toplist.tmp \
-        | mawk -v blacklist="$blacklist" '$0 ~ blacklist' \
-        | grep -of "$BLACKLIST" | sort -u -o "$BLACKLIST"
 }
 
 # Prune files to keep them within a certain size.

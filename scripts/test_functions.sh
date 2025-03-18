@@ -281,11 +281,12 @@ test_updating_subdomains_file() {
     output existing-subdomain "$SUBDOMAINS"
 }
 
-# Test tidying the blacklist to include only entries found in the raw file and
-# toplist.
+# Test tidying the blacklist.
 test_tidying_blacklist() {
     input github.com "$BLACKLIST"
     input github.com
+    # Test that domains with whitelisted TLDs are kept
+    input tidying-blacklist-test.gov
     # Test that domains not in the toplist are not added
     input blacklisted-not-in-toplist.com "$BLACKLIST"
     input blacklisted-not-in-toplist.com
@@ -297,6 +298,7 @@ test_tidying_blacklist() {
     output github.com "$RAW_LIGHT"
     output blacklisted-not-in-toplist.com "$RAW_LIGHT"
     output github.com "$BLACKLIST"
+    output tidying-blacklist-test.gov "$BLACKLIST"
 }
 
 # Test adding entries to the whitelist and blacklist using the review config
