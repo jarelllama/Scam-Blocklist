@@ -284,7 +284,7 @@ validate_raw_file() {
 # toplist
 tidy_blacklist() {
     comm -12 "$RAW" toplist.tmp \
-        | mawk -v blacklist="$BLACKLIST" '$0 ~ blacklist' \
+        | mawk -v blacklist="$blacklist" '$0 ~ blacklist' \
         | grep -of "$BLACKLIST" | sort -u -o "$BLACKLIST"
 }
 
