@@ -283,20 +283,21 @@ test_updating_subdomains_file() {
 
 # Test tidying the blacklist.
 test_tidying_blacklist() {
+    # Test that domains in the raw file and toplist are kept
     input github.com "$BLACKLIST"
     input github.com
     # Test that domains with whitelisted TLDs are kept
-    input tidying-blacklist-test.gov
-    # Test that domains not in the toplist are not added
-    input blacklisted-not-in-toplist.com "$BLACKLIST"
-    input blacklisted-not-in-toplist.com
-    # Test that domains not in the raw file are not added
+    input tidying-blacklist-test.gov "$BLACKLIST"
+    # Test that domains not in the toplist are removed
+    input tidying-blacklist-test.com "$BLACKLIST"
+    input tidying-blacklist-test.com
+    # Test that domains not in the raw file are removed
     input microsoft.com "$BLACKLIST"
 
     output github.com "$RAW"
-    output blacklisted-not-in-toplist.com "$RAW"
+    output tidying-blacklist-test.com "$RAW"
     output github.com "$RAW_LIGHT"
-    output blacklisted-not-in-toplist.com "$RAW_LIGHT"
+    output tidying-blacklist-test.comm "$RAW_LIGHT"
     output github.com "$BLACKLIST"
     output tidying-blacklist-test.gov "$BLACKLIST"
 }
@@ -306,10 +307,11 @@ test_tidying_blacklist() {
 test_review_file() {
     input Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
     input Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
-    input Source,review-file-blacklist-test.com,toplist,y, "$REVIEW_CONFIG"
+    # gov TLD used to avoid being removed for not being in the toplist
+    input Source,review-file-blacklist-test.gov,toplist,y, "$REVIEW_CONFIG"
     input Source,review-file-whitelist-test.com,toplist,,y "$REVIEW_CONFIG"
 
-    output review-file-blacklist-test.com "$BLACKLIST"
+    output review-file-blacklist-test.gov "$BLACKLIST"
     output '^review-file-whitelist-test\.com$' "$WHITELIST"
     # Only unconfigured and misconfigured entries should remain in the review
     # config file
