@@ -292,6 +292,10 @@ test_tidying_blacklist() {
     # Test that domains not in the raw file are not added
     input microsoft.com "$BLACKLIST"
 
+    output github.com "$RAW"
+    output blacklisted-not-in-toplist.com "$RAW"
+    output github.com "$RAW_LIGHT"
+    output blacklisted-not-in-toplist.com "$RAW_LIGHT"
     output github.com "$BLACKLIST"
 }
 
