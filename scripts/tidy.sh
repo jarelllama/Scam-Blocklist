@@ -22,13 +22,13 @@ main() {
 
     $FUNCTION --download-toplist
 
-    $FUNCTION --update-review-config
-
     # Remove entries in the blacklist that are not found in the raw file and
     # toplist
     comm -12 "$RAW" toplist.tmp \
         | mawk -v blacklist="$($FUNCTION --get-blacklist)" '$0 ~ blacklist' \
         | grep -of "$BLACKLIST" | sort -u -o "$BLACKLIST"
+
+    $FUNCTION --update-review-config
 
     # Store whitelist and blacklist as regex expressions
     whitelist="$($FUNCTION --get-whitelist)"
