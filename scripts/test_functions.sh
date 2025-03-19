@@ -586,14 +586,14 @@ test_wildcards_file() {
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
         # Test that existing wildcards (wildcards with subdomains) that occur
         # 10 times or more are kept
-        for i in {1..10}; do printf "x%s.abc.existing-wildcard.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.abc.old-existing-wildcard.com\n" "$i"; done
+        for i in {1..10}; do printf "x%s.abcdef.existing-wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old.existing-wildcard.com\n" "$i"; done
     })"
 
     input "$input" "$RAW"
     input '^whitelisted\.com$' "$WHITELIST"
-    input abc.existing-wildcard.com "$WILDCARDS"
-    input abc.old-existing-wildcard.com "$WILDCARDS"
+    input abcdef.existing-wildcard.com "$WILDCARDS"
+    input old.existing-wildcard.com "$WILDCARDS"
 
     # Domains that should not be removed via wildcard matching
     output="$({
@@ -601,23 +601,23 @@ test_wildcards_file() {
         for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
         for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.abc.old-existing-wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.old.existing-wildcard.com\n" "$i"; done
     })"
 
     output "$(mawk '{ print "||" $0 "^" }' <<< "$output")" \
         "${ADBLOCK}/scams.txt"
     output "$output" "${DOMAINS}/scams.txt"
     output wildcard.com "$WILDCARDS"
-    output abc.existing-wildcard.com "$WILDCARDS"
+    output abcdef.existing-wildcard.com "$WILDCARDS"
 
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
         output '||wildcard.com^' "$list"
-        output '||abc.existing-wildcard.com^' "$list"
+        output '||abcdef.existing-wildcard.com^' "$list"
     done
 
     for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output wildcard.com "$list"
-        output abc.existing-wildcard.com "$list"
+        output abcdef.existing-wildcard.com "$list"
     done
 }
 
