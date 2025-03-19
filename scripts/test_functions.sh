@@ -624,18 +624,18 @@ test_wildcards_file() {
 
 # Test adding blacklisted domains that are in the toplist to the light version.
 test_adding_blacklisted() {
-    input apple.com "$BLACKLIST"
-    input apple.com "$RAW"
+    input github.com "$BLACKLIST"
+    input github.com "$RAW"
     input blacklisted-not-in-toplist.com "$BLACKLIST"
     input blacklisted-not-in-toplist.com "$RAW"
 
     local list
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
-        output '||apple.com^' "$list"
+        output '||github.com^' "$list"
     done
 
     for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
-        output apple.com "$list"
+        output github.com "$list"
     done
 }
 
