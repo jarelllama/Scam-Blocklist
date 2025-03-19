@@ -226,13 +226,14 @@ process_source_results() {
         : > "$source_results"
     fi
 
-    echo
-
     # Get blacklisted domains
     # This is done once here instead of extra regex matching below
-    mawk -v blacklist="$blacklist" '$0 ~ blacklist' "$source_results" #\
-        #> blacklisted.tmp
+    mawk -v blacklist="$blacklist" '$0 ~ blacklist' "$source_results" \
+        > blacklisted.tmp
 
+    # DEBUG
+    echo
+    cat blacklisted.tmp
     echo
 
     # Temporarily remove blacklisted domains from the source results
@@ -246,7 +247,7 @@ process_source_results() {
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_count="$(filter \
-        "$(awk -v whitelist="$whitelist" '$0 ~ whitelist ' "$source_results"
+        "$(awk -v whitelist="$whitelist" '$0 ~ whitelist' "$source_results"
     )" whitelist)"
 
     # Remove domains with whitelisted TLDs
