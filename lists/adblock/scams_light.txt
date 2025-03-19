@@ -3,11 +3,11 @@
 ! Description: Blocklist for newly created scam, phishing, and other malicious domains automatically retrieved daily using Google Search API, automated detection, and public databases.
 ! Homepage: https://github.com/jarelllama/Scam-Blocklist
 ! License: https://github.com/jarelllama/Scam-Blocklist/blob/main/LICENSE.md
-! Version: 03.19.082812.2025
+! Version: 03.19.085036.2025
 ! Expires: 12 hours
-! Last modified: Wed Mar 19 08:28:12 UTC 2025
+! Last modified: Wed Mar 19 08:50:36 UTC 2025
 ! Syntax: Adblock Plus
-! Number of entries: 11042
+! Number of entries: 11043
 !
 ||0142plus.weebly.com^
 ||028426.com^
@@ -1962,6 +1962,7 @@
 ||clarionpinball.us^
 ||claronet.com^
 ||clascchic.shop^
+||clash-of-clans.site^
 ||clcarpg.com^
 ||clean-data.bet^
 ||cleanviewlawn.com^
