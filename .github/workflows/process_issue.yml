@@ -84,7 +84,7 @@ jobs:
               | grep -Po "^(https?://)?\K${DOMAIN_REGEX}" \
               | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
               | sort -u - config/whitelist.txt -o config/whitelist.txt) \
-              | xargs -I {} sh -c 'printf {}; sed -i '/{}$/d' config/blacklist.txt'
+              | xargs -I {} sh -c 'printf "{}\n"; sed -i '/{}$/d' config/blacklist.txt'
             )
           \`\`\`"
         env:
