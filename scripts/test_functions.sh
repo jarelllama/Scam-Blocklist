@@ -48,11 +48,11 @@ main() {
         shellcheck)
             SHELLCHECK
             ;;
-        tidy)
-            TEST_TIDY_RETRIEVE "$1"
+        validate)
+            TEST_VALIDATE_RETRIEVE "$1"
             ;;
         retrieve)
-            TEST_TIDY_RETRIEVE "$1"
+            TEST_VALIDATE_RETRIEVE "$1"
             ;;
         dead)
             TEST_DEAD_CHECK
@@ -117,12 +117,12 @@ SHELLCHECK() {
     printf "\e[1m[success] Test completed. No errors found.\e[0m\n"
 }
 
-# Test the tidy or retrieval scripts.
+# Test the validation or retrieval scripts.
 # Input:
 #   $1: script to test
-#     tidy
+#     validate
 #     retrieve
-TEST_TIDY_RETRIEVE() {
+TEST_VALIDATE_RETRIEVE() {
     local script_to_test="$1"
 
     # Initialize pending directory
@@ -138,7 +138,7 @@ TEST_TIDY_RETRIEVE() {
     test_whitelisted_tld_check
     test_toplist_check
 
-    if [[ "$script_to_test" == 'tidy' ]]; then
+    if [[ "$script_to_test" == 'validate' ]]; then
         test_updating_subdomains_file
         test_tidying_blacklist
 
@@ -146,8 +146,8 @@ TEST_TIDY_RETRIEVE() {
         cp input.txt "$RAW"
         cp input.txt "$RAW_LIGHT"
 
-        # Run tidy script
-        run_script tidy.sh
+        # Run validation script
+        run_script validate.sh
 
     elif [[ "$script_to_test" == 'retrieve' ]]; then
         test_manual_addition_and_logging
@@ -260,7 +260,7 @@ TEST_BUILD() {
     check_output
 }
 
-### TIDY/RETRIEVAL TESTS
+### VALIDATION/RETRIEVAL TESTS
 
 # Test updating the subdomains file.
 test_updating_subdomains_file() {
@@ -394,9 +394,9 @@ test_invalid_removal() {
     output invalid,invalid-test.1com "$DOMAIN_LOG"
     output invalid,invalid-test.c "$DOMAIN_LOG"
 
-    # The tidy script does not add invalid entries to the review config
+    # The validation script does not add invalid entries to the review config
     # file
-    [[ "$script_to_test" == 'tidy' ]] && return
+    [[ "$script_to_test" == 'validate' ]] && return
     output 100.100.100.100,invalid "$REVIEW_CONFIG"
     output invalid-test.com/subfolder,invalid "$REVIEW_CONFIG"
     output '-invalid-test.com,invalid' "$REVIEW_CONFIG"
@@ -496,8 +496,8 @@ test_whitelist_blacklist() {
     output www.google.com "$RAW_LIGHT"
     output whitelist,regex-test.whitelist-test.com "$DOMAIN_LOG"
 
-    # The tidy script does not log blacklisted domains
-    [[ "$script_to_test" == 'tidy' ]] && return
+    # The validation script does not log blacklisted domains
+    [[ "$script_to_test" == 'validate' ]] && return
     output blacklist,www.google.com "$DOMAIN_LOG"
 }
 

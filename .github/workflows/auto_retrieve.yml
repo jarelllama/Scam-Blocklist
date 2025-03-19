@@ -17,60 +17,25 @@ jobs:
   test-functions:
     uses: ./.github/workflows/test_functions.yml
 
-  tidy-and-update:
-    if: ${{ ! cancelled() }}
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Update subdomains file
-        run: |
-          {
-            # Get subdomains less than or equal to 3 characters and occur more
-            # than or equal to 10 times
-            mawk -F '.' '{ print $1 }' data/raw.txt | sort | uniq -c | sort -nr \
-              | mawk '$1 >= 10 && length($2) <= 3 { print $2 }'
-
-            # Get manually added subdomains
-            mawk 'length($0) > 3 { print }' config/subdomains.txt
-          } | sort -u -o config/subdomains.txt
-
-      - name: Prune logs
-        run: |
-          # 500,000 is enough for a month's worth of logs.
-          bash scripts/tools.sh --prune-lines config/domain_log.csv 500000
-          bash scripts/tools.sh --prune-lines config/source_log.csv 10000
-
-      - name: Push
-        run: |
-          git config user.email ${{ vars.GIT_EMAIL }}
-          git config user.name ${{ vars.GIT_USERNAME }}
-          git add .
-          git diff-index --quiet HEAD || git commit -m "CI: tidy and update files"
-          git push -q
-
   build-nsfw:
-    needs: [test-functions, tidy-and-update]
-    if: ${{ ! cancelled() }}
+    needs: test-functions
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_nsfw.yml
 
-  retrieve-domains:
+  validate-files:
     needs: [test-functions, build-nsfw]
+    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
+    uses: ./.github/workflows/validate_files.yml
+    secrets: inherit
+
+  retrieve-domains:
+    needs: [test-functions, validate-files]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/retrieve_domains.yml
     secrets: inherit
 
-  validate:
-    needs: [test-functions, check-unparked]
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
-    uses: ./.github/workflows/validate_domains.yml
-    secrets: inherit
-
   build:
-    needs: [test-functions, validate]
+    needs: [test-functions, retrieve-domains]
     if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_lists.yml
 

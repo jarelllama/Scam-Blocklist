@@ -6,9 +6,9 @@ on:
   workflow_run:
     workflows:
       - Process issue
+      - Validate files
       - Retrieve domains
-      - Validate domains
-      - Retrieve and validate domains
+      - Retrieve domains and validate
     types:
       - completed
 permissions:

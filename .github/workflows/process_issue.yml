@@ -107,5 +107,5 @@ jobs:
   whitelist:
     needs: add-to-whitelist
     if: ${{ github.event.label.name == 'whitelist domains' && github.actor == github.repository_owner }}
-    uses: ./.github/workflows/validate_domains.yml
+    uses: ./.github/workflows/validate_files.yml
     secrets: inherit

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Tidy the files in the repo including filtering the raw file.
+# Validate and tidy the files in the repo including filtering the raw file.
 
 readonly FUNCTION='bash scripts/tools.sh'
 readonly DEAD_DOMAINS='data/dead_domains.txt'

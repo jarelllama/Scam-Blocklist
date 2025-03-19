@@ -20,17 +20,17 @@ jobs:
       - name: Run ShellCheck
         run: bash scripts/test_functions.sh shellcheck
 
-  test-tidy:
+  test-validation:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Test tidying of repo files
+      - name: Test validation of files
         run: bash scripts/test_functions.sh tidy
 
-  test-retrieve:
+  test-retrieval:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout

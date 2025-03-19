@@ -1,5 +1,5 @@
-name: Validate domains
-run-name: Validate domains
+name: Validate files
+run-name: Validate files
 on:
   workflow_dispatch:
   workflow_call:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  validate-domains:
+  validate-files:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -15,8 +15,8 @@ jobs:
         with:
           ref: main
 
-      - name: validate_domains.sh
-        run: bash scripts/validate_domains.sh
+      - name: validate.sh
+        run: bash scripts/validate.sh
         env:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -26,5 +26,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "CI: validate domains"
+          git diff-index --quiet HEAD || git commit -m "CI: validate files"
           git push -q
