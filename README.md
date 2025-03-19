@@ -33,45 +33,45 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 457382
-Light version: 11067
+Total domains: 479937
+Light version: 23709
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    0 |     566 |      0 % |      34 % | 165 Anti-fraud
-    0 |      53 |      0 % |      13 % | Artists Against 419
-    0 |      27 |      0 % |      11 % | BehindMLM
-    0 |      57 |      0 % |       5 % | BugsFighter
-    0 |     449 |      0 % |       7 % | Chainabuse
-    0 |     328 |      0 % |      54 % | DFPI Crypto Scam Tracker
-    0 |   14872 |     15 % |       1 % | DGA Detector
-    0 |     552 |      0 % |       1 % | dnstwist
-    0 |    3804 |      3 % |      35 % | Emerging Threats
-    0 |    1148 |      1 % |      25 % | FakeWebshopListHUN
-    0 |     877 |      0 % |       2 % | Google Search
-    8 |    3221 |      3 % |      18 % | Gridinsoft
-    2 |   23091 |     23 % |       8 % | Jeroengui
+  185 |     751 |      0 % |      34 % | 165 Anti-fraud
+  140 |     193 |      0 % |      13 % | Artists Against 419
+   13 |      40 |      0 % |      11 % | BehindMLM
+   40 |      97 |      0 % |       4 % | BugsFighter
+    6 |     455 |      0 % |      11 % | Chainabuse
+   61 |     389 |      0 % |      55 % | DFPI Crypto Scam Tracker
+ 7938 |   22810 |     18 % |       1 % | DGA Detector
+  470 |    1022 |      0 % |       0 % | dnstwist
+  127 |    3931 |      3 % |      35 % | Emerging Threats
+  125 |    1273 |      1 % |      25 % | FakeWebshopListHUN
+  366 |    1243 |      1 % |       2 % | Google Search
+ 1779 |    4992 |      4 % |      18 % | Gridinsoft
+ 2488 |   25577 |     20 % |       8 % | Jeroengui
     0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
-    0 |    3145 |      3 % |      16 % | Malwarebytes
-    0 |     183 |      0 % |       7 % | MalwareURL
-    0 |      38 |      0 % |       7 % | PCrisk
-    0 |   15766 |     16 % |      28 % | PhishStats
-    0 |      51 |      0 % |      17 % | PuppyScams.org
-   11 |   23636 |     24 % |       1 % | Regex
-    3 |    2137 |      2 % |       3 % | SafelyWeb
-    0 |    2225 |      2 % |      37 % | Scam Directory
-    0 |      13 |      0 % |      30 % | ScamAdviser
-    3 |     480 |      0 % |       5 % | ScamMinder
-    1 |       3 |      0 % |       0 % | ScamScavenger
-    0 |     381 |      0 % |      15 % | ScamTracker
-    0 |      73 |      0 % |       6 % | Unit42
-    0 |      96 |      0 % |       5 % | URLCrazy
-    0 |      16 |      0 % |      11 % | Verbraucherzentrale Hamburg
-    0 |      68 |      0 % |      28 % | ViriBack C2 Tracker
-    1 |     163 |      0 % |      20 % | Wildcat Cyber Patrol
-    0 |       4 |      0 % |       8 % | WiperSoft
-    0 |     508 |      0 % |      49 % | Česká Obchodní Inspekce
-   29 |   98252 |    100 % |       0 % | All sources
+    0 |    3145 |      2 % |      21 % | Malwarebytes
+  142 |     325 |      0 % |       8 % | MalwareURL
+   14 |      52 |      0 % |       7 % | PCrisk
+ 9038 |   24804 |     20 % |      28 % | PhishStats
+    0 |      51 |      0 % |      18 % | PuppyScams.org
+   11 |   23636 |     19 % |       1 % | Regex
+  507 |    2641 |      2 % |       3 % | SafelyWeb
+  173 |    2398 |      1 % |      38 % | Scam Directory
+    1 |      14 |      0 % |      30 % | ScamAdviser
+  343 |     820 |      0 % |       5 % | ScamMinder
+   19 |      21 |      0 % |      10 % | ScamScavenger
+  138 |     519 |      0 % |      15 % | ScamTracker
+   27 |     100 |      0 % |       6 % | Unit42
+   60 |     156 |      0 % |       4 % | URLCrazy
+    8 |      24 |      0 % |      11 % | Verbraucherzentrale Hamburg
+    2 |      70 |      0 % |      28 % | ViriBack C2 Tracker
+   54 |     216 |      0 % |      20 % | Wildcat Cyber Patrol
+   14 |      18 |      0 % |       8 % | WiperSoft
+    6 |     514 |      0 % |      49 % | Česká Obchodní Inspekce
+24295 |  122518 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
