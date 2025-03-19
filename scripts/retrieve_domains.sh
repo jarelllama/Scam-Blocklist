@@ -84,6 +84,9 @@ retrieve_source_results() {
 
         # Run the Manual source
         if [[ "$source_name" == 'Manual' ]]; then
+            # Only process if the source results file is found
+            [[ ! -f "$source_results" ]] && continue
+
             printf "\n\e[1mSource: Manual\e[0m\n"
             execution_time="$(date +%s)"
             process_source_results
