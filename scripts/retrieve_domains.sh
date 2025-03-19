@@ -226,6 +226,10 @@ process_source_results() {
         : > "$source_results"
     fi
 
+    echo
+    cat "$source_results"
+    echo
+
     # Get blacklisted domains
     # This is done once here instead of extra regex matching below
     mawk -v blacklist="$blacklist" '$0 ~ blacklist' "$source_results" \
