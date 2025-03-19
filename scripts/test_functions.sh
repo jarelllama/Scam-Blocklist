@@ -297,7 +297,7 @@ test_tidying_blacklist() {
     output github.com "$RAW"
     output tidying-blacklist-test.com "$RAW"
     output github.com "$RAW_LIGHT"
-    output tidying-blacklist-test.comm "$RAW_LIGHT"
+    output tidying-blacklist-test.com "$RAW_LIGHT"
     output github.com "$BLACKLIST"
     output tidying-blacklist-test.gov "$BLACKLIST"
 }
