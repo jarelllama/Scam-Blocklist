@@ -63,7 +63,17 @@ main() {
 retrieve_source_results() {
     local source_results source_function execution_time
 
-    # Loop through enabled sources
+    # Get enabled sources
+    sources="$({
+        # Run the Manual source only if existing results are found
+        [[ "$USE_EXISTING_RESULTS" == true ]] && printf 'Manual,,,y\n'
+        mawk -F ',' '$1 != "Google Search" { print }' "$SOURCES"
+        # Run the Google Search source last
+        mawk -F ',' '$1 == "Google Search" { print }' "$SOURCES"
+    } | mawk -F ',' '$4 == "y" { print $1 }')"
+    readonly sources
+
+    # Loop through sources
     # The while loop sets source_name as local
     while read -r source_name; do
         # Initialize source variables
@@ -79,17 +89,6 @@ retrieve_source_results() {
         if [[ "$USE_EXISTING_RESULTS" == true \
             && ! -f "$source_results" \
             && "$source_name" != 'Google Search' ]]; then
-            continue
-        fi
-
-        # Run the Manual source
-        if [[ "$source_name" == 'Manual' ]]; then
-            # Only process if the source results file is found
-            [[ ! -f "$source_results" ]] && continue
-
-            printf "\n\e[1mSource: Manual\e[0m\n"
-            execution_time="$(date +%s)"
-            process_source_results
             continue
         fi
 
@@ -124,12 +123,7 @@ retrieve_source_results() {
 
         process_source_results
 
-    done <<< "$({
-            printf 'Manual,,,y\n'
-            mawk -F ',' '$1 != "Google Search" { print }' "$SOURCES"
-            mawk -F ',' '$1 == "Google Search" { print }' "$SOURCES"
-        } | mawk -F ',' '$4 == "y" { print $1 }')"
-        # Run the Manual source first and the Google Search source last
+    done <<< "$sources"
 }
 
 # Called by process_source_results() to remove entries from the source results
@@ -209,12 +203,12 @@ process_source_results() {
     # Convert Unicode to Punycode
     $FUNCTION --convert-unicode "$source_results"
 
-    # Remove known dead domains (dead domains file is not sorted)
+    # Remove known dead domains
     dead_count="$(filter \
         "$(comm -12 <(sort "$DEAD_DOMAINS") "$source_results")" \
         dead --no-log)"
 
-    # Remove known parked domains (parked domains file is not sorted)
+    # Remove known parked domains
     parked_count="$(filter \
         "$(comm -12 <(sort "$PARKED_DOMAINS") "$source_results")" \
         parked --no-log)"
@@ -232,32 +226,39 @@ process_source_results() {
         : > "$source_results"
     fi
 
-    # Log blacklisted domains
-    # 'filter' is not used as the blacklisted domains should not be removed
-    # from the results file.
-    $FUNCTION --log-domains "$(mawk -v blacklist="$blacklist" '
-        $0 ~ blacklist' "$source_results")" blacklist "$source_name"
+    # Get blacklisted domains
+    # This is done once here instead of extra regex matching below
+    mawk -v blacklist="$blacklist" '$0 ~ blacklist' "$source_results" \
+        > blacklisted.tmp
 
-    # Remove whitelisted domains excluding blacklisted domains
+    # Temporarily remove blacklisted domains from the source results
+    comm -23 "$source_results" blacklisted.tmp > temp
+    mv temp "$source_results"
+
+    # Log blacklisted domains
+    $FUNCTION --log-domains blacklisted.tmp blacklist "$source_name"
+
+    # Remove whitelisted domains
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_count="$(filter \
-        "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
-        $0 ~ whitelist && $0 !~ blacklist' "$source_results")" whitelist)"
+        "$(awk -v whitelist="$whitelist" '$0 ~ whitelist ' "$source_results"
+    )" whitelist)"
 
-    # Remove domains with whitelisted TLDs excluding blacklisted domains
+    # Remove domains with whitelisted TLDs
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_tld_count="$(filter \
-        "$(awk -v blacklist="$blacklist" '
-        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist' "$source_results"
-        )" whitelisted_tld --preserve)"
+        "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$source_results"
+    )" whitelisted_tld --preserve)"
 
-    # Remove domains found in the toplist excluding blacklisted domains
+    # Remove domains found in the toplist
     in_toplist_count="$(filter \
-        "$(comm -12 "$source_results" toplist.tmp \
-        | mawk -v blacklist="$blacklist" '$0 !~ blacklist'
-        )" toplist --preserve)"
+        "$(comm -12 "$source_results" toplist.tmp)" toplist --preserve)"
+
+    # Add back blacklisted domains
+    sort -u blacklisted.tmp "$source_results" -o "$source_results"
+    rm blacklisted.tmp
 
     # Count the number of filtered domains
     filtered_count="$(wc -l < "$source_results")"
@@ -399,13 +400,15 @@ source_google_search() {
     # Check for existing results
     if [[ "$USE_EXISTING_RESULTS" == true ]]; then
         # Loop through the results from each search term
-        for source_results in data/pending/google_search_*.tmp; do
+        for source_results in data/pending/Google_Search_*.tmp; do
             [[ ! -f "$source_results" ]] && return
 
             # Remove header from file name
-            search_term="${source_results#data/pending/google_search_}"
+            search_term="${source_results#data/pending/Google_Search_}"
             # Remove file extension from file name to get search term
             search_term="${search_term%.tmp}"
+            # Replace underscores with spaces
+            search_term="${search_term//_/ }.tmp"
 
             printf "\n\e[1mSource: Google Search\e[0m\n"
             printf "Search term: \"%s...\"\n" "${search_term:0:100}"
@@ -430,8 +433,11 @@ source_google_search() {
         query_count=0
 
         # Assign and create results file to ensure proper logging
-        search_term="${search_term//\//}"  # Remove slashes
-        source_results="data/pending/google_search_${search_term:0:100}.tmp"
+        # Remove slashes
+        search_term="${search_term//\//}"
+        source_results="data/pending/Google_Search_${search_term:0:100}.tmp"
+        # Replace spaces with underscores
+        source_results="${source_results// /_}.tmp"
         touch "$source_results"
 
         printf "\n\e[1mSource: Google Search\e[0m\n"
