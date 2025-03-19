@@ -86,8 +86,7 @@ retrieve_source_results() {
         # If using existing results, skip sources with no results to process.
         # The Google Search source is an exception as each search term has its
         # own results file.
-        if [[ "$USE_EXISTING_RESULTS" == true \
-            && ! -f "$source_results" \
+        if [[ "$USE_EXISTING_RESULTS" == true && ! -f "$source_results" \
             && "$source_name" != 'Google Search' ]]; then
             continue
         fi
@@ -131,8 +130,8 @@ retrieve_source_results() {
 # Input:
 #   $1: entries to process passed in a variable
 #   $2: tag to be shown in the domain log
-#     --no-log:    do not log entries into the domain log
-#     --preserve:  save entries for manual review and for rerun
+#     --no-log:   do not log entries into the domain log
+#     --preserve: save entries for manual review and for rerun
 # Output:
 #   Number of entries that were passed
 filter() {
@@ -284,6 +283,53 @@ process_source_results() {
     fi
 }
 
+# Print and log statistics for each source.
+log_source() {
+    local total_whitelisted_count excluded_count
+    local status='saved'
+
+    # Check for errors to log
+    if [[ "$too_large" == true ]]; then
+        status='ERROR: too_large'
+    elif (( raw_count == 0 )); then
+        status='ERROR: empty'
+    fi
+
+    if [[ -n "$search_term" ]]; then
+        search_term="\"${search_term:0:100}...\""
+    fi
+
+    total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
+    excluded_count="$(( dead_count + parked_count ))"
+
+    echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
+${search_term},${raw_count},${filtered_count},${total_whitelisted_count},\
+${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
+    >> "$SOURCE_LOG"
+
+    if [[ "$status" == 'ERROR: empty' ]]; then
+        printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
+
+        $FUNCTION --send-telegram \
+            "Warning: '$source_name' retrieved no results. Potential error occurred."
+
+    elif [[ "$status" == 'ERROR: too_large' ]]; then
+        printf "\e[1;31mSource is unusually large (%s entries). Not saving.\e[0m\n" \
+            "$(wc -l < "${source_results}.tmp")"
+
+        $FUNCTION --send-telegram \
+            "Warning: '$source_name' is unusually large ($(wc -l < "${source_results}.tmp") entries). Potential error occurred."
+
+    else
+        printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
+            "$raw_count" "$filtered_count" "$total_whitelisted_count" \
+            "$excluded_count" "$in_toplist_count"
+    fi
+
+    printf "Processing time: %s seconds\n" "$(( $(date +%s) - execution_time ))"
+    printf -- "----------------------------------------------------------------------\n"
+}
+
 # Save filtered domains into the raw file.
 save_domains() {
     # Create files to avoid not found errors especially when no light sources
@@ -333,51 +379,13 @@ save_domains() {
         "Retrieval: added ${count_added} domains"
 }
 
-# Print and log statistics for each source.
-log_source() {
-    local total_whitelisted_count excluded_count
-    local status='saved'
-
-    # Check for errors to log
-    if [[ "$too_large" == true ]]; then
-        status='ERROR: too_large'
-    elif (( raw_count == 0 )); then
-        status='ERROR: empty'
-    fi
-
-    if [[ -n "$search_term" ]]; then
-        search_term="\"${search_term:0:100}...\""
-    fi
-
-    total_whitelisted_count="$(( whitelisted_count + whitelisted_tld_count ))"
-    excluded_count="$(( dead_count + parked_count ))"
-
-    echo "$(TZ=Asia/Singapore date +"%H:%M:%S %d-%m-%y"),${source_name},\
-${search_term},${raw_count},${filtered_count},${total_whitelisted_count},\
-${dead_count},${parked_count},${in_toplist_count},${query_count},${status}" \
-    >> "$SOURCE_LOG"
-
-    if [[ "$status" == 'ERROR: empty' ]]; then
-        printf "\e[1;31mNo results retrieved. Potential error occurred.\e[0m\n"
-
-        $FUNCTION --send-telegram \
-            "Warning: '$source_name' retrieved no results. Potential error occurred."
-
-    elif [[ "$status" == 'ERROR: too_large' ]]; then
-        printf "\e[1;31mSource is unusually large (%s entries). Not saving.\e[0m\n" \
-            "$(wc -l < "${source_results}.tmp")"
-
-        $FUNCTION --send-telegram \
-            "Warning: '$source_name' is unusually large ($(wc -l < "${source_results}.tmp") entries). Potential error occurred."
-
-    else
-        printf "Raw:%4s  Final:%4s  Whitelisted:%4s  Excluded:%4s  Toplist:%4s\n" \
-            "$raw_count" "$filtered_count" "$total_whitelisted_count" \
-            "$excluded_count" "$in_toplist_count"
-    fi
-
-    printf "Processing time: %s seconds\n" "$(( $(date +%s) - execution_time ))"
-    printf -- "----------------------------------------------------------------------\n"
+# Use curl to scrape the source webpage.
+# Input:
+#   source_url: URL to scrape
+# Output:
+#   webpage HTML
+scrape() {
+    curl -sSL --retry 2 --retry-all-errors "$source_url"
 }
 
 cleanup() {
@@ -498,7 +506,7 @@ source_dga_detector() {
     source_url='https://github.com/jarelllama/dga_detector/archive/refs/heads/master.zip'
 
     # Install DGA Detector and dependencies
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o dga_detector.zip
+    scrape > dga_detector.zip
     unzip -q dga_detector.zip
     pip install -q tldextract
 
@@ -610,7 +618,7 @@ source_urlcrazy() {
     source_url='https://github.com/urbanadventurer/urlcrazy/archive/refs/heads/master.zip'
 
     # Install URLCrazy and dependencies
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o urlcrazy.zip
+    scrape > urlcrazy.zip
     unzip -q urlcrazy.zip
     command -v ruby > /dev/null || apt-get install -qq ruby ruby-dev
     # sudo is needed for gem
@@ -655,8 +663,7 @@ source_165antifraud() {
     # Last checked: 17/02/25
     # Credit to @tanmarpn for the source idea
     source_url='https://165.npa.gov.tw/api/article/subclass/3'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
+    scrape \
         | jq --arg year "$(date +%Y)" '.[] | select(.publishDate | contains($year)) | .content' \
         | grep -Po "\\\">(https?://)?\K${DOMAIN_REGEX}" > "$source_results"
 }
@@ -664,8 +671,6 @@ source_165antifraud() {
 source_aa419() {
     # Last checked: 10/03/25
     source_url='https://api.aa419.org/fakesites'
-
-    # Trailing slash intentionally omitted
     curl -sS --retry 2 --retry-all-errors -H "Auth-API-Id:${AA419_API_ID}" \
         "${source_url}/0/250?Status=active" --retry 2 --retry-all-errors \
         | jq -r '.[].Domain' > "$source_results"
@@ -674,7 +679,6 @@ source_aa419() {
 source_behindmlm() {
     # Last checked: 10/03/25
     source_url='https://behindmlm.com'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "&#8220;\K${DOMAIN_REGEX}(?=&#8221;)|<li>\K${DOMAIN_REGEX}|(;|:) \K${DOMAIN_REGEX}|and \K${DOMAIN_REGEX}" \
         > "$source_results"
@@ -683,7 +687,6 @@ source_behindmlm() {
 source_bugsfighter() {
     # Last checked: 10/03/25
     source_url='https://www.bugsfighter.com/blog'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "remove \K${DOMAIN_REGEX}" > "$source_results"
 }
@@ -691,24 +694,20 @@ source_bugsfighter() {
 source_chainabuse() {
     # Last checked: 03/03/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/chainabuse.txt'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
+    scrape > "$source_results"
 }
 
 source_coi.gov.cz() {
     # Last checked: 10/03/25
     source_url='https://coi.gov.cz/pro-spotrebitele/rizikove-e-shopy'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | mawk '/<p class = "list_titles">/ { getline; getline; print }' \
+    scrape | mawk '/<p class = "list_titles">/ { getline; getline; print }' \
         | grep -Po "<span>\K$DOMAIN_REGEX" > "$source_results"
 }
 
 source_crypto_scam_tracker() {
     # Last checked: 15/03/25
     source_url='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" | mawk '
+    scrape | mawk '
         /"column-4"/ && /"column-5"/ {
             sub(/.*column-4">/, "")
             sub(/<\/th><th class="column-5">.*/, "")
@@ -729,8 +728,7 @@ source_crypto_scam_tracker() {
 source_emerging_threats() {
     # Last checked: 17/02/25
     source_url='https://rules.emergingthreats.net/open/suricata-5.0/emerging.rules.zip'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o rules.zip
+    scrape > rules.zip
     unzip -q rules.zip -d rules
 
     # Ignore rules with specific payload keywords. See here:
@@ -751,15 +749,12 @@ source_emerging_threats() {
 source_fakewebshoplisthun() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/FakesiteListHUN/FakeWebshopListHUN/refs/heads/main/fakewebshoplist'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" > "$source_results"
+    scrape | grep -Po "^(\|\|)?\K${DOMAIN_REGEX}(?=\^?$)" > "$source_results"
 }
 
 source_greatis() {
     # Last checked: 10/03/25
     source_url='https://greatis.com/unhackme/help/category/remove'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | grep -iPo "rel=\"bookmark\">remove \K${DOMAIN_REGEX}" \
         > "$source_results"
@@ -768,8 +763,7 @@ source_greatis() {
 source_gridinsoft() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/gridinsoft.txt'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
+    scrape > "$source_results"
 }
 
 source_jeroengui() {
@@ -802,23 +796,19 @@ source_jeroengui_nrd() {
 source_malwarebytes() {
     # Last checked: 06/03/25
     source_url='https://www.malwarebytes.com/blog/detections'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po ">\K${DOMAIN_REGEX}(?=</a>)" | mawk '!/[A-Z]/' \
+    scrape | grep -Po ">\K${DOMAIN_REGEX}(?=</a>)" | mawk '!/[A-Z]/' \
         > "$source_results"
 }
 
 source_malwareurl() {
     # Last checked: 17/02/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/malwareurl.txt'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
+    scrape > "$source_results"
 }
 
 source_pcrisk() {
     # Last checked: 09/03/25
     source_url='https://www.pcrisk.com/removal-guides'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?start=[0-15]0" \
         | mawk '/<div class="text-article">/ { getline; getline; print }' \
         | grep -Po "${DOMAIN_SQUARE_REGEX}" > "$source_results"
@@ -827,16 +817,13 @@ source_pcrisk() {
 source_phishstats() {
     # Last checked: 17/02/25
     source_url='https://phishstats.info/phish_score.csv'
-
     # Get URLs with no subdirectories (some of the URLs use docs.google.com)
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" > "$source_results"
+    scrape | grep -Po "\"https?://\K${DOMAIN_REGEX}(?=/?\")" > "$source_results"
 }
 
 source_puppyscams() {
     # Last checked: 17/02/25
     source_url='https://puppyscams.org'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?page=[1-15]" \
         | grep -Po " \K${DOMAIN_REGEX}(?=</h4></a>)" > "$source_results"
 }
@@ -844,7 +831,6 @@ source_puppyscams() {
 source_safelyweb() {
     # Last checked: 19/03/25
     source_url='https://safelyweb.com/scams-database'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?per_page=[1-30]" \
         | grep -iPo "suspicious website</div> <h2 class=\"title\">\K${DOMAIN_REGEX}" \
         > "$source_results"
@@ -853,7 +839,6 @@ source_safelyweb() {
 source_scamadviser() {
     # Last checked: 06/03/25
     source_url='https://www.scamadviser.com/articles'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}?p=[1-15]" \
         | grep -Po "[A-Z0-9][-.]?${DOMAIN_REGEX}(?= ([A-Z]|a ))" \
         > "$source_results"
@@ -862,16 +847,13 @@ source_scamadviser() {
 source_scamdirectory() {
     # Last checked: 17/02/25
     source_url='https://scam.directory/category'
-
     # head -n causes grep broken pipe error
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$source_results"
+    scrape | grep -Po "<span>\K${DOMAIN_REGEX}(?=<br>)" > "$source_results"
 }
 
 source_scamminder() {
     # Last checked: 10/03/25
     source_url='https://scamminder.com/websites'
-
     # There are about 150 new pages daily
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-200]" \
         | mawk '/Trust Score :  strongly low/ { getline; print }' \
@@ -881,8 +863,7 @@ source_scamminder() {
 source_scamscavenger() {
     # Last checked: 10/03/25
     source_url='https://raw.githubusercontent.com/jarelllama/Blocklist-Sources/refs/heads/main/scamscavenger.txt'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o "$source_results"
+    scrape > "$source_results"
 }
 
 source_scamtracker() {
@@ -903,8 +884,7 @@ source_scamtracker() {
 source_unit42() {
     # Last checked: 10/03/25
     source_url='https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/archive/refs/heads/main.zip'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" -o unit42.zip
+    scrape > unit42.zip
     unzip -q unit42.zip -d unit42
 
     grep -hPo "hxxps?\[:\]//\K${DOMAIN_SQUARE_REGEX}|^- \K${DOMAIN_SQUARE_REGEX}" \
@@ -916,24 +896,19 @@ source_unit42() {
 source_viriback_tracker() {
     # Last checked: 10/03/25
     source_url='https://tracker.viriback.com/last30.php'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po ",https?://\K${DOMAIN_REGEX}" > "$source_results"
+    scrape | grep -Po ",https?://\K${DOMAIN_REGEX}" > "$source_results"
 }
 
 source_vzhh() {
     # Last checked: 17/02/25
     source_url='https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/fake-shop-liste-wenn-guenstig-richtig-teuer-wird'
-
-    curl -sSL --retry 2 --retry-all-errors "$source_url" \
-        | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
+    scrape | grep -Po "field--item\">\K${DOMAIN_REGEX}(?=</div>)" \
         > "$source_results"
 }
 
 source_wipersoft() {
     # Last checked: 10/03/25
     source_url='https://www.wipersoft.com/blog'
-
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/page/[1-15]" \
         | mawk '/<div class="post-content">/ { getline; print }' \
         | grep -Po "${DOMAIN_REGEX}" > "$source_results"
