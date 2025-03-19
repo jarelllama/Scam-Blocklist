@@ -629,6 +629,9 @@ test_adding_blacklisted() {
     input blacklisted-not-in-toplist.com "$BLACKLIST"
     input blacklisted-not-in-toplist.com "$RAW"
 
+    output '||blacklisted-not-in-toplist.com^' "${ADBLOCK}/scams.txt"
+    output blacklisted-not-in-toplist.com "${DOMAINS}/scams.txt"
+
     local list
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
         output '||github.com^' "$list"
@@ -649,7 +652,7 @@ test_blocklist_build() {
 
     output www "$SUBDOMAINS"
     output '||full-version-only.com^' "${ADBLOCK}/scams.txt"
-    output 'full-version-only.com' "${DOMAINS}/scams.txt"
+    output full-version-only.com "${DOMAINS}/scams.txt"
 
     local list
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
