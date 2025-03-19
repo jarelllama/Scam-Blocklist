@@ -19,7 +19,6 @@ jobs:
 
   build-nsfw:
     needs: test-functions
-    if: ${{ ! cancelled() && needs.test-functions.result == 'success' }}
     uses: ./.github/workflows/build_nsfw.yml
 
   validate-files:
