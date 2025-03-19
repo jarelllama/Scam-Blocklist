@@ -90,7 +90,8 @@ process_resurrected_domains() {
     count_before="$(wc -l < "$RAW")"
 
     # Add resurrected domains found in the dead domains file to the raw file
-    comm -12 alive_domains.tmp "$DEAD_DOMAINS" | sort -u - "$RAW" -o "$RAW"
+    comm -12 alive_domains.tmp <(sort "$DEAD_DOMAINS") \
+        | sort -u - "$RAW" -o "$RAW"
 
     # Remove resurrected domains from the dead domains file
     # grep is used here as the dead domains file should remain unsorted
@@ -160,7 +161,7 @@ process_unparked_domains() {
     count_before="$(wc -l < "$RAW")"
 
     # Add unparked domains found in the parked domains file to the raw file
-    comm -12 unparked_domains.tmp "$PARKED_DOMAINS" \
+    comm -12 unparked_domains.tmp <(sort "$PARKED_DOMAINS") \
         | sort -u - "$RAW" -o "$RAW"
 
     # Remove unparked domains from the parked domains file
