@@ -587,13 +587,13 @@ test_wildcards_file() {
         # Test that existing wildcards (wildcards with subdomains) that occur
         # 10 times or more are kept
         for i in {1..10}; do printf "x%s.abc.existing-wildcard.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.xyz.existing-wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.abc.old-existing-wildcard.com\n" "$i"; done
     })"
 
     input "$input" "$RAW"
     input '^whitelisted\.com$' "$WHITELIST"
     input abc.existing-wildcard.com "$WILDCARDS"
-    input xyz.existing-wildcard.com "$WILDCARDS"
+    input abc.old-existing-wildcard.com "$WILDCARDS"
 
     # Domains that should not be removed via wildcard matching
     output="$({
@@ -601,7 +601,7 @@ test_wildcards_file() {
         for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
         for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.xyz.existing-wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.abc.old-existing-wildcard.com\n" "$i"; done
     })"
 
     output "$(mawk '{ print "||" $0 "^" }' <<< "$output")" \
