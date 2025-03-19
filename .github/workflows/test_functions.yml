@@ -30,7 +30,7 @@ jobs:
       - name: Test tidying of repo files
         run: bash scripts/test_functions.sh tidy
 
-  test-retrieval:
+  test-retrieve:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -67,5 +67,5 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Test build
+      - name: Test building of the blocklists
         run: bash scripts/test_functions.sh build

@@ -150,9 +150,9 @@ TEST_TIDY_RETRIEVE() {
         run_script tidy.sh
 
     elif [[ "$script_to_test" == 'retrieve' ]]; then
-        test_large_source_error
         test_manual_addition_and_logging
         test_url_conversion
+        test_large_source_error
         test_light_exclusion
 
         # Distribute the test input into various sources
@@ -260,7 +260,7 @@ TEST_BUILD() {
     check_output
 }
 
-### RETRIEVAL/VALIDATION TESTS
+### TIDY/RETRIEVAL TESTS
 
 # Test updating the subdomains file.
 test_updating_subdomains_file() {
@@ -286,13 +286,13 @@ test_tidying_blacklist() {
     # Test that domains in the raw file and toplist are kept
     input github.com "$BLACKLIST"
     input github.com
-    # Test that domains with whitelisted TLDs are kept
-    input tidying-blacklist-test.gov "$BLACKLIST"
+    # Test that domains not in the raw file are removed
+    input microsoft.com "$BLACKLIST"
     # Test that domains not in the toplist are removed
     input tidying-blacklist-test.com "$BLACKLIST"
     input tidying-blacklist-test.com
-    # Test that domains not in the raw file are removed
-    input microsoft.com "$BLACKLIST"
+    # Test that domains with whitelisted TLDs are kept
+    input tidying-blacklist-test.gov "$BLACKLIST"
 
     output github.com "$RAW"
     output tidying-blacklist-test.com "$RAW"
@@ -311,27 +311,12 @@ test_review_file() {
     input Source,review-file-blacklist-test.gov,toplist,y, "$REVIEW_CONFIG"
     input Source,review-file-whitelist-test.com,toplist,,y "$REVIEW_CONFIG"
 
-    output review-file-blacklist-test.gov "$BLACKLIST"
-    output '^review-file-whitelist-test\.com$' "$WHITELIST"
     # Only unconfigured and misconfigured entries should remain in the review
     # config file
     output Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
     output Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
-}
-
-# Test error handling for unusually large sources.
-test_large_source_error() {
-    local i entries
-
-    entries="$(
-        for i in {1..10001}; do printf "large-source-test-%s.com\n" "$i"; done
-        )"
-
-    input "$entries" data/pending/Gridinsoft.tmp
-
-    output "$entries" data/pending/Gridinsoft.tmp
-    output '' "$RAW"
-    output ',Gridinsoft,,10001,0,0,0,0,0,,ERROR: too_large' "$SOURCE_LOG"
+    output review-file-blacklist-test.gov "$BLACKLIST"
+    output '^review-file-whitelist-test\.com$' "$WHITELIST"
 }
 
 # Test manual addition of domains from repo issue, proper logging into domain
@@ -349,15 +334,31 @@ test_manual_addition_and_logging() {
     output m.-invalid-logging-test data/pending/Manual.tmp
 }
 
-# Test conversion of URLs to domains and removal of square brackets.
+# Test conversion of URLs to domains, removal of square brackets and conversion
+# to lowercase.
 test_url_conversion() {
     input https://conversion-test[.]com[.]us
-    input http://conversion-test-2.com
+    input http://CONVERSION-TEST-2.com
 
     output conversion-test.com.us "$RAW"
     output conversion-test-2.com "$RAW"
     output conversion-test.com.us "$RAW_LIGHT"
     output conversion-test-2.com "$RAW_LIGHT"
+}
+
+# Test error handling for unusually large sources.
+test_large_source_error() {
+    local i entries
+
+    entries="$(
+        for i in {1..10001}; do printf "large-source-test-%s.com\n" "$i"; done
+    )"
+
+    input "$entries" data/pending/Gridinsoft.tmp
+
+    output "$entries" data/pending/Gridinsoft.tmp
+    output '' "$RAW"
+    output ',Gridinsoft,,10001,0,0,0,0,0,,ERROR: too_large' "$SOURCE_LOG"
 }
 
 # Test removal of invalid entries.
@@ -480,22 +481,24 @@ test_parked_processing() {
 
 # Test whitelisting and blacklisting entries.
 test_whitelist_blacklist() {
-    input '(regex-test)?\.whitelist-test\.com' "$WHITELIST"
-    input blacklisted.whitelist-test.com "$BLACKLIST"
     # Test that the whitelist uses regex matching
+    input '(regex-test\.)?whitelist-test.com' "$WHITELIST"
     input regex-test.whitelist-test.com
-    # Test that the blacklist matches subdomains
-    input www.blacklisted.whitelist-test.com
+    # Test that the blacklist has higher priority and matches subdomains
+    input '\.google\.com$' "$WHITELIST"
+    input google.com "$BLACKLIST"
+    input www.google.com
 
-    output '(regex-test)?\.whitelist-test\.com' "$WHITELIST"
-    output blacklisted.whitelist-test.com "$BLACKLIST"
-    output www.blacklisted.whitelist-test.com "$RAW"
-    output www.blacklisted.whitelist-test.com "$RAW_LIGHT"
+    output '(regex-test\.)?whitelist-test.com' "$WHITELIST"
+    output '\.google\.com$' "$WHITELIST"
+    output google.com "$BLACKLIST"
+    output www.google.com "$RAW"
+    output www.google.com "$RAW_LIGHT"
     output whitelist,regex-test.whitelist-test.com "$DOMAIN_LOG"
 
     # The tidy script does not log blacklisted domains
     [[ "$script_to_test" == 'tidy' ]] && return
-    output blacklist,www.blacklisted.whitelist-test.com "$DOMAIN_LOG"
+    output blacklist,www.google.com "$DOMAIN_LOG"
 }
 
 # Test checking of domains with whitelisted TLDs.
@@ -533,15 +536,15 @@ test_whitelisted_tld_check() {
 
 # Test checking of domains against the toplist.
 test_toplist_check() {
-    input www.google.com
+    input delta.com
     input apple.com "$BLACKLIST"
     input apple.com
 
     output apple.com "$BLACKLIST"
     output apple.com "$RAW"
     output apple.com "$RAW_LIGHT"
-    output www.google.com,toplist "$REVIEW_CONFIG"
-    output toplist,www.google.com "$DOMAIN_LOG"
+    output delta.com,toplist "$REVIEW_CONFIG"
+    output toplist,delta.com "$DOMAIN_LOG"
 
     # The retrieve script logs blacklisted domains and removes domains in the
     # toplist from the results
@@ -550,8 +553,8 @@ test_toplist_check() {
         return
     fi
 
-    output www.google.com "$RAW"
-    output www.google.com "$RAW_LIGHT"
+    output delta.com "$RAW"
+    output delta.com "$RAW_LIGHT"
 }
 
 # Test exclusion of specific sources from the light version.

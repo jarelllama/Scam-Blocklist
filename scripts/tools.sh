@@ -212,13 +212,14 @@ send_telegram() {
 # Check for configured entries in the review config file and add them to the
 # whitelist/blacklist.
 update_review_config() {
-    # Add blacklisted entries to blacklist and remove them from the review file
+    # Add blacklisted entries to the blacklist and remove them from the review
+    # config file
     mawk -F ',' '$4 == "y" && $5 != "y" { print $2 }' "$REVIEW_CONFIG" \
         | xargs -I {} sh -c "printf {} | sort -u - $BLACKLIST -o $BLACKLIST
         sed -i "/,{},/d" $REVIEW_CONFIG"
 
-    # Add whitelisted entries to whitelist after formatting to regex and remove
-    # them from the review file
+    # Add whitelisted entries to the whitelist after formatting to regex and
+    # remove them from the review config file
     mawk -F ',' '$5 == "y" && $4 != "y" { print $2 }' "$REVIEW_CONFIG" \
         | tee >(mawk '{ gsub(/\./, "\."); print "^" $0 "$" }' \
         | sort -u - "$WHITELIST" -o "$WHITELIST") \

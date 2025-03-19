@@ -48,7 +48,7 @@ main() {
 
     $FUNCTION --update-review-config
 
-    # Store whitelist and blacklist as a regex expression
+    # Store whitelist and blacklist as regex expressions
     whitelist="$($FUNCTION --get-whitelist)"
     blacklist="$($FUNCTION --get-blacklist)"
     readonly whitelist blacklist
