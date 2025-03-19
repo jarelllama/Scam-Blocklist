@@ -59,7 +59,7 @@ main() {
     # Format raw file to Domains format
     mawk '/\|/ { gsub(/[|^]/, ""); print }' "$BLOCKLIST" > raw.tmp
 
-    # Add matching domains in toplist to raw file
+    # Add matching domains in the toplist to the raw file
     local term
     for term in "${TERMS[@]}"; do
         mawk "/${term}/" toplist.tmp >> raw.tmp
