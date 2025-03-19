@@ -643,9 +643,11 @@ test_adding_blacklisted() {
 test_blocklist_build() {
     input full-version-only.com "$RAW"
     # Test that subdomains are removed
+    input www "$SUBDOMAINS"
     input www.build-test.com "$RAW"
     input www.build-test.com "$RAW_LIGHT"
 
+    output www "$SUBDOMAINS"
     output '||full-version-only.com^' "${ADBLOCK}/scams.txt"
     output 'full-version-only.com' "${DOMAINS}/scams.txt"
 

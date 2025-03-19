@@ -67,5 +67,5 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      - name: Test building of the blocklists
+      - name: Test building the blocklists
         run: bash scripts/test_functions.sh build
