@@ -226,32 +226,39 @@ process_source_results() {
         : > "$source_results"
     fi
 
-    # Log blacklisted domains
-    # 'filter' is not used as the blacklisted domains should not be removed
-    # from the results file.
-    $FUNCTION --log-domains "$(mawk -v blacklist="$blacklist" '
-        $0 ~ blacklist' "$source_results")" blacklist "$source_name"
+    # Get blacklisted domains
+    # This is done once here instead of extra regex matching below
+    mawk -v blacklist="$blacklist" '$0 ~ blacklist' "$source_results" \
+        > blacklisted.tmp
 
-    # Remove whitelisted domains excluding blacklisted domains
+    # Temporarily remove blacklisted domains from the source results
+    comm -23 "$source_results" blacklisted.tmp > temp
+    mv temp "$source_results"
+
+    # Log blacklisted domains
+    $FUNCTION --log-domains blacklisted.tmp blacklist "$source_name"
+
+    # Remove whitelisted domains
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_count="$(filter \
-        "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
-        $0 ~ whitelist && $0 !~ blacklist' "$source_results")" whitelist)"
+        "$(awk -v whitelist="$whitelist" '$0 ~ whitelist' "$source_results"
+    )" whitelist)"
 
-    # Remove domains with whitelisted TLDs excluding blacklisted domains
+    # Remove domains with whitelisted TLDs
     # awk is used here instead of mawk for compatibility with the regex
     # expression.
     whitelisted_tld_count="$(filter \
-        "$(awk -v blacklist="$blacklist" '
-        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist' "$source_results"
-        )" whitelisted_tld --preserve)"
+        "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$source_results"
+    )" whitelisted_tld --preserve)"
 
-    # Remove domains found in the toplist excluding blacklisted domains
+    # Remove domains found in the toplist
     in_toplist_count="$(filter \
-        "$(comm -12 "$source_results" toplist.tmp \
-        | mawk -v blacklist="$blacklist" '$0 !~ blacklist'
-        )" toplist --preserve)"
+        "$(comm -12 "$source_results" toplist.tmp)" toplist --preserve)"
+
+    # Add back blacklisted domains
+    sort -u blacklisted.tmp "$source_results" -o "$source_results"
+    rm blacklisted.tmp
 
     # Count the number of filtered domains
     filtered_count="$(wc -l < "$source_results")"
