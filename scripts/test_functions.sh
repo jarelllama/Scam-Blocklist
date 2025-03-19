@@ -585,15 +585,16 @@ test_wildcards_file() {
         # are not added
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
         # Test that existing wildcards (wildcards with subdomains) that occur
-        # 10 times or more are kept
-        for i in {1..10}; do printf "x%s.abcdef.existing-wildcard.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old.existing-wildcard.com\n" "$i"; done
+        # 10 times or more are kept. These wildcards often have root domains
+        # that are in the toplist.
+        for i in {1..10}; do printf "x%s.existing-wildcard.apple.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.existing-wildcard.google.com\n" "$i"; done
     })"
 
     input "$input" "$RAW"
     input '^whitelisted\.com$' "$WHITELIST"
-    input abcdef.existing-wildcard.com "$WILDCARDS"
-    input old.existing-wildcard.com "$WILDCARDS"
+    input existing-wildcard.apple.com "$WILDCARDS"
+    input existing-wildcard.google.com "$WILDCARDS"
 
     # Domains that should not be removed via wildcard matching
     output="$({
@@ -601,23 +602,23 @@ test_wildcards_file() {
         for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
         for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
         for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.old.existing-wildcard.com\n" "$i"; done
+        for i in {1..9}; do printf "x%s.existing-wildcard.google.com\n" "$i"; done
     })"
 
     output "$(mawk '{ print "||" $0 "^" }' <<< "$output")" \
         "${ADBLOCK}/scams.txt"
     output "$output" "${DOMAINS}/scams.txt"
     output wildcard.com "$WILDCARDS"
-    output abcdef.existing-wildcard.com "$WILDCARDS"
+    output existing-wildcard.apple.com "$WILDCARDS"
 
     for list in "${ADBLOCK}/scams.txt" "${ADBLOCK}/scams_light.txt"; do
         output '||wildcard.com^' "$list"
-        output '||abcdef.existing-wildcard.com^' "$list"
+        output '||existing-wildcard.apple.com^' "$list"
     done
 
     for list in "${DOMAINS}/scams.txt" "${DOMAINS}/scams_light.txt"; do
         output wildcard.com "$list"
-        output abcdef.existing-wildcard.com "$list"
+        output existing-wildcard.apple.com "$list"
     done
 }
 
