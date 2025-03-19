@@ -833,7 +833,7 @@ source_puppyscams() {
 }
 
 source_safelyweb() {
-    # Last checked: 02/03/25
+    # Last checked: 19/03/25
     source_url='https://safelyweb.com/scams-database'
 
     curl -sSLZ --retry 2 --retry-all-errors "${source_url}/?per_page=[1-30]" \
