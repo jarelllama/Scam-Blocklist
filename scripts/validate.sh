@@ -17,6 +17,14 @@ readonly PARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked
 readonly UNPARKED_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Parked-Domains/refs/heads/main/unparked_domains.txt'
 
 main() {
+    printf "\n\e[1mProcessing dead domains\e[0m\n"
+    process_resurrected_domains
+    process_dead_domains
+
+    printf "\n\e[1mProcessing parked domains\e[0m\n"
+    process_unparked_domains
+    process_parked_domains
+
     # Update subdomains file before downloading the toplist
     update_subdomains_file
 
@@ -31,47 +39,9 @@ main() {
     blacklist="$($FUNCTION --get-blacklist)"
     readonly whitelist blacklist
 
-    printf "\n\e[1mProcessing dead domains\e[0m\n"
-
-    process_resurrected_domains
-
-    process_dead_domains
-
-    printf "\n\e[1mProcessing parked domains\e[0m\n"
-
-    process_unparked_domains
-
-    process_parked_domains
-
     validate_raw_file
 
     prune_files
-}
-
-# Update the subdomains file.
-update_subdomains_file() {
-    {
-        # Get subdomains less than or equal to 3 characters and occur more
-        # than or equal to 10 times
-        mawk -F '.' '{ print $1 }' "$RAW" | sort | uniq -c | sort -nr \
-            | mawk '$1 >= 10 && length($2) <= 3 { print $2 }'
-
-        # Get manually added subdomains
-        mawk 'length($0) > 3 { print }' "$SUBDOMAINS"
-    } | sort -u -o "$SUBDOMAINS"
-}
-
-# Tidy the blacklist.
-tidy_blacklist() {
-    {
-        # Remove entries that are not found in the raw file and toplist
-        comm -12 "$RAW" toplist.tmp \
-            | mawk -v blacklist="$($FUNCTION --get-blacklist)" '
-            $0 ~ blacklist' | grep -of "$BLACKLIST"
-
-        # Keep entries with whitelisted TLDs
-        awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$BLACKLIST"
-    } | sort -u -o "$BLACKLIST"
 }
 
 # Add resurrected domains to the raw file and remove them from the dead domains
@@ -214,6 +184,32 @@ process_parked_domains() {
     printf "Removed %s parked domains from the raw file.\n" "$parked_count"
 
     $FUNCTION --log-domains "$parked_count" parked_count raw
+}
+
+# Update the subdomains file.
+update_subdomains_file() {
+    {
+        # Get subdomains less than or equal to 3 characters and occur more
+        # than or equal to 10 times
+        mawk -F '.' '{ print $1 }' "$RAW" | sort | uniq -c | sort -nr \
+            | mawk '$1 >= 10 && length($2) <= 3 { print $2 }'
+
+        # Get manually added subdomains
+        mawk 'length($0) > 3 { print }' "$SUBDOMAINS"
+    } | sort -u -o "$SUBDOMAINS"
+}
+
+# Tidy the blacklist.
+tidy_blacklist() {
+    {
+        # Remove entries that are not found in the raw file and toplist
+        comm -12 "$RAW" toplist.tmp \
+            | mawk -v blacklist="$($FUNCTION --get-blacklist)" '
+            $0 ~ blacklist' | grep -of "$BLACKLIST"
+
+        # Keep entries with whitelisted TLDs
+        awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$BLACKLIST"
+    } | sort -u -o "$BLACKLIST"
 }
 
 # Used by validate_raw_file() to remove entries from the raw file and log them
