@@ -482,14 +482,14 @@ test_parked_processing() {
 # Test whitelisting and blacklisting entries.
 test_whitelist_blacklist() {
     # Test that the whitelist uses regex matching
-    input '(regex-test\.)?whitelist-test.com' "$WHITELIST"
+    input '(regex-test\.)?whitelist-test\.com' "$WHITELIST"
     input regex-test.whitelist-test.com
     # Test that the blacklist has higher priority and matches subdomains
     input '\.google\.com$' "$WHITELIST"
     input google.com "$BLACKLIST"
     input www.google.com
 
-    output '(regex-test\.)?whitelist-test.com' "$WHITELIST"
+    output '(regex-test\.)?whitelist-test\.com' "$WHITELIST"
     output '\.google\.com$' "$WHITELIST"
     output google.com "$BLACKLIST"
     output www.google.com "$RAW"
