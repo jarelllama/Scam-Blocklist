@@ -93,7 +93,9 @@ process_resurrected_domains() {
     comm -12 alive_domains.tmp "$DEAD_DOMAINS" | sort -u - "$RAW" -o "$RAW"
 
     # Remove resurrected domains from the dead domains file
-    comm -23 "$DEAD_DOMAINS" alive_domains.tmp > temp
+    # grep is used here as the dead domains file should remain unsorted
+    # Using grep is faster than a loop in mawk here
+    grep -vxFf alive_domains.tmp "$DEAD_DOMAINS" > temp || true
     mv temp "$DEAD_DOMAINS"
 
     count_after="$(wc -l < "$RAW")"
@@ -162,7 +164,9 @@ process_unparked_domains() {
         | sort -u - "$RAW" -o "$RAW"
 
     # Remove unparked domains from the parked domains file
-    comm -23 "$PARKED_DOMAINS" unparked_domains.tmp > temp
+    # grep is used here as the parked domains file should remain unsorted
+    # Using grep is faster than a loop in mawk here
+    grep -vxFf unparked_domains.tmp "$PARKED_DOMAINS" > temp || true
     mv temp "$PARKED_DOMAINS"
 
     count_after="$(wc -l < "$RAW")"
