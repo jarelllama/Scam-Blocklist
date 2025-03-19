@@ -28,7 +28,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Test validation of files
-        run: bash scripts/test_functions.sh tidy
+        run: bash scripts/test_functions.sh validate
 
   test-retrieval:
     runs-on: ubuntu-22.04
