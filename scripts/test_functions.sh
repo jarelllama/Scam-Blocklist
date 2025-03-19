@@ -125,9 +125,7 @@ SHELLCHECK() {
 TEST_VALIDATE_RETRIEVE() {
     local script_to_test="$1"
 
-    # Initialize pending directory
     [[ -d data/pending ]] && rm -r data/pending
-    mkdir -p data/pending
 
     test_review_file
     test_invalid_removal
@@ -150,6 +148,8 @@ TEST_VALIDATE_RETRIEVE() {
         run_script validate.sh
 
     elif [[ "$script_to_test" == 'retrieve' ]]; then
+        mkdir -p data/pending
+
         test_manual_addition_and_logging
         test_url_conversion
         test_large_source_error
@@ -307,15 +307,14 @@ test_tidying_blacklist() {
 test_review_file() {
     input Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
     input Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
-    # gov TLD used to avoid being removed for not being in the toplist
-    input Source,review-file-blacklist-test.gov,toplist,y, "$REVIEW_CONFIG"
+    input Source,review-file-blacklist-test.com,toplist,y, "$REVIEW_CONFIG"
     input Source,review-file-whitelist-test.com,toplist,,y "$REVIEW_CONFIG"
 
     # Only unconfigured and misconfigured entries should remain in the review
     # config file
     output Source,review-file-test.com,toplist,, "$REVIEW_CONFIG"
     output Source,review-file-misconfigured-test.com,toplist,y,y "$REVIEW_CONFIG"
-    output review-file-blacklist-test.gov "$BLACKLIST"
+    output review-file-blacklist-test.com "$BLACKLIST"
     output '^review-file-whitelist-test\.com$' "$WHITELIST"
 }
 

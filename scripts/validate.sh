@@ -30,9 +30,11 @@ main() {
 
     $FUNCTION --download-toplist
 
-    $FUNCTION --update-review-config
-
+    # Tidy blacklist before getting new blacklisted entries from the review
+    # config file
     tidy_blacklist
+
+    $FUNCTION --update-review-config
 
     # Store whitelist and blacklist as regex expressions
     whitelist="$($FUNCTION --get-whitelist)"
