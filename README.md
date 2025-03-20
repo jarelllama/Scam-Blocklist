@@ -33,56 +33,56 @@ The automated retrieval is done daily at 16:00 UTC.
 ## Statistics
 
 ``` text
-Total domains: 479937
-Light version: 23709
+Total domains: 468729
+Light version: 18254
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-  185 |     751 |      0 % |      34 % | 165 Anti-fraud
-  140 |     193 |      0 % |      13 % | Artists Against 419
-   13 |      40 |      0 % |      11 % | BehindMLM
-   40 |      97 |      0 % |       4 % | BugsFighter
-    6 |     455 |      0 % |      11 % | Chainabuse
-   61 |     389 |      0 % |      55 % | DFPI Crypto Scam Tracker
- 7938 |   22810 |     18 % |       1 % | DGA Detector
-  470 |    1022 |      0 % |       0 % | dnstwist
-  127 |    3931 |      3 % |      35 % | Emerging Threats
-  125 |    1273 |      1 % |      25 % | FakeWebshopListHUN
-  366 |    1243 |      1 % |       2 % | Google Search
- 1779 |    4992 |      4 % |      18 % | Gridinsoft
- 2488 |   25577 |     20 % |       8 % | Jeroengui
-    0 |       0 |      0 % |       0 % | Jeroengui (NRDs)
-    0 |    3145 |      2 % |      21 % | Malwarebytes
-  142 |     325 |      0 % |       8 % | MalwareURL
-   14 |      52 |      0 % |       7 % | PCrisk
- 9038 |   24804 |     20 % |      28 % | PhishStats
-    0 |      51 |      0 % |      18 % | PuppyScams.org
-   11 |   23636 |     19 % |       1 % | Regex
-  507 |    2641 |      2 % |       3 % | SafelyWeb
-  173 |    2398 |      1 % |      38 % | Scam Directory
-    1 |      14 |      0 % |      30 % | ScamAdviser
-  343 |     820 |      0 % |       5 % | ScamMinder
-   19 |      21 |      0 % |      10 % | ScamScavenger
-  138 |     519 |      0 % |      15 % | ScamTracker
-   27 |     100 |      0 % |       6 % | Unit42
-   60 |     156 |      0 % |       4 % | URLCrazy
-    8 |      24 |      0 % |      11 % | Verbraucherzentrale Hamburg
-    2 |      70 |      0 % |      28 % | ViriBack C2 Tracker
-   54 |     216 |      0 % |      20 % | Wildcat Cyber Patrol
-   14 |      18 |      0 % |       8 % | WiperSoft
-    6 |     514 |      0 % |      49 % | Česká Obchodní Inspekce
-24295 |  122518 |    100 % |       0 % | All sources
+    - |     751 |      0 % |      34 % | 165 Anti-fraud
+    - |     193 |      0 % |      13 % | Artists Against 419
+    - |      40 |      0 % |      11 % | BehindMLM
+    - |      97 |      0 % |       4 % | BugsFighter
+    - |     455 |      0 % |      11 % | Chainabuse
+    - |     389 |      0 % |      55 % | DFPI Crypto Scam Tracker
+    - |   22810 |     18 % |       1 % | DGA Detector
+    - |    1022 |      0 % |       0 % | dnstwist
+    - |    3931 |      3 % |      35 % | Emerging Threats
+    - |    1273 |      1 % |      25 % | FakeWebshopListHUN
+    - |    1243 |      1 % |       2 % | Google Search
+    - |    4992 |      4 % |      18 % | Gridinsoft
+    - |   25577 |     20 % |       8 % | Jeroengui
+    - |       0 |      0 % |       0 % | Jeroengui (NRDs)
+    - |    3145 |      2 % |      21 % | Malwarebytes
+    - |     325 |      0 % |       8 % | MalwareURL
+    - |      52 |      0 % |       7 % | PCrisk
+    - |   24804 |     20 % |      28 % | PhishStats
+    - |      51 |      0 % |      18 % | PuppyScams.org
+    - |   23636 |     19 % |       1 % | Regex
+    - |    2641 |      2 % |       3 % | SafelyWeb
+    - |    2398 |      1 % |      38 % | Scam Directory
+    - |      14 |      0 % |      30 % | ScamAdviser
+    - |     820 |      0 % |       5 % | ScamMinder
+    - |      21 |      0 % |      10 % | ScamScavenger
+    - |     519 |      0 % |      15 % | ScamTracker
+    - |     100 |      0 % |       6 % | Unit42
+    - |     156 |      0 % |       4 % | URLCrazy
+    - |      24 |      0 % |      11 % | Verbraucherzentrale Hamburg
+    - |      70 |      0 % |      28 % | ViriBack C2 Tracker
+    - |     216 |      0 % |      20 % | Wildcat Cyber Patrol
+    - |      18 |      0 % |       8 % | WiperSoft
+    - |     514 |      0 % |      49 % | Česká Obchodní Inspekce
+    - |  122518 |    100 % |       0 % | All sources
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 15255
-Dead domains removed this month: 95852
-Resurrected domains added today: 3547
+Dead domains removed today: 14731
+Dead domains removed this month: 110583
+Resurrected domains added today: 2415
 
-Parked domains removed today: 27763
-Parked domains removed this month: 27765
-Unparked domains added today: 374
+Parked domains removed today: 1666
+Parked domains removed this month: 29431
+Unparked domains added today: 2184
 ```
 
 <details>
