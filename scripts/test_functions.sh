@@ -756,10 +756,10 @@ check_output() {
     [[ "$error" == true ]] && exit 1 || exit 0
 }
 
-# Add an entry into a file to be processed by the called script for testing.
+# Add an entry to a file to be processed by the called script for testing.
 # Input:
-#   $1: Entry to add into file
-#   $2: File to add entry into (default is input.txt)
+#   $1: entry to add into file
+#   $2: file to add entry into (default is input.txt)
 input() {
     printf "%s\n" "$1" >> "${2:-input.txt}"
 }
@@ -767,14 +767,15 @@ input() {
 # Add an entry to an output file which is used as the expected results to
 # compare against the actual results of the called script.
 # Input:
-#   $1: Entry to add into expected results file
-#   $2: Actual results file path
+#   $1: entry to add into expected results file
+#   $2: actual results file path
 output() {
     local expected_output="$1"
     local actual_output_file="$2"
     local expected_output_file="${actual_output_file//\//_}.txt"
 
     printf "%s\n" "$actual_output_file" >> output_files_to_test.txt
+
     # Remove duplicates without sorting
     mawk '!seen[$0]++' output_files_to_test.txt > temp
     mv temp output_files_to_test.txt

@@ -25,6 +25,7 @@ convert_unicode() {
     mawk '/^..--/' "$1" > temp
     mawk '!/^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
     sort -u temp -o "$1"
+    rm temp
 }
 
 # Download and collate NRD feeds consisting domains registered in the last 30
@@ -237,9 +238,6 @@ error() {
 # Entry point
 
 set -e
-
-# Do not remove .tmp files
-trap 'rm temp 2> /dev/null || true' EXIT
 
 case "$1" in
     --convert-unicode)
