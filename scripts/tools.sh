@@ -35,13 +35,15 @@ convert_unicode() {
 download_nrd_feed() {
     [[ -s nrd.tmp ]] && return
 
-    local url1='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt'
-    local url2='https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt'
-    local url3='https://raw.githubusercontent.com/SystemJargon/filters/refs/heads/main/nrds-30days.txt'
-    local url4='https://feeds.opensquat.com/domain-names-month.txt'
+    local -a urls=(
+        https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt
+        https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part2.txt
+        https://raw.githubusercontent.com/SystemJargon/filters/refs/heads/main/nrds-30days.txt
+        https://feeds.opensquat.com/domain-names-month.txt
+    )
 
     # Download the feeds in parallel and get domains
-    curl -sSLZH 'User-Agent: openSquat-2.1.0' "$url1" "$url2" "$url3" "$url4" \
+    curl -sSLZH 'User-Agent: openSquat-2.1.0' "${urls[@]}" \
         | grep -P "^${DOMAIN_REGEX}$" > nrd.tmp
     # TODO: error detection
 
@@ -97,7 +99,7 @@ format_file() {
             # Convert to lowercase, sort, and remove duplicates
             mawk '{ print tolower($0) }' "$file" | sort -u -o temp
             ;;
-        *.txt|*.tmp)
+        *.txt)
             # Remove whitespaces, convert to lowercase, sort, and remove
             # duplicates
             mawk '{ gsub(/ /, ""); print tolower($0) }' "$file" \
