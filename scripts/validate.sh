@@ -8,7 +8,9 @@ readonly PARKED_DOMAINS='data/parked_domains.txt'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly BLACKLIST='config/blacklist.txt'
+readonly DOMAIN_LOG='config/domain_log.csv'
 readonly REVIEW_CONFIG='config/review_config.csv'
+readonly SOURCE_LOG='config/source_log.csv'
 readonly SUBDOMAINS='config/subdomains.txt'
 readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 readonly ALIVE_DOMAINS_URL='https://raw.githubusercontent.com/jarelllama/Dead-Domains/refs/heads/main/alive_domains.txt'
@@ -36,12 +38,17 @@ main() {
 
     $FUNCTION --update-review-config
 
-    # Store whitelist and blacklist as regex expressions
+    # Store updated whitelist and blacklist as regex expressions
     whitelist="$($FUNCTION --get-whitelist)"
     blacklist="$($FUNCTION --get-blacklist)"
     readonly whitelist blacklist
 
     filter_raw_file
+
+    # Remove duplicates from the review config file
+    # This is done here once instead of multiple times in filter()
+    mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
+    mv temp "$REVIEW_CONFIG"
 
     prune_files
 }
@@ -233,10 +240,6 @@ filter() {
         # Save entries into the review config file
         mawk -v reason="$tag" '{ print "raw," $0 "," reason ",," }' \
             <<< "$entries" >> "$REVIEW_CONFIG"
-
-        # Remove duplicates from the review config file
-        mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
-        mv temp "$REVIEW_CONFIG"
     else
         # Remove entries from the raw file
         comm -23 "$RAW" <(printf "%s" "$entries") > temp
@@ -265,18 +268,26 @@ filter_raw_file() {
     $FUNCTION --convert-unicode "$RAW"
     $FUNCTION --convert-unicode "$RAW_LIGHT"
 
-    # Remove whitelisted domains excluding blacklisted domains
-    filter "$(awk -v whitelist="$whitelist" -v blacklist="$blacklist" '
-        $0 ~ whitelist && $0 !~ blacklist' "$RAW")" whitelist
+    # Get blacklisted domains
+    # This is done here once instead of extra regex matching below
+    mawk -v blacklist="$blacklist" '$0 ~ blacklist' "$RAW" > blacklisted.tmp
 
-    # Get domains with whitelisted TLDs excluding blacklisted domains
-    filter "$(awk -v blacklist="$blacklist" '
-        /\.(gov|edu|mil)(\.[a-z]{2})?$/ && $0 !~ blacklist' "$RAW"
+    # Temporarily remove blacklisted domains from the raw file
+    comm -23 "$RAW" blacklisted.tmp > temp
+    mv temp "$RAW"
+
+    # Remove whitelisted domains
+    filter "$(awk -v whitelist="$whitelist" '$0 ~ whitelist' "$RAW")" whitelist
+
+    # Get domains with whitelisted TLDs
+    filter "$(awk '/\.(gov|edu|mil)(\.[a-z]{2})?$/' "$RAW"
         )" whitelisted_tld --preserve
 
-    # Get domains in the toplist excluding blacklisted domains
-    filter "$(comm -12 "$RAW" toplist.tmp \
-        | mawk -v blacklist="$blacklist" '$0 !~ blacklist')" toplist --preserve
+    # Get domains in the toplist
+    filter "$(comm -12 "$RAW" toplist.tmp)" toplist --preserve
+
+    # Add back blacklisted domains
+    sort -u blacklisted.tmp "$RAW" -o "$RAW"
 
     # Save changes to the raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > temp
@@ -288,16 +299,12 @@ filter_raw_file() {
 
 # Prune files to keep them within a certain size.
 prune_files() {
-    # Prune logs
-    $FUNCTION --prune-lines config/source_log.csv 10000
+    $FUNCTION --prune-lines "$SOURCE_LOG" 10000
     # 500,000 is enough for a month's worth of logs
-    $FUNCTION --prune-lines config/domain_log.csv 500000
+    $FUNCTION --prune-lines "$DOMAIN_LOG" 500000
 
-    # Prune dead domains file
-    $FUNCTION --prune-lines data/dead_domains.txt 100000
-
-    # Prune parked domains file
-    $FUNCTION --prune-lines data/parked_domains.txt 100000
+    $FUNCTION --prune-lines "$DEAD_DOMAINS" 100000
+    $FUNCTION --prune-lines "$PARKED_DOMAINS" 100000
 }
 
 # Print error message and exit.
