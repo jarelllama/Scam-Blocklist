@@ -40,7 +40,7 @@ main() {
                         print domain
                     }
                 }
-            }' "$RAW") toplist.tmp \
+            }' "$RAW" | sort) toplist.tmp \
             | mawk -v whitelist="$whitelist" '$0 !~ whitelist'
 
         # Keep existing wildcards with subdomains as these tend to be manually
