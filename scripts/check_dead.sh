@@ -84,6 +84,7 @@ find_dead_in() {
     # Run checks in parallel
     find_dead x00 & find_dead x01 & find_dead x02
     wait
+    rm x??
 
     # Collate dead domains
     sort -u dead_x??.tmp -o dead.tmp
@@ -120,6 +121,6 @@ error() {
 
 set -e
 
-trap 'rm ./*.tmp x?? 2> /dev/null || true' EXIT
+trap 'rm ./*.tmp 2> /dev/null || true' EXIT
 
 main "$1" "$2"
