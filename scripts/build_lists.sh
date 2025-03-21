@@ -40,14 +40,16 @@ main() {
                         print domain
                     }
                 }
-            }' "$RAW" | sort) toplist.tmp \
+            }' "$RAW") toplist.tmp \
             | mawk -v whitelist="$whitelist" '$0 !~ whitelist'
 
         # Keep existing wildcards with subdomains as these tend to be manually
         # added. Only keep wildcards that occur 10 or more times. Using a while
         # loop here is faster than using mawk.
         while read -r wildcard; do
-            [[ -z "$wildcard" ]] && break  # For when no wildcards are found
+            # Break when there are no wildcards to avoid printing an empty line
+            [[ -z "$wildcard" ]] && break
+
             if (( $(grep -c "$wildcard" "$RAW") >= 10 )); then
                 printf "%s\n" "$wildcard"
             fi
