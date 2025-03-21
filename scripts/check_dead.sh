@@ -16,7 +16,7 @@
 
 readonly ARGUMENT="$1"
 readonly FILE="$2"
-readonly PARTS=3
+readonly PARTS=2
 
 main() {
     [[ ! -f "$FILE" ]] && error "File $FILE not found."
