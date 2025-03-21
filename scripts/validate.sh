@@ -251,7 +251,7 @@ filter() {
 
 # Validate the entries in the raw file.
 validate_raw_file() {
-    printf "\n\e[1mFiltering raw file\e[0m\n"
+    printf "\n\e[1mValidating raw file\e[0m\nLog:\n"
 
     # Remove non-domain entries
     filter "$(grep -vP "^${DOMAIN_REGEX}$" "$RAW")" invalid
@@ -281,6 +281,8 @@ validate_raw_file() {
     # Save changes to the raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > temp
     mv temp "$RAW_LIGHT"
+
+    printf "\n\e[1mValidation completed\e[0m\n\n"
 }
 
 # Prune files to keep them within a certain size.
