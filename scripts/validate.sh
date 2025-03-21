@@ -282,7 +282,7 @@ validate_raw_file() {
     comm -12 "$RAW_LIGHT" "$RAW" > temp
     mv temp "$RAW_LIGHT"
 
-    printf "\n\e[1mValidation completed\e[0m\n\n"
+    printf "\e[1mValidation completed\e[0m\n\n"
 }
 
 # Prune files to keep them within a certain size.
