@@ -43,7 +43,7 @@ main() {
                 --additional-suffix=.tmp "$FILE" part
 
             # Get which part to process
-            readonly PART="part${ARGUMENT##--check-parked-part-}"
+            readonly PART="part${ARGUMENT##--check-dead-part-}"
 
             # Always clear the dead domains file for the first part
             if [[ "$PART" == 'part1' ]]; then
