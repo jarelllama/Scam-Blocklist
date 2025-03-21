@@ -226,7 +226,7 @@ filter() {
     local entries="$1"
     local tag="$2"
 
-    # Return if no entries passed
+    # Return if no entries were passed
     [[ -z "$entries" ]] && return
 
     if [[ "$3" == '--preserve' ]]; then
@@ -234,7 +234,7 @@ filter() {
         mawk -v reason="$tag" '{ print "raw," $0 "," reason ",," }' \
             <<< "$entries" >> "$REVIEW_CONFIG"
 
-        # Remove duplicates
+        # Remove duplicates from the review config file
         mawk '!seen[$0]++' "$REVIEW_CONFIG" > temp
         mv temp "$REVIEW_CONFIG"
     else
@@ -243,15 +243,16 @@ filter() {
         mv temp "$RAW"
     fi
 
-    # Record entries into the filter log for console output
-    mawk -v tag="$tag" '{ print $0 " (" tag ")" }' \
-        <<< "$entries" >> filter_log.tmp
+    # Print filtered entries
+    mawk -v tag="$tag" '{ print $0 " (" tag ")" }' <<< "$entries"
 
     $FUNCTION --log-domains "$entries" "$tag" raw
 }
 
 # Validate the entries in the raw file.
 validate_raw_file() {
+    printf "\n\e[1mFiltering raw file\e[0m\n"
+
     # Remove non-domain entries
     filter "$(grep -vP "^${DOMAIN_REGEX}$" "$RAW")" invalid
 
@@ -280,20 +281,6 @@ validate_raw_file() {
     # Save changes to the raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > temp
     mv temp "$RAW_LIGHT"
-
-    # Return if no filtering done
-    [[ ! -s filter_log.tmp ]] && return
-
-    # Print filter log
-    printf "\n\e[1mProblematic domains (%s):\e[0m\n" \
-        "$(wc -l < filter_log.tmp)"
-    sed 's/(toplist)/& - \o033[31mmanual verification required\o033[0m/' \
-        filter_log.tmp
-
-    $FUNCTION --send-telegram \
-        "Validation: problematic domains found\n\n$(<filter_log.tmp)"
-
-    printf "\nTelegram notification sent.\n"
 }
 
 # Prune files to keep them within a certain size.
@@ -322,7 +309,7 @@ error() {
 
 set -e
 
-trap 'rm ./*.tmp temp 2> /dev/null || true' EXIT
+trap 'rm ./*.tmp 2> /dev/null || true' EXIT
 
 $FUNCTION --format-files
 
