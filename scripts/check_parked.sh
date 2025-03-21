@@ -3,14 +3,14 @@
 # Check for parked or unparked domains and output them to respective files.
 # Note that although the domain may be parked, subfolders of the domain may
 # host malicious content. This script does not account for that.
-# The parked check can be split into 2 parts to get around GitHub job timeouts.
+# The parked check can be split into parts to get around GitHub job timeouts.
 # Input:
 #   $1:
 #     --check-unparked:       check for unparked domains in the given file
 #     --check-parked:         check for parked domains in the given file
-#     --check-parked-part-1:  check for parked domains in one half of the file
-#     --check-parked-part-2:  check for parked domains in the other half of the
-#                             file. should only be ran after part 1
+#     --check-parked-part-N:  check for parked domains in multiple parts, where
+#                             N is the part to check for. the maximum number of
+#                             of parts is configured using the variable PARTS
 #   $2:                file to process
 #   parked_terms.txt:  list of parked terms to check for
 # Output:
@@ -19,16 +19,11 @@
 
 readonly ARGUMENT="$1"
 readonly FILE="$2"
-readonly PARKED_TERMS='parked_terms.txt'
+readonly PARTS=3
 
 main() {
     [[ ! -f "$FILE" ]] && error "File $FILE not found."
-    [[ ! -s "$PARKED_TERMS" ]] && error 'Parked terms not found.'
-
-    # Split the file into 2 parts for each GitHub job if requested
-    if [[ "$ARGUMENT" == --check-parked-part-? ]]; then
-        split -n l/2 "$FILE"
-    fi
+    [[ ! -s parked_terms.txt ]] && error 'Parked terms not found.'
 
     case "$ARGUMENT" in
         --check-unparked)
@@ -44,15 +39,21 @@ main() {
             sort -u parked.tmp -o parked_domains.txt
             ;;
 
-        --check-parked-part-1)
-            find_parked_in xaa
-            sort -u parked.tmp -o parked_domains.txt
-            ;;
+        --check-parked-part-?)
+            # Split the file into parts for each run
+            split -n l/"$PARTS" --numeric-suffixes=1 --suffix-length=1 \
+                --additional-suffix=.tmp "$FILE" part
 
-        --check-parked-part-2)
-            find_parked_in xab
-            # Append the parked domains since the parked domains file
-            # should contain parked domains from part 1.
+            # Get which part to process
+            readonly PART="part${ARGUMENT##--check-parked-part-}"
+
+            # Always clear the parked domains file for the first part
+            if [[ "$PART" == 'part1' ]]; then
+                : > parked_domains.txt
+            fi
+
+            find_parked_in "${PART}.tmp"
+
             sort -u parked.tmp parked_domains.txt -o parked_domains.txt
             ;;
 
@@ -150,7 +151,7 @@ find_parked() {
             printf "%s\n" "$domain" >> "errored_domains_${1}.tmp"
 
         # Check for parked messages in the site's HTML
-        elif grep -qiFf "$PARKED_TERMS" <<< "$html"; then
+        elif grep -qiFf parked_terms.txt <<< "$html"; then
             printf "[info] Found parked domain: %s\n" "$domain"
             printf "%s\n" "$domain" >> "parked_domains_${1}.tmp"
         fi
