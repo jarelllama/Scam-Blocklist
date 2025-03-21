@@ -234,9 +234,10 @@ TEST_PARKED_CHECK() {
     # Run script
     cp "$PARKED_TERMS" parked_terms.txt
     run_script check_parked.sh --check-unparked "$PARKED_DOMAINS"
-    # Test using 2 parts for each GitHub Job
+    # Test using multiple parts for each GitHub Job
     run_script check_parked.sh --check-parked-part-1 input.txt
     run_script check_parked.sh --check-parked-part-2 input.txt
+    run_script check_parked.sh --check-parked-part-3 input.txt
 
     check_output
 }
