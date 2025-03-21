@@ -137,7 +137,7 @@ EOF
 
 set -e
 
-trap 'rm ./*.tmp temp 2> /dev/null || true' EXIT
+trap 'rm ./*.tmp 2> /dev/null || true' EXIT
 
 $FUNCTION --format-files
 
