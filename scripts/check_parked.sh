@@ -6,13 +6,13 @@
 # The parked check can be split into parts to get around GitHub job timeouts.
 # Input:
 #   $1:
-#     --check-unparked:       check for unparked domains in the given file
-#     --check-parked:         check for parked domains in the given file
-#     --check-parked-part-N:  check for parked domains in multiple parts, where
-#                             N is the part to check for. the maximum number of
-#                             of parts is configured using the variable PARTS
-#   $2:                file to process
-#   parked_terms.txt:  list of parked terms to check for
+#     --check-unparked:      check for unparked domains in the given file
+#     --check-parked:        check for parked domains in the given file
+#     --check-parked-part-N: check for parked domains in multiple parts, where
+#                            N is the part to check. the maximum number of
+#                            parts is configured using the variable PARTS
+#   $2: file to process
+#   parked_terms.txt: list of parked terms to check for
 # Output:
 #   unparked_domains.txt (for unparked domains check)
 #   parked_domains.txt (for parked domains check)
@@ -170,6 +170,6 @@ error() {
 
 set -e
 
-trap 'rm ./*.tmp temp x?? 2> /dev/null || true' EXIT
+trap 'rm ./*.tmp x?? 2> /dev/null || true' EXIT
 
 main "$1" "$2"

@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Check for dead or resurrected domains and output them to respective files.
-# The dead check can be split into 2 parts to get around GitHub job timeouts.
+# The dead check can be split into parts to get around GitHub job timeouts.
 # Input:
 #   $1:
-#     --check-alive:        check for resurrected domains in the given file
-#     --check-dead:         check for dead domains in the given file
-#     --check-dead-part-1:  check for dead domains in one half of the file
-#     --check-dead-part-2:  check for dead domains in the other half of the
-#                           file. should only be ran after part 1
+#     --check-alive:       check for resurrected domains in the given file
+#     --check-dead:        check for dead domains in the given file
+#     --check-dead-part-N: check for dead domains in multiple parts, where
+#                          N is the part to check. the maximum number of parts
+#                          is configured using the variable PARTS
 #   $2: file to process
 # Output:
 #   alive_domains.txt (for resurrected domains check)
@@ -16,6 +16,7 @@
 
 readonly ARGUMENT="$1"
 readonly FILE="$2"
+readonly PARTS=3
 
 main() {
     [[ ! -f "$FILE" ]] && error "File $FILE not found."
@@ -23,11 +24,6 @@ main() {
     # Install AdGuard's Dead Domains Linter
     if ! command -v dead-domains-linter &> /dev/null; then
         npm install -g @adguard/dead-domains-linter > /dev/null
-    fi
-
-    # Split the file into 2 parts for each GitHub job if requested
-    if [[ "$ARGUMENT" == --check-dead-part-? ]]; then
-        split -n l/2 "$FILE"
     fi
 
     case "$ARGUMENT" in
@@ -41,15 +37,21 @@ main() {
             sort -u dead.tmp -o dead_domains.txt
             ;;
 
-        --check-dead-part-1)
-            find_dead_in xaa
-            sort -u dead.tmp -o dead_domains.txt
-            ;;
+        --check-dead-part-?)
+            # Split the file into parts for each run
+            split -n l/"$PARTS" --numeric-suffixes=1 --suffix-length=1 \
+                --additional-suffix=.tmp "$FILE" part
 
-        --check-dead-part-2)
-            find_dead_in xab
-            # Append the dead domains since the dead domains file
-            # should contain dead domains from part 1.
+            # Get which part to process
+            readonly PART="part${ARGUMENT##--check-parked-part-}"
+
+            # Always clear the dead domains file for the first part
+            if [[ "$PART" == 'part1' ]]; then
+                : > dead_domains.txt
+            fi
+
+            find_dead_in "${PART}.tmp"
+
             sort -u dead.tmp dead_domains.txt -o dead_domains.txt
             ;;
 
@@ -118,6 +120,6 @@ error() {
 
 set -e
 
-trap 'rm ./*.tmp temp x?? 2> /dev/null || true' EXIT
+trap 'rm ./*.tmp x?? 2> /dev/null || true' EXIT
 
 main "$1" "$2"
