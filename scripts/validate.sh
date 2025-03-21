@@ -41,7 +41,7 @@ main() {
     blacklist="$($FUNCTION --get-blacklist)"
     readonly whitelist blacklist
 
-    validate_raw_file
+    filter_raw_file
 
     prune_files
 }
@@ -214,7 +214,7 @@ tidy_blacklist() {
     } | sort -u -o "$BLACKLIST"
 }
 
-# Used by validate_raw_file() to remove entries from the raw file and log them
+# Used by filter_raw_file() to remove entries from the raw file and log them
 # into the domain log.
 # Input:
 #   $1: entries to process passed in a variable
@@ -249,9 +249,9 @@ filter() {
     $FUNCTION --log-domains "$entries" "$tag" raw
 }
 
-# Validate the entries in the raw file.
-validate_raw_file() {
-    printf "\n\e[1mValidating raw file\e[0m\nLog:\n"
+# Filter the entries in the raw file.
+filter_raw_file() {
+    printf "\n\e[1mFiltering the raw file\e[0m\nLog:\n"
 
     # Remove non-domain entries
     filter "$(grep -vP "^${DOMAIN_REGEX}$" "$RAW")" invalid
@@ -281,6 +281,9 @@ validate_raw_file() {
     # Save changes to the raw light file
     comm -12 "$RAW_LIGHT" "$RAW" > temp
     mv temp "$RAW_LIGHT"
+
+    # Print a new line after the filtering log
+    printf "\n"
 }
 
 # Prune files to keep them within a certain size.
