@@ -37,7 +37,7 @@ main() {
             sort -u dead.tmp -o dead_domains.txt
             ;;
 
-        --check-dead-part-?)
+        --check-dead-part-[1-"${PARTS}"])
             # Split the file into parts for each run
             split -n l/"$PARTS" --numeric-suffixes=1 --suffix-length=1 \
                 --additional-suffix=.tmp "$FILE" part

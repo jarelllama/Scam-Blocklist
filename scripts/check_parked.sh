@@ -39,7 +39,7 @@ main() {
             sort -u parked.tmp -o parked_domains.txt
             ;;
 
-        --check-parked-part-?)
+        --check-parked-part-[1-"${PARTS}"])
             # Split the file into parts for each run
             split -n l/"$PARTS" --numeric-suffixes=1 --suffix-length=1 \
                 --additional-suffix=.tmp "$FILE" part
