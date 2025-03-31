@@ -1,34 +1,35 @@
 source name,source function,exclude from light,enable
-165 Anti-fraud,source_165antifraud,,y
-Artists Against 419,source_aa419,,y
-BehindMLM,source_behindmlm,,y
-BugsFighter,source_bugsfighter,,y
-Chainabuse,source_chainabuse,,y
-DFPI Crypto Scam Tracker,source_crypto_scam_tracker,,y
-DGA Detector,source_dga_detector,y,y
-dnstwist,source_dnstwist,,y
-Emerging Threats,source_emerging_threats,,y
-FakeWebshopListHUN,source_fakewebshoplisthun,y,y
-Google Search,source_google_search,,y
-Gridinsoft,source_gridinsoft,y,y
-Jeroengui,source_jeroengui,y,y
-Jeroengui (NRDs),source_jeroengui_nrd,,y
-Malwarebytes,source_malwarebytes,,y
-MalwareURL,source_malwareurl,,y
-PCrisk,source_pcrisk,,y
-PhishStats,source_phishstats,,y
-PuppyScams.org,source_puppyscams,,y
-Regex,source_regex,y,y
-SafelyWeb,source_safelyweb,y,y
-Scam Directory,source_scamdirectory,,y
-ScamAdviser,source_scamadviser,,y
-ScamMinder,source_scamminder,,y
-ScamScavenger,source_scamscavenger,,y
-ScamTracker,source_scamtracker,,y
-Unit42,source_unit42,,y
-URLCrazy,source_urlcrazy,,y
-Verbraucherzentrale Hamburg,source_vzhh,,y
-ViriBack C2 Tracker,source_viriback_tracker,,y
-Wildcat Cyber Patrol,source_greatis,,y
-WiperSoft,source_wipersoft,,y
-Česká Obchodní Inspekce,source_coi.gov.cz,,y
+165 Anti-fraud,165antifraud,,y
+Artists Against 419,aa419,,y
+BehindMLM,behindmlm,,y
+BugsFighter,bugsfighter,,y
+Chainabuse,chainabuse,,y
+DFPI Crypto Scam Tracker,crypto_scam_tracker,,y
+DGA Detector,dga_detector,y,y
+dnstwist,dnstwist_,,y
+Emerging Threats,emerging_threats,,y
+FakeWebshopListHUN,fakewebshoplisthun,y,y
+Google Search,google_search,,y
+Gridinsoft,gridinsoft,y,y
+Jeroengui,jeroengui,y,y
+Jeroengui (NRDs),jeroengui_nrds,,y
+Malwarebytes,malwarebytes,,y
+MalwareURL,malwareurl,,y
+PCrisk,pcrisk,,y
+Phishing NRDs,phishing_nrds,y,y
+PhishStats,phishstats,,y
+Podvod na bazaru,podvodnabazaru.cz,,y
+PuppyScams.org,puppyscams,,y
+SafelyWeb,safelyweb,y,y
+Scam Directory,scamdirectory,,y
+ScamAdviser,scamadviser,,y
+ScamMinder,scamminder,,y
+ScamScavenger,scamscavenger,,y
+ScamTracker,scamtracker,,y
+Unit42,unit42,,y
+URLCrazy,urlcrazy,,y
+Verbraucherzentrale Hamburg,vzhh.de,,y
+ViriBack C2 Tracker,viriback_tracker,,y
+Wildcat Cyber Patrol,greatis,,y
+WiperSoft,wipersoft,,y
+Česká Obchodní Inspekce,coi.gov.cz,,y

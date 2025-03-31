@@ -65,22 +65,26 @@ coi.gov.cz() {
 }
 
 crypto_scam_tracker() {
-    # Last checked: 29/03/25
-    # TODO: match column 4 and 5 lines
-
+    # Last checked: 31/03/25
     URL='https://dfpi.ca.gov/consumers/crypto/crypto-scam-tracker'
     CURL | mawk '
-        # Note that matching lines between column 4 and 5 is not inclusive of
-        # the column 4 and 5 lines themselves
-        /"column-3"/ {
+        /"column-4"/ {
+            # Set block to 1 when line contains "column-4"
             block = 1;
-            next
         }
-        /<\/tr>/ {
+        /"column-5"/ {
+            # Print the "column-5" line as it will not get printed below
+            # due to block = 0
+            match($0, /"column-5"/);
+            # Print only before "column-5"
+            print substr($0, 1, RSTART - 1);
+
+            # Set block to 0 when line contains "column-5"
             block = 0
         }
+        # Print lines between "column-4" and "column-5" (block = 1)
         block
-        ' | grep -Po "(https?://)?\K${DOMAIN_REGEX}" > results.tmp
+        ' | grep -Po "(^|>| )(https?://)?\K${DOMAIN_REGEX}" > results.tmp
 }
 
 dga_detector() {
@@ -280,6 +284,13 @@ phishstats() {
     CURL | grep -Po ",\"https?://\K${DOMAIN_REGEX}" > results.tmp
 }
 
+podvodnabazaru.cz() {
+    # Last checked: 31/03/25
+    URL='https://podvodnabazaru.cz/database/scam-eshop'
+    CURL | mawk '/Podvodný eshop/ { getline; getline; print }' \
+        | grep -Po "${DOMAIN_REGEX}" > results.tmp
+}
+
 puppyscams() {
     # Last checked: 30/02/25
     URL='https://puppyscams.org'
@@ -326,8 +337,9 @@ scamscavenger() {
 
 scamtracker() {
     # Last checked: 29/03/25
-    URL='https://scam-tracker.net/category/crypto-scams'
     local -a review_urls
+
+    URL='https://scam-tracker.net/category/crypto-scams'
 
     # Collate the review URLs into an array
     mapfile -t review_urls < <(CURL "${URL}/page/[1-100]" \
