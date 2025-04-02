@@ -56,6 +56,18 @@ readonly -a WHITELIST=(
 )
 
 main() {
+    # Install AdGuard's Dead Domains Linter
+    if ! command -v dead-domains-linter &> /dev/null; then
+        npm install -g @adguard/dead-domains-linter > /dev/null
+    fi
+
+    # Install AdGuard's Hostlist Compiler
+    if ! command -v hostlist-compiler &> /dev/null; then
+        npm install -g @adguard/hostlist-compiler > /dev/null
+    fi
+
+    $FUNCTION --download-toplist
+
     # Format raw file to Domains format
     mawk '/\|/ { gsub(/[|^]/, ""); print }' "$BLOCKLIST" > raw.tmp
 
@@ -108,17 +120,5 @@ EOF
 set -e
 
 trap 'rm ./*.tmp 2> /dev/null || true' EXIT
-
-# Install AdGuard's Dead Domains Linter
-if ! command -v dead-domains-linter &> /dev/null; then
-    npm install -g @adguard/dead-domains-linter > /dev/null
-fi
-
-# Install AdGuard's Hostlist Compiler
-if ! command -v hostlist-compiler &> /dev/null; then
-    npm install -g @adguard/hostlist-compiler > /dev/null
-fi
-
-$FUNCTION --download-toplist
 
 main

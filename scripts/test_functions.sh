@@ -158,8 +158,8 @@ TEST_VALIDATE_RETRIEVE() {
         # Distribute the test input into various sources
         split -n l/3 input.txt
         mv xaa data/pending/Artists_Against_419.tmp
-        mv xab data/pending/Google_Search_search-term-1.tmp
-        mv xac data/pending/Google_Search_search-term-2.tmp
+        mv xab data/pending/Google_Search:search-term-1.tmp
+        mv xac data/pending/Google_Search:search-term-2.tmp
 
         # Enable all sources in the sources config file
         mawk '

@@ -31,9 +31,9 @@ convert_unicode() {
 # Download and collate NRD feeds consisting domains registered in the last 30
 # days.
 # Output:
-#   nrd.tmp
+#   nrds.tmp
 download_nrd_feed() {
-    [[ -s nrd.tmp ]] && return
+    [[ -s nrds.tmp ]] && return
 
     local -a urls=(
         https://raw.githubusercontent.com/xRuffKez/NRD/refs/heads/main/lists/30-day/domains-only/nrd-30day_part1.txt
@@ -44,10 +44,10 @@ download_nrd_feed() {
 
     # Download the feeds in parallel and get domains
     curl -sSLZH 'User-Agent: openSquat-2.1.0' "${urls[@]}" \
-        | grep -P "^${DOMAIN_REGEX}$" > nrd.tmp
+        | grep -P "^${DOMAIN_REGEX}$" > nrds.tmp
     # TODO: error detection
 
-    format_file nrd.tmp
+    format_file nrds.tmp
 }
 
 # Download and format the Tranco toplist.

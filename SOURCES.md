@@ -23,7 +23,9 @@ Only active sources are used to automatically retrieve domains.
 | [France Verif](https://franceverif.fr/) | | |
 | [Google Custom Search JSON API](https://github.com/jarelllama/Scam-Blocklist/blob/main/config/search_terms.csv) | Yes | |
 | [Gridinsoft](https://gridinsoft.com/website-reputation-checker) | Yes | Yes |
-| [GunTab](https://www.guntab.com/scam-websites) | | |
+| [GunTab](https://www.guntab.com/scam-websites) | Yes | |
+| [HowToFix.Guide](https://howtofix.guide/)| Yes | |
+| [HowToRemove.Guide](https://howtoremove.guide/) | Yes | |
 | [Hagezi's URL Shorteners Whitelist](https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/whitelist-urlshortener.txt) | - | - |
 | [Jeroen Gui Anti-Phishing Project](https://jeroengui.be/anti-phishing-project/)[^1] | Yes | ~ |
 | [MalwareTips](https://malwaretips.com/blogs/) | | |
