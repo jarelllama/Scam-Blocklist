@@ -7,45 +7,42 @@ readonly BLOCKLIST='lists/adblock/nsfw.txt'
 
 # Patterns to match for
 readonly -a TERMS=(
-    porn
-    xxx
-    spankbang
-    xhamster
-    xvideo
-    onlyfans
-    fansly
-    hentai
-    redtube
-    internetchicks
-    masterfap
-    thothub
-    onlyleaks
-    thumbzilla
-    fapello
-    thenudebay
-    gonewild
-    thothd
-    camwhores
-    brazzers
-    hookup
-    ^sex
     \.sex$
-    escort
-    rule34
-    hookers
-    blowjob
-    jizz
-    xnxx
-    noodlemagazine
-    xhopen
-    xgroovy
-    ^xcafe
+    ^sex
     asiangalore
+    blowjob
+    brazzers
+    camwhores
     dinotube
-    4tube
+    escort
+    fansly
+    fapello
     gaymaletube
+    gonewild
+    hentai
+    hookers
+    hookup
+    internetchicks
+    jizz
+    masterfap
+    noodlemagazine
+    onlyfans
+    onlyleaks
+    porn
+    redtube
+    rule34
+    spankbang
+    thenudebay
+    thothd
+    thothub
+    thumbzilla
     tubesafari
-    ^xfree
+    xgroovy
+    xhamster
+    xhopen
+    xnxx
+    xvideo
+    xxx
 )
 
 # Whitelisted domains
@@ -56,11 +53,6 @@ readonly -a WHITELIST=(
 )
 
 main() {
-    # Install AdGuard's Dead Domains Linter
-    if ! command -v dead-domains-linter &> /dev/null; then
-        npm install -g @adguard/dead-domains-linter > /dev/null
-    fi
-
     # Install AdGuard's Hostlist Compiler
     if ! command -v hostlist-compiler &> /dev/null; then
         npm install -g @adguard/hostlist-compiler > /dev/null
@@ -68,16 +60,11 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Format raw file to Domains format
-    mawk '/\|/ { gsub(/[|^]/, ""); print }' "$BLOCKLIST" > raw.tmp
-
-    # Add matching domains in the toplist to the raw file
+    # Get matching domains in the toplist
     local term
     for term in "${TERMS[@]}"; do
-        mawk "/${term}/" toplist.tmp >> raw.tmp
-    done
-
-    sort -u raw.tmp -o raw.tmp
+        mawk "/${term}/" toplist.tmp
+    done | sort -u -o raw.tmp
 
     # Remove whitelisted domains
     local white
@@ -85,14 +72,8 @@ main() {
         sed -i "/${white}/d" raw.tmp
     done
 
-    # Compile list. See the list of transformations here:
-    # https://github.com/AdguardTeam/HostlistCompiler
-    printf "\n"
+    # Compile blocklist
     hostlist-compiler -i raw.tmp -o compiled.tmp
-
-    # Remove dead domains
-    printf "\n"
-    dead-domains-linter -a -i compiled.tmp
 
     # Remove comments
     sed -i '/!/d' compiled.tmp
