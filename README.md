@@ -38,51 +38,18 @@ Light version: 18254
 
 New domains after filtering:
 Today | Monthly | %Monthly | %Filtered | Source
-    - |     751 |      0 % |      34 % | 165 Anti-fraud
-    - |     193 |      0 % |      13 % | Artists Against 419
-    - |      40 |      0 % |      11 % | BehindMLM
-    - |      97 |      0 % |       4 % | BugsFighter
-    - |     455 |      0 % |      11 % | Chainabuse
-    - |     389 |      0 % |      55 % | DFPI Crypto Scam Tracker
-    - |   22810 |     18 % |       1 % | DGA Detector
-    - |    1022 |      0 % |       0 % | dnstwist
-    - |    3931 |      3 % |      35 % | Emerging Threats
-    - |    1273 |      1 % |      25 % | FakeWebshopListHUN
-    - |    1243 |      1 % |       2 % | Google Search
-    - |    4992 |      4 % |      18 % | Gridinsoft
-    - |   25577 |     20 % |       8 % | Jeroengui
-    - |       0 |      0 % |       0 % | Jeroengui (NRDs)
-    - |    3145 |      2 % |      21 % | Malwarebytes
-    - |     325 |      0 % |       8 % | MalwareURL
-    - |      52 |      0 % |       7 % | PCrisk
-    - |   24804 |     20 % |      28 % | PhishStats
-    - |      51 |      0 % |      18 % | PuppyScams.org
-    - |   23636 |     19 % |       1 % | Regex
-    - |    2641 |      2 % |       3 % | SafelyWeb
-    - |    2398 |      1 % |      38 % | Scam Directory
-    - |      14 |      0 % |      30 % | ScamAdviser
-    - |     820 |      0 % |       5 % | ScamMinder
-    - |      21 |      0 % |      10 % | ScamScavenger
-    - |     519 |      0 % |      15 % | ScamTracker
-    - |     100 |      0 % |       6 % | Unit42
-    - |     156 |      0 % |       4 % | URLCrazy
-    - |      24 |      0 % |      11 % | Verbraucherzentrale Hamburg
-    - |      70 |      0 % |      28 % | ViriBack C2 Tracker
-    - |     216 |      0 % |      20 % | Wildcat Cyber Patrol
-    - |      18 |      0 % |       8 % | WiperSoft
-    - |     514 |      0 % |      49 % | Česká Obchodní Inspekce
-    - |  122518 |    100 % |       0 % | All sources
+
 
 - %Monthly: percentage out of total domains from all sources.
 - %Filtered: percentage of dead, whitelisted, and parked domains.
 
-Dead domains removed today: 14731
-Dead domains removed this month: 110583
-Resurrected domains added today: 2415
+Dead domains removed today: 0
+Dead domains removed this month: 0
+Resurrected domains added today: 0
 
-Parked domains removed today: 1666
-Parked domains removed this month: 29431
-Unparked domains added today: 2184
+Parked domains removed today: 0
+Parked domains removed this month: 0
+Unparked domains added today: 0
 ```
 
 <details>
@@ -121,28 +88,16 @@ Parked sites no longer containing any of the parked messages are assumed to be u
 
 ### Light version
 
-For collated blocklists cautious about size, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory. Sources excluded from the light version are marked in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md). The light version also includes domains from the full version that are found in the Tranco toplist.
+For collated blocklists cautious about size, a light version of the blocklist is available in the [lists](https://github.com/jarelllama/Scam-Blocklist/tree/main/lists) directory. Sources excluded from the light version are marked in [SOURCES.md](https://github.com/jarelllama/Scam-Blocklist/blob/main/SOURCES.md). The light version also includes domains from the full version that are found in the Tranco Top Sites Ranking.
 
 Note that dead and parked domains that become alive/unparked are not added back into the light version due to limitations in how these domains are recorded.
 
 ### NSFW Blocklist
 
-A blocklist for NSFW domains is available in Adblock Plus format here:
+A blocklist for NSFW domains retrieved daily from the Tranco Top Sites Ranking is available in Adblock Plus format here:
 [nsfw.txt](https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/adblock/nsfw.txt).
 
-<details>
-<summary>Details</summary>
-<ul>
-<li>Domains are automatically retrieved from the Tranco Top Sites Ranking daily</li>
-<li>Dead domains are removed daily</li>
-<li>Note that resurrected domains are not added back</li>
-<li>Note that parked domains are not checked for</li>
-</ul>
-Total domains: 13786
-<br>
-<br>
 This blocklist does not just include adult videos, but also NSFW content of the artistic variety (rule34, illustrations, etc).
-</details>
 
 ### Parked domains
 
