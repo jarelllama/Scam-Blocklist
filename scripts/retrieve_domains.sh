@@ -11,11 +11,12 @@ readonly PENDING='data/pending'
 readonly RAW='data/raw.txt'
 readonly RAW_LIGHT='data/raw_light.txt'
 readonly REVIEW_CONFIG='config/review_config.csv'
-readonly SOURCES='config/sources.csv'
+readonly SOURCES_CONFIG='config/sources.csv'
 readonly SOURCE_LOG='config/source_log.csv'
 # '[\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]' matches the root domain and subdomains
 # '[\p{L}\p{N}]' matches single character subdomains
 # '[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]' matches the TLD (TLDs can not start with a number)
+# Does NOT match periods enclosed by square brackets
 readonly DOMAIN_REGEX='(?:([\p{L}\p{N}][\p{L}\p{N}-]*[\p{L}\p{N}]|[\p{L}\p{N}])\.)+[\p{L}}][\p{L}\p{N}-]*[\p{L}\p{N}]'
 
 main() {
@@ -43,13 +44,8 @@ main() {
 
         $FUNCTION --download-nrd-feed
 
-        # Remove already processed NRDs to save processing time
-        comm -23 nrds.tmp <(sort "$RAW" "$DEAD_DOMAINS" "$PARKED_DOMAINS") \
-            > temp
-        mv temp nrds.tmp
-
         # Install jq
-        command -v jq > /dev/null || apt-get install -qq jq
+        command -v jq > /dev/null || sudo apt-get install jq > /dev/null
 
         retrieve_new_results
     fi
@@ -82,7 +78,7 @@ process_existing_results() {
 
         # Check if the source is in the sources config file, excluding manual
         # additions
-        if ! grep -q "^${source_name}," "$SOURCES" &&
+        if ! grep -q "^${source_name}," "$SOURCES_CONFIG" &&
             [[ "$source_name" != 'Manual' ]]; then
             printf "Note: source not found in sources config file.\n"
         fi
@@ -93,7 +89,7 @@ process_existing_results() {
     done
 }
 
-# Process and retrieve source results from enabled sources in the source
+# Process and retrieve source results from enabled sources in the sources
 # config file.
 retrieve_new_results() {
     local source_results execution_time
@@ -114,7 +110,7 @@ retrieve_new_results() {
         mv results.tmp "$source_results"
 
         process_source
-    done <<< "$(mawk -F ',' '$4 == "y" { print $1 "," $2 }' "$SOURCES")"
+    done <<< "$(mawk -F ',' '$4 == "y" { print $1 "," $2 }' "$SOURCES_CONFIG")"
 }
 
 # Used by process_source() to remove entries from the source results
@@ -186,7 +182,7 @@ process_source() {
     }' "$source_results" | sort -u -o "$source_results"
 
     # Remove non-domain entries
-    # Redirect output to /dev/null as the invalid entries count is not needed
+    # Redirect output to /dev/null as the invalid entries count is not used
     filter "$(grep -vP "^${DOMAIN_REGEX}$" "$source_results")" \
         invalid --preserve > /dev/null
 
@@ -258,7 +254,7 @@ process_source() {
 
     # Check if the source is excluded from the light version
     if [[ -z "$(mawk -v source="$source_name" -F ',' '
-        $1 == source { print $3 }' "$SOURCES")" ]]; then
+        $1 == source { print $3 }' "$SOURCES_CONFIG")" ]]; then
         cat "$source_results" >> all_filtered_light_domains.tmp
     fi
 
