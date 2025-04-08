@@ -24,8 +24,8 @@ convert_unicode() {
     # error, exit 1.
     mawk '/^..--/' "$1" > temp
     mawk '!/^..--/' "$1" | idn2 >> temp || error 'idn2 errored.'
-    sort -u temp -o "$1"
-    rm temp
+    mv temp "$1"
+    sort -u "$1" -o "$1"
 }
 
 # Download and collate NRD feeds consisting domains registered in the last 30
@@ -60,7 +60,7 @@ download_toplist() {
 
     curl -sSL --retry 2 --retry-all-errors "$url" -o toplist.tmp
 
-    (( $(wc -l < toplist.tmp) == 1000000 )) \
+    (( "$(wc -l < toplist.tmp)" == 1000000 )) \
         || error 'Error downloading toplist.'
 
     # Expand toplist to include both root domains and subdomains
@@ -71,7 +71,7 @@ download_toplist() {
             sub(subdomains, "")
             print  # Print root domains
         } else {
-            print  # Print domains that originally have no subdomains
+            print  # Print domains that had no subdomains
         }
     }' toplist.tmp | grep -P "^${DOMAIN_REGEX}$" | sort -u -o toplist.tmp
 }
@@ -124,13 +124,15 @@ format_files() {
 # Return the blacklist as a regex expression.
 # Output:
 #   Blacklisted domains as a regex expression
-#   '-' if no blacklisted domains found to avoid errors with regex matching
+#   '_' if no blacklisted domains found to avoid errors with regex matching
 get_blacklist() {
     if [[ ! -s "$BLACKLIST" ]]; then
         printf '_'
         return
     fi
 
+    # Ensure periods are escaped twice to prevent
+    # 'awk: warning: escape sequence \. treated as plain .' error
     mawk '{
         gsub(/\./, "\\\\\.")
         print "(^|\\\.)" $0 "$"
@@ -140,13 +142,15 @@ get_blacklist() {
 # Return the whitelist as a regex expression.
 # Output:
 #   Whitelisted domains as a regex expression
-#   '-' if no whitelisted domains found to avoid errors with regex matching
+#   '_' if no whitelisted domains found to avoid errors with regex matching
 get_whitelist() {
     if [[ ! -s "$WHITELIST" ]]; then
         printf '_'
         return
     fi
 
+    # Ensure periods are escaped twice to prevent
+    # 'awk: warning: escape sequence \. treated as plain .' error
     mawk '{
         gsub(/\./, "\.")
         print
