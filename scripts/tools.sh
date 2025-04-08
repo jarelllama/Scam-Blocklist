@@ -66,12 +66,10 @@ download_toplist() {
     # Expand toplist to include both root domains and subdomains
     mawk -v subdomains="$(mawk '{ print "^" $0 "\." }' \
         "$SUBDOMAINS" | paste -sd '|')" '{
+        print
         if ($0 ~ subdomains) {
-            print  # Print subdomains
             sub(subdomains, "")
             print  # Print root domains
-        } else {
-            print  # Print domains that had no subdomains
         }
     }' toplist.tmp | grep -P "^${DOMAIN_REGEX}$" | sort -u -o toplist.tmp
 }
