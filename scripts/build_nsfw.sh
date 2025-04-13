@@ -60,26 +60,19 @@ main() {
 
     $FUNCTION --download-toplist
 
-    # Get matching domains in the toplist
-    local term
-    for term in "${TERMS[@]}"; do
-        mawk "/${term}/" toplist.tmp
-    done | sort -u -o raw.tmp
+    # Get matching domains in the toplist excluding whitelisted domains
+    awk -v terms="$(IFS='|'; printf "%s" "${TERMS[*]}")" \
+        -v whitelist="$(IFS='|'; printf "^(%s)$" "${WHITELIST[*]}")" '
+        $0 ~ terms && $0 !~ whitelist' toplist.tmp | sort -u -o raw.tmp
 
-    # Remove whitelisted domains
-    local white
-    for white in "${WHITELIST[@]}"; do
-        sed -i "/${white}/d" raw.tmp
-    done
-
-    # Compile blocklist
+    # Compile the blocklist
+    printf "\n"
     hostlist-compiler -i raw.tmp -o compiled.tmp
 
-    # Remove comments
-    sed -i '/!/d' compiled.tmp
-
-    # Append header
-    cat << EOF > "$BLOCKLIST"
+    # Create the blocklist
+    {
+        # Append header
+        cat << EOF
 [Adblock Plus]
 ! Title: Jarelllama's NSFW Blocklist
 ! Description: Blocklist for NSFW domains automatically retrieved daily.
@@ -93,7 +86,9 @@ main() {
 !
 EOF
 
-    cat compiled.tmp >> "$BLOCKLIST"
+        # Addend entries excluding comments
+        mawk '!/!/' compiled.tmp
+    } > "$BLOCKLIST"
 }
 
 # Entry point
