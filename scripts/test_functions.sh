@@ -180,19 +180,17 @@ TEST_VALIDATE_RETRIEVE() {
 
 # Test detection of dead and resurrected domains.
 TEST_DEAD_CHECK() {
-    local i
-
     # Placeholders are used to avoid errors when there are not enough entries
     # for split.
 
     # Test adding resurrected domains to alive_domains.txt
-    for i in {1..25}; do input "placeholder483${i}s.com" "$DEAD_DOMAINS"; done
+    input "$(printf "placeholder4835%s.com\n" {1..25})" "$DEAD_DOMAINS"
     input google.com "$DEAD_DOMAINS"
     input abcdead-domain.com "$DEAD_DOMAINS"
     output google.com alive_domains.txt
 
     # Test adding dead domains to dead_domains.txt
-    for i in {26..50}; do input "placeholder483${i}s.com"; done
+    input "$(printf "placeholder4835%s.com\n" {26..50})"
     input apple.com
     input xyzdead-domain.com
     output xyzdead-domain.com dead_domains.txt
@@ -212,20 +210,18 @@ TEST_DEAD_CHECK() {
 
 # Test detection of parked and unparked domains.
 TEST_PARKED_CHECK() {
-    local i
-
     # Placeholders are used to avoid errors when there are not enough entries
     # for split.
 
     # Test adding unparked domains to unparked_domains.txt
-    for i in {1..50}; do input "placeholder483${i}s.com" "$PARKED_DOMAINS"; done
+    input "$(printf "placeholder4835%s.com\n" {1..50})" "$PARKED_DOMAINS"
     input google.com "$PARKED_DOMAINS"
     # Test that domains that errored during curl are still assumed to be parked
     input parked-errored-test.com "$PARKED_DOMAINS"
     output google.com unparked_domains.txt
 
     # Test adding parked domains to parked_domains.txt
-    for i in {51..100}; do input "placeholder483${i}s.com"; done
+    input "$(printf "placeholder4835%s.com\n" {51..100})"
     input apple.com
     # Subfolder used here for easier testing despite being an invalid entry
     input porkbun.com/parked
@@ -265,12 +261,12 @@ TEST_BUILD() {
 
 # Test updating the subdomains file.
 test_updating_subdomains_file() {
-    local i entries
+    local entries
 
     entries="$({
-        for i in {1..10}; do printf "abc.subdomain-test-%s.com\n" "$i"; done
-        for i in {1..10}; do printf "abcxyz.subdomain-test-%s.com\n" "$i"; done
-        for i in {1..9}; do printf "xyz.subdomain-test-%s.com\n" "$i"; done
+        printf "abc.subdomain-test-%s.com\n" {1..10}
+        printf "abcxyz.subdomain-test-%s.com\n" {1..10}
+        printf "xyz.subdomain-test-%s.com\n" {1..9}
     })"
 
     input "$entries"
@@ -348,10 +344,10 @@ test_url_conversion() {
 
 # Test error handling for unusually large sources.
 test_large_source_error() {
-    local i entries
+    local entries
 
     entries="$(
-        for i in {1..10001}; do printf "large-source-test-%s.com\n" "$i"; done
+        printf "large-source-test-%s.com\n" {1..10001}
     )"
 
     input "$entries" data/pending/Gridinsoft.tmp
@@ -569,26 +565,26 @@ test_light_exclusion() {
 
 # Test updating wildcards file and adding wildcards to the blocklist.
 test_wildcards_file() {
-    local i input output list
+    local input output list
 
     # x is appended to the subdomain to prevent getting removed by subdomain
     # removal.
     input="$({
         # Test that root domains that occur 10 times or more are added
-        for i in {1..10}; do printf "x%s.wildcard.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.root-domain.com\n" "$i"; done
+        printf "x%s.wildcard.com\n" {1..10}
+        printf "x%s.root-domain.com\n" {1..9}
         # Test that TLDs like 'com.us' should not be added
-        for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
+        printf "x%s.com.us\n" {1..10}
         # Test that root domains found in the toplist are not added
-        for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
+        printf "x%s.google.com\n" {1..10}
         # Test that root domains not found in the toplist but are whitelisted
         # are not added
-        for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
+        printf "x%s.whitelisted.com\n" {1..10}
         # Test that existing wildcards (wildcards with subdomains) that occur
         # 10 times or more are kept. These wildcards often have root domains
         # that are in the toplist.
-        for i in {1..10}; do printf "x%s.existing-wildcard.apple.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.existing-wildcard.google.com\n" "$i"; done
+        printf "x%s.existing-wildcard.apple.com\n" {1..10}
+        printf "x%s.existing-wildcard.google.com\n" {1..9}
     })"
 
     input "$input" "$RAW"
@@ -598,11 +594,11 @@ test_wildcards_file() {
 
     # Domains that should not be removed via wildcard matching
     output="$({
-        for i in {1..9}; do printf "x%s.root-domain.com\n" "$i"; done
-        for i in {1..10}; do printf "x%s.com.us\n" "$i"; done
-        for i in {1..10}; do printf "x%s.google.com\n" "$i"; done
-        for i in {1..10}; do printf "x%s.whitelisted.com\n" "$i"; done
-        for i in {1..9}; do printf "x%s.existing-wildcard.google.com\n" "$i"; done
+        printf "x%s.root-domain.com\n" {1..9}
+        printf "x%s.com.us\n" {1..10}
+        printf "x%s.google.com\n" {1..10}
+        printf "x%s.whitelisted.com\n" {1..10}
+        printf "x%s.existing-wildcard.google.com\n" {1..9}
     })"
 
     output "$(mawk '{ print "||" $0 "^" }' <<< "$output")" \
